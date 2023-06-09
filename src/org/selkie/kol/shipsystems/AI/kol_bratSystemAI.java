@@ -1,15 +1,19 @@
-package org.selkie.kol.shipsystems;
+package org.selkie.kol.shipsystems.AI;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.util.IntervalUtil;
 import org.lwjgl.util.vector.Vector2f;
 
-public class kol_bottomSystemAI implements ShipSystemAIScript {
+import java.awt.*;
 
-    //private static float DELAY = 2f; // Change this to delay you want
+public class kol_bratSystemAI implements ShipSystemAIScript {
+
+    private static float DELAY = 0.9f; // Change this to delay you want
     private ShipAPI ship;
     private ShipSystemAPI parentSys;
 
-    //private final IntervalUtil delay = new IntervalUtil(DELAY,DELAY);
+    private final IntervalUtil delay = new IntervalUtil(DELAY,DELAY);
 
     private Boolean hasTriggered = false;
     private Boolean hasFired = false;
@@ -30,16 +34,17 @@ public class kol_bottomSystemAI implements ShipSystemAIScript {
             if (hasFired) {
                 hasTriggered = false;
                 hasFired = false;
+                delay.advance(amount);
             }
         }
 
         if (hasTriggered && !hasFired) {
-            //delay.advance(amount);
+            delay.advance(amount);
         }
         
-        //if (delay.intervalElapsed()) {
+        if (delay.intervalElapsed()) {
             ship.useSystem();
             hasFired = true;
-        //}
+        }
     }
 }

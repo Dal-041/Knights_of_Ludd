@@ -5,6 +5,6 @@
 	"version":"0.4",
 	"description":"Adds the Knights of Ludd faction, as well as some other fun stuff!",
     "gameVersion": "0.96",
-	"jars": ["jars/KnightsOfSelkie.jar",],
-	"modPlugin":"org.selkie.kol.plugins.KOL_ModPlugin",
+	"jars": ["jars/KnightsOfSelkie.jar"],
+	"modPlugin":"org.selkie.kol.plugins.KOL_ModPlugin"
 }
