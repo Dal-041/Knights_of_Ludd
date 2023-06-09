@@ -13,7 +13,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
 
-public class KOL_Generate {
+public class Generate {
 	static StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
 	static StarSystemAPI Kumari = Global.getSector().getStarSystem("Kumari Kandam");
 	static StarSystemAPI Eos = Global.getSector().getStarSystem("Eos Exodus");

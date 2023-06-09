@@ -12,7 +12,7 @@ import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
 
-public class KOL_SpawnInvictus {
+public class SpawnInvictus {
 	
 	public static boolean spawnInvictus() {
 	        
@@ -82,7 +82,7 @@ public class KOL_SpawnInvictus {
 	            invictusFleet.setDiscoverable(false);
 	            //invictusFleet.addTag(Tags.NEUTRINO); //?
 	            invictusFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-	            invictusFleet.addEventListener(new KOL_ManageInvictus());
+	            invictusFleet.addEventListener(new ManageInvictus());
 	        }
 
 		return true;

@@ -14,7 +14,7 @@ import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 
-public class KOL_ManageInvictus implements FleetEventListener {
+public class ManageInvictus implements FleetEventListener {
 	private final String MEMKEY_SSSSS_LP_INVICTUS_DROPPED = "$lp_invictus_dropped";
 
 	//Totally not adapted from Diable or anything :>

@@ -11,7 +11,7 @@ import org.lazywizard.lazylib.MathUtils;
 
 //By Tartiflette
 
-public class kol_heatEffect implements EveryFrameWeaponEffectPlugin {
+public class heatEffect implements EveryFrameWeaponEffectPlugin {
     
     private boolean alive = true, runOnce = false;
     private int range = 0;

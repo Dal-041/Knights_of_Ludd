@@ -12,8 +12,8 @@ import com.fs.starfarer.api.impl.campaign.intel.BaseMissionIntel.MissionResult;
 import com.fs.starfarer.api.impl.campaign.intel.BaseMissionIntel.MissionState;
 import com.fs.starfarer.api.util.Misc;
 
-public class kol_updateRelationships extends BaseCampaignEventListener {
-    public kol_updateRelationships(boolean permaRegister) {
+public class updateRelationships extends BaseCampaignEventListener {
+    public updateRelationships(boolean permaRegister) {
 		super(permaRegister);
 	}
 

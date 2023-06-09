@@ -1,11 +1,9 @@
 package org.selkie.kol.shipsystems.AI;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.util.IntervalUtil;
 import org.lwjgl.util.vector.Vector2f;
 
-public class kol_bottomSystemAI implements ShipSystemAIScript {
+public class bottomSystemAI implements ShipSystemAIScript {
 
     private ShipAPI ship;
     private ShipSystemAPI parentSys;

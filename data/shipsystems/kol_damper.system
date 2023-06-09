@@ -3,7 +3,7 @@
 	"type":"STAT_MOD",
 	"aiType":"DAMPER_FIELD",
 	
-	"statsScript":"org.selkie.kol.shipsystems.kol_damperblu",
+	"statsScript":"org.selkie.kol.shipsystems.damperbluStats",
 	
 	#"jitterUnderColor":[255,165,90,155],
 	#"jitterUnderCopies":15,

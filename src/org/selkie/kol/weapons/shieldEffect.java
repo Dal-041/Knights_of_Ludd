@@ -15,7 +15,7 @@ import java.util.*;
 
 //By Tartiflette
 
-public class kol_shieldEffect implements EveryFrameWeaponEffectPlugin {
+public class shieldEffect implements EveryFrameWeaponEffectPlugin {
     
     private final float MAX_SHIELD=10;
     private final static float TIME_TO_ESTIMATE = 3f;

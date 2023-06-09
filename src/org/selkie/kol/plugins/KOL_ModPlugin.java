@@ -3,9 +3,9 @@ package org.selkie.kol.plugins;
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
-import org.selkie.kol.listeners.kol_updateRelationships;
-import org.selkie.kol.world.KOL_Generate;
-import org.selkie.kol.world.KOL_SpawnInvictus;
+import org.selkie.kol.listeners.updateRelationships;
+import org.selkie.kol.world.Generate;
+import org.selkie.kol.world.SpawnInvictus;
 import exerelin.campaign.SectorManager;
 
 public class KOL_ModPlugin extends BaseModPlugin {
@@ -16,10 +16,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	
 	@Override
 	public void onGameLoad(boolean newGame) {
-		Global.getSector().addTransientListener(new kol_updateRelationships(true));
+		Global.getSector().addTransientListener(new updateRelationships(true));
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			if(!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_SSSSS_LP_INVICTUS_SPAWNED)) {
-				KOL_SpawnInvictus.spawnInvictus();
+				SpawnInvictus.spawnInvictus();
 				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_SSSSS_LP_INVICTUS_SPAWNED, true);
 			}
 		}
@@ -31,10 +31,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	@Override
 	public void onNewGameAfterEconomyLoad() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
-			KOL_Generate.zugg();
-			KOL_SpawnInvictus.spawnInvictus();
+			Generate.zugg();
+			SpawnInvictus.spawnInvictus();
 			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_SSSSS_LP_INVICTUS_SPAWNED, true);
 		}
-		Global.getSector().addTransientListener(new kol_updateRelationships(true));
+		Global.getSector().addTransientListener(new updateRelationships(true));
 	}
 }

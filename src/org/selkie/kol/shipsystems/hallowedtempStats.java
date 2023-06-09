@@ -6,11 +6,11 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 
 import java.awt.*;
 
-public class kol_damperblu extends BaseShipSystemScript {
+public class hallowedtempStats extends BaseShipSystemScript {
 
-    //private static final float BASE_SPEED_BONUS = 80f;
-    //private static final float SPEED_PER_MODULE = 10f;
-    //private static final float ACCELERATION_BONUS = 100f;
+    private static final float BASE_SPEED_BONUS = 80f;
+    private static final float SPEED_PER_MODULE = 10f;
+    private static final float ACCELERATION_BONUS = 100f;
     private static final float DAMAGE_MULT = 0.5f;
 
     private static final Color JITTER_COLOR = new Color(15, 150, 230, 55);
@@ -24,8 +24,7 @@ public class kol_damperblu extends BaseShipSystemScript {
             return;
         }
 
-        @SuppressWarnings("unused")
-		int dead = 0;
+        int dead = 0;
         for (ShipAPI child : ship.getChildModulesCopy()) {
             if (child.isAlive()) {
                 child.setJitter(id, JITTER_COLOR, effectLevel, 2, 5);
@@ -40,8 +39,8 @@ public class kol_damperblu extends BaseShipSystemScript {
             }
         }
 
-        //stats.getMaxSpeed().modifyFlat(id, BASE_SPEED_BONUS + SPEED_PER_MODULE * dead);
-        //stats.getAcceleration().modifyFlat(id, ACCELERATION_BONUS + SPEED_PER_MODULE * dead);
+        stats.getMaxSpeed().modifyFlat(id, BASE_SPEED_BONUS + SPEED_PER_MODULE * dead);
+        stats.getAcceleration().modifyFlat(id, ACCELERATION_BONUS + SPEED_PER_MODULE * dead);
 
     }
 
@@ -61,8 +60,8 @@ public class kol_damperblu extends BaseShipSystemScript {
             child.setJitterUnder(id, JITTER_UNDER_COLOR, 0, 25, 7);
         }
 
-        //stats.getAcceleration().unmodify(id);
-        //stats.getMaxSpeed().unmodify(id);
+        stats.getAcceleration().unmodify(id);
+        stats.getMaxSpeed().unmodify(id);
         ;
     }
 }

@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 
-public class kol_caelia implements EveryFrameWeaponEffectPlugin {
+public class caelia implements EveryFrameWeaponEffectPlugin {
 
 	private float count = 0f;
 	private float wait = 0f;
