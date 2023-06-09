@@ -1,0 +1,69 @@
+{
+    "playableFaction":true,
+    "corvusCompatible":true,
+    
+    "rebelFleetSuffix":"Heretics",
+    
+    "directoryUseShortName":true,
+
+    "startRelationships":{ "tritachyon":-0.6 },
+    "maxRelationships":{ "tritachyon":-0.1, "remnant":-0.51},
+    "diplomacyPositiveChance":{ "tritachyon":0.8 },
+    "diplomacyNegativeChance":{ "tritachyon":1.2 },
+    "morality":"good",
+    
+    "alignments":{
+        "corporate":-0.5,
+        "technocratic":-1,
+        #"militarist":0.5,
+        "hierarchical":0.5,
+        "ideological":1,
+    },
+    "diplomacyTraits":["selfrighteous", "hates_ai", "law_and_order", "submissive"],
+    
+    # chance of the faction being picked to send a colony expedition. Default 0 (disabled)
+    "colonyExpeditionChance":1.5,	# be fruitful and multiply
+    "colonyTargetValuator":"exerelin.campaign.colony.LuddicColonyTargetValuator",
+        
+    "vengeanceLevelNames":["Excommunication", "Interdiction", "Jihad"],
+    "vengeanceFleetNames":["Evangelists", "Inquisition", "Crusade"],
+    "vengeanceFleetNamesSingle":["Evangelists", "an Inquisition", "a Crusade"],
+    
+    "groundBattleSettings":{
+		"luddef_moraleDamageTakenMult":0.85f,
+        "plugin":"exerelin.campaign.intel.groundbattle.plugins.LuddicChurchBonusSubplugin",
+    },
+    
+    "specialForcesNamerClass":"exerelin.campaign.intel.specialforces.namer.LuddicNamer",
+    
+    "startShipsSolo":[["vigilance_Standard"]],
+    "startShipsCombatSmall":[
+      ["swp_striker_luddic_church_sup", "lasher_luddic_church_Standard", "centurion_Assault"],
+      ["enforcer_Balanced", "lasher_luddic_church_Standard", "centurion_Assault"]
+    ],
+    "startShipsTradeSmall":[["tarsus_Standard", "cerberus_Standard", "lasher_CS"]],
+    "startShipsCombatLarge":[
+      ["swp_vulture_sta", "swp_albatross_sta", "kite_Standard"],
+      ["dominator_Support", "enforcer_Outdated", "kite_Support"]
+    ],
+     "startShipsTradeLarge":[["colossus_Standard", "mule_Standard", "wayfarer_Standard"]],
+    "startShipsExplorerLarge":[["venture_Balanced", "buffalo_luddic_church_Standard", "hound_luddic_church_Standard"]],
+    "startShipsCarrierSmall":[["condor_Attack", "lasher_luddic_church_Standard", "hound_luddic_church_Standard"]],
+    
+    "startSpecialItems":[],
+
+    "defenceStations":[
+        {"ids":["orbitalstation", "battlestation", "starfortress"]},
+    ],
+    
+    "industrySeeds":[
+        {"id":"heavyindustry", "mult":0.05},
+        {"id":"lightindustry", "mult":0.2},
+    ],
+    
+    "industrySpawnMults":{
+        "heavyindustry":0,
+    },
+    
+    "bonusSeeds":[],
+}

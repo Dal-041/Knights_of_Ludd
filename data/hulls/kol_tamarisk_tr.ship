@@ -1,0 +1,54 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_tamarisk_tr",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/modules/kol_tamarisk_tr.png",
+  "style": "LOW_TECH",
+  "height": 88,
+  "width": 39,
+  "center": [20.5, 43.5],
+  "collisionRadius": 55,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 53,
+  "viewOffset": 0,
+  "builtInMods": [
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "builtInWeapons": {
+    "WS0001": "eis_blinker_white",
+    "WS0002": "eis_blinker_green"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [13.5, 4.5]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [42.5, 3.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -40.5, 0.5,
+    -38, -14.5,
+    -27, -20.5,
+    12, -18.5,
+    16, -14,
+    43, -1,
+    41, 21,
+    -5.5, 13,
+    -9, 9.5
+  ]
+}

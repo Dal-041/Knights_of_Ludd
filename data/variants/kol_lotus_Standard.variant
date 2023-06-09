@@ -1,0 +1,19 @@
+{
+  "variantId": "kol_lotus_Standard",
+  "hullId": "kol_lotus",
+  "displayName": "Standard",
+  "goalVariant": false,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+  "modules": [
+    {"WS0011": "kol_lotus_ll_Standard"},
+    {"WS0012": "kol_lotus_lr_Standard"},
+    {"WS0013": "kol_lotus_tl_Standard"},
+    {"WS0014": "kol_lotus_tr_Standard"}
+  ],
+  "wings": []
+}

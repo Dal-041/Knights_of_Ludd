@@ -1,0 +1,60 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_lunaria_tr",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_lunaria_tr.png",
+  "style": "LOW_TECH",
+  "height": 90,
+  "width": 55,
+  "center": [27.5, 45],
+  "collisionRadius": 52,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 56.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "builtInWeapons": {
+    "WS0002": "eis_blinker_white",
+    "WS0003": "eis_blinker_white"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [20, 15.5]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [20, 5.5]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [0, -7.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -41.5, -15.5,
+    -37, -25.5,
+    -12, -19.5,
+    42.5, 14.5,
+    38.5, 23,
+    32, 23.5
+  ]
+}

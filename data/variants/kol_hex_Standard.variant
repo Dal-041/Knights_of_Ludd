@@ -1,0 +1,23 @@
+{
+  "displayName": "Drone",
+  "hullId": "kol_hex",
+  "variantId": "kol_hex",
+  "goalVariant": true,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods":["no_weapon_flux", "terminator_core"], 
+	"weaponGroups":[
+		{"mode":"LINKED",
+		 "weapons":{
+		 			"WS 001":"vulcan",
+		 		   },
+		},
+		{"mode":"LINKED",
+		 "weapons":{
+		 			"WS 002":"lightmortar",
+		 		   },
+		},		
+	],
+}

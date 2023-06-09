@@ -1,0 +1,29 @@
+id,type,text1,text2,text3,notes
+,,,,,
+# WEAPONS,,,,,
+,,,,,
+,,,,,
+,,,,,
+# SHIPS,,,,,
+,,,,,
+,,,,,
+,,,,,
+kol_snowdrop,SHIP,"The Snowdrop is an experimental destroyer built over a radically altered and up-armed Vanguard-class hull. Evaluated as a whole, the modifications recall the technology systems utilized by Alysse class battleships:  removable ferro-ceramic armor modules replace the integral armor but remain linked to the ship’s dampening field; engine mass is downsized to permit the installation of a small Orion push plate; any and all saved space is crammed full of autoloaders and magazines to support a destroyer-level weaponry suite within the frigate-sized profile.  The deep alterations and cramped nature of the interior makes the class difficult to maintain and expensive to operate when compared with vessels of similar age and tonnage."
+,,,,,
+kol_tamarisk,SHIP,"A prototypal light cruiser from the unification era of the Domain, the Tamarisk class first designed as a convoy leader to defend logistic lines outside of established gate space. Unusual for its age, the class favors strike tactics, with most of its internal volume being split between oversize engine conduits and the munition citadels necessary to support a large complement of ballistic batteries.
+
+Despite a successful service record, the class met an unceremonious end when the maturity of the gate system greatly simplified Domain military logistics. Many a Tamarisk was sold to frontier prospecting and defense outfits, but subsequent advancements in targeting technology and the later development of strike craft made the warship’s lack of integral armor an unsustainable vulnerability.",,,
+,,,,,
+kol_alysse,SHIP,"A treasured battleship often found as the leading element within knight armadas, the Alysse achieves a seldomly seen combination of firepower, speed, and resilience through the implementation of novel if somewhat antiquated technologies. Four heavy ablative armor plates with independent flux grids and dampening field generators mount Vulcan and Flak point defense grids, with additional cannons keyed to fire following the activation of the Orion Drive. Defense is simply unparalleled so long as the modular plates hold. 
+
+The Alysse once represented an evolutionary step for the militarization of the Orion Drive technology first implemented by the Retribution. The inclusion of robust modular plating serving a dual purpose, augmenting both survivability and relieving strain on the ship's inertial compensators. Strategic command likely remained unconvinced, and no combat or procurement records exist for the ship within known Domain Battlegroups.
+
+Every Alysse-class vessel that exists today is a painstaking reconstruction of the forgotten prototypes, artisanally assembled and sanctified for their sacred duty to the Church.",,,
+,,,,,
+,,,,,
+,,,,,
+# FACTIONS,,,,,
+,,,,,
+,,,,,
+,,,,,
+knights_of_selkie,FACTION,"The military branch of the Luddic Church of Galactic Redemption, modeled on monastic warrior societies from previous millennia. Built and governed by a myriad of martial rituals that deftly reconcile Ludd’s anti-militaristic revelations with the constrained bloodshed required by practical statecraft. With the oldest being traceable into the depths of Sector history, when the faithful fought alongside the founding fleets of the Hegemony to overcome the tyranny of Warlord Leonis and to shatter the technological yoke of the Tri-Tachyon Corporation.",,,

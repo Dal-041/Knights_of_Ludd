@@ -1,0 +1,14 @@
+{
+	"id":"kol_hellfire",
+	"type":"STAT_MOD",
+	"aiType":"WEAPON_BOOST",
+	
+	"statsScript":"data.shipsystems.scripts.kol_hellfirestats",
+	
+	"weaponGlowColor":[180,0,0,155],
+	"weaponTypes":[BALLISTIC],
+	"minFractionToReload":1,
+	
+	"useSound":"system_ammo_feeder",
+	"outOfUsesSound":"gun_out_of_ammo",
+}

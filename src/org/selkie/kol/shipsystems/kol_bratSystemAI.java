@@ -1,0 +1,47 @@
+package org.selkie.kol.shipsystems;
+
+import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.util.IntervalUtil;
+import org.lwjgl.util.vector.Vector2f;
+
+public class kol_bratSystemAI implements ShipSystemAIScript {
+
+    private static float DELAY = 0.7f; // Change this to delay you want
+    private ShipAPI ship;
+    private ShipSystemAPI parentSys;
+
+    private final IntervalUtil delay = new IntervalUtil(DELAY,DELAY);
+
+    private Boolean hasTriggered = false;
+    private Boolean hasFired = false;
+    @Override
+    public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
+        this.ship = ship;
+        if (ship.isStationModule() && ship.getParentStation() != null && ship.getParentStation().getSystem() != null)
+            this.parentSys = ship.getParentStation().getSystem();
+    }
+
+    @Override
+    public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
+        if (parentSys == null) return;
+
+        if (parentSys.isActive()) {
+            hasTriggered = true;
+        } else {
+            if (hasFired) {
+                hasTriggered = false;
+                hasFired = false;
+                delay.setElapsed(0f);
+            }
+        }
+
+        if (hasTriggered && !hasFired) {
+            delay.advance(amount);
+        }
+        
+        if (delay.intervalElapsed()) {
+            ship.useSystem();
+            hasFired = true;
+        }
+    }
+}

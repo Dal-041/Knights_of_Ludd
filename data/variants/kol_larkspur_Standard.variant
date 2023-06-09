@@ -1,0 +1,21 @@
+{
+  "variantId": "kol_larkspur_Standard",
+  "hullId": "kol_larkspur",
+  "displayName": "Standard",
+  "goalVariant": false,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+  "modules": [
+    {
+      "WS0011": "kol_larkspur_tl_Standard"
+    },
+    {
+      "WS0012": "kol_larkspur_tr_Standard"
+    }
+  ],
+  "wings": []
+}

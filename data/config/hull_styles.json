@@ -1,0 +1,47 @@
+{
+	"KOL_TECH":{
+		"hyperspaceJitterColor":[255,125,45,200],
+		"baseCampaignExplosionColor":[255,125,25,255],
+		"baseCombatExplosionColor":[255,125,25,255], # smooth flash
+		"combatExplosionNonFlashColorOverride":[255,165,100,255], # the more billowy explosion
+		"fighterRepairFlickerColor":[255,125,25,255],
+		"fighterChipIconColor":[255,200,150,255],
+		"weaponDisabledExplosionColor":[255,125,25,255],
+		"shieldRingColor":[255,255,255,255],
+		"shieldInnerColor":[15,150,255,75],
+		"fluxVentCoreColor":[15,150,255,255],
+		"fluxVentFringeColor":[30,70,255,255],
+		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png", # optional, this is the default value
+		"fluxVentRadialTexture":"graphics/fx/radial_fx.png", # optional, this is the default value
+		"engineLoopSet":"engine_loop", 					# id of entry in sounds.json
+		"engineAccelerateSet":"engine_accelerate",		# id of entry in sounds.json
+		"empLoopSet":"emp_loop",						# id of entry in sounds.json
+		"fluxLoopSet":"flux_loop",						# id of entry in sounds.json
+		"ventFluxSet":"vent_flux",						# id of entry in sounds.json
+		"shieldBurnoutSet":"shield_burnout",			# id of entry in sounds.json
+		"shieldLowerSet":"shield_lower",				# id of entry in sounds.json
+		"shieldRaiseSet":"shield_raise",				# id of entry in sounds.json
+		"explosionShipSet":"explosion_ship",			# id of entry in sounds.json
+		"damageDecalSheet":"graphics/damage/damage_decal_sheet_base.png",
+		"damageDecalGlowSheet":"graphics/damage/damage_decal_sheet_glow.png",
+		
+		#"colorShiftCovers":true,
+		"coversColorShiftAmount":0,  # 0 to 1
+		"coversMatchShipBrightness":true,
+		
+		#"colorShiftCovers":false,
+		"slotCoverSmallTurret":"graphics/weapons/covers/cover_turret_lowtech_small.png",
+		"slotCoverSmallHardpoint":"graphics/weapons/covers/cover_hardpoint_lowtech_small.png",
+		"slotCoverMediumTurret":"graphics/weapons/covers/cover_turret_lowtech_medium.png",
+		"slotCoverMediumHardpoint":"graphics/weapons/covers/cover_hardpoint_lowtech_medium.png",
+		"slotCoverLargeTurret":"graphics/weapons/covers/cover_turret_lowtech_large.png",
+		"slotCoverLargeHardpoint":"graphics/weapons/covers/cover_hardpoint_lowtech_large.png",
+
+		"dHullOverlayLight":"graphics/damage/dmod_overlay_lowtech_light.png",
+		"dHullOverlayMedium":"graphics/damage/dmod_overlay_lowtech_medium.png",
+		"dHullOverlayHeavy":"graphics/damage/dmod_overlay_lowtech_heavy.png",
+	},
+}
+
+
+

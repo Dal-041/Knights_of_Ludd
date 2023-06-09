@@ -1,0 +1,27 @@
+{
+  "variantId": "kol_alysse_Standard",
+  "hullId": "kol_alysse",
+  "displayName": "Standard",
+  "goalVariant": true,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+  "modules": [
+    {
+      "WS0012": "kol_alysse_tl_Standard"
+    },
+    {
+      "WS0018": "kol_alysse_tr_standard"
+    },
+    {
+      "WS0016": "kol_alysse_ll_Standard"
+    },
+    {
+      "WS0017": "kol_alysse_lr_Standard"
+    }
+  ],
+  "wings": []
+}

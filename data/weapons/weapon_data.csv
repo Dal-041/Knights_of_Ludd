@@ -1,0 +1,25 @@
+name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn rate,OPs,ammo,ammo/sec,reload size,type,energy/shot,energy/second,chargeup,chargedown,burst size,burst delay,min spread,max spread,spread/shot,spread decay/sec,beam speed,proj speed,launch speed,flight time,proj hitpoints,autofireAccBonus,extraArcForAI,hints,tags,groupTag,tech/manufacturer,for weapon tooltip>>,primaryRoleStr,speedStr,trackingStr,turnRateStr,accuracyStr,customPrimary,customPrimaryHL,customAncillary,customAncillaryHL,noDPSInTooltip,number
+#WEAPONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Tor Autocannon,kol_tor,2,0.3,750,700,,120,,10,20,7,,,,HIGH_EXPLOSIVE,130,,0,4.4,3,0.3,0,5,1,10,,900,,,30,,,,"he16, LR, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,
+Caelia Assault Cannon,kol_caelia,1,,5000,900,,200,,5,10,26,,,,HIGH_EXPLOSIVE,200,,0,0.4166,1,,10,24,3,4.5,,700,,,50,,,,"he18, kol_bp, rare_bp",,,,Anti Armor,,,,,"Fire rate accelerates during sustained use, up to a maximum of +#% after # seconds.",,,,,
+Llyr Autocannon,kol_llyr,0,,4500,900,,130,,20,10,22,,,,KINETIC,200,,0,0.3,1,,5,24,2,5,,700,,,100,,,,"kinetic18, base_bp, rare_bp",,,,Anti Shield,,,,,"Fire rate accelerates during sustained use, up to a maximum of +#% after # seconds.",,,,,
+#DECOS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+EIS Blinker Red,eis_blinker_red,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+EIS Blinker Green,eis_blinker_green,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+EIS Blinker White,eis_blinker_white,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+EIS Blinker White Long,eis_blinker_white30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,kol_deco_tamarisk_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,kol_deco_larkspur_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,kol_deco_protea_mid,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,kol_deco_alysse_ll,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,kol_deco_alysse_lr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+#BUILT_IN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Pusher Plate (Low Tech But Slightly Smaller Haha Lol XDd),kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
+Pusher Plate (Low Tech But It's Really Really Smol And Cute),kol_pusherplate_lt_but_cute,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Lunete Thermal Lance,kol_lunete,1,,250,700,,1700,,15,30,0,1,0.05,,HIGH_EXPLOSIVE,0,,0,1,1,,0,0,0,0,,75,75,2.5,450,,,DO_NOT_AIM,"missile8, strike4, damage_special, damage_soft_flux, no_drop, no_drop_salvage",,,,Assault / Finisher,Slow,None,,,"The missile fires a high-powered laser when it gets near the target, dealing approximately %s energy damage in a short burst. This damage is affected by missile damage modifiers and not energy weapon ones.",3400,,,TRUE,11.9
+ Lunete - Payload,kol_lunete_payload,1,,0,500,1700,,,,30,0,,,,HIGH_EXPLOSIVE,0,,0.25,0.25,2,1,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS",fires_one_burst,,,,,,,,,,,,,,11.91
+Lunete Targeting Laser,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,ENERGY,,0,0.05,0.05,0.1,0.05,,,,,1000000,,,,,,,SYSTEM,,,,,Special,,,,,,,,,,50
+#UTILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,kol_flickerShield,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+,kol_heatEffect,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,

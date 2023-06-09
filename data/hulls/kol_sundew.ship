@@ -1,0 +1,169 @@
+{
+  "hullName": "Sundew",
+  "hullId": "kol_sundew",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/kol_sundew.png",
+  "style": "KOL_TECH",
+  "height": 118,
+  "width": 94,
+  "center": [47, 59],
+  "collisionRadius": 130.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 107.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 0,
+      "locations": [12, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 160,
+      "angle": 60,
+      "locations": [-7, 25]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 160,
+      "angle": -60,
+      "locations": [-7, -25]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [23, 24]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [23, -24]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-54.5, 15.5],
+      "length": 33.464931,
+      "width": 12.1817,
+      "angle": 168,
+      "contrailSize": 12.1817,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-54.5, -15.5],
+      "length": 33.464931,
+      "width": 12.1817,
+      "angle": -168,
+      "contrailSize": 12.1817,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-56, 29],
+      "length": 41.175861,
+      "width": 21.264847,
+      "angle": 163.5,
+      "contrailSize": 21.264847,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-56, -29],
+      "length": 41.175861,
+      "width": 21.264847,
+      "angle": -163.5,
+      "contrailSize": 21.264847,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-44, -0],
+      "length": 50.5,
+      "width": 26,
+      "angle": 180,
+      "contrailSize": 26,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-50.5, -0],
+      "length": 56,
+      "width": 20,
+      "angle": -180,
+      "contrailSize": 20,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-59.5, 16.5],
+      "length": 40.099556,
+      "width": 8.252384,
+      "angle": 167,
+      "contrailSize": 8.252384,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-59.5, -16.5],
+      "length": 40.099556,
+      "width": 8.252384,
+      "angle": -167,
+      "contrailSize": 8.252384,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-61, 31],
+      "length": 53.90638,
+      "width": 16.291363,
+      "angle": 163.5,
+      "contrailSize": 16.291363,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-61, -31],
+      "length": 53.90638,
+      "width": 16.291363,
+      "angle": -163.5,
+      "contrailSize": 16.291363,
+      "style": "KOL_ENG"
+    }
+  ],
+  "bounds": [
+    25, -11.5,
+    31, -13.5,
+    30.5, -21,
+    0.5, -22.5,
+    -4, -29.5,
+    -17.5, -38,
+    -30, -39,
+    -32, -45,
+    -48.5, -44,
+    -58, -35.5,
+    -57, -13,
+    -47, -11.5,
+    -47, 11.5,
+    -57, 13,
+    -58, 35.5,
+    -48.5, 44,
+    -32, 45,
+    -30, 39,
+    -17.5, 38,
+    -4, 29.5,
+    0.5, 22.5,
+    30.5, 21,
+    31, 13.5,
+    25, 11.5
+  ]
+}

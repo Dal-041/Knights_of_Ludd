@@ -1,0 +1,70 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_snowdrop_tl",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_snowdrop_tl.png",
+  "style": "KOL_TECH",
+  "height": 84,
+  "width": 64,
+  "center": [32, 42],
+  "collisionRadius": 54,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 51,
+  "viewOffset": 0,
+  "builtInMods": [
+    "no_weapon_flux",
+    "reduced_explosion",
+    "always_detaches",
+    "kol_vulcan"
+  ],
+  "builtInWeapons": {
+    "WS0001": "vulcan"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [-22, 9]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 45,
+      "locations": [14.5, 13.5]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 15,
+      "locations": [38.5, -20.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    7, 24,
+    17, 10,
+    35, -11.5,
+    36, -16,
+    41, -18,
+    40.5, -25,
+    35.5, -31,
+    17, -30,
+    -2.5, -9.5,
+    -34.5, 3,
+    -36, 6,
+    -36, 21,
+    -34, 25,
+    -20, 31,
+    -13, 22.5
+  ]
+}

@@ -1,0 +1,17 @@
+{
+        "kol_caelia_fire":[
+                {"file":"sounds/kol_caelia_fire.ogg","pitch":1,"volume":1},   
+                {"file":"sounds/kol_caelia_fire.ogg","pitch":0.98,"volume":1},   
+                {"file":"sounds/kol_caelia_fire.ogg","pitch":0.95,"volume":1},   
+        ],
+        "kol_llyr_fire":[
+                {"file":"sounds/kol_llyr_fire.ogg","pitch":1,"volume":1},   
+                {"file":"sounds/kol_llyr_fire.ogg","pitch":0.98,"volume":1},   
+                {"file":"sounds/kol_llyr_fire.ogg","pitch":0.95,"volume":1},   
+        ],
+        "kol_tor_fire":[
+                {"file":"sounds/sfx_wpn_guns/mauler_fire_01.ogg","pitch":1.25,"volume":1.55},   
+                {"file":"sounds/sfx_wpn_guns/mauler_fire_01.ogg","pitch":1.28,"volume":1.55},   
+                {"file":"sounds/sfx_wpn_guns/mauler_fire_01.ogg","pitch":1.31,"volume":1.55},   
+        ],
+}

@@ -1,0 +1,10 @@
+{
+	"combatCapital":{
+		"kol_lunaria_Standard":1,
+		"kol_alysse_Standard":1,
+	},
+	"combatLarge":{
+		"kol_tamarisk_Standard":1,
+		"kol_larkspur_Standard":1,
+	}
+}
