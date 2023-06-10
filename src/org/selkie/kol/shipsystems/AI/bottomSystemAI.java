@@ -6,22 +6,19 @@ import org.lwjgl.util.vector.Vector2f;
 public class bottomSystemAI implements ShipSystemAIScript {
 
     private ShipAPI ship;
-    private ShipSystemAPI parentSys;
 
     private Boolean hasTriggered = false;
     private Boolean hasFired = false;
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;
-        if (ship.isStationModule() && ship.getParentStation() != null && ship.getParentStation().getSystem() != null)
-            this.parentSys = ship.getParentStation().getSystem();
     }
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-        if (parentSys == null) return;
+        if (ship.getParentStation() == null || ship.getParentStation().getSystem() == null) return;
 
-        if (parentSys.isActive()) {
+        if (ship.getParentStation().getSystem().isActive()) {
             hasTriggered = true;
         } else {
             if (hasFired) {
