@@ -18,19 +18,18 @@ public class bratSystemAI implements ShipSystemAIScript {
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;
+        /*
         if (ship.isStationModule() && ship.getParentStation() != null && ship.getParentStation().getSystem() != null)
             this.parentSys = ship.getParentStation().getSystem();
+        */
     }
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
 
-        Global.getCombatEngine().maintainStatusForPlayerShip("debug1",null,"SLAVE Triggered",  hasTriggered.toString(), false);
-        Global.getCombatEngine().maintainStatusForPlayerShip("debug2",null,"SLAVE Fired",  hasFired.toString(), false);
+        if (ship.getParentStation().getSystem() == null) return;
 
-        if (parentSys == null) return;
-
-        if (parentSys.isActive()) {
+        if (ship.getParentStation().getSystem().isActive()) {
             hasTriggered = true;
         } else {
             if (hasFired) {
