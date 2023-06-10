@@ -10,6 +10,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
@@ -26,6 +27,9 @@ public class lidarStats extends BaseShipSystemScript {
 	public static float ROF_BONUS = 2f;
 	public static float RECOIL_BONUS = 75f;
 	public static float PROJECTILE_SPEED_BONUS = 50f;
+	
+	public static float SPEED_PENALTY = -50f;
+	public static float WEAPON_TURN_PENALTY = -50f;
 	
 	
 	public static class LidarDishData {
@@ -138,7 +142,7 @@ public class lidarStats extends BaseShipSystemScript {
 				unmodify(id, stats);
 				for (WeaponAPI w : ship.getAllWeapons()) {
 					if (!w.isDecorative() && w.getSlot().isTurret() &&
-							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
+							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
 						w.setGlowAmount(0, null);
 					}
 				}
@@ -156,6 +160,11 @@ public class lidarStats extends BaseShipSystemScript {
 		rotateLidarDishes(active, effectLevel);
 		
 		if (active) {
+			for (WeaponAPI w : ship.getAllWeapons()) {
+				if (!w.getSpec().hasTag(Tags.LIDAR) && (w.getSize() != WeaponSize.LARGE || w.getType() == WeaponType.MISSILE)) {
+					w.setForceNoFireOneFrame(true); //w.disable();
+				}
+			}
 			modify(id, stats, effectLevel);
 			needsUnapply = true;
 		} else {
@@ -164,9 +173,14 @@ public class lidarStats extends BaseShipSystemScript {
 				for (WeaponAPI w : ship.getAllWeapons()) {
 					if (w.getSlot().isSystemSlot()) continue;
 					if (!w.isDecorative() && w.getSlot().isTurret() &&
-							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
+							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
 						w.setGlowAmount(0, null);
 					}
+					/*
+					if (!w.getSpec().hasTag(Tags.LIDAR) && (w.getSize() != WeaponSize.LARGE || w.getType() == WeaponType.MISSILE)) {
+						w.repair();
+					}
+					*/
 				}
 				needsUnapply = false;
 			}
@@ -194,7 +208,7 @@ public class lidarStats extends BaseShipSystemScript {
 		float lidarRange = 500;
 		for (WeaponAPI w : ship.getAllWeapons()) {
 			if (!w.isDecorative() && w.getSlot().isTurret() &&
-					(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
+					(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
 				lidarRange = Math.max(lidarRange, w.getRange());
 				w.setGlowAmount(effectLevel, glowColor);
 			}
@@ -249,6 +263,8 @@ public class lidarStats extends BaseShipSystemScript {
 		
 		stats.getBallisticProjectileSpeedMult().modifyPercent(id, PROJECTILE_SPEED_BONUS);
 		stats.getEnergyProjectileSpeedMult().modifyPercent(id, PROJECTILE_SPEED_BONUS);
+		stats.getMaxSpeed().modifyPercent(id, SPEED_PENALTY);
+		stats.getWeaponTurnRateBonus().modifyPercent(id, WEAPON_TURN_PENALTY);
 	}
 	protected void unmodify(String id, MutableShipStatsAPI stats) {
 		stats.getBallisticWeaponRangeBonus().modifyPercent(id, PASSIVE_RANGE_BONUS);
@@ -264,6 +280,9 @@ public class lidarStats extends BaseShipSystemScript {
 		
 		stats.getBallisticProjectileSpeedMult().unmodifyPercent(id);
 		stats.getEnergyProjectileSpeedMult().unmodifyPercent(id);
+		
+		stats.getMaxSpeed().unmodifyPercent(id);
+		stats.getWeaponTurnRateBonus().unmodifyPercent(id);
 		
 		playedWindup = false;
 	}
@@ -284,6 +303,12 @@ public class lidarStats extends BaseShipSystemScript {
 		//float mult = 1f + ROF_BONUS;
 		float mult = 1f + ROF_BONUS;
 		float bonusPercent = (int) ((mult - 1f) * 100f);
+		if (index == 5) {
+			return new StatusData("ship speed " + (int) SPEED_PENALTY + "%", false);
+		}
+		if (index == 4) {
+			return new StatusData("weapon turn rate " + (int) WEAPON_TURN_PENALTY + "%", false);
+		}
 		if (index == 3) {
 			return new StatusData("weapon range +" + (int) RANGE_BONUS + "%", false);
 		}
@@ -304,7 +329,7 @@ public class lidarStats extends BaseShipSystemScript {
 	
 	public String getDisplayNameOverride(State state, float effectLevel) {
 		if (state == State.IDLE || state == State.COOLDOWN) {
-			return "lidarStats array - passive";
+			return "lidar array passive";
 		}
 		return null;
 	}
