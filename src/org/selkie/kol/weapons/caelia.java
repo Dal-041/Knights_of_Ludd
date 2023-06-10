@@ -1,5 +1,7 @@
 package org.selkie.kol.weapons;
 
+import org.selkie.kol.shipsystems.lidarStats;
+
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -38,7 +40,9 @@ public class caelia implements EveryFrameWeaponEffectPlugin {
         
 		//Firing
         if (weapon.isFiring() || weapon.getChargeLevel() > 0) {// || wait > 0f) {
-        	if (count > timeFull) count = timeFull;
+        	if (count > timeFull || (ship.getSystem().isOn() && ship.getSystem().getId() == lidarStats.SYSID)) { //I feel dirty. Whyyyyyy
+        		count = timeFull;
+        	}
         	magnitude = count/timeFull; // 0-1
         	rofMult = ship.getMutableStats().getBallisticRoFMult().computeMultMod();
         	newCD = (baseCD-(baseCD * reductionFactor * magnitude)) * rofMult;

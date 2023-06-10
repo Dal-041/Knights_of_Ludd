@@ -31,6 +31,8 @@ public class lidarStats extends BaseShipSystemScript {
 	public static float SPEED_PENALTY = -50f;
 	public static float WEAPON_TURN_PENALTY = -50f;
 	
+	public static String SYSID = "unset";
+	
 	
 	public static class LidarDishData {
 		public float turnDir;
@@ -87,6 +89,7 @@ public class lidarStats extends BaseShipSystemScript {
 				index++;
 			}
 		}
+		SYSID = ship.getSystem().getId();
 	}
 	
 	public void rotateLidarDishes(boolean active, float effectLevel) {
@@ -304,10 +307,10 @@ public class lidarStats extends BaseShipSystemScript {
 		float mult = 1f + ROF_BONUS;
 		float bonusPercent = (int) ((mult - 1f) * 100f);
 		if (index == 5) {
-			return new StatusData("ship speed " + (int) SPEED_PENALTY + "%", false);
+			return new StatusData("ship speed " + (int) SPEED_PENALTY + "%", true);
 		}
 		if (index == 4) {
-			return new StatusData("weapon turn rate " + (int) WEAPON_TURN_PENALTY + "%", false);
+			return new StatusData("weapon turn rate " + (int) WEAPON_TURN_PENALTY + "%", true);
 		}
 		if (index == 3) {
 			return new StatusData("weapon range +" + (int) RANGE_BONUS + "%", false);
