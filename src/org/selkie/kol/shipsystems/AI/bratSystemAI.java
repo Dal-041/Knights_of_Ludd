@@ -5,7 +5,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lwjgl.util.vector.Vector2f;
 
-public class newBratSystemAI implements ShipSystemAIScript {
+public class bratSystemAI implements ShipSystemAIScript {
 
     private static float DELAY = 0.9f; // Change this to delay you want
     private ShipAPI ship;
@@ -24,10 +24,11 @@ public class newBratSystemAI implements ShipSystemAIScript {
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-        if (parentSys == null) return;
 
         Global.getCombatEngine().maintainStatusForPlayerShip("debug1",null,"SLAVE Triggered",  hasTriggered.toString(), false);
         Global.getCombatEngine().maintainStatusForPlayerShip("debug2",null,"SLAVE Fired",  hasFired.toString(), false);
+
+        if (parentSys == null) return;
 
         if (parentSys.isActive()) {
             hasTriggered = true;
