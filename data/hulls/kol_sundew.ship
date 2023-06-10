@@ -7,10 +7,13 @@
   "height": 118,
   "width": 94,
   "center": [47, 59],
-  "collisionRadius": 130.5,
+  "collisionRadius": 87,
   "shieldCenter": [0, 0],
-  "shieldRadius": 107.5,
+  "shieldRadius": 80,
   "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0006": "kol_flickerShield"
+  },
   "weaponSlots": [
     {
       "id": "WS0001",
@@ -56,6 +59,15 @@
       "arc": 0,
       "angle": -0,
       "locations": [23, -24]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [0, -0]
     }
   ],
   "engineSlots": [
