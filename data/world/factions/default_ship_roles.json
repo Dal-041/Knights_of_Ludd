@@ -2,7 +2,7 @@
 	"combatCapital":{
 		"kol_lunaria_Standard":1,
 		"kol_alysse_Standard":1,
-		#"kol_retribution_path_Standard":1,
+		#"kol_boss_ret_lp":1,
 		"kol_invictus_lp_hallowed":1,
 	},
 	"combatLarge":{

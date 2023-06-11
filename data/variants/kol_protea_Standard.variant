@@ -1,13 +1,47 @@
 {
-  "variantId": "kol_protea_Standard",
-  "hullId": "kol_protea",
-  "displayName": "Standard",
-  "goalVariant": true,
-  "fluxCapacitors": 0,
-  "fluxVents": 0,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [],
-  "weaponGroups": [],
-  "wings": []
+    "displayName": "Standard",
+    "fluxCapacitors": 10,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "kol_protea",
+    "hullMods": [
+        "hardened_subsystems",
+        "unstable_injector",
+        "armoredweapons"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "kol_protea_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "arbalest",
+                "WS0002": "arbalest"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0005": "hammer",
+                "WS0006": "hammer"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "lightac",
+                "WS0004": "lightac"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS0007": "vulcan"}
+        }
+    ],
+    "wings": []
 }

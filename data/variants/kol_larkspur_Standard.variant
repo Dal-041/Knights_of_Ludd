@@ -1,21 +1,49 @@
 {
-  "variantId": "kol_larkspur_Standard",
-  "hullId": "kol_larkspur",
-  "displayName": "Standard",
-  "goalVariant": false,
-  "fluxCapacitors": 0,
-  "fluxVents": 0,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [],
-  "weaponGroups": [],
-  "modules": [
-    {
-      "WS0011": "kol_larkspur_tl_Standard"
-    },
-    {
-      "WS0012": "kol_larkspur_tr_Standard"
-    }
-  ],
-  "wings": []
+    "displayName": "Standard",
+    "fluxCapacitors": 1,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "kol_larkspur",
+    "hullMods": [
+        "targetingunit",
+        "missleracks",
+        "armoredweapons"
+    ],
+    "modules": [
+        {"WS0011": "kol_larkspur_tl_Standard"},
+        {"WS0012": "kol_larkspur_tr_Standard"}
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "kol_larkspur_Standard",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS0001": "kol_llyr"}
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "annihilatorpod",
+                "WS0010": "annihilatorpod"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS0002": "heavyac"}
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "vulcan",
+                "WS0004": "flak",
+                "WS0005": "flak",
+                "WS0006": "vulcan"
+            }
+        }
+    ]
 }

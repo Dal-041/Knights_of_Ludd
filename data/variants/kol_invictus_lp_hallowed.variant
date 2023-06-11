@@ -1,57 +1,55 @@
 {
-  "variantId": "kol_invictus_lp_hallowed",
-  "hullId": "kol_invictus_lp",
-  "displayName": "Hallowed",
-  "goalVariant": true,
-  "fluxCapacitors": 0,
-  "fluxVents": 0,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [
-    "armoredweapons",
-    "eccm",
-    "missleracks"
-  ],
-  "weaponGroups": [
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 000": "multineedler",
-        "WS 026": "multineedler"
-      }
-    },
-    {
-      "autofire": false,
-      "mode": "ALTERNATING",
-      "weapons": {
-        "WS 022": "jackhammer",
-        "WS 023": "jackhammer",
-        "WS 024": "jackhammer",
-        "WS 025": "jackhammer",
-	  }
-    },
-    {
-      "autofire": false,
-      "mode": "ALTERNATING",
-      "weapons": {
-        "WS 001": "hammerrack",
-        "WS 002": "hammerrack",
-        "WS 009": "hammerrack",
-        "WS 010": "hammerrack"
-      }
-    },
-    {
-      "autofire": false,
-      "mode": "LINKED",
-      "weapons": {
-        "WS 003": "devastator",
-        "WS 005": "devastator",
-        "WS 006": "devastator",
-        "WS 008": "devastator"
-      }
-    }
-  ],
-  "modules": [],
-  "wings": []
+    "displayName": "Hallowed",
+    "fluxCapacitors": 0,
+    "fluxVents": 34,
+    "goalVariant": true,
+    "hullId": "kol_invictus_lp",
+    "hullMods": [
+        "armoredweapons",
+        "eccm",
+        "fluxbreakers"
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "kol_invictus_lp_hallowed",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 000": "multineedler",
+                "WS 026": "multineedler"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 022": "jackhammer",
+                "WS 023": "jackhammer",
+                "WS 024": "jackhammer",
+                "WS 025": "jackhammer"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 001": "hammerrack",
+                "WS 002": "hammerrack",
+                "WS 009": "hammerrack",
+                "WS 010": "hammerrack"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "devastator",
+                "WS 005": "devastator",
+                "WS 006": "devastator",
+                "WS 008": "devastator"
+            }
+        }
+    ]
 }

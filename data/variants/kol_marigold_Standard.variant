@@ -1,21 +1,54 @@
 {
-  "variantId": "kol_marigold_Standard",
-  "hullId": "kol_marigold",
-  "displayName": "Standard",
-  "goalVariant": false,
-  "fluxCapacitors": 0,
-  "fluxVents": 0,
-  "quality": 1,
-  "permaMods": [],
-  "hullMods": [],
-  "weaponGroups": [],
-  "modules": [
-    {
-      "WS0013": "kol_sundew_tl_Standard"
-    },
-    {
-      "WS0014": "kol_sundew_tr_Standard"
-    }
-  ],
-  "wings": []
+    "displayName": "Standard",
+    "fluxCapacitors": 0,
+    "fluxVents": 6,
+    "goalVariant": true,
+    "hullId": "kol_marigold",
+    "hullMods": [
+        "missleracks",
+        "heavyarmor"
+    ],
+    "modules": [
+        {"WS0013": "kol_sundew_tl_Standard"},
+        {"WS0014": "kol_sundew_tr_Standard"}
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "kol_marigold_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "harpoonpod",
+                "WS0010": "harpoonpod"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0011": "sabot",
+                "WS0012": "sabot"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lightac",
+                "WS0002": "lightac"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "vulcan",
+                "WS0004": "vulcan",
+                "WS0007": "vulcan",
+                "WS0008": "vulcan"
+            }
+        }
+    ]
 }
