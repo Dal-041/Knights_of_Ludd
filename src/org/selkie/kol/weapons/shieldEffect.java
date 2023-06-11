@@ -193,7 +193,7 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         float estimatedDamage = 0f;
         // sum up projectile damage
         for(DamagingProjectileAPI hit : estimatedHits){
-            engine.addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
+            if (Global.getSettings().isDevMode()) engine.addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
             estimatedDamage += convertDamageType(hit.getDamageType(), hit.getDamageAmount()) + hit.getEmpAmount()/4;
         }
 
