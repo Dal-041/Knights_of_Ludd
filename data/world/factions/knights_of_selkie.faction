@@ -146,6 +146,7 @@
 			"shredder",
 			"heavymortar",
 			"flak",
+			"dualflak",
 			"arbalest",
 			"heavyac",
 			"heavymauler",
@@ -154,6 +155,8 @@
 			"hellbore",
 			"devastator",
 			"kol_caelia",
+			"kol_llyr",
+			"kol_tor",
 			
 			"hammer",
 			"hammer_single",
