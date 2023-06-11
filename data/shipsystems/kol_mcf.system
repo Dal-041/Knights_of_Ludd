@@ -4,6 +4,6 @@
 	"aiType":"CUSTOM",
 	"aiScript":"org.selkie.kol.shipsystems.AI.bratSystemAI",
 	
-	"weaponDataId":"canister_flak",
+	"weaponDataId":"kol_canister_flak",
 	"outOfUsesSound":"gun_out_of_ammo",
 }

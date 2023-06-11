@@ -47,22 +47,6 @@
       "angle": -167.5,
       "contrailSize": 64,
       "style": "COBRA_BOMBER"
-    },
-    {
-      "location": [-19, 6.5],
-      "length": 25.5,
-      "width": 9,
-      "angle": 167.5,
-      "contrailSize": 9,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-19, -6.5],
-      "length": 25.5,
-      "width": 9,
-      "angle": -167.5,
-      "contrailSize": 9,
-      "style": "KOL_ENG"
     }
   ],
   "bounds": [

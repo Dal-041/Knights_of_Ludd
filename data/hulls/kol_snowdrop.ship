@@ -12,7 +12,11 @@
   "shieldRadius": 113,
   "viewOffset": 0,
   "builtInWeapons": {
-    "WS0012": "kol_pusherplate_lt_but_cute"
+    "WS0012": "kol_pusherplate_lt_but_cute",
+    "WS0013": "eis_blinker_white30",
+    "WS0014": "eis_blinker_white30",
+    "WS0018": "eis_blinker_white",
+    "WS0019": "eis_blinker_white"
   },
   "weaponSlots": [
     {
@@ -149,24 +153,6 @@
       "arc": 0,
       "angle": 0,
       "locations": [13, -0]
-    },
-    {
-      "id": "WS0016",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-14, 41]
-    },
-    {
-      "id": "WS0017",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -0,
-      "locations": [-14, -41]
     },
     {
       "id": "WS0018",

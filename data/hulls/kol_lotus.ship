@@ -11,6 +11,13 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 154,
   "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0015": "kol_flickerShield",
+    "WS0016": "eis_blinker_white",
+    "WS0017": "eis_blinker_white",
+    "WS0018": "eis_blinker_white",
+    "WS0019": "eis_blinker_white"
+  },
   "weaponSlots": [
     {
       "id": "WS0002",
@@ -137,6 +144,51 @@
       "arc": 0,
       "angle": -0,
       "locations": [-50.5, -62]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [62.5, -0]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [26, 25.5]
+    },
+    {
+      "id": "WS0017",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [26, -25.5]
+    },
+    {
+      "id": "WS0018",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-35, 30.5]
+    },
+    {
+      "id": "WS0019",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-35, -30.5]
     }
   ],
   "engineSlots": [

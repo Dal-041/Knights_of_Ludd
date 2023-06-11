@@ -16,10 +16,10 @@
   ],
   "builtInWeapons": {
     "FLICKERSHIELD": "kol_flickerShield",
-    "WS0019": "eis_blinker_white",
+    "WS0001": "kol_lunete",
+    "WS0002": "kol_lunete",
     "WS0020": "eis_blinker_white30",
     "WS0021": "eis_blinker_white30",
-    "WS0022": "eis_blinker_white",
     "WS0023": "eis_blinker_white30",
     "WS0024": "eis_blinker_white30",
     "WS0025": "eis_blinker_white30",
@@ -52,7 +52,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [170, 28]
+      "locations": [172, 27]
     },
     {
       "id": "WS0002",
@@ -61,7 +61,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -0,
-      "locations": [170, -28]
+      "locations": [172, -27]
     },
     {
       "id": "WS0003",
@@ -252,24 +252,6 @@
       "arc": 0,
       "angle": -0,
       "locations": [115, -42]
-    },
-    {
-      "id": "WS0019",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-23.5, 103.5]
-    },
-    {
-      "id": "WS0022",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -0,
-      "locations": [-23.5, -103.5]
     },
     {
       "id": "WS0025",

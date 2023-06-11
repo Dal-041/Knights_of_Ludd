@@ -16,7 +16,14 @@
     "kol_hex_wing"
   ],
   "builtInWeapons": {
-    "WS0008": "kol_deco_protea_mid"
+    "WS0008": "kol_deco_protea_mid",
+    "WS0009": "kol_flickerShield",
+    "WS0010": "eis_blinker_white",
+    "WS0011": "eis_blinker_white",
+    "WS0012": "eis_blinker_red",
+    "WS0013": "eis_blinker_green",
+    "WS0014": "kol_deco_protea_l",
+    "WS0015": "kol_deco_protea_r"
   },
   "weaponSlots": [
     {
@@ -62,7 +69,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [12, 62.5]
+      "locations": [4, 62]
     },
     {
       "id": "WS0006",
@@ -71,7 +78,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
-      "locations": [12, -62.5]
+      "locations": [4, -62]
     },
     {
       "id": "WS0007",
@@ -90,6 +97,69 @@
       "arc": 0,
       "angle": 0,
       "locations": [-2.5, -0]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [48, -0]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-30.5, 48.5]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-30.5, -48.5]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [2.5, 76.5]
+    },
+    {
+      "id": "WS0013",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [2.5, -76.5]
+    },
+    {
+      "id": "WS0014",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [1, 69]
+    },
+    {
+      "id": "WS0015",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [1, -69]
     }
   ],
   "engineSlots": [

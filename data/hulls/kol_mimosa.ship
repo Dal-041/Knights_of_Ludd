@@ -12,7 +12,8 @@
   "shieldRadius": 107.5,
   "viewOffset": 0,
   "builtInWeapons": {
-    "WS0007": "lidardish"
+    "WS0007": "lidardish",
+    "WS0016": "kol_flickerShield"
   },
   "weaponSlots": [
     {
@@ -48,7 +49,7 @@
       "type": "BALLISTIC",
       "mount": "TURRET",
       "arc": 150,
-      "angle": -0,
+      "angle": -45,
       "locations": [6.5, -37]
     },
     {
@@ -149,6 +150,15 @@
       "arc": 0,
       "angle": 0,
       "locations": [43.5, -0]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [51.5, -0]
     }
   ],
   "engineSlots": [],
