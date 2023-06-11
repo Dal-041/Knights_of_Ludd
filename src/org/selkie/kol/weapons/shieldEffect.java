@@ -13,7 +13,7 @@ import org.magiclib.util.MagicUI;
 import java.awt.Color;
 import java.util.*;
 
-//By Tartiflette
+//Concept and impl by Tartiflette, AI by Starficz
 
 public class shieldEffect implements EveryFrameWeaponEffectPlugin {
     

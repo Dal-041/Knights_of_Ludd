@@ -10,8 +10,9 @@ Lidar Array,kol_lidar,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/l
 Leap of Faith,kol_lunge,,,,,,,,3,0.15,0.1,0.3,0.1,,,,,,,,,,,,TRUE,,graphics/icons/hullsys/maneuvering_jets.png
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #MODULE SYS,,,,,,,,,,,,,,,,,,,,,,,,,,,
-why can you see this wtf,kol_mcf,,,,,,,,69,1,,,,.2,,,,,,,,,,,,,
+why can you see this wtf,kol_mcf,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DISABLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #flare shooty idfk,kol_flarejets,,,,,,,,,,1,5,1,5,,,,,,,,,,,,,graphics/icons/hullsys/maneuvering_jets.png
 Condemn,kol_drone_strike,,,,600,,,,,,0,0.05,0.2,0,,,,,,,,,,,,,graphics/icons/hullsys/drone_pd_high.png
+Drone Control,drone_control,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphics/icons/hullsys/reserve_deployment.png

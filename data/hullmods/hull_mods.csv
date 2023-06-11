@@ -1,6 +1,3 @@
-name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sprite
-Vulcan Built-In,kol_vulcan,,,,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.kol_vulcan,no don’t look,don’t look,
-,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,
+name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sprite,
+Vulcan Built-In,kol_vulcan,,,,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.kol_vulcan,no donï¿½t look,donï¿½t look,,
+Unknown Mechanisms,kol_ea_sparkle,,,,,"Weapons, Defenses",,,,,0,0,0,0,org.selkie.kol.impl.hullmods.sparkleHullMod,"Strange devices of unknown origin, they appear to be highly energized.","Strange devices of unknown origin, they appear to be highly energized.",data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/hullmods/kol_sparklethingy.png, 
