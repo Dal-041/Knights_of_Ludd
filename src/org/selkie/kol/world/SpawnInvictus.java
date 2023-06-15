@@ -17,8 +17,8 @@ public class SpawnInvictus {
 	public static boolean spawnInvictus() {
 	        
 		SectorEntityToken target=null;
-		if(Global.getSector().getEntityById("epiphany")!=null && Global.getSector().getEntityById("epiphany").getFaction() == Global.getSector().getFaction("luddic_path")){
-	            target = Global.getSector().getEntityById("epiphany");
+		if(Global.getSector().getEntityById("chalcedon")!=null && Global.getSector().getEntityById("chalcedon").getFaction() == Global.getSector().getFaction("luddic_path")){
+	            target = Global.getSector().getEntityById("chalcedon");
 	        } else {
 	            for(MarketAPI markets : Global.getSector().getEconomy().getMarketsCopy()){
 	                if(markets.getFaction().getId().equals("luddic_path")){
