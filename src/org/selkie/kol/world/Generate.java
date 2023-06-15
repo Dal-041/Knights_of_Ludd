@@ -17,11 +17,13 @@ public class Generate {
 	static StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
 	static StarSystemAPI Kumari = Global.getSector().getStarSystem("Kumari Kandam");
 	static StarSystemAPI Eos = Global.getSector().getStarSystem("Eos Exodus");
+	static StarSystemAPI Gebbar = Global.getSector().getStarSystem("Al Gebbar");
 	
 	public static void zugg() {
 		Eos.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");
 		Kumari.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_2.jpg");
 		Canaan.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_3.jpg");
+		Gebbar.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
 	}

@@ -21,7 +21,9 @@
     "WS0016": "eis_blinker_white30",
     "WS0017": "eis_blinker_white",
     "WS0018": "eis_blinker_white",
-    "WS0019": "kol_deco_larkspur_front"
+    "WS0019": "kol_deco_larkspur_front",
+    "WS0020": "kol_deco_larkspur_tl",
+    "WS0021": "kol_deco_larkspur_tr"
   },
   "weaponSlots": [
     {
@@ -206,6 +208,26 @@
       "angle": 0,
       "locations": [81, -0],
       "renderOrderMod": 100
+    },
+    {
+      "id": "WS0020",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [79.5, 25.5],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0021",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [79.5, -25.5],
+      "renderOrderMod": 200
     }
   ],
   "engineSlots": [

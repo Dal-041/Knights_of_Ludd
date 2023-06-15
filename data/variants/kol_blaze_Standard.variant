@@ -1,0 +1,19 @@
+{
+    "displayName": "Standard",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_blaze",
+    "hullMods": [
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "kol_blaze_Standard",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {"WS0009": "kol_brimstone"}
+        },
+    ]
+}
