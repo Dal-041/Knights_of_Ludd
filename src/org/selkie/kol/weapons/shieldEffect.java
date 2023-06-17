@@ -185,8 +185,8 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         float estimatedDamage = 0f;
         // sum up all the actual damage after armor
         for(DamagingProjectileAPI hit : estimatedHits){
-            if (Global.getSettings().isDevMode()) engine.addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
-            estimatedDamage += convertDamageType(hit.getDamageType(), hit.getDamageAmount()) + hit.getEmpAmount()/4;
+            if (Global.getSettings().isDevMode()) Global.getCombatEngine().addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
+            estimatedDamage += damageAfterArmor(hit.getDamageType(), hit.getDamageAmount(), ship) + hit.getEmpAmount()/4;
         }
 
         // Handle beams with line-circle collision checks
