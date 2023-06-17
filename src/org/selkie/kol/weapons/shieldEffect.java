@@ -2,10 +2,13 @@ package org.selkie.kol.weapons;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.loading.MissileSpecAPI;
+import com.fs.starfarer.api.loading.ProjectileSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicUI;
@@ -18,8 +21,7 @@ import java.util.*;
 public class shieldEffect implements EveryFrameWeaponEffectPlugin {
     
     private final float MAX_SHIELD=10;
-    private final static float TIME_TO_ESTIMATE = 3f;
-    
+    private final static boolean DEBUG = true;
     private boolean runOnce = false, disabled=false;
     private float shieldT=0,aiT=0;
     private ShipAPI ship;
@@ -54,19 +56,8 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
 
                 //AI
 
-
-                float shieldDirection = 0;
-                float shieldArc = 0;
-                if (shield.getType() == ShieldAPI.ShieldType.FRONT){
-                    shieldDirection = ship.getFacing();
-                    shieldArc = shield.getArc();
-                }
-                else if (shield.getType() == ShieldAPI.ShieldType.OMNI){
-                    shieldArc = 360f; // 360 means to estimate as if you can block damage anywhere
-                }
-
-                float estimatedBlockableDamage = getDamageBlockedEstimate(ship.getLocation(),ship.getVelocity(), ship.getCollisionRadius()*0.9f, TIME_TO_ESTIMATE, shieldDirection, shieldArc);
-
+                //If debug is turned on, weapons that can hit the ship will be blue, and projectiles that can hit the ship will be magenta
+                float estimatedBlockableDamage = estimateBlockableProjectileDamage(ship, shield.getUnfoldTime()) + estimateBlockableUnfiredDamage(ship, shield.getUnfoldTime());
 
                 // usually false, only true when currently unfolding shield. stops shield flickering.
                 boolean wantToShield = shield.getActiveArc() > 1f && shield.getActiveArc() < shield.getArc() * 0.9f;
@@ -82,6 +73,7 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
 
                 if(ship.getFluxLevel() > 0.95f) // dont overload
                     wantToShield = false;
+
 
                 if (!disabled && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)) {
                     if (shield.isOn() ^ wantToShield)
@@ -113,112 +105,6 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         }
     }
 
-    private float getDamageBlockedEstimate(Vector2f testPoint, Vector2f velocity, float radius, float secondsToEstimate, float shieldDirection, float shieldArc){
-        float MAX_SPEED_OF_PROJECTILE = 2000f;
-
-        Set<DamagingProjectileAPI> nearbyUnguided = new HashSet<>();
-        Set<MissileAPI> nearbyGuided = new HashSet<>();
-
-        // Sort all projectiles into guided or unguided
-        for (DamagingProjectileAPI threat : getAllProjectilesInRange(testPoint, secondsToEstimate * MAX_SPEED_OF_PROJECTILE)) {
-            if (!threat.isFading() && threat.getOwner() != ship.getOwner()) {
-                float threatAngle = VectorUtils.getAngle(testPoint, threat.getLocation());
-                if (threat instanceof MissileAPI){
-                    MissileAPI missile = (MissileAPI) threat;
-                    if (!missile.isFlare()) {
-                        if (!missile.isGuided()) {
-                            if (Math.abs(MathUtils.getShortestRotation(shieldDirection, threatAngle)) < shieldArc / 2)
-                                nearbyUnguided.add(threat);
-                        } else {
-                            nearbyGuided.add(missile);
-                        }
-                    }
-                }else{
-                    if(Math.abs(MathUtils.getShortestRotation(shieldDirection, threatAngle)) < shieldArc/2)
-                        nearbyUnguided.add(threat);
-                }
-            }
-        }
-
-        Set<DamagingProjectileAPI> estimatedHits = new HashSet<>();
-
-        // do a line-circle collision check for unguided
-        for (DamagingProjectileAPI unguided : nearbyUnguided){
-            float maxSpeed = (unguided instanceof MissileAPI) ? ((MissileAPI) unguided).getMaxSpeed() : unguided.getMoveSpeed();
-            Vector2f futureProjectileLocation = Vector2f.add(unguided.getLocation(), VectorUtils.resize(new Vector2f(unguided.getVelocity()), secondsToEstimate*maxSpeed), null);
-            float hitDistance = MathUtils.getDistance(testPoint, unguided.getLocation()) - radius;
-            float travelTime = hitDistance/unguided.getMoveSpeed();
-            Vector2f futureTestPoint = Vector2f.add(testPoint, (Vector2f) new Vector2f(velocity).scale(travelTime), null);
-            if (CollisionUtils.getCollides(unguided.getLocation(), futureProjectileLocation, futureTestPoint, radius * 0.9f)){
-                estimatedHits.add(unguided);
-            }
-        }
-
-        for (MissileAPI guided : nearbyGuided){
-            // for guided, check if they are currently in the ships collision bounds
-            if (CollisionUtils.isPointWithinBounds(guided.getLocation(), ship)){
-                estimatedHits.add(guided);
-            }else{ // If not, do some complex math to figure out the time it takes to hit
-
-                float missileTurningRadius = (float) (guided.getMaxSpeed() / (guided.getMaxTurnRate() * Math.PI / 180));
-                float missileCurrentAngle = VectorUtils.getFacing(guided.getVelocity());
-                Vector2f missileCurrentLocation = guided.getLocation();
-                float missileTargetAngle = VectorUtils.getAngle(missileCurrentLocation, testPoint);
-                float missileRotationNeeded = MathUtils.getShortestRotation(missileCurrentAngle, missileTargetAngle);
-                Vector2f missileRotationCenter = MathUtils.getPointOnCircumference(guided.getLocation(), missileTurningRadius, missileCurrentAngle + (missileRotationNeeded > 0 ? 90 : -90));
-
-                float missileRotationSeconds = 0;
-                do {
-                    missileRotationSeconds += Math.abs(missileRotationNeeded)/guided.getMaxTurnRate();
-                    missileCurrentAngle = missileTargetAngle;
-                    missileCurrentLocation = MathUtils.getPointOnCircumference(missileRotationCenter, missileTurningRadius, missileCurrentAngle + (missileRotationNeeded > 0 ? -90 : 90));
-
-                    missileTargetAngle = VectorUtils.getAngle(missileCurrentLocation, testPoint);
-                    missileRotationNeeded = MathUtils.getShortestRotation(missileCurrentAngle, missileTargetAngle);
-                } while (missileRotationSeconds < secondsToEstimate && Math.abs(missileRotationNeeded) > 1f);
-
-
-
-
-                float missileStraightSeconds = (MathUtils.getDistance(missileCurrentLocation, testPoint)-radius) / guided.getMaxSpeed();
-
-                if ((missileRotationSeconds + missileStraightSeconds < secondsToEstimate) && (missileRotationSeconds + missileStraightSeconds < guided.getMaxFlightTime() - guided.getFlightTime())){
-                    if(Math.abs(MathUtils.getShortestRotation(shieldDirection, missileTargetAngle+180)) < shieldArc/2) {
-                        estimatedHits.add(guided);
-                    }
-                }
-            }
-        }
-
-        float estimatedDamage = 0f;
-        // sum up projectile damage
-        for(DamagingProjectileAPI hit : estimatedHits){
-            if (Global.getSettings().isDevMode()) engine.addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
-            estimatedDamage += convertDamageType(hit.getDamageType(), hit.getDamageAmount()) + hit.getEmpAmount()/4;
-        }
-
-        // Handle beams with line-circle collision checks
-        // TODO: check if engine.getBeams() can be replaced with something like getAllProjectilesInRange() that uses the object grid
-        List<BeamAPI> nearbyBeams = engine.getBeams();
-        for (BeamAPI beam : nearbyBeams) {
-            float threatAngle = VectorUtils.getAngle(testPoint, beam.getFrom());
-            if (Math.abs(MathUtils.getShortestRotation(shieldDirection, threatAngle)) < shieldArc / 2){
-                if (beam.getSource().getOwner() != ship.getOwner() && CollisionUtils.getCollides(beam.getFrom(), beam.getTo(), testPoint, Misc.getTargetingRadius(beam.getFrom(), ship, false))) {
-                    float damage;
-                    float emp = beam.getWeapon().getDerivedStats().getEmpPerSecond();
-                    if (beam.getWeapon().getDerivedStats().getSustainedDps() < beam.getWeapon().getDerivedStats().getDps()) {
-                        damage = beam.getWeapon().getDerivedStats().getBurstDamage() / beam.getWeapon().getDerivedStats().getBurstFireDuration();
-                    } else {
-                        damage = beam.getWeapon().getDerivedStats().getDps();
-                    }
-                    estimatedDamage += convertDamageType(beam.getWeapon().getDamageType(), damage) + emp/4;
-                }
-            }
-        }
-
-        return estimatedDamage;
-    }
-
     public static ArrayList<DamagingProjectileAPI> getAllProjectilesInRange(Vector2f loc, float radius) {
         ArrayList<DamagingProjectileAPI> entities = new ArrayList<>();
 
@@ -234,7 +120,217 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         return entities;
     }
 
-    private float getWeakestTotalArmor(ShipAPI ship){
+    public static float estimateBlockableProjectileDamage(ShipAPI ship, float secondsToEstimate){
+        float MAX_SPEED_OF_PROJECTILE = 2000f;
+
+        Set<DamagingProjectileAPI> nearbyUnguided = new HashSet<>();
+        Set<MissileAPI> nearbyGuided = new HashSet<>();
+        float angleToShip;
+        // Sort all projectiles into guided or unguided
+        for (DamagingProjectileAPI threat : getAllProjectilesInRange(ship.getLocation(), secondsToEstimate * MAX_SPEED_OF_PROJECTILE)) {
+
+            // assume omni shields can block everything
+            if (ship.getShield().getType() == ShieldAPI.ShieldType.FRONT)
+                angleToShip = MathUtils.getShortestRotation(VectorUtils.getAngle(ship.getLocation(), threat.getLocation()), ship.getFacing());
+            else if (ship.getShield().getType() == ShieldAPI.ShieldType.OMNI)
+                angleToShip = 0;
+            else
+                return 0;
+
+            if (!threat.isFading() && threat.getOwner() != ship.getOwner() && angleToShip < ship.getShield().getArc()/2) {
+                if (threat instanceof MissileAPI){
+                    MissileAPI missile = (MissileAPI) threat;
+                    if (!missile.isFlare()) {
+                        if (!missile.isGuided() || !(missile.getEngineController().isTurningLeft() || missile.getEngineController().isTurningRight()))
+                            nearbyUnguided.add(threat);
+                        else
+                            nearbyGuided.add(missile);
+                    }
+                }else{
+                    nearbyUnguided.add(threat);
+                }
+            }
+        }
+
+        Set<DamagingProjectileAPI> estimatedHits = new HashSet<>();
+
+        // do a line-circle collision check for unguided
+        for (DamagingProjectileAPI unguided : nearbyUnguided){
+            float radius = Misc.getTargetingRadius(unguided.getLocation(), ship, false);
+            float maxSpeed = (unguided instanceof MissileAPI) ? ((MissileAPI) unguided).getMaxSpeed() : unguided.getMoveSpeed();
+            Vector2f futureProjectileLocation = Vector2f.add(unguided.getLocation(), VectorUtils.resize(new Vector2f(unguided.getVelocity()), secondsToEstimate*maxSpeed), null);
+            float hitDistance = MathUtils.getDistance(ship.getLocation(), unguided.getLocation()) - radius;
+            float travelTime = hitDistance/unguided.getMoveSpeed();
+            Vector2f futureTestPoint = Vector2f.add(ship.getLocation(), (Vector2f) new Vector2f(ship.getVelocity()).scale(travelTime), null);
+            if (CollisionUtils.getCollides(unguided.getLocation(), futureProjectileLocation, futureTestPoint, radius)){
+                estimatedHits.add(unguided);
+            }
+        }
+
+        // estimate the missile flight time and check if it will hit the ship
+        for (MissileAPI guided : nearbyGuided){
+            float radius = Misc.getTargetingRadius(guided.getLocation(), ship, false);
+            if(MathUtils.isPointWithinCircle(guided.getLocation(), ship.getLocation(), radius)){
+                estimatedHits.add(guided);
+                continue;
+            }
+            float travelTime = missileTravelTime(guided.getMoveSpeed(), guided.getMaxSpeed(), guided.getAcceleration(),
+                    guided.getMaxTurnRate(), VectorUtils.getFacing(guided.getVelocity()), guided.getLocation(), ship.getLocation(), radius );
+
+            if ((travelTime < secondsToEstimate) && (travelTime < guided.getMaxFlightTime() - guided.getFlightTime())){
+                estimatedHits.add(guided);
+            }
+        }
+
+        float estimatedDamage = 0f;
+        // sum up all the actual damage after armor
+        for(DamagingProjectileAPI hit : estimatedHits){
+            if (Global.getSettings().isDevMode()) engine.addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
+            estimatedDamage += convertDamageType(hit.getDamageType(), hit.getDamageAmount()) + hit.getEmpAmount()/4;
+        }
+
+        // Handle beams with line-circle collision checks
+        // TODO: check if getBeams() can be replaced with something like getAllProjectilesInRange() that uses the object grid
+        List<BeamAPI> nearbyBeams = Global.getCombatEngine().getBeams();
+        for (BeamAPI beam : nearbyBeams) {
+            if (beam.getSource().getOwner() != ship.getOwner() && CollisionUtils.getCollides(beam.getFrom(), beam.getTo(), ship.getLocation(), Misc.getTargetingRadius(beam.getFrom(), ship, false))) {
+                float damage;
+                float emp = beam.getWeapon().getDerivedStats().getEmpPerSecond();
+                if (beam.getWeapon().getDerivedStats().getSustainedDps() < beam.getWeapon().getDerivedStats().getDps()) {
+                    damage = beam.getWeapon().getDerivedStats().getBurstDamage() / beam.getWeapon().getDerivedStats().getBurstFireDuration();
+                } else {
+                    damage = beam.getWeapon().getDerivedStats().getDps();
+                }
+                estimatedDamage += damageAfterArmor(beam.getWeapon().getDamageType(), damage, ship) + emp/4;
+            }
+        }
+
+        return estimatedDamage;
+    }
+
+    public static float estimateBlockableUnfiredDamage(ShipAPI ship, float timeToEstimate){
+        float totalDamage = 0f;
+        List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,3000f);
+        for (ShipAPI enemy: nearbyEnemies) {
+            // ignore venting/overloaded enemies
+            if(enemy.getFluxTracker().isOverloaded() || enemy.getFluxTracker().isVenting())
+                continue;
+
+            for (WeaponAPI weapon: enemy.getAllWeapons()){
+
+                // ignore decorative / weapons out of ammo
+                if(weapon.isDecorative() || (weapon.usesAmmo() && weapon.getAmmo() == 0))
+                    continue;
+
+                // ignore weapon if out of range
+                float distanceFromWeaponSquared = MathUtils.getDistanceSquared(weapon.getLocation(), ship.getLocation());
+                if(weapon.getRange()*weapon.getRange() < distanceFromWeaponSquared)
+                    continue;
+
+                // ignore weapon if not in shield arc
+                float angleToShip;
+                // assume omni shields can block everything
+                if (ship.getShield().getType() == ShieldAPI.ShieldType.FRONT)
+                    angleToShip = Math.abs(MathUtils.getShortestRotation(ship.getFacing(), VectorUtils.getAngle(ship.getLocation(), weapon.getLocation())));
+                else if (ship.getShield().getType() == ShieldAPI.ShieldType.OMNI)
+                    angleToShip = 0;
+                else
+                    return 0;
+
+                if(angleToShip > ship.getShield().getArc()/2)
+                    continue;
+
+                // distanceFromArc returns 0 only if ship is in arc
+                boolean inArc = weapon.distanceFromArc(ship.getLocation()) == 0;
+                float timeToAim = Math.abs(MathUtils.getShortestRotation(weapon.getCurrAngle(), VectorUtils.getAngle(weapon.getLocation(), ship.getLocation())))/weapon.getTurnRate();
+
+                // estimate the actual time spent firing
+                float firingTime = timeToEstimate - weapon.getCooldownRemaining();
+                if (weapon.isDisabled())
+                    firingTime -= 15 * weapon.getCurrHealth()/weapon.getMaxHealth(); //TODO: no clue where to actually get the real repair time
+
+                // special case the beam, as beam damage is complicated. no clue if the inbuilt computeDamageDealt() is accurate or not, lets hope it is.
+                if(weapon.isBeam() && inArc){
+                    if (Global.getSettings().isDevMode()) Global.getCombatEngine().addSmoothParticle(weapon.getLocation(), enemy.getVelocity(), 30f, 5f, 0.1f, Color.blue);
+
+                    firingTime = Math.max(firingTime - timeToAim, 0);
+                    totalDamage += damageAfterArmor(weapon.getDamageType(), weapon.getDamage().computeDamageDealt(firingTime), ship);
+                } // otherwise if in weapon arc or weapon is guided, calculate the unfired damage that should hit the ship
+                else if(inArc || weapon.hasAIHint(WeaponAPI.AIHints.DO_NOT_AIM) || weapon.hasAIHint(WeaponAPI.AIHints.GUIDED_POOR)){
+                    if (Global.getSettings().isDevMode()) Global.getCombatEngine().addSmoothParticle(weapon.getLocation(), enemy.getVelocity(), 30f, 5f, 0.1f, Color.blue);
+
+                    MutableShipStatsAPI stats = enemy.getMutableStats();
+                    // calculate the initial damage latency (ie: time until the first projectile/missile will hit)
+                    if (weapon.getSpec().getProjectileSpec() instanceof ProjectileSpecAPI) {
+                        firingTime = Math.max(firingTime - timeToAim - weapon.getSpec().getChargeTime(), 0);
+                        firingTime -= distanceFromWeaponSquared / ((ProjectileSpecAPI) weapon.getSpec().getProjectileSpec()).getMoveSpeed(stats, weapon);
+                    }
+                    else if (weapon.getSpec().getProjectileSpec() instanceof MissileSpecAPI) {
+                        ShipHullSpecAPI.EngineSpecAPI missileEngine = ((MissileSpecAPI) weapon.getSpec().getProjectileSpec()).getHullSpec().getEngineSpec();
+                        float launchSpeed = ((MissileSpecAPI) weapon.getSpec().getProjectileSpec()).getLaunchSpeed();
+                        float maxSpeed = stats.getMissileMaxSpeedBonus().computeEffective(missileEngine.getMaxSpeed());
+                        float acceleration = stats.getMissileAccelerationBonus().computeEffective(missileEngine.getAcceleration());
+                        float maxTurnRate = stats.getMissileMaxTurnRateBonus().computeEffective(missileEngine.getMaxTurnRate());
+                        float radius = Misc.getTargetingRadius(weapon.getLocation(), ship, false);
+                        float travelTime = missileTravelTime(launchSpeed, maxSpeed, acceleration, maxTurnRate, weapon.getCurrAngle(), weapon.getLocation(), ship.getLocation(), radius );
+                        firingTime -= travelTime;
+                    }
+
+                    // if it will hit in the time given, add damage instances until the time is over
+                    while (firingTime > 0){
+                        totalDamage += damageAfterArmor(weapon.getDamageType(), weapon.getDamage().getDamage(), ship);
+                        firingTime -= weapon.getRefireDelay() + weapon.getSpec().getChargeTime();
+                    }
+                }
+            }
+        }
+
+        return totalDamage;
+    }
+
+
+    public static float missileTravelTime(float startingSpeed, float maxSpeed, float acceleration, float maxTurnRate,
+                                          float missileStartingAngle, Vector2f missileStartingLocation, Vector2f targetLocation, float targetRadius){
+        // for guided, do some complex math to figure out the time it takes to hit
+        float missileTurningRadius = (float) (maxSpeed/ (maxTurnRate* Math.PI / 180));
+        float missileCurrentAngle = missileStartingAngle;
+        Vector2f missileCurrentLocation = missileStartingLocation;
+        float missileTargetAngle = VectorUtils.getAngle(missileCurrentLocation, targetLocation);
+        float missileRotationNeeded = MathUtils.getShortestRotation(missileCurrentAngle, missileTargetAngle);
+        Vector2f missileRotationCenter = MathUtils.getPointOnCircumference(missileStartingLocation, missileTurningRadius, missileCurrentAngle + (missileRotationNeeded > 0 ? 90 : -90));
+
+        float missileRotationSeconds = 0;
+        do {
+            missileRotationSeconds += Math.abs(missileRotationNeeded)/maxTurnRate;
+            missileCurrentAngle = missileTargetAngle;
+            missileCurrentLocation = MathUtils.getPointOnCircumference(missileRotationCenter, missileTurningRadius, missileCurrentAngle + (missileRotationNeeded > 0 ? -90 : 90));
+
+            missileTargetAngle = VectorUtils.getAngle(missileCurrentLocation, targetLocation);
+            missileRotationNeeded = MathUtils.getShortestRotation(missileCurrentAngle, missileTargetAngle);
+        } while (missileRotationSeconds < 30f && Math.abs(missileRotationNeeded) > 1f);
+
+        float missileStraightSeconds = (MathUtils.getDistance(missileCurrentLocation, targetLocation)-targetRadius) / maxSpeed;
+
+        float totalDistance = (missileRotationSeconds + missileStraightSeconds) * maxSpeed;
+
+        float t1 = (maxSpeed - startingSpeed) / acceleration;
+        float d1 = startingSpeed * t1 + 0.5f * acceleration * (float) Math.pow(t1, 2);
+        if(totalDistance >= d1) {
+            float d2 = totalDistance - d1;
+            float t2 = d2 / maxSpeed;
+
+            return t1 + t2;
+        }
+        else {
+            float discriminant = (float) Math.pow(startingSpeed, 2) + 2 * acceleration * totalDistance;
+            if(discriminant > 0)
+                return (float) (-startingSpeed + Math.sqrt(discriminant)) / acceleration;
+            else
+                return 0;
+        }
+    }
+
+    public static float getWeakestTotalArmor(ShipAPI ship){
         if (ship == null || !Global.getCombatEngine().isEntityInPlay(ship)) {
             return 0f;
         }
@@ -259,7 +355,7 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         }
     }
 
-    private float convertDamageType(DamageType damageType, float damage){
+    public static float damageAfterArmor(DamageType damageType, float damage, ShipAPI ship){
         float armorValue = getWeakestTotalArmor(ship);
         float armorDamage = 0;
         switch (damageType) {
