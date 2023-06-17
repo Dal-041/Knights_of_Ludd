@@ -3,6 +3,8 @@ package org.selkie.kol.plugins;
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
+
+import org.selkie.kol.impl.world.prepareAbyss;
 import org.selkie.kol.listeners.updateRelationships;
 import org.selkie.kol.world.Generate;
 import org.selkie.kol.world.SpawnInvictus;
@@ -39,6 +41,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public void onNewGameAfterEconomyLoad() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			Generate.zugg();
+			prepareAbyss.GenerateAbyss(Global.getSector());
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
 			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);

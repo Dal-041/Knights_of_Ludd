@@ -161,7 +161,72 @@
       "locations": [51.5, -0]
     }
   ],
-  "engineSlots": [],
+  "engineSlots": [
+    {
+      "location": [-40.5, 9],
+      "length": 62.5,
+      "width": 18,
+      "angle": 179.5,
+      "contrailSize": 18,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-40.5, -9],
+      "length": 62.5,
+      "width": 18,
+      "angle": -179.5,
+      "contrailSize": 18,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-41.5, 21],
+      "length": 30.530489,
+      "width": 10.934229,
+      "angle": 168,
+      "contrailSize": 10.934229,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-41.5, -21],
+      "length": 30.530489,
+      "width": 10.934229,
+      "angle": -168,
+      "contrailSize": 10.934229,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-46, 22],
+      "length": 31.331429,
+      "width": 8.207698,
+      "angle": 168,
+      "contrailSize": 8.207698,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-46, -22],
+      "length": 31.331429,
+      "width": 8.207698,
+      "angle": -168,
+      "contrailSize": 8.207698,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-46, 9],
+      "length": 65,
+      "width": 14,
+      "angle": 180,
+      "contrailSize": 14,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-46, -9],
+      "length": 65,
+      "width": 14,
+      "angle": -180,
+      "contrailSize": 14,
+      "style": "KOL_ENG"
+    }
+  ],
   "bounds": [
     53, -16.5,
     36, -33,

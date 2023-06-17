@@ -1,5 +1,6 @@
 package org.selkie.kol.impl.world;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,6 +36,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 
 public class prepareAbyss implements SectorGeneratorPlugin {
+	
     @Override
     public void generate(SectorAPI sector) {
     	GenerateAbyss(sector);
@@ -44,10 +46,16 @@ public class prepareAbyss implements SectorGeneratorPlugin {
     public static void GenerateAbyss(SectorAPI sector) {
     	
     	int beeg = 1500;
+    	double posX = 2600;
+    	double posY = 24900;
+    	
+    	//Variable location
+    	//posX = Math.random()%(Global.getSettings().getFloat("sectorWidth")-10000);
+    	//posY = Math.random()%(Global.getSettings().getFloat("sectorHeight")-8000);
         
     	StarSystemAPI system = sector.createStarSystem("Elysia");
-    	system.getLocation().set(2600, 24900);
-    	system.setBackgroundTextureFilename("graphics/backgrounds/abyss_bg2.jpg");
+    	system.getLocation().set((int)posX, (int)posY);
+    	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg2.jpg");
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_UNSAFE);
 		
@@ -57,16 +65,19 @@ public class prepareAbyss implements SectorGeneratorPlugin {
     	elysia.applySpecChanges();
     	SectorEntityToken horizon1 = system.addTerrain(Terrain.EVENT_HORIZON, new EventHorizonPlugin.CoronaParams(
     			4000,
-				0,
+				500,
 				elysia,
 				-10f,
 				0f,
 				5f)
     		);
     	
-    	SectorEntityToken accretion1 = system.addTerrain(Terrain.RING, new BaseRingTerrain.RingParams(5000, 1500, elysia, "Accretion Disk"));
-    	accretion1.addTag(Tags.ACCRETION_DISK);
-    	accretion1.setCircularOrbit(elysia, 0, 0, 10);
+    	//runcode org.selkie.kol.impl.world.prepareAbyss.GenerateAbyss(Global.getSector());
+    	//runcode Global.getSector().getStarSystem("Elysia").addRingBand(Global.getSector().getStarSystem("Elysia").getStar(), "misc", "rings_dust0", 1620, 0, Color.red, 1620, 3434, 17, Terrain.RING, "Accretion Disk");
+    	system.addRingBand(elysia, "misc", "rings_dust0", 1620, 0, Color.red, 1620, 3124, 17, Terrain.RING, "Accretion Disk");
+    	//SectorEntityToken accretion1 = system.addTerrain(Terrain.RING, new BaseRingTerrain.RingParams(5000, 1500, elysia, "Accretion Disk"));
+    	//accretion1.addTag(Tags.ACCRETION_DISK);
+    	//accretion1.setCircularOrbit(elysia, 0, 0, 10);
     	
     	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/campaign/terrain/eos_nebula.png",
                                                                     0, 0, // center of nebula
@@ -101,7 +112,7 @@ public class prepareAbyss implements SectorGeneratorPlugin {
 		);
 		gazeBeam2.setCircularOrbit(gaze, 0, 0, 16);
     	
-    	PlanetAPI silence = system.addPlanet("nsf_silence", elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 4000, 18500, 0);
+    	PlanetAPI silence = system.addPlanet("nsf_silence", elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 1666, 18500, 0);
     	system.setTertiary(silence);
     	silence.setFixedLocation(-14000, -16500);
     	
@@ -165,50 +176,4 @@ public class prepareAbyss implements SectorGeneratorPlugin {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
         
     }
-        
-    public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name, 
-            int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff) {  
-    	EconomyAPI globalEconomy = Global.getSector().getEconomy();  
-    	String planetID = primaryEntity.getId();  
-    	String marketID = planetID;
-
-    	MarketAPI newMarket = Global.getFactory().createMarket(marketID, name, size);  
-    	newMarket.setFactionId(factionID);  
-    	newMarket.setPrimaryEntity(primaryEntity);  
-    	newMarket.getTariff().modifyFlat("generator", tariff);  
-
-    	if (null != submarkets){  
-    		for (String market : submarkets){  
-    			newMarket.addSubmarket(market);  
-    		}  
-    	}  
-
-    	for (String condition : marketConditions) {  
-    		newMarket.addCondition(condition);  
-    	}
-
-    	for (String industry : Industries) {
-    		newMarket.addIndustry(industry);
-    	}
-
-    	if (null != connectedEntities) {  
-    		for (SectorEntityToken entity : connectedEntities) {  
-    			newMarket.getConnectedEntities().add(entity);  
-    		}  
-    	}  
-
-    	globalEconomy.addMarket(newMarket, true);  
-    	primaryEntity.setMarket(newMarket);
-    	primaryEntity.setFaction(factionID);
-
-    	if (null != connectedEntities) {  
-    		for (SectorEntityToken entity : connectedEntities) {  
-    			entity.setMarket(newMarket);
-    			entity.setFaction(factionID);
-    		}  
-    	}
-
-    	return newMarket;
-    }
-
 }

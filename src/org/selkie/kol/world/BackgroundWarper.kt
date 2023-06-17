@@ -1,4 +1,4 @@
-package assortment_of_things.hyperdepths
+package org.selkie.kol.world
 
 import com.fs.graphics.Sprite
 import com.fs.starfarer.api.Global

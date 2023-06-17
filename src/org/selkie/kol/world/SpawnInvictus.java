@@ -66,7 +66,7 @@ public class SpawnInvictus {
 	            */
 	            String variant = "kol_invictus_lp_hallowed";
 	            CampaignFleetAPI invictusFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
-	                    .setFleetName("Hammers of Ludd")
+	                    .setFleetName("Hammer of Ludd")
 	                    .setFleetFaction("luddic_path")
 	                    .setFleetType(FleetTypes.TASK_FORCE)
 	                    .setFlagshipName("In the Glory of the Blessed")
