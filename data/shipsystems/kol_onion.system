@@ -4,7 +4,7 @@
 	#"aiType":"NONE",
 	"aiType":"BURN_DRIVE",
 	
-	"statsScript":"com.fs.starfarer.api.impl.combat.OrionDeviceStats",
+	"statsScript":"org.selkie.kol.shipsystems.hallowedOrionDevice",
 
 	"runScriptWhileIdle":true, # unapply() never gets called
 
