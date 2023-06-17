@@ -9,6 +9,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.IntervalUtil;
+import com.fs.starfarer.combat.entities.Ship;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
@@ -56,37 +57,13 @@ public class lungeStats extends BaseShipSystemScript {
             interval.advance(engine.getElapsedInLastFrame());
 
             if (interval.intervalElapsed()) {
-                SpriteAPI sprite = ship.getSpriteAPI();
-                float offsetX = sprite.getWidth() / 2 - sprite.getCenterX();
-                float offsetY = sprite.getHeight() / 2 - sprite.getCenterY();
-
-                float trueOffsetX = (float) FastTrig.cos(Math.toRadians(ship.getFacing() - 90f)) * offsetX - (float) FastTrig.sin(Math.toRadians(ship.getFacing() - 90f)) * offsetY;
-                float trueOffsetY = (float) FastTrig.sin(Math.toRadians(ship.getFacing() - 90f)) * offsetX + (float) FastTrig.cos(Math.toRadians(ship.getFacing() - 90f)) * offsetY;
-
-                Vector2f trueLocation = new Vector2f(ship.getLocation().getX() + trueOffsetX, ship.getLocation().getY() + trueOffsetY);
-
-                MagicRender.battlespace(
-                        Global.getSettings().getSprite(ship.getHullSpec().getSpriteName()),
-                        MathUtils.getRandomPointInCircle(trueLocation,MathUtils.getRandomNumberInRange(0f,20f)),
-                        new Vector2f(0, 0),
-                        new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
-                        new Vector2f(0, 0),
-                        ship.getFacing() - 90f,
-                        0f,
-                        AFTERIMAGE_COLOR,
-                        true,
-                        0f,
-                        0f,
-                        0f,
-                        0f,
-                        0f,
-                        0.1f,
-                        0.1f,
-                        1f,
-                        CombatEngineLayers.BELOW_SHIPS_LAYER);
+                renderAfterimage(ship);
+                for (ShipAPI child : ship.getChildModulesCopy()) {
+                    renderAfterimage(child);
+                }
             }
 
-            ship.setJitter(ship,FLICKER_COLOR,0.7f,10,25f,50f);
+            //ship.setJitter(ship,FLICKER_COLOR,0.7f,10,25f,50f);
 
             stats.getAcceleration().unmodify(id);
             stats.getDeceleration().unmodify(id);
@@ -110,6 +87,37 @@ public class lungeStats extends BaseShipSystemScript {
         }
 
 
+    }
+
+    private void renderAfterimage(ShipAPI ship) {
+        SpriteAPI sprite = ship.getSpriteAPI();
+        float offsetX = sprite.getWidth() / 2 - sprite.getCenterX();
+        float offsetY = sprite.getHeight() / 2 - sprite.getCenterY();
+
+        float trueOffsetX = (float) FastTrig.cos(Math.toRadians(ship.getFacing() - 90f)) * offsetX - (float) FastTrig.sin(Math.toRadians(ship.getFacing() - 90f)) * offsetY;
+        float trueOffsetY = (float) FastTrig.sin(Math.toRadians(ship.getFacing() - 90f)) * offsetX + (float) FastTrig.cos(Math.toRadians(ship.getFacing() - 90f)) * offsetY;
+
+        Vector2f trueLocation = new Vector2f(ship.getLocation().getX() + trueOffsetX, ship.getLocation().getY() + trueOffsetY);
+
+        MagicRender.battlespace(
+                Global.getSettings().getSprite(ship.getHullSpec().getSpriteName()),
+                MathUtils.getRandomPointInCircle(trueLocation,MathUtils.getRandomNumberInRange(0f,20f)),
+                new Vector2f(0, 0),
+                new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
+                new Vector2f(0, 0),
+                ship.getFacing() - 90f,
+                0f,
+                AFTERIMAGE_COLOR,
+                true,
+                0f,
+                0f,
+                0f,
+                0f,
+                0f,
+                0.1f,
+                0.1f,
+                1f,
+                CombatEngineLayers.BELOW_SHIPS_LAYER);
     }
 
     public void unapply(MutableShipStatsAPI stats, String id) {
