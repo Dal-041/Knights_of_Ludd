@@ -13,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods":[
     "kol_shields"
-  ]
+  ],
   "builtInWeapons": {
     "WS0009": "kol_brimstone",
     "WS0010": "eis_blinker_white30",

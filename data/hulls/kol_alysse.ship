@@ -13,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods":[
     "kol_shields"
-  ]
+  ],
   "builtInWeapons": {
     "WS0013": "kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol",
     "WS0014": "eis_blinker_white30",

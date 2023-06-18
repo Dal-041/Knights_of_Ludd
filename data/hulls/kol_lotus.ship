@@ -13,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods":[
     "kol_shields"
-  ]
+  ],
   "builtInWeapons": {
     "WS0015": "kol_flickerShield",
     "WS0016": "eis_blinker_white",
