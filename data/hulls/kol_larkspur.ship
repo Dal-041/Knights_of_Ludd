@@ -11,6 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 152,
   "viewOffset": 0,
+  "builtInMods":[
+    "kol_shields"
+  ]
   "builtInWeapons": {
     "FLICKERSHIELD": "kol_flickerShield",
     "WS0007": "eis_blinker_white",

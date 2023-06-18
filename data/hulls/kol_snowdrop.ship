@@ -11,6 +11,9 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 113,
   "viewOffset": 0,
+  "builtInMods":[
+    "kol_shields"
+  ]
   "builtInWeapons": {
     "WS0012": "kol_pusherplate_lt_but_cute",
     "WS0013": "eis_blinker_white30",
