@@ -9,16 +9,19 @@ import com.fs.starfarer.campaign.WarpingSpriteRenderer
 import org.lwjgl.opengl.GL11
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
+import kotlin.math.cos
+import kotlin.math.sin
 
+//Lukas04
 class BackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: Float) : WarpingSpriteRenderer(chunks, chunks) {
 
     private val verticesWide = chunks
     private val verticesTall = chunks
     private val vertices = Array(verticesWide) { arrayOfNulls<Vertex>(verticesTall) }
-
+/*
     init {
 
-        var background = invoke("getBackground", system) as BackgroundAndStars
+        val background = invoke("getBackground", system) as BackgroundAndStars
         set("warpngRenderer", background, this)
 
         for (var3 in 0 until verticesWide) {
@@ -40,8 +43,8 @@ class BackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: F
 
     override fun renderNoBlendOrRotate(sprite: Sprite, bgOffsetX: Float, bgOffsetY: Float, disableBlend: Boolean) {
 
-        var spritePath = get("textureId", sprite) as String
-        var spriteAPI: SpriteAPI? = Global.getSettings().getSprite(spritePath) ?: return
+        val spritePath = get("textureId", sprite) as String
+        val spriteAPI: SpriteAPI? = Global.getSettings().getSprite(spritePath) ?: return
 
         spriteAPI!!.bindTexture()
         GL11.glPushMatrix()
@@ -58,8 +61,8 @@ class BackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: F
         }
         val var6 = spriteAPI.width
         val var7 = spriteAPI.height
-        var var8 = spriteAPI.textureWidth - 0.001f
-        var var9 = spriteAPI.textureHeight - 0.001f
+        val var8 = spriteAPI.textureWidth - 0.001f
+        val var9 = spriteAPI.textureHeight - 0.001f
         val var10 = var6 / (this.verticesWide - 1).toFloat()
         val var11 = var7 / (this.verticesTall - 1).toFloat()
         val var12 = var8 / (this.verticesWide - 1).toFloat()
@@ -167,5 +170,5 @@ class BackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: F
 
         return invokeMethod.invoke(foundMethod, instance, arguments)
     }
-
+*/
 }

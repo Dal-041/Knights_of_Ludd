@@ -17,16 +17,16 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 		// Set up the fleets so we can add ships and fighter wings to them.
 		// In this scenario, the fleets are attacking each other, but
 		// in other scenarios, a fleet may be defending or trying to escape
-		api.initFleet(FleetSide.PLAYER, "KoL", FleetGoal.ATTACK, false);
-		api.initFleet(FleetSide.ENEMY, "ISS", FleetGoal.ATTACK, true);
+		api.initFleet(FleetSide.PLAYER, "KOL", FleetGoal.ATTACK, false);
+		api.initFleet(FleetSide.ENEMY, "TTS", FleetGoal.ATTACK, true);
 
 //		api.getDefaultCommander(FleetSide.PLAYER).getStats().setSkillLevel(Skills.COORDINATED_MANEUVERS, 3);
 //		api.getDefaultCommander(FleetSide.PLAYER).getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 3);
 		
 		// Set a small blurb for each fleet that shows up on the mission detail and
 		// mission results screens to identify each side.
-		api.setFleetTagline(FleetSide.PLAYER, "Knights of Ludd fleet portfolio");
-		api.setFleetTagline(FleetSide.ENEMY, "Pawns of Moloch");
+		api.setFleetTagline(FleetSide.PLAYER, "Knights of Ludd");
+		api.setFleetTagline(FleetSide.ENEMY, "Forces of Moloch");
 		
 		// These show up as items in the bulleted list under 
 		// "Tactical Objectives" on the mission detail screen
@@ -38,23 +38,19 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 
 		boolean isFlagship = true;
 		for (String testID : Global.getSettings().getAllVariantIds()) {
-			if (testID.contains("kol_") && Global.getSettings().getVariant(testID).getSource() == VariantSource.HULL && !Global.getSettings().getVariant(testID).getHullSize().equals(ShipAPI.HullSize.FIGHTER)) {
+			if (testID.contains("kol_") && Global.getSettings().getVariant(testID).getSource() == VariantSource.HULL
+					&& !Global.getSettings().getVariant(testID).getHullSize().equals(ShipAPI.HullSize.FIGHTER)
+					&& Global.getSettings().getVariant(testID).getHullSpec().getFleetPoints() > 0) {
 				api.addToFleet(FleetSide.PLAYER, testID, FleetMemberType.SHIP, isFlagship);
 				isFlagship = false;
 			}
+			if (testID.contains("abyss_") && Global.getSettings().getVariant(testID).getSource() == VariantSource.HULL
+					&& !Global.getSettings().getVariant(testID).getHullSize().equals(ShipAPI.HullSize.FIGHTER)
+					&& Global.getSettings().getVariant(testID).getHullSpec().getFleetPoints() > 0) {
+				api.addToFleet(FleetSide.ENEMY, testID, FleetMemberType.SHIP, isFlagship);
+				isFlagship = false;
+			}
 		}
-		
-		// Set up the enemy fleet.
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
-		api.addToFleet(FleetSide.ENEMY, "buffalo2_FS", FleetMemberType.SHIP, false);
 		
 		// Set up the map.
 		float width = 10000f;
