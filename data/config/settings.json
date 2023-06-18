@@ -6,7 +6,7 @@
 	"MagicVectorThrusterSelkieX3": 10,
 	"MagicVectorThrusterSelkieY3": 75,
 
-	graphics":{
+	"graphics":{
 		"fx":{
 			"kol_shield":"graphics/fx/kol_shield_fx.png",
 		}
