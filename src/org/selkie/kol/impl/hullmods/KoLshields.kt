@@ -8,6 +8,8 @@ class KoLshields : BaseHullMod() {
     private val INNERLARGE = "graphics/fx/kol_shield_fx.png"
     private val OUTERLARGE = "graphics/fx/kol_shield_fx.png"
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
-        ship.shield.setRadius(ship.shieldRadiusEvenIfNoShield, INNERLARGE, OUTERLARGE)
+        if (ship.shield != null) {
+            ship.shield.setRadius(ship.shieldRadiusEvenIfNoShield, INNERLARGE, OUTERLARGE)
+        }
     }
 }
