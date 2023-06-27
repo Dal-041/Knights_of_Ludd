@@ -3,9 +3,7 @@ package org.selkie.kol.hullmods;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
-import com.fs.starfarer.api.ui.TooltipMakerAPI;
 
     // Reduces High Explosive damage taken by modules by [greentext] 50% [/g].
     // Hullmods are applied to modular armor panels.
@@ -40,18 +38,4 @@ public class knightModule extends BaseHullMod {
             }
         }
     }
-
-    @Override
-    public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-
-    }
-
-    public void advanceInCampaign(FleetMemberAPI member, float amount) {
-        super.advanceInCampaign(member, amount);
-    }
-
-    public void advanceInCombat(ShipAPI ship, float amount) {
-        super.advanceInCombat(ship, amount);
-    }
-
 }

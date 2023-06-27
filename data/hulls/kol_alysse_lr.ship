@@ -12,6 +12,7 @@
   "shieldRadius": 71,
   "viewOffset": 0,
   "builtInMods": [
+    "kol_module",
     "no_weapon_flux",
     "reduced_explosion",
     "always_detaches",
