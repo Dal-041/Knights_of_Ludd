@@ -12,7 +12,8 @@
   "shieldRadius": 88,
   "viewOffset": 0,
   "builtInMods":[
-    "kol_shields"
+    "kol_shields",
+	"kol_refit"
   ],
   "builtInWings": [
     "kol_hex_wing",

@@ -12,6 +12,7 @@
   "shieldRadius": 224,
   "viewOffset": 200,
   "builtInMods": [
+	"kol_refit",
     "hbi",
     "kol_shields"
   ],

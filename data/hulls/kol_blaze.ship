@@ -11,8 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 112.5,
   "viewOffset": 0,
-  "builtInMods":[
-    "kol_shields"
+  "builtInMods": [
+    "kol_shields",
+	"kol_refit"
   ],
   "builtInWeapons": {
     "WS0009": "kol_brimstone",

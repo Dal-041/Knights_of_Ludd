@@ -11,6 +11,9 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 30,
   "viewOffset": 0,
+  "builtInMods": [
+	"kol_refit"
+  ],
   "weaponSlots": [
     {
       "id": "WS 001",

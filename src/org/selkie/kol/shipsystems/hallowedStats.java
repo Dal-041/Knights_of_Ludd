@@ -6,7 +6,7 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 
 import java.awt.*;
 
-public class hallowedtempStats extends BaseShipSystemScript {
+public class hallowedStats extends BaseShipSystemScript {
 
     private static final float BASE_SPEED_BONUS = 80f;
     private static final float SPEED_PER_MODULE = 10f;

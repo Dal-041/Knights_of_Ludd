@@ -12,7 +12,8 @@
   "shieldRadius": 80,
   "viewOffset": 0,
   "builtInMods":[
-    "kol_shields"
+    "kol_shields",
+	"kol_refit"
   ],
   "builtInWeapons": {
     "WS0006": "kol_flickerShield"

@@ -12,7 +12,8 @@
   "shieldRadius": 107.5,
   "viewOffset": 0,
   "builtInMods":[
-    "kol_shields"
+    "kol_shields",
+	"kol_refit"
   ],
   "builtInWeapons": {
     "WS0007": "lidardish",

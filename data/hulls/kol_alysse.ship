@@ -11,8 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 170.5,
   "viewOffset": 0,
-  "builtInMods":[
-    "kol_shields"
+  "builtInMods": [
+    "kol_shields",
+	"kol_refit"
   ],
   "builtInWeapons": {
     "WS0013": "kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol",
