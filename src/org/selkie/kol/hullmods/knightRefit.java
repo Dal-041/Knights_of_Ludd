@@ -1,25 +1,21 @@
 package org.selkie.kol.hullmods;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
-import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.BaseHullMod;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.skills.BaseSkillEffectDescription;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
-import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.IntervalUtil;
-import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.api.util.WeightedRandomPicker;
-import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
-import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.*;
 
 /*
   - When ballistic weaponry is installed in composite slots :
@@ -126,13 +122,6 @@ public class knightRefit extends BaseHullMod {
                 }
             }
         }
-
-        topArmorAvg = 0f;
-        topHullAvg = 0f;
-        middleArmorAvg = 0f;
-        middleHullAvg = 0f;
-        rearArmorAvg = 0f;
-        rearHullAvg = 0f;
 
         for (String ID : childHPVals.keySet()) {
             if (ID.contains("_tl") || ID.contains("_tr")) {

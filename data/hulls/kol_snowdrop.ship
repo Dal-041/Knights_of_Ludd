@@ -12,7 +12,6 @@
   "shieldRadius": 113,
   "viewOffset": 0,
   "builtInMods":[
-    "kol_shields",
 	"kol_refit"
   ],
   "builtInWeapons": {

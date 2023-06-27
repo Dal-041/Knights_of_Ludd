@@ -1,5 +1,6 @@
 name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sprite,
 Vulcan Built-In,kol_vulcan,,,,,,,,TRUE,TRUE,0,0,0,0,data.hullmods.kol_vulcan,no don't look,don't look,,
 Unknown Mechanisms,kol_ea_sparkle,,,,,"Weapons, Defenses",,,TRUE,,0,0,0,0,org.selkie.kol.impl.hullmods.sparkleHullMod,"Strange devices of unknown origin, they appear to be highly energized.","Strange devices of unknown origin, they appear to be highly energized.",data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/hullmods/kol_sparklethingy.png, 
-KoL Shields,kol_shields,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.KoLshields,KoL shields,KoL shields,, 
-Knight Refit,kol_refit,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.knightRefit,placeholder text write stuff here plz aaaaaaaa,,graphics/hullmods/fourteenth.png,
+Primitive Shields,kol_shields,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.KoLshields,This ship carries an early branch of shield technology that never became widespread. These shields are very efficient but have a limited duration and must regularly recharge or go offline to reset.,Primitive ships,, 
+Knight Refit,kol_refit,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.knightRefit,This ship has been overhauled by a devout and clearly militant sect of the Church. Its armors and weapon slots are geared toward heavy and brutal combat. ,Knight Refit,graphics/hullmods/fourteenth.png,
+Knight Module,kol_module,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.knightModule,Knight module,Knight module,,

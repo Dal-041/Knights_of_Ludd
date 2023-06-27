@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.hullmods
+package org.selkie.kol.hullmods
 
 import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.ShipAPI
