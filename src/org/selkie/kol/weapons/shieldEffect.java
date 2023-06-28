@@ -65,19 +65,33 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
                 if (tracker.intervalElapsed()) {
                     //Cap estimate at 80 degrees of unfold (about what is needed to block a full direction)
                     float estimateTime = Math.min(ship.getShield().getUnfoldTime() / (ship.getShield().getArc() / 80), ship.getShield().getUnfoldTime());
-                    float estimatedBlockableDamage = estimateBlockableDamage(ship, estimateTime) + estimateBlockableUnfiredDamage(ship, estimateTime);
+                    float[] estimatedBlockableDamage = estimateBlockableDamage(ship, estimateTime);
+                    float[] estimatedBlockableUnfiredDamage = estimateBlockableUnfiredDamage(ship, estimateTime);
+
+                    float estimatedHullDamage = estimatedBlockableDamage[0] + estimatedBlockableUnfiredDamage[0];
+                    float estimatedShieldHardFlux = estimatedBlockableDamage[1] + estimatedBlockableUnfiredDamage[1];
+                    float estimatedEMPDamage = estimatedBlockableDamage[2] + estimatedBlockableUnfiredDamage[2];
 
                     // consider the max of shield time or flux level to decide when to shield
                     float alpha = Math.max(ship.getFluxLevel(), shieldT / MAX_SHIELD);
                     float lowDamage = 0.001f; // 0.1% hull damage
-                    float highDamage = 0.05f; // 5% hull damage
-                    wantToShield = estimatedBlockableDamage > ship.getHitpoints() * (alpha * highDamage + (1 - alpha) * lowDamage);
+                    float highDamage = 0.020f; // 2.0% hull damage
 
-                    if (shieldT / MAX_SHIELD > 0.85f && estimatedBlockableDamage < 3000f) // Save the last 15% for super high damage, like a Reaper
+                    // shield based on the current flux level and shield timer
+                    wantToShield = (estimatedHullDamage + estimatedEMPDamage/3) > ship.getHitpoints() * (alpha * highDamage + (1 - alpha) * lowDamage);
+
+                    // if the damage is high enough to shield, but flux is high/ shield timer is low, armor tank KE
+                    if (wantToShield && estimatedShieldHardFlux/(estimatedHullDamage + estimatedEMPDamage/3) > (alpha * 2f + (1 - alpha) * 7f))
                         wantToShield = false;
 
-                    if (ship.getFluxLevel() > 0.95f && estimatedBlockableDamage < 3000f) // Prevent overloads unless blocking Reapers
+                    if (shieldT + estimateTime > MAX_SHIELD) // Save enough time for 1 emergency unfold
                         wantToShield = false;
+
+                    if ((estimatedShieldHardFlux + ship.getCurrFlux())/ship.getMaxFlux() > 1) // Prevent overloads...
+                        wantToShield = false;
+
+                    if (estimatedHullDamage > 4000f) // Unless a reaper is on the way, in that case try and block it no matter what
+                        wantToShield = true;
                 }
 
                 if (!disabled && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)) {
@@ -125,7 +139,7 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         return entities;
     }
 
-    public static float estimateBlockableDamage(ShipAPI ship, float secondsToEstimate){
+    public static float[] estimateBlockableDamage(ShipAPI ship, float secondsToEstimate){
         float MAX_SPEED_OF_PROJECTILE = 2000f;
 
         Set<DamagingProjectileAPI> nearbyUnguided = new HashSet<>();
@@ -186,37 +200,64 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
             }
         }
 
-        float estimatedDamage = 0f;
+        float estimatedHullDamage = 0f;
+        float estimatedShieldHardFlux = 0f;
+        float estimatedEMPDamage = 0f;
         // sum up all the actual damage after armor
         float armorValue = getWeakestTotalArmor(ship);
         for(DamagingProjectileAPI hit : estimatedHits){
             if (Global.getSettings().isDevMode()) Global.getCombatEngine().addSmoothParticle(hit.getLocation(), hit.getVelocity(), 30f, 5f, 0.1f, Color.magenta);
-            float damageTaken = damageAfterArmor(hit.getDamageType(), hit.getDamageAmount(), hit.getDamageAmount(), armorValue);
-            armorValue = Math.max(0, armorValue - damageTaken);
-            estimatedDamage += damageTaken + ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue() * hit.getEmpAmount()/3;
+            float hullDamageTaken = damageAfterArmor(hit.getDamageType(), hit.getDamageAmount(), hit.getDamageAmount(), armorValue);
+            float shieldHardFlux = damageToShield(hit.getDamageType(), hit.getDamageAmount(), ship.getShield().getFluxPerPointOfDamage());
+
+            estimatedHullDamage += hullDamageTaken;
+            estimatedShieldHardFlux += shieldHardFlux;
+            estimatedEMPDamage += ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue() * hit.getEmpAmount();
+
+            armorValue = Math.max(0, armorValue - hullDamageTaken);
         }
 
-        /* //TODO: rewrite this entire section, currently I assume beam speed is instant so estimateBlockableUnfiredDamage() is already counting beam damage,
-              no need to count twice until I figure out how to get actual beam speed from a WeaponAPI
+        /*TODO: rewrite this entire section, currently I assume beam speed is instant so estimateBlockableUnfiredDamage() is already counting beam damage,
+                no need to count twice until I figure out how to get actual beam speed from a WeaponAPI*/
         // Handle beams with line-circle collision checks
         // TODO: check if getBeams() can be replaced with something like getAllProjectilesInRange() that uses the object grid
         List<BeamAPI> nearbyBeams = Global.getCombatEngine().getBeams();
         for (BeamAPI beam : nearbyBeams) {
             if (beam.getSource().getOwner() != ship.getOwner() && CollisionUtils.getCollides(beam.getFrom(), beam.getTo(), ship.getLocation(), Misc.getTargetingRadius(beam.getFrom(), ship, true))) {
-                float damageTaken = beam.getWeapon().getDamage().computeDamageDealt(secondsToEstimate);
-                WeaponAPI.DerivedWeaponStatsAPI beamStats = beam.getWeapon().getDerivedStats();
-                float emp = beamStats.getEmpPerSecond() * secondsToEstimate;
-                float hitStrength = Math.max(beamStats.getDps(), beamStats.getBurstDamage()/beamStats.getBurstFireDuration());
-                estimatedDamage += damageAfterArmor(beam.getWeapon().getDamageType(), damageTaken, hitStrength, armorValue) + ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue() * emp/3;
-                armorValue = Math.max(0, armorValue - damageTaken);
+                WeaponAPI beamWeapon = beam.getWeapon();
+                WeaponAPI.DerivedWeaponStatsAPI beamStats = beamWeapon.getDerivedStats();
+
+                float totalDamage;
+                float EMPDamageTaken;
+                if(beamWeapon.isBurstBeam()){
+                    float burstRemainingLevel = (Math.min(beamWeapon.getBurstFireTimeRemaining(), secondsToEstimate) / beamStats.getBurstFireDuration());
+                    totalDamage = burstRemainingLevel * beamStats.getBurstDamage();
+                    EMPDamageTaken = burstRemainingLevel * beamWeapon.getDerivedStats().getEmpPerShot() * ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue();
+                }
+                else {
+                    totalDamage = beam.getWeapon().getDamage().computeDamageDealt(secondsToEstimate);
+                    EMPDamageTaken = beamStats.getEmpPerSecond() * secondsToEstimate * ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue();
+                }
+
+                float hullDamageTaken = damageAfterArmor(beamWeapon.getDamageType(), totalDamage, beamWeapon.getDamage().getDamage(), armorValue);
+                // TODO: figure out how to check which beams actually do hardflux
+                //float shieldHardFlux = damageToShield(beamWeapon.getDamageType(), totalDamage, ship.getShield().getFluxPerPointOfDamage());
+
+                estimatedHullDamage += hullDamageTaken;
+                // estimatedShieldHardFlux += shieldHardFlux;
+                estimatedEMPDamage += EMPDamageTaken;
+
+                armorValue = Math.max(0, armorValue - hullDamageTaken);
             }
         }
-        */
-        return estimatedDamage;
+
+        return new float[] {estimatedHullDamage, estimatedShieldHardFlux, estimatedEMPDamage};
     }
 
-    public static float estimateBlockableUnfiredDamage(ShipAPI ship, float timeToEstimate){
-        float totalDamage = 0f;
+    public static float[] estimateBlockableUnfiredDamage(ShipAPI ship, float timeToEstimate){
+        float estimatedHullDamage = 0f;
+        float estimatedShieldHardFlux = 0f;
+        float estimatedEMPDamage = 0f;
         List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,3000f);
         for (ShipAPI enemy: nearbyEnemies) {
             // ignore venting/overloaded enemies
@@ -286,32 +327,62 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
                 if (Global.getSettings().isDevMode() && dpsTime > 0)
                     Global.getCombatEngine().addSmoothParticle(weapon.getLocation(), enemy.getVelocity(), 30f, 50f, 0.1f, Color.blue);
 
+                /* //TODO: need to rewrite this entire section for beams, currently I am assuming beam speed is instant, thus beam damage is captured in estimateBlockableDamage.
                 // computeDamageDealt only works for non burst beams
                 if(weapon.isBeam() && !weapon.isBurstBeam()){
                     WeaponAPI.DerivedWeaponStatsAPI beamStats = weapon.getDerivedStats();
-                    float emp = beamStats.getEmpPerSecond() * dpsTime;
-                    float damageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().computeDamageDealt(dpsTime), weapon.getDamage().getDamage(), armorValue);
-                    totalDamage += damageTaken + emp/3;
-                    armorValue = Math.max(0, armorValue - damageTaken);
+
+                    float hullDamageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().computeDamageDealt(dpsTime), weapon.getDamage().getDamage(), armorValue);
+                    float shieldHardFlux = damageToShield(weapon.getDamageType(), weapon.getDamage().computeDamageDealt(dpsTime), ship.getShield().getFluxPerPointOfDamage());
+
+                    estimatedHullDamage += hullDamageTaken;
+                    estimatedShieldHardFlux += shieldHardFlux;
+                    estimatedEMPDamage += beamStats.getEmpPerSecond() * dpsTime;
+
+                    armorValue = Math.max(0, armorValue - hullDamageTaken);
                 }
-                else{
-                    if(weapon.isBurstBeam()){
-                        float trailingDamageTime = weapon.getCooldownRemaining() - (weapon.getCooldown() - weapon.getSpec().getBeamChargedownTime()*2);
-                        if (trailingDamageTime > 0){
-                            float damageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().getDamage(), weapon.getDamage().getDamage(), armorValue);
-                            totalDamage += damageTaken * trailingDamageTime;
-                        }
+                else if(weapon.isBurstBeam()){ // special case burst beams as they are instant
+                    float trailingDamageTime = weapon.getCooldownRemaining() - (weapon.getCooldown() - weapon.getSpec().getBeamChargedownTime()*2);
+                    if (trailingDamageTime > 0){
+                        float hullDamageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().getDamage(), weapon.getDamage().getDamage(), armorValue) * trailingDamageTime;
+                        float shieldHardFlux = damageToShield(weapon.getDamageType(), weapon.getDamage().getDamage(), ship.getShield().getFluxPerPointOfDamage()) * trailingDamageTime;
+
+                        estimatedHullDamage += hullDamageTaken;
+                        estimatedShieldHardFlux += shieldHardFlux;
+                        estimatedEMPDamage += weapon.getDerivedStats().getEmpPerShot() * trailingDamageTime; // This isnt correct, the correct value should be emp/s during the burst
+
+                        armorValue = Math.max(0, armorValue - hullDamageTaken);
                     }
+
+                    if(weapon.isFiring()){
+                        float hullDamageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().getDamage(), weapon.getDamage().getDamage(), armorValue);
+                        float shieldHardFlux = damageToShield(weapon.getDamageType(), weapon.getDamage().getDamage(), ship.getShield().getFluxPerPointOfDamage());
+                        if (weapon.getDerivedStats().getBurstFireDuration() > 0) {
+                            hullDamageTaken *= weapon.getSpec().getBurstSize() * Math.min(dpsTime / weapon.getDerivedStats().getBurstFireDuration(), 1);
+                            shieldHardFlux *= weapon.getSpec().getBurstSize() * Math.min(dpsTime / weapon.getDerivedStats().getBurstFireDuration(), 1);
+                        }
+
+                        estimatedHullDamage += hullDamageTaken;
+                        estimatedShieldHardFlux += shieldHardFlux;
+                        estimatedEMPDamage += ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue() * weapon.getDerivedStats().getEmpPerShot();
+                    }
+                }*/
+                if(!weapon.isBeam()){
                     // if it will hit in the time given, add damage instances until the time is over
                     dpsTime -= weapon.getCooldownRemaining() - weapon.getSpec().getChargeTime();
                     while (dpsTime > 0){
-                        float damageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().getDamage(), weapon.getDamage().getDamage(), armorValue);
-                        damageTaken += ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue() * weapon.getDerivedStats().getEmpPerShot()/3;
-                        if (weapon.getDerivedStats().getBurstFireDuration() > 0)
-                            damageTaken *= weapon.getSpec().getBurstSize() * Math.min(dpsTime/weapon.getDerivedStats().getBurstFireDuration(), 1);
+                        float hullDamageTaken = damageAfterArmor(weapon.getDamageType(), weapon.getDamage().getDamage(), weapon.getDamage().getDamage(), armorValue);
+                        float shieldHardFlux = damageToShield(weapon.getDamageType(), weapon.getDamage().getDamage(), ship.getShield().getFluxPerPointOfDamage());
+                        if (weapon.getDerivedStats().getBurstFireDuration() > 0) {
+                            hullDamageTaken *= weapon.getSpec().getBurstSize() * Math.min(dpsTime / weapon.getDerivedStats().getBurstFireDuration(), 1);
+                            shieldHardFlux *= weapon.getSpec().getBurstSize() * Math.min(dpsTime / weapon.getDerivedStats().getBurstFireDuration(), 1);
+                        }
 
-                        totalDamage += damageTaken;
-                        armorValue = Math.max(0, armorValue - damageTaken);
+                        estimatedHullDamage += hullDamageTaken;
+                        estimatedShieldHardFlux += shieldHardFlux;
+                        estimatedEMPDamage += ship.getMutableStats().getEmpDamageTakenMult().getModifiedValue() * weapon.getDerivedStats().getEmpPerShot();
+
+                        armorValue = Math.max(0, armorValue - hullDamageTaken);
 
                         dpsTime -= weapon.getCooldown() + weapon.getDerivedStats().getBurstFireDuration() + weapon.getSpec().getChargeTime();
                     }
@@ -319,9 +390,8 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
             }
         }
 
-        return totalDamage;
+        return new float[] {estimatedHullDamage, estimatedShieldHardFlux, estimatedEMPDamage};
     }
-
 
     public static float missileTravelTime(float startingSpeed, float maxSpeed, float acceleration, float maxTurnRate,
                                           float missileStartingAngle, Vector2f missileStartingLocation, Vector2f targetLocation, float targetRadius){
@@ -407,5 +477,23 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
         float damageMultiplier = Math.max(hitStrength / (armorValue + hitStrength),  0.15f);
 
         return (damage * damageMultiplier);
+    }
+
+    public static float damageToShield(DamageType damageType, float damage, float shieldEfficiency){
+        switch (damageType) {
+            case FRAGMENTATION:
+                damage *= 0.25f;
+                break;
+            case KINETIC:
+                damage *= 2f;
+                break;
+            case HIGH_EXPLOSIVE:
+                damage *= 0.5f;
+                break;
+            default:
+                break;
+        }
+
+        return (damage * shieldEfficiency);
     }
 }
