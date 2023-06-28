@@ -1,7 +1,7 @@
 {
   "hullName": "Armor",
   "hullId": "kol_tamarisk_tl",
-  "hullSize": "FIGHTER",
+  "hullSize": "FRIGATE",
   "spriteName": "graphics/ships/modules/kol_tamarisk_tl.png",
   "style": "LOW_TECH",
   "height": 88,

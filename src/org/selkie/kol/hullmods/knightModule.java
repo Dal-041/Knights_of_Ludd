@@ -1,5 +1,6 @@
 package org.selkie.kol.hullmods;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -37,5 +38,8 @@ public class knightModule extends BaseHullMod {
                 ship.getVariant().addMod(hullmodID);
             }
         }
+
+        // avoid the enemy AI being scared of armor modules as if they are ships
+        ship.setDrone(true);
     }
 }
