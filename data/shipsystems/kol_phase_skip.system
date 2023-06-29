@@ -1,0 +1,34 @@
+{
+	"id":"kol_phase_skip",
+	"type":"PHASE_CLOAK",
+	"aiType":"PHASE_CLOAK",
+	
+	"statsScript":"org.selkie.kol.shipsystems.phasespaceSkip",
+	"runScriptWhilePaused":false, # only for the player's ship
+	"runScriptWhileIdle":true,  # this means unapply() never gets called
+	"blockActionsWhileChargingDown":true,
+	
+	"phaseHighlight":"_glow2",
+	"phaseDiffuse":"_glow2",
+	
+	"effectColor1":[64,13,102,0],
+	"effectColor2":[64,13,102,0],
+	
+	"clampTurnRateAfter":true,
+	"clampMaxSpeedAfter":true,
+	
+	"engineGlowColor":[0,0,0,0],
+	"engineGlowContrailColor":[0,0,0,0],
+	"engineGlowLengthMult":0,
+	"engineGlowWidthMult":0,
+	"engineGlowGlowMult":0,
+	
+	"soundFilterType":"LOWPASS",
+	"soundFilterGain":0.8,
+	"soundFilterGainHF":0.25,
+	
+	"shipAlpha":1,
+	
+	"loopSound":"kol_phasespace_with_system",
+	"outOfUsesSound":"system_phase_cloak_collision",
+}
