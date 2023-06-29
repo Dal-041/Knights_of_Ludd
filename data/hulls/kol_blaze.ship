@@ -13,7 +13,6 @@
   "viewOffset": 0,
   "builtInMods": [
     "kol_shields",
-	"kol_refit"
   ],
   "builtInWeapons": {
     "WS0009": "kol_brimstone",
