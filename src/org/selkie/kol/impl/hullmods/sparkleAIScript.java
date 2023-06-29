@@ -18,16 +18,16 @@ import java.util.Map;
 
 public class sparkleAIScript implements MissileAIPlugin {
 
-    private static float SOURCE_REJOIN = 200f;  //distance added to the collision radius that determines target radius for sparkles returning
+    private static float SOURCE_REJOIN = 200f;  //200f distance added to the collision radius that determines target radius for sparkles returning
                                                 //towards their host ship
-    private static float SOURCE_REPEL = 50f;    //distance added to the collision radius that determines the radius below which sparkles
+    private static float SOURCE_REPEL = 50f;    //50f distance added to the collision radius that determines the radius below which sparkles
                                                 // are pushed away from their host ship
-    private static float SOURCE_COHESION = 600f; //stickiness
+    private static float SOURCE_COHESION = 600f; //600f stickiness
 
     public static float MAX_FLOCK_RANGE = 500;  //unused right now
     public static float MAX_HARD_AVOID_RANGE = 200;
     public static float AVOID_RANGE = 50;
-    public static float COHESION_RANGE = 100;
+    public static float COHESION_RANGE = 100; //Distance under which motes are considered cohered
     public static float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 300f;
     
     private static Map distMult = new HashMap(); //Change orbiting radius here

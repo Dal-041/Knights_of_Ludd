@@ -3,10 +3,12 @@ package org.selkie.kol.impl.hullmods;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize;
+import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.magiclib.util.MagicIncompatibleHullmods;
 import org.selkie.kol.impl.hullmods.DroneAIScript;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -52,6 +54,18 @@ public class sparkleHullMod extends BaseHullMod {
         public float test_antiFighterDamage;
         public String test_impactSound;
         public String test_loopSound;
+    }
+
+    public static float FLUX_THRESHOLD_INCREASE_PERCENT = 150f; //Adjusts high flux target, not min flux threshold. Values > 100 allowed and effective
+
+    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        stats.getDynamic().getMod(Stats.PHASE_CLOAK_FLUX_LEVEL_FOR_MIN_SPEED_MOD).modifyPercent(id, FLUX_THRESHOLD_INCREASE_PERCENT);
+    }
+
+    @Override
+    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        //unused. Update ID if reenabled
+        //if (ship.getVariant().hasHullMod("adaptivephasecoils")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptivephasecoils", "sparkleHullmod");
     }
 
     public void advanceInCombat(ShipAPI ship, float amount) {

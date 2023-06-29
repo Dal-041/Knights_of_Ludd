@@ -1,12 +1,8 @@
 package org.selkie.kol.hullmods;
 
-import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
-import com.fs.starfarer.api.combat.BaseHullMod;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.WeaponAPI;
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.campaign.skills.BaseSkillEffectDescription;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.Alignment;
@@ -14,7 +10,6 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 /*
@@ -23,24 +18,17 @@ import java.util.List;
     - Increases flux dissipation by #/#/#.
 
  - Front Armor
-     - Hull : %
-     - Armor : %
+     - Rating:
+     - Effectiveness:
  - Flank Armor
-     - Hull : %
-     - Armor : %
+     - Rating:
+     - Effectiveness:
  - Rear Armor
-     - Hull : %
-     - Armor %
+     - Rating:
+     - Effectiveness:
 
  - Ship gains increased speed and maneuverability as armor panels are destroyed.
 
-    desc:
- - Max duration of [yellowtext] # [/y] seconds.
- - Shield charge regenerates while shields are off.
- - Shield emitters forcibly shut down at [y] 0% [/y] charge until fully regenerated.
-
-    [orange text] Incompatible with Shield Conversion - Omni
-    [orange text] Shield arc cannot be extended by any means.
     */
 
 public class knightRefit extends BaseHullMod {
@@ -54,6 +42,9 @@ public class knightRefit extends BaseHullMod {
     public static final int flux_diss_lorge  = 10;
     public static final int flux_diss_per_op  = 5;
 
+    private final String knightRefitID = "knightRefit";
+    private final float SPEED_BONUS=0.25f;
+
     @Override
     public void init(HullModSpecAPI spec) {
 
@@ -61,18 +52,15 @@ public class knightRefit extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        //MutableShipStatsAPI stats = ship.getMutableStats();
-        //MutableCharacterStatsAPI cStats = BaseSkillEffectDescription.getCommanderStats(stats);
-
         if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptiveshields", "kol_refit");
         if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_refit");
+
     }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        MutableCharacterStatsAPI cStats = BaseSkillEffectDescription.getCommanderStats(stats);
 
         float capBonus = 0;
         float dissBonus = 0;
@@ -107,34 +95,24 @@ public class knightRefit extends BaseHullMod {
 
         //I have no idea what I'm doing
 
-        HashMap<String, List<Float>> childHPVals = new HashMap<>();
-        List<Float> moduleHP = new ArrayList<>(); //armor, hull
         List<Float> topHull = new ArrayList<>(), topArmor = new ArrayList<>(), middleHull = new ArrayList<>(), middleArmor = new ArrayList<>(), rearHull = new ArrayList<>(), rearArmor = new ArrayList<>();
         float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
 
         if (ship.getChildModulesCopy() != null) {
-            for (ShipAPI module : ship.getChildModulesCopy()) {
-                if (module.isAlive()) {
-                    moduleHP.add(module.getArmorGrid().getArmorRating());
-                    moduleHP.add(module.getHullLevel());
-                    childHPVals.put(module.getId(), moduleHP);
-                    moduleHP.clear();
+            for(ShipAPI module : ship.getChildModulesCopy()) {
+                String ID = module.getVariant().getHullVariantId();
+                if (ID.contains("_tl") || ID.contains("_tr")) {
+                    topArmor.add(module.getArmorGrid().getArmorRating()/module.getHullSpec().getArmorRating() * 100f);
+                    topHull.add(module.getHullLevel()/module.getMaxHitpoints() * 100f);
                 }
-            }
-        }
-
-        for (String ID : childHPVals.keySet()) {
-            if (ID.contains("_tl") || ID.contains("_tr")) {
-                topArmor.add(childHPVals.get(ID).get(0));
-                topHull.add(childHPVals.get(ID).get(1));
-            }
-            if (ID.contains("_ml") || ID.contains("_mr")) {
-                middleArmor.add(childHPVals.get(ID).get(0));
-                middleHull.add(childHPVals.get(ID).get(1));
-            }
-            if (ID.contains("_ll") || ID.contains("_lr")) {
-                rearArmor.add(childHPVals.get(ID).get(0));
-                rearHull.add(childHPVals.get(ID).get(1));
+                if (ID.contains("_ml") || ID.contains("_mr")) {
+                    middleArmor.add(module.getArmorGrid().getArmorRating()/module.getHullSpec().getArmorRating() * 100f);
+                    middleHull.add(module.getHullLevel()/module.getMaxHitpoints() * 100f * 100f);
+                }
+                if (ID.contains("_ll") || ID.contains("_lr")) {
+                    rearArmor.add(module.getArmorGrid().getArmorRating()/module.getHullSpec().getArmorRating() * 100f);
+                    rearHull.add(module.getHullLevel()/module.getMaxHitpoints() * 100f * 100f);
+                }
             }
         }
 
@@ -164,88 +142,61 @@ public class knightRefit extends BaseHullMod {
         }
 
         tooltip.addSectionHeading("Module status", Alignment.MID, 10);
-        //if(topHullAvg != 0f) {
+        if(topHullAvg != 0f) {
             tooltip.addPara("Fore Armor: " + Math.round(topArmorAvg), 0f);
             tooltip.addPara("Fore Hull: " + Math.round(topHullAvg), 0f);
-        //}
-        //if(middleHullAvg != 0f) {
+        }
+        if(middleHullAvg != 0f) {
             tooltip.addPara("Middle Armor: " + Math.round(middleArmorAvg), 0f);
             tooltip.addPara("Middle Hull: " + Math.round(middleHullAvg), 0f);
-        //}
-        //if(rearHullAvg != 0f) {
+        }
+        if(rearHullAvg != 0f) {
             tooltip.addPara("Rear Armor: " + Math.round(rearArmorAvg), 0f);
             tooltip.addPara("Rear Hull: " + Math.round(rearHullAvg), 0f);
-        //}
-    }
-
-    @Override
-    public void advanceInCampaign(FleetMemberAPI member, float amount) {
-        super.advanceInCampaign(member, amount);
-
-        /*
-        //once a second..ish
-        if (childHPVals == null || (amount != 0 && amount % 60 != 0)) {
-            return;
         }
-        topArmor.clear();
-        topHull.clear();
-        middleArmor.clear();
-        middleHull.clear();
-        rearArmor.clear();
-        rearHull.clear();
-
-        topArmorAvg = 0f;
-        topHullAvg = 0f;
-        middleArmorAvg = 0f;
-        middleHullAvg = 0f;
-        rearArmorAvg = 0f;
-        rearHullAvg = 0f;
-
-        for (String ID:childHPVals.keySet()) {
-            if (ID.contains("_tl") || ID.contains("_tr")) {
-                topArmor.add(childHPVals.get(ID).get(0));
-                topHull.add(childHPVals.get(ID).get(1));
-            }
-            if (ID.contains("_ml") || ID.contains("_mr")) {
-                middleArmor.add(childHPVals.get(ID).get(0));
-                middleHull.add(childHPVals.get(ID).get(1));
-            }
-            if (ID.contains("_ll") || ID.contains("_lr")) {
-                rearArmor.add(childHPVals.get(ID).get(0));
-                rearHull.add(childHPVals.get(ID).get(1));
-            }
-        }
-
-        for (int i = 0; i < topArmor.size(); i++) {
-            topArmorAvg += topArmor.get(i);
-            topHullAvg += topHull.get(i);
-            if (i == topArmor.size()-1) {
-                topArmorAvg = topArmorAvg/(i+1);
-                topHullAvg = topHullAvg/(i+1);
-            }
-        }
-        for (int i = 0; i < middleArmor.size(); i++) {
-            middleArmorAvg += middleArmor.get(i);
-            middleHullAvg += middleHull.get(i);
-            if (i == middleArmor.size()-1) {
-                middleArmorAvg = middleArmorAvg/(i+1);
-                middleHullAvg = middleHullAvg/(i+1);
-            }
-        }
-        for (int i = 0; i < rearArmor.size(); i++) {
-            rearArmorAvg += rearArmor.get(i);
-            rearHullAvg += rearHull.get(i);
-            if (i == rearArmor.size()-1) {
-                rearArmorAvg = rearArmorAvg/(i+1);
-                rearHullAvg = rearHullAvg/(i+1);
-            }
-        }
-        */
     }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        super.advanceInCombat(ship, amount);
+        //Yoinked whole-cloth from SCY. <3 ya Tarty
+        if (Global.getCombatEngine().isPaused() || ship==null || ship.getOriginalOwner() == -1) {
+            return;
+        }
+
+        if (!ship.isAlive()) {
+            removeStats(ship);
+            return;
+        }
+
+        float modules =0;
+        float alive =0;
+        for(ShipAPI s : ship.getChildModulesCopy()){
+            modules++;
+            if(s.isAlive()){
+                alive++;
+            }
+        }
+
+        if(modules!=0){
+            //speed bonus applies linearly
+            float speedRatio=1 - (alive / modules);
+            applyStats(speedRatio, ship);
+        }
     }
 
+    private void removeStats(ShipAPI ship) {
+        ship.getMutableStats().getMaxSpeed().unmodify(knightRefitID);
+        ship.getMutableStats().getAcceleration().unmodify(knightRefitID);
+        ship.getMutableStats().getDeceleration().unmodify(knightRefitID);
+        ship.getMutableStats().getMaxTurnRate().unmodify(knightRefitID);
+        ship.getMutableStats().getTurnAcceleration().unmodify(knightRefitID);
+    }
+
+    private void applyStats(float speedRatio, ShipAPI ship) {
+        ship.getMutableStats().getMaxSpeed().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getDeceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getMaxTurnRate().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+    }
 }

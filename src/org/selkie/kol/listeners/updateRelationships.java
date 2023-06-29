@@ -43,7 +43,7 @@ public class updateRelationships extends BaseCampaignEventListener {
 	public void reportEconomyTick (int iterIndex) {
 		if (Global.getSector().getFaction("luddic_church") != null && Global.getSector().getFaction("knights_of_selkie") != null) {
 			FactionAPI church = Global.getSector().getFaction("luddic_church");
-			FactionAPI knights = Global.getSector().getFaction("luddic_church");
+			FactionAPI knights = Global.getSector().getFaction("knights_of_selkie");
 			for(FactionAPI faction:Global.getSector().getAllFactions()) {
 				knights.setRelationship(faction.getId(), church.getRelationship(faction.getId()));
 			}
