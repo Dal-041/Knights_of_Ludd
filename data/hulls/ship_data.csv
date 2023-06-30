@@ -73,7 +73,7 @@ Funayurei,abyss_funayurei,Unholy Destroyer,High Tech,acausaldisruptor,15,4000,65
 #CRUISERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Onryo,abyss_onryo,Unholy Cruiser,High Tech,kol_slip_drive,22,9500,1300,10000,18000,900,145,,75,55,40,20,25,1200,PHASE,phasecloak,,,,0.05,0.05,50,100,120,150,3,50,8,250000,4,20,420,0.25,35,35,,,,,,,,"rare_bp, hist2t, merc",,0.5,2,3,,
 #CAPITALS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Ayakashi,abyss_ayakashi,Unholy Battleship,High Tech,kol_phase_skip,40,16000,1100,24000,31250,1000,280,2,40,30,20,8,10,3300,FRONT,,120,0.3,0.7,,,200,400,500,500,10,30,7,750000,4,20,720,0.25,50,50,,HIDE_IN_CODEX,0.8,0.6,2,5,,,,,,,,
+Ayakashi,abyss_ayakashi,Unholy Battleship,High Tech,kol_phase_skip,40,16000,1100,24000,31250,1000,280,2,40,30,20,8,10,3300,FRONT,,90,0.3,0.7,,,200,400,500,500,10,30,7,750000,4,20,720,0.25,50,50,,HIDE_IN_CODEX,0.8,0.6,2,5,,,,,,,,
 #EA BOSS SHIPS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ninaya,abyss_tt_boss_ninaya,Prototype,High Tech,phaseteleporter,20,2500,250,8000,,500,70,,130,190,165,60,120,325,FRONT,,300,0.6,0.55,,,1,1,7,10,1,15,11,150000,8,50,120,0.25,22,22,,,,,,,HIDE_IN_CODEX,,0.5,0.75,2,2,,
 Ninmah,abyss_tt_boss_ninmah,Prototype,High Tech,acausaldisruptor,27,5500,800,11000,,900,175,,75,55,40,20,25,1200,PHASE,phasecloak,,,,0.03,0.03,75,125,100,125,2,50,9,350000,4,50,420,0.25,35,35,,,,,,,HIDE_IN_CODEX,,,0.5,2,3,,

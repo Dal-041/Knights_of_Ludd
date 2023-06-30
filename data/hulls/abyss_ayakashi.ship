@@ -8,14 +8,17 @@
   "width": 474,
   "center": [237, 162],
   "collisionRadius": 272,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 244.5,
+  "shieldCenter": [-204.5, -0],
+  "shieldRadius": 363.5,
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
     "delicate",
-	"kol_ea_sparkle"
+    "kol_ea_sparkle"
   ],
+  "builtInWeapons": {
+    "WS0009": "abyss_deco_ayakashi_lights"
+  },
   "weaponSlots": [
     {
       "id": "WS0005",
@@ -214,39 +217,24 @@
       "arc": 7,
       "angle": -164.5,
       "locations": [-27, -26]
+    },
+    {
+      "id": "WS0009",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-27, -0]
     }
   ],
   "engineSlots": [
     {
       "location": [-42, 128],
-      "length": 90.797935,
-      "width": 12.285722,
+      "length": 67.7174,
+      "width": 13.689975,
       "angle": 170,
-      "contrailSize": 12.285722,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-42, -128],
-      "length": 90.797935,
-      "width": 12.285722,
-      "angle": -170,
-      "contrailSize": 12.285722,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-22, 203.5],
-      "length": 67.711914,
-      "width": 12.664272,
-      "angle": 173,
-      "contrailSize": 12.664272,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-22, -203.5],
-      "length": 67.711914,
-      "width": 12.664272,
-      "angle": -173,
-      "contrailSize": 12.664272,
+      "contrailSize": 13.689975,
       "style": "HIGH_TECH"
     },
     {
@@ -282,7 +270,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-25, 172],
+      "location": [-25, 173],
       "length": 67.711914,
       "width": 12.664272,
       "angle": 175.5,
@@ -290,7 +278,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-25, -172],
+      "location": [-25, -173],
       "length": 67.711914,
       "width": 12.664272,
       "angle": -175.5,
@@ -346,42 +334,26 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-47, 112],
-      "length": 123.656975,
-      "width": 18.460939,
+      "location": [-47.5, 113],
+      "length": 103.346664,
+      "width": 23.363731,
       "angle": 173,
-      "contrailSize": 18.460939,
+      "contrailSize": 23.363731,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-47, -112],
-      "length": 123.656975,
-      "width": 18.460939,
+      "location": [-47.5, -113],
+      "length": 103.346664,
+      "width": 23.363731,
       "angle": -173,
-      "contrailSize": 18.460939,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-49, 104],
-      "length": 76.962158,
-      "width": 9.343582,
-      "angle": 179.5,
-      "contrailSize": 9.343582,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-49, -104],
-      "length": 76.962158,
-      "width": 9.343582,
-      "angle": -179.5,
-      "contrailSize": 9.343582,
+      "contrailSize": 23.363731,
       "style": "HIGH_TECH"
     },
     {
       "location": [-48, 96],
       "length": 51.954388,
       "width": 10.907179,
-      "angle": -178.5,
+      "angle": 180,
       "contrailSize": 10.907179,
       "style": "HIGH_TECH"
     },
@@ -389,8 +361,48 @@
       "location": [-48, -96],
       "length": 51.954388,
       "width": 10.907179,
-      "angle": 178.5,
+      "angle": -180,
       "contrailSize": 10.907179,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-42, -128],
+      "length": 67.7174,
+      "width": 13.689975,
+      "angle": -170,
+      "contrailSize": 13.689975,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-49, 104],
+      "length": 51.954388,
+      "width": 10.907179,
+      "angle": 177.5,
+      "contrailSize": 10.907179,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-49, -104],
+      "length": 51.954388,
+      "width": 10.907179,
+      "angle": -177.5,
+      "contrailSize": 10.907179,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-23, -203.5],
+      "length": 67.711914,
+      "width": 12.664272,
+      "angle": -174,
+      "contrailSize": 12.664272,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-23, 203.5],
+      "length": 67.711914,
+      "width": 12.664272,
+      "angle": 174,
+      "contrailSize": 12.664272,
       "style": "HIGH_TECH"
     }
   ],
