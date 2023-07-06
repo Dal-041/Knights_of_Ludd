@@ -36,8 +36,9 @@ public class sparkleHullMod extends BaseHullMod {
     private static String WEAPON = "motelauncher";
     private static final String TEST_DATA_KEY = "_test_AI_shared";
 
-    private float antiFighterDamage = 100f;
+    public static float FLUX_THRESHOLD_INCREASE_PERCENT = 150f; //Adjusts high flux target, not min flux threshold. Values > 100 allowed and effective
 
+    private float antiFighterDamage = 100f;
     public static float MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD = 400f;
     public static float MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD = MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD;
     private boolean findNewTargetOnUse;
@@ -56,16 +57,14 @@ public class sparkleHullMod extends BaseHullMod {
         public String test_loopSound;
     }
 
-    public static float FLUX_THRESHOLD_INCREASE_PERCENT = 150f; //Adjusts high flux target, not min flux threshold. Values > 100 allowed and effective
-
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
         stats.getDynamic().getMod(Stats.PHASE_CLOAK_FLUX_LEVEL_FOR_MIN_SPEED_MOD).modifyPercent(id, FLUX_THRESHOLD_INCREASE_PERCENT);
     }
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        //unused. Update ID if reenabled
-        //if (ship.getVariant().hasHullMod("adaptivephasecoils")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptivephasecoils", "sparkleHullmod");
+        //unused.
+        //if (ship.getVariant().hasHullMod("adaptive_coils")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "sparkleHullmod");
     }
 
     public void advanceInCombat(ShipAPI ship, float amount) {

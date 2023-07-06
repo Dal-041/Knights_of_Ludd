@@ -7,6 +7,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 class knightShields : BaseHullMod() {
 
     /*
+    Desc:
     - Max duration of [yellowtext] # [/y] seconds.
     - Shield charge regenerates while shields are off.
     - Shield emitters forcibly shut down at [y] 0% [/y] charge until fully regenerated.

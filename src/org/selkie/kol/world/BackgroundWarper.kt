@@ -18,7 +18,7 @@ class BackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: F
     private val verticesWide = chunks
     private val verticesTall = chunks
     private val vertices = Array(verticesWide) { arrayOfNulls<Vertex>(verticesTall) }
-/*
+
     init {
 
         val background = invoke("getBackground", system) as BackgroundAndStars
@@ -170,5 +170,4 @@ class BackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: F
 
         return invokeMethod.invoke(foundMethod, instance, arguments)
     }
-*/
 }

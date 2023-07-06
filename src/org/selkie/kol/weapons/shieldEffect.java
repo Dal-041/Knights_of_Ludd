@@ -29,7 +29,7 @@ public class shieldEffect implements EveryFrameWeaponEffectPlugin {
     private CombatEngineAPI engine;
     private ShieldAPI shield;
     private boolean wantToShield;
-    private final IntervalUtil tracker = new IntervalUtil(0.05f, 0.1f);
+    private final IntervalUtil tracker = new IntervalUtil(0.1f, 0.3f); //Seconds
     
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
