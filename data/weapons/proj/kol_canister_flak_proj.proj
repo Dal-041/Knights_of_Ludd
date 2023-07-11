@@ -38,7 +38,7 @@
 									 "detailedExplosionRadius":80,
 									 "detailedExplosionFlashRadius":250,
 									 "detailedExplosionFlashDuration":0.5,
-									 "detailedExplosionFlashColorFringe":[200,175,100,255],
+									 "detailedExplosionFlashColorFringe":[240,180,80,255],
 									 "detailedExplosionFlashColorCore":[155,155,155,255],
 									 "sound":"system_canister_flak_explosion"},									 
 					},
