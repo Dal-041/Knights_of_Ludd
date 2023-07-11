@@ -2,8 +2,6 @@
 	# Reserved engine style ids (can not be used):
 	# "CUSTOM"
 	"KOL_ENG":{
-		#"glowSprite":"graphics/fx/engineglow32.png", # not implemented
-		#"glowShape":"graphics/fx/engineflame32.png",
 		"engineColor":[25,100,255,180],
 		"engineCampaignColor":[25,100,255,180],
 		"glowAlternateColor":[0,0,0,0],
@@ -16,6 +14,35 @@
 		"contrailCampaignColor":[200,90,70,75],
 		#"contrailCampaignColor":[120,50,50,50],
 		"type":"SMOKE" # GLOW or SMOKE
+	},
+	"ABYSS_EDF_TRAIL":{
+		"mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+		"contrailDuration":0.7,  #1.5
+		"contrailWidthMult":5.0, #0.67
+		"contrailWidthAddedFractionAtEnd":-1f,  # can be negative. makes trail spread out/narrow at the end
+		"contrailMinSeg":10, # 5, min segment length, in pixels
+		"contrailMaxSpeedMult":.3f,   #1f
+		"contrailAngularVelocityMult":-10f,   #0f,
+		"contrailColor":[255,50,50,75],
+		"type":"GLOW", # GLOW or SMOKE; additive or regular blend mode
+						
+		"glowSprite":"graphics/fx/engineglow32b.png",
+		"glowOutline":"graphics/fx/engineflame32b.png",
+		"omegaMode":true,
+		"glowSizeMult":0,
+		"glowAlternateColor":[255,50,50,255],
+		"engineColor":[250,145,255,255],
+	},	
+	"ABYSS_EDF_ENG":{
+		"engineColor":[255,25,25,255],
+		"contrailParticleSizeMult":4,
+		"contrailParticleDuration":1,
+		"contrailParticleFinalSizeMult":2.5,
+		"contrailMaxSpeedMult":0.5f,
+		"contrailAngularVelocityMult":0f,
+		"contrailColor":[100,165,255,25],
+		"contrailCampaignColor":[255,50,50,75],
+		"type":"GLOW" # GLOW or SMOKE
 	},
 }
 
