@@ -41,7 +41,9 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public void onNewGameAfterEconomyLoad() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			Generate.zugg();
+			prepareAbyss.GenerateElysia(Global.getSector());
 			prepareAbyss.GenerateAbyss(Global.getSector());
+			prepareAbyss.GenerateLunaSea(Global.getSector());
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
 			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);
