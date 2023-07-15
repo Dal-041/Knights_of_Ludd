@@ -1,0 +1,36 @@
+{
+	#
+	# terrain with gameplay effects
+	#
+	"kol_asteroidBelt":{
+		"plugin":"org.selkie.kol.impl.terrain.abyssAsteroidBelt",
+		"loopOne":"terrain_asteroid_field",
+	},
+
+	"kol_asteroidField":{
+		"plugin":"org.selkie.kol.impl.terrain.abyssAsteroidField",
+		"musicSuppression":0.25,
+		"loopOne":"terrain_asteroid_field",
+	},
+
+	"kol_corona":{
+		"plugin":"org.selkie.kol.impl.terrain.abyssCorona",
+		"musicSuppression":1,
+		# inside corona but not inside flare
+		"loopOne":"terrain_corona",
+		# inside flare
+		"loopTwo":"terrain_corona_flare",
+	},
+
+	"kol_eventHorizon":{
+		"plugin":"org.selkie.kol.impl.terrain.abyssEventHorizon",
+		"musicSuppression":1,
+		"loopOne":"terrain_corona_am",
+	},
+
+	"kol_pulsarBeam":{
+		"plugin":"org.selkie.kol.impl.terrain.abyssPulsarBeam",
+		"musicSuppression":1,
+		"loopOne":"terrain_corona_am",
+	},
+}
