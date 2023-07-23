@@ -19,6 +19,18 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
 
     var overwriteColor: Color? = null
 
+    companion object {
+        private val fieldClass = Class.forName("java.lang.reflect.Field", false, Class::class.java.classLoader)
+        private val setFieldHandle = MethodHandles.lookup().findVirtual(fieldClass, "set", MethodType.methodType(Void.TYPE, Any::class.java, Any::class.java))
+        private val getFieldHandle = MethodHandles.lookup().findVirtual(fieldClass, "get", MethodType.methodType(Any::class.java, Any::class.java))
+        private val getFieldNameHandle = MethodHandles.lookup().findVirtual(fieldClass, "getName", MethodType.methodType(String::class.java))
+        private val setFieldAccessibleHandle = MethodHandles.lookup().findVirtual(fieldClass,"setAccessible", MethodType.methodType(Void.TYPE, Boolean::class.javaPrimitiveType))
+
+        private val methodClass = Class.forName("java.lang.reflect.Method", false, Class::class.java.classLoader)
+        private val getMethodNameHandle = MethodHandles.lookup().findVirtual(methodClass, "getName", MethodType.methodType(String::class.java))
+        private val invokeMethodHandle = MethodHandles.lookup().findVirtual(methodClass, "invoke", MethodType.methodType(Any::class.java, Any::class.java, Array<Any>::class.java))
+    }
+
     init {
         var background = invoke("getBackground", system) as BackgroundAndStars
         set("warpngRenderer", background, this)
@@ -42,8 +54,12 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
 
     override fun renderNoBlendOrRotate(sprite: Sprite, bgOffsetX: Float, bgOffsetY: Float, disableBlend: Boolean) {
 
+
         var spritePath = get("textureId", sprite) as String
         var spriteAPI: SpriteAPI? = Global.getSettings().getSprite(spritePath) ?: return
+
+        var width = invoke("getWidth", sprite) as Float
+        var heigth = invoke("getHeight", sprite) as Float
 
         GL11.glPushMatrix()
         spriteAPI!!.bindTexture()
@@ -51,16 +67,17 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
         var var5 = spriteAPI.color
         if (overwriteColor != null) var5 = overwriteColor
         GL11.glColor4ub(var5.red.toByte(),
-                var5.green.toByte(),
-                var5.blue.toByte(),
-                (var5.alpha.toFloat() * spriteAPI.alphaMult).toInt().toByte())
+            var5.green.toByte(),
+            var5.blue.toByte(),
+            (var5.alpha.toFloat() * spriteAPI.alphaMult).toInt().toByte())
         GL11.glTranslatef(bgOffsetX, bgOffsetY, 0.0f)
         GL11.glEnable(3553)
         if (disableBlend) {
             GL11.glDisable(3042)
         }
-        val var6 = spriteAPI.width
-        val var7 = spriteAPI.height
+
+        var var6 = width
+        var var7 = heigth
         var var8 = spriteAPI.textureWidth - 0.001f
         var var9 = spriteAPI.textureHeight - 0.001f
         val var10 = var6 / (this.verticesWide - 1).toFloat()
@@ -86,7 +103,7 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
                 var var27: Float
                 if (var14 != 0.0f && var14 != (this.verticesWide - 1).toFloat() && var15 != 0.0f && var15 != (this.verticesTall - 1).toFloat()) {
                     var24 = Math.toRadians(this.vertices[var14.toInt()][var15.toInt()]!!.theta.value.toDouble())
-                            .toFloat()
+                        .toFloat()
                     var25 = this.vertices[var14.toInt()][var15.toInt()]!!.radius.value
                     var26 = Math.sin(var24.toDouble()).toFloat()
                     var27 = Math.cos(var24.toDouble()).toFloat()
@@ -95,7 +112,7 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
                 }
                 if (var14 + 1.0f != 0.0f && var14 + 1.0f != (this.verticesWide - 1).toFloat() && var15 != 0.0f && var15 != (this.verticesTall - 1).toFloat()) {
                     var24 = Math.toRadians(this.vertices[var14.toInt() + 1][var15.toInt()]!!.theta.value.toDouble())
-                            .toFloat()
+                        .toFloat()
                     var25 = this.vertices[var14.toInt() + 1][var15.toInt()]!!.radius.value
                     var26 = Math.sin(var24.toDouble()).toFloat()
                     var27 = Math.cos(var24.toDouble()).toFloat()
@@ -114,61 +131,44 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
         GL11.glPopMatrix()
     }
 
-    fun get(fieldName: String, instanceToGetFrom: Any): Any? {
-        val fieldClass = Class.forName("java.lang.reflect.Field", false, Class::class.java.classLoader)
-        val getMethod = MethodHandles.lookup().findVirtual(fieldClass, "get", MethodType.methodType(Any::class.java, Any::class.java))
-        val getNameMethod = MethodHandles.lookup().findVirtual(fieldClass, "getName", MethodType.methodType(String::class.java))
-        val setAcessMethod = MethodHandles.lookup().findVirtual(fieldClass,"setAccessible", MethodType.methodType(Void.TYPE, Boolean::class.javaPrimitiveType))
-
-        val instancesOfFields: Array<out Any> = instanceToGetFrom.javaClass.getDeclaredFields()
-        for (obj in instancesOfFields)
-        {
-            setAcessMethod.invoke(obj, true)
-            val name = getNameMethod.invoke(obj)
-            if (name.toString() == fieldName)
-            {
-                return getMethod.invoke(obj, instanceToGetFrom)
-            }
-        }
-        return null
-    }
-
     fun set(fieldName: String, instanceToModify: Any, newValue: Any?)
     {
-        val fieldClass = Class.forName("java.lang.reflect.Field", false, Class::class.java.classLoader)
-        val setMethod = MethodHandles.lookup().findVirtual(fieldClass, "set", MethodType.methodType(Void.TYPE, Any::class.java, Any::class.java))
-        val getNameMethod = MethodHandles.lookup().findVirtual(fieldClass, "getName", MethodType.methodType(String::class.java))
-        val setAcessMethod = MethodHandles.lookup().findVirtual(fieldClass,"setAccessible", MethodType.methodType(Void.TYPE, Boolean::class.javaPrimitiveType))
-
-        val instancesOfFields: Array<out Any> = instanceToModify.javaClass.getDeclaredFields()
-        for (obj in instancesOfFields)
-        {
-            setAcessMethod.invoke(obj, true)
-            val name = getNameMethod.invoke(obj)
-            if (name.toString() == fieldName)
-            {
-                setMethod.invoke(obj, instanceToModify, newValue)
-            }
+        var field: Any? = null
+        try {  field = instanceToModify.javaClass.getField(fieldName) } catch (e: Throwable) {
+            try {  field = instanceToModify.javaClass.getDeclaredField(fieldName) } catch (e: Throwable) { }
         }
+
+        setFieldAccessibleHandle.invoke(field, true)
+        setFieldHandle.invoke(field, instanceToModify, newValue)
     }
 
-    fun invoke(methodName: String, instance: Any, vararg arguments: Any?) : Any?
-    {
-        val methodClass = Class.forName("java.lang.reflect.Method", false, Class::class.java.classLoader)
-        val getNameMethod = MethodHandles.lookup().findVirtual(methodClass, "getName", MethodType.methodType(String::class.java))
-        val invokeMethod = MethodHandles.lookup().findVirtual(methodClass, "invoke", MethodType.methodType(Any::class.java, Any::class.java, Array<Any>::class.java))
-
-        var foundMethod: Any? = null
-
-        for (method in instance::class.java.methods as Array<Any>)
-        {
-            if (getNameMethod.invoke(method) == methodName)
-            {
-                foundMethod = method
-            }
+    fun get(fieldName: String, instanceToGetFrom: Any): Any? {
+        var field: Any? = null
+        try {  field = instanceToGetFrom.javaClass.getField(fieldName) } catch (e: Throwable) {
+            try {  field = instanceToGetFrom.javaClass.getDeclaredField(fieldName) } catch (e: Throwable) { }
         }
 
-        return invokeMethod.invoke(foundMethod, instance, arguments)
+        setFieldAccessibleHandle.invoke(field, true)
+        return getFieldHandle.invoke(field, instanceToGetFrom)
+    }
+
+    fun invoke(methodName: String, instance: Any, vararg arguments: Any?, declared: Boolean = false) : Any?
+    {
+        var method: Any? = null
+
+        val clazz = instance.javaClass
+        val args = arguments.map { it!!::class.javaPrimitiveType ?: it::class.java }
+        val methodType = MethodType.methodType(Void.TYPE, args)
+
+
+        if (!declared) {
+            method = clazz.getMethod(methodName, *methodType.parameterArray())
+        }
+        else  {
+            method = clazz.getDeclaredMethod(methodName, *methodType.parameterArray())
+        }
+
+        return invokeMethodHandle.invoke(method, instance, arguments)
     }
 
 }

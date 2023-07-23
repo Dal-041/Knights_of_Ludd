@@ -14,7 +14,7 @@ import exerelin.campaign.SectorManager;
 
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static String ModID = "Knights of Ludd";
-	public boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
+	public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
 	
 	public static String MEMKEY_KOL_INVICTUS_SPAWNED = "$kol_lp_invictus_spawned";
 	public static String MEMKEY_KOL_RETRIBUTION_SPAWNED = "$kol_lp_retribution_spawned";

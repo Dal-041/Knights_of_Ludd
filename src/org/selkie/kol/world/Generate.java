@@ -12,6 +12,8 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI.SurveyLevel;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
+import exerelin.campaign.SectorManager;
+import org.selkie.kol.plugins.KOL_ModPlugin;
 
 public class Generate {
 	static StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
@@ -39,6 +41,7 @@ public class Generate {
         		new ArrayList<String>(Arrays.asList(
                         Industries.POPULATION,
                         Industries.SPACEPORT,
+						"kol_garden",
                         Industries.LIGHTINDUSTRY,
                         Industries.GROUNDDEFENSES,
                         Industries.BATTLESTATION)),
@@ -49,6 +52,8 @@ public class Generate {
                         Submarkets.SUBMARKET_OPEN)),
         		0.3f
         );
+
+		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add("kol_cygnus");
 	}
 	
 	public static void genKnightsStarfortress() {
@@ -62,6 +67,7 @@ public class Generate {
         		new ArrayList<String>(Arrays.asList(
                         Industries.POPULATION,
                         Industries.SPACEPORT,
+						"kol_garden",
                         Industries.MILITARYBASE,
                         Industries.ORBITALWORKS,
                         Industries.FUELPROD,
@@ -75,6 +81,10 @@ public class Generate {
                         Submarkets.SUBMARKET_OPEN)),
         		0.3f
         );
+
+
+
+		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add("kol_lyra");
 	}
 	
 	public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name, 
