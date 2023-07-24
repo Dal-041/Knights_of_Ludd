@@ -9,10 +9,7 @@ import com.fs.starfarer.api.campaign.econ.MarketConditionAPI;
 import com.fs.starfarer.api.campaign.econ.MarketImmigrationModifier;
 import com.fs.starfarer.api.impl.campaign.econ.ResourceDepositsCondition;
 import com.fs.starfarer.api.impl.campaign.econ.impl.BaseIndustry;
-import com.fs.starfarer.api.impl.campaign.ids.Commodities;
-import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import com.fs.starfarer.api.impl.campaign.ids.Industries;
-import com.fs.starfarer.api.impl.campaign.ids.Planets;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.population.PopulationComposition;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.MarketCMD.RaidDangerLevel;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
@@ -26,13 +23,13 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
 
         int size = market.getSize();
 
-        demand(0, Commodities.HEAVY_MACHINERY, size - 3, BASE_VALUE_TEXT);
-        supply(Commodities.FOOD, 2);
+        demand(Commodities.MARINES, size - 3);
+        demand(Commodities.CREW, size - 3);
+        supply(Commodities.FOOD, size - 2);
 
-
-        Pair<String, Integer> deficit = getMaxDeficit(Commodities.HEAVY_MACHINERY);
+        Pair<String, Integer> deficit = getMaxDeficit(Commodities.CREW);
         //applyDeficitToProduction(0, deficit, Commodities.FOOD, Commodities.ORGANICS);
-        applyDeficitToProduction(0, deficit, Commodities.FOOD);
+        //applyDeficitToProduction(0, deficit, Commodities.FOOD);
 
 
         if (!isFunctional()) {
@@ -40,6 +37,10 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
         }
     }
 
+    @Override
+    public boolean isFunctional() {
+        return super.isFunctional();
+    }
 
     @Override
     public void unapply() {
@@ -51,7 +52,7 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
     public boolean isAvailableToBuild() {
         if (!super.isAvailableToBuild()) return false;
 
-        if (market.getFactionId() == "knights_of_selkie" && market.getId() == "kol_lyra" || market.getId() == "kol_cygnus") {
+        if (market.getFactionId() == "knights_of_selkie" && market.hasCondition(Conditions.OUTPOST)) {
             return true;
         }
 
@@ -91,17 +92,6 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
     @Override
     protected boolean canImproveToIncreaseProduction() {
         return false;
-    }
-
-
-    @Override
-    public RaidDangerLevel adjustCommodityDangerLevel(String commodityId, RaidDangerLevel level) {
-        return level.prev();
-    }
-
-    @Override
-    public RaidDangerLevel adjustItemDangerLevel(String itemId, String data, RaidDangerLevel level) {
-        return level.prev();
     }
 
     @Override

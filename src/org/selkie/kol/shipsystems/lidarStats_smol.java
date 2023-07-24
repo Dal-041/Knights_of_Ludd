@@ -1,11 +1,5 @@
 package org.selkie.kol.shipsystems;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -16,7 +10,13 @@ import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
 
-public class lidarStats extends BaseShipSystemScript {
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class lidarStats_smol extends BaseShipSystemScript {
 
 	public static String LIDAR_WINDUP = "lidar_windup";
 	
@@ -43,7 +43,7 @@ public class lidarStats extends BaseShipSystemScript {
 		public WeaponAPI w;
 	}
 	
-	protected List<LidarDishData> dishData = new ArrayList<lidarStats.LidarDishData>();
+	protected List<LidarDishData> dishData = new ArrayList<lidarStats_smol.LidarDishData>();
 	protected boolean needsUnapply = false;
 	protected boolean playedWindup = false;
 	
@@ -145,7 +145,7 @@ public class lidarStats extends BaseShipSystemScript {
 				unmodify(id, stats);
 				for (WeaponAPI w : ship.getAllWeapons()) {
 					if (!w.isDecorative() && w.getSlot().isTurret() &&
-							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
+							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
 						w.setGlowAmount(0, null);
 					}
 				}
@@ -164,7 +164,7 @@ public class lidarStats extends BaseShipSystemScript {
 		
 		if (active) {
 			for (WeaponAPI w : ship.getAllWeapons()) {
-				if (!w.getSpec().hasTag(Tags.LIDAR) && (w.getSize() != WeaponSize.LARGE || w.getType() == WeaponType.MISSILE)) {
+				if (!w.getSpec().hasTag(Tags.LIDAR) && w.getType() == WeaponType.MISSILE) {
 					w.setForceNoFireOneFrame(true); //w.disable();
 				}
 			}
@@ -176,11 +176,11 @@ public class lidarStats extends BaseShipSystemScript {
 				for (WeaponAPI w : ship.getAllWeapons()) {
 					if (w.getSlot().isSystemSlot()) continue;
 					if (!w.isDecorative() && w.getSlot().isTurret() &&
-							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
+							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
 						w.setGlowAmount(0, null);
 					}
 					/*
-					if (!w.getSpec().hasTag(Tags.LIDAR) && (w.getSize() != WeaponSize.LARGE || w.getType() == WeaponType.MISSILE)) {
+					if (!w.getSpec().hasTag(Tags.LIDAR) && w.getType() == WeaponType.MISSILE)) {
 						w.repair();
 					}
 					*/
@@ -211,7 +211,7 @@ public class lidarStats extends BaseShipSystemScript {
 		float lidarRange = 500;
 		for (WeaponAPI w : ship.getAllWeapons()) {
 			if (!w.isDecorative() && w.getSlot().isTurret() &&
-					(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
+					(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
 				lidarRange = Math.max(lidarRange, w.getRange());
 				w.setGlowAmount(effectLevel, glowColor);
 			}
