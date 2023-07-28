@@ -12,6 +12,8 @@ Leap of Faith,kol_lunge,,,,,,,,3,0.15,0.1,0.3,0.1,,,,,,,,,,,,TRUE,,graphics/icon
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #MODULE SYS,,,,,,,,,,,,,,,,,,,,,,,,,,,
 why can you see this wtf,kol_mcf,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,
+no really you should not be able to see these plz stop aaaaa,kol_flareslv,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,graphics/icons/hullsys/flare_launcher.png
+,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DISABLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #flare shooty idfk,kol_flarejets,,,,,,,,,,1,5,1,5,,,,,,,,,,,,,graphics/icons/hullsys/maneuvering_jets.png
