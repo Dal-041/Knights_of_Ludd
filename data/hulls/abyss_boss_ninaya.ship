@@ -2,7 +2,7 @@
   "hullName": "Ninaya",
   "hullId": "abyss_boss_ninaya",
   "hullSize": "FRIGATE",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_ea_boss_ninaya.png",
+  "spriteName": "graphics/ships/kol_tt_boss_ninaya.png",
   "style": "HIGH_TECH",
   "height": 108,
   "width": 118,
@@ -116,34 +116,34 @@
   "engineSlots": [
     {
       "location": [-36, 18],
-      "length": 64,
-      "width": 12,
+      "length": 33.226211,
+      "width": 9.437953,
       "angle": 168.5,
-      "contrailSize": 64,
+      "contrailSize": 9.437953,
       "style": "HIGH_TECH"
     },
     {
       "location": [-36, -18],
-      "length": 64,
-      "width": 12,
+      "length": 33.226211,
+      "width": 9.437953,
       "angle": -168.5,
-      "contrailSize": 64,
+      "contrailSize": 9.437953,
       "style": "HIGH_TECH"
     },
     {
       "location": [-36, 11],
-      "length": 64,
-      "width": 12,
+      "length": 50.764324,
+      "width": 9.996663,
       "angle": 175.5,
-      "contrailSize": 64,
+      "contrailSize": 9.996663,
       "style": "HIGH_TECH"
     },
     {
       "location": [-36, -11],
-      "length": 64,
-      "width": 12,
+      "length": 50.764324,
+      "width": 9.996663,
       "angle": -175.5,
-      "contrailSize": 64,
+      "contrailSize": 9.996663,
       "style": "HIGH_TECH"
     },
     {

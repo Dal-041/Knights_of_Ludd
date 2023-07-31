@@ -2,7 +2,7 @@
   "hullName": "Nineveh",
   "hullId": "abyss_boss_nineveh",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/kol_ea_boss_nineveh.png",
+  "spriteName": "graphics/ships/kol_tt_boss_nineveh.png",
   "style": "HIGH_TECH",
   "height": 371,
   "width": 282,
@@ -305,18 +305,18 @@
     },
     {
       "location": [-98, 97],
-      "length": 162.208679,
-      "width": 37.234112,
+      "length": 70.733788,
+      "width": 14.557688,
       "angle": 164,
-      "contrailSize": 37.234112,
+      "contrailSize": 14.557688,
       "style": "HIGH_TECH"
     },
     {
       "location": [-98, -97],
-      "length": 162.208679,
-      "width": 37.234112,
+      "length": 70.733788,
+      "width": 14.557688,
       "angle": -164,
-      "contrailSize": 37.234112,
+      "contrailSize": 14.557688,
       "style": "HIGH_TECH"
     },
     {
