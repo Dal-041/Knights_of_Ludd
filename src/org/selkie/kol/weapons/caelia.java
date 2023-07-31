@@ -44,7 +44,7 @@ public class caelia implements EveryFrameWeaponEffectPlugin {
         		count = timeFull;
         	}
         	magnitude = count/timeFull; // 0-1
-        	rofMult = ship.getMutableStats().getBallisticRoFMult().computeMultMod();
+        	rofMult = ship.getMutableStats().getBallisticRoFMult().getModifiedValue();
         	newCD = (baseCD-(baseCD * reductionFactor * magnitude)) * rofMult;
         	wait = newCD;
     		//weapon.setRemainingCooldownTo(newCD);

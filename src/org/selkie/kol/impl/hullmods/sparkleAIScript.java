@@ -18,22 +18,23 @@ import java.util.Map;
 
 public class sparkleAIScript implements MissileAIPlugin {
 
+    //Boids flocking: Separation, Alignment, Cohesion
     private static float SOURCE_REJOIN = 200f;  //200f distance added to the collision radius that determines target radius for sparkles returning
                                                 //towards their host ship
     private static float SOURCE_REPEL = 50f;    //50f distance added to the collision radius that determines the radius below which sparkles
                                                 // are pushed away from their host ship
     private static float SOURCE_COHESION = 600f; //600f stickiness
 
-    public static float MAX_FLOCK_RANGE = 500;  //unused right now
-    public static float MAX_HARD_AVOID_RANGE = 200;
-    public static float AVOID_RANGE = 50;
-    public static float COHESION_RANGE = 100; //Distance under which motes are considered cohered
+    public static float MAX_FLOCK_RANGE = 500f;  //unused right now
+    public static float MAX_HARD_AVOID_RANGE = 200f;
+    public static float AVOID_RANGE = 50f;
+    public static float COHESION_RANGE = 10f; //100f Distance under which sparkles will cohere
     public static float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 300f;
     
     private static Map distMult = new HashMap(); //Change orbiting radius here
     static {
     	distMult.put(ShipAPI.HullSize.FIGHTER, 0.125f);
-        distMult.put(ShipAPI.HullSize.FRIGATE, 0.25f);
+        distMult.put(ShipAPI.HullSize.FRIGATE, 0.17f);
         distMult.put(ShipAPI.HullSize.DESTROYER, 0.35f);
         distMult.put(ShipAPI.HullSize.CRUISER, 0.55f);
         distMult.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.8f);

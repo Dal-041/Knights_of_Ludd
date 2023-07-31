@@ -23,18 +23,18 @@ public class DroneAIScript implements MissileAIPlugin {
 	private static float SOURCE_REPEL = 50f;
 	private static float SOURCE_COHESION = 600f;
 
-	public static float MAX_FLOCK_RANGE = 500;
-	public static float MAX_HARD_AVOID_RANGE = 200;
-	public static float AVOID_RANGE = 50;
-	public static float COHESION_RANGE = 100;
+	public static float MAX_FLOCK_RANGE = 500f;
+	public static float MAX_HARD_AVOID_RANGE = 200f;
+	public static float AVOID_RANGE = 50f;
+	public static float COHESION_RANGE = 10f;
 	public static float ATTRACTOR_LOCK_STOP_FLOCKING_ADD = 300f;
     private static Map distMult = new HashMap();
     static {
     	distMult.put(ShipAPI.HullSize.FIGHTER, 0.125f);
-        distMult.put(ShipAPI.HullSize.FRIGATE, 0.25f);
-        distMult.put(ShipAPI.HullSize.DESTROYER, 0.4f);
-        distMult.put(ShipAPI.HullSize.CRUISER, 0.7f);
-        distMult.put(ShipAPI.HullSize.CAPITAL_SHIP, 1);
+        distMult.put(ShipAPI.HullSize.FRIGATE, 0.17f);
+        distMult.put(ShipAPI.HullSize.DESTROYER, 0.35f);
+        distMult.put(ShipAPI.HullSize.CRUISER, 0.55f);
+        distMult.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.8f);
     }
     
 	protected MissileAPI missile;
