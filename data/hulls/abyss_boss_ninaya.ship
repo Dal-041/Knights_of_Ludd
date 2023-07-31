@@ -2,7 +2,7 @@
   "hullName": "Ninaya",
   "hullId": "abyss_boss_ninaya",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/kol_tt_boss_ninaya.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_boss_ninaya.png",
   "style": "HIGH_TECH",
   "height": 108,
   "width": 118,
