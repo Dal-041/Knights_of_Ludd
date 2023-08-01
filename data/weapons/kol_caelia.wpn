@@ -1,0 +1,57 @@
+{
+  "id": "kol_caelia",
+  "specClass": "projectile",
+  "projectileSpecId": "hephag_shot",
+  "type": "BALLISTIC",
+  "size": "LARGE",
+  "everyFrameEffect": "org.selkie.kol.weapons.caelia",
+  "displayArcRadius": 450,
+  "turretSprite": "graphics/weapons/kol_caelia_turret_base.png",
+  "turretGunSprite": "graphics/weapons/kol_caelia_turret_recoil.png",
+  "hardpointSprite": "graphics/weapons/kol_caelia_hardpoint_base.png",
+  "hardpointGunSprite": "graphics/weapons/kol_caelia_hardpoint_recoil.png",
+  "renderAboveAllWeapons": 0,
+  "visualRecoil": 10,
+  "renderHints": [
+    RENDER_BARREL_BELOW
+  ],
+  "turretOffsets": [
+    41,
+    -5.5,
+    41,
+    5.5
+  ],
+  "turretAngleOffsets": [
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    52,
+    -5.5,
+    52,
+    5.5
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0
+  ],
+  "barrelMode": "ALTERNATING",
+  "animationType": "MUZZLE_FLASH",
+  "muzzleFlashSpec": {
+    "length": 54,
+    "spread": 20,
+    "particleSizeMin": 18,
+    "particleSizeRange": 24,
+    "particleDuration": 0.12,
+    "particleCount": 32,
+    "particleColor": [
+      110,
+      225,
+      250,
+      215
+    ]
+  },
+  "textureType": ROUGH,
+  "fireSoundTwo": "kol_caelia_fire",
+  "unaffectedByProjectileSpeedBonuses": false
+}
