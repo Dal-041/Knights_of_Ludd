@@ -1,0 +1,63 @@
+{
+  "hullName": "Hex USV",
+  "hullId": "kol_hex",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/kol_hex.png",
+  "style": "KOL_TECH",
+  "height": 43,
+  "width": 38,
+  "center": [19, 21],
+  "collisionRadius": 40,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 30,
+  "viewOffset": 0,
+  "builtInMods": [
+	"kol_refit"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [15, 5]
+    },
+    {
+      "id": "WS 002",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [15, -5]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-15, 5.5],
+      "length": 24,
+      "width": 12,
+      "angle": 167.5,
+      "contrailSize": 64,
+      "style": "COBRA_BOMBER"
+    },
+    {
+      "location": [-15, -5.5],
+      "length": 24,
+      "width": 12,
+      "angle": -167.5,
+      "contrailSize": 64,
+      "style": "COBRA_BOMBER"
+    }
+  ],
+  "bounds": [
+    16, -8,
+    -2, -15,
+    -16, -9,
+    -16, 9,
+    -2, 15,
+    16, 8
+  ]
+}

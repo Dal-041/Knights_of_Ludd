@@ -1,0 +1,51 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_snowdrop_ll",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_snowdrop_ll.png",
+  "style": "KOL_TECH",
+  "height": 56,
+  "width": 58,
+  "center": [29, 28],
+  "collisionRadius": 45.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 41.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "no_weapon_flux",
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 135,
+      "locations": [0, 17]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 155,
+      "locations": [-25, -16.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -3, -27,
+    15.5, -5.5,
+    24, 12,
+    12, 28,
+    7, 28,
+    -27.5, -15,
+    -27.5, -22,
+    -21.5, -27.5
+  ]
+}

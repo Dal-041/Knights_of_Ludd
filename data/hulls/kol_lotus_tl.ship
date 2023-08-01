@@ -1,0 +1,62 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_lotus_tl",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_lotus_tl.png",
+  "style": "LOW_TECH",
+  "height": 95,
+  "width": 52,
+  "center": [22, 47],
+  "collisionRadius": 55,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 54.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "builtInWeapons": {
+    "WS0002": "eis_blinker_white30"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [14, -4]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [20, -21]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -9, -22,
+    8, -22,
+    14, -25.5,
+    30, -25.5,
+    32.5, -16,
+    46.5, -11,
+    46.5, 6,
+    13, 17.5,
+    3, 11.5,
+    -4, 20,
+    -16.5, 20,
+    -20.5, 15.5,
+    -42.5, 20,
+    -46, 15,
+    -26, -0.5,
+    -16.5, -1.5,
+    -10.5, -8.5
+  ]
+}

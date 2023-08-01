@@ -1,0 +1,191 @@
+{
+  "hullName": "Ninaya",
+  "hullId": "abyss_boss_ninaya",
+  "hullSize": "FRIGATE",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_boss_ninaya.png",
+  "style": "ABYSS_DUSK_TECH",
+  "height": 108,
+  "width": 118,
+  "center": [60, 40],
+  "collisionRadius": 80,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 76.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "advancedshieldemitter",
+    "kol_ea_sparkle",
+    "high_maintenance",
+    "delicate"
+  ],
+  "builtInWeapons": {
+    "WS0003": "eis_nineng",
+    "WS0004": "eis_nineng"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS 001",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [15, 32]
+    },
+    {
+      "id": "WS 002",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [21, -30]
+    },
+    {
+      "id": "WS 003",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [9, -0]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 135,
+      "locations": [-10, 55]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": -135,
+      "locations": [1, -54]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -135,
+      "locations": [-10, -25]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -127,
+      "locations": [13, -41]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -170.5,
+      "locations": [-2.5, -12.5]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": -124.5,
+      "locations": [9, -15]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 135,
+      "locations": [19, 14]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-36, 18],
+      "length": 33.226211,
+      "width": 9.437953,
+      "angle": 168.5,
+      "contrailSize": 9.437953,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-36, -18],
+      "length": 33.226211,
+      "width": 9.437953,
+      "angle": -168.5,
+      "contrailSize": 9.437953,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-36, 11],
+      "length": 50.764324,
+      "width": 9.996663,
+      "angle": 175.5,
+      "contrailSize": 9.996663,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-36, -11],
+      "length": 50.764324,
+      "width": 9.996663,
+      "angle": -175.5,
+      "contrailSize": 9.996663,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-11, 55],
+      "length": 0,
+      "width": 13,
+      "angle": 75,
+      "contrailSize": 0,
+      "style": "OMEGA"
+    },
+    {
+      "location": [1, -54],
+      "length": -0,
+      "width": 13,
+      "angle": -75,
+      "contrailSize": 0,
+      "style": "OMEGA"
+    }
+  ],
+  "bounds": [
+    -37, -22,
+    -37, 22,
+    -8.5, 57.5,
+    -2, 59,
+    8, 59,
+    24, 39.5,
+    24, 26,
+    65, 12,
+    47.5, 7,
+    18, 7.5,
+    18, -9,
+    48, -10,
+    56, -13.5,
+    29.5, -19,
+    29, -45.5,
+    11, -53,
+    5, -57.5,
+    -6, -47,
+    -3, -44,
+    -11, -36,
+    -16, -40.5,
+    -26.5, -39.5,
+    -28.5, -26.5
+  ]
+}

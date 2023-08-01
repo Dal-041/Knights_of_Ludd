@@ -1,0 +1,82 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_alysse_ll",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_alysse_ll.png",
+  "style": "LOW_TECH",
+  "height": 108,
+  "width": 66,
+  "center": [32.5, 54.5],
+  "collisionRadius": 69,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 67.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "no_weapon_flux",
+    "reduced_explosion",
+    "always_detaches",
+    "kol_vulcan"
+  ],
+  "builtInWeapons": {
+    "WS0001": "dualflak",
+    "WS0002": "kol_deco_alysse_ll",
+    "WS0003": "eis_blinker_white",
+    "WS0004": "eis_blinker_white30"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 165,
+      "angle": 90,
+      "locations": [26.5, 9.5]
+    },
+    {
+      "id": "WS0002",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [8.5, 5.5],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-36.5, 11.5]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [15, -22]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    37, -32,
+    53.5, -11,
+    48.5, -3,
+    37.5, 5,
+    40, 17,
+    35, 25.5,
+    19.5, 26.5,
+    14, 21.5,
+    -41, 30.5,
+    -53.5, 14,
+    -53.5, 10.5,
+    6, -30,
+    18, -27
+  ]
+}
