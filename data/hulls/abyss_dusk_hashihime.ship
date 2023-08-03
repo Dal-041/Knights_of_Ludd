@@ -2,7 +2,7 @@
   "hullName": "Hashihime",
   "hullId": "abyss_dusk_hashihime",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/abyss_dusk_hashihime.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_dusk_hashihime.png",
   "style": "ABYSS_DUSK_TECH",
   "height": 294,
   "width": 206,
