@@ -20,8 +20,8 @@
   "weaponSlots": [
     {
       "id": "WS 001",
-      "size": "MEDIUM",
-      "type": "UNIVERSAL",
+      "size": "LARGE",
+      "type": "ENERGY",
       "mount": "HARDPOINT",
       "arc": 6,
       "angle": 0,

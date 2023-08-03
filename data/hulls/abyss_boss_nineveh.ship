@@ -13,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
-	"kol_ea_sparkle",
+    "kol_ea_sparkle",
     "ex_phase_coils",
     "kol_ea_mist",
     "delicate"
@@ -40,7 +40,7 @@
     {
       "id": "WS0001",
       "size": "LARGE",
-      "type": "UNIVERSAL",
+      "type": "SYNERGY",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
