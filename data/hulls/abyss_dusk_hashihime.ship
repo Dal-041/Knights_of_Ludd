@@ -11,6 +11,12 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 174.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "delicate",
+    "kol_ea_mist",
+    "kol_ea_sparkle"
+  ],
   "weaponSlots": [
     {
       "id": "WS0003",
@@ -148,6 +154,100 @@
       "locations": [-92, -27]
     }
   ],
-  "engineSlots": [],
-  "bounds": []
+  "engineSlots": [
+    {
+      "location": [-51, -0],
+      "length": 72,
+      "width": 23,
+      "angle": 180,
+      "contrailSize": 23,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-31, 67],
+      "length": 34,
+      "width": 11,
+      "angle": 175,
+      "contrailSize": 11,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-31, -67],
+      "length": 34,
+      "width": 11,
+      "angle": -175,
+      "contrailSize": 11,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-31, 74],
+      "length": 47.357594,
+      "width": 15.685417,
+      "angle": 163.5,
+      "contrailSize": 15.685417,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-31, -74],
+      "length": 47.357594,
+      "width": 15.685417,
+      "angle": -163.5,
+      "contrailSize": 15.685417,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-28, 84],
+      "length": 64.826546,
+      "width": 15.201142,
+      "angle": 158.5,
+      "contrailSize": 15.201142,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-28, -84],
+      "length": 64.826546,
+      "width": 15.201142,
+      "angle": -158.5,
+      "contrailSize": 15.201142,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    67, -27.5,
+    108.5, -27.5,
+    109.5, -31.5,
+    130.5, -34.5,
+    89.5, -46.5,
+    65.5, -60.5,
+    90.5, -68,
+    44.5, -80,
+    29, -96,
+    -11.5, -96,
+    -46, -38.5,
+    -67.5, -49,
+    -121.5, -25,
+    -160, -16,
+    -130, -5,
+    -52, -8,
+    -52, 8,
+    -130, 5,
+    -160, 16,
+    -121.5, 25,
+    -67.5, 49,
+    -46, 38.5,
+    -11.5, 96,
+    29, 96,
+    44.5, 80,
+    90.5, 68,
+    65.5, 60.5,
+    89.5, 46.5,
+    130.5, 34.5,
+    109.5, 31.5,
+    108.5, 27.5,
+    67, 27.5,
+    63.5, 11.5,
+    53, 8.5,
+    53, -8.5,
+    63.5, -11.5
+  ]
 }
