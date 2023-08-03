@@ -13,10 +13,10 @@
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
-	"kol_ea_sparkle",
+    "kol_ea_sparkle",
     "ex_phase_coils",
     "kol_ea_mist",
-	"delicate"
+    "delicate"
   ],
   "weaponSlots": [
     {
@@ -32,18 +32,18 @@
       "id": "WS0002",
       "size": "SMALL",
       "type": "ENERGY",
-      "mount": "HARDPOINT",
-      "arc": 7,
-      "angle": 0,
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 45,
       "locations": [52, 35]
     },
     {
       "id": "WS0003",
       "size": "SMALL",
       "type": "ENERGY",
-      "mount": "HARDPOINT",
-      "arc": 7,
-      "angle": -0,
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -45,
       "locations": [52, -35]
     },
     {

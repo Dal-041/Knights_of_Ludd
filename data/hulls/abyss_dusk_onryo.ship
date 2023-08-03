@@ -15,7 +15,7 @@
     "phasefield",
     "delicate",
     "kol_ea_mist",
-	"kol_ea_sparkle"
+    "kol_ea_sparkle"
   ],
   "weaponSlots": [
     {
@@ -76,7 +76,7 @@
       "id": "WS0005",
       "size": "LARGE",
       "type": "UNIVERSAL",
-      "mount": "TURRET",
+      "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
       "locations": [4, -0]
