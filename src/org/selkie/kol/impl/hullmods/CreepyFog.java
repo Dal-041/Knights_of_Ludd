@@ -18,6 +18,8 @@ import static com.fs.starfarer.api.util.Misc.isPointInBounds;
 public class CreepyFog extends BaseHullMod {
 
     private final IntervalUtil interval = new IntervalUtil(0.1f, 0.15f);
+    private final Color rgbPos = new Color(90,160,222,60);
+    private final Color rgbNeg = new Color(145,85,115,60);
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -40,7 +42,7 @@ public class CreepyFog extends BaseHullMod {
                     0.5f,
                     0.5f,
                     MathUtils.getRandomNumberInRange(2.0f, 3.4f),
-                    new Color(42, 19, 56, 80)
+                    rgbPos
             );
 
             while (!CollisionUtils.isPointWithinBounds(point, ship)) {
@@ -55,7 +57,7 @@ public class CreepyFog extends BaseHullMod {
                     0.5f,
                     0.5f,
                     MathUtils.getRandomNumberInRange(2.0f, 3.4f),
-                    new Color(24, 255, 228, 40)
+                    rgbNeg
             );
         }
     }

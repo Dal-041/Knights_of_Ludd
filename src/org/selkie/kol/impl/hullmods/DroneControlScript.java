@@ -27,7 +27,7 @@ public class DroneControlScript extends BaseShipSystemScript {
     public static float MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD = 600f;
     private boolean findNewTargetOnUse;
 
-    protected IntervalUtil launchInterval = new IntervalUtil(0.75f, 1.25f);
+    protected IntervalUtil launchInterval = new IntervalUtil(1.25f, 1.75f); //(0.75f, 1.25f)
     protected IntervalUtil attractorParticleInterval = new IntervalUtil(0.05f, 0.1f);
     protected WeightedRandomPicker<WeaponSlotAPI> launchSlots = new WeightedRandomPicker<WeaponSlotAPI>();
     protected WeaponSlotAPI lock = null;
@@ -95,7 +95,8 @@ public class DroneControlScript extends BaseShipSystemScript {
             */
             int maxMotes = maxDrones;
             if (data.drones.size() < maxMotes && data.targetLock == null &&// false &&
-                    !ship.getFluxTracker().isOverloadedOrVenting()) {
+                    !ship.getFluxTracker().isOverloadedOrVenting() &&
+                    !ship.isPhased()) {
                 findDroneSlots(ship);
 
                 WeaponSlotAPI slot = launchSlots.pick();
