@@ -165,6 +165,60 @@
       "arc": 0,
       "angle": -133.5,
       "locations": [-50, -191]
+    },
+    {
+      "id": "WS0019",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 133.5,
+      "locations": [-50, 191.5]
+    },
+    {
+      "id": "WS0020",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -166,
+      "locations": [-62.5, -191.5]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 166,
+      "locations": [-62.5, 191.5]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -133.5,
+      "locations": [-50, -191.5]
+    },
+    {
+      "id": "WS0021",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 104,
+      "locations": [-48.5, 208]
+    },
+    {
+      "id": "WS0022",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -104,
+      "locations": [-48.5, -208]
     }
   ],
   "engineSlots": [
