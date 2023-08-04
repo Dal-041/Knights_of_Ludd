@@ -2,7 +2,7 @@
   "hullName": "Yukionna",
   "hullId": "abyss_boss_yukionna",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/abyss_boss_yukionna.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_boss_yukionna.png",
   "style": "ABYSS_DUSK_TECH",
   "height": 422,
   "width": 528,
@@ -11,13 +11,23 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 286.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "delicate",
+    "kol_ea_mist",
+    "kol_ea_sparkle"
+  ],
+  "builtInWeapons": {
+    "WS0017": "resonatormrm",
+    "WS0018": "resonatormrm"
+  },
   "weaponSlots": [
     {
       "id": "WS0002",
       "size": "MEDIUM",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 120,
+      "arc": 210,
       "angle": 45,
       "locations": [38, 93]
     },
@@ -26,7 +36,7 @@
       "size": "MEDIUM",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 120,
+      "arc": 210,
       "angle": -45,
       "locations": [38, -93]
     },
@@ -53,8 +63,8 @@
       "size": "MEDIUM",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 120,
-      "angle": 45,
+      "arc": 210,
+      "angle": 57.5,
       "locations": [-21, 76]
     },
     {
@@ -62,8 +72,8 @@
       "size": "MEDIUM",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 120,
-      "angle": -45,
+      "arc": 210,
+      "angle": -57.5,
       "locations": [-21, -76]
     },
     {
@@ -89,8 +99,8 @@
       "size": "LARGE",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 120,
-      "angle": 45,
+      "arc": 210,
+      "angle": 90,
       "locations": [-60, 102]
     },
     {
@@ -98,8 +108,8 @@
       "size": "LARGE",
       "type": "ENERGY",
       "mount": "TURRET",
-      "arc": 120,
-      "angle": -45,
+      "arc": 210,
+      "angle": -90,
       "locations": [-60, -102]
     },
     {
@@ -137,6 +147,24 @@
       "arc": 120,
       "angle": -45,
       "locations": [141, -59]
+    },
+    {
+      "id": "WS0017",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 133.5,
+      "locations": [-50, 191]
+    },
+    {
+      "id": "WS0018",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -133.5,
+      "locations": [-50, -191]
     }
   ],
   "engineSlots": [
