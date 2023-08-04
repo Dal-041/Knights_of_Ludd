@@ -16,7 +16,7 @@ public class kol_phasecloak extends BaseShipSystemScript {
     private static final Color JITTER_COLOR = new Color(15,150,255,255);
     private static final float JITTER_FADE_TIME = 0.5f;
     
-    private static final Map<HullSize, Float> mag = new HashMap<>();
+    private static final Map<HullSize, Float> mag = new HashMap();
     static {
         mag.put(ShipAPI.HullSize.FIGHTER, 60f);
         mag.put(ShipAPI.HullSize.FRIGATE, 60f);

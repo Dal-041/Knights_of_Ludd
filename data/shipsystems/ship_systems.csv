@@ -19,6 +19,6 @@ no really you should not be able to see these plz stop aaaaa,kol_flareslv,,,,,,,
 #flare shooty idfk,kol_flarejets,,,,,,,,,,1,5,1,5,,,,,,,,,,,,,graphics/icons/hullsys/maneuvering_jets.png
 Condemn,kol_drone_strike,,,,600,,,,,,0,0.05,0.2,0,,,,,,,,,,,,,graphics/icons/hullsys/drone_pd_high.png
 Drone Control,drone_control,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphics/icons/hullsys/reserve_deployment.png
-Phase Skip,kol_phase_skip,1,,,,,0.1,,,,0.1,1,0.1,6,,,TRUE,,TRUE,,,,TRUE,TRUE,graphics/icons/hullsys/displacer.png,,
-Slip Drive,kol_slip_drive,,,,,,0.08,,3,0.15,0.1,0.35,0,0.4,,TRUE,,TRUE,TRUE,,,,,,graphics/icons/hullsys/displacer.png,,
-Phase Cloak,kol_phasecloak,,,,,,,,,,0.5,,0.5,2,TRUE,,TRUE,TRUE,TRUE,,,,TRUE,,graphics/icons/hullsys/phase_cloak.png,,
+Phase Skip,kol_phase_skip,1,,,,,0.1,,,,0.1,1,0.1,6,,,TRUE,,TRUE,,,,TRUE,TRUE,,,graphics/icons/hullsys/displacer.png
+Slip Drive,kol_slip_drive,,,,,,0.08,,3,0.15,0.1,0.35,0,0.4,,TRUE,,TRUE,TRUE,,,,,,,,graphics/icons/hullsys/displacer.png
+Phase Cloak,kol_phasecloak,,,,,,,,,,0.5,,0.5,2,TRUE,,TRUE,TRUE,TRUE,,,,TRUE,,TRUE,,graphics/icons/hullsys/phase_cloak.png
