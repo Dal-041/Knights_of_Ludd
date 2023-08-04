@@ -18,8 +18,13 @@ import static com.fs.starfarer.api.util.Misc.isPointInBounds;
 public class CreepyFog extends BaseHullMod {
 
     private final IntervalUtil interval = new IntervalUtil(0.1f, 0.15f);
+    private final IntervalUtil interval2 = new IntervalUtil(0.4f, 0.75f);
     private final Color rgbPos = new Color(90,160,222,60);
     private final Color rgbNeg = new Color(145,85,115,60);
+    private final Color specialOne = new Color(54, 56, 19, 80);
+    private final Color specialTwo = new Color(24, 255, 228, 60);
+    private boolean useNormal = true;
+
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -49,16 +54,34 @@ public class CreepyFog extends BaseHullMod {
                 point = MathUtils.getRandomPointInCircle(ship.getLocation(), ship.getCollisionRadius() * 0.75f);
             }
 
-            engine.addNegativeNebulaParticle(
-                    point,
-                    MathUtils.getRandomPointInCircle(ZERO, 50f),
-                    MathUtils.getRandomNumberInRange(150f, 300f),
-                    0.3f,
-                    0.5f,
-                    0.5f,
-                    MathUtils.getRandomNumberInRange(2.0f, 3.4f),
-                    rgbNeg
-            );
+            if (useNormal && MathUtils.getRandom().nextInt() % 60 != 0) {
+                engine.addNegativeNebulaParticle(
+                        point,
+                        MathUtils.getRandomPointInCircle(ZERO, 50f),
+                        MathUtils.getRandomNumberInRange(150f, 300f),
+                        0.3f,
+                        0.5f,
+                        0.5f,
+                        MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                        rgbNeg
+                );
+            } else {
+                useNormal = false;
+                interval2.advance(amount);
+                if (interval2.intervalElapsed()) {
+                    useNormal = true;
+                }
+                engine.addNegativeNebulaParticle(
+                        point,
+                        MathUtils.getRandomPointInCircle(ZERO, 50f),
+                        MathUtils.getRandomNumberInRange(150f, 300f),
+                        0.25f,
+                        0.5f,
+                        0.5f,
+                        MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                        specialTwo
+                );
+            }
         }
     }
 }
