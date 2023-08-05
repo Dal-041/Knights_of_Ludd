@@ -8,11 +8,13 @@
 	"runScriptWhileIdle":true,  # this means unapply() never gets called
 	"blockActionsWhileChargingDown":false,
 	
+	"canNotCauseOverload":true,
+	
 	"phaseHighlight":"_glow1",
 	"phaseDiffuse":"_glow2",
 	
-	"effectColor1":[165,215,145,255],
-	"effectColor2":[125,155,115,150],
+	"effectColor1":[80,160,240,255],
+	"effectColor2":[5,120,180,150],
 	
 	"clampTurnRateAfter":true,
 	"clampMaxSpeedAfter":true,
@@ -27,7 +29,7 @@
 	"soundFilterGain":0.8,
 	"soundFilterGainHF":0.25,
 	
-	"shipAlpha":1,
+	"shipAlpha":1, # handled in stats script
 	#"shipAlpha":0.25,
 	
 	"useSound":"system_phase_cloak_activate",
