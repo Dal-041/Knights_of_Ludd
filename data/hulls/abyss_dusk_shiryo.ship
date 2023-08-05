@@ -141,7 +141,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-37.5, 28],
+      "location": [-29, 28],
       "length": 25,
       "width": 6,
       "angle": 180,
@@ -149,7 +149,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-37.5, -28],
+      "location": [-29, -28],
       "length": 25,
       "width": 6,
       "angle": -180,
@@ -157,7 +157,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-42.5, 19],
+      "location": [-29, 19],
       "length": 29.32288,
       "width": 7.594403,
       "angle": 176.5,
@@ -165,7 +165,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-42.5, -19],
+      "location": [-29, -19],
       "length": 29.32288,
       "width": 7.594403,
       "angle": -176.5,
@@ -173,7 +173,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-43.5, 12.5],
+      "location": [-29, 12.5],
       "length": 35,
       "width": 15,
       "angle": 180,
@@ -181,7 +181,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-43.5, -12.5],
+      "location": [-29, -12.5],
       "length": 35,
       "width": 15,
       "angle": -180,

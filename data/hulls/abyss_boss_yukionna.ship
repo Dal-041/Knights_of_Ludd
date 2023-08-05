@@ -8,7 +8,7 @@
   "width": 528,
   "center": [264, 211],
   "collisionRadius": 315.5,
-  "shieldCenter": [0, 0],
+  "shieldCenter": [-51, -0],
   "shieldRadius": 286.5,
   "viewOffset": 0,
   "builtInMods": [
@@ -239,104 +239,8 @@
       "style": "OMEGA"
     },
     {
-      "location": [-93, 192],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": 137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-93, -192],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": -137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-79, 180],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": 137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-79, -180],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": -137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-98, 164],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": 137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-98, -164],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": -137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-124, 65],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": 137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-124, -65],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": -137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-110, 77],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": 137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-110, -77],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": -137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-134, 71],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": 137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-134, -71],
-      "length": 0.706676,
-      "width": 0.049355,
-      "angle": -137,
-      "contrailSize": 0.049355,
-      "style": "OMEGA"
-    },
-    {
       "location": [-109.5, 25],
-      "length": 130.5,
+      "length": 76,
       "width": 16,
       "angle": 180,
       "contrailSize": 16,
@@ -344,7 +248,7 @@
     },
     {
       "location": [-109.5, -25],
-      "length": 130.5,
+      "length": 76,
       "width": 16,
       "angle": -180,
       "contrailSize": 16,

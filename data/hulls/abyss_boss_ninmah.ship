@@ -1,7 +1,7 @@
 {
   "hullName": "Ninmah",
   "hullId": "abyss_boss_ninmah",
-  "hullSize": "DESTROYER",
+  "hullSize": "CRUISER",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_boss_ninmah.png",
   "style": "ABYSS_DUSK_TECH",
   "height": 239,
