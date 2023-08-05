@@ -18,11 +18,11 @@ import static com.fs.starfarer.api.util.Misc.isPointInBounds;
 public class CreepyFog extends BaseHullMod {
 
     private final IntervalUtil interval = new IntervalUtil(0.1f, 0.15f);
-    private final IntervalUtil interval2 = new IntervalUtil(0.4f, 0.75f);
+    private final IntervalUtil interval2 = new IntervalUtil(0.35f, 0.6f);
     private final Color rgbPos = new Color(90,160,222,60);
     private final Color rgbNeg = new Color(145,85,115,60);
-    private final Color specialOne = new Color(54, 56, 19, 80);
-    private final Color specialTwo = new Color(24, 255, 228, 60);
+    private final Color specialOne = new Color(215, 30, 19, 60);
+    private final Color specialTwo = new Color(14, 220, 200, 60);
     private boolean useNormal = true;
 
 
@@ -73,13 +73,23 @@ public class CreepyFog extends BaseHullMod {
                 }
                 engine.addNegativeNebulaParticle(
                         point,
-                        MathUtils.getRandomPointInCircle(ZERO, 50f),
-                        MathUtils.getRandomNumberInRange(150f, 300f),
-                        0.25f,
+                        MathUtils.getRandomPointInCircle(ZERO, 35f),
+                        MathUtils.getRandomNumberInRange(75f, 200f),
+                        0.1f,
                         0.5f,
                         0.5f,
                         MathUtils.getRandomNumberInRange(2.0f, 3.4f),
                         specialTwo
+                );
+                engine.addNebulaParticle(
+                        point,
+                        MathUtils.getRandomPointInCircle(ZERO, 35f),
+                        MathUtils.getRandomNumberInRange(75f, 200f),
+                        0.1f,
+                        0.5f,
+                        0.5f,
+                        MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                        specialOne
                 );
             }
         }
