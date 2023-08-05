@@ -18,8 +18,8 @@
     "kol_ea_sparkle"
   ],
   "builtInWeapons": {
-    "WS0017": "resonatormrm",
-    "WS0018": "resonatormrm"
+    "WS0017": "abyss_boss_resonator",
+    "WS0018": "abyss_boss_resonator"
   },
   "weaponSlots": [
     {
@@ -274,7 +274,7 @@
       "location": [-48, 200.5],
       "length": 102.616173,
       "width": 21.440256,
-      "angle": 122.5,
+      "angle": 121,
       "contrailSize": 21.440256,
       "style": "OMEGA"
     },
@@ -282,24 +282,24 @@
       "location": [-48, -200.5],
       "length": 102.616173,
       "width": 21.440256,
-      "angle": -122.5,
+      "angle": -121,
       "contrailSize": 21.440256,
       "style": "OMEGA"
     },
     {
-      "location": [-45, 208.5],
-      "length": 89.089722,
-      "width": 23.918373,
-      "angle": 114,
-      "contrailSize": 23.918373,
+      "location": [-43, 205.5],
+      "length": 102.616173,
+      "width": 21.440256,
+      "angle": 113,
+      "contrailSize": 21.440256,
       "style": "OMEGA"
     },
     {
-      "location": [-45, -208.5],
-      "length": 89.089722,
-      "width": 23.918373,
-      "angle": -114,
-      "contrailSize": 23.918373,
+      "location": [-43, -205.5],
+      "length": 102.616173,
+      "width": 21.440256,
+      "angle": -113,
+      "contrailSize": 21.440256,
       "style": "OMEGA"
     }
   ],
