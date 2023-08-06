@@ -19,7 +19,9 @@
   ],
   "builtInWeapons": {
     "WS0003": "eis_nineng",
-    "WS0004": "eis_nineng"
+    "WS0004": "eis_nineng",
+    "WS0008": "abyss_deco_boss_ninaya_front",
+    "WS0009": "abyss_deco_boss_ninaya_bridge"
   },
   "weaponSlots": [
     {
@@ -47,7 +49,8 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [9, -0]
+      "locations": [9, -0],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0003",
@@ -111,6 +114,25 @@
       "arc": 5,
       "angle": 135,
       "locations": [19, 14]
+    },
+    {
+      "id": "WS0008",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [-9.5, 1]
+    },
+    {
+      "id": "WS0009",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [-10, 18],
+      "renderOrderMod": 200
     }
   ],
   "engineSlots": [
