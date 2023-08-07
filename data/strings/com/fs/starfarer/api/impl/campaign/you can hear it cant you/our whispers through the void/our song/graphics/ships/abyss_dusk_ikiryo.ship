@@ -1,0 +1,177 @@
+{
+  "hullName": "Ikiryo",
+  "hullId": "abyss_dusk_ikiryo",
+  "hullSize": "FRIGATE",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_dusk_ikiryo.png",
+  "style": "ABYSS_DUSK_TECH",
+  "height": 115,
+  "width": 116,
+  "center": [58, 72],
+  "collisionRadius": 92,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 89,
+  "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "delicate",
+    "kol_ea_mist",
+    "kol_ea_sparkle"
+  ],
+  "builtInWeapons": {
+    "WS0007": "abyss_deco_dusk_ikiryo_tl",
+    "WS0008": "abyss_deco_dusk_ikiryo_tr"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS 002",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [20, 23]
+    },
+    {
+      "id": "WS 003",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 0,
+      "locations": [20, -23]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [6, 29],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -45,
+      "locations": [6, -29],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 160,
+      "locations": [-13, 5]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -160,
+      "locations": [-13, -5]
+    },
+    {
+      "id": "WS0007",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [21, 21]
+    },
+    {
+      "id": "WS0008",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [21, -21]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-36, 8],
+      "length": 27.5,
+      "width": 4,
+      "angle": 176.5,
+      "contrailSize": 4,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-36, -8],
+      "length": 27.5,
+      "width": 4,
+      "angle": -176.5,
+      "contrailSize": 4,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-35, 13],
+      "length": 42.294697,
+      "width": 8.404433,
+      "angle": 174,
+      "contrailSize": 8.404433,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-35, -13],
+      "length": 42.294697,
+      "width": 8.404433,
+      "angle": -174,
+      "contrailSize": 8.404433,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-35, 19],
+      "length": 45.979999,
+      "width": 7.48,
+      "angle": 171,
+      "contrailSize": 7.48,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-35, -19],
+      "length": 45.981186,
+      "width": 7.478152,
+      "angle": -171,
+      "contrailSize": 7.478152,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    32, -14,
+    31.5, -32,
+    25.5, -33,
+    19.5, -39.5,
+    11, -34,
+    -1, -57,
+    -11, -57,
+    -31.5, -41.5,
+    -25, -23,
+    -36, -23,
+    -36, -8,
+    -70, -0,
+    -36, 8,
+    -36, 23,
+    -25, 23,
+    -24, 36.5,
+    -31.5, 41.5,
+    -11, 57,
+    -1, 57,
+    11, 34,
+    19.5, 39.5,
+    25.5, 33,
+    31.5, 32,
+    32, 14,
+    43, -0
+  ]
+}
