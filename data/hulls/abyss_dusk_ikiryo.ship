@@ -17,6 +17,10 @@
     "kol_ea_mist",
     "kol_ea_sparkle"
   ],
+  "builtInWeapons": {
+    "WS0007": "abyss_deco_dusk_ikiryo_tl",
+    "WS0008": "abyss_deco_dusk_ikiryo_tr"
+  },
   "weaponSlots": [
     {
       "id": "WS 002",
@@ -25,7 +29,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [22, 23]
+      "locations": [20, 23]
     },
     {
       "id": "WS 003",
@@ -34,7 +38,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [22, -23]
+      "locations": [20, -23]
     },
     {
       "id": "WS0003",
@@ -43,7 +47,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 45,
-      "locations": [6, 29]
+      "locations": [6, 29],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0004",
@@ -52,7 +57,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -45,
-      "locations": [6, -29]
+      "locations": [6, -29],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0001",
@@ -71,6 +77,24 @@
       "arc": 5,
       "angle": -160,
       "locations": [-13, -5]
+    },
+    {
+      "id": "WS0007",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [21, 21]
+    },
+    {
+      "id": "WS0008",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [21, -21]
     }
   ],
   "engineSlots": [
@@ -112,8 +136,7 @@
       "width": 7.48,
       "angle": 171,
       "contrailSize": 7.48,
-      "style": "HIGH_TECH",
-      "styleId": "ABYSS_EDF_ENG"
+      "style": "HIGH_TECH"
     },
     {
       "location": [-35, -19],
