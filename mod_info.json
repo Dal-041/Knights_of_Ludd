@@ -1,8 +1,8 @@
 {
 	"id":"abyss_knights", # internal id
 	"name":"Knights of Ludd", # displayed to the player
-	"author":"Selkie & Friends",
-	"version":"0.7",
+	"author":"Selkie & Dal",
+	"version":"0.8",
 	"description":"Adds the Knights of Ludd faction and content!",
     "gameVersion": "0.96",
 	"jars": ["jars/KnightsOfSelkie.jar"],
