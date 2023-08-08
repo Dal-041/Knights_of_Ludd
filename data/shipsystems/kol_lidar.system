@@ -3,7 +3,7 @@
 	"type":"STAT_MOD",
 	"aiType":"LIDAR_ARRAY",
 	
-	"statsScript":"org.selkie.kol.shipsystems.lidarStats",
+	"statsScript":"org.selkie.kol.shipsystems.LidarStats",
 
 	#"runScriptWhilePaused":true, # only for the player's ship
 	"runScriptWhileIdle":true, # unapply() never gets called

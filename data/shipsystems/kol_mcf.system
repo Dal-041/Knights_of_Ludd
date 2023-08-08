@@ -2,7 +2,7 @@
 	"id":"kol_mcf",
 	"type":"WEAPON",
 	"aiType":"CUSTOM",
-	"aiScript":"org.selkie.kol.shipsystems.AI.bratSystemAI",
+	"aiScript":"org.selkie.kol.shipsystems.AI.BratSystemAI",
 	
 	"weaponDataId":"kol_canister_flak",
 	"outOfUsesSound":"gun_out_of_ammo",

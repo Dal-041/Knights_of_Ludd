@@ -20,5 +20,5 @@
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,
 	"pixelsPerTexel":5.0,
-	"everyFrameEffect":"org.selkie.kol.weapons.heatEffect",
+	"everyFrameEffect":"org.selkie.kol.weapons.HeatEffect",
 }

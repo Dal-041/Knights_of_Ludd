@@ -4,7 +4,7 @@
   "projectileSpecId": "hephag_shot",
   "type": "BALLISTIC",
   "size": "LARGE",
-  "everyFrameEffect": "org.selkie.kol.weapons.caelia",
+  "everyFrameEffect": "org.selkie.kol.weapons.Caelia",
   "displayArcRadius": 450,
   "turretSprite": "graphics/weapons/kol_caelia_turret_base.png",
   "turretGunSprite": "graphics/weapons/kol_caelia_turret_recoil.png",

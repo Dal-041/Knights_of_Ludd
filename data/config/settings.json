@@ -16,6 +16,11 @@
 			"abyss_dusk_ayakashi_balance_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
 			"abyss_dusk_onryo_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 			"abyss_dusk_onryo_P_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
-		}
+		},
+		"terrain":{
+			"nebula_kol_black":"graphics/terrain/nebula_kol_black.png",
+			"nebula_kol_black_map":"graphics/terrain/nebula_kol_black_map.png",
+
+		},
 	}
 }

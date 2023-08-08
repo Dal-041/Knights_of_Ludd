@@ -4,7 +4,7 @@
   "projectileSpecId": "mark9_shot",
   "type": "BALLISTIC",
   "size": "LARGE",
-  "everyFrameEffect": "org.selkie.kol.weapons.caelia",
+  "everyFrameEffect": "org.selkie.kol.weapons.Caelia",
   "turretSprite": "graphics/weapons/kol_llyr_turret_base.png",
   "turretGunSprite": "graphics/weapons/kol_llyr_turret_recoil.png",
   "hardpointSprite": "graphics/weapons/kol_llyr_hardpoint_base.png",

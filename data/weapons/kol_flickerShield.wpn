@@ -16,5 +16,5 @@
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,
 	"pixelsPerTexel":5.0,
-	"everyFrameEffect":"org.selkie.kol.weapons.shieldEffect",
+	"everyFrameEffect":"org.selkie.kol.weapons.ShieldEffect",
 }
