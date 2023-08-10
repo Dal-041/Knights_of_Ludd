@@ -1,0 +1,141 @@
+{
+  "hullName": "Mul-Guishin",
+  "hullId": "abyss_dawn_mulguishin",
+  "hullSize": "DESTROYER",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_dawn_mulguishin.png",
+  "style": "ABYSS_DAWN_TECH",
+  "height": 157,
+  "width": 100,
+  "center": [50, 78.5],
+  "collisionRadius": 101,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 91.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [8.5, 29]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [8.5, -29]
+    },
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HIDDEN",
+      "arc": 7,
+      "angle": 0,
+      "locations": [2.5, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-59.5, 26.5],
+      "length": 58.400002,
+      "width": 26.15,
+      "angle": 177,
+      "contrailSize": 26.15,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-59.5, -26.5],
+      "length": 58.400002,
+      "width": 26.15,
+      "angle": -177,
+      "contrailSize": 26.15,
+      "style": "CUSTOM",
+      "styleId": "KOL_ENG"
+    },
+    {
+      "location": [-51.5, 5],
+      "length": 54.869457,
+      "width": 15.917632,
+      "angle": 178.5,
+      "contrailSize": 15.917632,
+      "style": "CUSTOM",
+      "styleId": "KOL_ENG"
+    },
+    {
+      "location": [-51.5, -5],
+      "length": 54.869457,
+      "width": 15.917632,
+      "angle": -178.5,
+      "contrailSize": 15.917632,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-67.5, 26.5],
+      "length": 64.176094,
+      "width": 15.739004,
+      "angle": 177,
+      "contrailSize": 15.739004,
+      "style": "CUSTOM",
+      "styleId": "ABYSS_DAWN_ENG"
+    },
+    {
+      "location": [-67.5, -26.5],
+      "length": 64.176094,
+      "width": 15.739004,
+      "angle": -177,
+      "contrailSize": 15.739004,
+      "style": "CUSTOM",
+      "styleId": "ABYSS_DAWN_ENG"
+    },
+    {
+      "location": [-57.5, 5],
+      "length": 59.623585,
+      "width": 7.881174,
+      "angle": 178.5,
+      "contrailSize": 7.881174,
+      "style": "CUSTOM",
+      "styleId": "ABYSS_DAWN_ENG"
+    },
+    {
+      "location": [-57.5, -5],
+      "length": 59.623585,
+      "width": 7.881174,
+      "angle": -178.5,
+      "contrailSize": 7.881174,
+      "style": "CUSTOM",
+      "styleId": "ABYSS_DAWN_ENG"
+    }
+  ],
+  "bounds": [
+    20.5, -5.5,
+    75.5, -6,
+    76.5, -22,
+    25.5, -22,
+    25.5, -32,
+    5.5, -49,
+    -16.5, -33,
+    -32.5, -33,
+    -45.5, -44,
+    -62.5, -34,
+    -62.5, -18,
+    -51.5, -14,
+    -51.5, 14,
+    -62.5, 18,
+    -62.5, 34,
+    -45.5, 44,
+    -32.5, 33,
+    -16.5, 33,
+    5.5, 49,
+    25.5, 32,
+    25.5, 22,
+    76.5, 22,
+    75.5, 6,
+    20.5, 5.5
+  ]
+}

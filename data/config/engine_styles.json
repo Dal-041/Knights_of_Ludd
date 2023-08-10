@@ -44,5 +44,17 @@
 		"contrailCampaignColor":[255,50,50,75],
 		"type":"GLOW" # GLOW or SMOKE
 	},
+	"ABYSS_DAWN_ENG":{
+		"engineColor":[100, 214, 98,155],
+		"engineCampaignColor":[100, 214, 98,155],
+		"contrailParticleSizeMult":0,
+		"contrailParticleDuration":0,
+		"contrailParticleFinalSizeMult":0,
+		"contrailMaxSpeedMult":0.5,
+		"contrailAngularVelocityMult":0.5,
+		"contrailColor":[50,50,50,50],
+		"contrailCampaignColor":[63, 104, 29,75],
+		"type":"SMOKE"
+	},
 }
 

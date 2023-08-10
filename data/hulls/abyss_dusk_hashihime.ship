@@ -17,6 +17,15 @@
     "kol_ea_mist",
     "kol_ea_sparkle"
   ],
+  "builtInWeapons": {
+    "WS0005": "abyss_dusk_lrsr",
+    "WS0006": "abyss_dusk_lrsr",
+    "WS0014": "abyss_deco_dusk_hashihime_front",
+    "WS0015": "abyss_deco_dusk_hashihime_tl",
+    "WS0018": "abyss_deco_dusk_hashihime_tr",
+    "airbrakeL": "abyss_deco_dusk_hashihime_ml",
+    "airbrakeR": "abyss_deco_dusk_hashihime_mr"
+  },
   "weaponSlots": [
     {
       "id": "WS0003",
@@ -38,19 +47,19 @@
     },
     {
       "id": "WS0005",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "BUILT_IN",
-      "mount": "HARDPOINT",
-      "arc": 0,
+      "mount": "HIDDEN",
+      "arc": 45,
       "angle": 0,
       "locations": [64, 16]
     },
     {
       "id": "WS0006",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "BUILT_IN",
-      "mount": "HARDPOINT",
-      "arc": 0,
+      "mount": "HIDDEN",
+      "arc": 45,
       "angle": -0,
       "locations": [64, -16]
     },
@@ -152,6 +161,52 @@
       "arc": 210,
       "angle": -135,
       "locations": [-92, -27]
+    },
+    {
+      "id": "WS0014",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 0,
+      "locations": [16.5, -0],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0015",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 0,
+      "locations": [39, 70]
+    },
+    {
+      "id": "WS0018",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -0,
+      "locations": [39, -70]
+    },
+    {
+      "id": "airbrakeL",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 0,
+      "locations": [-3, 96]
+    },
+    {
+      "id": "airbrakeR",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -0,
+      "locations": [-3, -96]
     }
   ],
   "engineSlots": [

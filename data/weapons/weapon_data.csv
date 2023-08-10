@@ -30,12 +30,20 @@ EIS Blinker White Long,eis_blinker_white30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM
 ,abyss_deco_boss_ninaya_bridge,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,abyss_deco_dusk_ikiryo_tl,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,abyss_deco_dusk_ikiryo_tr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,abyss_deco_dusk_hashihime_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,abyss_deco_dusk_hashihime_tr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,abyss_deco_dusk_hashihime_tl,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,abyss_deco_dusk_hashihime_mr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,abyss_deco_dusk_hashihime_ml,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+mdCap,abyss_deco_dawn_engL,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
+lgCap,abyss_deco_dawn_engM,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #BUILT_IN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Pusher Plate (Low Tech But Slightly Smaller Haha Lol XDd),kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
 Pusher Plate (Low Tech But It's Really Really Smol And Cute),kol_pusherplate_lt_but_cute,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+Long-Range Shock Repeater,abyss_dusk_lrsr,3,,0,500,,50,200,0,100,0,,,,ENERGY,25,,0,0.5,1,,,,,,,10000,,,,,25,PD,"PD14, no_drop, no_drop_salvage",,Unknown,,Point Defense,,,,Perfect,Fires an EMP arc at the nearest target close to the weapon's current facing. The arc always hits.,,,,,
 Lunete Thermal Lance,kol_lunete,1,,250,1400,,850,,15,30,0,1,0.05,,HIGH_EXPLOSIVE,0,,0,1,1,,0,0,0,0,,35,35,2.5,450,,,SYSTEM,"damage_special, damage_soft_flux, no_drop, no_drop_salvage",,,,Assault / Finisher,Slow,None,,,"The missile fires a high-powered laser when it gets near the target, dealing approximately %s energy damage in a short burst. This damage is affected by missile damage modifiers and not energy weapon ones.",3400,,,TRUE,11.9
  Lunete - Payload,kol_lunete_payload,1,,0,1400,850,,,,30,0,,,,HIGH_EXPLOSIVE,0,,0.25,0.25,2,1,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS","fires_one_burst, no_drop, no_drop_salvage",,,,,,,,,,,,,,11.91
 Lunete Targeting Laser,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,ENERGY,,0,0.05,0.05,0.1,0.05,,,,,1000000,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Special,,,,,,,,,,50

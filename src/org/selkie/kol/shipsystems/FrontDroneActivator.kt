@@ -116,4 +116,5 @@ class FrontalShieldDroneActivator(ship:ShipAPI) : DroneActivator(ship) {
                 }
             }
         }
+
     }

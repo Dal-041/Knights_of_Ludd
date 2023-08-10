@@ -73,12 +73,20 @@ Tamamo,abyss_edf_tamamo,Experimental Superfrigate,Elysia Automata,burndrive,20,1
 Ikiryo,abyss_dusk_ikiryo,Exalted Phase Frigate,Dusk,entropyamplifier,13,1500,400,3000,,400,50,,165,120,100,60,120,200,PHASE,kol_phasecloak,90,,,0.03,0.04,5,10,25,50,1,50,10,42000,10,30,180,0.25,10,10,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.5,2,2,,
 #DESTROYERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Shiryo,abyss_dusk_shiryo,Exalted Phase Destroyer,Dusk,acausaldisruptor,15,4000,650,5000,,500,80,,100,75,50,30,30,400,PHASE,kol_phasecloak,90,,,0.05,0.04,25,50,60,100,2,50,9,120000,5,30,300,0.25,18,18,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.5,2,3,,314
+#Inmyeonjo,abyss_dawn_inmyeonjo,Harmony,Dawntide,maneuveringjets,12,5500,900,5000,,300,100,,85,75,50,30,50,500,OMNI,,150,0.4,0.6,,,0,0,80,60,2,30,10,50000,5,15,420,0.25,11,11,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","remnant, auto_rec",,0.5,2,3,,
 #CRUISERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Funayurei,abyss_dusk_funayurei,Exalted Destroyer,Dusk,acausaldisruptor,14,4000,650,7000,,700,110,,80,60,40,30,30,400,FRONT,,300,0.2,0.7,0.05,0.04,25,50,60,100,2,50,9,120000,5,20,300,0.25,20,20,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.5,2,3,,314
 Onryo,abyss_dusk_onryo,Exalted Cruiser,Dusk,kol_slip_drive,22,9500,1300,12000,,900,170,,75,55,40,20,25,1200,FRONT,,120,0.2,0.7,0.05,0.05,50,100,120,150,3,50,8,250000,4,20,420,0.25,35,35,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.5,2,3,,
 Hashihime,abyss_dusk_hashihime,Exalted Phase Cruiser,Dusk,mine_strike,22,7000,1250,10500,,925,155,,75,55,40,20,25,1200,PHASE,kol_phasecloak,,,,0.05,0.05,50,100,120,150,3,50,8,250000,4,30,420,0.25,35,35,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.5,2,3,,
+#Dal-Gyal-Guishin,abyss_dawn_dalgyalguishin,Faceless Void,Dawntide,maneuveringjets,16,8000,900,10000,,600,140,,60,35,30,20,25,2000,OMNI,,270,0.4,0.6,,,0,0,120,90,3,30,9,140000,5,15,540,0.25,25,25,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","remnant, auto_rec",,0.5,2,3,,
+#Imugi,abyss_dawn_imugi,Great Serpent,Dawntide,reservewing,18,12000,1100,12000,,550,150, ,50,35,30,12,20,3000,FRONT,,180,0.4,0.6,,,0,0,120,90,3,30,9,170000,5,15,540,0.25,30,30,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","remnant, auto_rec",,0.5,2,3,,
 #CAPITALS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ayakashi,abyss_dusk_ayakashi,Exalted Battleship,Dusk,kol_phase_skip,30,16000,1100,24000,,1000,340,2,40,30,20,8,10,3300,FRONT,,90,0.3,0.7,,,200,400,500,500,10,30,7,750000,4,20,720,0.25,50,50,,HIDE_IN_CODEX,0.8,0.6,2,5,,,,,,,,
+Cheonyeo-Guishin,abyss_dawn_cheonyeoguishin,Unloved,Dawntide,microburn,32,22000,1750,17000,,600,360,,25,10,10,4,4,3500,FRONT,,180,0.4,1,,,750,1500,300,400,15,27,7,350000,3,12,720,0.25,40,40,,,,,,,,"rare_bp, merc",,0.4,2,4,,
+#Kangcheori,abyss_dawn_kangcheori,Calamity,Dawntide,reservewing,32,2000,1650,12000,,500,300,4,30,15,15,6,6,3500,FRONT,,180,0.4,1,,,700,1500,300,300,15,20,7,375000,3,12,720,0.25,40,40,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT","rare_bp, merc",,0.4,2,4,,507
+Samjok-o,abyss_dawn_samjoko,Sun,Dawntide,ammofeed,38,26500,1750,17000,,600,360,,25,10,10,4,4,3500,FRONT,,180,0.4,1,,,750,1500,300,400,15,27,7,350000,3,12,720,0.25,40,40,,,,,,,,"rare_bp, merc",,0.4,2,4,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+#Dokkaebi,abyss_dawn_dokkaebi,Fateweaver,Dawntide,lidararray,60,40000,2250,30000,,3250,500,3,15,7.5,5,6,3,6000,FRONT,,360,0.666,2,,,0,0,500,400,20,,5,799999,2,12,840,0.25,65,65,HIDE_IN_CODEX,restricted,0,0.9,8,13,,,,,,,,
 #UNIQUE BOSS SHIPS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ninaya,abyss_boss_ninaya,Prototype,High Tech,phaseteleporter,20,2500,250,8000,,500,70,,130,190,165,60,120,325,FRONT,,300,0.6,0.55,,,1,1,7,10,1,15,11,150000,8,50,120,0.25,22,22,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",0.5,0.75,2,2,,
 Ninmah,abyss_boss_ninmah,Prototype,High Tech,acausaldisruptor,27,5500,1250,11000,,900,130,,75,55,40,20,25,1200,PHASE,kol_phasecloak,,,,0.03,0.03,75,125,100,125,2,50,9,350000,4,50,420,0.25,35,35,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.5,2,3,,
