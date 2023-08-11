@@ -11,6 +11,7 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 259,
   "viewOffset": 0,
+  "builtInMods": ["advancedcore"],
   "builtInWeapons": {
     "WS0013": "abyss_deco_dawn_engL",
     "WS0014": "abyss_deco_dawn_engM",
@@ -129,37 +130,37 @@
     {
       "id": "WS0014",
       "size": "SMALL",
-      "type": "BUILT_IN",
+      "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 262,
+      "arc": 210,
       "angle": 60,
       "locations": [62, 222]
     },
     {
       "id": "WS0016",
       "size": "SMALL",
-      "type": "BUILT_IN",
+      "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 262,
+      "arc": 210,
       "angle": -60,
       "locations": [62, -222]
     },
     {
       "id": "WS0013",
       "size": "SMALL",
-      "type": "BUILT_IN",
+      "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 210,
-      "angle": 135,
+      "arc": 130,
+      "angle": 150,
       "locations": [-63, 155]
     },
     {
       "id": "WS0017",
       "size": "SMALL",
-      "type": "BUILT_IN",
+      "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 210,
-      "angle": -135,
+      "arc": 130,
+      "angle": -150,
       "locations": [-63, -155]
     },
     {
