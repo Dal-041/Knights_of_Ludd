@@ -6,6 +6,7 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.combat.MoteControlScript;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.hullmods.SparkleHullMod;
 
 import java.awt.*;
 
@@ -26,9 +27,13 @@ public class SparkleOnHitEffect implements OnHitEffectPlugin {
 				boolean piercedShield = shieldHit && (float) Math.random() < pierceChance;
 				
 				if (!shieldHit || piercedShield) {
-					float emp = SparkleControlScript.getAntiShipEMP(source);
-					float dam = SparkleControlScript.getAntiShipDamage(source); // this should be 1 for regular and 300 for high-frequency
-					
+					float emp = projectile.getEmpAmount();
+					float dam = 1f;
+					if (ship.getCustomData().containsKey("HF_SPARKLE")) {
+						dam = SparkleHullMod.shipDamageReg;; // 1
+					} else {
+						dam = SparkleHullMod.shipDamageHF;; // 300
+					}
 					engine.spawnEmpArcPierceShields(source, point, target, target,
 									   projectile.getDamageType(), 
 									   dam,

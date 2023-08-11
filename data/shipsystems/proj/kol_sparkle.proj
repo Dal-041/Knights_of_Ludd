@@ -1,5 +1,5 @@
 {
-	"id":"mote",
+	"id":"kol_sparkle",
 	"specClass":"missile",	
 	"missileType":"MOTE",
 	"onHitEffect":"org.selkie.kol.impl.combat.SparkleOnHitEffect",
@@ -13,7 +13,7 @@
 	"flameoutTime":1, # total time from flameout to full fadeout
 	"noEngineGlowTime":0.5, # time spent without the engine glow being rendered
 	"fadeTime":0.5, # fadeout duration
-	"glowColor":[100,165,255,125],
+	"glowColor":[100,165,255,75],
 	#"collisionClassAfterFlameout":"MISSILE_NO_FF",
 	#"behaviorSpec":{"behavior":"CUSTOM",
 	#				"effectRange":300,
