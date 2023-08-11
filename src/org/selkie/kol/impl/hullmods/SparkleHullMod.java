@@ -208,7 +208,7 @@ public class SparkleHullMod extends BaseHullMod {
 //            ArrayList<MissileAPI> newSparklies = new ArrayList<>();
             for (int i = 0; i < data.drones.size(); i++) {
                 MissileAPI orig = data.drones.get(i);
-                //orig.setDamageAmount(shipDamageReg);
+                orig.setDamageAmount(shipDamageReg);
 //                String weaponId = WEAPON;
 //                MissileAPI newDrone = (MissileAPI) engine.spawnProjectile(ship, null,
 //                        weaponId,
