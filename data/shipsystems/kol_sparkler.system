@@ -1,0 +1,20 @@
+{
+	"id":"kol_sparkler",
+	"type":"PHASE_CLOAK",
+	"aiType":"PHASE_CLOAK",
+	
+	"runScriptWhileIdle":true,
+	"canUseWhileRightClickSystemOn":true,
+	
+	"statsScript":"org.selkie.kol.impl.combat.SparkleControlScript",
+	
+	"useSound":"mote_attractor_system_activated",
+	"outOfUsesSound":"gun_out_of_ammo",
+	
+	"aiHints":{
+	}
+}
+
+
+
+

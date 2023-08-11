@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.hullmods;
+package org.selkie.kol.impl.combat;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.hullmods.SparkleHullMod;
 import org.selkie.kol.impl.hullmods.SparkleHullMod.SharedAIData;
 import java.util.ArrayList;
 import java.util.HashMap;

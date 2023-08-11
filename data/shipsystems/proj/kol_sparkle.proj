@@ -2,7 +2,7 @@
 	"id":"mote",
 	"specClass":"missile",	
 	"missileType":"MOTE",
-	"onHitEffect":"com.fs.starfarer.api.impl.combat.MoteOnHitEffect",
+	"onHitEffect":"org.selkie.kol.impl.combat.SparkleOnHitEffect",
 	"sprite":"graphics/missiles/bomblet0.png",
 	"size":[4,4],	
 	"center":[2,2],

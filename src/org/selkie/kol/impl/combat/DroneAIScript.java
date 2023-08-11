@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.hullmods;
+package org.selkie.kol.impl.combat;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
@@ -9,13 +9,14 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.hullmods.DroneControlScript;
-import org.selkie.kol.impl.hullmods.DroneControlScript.SharedDroneAIData;
+import org.selkie.kol.impl.combat.SparkleControlScript;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
+import static org.selkie.kol.impl.combat.SparkleControlScript.getDroneSharedData;
 
 public class DroneAIScript implements MissileAIPlugin {
 
@@ -47,14 +48,14 @@ public class DroneAIScript implements MissileAIPlugin {
 	protected List<CombatEntityAPI> hardAvoidList = new ArrayList<CombatEntityAPI>();
 	protected float r;
 	protected CombatEntityAPI target;
-	protected SharedDroneAIData data;
+	protected SparkleControlScript.SharedSparkleAIData data;
 
 	public DroneAIScript(MissileAPI missile) {
 		this.missile = missile;
 		r = (float) Math.random();
 		elapsed = -(float) Math.random() * 0.5f;
 		
-		data = DroneControlScript.getDroneSharedData(missile.getSource());
+		data = getDroneSharedData(missile.getSource());
 
 		this.OFFSET = (float)(Math.random() * 3.1415927410125732 * 2.0);
 
@@ -326,8 +327,8 @@ public class DroneAIScript implements MissileAIPlugin {
 		int owner = missile.getOwner();
 		
 		int maxMotesPerMissile = 2;
-		float maxDistFromSourceShip = DroneControlScript.MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD;
-		float maxDistFromAttractor = DroneControlScript.MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD;
+		float maxDistFromSourceShip = SparkleControlScript.MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD;
+		float maxDistFromAttractor = SparkleControlScript.MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD;
 		
 		float minDist = Float.MAX_VALUE;
 		CombatEntityAPI closest = null;

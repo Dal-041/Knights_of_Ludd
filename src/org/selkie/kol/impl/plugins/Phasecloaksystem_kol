@@ -1,0 +1,402 @@
+//
+// Source code recreated from a .class file by IntelliJ IDEA
+// (powered by FernFlower decompiler)
+//
+
+/*
+package org.selkie.kol.impl.plugins;
+
+import com.fs.graphics.Sprite;
+import com.fs.starfarer.Object;
+import com.fs.starfarer.api.combat.CombatEngineLayers;
+import com.fs.starfarer.api.combat.PhaseCloakSystemAPI;
+import com.fs.starfarer.api.combat.ShipSystemAPI;
+import com.fs.starfarer.api.combat.ShipSystemAPI.SystemState;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
+import com.fs.starfarer.combat.CombatEngine;
+import com.fs.starfarer.combat.CombatViewport;
+import com.fs.starfarer.combat.E.B;
+import com.fs.starfarer.combat.E.super.C;
+import com.fs.starfarer.combat.ai.N;
+import com.fs.starfarer.combat.entities.Ship;
+import com.fs.starfarer.combat.entities.terrain.Asteroid;
+import com.fs.starfarer.combat.systems.F;
+import com.fs.starfarer.loading.specs.Q;
+import com.fs.starfarer.loading.specs.g;
+import com.fs.starfarer.loading.specs.oO0O;
+import com.fs.starfarer.prototype.Utils;
+import com.fs.starfarer.renderers.JitterRenderer;
+import com.fs.starfarer.util.IntervalTracker;
+import java.util.ArrayList;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector2f;
+
+public class kol_phasecloaksystem extends F implements PhaseCloakSystemAPI {
+private boolean õÓ0000 = false;
+private boolean OÔ0000 = true;
+private IntervalTracker ÓÔ0000 = new IntervalTracker(0.05F, 0.1F);
+private Sprite spr; //Highlight
+private Sprite ÖÔ0000; //Diffuse
+private List<o> ray = new ArrayList();
+private JitterRenderer öÓ0000 = new JitterRenderer();
+private float ÔÔ0000 = 0.016666668F;
+private boolean oÔ0000 = false;
+private B ØÓ0000 = null;
+private Vector2f vec = null;
+private float nul = 0.0F;
+
+public kol_phasecloaksystem(Ship var1, oO0O var2) {
+        super(var1, var2);
+        this.Obj();
+        this.layers = EnumSet.of(CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER);
+        spr = new Sprite(var2.getPhaseHighlightSpriteName(var1.getSpec().getHullSpec()));
+        ÖÔ0000 = new Sprite(var2.getPhaseDiffuseSpriteName(var1.getSpec().getHullSpec()));
+        Q var3 = var1.getSpec().getHullSpec().getSpriteSpec();
+        this.spr.setCenter(var3.Õ00000(), var3.Ò00000());
+        this.spr.setSize(var3.ô00000(), var3.o00000());
+        this.ÖÔ0000.setCenter(var3.Õ00000(), var3.Ò00000());
+        this.ÖÔ0000.setSize(var3.ô00000(), var3.o00000());
+        }
+
+private void Obj() {
+        g var1 = this.ship.getSpec().getHullSpec();
+        float var2 = this.ship.getStats().getPhaseCloakActivationCostBonus().computeEffective(var1.getShieldSpec().getPhaseCost());
+        float var3 = this.ship.getStats().getPhaseCloakUpkeepCostBonus().computeEffective(var1.getShieldSpec().getPhaseUpkeep());
+        this.chargeTracker.Õ00000(var2);
+        this.chargeTracker.Object(var3);
+        }
+
+public B getNearestUnsafe() {
+        return this.ØÓ0000;
+        }
+
+public void advanceEvenIfPaused() {
+        super.advanceEvenIfPaused();
+        }
+
+public void advanceImpl(float var1) {
+        this.Obj();
+        this.ÔÔ0000 = var1;
+        if (var1 != 0.0F) {
+        this.öÓ0000.updateSeed();
+        }
+
+        if (this.isActive()) {
+        float var2 = this.getEffectLevel();
+        float var3 = this.spec.getPhaseChargedownVulnerabilityFraction();
+        if (this.chargeTracker.Object() != SystemState.OUT && !this.getSpec().isFiringAllowed() && this.ship.getSystem() != null && this.ship.getSystem().isActive() && (this.ship.getSystem().getSpec().isToggle() || this.ship.getSystem().getSpec().getThreatAmount() > 0.0F) && this.ship.getSystem() != this && !this.ship.getSystem().getSpec().isCanUseWhileRightClickSystemOn()) {
+        this.ship.getSystem().getChargeTracker().Ò00000();
+        }
+
+        this.oÔ0000 = false;
+        o var4 = new o(new Vector2f(this.ship.getLocation()), this.ship.getFacing(), (o)null);
+        this.new.Object.add(0, var4);
+        if (this.new.Object.size() > 7) {
+        this.new.Object.remove(this.new.Object.size() - 1);
+        }
+
+        this.ÓÔ0000.advance(var1);
+        if (this.ÓÔ0000.intervalElapsed()) {
+        this.OÔ0000 = return(ship.getLocation());
+        }
+
+        ShipSystemAPI.SystemState var5 = this.chargeTracker.Object();
+        float var6 = this.ship.getFluxLevel();
+        if (this.chargeTracker.Ø00000() < 0.0F) {
+        var6 = 1.0F - var6;
+        }
+
+        if (this.ØÓ0000 != null && var6 > 0.5F) {
+        float var7 = Utils.Ø00000(this.ship.getLocation(), this.ØÓ0000.getLocation());
+        float var8 = (this.ship.getCollisionRadius() + this.ØÓ0000.getCollisionRadius()) * 0.5F;
+        float var9 = 1.0F - var7 / var8;
+        var9 *= var9;
+        var9 *= 20.0F;
+        if (var9 < 0.0F) {
+        var9 = 0.0F;
+        }
+
+        float var10 = var1 * Math.max(0.0F, var6 - 0.67F) * 1.0F * var9;
+        if (var10 < 0.0F) {
+        var10 = 0.0F;
+        }
+
+        C.o00000(this.ship, this.ØÓ0000, var10);
+        }
+
+        this.õÓ0000 = true;
+        this.õÓ0000 = true;
+        } else if (this.õÓ0000) {
+        this.õÓ0000 = false;
+        this.new.Object.clear();
+        }
+
+        }
+
+public void useSystem() {
+        }
+
+public void systemActivated() {
+        super.systemActivated();
+        }
+
+public void systemDeactivated() {
+        super.systemDeactivated();
+        }
+
+public void failedToDeactivate() {
+        super.failedToDeactivate();
+        }
+
+private Vector2f Õ00000(Vector2f var1) {
+        if (this.ret(var1)) {
+        return var1;
+        } else {
+        float var2 = this.ship.getCollisionRadius();
+        WeightedRandomPicker var3 = new WeightedRandomPicker();
+
+        for(float var4 = 1.0F; var4 <= 5.0F; ++var4) {
+        for(float var5 = 0.0F; var5 < 360.0F; var5 += 30.0F) {
+        Vector2f var6 = Utils.Object(var5);
+        var6.scale(var2 * var4);
+        Vector2f.add(var1, var6, var6);
+        var3.add(var6);
+        if (this.return(var6)) {
+        return var6;
+        }
+        }
+        }
+
+        if (var3.isEmpty()) {
+        return var1;
+        } else {
+        return (Vector2f)var3.pick();
+        }
+        }
+        }
+
+private boolean ret(Vector2f var1) {
+        this.ØÓ0000 = null;
+        boolean var2 = true;
+        float var3 = Float.MAX_VALUE;
+        float var4 = this.ship.getCollisionRadius();
+        List var5 = CombatEngine.getInstance().getObjects().getList(Ship.class);
+        Iterator var7 = var5.iterator();
+
+        while(var7.hasNext()) {
+        Ship var6 = (Ship)var7.next();
+        if (!var6.isShuttlePod() && !var6.isFighter() && this.ship != var6 && !N.String(this.ship, var6)) {
+        float var8 = Utils.Ø00000(var1, var6.getLocation());
+        if (var8 < (var6.getCollisionRadius() + var4) * 0.85F && var8 < var3) {
+        this.ØÓ0000 = var6;
+        var3 = var8;
+        }
+
+        if (var8 < (var6.getCollisionRadius() + var4) * 0.35F) {
+        var2 = false;
+        }
+        }
+        }
+
+        if (!var2) {
+        return false;
+        } else {
+        List var10 = CombatEngine.getInstance().getObjects().getList(Asteroid.class);
+        Iterator var12 = var10.iterator();
+
+        while(var12.hasNext()) {
+        Asteroid var11 = (Asteroid)var12.next();
+        if (!var11.isFromRing()) {
+        float var9 = Utils.Ø00000(var1, var11.getLocation());
+        if (var9 < (var11.getCollisionRadius() + var4) * 0.85F && var9 < var3) {
+        this.ØÓ0000 = var11;
+        var3 = var9;
+        }
+
+        if (var9 < (var11.getCollisionRadius() + var4) * 0.5F) {
+        var2 = false;
+        }
+        }
+        }
+
+        return var2;
+        }
+        }
+
+public boolean raiseFlux(float var1, boolean var2) {
+        float var3 = this.ship.getCurrFlux();
+        boolean var4 = super.raiseFlux(var1, var2);
+        if (!var4 && var3 + var1 > this.ship.getFluxCapacity() && !this.spec.isCanNotCauseOverload()) {
+        this.ship.getFluxTracker().beginOverload(0.0F);
+        this.ship.getFluxTracker().playOverloadSound();
+        this.ship.getFluxTracker().showOverloadFloatyIfNeeded();
+        if (this.ship.getFluxTracker().showFloaty()) {
+        Vector2f var5 = this.ship.getLocation();
+        CombatEngine.getInstance().getFloatingTextManager().super(var5.x, var5.y + 40.0F, "Overload!", this.ship.getFluxTracker().getFloatySize(), Object.oo0000, this.ship, (B)null).super(4.0F, 2000.0F);
+        }
+        }
+
+        return var4;
+        }
+
+public boolean canBeDeactivated() {
+        return this.ship.isFighter() || this.ship.isDrone() || this.OÔ0000 || this.ship.getFluxTracker().isOverloadedOrVenting();
+        }
+
+public float getMinCoilJitterLevel() {
+        return 0f;
+        }
+
+public void setMinCoilJitterLevel(float var1) {
+        this.null.Object = var1;
+        }
+
+public void render(CombatEngineLayers var1, CombatViewport var2, float var3) {
+        float var6;
+        float var8;
+        float var9;
+        if (var1 == CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER) {
+        ShipSystemAPI.SystemState var4 = this.chargeTracker.Object();
+        float var5 = 0.0F;
+        float var7;
+        if (var4 == SystemState.COOLDOWN) {
+        var6 = this.getCooldown();
+        var7 = this.getCooldownRemaining();
+        if (var6 <= 0.0F) {
+        return;
+        }
+
+        var8 = var7 / var6;
+        var8 = (float)Math.sqrt((double)var8);
+        var5 = var8;
+        } else if (var4 == SystemState.OUT) {
+        var6 = this.getEffectLevel();
+        var7 = 1.0F;
+        if (var6 > var7) {
+        var5 = 0.0F;
+        } else {
+        var5 = 1.0F - var6 / var7;
+        }
+        }
+
+        var6 = Math.max(0, 1.0F - var5);
+        var7 = Math.max(var5 * 0.33F, this.null.Object * 0.67F);
+        if (var6 > 0.0F) {
+        var8 = this.ship.getAlphaMult() * var3;
+        spr.setAdditiveBlend();
+        ÖÔ0000.setAdditiveBlend();
+        ÖÔ0000.setAlphaMult(var8 * var7 * this.ship.getExtraAlphaMult2());
+        spr.setAlphaMult(var8 * var7 * this.ship.getExtraAlphaMult2());
+        ÖÔ0000.setAngle(this.ship.getFacing() - 90.0F);
+        spr.setAngle(this.ship.getFacing() - 90.0F);
+        spr.setColor(this.spec.getEffectColor1());
+        ÖÔ0000.setColor(this.spec.getEffectColor2()); //Diffuse
+        var9 = 20.0F * var6;
+        if (var4 == SystemState.OUT) {
+        var9 = 0.0F;
+        }
+
+        this.öÓ0000.render(ÖÔ0000, 0.0F, 0.0F, var9, 15);
+        this.öÓ0000.render(spr, 0.0F, 0.0F, var9, 5);
+        }
+        }
+
+        if (!isActive()) {
+        float.Object = null;
+        } else {
+        if (var1 == CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER) {
+        float var19 = this.getEffectLevel();
+        if (var19 <= 0.0F) {
+        return;
+        }
+
+        Vector2f var20 = new Vector2f();
+        if (this.float.Object != null) {
+        var20 = Vector2f.sub(this.ship.getVelocity(), this.float.Object, var20);
+        var20.scale(this.ÔÔ0000);
+        }
+
+        spr.setAdditiveBlend();
+        this.ÖÔ0000.setAdditiveBlend();
+        spr.setColor(this.spec.getEffectColor1());
+        this.ÖÔ0000.setColor(this.spec.getEffectColor2());
+        var6 = this.spec.getPhaseChargedownVulnerabilityFraction();
+        ShipSystemAPI.SystemState var21 = this.chargeTracker.Object();
+        var8 = var19;
+        if (var21 == SystemState.OUT) {
+        var9 = 0.25F;
+        if (var19 > var9) {
+        var8 = 1.0F;
+        } else {
+        var8 = var19 / var9;
+        }
+        }
+
+        var9 = this.ship.getAlphaMult() * var8;
+        GL11.glPushMatrix();
+        GL11.glTranslatef(-this.ship.getLocation().x, -this.ship.getLocation().y, 0.0F);
+        float var10 = 0.0F;
+        o var11 = null;
+        Vector2f var12 = null;
+        boolean var13 = true;
+
+        o var14;
+        for(Iterator var15 = this.new.Object.iterator(); var15.hasNext(); var11 = var14) {
+        var14 = (o)var15.next();
+        float var16 = 1.0F;
+        if (var10 > 0.0F) {
+        var16 = 1.0F - var10 * 1.0F / (float)this.new.Object.size();
+        var16 *= 0.2F;
+        }
+
+        ++var10;
+        this.ÖÔ0000.setAlphaMult(var9 * var16 * this.ship.getExtraAlphaMult2());
+        spr.setAlphaMult(var9 * var16 * this.ship.getExtraAlphaMult2());
+        this.ÖÔ0000.setAngle(var14.o00000 - 90.0F);
+        spr.setAngle(var14.o00000 - 90.0F);
+        Vector2f var17 = var14.Ò00000;
+        if (var11 != null) {
+        Vector2f var18 = Vector2f.sub(var14.Ò00000, var11.Ò00000, new Vector2f());
+        if (var18.length() > 0.0F) {
+        if (this.ship.isDrone()) {
+        if (var18.length() > 2.0F) {
+        Utils.o00000(var18);
+        var18.scale(2.0F);
+        }
+        } else {
+        var18.scale(2.0F);
+        if (var18.length() > 5.0F) {
+        Utils.o00000(var18);
+        var18.scale(5.0F);
+        }
+        }
+
+        var17 = Vector2f.add(var12, var18, new Vector2f());
+        }
+        }
+
+        var12 = var17;
+        this.ÖÔ0000.renderAtCenter(var17.x, var17.y);
+        spr.renderAtCenter(var17.x, var17.y);
+        }
+
+        GL11.glPopMatrix();
+        }
+
+        }
+        }
+
+private static class o {
+    Vector2f Ò00000;
+    float o00000;
+
+    private o(Vector2f var1, float var2) {
+        this.Ò00000 = var1;
+        this.o00000 = var2;
+    }
+}
+}
+*/

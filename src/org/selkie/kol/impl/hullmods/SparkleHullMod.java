@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.combat.SparkleAIScript;
 
 import java.awt.*;
 import java.util.List;
@@ -21,6 +22,16 @@ public class SparkleHullMod extends BaseHullMod {
     private Color jitterColor = new Color(100,165,255,175);
     private Color droneEMPColor = new Color(100,165,255,255);
 
+    private static Color hfColor = new Color(255,80,100,225);
+    private static Color hfEMPColor = new Color(255,80,100,255);
+
+    public static final String NINAYA = "abyss_boss_ninaya";
+    public static final String NINMAH = "abyss_boss_ninmah";
+    public static final String NINEVEH = "abyss_boss_nineveh";
+    public static final String HFCOOLDOWNTAG = "HF_SPARKLE";
+
+    public static float shipDamageReg = 1f;
+    public static float shipDamageHF = 300f;
 
     private static Map maxDrones = new HashMap();
     static {
@@ -42,6 +53,9 @@ public class SparkleHullMod extends BaseHullMod {
     private boolean findNewTargetOnUse;
 
     protected IntervalUtil launchInterval = new IntervalUtil(1.25f, 1.75f); //(0.75f, 1.25f)
+    protected IntervalUtil HFGraceInterval = new IntervalUtil(5f, 5f);
+    protected boolean madeHF = false;
+    protected boolean madeNormal = false;
     protected IntervalUtil attractorParticleInterval = new IntervalUtil(0.05f, 0.1f);
     protected WeightedRandomPicker<WeaponSlotAPI> launchSlots = new WeightedRandomPicker<WeaponSlotAPI>();
     protected WeaponSlotAPI lock = null;
@@ -98,7 +112,8 @@ public class SparkleHullMod extends BaseHullMod {
 
         CombatEngineAPI engine = Global.getCombatEngine();
 
-        launchInterval.advance(amount * 5f);
+        launchInterval.advance(amount * 3f);
+
         if (launchInterval.intervalElapsed()) {
             Iterator<MissileAPI> iter = data.drones.iterator();
             while (iter.hasNext()) {
@@ -159,9 +174,72 @@ public class SparkleHullMod extends BaseHullMod {
             com.scale(1f / data.drones.size());
         }
 
+        HFGraceInterval.advance(amount);
+        if ((!madeHF && makeHFSparkles(ship)) || (madeHF && !HFGraceInterval.intervalElapsed())) { //make mean
+//            ArrayList<MissileAPI> newSparklies = new ArrayList<>();
+            for (int i = 0; i < data.drones.size(); i++) {
+                MissileAPI orig = data.drones.get(i);
+                orig.setDamageAmount(shipDamageHF);
+//                String weaponId = WEAPON + "_hf";
+//                MissileAPI newDrone = (MissileAPI) engine.spawnProjectile(ship, null,
+//                        weaponId,
+//                        orig.getLocation(), orig.getFacing(), null); //orig.getVelocity());
+//                newDrone.setWeaponSpec(weaponId);
+//                newDrone.setMissileAI(new SparkleAIScript(newDrone));
+//                newDrone.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
+//                // if they could flame out/be affected by emp, that'd be bad since they don't expire for a
+//                // very long time so they'd be stuck disabled permanently, for practical purposes
+//                // thus: total emp resistance (which can't target them anyway, but if it did.)
+//                newDrone.setEmpResistance(10000);
+//                newSparklies.add(newDrone);
+//                orig.explode();
+//                Global.getCombatEngine().removeEntity(orig);
+//            }
+//            for (MissileAPI sparkle : newSparklies) {
+                //orig.setNoGlowTime(0.01f); //One frame,ish
+                orig.setJitter(this, hfColor, 50f, 1, orig.getGlowRadius());
+                orig.getEngineController().fadeToOtherColor(this,hfColor,hfColor,2f,1f);
+//                data.drones.add(sparkle);
+            }
+            HFGraceInterval.setElapsed(0f);
+            madeHF = true;
+        }
+        if (HFGraceInterval.intervalElapsed() && madeHF) { //make chill
+//            ArrayList<MissileAPI> newSparklies = new ArrayList<>();
+            for (int i = 0; i < data.drones.size(); i++) {
+                MissileAPI orig = data.drones.get(i);
+                //orig.setDamageAmount(shipDamageReg);
+//                String weaponId = WEAPON;
+//                MissileAPI newDrone = (MissileAPI) engine.spawnProjectile(ship, null,
+//                        weaponId,
+//                        orig.getLocation(), orig.getFacing(), null);
+//                newDrone.setWeaponSpec(weaponId);
+//                newDrone.setMissileAI(new SparkleAIScript(newDrone));
+//                newDrone.getActiveLayers().remove(CombatEngineLayers.FF_INDICATORS_LAYER);
+//                // if they could flame out/be affected by emp, that'd be bad since they don't expire for a
+//                // very long time so they'd be stuck disabled permanently, for practical purposes
+//                // thus: total emp resistance (which can't target them anyway, but if it did.)
+//                newDrone.setEmpResistance(10000);
+//                newSparklies.add(newDrone);
+//                orig.explode();
+//                Global.getCombatEngine().removeEntity(orig);
+//            }
+//            for (MissileAPI sparkle : newSparklies) {
+                //orig.setNoGlowTime(0.01f); //One frame,ish
+                orig.setJitter(this, jitterColor, 1f, 1, orig.getGlowRadius());
+                orig.getEngineController().fadeToOtherColor(this,jitterColor,jitterColor,1f,1f);
+//                data.drones.add(sparkle);
+            }
+            madeHF = false;
+        }
     }
 
     public void unapply(MutableShipStatsAPI stats, String id) {
+    }
+
+    protected boolean makeHFSparkles(ShipAPI ship) {
+        if (ship.getSystem().isActive() && (ship.getHullSpec().getBaseHullId().equals(NINMAH) || ship.getHullSpec().getBaseHullId().equals(NINAYA) || ship.getHullSpec().getBaseHullId().equals(NINEVEH))) return true;
+        return false;
     }
 
     protected void findDroneSlots(ShipAPI ship) {

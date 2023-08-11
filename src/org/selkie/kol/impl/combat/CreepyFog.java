@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.hullmods;
+package org.selkie.kol.impl.combat;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
