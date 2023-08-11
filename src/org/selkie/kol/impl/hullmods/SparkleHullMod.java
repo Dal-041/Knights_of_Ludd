@@ -201,7 +201,7 @@ public class SparkleHullMod extends BaseHullMod {
                 orig.getEngineController().fadeToOtherColor(this,hfColor,hfColor,2f,1f);
 //                data.drones.add(sparkle);
             }
-            HFGraceInterval.setElapsed(0f);
+            if (makeHFSparkles(ship)) HFGraceInterval.setElapsed(0f);
             madeHF = true;
         }
         if (HFGraceInterval.intervalElapsed() && madeHF) { //make chill
