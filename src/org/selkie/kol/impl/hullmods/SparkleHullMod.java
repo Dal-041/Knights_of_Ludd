@@ -182,10 +182,10 @@ public class SparkleHullMod extends BaseHullMod {
                 //orig.setNoGlowTime(0.01f); //One frame,ish
                 orig.setJitter(this, hfColor, (HFGraceInterval.getElapsed()/(HFGraceInterval.getMaxInterval()/3)) * 3, 1, orig.getGlowRadius());
                 orig.getEngineController().fadeToOtherColor(this,hfColor,hfColor,2f,0.75f);
-                ship.getCustomData().put("HF_SPARKLE", true);
             }
             if (makeHFSparkles(ship)) {
                 HFGraceInterval.setElapsed(0f);
+                ship.getCustomData().put("HF_SPARKLE", true);
             }
             madeHF = true;
         }
@@ -195,9 +195,9 @@ public class SparkleHullMod extends BaseHullMod {
                 orig.setNoGlowTime(0.01f); //One frame,ish
                 orig.setJitter(this, jitterColor, 1f, 1, orig.getGlowRadius());
                 orig.getEngineController().fadeToOtherColor(this,jitterColor,jitterColor,1f,1f);
-                ship.getCustomData().remove("HF_SPARKLE");
             }
             madeHF = false;
+            ship.getCustomData().remove("HF_SPARKLE");
         }
     }
 
