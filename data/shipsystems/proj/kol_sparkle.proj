@@ -13,7 +13,7 @@
 	"flameoutTime":1, # total time from flameout to full fadeout
 	"noEngineGlowTime":0.5, # time spent without the engine glow being rendered
 	"fadeTime":0.5, # fadeout duration
-	"glowColor":[100,165,255,75],
+	"glowColor":[100,165,255,105],
 	#"collisionClassAfterFlameout":"MISSILE_NO_FF",
 	#"behaviorSpec":{"behavior":"CUSTOM",
 	#				"effectRange":300,
@@ -28,7 +28,7 @@
 					"loc":[0, 0],
 				    "style":"CUSTOM",
 					"styleSpec":{
-						"engineColor":[100,165,255,255],
+						"engineColor":[100,165,255,175],
 						"contrailParticleSizeMult":10,
 						"contrailParticleDuration":2,
 						"contrailMaxSpeedMult":-0.1,

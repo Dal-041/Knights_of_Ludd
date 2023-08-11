@@ -29,10 +29,10 @@ public class SparkleOnHitEffect implements OnHitEffectPlugin {
 				if (!shieldHit || piercedShield) {
 					float emp = projectile.getEmpAmount();
 					float dam = 1f;
-					if (ship.getCustomData().containsKey("HF_SPARKLE")) {
-						dam = SparkleHullMod.shipDamageHF;; // 300
+					if (source.getCustomData().containsKey("HF_SPARKLE") && source.getCustomData().get("HF_SPARKLE").equals(true)) {
+						dam = SparkleHullMod.shipDamageHF; // 300
 					} else {
-						dam = SparkleHullMod.shipDamageReg;; // 1
+						dam = SparkleHullMod.shipDamageReg; // 1
 					}
 					engine.spawnEmpArcPierceShields(source, point, target, target,
 									   projectile.getDamageType(), 

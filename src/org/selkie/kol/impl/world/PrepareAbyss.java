@@ -1,27 +1,39 @@
 package org.selkie.kol.impl.world;
 
 import java.awt.Color;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Random;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
+import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
 import com.fs.starfarer.api.impl.campaign.procgen.StarAge;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.DerelictThemeGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.MiscellaneousThemeGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.ThemeGenerator;
+import com.fs.starfarer.api.impl.campaign.rulecmd.missions.GateCMD;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
 import org.selkie.kol.plugins.KOL_ModPlugin;
+
+import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.*;
+import static com.fs.starfarer.api.impl.campaign.world.TTBlackSite.NASCENT_WELL_KEY;
 
 public class PrepareAbyss {
 
     public static void generate(SectorAPI sector) {
     	GenerateElysia(sector);
-    	GeneratePhaseAbyss(sector);
+    	GenerateUnderworld(sector);
     	GenerateLunaSea(sector);
 
         //PrepareForRelations(sector);
@@ -50,9 +62,9 @@ public class PrepareAbyss {
 		
     	//PlanetAPI elysia = system.initStar("Elysian_Abyss", StarTypes.BLACK_HOLE, beeg, -750f);
 		system.initNonStarCenter();
-    	PlanetAPI elysia = system.addPlanet("abyss_elysia_abyss", system.getCenter(), "Elysian Abyss", StarTypes.BLACK_HOLE, 0f, beeg, 0f, 100000f);
+    	PlanetAPI elysia = system.addPlanet("abyss_elysia_abyss", system.getCenter(), "Elysia", StarTypes.BLACK_HOLE, 0f, beeg, 0f, 100000f);
     	elysia.getSpec().setBlackHole(true);
-    	elysia.setName("Elysian Abyss");
+    	system.setName("Elysian Abyss");
     	elysia.applySpecChanges();
     	SectorEntityToken horizon1 = system.addTerrain("kol_eventHorizon", new AbyssEventHorizon.CoronaParams(
     			4000,
@@ -75,7 +87,7 @@ public class PrepareAbyss {
     	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
                                                                     0, 0, // center of nebula
                                                                     system, // location to add to
-                                                                    "terrain", "nebula_kol_black", // "nebula_blue", // texture to use, uses xxx_map for map
+                                                                    "terrain", "nebula_kol_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
                                                                     4, 4, StarAge.AVERAGE); // number of cells in texture
 
     	system.setType(StarSystemType.TRINARY_1CLOSE_1FAR);
@@ -173,32 +185,37 @@ public class PrepareAbyss {
 
     }
 
-	public static void GeneratePhaseAbyss(SectorAPI sector) {
+	public static void GenerateUnderworld(SectorAPI sector) {
 
-		// Deep in quasi space, no direct access
+		// No direct access
 
-		StarSystemAPI system = sector.createStarSystem("Phase Abyss");
-		system.setName("Phase Abyss");
+		StarSystemAPI system = sector.createStarSystem("Quasispace");
+		system.setName("Quasispace");
 		LocationAPI hyper = Global.getSector().getHyperspace();
-		system.getLocation().set(-1000, -5000);
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 
-		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_edf_phasebg.jpg");
+		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dusk.jpg");
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
+		system.getLocation().set(-5000, -3000);
 		SectorEntityToken center = system.initNonStarCenter();
 		SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
 				0, 0, // center of nebula
 				system, // location to add to
-				"terrain", "nebula", // "nebula_blue", // texture to use, uses xxx_map for map
+				"terrain", "nebula_kol_black_shiny", // texture to use, uses xxx_map for map
 				4, 4, StarAge.AVERAGE); // number of cells in texture
 
 		system.setLightColor(new Color(225,170,255,255)); // light color in entire system, affects all entities
 		new AbyssBackgroundWarper(system, 8, 0.125f);
-
 		system.generateAnchorIfNeeded();
+
+//		SectorEntityToken gate = system.addCustomEntity("kol_quasigate", "Quasigate", Entities.INACTIVE_GATE, Factions.DERELICT);
+//		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
+//
+//		GateCMD.notifyScanned(gate);
+//		GateEntityPlugin.getGateData().scanned.add(gate);
 
 		ElysianSeededFleetManager fleets = new ElysianSeededFleetManager(system, 3, 5, 10, 50, 0.95f);
 		system.addScript(fleets);
@@ -222,13 +239,13 @@ public class PrepareAbyss {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula.png",
 					0, 0, // center of nebula
 					system, // location to add to
-					"terrain", "nebula", // "nebula_blue", // texture to use, uses xxx_map for map
+					"terrain", "nebula_kol_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					8, 8, StarAge.AVERAGE); // number of cells in texture
 		} else {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/luwunasea_nebula2.png",
 					0, 0, // center of nebula
 					system, // location to add to
-					"terrain", "nebula", // "nebula_blue", // texture to use, uses xxx_map for map
+					"terrain", "nebula_kol_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					4, 4, StarAge.AVERAGE); // number of cells in texture
 		}
 

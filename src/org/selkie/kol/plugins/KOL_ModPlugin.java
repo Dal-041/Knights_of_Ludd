@@ -68,4 +68,9 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 		Global.getSector().addTransientListener(new UpdateRelationships(true));
 	}
+
+	@Override
+	public void onNewGameAfterTimePass() {
+
+	}
 }

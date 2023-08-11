@@ -18,9 +18,18 @@
 			"abyss_dusk_onryo_P_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 		},
 		"terrain":{
-			"nebula_kol_black":"graphics/terrain/nebula_kol_black.png",
-			"nebula_kol_black_map":"graphics/terrain/nebula_kol_black_map.png",
-
+			"nebula_kol_black":"graphics/terrain/nebula_kol_black_shiny.png",
+			"nebula_kol_black_map":"graphics/terrain/nebula_kol_black_shiny_map.png",
+			"nebula_kol_black_shiny":"graphics/terrain/nebula_kol_black.png",
+			"nebula_kol_black_shiny_map":"graphics/terrain/nebula_kol_black_map.png",
+			"nebula_kol_redblue":"graphics/terrain/nebula_kol_redblue.png",
+			"nebula_kol_redblue_map":"graphics/terrain/nebula_kol_redblue_map.png",
+			"nebula_kol_red":"graphics/terrain/nebula_kol_red.png",
+			"nebula_kol_red_map":"graphics/terrain/nebula_kol_red_map.png",
+			"nebula_kol_redgrey":"graphics/terrain/nebula_kol_redgrey.png",
+			"nebula_kol_redgrey_map":"graphics/terrain/nebula_kol_redgrey.png",
+			"nebula_kol_purpleblue":"graphics/terrain/nebula_kol_purpleblue.png",
+			"nebula_kol_purpleblue_map":"graphics/terrain/nebula_kol_purpleblue_map.png",
 		},
 	}
 }
