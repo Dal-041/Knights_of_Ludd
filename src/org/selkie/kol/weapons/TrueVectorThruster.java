@@ -7,6 +7,8 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.util.HashMap;
+
 /**
  * Manages vectoring or vernier-style attitude thrusters.
  *
@@ -23,7 +25,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
 
     private boolean runOnce = false, accel = false, turn = false;
     private ShipAPI SHIP;
-    private ShipEngineAPI thruster;
+    private HashMap<Integer, ShipEngineAPI> thrusters;
     private ShipEngineControllerAPI ENGINES;
     private float time = 0, previousThrust = 0;
 
@@ -45,7 +47,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             //find the ship engine associated with the deco thruster
             for (ShipEngineAPI e : SHIP.getEngineController().getShipEngines()) {
                 if (MathUtils.isWithinRange(e.getLocation(), weapon.getLocation(), 2)) {
-                    thruster = e;
+                    thrusters.put(MathUtils.getRandom().nextInt(),e);
                 }
             }
 
@@ -66,7 +68,11 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
         }
 
         //check for death/engine disabled
-        if (!SHIP.isAlive() || (thruster != null && thruster.isDisabled())) {
+        Boolean dead = true;
+        for (ShipEngineAPI e : thrusters.values()) {
+            if (e.isActive()) dead = false;
+        }
+        if (!SHIP.isAlive() || dead) {
             previousThrust = 0;
             return;
         }
@@ -202,7 +208,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
         //clamp the thrust then color stuff
         length = Math.max(0, Math.min(1, length));
 
-        if (thruster != null) {
+        for (ShipEngineAPI thruster : thrusters.values()) {
             weapon.getShip().getEngineController().setFlameLevel(thruster.getEngineSlot(), length);
             thruster.getEngineSlot().setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
         }
