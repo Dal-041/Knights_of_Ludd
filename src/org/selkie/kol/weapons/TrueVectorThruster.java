@@ -1,12 +1,15 @@
 package org.selkie.kol.weapons;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
+import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -30,8 +33,9 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
     private float time = 0, previousThrust = 0;
 
     //Smooth thrusting prevents instant changes in directions and levels of thrust, lower is smoother
-    private final float SMOOTH_THRUSTING = 3f;
-    private float TURN_RIGHT_ANGLE = 0, THRUST_TO_TURN = 0, NEUTRAL_ANGLE = 0, OFFSET = 0;
+    private float MAX_THRUST_CHANGE_PER_SECOND = 0;
+    private float MAX_ANGLE_CHANGE_PER_SECOND = 0;
+    private float TURN_RIGHT_ANGLE = 0, THRUST_TO_TURN = 0, NEUTRAL_ANGLE = 0, OFFSET = 0, ENGINE_LENGTH = 0, ENGINE_WIDTH = 0;
     //sprite size, could be scaled with the engine width to allow variable engine length
     private Vector2f size = new Vector2f(8, 74);
 
@@ -44,10 +48,13 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             SHIP = weapon.getShip();
             ENGINES = SHIP.getEngineController();
             ENGINES.forceShowAccelerating();
+            thrusters = new HashMap<>();
             //find the ship engine associated with the deco thruster
             for (ShipEngineAPI e : SHIP.getEngineController().getShipEngines()) {
                 if (MathUtils.isWithinRange(e.getLocation(), weapon.getLocation(), 2)) {
                     thrusters.put(MathUtils.getRandom().nextInt(),e);
+                    ENGINE_LENGTH = e.getEngineSlot().getLength();
+                    ENGINE_WIDTH = e.getEngineSlot().getWidth();
                 }
             }
 
@@ -61,6 +68,9 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             TURN_RIGHT_ANGLE = MathUtils.getShortestRotation(SHIP.getFacing(), TURN_RIGHT_ANGLE) + 90;
             //is the thruster performant at turning the ship? Engines closer to the center of mass will concentrate more on dealing with changes of velocity.
             THRUST_TO_TURN = smooth(MathUtils.getDistance(SHIP.getLocation(), weapon.getLocation()) / SHIP.getCollisionRadius());
+
+            MAX_ANGLE_CHANGE_PER_SECOND = weapon.getTurnRate();
+            MAX_THRUST_CHANGE_PER_SECOND = weapon.getDerivedStats().getDps()/100f;
         }
 
         if (engine.isPaused() || SHIP.getOriginalOwner() == -1) {
@@ -129,38 +139,45 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             turn = false;
         }
 
+
         //calculate the corresponding vector thrusting
         if (thrust > 0) {
             SHIP.getEngineController().forceShowAccelerating();
-
+            //SHIP.getEngineController().extendFlame(this, 2f, 0.5f, 0.5f);
             //DEBUG
             Vector2f offset = new Vector2f(weapon.getLocation().x - SHIP.getLocation().x, weapon.getLocation().y - SHIP.getLocation().y);
             VectorUtils.rotate(offset, -SHIP.getFacing(), offset);
+            float thrustChangeModifier = (SHIP.getMutableStats().getTurnAcceleration().computeMultMod() + SHIP.getMutableStats().getAcceleration().computeMultMod()) / 2;
 
             if (!turn) {
                 //thrust only, easy.
-                thrust(weapon, accelerateAngle, thrust * (SHIP.getMutableStats().getAcceleration().computeMultMod()), amount*SMOOTH_THRUSTING);
+                thrust(weapon, accelerateAngle, thrustChangeModifier, amount);
 
             } else {
                 if (!accel) {
                     //turn only, easy too.
-                    thrust(weapon, turnAngle, thrust * (SHIP.getMutableStats().getTurnAcceleration().computeMultMod()), amount*SMOOTH_THRUSTING);
+                    thrust(weapon, turnAngle, thrustChangeModifier, amount);
 
 
                 } else {
                     //combined turn and thrust, aka the funky part.
 
+                    // I think this is pointless -Starficz
+                    /*
                     //aim-to-mouse clamp, helps to avoid flickering when the ship is almost facing the cursor and not turning much.
                     float clampedThrustToTurn = THRUST_TO_TURN * Math.min(1, Math.abs(SHIP.getAngularVelocity()) / 10);
                     clampedThrustToTurn = smooth(clampedThrustToTurn);
+                    */
 
                     //start from the neutral angle
                     float combinedAngle = NEUTRAL_ANGLE;
 
                     //adds both thrust and turn angle at their respective thrust-to-turn ratio. Gives a "middleground" angle
                     combinedAngle = MathUtils.clampAngle(combinedAngle + MathUtils.getShortestRotation(NEUTRAL_ANGLE, accelerateAngle));
-                    combinedAngle = MathUtils.clampAngle(combinedAngle + clampedThrustToTurn * MathUtils.getShortestRotation(accelerateAngle, turnAngle));
+                    combinedAngle = MathUtils.clampAngle(combinedAngle + THRUST_TO_TURN * MathUtils.getShortestRotation(accelerateAngle, turnAngle));
 
+                    // I think this is pointless -Starficz
+                    /*
                     //get the total thrust with mults
                     float combinedThrust = thrust;
                     combinedThrust *= (SHIP.getMutableStats().getTurnAcceleration().computeMultMod() + SHIP.getMutableStats().getAcceleration().computeMultMod()) / 2;
@@ -173,44 +190,97 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
                     offAxis /= 45;
 
                     combinedThrust *= 1 - Math.max(0, Math.min(1, offAxis));
-
-                    thrust(weapon, combinedAngle, combinedThrust, amount*SMOOTH_THRUSTING);
+                    */
+                    thrust(weapon, combinedAngle, thrustChangeModifier, amount);
                 }
             }
 
         } else {
-            thrust(weapon, NEUTRAL_ANGLE, 0, amount*SMOOTH_THRUSTING);
+            thrust(weapon, NEUTRAL_ANGLE, 0, amount);
         }
 
     }
 
-    private void thrust(WeaponAPI weapon, float angle, float thrust, float smooth) {
+    public boolean isAngleWithinArc(float startAngle, float endAngle, float testAngle) {
+        startAngle = MathUtils.clampAngle(startAngle);
+        endAngle = MathUtils.clampAngle(endAngle);
+        testAngle = MathUtils.clampAngle(testAngle);
+
+        float diff_ccw;
+        if (startAngle <= endAngle)
+            diff_ccw = endAngle - startAngle;
+        else
+            diff_ccw = (360 - startAngle) + endAngle;
+
+        if (diff_ccw > 180) {
+            if (startAngle >= endAngle)
+                return testAngle <= startAngle && testAngle >= endAngle;
+            else
+                return testAngle <= startAngle || testAngle >= endAngle;
+        }
+        else {
+            if (startAngle <= endAngle)
+                return testAngle >= startAngle && testAngle <= endAngle;
+            else
+                return testAngle >= startAngle || testAngle <= endAngle;
+        }
+    }
+
+
+    private void thrust(WeaponAPI weapon, float angle, float thrustChangeModifier, float amount) {
 
         //target angle
-        float aim = angle + SHIP.getFacing();
-        float length = thrust;
+        float optimalAim = angle + SHIP.getFacing();
 
         //how far from the target angle the engine is aimed at
-        aim = MathUtils.getShortestRotation(weapon.getCurrAngle(), aim);
 
-        //thrust is reduced while the engine isn't facing the target angle, then smoothed
-        length *= Math.max(0, 1 - (Math.abs(aim) / 90));
-        length -= previousThrust;
-        length *= smooth;
-        length += previousThrust;
-        previousThrust = length;
+        float aimDirection = MathUtils.getShortestRotation(weapon.getCurrAngle(), optimalAim);
 
-        //engine wooble
-        aim += (float) (2 * FastTrig.cos(SHIP.getFullTimeDeployed() * 5 * thrust + OFFSET));
-        aim *= smooth;
-        weapon.setCurrAngle(MathUtils.clampAngle(weapon.getCurrAngle() + aim));
+        //Global.getCombatEngine().addSmoothParticle(MathUtils.getPointOnCircumference(weapon.getLocation(), 100, weapon.getCurrAngle()), SHIP.getVelocity(), 20f, 100f,0.1f, Color.red);
+        //Global.getCombatEngine().addSmoothParticle(MathUtils.getPointOnCircumference(weapon.getLocation(), 30, weapon.getArcFacing() + SHIP.getFacing()+ 180f), SHIP.getVelocity(), 20f, 100f,0.1f, Color.magenta);
+        //Global.getCombatEngine().addSmoothParticle(MathUtils.getPointOnCircumference(weapon.getLocation(), 80, angle + SHIP.getFacing()), SHIP.getVelocity(), 20f, 100f,0.1f, Color.green);
 
-        //clamp the thrust then color stuff
-        length = Math.max(0, Math.min(1, length));
+        //thrust is reduced while the engine isn't facing the target angle
 
+        float targetThrust = MathUtils.clamp((1 - (Math.abs(aimDirection) / 90)),0, 1);
+        if (thrustChangeModifier == 0) targetThrust = 0;
+
+        float currentThrust;
+        if (previousThrust < targetThrust){
+            currentThrust = previousThrust + amount * MAX_THRUST_CHANGE_PER_SECOND;
+            if (currentThrust > targetThrust)
+                currentThrust = targetThrust;
+        }
+        else {
+            currentThrust = previousThrust - amount * MAX_THRUST_CHANGE_PER_SECOND;
+            if (currentThrust < targetThrust)
+                currentThrust = targetThrust;
+        }
+        currentThrust = MathUtils.clamp(currentThrust, 0, 1);
+        previousThrust = currentThrust;
+
+        //engine wobble
+        float targetAim = optimalAim + ((Math.abs(aimDirection) < 10f) ? (float) (2 * FastTrig.cos(SHIP.getFullTimeDeployed() * 5 + OFFSET)) : 0f);
+        aimDirection = MathUtils.getShortestRotation(weapon.getCurrAngle(), targetAim);
+        if (isAngleWithinArc(weapon.getCurrAngle(), angle + SHIP.getFacing(), weapon.getArcFacing() + SHIP.getFacing() + 180))
+            aimDirection = -aimDirection;
+
+        float turnBonus = Misc.interpolate(1, 2, Math.abs(aimDirection)/180);
+        if(aimDirection > 0){
+            weapon.setCurrAngle(MathUtils.clampAngle(weapon.getCurrAngle() + amount * MAX_ANGLE_CHANGE_PER_SECOND * turnBonus));
+        } else{
+            weapon.setCurrAngle(MathUtils.clampAngle(weapon.getCurrAngle() - amount * MAX_ANGLE_CHANGE_PER_SECOND * turnBonus));
+        }
+
+        float offset = weapon.getSprite().getHeight() - weapon.getSprite().getCenterY();
         for (ShipEngineAPI thruster : thrusters.values()) {
-            weapon.getShip().getEngineController().setFlameLevel(thruster.getEngineSlot(), length);
-            thruster.getEngineSlot().setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
+            EngineSlotAPI engineSlot = thruster.getEngineSlot();
+            float startingLevel = (ENGINE_LENGTH - offset) / ENGINE_LENGTH;
+            float compensatedLevel = Misc.interpolate(startingLevel, 1f, currentThrust);
+            SHIP.getEngineController().setFlameLevel(engineSlot, compensatedLevel);
+            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(ENGINE_WIDTH, ENGINE_LENGTH*compensatedLevel,1f,1f); // no clue what v2 and v3 do
+            engineSlot.setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
+            engineSlot.setGlowSizeMult(0f);
         }
     }
 

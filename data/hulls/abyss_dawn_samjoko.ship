@@ -132,7 +132,7 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 210,
+      "arc": 260,
       "angle": 60,
       "locations": [62, 222]
     },
@@ -141,7 +141,7 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 210,
+      "arc": 260,
       "angle": -60,
       "locations": [62, -222]
     },
@@ -150,7 +150,7 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 130,
+      "arc": 210,
       "angle": 150,
       "locations": [-63, 155]
     },
@@ -159,7 +159,7 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 130,
+      "arc": 210,
       "angle": -150,
       "locations": [-63, -155]
     },
@@ -358,34 +358,34 @@
     },
     {
       "location": [-63, 155],
-      "length": 75,
-      "width": 30.41,
-      "angle": 135,
-      "contrailSize": 30.41,
+      "length": 120,
+      "width": 20,
+      "angle": -150,
+      "contrailSize": 31,
       "style": "KOL_ENG"
     },
     {
       "location": [-63, -155],
-      "length": 75,
-      "width": 30.41,
-      "angle": -135,
-      "contrailSize": 30.41,
+      "length": 120,
+      "width": 20,
+      "angle": 150,
+      "contrailSize": 31,
       "style": "KOL_ENG"
     },
     {
       "location": [62, 222],
-      "length": 40,
-      "width": 14.68,
+      "length": 60,
+      "width":10,
       "angle": 60,
-      "contrailSize": 14.68,
+      "contrailSize": 31,
       "style": "KOL_ENG"
     },
     {
       "location": [62, -222],
-      "length": 40,
-      "width": 30.41,
+      "length": 60,
+      "width": 10,
       "angle": -60,
-      "contrailSize": 30.41,
+      "contrailSize": 31,
       "style": "KOL_ENG"
     }
   ],
