@@ -28,14 +28,14 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
 
     private boolean runOnce = false, accel = false, turn = false;
     private ShipAPI SHIP;
-    private HashMap<Integer, ShipEngineAPI> thrusters;
+    private HashMap<Integer, ThrusterData> thrusters;
     private ShipEngineControllerAPI ENGINES;
     private float time = 0, previousThrust = 0;
 
     //Smooth thrusting prevents instant changes in directions and levels of thrust, lower is smoother
     private float MAX_THRUST_CHANGE_PER_SECOND = 0;
     private float MAX_ANGLE_CHANGE_PER_SECOND = 0;
-    private float TURN_RIGHT_ANGLE = 0, THRUST_TO_TURN = 0, NEUTRAL_ANGLE = 0, OFFSET = 0, ENGINE_LENGTH = 0, ENGINE_WIDTH = 0;
+    private float TURN_RIGHT_ANGLE = 0, THRUST_TO_TURN = 0, NEUTRAL_ANGLE = 0, OFFSET = 0;
     //sprite size, could be scaled with the engine width to allow variable engine length
     private Vector2f size = new Vector2f(8, 74);
 
@@ -52,9 +52,8 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             //find the ship engine associated with the deco thruster
             for (ShipEngineAPI e : SHIP.getEngineController().getShipEngines()) {
                 if (MathUtils.isWithinRange(e.getLocation(), weapon.getLocation(), 2)) {
-                    thrusters.put(MathUtils.getRandom().nextInt(),e);
-                    ENGINE_LENGTH = e.getEngineSlot().getLength();
-                    ENGINE_WIDTH = e.getEngineSlot().getWidth();
+                    ThrusterData t = new ThrusterData(e);
+                    thrusters.put(MathUtils.getRandom().nextInt(),t);
                 }
             }
 
@@ -79,8 +78,8 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
 
         //check for death/engine disabled
         Boolean dead = true;
-        for (ShipEngineAPI e : thrusters.values()) {
-            if (e.isActive()) dead = false;
+        for (ThrusterData e : thrusters.values()) {
+            if (e.engine.isActive()) dead = false;
         }
         if (!SHIP.isAlive() || dead) {
             previousThrust = 0;
@@ -273,15 +272,28 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
         }
 
         float offset = weapon.getSprite().getHeight() - weapon.getSprite().getCenterY();
-        for (ShipEngineAPI thruster : thrusters.values()) {
-            EngineSlotAPI engineSlot = thruster.getEngineSlot();
-            float startingLevel = (ENGINE_LENGTH - offset) / ENGINE_LENGTH;
+        for (ThrusterData thruster : thrusters.values()) {
+            EngineSlotAPI engineSlot = thruster.engine.getEngineSlot();
+            float startingLevel = (thruster.length - offset) / thruster.length;
             float compensatedLevel = Misc.interpolate(startingLevel, 1f, currentThrust);
             SHIP.getEngineController().setFlameLevel(engineSlot, compensatedLevel);
-            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(ENGINE_WIDTH, ENGINE_LENGTH*compensatedLevel,1f,1f); // no clue what v2 and v3 do
+            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(thruster.width, thruster.width*compensatedLevel,1f,1f); // no clue what v2 and v3 do
             engineSlot.setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
             engineSlot.setGlowSizeMult(0f);
         }
+    }
+
+    static class ThrusterData {
+        private final Float length;
+        private final Float width;
+        private final ShipEngineAPI engine;
+
+        ThrusterData(ShipEngineAPI engine) {
+            length = engine.getEngineSlot().getLength();
+            width = engine.getEngineSlot().getWidth();
+            this.engine = engine;
+        }
+
     }
 
     //////////////////////////////////////////
