@@ -1,0 +1,53 @@
+{
+  "hullName": "Kitesunebi",
+  "hullId": "abyss_edf_kitsunebi",
+  "hullSize": "FIGHTER",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/abyss_edf_kitsunebi.png",
+  "style": "LOW_TECH",
+  "height": 26,
+  "width": 32,
+  "center": [16, 13],
+  "collisionRadius": 18.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 20.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 20,
+      "angle": 0,
+      "locations": [10, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-7, 6.5],
+      "length": 12.32,
+      "width": 6.37,
+      "angle": 180,
+      "contrailSize": 6.37,
+      "style": "ABYSS_EDF_ENG_F"
+    },
+    {
+      "location": [-7, -6.5],
+      "length": 12.32,
+      "width": 6.37,
+      "angle": -180,
+      "contrailSize": 6.37,
+      "style": "ABYSS_EDF_ENG_F"
+    }
+  ],
+  "bounds": [
+    10, 0,
+    -1.5, 14,
+    -11, 14,
+    -5.5, 6.5,
+    -12, 0,
+    -5.5, -6.5,
+    -11, -14,
+    -1.5, -14
+  ]
+}
