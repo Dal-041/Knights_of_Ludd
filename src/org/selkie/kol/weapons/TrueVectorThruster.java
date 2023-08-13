@@ -1,6 +1,5 @@
 package org.selkie.kol.weapons;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
 import com.fs.starfarer.api.util.Misc;
@@ -9,7 +8,6 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 
-import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -30,14 +28,13 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
     private ShipAPI SHIP;
     private HashMap<Integer, ThrusterData> thrusters;
     private ShipEngineControllerAPI ENGINES;
-    private float time = 0, previousThrust = 0;
+    private float previousThrust = 0;
 
     //Smooth thrusting prevents instant changes in directions and levels of thrust, lower is smoother
     private float MAX_THRUST_CHANGE_PER_SECOND = 0;
     private float MAX_ANGLE_CHANGE_PER_SECOND = 0;
     private float TURN_RIGHT_ANGLE = 0, THRUST_TO_TURN = 0, NEUTRAL_ANGLE = 0, OFFSET = 0;
     //sprite size, could be scaled with the engine width to allow variable engine length
-    private Vector2f size = new Vector2f(8, 74);
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
@@ -77,7 +74,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
         }
 
         //check for death/engine disabled
-        Boolean dead = true;
+        boolean dead = true;
         for (ThrusterData e : thrusters.values()) {
             if (e.engine.isActive()) dead = false;
         }
