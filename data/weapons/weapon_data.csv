@@ -50,7 +50,9 @@ Lunete Targeting Laser,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,
 Canister Flak,kol_canister_flak,,,,200,,200,,,,,,0,,HIGH_EXPLOSIVE,0,0,0,0.1,5,0.5,150,150,0,0,,50,200,2,100,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,35.5
 Hallowed Orion Device Launcher,kol_hallowedODLauncher,0,,200000,1000,,1000,,25,30,0,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,1,10000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 Brimstone,kol_brimstone,3,,,800,,175,,3,60,0,120,0,0,ENERGY,50,,,0.05,2,0.05,0,0,0,0,,500,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,General,,,,,,,,,,
-Twilight's Gleam,abyss_boss_resonator,3,,100000,3000,,250,,15,20,0,8,0.8,8,KINETIC,50,,0,1.25,8,0.25,0,0,0,,,400,200,10,250,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Anti Shield,Fast,Excellent,,,,,,,,
+Twilight's Gleam,abyss_boss_resonator,3,,0,3000,,250,,15,20,0,8,0.8,8,KINETIC,50,,0,1.25,8,0.25,0,0,0,,,400,200,10,250,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Havoc,Fast,Excellent,,,,,,,,
+Twilight's Ruin,abyss_boss_resonator2,3,,0,2000,,600,,15,0,0,5,0.2,5,HIGH_EXPLOSIVE,65,,0,5,5,0.25,0,0,0,,,400,200,10,225,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Slaughter,Fast,Excellent,,,,,,,,12
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #UTILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
