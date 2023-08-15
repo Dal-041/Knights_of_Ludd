@@ -13,7 +13,7 @@
   "shieldRadius": 97,
   "viewOffset": 0,
   "builtInWings": [
-    "eis_gunblade_wing"
+    "abyss_edf_kitsunebi"
   ],
   "builtInWeapons": {
     "WS0005": "abyss_deco_edf_tamamo_ml",
