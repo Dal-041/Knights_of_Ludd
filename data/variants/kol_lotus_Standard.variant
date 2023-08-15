@@ -5,56 +5,62 @@
     "goalVariant": true,
     "hullId": "kol_lotus",
     "hullMods": [
-        "missleracks",
-        "heavyarmor",
         "eccm",
-        "reinforcedhull"
-    ],
-    "modules": [
-        {"WS0011": "kol_lotus_ll_Standard"},
-        {"WS0012": "kol_lotus_lr_Standard"},
-        {"WS0013": "kol_lotus_tl_Standard"},
-        {"WS0014": "kol_lotus_tr_Standard"}
+        "heavyarmor",
+        "missleracks",
+        "reinforcedhull",
     ],
     "permaMods": [],
     "sMods": [],
+    "suppressedMods": [],
     "variantId": "kol_lotus_Standard",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0004": "hammerrack"}
-        },
-        {
-            "autofire": true,
-            "mode": "ALTERNATING",
             "weapons": {
-                "WS0007": "annihilator",
-                "WS0008": "annihilator"
+                "WS0004": "hammerrack",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0005": "sabot",
-                "WS0006": "sabot",
-                "WS0009": "sabot",
-                "WS0010": "sabot"
+                "WS0008": "annihilator",
+                "WS0007": "annihilator",
             }
         },
         {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {"WS0001": "heavyac"}
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "sabot",
+                "WS0010": "sabot",
+            }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "flak",
-                "WS0003": "flak"
+                "WS0001": "heavyac",
             }
-        }
-    ]
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0005": "vulcan",
+                "WS0003": "flak",
+                "WS0002": "flak",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0011": "kol_lotus_ll_Standard"},
+        {"WS0012": "kol_lotus_lr_Standard"},
+        {"WS0013": "kol_lotus_tl_Standard"},
+        {"WS0014": "kol_lotus_tr_Standard"},
+    ],
 }

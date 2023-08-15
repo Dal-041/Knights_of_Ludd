@@ -1,5 +1,5 @@
 {
-	"id":"kol_dusk",
+	"id":"kol_dawn",
     "color":[125,125,125,255],
     "secondaryUIColor":[25,115,10,255],
 	"secondarySegments":3,
@@ -8,10 +8,10 @@
 	"darkUIColor":[32,0,32,175],
 	"gridUIColor":[50,0,50,75],
 	
-	"displayName":"Dusk",
-	"displayNameWithArticle":"the Dusk",
-	"displayNameLong":"the Dusk",
-	"displayNameLongWithArticle":"the Dusk",
+	"displayName":"Dawn",
+	"displayNameWithArticle":"the Dawn",
+	"displayNameLong":"the Dawn",
+	"displayNameLongWithArticle":"the Dawn",
 	"logo":"graphics/factions/ai_remnant.png",
 	"crest":"graphics/factions/crest_ai_remnant.png",
 	"showInIntelTab":false,
@@ -48,12 +48,14 @@
 
 		],
 		"hulls":[
-			"abyss_dusk_ayakashi",
-			"abyss_dusk_funayurei",
-			"abyss_dusk_hashihime",
-			"abyss_dusk_ikiryo",
-			"abyss_dusk_onryo",
-			"abyss_dusk_shiryo",
+			"abyss_dawn_cheonyeoguishin",
+			"abyss_dawn_kangcheori",
+			"abyss_dawn_samjoko",
+			"abyss_dawn_dalgyalguishin",
+			"abyss_dawn_imugi",
+			"abyss_dawn_inmyeonjo",
+			"abyss_dawn_inmyeonjo",
+			"abyss_dawn_mulguishin",
 		],
 	},
 	"priorityShips":{

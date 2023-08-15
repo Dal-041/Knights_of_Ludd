@@ -1,0 +1,57 @@
+{
+    "displayName": "Souleater",
+    "fluxCapacitors": 7,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "abyss_boss_nineveh",
+    "hullMods": [
+        "fluxbreakers",
+        "heavyarmor",
+        "missleracks",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "abyss_boss_nineveh_Souleater",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0001": "cyclone",
+                "WS0003": "typhoon",
+                "WS0004": "typhoon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0006": "ionpulser",
+                "WS0007": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdburst",
+                "WS0009": "pdburst",
+                "WS0010": "ioncannon",
+                "WS0011": "ioncannon",
+                "WS0012": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "heavyneedler",
+                "WS0002": "heavyneedler",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

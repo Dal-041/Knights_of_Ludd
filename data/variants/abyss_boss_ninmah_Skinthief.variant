@@ -1,55 +1,51 @@
 {
-    "displayName": "Standard",
+    "displayName": "Skinthief",
     "fluxCapacitors": 4,
     "fluxVents": 30,
     "goalVariant": true,
-    "hullId": "kol_blaze",
+    "hullId": "abyss_boss_ninmah",
     "hullMods": [
-        "hardened_subsystems",
-        "heavyarmor",
+        "fluxbreakers",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_blaze_Standard",
+    "variantId": "abyss_boss_ninmah_Skinthief",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0009": "kol_brimstone",
+                "WS0001": "tachyonlance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "amsrm",
+                "WS0009": "amsrm",
+                "WS0013": "amsrm",
+                "WS0012": "amsrm",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "chaingun",
-                "WS0004": "heavymg",
+                "WS0006": "ionpulser",
+                "WS0007": "ionpulser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "lightdualmg",
-                "WS0002": "lightdualmg",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0005": "vulcan",
-                "WS0006": "vulcan",
-                "WS0007": "vulcan",
-                "WS0008": "vulcan",
+                "WS0003": "pdburst",
+                "WS0002": "pdburst",
             }
         },
     ],
-    "wings": [
-        "broadsword_wing",
-        "talon_wing",
-    ],
+    "wings": [],
     "modules": [],
 }

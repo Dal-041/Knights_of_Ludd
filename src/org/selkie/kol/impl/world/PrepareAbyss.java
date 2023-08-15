@@ -199,7 +199,7 @@ public class PrepareAbyss {
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dusk.jpg");
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
-		system.getLocation().set(-5000, -3000);
+		system.getLocation().set(2600, -3000);
 		SectorEntityToken center = system.initNonStarCenter();
 		SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
 				0, 0, // center of nebula

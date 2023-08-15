@@ -1,0 +1,53 @@
+{
+    "displayName": "Inciting",
+    "fluxCapacitors": 0,
+    "fluxVents": 15,
+    "goalVariant": true,
+    "hullId": "abyss_dawn_inmyeonjo",
+    "hullMods": [
+        "hardened_subsystems",
+        "hardenedshieldemitter",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "abyss_dawn_inmyeonjo_Inciting",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0004": "phasebeam",
+                "WS0001": "phasebeam",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "sabot",
+                "WS0007": "sabot",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "ionbeam",
+                "WS0003": "gravitonbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "lrpdlaser",
+                "WS0005": "lrpdlaser",
+            }
+        },
+    ],
+    "wings": [
+        "spark_wing",
+    ],
+    "modules": [],
+}

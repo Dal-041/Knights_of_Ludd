@@ -42,6 +42,7 @@ public class GenerateKnights {
                         Industries.POPULATION,
                         Industries.SPACEPORT,
 						"kol_garden",
+						Industries.PATROLHQ,
                         Industries.LIGHTINDUSTRY,
                         Industries.GROUNDDEFENSES,
                         Industries.BATTLESTATION)),

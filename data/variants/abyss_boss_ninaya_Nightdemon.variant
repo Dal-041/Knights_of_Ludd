@@ -1,0 +1,43 @@
+{
+    "displayName": "Nightdemon",
+    "fluxCapacitors": 6,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "abyss_boss_ninaya",
+    "hullMods": [
+        "fluxbreakers",
+        "hardened_subsystems",
+        "hardenedshieldemitter",
+        "missleracks",
+        "stabilizedshieldemitter",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "abyss_boss_ninaya_Nightdemon",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "chaingun",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "typhoon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "heavymg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

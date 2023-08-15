@@ -1,0 +1,75 @@
+{
+    "displayName": "Grand",
+    "fluxCapacitors": 20,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "abyss_dusk_ayakashi",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "magazines",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "abyss_dusk_ayakashi_Grand",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0020": "tachyonlance",
+                "WS0021": "tachyonlance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0018": "squall",
+                "WS0019": "squall",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "hveldriver",
+                "WS0005": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0024": "ionpulser",
+                "WS0023": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "lightac",
+                "WS0012": "lightac",
+                "WS0011": "lightac",
+                "WS0015": "lightac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "heavyburst",
+                "WS0017": "heavyburst",
+                "WS0003": "heavyburst",
+                "WS0002": "heavyburst",
+            }
+        },
+    ],
+    "wings": [
+        "lux_wing",
+        "lux_wing",
+    ],
+    "modules": [],
+}

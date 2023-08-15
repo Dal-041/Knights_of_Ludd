@@ -1,0 +1,48 @@
+{
+    "displayName": "Profane",
+    "fluxCapacitors": 4,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "abyss_dawn_inmyeonjo",
+    "hullMods": [
+        "eccm",
+        "hardened_subsystems",
+        "missleracks",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "abyss_dawn_inmyeonjo_Profane",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0004": "heavyac",
+                "WS0001": "heavyac",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0007": "atropos",
+                "WS0008": "atropos",
+                "WS0005": "atropos",
+                "WS0006": "atropos",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "pdburst",
+                "WS0002": "pdburst",
+            }
+        },
+    ],
+    "wings": [
+        "flash_wing",
+    ],
+    "modules": [],
+}
