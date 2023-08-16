@@ -11,7 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 259,
   "viewOffset": 0,
-  "builtInMods": ["advancedcore"],
+  "builtInMods": [
+    "advancedcore"
+  ],
   "builtInWeapons": {
     "WS0013": "abyss_deco_dawn_engL",
     "WS0014": "abyss_deco_dawn_engM",
@@ -360,7 +362,7 @@
       "location": [-63, 155],
       "length": 120,
       "width": 20,
-      "angle": -150,
+      "angle": 150,
       "contrailSize": 31,
       "style": "KOL_ENG"
     },
@@ -368,14 +370,14 @@
       "location": [-63, -155],
       "length": 120,
       "width": 20,
-      "angle": 150,
+      "angle": -150,
       "contrailSize": 31,
       "style": "KOL_ENG"
     },
     {
       "location": [62, 222],
       "length": 60,
-      "width":10,
+      "width": 10,
       "angle": 60,
       "contrailSize": 31,
       "style": "KOL_ENG"
