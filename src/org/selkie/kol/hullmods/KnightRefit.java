@@ -28,6 +28,7 @@ import java.util.List;
 
  - Ship gains increased speed and maneuverability as armor panels are destroyed.
 
+ - When a module is destroyed, the corresponding deco cover on the main hull is hidden
     */
 
 public class KnightRefit extends BaseHullMod {
