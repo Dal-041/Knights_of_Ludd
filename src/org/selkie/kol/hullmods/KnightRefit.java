@@ -12,7 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /*
-  - When ballistic weaponry is installed in composite slots :
+- flavor description tl;dr-ing both the limited-charge shielding, and ablative armor modules, reduced main ship hull/armor
+
+- Passives
+ - Reduces hull and armor by [orangetext] 40% [/o]. [this is done via shipdata.csv, not hullmod]
+ - When ballistic weaponry is installed in composite slots :
     - Increases flux capacity by #/#/#.
     - Increases flux dissipation by #/#/#.
 
@@ -44,6 +48,8 @@ public class KnightRefit extends BaseHullMod {
 
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS=0.25f;
+    private float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
+
 
     @Override
     public void init(HullModSpecAPI spec) {
@@ -92,55 +98,54 @@ public class KnightRefit extends BaseHullMod {
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
 
-        //I have no idea what I'm doing
+        if (topArmorAvg == 0 && middleArmorAvg == 0 && rearArmorAvg == 0f) { //run once
+            List<Float> topHull = new ArrayList<>(), topArmor = new ArrayList<>(), middleHull = new ArrayList<>(), middleArmor = new ArrayList<>(), rearHull = new ArrayList<>(), rearArmor = new ArrayList<>();
 
-        List<Float> topHull = new ArrayList<>(), topArmor = new ArrayList<>(), middleHull = new ArrayList<>(), middleArmor = new ArrayList<>(), rearHull = new ArrayList<>(), rearArmor = new ArrayList<>();
-        float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
-
-        if (ship.getChildModulesCopy() != null) {
-            for(ShipAPI module : ship.getChildModulesCopy()) {
-                String ID = module.getVariant().getHullVariantId();
-                if (ID.contains("_tl") || ID.contains("_tr")) {
-                    topArmor.add(module.getArmorGrid().getArmorRating()/module.getHullSpec().getArmorRating() * 100f);
-                    topHull.add(module.getHullLevel()/module.getMaxHitpoints() * 100f);
+            if (ship.getChildModulesCopy() != null) {
+                for (ShipAPI module : ship.getChildModulesCopy()) {
+                    String ID = module.getVariant().getHullVariantId();
+                    if (ID.contains("_tl") || ID.contains("_tr")) {
+                        topArmor.add(module.getArmorGrid().getArmorRating() / module.getHullSpec().getArmorRating() * 100f);
+                        topHull.add(module.getHullLevel() / module.getMaxHitpoints() * 100f);
+                    }
+                    if (ID.contains("_ml") || ID.contains("_mr")) {
+                        middleArmor.add(module.getArmorGrid().getArmorRating() / module.getHullSpec().getArmorRating() * 100f);
+                        middleHull.add(module.getHullLevel() / module.getMaxHitpoints() * 100f * 100f);
+                    }
+                    if (ID.contains("_ll") || ID.contains("_lr")) {
+                        rearArmor.add(module.getArmorGrid().getArmorRating() / module.getHullSpec().getArmorRating() * 100f);
+                        rearHull.add(module.getHullLevel() / module.getMaxHitpoints() * 100f * 100f);
+                    }
                 }
-                if (ID.contains("_ml") || ID.contains("_mr")) {
-                    middleArmor.add(module.getArmorGrid().getArmorRating()/module.getHullSpec().getArmorRating() * 100f);
-                    middleHull.add(module.getHullLevel()/module.getMaxHitpoints() * 100f * 100f);
+            }
+
+            for (int i = 0; i < topArmor.size(); i++) {
+                topArmorAvg += topArmor.get(i);
+                topHullAvg += topHull.get(i);
+                if (i == topArmor.size() - 1) {
+                    topArmorAvg = topArmorAvg / (i + 1);
+                    topHullAvg = topHullAvg / (i + 1);
                 }
-                if (ID.contains("_ll") || ID.contains("_lr")) {
-                    rearArmor.add(module.getArmorGrid().getArmorRating()/module.getHullSpec().getArmorRating() * 100f);
-                    rearHull.add(module.getHullLevel()/module.getMaxHitpoints() * 100f * 100f);
+            }
+            for (int i = 0; i < middleArmor.size(); i++) {
+                middleArmorAvg += middleArmor.get(i);
+                middleHullAvg += middleHull.get(i);
+                if (i == middleArmor.size() - 1) {
+                    middleArmorAvg = middleArmorAvg / (i + 1);
+                    middleHullAvg = middleHullAvg / (i + 1);
+                }
+            }
+            for (int i = 0; i < rearArmor.size(); i++) {
+                rearArmorAvg += rearArmor.get(i);
+                rearHullAvg += rearHull.get(i);
+                if (i == rearArmor.size() - 1) {
+                    rearArmorAvg = rearArmorAvg / (i + 1);
+                    rearHullAvg = rearHullAvg / (i + 1);
                 }
             }
         }
 
-        for (int i = 0; i < topArmor.size(); i++) {
-            topArmorAvg += topArmor.get(i);
-            topHullAvg += topHull.get(i);
-            if (i == topArmor.size() - 1) {
-                topArmorAvg = topArmorAvg / (i + 1);
-                topHullAvg = topHullAvg / (i + 1);
-            }
-        }
-        for (int i = 0; i < middleArmor.size(); i++) {
-            middleArmorAvg += middleArmor.get(i);
-            middleHullAvg += middleHull.get(i);
-            if (i == middleArmor.size() - 1) {
-                middleArmorAvg = middleArmorAvg / (i + 1);
-                middleHullAvg = middleHullAvg / (i + 1);
-            }
-        }
-        for (int i = 0; i < rearArmor.size(); i++) {
-            rearArmorAvg += rearArmor.get(i);
-            rearHullAvg += rearHull.get(i);
-            if (i == rearArmor.size() - 1) {
-                rearArmorAvg = rearArmorAvg / (i + 1);
-                rearHullAvg = rearHullAvg / (i + 1);
-            }
-        }
-
-        tooltip.addSectionHeading("Module status", Alignment.MID, 10);
+        tooltip.addSectionHeading("Module specs", Alignment.MID, 10);
         if(topHullAvg != 0f) {
             tooltip.addPara("Fore Armor: " + Math.round(topArmorAvg), 0f);
             tooltip.addPara("Fore Hull: " + Math.round(topHullAvg), 0f);

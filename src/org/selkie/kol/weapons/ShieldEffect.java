@@ -33,6 +33,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     private ShipAPI ship;
     private CombatEngineAPI engine;
     private ShieldAPI shield;
+    private Color baseColorRing;
+    private Color baseColorInner;
     private final IntervalUtil tracker = new IntervalUtil(0.1f, 0.3f); //Seconds
     public float lastUpdatedTime = 0f;
     public List<FutureHit> incomingProjectiles = new ArrayList<>();
@@ -49,6 +51,10 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
             runOnce=true;
             ship=weapon.getShip();
             shield=ship.getShield();
+            if (shield!= null) {
+                baseColorRing = shield.getRingColor();
+                baseColorInner = shield.getInnerColor();
+            }
             this.engine=engine;
         }
         
@@ -67,6 +73,12 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
 //                MagicUI.drawSystemBar(ship,new Color(color,1,(1-color)/2), shieldT/MAX_SHIELD, 0);
                 MagicUI.drawInterfaceStatusBar(ship, 1-shieldT/MAX_SHIELD, new Color(color*0.4f+0.6f,1f-0.4f*color,0), null, 0, "SHIELD", (int) (100-100*shieldT/MAX_SHIELD));
 
+                //FX
+
+                Color shieldColorRing = new Color(Math.min(1, (baseColorRing.getRed()/255)*(1-color)+(color)), Math.min(1, (baseColorRing.getGreen()/255)*(1-color)+(0.25f*color)), Math.min(1, (baseColorRing.getBlue()/255)*(1-color)+(0.25f*color)));
+                Color shieldColorInner = new Color(Math.min(1, (baseColorInner.getRed()/255)*(1-color)+(color)),Math.min(1, (baseColorInner.getGreen()/255)*(1-color)+(0.25f*color)),Math.min(1, (baseColorInner.getBlue()/255)*(1-color)+(0.25f*color)));
+                shield.setInnerColor(shieldColorInner);
+                shield.setRingColor(shieldColorRing);
                 //AI
 
                 //If debug is turned on, weapons that can hit the ship will be blue, and projectiles that can hit the ship will be magenta
