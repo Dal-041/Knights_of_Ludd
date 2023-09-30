@@ -75,8 +75,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
 
                 //FX
 
-                Color shieldColorRing = new Color(Math.min(1, (baseColorRing.getRed()/255)*(1-color)+(color)), Math.min(1, (baseColorRing.getGreen()/255)*(1-color)+(0.25f*color)), Math.min(1, (baseColorRing.getBlue()/255)*(1-color)+(0.25f*color)));
-                Color shieldColorInner = new Color(Math.min(1, (baseColorInner.getRed()/255)*(1-color)+(color)),Math.min(1, (baseColorInner.getGreen()/255)*(1-color)+(0.25f*color)),Math.min(1, (baseColorInner.getBlue()/255)*(1-color)+(0.25f*color)));
+                Color shieldColorRing = new Color(Math.min(1, (baseColorRing.getRed()/255)*(1-color)+(color)), Math.min(1, (baseColorRing.getGreen()/255)*(1-color)+(0.25f*color)), Math.min(1, (baseColorRing.getBlue()/255)*(1-color)+(0.25f*color)), baseColorRing.getAlpha()/255);
+                Color shieldColorInner = new Color(Math.min(1, (baseColorInner.getRed()/255)*(1-color)+(color)),Math.min(1, (baseColorInner.getGreen()/255)*(1-color)+(0.25f*color)),Math.min(1, (baseColorInner.getBlue()/255)*(1-color)+(0.25f*color)), baseColorRing.getAlpha()/255);
                 shield.setInnerColor(shieldColorInner);
                 shield.setRingColor(shieldColorRing);
                 //AI
