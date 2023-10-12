@@ -11,13 +11,15 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 113,
   "viewOffset": 0,
-  "builtInMods":[
-	"kol_refit"
+  "builtInMods": [
+    "kol_refit"
   ],
   "builtInWeapons": {
     "WS0012": "kol_pusherplate_lt_but_cute",
     "WS0013": "eis_blinker_white30",
     "WS0014": "eis_blinker_white30",
+    "WS0015": "kol_deco_snowdrop_tl",
+    "WS0016": "kol_deco_snowdrop_tr",
     "WS0018": "eis_blinker_white",
     "WS0019": "eis_blinker_white"
   },
@@ -29,7 +31,8 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 45,
-      "locations": [-13, 25]
+      "locations": [-13, 25],
+      "renderOrderMod": 200
     },
     {
       "id": "WS0004",
@@ -38,7 +41,8 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -45,
-      "locations": [-13, -25]
+      "locations": [-13, -25],
+      "renderOrderMod": 200
     },
     {
       "id": "WS0001",
@@ -47,7 +51,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 30,
-      "locations": [22, 17]
+      "locations": [22, 17],
+      "renderOrderMod": 200
     },
     {
       "id": "WS0002",
@@ -56,7 +61,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -30,
-      "locations": [22, -17]
+      "locations": [22, -17],
+      "renderOrderMod": 200
     },
     {
       "id": "WS0006",
@@ -92,7 +98,8 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [21, 39]
+      "locations": [21, 39],
+      "renderOrderMod": 101
     },
     {
       "id": "WS0011",
@@ -101,7 +108,8 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [21, -39]
+      "locations": [21, -39],
+      "renderOrderMod": 101
     },
     {
       "id": "WS0008",
@@ -149,15 +157,6 @@
       "locations": [6.5, -6.5]
     },
     {
-      "id": "WS0015",
-      "size": "LARGE",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [13, -0]
-    },
-    {
       "id": "WS0018",
       "size": "SMALL",
       "type": "DECORATIVE",
@@ -183,6 +182,26 @@
       "arc": 0,
       "angle": 180,
       "locations": [-68.5, -0]
+    },
+    {
+      "id": "WS0015",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [21, 39],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0016",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [21, -39],
+      "renderOrderMod": 100
     }
   ],
   "engineSlots": [
