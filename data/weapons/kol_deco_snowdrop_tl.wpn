@@ -1,5 +1,5 @@
 {
-	"id":"kol_deco_larkspur_tr",  # this id must match what's in the spreadsheet
+	"id":"kol_deco_snowdrop_tl",  # this id must match what's in the spreadsheet
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"LARGE",
@@ -7,8 +7,8 @@
 	"showDamageWhenDecorative":true,
 	"renderBelowAllWeapons":false,
 	#"renderHints":["RENDER_ADDITIVE"],	
-	"turretSprite":"graphics/ships/decos/kol_deco_larkspur_tr.png",
-	"hardpointSprite":"graphics/ships/decos/kol_deco_larkspur_tr.png",
+	"turretSprite":"graphics/ships/decos/kol_deco_snowdrop_tl.png",
+	"hardpointSprite":"graphics/ships/decos/kol_deco_snowdrop_tl.png",
 	"turretOffsets":[0, 0],
 	"turretAngleOffsets":[0],
 	"hardpointOffsets":[0, 0],
