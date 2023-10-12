@@ -1,4 +1,5 @@
 faction
 data/world/factions/knights_of_selkie.faction
-data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/world/factions/aiblob.faction
-data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/world/factions/aiblobtwo.faction
+data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/world/factions/kol_dawn.faction
+data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/world/factions/kol_dusk.faction
+data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/world/factions/kol_elysians.faction

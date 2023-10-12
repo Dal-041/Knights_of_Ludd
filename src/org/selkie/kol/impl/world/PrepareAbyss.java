@@ -1,44 +1,94 @@
 package org.selkie.kol.impl.world;
 
 import java.awt.Color;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
-import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
 import com.fs.starfarer.api.impl.campaign.procgen.StarAge;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.DerelictThemeGenerator;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.MiscellaneousThemeGenerator;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.ThemeGenerator;
-import com.fs.starfarer.api.impl.campaign.rulecmd.missions.GateCMD;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
-import org.selkie.kol.plugins.KOL_ModPlugin;
-
-import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.*;
-import static com.fs.starfarer.api.impl.campaign.world.TTBlackSite.NASCENT_WELL_KEY;
 
 public class PrepareAbyss {
+
+	public static final String dawnID = "kol_dawn";
+	public static final String duskID = "kol_dusk";
+	public static final String elysianID = "kol_elysians";
 
     public static void generate(SectorAPI sector) {
     	GenerateElysia(sector);
     	GenerateUnderworld(sector);
     	GenerateLunaSea(sector);
 
+		for (FactionAPI faction:Global.getSector().getAllFactions()) {
+			if (!faction.getId().equals(dawnID)) {
+				faction.setRelationship(dawnID, -100);
+			}
+			if (!faction.getId().equals(duskID)) {
+				faction.setRelationship(duskID, -100);
+			}
+			if (!faction.getId().equals(elysianID)) {
+				faction.setRelationship(elysianID, -100);
+			}
+		}
+
         //PrepareForRelations(sector);
     }
-    
+
+	/*
+    POOL A
+        comprises 60% of the fleet
+        is always the star system owner (ie, luna sea fleets will always be 60% dawntide boats)
+
+    POOL B
+        randomly picked
+        can be one of the other factions that is NOT the star system owner (ie, if luna sea fleet, pool B can potentially also have Dusk or Elysian ships)
+        only boss fleets should ever be 100% single-faction
+        [?] never spawns capitals/supercapitals
+        the following can also be used :
+        Remnants
+        Domain Derelicts
+        Domres (HMI)
+        Lostech (Tahlan)
+        Dustkeepers (SOTF)
+        DAWNTIDE-ONLY: Enigma (LOST_SECTOR)
+     */
+
+	/*
+	Method 1:
+		if (Global.getSettings().getHullSpec("etc") != null { Global.getSettings().getHullSpec("etc").addTag("kol_xyz"); }
+
+	method 2:
+
+	    for (String ship : Global.getSector().getFaction(Factions.HEGEMONY).getKnownShips()) {
+            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsShip(ship)) {
+                Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownShip(ship, true);
+            }
+        }
+        for (String baseShip : Global.getSector().getFaction(Factions.HEGEMONY).getAlwaysKnownShips()) {
+            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).useWhenImportingShip(baseShip)) {
+                Global.getSector().getFaction(IRONSTANDSETERNAL).addUseWhenImportingShip(baseShip);
+            }
+        }
+        for (String fighter : Global.getSector().getFaction(Factions.HEGEMONY).getKnownFighters()) {
+            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsFighter(fighter)) {
+                Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownFighter(fighter, true);
+            }
+        }
+        for (String weapon : Global.getSector().getFaction(Factions.HEGEMONY).getKnownWeapons()) {
+            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsWeapon(weapon)) {
+               Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownWeapon(weapon, true);
+            }
+        }
+	 */
+
     public static void GenerateElysia(SectorAPI sector) {
     	
     	int beeg = 1500;
@@ -153,15 +203,15 @@ public class PrepareAbyss {
 		system.addAsteroidBelt(elysia, 200, 4024, 1024, 40, 40, "kol_asteroidBelt", null);
 		system.addAsteroidBelt(elysia, 200, 4536, 1024, 40, 60, "kol_asteroidBelt", null);
 
-        SectorEntityToken derelict1 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", KOL_ModPlugin.duskID);
+        SectorEntityToken derelict1 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.duskID);
         derelict1.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3100, 20);
-        SectorEntityToken derelict2 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", KOL_ModPlugin.duskID);
+        SectorEntityToken derelict2 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.duskID);
         derelict2.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3400, 25);
-        SectorEntityToken derelict3 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", KOL_ModPlugin.duskID);
+        SectorEntityToken derelict3 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.duskID);
         derelict3.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3700, 30);
-        SectorEntityToken derelict4 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", KOL_ModPlugin.duskID);
+        SectorEntityToken derelict4 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.duskID);
         derelict4.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4000, 35);
-        SectorEntityToken derelict5 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", KOL_ModPlugin.duskID);
+        SectorEntityToken derelict5 = DerelictThemeGenerator.addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.duskID);
         derelict5.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4400, 40);
     	
         JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("abyss_elysia_jp", "First Trial");
@@ -180,7 +230,7 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		ElysianSeededFleetManager fleets = new ElysianSeededFleetManager(system, 3, 5, 10, 50, 0.95f);
+		SeededFleetManagerElysian fleets = new SeededFleetManagerElysian(system, 3, 5, 10, 50, 0.95f);
 		system.addScript(fleets);
 
     }
@@ -217,7 +267,7 @@ public class PrepareAbyss {
 //		GateCMD.notifyScanned(gate);
 //		GateEntityPlugin.getGateData().scanned.add(gate);
 
-		ElysianSeededFleetManager fleets = new ElysianSeededFleetManager(system, 3, 5, 10, 50, 0.95f);
+		SeededFleetManagerDusk fleets = new SeededFleetManagerDusk(system, 3, 5, 10, 50, 0.95f);
 		system.addScript(fleets);
 	}
 
@@ -252,6 +302,9 @@ public class PrepareAbyss {
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
 		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 30500, -30500, 0);
+		if (sector.getDifficulty().equals(Difficulties.EASY)) {
+			luna.setName("The Luwuna Sea");
+		}
 		system.setDoNotShowIntelFromThisLocationOnMap(true);
 
 		SectorEntityToken star_corona = system.addTerrain("kol_corona",
@@ -266,9 +319,23 @@ public class PrepareAbyss {
 		//system.generateAnchorIfNeeded();
 		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("abyss_lunasea_jp", "Second Trial");
 		//OrbitAPI orbit = Global.getFactory().createCircularOrbit(luna, 90, 10000, 25);
-		jumpPoint.setFixedLocation(8500,-1500);
+		jumpPoint.setFixedLocation(6500,-1500);
 		jumpPoint.setStandardWormholeToHyperspaceVisual();
 		system.addEntity(jumpPoint);
+
+		PlanetAPI first = system.addPlanet("abyss_lunasea_one", luna, "Out There", "barren-bombarded", 50, 150, 10900, 3000000);
+		PlanetAPI second = system.addPlanet("abyss_lunasea_two", luna, "Doubt", "desert", 29, 170, 6100, 3000000);
+		PlanetAPI third = system.addPlanet("abyss_lunasea_three", luna, "Wild", "jungle", 12, 70, 15800, 3000000);
+		PlanetAPI fourth = system.addPlanet("abyss_lunasea_four", jumpPoint, "Tenuous Grip", "frozen", 190, 250, 500, 3000000);
+		PlanetAPI fifth = system.addPlanet("abyss_lunasea_five", luna, "Savage", "barren", 336, 145, 12300, 3000000);
+		PlanetAPI sixth = system.addPlanet("abyss_lunasea_six", luna, "Feral", "toxic", 306, 165, 8100, 3000000);
+
+		first.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		second.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		third.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		fourth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		fifth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		sixth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
 
 		system.autogenerateHyperspaceJumpPoints(false, false); //begone evil clouds
 		HyperspaceTerrainPlugin plugin = (HyperspaceTerrainPlugin) Misc.getHyperspaceTerrain().getPlugin();
@@ -279,7 +346,7 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		ElysianSeededFleetManager fleets = new ElysianSeededFleetManager(system, 3, 5, 10, 50, 0.95f);
+		SeededFleetManagerDawn fleets = new SeededFleetManagerDawn(system, 3, 5, 10, 50, 0.95f);
 		system.addScript(fleets);
 	}
 }

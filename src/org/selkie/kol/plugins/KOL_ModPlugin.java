@@ -18,7 +18,6 @@ import exerelin.campaign.SectorManager;
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String ModID = "Knights of Ludd";
 	public static final String kolID = "knights_of_selkie";
-	public static final String duskID = "kol_dusk";
 
 	public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
 	boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");

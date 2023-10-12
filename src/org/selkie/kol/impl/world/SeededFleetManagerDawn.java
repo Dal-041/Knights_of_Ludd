@@ -1,30 +1,26 @@
 package org.selkie.kol.impl.world;
 
-import java.util.Random;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
-import com.fs.starfarer.api.impl.campaign.ids.*;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantAssignmentAI;
-import org.lazywizard.lazylib.MathUtils;
-import org.lwjgl.util.vector.Vector2f;
-
 import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.BaseFIDDelegate;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfig;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfigGen;
+import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.fleets.SeededFleetManager;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
-import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantAssignmentAI;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.plugins.KOL_ModPlugin;
 
-public class ElysianSeededFleetManager extends SeededFleetManager {
+import java.util.Random;
+
+public class SeededFleetManagerDawn extends SeededFleetManager {
 
     public static class ElysianFleetInteractionConfigGen implements FIDConfigGen {
         public FIDConfig createConfig() {
@@ -32,7 +28,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
             config.showTransponderStatus = false;
             config.delegate = new BaseFIDDelegate() {
                 public void battleContextCreated(InteractionDialogAPI dialog, BattleCreationContext bcc) {
-                    bcc.aiRetreatAllowed = false;
+                    bcc.aiRetreatAllowed = true; //false
                     //bcc.objectivesAllowed = false;
                 }
             };
@@ -44,7 +40,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
     protected int maxPts;
     protected float activeChance;
 
-    public ElysianSeededFleetManager(StarSystemAPI system, int minFleets, int maxFleets, int minPts, int maxPts, float activeChance) {
+    public SeededFleetManagerDawn(StarSystemAPI system, int minFleets, int maxFleets, int minPts, int maxPts, float activeChance) {
         super(system, 1f);
         this.minPts = minPts;
         this.maxPts = maxPts;
@@ -63,7 +59,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
 
         FleetParamsV3 params = new FleetParamsV3(
                 system.getLocation(),
-                Factions.REMNANTS, //KOL_ModPlugin.duskID,
+                PrepareAbyss.dawnID,
                 5f,
                 FleetTypes.PATROL_LARGE,
                 MathUtils.getRandomNumberInRange(60f,200f), // combatPts
@@ -76,7 +72,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
         );
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
-        params.commander = createDuskCaptain();
+        params.commander = createDawnCaptain();
         params.officerNumberMult = 5f;
         params.officerLevelBonus = 0;
         params.random = random;
@@ -154,7 +150,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
 
     public static void addElysianInteractionConfig(CampaignFleetAPI fleet) {
         fleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
-                new org.selkie.kol.impl.world.ElysianSeededFleetManager.ElysianFleetInteractionConfigGen());
+                new SeededFleetManagerDawn.ElysianFleetInteractionConfigGen());
     }
 
     public static void spawnElysiaPatrollers() {
@@ -180,7 +176,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
             FleetParamsV3 params = new FleetParamsV3(
                     null,
                     null,
-                    KOL_ModPlugin.duskID,
+                    PrepareAbyss.dawnID,
                     5f,
                     FleetTypes.PATROL_LARGE,
                     MathUtils.getRandomNumberInRange(200f,400f), // combatPts
@@ -193,7 +189,7 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
             );
             params.averageSMods = 1;
             params.ignoreMarketFleetSizeMult = true;
-            params.commander = createDuskCaptain();
+            params.commander = createDawnCaptain();
             params.officerNumberMult = 5f;
             params.officerLevelBonus = 0;
 
@@ -205,8 +201,8 @@ public class ElysianSeededFleetManager extends SeededFleetManager {
         }
     }
 
-    public static PersonAPI createDuskCaptain() {
-        return MagicCampaign.createCaptainBuilder(KOL_ModPlugin.duskID)
+    public static PersonAPI createDawnCaptain() {
+        return MagicCampaign.createCaptainBuilder(PrepareAbyss.duskID)
                 .setIsAI(true)
                 .setAICoreType("alpha_core")
                 .setPersonality(Personalities.AGGRESSIVE)

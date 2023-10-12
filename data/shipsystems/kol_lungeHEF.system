@@ -1,0 +1,22 @@
+{
+    "id":"kol_lungeHEF",
+    #"type":"STAT_MOD",
+	"type":"ENGINE_MOD",
+    "aiType":"MANEUVERING_JETS",
+
+    "statsScript":"org.selkie.kol.shipsystems.LungeHEFStats",
+    #"runScriptWhilePaused":true, # only for the player's ship
+
+    "engineGlowLengthMult":1.5,
+
+    "flameoutOnImpactChance":0,
+
+	"useSound":"system_burn_drive_deactivate",
+    "outOfUsesSound":"engine_disabled",
+
+    "aiHints":{
+		"activeSpeedIncrease":200,
+		"burstMovementPotential":50,
+		"averageSpeedIncrease":100,
+    }
+}
