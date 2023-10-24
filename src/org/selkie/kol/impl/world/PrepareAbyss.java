@@ -102,7 +102,7 @@ public class PrepareAbyss {
     	StarSystemAPI system = sector.createStarSystem("Elysia");
     	system.getLocation().set((int)posX, (int)posY);
     	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_edf_elysiabg.png");
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
+		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_elysia_theme");
 
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
@@ -247,7 +247,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_UNSAFE);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dusk.jpg");
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
+		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_underworld_theme");
 
 		system.getLocation().set(2600, -3000);
 		SectorEntityToken center = system.initNonStarCenter();
@@ -299,7 +299,7 @@ public class PrepareAbyss {
 					4, 4, StarAge.AVERAGE); // number of cells in texture
 		}
 
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
+		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_lunasea_theme");
 
 		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 30500, -30500, 0);
 		if (sector.getDifficulty().equals(Difficulties.EASY)) {

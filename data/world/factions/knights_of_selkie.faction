@@ -239,6 +239,15 @@
 			"faithful":10,
 		},
 	},
+	"music":{
+		"theme":"music_kol_market_neutral",
+		"market_neutral":"music_kol_market_neutral",
+		"market_hostile":"music_kol_market_hostile",
+		"market_friendly":"music_kol_market_friendly",
+		"encounter_neutral":"music_kol_encounter_neutral",
+		"encounter_hostile":"music_kol_encounter_hostile",
+		"encounter_friendly":"music_kol_encounter_friendly",
+	},
 	"portraits":{
 		"standard_male":[
 			"graphics/portraits/portrait_luddic00.png",

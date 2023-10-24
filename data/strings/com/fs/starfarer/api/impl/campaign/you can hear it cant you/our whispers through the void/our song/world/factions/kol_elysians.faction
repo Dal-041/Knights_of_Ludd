@@ -171,7 +171,10 @@
 		"ai_cores",
 	],
 	"music":{
-		"encounter_hostile":"music_tritach_encounter_hostile",
+		"theme":"music_kol_elysia_system",
+		"encounter_neutral":"music_kol_elysia_encounter",
+		"encounter_hostile":"music_kol_elysia_encounter",
+		"encounter_friendly":"music_kol_elysia_encounter",
 	},
 	"portraits":{
 		"standard_male":[

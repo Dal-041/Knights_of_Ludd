@@ -9,6 +9,7 @@ import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.econ.EconomyAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI.SurveyLevel;
+import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
@@ -34,6 +35,7 @@ public class GenerateKnights {
         SectorEntityToken cygnus = Canaan.addCustomEntity("kol_cygnus", "Battlestation Cygnus", "station_lowtech2", "knights_of_selkie");
         cygnus.setCircularOrbitPointingDown(Canaan.getEntityById("canaan_gate"), 33, 275, 99);
         cygnus.setCustomDescriptionId("kol_cygnus_desc");
+		cygnus.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         
         addMarketplace("knights_of_selkie", cygnus, null, "Battlestation Cygnus", 4,
         		new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
@@ -61,6 +63,7 @@ public class GenerateKnights {
         SectorEntityToken lyra = Eos.addCustomEntity("kol_lyra", "Star Keep Lyra", "station_lowtech3", "knights_of_selkie");
         lyra.setCircularOrbitPointingDown(Eos.getEntityById("eos_exodus_gate"), 33, 275, 99);
         lyra.setCustomDescriptionId("kol_lyra_desc");
+		lyra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         
         addMarketplace("knights_of_selkie", lyra, null, "Star Keep Lyra", 5,
         		new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
