@@ -32,7 +32,7 @@
 		"music_kol_encounter_friendly":[
 			{
 				"source":"sounds/music",
-				"volume":0.8,
+				"volume":0.65,
 				"files":[
 					"kol_fleet_friendly.ogg",
 				],
@@ -42,7 +42,7 @@
 		"music_kol_encounter_hostile":[
 			{
 				"source":"sounds/music",
-				"volume":0.8,
+				"volume":0.65,
 				"files":[
 					"kol_fleet_hostile.ogg",
 				],
@@ -52,7 +52,7 @@
 		"music_kol_encounter_neutral":[
 			{
 				"source":"sounds/music",
-				"volume":0.8,
+				"volume":0.65,
 				"files":[
 					"kol_fleet_neutral.ogg",
 				],
@@ -75,7 +75,7 @@
 				"source":"sounds/music",
 				"volume":0.8,
 				"files":[
-					"kol_hostile_market.ogg",
+					"kol_market_hostile.ogg",
 				],
 				"randomStart":true, 
 			},
@@ -140,14 +140,14 @@
 				"randomStart":true,
 			},
 		],
-		"music_kol_underworld_fleet":[
+		"music_kol_underworld_encounter":[
 			{
 				"source":"sounds/music",
 				"volume":0.8,
 				"files":[
 					"kol_abyss_dusk_encounter.ogg",
-					#"kol_abyss_dusk_encounter2.ogg",
-					#"kol_abyss_dusk_encounter_siren.ogg",
+					"kol_abyss_dusk_encounter2.ogg",
+					"kol_abyss_dusk_encounter_siren.ogg",
 				],
 				"randomStart":true, 
 			},

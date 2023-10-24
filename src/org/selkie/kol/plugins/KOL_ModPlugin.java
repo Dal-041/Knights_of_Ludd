@@ -21,16 +21,17 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
 	boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
-	
+	boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
+
 	public static final String MEMKEY_KOL_INVICTUS_SPAWNED = "$kol_lp_invictus_spawned";
 	public static final String MEMKEY_KOL_RETRIBUTION_SPAWNED = "$kol_lp_retribution_spawned";
 
 	@Override
 	public void onApplicationLoad() {
-		if (hasGraphicsLib) {
+		if (hasGraphicsLib && hasKOLGraphics) {
 			ShaderLib.init();
-			LightData.readLightDataCSV("data/lights/abyss_light_data.csv");
-			TextureData.readTextureDataCSV("data/lights/abyss_texture_data.csv");
+			LightData.readLightDataCSV("data/lights/kol_light_data.csv");
+			TextureData.readTextureDataCSV("data/lights/kol_texture_data.csv");
 		}
 	}
 
