@@ -5,8 +5,8 @@ import com.fs.starfarer.api.combat.ShipAPI
 
 class DuskyShields3 : BaseHullMod() {
 
-    private val INNERLARGE = "graphics/fx/kol_shield_fx4.png"
-    private val OUTERLARGE = "graphics/fx/kol_shield_fx4.png"
+    private val INNERLARGE = "graphics/fx/kol_shieldelysia.png"
+    private val OUTERLARGE = "graphics/fx/kol_shieldelysia.png"
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         if (ship.shield != null) {
