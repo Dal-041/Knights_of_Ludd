@@ -11,6 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 235,
   "viewOffset": 0,
+  "builtInMods": [
+    "kol_ea_shields3"
+  ],
   "builtInWeapons": {
     "WS0016": "abyss_deco_edf_engS",
     "WS0017": "abyss_deco_edf_engS",

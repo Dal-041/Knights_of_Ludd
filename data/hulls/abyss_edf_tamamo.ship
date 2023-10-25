@@ -12,6 +12,9 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 97,
   "viewOffset": 0,
+  "builtInMods": [
+    "kol_ea_shields3"
+  ],
   "builtInWings": [
     "abyss_edf_kitsunebi"
   ],
