@@ -12,6 +12,7 @@
   "shieldRadius": 286.5,
   "viewOffset": 0,
   "builtInMods": [
+    "kol_ea_shields2",
     "phasefield",
     "delicate",
     "kol_ea_mist",
