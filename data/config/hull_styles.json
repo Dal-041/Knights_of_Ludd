@@ -53,6 +53,7 @@
 		"shieldInnerColor":[235,125,255,75],
 		"fluxVentCoreColor":[125,0,155,255],
 		"fluxVentFringeColor":[15,150,255,255],
+		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/abyss_dusk_radial_fx.png", # optional, this is the default value
 		"engineLoopSet":"engine_loop", 					# id of entry in sounds.json
 		"engineAccelerateSet":"engine_accelerate",		# id of entry in sounds.json
 		"empLoopSet":"emp_loop",						# id of entry in sounds.json
@@ -86,8 +87,8 @@
 		"fighterRepairFlickerColor":[100,165,255,255],
 		"fighterChipIconColor":[100,165,255,255],
 		"weaponDisabledExplosionColor":[100,165,255,255],
-		"shieldRingColor":[215,255,215,245],
-		"shieldInnerColor":[199,109,97,151],
+		"shieldRingColor":[255,205,60,245],
+		"shieldInnerColor":[255,100,0,151],
 		"fluxVentCoreColor":[30,70,255,255],
 		"fluxVentFringeColor":[150,255,50,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png", # optional, this is the default value
