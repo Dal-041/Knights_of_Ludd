@@ -85,7 +85,7 @@ A Mimosa provides effective support for a balanced fleet by painting opportune e
 - better stats
 - 2 extra small mounts
 
-To confuse to Mudskipper and a Sundew is to confuse a Ludd with a Pather - or, indeed, a Knight. Thought there are similarities, the Sundew is a fierce, shielded, armored, and highly mobile ship capable of quickly dusting any captains not taking it seriously.
+To confuse a Mudskipper and a Sundew is to confuse a Luddic with a Pather - or, indeed, a Knight. Thought there are similarities, the Sundew is a fierce, shielded, armored, and highly mobile ship capable of quickly dusting any captains not taking it seriously.
 
 #### Protea-class high-end frigate
 
