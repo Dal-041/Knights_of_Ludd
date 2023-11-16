@@ -22,7 +22,7 @@ artillery boat hackjob made from destroyed or otherwise totaled onslaughts
 - 1 large missile
 - 2x large ballistics
 - plus some smalls and meds for frontal firepower
-- 6 armor modules (4 of which have builtin range boosted vulcans). Lastly
+- 6 armor modules (4 of which have builtin range boosted vulcans).
 - 2x builtin DEM/TPC precurors
 - long range dumbfire HE TPC beams that have zero tracking
 
@@ -85,7 +85,7 @@ A Mimosa provides effective support for a balanced fleet by painting opportune e
 - better stats
 - 2 extra small mounts
 
-To confuse a Mudskipper and a Sundew is to confuse a Luddic with a Pather - or, indeed, a Knight. Thought there are similarities, the Sundew is a fierce, shielded, armored, and highly mobile ship capable of quickly dusting any captains not taking it seriously.
+To confuse a Mudskipper and a Sundew is to confuse a Luddic with a Pather - or, indeed, a Knight. Though there are similarities, the Sundew is a fierce, shielded, armored, and highly mobile ship capable of quickly dusting any captains not taking it seriously.
 
 #### Protea-class high-end frigate
 
@@ -107,7 +107,7 @@ In a marked departure from standard doctrine, the Protea-class frigate eschews c
 A variant of the Hephaestus assault gun given a larger bore size by luddic engineers and loaded with explosive shells. While undoubtedly effective, the incredible heat generated during fire easily deforms the cannon's more delicate components, and sustained salvoes readily devolve into undirected fire.
 
 #### Llyr
-A variant of the Caelia assault gun modified to fire depleted uranium kinetic penetrators. Excellent at bringing down enemy shields and causing an overload. While certainly effective, the incredible heat generated during fire easily deforms the cannon's more delicate components, and sustained salvoes readily devolve into undirected fire.
+A variant of the Caelia assault gun modified to fire depleted uranium kinetic penetrators. Excellent at bringing down enemy shields and causing an overload. While undoubtedly effective, the incredible heat generated during fire easily deforms the cannon's more delicate components, and sustained salvoes readily devolve into undirected fire.
 
 #### Lunete
 
@@ -120,18 +120,18 @@ A powerful energy torpedo that generates a lance of plasma though the controlled
 
 #### Tor
 
-A lower caliber and less demanding version of the Mauler cannon, firing antimatter charged munitions that are highly effective at destroying enemy armor. Manufactoring such an advanced weapon system is beyond the normal means of the Church, and most of these are traded by the Hegemony as part armament transfer treaties that date back to the First AI War.
+A lower caliber and less demanding version of the Mauler cannon, firing antimatter charged munitions that are highly effective at destroying enemy armor. Manufacturing such an advanced weapon system is beyond the normal means of the Church, and most of these are traded by the Hegemony as part armament transfer treaties that date back to the First AI War.
 
 ## Skills
 
 ### Phase transposition (Luna Sea)
 Synchronize the fleets drive bubble with subtle fluctuations in ambient phase space, allowing near instantaneous displacement to the "Luna Sea" star system.
 
-A successful transposition creates persistent deformations within the target system's phase space, preventing repeat transpositions for a period of three months. The safety and-long term effects of this manuever, both on crew and stellar objects, are completely unknown. 
+A successful transposition creates persistent deformations within the target system's phase space, preventing repeat transpositions for a period of three months. The safety and long-term effects of this maneuver, both on crew and stellar objects, are completely unknown. 
 
 ## Hullmods 
 ### KOL MODIFICATIONS
 
-Unable or unwilling to service the complex powerplants and ship nanoforges that allow the deployment of modern shield and ablative armor systems, the defensive strategy of the Knights of Ludd necesarilly centers around much simpler disposable external armor plates backed up by older capacitor-based shield screens. While such doctrine can be effective when ships are deployed in large numbers, it is decidedly less so when ships are forced to operate alone or in small groups.
+Unable or unwilling to service the complex powerplants and ship nanoforges that allow the deployment of modern shield and ablative armor systems, the defensive strategy of the Knights of Ludd necessarily centers around much simpler disposable external armor plates backed up by older capacitor-based shield screens. While such doctrine can be effective when ships are deployed in large numbers, it is decidedly less so when ships are forced to operate alone or in small groups.
 
 Although any ship that loses its external armor plates is effectively crippled, the accompanying mass reduction will at least allow it to perform a rapid retreat.
