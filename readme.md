@@ -1,7 +1,7 @@
 # Knights of Ludd
 
 ## Credits
-
+- Code: Dal, Starficz, Nia
 - Writing: Wisp, WMGreywind
 - Sprite help: Sleepyfish, Alfonzo, Nia
 - Music: Haplogynae
