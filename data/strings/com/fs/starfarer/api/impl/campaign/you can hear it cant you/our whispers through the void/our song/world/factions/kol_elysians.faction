@@ -1,8 +1,8 @@
 {
 	"id":"kol_elysians",
-    "color":[125,125,125,255],
-    "secondaryUIColor":[25,115,10,255],
-	"secondarySegments":3,
+    "color":[208,0,0,255],
+    "secondaryUIColor":[255,253,222,255],
+	"secondarySegments":18,
 	
 	"baseUIColor":[125,125,125,255],
 	"darkUIColor":[32,0,32,175],

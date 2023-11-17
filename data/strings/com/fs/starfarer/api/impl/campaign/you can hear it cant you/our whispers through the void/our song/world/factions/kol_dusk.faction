@@ -1,7 +1,7 @@
 {
 	"id":"kol_dusk",
-    "color":[125,125,125,255],
-    "secondaryUIColor":[25,115,10,255],
+    "color":[171,95,176,255],
+    "secondaryUIColor":[25,25,25,255],
 	"secondarySegments":3,
 	
 	"baseUIColor":[125,125,125,255],

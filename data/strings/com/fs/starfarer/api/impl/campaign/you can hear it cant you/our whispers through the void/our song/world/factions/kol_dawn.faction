@@ -1,8 +1,8 @@
 {
 	"id":"kol_dawn",
-    "color":[125,125,125,255],
-    "secondaryUIColor":[25,115,10,255],
-	"secondarySegments":3,
+    "color":[25,200,155,255],
+    "secondaryUIColor":[0,255,100,255],
+	"secondarySegments":18,
 	
 	"baseUIColor":[125,125,125,255],
 	"darkUIColor":[32,0,32,175],
