@@ -228,10 +228,10 @@ public class LidarStats extends BaseShipSystemScript {
 		
 		// always wait a quarter of a second before starting to fire the targeting lasers
 		// this is the worst-case turn time required for the dishes to face front
-		// doing this to keep the timing of the lidarStats ping sounds consistent relative
+		// doing this to keep the timing of the lidar ping sounds consistent relative
 		// to when the windup sound plays
 		float fireThreshold = 0.25f / 3.25f;
-		fireThreshold += 0.02f; // making sure there's only 4 lidarStats pings; lines up with the timing of the lidardish weapon
+		fireThreshold += 0.02f; // making sure there's only 4 lidar pings; lines up with the timing of the lidardish weapon
 		//fireThreshold = 0f;
 		for (LidarDishData data : dishData) {
 			boolean skip = data.phase % 1f > 1f / data.count;

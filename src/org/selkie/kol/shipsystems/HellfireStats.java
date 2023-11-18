@@ -1,9 +1,9 @@
-package data.shipsystems.scripts;
+package org.selkie.kol.shipsystems;
 
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 
-public class kol_hellfirestats extends BaseShipSystemScript {
+public class HellfireStats extends BaseShipSystemScript {
 
 	public static final float WEAPON_BONUS = 0.3f;
 	//public static final float DAMAGE_BONUS = 0.3f;
