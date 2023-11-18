@@ -1,0 +1,30 @@
+id,trigger,conditions,script,text,options,notes
+#RULESET_NAME KOL,,,,,,
+,,,,,,
+# relationship level descriptions,,,,,,
+,,,,,,
+# good,,,,,,
+relLevelNeutralKol,RelationshipLevelDesc,"$faction.rel == NEUTRAL
+$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"You stay clear of the Knights of Ludd and they do not hinder your passage. Though you are ever watched within their space, comms are crisp and polite.",,
+relLevelFavorableKol,RelationshipLevelDesc,"$faction.rel == FAVORABLE
+$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"Requests for your destination and purpose are notably lessened, if not absent. You respect their sometimes archaic protocols and they occasionally fail to scowl at your lifestyle.",,
+relLevelWelcomingKol,RelationshipLevelDesc,"$faction.rel == WELCOMING
+$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"The Knights of Ludd watch you with less suspicion than most spacers, and the Church welcomes you to the volumes they control. You are an old hand at navigating their ways of operating and leave behind those technologies which cause alarm to the most wary Knights.",,
+relLevelFriendlyKol,RelationshipLevelDesc,"$faction.rel == FRIENDLY
+$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"The Luddic Faithful of the Church count you as a friend, made welcome in their lands and trusted in dealings. You are allowed to self-moderate unsubtle use of technologies without need for the heavy hand of the Knights of Ludd to guide you toward righteousness.",,
+relLevelCooperativeKol,RelationshipLevelDesc,"$faction.rel == COOPERATIVE
+$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"Truly, you walk with Ludd. Even the most pious curates concede that your worldly actions have bolstered the Faith, and they pray for your wellbeing. The Knights of Ludd put great trust in your handling of technology for righteous cause. Even heretical sects admire your conduct, despite their departures from Church canon.",,
+#END good,,,,,,
+,,,,,,
+# bad,,,,,,
+relLevelSuspiciousKol,RelationshipLevelDesc,"$faction.rel == SUSPICIOUS
+$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"You are seen as a typical spacer; dismissive of Ludd's revelation and scornful of the Church. Your use of high technology is considered reckless, filling a hollow in your soul with false comforts of the material world. Some among the Faithful pity you, others distrust you.",,
+relLevelInhospitableKol,RelationshipLevelDesc,"$faction.rel == INHOSPITABLE
+$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"Curates of the Church of Galactic Redemption offer you as example of one led far astray from Ludd's revelation; one lost in the machine; perhaps not yet lost to Moloch, but an unwitting servant to evil. The Knights look wary upon you, and subject you to unnecessary delays and investigation.",,
+relLevelHostileKol,RelationshipLevelDesc,"$faction.rel == HOSTILE
+$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"The Church considers you a minion of Moloch, a slave to demonic technology. You are a witless ally of Mammon, striving only for the hedonic lucre of miserable unbelievers blind to Ludd's Revelation. Yea, you are an agent of evil and must be treated with as such.",,
+relLevelVengefulKol,RelationshipLevelDesc,"$faction.rel == VENGEFUL
+$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"The Luddic Church portrays you as a wrathful corruptor, sinful and unrepentant, a desecrator of that which is holy and good. The Knights of Ludd have assigned an Inquisitor to your case; even some curates have suggested that it might not be a sin to kill you. It's only a matter of time before some fanatic makes an attempt.",,
+#END bad,,,,,,
+#END relationship level descriptions,,,,,,
+,,,,,,
