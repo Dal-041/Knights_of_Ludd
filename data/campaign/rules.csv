@@ -11,7 +11,7 @@ $faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"Re
 relLevelWelcomingKol,RelationshipLevelDesc,"$faction.rel == WELCOMING
 $faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"The Knights of Ludd watch you with less suspicion than most spacers, and the Church welcomes you to the volumes they control. You are an old hand at navigating their ways of operating and leave behind those technologies which cause alarm to the most wary Knights.",,
 relLevelFriendlyKol,RelationshipLevelDesc,"$faction.rel == FRIENDLY
-$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,You are given preferential treatment over other spacers during security checks. You are allowed to self-moderate unsubtle use of technologies without need for the heavy hand of the Knights of Ludd to guide you toward righteousness.,,
+$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,You are given preferential treatment over other spacers during security checks and are allowed to self-moderate unsubtle use of technologies without need for the heavy hand of the Knights of Ludd to guide you toward righteousness.,,
 relLevelCooperativeKol,RelationshipLevelDesc,"$faction.rel == COOPERATIVE
 $faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,The Knights of Ludd put great trust in your handling of technology for righteous cause. Your presence is seen as a boon to security and your sensor data packages are integrated into sector models. Even the most radical of Knights acknowledge your contribution.,,
 #END good,,,,,,
@@ -24,7 +24,7 @@ $faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"Th
 relLevelHostileKol,RelationshipLevelDesc,"$faction.rel == HOSTILE
 $faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"The Church considers you a minion of Moloch, a slave to demonic technology. You are a witless ally of Mammon, and the Knights treat you as an agent of evil. Begone, or be subject to the wrath of the righteous.",,
 relLevelVengefulKol,RelationshipLevelDesc,"$faction.rel == VENGEFUL
-$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"The Knights of Ludd have assigned an Inquisitor to your case; even some curates have suggested that it might not be a sin to kill you. It's only a matter of time before some fanatic makes an attempt.The Luddic Church portrays you as a wrathful corruptor, sinful and unrepentant, a desecrator of that which is holy and good.",,
+$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"You have been deemed an enemy of Ludd. An Inquisitor has been assigned to carry out your termination, which they will name a righteous deed, just and honorable. The Knights' indoctrinal school for squires identifies you as the slavering dretch of every known demon, from Mammon, Moloch, and Belial all the way down to some possibly created just for you.",,
 #END bad,,,,,,
 #END relationship level descriptions,,,,,,
 ,,,,,,
