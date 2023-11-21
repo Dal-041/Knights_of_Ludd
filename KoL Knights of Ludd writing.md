@@ -1,6 +1,6 @@
 # Nights of Lewdd
 
-## Ships
+## Knights of Ludd
 
 ### Capitals
 
@@ -98,8 +98,6 @@ To confuse a Mudskipper and a Sundew is to confuse a Luddic with a Pather - or, 
 
 In a marked departure from standard doctrine, the Protea-class frigate eschews cumbersome armor modules in favor of armored drones, giving it the freedom to choose when and where to thrust its oversize ballistic weaponry.
 
-## Weapons
-
 ### Large Weapons
 
 #### Caelia
@@ -121,6 +119,14 @@ A powerful energy torpedo that generates a lance of plasma though the controlled
 #### Tor
 
 A lower caliber and less demanding version of the Mauler cannon, firing antimatter charged munitions that are highly effective at destroying enemy armor. Manufacturing such an advanced weapon system is beyond the normal means of the Church, and most of these are traded by the Hegemony as part armament transfer treaties that date back to the First AI War.
+
+## Elysia
+
+### Capitals
+
+#### Ryujin
+
+![](data/strings/com/fs/starfarer/api/impl/campaign/you%20can%20hear%20it%20cant%20you/our%20whispers%20through%20the%20void/our%20song/graphics/ships/abyss_edf_ryujin.png)
 
 ## Skills
 

@@ -38,6 +38,7 @@ kol_alysse,SHIP,"A treasured battleship often found as the leading element withi
 The Alysse once represented an evolutionary step for the militarization of the Orion Drive technology first implemented by the Retribution. The inclusion of robust modular plating serving a dual purpose, augmenting both survivability and relieving strain on the ship's inertial compensators. Strategic command likely remained unconvinced, and no combat or procurement records exist for the ship within known Domain Battlegroups.
 
 Every Alysse-class vessel that exists today is a painstaking reconstruction of the forgotten prototypes, artisanally assembled and sanctified for their sacred duty to the Church.",,,
+abyss_edf_ryujin,SHIP,,,,
 ,,,,,
 # SHIP SYSTEMS,,,,,
 kol_lunge,SHIP_SYSTEM,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,Movement,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,three
