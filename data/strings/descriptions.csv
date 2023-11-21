@@ -13,8 +13,8 @@ kol_lunete,WEAPON,"A powerful energy torpedo that generates a lance of plasma th
 # Small,,,,,
 kol_tor,WEAPON,"A lower caliber and less demanding version of the Mauler cannon, firing antimatter charged munitions that are highly effective at destroying enemy armor. Manufacturing such an advanced weapon system is beyond the normal means of the Church, and most of these are traded by the Hegemony as part armament transfer treaties that date back to the First AI War.",,,
 ,,,,,
-# Built-in
-kol_brimstone,WEAPON,"(WIP) haha fire go fwoom.",,,
+# Built-in,,,,,
+kol_brimstone,WEAPON,"""Point Toward Heathen.""",- Inscription upon Brimstone rim,,
 ,,,,,
 # SHIPS,,,,,
 # Frigates,,,,,
@@ -30,7 +30,7 @@ kol_tamarisk,SHIP,"A prototypal light cruiser from the unification era of the Do
 Despite a successful service record, the class met an unceremonious end when the maturity of the gate system greatly simplified Domain military logistics. Many a Tamarisk was sold to frontier prospecting and defense outfits, but subsequent advancements in targeting technology and the later development of strike craft made the warship’s lack of integral armor an unsustainable vulnerability.",,,
 kol_larkspur,SHIP,"Marveling at the cleanly-engineered systems and the surprising agility of the Larkspur-class cruiser is looked upon with studied disapproval, but, in private, even Knights are said to revel in the ""high-end"" tech it carries. As with most of the hulls birthed by Ceyx, its fury is directed forward, but flanking frigates would do well to tread carefully. The Omni-Lunge Canister Flak system has chastened many would-be opportunists.",,,
 kol_lotus,SHIP,"The Knights' heavy support cruiser lurks behind the front lines, waiting for a target. Once a suitable foe wanders within range, it paints them with its laser array and pounds them with a rain of missiles.",,,
-kol_blaze,SHIP,"Every Blaze is slightly different, as each is hacked together around the largest ship engine available, which is then turned around and tinkered with to jet plasma in a forward-facing stream. The rest of the ship serves to deliver and refuel this engineering monstrosity to enemies of Ludd.",,,
+kol_blaze,SHIP,"Every Blaze is slightly different, as each is hacked together around the largest ship engine available, which is then turned around and tinkered with to jet plasma in a forward-facing stream. The rest of the ship exists only to feed the ravenous hunger of this monster, and deliver its wrath upon the enemies of Ludd.",,,
 # Capital Ships,,,,,
 kol_lunaria,SHIP,"Hulls are rarely ever truly lost in the sector. ""Today's wreck is tomorrow's Hound"" is an old mechanic saying, and the Lunaria-class artillery capital ship is the concept taken to its conclusion; a ship designed from the start to be built from the salvage of unfortunate Onslaughts. The iconic forward prongs chew through targets after being softened by heavy long-range batteries boosted by the terrifying LIDAR Array. Six slabs of armor protect it in close combat, but, like its progenitors, a meager two aft weapons leave it vulnerable to attack from behind.",,,
 kol_alysse,SHIP,"A treasured battleship often found as the leading element within knight armadas, the Alysse achieves a seldomly seen combination of firepower, speed, and resilience through the implementation of novel if somewhat antiquated technologies. Four heavy ablative armor plates with independent flux grids and dampening field generators mount Vulcan and Flak point defense grids, with additional cannons keyed to fire following the activation of the Orion Drive. Defense is simply unparalleled so long as the modular plates hold. 
