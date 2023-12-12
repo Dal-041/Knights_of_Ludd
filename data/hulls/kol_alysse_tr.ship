@@ -6,9 +6,9 @@
   "style": "LOW_TECH",
   "height": 106,
   "width": 108,
-  "center": [42, 42],
-  "collisionRadius": 80.5,
-  "shieldCenter": [0, -0],
+  "center": [-13, -20.5],
+  "collisionRadius": 135.5,
+  "shieldCenter": [62.5, -55],
   "shieldRadius": 77.5,
   "viewOffset": 0,
   "builtInMods": [
@@ -19,8 +19,7 @@
     "kol_vulcan"
   ],
   "builtInWeapons": {
-    "WS0001": "vulcan",
-    "WS0002": "eis_blinker_white"
+    "WS0001": "vulcan"
   },
   "weaponSlots": [
     {
@@ -30,16 +29,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -60,
-      "locations": [0, -0]
-    },
-    {
-      "id": "WS0002",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [10.5, -17.5]
+      "locations": [62.5, -55]
     },
     {
       "id": "WS0003",
@@ -48,7 +38,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -10,
-      "locations": [61, 29.5]
+      "locations": [123.5, -25.5]
     },
     {
       "id": "WS0004",
@@ -57,7 +47,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -30,
-      "locations": [36.5, -4.5]
+      "locations": [99, -59.5]
     },
     {
       "id": "WS0005",
@@ -66,28 +56,28 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -30,
-      "locations": [-3, -56.5]
+      "locations": [59.5, -111.5]
     }
   ],
   "engineSlots": [],
   "bounds": [
-    -34.5, -52.5,
-    -39.5, -45.5,
-    -11.5, 8.5,
-    18.5, 17.5,
-    39.5, 40.5,
-    57.5, 39.5,
-    63, 34.5,
-    63, 26.5,
-    21.5, -28,
-    15, -28,
-    -1.5, -52,
-    -2, -60,
-    -9, -61,
-    -12, -64,
-    -17, -64,
-    -17, -58,
-    -14, -58,
-    -12, -53
+    28, -107.5,
+    23, -100.5,
+    51, -46.5,
+    81, -37.5,
+    102, -14.5,
+    120, -15.5,
+    125.5, -20.5,
+    125.5, -28.5,
+    84, -83,
+    77.5, -83,
+    61, -107,
+    60.5, -115,
+    53.5, -116,
+    50.5, -119,
+    45.5, -119,
+    45.5, -113,
+    48.5, -113,
+    50.5, -108
   ]
 }

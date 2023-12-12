@@ -12,7 +12,8 @@
   "shieldRadius": 170.5,
   "viewOffset": 0,
   "builtInMods": [
-	"kol_refit"
+    "kol_refit",
+    "distributed_fire_control"
   ],
   "builtInWeapons": {
     "WS0013": "kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol",
@@ -134,7 +135,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [70, 60]
+      "locations": [7.5, 5]
     },
     {
       "id": "WS0018",
@@ -143,7 +144,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [70, -60]
+      "locations": [7.5, -5]
     },
     {
       "id": "WS0016",
