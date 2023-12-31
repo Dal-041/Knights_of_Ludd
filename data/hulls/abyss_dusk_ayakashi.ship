@@ -16,7 +16,8 @@
     "phasefield",
     "delicate",
     "kol_ea_mist",
-    "kol_ea_sparkle"
+    "kol_ea_sparkle",
+	"kol_conformal_shield"
   ],
   "builtInWeapons": {
     "WS0009": "abyss_deco_dusk_ayakashi_lights"

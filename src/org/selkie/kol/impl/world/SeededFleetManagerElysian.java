@@ -91,7 +91,7 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
 
         initElysianFleetProperties(random, fleet, false);
 
-        fleet.addScript(new RemnantAssignmentAI(fleet, system, null));
+        fleet.addScript(new AbyssAssignmentAI(fleet, system, pickEntityToGuard(new Random(), system, fleet)));
 
         return fleet;
     }
@@ -101,13 +101,17 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
         WeightedRandomPicker<SectorEntityToken> picker = new WeightedRandomPicker<SectorEntityToken>(random);
 
         for (SectorEntityToken entity : system.getEntitiesWithTag(Tags.SALVAGEABLE)) {
-            float w = 1f;
-            if (entity.hasTag(Tags.NEUTRINO_HIGH)) w = 3f;
-            if (entity.hasTag(Tags.NEUTRINO_LOW)) w = 0.33f;
+            float w = 5f; //1f
+            if (entity.hasTag(Tags.NEUTRINO_HIGH)) w = 15f;
+            if (entity.hasTag(Tags.NEUTRINO_LOW)) w = 1.5f;
             picker.add(entity, w);
         }
 
         for (SectorEntityToken entity : system.getJumpPoints()) {
+            picker.add(entity, 1f);
+        }
+
+        for (SectorEntityToken entity : system.getPlanets()) {
             picker.add(entity, 1f);
         }
 
@@ -119,7 +123,7 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
     public static void initElysianFleetProperties(Random random, CampaignFleetAPI fleet, boolean dormant) {
         if (random == null) random = new Random();
 
-        fleet.removeAbility(Abilities.EMERGENCY_BURN);
+        //fleet.removeAbility(Abilities.EMERGENCY_BURN);
         //fleet.removeAbility(Abilities.SENSOR_BURST);
         fleet.removeAbility(Abilities.GO_DARK);
 
@@ -153,29 +157,15 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
                 new SeededFleetManagerElysian.ElysianFleetInteractionConfigGen());
     }
 
-    public static void spawnElysiaPatrollers() {
-        int numFleetsPatrol = 4;
+    public static void spawnPatrollersElysia(SectorEntityToken targ) {
+        int numFleetsPatrol = 8;
         int numFleetsActive = 0;
 
-        SectorEntityToken targAbyss = null;
-        SectorEntityToken targGaze = null;
-        SectorEntityToken targSilence = null;
 
-        if(Global.getSector().getEntityById("abyss_elysia_abyss")!=null){
-            targAbyss = Global.getSector().getEntityById("abyss_elysia_abyss");
-        }
-        if(Global.getSector().getEntityById("abyss_elysia_gaze")!=null){
-            targGaze = Global.getSector().getEntityById("abyss_elysia_gaze");
-        }
-        if(Global.getSector().getEntityById("abyss_elysia_silence")!=null){
-            targSilence = Global.getSector().getEntityById("abyss_elysia_silence");
-        }
-
-
-        if (targGaze != null && numFleetsActive < numFleetsPatrol) {
+        if (targ != null && numFleetsActive < numFleetsPatrol) {
             FleetParamsV3 params = new FleetParamsV3(
                     null,
-                    null,
+                    targ.getStarSystem().getLocation(),
                     PrepareAbyss.elysianID,
                     5f,
                     FleetTypes.PATROL_LARGE,
@@ -196,7 +186,7 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
             CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
             fleet.addTag("abyss_rulesfortheebutnotforme");
 
-            MagicCampaign.spawnFleet(fleet, targGaze, FleetAssignment.PATROL_SYSTEM, targGaze, true, false, false);
+            MagicCampaign.spawnFleet(fleet, targ, FleetAssignment.PATROL_SYSTEM, targ, true, false, false);
 
         }
     }
