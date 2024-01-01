@@ -15,14 +15,14 @@
     "alignments":{
         "corporate":-0.5,
         "technocratic":-1,
-        #"militarist":0.5,
+        "militarist":0.5,
         "hierarchical":0.5,
-        "ideological":1,
+        "ideological":0.75,
     },
-    "diplomacyTraits":["selfrighteous", "hates_ai", "law_and_order", "submissive"],
+    "diplomacyTraits":["selfrighteous", "hates_ai", "law_and_order"],
     
     # chance of the faction being picked to send a colony expedition. Default 0 (disabled)
-    "colonyExpeditionChance":1.5,	# be fruitful and multiply
+    "colonyExpeditionChance":0.25,	# Military order
     "colonyTargetValuator":"exerelin.campaign.colony.LuddicColonyTargetValuator",
         
     "vengeanceLevelNames":["Excommunication", "Interdiction", "Jihad"],
@@ -30,25 +30,25 @@
     "vengeanceFleetNamesSingle":["Evangelists", "an Inquisition", "a Crusade"],
     
     "groundBattleSettings":{
-		"luddef_moraleDamageTakenMult":0.85f,
+		"luddef_moraleDamageTakenMult":0.75f,
         "plugin":"exerelin.campaign.intel.groundbattle.plugins.LuddicChurchBonusSubplugin",
     },
     
     "specialForcesNamerClass":"exerelin.campaign.intel.specialforces.namer.LuddicNamer",
     
-    "startShipsSolo":[["vigilance_Standard"]],
+    "startShipsSolo":[["kol_sundew_Standard"]],
     "startShipsCombatSmall":[
-      ["swp_striker_luddic_church_sup", "lasher_luddic_church_Standard", "centurion_Assault"],
-      ["enforcer_Balanced", "lasher_luddic_church_Standard", "centurion_Assault"]
+      ["kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Standard"],
+      ["kol_mimosa_Standard", "kol_protea_Standard", "kol_protea_Standard"]
     ],
-    "startShipsTradeSmall":[["tarsus_Standard", "cerberus_Standard", "lasher_CS"]],
+    "startShipsTradeSmall":[["tarsus_Standard", "cerberus_Standard", "kol_protea_Standard"]],
     "startShipsCombatLarge":[
-      ["swp_vulture_sta", "swp_albatross_sta", "kite_Standard"],
-      ["dominator_Support", "enforcer_Outdated", "kite_Support"]
+      ["kol_larkspur_Standard", "kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Standard"],
+      ["kol_lotus_Standard", "kol_marigold_Standard", "kol_protea_Standard", "kol_protea_Standard"]
     ],
      "startShipsTradeLarge":[["colossus_Standard", "mule_Standard", "wayfarer_Standard"]],
-    "startShipsExplorerLarge":[["venture_Balanced", "buffalo_luddic_church_Standard", "hound_luddic_church_Standard"]],
-    "startShipsCarrierSmall":[["condor_Attack", "lasher_luddic_church_Standard", "hound_luddic_church_Standard"]],
+    "startShipsExplorerLarge":[["venture_Balanced", "buffalo_luddic_church_Standard", "kol_protea_Standard"]],
+    "startShipsCarrierSmall":[["condor_Attack", "lasher_luddic_church_Standard", "kol_protea_Standard"]],
     
     "startSpecialItems":[],
 
@@ -57,12 +57,12 @@
     ],
     
     "industrySeeds":[
-        {"id":"heavyindustry", "mult":0.05},
-        {"id":"lightindustry", "mult":0.2},
+        {"id":"heavyindustry", "mult":0.75},
+        {"id":"lightindustry", "mult":0.5},
     ],
     
     "industrySpawnMults":{
-        "heavyindustry":0,
+        "heavyindustry":0.5,
     },
     
     "bonusSeeds":[],
