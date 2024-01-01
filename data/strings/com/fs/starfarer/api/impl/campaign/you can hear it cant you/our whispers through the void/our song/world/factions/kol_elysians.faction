@@ -38,8 +38,8 @@
 	},
 	"shipsWhenImporting":{
 		"tags":[
-			"remnant",
-			"derelict",
+			#"remnant",
+			#"derelict",
 		],
 		"hulls":[
 
@@ -47,8 +47,8 @@
 	},
 	"knownShips":{
 		"tags":[
-			"remnant",
-			"derelict",
+			#"remnant",
+			#"derelict",
 		],
 		"hulls":[
 			"abyss_edf_kitsunebi",

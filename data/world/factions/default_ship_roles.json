@@ -32,20 +32,20 @@
 		"abyss_dawn_inmyeonjo_Inciting":100,
 		"abyss_dawn_inmyeonjo_Profane":100,
 		"abyss_dawn_mulguishin_Deep":100,
-		"abyss_dusk_funayurei_Gatekeeper":100,
+		"abyss_dusk_funayurei_Gatekeeper":50,
+		"abyss_dusk_shiryo_Leecher":40,
+
 	},
 	"combatSmall":{
 		"kol_protea_Standard":1,
 		"kol_sundew_Standard":1,
 		"abyss_boss_ninaya_Nightdemon":0,
-		"abyss_dusk_ikiryo_Draconic":100,
-		"abyss_dusk_shiryo_Leecher":100,
+		"abyss_dusk_ikiryo_Draconic":40,
 	},
 	"combatSmallForSmallFleet":{
 		"kol_protea_Standard":1,
 		"kol_sundew_Standard":0.5,
 		"abyss_boss_ninaya_Nightdemon":0,
 		"abyss_dusk_ikiryo_Draconic":100,
-		"abyss_dusk_shiryo_Leecher":100,
 	},
 }

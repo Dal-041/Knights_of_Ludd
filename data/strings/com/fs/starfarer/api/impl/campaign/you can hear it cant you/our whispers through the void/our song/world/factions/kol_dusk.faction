@@ -38,8 +38,8 @@
 	},
 	"shipsWhenImporting":{
 		"tags":[
-			"remnant",
-			"derelict",
+			#"remnant",
+			#"derelict",
 		],
 		"hulls":[
 			"abyss_dusk_ayakashi",
@@ -52,8 +52,8 @@
 	},
 	"knownShips":{
 		"tags":[
-			"remnant",
-			"derelict",
+			#"remnant",
+			#"derelict",
 		],
 		"hulls":[
 			"abyss_dusk_ayakashi",

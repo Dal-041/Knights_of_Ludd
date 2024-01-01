@@ -5,6 +5,7 @@ import java.util.Random;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantAssignmentAI;
@@ -57,13 +58,30 @@ public class SeededFleetManagerDusk extends SeededFleetManager {
     @Override
     protected CampaignFleetAPI spawnFleet(long seed) {
         Random random = new Random(seed);
+        float factorMain = 0.6f;
+        boolean mixAll = false;
+
+        WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(new Random(seed));
+        picker.add("derelict",1f);
+        picker.add("remnant", 1f);
+        picker.add("kol_dawn", 1f);
+        //picker.add("kol_dusk", 1f);
+        picker.add("kol_elysians", 0.7f);
+        if (PrepareAbyss.useDomres) picker.add("domres", 1f);
+        if (PrepareAbyss.useDustkeepers) picker.add("sotf_dustkeepers", 1f);
+        //if (PrepareAbyss.useEnigma) picker.add("enigma", 0.75f);
+        if (PrepareAbyss.useLostech) {
+
+            //picker.add("lostech", 0.5f);
+        }
+        String facSecond = picker.pick();
 
         FleetParamsV3 params = new FleetParamsV3(
                 system.getLocation(),
                 PrepareAbyss.duskID,
                 5f,
                 FleetTypes.PATROL_LARGE,
-                MathUtils.getRandomNumberInRange(60f,200f), // combatPts
+                MathUtils.getRandomNumberInRange(minPts*factorMain, maxPts*factorMain), // combatPts
                 0f, // freighterPts
                 0f, // tankerPts
                 0f, // transportPts
@@ -79,6 +97,22 @@ public class SeededFleetManagerDusk extends SeededFleetManager {
         params.random = random;
 
         CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
+
+        params.factionId = facSecond;
+        params.combatPts = params.combatPts/factorMain * (1-factorMain);
+
+        CampaignFleetAPI fleet2 = FleetFactoryV3.createFleet(params);
+
+        for (FleetMemberAPI member : fleet2.getMembersWithFightersCopy()) {
+            member.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+            if (!member.getVariant().hasTag("UNBOARDABLE")) member.getVariant().addTag("UNBOARDABLE");
+            if (member.isFlagship()) member.setFlagship(false);
+            member.setShipName(Global.getSector().getFaction(facSecond).pickRandomShipName());
+            fleet.getFleetData().addFleetMember(member);
+        }
+        fleet2.despawn();
+
+        //fleet.getFleetData().sort();
         fleet.addTag("abyss_rulesfortheebutnotforme");
         if (fleet == null) return null;
 
@@ -196,6 +230,7 @@ public class SeededFleetManagerDusk extends SeededFleetManager {
         return MagicCampaign.createCaptainBuilder(PrepareAbyss.duskID)
                 .setIsAI(true)
                 .setAICoreType("alpha_core")
+                .setLevel(7)
                 .setPersonality(Personalities.AGGRESSIVE)
                 .setSkillPreference(OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_NO_MISSILE_YES_DEFENSE)
                 .create();

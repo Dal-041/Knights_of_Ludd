@@ -49,8 +49,8 @@ public class ConformalShields extends BaseHullMod {
 
             float shieldX = 0;
             float shieldY = 0;
-            float a = maxY;
-            float b = maxX;
+            float a = maxY+10;
+            float b = maxX+6;
             float rad = (float) Math.toRadians(shieldFacing);
             shieldX = (float) ((a*b)/Math.sqrt(b*b + a*a * Math.tan(rad)*Math.tan(rad)));
             if (rad > Math.PI/2 && rad < 3*Math.PI/2 || rad < -Math.PI/2 && rad > -3*Math.PI/2) { //Rear-facing

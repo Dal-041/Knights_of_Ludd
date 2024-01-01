@@ -7,6 +7,7 @@ import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
+import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
@@ -51,6 +52,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
+		Global.getSector().addTransientListener(new UpdateRelationships(true));
+		Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 	}
 	
 	@Override
@@ -67,6 +70,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		Global.getSector().addTransientListener(new UpdateRelationships(true));
+		Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 	}
 
 	@Override

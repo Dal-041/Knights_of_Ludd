@@ -38,8 +38,8 @@
 	},
 	"shipsWhenImporting":{
 		"tags":[
-			"remnant",
-			"derelict",
+			#"remnant",
+			#"derelict",
 		],
 		"hulls":[
 			"abyss_dawn_cheonyeoguishin",
@@ -54,8 +54,8 @@
 	},
 	"knownShips":{
 		"tags":[
-			"remnant",
-			"derelict",
+			#"remnant",
+			#"derelict",
 		],
 		"hulls":[
 			"abyss_dawn_cheonyeoguishin",

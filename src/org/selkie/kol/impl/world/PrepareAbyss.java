@@ -12,17 +12,25 @@ import com.fs.starfarer.api.impl.campaign.procgen.themes.DerelictThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
+import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
+import org.selkie.kol.listeners.UpdateRelationships;
+import org.selkie.kol.world.SpawnInvictus;
 
 public class PrepareAbyss {
 
 	public static final String dawnID = "kol_dawn";
 	public static final String duskID = "kol_dusk";
 	public static final String elysianID = "kol_elysians";
-	private static int dynCount = 0;
+	public static boolean useDomres = false;
+	public static boolean useLostech = false;
+	public static boolean useDustkeepers = false;
+	public static boolean useEnigma = false;
 
     public static void generate(SectorAPI sector) {
+		prepareAbyssalFleets();
+
     	GenerateElysia(sector);
     	GenerateUnderworld(sector);
     	GenerateLunaSea(sector);
@@ -41,9 +49,23 @@ public class PrepareAbyss {
 				faction.setRelationship(elysianID, -100);
 			}
 		}
-
-        //PrepareForRelations(sector);
+		SpawnDuskBoss.SpawnDuskBoss();
     }
+
+	public static void prepareAbyssalFleets() {
+		if(Global.getSettings().getModManager().isModEnabled("lost_sector")) {
+			for (FactionAPI faction:Global.getSector().getAllFactions()) {
+				if (faction.getId().equals("enigma")) useEnigma = true;
+			}
+		}
+		if(Global.getSettings().getModManager().isModEnabled("lost_sector")) {
+			useLostech = true;
+		}
+		for (FactionAPI faction:Global.getSector().getAllFactions()) {
+			if (faction.getId().equals("domres")) useDomres = true;
+			if (faction.getId().equals("sotf_dustkeepers")) useDustkeepers = true;
+		}
+	}
 
 	/*
     POOL A
@@ -65,29 +87,24 @@ public class PrepareAbyss {
      */
 
 	/*
-	Method 1:
-		if (Global.getSettings().getHullSpec("etc") != null { Global.getSettings().getHullSpec("etc").addTag("kol_xyz"); }
-
-	method 2:
-
-	    for (String ship : Global.getSector().getFaction(Factions.HEGEMONY).getKnownShips()) {
-            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsShip(ship)) {
-                Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownShip(ship, true);
+	    for (String ship : Global.getSector().getFaction(Factions.A).getKnownShips()) {
+            if (!Global.getSector().getFaction(B).knowsShip(ship)) {
+                Global.getSector().getFaction(B).addKnownShip(ship, true);
             }
         }
-        for (String baseShip : Global.getSector().getFaction(Factions.HEGEMONY).getAlwaysKnownShips()) {
-            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).useWhenImportingShip(baseShip)) {
-                Global.getSector().getFaction(IRONSTANDSETERNAL).addUseWhenImportingShip(baseShip);
+        for (String baseShip : Global.getSector().getFaction(Factions.A).getAlwaysKnownShips()) {
+            if (!Global.getSector().getFaction(B).useWhenImportingShip(baseShip)) {
+                Global.getSector().getFaction(B).addUseWhenImportingShip(baseShip);
             }
         }
-        for (String fighter : Global.getSector().getFaction(Factions.HEGEMONY).getKnownFighters()) {
-            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsFighter(fighter)) {
-                Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownFighter(fighter, true);
+        for (String fighter : Global.getSector().getFaction(Factions.A).getKnownFighters()) {
+            if (!Global.getSector().getFaction(B).knowsFighter(fighter)) {
+                Global.getSector().getFaction(B).addKnownFighter(fighter, true);
             }
         }
-        for (String weapon : Global.getSector().getFaction(Factions.HEGEMONY).getKnownWeapons()) {
-            if (!Global.getSector().getFaction(IRONSTANDSETERNAL).knowsWeapon(weapon)) {
-               Global.getSector().getFaction(IRONSTANDSETERNAL).addKnownWeapon(weapon, true);
+        for (String weapon : Global.getSector().getFaction(Factions.A).getKnownWeapons()) {
+            if (!Global.getSector().getFaction(B).knowsWeapon(weapon)) {
+               Global.getSector().getFaction(B).addKnownWeapon(weapon, true);
             }
         }
 	 */
@@ -242,8 +259,8 @@ public class PrepareAbyss {
 
 		// No direct access
 
-		StarSystemAPI system = sector.createStarSystem("Quasispace");
-		system.setName("Quasispace");
+		StarSystemAPI system = sector.createStarSystem("Underspace");
+		system.setName("Underspace");
 		LocationAPI hyper = Global.getSector().getHyperspace();
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
@@ -266,9 +283,6 @@ public class PrepareAbyss {
 
 		SectorEntityToken gate = system.addCustomEntity("kol_quasigate", "Quasigate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
-
-//		GateCMD.notifyScanned(gate);
-//		GateEntityPlugin.getGateData().scanned.add(gate);
 
 //		SeededFleetManagerDusk fleets = new SeededFleetManagerDusk(system, 10, 14, 120, 300, 1.0f);
 //		system.addScript(fleets);
@@ -355,8 +369,8 @@ public class PrepareAbyss {
 
 	public static void generateDynamicDuskHole(SectorAPI sector) {
 		//Variable location
-		double posX = Math.random()*(Global.getSettings().getFloat("sectorWidth")-10000);
-		double posY = Math.random()*(Global.getSettings().getFloat("sectorHeight")-5000);
+		double posX = Math.random()*(Global.getSettings().getFloat("sectorWidth")/2-5000);
+		double posY = Math.random()*(Global.getSettings().getFloat("sectorHeight")/2-2500);
 
 		if (Math.abs(posX) < 5000) {
 			if (Math.random() < 0.5f) {
@@ -422,7 +436,9 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		SeededFleetManagerDusk fleets = new SeededFleetManagerDusk(system, 10, 14, 120, 300, 1.0f);
+		SeededFleetManagerDusk fleets = new SeededFleetManagerDusk(system, 6, 6, 80, 200, 1.0f);
+		SeededFleetManagerDusk fleetsMiniboss = new SeededFleetManagerDusk(system, 3, 3, 250, 400, 1.0f);
 		system.addScript(fleets);
+		system.addScript(fleetsMiniboss);
 	}
 }
