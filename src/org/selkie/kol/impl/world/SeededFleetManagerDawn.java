@@ -103,6 +103,13 @@ public class SeededFleetManagerDawn extends SeededFleetManager {
         CampaignFleetAPI fleet2 = FleetFactoryV3.createFleet(params);
 
         for (FleetMemberAPI member : fleet2.getMembersWithFightersCopy()) {
+            boolean skip = false;
+            for (int i = 0; i < PrepareAbyss.hullBlacklist.length; i++) {
+                if (PrepareAbyss.hullBlacklist[i].equals(member.getHullId())) {
+                    skip = true;
+                }
+            }
+            if (skip) continue;
             member.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
             if (member.getVariant().hasTag("auto_rec")) member.getVariant().removeTag("auto_rec");
             if (member.isFlagship()) member.setFlagship(false);

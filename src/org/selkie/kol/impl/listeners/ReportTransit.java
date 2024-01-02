@@ -14,6 +14,7 @@ import com.fs.starfarer.api.impl.campaign.missions.DelayedFleetEncounter;
 import com.fs.starfarer.api.impl.campaign.rulecmd.missions.GateCMD;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.campaign.CampaignEntity;
+import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.util.List;
 
@@ -23,12 +24,10 @@ public class ReportTransit implements GateTransitListener {
 	public void reportFleetTransitingGate(CampaignFleetAPI fleet, SectorEntityToken gateFrom, SectorEntityToken gateTo) {
 		if (!fleet.isPlayerFleet() || gateFrom == null) return;
 
-
-
-		if (Math.random() <= 0.05f) {
+		if (Math.random() <= 0.05f) { //0.05f
 			StarSystemAPI destSys = Global.getSector().getStarSystem("Underspace");
 			if (destSys == null) return;
-			SectorEntityToken dest = destSys.getEntityById("kol_quasigate");
+			SectorEntityToken dest = destSys.getEntityById(PrepareAbyss.undergateID);
 			float dist = Misc.getDistanceLY(dest, gateTo);
 
 			if (dist < 12f) {
@@ -39,8 +38,7 @@ public class ReportTransit implements GateTransitListener {
 						dest.getLocation().y);
 				fleet.setNoEngaging(1.0f);
 				fleet.clearAssignments();
-				//fleet.addAssignment(FleetAssignment.GO_TO_LOCATION, dest, 1f);
-				//fleet.setMoveDestination(0, 0);
+
 
 				GateCMD.notifyScanned(dest);
 				GateEntityPlugin.getGateData().scanned.add(dest);

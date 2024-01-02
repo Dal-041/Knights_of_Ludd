@@ -2,6 +2,7 @@ package org.selkie.kol.impl.world;
 
 import java.awt.Color;
 
+import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
@@ -13,6 +14,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.listeners.ReportTransit;
+import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
 import org.selkie.kol.listeners.UpdateRelationships;
@@ -23,10 +25,15 @@ public class PrepareAbyss {
 	public static final String dawnID = "kol_dawn";
 	public static final String duskID = "kol_dusk";
 	public static final String elysianID = "kol_elysians";
+	public static final String undergateID = "kol_undergate";
 	public static boolean useDomres = false;
 	public static boolean useLostech = false;
 	public static boolean useDustkeepers = false;
 	public static boolean useEnigma = false;
+	public static String[] hullBlacklist = {
+			"guardian",
+			"radiant"
+	};
 
     public static void generate(SectorAPI sector) {
 		prepareAbyssalFleets();
@@ -128,8 +135,6 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 
-		//fancy bg script
-		
     	//PlanetAPI elysia = system.initStar("Elysian_Abyss", StarTypes.BLACK_HOLE, beeg, -750f);
 		system.initNonStarCenter();
     	PlanetAPI elysia = system.addPlanet("abyss_elysia_abyss", system.getCenter(), "Elysia", StarTypes.BLACK_HOLE, 0f, beeg, 0f, 100000f);
@@ -253,11 +258,14 @@ public class PrepareAbyss {
 		SeededFleetManagerElysian fleets = new SeededFleetManagerElysian(system, 10, 14, 120, 300, 1.0f);
 		system.addScript(fleets);
 
+		EveryFrameScript tracker = new TrackFleet();
+		system.addScript(tracker);
+
     }
 
 	public static void GenerateUnderworld(SectorAPI sector) {
 
-		// No direct access
+		// No direct access, see ReportTransit listener
 
 		StarSystemAPI system = sector.createStarSystem("Underspace");
 		system.setName("Underspace");
@@ -281,7 +289,7 @@ public class PrepareAbyss {
 		new AbyssBackgroundWarper(system, 8, 0.125f);
 		system.generateAnchorIfNeeded();
 
-		SectorEntityToken gate = system.addCustomEntity("kol_quasigate", "Quasigate", Entities.INACTIVE_GATE, Factions.DERELICT);
+		SectorEntityToken gate = system.addCustomEntity(undergateID, "Undergate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
 //		SeededFleetManagerDusk fleets = new SeededFleetManagerDusk(system, 10, 14, 120, 300, 1.0f);
