@@ -103,20 +103,8 @@ public class SeededFleetManagerDusk extends SeededFleetManager {
 
         CampaignFleetAPI fleet2 = FleetFactoryV3.createFleet(params);
 
-        for (FleetMemberAPI member : fleet2.getMembersWithFightersCopy()) {
-            boolean skip = false;
-            for (int i = 0; i < PrepareAbyss.hullBlacklist.length; i++) {
-                if (PrepareAbyss.hullBlacklist[i].equals(member.getHullId())) {
-                    skip = true;
-                }
-            }
-            if (skip) continue;
-            member.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-            if (!member.getVariant().hasTag("UNBOARDABLE")) member.getVariant().addTag("UNBOARDABLE");
-            if (member.isFlagship()) member.setFlagship(false);
-            member.setShipName(Global.getSector().getFaction(facSecond).pickRandomShipName());
-            fleet.getFleetData().addFleetMember(member);
-        }
+        PrepareAbyss.copyFleetMembers(facSecond, fleet2, fleet);
+
         fleet2.despawn();
 
         //fleet.getFleetData().sort();

@@ -53,7 +53,7 @@ public class ManageDuskBoss implements FleetEventListener {
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
-	                        true,
+	                        false,
 	                        //orbitCenter,angle,radius,period);
 	                        fleet.getStarSystem().getCenter(),VectorUtils.getAngle(new Vector2f(), location),location.length(),360);               
 	                //MagicCampaign.placeOnStableOrbit(wreck, true);
