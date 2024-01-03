@@ -1,5 +1,6 @@
 package org.selkie.kol.weapons;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -13,6 +14,8 @@ import java.awt.*;
 public class hideDeco implements EveryFrameWeaponEffectPlugin {
 
     ShipAPI module = null;
+    boolean done = false;
+    boolean gotMod = false;
 
     public hideDeco() {
     }
@@ -26,9 +29,9 @@ public class hideDeco implements EveryFrameWeaponEffectPlugin {
         if (weapID.length() >= 2) {
             weapID = weapID.substring(weapID.length() - 2);
         }
-        for(ShipAPI s : mainShip.getChildModulesCopy()){
-            if (s.getId().substring(s.getId().length() - 2) == weapID) {
-                return s;
+        for(ShipAPI module : mainShip.getChildModulesCopy()){
+            if (module.getHullSpec().getBaseHullId().substring(module.getHullSpec().getBaseHullId().length() - 2).equals(weapID)) {
+                return module;
             }
         }
 
@@ -37,21 +40,25 @@ public class hideDeco implements EveryFrameWeaponEffectPlugin {
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        ShipAPI ship = weapon.getShip();
-        if (ship == null || engine.isPaused()) return;
+        if (!done) {
+            ShipAPI ship = weapon.getShip();
+            if (ship == null || engine.isPaused()) return;
 
-        // Refit screen check
-        if (ship.getOriginalOwner() == -1) {
-            return;
-        }
+            // Refit screen check
+            if (ship.getOriginalOwner() == -1) {
+                return;
+            }
 
-        if (module == null) {
-            ShipAPI module = getCorrespondingModule(ship, weapon.getId());
-        }
-        if (module != null && !module.isAlive()) {
-            weapon.getSprite().setAdditiveBlend();
-            SpriteAPI sprite = weapon.getSprite();
-            sprite.setAlphaMult(0f);
+            if (!gotMod) {
+                module = getCorrespondingModule(ship, weapon.getSpec().getWeaponId());
+                if (module != null) gotMod = true;
+            }
+            if (gotMod && !module.isAlive()) {
+                weapon.getSprite().setNormalBlend();
+                SpriteAPI sprite = weapon.getSprite();
+                sprite.setColor(new Color(0,0,0,0));
+                done = true;
+            }
         }
         return;
     }
