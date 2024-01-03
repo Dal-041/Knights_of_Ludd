@@ -75,6 +75,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	@Override
 	public void onNewGameAfterTimePass() {
-
+		GenerateKnights.genKnightsExpeditions();
 	}
 }

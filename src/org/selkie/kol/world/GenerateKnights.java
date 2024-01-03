@@ -13,6 +13,7 @@ import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RuinsFleetRouteManager;
 import exerelin.campaign.SectorManager;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
@@ -90,6 +91,11 @@ public class GenerateKnights {
 
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add("kol_lyra");
 	}
+
+	public static void genKnightsExpeditions() {
+		KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
+		Eos.addScript(expeditions);
+	}
 	
 	public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name, 
             int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff, boolean hidden) {
@@ -142,5 +148,14 @@ public class GenerateKnights {
             int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff) {
     	return addMarketplace(factionID, primaryEntity, connectedEntities, name, size, marketConditions, Industries, submarkets, tariff, false);
     }
+
+	public class KnightsFleetTypes {
+
+		public static final String SCOUT = "kolScout";
+		public static final String HEADHUNTER = "kolHeadHunter";
+		public static final String WARRIORS = "kolHolyWarriors";
+		public static final String PATROL = "kolPatrol";
+		public static final String ARMADA = "kolArmada";
+	}
 }
 
