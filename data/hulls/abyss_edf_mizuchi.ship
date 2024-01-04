@@ -1,0 +1,229 @@
+{
+  "hullName": "mizuchi",
+  "hullId": "abyss_edf_mizuchi",
+  "hullSize": "CRUISER",
+  "spriteName":   "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_mizuchi.png",
+  "style": "MIDLINE",
+  "height": 190,
+  "width": 342,
+  "center": [171, 95],
+  "collisionRadius": 175.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 0,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0015": "abyss_deco_edf_engL",
+    "WS0016": "abyss_deco_edf_engL"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 0,
+      "locations": [43, 48]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -0,
+      "locations": [43, -48]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 45,
+      "locations": [39, 80]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -45,
+      "locations": [39, -80]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 45,
+      "locations": [21, 84]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -45,
+      "locations": [21, -84]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 260,
+      "angle": 90,
+      "locations": [23, 104]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 260,
+      "angle": -90,
+      "locations": [23, -104]
+    },
+    {
+      "id": "WS0011",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [59, 33]
+    },
+    {
+      "id": "WS0012",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [59, -33]
+    },
+    {
+      "id": "WS0009",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 7,
+      "angle": 35,
+      "locations": [48, 105]
+    },
+    {
+      "id": "WS0013",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 7,
+      "angle": -35,
+      "locations": [48, -105]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 35,
+      "angle": 170,
+      "locations": [24, 29]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 35,
+      "angle": -170,
+      "locations": [24, -29]
+    },
+    {
+      "id": "LB 1",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        -11.5, 121,
+        -11.5, -121.5,
+        -7, -139
+      ]
+    },
+    {
+      "id": "LB 2",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-6.5, 140]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [8, 38.5],
+      "length": 118,
+      "width": 25,
+      "angle": 180,
+      "contrailSize": 25,
+      "style": "ABYSS_EDF_ENG"
+    },
+    {
+      "location": [8, -38.5],
+      "length": 118,
+      "width": 25,
+      "angle": -180,
+      "contrailSize": 25,
+      "style": "ABYSS_EDF_ENG"
+    }
+  ],
+  "bounds": [
+    8.5, -166.5,
+    -2.5, -146.5,
+    -5.5, -150,
+    -15, -141,
+    -9, -131.5,
+    -19.5, -121.5,
+    -14.5, -113,
+    -18.5, -93.5,
+    -10, -92.5,
+    17, -53.5,
+    11.5, -20.5,
+    -10.5, -28,
+    -19.5, -13,
+    -39.5, -13.5,
+    -43, -6.5,
+    -94, -2,
+    -94, 2,
+    -43, 6.5,
+    -39.5, 13.5,
+    -19.5, 13,
+    -10.5, 28,
+    11.5, 20.5,
+    17, 53.5,
+    -10, 92.5,
+    -18.5, 93.5,
+    -14.5, 113,
+    -19.5, 121.5,
+    -9, 131.5,
+    -15, 141,
+    -5.5, 150,
+    -2.5, 146.5,
+    8.5, 166.5,
+    78.5, 56,
+    64.5, 38.5,
+    70, 18,
+    85.5, 11,
+    93, -0,
+    85.5, -11,
+    70, -18,
+    64.5, -38.5,
+    78.5, -56
+  ]
+}

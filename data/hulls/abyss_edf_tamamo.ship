@@ -13,12 +13,15 @@
   "shieldRadius": 97,
   "viewOffset": 0,
   "builtInMods": [
-    "kol_ea_shields3"
+    "kol_ea_shields3",
+    "eis_aquila",
+    "eis_zandatsu"
   ],
   "builtInWings": [
     "abyss_edf_kitsunebi"
   ],
   "builtInWeapons": {
+    "WS0003": "eis_deco_valorous_fx",
     "WS0005": "abyss_deco_edf_tamamo_ml",
     "WS0006": "abyss_deco_edf_tamamo_mr"
   },
@@ -136,54 +139,6 @@
       "contrailSize": 10,
       "style": "CUSTOM",
       "styleId": "ABYSS_EDF_TRAIL"
-    },
-    {
-      "location": [-50.5, 12],
-      "length": 61.5,
-      "width": 11,
-      "angle": 180,
-      "contrailSize": 11,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-50.5, -12],
-      "length": 61.5,
-      "width": 11,
-      "angle": -180,
-      "contrailSize": 11,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-43, 36],
-      "length": 46.310001,
-      "width": 10.24,
-      "angle": 170,
-      "contrailSize": 10.24,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-43, -36],
-      "length": 46.310001,
-      "width": 10.24,
-      "angle": -170,
-      "contrailSize": 10.24,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-40, 41],
-      "length": 35.639999,
-      "width": 9,
-      "angle": 164,
-      "contrailSize": 9,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-40, -41],
-      "length": 35.639999,
-      "width": 9,
-      "angle": -164,
-      "contrailSize": 9,
-      "style": "KOL_ENG"
     },
     {
       "location": [-39.5, 22.5],
