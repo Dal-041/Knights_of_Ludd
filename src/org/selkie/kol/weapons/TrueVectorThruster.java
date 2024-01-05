@@ -274,7 +274,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             float startingLevel = (thruster.length - offset) / thruster.length;
             float compensatedLevel = Misc.interpolate(startingLevel, 1f, currentThrust);
             SHIP.getEngineController().setFlameLevel(engineSlot, compensatedLevel);
-            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(thruster.width, thruster.width*compensatedLevel,1f,1f); // no clue what v2 and v3 do
+            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(thruster.width, thruster.length*compensatedLevel,1f,1f); // no clue what v2 and v3 do
             engineSlot.setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
             engineSlot.setGlowSizeMult(0f);
         }
