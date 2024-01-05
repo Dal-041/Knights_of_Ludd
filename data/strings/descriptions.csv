@@ -20,7 +20,7 @@ kol_brimstone,WEAPON,"""Point Toward Heathen.""",- Inscription upon Brimstone ri
 # SHIPS,,,,,
 # Frigates,,,,,
 kol_sundew,SHIP,"To confuse a Mudskipper and a Sundew is to confuse a Luddic with a Pather - or, indeed, a Knight. Though there are similarities, the Sundew is a fierce, shielded, armored, and highly mobile ship capable of quickly dusting any captains not taking it seriously.",,,
-kol_protea,SHIP,"In a marked departure from standard doctrine, the Protea-class frigate eschews cumbersome armor modules in favor of armored drones, giving it the freedom to choose when and where to thrust its oversize ballistic weaponry.",,,
+kol_protea,SHIP,"In a marked departure from standard doctrine, the Protea-class frigate eschews attached armor modules in favor of armored drones, giving it the freedom to choose when and where to thrust its oversize ballistic weaponry.",,,
 # Destroyers,,,,,
 kol_marigold,SHIP,"The Marigold is the Knights of Ludd's tempered answer to the Manticore. Cheaper to field and more flexible to outfit, it nonetheless lacks the firepower afforded by large ballistic weaponry. When faced with detractors, most Knights are quick to point out that the original Manticore is merely a Domain tool of war, and not a design worthy of the faithful's respect.",,,
 kol_mimosa,SHIP,"A Mimosa provides effective support for a balanced fleet by painting opportune enemies with its LIDAR Array, shredding fighters with canister flak, and, if needed, absorbing stray fire with its armor modules. Never the hero of a battle, the Mimosa-class is nevertheless sorely missed by Knights forced to go without.",,,
