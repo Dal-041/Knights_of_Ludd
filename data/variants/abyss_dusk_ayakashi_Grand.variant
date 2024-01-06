@@ -1,6 +1,6 @@
 {
     "displayName": "Grand",
-    "fluxCapacitors": 20,
+    "fluxCapacitors": 12,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "abyss_dusk_ayakashi",
@@ -23,7 +23,7 @@
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
                 "WS0018": "squall",
@@ -52,8 +52,8 @@
             "weapons": {
                 "WS0004": "lightac",
                 "WS0012": "lightac",
-                "WS0011": "lightac",
                 "WS0015": "lightac",
+                "WS0011": "lightac",
             }
         },
         {
@@ -61,9 +61,11 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "heavyburst",
-                "WS0017": "heavyburst",
-                "WS0003": "heavyburst",
                 "WS0002": "heavyburst",
+                "WS0003": "heavyburst",
+                "WS0017": "heavyburst",
+                "WS0013": "lrpdlaser",
+                "WS0014": "lrpdlaser",
             }
         },
     ],

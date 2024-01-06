@@ -8,11 +8,13 @@
   "width": 524,
   "center": [262, 132],
   "collisionRadius": 281,
-  "shieldCenter": [-217.5, -0],
-  "shieldRadius": 411.5,
+  "shieldCenter": [0,0], #[-217.5, -0],
+  "shieldRadius": 350,
   "viewOffset": 0,
   "builtInMods": [
-    "kol_ea_shields3"
+	"automated",
+    "kol_ea_shields3",
+    "kol_conformal_shield"
   ],
   "builtInWings": [
     "abyss_edf_kitsunebi",

@@ -13,10 +13,11 @@
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
+	"delicate",
+	"automated",
     "kol_ea_sparkle",
     "ex_phase_coils",
-    "kol_ea_mist",
-    "delicate"
+    "kol_ea_mist"
   ],
   "weaponSlots": [
     {

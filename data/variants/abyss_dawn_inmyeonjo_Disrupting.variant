@@ -1,54 +1,53 @@
 {
-    "displayName": "Inciting",
-    "fluxCapacitors": 13,
+    "displayName": "Disrupting",
+    "fluxCapacitors": 18,
     "fluxVents": 20,
     "goalVariant": true,
     "hullId": "abyss_dawn_inmyeonjo",
     "hullMods": [
-        "hardened_subsystems",
-        "hardenedshieldemitter",
+        "pointdefenseai",
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dawn_inmyeonjo_Inciting",
+    "variantId": "abyss_dawn_inmyeonjo_Disrupting",
     "weaponGroups": [
         {
             "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0004": "phasebeam",
-                "WS0001": "phasebeam",
-            }
-        },
-        {
-            "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0008": "sabot",
-                "WS0007": "sabot",
+                "WS0004": "hveldriver",
+                "WS0001": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0002": "heavyburst",
+                "WS0003": "heavyburst",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "gravitonbeam",
-                "WS0002": "ionbeam",
+                "WS0006": "kol_tor",
+                "WS0005": "kol_tor",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "pdburst",
-                "WS0005": "pdburst",
+                "WS0007": "heatseeker",
+                "WS0008": "heatseeker",
             }
         },
     ],
     "wings": [
-        "spark_wing",
+        "lux_wing",
     ],
     "modules": [],
 }

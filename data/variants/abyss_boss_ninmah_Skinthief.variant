@@ -1,6 +1,6 @@
 {
     "displayName": "Skinthief",
-    "fluxCapacitors": 4,
+    "fluxCapacitors": 8,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "abyss_boss_ninmah",
@@ -23,10 +23,14 @@
             "autofire": true,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0008": "amsrm",
-                "WS0009": "amsrm",
-                "WS0013": "amsrm",
-                "WS0012": "amsrm",
+                "WS0004": "amsrm",
+                "WS0005": "amsrm",
+                "WS0014": "amsrm",
+                "WS0017": "abyss_boss_resonator2",
+                "WS0016": "abyss_boss_resonator2",
+                "WS0015": "amsrm",
+                "WS0011": "amsrm",
+                "WS0010": "amsrm",
             }
         },
         {
@@ -41,6 +45,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0008": "pdburst",
+                "WS0009": "pdburst",
                 "WS0003": "pdburst",
                 "WS0002": "pdburst",
             }

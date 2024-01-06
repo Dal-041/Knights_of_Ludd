@@ -1,34 +1,35 @@
 {
     "displayName": "Hallowed",
     "fluxCapacitors": 0,
-    "fluxVents": 34,
+    "fluxVents": 44,
     "goalVariant": true,
     "hullId": "kol_invictus_lp",
     "hullMods": [
         "armoredweapons",
         "eccm",
-        "fluxbreakers"
+        "fluxbreakers",
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "kol_invictus_lp_hallowed",
+    "suppressedMods": [],
+    "variantId": "kol_invictus_lp_Hallowed",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS 000": "multineedler",
-                "WS 026": "multineedler"
+                "WS 026": "multineedler",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS 022": "jackhammer",
-                "WS 023": "jackhammer",
+                "WS 025": "jackhammer",
                 "WS 024": "jackhammer",
-                "WS 025": "jackhammer"
+                "WS 023": "jackhammer",
+                "WS 022": "jackhammer",
             }
         },
         {
@@ -38,7 +39,7 @@
                 "WS 001": "hammerrack",
                 "WS 002": "hammerrack",
                 "WS 009": "hammerrack",
-                "WS 010": "hammerrack"
+                "WS 010": "hammerrack",
             }
         },
         {
@@ -46,10 +47,12 @@
             "mode": "LINKED",
             "weapons": {
                 "WS 003": "devastator",
+                "WS 008": "devastator",
                 "WS 005": "devastator",
                 "WS 006": "devastator",
-                "WS 008": "devastator"
             }
-        }
-    ]
+        },
+    ],
+    "wings": [],
+    "modules": [],
 }

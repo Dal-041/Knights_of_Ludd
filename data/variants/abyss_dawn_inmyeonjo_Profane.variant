@@ -1,13 +1,14 @@
 {
     "displayName": "Profane",
-    "fluxCapacitors": 4,
-    "fluxVents": 10,
+    "fluxCapacitors": 11,
+    "fluxVents": 20,
     "goalVariant": true,
     "hullId": "abyss_dawn_inmyeonjo",
     "hullMods": [
         "eccm",
-        "hardened_subsystems",
+        "heavyarmor",
         "missleracks",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
@@ -26,10 +27,10 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0007": "atropos",
                 "WS0008": "atropos",
-                "WS0005": "atropos",
                 "WS0006": "atropos",
+                "WS0007": "atropos",
+                "WS0005": "atropos",
             }
         },
         {

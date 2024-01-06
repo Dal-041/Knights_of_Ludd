@@ -8,13 +8,14 @@
   "width": 474,
   "center": [237, 162],
   "collisionRadius": 272,
-  "shieldCenter": [-204.5, -0],
-  "shieldRadius": 363.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 360,
   "viewOffset": 0,
   "builtInMods": [
     "kol_ea_shields2",
     "phasefield",
     "delicate",
+	"automated",
     "kol_ea_mist",
     "kol_ea_sparkle",
 	"kol_conformal_shield"

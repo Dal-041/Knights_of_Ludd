@@ -42,7 +42,12 @@
 			#"derelict",
 		],
 		"hulls":[
-
+			"abyss_edf_tamamo",
+			"abyss_edf_ryujin",
+			"abyss_edf_wani",
+			"abyss_edf_suzaku",
+			"abyss_edf_seiryu",
+			"abyss_edf_mizuchi",
 		],
 	},
 	"knownShips":{
@@ -51,17 +56,17 @@
 			#"derelict",
 		],
 		"hulls":[
-			"abyss_edf_kitsunebi",
 			"abyss_edf_tamamo",
 			"abyss_edf_ryujin",
+			"abyss_edf_wani",
+			"abyss_edf_suzaku",
+			"abyss_edf_seiryu",
+			"abyss_edf_mizuchi",
 		],
 	},
 	"priorityShips":{
 		"tags":[],
 		"hulls":[
-			"abyss_edf_kitsunebi",
-			"abyss_edf_tamamo",
-			"abyss_edf_ryujin",
 		],
 	},
 	"knownFighters":{
@@ -151,7 +156,7 @@
 		"shipQuality":5,
 		"numShips":2,
 		
-		"shipSize":3,
+		"shipSize":4,
 		
 		"aggression":2,
 		

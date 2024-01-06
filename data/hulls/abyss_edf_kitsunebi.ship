@@ -11,6 +11,10 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 20.5,
   "viewOffset": 0,
+  "builtInMods": [
+	"automated",
+    "kol_ea_shields3",
+  ],
   "weaponSlots": [
     {
       "id": "WS0001",

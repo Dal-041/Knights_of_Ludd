@@ -12,10 +12,11 @@
   "shieldRadius": 76.5,
   "viewOffset": 0,
   "builtInMods": [
-    "advancedshieldemitter",
-    "kol_ea_sparkle",
+	"automated",
     "high_maintenance",
-    "delicate"
+    "delicate",
+	"advancedshieldemitter",
+	"kol_ea_sparkle"
   ],
   "builtInWeapons": {
     "WS0003": "eis_nineng",

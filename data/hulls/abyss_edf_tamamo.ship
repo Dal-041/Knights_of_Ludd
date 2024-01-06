@@ -14,14 +14,15 @@
   "viewOffset": 0,
   "builtInMods": [
     "kol_ea_shields3",
-    "eis_aquila",
-    "eis_zandatsu"
+	"automated",
+    #"eis_aquila",
+    #"eis_zandatsu"
   ],
   "builtInWings": [
     "abyss_edf_kitsunebi"
   ],
   "builtInWeapons": {
-    "WS0003": "eis_deco_valorous_fx",
+    #"WS0003": "eis_deco_valorous_fx",
     "WS0005": "abyss_deco_edf_tamamo_ml",
     "WS0006": "abyss_deco_edf_tamamo_mr"
   },

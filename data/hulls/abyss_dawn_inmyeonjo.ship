@@ -12,6 +12,7 @@
   "shieldRadius": 115,
   "viewOffset": 0,
   "builtInMods": [
+	"automated",
     "kol_ea_shields1"
   ],
   "weaponSlots": [

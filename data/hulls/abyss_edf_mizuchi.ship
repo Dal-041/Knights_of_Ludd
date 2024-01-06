@@ -2,15 +2,20 @@
   "hullName": "mizuchi",
   "hullId": "abyss_edf_mizuchi",
   "hullSize": "CRUISER",
-  "spriteName":   "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_mizuchi.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_mizuchi.png",
   "style": "MIDLINE",
   "height": 190,
   "width": 342,
   "center": [171, 95],
-  "collisionRadius": 175.5,
-  "shieldCenter": [0, 0],
-  "shieldRadius": 0,
+  "collisionRadius": 182.5,
+  "shieldCenter": [0,0], #[-88, -0],
+  "shieldRadius": 305,
   "viewOffset": 0,
+  "builtInMods": [
+	"automated",
+    "kol_ea_shields3",
+    "kol_conformal_shield"
+  ],
   "builtInWeapons": {
     "WS0015": "abyss_deco_edf_engL",
     "WS0016": "abyss_deco_edf_engL"

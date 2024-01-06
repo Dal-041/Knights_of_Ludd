@@ -1,53 +1,57 @@
 {
-    "displayName": "Inciting",
-    "fluxCapacitors": 13,
-    "fluxVents": 20,
+    "displayName": "Arsenal Wing",
+    "fluxCapacitors": 0,
+    "fluxVents": 3,
     "goalVariant": true,
-    "hullId": "abyss_dawn_inmyeonjo",
+    "hullId": "abyss_edf_mizuchi",
     "hullMods": [
-        "hardened_subsystems",
-        "hardenedshieldemitter",
-        "targetingunit",
+        "eccm",
+        "expanded_deck_crew",
+        "missleracks",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dawn_inmyeonjo_Inciting",
+    "variantId": "abyss_edf_mizuchi_Arsenal_Wing",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "phasebeam",
-                "WS0001": "phasebeam",
+                "WS0004": "hveldriver",
+                "WS0003": "hveldriver",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0008": "sabot",
-                "WS0007": "sabot",
+                "WS0012": "harpoonpod",
+                "WS0011": "harpoonpod",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "gravitonbeam",
-                "WS0002": "ionbeam",
+                "WS0001": "taclaser",
+                "WS0002": "taclaser",
+                "WS0005": "taclaser",
+                "WS0006": "taclaser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "pdburst",
-                "WS0005": "pdburst",
+                "WS0007": "pdburst",
+                "WS0008": "pdburst",
             }
         },
     ],
     "wings": [
+        "lux_wing",
+        "lux_wing",
         "spark_wing",
     ],
     "modules": [],

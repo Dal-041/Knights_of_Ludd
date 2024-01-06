@@ -1,14 +1,16 @@
 {
-    "displayName": "Nameless",
-    "fluxCapacitors": 3,
+    "displayName": "Nametaker",
+    "fluxCapacitors": 8,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "abyss_dawn_dalgyalguishin",
-    "hullMods": [],
+    "hullMods": [
+        "targetingunit",
+    ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dawn_dalgyalguishin_Nameless",
+    "variantId": "abyss_dawn_dalgyalguishin_Nametaker",
     "weaponGroups": [
         {
             "autofire": false,
