@@ -12,11 +12,10 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 public class TrackFleet implements EveryFrameScript {
 
     private boolean inited = false;
-    protected IntervalUtil iMain = new IntervalUtil(1f, 1f);
-    protected IntervalUtil iSecond = new IntervalUtil(7f, 7f);
-    protected StarSystemAPI elysia = null;
+    protected IntervalUtil iMain = new IntervalUtil(10f, 10f);
+    protected IntervalUtil iSecond = new IntervalUtil(12f, 12f); //multiplied by iMain
+    protected StarSystemAPI under = null;
     protected SectorEntityToken targ = null;
-    //private float days = 0;
 
     @Override
     public boolean isDone() {
@@ -37,10 +36,11 @@ public class TrackFleet implements EveryFrameScript {
                 fleet = Global.getSector().getPlayerFleet();
                 if (fleet.isInHyperspaceTransition()) return;
                 if (fleet.getContainingLocation().getId().equals("elysia")) {
-                    if (Math.abs(fleet.getLocation().getX()) <= 250 && Math.abs(fleet.getLocation().getY()) <= 250 && Global.getSector().getStarSystem("Underspace").getEntityById(PrepareAbyss.undergateID) != null) {
+                    under = Global.getSector().getStarSystem("Underspace");
+                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 250 && Math.abs(fleet.getLocation().getY()) <= 250 && under.getEntityById(PrepareAbyss.undergateID) != null) {
                         iSecond.advance(amount);
                         if (iSecond.intervalElapsed()) {
-                            targ = Global.getSector().getStarSystem("Underspace").getEntityById(PrepareAbyss.undergateID);
+                            targ = under.getEntityById(PrepareAbyss.undergateID);
                             JumpPointAPI.JumpDestination dest = new JumpPointAPI.JumpDestination(targ, null);
                             Global.getSector().doHyperspaceTransition(fleet, fleet, dest);
 //                            fleet.getContainingLocation().removeEntity(fleet);
