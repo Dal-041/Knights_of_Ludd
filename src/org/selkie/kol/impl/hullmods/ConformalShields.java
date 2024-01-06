@@ -4,67 +4,64 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.BoundsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
-import lunalib.backend.ui.components.base.Filters;
+import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
-
-import java.awt.Color;
-import java.awt.geom.Ellipse2D;
 
 public class ConformalShields extends BaseHullMod {
 
-    public float eWidth = 0;
-    public float eHeight = 0;
     public float maxX = 0;
     public float maxY = 0;
     private boolean inited = false;
-    private Vector2f origin = null;
-    private float radius = 0;
-    private float offset = 20f;
-    //private Ellipse2D e = null;
-    private Vector2f center;
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (!inited && ship.getShield() != null) {
-            origin = ship.getShield().getLocation();
-            radius = ship.getShield().getRadius();
-            //debug stuff
-            /*
-            runcode $print("Ship: " + Global.getCombatEngine().getPlayerShip().getFacing()); $print("Shield: " + Global.getCombatEngine().getPlayerShip().getShield().getFacing()); $print("Shield-ship: " + (Global.getCombatEngine().getPlayerShip().getShield().getFacing()-Global.getCombatEngine().getPlayerShip().getFacing()));
-            */
+
+            ship.getExactBounds().update(ship.getLocation(), ship.getFacing());
             for (BoundsAPI.SegmentAPI seg : ship.getExactBounds().getOrigSegments()) {
-                if (Math.abs(seg.getP1().getX()) > maxX) maxX = seg.getP1().getX(); //height
-                if (Math.abs(seg.getP1().getY()) > maxY) maxY = seg.getP1().getY(); //width
+                if (Math.abs(seg.getP1().getX()) > maxX) maxX = Math.abs(seg.getP1().getX()); //height
+                if (Math.abs(seg.getP1().getY()) > maxY) maxY = Math.abs(seg.getP1().getY()); //width
             }
-            //eWidth = maxY;
-            //eHeight = maxX;
-            center = ship.getLocation();
-            inited = true;
+            //backup fetching method
+            //maxX = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false));
+            //maxY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false));
+
+            //center = ship.getLocation();
+            //ship.getShield().setRadius(Math.max(maxX, maxY)/2 + Math.min(maxX, maxY)/2 + 30f);
+            if (maxX != 0) inited = true;
         }
         if (ship.getShield() != null) {
             float shieldFacing = ship.getShield().getFacing();
             float shipFacing = ship.getFacing(); //Right = 0, upward = 90, etc
+            if (shipFacing < 0) shipFacing += 360;
+            if (shieldFacing < 0) shieldFacing += 360;
+
             shieldFacing -= shipFacing; // Relative rotation around the ship
-            shieldFacing -= 180; //-180 to 180, will get opposite side from facing
+            shieldFacing -= 180; //Get opposite side from facing
+            if (shieldFacing < 0) shieldFacing += 360; //Can't believe this helped.
 
-            float shieldX = 0;
-            float shieldY = 0;
-            float a = maxY+10;
-            float b = maxX+6;
-            float rad = (float) Math.toRadians(shieldFacing);
-            shieldX = (float) ((a*b)/Math.sqrt(b*b + a*a * Math.tan(rad)*Math.tan(rad)));
-            if (rad > Math.PI/2 && rad < 3*Math.PI/2 || rad < -Math.PI/2 && rad > -3*Math.PI/2) { //Rear-facing
-                shieldX = shieldX*-1;
-            }
-            shieldY = (float) (shieldX * Math.tan(rad));
+            float rad = (float) Math.toRadians((shieldFacing) % 360);
+            Vector2f pos = getEllipsePosition(maxX, maxY, rad);
 
-            if (maxY > maxX) { //wider
-                //ship.getShield().setCenter(shieldX, shieldY*-1);
-                ship.getShield().setCenter(shieldX, shieldY);
-            } else { //taller
-                //ship.getShield().setCenter(shieldY, shieldX*-1); //invert
-                ship.getShield().setCenter(shieldY, shieldX); //invert
+            if (maxY > maxX) { //Wider, in theory. Haunted.
+                ship.getShield().setCenter(pos.getY(), pos.getX());
+            } else { //Supposed to be taller ship, instead also haunted
+                ship.getShield().setCenter(pos.getX(), pos.getY());
             }
+//debug runcode $print("X: " + (Global.getCombatEngine().getPlayerShip().getShield().getLocation().getX() - Global.getCombatEngine().getPlayerShip().getLocation().getX()) + "\nY: " + (Global.getCombatEngine().getPlayerShip().getShield().getLocation().getY() - Global.getCombatEngine().getPlayerShip().getLocation().getY()));
         }
+    }
+
+    public static Vector2f getEllipsePosition(float a, float b, float rad) {
+        Vector2f pos = new Vector2f();
+
+        pos.setX((float) ((a*b)/Math.sqrt(b*b + a*a * Math.tan(rad)*Math.tan(rad))));
+        if (rad > Math.toRadians(90) && rad < Math.toRadians(270) || rad < Math.toRadians(-90) && rad > Math.toRadians(-270)) { //Rear-facing
+            pos.setX(pos.getX()*-1);
+        }
+        pos.setY((float) (pos.getX() * Math.tan(rad)));
+
+        return pos;
     }
 }
