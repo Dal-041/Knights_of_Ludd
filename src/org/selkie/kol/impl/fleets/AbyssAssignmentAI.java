@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.world;
+package org.selkie.kol.impl.fleets;
 
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
@@ -6,9 +6,9 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.fleets.AbyssalFleetManager;
 
 import java.util.Random;
 
@@ -36,7 +36,7 @@ public class AbyssAssignmentAI implements EveryFrameScript {
 			fleet.addAssignment(FleetAssignment.PATROL_SYSTEM, source, 3f + (float) Math.random() * 2f);
 		} else {
 			// start at random location
-			SectorEntityToken target = RemnantSeededFleetManager.pickEntityToGuard(new Random(), homeSystem, fleet);
+			SectorEntityToken target = org.selkie.kol.impl.fleets.AbyssalFleetManager.pickEntityToGuard(new Random(), homeSystem, fleet);
 			if (target != null) {
 				Vector2f loc = Misc.getPointAtRadius(target.getLocation(), target.getRadius() + 100f);
 				fleet.setLocation(loc.x, loc.y);
@@ -51,7 +51,7 @@ public class AbyssAssignmentAI implements EveryFrameScript {
 	protected void pickNext() {
 		boolean standDown = source != null && (float) Math.random() < 0.2f;
 		if (!standDown) {
-			SectorEntityToken target = SeededFleetManagerDawn.pickEntityToGuard(new Random(), homeSystem, fleet);
+			SectorEntityToken target = AbyssalFleetManager.pickEntityToGuard(new Random(), homeSystem, fleet);
 			if (target != null) {
 				float speed = Misc.getSpeedForBurnLevel(8);
 				float dist = Misc.getDistance(fleet.getLocation(), target.getLocation());

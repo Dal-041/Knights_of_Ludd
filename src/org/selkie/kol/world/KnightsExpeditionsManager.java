@@ -135,6 +135,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
 
         KnightsExpeditionAssignmentAI ai = new KnightsExpeditionAssignmentAI(fleet, route);
         fleet.addScript(ai);
+        fleet.setTransponderOn(true);
 
         return fleet;
     }

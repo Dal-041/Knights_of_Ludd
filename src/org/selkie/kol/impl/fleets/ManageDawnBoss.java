@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.world;
+package org.selkie.kol.impl.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
@@ -9,19 +9,20 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 
-public class ManageDuskBoss implements FleetEventListener {
-	private final String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
+public class ManageDawnBoss implements FleetEventListener {
+	public static final String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";
 
 	//Totally not adapted from Diable or anything :>
 	@Override
 	public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
 
-		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_DUSK_BOSS_DONE)
-	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_DUSK_BOSS_DONE)){
+		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_DAWN_BOSS_DONE)
+	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_DAWN_BOSS_DONE)){
 	            return;
 		}
-	        
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("abyss_boss_yukionna")){
+
+
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("abyss_boss_dokkaebi")){
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -33,10 +34,10 @@ public class ManageDuskBoss implements FleetEventListener {
 			//boss is dead,
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
-				if(f.getHullId().startsWith("abyss_boss_yukionna")) salvaged=true;
+				if(f.getHullId().startsWith("abyss_boss_dokkaebi")) salvaged=true;
 	                
 	                //set memkey that the wreck must never spawn
-	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DUSK_BOSS_DONE,true);
+	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DAWN_BOSS_DONE,true);
 	        }
 	            
 	            //spawn a derelict if it wasn't salvaged
@@ -49,7 +50,7 @@ public class ManageDuskBoss implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "abyss_boss_yukionna_Ultimate",
+	                        "abyss_boss_dokkaebi_Fiend",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
@@ -57,11 +58,11 @@ public class ManageDuskBoss implements FleetEventListener {
 	                        //orbitCenter,angle,radius,period);
 	                        fleet.getStarSystem().getCenter(),VectorUtils.getAngle(new Vector2f(), location),location.length(),360);               
 	                //MagicCampaign.placeOnStableOrbit(wreck, true);
-	                wreck.setName("Wreck of the Yukionna");
+	                wreck.setName("Wreck of the AI flagship");
 	                wreck.setFacing((float)Math.random()*360f);
 	                
 	                //set memkey that the wreck exist
-	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DUSK_BOSS_DONE,true);
+	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DAWN_BOSS_DONE,true);
 	        }
 	    }
 	}

@@ -16,6 +16,10 @@ import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.fleets.AbyssalFleetManager;
+import org.selkie.kol.impl.fleets.SpawnDuskBoss;
+import org.selkie.kol.impl.fleets.SpawnElysianAmaterasu;
+import org.selkie.kol.impl.fleets.SpawnElysianHeart;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -39,9 +43,6 @@ public class PrepareAbyss {
 			"radiant",
 			"tahlan_nirvana"
 	};
-
-	//the destroyed remains of a TT fleet
-	//phase ships get 1-2 dmods, regular high tech ships get max dmods
 	public static final String[] uwDerelictsNormal = {
 			"aurora_Assault",
 			"brawler_tritachyon_Standard",
@@ -68,6 +69,20 @@ public class PrepareAbyss {
 			"harbinger_Strike",
 			"doom_Attack"
 	};
+	//The flagships are spawned separately
+	public static final String[] duskBossSupportingFleet = {
+			"abyss_boss_nineveh_Souleater",
+			"abyss_boss_nineveh_Souleater",
+			"abyss_boss_ninmah_Skinthief",
+			"abyss_boss_ninmah_Skinthief",
+			"abyss_boss_ninaya_Gremlin",
+			"abyss_boss_ninaya_Gremlin",
+			"abyss_boss_ninaya_Nightdemon"
+	};
+	public static final String[] elysianBossSupportingFleet = {
+			"abyss_edf_tamamo_Striker",
+			"abyss_edf_tamamo_Striker"
+	};
 
     public static void generate(SectorAPI sector) {
 		prepareAbyssalFleets();
@@ -91,6 +106,9 @@ public class PrepareAbyss {
 			}
 		}
 		SpawnDuskBoss.SpawnDuskBoss();
+		SpawnElysianAmaterasu.SpawnElysianAmaterasu();
+		SpawnElysianHeart.SpawnElysianHeart();
+		//Unimplemnted SpawnDawnBoss.SpawnDawnBoss();
     }
 
 	public static void prepareAbyssalFleets() {
@@ -155,16 +173,7 @@ public class PrepareAbyss {
                 Global.getSector().getFaction(B).addUseWhenImportingShip(baseShip);
             }
         }
-        for (String fighter : Global.getSector().getFaction(Factions.A).getKnownFighters()) {
-            if (!Global.getSector().getFaction(B).knowsFighter(fighter)) {
-                Global.getSector().getFaction(B).addKnownFighter(fighter, true);
-            }
-        }
-        for (String weapon : Global.getSector().getFaction(Factions.A).getKnownWeapons()) {
-            if (!Global.getSector().getFaction(B).knowsWeapon(weapon)) {
-               Global.getSector().getFaction(B).addKnownWeapon(weapon, true);
-            }
-        }
+        etc
 	 */
 
     public static void GenerateElysia(SectorAPI sector) {
@@ -248,10 +257,10 @@ public class PrepareAbyss {
     	silence.setFixedLocation(-14000, -16500);
     	
 		SectorEntityToken silence_corona = system.addTerrain("kol_corona",
-				new AbyssCorona.CoronaParams(11000,
+				new AbyssCorona.CoronaParams(7000,
 						0,
 						silence,
-						5f,
+						3f,
 						0.1f,
 						1f)
 		);
@@ -306,7 +315,7 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		SeededFleetManagerElysian fleets = new SeededFleetManagerElysian(system, 10, 14, 120, 300, 1.0f);
+		AbyssalFleetManager fleets = new AbyssalFleetManager(system, elysianID, 14, 80, 260);
 		system.addScript(fleets);
 
 		EveryFrameScript tracker = new TrackFleet();
@@ -360,7 +369,8 @@ public class PrepareAbyss {
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
 		SectorEntityToken stationResearch = addSalvageEntity(system, "station_research_remnant", PrepareAbyss.duskID);
-		stationResearch.setFixedLocation(-5500, 9460);
+		stationResearch.setFixedLocation(-5230, 8860);
+		stationResearch.setName("Null");
 
 		for(String variant:uwDerelictsNormal) {
 			if (Math.random() <= 0.45f) {
@@ -393,7 +403,6 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
-				//system.addEntity(wreck);
 			}
 		}
 	}
@@ -493,8 +502,10 @@ public class PrepareAbyss {
 		SectorEntityToken loot6 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
 		loot6.setCircularOrbitPointingDown(sixth, 217, 4770, 100000);
 
-		SeededFleetManagerDawn fleets = new SeededFleetManagerDawn(system, 14, 18, 120, 300, 1.0f);
+		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 60, 200);
+		org.selkie.kol.impl.fleets.AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, dawnID, 4, 250, 350);
 		system.addScript(fleets);
+		system.addScript(fleetsMiniboss);
 	}
 
 	public static void generateDynamicDuskHole(SectorAPI sector) {
@@ -566,8 +577,8 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		SeededFleetManagerDusk fleets = new SeededFleetManagerDusk(system, 6, 6, 80, 200, 1.0f);
-		SeededFleetManagerDusk fleetsMiniboss = new SeededFleetManagerDusk(system, 3, 3, 250, 400, 1.0f);
+		AbyssalFleetManager fleets = new AbyssalFleetManager(system, duskID, 6, 80, 200);
+		AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, duskID, 3, 250, 350);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}

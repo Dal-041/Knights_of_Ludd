@@ -1,10 +1,9 @@
-package org.selkie.kol.impl.world;
+package org.selkie.kol.impl.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.BaseFIDDelegate;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfig;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfigGen;
@@ -14,22 +13,23 @@ import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.fleets.SeededFleetManager;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantAssignmentAI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.world.*;
 
 import java.util.Random;
 
-public class SeededFleetManagerElysian extends SeededFleetManager {
+public class AbyssalFleetManager extends SeededFleetManager {
 
-    public static class ElysianFleetInteractionConfigGen implements FIDConfigGen {
+    public static class AbyssalFleetInteractionConfigGen implements FIDConfigGen {
         public FIDConfig createConfig() {
             FIDConfig config = new FIDConfig();
             config.showTransponderStatus = false;
             config.delegate = new BaseFIDDelegate() {
                 public void battleContextCreated(InteractionDialogAPI dialog, BattleCreationContext bcc) {
-                    bcc.aiRetreatAllowed = true; //false
+                    bcc.aiRetreatAllowed = false; //false
                     //bcc.objectivesAllowed = false;
                 }
             };
@@ -40,44 +40,56 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
     protected int minPts;
     protected int maxPts;
     protected float activeChance;
+    protected int maxFleets;
+    protected StarSystemAPI system;
+    String fac;
+    protected IntervalUtil interval = new IntervalUtil(3, 5);
 
-    public SeededFleetManagerElysian(StarSystemAPI system, int minFleets, int maxFleets, int minPts, int maxPts, float activeChance) {
+    public AbyssalFleetManager(StarSystemAPI system, String factionID, int maxFleets, int minPts, int maxPts) {
         super(system, 1f);
+
         this.minPts = minPts;
         this.maxPts = maxPts;
-        this.activeChance = activeChance;
+        this.maxFleets = maxFleets;
+        this.system = system;
+        this.fac = factionID;
 
-        int num = minFleets + StarSystemGenerator.random.nextInt(maxFleets - minFleets + 1);
-        for (int i = 0; i < num; i++) {
+        for (int i = 0; i < maxFleets; i++) {
             long seed = StarSystemGenerator.random.nextLong();
             addSeed(seed);
         }
     }
 
-    @Override
-    protected CampaignFleetAPI spawnFleet(long seed) {
-        Random random = new Random(seed);
-        float factorMain = 0.6f;
-        boolean mixAll = false;
-
+    public String getSecondFaction(long seed, String primary) {
         WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(new Random(seed));
+
         picker.add("derelict",1f);
         picker.add("remnant", 1f);
-        picker.add("kol_dawn", 0.7f);
-        picker.add("kol_dusk", 0.7f);
-        //picker.add("kol_elysians", 1f);
+        float w = primary.equals(PrepareAbyss.dawnID) ? 0f : 1f;
+        picker.add("kol_dawn", w);
+        w = primary.equals(PrepareAbyss.duskID) ? 0f : 1f;
+        picker.add("kol_dusk", w);
+        w = primary.equals(PrepareAbyss.elysianID) ? 0f : 1f;
+        picker.add("kol_elysians", w);
         if (PrepareAbyss.useDomres) picker.add("domres", 1f);
         if (PrepareAbyss.useDustkeepers) picker.add("sotf_dustkeepers", 1f);
-        //if (PrepareAbyss.useEnigma) picker.add("enigma", 0.75f);
+        if (PrepareAbyss.useEnigma) picker.add("enigma", 0.75f);
         if (PrepareAbyss.useLostech) {
-
             //picker.add("lostech", 0.5f);
         }
-        String facSecond = picker.pick();
+        return picker.pick();
+    }
+
+    @Override
+    protected CampaignFleetAPI spawnFleet(long seed) {
+
+        Random random = new Random(seed);
+        float factorMain = 0.65f;
+        boolean mixAll = false;
 
         FleetParamsV3 params = new FleetParamsV3(
                 system.getLocation(),
-                PrepareAbyss.elysianID,
+                fac,
                 5f,
                 FleetTypes.PATROL_LARGE,
                 MathUtils.getRandomNumberInRange(minPts, maxPts), // combatPts
@@ -90,13 +102,15 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
         );
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
-        params.commander = createEDFCaptain();
+        params.commander = createAbyssaCaptain();
         params.officerNumberMult = 5f;
-        params.officerLevelBonus = 0;
+        params.officerLevelBonus = 1;
+        //params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_ALPHA;
         params.random = random;
 
         CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
 
+        String facSecond = getSecondFaction(seed, fac);
         params.factionId = facSecond;
         params.combatPts = params.combatPts/factorMain * (1-factorMain);
 
@@ -107,9 +121,10 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
         fleet2.despawn();
 
         //fleet.getFleetData().sort();
-        fleet.addTag("abyss_rulesfortheebutnotforme");
+
         if (fleet == null) return null;
 
+        fleet.addTag("abyss_rulesfortheebutnotforme");
         system.addEntity(fleet);
         fleet.setFacing(random.nextFloat() * 360f);
 
@@ -124,7 +139,6 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
 
         return fleet;
     }
-
 
     public static SectorEntityToken pickEntityToGuard(Random random, StarSystemAPI system, CampaignFleetAPI fleet) {
         WeightedRandomPicker<SectorEntityToken> picker = new WeightedRandomPicker<SectorEntityToken>(random);
@@ -147,12 +161,55 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
         return picker.pick();
     }
 
+    @Override
+    public void advance(float amount) {
+        super.advance(amount);
+        float days = Global.getSector().getClock().convertToDays(amount);
+        interval.advance(days);
 
+        if (interval.intervalElapsed() && fleets.size() < maxFleets) {
+            for (int i = fleets.size(); i < maxFleets; i++) {
+                long seed = StarSystemGenerator.random.nextLong();
+                addSeed(seed);
+            }
+        }
+    }
+
+    @Override
+    public boolean isDone() {
+        switch (fac) {
+            case PrepareAbyss.dawnID:
+                if (Global.getSector().getMemoryWithoutUpdate().contains(ManageDawnBoss.MEMKEY_KOL_DAWN_BOSS_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageDawnBoss.MEMKEY_KOL_DAWN_BOSS_DONE)) return true;
+            case PrepareAbyss.duskID:
+                if (Global.getSector().getMemoryWithoutUpdate().contains(ManageDuskBoss.MEMKEY_KOL_DUSK_BOSS_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageDuskBoss.MEMKEY_KOL_DUSK_BOSS_DONE)) return true;
+            case PrepareAbyss.elysianID:
+                if (Global.getSector().getMemoryWithoutUpdate().contains(ManageElysianAmaterasu.MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageElysianAmaterasu.MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().contains(ManageElysianCorruptingheart.MEMKEY_KOL_ELYSIAN_BOSS2_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageElysianCorruptingheart.MEMKEY_KOL_ELYSIAN_BOSS2_DONE)) return true;
+            default: return false;
+        }
+    }
+
+    @Override
+    public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
+        if (fleet.getMembersWithFightersCopy().isEmpty()) {
+            for (SeededFleet curr : fleets) {
+                if (curr.fleet != null && curr.fleet == fleet) {
+                    fleets.remove(curr);
+                    if (DEBUG) System.out.println("Removed " + curr.fleet.getName() + " (seed: " + curr.seed + "), remaining: " + fleets.size());
+                    break;
+                }
+            }
+        }
+    }
 
     public static void initElysianFleetProperties(Random random, CampaignFleetAPI fleet, boolean dormant) {
         if (random == null) random = new Random();
 
-        //fleet.removeAbility(Abilities.EMERGENCY_BURN);
+        fleet.removeAbility(Abilities.EMERGENCY_BURN);
         //fleet.removeAbility(Abilities.SENSOR_BURST);
         fleet.removeAbility(Abilities.GO_DARK);
 
@@ -183,10 +240,10 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
 
     public static void addElysianInteractionConfig(CampaignFleetAPI fleet) {
         fleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
-                new SeededFleetManagerElysian.ElysianFleetInteractionConfigGen());
+                new AbyssalFleetManager.AbyssalFleetInteractionConfigGen());
     }
 
-    public static void spawnPatrollersElysia(SectorEntityToken targ) {
+    public void spawnPatrollersDawn(SectorEntityToken targ) {
         int numFleetsPatrol = 8;
         int numFleetsActive = 0;
 
@@ -195,10 +252,10 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
             FleetParamsV3 params = new FleetParamsV3(
                     null,
                     targ.getStarSystem().getLocation(),
-                    PrepareAbyss.elysianID,
+                    PrepareAbyss.dawnID,
                     5f,
                     FleetTypes.PATROL_LARGE,
-                    MathUtils.getRandomNumberInRange(60f, 200f), // combatPts
+                    MathUtils.getRandomNumberInRange(100f,300f), // combatPts
                     0f, // freighterPts
                     0f, // tankerPts
                     0f, // transportPts
@@ -208,25 +265,32 @@ public class SeededFleetManagerElysian extends SeededFleetManager {
             );
             params.averageSMods = 1;
             params.ignoreMarketFleetSizeMult = true;
-            params.commander = createEDFCaptain();
+            params.commander = createAbyssaCaptain();
             params.officerNumberMult = 5f;
             params.officerLevelBonus = 0;
 
             CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
             fleet.addTag("abyss_rulesfortheebutnotforme");
 
-            MagicCampaign.spawnFleet(fleet, targ, FleetAssignment.PATROL_SYSTEM, targ, true, false, false);
+            MagicCampaign.spawnFleet(fleet, targ, FleetAssignment.PATROL_SYSTEM, targ, false, false, false);
 
         }
     }
 
-    public static PersonAPI createEDFCaptain() {
-        return MagicCampaign.createCaptainBuilder(PrepareAbyss.duskID)
+    public PersonAPI createAbyssaCaptain() {
+        OfficerManagerEvent.SkillPickPreference skillPref;
+        switch (fac) {
+            case PrepareAbyss.dawnID: skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
+            case PrepareAbyss.duskID: skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+            case PrepareAbyss.elysianID: skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+            default: skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
+        }
+        return MagicCampaign.createCaptainBuilder(fac)
                 .setIsAI(true)
                 .setAICoreType("alpha_core")
                 .setLevel(7)
                 .setPersonality(Personalities.AGGRESSIVE)
-                .setSkillPreference(OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_NO_MISSILE_YES_DEFENSE)
+                .setSkillPreference(skillPref)
                 .create();
     }
 }
