@@ -188,7 +188,7 @@ public class PrepareAbyss {
         
     	StarSystemAPI system = sector.createStarSystem("Elysia");
     	system.getLocation().set((int)posX, (int)posY);
-    	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_edf_elysiabg.png");
+    	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_elysia.png");
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_elysia_theme");
 
 		system.addTag(Tags.THEME_HIDDEN);
@@ -334,7 +334,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 
-		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dusk.jpg");
+		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dusk.png");
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_underworld_theme");
 
 		system.getLocation().set(2100, -4200);
@@ -418,7 +418,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 
-		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_edf_under.png");
+		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dawn.png");
 		new AbyssBackgroundWarper(system, 8, 0.25f);
 
 		if (!sector.getDifficulty().equals(Difficulties.EASY)) {
@@ -510,30 +510,24 @@ public class PrepareAbyss {
 
 	public static void generateDynamicDuskHole(SectorAPI sector) {
 		//Variable location
-		double posX = Math.random()*(Global.getSettings().getFloat("sectorWidth")/2-5000);
-		double posY = Math.random()*(Global.getSettings().getFloat("sectorHeight")/2-2500);
-
-		if (Math.abs(posX) < 5000) {
-			if (Math.random() < 0.5f) {
-				posX += 10000;
-			} else {
-				posX -= 10000;
-			}
-		}
-		if (Math.abs(posY) < 5000) {
-			if (Math.random() < 0.5f) {
-				posY += 10000;
-			} else {
-				posY -= 10000;
-			}
-		}
+		double posX = Math.random()*(Global.getSettings().getFloat("sectorWidth")/2);
+		double posY = Math.random()*(Global.getSettings().getFloat("sectorHeight")/2);
+		if (Math.abs(posX) < 20000) posX += 20000; //Coreworld area
+		if (Math.abs(posY) < 20000) posY += 20000;
+		if (Math.random() < 0.5f) posX *= -1;
+		if (Math.random() < 0.5f) posY *= -1;
 
 		StarSystemAPI system = sector.createStarSystem(ProcgenUsedNames.pickName(NameGenData.TAG_STAR, null, null).nameWithRomanSuffixIfAny);
-		system.getLocation().set((int)posX, (int)posY);
-		//system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_edf_elysiabg.png");
-		//system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_elysia_theme");
+		system.getLocation().set((float)posX, (float)posY);
+		if (Math.random() < 0.5f) {
+			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bh_duskbh1.png");
+		} else {
+			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bh_duskbh2.png");
+		}
+		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_underworld_theme");
 
 		system.addTag(Tags.THEME_UNSAFE);
+		system.addTag(Tags.THEME_SPECIAL);
 
 		//fancy bg script
 
@@ -542,15 +536,14 @@ public class PrepareAbyss {
 		system.setName(tempName);
 		sing.setName(tempName);
 		ProcgenUsedNames.notifyUsed(system.getBaseName());
-		//system.initNonStarCenter();
-		//PlanetAPI elysia = system.addPlanet("abyss_elysia_abyss", system.getCenter(), "Elysia", StarTypes.BLACK_HOLE, 0f, beeg, 0f, 100000f);
 		sing.getSpec().setBlackHole(true);
 		sing.applySpecChanges();
+
 		SectorEntityToken horizon1 = system.addTerrain("kol_eventHorizon", new AbyssEventHorizon.CoronaParams(
-				2000,
+				1000,
 				50,
 				sing,
-				-10f,
+				-5f,
 				0f,
 				5f)
 		);
