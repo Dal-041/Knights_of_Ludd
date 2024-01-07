@@ -12,7 +12,7 @@
   "shieldRadius": 259,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
+    "automated",
     "kol_ea_shields1",
     "advancedcore"
   ],
@@ -243,7 +243,7 @@
   "engineSlots": [
     {
       "location": [-121, 59],
-      "length": 148.5,
+      "length": 125,
       "width": 46,
       "angle": 180,
       "contrailSize": 46,
@@ -251,7 +251,7 @@
     },
     {
       "location": [-121, -59],
-      "length": 148.5,
+      "length": 125,
       "width": 46,
       "angle": -180,
       "contrailSize": 46,
@@ -259,7 +259,7 @@
     },
     {
       "location": [-58, -0],
-      "length": 211.5,
+      "length": 150,
       "width": 49,
       "angle": 180,
       "contrailSize": 49,
@@ -267,7 +267,7 @@
     },
     {
       "location": [-47, 27],
-      "length": 110,
+      "length": 80,
       "width": 30,
       "angle": 178,
       "contrailSize": 30,
@@ -275,7 +275,7 @@
     },
     {
       "location": [-47, -27],
-      "length": 110,
+      "length": 80,
       "width": 30,
       "angle": -178,
       "contrailSize": 30,
@@ -283,7 +283,7 @@
     },
     {
       "location": [-91, 39],
-      "length": 77.5,
+      "length": 65,
       "width": 15,
       "angle": 176.5,
       "contrailSize": 15,
@@ -291,7 +291,7 @@
     },
     {
       "location": [-91, -39],
-      "length": 77.5,
+      "length": 65,
       "width": 15,
       "angle": -176.5,
       "contrailSize": 15,
@@ -299,7 +299,7 @@
     },
     {
       "location": [-134, 58.5],
-      "length": 155.5,
+      "length": 125,
       "width": 25,
       "angle": 180,
       "contrailSize": 25,
@@ -308,7 +308,7 @@
     },
     {
       "location": [-134, -58.5],
-      "length": 155.5,
+      "length": 125,
       "width": 25,
       "angle": -180,
       "contrailSize": 25,
@@ -317,43 +317,43 @@
     },
     {
       "location": [-54, 27],
-      "length": 121.303841,
-      "width": 15.476314,
+      "length": 80,
+      "width": 15.479999,
       "angle": 178,
-      "contrailSize": 15.476314,
+      "contrailSize": 15.479999,
       "style": "CUSTOM",
       "styleId": "ABYSS_DAWN_ENG"
     },
     {
       "location": [-54, -27],
-      "length": 121.303841,
-      "width": 15.476314,
+      "length": 80,
+      "width": 15.479999,
       "angle": -178,
-      "contrailSize": 15.476314,
+      "contrailSize": 15.479999,
       "style": "CUSTOM",
       "styleId": "ABYSS_DAWN_ENG"
     },
     {
       "location": [-99.5, 40],
-      "length": 81.380554,
-      "width": 9.686181,
+      "length": 65,
+      "width": 9.69,
       "angle": 176.5,
-      "contrailSize": 9.686181,
+      "contrailSize": 9.69,
       "style": "CUSTOM",
       "styleId": "ABYSS_DAWN_ENG"
     },
     {
       "location": [-99.5, -40],
-      "length": 81.380554,
-      "width": 9.686181,
+      "length": 65,
+      "width": 9.69,
       "angle": -176.5,
-      "contrailSize": 9.686181,
+      "contrailSize": 9.69,
       "style": "CUSTOM",
       "styleId": "ABYSS_DAWN_ENG"
     },
     {
       "location": [-70, -0],
-      "length": 220.5,
+      "length": 150,
       "width": 31,
       "angle": 180,
       "contrailSize": 31,
@@ -362,7 +362,7 @@
     },
     {
       "location": [-63, 155],
-      "length": 120,
+      "length": 75,
       "width": 20,
       "angle": 150,
       "contrailSize": 31,
@@ -370,7 +370,7 @@
     },
     {
       "location": [-63, -155],
-      "length": 120,
+      "length": 75,
       "width": 20,
       "angle": -150,
       "contrailSize": 31,
@@ -378,7 +378,7 @@
     },
     {
       "location": [62, 222],
-      "length": 60,
+      "length": 45,
       "width": 10,
       "angle": 60,
       "contrailSize": 31,
@@ -386,7 +386,7 @@
     },
     {
       "location": [62, -222],
-      "length": 60,
+      "length": 45,
       "width": 10,
       "angle": -60,
       "contrailSize": 31,
