@@ -11,8 +11,8 @@ import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
-import org.selkie.kol.world.SpawnInvictus;
-import org.selkie.kol.world.SpawnRetribution;
+import org.selkie.kol.fleets.SpawnInvictus;
+import org.selkie.kol.fleets.SpawnRetribution;
 
 import exerelin.campaign.SectorManager;
 

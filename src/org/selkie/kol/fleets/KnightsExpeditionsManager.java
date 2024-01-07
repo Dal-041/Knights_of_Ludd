@@ -1,4 +1,4 @@
-package org.selkie.kol.world;
+package org.selkie.kol.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
@@ -6,12 +6,11 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.impl.campaign.fleets.*;
 import com.fs.starfarer.api.impl.campaign.fleets.misc.MiscFleetRouteManager;
 import com.fs.starfarer.api.impl.campaign.ids.*;
-import com.fs.starfarer.api.impl.campaign.intel.SystemBountyManager;
-import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
-import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.fleets.KnightsExpeditionAssignmentAI;
 import org.selkie.kol.plugins.KOL_ModPlugin;
+import org.selkie.kol.world.GenerateKnights;
 
 import java.util.Random;
 
@@ -133,7 +132,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         // this will get overridden by the patrol assignment AI, depending on route-time elapsed etc
         fleet.setLocation(route.getMarket().getPrimaryEntity().getLocation().x, route.getMarket().getPrimaryEntity().getLocation().y);
 
-        KnightsExpeditionAssignmentAI ai = new KnightsExpeditionAssignmentAI(fleet, route);
+        org.selkie.kol.fleets.KnightsExpeditionAssignmentAI ai = new KnightsExpeditionAssignmentAI(fleet, route);
         fleet.addScript(ai);
         fleet.setTransponderOn(true);
 
@@ -306,7 +305,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
                     if (system.hasTag(Tags.THEME_UNSAFE)) {
                         picker.add(system.getId(), 5);
                     } else {
-                        picker.add(system.getId(), 1);
+                        picker.add(system.getId(), 2);
                     }
                 }
                 if (system.getId().startsWith("dusk_DBH")) {

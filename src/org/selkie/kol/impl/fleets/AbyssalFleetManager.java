@@ -39,7 +39,6 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
     protected int minPts;
     protected int maxPts;
-    protected float activeChance;
     protected int maxFleets;
     protected StarSystemAPI system;
     String fac;

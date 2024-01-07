@@ -36,12 +36,12 @@ public class ConformalShields extends BaseHullMod {
         if (ship.getShield() != null) {
             float shieldFacing = ship.getShield().getFacing();
             float shipFacing = ship.getFacing(); //Right = 0, upward = 90, etc
-            if (shipFacing < 0) shipFacing += 360;
-            if (shieldFacing < 0) shieldFacing += 360;
+            //if (shipFacing < 0) shipFacing += 360;
+            //if (shieldFacing < 0) shieldFacing += 360;
 
             shieldFacing -= shipFacing; // Relative rotation around the ship
             shieldFacing -= 180; //Get opposite side from facing
-            if (shieldFacing < 0) shieldFacing += 360; //Can't believe this helped.
+            //if (shieldFacing < 0) shieldFacing += 360; //Can't believe this helped.
 
             float rad = (float) Math.toRadians((shieldFacing) % 360);
             Vector2f pos = getEllipsePosition(maxX + pad, maxY + pad/2, rad);

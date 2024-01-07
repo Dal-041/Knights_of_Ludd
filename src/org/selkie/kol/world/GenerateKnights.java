@@ -9,12 +9,11 @@ import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.econ.EconomyAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI.SurveyLevel;
-import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.RuinsFleetRouteManager;
 import exerelin.campaign.SectorManager;
+import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 public class GenerateKnights {
@@ -93,7 +92,7 @@ public class GenerateKnights {
 	}
 
 	public static void genKnightsExpeditions() {
-		KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
+		org.selkie.kol.fleets.KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
 		Eos.addScript(expeditions);
 	}
 	

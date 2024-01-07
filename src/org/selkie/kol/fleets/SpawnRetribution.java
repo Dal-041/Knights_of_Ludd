@@ -1,4 +1,4 @@
-package org.selkie.kol.world;
+package org.selkie.kol.fleets;
 
 import org.magiclib.util.MagicCampaign;
 
@@ -11,14 +11,15 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
+import org.selkie.kol.fleets.ManageRetribution;
 
-public class SpawnInvictus {
+public class SpawnRetribution {
 	
-	public static boolean spawnInvictus() {
+	public static boolean spawnRetribution() {
 	        
 		SectorEntityToken target=null;
-		if(Global.getSector().getEntityById("chalcedon")!=null && Global.getSector().getEntityById("chalcedon").getFaction() == Global.getSector().getFaction("luddic_path")){
-	            target = Global.getSector().getEntityById("chalcedon");
+		if(Global.getSector().getEntityById("epiphany")!=null && Global.getSector().getEntityById("epiphany").getFaction() == Global.getSector().getFaction("luddic_path")){
+	            target = Global.getSector().getEntityById("epiphany");
 	        } else {
 	            for(MarketAPI markets : Global.getSector().getEconomy().getMarketsCopy()){
 	                if(markets.getFaction().getId().equals("luddic_path")){
@@ -33,7 +34,7 @@ public class SpawnInvictus {
 	        }
 	        if(target!=null) {
 
-	            PersonAPI invictusCaptain = MagicCampaign.createCaptainBuilder("luddic_path").create();
+	            PersonAPI RetributionCaptain = MagicCampaign.createCaptainBuilder("luddic_path").create();
 
 	            /**
 	            * Creates a fleet with a defined flagship and optional escort
@@ -64,25 +65,25 @@ public class SpawnInvictus {
 	            * @param transponderOn
 	            * @return 
 	            */
-	            String variant = "kol_invictus_lp_hallowed";
-	            CampaignFleetAPI invictusFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
-	                    .setFleetName("Hammer of Ludd")
+	            String variant = "kol_boss_ret_lp_Hull";
+	            CampaignFleetAPI RetributionFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
+	                    .setFleetName("Ludd's Embrace")
 	                    .setFleetFaction("luddic_path")
 	                    .setFleetType(FleetTypes.TASK_FORCE)
-	                    .setFlagshipName("In the Glory of the Blessed")
+	                    .setFlagshipName("To Them Eternal Rest")
 	                    .setFlagshipVariant(variant)
-	                    .setCaptain(invictusCaptain)
-	                    .setMinFP(400) //support fleet
+	                    .setCaptain(RetributionCaptain)
+	                    .setMinFP(275) //support fleet
 	                    .setQualityOverride(2f)
 	                    .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
 	                    .setAssignmentTarget(target)
 	                    .setIsImportant(true)
 	                    .setTransponderOn(true)
 	                    .create();
-	            invictusFleet.setDiscoverable(false);
-	            //invictusFleet.addTag(Tags.NEUTRINO); //?
-	            invictusFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-	            invictusFleet.addEventListener(new ManageInvictus());
+	            RetributionFleet.setDiscoverable(false);
+	            //RetributionFleet.addTag(Tags.NEUTRINO); //?
+	            RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+	            RetributionFleet.addEventListener(new ManageRetribution());
 	        }
 
 		return true;
