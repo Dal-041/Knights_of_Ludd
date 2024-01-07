@@ -1,7 +1,7 @@
 {
     "displayName": "Ultimate",
-    "fluxCapacitors": 0,
-    "fluxVents": 47,
+    "fluxCapacitors": 17,
+    "fluxVents": 50,
     "goalVariant": true,
     "hullId": "abyss_boss_yukionna",
     "hullMods": [
@@ -10,7 +10,6 @@
         "fluxbreakers",
         "fluxdistributor",
         "heavyarmor",
-        "reinforcedhull",
         "stabilizedshieldemitter",
         "targetingunit",
     ],
@@ -40,9 +39,9 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0006": "ionbeam",
-                "WS0001": "ionbeam",
                 "WS0004": "gravitonbeam",
                 "WS0005": "gravitonbeam",
+                "WS0001": "ionbeam",
             }
         },
         {
@@ -50,11 +49,11 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0009": "guardian",
-                "WS0010": "guardian",
-                "WS0011": "lrpdlaser",
-                "WS0012": "lrpdlaser",
-                "WS0013": "ioncannon",
                 "WS0014": "ioncannon",
+                "WS0013": "ioncannon",
+                "WS0012": "lrpdlaser",
+                "WS0011": "lrpdlaser",
+                "WS0010": "guardian",
             }
         },
         {

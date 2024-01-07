@@ -4,7 +4,9 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianAmaterasu;
@@ -14,7 +16,7 @@ public class SpawnElysianAmaterasu {
 	
 	public static boolean SpawnElysianAmaterasu() {
 
-		PersonAPI elysianBossCaptain = MagicCampaign.createCaptainBuilder(PrepareAbyss.dawnID).create();
+		PersonAPI elysianBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -66,6 +68,18 @@ public class SpawnElysianAmaterasu {
 		}
 		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 		elysianBossFleet.getFleetData().sort();
+
+		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
+		//fleet.removeAbility(Abilities.SENSOR_BURST);
+		elysianBossFleet.removeAbility(Abilities.GO_DARK);
+		// to make sure they attack the player on sight when player's transponder is off
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_SAW_PLAYER_WITH_TRANSPONDER_ON, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_ALLOW_LONG_PURSUIT, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_HOLD_VS_STRONGER, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
+
 		elysianBossFleet.addTag("abyss_rulesfortheebutnotforme");
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
 

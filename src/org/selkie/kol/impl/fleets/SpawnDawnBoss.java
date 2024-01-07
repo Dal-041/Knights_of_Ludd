@@ -4,18 +4,17 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageDawnBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class SpawnDawnBoss {
 	
-	public static boolean SpawnDuskBoss() {
+	public static boolean SpawnDawnBoss() {
 
-		PersonAPI dawnBossCaptain = MagicCampaign.createCaptainBuilder("kol_dawn").create();
-
+		PersonAPI dawnBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.dawnID);
 		/**
 		* Creates a fleet with a defined flagship and optional escort
 		*
@@ -45,22 +44,34 @@ public class SpawnDawnBoss {
 		* @param transponderOn
 		* @return
 		*/
-		String variant = "abyss_boss_dokkaebi_Fiend";
+		String variant = "abyss_boss_dokkaebi_Fiendish";
 		CampaignFleetAPI dawnBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("The Fiend")
 		        .setFleetFaction(PrepareAbyss.dawnID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
-		        .setFlagshipName("00000011")
+		        .setFlagshipName("00000010")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(dawnBossCaptain)
-		        .setMinFP(300) //support fleet
+		        .setMinFP(400) //support fleet
 		        .setQualityOverride(2f)
-		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
+		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
 				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("abyss_lunasea_jp"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
 		dawnBossFleet.setDiscoverable(true);
+
+		//dawnBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
+		//fleet.removeAbility(Abilities.SENSOR_BURST);
+		dawnBossFleet.removeAbility(Abilities.GO_DARK);
+		// to make sure they attack the player on sight when player's transponder is off
+		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_SAW_PLAYER_WITH_TRANSPONDER_ON, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_ALLOW_LONG_PURSUIT, true);
+		//dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_HOLD_VS_STRONGER, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
+
 		dawnBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag("abyss_rulesfortheebutnotforme");

@@ -1,6 +1,6 @@
 {
-    "displayName": "Strike Bomber",
-    "fluxCapacitors": 4,
+    "displayName": "Attack Bomber",
+    "fluxCapacitors": 9,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "abyss_edf_seiryu",
@@ -11,22 +11,22 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_edf_seiryu_Strike_Bomber",
+    "variantId": "abyss_edf_seiryu_Attack_Bomber",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0010": "phasecl",
                 "WS0011": "phasecl",
+                "WS0010": "phasecl",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "heavyneedler",
                 "WS0004": "heavyneedler",
+                "WS0003": "heavyneedler",
             }
         },
         {

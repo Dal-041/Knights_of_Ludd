@@ -13,6 +13,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
+	"advancedcore",
+	"heavyarmor",
     "kol_ea_shields1"
   ],
   "weaponSlots": [
@@ -70,7 +72,7 @@
       "size": "LARGE",
       "type": "BALLISTIC",
       "mount": "TURRET",
-      "arc": 0,
+      "arc": 210,
       "angle": 0,
       "locations": [59, -206]
     },

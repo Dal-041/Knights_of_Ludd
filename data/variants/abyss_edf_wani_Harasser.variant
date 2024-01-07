@@ -5,6 +5,7 @@
     "goalVariant": true,
     "hullId": "abyss_edf_wani",
     "hullMods": [
+        "hardenedshieldemitter",
         "missleracks",
     ],
     "permaMods": [],

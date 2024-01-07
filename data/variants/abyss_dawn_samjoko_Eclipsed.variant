@@ -1,13 +1,13 @@
 {
     "displayName": "Eclipsed",
-    "fluxCapacitors": 17,
+    "fluxCapacitors": 45,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "abyss_dawn_samjoko",
     "hullMods": [
         "auxiliarythrusters",
+        "defensive_targeting_array",
         "fluxbreakers",
-        "hardenedshieldemitter",
         "heavyarmor",
     ],
     "permaMods": [],
@@ -16,26 +16,28 @@
     "variantId": "abyss_dawn_samjoko_Eclipsed",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0011": "tachyonlance",
-                "WS0012": "tachyonlance",
+                "WS0009": "kol_caelia",
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0003": "annihilatorpod",
-                "WS0002": "annihilatorpod",
+                "WS0003": "phasecl",
+                "WS0002": "phasecl",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0009": "mark9",
+                "WS0011": "mark9",
+                "WS0012": "mark9",
+                "WS0001": "lrpdlaser",
+                "WS0004": "lrpdlaser",
                 "WS0015": "lightac",
                 "WS0018": "lightac",
                 "WS0019": "lightac",
@@ -47,21 +49,19 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0021": "taclaser",
+                "WS0024": "taclaser",
                 "WS0022": "taclaser",
                 "WS0023": "taclaser",
-                "WS0024": "taclaser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "pdburst",
-                "WS0004": "pdburst",
-                "WS0005": "lrpdlaser",
+                "WS0008": "lrpdlaser",
                 "WS0006": "lrpdlaser",
-                "WS0007": "pdburst",
-                "WS0008": "pdburst",
+                "WS0007": "lrpdlaser",
+                "WS0005": "lrpdlaser",
             }
         },
         {

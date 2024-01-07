@@ -50,7 +50,7 @@ public class ManageDawnBoss implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "abyss_boss_dokkaebi_Fiend",
+	                        "abyss_boss_dokkaebi_Fiendish",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,

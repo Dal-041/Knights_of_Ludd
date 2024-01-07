@@ -1,5 +1,6 @@
 package org.selkie.kol.fleets;
 
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import org.magiclib.util.MagicCampaign;
 
 import com.fs.starfarer.api.Global;
@@ -81,7 +82,8 @@ public class SpawnRetribution {
 	                    .setTransponderOn(true)
 	                    .create();
 	            RetributionFleet.setDiscoverable(false);
-	            //RetributionFleet.addTag(Tags.NEUTRINO); //?
+				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
+				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 	            RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 	            RetributionFleet.addEventListener(new ManageRetribution());
 	        }

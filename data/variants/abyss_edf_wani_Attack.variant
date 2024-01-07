@@ -6,6 +6,7 @@
     "hullId": "abyss_edf_wani",
     "hullMods": [
         "fluxbreakers",
+        "hardenedshieldemitter",
     ],
     "permaMods": [],
     "sMods": [],

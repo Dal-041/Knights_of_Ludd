@@ -1,5 +1,6 @@
 package org.selkie.kol.fleets;
 
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import org.magiclib.util.MagicCampaign;
 
 import com.fs.starfarer.api.Global;
@@ -65,7 +66,7 @@ public class SpawnInvictus {
 	            * @param transponderOn
 	            * @return 
 	            */
-	            String variant = "kol_invictus_lp_hallowed";
+	            String variant = "kol_invictus_lp_Hallowed";
 	            CampaignFleetAPI invictusFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
 	                    .setFleetName("Hammer of Ludd")
 	                    .setFleetFaction("luddic_path")
@@ -81,7 +82,8 @@ public class SpawnInvictus {
 	                    .setTransponderOn(true)
 	                    .create();
 	            invictusFleet.setDiscoverable(false);
-	            //invictusFleet.addTag(Tags.NEUTRINO); //?
+				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
+				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 	            invictusFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 	            invictusFleet.addEventListener(new ManageInvictus());
 	        }

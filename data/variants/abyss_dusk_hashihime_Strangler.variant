@@ -1,7 +1,7 @@
 {
     "displayName": "Strangler",
-    "fluxCapacitors": 0,
-    "fluxVents": 13,
+    "fluxCapacitors": 17,
+    "fluxVents": 20,
     "goalVariant": true,
     "hullId": "abyss_dusk_hashihime",
     "hullMods": [
@@ -14,27 +14,27 @@
     "weaponGroups": [
         {
             "autofire": true,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0010": "resonatormrm",
-                "WS0011": "resonatormrm",
-                "WS0012": "resonatormrm",
-                "WS0013": "resonatormrm",
-            }
-        },
-        {
-            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "tachyonlance",
             }
         },
         {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0013": "gorgonpod",
+                "WS0012": "gorgonpod",
+                "WS0011": "gorgonpod",
+                "WS0010": "gorgonpod",
+            }
+        },
+        {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "minipulser",
-                "WS0009": "minipulser",
+                "WS0008": "lightneedler",
+                "WS0009": "lightneedler",
             }
         },
         {

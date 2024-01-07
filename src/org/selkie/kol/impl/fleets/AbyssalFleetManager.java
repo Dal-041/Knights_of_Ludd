@@ -12,6 +12,7 @@ import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.fleets.SeededFleetManager;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
@@ -101,10 +102,10 @@ public class AbyssalFleetManager extends SeededFleetManager {
         );
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
-        params.commander = createAbyssaCaptain();
+        params.commander = createAbyssalCaptain();
         params.officerNumberMult = 5f;
-        params.officerLevelBonus = 1;
-        //params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_ALPHA;
+        //params.officerLevelBonus = 0;
+        params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_MIXED;
         params.random = random;
 
         CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
@@ -242,49 +243,29 @@ public class AbyssalFleetManager extends SeededFleetManager {
                 new AbyssalFleetManager.AbyssalFleetInteractionConfigGen());
     }
 
-    public void spawnPatrollersDawn(SectorEntityToken targ) {
-        int numFleetsPatrol = 8;
-        int numFleetsActive = 0;
-
-
-        if (targ != null && numFleetsActive < numFleetsPatrol) {
-            FleetParamsV3 params = new FleetParamsV3(
-                    null,
-                    targ.getStarSystem().getLocation(),
-                    PrepareAbyss.dawnID,
-                    5f,
-                    FleetTypes.PATROL_LARGE,
-                    MathUtils.getRandomNumberInRange(100f,300f), // combatPts
-                    0f, // freighterPts
-                    0f, // tankerPts
-                    0f, // transportPts
-                    0f, // linerPts
-                    0f, // utilityPts
-                    5f // qualityMod, won't get used since routes mostly have quality override set
-            );
-            params.averageSMods = 1;
-            params.ignoreMarketFleetSizeMult = true;
-            params.commander = createAbyssaCaptain();
-            params.officerNumberMult = 5f;
-            params.officerLevelBonus = 0;
-
-            CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
-            fleet.addTag("abyss_rulesfortheebutnotforme");
-
-            MagicCampaign.spawnFleet(fleet, targ, FleetAssignment.PATROL_SYSTEM, targ, false, false, false);
-
-        }
-    }
-
-    public PersonAPI createAbyssaCaptain() {
+    public PersonAPI createAbyssalCaptain() {
         OfficerManagerEvent.SkillPickPreference skillPref;
-        switch (fac) {
-            case PrepareAbyss.dawnID: skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
-            case PrepareAbyss.duskID: skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
-            case PrepareAbyss.elysianID: skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
-            default: skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
-        }
+        if (fac.equals(PrepareAbyss.dawnID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
+        else if (fac.equals(PrepareAbyss.duskID)) skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+        else if (fac.equals(PrepareAbyss.elysianID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+        else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
+
         return MagicCampaign.createCaptainBuilder(fac)
+                .setIsAI(true)
+                .setAICoreType("alpha_core")
+                .setLevel(7)
+                .setPersonality(Personalities.AGGRESSIVE)
+                .setSkillPreference(skillPref)
+                .create();
+    }
+    public static PersonAPI createAbyssalCaptain(String faction) {
+        OfficerManagerEvent.SkillPickPreference skillPref;
+        if (faction.equals(PrepareAbyss.dawnID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
+        else if (faction.equals(PrepareAbyss.duskID)) skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+        else if (faction.equals(PrepareAbyss.elysianID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+        else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
+
+        return MagicCampaign.createCaptainBuilder(faction)
                 .setIsAI(true)
                 .setAICoreType("alpha_core")
                 .setLevel(7)

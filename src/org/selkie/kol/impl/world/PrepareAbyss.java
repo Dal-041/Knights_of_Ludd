@@ -16,10 +16,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.fleets.AbyssalFleetManager;
-import org.selkie.kol.impl.fleets.SpawnDuskBoss;
-import org.selkie.kol.impl.fleets.SpawnElysianAmaterasu;
-import org.selkie.kol.impl.fleets.SpawnElysianHeart;
+import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -108,7 +105,7 @@ public class PrepareAbyss {
 		SpawnDuskBoss.SpawnDuskBoss();
 		SpawnElysianAmaterasu.SpawnElysianAmaterasu();
 		SpawnElysianHeart.SpawnElysianHeart();
-		//Unimplemnted SpawnDawnBoss.SpawnDawnBoss();
+		SpawnDawnBoss.SpawnDawnBoss();
     }
 
 	public static void prepareAbyssalFleets() {
@@ -129,8 +126,8 @@ public class PrepareAbyss {
 	public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to) {
 		for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
 			boolean skip = false;
-			for (int i = 0; i < hullBlacklist.length; i++) {
-				if (hullBlacklist[i].equals(member.getHullId())) {
+			for (String s : hullBlacklist) {
+				if (s.equals(member.getHullId())) {
 					skip = true;
 				}
 			}
@@ -315,7 +312,7 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		AbyssalFleetManager fleets = new AbyssalFleetManager(system, elysianID, 14, 80, 260);
+		AbyssalFleetManager fleets = new AbyssalFleetManager(system, elysianID, 14, 60, 240);
 		system.addScript(fleets);
 
 		EveryFrameScript tracker = new TrackFleet();
@@ -482,7 +479,7 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		String lootEntity = "";
+		String lootEntity;
 		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
 		SectorEntityToken loot1 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
 		loot1.setCircularOrbitPointingDown(luna, 87, 6240, 100000);
@@ -502,7 +499,7 @@ public class PrepareAbyss {
 		SectorEntityToken loot6 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
 		loot6.setCircularOrbitPointingDown(sixth, 217, 4770, 100000);
 
-		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 60, 200);
+		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 40, 140);
 		org.selkie.kol.impl.fleets.AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, dawnID, 4, 250, 350);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
@@ -570,7 +567,7 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		AbyssalFleetManager fleets = new AbyssalFleetManager(system, duskID, 6, 80, 200);
+		AbyssalFleetManager fleets = new AbyssalFleetManager(system, duskID, 6, 60, 175);
 		AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, duskID, 3, 250, 350);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);

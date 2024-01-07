@@ -1,6 +1,6 @@
 {
     "displayName": "Unholy",
-    "fluxCapacitors": 20,
+    "fluxCapacitors": 12,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "abyss_boss_corruptingheart",
@@ -22,20 +22,11 @@
             }
         },
         {
-            "autofire": true,
-            "mode": "LINKED",
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0005": "flak",
-                "WS0006": "flak",
-                "WS0011": "dualflak",
-                "WS0012": "dualflak",
-                "WS0015": "pdburst",
                 "WS0009": "heatseeker",
                 "WS0010": "heatseeker",
-                "WS0007": "vulcan",
-                "WS0008": "vulcan",
-                "WS0013": "vulcan",
-                "WS0014": "vulcan",
             }
         },
         {
@@ -53,11 +44,33 @@
                 "WS0001": "heavyneedler",
             }
         },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "vulcan",
+                "WS0006": "flak",
+                "WS0007": "vulcan",
+                "WS0005": "flak",
+                "WS0014": "vulcan",
+                "WS0013": "vulcan",
+                "WS0012": "dualflak",
+                "WS0011": "dualflak",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0015": "pdburst",
+            }
+        },
     ],
     "wings": [
         "flash_wing",
         "flash_wing",
         "flash_wing",
+        "spark_wing",
         "spark_wing",
     ],
     "modules": [],

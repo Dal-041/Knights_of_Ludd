@@ -55,7 +55,7 @@ public class ManageInvictus implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "kol_invictus_lp_hallowed",
+	                        "kol_invictus_lp_Hallowed",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
