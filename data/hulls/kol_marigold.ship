@@ -12,7 +12,7 @@
   "shieldRadius": 103.5,
   "viewOffset": 0,
   "builtInMods": [
-	"kol_refit",
+    "kol_refit",
     "kol_shields"
   ],
   "builtInWeapons": {
@@ -255,7 +255,7 @@
       "style": "LOW_TECH"
     },
     {
-      "location": [-55, 13.5],
+      "location": [-49.5, 13.5],
       "length": 57.5,
       "width": 13,
       "angle": 180,
@@ -263,7 +263,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-55, -13.5],
+      "location": [-49.5, -13.5],
       "length": 57.5,
       "width": 13,
       "angle": -180,
@@ -271,7 +271,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-58, 23],
+      "location": [-52.5, 22],
       "length": 53.474476,
       "width": 15.030695,
       "angle": 172,
@@ -279,7 +279,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-58, -23],
+      "location": [-52.5, -22],
       "length": 53.474476,
       "width": 15.030695,
       "angle": -172,
@@ -303,7 +303,7 @@
       "style": "LOW_TECH"
     },
     {
-      "location": [-46.5, 48],
+      "location": [-41, 44.5],
       "length": 49.288128,
       "width": 7.260908,
       "angle": 150,
@@ -311,7 +311,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-46.5, -48],
+      "location": [-41, -44.5],
       "length": 49.288128,
       "width": 7.260908,
       "angle": -150,
@@ -319,7 +319,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-45, 52],
+      "location": [-39, 48],
       "length": 49.288128,
       "width": 7.260908,
       "angle": 150,
@@ -327,7 +327,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-45, -52],
+      "location": [-39, -48],
       "length": 49.288128,
       "width": 7.260908,
       "angle": -150,
