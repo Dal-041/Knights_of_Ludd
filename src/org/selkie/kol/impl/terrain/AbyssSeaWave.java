@@ -8,26 +8,25 @@ import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.terrain.CRLossPerSecondBuff;
 import com.fs.starfarer.api.impl.campaign.terrain.PeakPerformanceBuff;
-import com.fs.starfarer.api.impl.campaign.terrain.PulsarBeamTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
-public class AbyssPulsarBeam extends AbyssPulsarBeamTerrainPlugin {
+public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
 
     public boolean inited = false;
 
     @Override
     public void applyEffect(SectorEntityToken entity, float days) {
         if (!inited) {
-            //single = false;
-            params.name = "Gaze of the Abyss";
-            name = "Gaze of the Abyss";
-            nameTooltip = "Gaze of the Abyss";
-            multiplyArc(0.5f);
-            flareTexture.setAlphaMult(0.4f); //after any sprite changes
+            single = true;
+            name = "Coronal Wave";
+            params.name = "Coronal Wave";
+            nameTooltip = "Coronal Wave";
+            multiplyArc(2.5f);
+            //flareTexture.setAlphaMult(0.1f); //after any sprite changes ...but the code doesn't call the color
             inited = true;
         }
         if (entity instanceof CampaignFleetAPI) {

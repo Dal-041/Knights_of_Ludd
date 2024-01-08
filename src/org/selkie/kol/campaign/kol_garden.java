@@ -31,9 +31,11 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
         //applyDeficitToProduction(0, deficit, Commodities.FOOD, Commodities.ORGANICS);
         //applyDeficitToProduction(0, deficit, Commodities.FOOD);
 
+        modifyStabilityWithBaseMod();
 
         if (!isFunctional()) {
             supply.clear();
+            unmodifyStabilityWithBaseMod();
         }
     }
 

@@ -237,7 +237,7 @@ public class PrepareAbyss {
 						1f,
 						5f)
 		);
-		gazeBeam1.setCircularOrbit(gaze, 0, 0, 15);
+		gazeBeam1.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 15);
 
 		SectorEntityToken gazeBeam2 = system.addTerrain("kol_pulsarBeam",
 				new AbyssCorona.CoronaParams(25000,
@@ -247,7 +247,7 @@ public class PrepareAbyss {
 						1f,
 						5f)
 		);
-		gazeBeam2.setCircularOrbit(gaze, 0, 0, 16);
+		gazeBeam2.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 16);
     	
     	PlanetAPI silence = system.addPlanet("abyss_elysia_silence", elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 1666, 18500, 0);
     	system.setTertiary(silence);
@@ -263,14 +263,26 @@ public class PrepareAbyss {
 		);
 		silence_corona.setCircularOrbit(silence, 0, 0, 15);
 
-    	PlanetAPI first = system.addPlanet("abyss_elysia_zealot", elysia, "Zealot", "barren-bombarded", (float)(Math.random() * 360), 100, 4900, 50);
-    	PlanetAPI second = system.addPlanet("abyss_elysia_pilgrim", elysia, "Pilgrim", "barren-bombarded", (float)(Math.random() * 360), 100, 4100, 40);
-    	PlanetAPI third = system.addPlanet("abyss_elysia_apostate", elysia, "Apostate", "barren-bombarded", (float)(Math.random() * 360), 100, 3300, 30);
-    	
-    	first.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+    	PlanetAPI first = system.addPlanet("abyss_elysia_asclepius", elysia, "Asclepius", "barren-bombarded", (float)(Math.random() * 360), 100, 4900, 50);
+    	PlanetAPI second = system.addPlanet("abyss_elysia_appia", elysia, "Appia", "toxic", (float)(Math.random() * 360), 100, 4100, 40);
+    	PlanetAPI third = system.addPlanet("abyss_elysia_orpheus", elysia, "Orpheus", "irradiated", (float)(Math.random() * 360), 100, 3300, 30);
+
+    	first.getMarket().addCondition(Conditions.IRRADIATED);
+    	first.getMarket().addCondition(Conditions.METEOR_IMPACTS);
+    	first.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
+		first.getMarket().addCondition(Conditions.RUINS_WIDESPREAD);
+
     	second.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+    	second.getMarket().addCondition(Conditions.IRRADIATED);
+		second.getMarket().addCondition(Conditions.TOXIC_ATMOSPHERE);
+    	second.getMarket().addCondition(Conditions.TECTONIC_ACTIVITY);
+		second.getMarket().addCondition(Conditions.RUINS_EXTENSIVE);
+
     	third.getMarket().addCondition(Conditions.HIGH_GRAVITY);
-        
+    	third.getMarket().addCondition(Conditions.IRRADIATED);
+    	third.getMarket().addCondition(Conditions.EXTREME_TECTONIC_ACTIVITY);
+    	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
+
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);
 		SectorEntityToken ring2 = system.addTerrain(Terrain.RING, new RingParams(456, 3656, null, "Call of the Void"));
@@ -449,6 +461,16 @@ public class PrepareAbyss {
 						1f)
 		);
 
+		SectorEntityToken lunaBeam1 = system.addTerrain("kol_seaWave",
+				new AbyssCorona.CoronaParams(50000,
+						2500,
+						luna,
+						20f,
+						1f,
+						5f)
+		);
+		lunaBeam1.setCircularOrbit(luna, (float)Math.random()*360, 0, 19);
+
 		//system.generateAnchorIfNeeded();
 		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("abyss_lunasea_jp", "Second Trial");
 		//OrbitAPI orbit = Global.getFactory().createCircularOrbit(luna, 90, 10000, 25);
@@ -456,19 +478,40 @@ public class PrepareAbyss {
 		jumpPoint.setStandardWormholeToHyperspaceVisual();
 		system.addEntity(jumpPoint);
 
-		PlanetAPI first = system.addPlanet("abyss_lunasea_one", luna, "Out There", "barren-bombarded", 50, 150, 10900, 3000000);
+		PlanetAPI first = system.addPlanet("abyss_lunasea_one", luna, "Id", "barren-bombarded", 50, 150, 10900, 3000000);
 		PlanetAPI second = system.addPlanet("abyss_lunasea_two", luna, "Doubt", "desert", 29, 170, 6100, 3000000);
 		PlanetAPI third = system.addPlanet("abyss_lunasea_three", luna, "Wild", "jungle", 12, 70, 15800, 3000000);
-		PlanetAPI fourth = system.addPlanet("abyss_lunasea_four", jumpPoint, "Tenuous Grip", "frozen", 190, 250, 500, 3000000);
+		PlanetAPI fourth = system.addPlanet("abyss_lunasea_four", jumpPoint, "Slip", "frozen", 190, 250, 500, 3000000);
 		PlanetAPI fifth = system.addPlanet("abyss_lunasea_five", luna, "Savage", "barren", 336, 145, 12300, 3000000);
 		PlanetAPI sixth = system.addPlanet("abyss_lunasea_six", luna, "Feral", "toxic", 306, 165, 8100, 3000000);
 
-		first.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		first.getMarket().addCondition(Conditions.TECTONIC_ACTIVITY);
+		first.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
+		first.getMarket().addCondition(Conditions.METEOR_IMPACTS);
+		first.getMarket().addCondition(Conditions.RARE_ORE_ABUNDANT);
+
 		second.getMarket().addCondition(Conditions.HIGH_GRAVITY);
-		third.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		second.getMarket().addCondition(Conditions.HOT);
+		second.getMarket().addCondition(Conditions.EXTREME_WEATHER);
+		second.getMarket().addCondition(Conditions.ORE_ABUNDANT);
+		second.getMarket().addCondition(Conditions.RARE_ORE_SPARSE);
+
+		third.getMarket().addCondition(Conditions.INIMICAL_BIOSPHERE);
+		third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
+		third.getMarket().addCondition(Conditions.ORGANICS_PLENTIFUL);
+
+		fourth.getMarket().addCondition(Conditions.COLD);
+		fourth.getMarket().addCondition(Conditions.IRRADIATED);
 		fourth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
-		fifth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
-		sixth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
+		fourth.getMarket().addCondition(Conditions.VOLATILES_DIFFUSE);
+		fourth.getMarket().addCondition(Conditions.AI_CORE_ADMIN);
+
+		fifth.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
+		fifth.getMarket().addCondition(Conditions.ORE_ABUNDANT);
+
+		sixth.getMarket().addCondition(Conditions.TOXIC_ATMOSPHERE);
+		sixth.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
+		sixth.getMarket().addCondition(Conditions.ORGANICS_COMMON);
 
 		system.autogenerateHyperspaceJumpPoints(false, false); //begone evil clouds
 		HyperspaceTerrainPlugin plugin = (HyperspaceTerrainPlugin) Misc.getHyperspaceTerrain().getPlugin();
