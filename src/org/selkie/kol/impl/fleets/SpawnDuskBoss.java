@@ -3,6 +3,7 @@ package org.selkie.kol.impl.fleets;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
@@ -16,6 +17,9 @@ public class SpawnDuskBoss {
 	public static boolean SpawnDuskBoss() {
 
 		PersonAPI duskBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.duskID);
+		//Songtress, an experitmental AI who was once human.
+		FullName name = new FullName("Songtress", "", FullName.Gender.FEMALE);
+		duskBossCaptain.setName(name);
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort

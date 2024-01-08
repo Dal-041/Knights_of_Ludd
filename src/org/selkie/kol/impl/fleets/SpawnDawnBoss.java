@@ -3,6 +3,7 @@ package org.selkie.kol.impl.fleets;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.ids.*;
@@ -15,6 +16,10 @@ public class SpawnDawnBoss {
 	public static boolean SpawnDawnBoss() {
 
 		PersonAPI dawnBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.dawnID);
+		//A "slightly" rampant ALLMOTHER copy.
+		FullName name = new FullName("XLLM01H3R", "", FullName.Gender.ANY);
+		dawnBossCaptain.setName(name);
+
 		/**
 		* Creates a fleet with a defined flagship and optional escort
 		*

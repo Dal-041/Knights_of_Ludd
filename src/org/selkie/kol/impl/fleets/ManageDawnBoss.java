@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -44,7 +45,7 @@ public class ManageDawnBoss implements FleetEventListener {
 			if(!salvaged){
 	                //make sure there is a valid location to avoid spawning in the sun
 	                Vector2f location = fleet.getLocation();
-	            if(location==new Vector2f()){
+	            if(location==null){
 	                location = primaryWinner.getLocation();
 	            }
 	                
@@ -58,8 +59,14 @@ public class ManageDawnBoss implements FleetEventListener {
 	                        //orbitCenter,angle,radius,period);
 	                        fleet.getStarSystem().getCenter(),VectorUtils.getAngle(new Vector2f(), location),location.length(),360);               
 	                //MagicCampaign.placeOnStableOrbit(wreck, true);
-	                wreck.setName("Wreck of the AI flagship");
+	                wreck.setName("Wreck of the Dawntide flagship");
 	                wreck.setFacing((float)Math.random()*360f);
+					wreck.addDropRandom("guaranteed_alpha", 1);
+					wreck.addDropRandom("techmining_first_find", 6);
+					wreck.addDropRandom("omega_weapons_small", 3);
+					wreck.addDropRandom("omega_weapons_medium", 2);
+					wreck.addDropRandom("omega_weapons_large", 1);
+					wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 	                
 	                //set memkey that the wreck exist
 	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DAWN_BOSS_DONE,true);
