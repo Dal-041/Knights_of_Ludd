@@ -2,7 +2,7 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #WEAPONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Tor Autocannon,kol_tor,2,0.3,750,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,900,,,30,,,,"he16, LR, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,
+Tor Light Cannon,kol_tor,2,0.3,750,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,900,,,30,,,,"he16, LR, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,
 Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,250,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he18, kol_bp, rare_bp",,,,Anti Armor,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic18, rare_bp",,,,Anti Shield,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 ,,,,,#EDF,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

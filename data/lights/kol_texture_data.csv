@@ -112,6 +112,10 @@ abyss_deco_edf_engL,hardpoint,,1,normal,graphics/maps/weapon_normals/decos/abyss
 abyss_deco_edf_engL,turret,,1,normal,graphics/maps/weapon_normals/decos/abyss_deco_edf_engL_normal.png
 abyss_deco_edf_engS,hardpoint,,1,normal,graphics/maps/weapon_normals/decos/abyss_deco_edf_engS_normal.png
 abyss_deco_edf_engS,turret,,1,normal,graphics/maps/weapon_normals/decos/abyss_deco_edf_engS_normal.png
+kol_deco_snowdrop_tl,hardpoint,,1,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tl_normal.png
+kol_deco_snowdrop_tl,turret,,1,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tl_normal.png
+kol_deco_snowdrop_tr,hardpoint,,1,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tr_normal.png
+kol_deco_snowdrop_tr,turret,,1,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tr_normal.png
 ,,,,,
 ,,,,,
 #mat,,,,,
@@ -222,6 +226,10 @@ abyss_deco_edf_engL,hardpoint,,,material,graphics/maps/weapon_glib/decos/abyss_d
 abyss_deco_edf_engL,turret,,,material,graphics/maps/weapon_glib/decos/abyss_deco_edf_engL_material.png
 abyss_deco_edf_engS,hardpoint,,,material,graphics/maps/weapon_glib/decos/abyss_deco_edf_engS_material.png
 abyss_deco_edf_engS,turret,,,material,graphics/maps/weapon_glib/decos/abyss_deco_edf_engS_material.png
+kol_deco_snowdrop_tl,hardpoint,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_material.png
+kol_deco_snowdrop_tl,turret,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_material.png
+kol_deco_snowdrop_tr,hardpoint,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tr_material.png
+kol_deco_snowdrop_tr,turret,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tr_material.png
 ,,,,,
 #surface,,,,,
 kol_blaze,ship,,,surface,graphics/maps/ship_glib/kol_blaze_surface.png
@@ -331,6 +339,10 @@ abyss_deco_edf_engL,hardpoint,,,surface,graphics/maps/weapon_glib/decos/abyss_de
 abyss_deco_edf_engL,turret,,,surface,graphics/maps/weapon_glib/decos/abyss_deco_edf_engL_surface.png
 abyss_deco_edf_engS,hardpoint,,,surface,graphics/maps/weapon_glib/decos/abyss_deco_edf_engS_surface.png
 abyss_deco_edf_engS,turret,,,surface,graphics/maps/weapon_glib/decos/abyss_deco_edf_engS_surface.png
+kol_deco_snowdrop_tl,hardpoint,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_surface.png
+kol_deco_snowdrop_tl,turret,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_surface.png
+kol_deco_snowdrop_tr,hardpoint,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tr_surface.png
+kol_deco_snowdrop_tr,turret,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tr_surface.png
 ,,,,,
 #can you hear,,,,,
 abyss_edf_tamamo,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_tamamo_normal.png
@@ -404,8 +416,11 @@ abyss_deco_dusk_ikiryo_tr,turret,,1,normal,graphics/maps/ship_normals/decos/abys
 abyss_dusk_onryo,ship,,1,normal,graphics/maps/ship_normals/abyss_dusk_onryo_normal.png
 abyss_dusk_shiryo,ship,,1,normal,graphics/maps/ship_normals/abyss_dusk_shiryo_normal.png
 abyss_edf_kiyohime,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_kiyohime_normal.png
+abyss_edf_mizuchi,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_mizuchi_normal.png
 abyss_edf_ryujin,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_ryujin_normal.png
 abyss_edf_seiryu,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_seiryu_normal.png
+abyss_edf_suzaku,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_suzaku_normal.png
+abyss_edf_wani,ship,,1,normal,graphics/maps/ship_normals/abyss_edf_wani_normal.png
 ,,,,,
 #we have gun too you know,,,,,
 abyss_edf_arbalest,hardpoint,,1,normal,graphics/maps/weapon_normals/abyss_edf_arbalest_hardpoint_base_normal.png
@@ -485,8 +500,11 @@ abyss_deco_dusk_ikiryo_tr,turret,,,material,graphics/maps/ship_glib/decos/abyss_
 abyss_dusk_onryo,ship,,,material,graphics/maps/ship_glib/abyss_dusk_onryo_material.png
 abyss_dusk_shiryo,ship,,,material,graphics/maps/ship_glib/abyss_dusk_shiryo_material.png
 abyss_edf_kiyohime,ship,,,material,graphics/maps/ship_glib/abyss_edf_kiyohime_material.png
+abyss_edf_mizuchi,ship,,,material,graphics/maps/ship_glib/abyss_edf_mizuchi_material.png
 abyss_edf_ryujin,ship,,,material,graphics/maps/ship_glib/abyss_edf_ryujin_material.png
 abyss_edf_seiryu,ship,,,material,graphics/maps/ship_glib/abyss_edf_seiryu_material.png
+abyss_edf_suzaku,ship,,,material,graphics/maps/ship_glib/abyss_edf_suzaku_material.png
+abyss_edf_wani,ship,,,material,graphics/maps/ship_glib/abyss_edf_wani_material.png
 ,,,,,
 #its really gun,,,,,
 abyss_edf_arbalest,hardpoint,,,material,graphics/maps/weapon_glib/abyss_edf_arbalest_hardpoint_base_material.png
@@ -566,8 +584,11 @@ abyss_deco_dusk_ikiryo_tr,turret,,,surface,graphics/maps/ship_glib/decos/abyss_d
 abyss_dusk_onryo,ship,,,surface,graphics/maps/ship_glib/abyss_dusk_onryo_surface.png
 abyss_dusk_shiryo,ship,,,surface,graphics/maps/ship_glib/abyss_dusk_shiryo_surface.png
 abyss_edf_kiyohime,ship,,,surface,graphics/maps/ship_glib/abyss_edf_kiyohime_surface.png
+abyss_edf_mizuchi,ship,,,surface,graphics/maps/ship_glib/abyss_edf_mizuchi_surface.png
 abyss_edf_ryujin,ship,,,surface,graphics/maps/ship_glib/abyss_edf_ryujin_surface.png
 abyss_edf_seiryu,ship,,,surface,graphics/maps/ship_glib/abyss_edf_seiryu_surface.png
+abyss_edf_suzaku,ship,,,surface,graphics/maps/ship_glib/abyss_edf_suzaku_surface.png
+abyss_edf_wani,ship,,,surface,graphics/maps/ship_glib/abyss_edf_wani_surface.png
 ,,,,,
 #it work and it shoot,,,,,
 abyss_edf_arbalest,hardpoint,,,surface,graphics/maps/weapon_glib/abyss_edf_arbalest_hardpoint_base_surface.png
