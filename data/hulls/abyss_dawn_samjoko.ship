@@ -13,6 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
+	"solar_shielding",
     "kol_ea_shields1",
     "advancedcore"
   ],
