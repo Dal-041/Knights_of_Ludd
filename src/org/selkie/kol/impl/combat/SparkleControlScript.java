@@ -29,7 +29,7 @@ public class SparkleControlScript extends MoteControlScript {
 
     public boolean useAttractor = false;
 
-    private int maxDrones = 200;
+    private int maxDrones = 80;
 
     private float antiFighterDamage = 100f;
 
