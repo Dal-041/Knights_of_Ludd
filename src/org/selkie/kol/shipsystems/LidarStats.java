@@ -179,11 +179,6 @@ public class LidarStats extends BaseShipSystemScript {
 							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
 						w.setGlowAmount(0, null);
 					}
-					/*
-					if (!w.getSpec().hasTag(Tags.LIDAR) && (w.getSize() != WeaponSize.LARGE || w.getType() == WeaponType.MISSILE)) {
-						w.repair();
-					}
-					*/
 				}
 				needsUnapply = false;
 			}
@@ -272,8 +267,8 @@ public class LidarStats extends BaseShipSystemScript {
 	protected void unmodify(String id, MutableShipStatsAPI stats) {
 		//stats.getBallisticWeaponRangeBonus().modifyPercent(id, PASSIVE_RANGE_BONUS);
 		//stats.getEnergyWeaponRangeBonus().modifyPercent(id, PASSIVE_RANGE_BONUS);
-//		stats.getBallisticWeaponRangeBonus().unmodifyPercent(id);
-//		stats.getEnergyWeaponRangeBonus().unmodifyPercent(id);
+		stats.getBallisticWeaponRangeBonus().unmodifyPercent(id);
+		stats.getEnergyWeaponRangeBonus().unmodifyPercent(id);
 		
 		stats.getBallisticRoFMult().unmodifyMult(id);
 		stats.getEnergyRoFMult().unmodifyMult(id);

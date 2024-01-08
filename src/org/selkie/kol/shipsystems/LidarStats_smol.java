@@ -271,8 +271,8 @@ public class LidarStats_smol extends BaseShipSystemScript {
 	protected void unmodify(String id, MutableShipStatsAPI stats) {
 		//stats.getBallisticWeaponRangeBonus().modifyPercent(id, PASSIVE_RANGE_BONUS);
 		//stats.getEnergyWeaponRangeBonus().modifyPercent(id, PASSIVE_RANGE_BONUS);
-//		stats.getBallisticWeaponRangeBonus().unmodifyPercent(id);
-//		stats.getEnergyWeaponRangeBonus().unmodifyPercent(id);
+		stats.getBallisticWeaponRangeBonus().unmodifyPercent(id);
+		stats.getEnergyWeaponRangeBonus().unmodifyPercent(id);
 		
 		stats.getBallisticRoFMult().unmodifyMult(id);
 		stats.getEnergyRoFMult().unmodifyMult(id);
