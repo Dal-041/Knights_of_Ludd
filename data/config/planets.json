@@ -8,7 +8,7 @@
 		"atmosphereThickness":0.25, # as fraction of radius.  Set to 0 for no atmosphere
 		"atmosphereThicknessMin":10, #  minimum thickness in pixels
 		"atmosphereColor":[5,10,15,255],
-		"texture":"graphics/planets/star_white.jpg",
+		"texture":"graphics/planets/star_full_white.jpg",
 		"icon":"graphics/warroom/icon_star.png",
 		"iconColor":[42,32,58,255],
 		"starCoronaSprite":"graphics/fx/star_halo.png", # optional, defaults to really bright particle
@@ -27,7 +27,7 @@
 		"atmosphereThickness":0.25, # as fraction of radius.  Set to 0 for no atmosphere
 		"atmosphereThicknessMin":10, #  minimum thickness in pixels
 		"atmosphereColor":[255,170,255,255],
-		"texture":"graphics/planets/star_white.jpg",
+		"texture":"graphics/planets/star_full_white.jpg",
 		"icon":"graphics/icons/blackhole.png",
 		#"icon":"graphics/icons/icon_portal.png",
 		"starscapeIcon":"graphics/starscape/blackhole.png",
@@ -50,7 +50,7 @@
 		"atmosphereThickness":0.25, # as fraction of radius.  Set to 0 for no atmosphere
 		"atmosphereThicknessMin":10, #  minimum thickness in pixels
 		"atmosphereColor":[170,170,255,255],
-		"texture":"graphics/planets/star_white.jpg",
+		"texture":"graphics/planets/star_full_white.jpg",
 		"icon":"graphics/icons/blackhole.png",
 		#"icon":"graphics/icons/icon_portal.png",
 		"starscapeIcon":"graphics/starscape/blackhole.png",
