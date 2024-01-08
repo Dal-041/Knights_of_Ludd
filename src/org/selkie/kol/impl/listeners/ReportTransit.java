@@ -22,7 +22,7 @@ public class ReportTransit implements GateTransitListener {
 
 	@Override
 	public void reportFleetTransitingGate(CampaignFleetAPI fleet, SectorEntityToken gateFrom, SectorEntityToken gateTo) {
-		if (!fleet.isPlayerFleet() || gateFrom == null) return;
+		if (!fleet.isPlayerFleet() || gateFrom == null || Global.getSector().getClock().getCycle() <= 206) return;
 
 		if (Math.random() <= 0.05f) { //0.05f
 			StarSystemAPI destSys = Global.getSector().getStarSystem("Underspace");

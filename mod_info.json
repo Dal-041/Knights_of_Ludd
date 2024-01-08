@@ -2,9 +2,9 @@
 	"id":"knights_of_ludd", # internal id
 	"name":"Knights of Ludd", # displayed to the player
 	"author":"Selkie & Dal",
-	"version":"0.8",
+	"version":"B1.0",
 	"description":"Adds the Knights of Ludd faction and content!",
-    "gameVersion": "0.96",
+    "gameVersion": "0.96a-RC10",
 	"jars": ["jars/KnightsOfSelkie.jar"],
 	"modPlugin":"org.selkie.kol.plugins.KOL_ModPlugin"
 }
