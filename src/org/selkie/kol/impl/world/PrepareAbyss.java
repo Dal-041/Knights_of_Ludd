@@ -194,7 +194,8 @@ public class PrepareAbyss {
 
     	//PlanetAPI elysia = system.initStar("Elysian_Abyss", StarTypes.BLACK_HOLE, beeg, -750f);
 		system.initNonStarCenter();
-    	PlanetAPI elysia = system.addPlanet("abyss_elysia_abyss", system.getCenter(), "Elysia", StarTypes.BLACK_HOLE, 0f, beeg, 0f, 100000f);
+    	PlanetAPI elysia = system.addPlanet("abyss_elysia_abyss", system.getCenter(), "Elysia", "red_hole", 0f, beeg, 0f, 100000f);
+
     	elysia.getSpec().setBlackHole(true);
     	system.setName("Elysian Abyss");
     	elysia.applySpecChanges();
@@ -357,7 +358,7 @@ public class PrepareAbyss {
 		system.setLightColor(new Color(225,170,255,255)); // light color in entire system, affects all entities
 		new AbyssBackgroundWarper(system, 8, 0.125f);
 
-		PlanetAPI starVoid = system.addPlanet("abyss_underworld_void", system.getCenter(), "Void", StarTypes.BLACK_HOLE, 135, 166, 12500, 0);
+		PlanetAPI starVoid = system.addPlanet("abyss_underworld_void", system.getCenter(), "Void", "white_hole", 135, 166, 12500, 0);
 		//system.setStar(starVoid);
 
 		starVoid.setFixedLocation(-5512, 9420);
@@ -571,7 +572,7 @@ public class PrepareAbyss {
 
 		//fancy bg script
 
-		PlanetAPI sing = system.initStar("dusk_DBH" + Misc.genUID(), StarTypes.BLACK_HOLE, 200, -200f);
+		PlanetAPI sing = system.initStar("dusk_DBH" + Misc.genUID(), "star_black_neutron", 200, -200f);
 		String tempName = system.getBaseName();
 		system.setName(tempName);
 		sing.setName(tempName);
@@ -587,6 +588,16 @@ public class PrepareAbyss {
 				0f,
 				5f)
 		);
+
+		SectorEntityToken dbhBeam1 = system.addTerrain("kol_blackBeam",
+				new AbyssCorona.CoronaParams(25000,
+						250,
+						sing,
+						-50f,
+						1f,
+						5f)
+		);
+		dbhBeam1.setCircularOrbit(sing, (float)(Math.random() * 360), 0, 20);
 
 		//sophistimacated
 		float orbRadius1 = (float)(Math.random() * 8500f);

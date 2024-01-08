@@ -26,15 +26,16 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
             params.name = "Coronal Wave";
             nameTooltip = "Coronal Wave";
             multiplyArc(2.5f);
+            flareTexture = Global.getSettings().getSprite("terrain", "wavefront");
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes ...but the code doesn't call the color
             inited = true;
         }
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
+            if (fleet.hasTag("abyss_rulesfortheebutnotforme")) return;
             float intensity = getIntensityAtPoint(fleet.getLocation());
             if (intensity <= 0) return;
-            if (fleet.hasTag("abyss_rulesfortheebutnotforme")) return;
 
             String buffId = getModId();
             float buffDur = 0.1f;

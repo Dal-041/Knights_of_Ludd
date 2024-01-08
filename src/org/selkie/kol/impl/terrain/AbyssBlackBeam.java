@@ -8,26 +8,27 @@ import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.terrain.CRLossPerSecondBuff;
 import com.fs.starfarer.api.impl.campaign.terrain.PeakPerformanceBuff;
-import com.fs.starfarer.api.impl.campaign.terrain.PulsarBeamTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
-public class AbyssPulsarBeam extends AbyssPulsarBeamTerrainPlugin {
+public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
 
     public boolean inited = false;
 
     @Override
     public void applyEffect(SectorEntityToken entity, float days) {
         if (!inited) {
-            //single = false;
-            params.name = "Gaze of the Abyss";
-            name = "Gaze of the Abyss";
-            nameTooltip = "Gaze of the Abyss";
+            single = true;
+            params.name = "Pull of the Abyss";
+            name = "Pull of the Abyss";
+            nameTooltip = "Pull of the Abyss";
             multiplyArc(0.5f);
-            flareTexture.setAlphaMult(0.4f); //after any sprite changes
+            flareTexture = Global.getSettings().getSprite("terrain", "aurora");
+            //pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
+            pulsarRotation *= 8f;
             inited = true;
         }
         if (entity instanceof CampaignFleetAPI) {

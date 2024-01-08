@@ -33,6 +33,11 @@
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
+	"kol_blackBeam":{
+		"plugin":"org.selkie.kol.impl.terrain.AbyssBlackBeam",
+		"musicSuppression":1,
+		"loopOne":"terrain_corona_am",
+	},
 	"kol_seaWave":{
 		"plugin":"org.selkie.kol.impl.terrain.AbyssSeaWave",
 		"musicSuppression":1,

@@ -300,7 +300,10 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(random);
 
         for(StarSystemAPI system : Global.getSector().getStarSystems()) {
-            if (system.getStar() != null && system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE)) {
+            if (system.getStar() != null
+                    && (system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE)
+                    || system.getStar().getTypeId().equals("white_hole")
+                    || system.getStar().getTypeId().equals("star_black_neutron"))) {
                 if (!system.hasTag(Tags.THEME_HIDDEN) && !system.hasTag(Tags.THEME_SPECIAL)) {
                     if (system.hasTag(Tags.THEME_UNSAFE)) {
                         picker.add(system.getId(), 5);

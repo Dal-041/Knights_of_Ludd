@@ -44,9 +44,13 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
         }
     }
 
+    public void setFlareTexture(SpriteAPI texture) {
+        flareTexture = texture;
+    }
+
     public void multiplyArc(float mult) {
         PULSAR_ARC = mult / ((float) Math.PI * 2f) * 360f;
-        if (mult >= 2f) flareTexture = Global.getSettings().getSprite("terrain", "wavefront");
+        //if (mult >= 2f) flareTexture = Global.getSettings().getSprite("terrain", "wavefront");
     }
 
     public String getNameForTooltip() {

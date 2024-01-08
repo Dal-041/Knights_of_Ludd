@@ -151,11 +151,11 @@ public class AbyssalFleetManager extends SeededFleetManager {
         }
 
         for (SectorEntityToken entity : system.getJumpPoints()) {
-            picker.add(entity, 1f);
+            picker.add(entity, 2f);
         }
 
         for (SectorEntityToken entity : system.getPlanets()) {
-            picker.add(entity, 1f);
+            picker.add(entity, 0.2f);
         }
 
         return picker.pick();
