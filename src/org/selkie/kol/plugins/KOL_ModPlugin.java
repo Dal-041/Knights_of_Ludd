@@ -52,6 +52,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
+		GenerateKnights.copyChurchEquipment();
+		PrepareAbyss.checkAbyssalFleets();
+		PrepareAbyss.copyHighgradeEquipment();
+
 		Global.getSector().addTransientListener(new UpdateRelationships(true));
 		Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 	}

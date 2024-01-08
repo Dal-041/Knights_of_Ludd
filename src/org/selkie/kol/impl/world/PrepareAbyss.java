@@ -20,6 +20,7 @@ import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
+import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 
@@ -35,10 +36,32 @@ public class PrepareAbyss {
 	public static boolean useLostech = false;
 	public static boolean useDustkeepers = false;
 	public static boolean useEnigma = false;
+	public static String[] factionIDs = {
+			"kol_dawn",
+			"kol_dusk",
+ 			"kol_elysians"
+	};
+	public static String[] parentIDs = {
+			"remnant",
+ 			"mercenary"
+	};
 	public static String[] hullBlacklist = {
 			"guardian",
 			"radiant",
 			"tahlan_nirvana"
+	};
+	public static String[] weaponBlacklist = {
+			"lightdualmg",
+			"lightmortar",
+			"lightmg",
+			"mininglaser",
+			"atropos_single",
+			"harpoon_single",
+			"sabot_single",
+			"hammer",
+			"hammer_single",
+			"hammerrack",
+			"jackhammer"
 	};
 	public static final String[] uwDerelictsNormal = {
 			"aurora_Assault",
@@ -82,7 +105,8 @@ public class PrepareAbyss {
 	};
 
     public static void generate(SectorAPI sector) {
-		prepareAbyssalFleets();
+		checkAbyssalFleets();
+		copyHighgradeEquipment();
 
     	GenerateElysia(sector);
     	GenerateUnderworld(sector);
@@ -108,7 +132,7 @@ public class PrepareAbyss {
 		SpawnDawnBoss.SpawnDawnBoss();
     }
 
-	public static void prepareAbyssalFleets() {
+	public static void checkAbyssalFleets() {
 		if(Global.getSettings().getModManager().isModEnabled("lost_sector")) {
 			for (FactionAPI faction:Global.getSector().getAllFactions()) {
 				if (faction.getId().equals("enigma")) useEnigma = true;
@@ -140,44 +164,42 @@ public class PrepareAbyss {
 		}
 	}
 
-	/*
-    POOL A
-        comprises 60% of the fleet
-        is always the star system owner (ie, luna sea fleets will always be 60% dawntide boats)
-
-    POOL B
-        randomly picked
-        can be one of the other factions that is NOT the star system owner (ie, if luna sea fleet, pool B can potentially also have Dusk or Elysian ships)
-        only boss fleets should ever be 100% single-faction
-        [?] never spawns capitals/supercapitals
-        the following can also be used :
-        Remnants
-        Domain Derelicts
-        Domres (HMI)
-        Lostech (Tahlan)
-        Dustkeepers (SOTF)
-        DAWNTIDE-ONLY: Enigma (LOST_SECTOR)
-     */
-
-	/*
-	    for (String ship : Global.getSector().getFaction(Factions.A).getKnownShips()) {
-            if (!Global.getSector().getFaction(B).knowsShip(ship)) {
-                Global.getSector().getFaction(B).addKnownShip(ship, true);
-            }
-        }
-        for (String baseShip : Global.getSector().getFaction(Factions.A).getAlwaysKnownShips()) {
-            if (!Global.getSector().getFaction(B).useWhenImportingShip(baseShip)) {
-                Global.getSector().getFaction(B).addUseWhenImportingShip(baseShip);
-            }
-        }
-        etc
-	 */
+	public static void copyHighgradeEquipment() {
+		for (String ID : factionIDs) {
+			FactionAPI fac = Global.getSector().getFaction(ID);
+			boolean skip;
+			for (String parentID : parentIDs) {
+				FactionAPI par = Global.getSector().getFaction(parentID);
+				for (String entry : par.getKnownWeapons()) {
+					skip = false;
+					for (String no : weaponBlacklist) {
+						if (entry.equals(no)) skip = true;
+					}
+					if (!skip && !fac.knowsWeapon(entry)) {
+						fac.addKnownWeapon(entry, false);
+					}
+				}
+				if (parentID.equals(Factions.REMNANTS)) {
+					for (String entry : par.getKnownFighters()) {
+						if (!fac.knowsFighter(entry)) {
+							fac.addKnownFighter(entry, false);
+						}
+					}
+				}
+				for (String entry : par.getKnownHullMods()) {
+					if (!fac.knowsHullMod(entry)) {
+						fac.addKnownHullMod(entry);
+					}
+				}
+			}
+		}
+	}
 
     public static void GenerateElysia(SectorAPI sector) {
     	
     	int beeg = 1500;
-    	double posX = 2600;
-    	double posY = 24900;
+    	double posX = 2150;
+    	double posY = 34900;
     	
     	//Variable location
     	//posX = Math.random()%(Global.getSettings().getFloat("sectorWidth")-10000);

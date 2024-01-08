@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.econ.EconomyAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI.SurveyLevel;
 import com.fs.starfarer.api.impl.campaign.ids.Conditions;
+import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
 import exerelin.campaign.SectorManager;
@@ -29,6 +31,7 @@ public class GenerateKnights {
 		Gebbar.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
+		copyChurchEquipment();
 	}
 	
 	public static void genKnightsBattlestation() {
@@ -95,8 +98,40 @@ public class GenerateKnights {
 		org.selkie.kol.fleets.KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
 		Eos.addScript(expeditions);
 	}
+
+	public static void copyChurchEquipment() {
+		// The knights don't want the misc modiverse ships
+		// Unless they have no other choice
+		FactionAPI KOL = Global.getSector().getFaction(KOL_ModPlugin.kolID);
+	    for (String ship : Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getKnownShips()) {
+            if (!KOL.knowsShip(ship)
+					&& !KOL.getAlwaysKnownShips().contains(ship)) {
+                Global.getSector().getFaction(KOL_ModPlugin.kolID).addUseWhenImportingShip(ship);
+            }
+        }
+        //for (String baseShip : Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getAlwaysKnownShips()) {
+        //    if (!Global.getSector().getFaction(KOL_ModPlugin.kolID).useWhenImportingShip(baseShip)) {
+        //        Global.getSector().getFaction(KOL_ModPlugin.kolID).addUseWhenImportingShip(baseShip);
+        //    }
+        //}
+		for (String entry : Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getKnownWeapons()) {
+			if (!KOL.knowsWeapon(entry)) {
+				KOL.addKnownWeapon(entry, false);
+			}
+		}
+		for (String entry : Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getKnownFighters()) {
+			if (!KOL.knowsFighter(entry)) {
+				KOL.addKnownFighter(entry, false);
+			}
+		}
+		for (String entry : Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getKnownHullMods()) {
+			if (!KOL.knowsHullMod(entry)) {
+				KOL.addKnownHullMod(entry);
+			}
+		}
+	}
 	
-	public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name, 
+	public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name,
             int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff, boolean hidden) {
     	EconomyAPI globalEconomy = Global.getSector().getEconomy();  
     	String planetID = primaryEntity.getId();  
@@ -143,7 +178,7 @@ public class GenerateKnights {
     	return newMarket;
 	}
 	
-    public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name, 
+    public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name,
             int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff) {
     	return addMarketplace(factionID, primaryEntity, connectedEntities, name, size, marketConditions, Industries, submarkets, tariff, false);
     }
