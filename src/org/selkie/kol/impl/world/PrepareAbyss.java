@@ -114,7 +114,7 @@ public class PrepareAbyss {
 				if (faction.getId().equals("enigma")) useEnigma = true;
 			}
 		}
-		if(Global.getSettings().getModManager().isModEnabled("lost_sector")) {
+		if(Global.getSettings().getModManager().isModEnabled("tahlan")) {
 			useLostech = true;
 		}
 		for (FactionAPI faction:Global.getSector().getAllFactions()) {

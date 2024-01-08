@@ -72,10 +72,10 @@ public class AbyssalFleetManager extends SeededFleetManager {
         w = primary.equals(PrepareAbyss.elysianID) ? 0f : 1f;
         picker.add("kol_elysians", w);
         if (PrepareAbyss.useDomres) picker.add("domres", 1f);
-        if (PrepareAbyss.useDustkeepers) picker.add("sotf_dustkeepers", 1f);
+        if (PrepareAbyss.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
         if (PrepareAbyss.useEnigma) picker.add("enigma", 0.75f);
         if (PrepareAbyss.useLostech) {
-            //picker.add("lostech", 0.5f);
+            picker.add("tahlan_allmother", 0.6f);
         }
         return picker.pick();
     }
