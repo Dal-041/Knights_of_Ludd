@@ -11,9 +11,9 @@
   "shieldCenter": [0, -0],
   "shieldRadius": 152.5,
   "viewOffset": 0,
-  "builtInMods":[
+  "builtInMods": [
     "kol_shields",
-	"kol_refit"
+    "kol_refit"
   ],
   "builtInWeapons": {
     "FLICKERSHIELD": "kol_flickerShield",
@@ -23,6 +23,8 @@
     "WS0019": "eis_blinker_white",
     "WS0020": "eis_blinker_white",
     "WS0021": "eis_blinker_white",
+    "WS0022": "kol_deco_tamarisk_tl",
+    "WS0023": "kol_deco_tamarisk_tr",
     "WS0024": "kol_deco_tamarisk_front"
   },
   "weaponSlots": [
@@ -144,7 +146,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [87.5, 20.5]
+      "locations": [86.5, 20.5]
     },
     {
       "id": "WS0017",
@@ -153,7 +155,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -0,
-      "locations": [87.5, -20.5]
+      "locations": [86.5, -20.5]
     },
     {
       "id": "WS0012",
@@ -238,6 +240,26 @@
       "angle": 0,
       "locations": [24.5, -0],
       "renderOrderMod": 100
+    },
+    {
+      "id": "WS0022",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [77.5, 18],
+      "renderOrderMod": 101
+    },
+    {
+      "id": "WS0023",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [77.5, -18],
+      "renderOrderMod": 101
     }
   ],
   "engineSlots": [

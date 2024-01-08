@@ -50,6 +50,15 @@
       "arc": 0,
       "angle": 0,
       "locations": [48, 11]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -15,
+      "locations": [18, -2]
     }
   ],
   "engineSlots": [],
