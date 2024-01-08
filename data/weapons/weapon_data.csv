@@ -2,7 +2,7 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #WEAPONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Tor Light Cannon,kol_tor,2,0.3,750,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,900,,,30,,,,"he16, LR, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,
+Tor Autocannon,kol_tor,2,0.3,750,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,900,,,30,,,,"he16, LR, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,
 Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,250,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he18, kol_bp, rare_bp",,,,Anti Armor,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic18, rare_bp",,,,Anti Shield,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 ,,,,,#EDF,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -48,9 +48,9 @@ Pusher Plate (Low Tech But Slightly Smaller Haha Lol XDd),kol_pusherplate_lt_but
 Pusher Plate (Low Tech But It's Really Really Smol And Cute),kol_pusherplate_lt_but_cute,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Long-Range Shock Repeater,abyss_dusk_lrsr,3,,0,500,,50,200,0,100,0,,,,ENERGY,25,,0,0.5,1,,,,,,,10000,,,,,25,"PD, SYSTEM","PD14, no_drop, no_drop_salvage",,Unknown,,Point Defense,,,,Perfect,Fires an EMP arc at the nearest target close to the weapon's current facing. The arc always hits.,,,,,
-Lunete Thermal Lance,kol_lunete,1,,250,1400,,850,,15,30,0,1,0.05,,HIGH_EXPLOSIVE,0,,0,1,1,,0,0,0,0,,35,35,2.5,450,,,SYSTEM,"damage_special, damage_soft_flux, no_drop, no_drop_salvage",,,,Assault / Finisher,Slow,None,,,"The missile fires a high-powered laser when it gets near the target, dealing approximately %s energy damage in a short burst. This damage is affected by missile damage modifiers and not energy weapon ones.",3400,,,TRUE,11.9
- Lunete - Payload,kol_lunete_payload,1,,0,1400,850,,,,30,0,,,,HIGH_EXPLOSIVE,0,,0.25,0.25,2,1,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS","fires_one_burst, no_drop, no_drop_salvage",,,,,,,,,,,,,,11.91
-Lunete Targeting Laser,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,ENERGY,,0,0.05,0.05,0.1,0.05,,,,,1000000,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Special,,,,,,,,,,50
+Lunete Thermal Lance,kol_lunete,1,,0,900,1000,,,15,30,0,15,0,,HIGH_EXPLOSIVE,0,2000,0.5,1,1,8,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Assault / Finisher,Slow,None,,,"Fires a high-powered laser when it gets near the target, dealing approximately %s high-explosive damage in a short burst.",3400,,,TRUE,11.9
+ OBSOLETE DELETE ME,kol_lunete_payload,1,,0,1400,850,,,,30,0,,,,HIGH_EXPLOSIVE,0,,0.25,0.25,2,1,,,,,,,,,,,,"SYSTEM, DANGEROUS","fires_one_burst, no_drop, no_drop_salvage",,,,,,,,,,,,,,11.91
+OBSOLETE DELETE ME,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,ENERGY,,0,0.05,0.05,0.1,0.05,,,,,1000000,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Special,,,,,,,,,,50
 Canister Flak,kol_canister_flak,,,,200,,200,,,,,,0,,HIGH_EXPLOSIVE,0,0,0,0.1,5,0.5,50,50,0,0,,50,500,1.4,100,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,35.5
 Hallowed Orion Device Launcher,kol_hallowedODLauncher,0,,200000,1000,,1000,,25,30,0,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,1,10000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 Brimstone,kol_brimstone,3,,,800,,175,,3,60,0,120,0,0,ENERGY,50,,,0.05,2,0.05,0,0,0,0,,500,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,General,,,,,,,,,,
@@ -62,7 +62,7 @@ Twilight's Ruin,abyss_boss_resonator2,3,,0,2000,,600,,15,0,0,5,0.2,5,HIGH_EXPLOS
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,kol_flickerShield,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,kol_heatEffect,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-THIS IS OBSOLETE NOW,eis_nineng,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
+ OBSOLETE DELETE ME,eis_nineng,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 kol_sparkler_wpn,kol_sparkler_wpn,,,,500,,1,1500,,,,,0,,ENERGY,0,0,0,0.1,1,,30,30,0,0,,400,200,10000,500,,,SYSTEM,,,,,,,,,,,,,,,38.25
 ,abyss_deco_edf_ryujin_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
