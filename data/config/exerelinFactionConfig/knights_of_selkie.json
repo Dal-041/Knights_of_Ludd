@@ -36,19 +36,25 @@
     
     "specialForcesNamerClass":"exerelin.campaign.intel.specialforces.namer.LuddicNamer",
     
-    "startShipsSolo":[["kol_sundew_Standard"]],
+    "startShipsSolo":[
+	  ["kol_sundew_Onager"],
+	  ["kol_protea_Standard"]
+	],
     "startShipsCombatSmall":[
-      ["kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Standard"],
+      ["kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Onager"],
       ["kol_mimosa_Standard", "kol_protea_Standard", "kol_protea_Standard"]
     ],
     "startShipsTradeSmall":[["tarsus_Standard", "cerberus_Standard", "kol_protea_Standard"]],
     "startShipsCombatLarge":[
-      ["kol_larkspur_Standard", "kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Standard"],
+      ["kol_larkspur_Standard", "kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Onager"],
       ["kol_lotus_Standard", "kol_marigold_Standard", "kol_protea_Standard", "kol_protea_Standard"]
     ],
-     "startShipsTradeLarge":[["colossus_Standard", "mule_Standard", "wayfarer_Standard"]],
+    "startShipsTradeLarge":[["colossus_Standard", "mule_Standard", "wayfarer_Standard"]],
     "startShipsExplorerLarge":[["venture_Balanced", "buffalo_luddic_church_Standard", "kol_protea_Standard"]],
     "startShipsCarrierSmall":[["condor_Attack", "lasher_luddic_church_Standard", "kol_protea_Standard"]],
+	"startShipsGrandFleet":[
+	  ["kol_alysse_Standard","kol_larkspur_Standard","kol_tamarisk_Standard","kol_mimosa_Standard","kol_mimosa_Standard","kol_sundew_Standard","kol_sundew_Onager","dram_Light"]
+	],
     
     "startSpecialItems":[],
 

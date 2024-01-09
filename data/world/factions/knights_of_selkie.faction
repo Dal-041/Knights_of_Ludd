@@ -15,7 +15,7 @@
 	"logo":"graphics/factions/kol_knights_flag.png",
 	"crest":"graphics/factions/kol_knights_crest.png",
 	"showInIntelTab":true,
-	"shipNamePrefix":"LSS",
+	"shipNamePrefix":"HLV",
 	"shipNameSources":{
 		"LUDDIC_CHURCH":1,
 		"ABRAHAMIC":1,
