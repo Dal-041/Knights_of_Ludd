@@ -3,6 +3,7 @@ package org.selkie.kol.impl.terrain;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
@@ -15,12 +16,14 @@ import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class AbyssCorona extends StarCoronaTerrainPlugin {
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
-            if (fleet.hasTag("abyss_rulesfortheebutnotforme")) return;
+            if (fleet.hasTag(excludeTag)) return;
 
             boolean inFlare = false;
             if (flareManager.isInActiveFlareArc(fleet)) {
@@ -148,4 +151,13 @@ public class AbyssCorona extends StarCoronaTerrainPlugin {
         }
     }
 
+    @Override
+    public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
+        if (!fleet.hasTag(excludeTag)) {
+            return flag == TerrainAIFlags.CR_DRAIN ||
+                    flag == TerrainAIFlags.BREAK_OTHER_ORBITS ||
+                    flag == TerrainAIFlags.EFFECT_DIMINISHED_WITH_RANGE;
+        }
+        return flag == TerrainAIFlags.HIDING_STATIONARY;
+    }
 }

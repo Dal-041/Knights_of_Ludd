@@ -2,10 +2,13 @@ package org.selkie.kol.impl.terrain;
 
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.terrain.AsteroidBeltTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.RingSystemTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
+
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssAsteroidBelt extends AsteroidBeltTerrainPlugin {
 
@@ -13,6 +16,8 @@ public class AbyssAsteroidBelt extends AsteroidBeltTerrainPlugin {
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
+
+            if (fleet.hasTag(excludeTag)) return;
 
 //			float penalty = getBurnPenalty(fleet);
 //			fleet.getStats().addTemporaryModMult(0.1f, getModId() + "_1",
@@ -62,4 +67,9 @@ public class AbyssAsteroidBelt extends AsteroidBeltTerrainPlugin {
         }
     }
 
+    @Override
+    public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
+        if (!fleet.hasTag(excludeTag)) return flag == TerrainAIFlags.REDUCES_SPEED_LARGE || flag == TerrainAIFlags.DANGEROUS_UNLESS_GO_SLOW;
+        return flag == TerrainAIFlags.REDUCES_DETECTABILITY;
+    }
 }

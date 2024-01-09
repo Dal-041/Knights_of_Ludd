@@ -3,6 +3,7 @@ package org.selkie.kol.impl.terrain;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
@@ -13,6 +14,8 @@ import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
+
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
 
@@ -25,7 +28,7 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
             params.name = "Pull of the Abyss";
             name = "Pull of the Abyss";
             nameTooltip = "Pull of the Abyss";
-            multiplyArc(0.5f);
+            multiplyArc(0.65f);
             flareTexture = Global.getSettings().getSprite("terrain", "aurora");
             //pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
             pulsarRotation *= 8f;
@@ -34,7 +37,7 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
-            if (fleet.hasTag("abyss_rulesfortheebutnotforme")) return;
+            if (fleet.hasTag(excludeTag)) return;
             float intensity = getIntensityAtPoint(fleet.getLocation());
             if (intensity <= 0) return;
 
@@ -122,5 +125,15 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
                 view.getWindEffectColor().shift(getModId(), glowColor, durIn, durOut, intensity);
             }
         }
+    }
+
+    @Override
+    public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
+        if (!fleet.hasTag(excludeTag)) {
+            return flag == TerrainAIFlags.CR_DRAIN ||
+                    flag == TerrainAIFlags.BREAK_OTHER_ORBITS ||
+                    flag == TerrainAIFlags.EFFECT_DIMINISHED_WITH_RANGE;
+        }
+        return flag == TerrainAIFlags.HIDING_STATIONARY;
     }
 }

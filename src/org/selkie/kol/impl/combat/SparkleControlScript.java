@@ -29,9 +29,9 @@ public class SparkleControlScript extends MoteControlScript {
 
     public boolean useAttractor = false;
 
-    private int maxDrones = 80;
+    private final int maxDrones = 8;
 
-    private float antiFighterDamage = 100f;
+    private final float antiFighterDamage = 100f;
 
     public static float MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD = 600f;
     public static float MAX_DIST_FROM_ATTRACTOR_TO_ENGAGE_AS_PD = 600f;
@@ -162,8 +162,8 @@ public class SparkleControlScript extends MoteControlScript {
                 return;
             }
             */
-            int maxMotes = maxDrones;
-            if (data.drones.size() < maxMotes && data.targetLock == null &&// false &&
+
+            if (data.drones.size() < maxDrones && data.targetLock == null &&// false &&
                     !ship.getFluxTracker().isOverloadedOrVenting() &&
                     !ship.isPhased()) {
                 findDroneSlots(ship);
@@ -194,8 +194,7 @@ public class SparkleControlScript extends MoteControlScript {
             }
         }
 
-        float maxMotes = maxDrones;
-        float fraction = data.drones.size() / (Math.max(1f, maxMotes));
+        float fraction = data.drones.size() / (Math.max(1f, maxDrones));
         float volume = fraction * 3f;
         if (volume > 1f) volume = 1f;
         if (data.drones.size() > 3) {

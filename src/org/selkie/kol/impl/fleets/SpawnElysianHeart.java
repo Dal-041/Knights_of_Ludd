@@ -12,6 +12,8 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianCorruptingheart;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class SpawnElysianHeart {
 	
 	public static boolean SpawnElysianHeart() {
@@ -81,7 +83,7 @@ public class SpawnElysianHeart {
 
 		elysianHeartFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 
-		elysianHeartFleet.addTag("abyss_rulesfortheebutnotforme");
+		elysianHeartFleet.addTag(excludeTag);
 		elysianHeartFleet.addEventListener(new ManageElysianCorruptingheart());
 
 		return true;

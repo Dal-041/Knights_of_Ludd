@@ -11,6 +11,8 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageDawnBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class SpawnDawnBoss {
 	
 	public static boolean SpawnDawnBoss() {
@@ -79,7 +81,7 @@ public class SpawnDawnBoss {
 
 		dawnBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 		dawnBossFleet.getFleetData().sort();
-		dawnBossFleet.addTag("abyss_rulesfortheebutnotforme");
+		dawnBossFleet.addTag(excludeTag);
 		dawnBossFleet.addEventListener(new ManageDawnBoss());
 
 		return true;
