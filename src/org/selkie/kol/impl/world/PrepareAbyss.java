@@ -20,7 +20,6 @@ import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
-import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 
@@ -28,6 +27,7 @@ import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerat
 
 public class PrepareAbyss {
 
+	public static final String excludeTag = "abyss_rulesfortheebutnotforme";
 	public static final String dawnID = "kol_dawn";
 	public static final String duskID = "kol_dusk";
 	public static final String elysianID = "kol_elysians";
@@ -156,7 +156,8 @@ public class PrepareAbyss {
 				}
 			}
 			if (skip) continue;
-			member.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+			//member.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+			member.getVariant().getTags().add(Tags.UNRECOVERABLE);
 			if (member.getVariant().hasTag("auto_rec")) member.getVariant().removeTag("auto_rec");
 			if (member.isFlagship()) member.setFlagship(false);
 			member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
@@ -173,7 +174,10 @@ public class PrepareAbyss {
 				for (String entry : par.getKnownWeapons()) {
 					skip = false;
 					for (String no : weaponBlacklist) {
-						if (entry.equals(no)) skip = true;
+						if (entry.equals(no)) {
+							skip = true;
+							break;
+						}
 					}
 					if (!skip && !fac.knowsWeapon(entry)) {
 						fac.addKnownWeapon(entry, false);
@@ -199,7 +203,7 @@ public class PrepareAbyss {
     	
     	int beeg = 1500;
     	double posX = 2150;
-    	double posY = 34900;
+    	double posY = 31940;
     	
     	//Variable location
     	//posX = Math.random()%(Global.getSettings().getFloat("sectorWidth")-10000);
@@ -418,6 +422,7 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
+				wreck.addTag(Tags.UNRECOVERABLE);
 				//system.addEntity(wreck);
 			}
 		}
@@ -435,6 +440,7 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
+				wreck.addTag(Tags.UNRECOVERABLE);
 			}
 		}
 	}
@@ -490,7 +496,7 @@ public class PrepareAbyss {
 						luna,
 						20f,
 						1f,
-						5f)
+						10f)
 		);
 		lunaBeam1.setCircularOrbit(luna, (float)Math.random()*360, 0, 19);
 
@@ -615,9 +621,9 @@ public class PrepareAbyss {
 				new AbyssCorona.CoronaParams(25000,
 						250,
 						sing,
-						-50f,
+						-70f,
 						1f,
-						5f)
+						8f)
 		);
 		dbhBeam1.setCircularOrbit(sing, (float)(Math.random() * 360), 0, 20);
 

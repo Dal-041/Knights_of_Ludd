@@ -14,6 +14,8 @@ import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
 
     public boolean inited = false;
@@ -33,7 +35,7 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
-            if (fleet.hasTag("abyss_rulesfortheebutnotforme")) return;
+            if (fleet.hasTag(excludeTag)) return;
             float intensity = getIntensityAtPoint(fleet.getLocation());
             if (intensity <= 0) return;
 

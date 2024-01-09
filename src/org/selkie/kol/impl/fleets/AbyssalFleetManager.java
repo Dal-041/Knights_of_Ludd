@@ -22,6 +22,8 @@ import org.selkie.kol.impl.world.*;
 
 import java.util.Random;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class AbyssalFleetManager extends SeededFleetManager {
 
     public static class AbyssalFleetInteractionConfigGen implements FIDConfigGen {
@@ -124,7 +126,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
         if (fleet == null) return null;
 
-        fleet.addTag("abyss_rulesfortheebutnotforme");
+        fleet.addTag(excludeTag);
         system.addEntity(fleet);
         fleet.setFacing(random.nextFloat() * 360f);
 

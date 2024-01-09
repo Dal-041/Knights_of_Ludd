@@ -33,9 +33,9 @@ public class DroneAIScript implements MissileAIPlugin {
     static {
     	distMult.put(ShipAPI.HullSize.FIGHTER, 0.125f);
         distMult.put(ShipAPI.HullSize.FRIGATE, 0.17f);
-        distMult.put(ShipAPI.HullSize.DESTROYER, 0.35f);
-        distMult.put(ShipAPI.HullSize.CRUISER, 0.55f);
-        distMult.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.8f);
+        distMult.put(ShipAPI.HullSize.DESTROYER, 0.25f);
+        distMult.put(ShipAPI.HullSize.CRUISER, 0.4f);
+        distMult.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.6f);
     }
     
 	protected MissileAPI missile;

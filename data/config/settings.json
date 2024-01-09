@@ -234,6 +234,9 @@
 	#Fine, but don't post spoilers.
 	
 	"graphics":{
+		"blueprint_packages":{
+			"knights_of_selkie_pack":"graphics/icons/cargo/knights_of_selkie_pack.png"
+		},
 		"fx":{
 			"kol_shield":"graphics/fx/kol_shield_fx.png",
 		},

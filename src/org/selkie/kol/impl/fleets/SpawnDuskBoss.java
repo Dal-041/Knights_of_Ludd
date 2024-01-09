@@ -12,6 +12,8 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageDuskBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class SpawnDuskBoss {
 	
 	public static boolean SpawnDuskBoss() {
@@ -75,7 +77,7 @@ public class SpawnDuskBoss {
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_HOLD_VS_STRONGER, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
-		duskBossFleet.addTag("abyss_rulesfortheebutnotforme");
+		duskBossFleet.addTag(excludeTag);
 		duskBossFleet.addEventListener(new ManageDuskBoss());
 
 		return true;

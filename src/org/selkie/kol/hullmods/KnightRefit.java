@@ -6,10 +6,13 @@ import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /*
 - flavor description tl;dr-ing both the limited-charge shielding, and ablative armor modules, reduced main ship hull/armor
@@ -49,7 +52,6 @@ public class KnightRefit extends BaseHullMod {
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS=0.25f;
     private float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
-
 
     @Override
     public void init(HullModSpecAPI spec) {
@@ -96,67 +98,67 @@ public class KnightRefit extends BaseHullMod {
     }
 
     @Override
-    public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+    public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {
+        if (index == 0) return "" + (int) flux_cap_per_op;
+        if (index == 1) return "" + (int) flux_diss_per_op;
+        if (index == 2) return "" + (int) 100 * SPEED_BONUS;
+        return null;
+    }
 
-        if (topArmorAvg == 0 && middleArmorAvg == 0 && rearArmorAvg == 0f) { //run once
-            List<Float> topHull = new ArrayList<>(), topArmor = new ArrayList<>(), middleHull = new ArrayList<>(), middleArmor = new ArrayList<>(), rearHull = new ArrayList<>(), rearArmor = new ArrayList<>();
+    @Override
+    public void addPostDescriptionSection(
+            TooltipMakerAPI tooltip,
+            ShipAPI.HullSize hullSize,
+            ShipAPI ship,
+            float width,
+            boolean isForModSpec) {
 
-            if (ship.getChildModulesCopy() != null) {
-                for (ShipAPI module : ship.getChildModulesCopy()) {
-                    String ID = module.getVariant().getHullVariantId();
-                    if (ID.contains("_tl") || ID.contains("_tr")) {
-                        topArmor.add(module.getArmorGrid().getArmorRating() / module.getHullSpec().getArmorRating() * 100f);
-                        topHull.add(module.getHullLevel() / module.getMaxHitpoints() * 100f);
-                    }
-                    if (ID.contains("_ml") || ID.contains("_mr")) {
-                        middleArmor.add(module.getArmorGrid().getArmorRating() / module.getHullSpec().getArmorRating() * 100f);
-                        middleHull.add(module.getHullLevel() / module.getMaxHitpoints() * 100f * 100f);
-                    }
-                    if (ID.contains("_ll") || ID.contains("_lr")) {
-                        rearArmor.add(module.getArmorGrid().getArmorRating() / module.getHullSpec().getArmorRating() * 100f);
-                        rearHull.add(module.getHullLevel() / module.getMaxHitpoints() * 100f * 100f);
-                    }
-                }
-            }
+        ShipVariantAPI variant = ship.getVariant();
 
-            for (int i = 0; i < topArmor.size(); i++) {
-                topArmorAvg += topArmor.get(i);
-                topHullAvg += topHull.get(i);
-                if (i == topArmor.size() - 1) {
-                    topArmorAvg = topArmorAvg / (i + 1);
-                    topHullAvg = topHullAvg / (i + 1);
-                }
-            }
-            for (int i = 0; i < middleArmor.size(); i++) {
-                middleArmorAvg += middleArmor.get(i);
-                middleHullAvg += middleHull.get(i);
-                if (i == middleArmor.size() - 1) {
-                    middleArmorAvg = middleArmorAvg / (i + 1);
-                    middleHullAvg = middleHullAvg / (i + 1);
-                }
-            }
-            for (int i = 0; i < rearArmor.size(); i++) {
-                rearArmorAvg += rearArmor.get(i);
-                rearHullAvg += rearHull.get(i);
-                if (i == rearArmor.size() - 1) {
-                    rearArmorAvg = rearArmorAvg / (i + 1);
-                    rearHullAvg = rearHullAvg / (i + 1);
-                }
-            }
+        if (variant == null) {
+            // default to base variant if the ship doesn't have a proper one (when it is bought)
+            variant = Global.getSettings().getVariant(ship.getId() + "_Standard");
         }
 
-        tooltip.addSectionHeading("Module specs", Alignment.MID, 10);
-        if(topHullAvg != 0f) {
-            tooltip.addPara("Fore Armor: " + Math.round(topArmorAvg), 0f);
-            tooltip.addPara("Fore Hull: " + Math.round(topHullAvg), 0f);
+        if (variant == null) return;
+        if (ship.getVariant().getStationModules().isEmpty()) return;
+
+        // title
+        tooltip.addSectionHeading("hm_armorStat0", Alignment.MID, 15);
+
+        tooltip.beginTable(
+                Misc.getBasePlayerColor(),
+                Misc.getDarkPlayerColor(),
+                Misc.getBrightPlayerColor(),
+                20f,
+                true,
+                true,
+                new Object[]{"Name", width - 80f * 2 - 8f, "Hull", 80f, "Armor", 80f});
+
+        for (String module : ship.getVariant().getStationModules().values()) {
+            // for some insane reason, the hullspec can return null
+            if (Global.getSettings().getVariant(module) == null
+                    || Global.getSettings().getVariant(module).getHullSpec() == null) continue;
+            ShipHullSpecAPI hull = Global.getSettings().getVariant(module).getHullSpec();
+            tooltip.addRow(
+                    Alignment.LMID,
+                    Misc.getTextColor(),
+                    hull.getHullName(),
+                    Alignment.MID,
+                    Misc.getTextColor(),
+                    String.valueOf(Math.round(hull.getHitpoints())),
+                    Alignment.MID,
+                    Misc.getTextColor(),
+                    String.valueOf(Math.round(hull.getArmorRating())));
         }
-        if(middleHullAvg != 0f) {
-            tooltip.addPara("Middle Armor: " + Math.round(middleArmorAvg), 0f);
-            tooltip.addPara("Middle Hull: " + Math.round(middleHullAvg), 0f);
-        }
-        if(rearHullAvg != 0f) {
-            tooltip.addPara("Rear Armor: " + Math.round(rearArmorAvg), 0f);
-            tooltip.addPara("Rear Hull: " + Math.round(rearHullAvg), 0f);
+        tooltip.addTable("-", 0, 4f);
+
+        tooltip.addPara("hm_armorStat1", 10);
+        for (String hullmodId : variant.getHullMods()) {
+            if (hullmodEffects.containsKey(hullmodId)) {
+                tooltip.addPara(Global.getSettings().getHullModSpec(hullmodId).getDisplayName(), 4f);
+                hullmodEffects.get(hullmodId).addTooltipText(tooltip, ship);
+            }
         }
     }
 
@@ -202,5 +204,83 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getDeceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
         ship.getMutableStats().getMaxTurnRate().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
         ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+    }
+
+    private static final Map<String, ArmorEffect> hullmodEffects = new HashMap<>();
+
+    static {
+        hullmodEffects.put("heavyarmor", new ArmorEffect(150, 1, 1, 1, 1, 1));
+        hullmodEffects.put("reinforcedhull", new ArmorEffect(0, 1, 0.72f, 1, 1, 1));
+        hullmodEffects.put("TADA_lightArmor", new ArmorEffect(0, 2, 1, 1, 1, 1));
+        hullmodEffects.put("TADA_reactiveArmor", new ArmorEffect(0, 1, 1, 1.25f, 1.25f, 0.66f));
+    }
+
+    public static void applyHullmodModificationsToStats(MutableShipStatsAPI stats, ShipHullSpecAPI moduleSpec, ShipVariantAPI parentVariant) {
+        for (String hullmodId : parentVariant.getHullMods()) {
+            if (hullmodEffects.containsKey(hullmodId)) {
+                hullmodEffects.get(hullmodId).applyToStats(hullmodId, stats, moduleSpec);
+            }
+        }
+    }
+
+    protected static class ArmorEffect {
+        public float armorDamageTakenModifier;
+        public float armorDamageTakenMult;
+        public float hullDamageTakenMult;
+        public float energyDamageTakenMult;
+        public float kineticDamageTakenMult;
+        public float heDamageTakenMult;
+
+        public ArmorEffect(float armorDamageTakenModifier, float armorDamageTakenMult, float hullDamageTakenMult, float energyDamageTakenMult, float kineticDamageTakenMult, float heDamageTakenMult) {
+            this.armorDamageTakenModifier = armorDamageTakenModifier;
+            this.armorDamageTakenMult = armorDamageTakenMult;
+            this.hullDamageTakenMult = hullDamageTakenMult;
+            this.energyDamageTakenMult = energyDamageTakenMult;
+            this.kineticDamageTakenMult = kineticDamageTakenMult;
+            this.heDamageTakenMult = heDamageTakenMult;
+        }
+
+        public float calcArmorDamageMult(float baseArmor) {
+            return baseArmor / (baseArmor + armorDamageTakenModifier) * armorDamageTakenMult;
+        }
+
+        public void applyToStats(String buffId, MutableShipStatsAPI stats, ShipHullSpecAPI spec) {
+            stats.getArmorDamageTakenMult().modifyMult(buffId, calcArmorDamageMult(spec.getArmorRating()));
+            stats.getHullDamageTakenMult().modifyMult(buffId, hullDamageTakenMult);
+            stats.getEnergyDamageTakenMult().modifyMult(buffId, energyDamageTakenMult);
+            stats.getKineticDamageTakenMult().modifyMult(buffId, kineticDamageTakenMult);
+            stats.getHighExplosiveDamageTakenMult().modifyMult(buffId, heDamageTakenMult);
+        }
+
+        public void addTooltipText(TooltipMakerAPI tooltip, ShipAPI ship) {
+            tooltip.setBulletedListMode("- ");
+            float armorDamageTaken = calcArmorDamageMult(ship.getHullSpec().getArmorRating());
+            if (armorDamageTaken != 1) {
+                String text = Misc.getRoundedValue(armorDamageTaken);
+                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
+            }
+
+            if (hullDamageTakenMult != 1) {
+                String text = Misc.getRoundedValue(hullDamageTakenMult);
+                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
+            }
+
+            if (energyDamageTakenMult != 1) {
+                String text = Misc.getRoundedValue(energyDamageTakenMult);
+                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
+            }
+
+            if (kineticDamageTakenMult != 1) {
+                String text = Misc.getRoundedValue(kineticDamageTakenMult);
+                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
+            }
+
+            if (heDamageTakenMult != 1) {
+                String text = Misc.getRoundedValue(heDamageTakenMult);
+                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
+            }
+
+            tooltip.setBulletedListMode(null);
+        }
     }
 }

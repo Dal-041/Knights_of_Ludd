@@ -12,6 +12,8 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianAmaterasu;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+
 public class SpawnElysianAmaterasu {
 	
 	public static boolean SpawnElysianAmaterasu() {
@@ -80,7 +82,7 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
-		elysianBossFleet.addTag("abyss_rulesfortheebutnotforme");
+		elysianBossFleet.addTag(excludeTag);
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
 
 		return true;
