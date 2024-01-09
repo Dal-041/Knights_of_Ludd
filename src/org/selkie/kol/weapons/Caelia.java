@@ -13,13 +13,11 @@ import com.fs.starfarer.api.util.Misc;
 public class Caelia implements EveryFrameWeaponEffectPlugin {
 
 
-	private ShipAPI ship;
+	//private ShipAPI ship;
 	private boolean runOnce = false;
 	private float baseRD = 20f;
-	private float baseCD = 20f;
-	private float rofMult = 1.4f;
-	private float timeFull = 4f;
 	private float rampUpTime = 0f;
+	public float timeFull = 3f;
 	
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
@@ -29,9 +27,9 @@ public class Caelia implements EveryFrameWeaponEffectPlugin {
         }
     	
         if (!runOnce) {
-        	ship = weapon.getShip();
+        	//ship = weapon.getShip();
         	baseRD = weapon.getRefireDelay();
-        	baseCD = weapon.getCooldown();
+			float baseCD = weapon.getCooldown();
         	runOnce = true;
         }
 
@@ -40,11 +38,12 @@ public class Caelia implements EveryFrameWeaponEffectPlugin {
 			rampUpTime += amount;
 			if (rampUpTime > timeFull) rampUpTime = timeFull;
 
-			float shipDelayReductionMult = 1/ship.getMutableStats().getBallisticRoFMult().getModifiedValue();
-			float weaponDelayReductionMult = 1/Misc.interpolate(1, rofMult, rampUpTime/timeFull);
-			weapon.setRefireDelay(baseRD * shipDelayReductionMult * weaponDelayReductionMult);
+			//float shipDelayReductionMult = 1/ship.getMutableStats().getBallisticRoFMult().getModifiedValue();
+			float rofMult = 1.4f;
+			float weaponDelayReductionMult = 1/Misc.interpolate(1, rofMult, rampUpTime/ timeFull);
+			weapon.setRefireDelay(baseRD * weaponDelayReductionMult);
         } else {
-			rampUpTime -= amount;
+			rampUpTime -= amount * timeFull; // 1 second
 			if (rampUpTime < 0) rampUpTime = 0;
         }
     }
