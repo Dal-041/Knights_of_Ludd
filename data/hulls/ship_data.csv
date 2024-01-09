@@ -67,7 +67,7 @@ Blaze,kol_blaze,Fast Cruiser,Luddic Path,ammofeed,13,8000,1200,9000,,400,125,2,9
 #BOSSES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Malleus,kol_invictus_lp,Dreadnought,Luddic Path,burndrive,40,40000,4000,40000,,600,250,,35,15,15,7,7,10000,PHASE,canister_flak,0,0,0,,,4000,6000,1000,800,23,40,7,900000,3,12,1200,0.25,60,60,,,,,,,"NEVER_DODGE_MISSILES, HIDE_IN_CODEX","no_autofit, restricted",,0.2,2,2,,
 #Azalea,kol_azalea,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Redemptor,kol_boss_ret_lp,Battlecruiser,Low Tech,ammofeed,28,15000,1650,16500,,700,300,,60,40,30,7,7,2500,FRONT,,120,0.2,1.1,,,300,400,200,300,10,30,8,400000,3,12,600,0.25,45,45,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","no_autofit, restricted",,0.5,2,4,,
+Redemptor,kol_boss_ret_lp,Battlecruiser,Low Tech,ammofeed,28,15000,1650,16500,,700,300,2,60,40,30,7,7,2500,FRONT,,120,0.2,1.1,,,300,400,200,300,10,30,8,400000,3,12,600,0.25,45,45,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","no_autofit, restricted",,0.5,2,4,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #FRIGATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ikiryo,abyss_dusk_ikiryo,Exalted Phase Frigate,Dusk,entropyamplifier,8,1500,400,3000,,400,50,,165,120,100,60,120,200,PHASE,kol_phasecloak,90,,,0.03,0.04,5,10,25,50,1,50,10,42000,10,30,180,0.25,10,10,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX",restricted,,0.5,2,2,,
