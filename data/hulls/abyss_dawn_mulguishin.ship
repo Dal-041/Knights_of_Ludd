@@ -16,7 +16,19 @@
 	"solar_shielding",
     "kol_ea_shields1"
   ],
+  "builtInWeapons": {
+      "WS0005": "kol_targeting_beam_wpn",
+  },
   "weaponSlots": [
+      {
+        "id": "WS0005",
+        "size": "SMALL",
+        "type": "DECORATIVE",
+        "mount": "HIDDEN",
+        "arc": 0,
+        "angle": 0,
+        "locations": [8.5, 0]
+      },
     {
       "id": "WS0003",
       "size": "MEDIUM",

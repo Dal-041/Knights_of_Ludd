@@ -51,6 +51,7 @@ Long-Range Shock Repeater,abyss_dusk_lrsr,3,,0,500,,50,200,0,100,0,,,,ENERGY,25,
 Lunete Thermal Lance,kol_lunete,1,,0,900,1000,,,15,30,0,15,0,,HIGH_EXPLOSIVE,0,2000,0.5,1,1,8,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Assault / Finisher,Slow,None,,,"Fires a high-powered laser at the target, dealing approximately %s high-explosive damage in a short burst.",3400,,,TRUE,11.9
 OBSOLETE DELETE ME,kol_lunete_payload,1,,0,1400,850,,,,30,0,,,,HIGH_EXPLOSIVE,0,,0.25,0.25,2,1,,,,,,,,,,,,"SYSTEM, DANGEROUS","fires_one_burst, no_drop, no_drop_salvage",,,,,,,,,,,,,,11.91
 OBSOLETE DELETE ME,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,ENERGY,,0,0.05,0.05,0.1,0.05,,,,,1000000,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Special,,,,,,,,,,50
+Targeting Beam,kol_targeting_beam_wpn,0,,0,1500,100,,,0,0,0,1000,1000,,ENERGY,,0,0.2,0.2,0.35,0,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS",lidar,,,,,,,,,,,,,,
 Canister Flak,kol_canister_flak,,,,200,,200,,,,,,0,,HIGH_EXPLOSIVE,0,0,0,0.1,5,0.5,50,50,0,0,,50,500,1.4,100,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,35.5
 Hallowed Orion Device Launcher,kol_hallowedODLauncher,0,,200000,1000,,1000,,25,30,0,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,1,10000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 Brimstone,kol_brimstone,3,,,800,,175,,3,60,0,120,0,0,ENERGY,50,,,0.05,2,0.05,0,0,0,0,,500,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,General,,,,,,,,,,
