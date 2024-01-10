@@ -124,7 +124,7 @@ public class KnightRefit extends BaseHullMod {
         if (ship.getVariant().getStationModules().isEmpty()) return;
 
         // title
-        tooltip.addSectionHeading("hm_armorStat0", Alignment.MID, 15);
+        tooltip.addSectionHeading("Modular Armor Stats", Alignment.MID, 15);
 
         tooltip.beginTable(
                 Misc.getBasePlayerColor(),
@@ -153,7 +153,7 @@ public class KnightRefit extends BaseHullMod {
         }
         tooltip.addTable("-", 0, 4f);
 
-        tooltip.addPara("hm_armorStat1", 10);
+        tooltip.addPara("These hullmods also apply to your modules:", 10);
         for (String hullmodId : variant.getHullMods()) {
             if (hullmodEffects.containsKey(hullmodId)) {
                 tooltip.addPara(Global.getSettings().getHullModSpec(hullmodId).getDisplayName(), 4f);
@@ -211,8 +211,8 @@ public class KnightRefit extends BaseHullMod {
     static {
         hullmodEffects.put("heavyarmor", new ArmorEffect(150, 1, 1, 1, 1, 1));
         hullmodEffects.put("reinforcedhull", new ArmorEffect(0, 1, 0.72f, 1, 1, 1));
-        hullmodEffects.put("TADA_lightArmor", new ArmorEffect(0, 2, 1, 1, 1, 1));
-        hullmodEffects.put("TADA_reactiveArmor", new ArmorEffect(0, 1, 1, 1.25f, 1.25f, 0.66f));
+        //hullmodEffects.put("TADA_lightArmor", new ArmorEffect(0, 2, 1, 1, 1, 1));
+        //hullmodEffects.put("TADA_reactiveArmor", new ArmorEffect(0, 1, 1, 1.25f, 1.25f, 0.66f));
     }
 
     public static void applyHullmodModificationsToStats(MutableShipStatsAPI stats, ShipHullSpecAPI moduleSpec, ShipVariantAPI parentVariant) {
