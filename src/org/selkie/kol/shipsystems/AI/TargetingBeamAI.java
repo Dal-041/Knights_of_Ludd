@@ -51,7 +51,7 @@ public class TargetingBeamAI implements ShipSystemAIScript {
             }
 
             currentScore += currentScore * other.getFluxTracker().getFluxLevel();
-
+            currentScore -= 10 * MathUtils.getDistance(other, ship)/lidarRange;
             if (currentScore < bestScore) continue;
 
             boolean occluded = false;
@@ -70,8 +70,9 @@ public class TargetingBeamAI implements ShipSystemAIScript {
         }
         if (bestTarget != null){
             float bestFacing = VectorUtils.getAngle(ship.getLocation(), bestTarget.getLocation());
-            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.FACING_OVERRIDE_FOR_MOVE_AND_ESCORT_MANEUVERS, 1f, bestFacing);
-
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.FACING_OVERRIDE_FOR_MOVE_AND_ESCORT_MANEUVERS, 4f, bestFacing);
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.TARGET_FOR_SHIP_SYSTEM, 4f, bestTarget);
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.SYSTEM_TARGET_COORDS, 4f, bestTarget.getLocation());
             double diff = Math.abs((ship.getFacing() % 360 + 360) % 360 - (bestFacing % 360 + 360) % 360);
 
             if(Math.min(diff, 360 - diff) <= 5f ){
