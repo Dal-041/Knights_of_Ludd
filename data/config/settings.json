@@ -263,6 +263,9 @@
 			"nebula_kol_redgrey_map":"graphics/terrain/nebula_kol_redgrey.png",
 			"nebula_kol_purpleblue":"graphics/terrain/nebula_kol_purpleblue.png",
 			"nebula_kol_purpleblue_map":"graphics/terrain/nebula_kol_purpleblue_map.png",
+			"nebula_kol_dawntide":"graphics/terrain/nebula_kol_dawntide2b.png",
+			"nebula_kol_dawntide_map":"graphics/terrain/nebula_kol_dawntide2b_map.png",
+			"kol_abyss_wavefront":"graphics/terrain/kol_abyss_wavefront.png",
 		},
 	}
 }

@@ -33,11 +33,13 @@
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
+	
 	"kol_blackBeam":{
 		"plugin":"org.selkie.kol.impl.terrain.AbyssBlackBeam",
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
+	
 	"kol_seaWave":{
 		"plugin":"org.selkie.kol.impl.terrain.AbyssSeaWave",
 		"musicSuppression":1,
@@ -46,6 +48,14 @@
 	
 	"nebula_kol_black":{
 		"plugin":"com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin",
+		
+		"musicSuppression":1,
+		# inside nebula
+		"loopOne":"terrain_nebula",
+	},
+	
+	"nebula_kol_abyss":{
+		"plugin":"org.selkie.kol.impl.terrain.AbyssNebulaTerrain",
 		
 		"musicSuppression":1,
 		# inside nebula

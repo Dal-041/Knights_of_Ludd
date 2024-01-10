@@ -24,9 +24,9 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
     public void applyEffect(SectorEntityToken entity, float days) {
         if (!inited) {
             single = true;
-            name = "Coronal Wave";
-            params.name = "Coronal Wave";
-            nameTooltip = "Coronal Wave";
+            name = "Dawntide";
+            params.name = "Dawntide";
+            nameTooltip = "Dawntide";
             multiplyArc(2.5f);
             flareTexture = Global.getSettings().getSprite("terrain", "wavefront");
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes ...but the code doesn't call the color
@@ -36,6 +36,7 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
             if (fleet.hasTag(excludeTag)) return;
+            if (fleet.getStats().hasMod("LunaSea_2")) return;
             float intensity = getIntensityAtPoint(fleet.getLocation());
             if (intensity <= 0) return;
 
@@ -57,7 +58,7 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
                 if (loss > curr) loss = curr;
 
                 if (resistance > 0) {
-                    member.getRepairTracker().applyCREvent(loss, "corona", "Pulsar beam effect");
+                    member.getRepairTracker().applyCREvent(loss, "corona", "Coronal wave effect");
                 }
 
                 float peakFraction = 1f / Math.max(1.3333f, 1f + params.crLossMult * intensity);

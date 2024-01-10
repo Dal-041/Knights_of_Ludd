@@ -6,10 +6,7 @@ import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
 import com.fs.starfarer.api.impl.campaign.ids.*;
-import com.fs.starfarer.api.impl.campaign.procgen.NameGenData;
-import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
-import com.fs.starfarer.api.impl.campaign.procgen.ProcgenUsedNames;
-import com.fs.starfarer.api.impl.campaign.procgen.StarAge;
+import com.fs.starfarer.api.impl.campaign.procgen.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
@@ -473,6 +470,11 @@ public class PrepareAbyss {
 					4, 4, StarAge.AVERAGE); // number of cells in texture
 		}
 
+		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_layer2.png",
+					0, 0, system,
+					"terrain", "nebula_kol_dawntide",
+					4, 4, "nebula_kol_abyss", StarAge.AVERAGE);
+
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_lunasea_theme");
 
 		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 30500, -30500, 0);
@@ -626,6 +628,20 @@ public class PrepareAbyss {
 						8f)
 		);
 		dbhBeam1.setCircularOrbit(sing, (float)(Math.random() * 360), 0, 20);
+
+		if (Math.random() < 0.4f) {
+			double orbit = 1200+Math.random()*7000;
+			PlanetAPI p1 = system.addPlanet("dusk_DBH_P1", sing, NameGenData.TAG_PLANET, "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
+			PlanetConditionGenerator.generateConditionsForPlanet(p1, StarAge.OLD);
+			p1.getMarket().addCondition(Conditions.IRRADIATED);
+		}
+
+		if (Math.random() < 0.4f) {
+			double orbit = 3200+Math.random()*27000;
+			PlanetAPI p2 = system.addPlanet("dusk_DBH_P2", sing, NameGenData.TAG_PLANET, "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
+			PlanetConditionGenerator.generateConditionsForPlanet(p2, StarAge.OLD);
+			p2.getMarket().addCondition(Conditions.IRRADIATED);
+		}
 
 		//sophistimacated
 		float orbRadius1 = (float)(Math.random() * 8500f);
