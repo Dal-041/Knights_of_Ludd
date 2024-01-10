@@ -2,7 +2,7 @@
   "hullName": "Kangcheori",
   "hullId": "abyss_dawn_kangcheori",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_dawn_kangcheori.png",
+  "spriteName": "graphics/ships/abyss_dawn_kangcheori.png",
   "style": "ABYSS_DAWN_TECH",
   "height": 360,
   "width": 224,
@@ -12,8 +12,8 @@
   "shieldRadius": 208,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
-	"solar_shielding",
+    "automated",
+    "solar_shielding",
     "kol_ea_shields1"
   ],
   "weaponSlots": [
@@ -24,7 +24,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": 180,
-      "locations": [-143, -0]
+      "locations": [-103, -0]
     },
     {
       "id": "WS0002",
