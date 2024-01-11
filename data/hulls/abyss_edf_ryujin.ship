@@ -30,7 +30,8 @@
     "WS0018": "eis_blinker_white30",
     "WS0019": "eis_blinker_white30",
     "WS0020": "eis_blinker_white30",
-    "WS0029": "abyss_deco_edf_vortice"
+    "WS0023": "abyss_deco_edf_vortice",
+    "WS0030": "abyss_deco_edf_vortice"
   },
   "weaponSlots": [
     {
@@ -253,21 +254,12 @@
     },
     {
       "id": "WS0023",
-      "size": "SMALL",
+      "size": "MEDIUM",
       "type": "DECORATIVE",
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-20, 244]
-    },
-    {
-      "id": "WS0024",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -0,
-      "locations": [-22, -245]
+      "locations": [-18, 244]
     },
     {
       "id": "WS0025",
@@ -288,22 +280,13 @@
       "locations": [53, -49.5]
     },
     {
-      "id": "WS0029",
-      "size": "MEDIUM",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-22, 245]
-    },
-    {
       "id": "WS0030",
       "size": "MEDIUM",
       "type": "DECORATIVE",
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [-20, -244]
+      "locations": [-18, -244]
     }
   ],
   "engineSlots": [
