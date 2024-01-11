@@ -22,7 +22,7 @@
       "id": "WS0001",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "TURRET",
+      "mount": "HIDDEN",
       "arc": 0,
       "angle": 135,
       "locations": [0, 17]
@@ -31,7 +31,7 @@
       "id": "WS0002",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "TURRET",
+      "mount": "HIDDEN",
       "arc": 0,
       "angle": 155,
       "locations": [-25, -16.5]

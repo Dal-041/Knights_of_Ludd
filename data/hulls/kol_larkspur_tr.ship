@@ -55,7 +55,7 @@
       "id": "WS0004",
       "size": "SMALL",
       "type": "SYSTEM",
-      "mount": "TURRET",
+      "mount": "HIDDEN",
       "arc": 0,
       "angle": -15,
       "locations": [18, -2]
