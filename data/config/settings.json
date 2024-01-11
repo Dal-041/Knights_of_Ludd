@@ -239,6 +239,7 @@
 		},
 		"fx":{
 			"kol_shield":"graphics/fx/kol_shield_fx.png",
+			"abyss_elysia_vortice":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/abyss_elysia_vortice.png",
 		},
 		"kol_fx":{
 			"kol_shielddawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/kol_shielddawn.png",
@@ -249,8 +250,7 @@
 			"abyss_dusk_ayakashi_balance_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
 			"abyss_dusk_onryo_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 			"abyss_dusk_onryo_P_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
-			"abyss_elysia_vortice":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/abyss_elysia_vortice.png",
-		},
+},
 		"terrain":{
 			"nebula_kol_black":"graphics/terrain/nebula_kol_black_shiny.png",
 			"nebula_kol_black_map":"graphics/terrain/nebula_kol_black_shiny_map.png",
