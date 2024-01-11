@@ -1,39 +1,37 @@
 {
-    "displayName": "Nightdemon",
+    "displayName": "Baleful",
     "fluxCapacitors": 0,
-    "fluxVents": 7,
+    "fluxVents": 8,
     "goalVariant": true,
-    "hullId": "abyss_boss_ninaya",
+    "hullId": "abyss_dusk_ikiryo",
     "hullMods": [
-        "fluxbreakers",
-        "hardened_subsystems",
-        "hardenedshieldemitter",
-        "stabilizedshieldemitter",
+        "missleracks",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_boss_ninaya_Nightdemon",
+    "variantId": "abyss_dusk_ikiryo_Baleful",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 001": "cryoblaster",
+                "WS 002": "abyss_plasma_chaingun",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "breachpod",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 003": "resonatormrm",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS 002": "cryoflux",
+                "WS0004": "pdburst",
+                "WS0003": "pdburst",
             }
         },
     ],

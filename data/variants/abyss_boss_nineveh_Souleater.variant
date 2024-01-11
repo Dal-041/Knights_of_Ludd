@@ -1,13 +1,11 @@
 {
     "displayName": "Souleater",
-    "fluxCapacitors": 7,
-    "fluxVents": 0,
+    "fluxCapacitors": 5,
+    "fluxVents": 23,
     "goalVariant": true,
     "hullId": "abyss_boss_nineveh",
     "hullMods": [
-        "fluxbreakers",
         "heavyarmor",
-        "missleracks",
         "targetingunit",
     ],
     "permaMods": [],
@@ -16,20 +14,36 @@
     "variantId": "abyss_boss_nineveh_Souleater",
     "weaponGroups": [
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
-                "WS0001": "cyclone",
-                "WS0003": "typhoon",
-                "WS0004": "typhoon",
+                "WS0001": "riftcascade",
             }
         },
         {
             "autofire": true,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "WS0006": "ionpulser",
-                "WS0007": "ionpulser",
+                "WS0004": "resonatormrm",
+                "WS0003": "resonatormrm",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "cryoblaster",
+                "WS0007": "cryoblaster",
+                "WS0011": "ioncannon",
+                "WS0010": "ioncannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "disintegrator",
+                "WS0002": "disintegrator",
             }
         },
         {
@@ -38,17 +52,7 @@
             "weapons": {
                 "WS0008": "pdburst",
                 "WS0009": "pdburst",
-                "WS0010": "ioncannon",
-                "WS0011": "ioncannon",
                 "WS0012": "pdburst",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0005": "heavyneedler",
-                "WS0002": "heavyneedler",
             }
         },
     ],

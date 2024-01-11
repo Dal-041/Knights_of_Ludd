@@ -1,18 +1,13 @@
 {
     "displayName": "Standard",
     "fluxCapacitors": 0,
-    "fluxVents": 10,
+    "fluxVents": 12,
     "goalVariant": true,
     "hullId": "kol_snowdrop",
     "hullMods": [],
-    "modules": [
-        {"WS0011": "kol_snowdrop_tr_Standard"},
-        {"WS0010": "kol_snowdrop_tl_Standard"},
-        {"WS0008": "kol_snowdrop_ll_Standard"},
-        {"WS0009": "kol_snowdrop_lr_Standard"}
-    ],
     "permaMods": [],
     "sMods": [],
+    "suppressedMods": [],
     "variantId": "kol_snowdrop_Standard",
     "weaponGroups": [
         {
@@ -20,25 +15,38 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "kol_tor",
-                "WS0002": "kol_tor"
+                "WS0002": "kol_tor",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "pilum",
                 "WS0006": "pilum",
-                "WS0007": "pilum"
+                "WS0007": "pilum",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0004": "heavyac",
                 "WS0003": "heavyac",
-                "WS0004": "heavyac"
             }
-        }
-    ]
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "breachpod",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0011": "kol_snowdrop_tr_Standard"},
+        {"WS0010": "kol_snowdrop_tl_Standard"},
+        {"WS0008": "kol_snowdrop_ll_Standard"},
+        {"WS0009": "kol_snowdrop_lr_Standard"},
+    ],
 }

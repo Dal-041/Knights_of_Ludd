@@ -1,0 +1,60 @@
+{
+    "displayName": "Support",
+    "fluxCapacitors": 5,
+    "fluxVents": 9,
+    "goalVariant": true,
+    "hullId": "kol_lotus",
+    "hullMods": [
+        "eccm",
+        "heavyarmor",
+        "reinforcedhull",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lotus_Support",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "heatseeker",
+                "WS0007": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "pilum_large",
+                "WS0002": "flak",
+                "WS0003": "flak",
+                "WS0005": "vulcan",
+                "WS0006": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0011": "kol_lotus_ll_Support"},
+        {"WS0012": "kol_lotus_lr_Support"},
+        {"WS0013": "kol_lotus_tl_Support"},
+        {"WS0014": "kol_lotus_tr_Support"},
+    ],
+}

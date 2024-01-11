@@ -1,39 +1,32 @@
 {
-    "displayName": "Vengeful",
-    "fluxCapacitors": 4,
-    "fluxVents": 50,
+    "displayName": "Undoer",
+    "fluxCapacitors": 10,
+    "fluxVents": 30,
     "goalVariant": true,
-    "hullId": "abyss_dawn_cheonyeoguishin",
+    "hullId": "abyss_boss_ninmah",
     "hullMods": [
-        "auxiliarythrusters",
+        "fluxbreakers",
         "heavyarmor",
-        "missleracks",
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dawn_cheonyeoguishin_Vengeful",
+    "variantId": "abyss_boss_ninmah_Undoer",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "abyss_frybeam_l",
+                "WS0001": "realitydisruptor",
             }
         },
         {
             "autofire": true,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0001": "multineedler",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0010": "guardian",
+                "WS0017": "abyss_boss_resonator2",
+                "WS0016": "abyss_boss_resonator2",
             }
         },
         {
@@ -42,23 +35,16 @@
             "weapons": {
                 "WS0008": "lrpdlaser",
                 "WS0009": "lrpdlaser",
-                "WS0005": "lrpdlaser",
                 "WS0003": "lrpdlaser",
+                "WS0002": "lrpdlaser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "dualflak",
-                "WS0007": "dualflak",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0002": "hurricane",
+                "WS0006": "riftbeam",
+                "WS0007": "riftbeam",
             }
         },
     ],

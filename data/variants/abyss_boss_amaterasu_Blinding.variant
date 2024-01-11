@@ -1,12 +1,13 @@
 {
     "displayName": "Blinding",
-    "fluxCapacitors": 6,
-    "fluxVents": 50,
+    "fluxCapacitors": 0,
+    "fluxVents": 46,
     "goalVariant": true,
     "hullId": "abyss_boss_amaterasu",
     "hullMods": [
         "fluxbreakers",
         "hardenedshieldemitter",
+        "magazines",
         "stabilizedshieldemitter",
         "targetingunit",
     ],
@@ -17,25 +18,25 @@
     "weaponGroups": [
         {
             "autofire": true,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0006": "plasma",
-                "WS0007": "plasma",
-            }
-        },
-        {
-            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0030": "cyclone",
+                "WS0030": "realitydisruptor",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "devastator",
-                "WS0009": "devastator",
+                "WS0008": "vpdriver",
+                "WS0009": "vpdriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "autopulse",
+                "WS0007": "autopulse",
             }
         },
         {
@@ -51,8 +52,14 @@
             "weapons": {
                 "WS0014": "pdburst",
                 "WS0013": "pdburst",
-                "WS0012": "pdburst",
-                "WS0011": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0012": "lrpdlaser",
+                "WS0011": "lrpdlaser",
             }
         },
     ],

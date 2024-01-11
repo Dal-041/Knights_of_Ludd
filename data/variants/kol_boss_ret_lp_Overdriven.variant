@@ -1,6 +1,6 @@
 {
     "displayName": "Overdriven",
-    "fluxCapacitors": 14,
+    "fluxCapacitors": 4,
     "fluxVents": 0,
     "goalVariant": true,
     "hullId": "kol_boss_ret_lp",
@@ -25,7 +25,15 @@
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 021": "heatseeker",
+                "WS 009": "heatseeker",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS 003": "annihilatorpod",
                 "WS 004": "annihilatorpod",
@@ -35,10 +43,10 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS 007": "sabot",
+                "WS 020": "sabot",
                 "WS 008": "sabot",
                 "WS 010": "sabot",
-                "WS 020": "sabot",
+                "WS 007": "sabot",
             }
         },
         {
@@ -47,13 +55,17 @@
             "weapons": {
                 "WS 000": "devastator",
                 "WS 001": "devastator",
-                "WS 009": "heatseeker",
-                "WS 021": "heatseeker",
-                "WS 011": "vulcan",
-                "WS 012": "vulcan",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS 015": "vulcan",
                 "WS 016": "vulcan",
                 "WS 017": "vulcan",
+                "WS 012": "vulcan",
+                "WS 011": "vulcan",
             }
         },
         {
@@ -61,12 +73,15 @@
             "mode": "LINKED",
             "weapons": {
                 "WS 005": "heavymg",
-                "WS 006": "heavymg",
-                "WS 013": "lightdualmg",
                 "WS 014": "lightdualmg",
+                "WS 013": "lightdualmg",
+                "WS 006": "heavymg",
             }
         },
     ],
-    "wings": [],
+    "wings": [
+        "broadsword_wing",
+        "talon_wing",
+    ],
     "modules": [],
 }

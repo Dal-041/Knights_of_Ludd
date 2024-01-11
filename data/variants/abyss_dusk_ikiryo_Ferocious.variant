@@ -1,39 +1,37 @@
 {
-    "displayName": "Nightdemon",
+    "displayName": "Ferocious",
     "fluxCapacitors": 0,
-    "fluxVents": 7,
+    "fluxVents": 10,
     "goalVariant": true,
-    "hullId": "abyss_boss_ninaya",
+    "hullId": "abyss_dusk_ikiryo",
     "hullMods": [
-        "fluxbreakers",
         "hardened_subsystems",
-        "hardenedshieldemitter",
-        "stabilizedshieldemitter",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_boss_ninaya_Nightdemon",
+    "variantId": "abyss_dusk_ikiryo_Ferocious",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 001": "cryoblaster",
+                "WS 002": "ionpulser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 003": "resonatormrm",
+                "WS0004": "kol_tor",
+                "WS0003": "railgun",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 002": "cryoflux",
+                "WS 003": "salamanderpod",
             }
         },
     ],

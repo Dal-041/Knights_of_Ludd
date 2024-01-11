@@ -1,6 +1,6 @@
 {
     "displayName": "Unholy",
-    "fluxCapacitors": 12,
+    "fluxCapacitors": 10,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "abyss_boss_corruptingheart",
@@ -18,51 +18,45 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "mjolnir",
+                "WS0002": "rifttorpedo",
             }
         },
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
+                "WS0003": "gauss",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "flak",
+                "WS0006": "flak",
+                "WS0011": "dualflak",
+                "WS0012": "dualflak",
+                "WS0015": "pdburst",
                 "WS0009": "heatseeker",
                 "WS0010": "heatseeker",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0002": "tachyonlance",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0004": "heavyneedler",
-                "WS0001": "heavyneedler",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0008": "vulcan",
-                "WS0006": "flak",
                 "WS0007": "vulcan",
-                "WS0005": "flak",
-                "WS0014": "vulcan",
+                "WS0008": "vulcan",
                 "WS0013": "vulcan",
-                "WS0012": "dualflak",
-                "WS0011": "dualflak",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0015": "pdburst",
+                "WS0014": "vulcan",
             }
         },
     ],

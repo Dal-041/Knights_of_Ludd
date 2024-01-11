@@ -1,0 +1,66 @@
+{
+    "displayName": "Anointed",
+    "fluxCapacitors": 4,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "kol_tamarisk",
+    "hullMods": [
+        "ballistic_rangefinder",
+        "magazines",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_tamarisk_Anointed",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_llyr",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "annihilator",
+                "WS0005": "annihilator",
+                "WS0003": "annihilator",
+                "WS0002": "annihilator",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "miningblaster",
+                "WS0009": "miningblaster",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0011": "railgun",
+                "WS0010": "railgun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0007": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0016": "kol_tamarisk_tl_Anointed"},
+        {"WS0012": "kol_tamarisk_ll_Anointed"},
+        {"WS0013": "kol_tamarisk_lr_Anointed"},
+        {"WS0017": "kol_tamarisk_tr_Anointed"},
+    ],
+}

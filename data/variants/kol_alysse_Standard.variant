@@ -5,34 +5,35 @@
     "goalVariant": true,
     "hullId": "kol_alysse",
     "hullMods": [
+        "fluxbreakers",
         "heavyarmor",
         "targetingunit",
-        "armoredweapons"
-    ],
-    "modules": [
-        {"WS0012": "kol_alysse_tl_Standard"},
-        {"WS0018": "kol_alysse_tr_standard"},
-        {"WS0016": "kol_alysse_ll_Standard"},
-        {"WS0017": "kol_alysse_lr_Standard"}
     ],
     "permaMods": [],
     "sMods": [],
+    "suppressedMods": [],
     "variantId": "kol_alysse_Standard",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0004": "kol_caelia"}
+            "weapons": {
+                "WS0004": "kol_caelia",
+            }
         },
         {
             "autofire": false,
             "mode": "LINKED",
-            "weapons": {"WS0007": "hammerrack"}
+            "weapons": {
+                "WS0007": "hammerrack",
+            }
         },
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0001": "kol_llyr"}
+            "weapons": {
+                "WS0001": "kol_llyr",
+            }
         },
         {
             "autofire": true,
@@ -40,19 +41,26 @@
             "weapons": {
                 "WS0008": "lightac",
                 "WS0009": "lightac",
+                "WS0011": "lightac",
                 "WS0010": "lightac",
-                "WS0011": "lightac"
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "dualflak",
-                "WS0003": "dualflak",
+                "WS0006": "flak",
                 "WS0005": "flak",
-                "WS0006": "flak"
+                "WS0003": "dualflak",
+                "WS0002": "dualflak",
             }
-        }
-    ]
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0012": "kol_alysse_tl_Standard"},
+        {"WS0018": "kol_alysse_tr_Standard"},
+        {"WS0016": "kol_alysse_ll_Standard"},
+        {"WS0017": "kol_alysse_lr_Standard"},
+    ],
 }
