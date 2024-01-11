@@ -1,5 +1,5 @@
 {
-	"id":"thermal_shot",
+	"id":"abyss_thermal_shot",
 	"specClass":"projectile",
 	"spawnType":"PLASMA",
 	"collisionClass":"PROJECTILE_FF",

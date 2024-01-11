@@ -23,6 +23,6 @@
 					   "particleColor":[255,100,150,255]},
 	"interruptibleBurst":true,
 	"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
-	"projectileSpecId":"thermal_shot",  # projectile that will be fired
+	"projectileSpecId":"abyss_thermal_shot",  # projectile that will be fired
 	"fireSoundTwo":"plasma_cannon_fire",
 }
