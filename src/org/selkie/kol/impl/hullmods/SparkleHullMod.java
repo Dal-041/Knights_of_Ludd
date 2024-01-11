@@ -36,9 +36,9 @@ public class SparkleHullMod extends BaseHullMod {
     private static Map maxDrones = new HashMap();
     static {
         maxDrones.put(ShipAPI.HullSize.FIGHTER, 2);
-        maxDrones.put(ShipAPI.HullSize.FRIGATE, 8);
-        maxDrones.put(ShipAPI.HullSize.DESTROYER, 12);
-        maxDrones.put(ShipAPI.HullSize.CRUISER, 16);
+        maxDrones.put(ShipAPI.HullSize.FRIGATE, 6);
+        maxDrones.put(ShipAPI.HullSize.DESTROYER, 9);
+        maxDrones.put(ShipAPI.HullSize.CRUISER, 12);
         maxDrones.put(ShipAPI.HullSize.CAPITAL_SHIP, 20);
     }
 
