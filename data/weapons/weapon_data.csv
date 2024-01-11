@@ -3,8 +3,8 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 #WEAPONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Tor Light Cannon,kol_tor,2,0.3,750,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,900,,,30,,,,"he16, LR, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,
-Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,250,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he18, kol_bp, rare_bp",,,,Anti Armor,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
-Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic18, rare_bp",,,,Anti Shield,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
+Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,250,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he18, knights_of_selkie_bp",,,,Anti Armor,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
+Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic18, knights_of_selkie_bp",,,,Anti Shield,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Arbalesterest Autocannon,abyss_edf_arbalest,0,,800,700,,200,,10,12,8,,,,KINETIC,150,,0,1.2,1,,0,15,5,10,,800,,,30,,,,"kinetic12, restricted",,,,Anti Shield,,,,,,,,,,4.125
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -76,3 +76,6 @@ l,abyss_deco_edf_amaterasu_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,
 r,abyss_deco_edf_amaterasu_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 r,abyss_deco_edf_amaterasu_front,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 ,abyss_deco_edf_amaterasu_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
+Nanten Disassembler,abyss_frybeam_l,3,0.25,20000,1000,1600,,1000,0,12,25,,,,HIGH_EXPLOSIVE,,2400,0.5,1,1,8,,,,,10000,,,,,,,FIRE_WHEN_INEFFICIENT,"he23, beam15, LR, hist1t, restricted",,Unknown,,Cruelty,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47
+Konara Thermal Sniper,abyss_thermal_cannon,3,0.25,20000,1100,,150,,,20,30,,,,ENERGY,250,,0.33,1.01,3,0.33,,,,,,820,,,150,,,,"energy20, LR, hist1t, restricted",,Unknown,,Attrition,,,,,,,,,,43
+Myoga Plasma Chaingun,abyss_plasma_chaingun,1,,1000,550,,60,,3,30,12,,,,ENERGY,60,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR",,,,,,,,,,,,,,16.3
