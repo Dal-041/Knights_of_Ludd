@@ -1,0 +1,14 @@
+{
+	"id":"kol_small_flux_negation",
+	"type":"STAT_MOD",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.kol.shipsystems.AI.SmallFluxNegationAI",
+
+	"statsScript":"org.selkie.kol.shipsystems.SmallFluxNegationStats",
+
+	"useSound":"system_ammo_feeder",
+    "outOfUsesSound":"gun_out_of_ammo",
+
+	"aiHints":{
+	}
+}
