@@ -3,20 +3,18 @@
 	"specClass":"projectile",
 	"type":"HYBRID",
 	"size":"MEDIUM",
-	#"turretSprite":"graphics/weapons/kol_chaingun_M.png",
-	#"turretGunSprite":"graphics/weapons/assault_chaingun_turret_recoil.png",
-	#"hardpointSprite":"graphics/weapons/assault_chaingun_hardpoint_base.png",
-	#"hardpointGunSprite":"graphics/weapons/assault_chaingun_hardpoint_recoil.png",	
-	#"visualRecoil":4.0,  # the gun sprites are only used if this is non-0
-	#"renderHints":[RENDER_BARREL_BELOW],
-	"turretSprite":"graphics/weapons/kol_chaingunM.png",
-	"hardpointSprite":"graphics/weapons/kol_chaingunM.png",	
+	"visualRecoil":4.0,  # the gun sprites are only used if this is non-0
+	"renderHints":[RENDER_BARREL_BELOW],
+	"turretSprite":"graphics/weapons/kol_plasma_chaingun_base.png",
+	"turretGunSprite":"graphics/weapons/kol_plasma_chaingun_recoil.png",
+	"hardpointSprite":"graphics/weapons/kol_plasma_chaingun_base.png",
+	"hardpointGunSprite":"graphics/weapons/kol_plasma_chaingun_recoil.png",	
 	"numFrames":1,
 	"frameRate":1,
-	"turretOffsets":[10, 0],
+	"turretOffsets":[16, 0],
 	"turretAngleOffsets":[0],
 	"hardpointOffsets":[16, 0],
-	"hardpointAngleOffsets":[0],	
+	"hardpointAngleOffsets":[0],
 	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
 	"animationType":"MUZZLE_FLASH",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
 	"muzzleFlashSpec":{"length":24.0,   # only used if animationType = MUZZLE_FLASH
