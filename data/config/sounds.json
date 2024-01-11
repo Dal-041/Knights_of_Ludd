@@ -28,6 +28,50 @@
 	"kol_phasespace_with_system":[
 		{"file":"sounds/phasespace_fx/kol_nullspace_with_system.ogg","pitch":1.3,"volume":0.8},
 	],
+	"kol_shield_burnout":{
+	        "sounds":[
+                        {"file":"sounds/shields/kol_shields_burnout.ogg","pitch":1,"volume":1},
+                ],
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
+	"kol_emp_loop":{
+		"sounds":[
+                        {"file":"sounds/shields/kol_shields_burnout_loop.ogg","pitch":1,"volume":0.6},
+                ],
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
+	"kol_shield_lower":{
+		"sounds":[
+                        {"file":"sounds/shields/kol_shields_large_lower.ogg","pitch":1,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_medium_lower.ogg","pitch":1,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_small_lower.ogg","pitch":1,"volume":0.4},
+                ],
+		"FIGHTER":{"sounds":[2], "pitch":1, "volume":0.6},
+		"FRIGATE":{"sounds":[1], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[1], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[1], "pitch":1, "volume":0.8},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
+	"kol_shield_raise":{
+		"sounds":[
+                        {"file":"sounds/shields/kol_shields_large_raise.ogg","pitch":1,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_medium_raise.ogg","pitch":1,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_small_raise.ogg","pitch":1,"volume":0.4},
+                ],
+		"FIGHTER":{"sounds":[2], "pitch":1, "volume":0.5},
+		"FRIGATE":{"sounds":[2], "pitch":1, "volume":0.6},
+		"DESTROYER":{"sounds":[1], "pitch":1, "volume":0.7},
+		"CRUISER":{"sounds":[1], "pitch":1, "volume":0.8},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
 	"music":{
 		"music_kol_encounter_friendly":[
 			{
