@@ -6,7 +6,7 @@ Tor Light Cannon,kol_tor,2,0.3,750,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,
 Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,250,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he18, kol_bp, rare_bp",,,,Anti Armor,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic18, rare_bp",,,,Anti Shield,,,,,"Fire rate accelerates during sustained use, up to a maximum of +40% after 4 seconds.",,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Arbalesterest Autocannon,abyss_edf_arbalest,0,,800,700,,200,,10,12,8,,,,KINETIC,150,,0,1.2,1,,0,15,5,10,,800,,,30,,,,"kinetic12, base_bp, ind",,,,Anti Shield,,,,,,,,,,4.125
+Arbalesterest Autocannon,abyss_edf_arbalest,0,,800,700,,200,,10,12,8,,,,KINETIC,150,,0,1.2,1,,0,15,5,10,,800,,,30,,,,"kinetic12, restricted",,,,Anti Shield,,,,,,,,,,4.125
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DECOS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
