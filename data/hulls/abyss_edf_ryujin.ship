@@ -8,11 +8,11 @@
   "width": 524,
   "center": [262, 132],
   "collisionRadius": 281,
-  "shieldCenter": [0,0], #[-217.5, -0],
+  "shieldCenter": [0, 0],
   "shieldRadius": 350,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
+    "automated",
     "kol_ea_shields3",
     "kol_conformal_shield"
   ],
@@ -29,7 +29,8 @@
     "WS0017": "eis_blinker_white30",
     "WS0018": "eis_blinker_white30",
     "WS0019": "eis_blinker_white30",
-    "WS0020": "eis_blinker_white30"
+    "WS0020": "eis_blinker_white30",
+    "WS0029": "abyss_deco_edf_vortice"
   },
   "weaponSlots": [
     {
@@ -266,7 +267,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [-20, -244]
+      "locations": [-22, -245]
     },
     {
       "id": "WS0025",
@@ -285,6 +286,24 @@
       "arc": 0,
       "angle": -0,
       "locations": [53, -49.5]
+    },
+    {
+      "id": "WS0029",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-22, 245]
+    },
+    {
+      "id": "WS0030",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-20, -244]
     }
   ],
   "engineSlots": [
