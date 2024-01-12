@@ -12,7 +12,7 @@
   "shieldRadius": 208.5,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
+    "automated",
     "kol_ea_shields3"
   ],
   "builtInWeapons": {
@@ -35,7 +35,9 @@
     "WS0026": "eis_blinker_white",
     "WS0027": "eis_blinker_white30",
     "WS0028": "eis_blinker_white30",
-    "WS0029": "abyss_deco_edf_amaterasu_front"
+    "WS0029": "abyss_deco_edf_amaterasu_front",
+    "WS0033": "abyss_deco_edf_vortice",
+    "WS0034": "abyss_deco_edf_vortice"
   },
   "weaponSlots": [
     {
@@ -340,6 +342,24 @@
       "arc": 7,
       "angle": 0,
       "locations": [61, -0]
+    },
+    {
+      "id": "WS0033",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [9, 123]
+    },
+    {
+      "id": "WS0034",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [9, -123]
     }
   ],
   "engineSlots": [

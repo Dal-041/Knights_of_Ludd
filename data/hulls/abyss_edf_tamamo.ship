@@ -14,17 +14,16 @@
   "viewOffset": 0,
   "builtInMods": [
     "kol_ea_shields3",
-	"automated",
-    #"eis_aquila",
-    #"eis_zandatsu"
+    "automated"
   ],
   "builtInWings": [
     "abyss_edf_kitsunebi"
   ],
   "builtInWeapons": {
-    #"WS0003": "eis_deco_valorous_fx",
+    "WS0004": "abyss_deco_edf_vortice",
     "WS0005": "abyss_deco_edf_tamamo_ml",
-    "WS0006": "abyss_deco_edf_tamamo_mr"
+    "WS0006": "abyss_deco_edf_tamamo_mr",
+    "WS0007": "abyss_deco_edf_vortice"
   },
   "weaponSlots": [
     {
@@ -81,6 +80,24 @@
       "arc": 0,
       "angle": 0,
       "locations": [11, 0]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [3, 49]
+    },
+    {
+      "id": "WS0007",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [3, -49]
     }
   ],
   "engineSlots": [

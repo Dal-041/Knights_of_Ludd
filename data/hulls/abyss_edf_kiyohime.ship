@@ -2,7 +2,7 @@
   "hullName": "Kiyohime",
   "hullId": "abyss_edf_kiyohime",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName":   "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_kiyohime.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_kiyohime.png",
   "style": "MIDLINE",
   "height": 280,
   "width": 418,
@@ -12,8 +12,8 @@
   "shieldRadius": 237.5,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
-    "kol_ea_shields3",
+    "automated",
+    "kol_ea_shields3"
   ],
   "builtInWeapons": {
     "WS0009": "abyss_deco_edf_engS",
@@ -21,7 +21,9 @@
     "WS0011": "abyss_deco_edf_engS",
     "WS0012": "abyss_deco_edf_engS",
     "WS0013": "abyss_deco_edf_engS",
-    "WS0014": "abyss_deco_edf_engS"
+    "WS0014": "abyss_deco_edf_engS",
+    "WS0017": "abyss_deco_edf_vortice",
+    "WS0018": "abyss_deco_edf_vortice"
   },
   "weaponSlots": [
     {
@@ -189,6 +191,24 @@
       "arc": 360,
       "angle": 0,
       "locations": [-22, 173.5]
+    },
+    {
+      "id": "WS0017",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [0, 207]
+    },
+    {
+      "id": "WS0018",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [0, -207]
     }
   ],
   "engineSlots": [

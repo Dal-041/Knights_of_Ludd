@@ -8,17 +8,19 @@
   "width": 342,
   "center": [171, 95],
   "collisionRadius": 182.5,
-  "shieldCenter": [0,0], #[-88, -0],
+  "shieldCenter": [0, 0],
   "shieldRadius": 305,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
+    "automated",
     "kol_ea_shields3",
     "kol_conformal_shield"
   ],
   "builtInWeapons": {
     "WS0015": "abyss_deco_edf_engL",
-    "WS0016": "abyss_deco_edf_engL"
+    "WS0016": "abyss_deco_edf_engL",
+    "WS0017": "abyss_deco_edf_vortice",
+    "WS0018": "abyss_deco_edf_vortice"
   },
   "weaponSlots": [
     {
@@ -168,6 +170,24 @@
       "arc": 360,
       "angle": 0,
       "locations": [-6.5, 140]
+    },
+    {
+      "id": "WS0017",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [9, 166]
+    },
+    {
+      "id": "WS0018",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [9, -166]
     }
   ],
   "engineSlots": [

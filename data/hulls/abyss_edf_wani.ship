@@ -2,7 +2,7 @@
   "hullName": "Wani",
   "hullId": "abyss_edf_wani",
   "hullSize": "FRIGATE",
-  "spriteName":   "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_wani.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_wani.png",
   "style": "MIDLINE",
   "height": 144,
   "width": 120,
@@ -12,9 +12,13 @@
   "shieldRadius": 82,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
-    "kol_ea_shields3",
+    "automated",
+    "kol_ea_shields3"
   ],
+  "builtInWeapons": {
+    "WS0007": "abyss_deco_edf_vortice",
+    "WS0008": "abyss_deco_edf_vortice"
+  },
   "weaponSlots": [
     {
       "id": "WS0001",
@@ -51,6 +55,24 @@
       "arc": 210,
       "angle": -45,
       "locations": [-28, -21]
+    },
+    {
+      "id": "WS0007",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [3, 58]
+    },
+    {
+      "id": "WS0008",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [3, -58]
     }
   ],
   "engineSlots": [

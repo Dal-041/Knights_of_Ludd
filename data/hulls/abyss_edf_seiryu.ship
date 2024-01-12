@@ -2,7 +2,7 @@
   "hullName": "Seiryu",
   "hullId": "abyss_edf_seiryu",
   "hullSize": "CRUISER",
-  "spriteName":   "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_seiryu.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_seiryu.png",
   "style": "MIDLINE",
   "height": 269,
   "width": 296,
@@ -12,9 +12,13 @@
   "shieldRadius": 163,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
-    "kol_ea_shields3",
+    "automated",
+    "kol_ea_shields3"
   ],
+  "builtInWeapons": {
+    "WS0013": "abyss_deco_edf_vortice",
+    "WS0014": "abyss_deco_edf_vortice"
+  },
   "weaponSlots": [
     {
       "id": "WS0003",
@@ -105,6 +109,24 @@
       "arc": 7,
       "angle": 0,
       "locations": [126.5, -0]
+    },
+    {
+      "id": "WS0013",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-54.5, 145]
+    },
+    {
+      "id": "WS0014",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-54.5, -145]
     }
   ],
   "engineSlots": [

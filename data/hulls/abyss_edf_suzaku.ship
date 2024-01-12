@@ -2,7 +2,7 @@
   "hullName": "Suzaku",
   "hullId": "abyss_edf_suzaku",
   "hullSize": "DESTROYER",
-    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_suzaku.png",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/abyss_edf_suzaku.png",
   "style": "MIDLINE",
   "height": 188,
   "width": 156,
@@ -12,10 +12,14 @@
   "shieldRadius": 106.5,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
+    "automated",
     "kol_ea_shields3",
     "missile_autoloader"
   ],
+  "builtInWeapons": {
+    "WS0010": "abyss_deco_edf_vortice",
+    "WS0011": "abyss_deco_edf_vortice"
+  },
   "weaponSlots": [
     {
       "id": "WS0001",
@@ -79,6 +83,24 @@
       "arc": 260,
       "angle": 0,
       "locations": [-22, -0]
+    },
+    {
+      "id": "WS0010",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-13, 77]
+    },
+    {
+      "id": "WS0011",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-13, -77]
     }
   ],
   "engineSlots": [
