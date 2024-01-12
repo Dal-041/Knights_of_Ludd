@@ -3,6 +3,7 @@ package org.selkie.kol.impl.fleets;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
@@ -19,6 +20,8 @@ public class SpawnElysianHeart {
 	public static boolean SpawnElysianHeart() {
 
 		PersonAPI elysianBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
+		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
+		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png");
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -69,6 +72,9 @@ public class SpawnElysianHeart {
 			elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
 		elysianHeartFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);
+		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png");
+
 		elysianHeartFleet.getFleetData().sort();
 
 		elysianHeartFleet.removeAbility(Abilities.EMERGENCY_BURN);

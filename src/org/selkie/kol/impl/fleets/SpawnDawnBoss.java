@@ -21,6 +21,7 @@ public class SpawnDawnBoss {
 		//A "slightly" rampant ALLMOTHER copy.
 		FullName name = new FullName("XLLM01H3R", "", FullName.Gender.ANY);
 		dawnBossCaptain.setName(name);
+		dawnBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png");
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -62,7 +63,7 @@ public class SpawnDawnBoss {
 		        .setMinFP(400) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("abyss_lunasea_jp"))
+				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("abyss_lunasea_four"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -80,6 +81,9 @@ public class SpawnDawnBoss {
 		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
 		dawnBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		AbyssalFleetManager.setAbyssalCaptains(dawnBossFleet);
+		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png");
+
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);
 		dawnBossFleet.addEventListener(new ManageDawnBoss());

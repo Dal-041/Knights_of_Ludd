@@ -3,6 +3,7 @@ package org.selkie.kol.impl.fleets;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
@@ -19,6 +20,8 @@ public class SpawnElysianAmaterasu {
 	public static boolean SpawnElysianAmaterasu() {
 
 		PersonAPI elysianBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
+		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png");
+		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -69,6 +72,9 @@ public class SpawnElysianAmaterasu {
 			elysianBossFleet.getFleetData().addFleetMember(support);
 		}
 		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		AbyssalFleetManager.setAbyssalCaptains(elysianBossFleet);
+		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png");
+
 		elysianBossFleet.getFleetData().sort();
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);

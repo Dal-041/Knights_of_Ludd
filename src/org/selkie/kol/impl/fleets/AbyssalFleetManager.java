@@ -2,8 +2,12 @@ package org.selkie.kol.impl.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.characters.PersonalityAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
+import com.fs.starfarer.api.fleet.FleetAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.BaseFIDDelegate;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfig;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfigGen;
@@ -104,7 +108,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
         params.commander = createAbyssalCaptain();
-        params.officerNumberMult = 5f;
+        params.officerNumberMult = 1f;
         //params.officerLevelBonus = 0;
         params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_MIXED;
         params.random = random;
@@ -124,7 +128,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
         //fleet.getFleetData().sort();
 
         if (fleet == null) return null;
-
+        setAbyssalCaptains(fleet);
         fleet.addTag(excludeTag);
         system.addEntity(fleet);
         fleet.setFacing(random.nextFloat() * 360f);
@@ -245,33 +249,89 @@ public class AbyssalFleetManager extends SeededFleetManager {
     }
 
     public PersonAPI createAbyssalCaptain() {
+        return createAbyssalCaptain(fac, false);
+    }
+
+    public static PersonAPI createAbyssalCaptain(String faction) {
+        return createAbyssalCaptain(faction, false);
+    }
+
+    public static PersonAPI createAbyssalCaptain(String faction, boolean random) {
         OfficerManagerEvent.SkillPickPreference skillPref;
-        if (fac.equals(PrepareAbyss.dawnID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
-        else if (fac.equals(PrepareAbyss.duskID)) skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
-        else if (fac.equals(PrepareAbyss.elysianID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+        String persona = Personalities.AGGRESSIVE;
+        String portrait = Global.getSector().getFaction(faction).getPortraits(FullName.Gender.ANY).pick();
+
+        int level = 8;
+        String core = "alpha_core";
+        if (random) {
+            float rand = (float) Math.random();
+            if (rand < 0.35f);
+            else if (rand < 0.75f) {
+                level = 7;
+                core = "beta_core";
+            }
+            else level = 6; core = "gamma_core";
+        }
+
+        if (faction.equals(PrepareAbyss.dawnID)) {
+            skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
+            portrait = PrepareAbyss.portraitsDawn[level-6];
+            //persona = Personalities.AGGRESSIVE;
+        }
+        else if (faction.equals(PrepareAbyss.duskID)) {
+            skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+            persona = Personalities.STEADY;
+            portrait = PrepareAbyss.portraitsDusk[level-6];
+        }
+        else if (faction.equals(PrepareAbyss.elysianID)) {
+            skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+            persona = Personalities.CAUTIOUS;
+            portrait = PrepareAbyss.portraitsElysian[level-6];
+        }
         else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
 
-        return MagicCampaign.createCaptainBuilder(fac)
-                .setIsAI(true)
-                .setAICoreType("alpha_core")
-                .setLevel(7)
-                .setPersonality(Personalities.AGGRESSIVE)
-                .setSkillPreference(skillPref)
-                .create();
-    }
-    public static PersonAPI createAbyssalCaptain(String faction) {
-        OfficerManagerEvent.SkillPickPreference skillPref;
-        if (faction.equals(PrepareAbyss.dawnID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
-        else if (faction.equals(PrepareAbyss.duskID)) skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
-        else if (faction.equals(PrepareAbyss.elysianID)) skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
-        else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
+        portrait.replace(PrepareAbyss.path, "");
+        portrait.replace(".png", "");
 
         return MagicCampaign.createCaptainBuilder(faction)
                 .setIsAI(true)
-                .setAICoreType("alpha_core")
-                .setLevel(7)
-                .setPersonality(Personalities.AGGRESSIVE)
+                .setAICoreType(core)
+                .setLevel(level)
+                .setPersonality(persona)
                 .setSkillPreference(skillPref)
+                .setPortraitId(portrait)
                 .create();
+    }
+
+    public static void setAbyssalCaptains(CampaignFleetAPI fleet) {
+        String fac = fleet.getFaction().getId();
+        for (FleetMemberAPI member : fleet.getMembersWithFightersCopy()) {
+            if (member.getCaptain() == null) {
+                member.setCaptain(createAbyssalCaptain(fac, true));
+            } else {
+                boolean found = false;
+                String portCapt = member.getCaptain().getPortraitSprite();
+                for (String port : PrepareAbyss.portraitsDawn) {
+                    if (portCapt.equalsIgnoreCase(port)) found = true;
+                }
+                for (String port : PrepareAbyss.portraitsDusk) {
+                    if (portCapt.equalsIgnoreCase(port)) found = true;
+                }
+                for (String port : PrepareAbyss.portraitsElysian) {
+                    if (portCapt.equalsIgnoreCase(port)) found = true;
+                }
+                if (!found) {
+                    member.getCaptain().setPersonality(Personalities.RECKLESS); //AI cores default to "fearless" which is one-note, we bring them down a notch
+                    int level = Math.min(8, member.getCaptain().getStats().getLevel());
+                    if (level < 6) {
+                        level = 6;
+                        member.getCaptain().getStats().setLevel(6);
+                    }
+                    if (fac.equals(PrepareAbyss.dawnID)) member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDawnPaths[level-6]);
+                    if (fac.equals(PrepareAbyss.duskID)) member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDuskPaths[level-6]);
+                    if (fac.equals(PrepareAbyss.elysianID)) member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsElysianPaths[level-6]);
+                }
+            }
+        }
     }
 }

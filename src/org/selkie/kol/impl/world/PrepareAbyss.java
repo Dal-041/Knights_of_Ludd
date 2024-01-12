@@ -12,6 +12,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.listeners.TrackFleet;
@@ -19,6 +20,7 @@ import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
 
 import java.awt.*;
+import java.util.Random;
 
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
 
@@ -100,6 +102,14 @@ public class PrepareAbyss {
 			"abyss_edf_tamamo_Striker",
 			"abyss_edf_tamamo_Striker"
 	};
+
+	public static String path = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
+	public static final String[] portraitsDawnPaths = {path.concat("abyss_dawn_1.png"), path.concat("abyss_dawn_2.png"), path.concat("abyss_dawn_3.png")};
+	public static final String[] portraitsDuskPaths = {path.concat("abyss_dusk_1.png"), path.concat("abyss_dusk_2.png"), path.concat("abyss_dusk_3.png")};
+	public static final String[] portraitsElysianPaths = {path.concat("abyss_idk1.png"), path.concat("abyss_idk2.png"), path.concat("abyss_idk3.png")};
+	public static final String[] portraitsDawn = {"abyss_dawn_1", "abyss_dawn_2", "abyss_dawn_3"};
+	public static final String[] portraitsDusk = {"abyss_dusk_1", "abyss_dusk_2", "abyss_dusk_3"};
+	public static final String[] portraitsElysian = {"abyss_idk1", "abyss_idk2", "abyss_idk3"};
 
     public static void generate(SectorAPI sector) {
 		checkAbyssalFleets();
@@ -321,15 +331,15 @@ public class PrepareAbyss {
 		system.addAsteroidBelt(elysia, 200, 4024, 1024, 40, 40, "kol_asteroidBelt", null);
 		system.addAsteroidBelt(elysia, 200, 4536, 1024, 40, 60, "kol_asteroidBelt", null);
 
-        SectorEntityToken derelict1 = addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.elysianID);
+        SectorEntityToken derelict1 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict1.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3100, 20);
-        SectorEntityToken derelict2 = addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.elysianID);
+        SectorEntityToken derelict2 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict2.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3400, 25);
-        SectorEntityToken derelict3 = addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.elysianID);
+        SectorEntityToken derelict3 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict3.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3700, 30);
-        SectorEntityToken derelict4 = addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.elysianID);
+        SectorEntityToken derelict4 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict4.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4000, 35);
-        SectorEntityToken derelict5 = addSalvageEntity(system, "alpha_site_weapons_cache", PrepareAbyss.elysianID);
+        SectorEntityToken derelict5 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict5.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4400, 40);
     	
         JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("abyss_elysia_jp", "First Trial");
@@ -401,7 +411,7 @@ public class PrepareAbyss {
 		SectorEntityToken gate = system.addCustomEntity(undergateID, "Undergate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
-		SectorEntityToken stationResearch = addSalvageEntity(system, "station_research_remnant", PrepareAbyss.duskID);
+		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(dawnID, 0f), PrepareAbyss.duskID);
 		stationResearch.setFixedLocation(-5230, 8860);
 		stationResearch.setName("Null");
 
@@ -419,7 +429,7 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
-				wreck.addTag(Tags.UNRECOVERABLE);
+				if (Math.random() > 0.33f) wreck.addTag(Tags.UNRECOVERABLE);
 				//system.addEntity(wreck);
 			}
 		}
@@ -437,7 +447,7 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
-				wreck.addTag(Tags.UNRECOVERABLE);
+				if (Math.random() > 0.4f) wreck.addTag(Tags.UNRECOVERABLE);
 			}
 		}
 	}
@@ -553,25 +563,18 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		String lootEntity;
-		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
-		SectorEntityToken loot1 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
-		loot1.setCircularOrbitPointingDown(luna, 87, 6240, 100000);
-		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
-		SectorEntityToken loot2 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
-		loot2.setCircularOrbitPointingDown(luna, 38, 21330, 100000);
-		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
-		SectorEntityToken loot3 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
-		loot3.setCircularOrbitPointingDown(third, 101, 5155, 100000);
-		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
-		SectorEntityToken loot4 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
-		loot4.setCircularOrbitPointingDown(fourth, 171, 1500, 100000);
-		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
-		SectorEntityToken loot5 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
-		loot5.setCircularOrbitPointingDown(fifth, 285, 6353, 100000);
-		lootEntity = (Math.random() >= 0.5f) ? "station_research_remnant" : "weapons_cache_remnant";
-		SectorEntityToken loot6 = addSalvageEntity(system, lootEntity, PrepareAbyss.dawnID);
-		loot6.setCircularOrbitPointingDown(sixth, 217, 4770, 100000);
+		SectorEntityToken loot1 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		loot1.setCircularOrbitPointingDown(luna, (float)Math.random()*60+47, (float)Math.random()*2240+3000, 100000);
+		SectorEntityToken loot2 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		loot2.setCircularOrbitPointingDown(luna, (float)Math.random()*20+28, (float)Math.random()*3330+18330, 100000);
+		SectorEntityToken loot3 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		loot3.setCircularOrbitPointingDown(third, (float)Math.random()*50+71, (float)Math.random()*2155+3500, 100000);
+		SectorEntityToken loot4 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		loot4.setCircularOrbitPointingDown(fourth, 171, (float)Math.random()*1500+1000, 100000);
+		SectorEntityToken loot5 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		loot5.setCircularOrbitPointingDown(fifth, (float)Math.random()*65+245, (float)Math.random()*2000+5353, 100000);
+		SectorEntityToken loot6 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		loot6.setCircularOrbitPointingDown(sixth, (float)Math.random()*60+177, (float)Math.random()*2770+3000, 100000);
 
 		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 40, 140);
 		org.selkie.kol.impl.fleets.AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, dawnID, 4, 250, 350);
@@ -630,30 +633,30 @@ public class PrepareAbyss {
 		dbhBeam1.setCircularOrbit(sing, (float)(Math.random() * 360), 0, 20);
 
 		if (Math.random() < 0.4f) {
-			double orbit = 1200+Math.random()*7000;
-			PlanetAPI p1 = system.addPlanet("dusk_DBH_P1", sing, NameGenData.TAG_PLANET, "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
+			double orbit = 800+Math.random()*4000;
+			PlanetAPI p1 = system.addPlanet("dusk_DBH_P1", sing, "Yours?", "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
 			PlanetConditionGenerator.generateConditionsForPlanet(p1, StarAge.OLD);
 			p1.getMarket().addCondition(Conditions.IRRADIATED);
 		}
 
 		if (Math.random() < 0.4f) {
-			double orbit = 3200+Math.random()*27000;
-			PlanetAPI p2 = system.addPlanet("dusk_DBH_P2", sing, NameGenData.TAG_PLANET, "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
+			double orbit = 2200+Math.random()*4000;
+			PlanetAPI p2 = system.addPlanet("dusk_DBH_P2", sing, "Theirs?", "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
 			PlanetConditionGenerator.generateConditionsForPlanet(p2, StarAge.OLD);
 			p2.getMarket().addCondition(Conditions.IRRADIATED);
 		}
 
 		//sophistimacated
 		float orbRadius1 = (float)(Math.random() * 8500f);
-		SectorEntityToken cacheRem = addSalvageEntity(system, "weapons_cache_remnant", PrepareAbyss.duskID);
+		SectorEntityToken cacheRem = addSalvageEntity(system, getAbyssLootID(duskID, 1f), PrepareAbyss.duskID);
 		cacheRem.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius1, orbRadius1/10f);
 
 		float orbRadius2 = (float)(Math.random()*8500f);
-		SectorEntityToken stationResearch = addSalvageEntity(system, "station_research_remnant", PrepareAbyss.duskID);
+		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0.6f), PrepareAbyss.duskID);
 		stationResearch.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius2, orbRadius2/10f);
 
 		float orbRadius3 = (float)(Math.random()*8500f);
-		SectorEntityToken cacheRemSmall = addSalvageEntity(system, "weapons_cache_small_remnant", PrepareAbyss.duskID);
+		SectorEntityToken cacheRemSmall = addSalvageEntity(system, getAbyssLootID(duskID, 2f), PrepareAbyss.duskID);
 		cacheRemSmall.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius3, orbRadius3/10f);
 
 		system.autogenerateHyperspaceJumpPoints(true, true); //begone evil clouds
@@ -669,5 +672,29 @@ public class PrepareAbyss {
 		AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, duskID, 3, 250, 350);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
+	}
+
+	public static String getAbyssLootID(String faction) {
+		return getAbyssLootID(faction, 1, new Random());
+	}
+
+	public static String getAbyssLootID(String faction, float tier) {
+		return getAbyssLootID(faction, tier, new Random());
+	}
+
+	public static String getAbyssLootID(String faction, float tier, Random random) {
+		WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(random);
+		float w = tier; //Tier 1 has best loot odds, values < 1 even better.
+		picker.add("kol_abyss_cache_low", w);
+		picker.add("kol_abyss_cache_med", w);
+		picker.add("kol_abyss_cache_high", w);
+		w = faction.equals(dawnID)? 1f : 0f;
+		picker.add("kol_abyss_research_station_dawn", w);
+		w = faction.equals(duskID)? 1f : 0f;
+		picker.add("kol_abyss_research_station_dusk", w);
+		w = faction.equals(elysianID)? 1f : 0f;
+		picker.add("kol_abyss_research_station_elysia", w);
+
+		return picker.pick();
 	}
 }
