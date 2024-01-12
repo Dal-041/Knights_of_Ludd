@@ -212,7 +212,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
         for(ShipAPI other : CombatUtils.getShipsWithinRange(ship.getLocation(), range)){
             if (other.getOwner() == ship.getOwner()) continue;
             Vector2f closestPoint = MathUtils.getNearestPointOnLine(other.getLocation(), ship.getLocation(), MathUtils.getPointOnCircumference(ship.getLocation(), range, ship.getFacing()));
-            if (MathUtils.getDistance(closestPoint, other.getLocation()) < Misc.getTargetingRadius(closestPoint, other, other.getShield().isOn())){
+            if (MathUtils.getDistance(closestPoint, other.getLocation()) < Misc.getTargetingRadius(closestPoint, other, other.getShield() == null ? false : other.getShield().isOn())){
                 targets.add(other);
             }
 
