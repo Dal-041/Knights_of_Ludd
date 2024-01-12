@@ -8,29 +8,29 @@
 	"darkUIColor":[32,0,32,175],
 	"gridUIColor":[50,0,50,75],
 	
-	"displayName":"Dawn",
-	"displayNameWithArticle":"the Dawn",
-	"displayNameLong":"the Dawn",
-	"displayNameLongWithArticle":"the Dawn",
-	"logo":"graphics/factions/ai_remnant.png",
-	"crest":"graphics/factions/crest_ai_remnant.png",
+	"displayName":"Dawntide",
+	"displayNameWithArticle":"the Dawntide",
+	"displayNameLong":"the Dawntide",
+	"displayNameLongWithArticle":"the Dawntide",
+	"logo":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/abyss_flag_dawntide.png",
+	"crest":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/abyss_crest_dawntide.png",
 	"showInIntelTab":false,
 	"shipNamePrefix":"",
 	"shipNameSources":{
-		"LUDDIC_CHURCH":1,
-		"ABRAHAMIC":1,
+		"LUDDIC_CHURCH":3,
+		"ABRAHAMIC":2,
 		"DERELICT_DRONE":1,
 	},
 	"names":{
 		"ai":20,
-		"fringe":2,
-		"modern":2,
-		"future":1,
+		#"fringe":2,
+		#"modern":2,
+		#"future":1,
 	},
 	"hullFrequency":{
 		"tags":{
-			"remnant":0.1,
-			"derelict":0.1,
+			#"remnant":0.1,
+			#"derelict":0.1,
 		},
 		"hulls":{
 			
@@ -82,7 +82,8 @@
 	"knownFighters":{
 		"tags":[
 			"remnant",
-			#"derelict",
+			"derelict",
+			"kol_abyss_bp"
 		],
 		"fighters":[
 		],
@@ -92,7 +93,7 @@
 		"fighters":[],
 	},
 	"knownWeapons":{
-		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "remnant", "derelict"],
+		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "kol_abyss_bp", "remnant", "derelict"],
 		"weapons":[
 			"lightneedler",
 			"railgun",
@@ -169,7 +170,7 @@
 		"shipQuality":5,
 		"numShips":2,
 		
-		"shipSize":3,
+		"shipSize":4,
 		
 		"aggression":3,
 		

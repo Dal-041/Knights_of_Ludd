@@ -3,7 +3,7 @@ id,type,text1,text2,text3,notes
 # STATIONS,,,,,
 # Removed from Lyra for brevity #  The advanced technologies involved are the source of great grievance among Luddic theologians, but, in practice, it means that the presence of independent traders and visitors is only barely tolerated.,,
 kol_lyra_desc,CUSTOM,"The stronghold and command center of the Luddic Knights is the embodiment of their beliefs and their compromises. Heavy batteries and plentiful garden chambers keep the many faithful safe, living and practicing in lush open spaces. Military bases coordinate system-wide fleets, which are sourced from the proscribed acts of shipbuilding and fuel production carried out here as an open secret.",,"Lyra station's gardens are green pockmarks below your parking orbit, each growing between metroplex fora, comm-array towers, solar collecters, and batteries. Beneath them lie the shipbuilding forges and antimatter condensers that power the Knight's Armada, invisible to the naked eye but detectable by the telltale emission patterns of neutrinos and other charged particles. The tactical overlay of your Tri-pad helpfully marks many decorative steeples as likely weapon emplacements.",
-# Removed from Cygnus: Etchings of swans, with wings stylized to resemble ancient kite shields, are visible across the outer plating.
+# Removed from Cygnus: Etchings of swans, with wings stylized to resemble ancient kite shields, are visible across the outer plating.,,,
 kol_cygnus_desc,CUSTOM,"The highest calling of the Luddic Knights is the protection of the Church, and Battlestation Cygnus was constructed as the first line of system defense. Logisticians, technicians, and other staff make up a martial civilian populace embracing the station mantra: 'One faith, lasting aegis.'",,"Battlestation Cygnus is a constant buzz of activity. Personnel part to allow smartly adorned crew to rush about, giving anybody with visible cybernetics hard stares before muttering darkly into their headpieces.",
 ,,,,,
 # WEAPONS,,,,,
@@ -39,7 +39,7 @@ kol_alysse,SHIP,"A treasured battleship often found as the leading element withi
 The Alysse once represented an evolutionary step for the militarization of the Orion Drive technology first implemented by the Retribution. The inclusion of robust modular plating serving a dual purpose, augmenting both survivability and relieving strain on the ship's inertial compensators. Strategic command likely remained unconvinced, and no combat or procurement records exist for the ship within known Domain Battlegroups.
 
 Every Alysse-class vessel that exists today is a painstaking reconstruction of the forgotten prototypes, artisanally assembled and sanctified for their sacred duty to the Church.",,,
-abyss_edf_ryujin,SHIP,,,,
+,,,,,
 ,,,,,
 # SHIP SYSTEMS,,,,,
 kol_lunge,SHIP_SYSTEM,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,Movement,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,three
@@ -55,3 +55,8 @@ kol_drone_strike,SHIP_SYSTEM,"Supercharges one of the Hex drones with a brief en
 ,,,,,
 ,,,,,
 knights_of_selkie,FACTION,"The military branch of the Luddic Church of Galactic Redemption, modeled on monastic warrior societies from previous millennia. Built and governed by a myriad of martial rituals that deftly reconcile Ludd’s anti-militaristic revelations with the constrained bloodshed required by practical statecraft. The order's roots may be traced to the depths of Sector history, when the faithful fought alongside the founding fleets of the Hegemony to overcome the tyranny of Warlord Leonis and to shatter the technological yoke of the Tri-Tachyon Corporation.",,,
+,,,,,
+#ProcGen,,,,,
+white_hole,PLANET,"A singularity that cannot be entered from the outside, but rather energy, matter, light, and information are emitted from it. This stellar phenomenon was once considered a theoretical curiousity – yet now you find yourself discovering one. The question is only whether anyone will believe you when you relay the story at the bar.",,,
+red_hole,PLANET,"A enormous, unbelievably deep gravity well, so potent that the light from its ergosphere barely shines beyond the infrared. It calls to you, begging you to submit to its pull.",,,
+star_black_neutron,PLANET,"A rapidly spinning singularity, anomalous in the unceasing gravitational waves your sensors are reading. Its grip on spacetime seems so great as to drag space time itself along in a twist. ",,,
