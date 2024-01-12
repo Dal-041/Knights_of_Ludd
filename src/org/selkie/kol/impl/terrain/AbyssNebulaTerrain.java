@@ -35,7 +35,7 @@ public class AbyssNebulaTerrain extends NebulaTerrainPlugin {
             if (fleet.hasTag(excludeTag)) {
                 return;
             }
-            float penalty = 0.1f;
+            float penalty = 0.2f;
             fleet.getStats().addTemporaryModMult(0.1f, "LunaSea_2", //getModId() +
                     desc, penalty,
                     fleet.getStats().getFleetwideMaxBurnMod());

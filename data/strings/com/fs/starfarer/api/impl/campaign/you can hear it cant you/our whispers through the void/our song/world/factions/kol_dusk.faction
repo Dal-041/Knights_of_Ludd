@@ -8,29 +8,29 @@
 	"darkUIColor":[32,0,32,175],
 	"gridUIColor":[50,0,50,75],
 	
-	"displayName":"Dusk",
-	"displayNameWithArticle":"the Dusk",
-	"displayNameLong":"the Dusk",
-	"displayNameLongWithArticle":"the Dusk",
-	"logo":"graphics/factions/ai_remnant.png",
-	"crest":"graphics/factions/crest_ai_remnant.png",
+	"displayName":"Duskborne",
+	"displayNameWithArticle":"the Duskborne",
+	"displayNameLong":"the Duskborne",
+	"displayNameLongWithArticle":"the Duskborne",
+	"logo":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/abyss_flag_dusk.png",
+	"crest":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/abyss_crest_dusk.png",
 	"showInIntelTab":false,
 	"shipNamePrefix":"",
 	"shipNameSources":{
 		"LUDDIC_CHURCH":1,
-		"ABRAHAMIC":1,
-		"DERELICT_DRONE":1,
+		"ABRAHAMIC":2,
+		"DERELICT_DRONE":4,
 	},
 	"names":{
 		"ai":20,
-		"fringe":2,
-		"modern":2,
-		"future":1,
+		#"fringe":2,
+		#"modern":2,
+		#"future":1,
 	},
 	"hullFrequency":{
 		"tags":{
-			"remnant":0.1,
-			"derelict":0.1,
+			#"remnant":0.1,
+			#"derelict":0.1,
 		},
 		"hulls":{
 			
@@ -76,7 +76,7 @@
 		],
 	},
 	"knownFighters":{
-		"tags":["remnant"],
+		"tags":["remnant", "kol_abyss_bp"],
 		"fighters":[
 		],
 	},
@@ -85,7 +85,7 @@
 		"fighters":[],
 	},
 	"knownWeapons":{
-		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "remnant"],
+		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "kol_abyss_bp", "remnant"],
 		"weapons":[
 			"lightneedler",
 			"railgun",
@@ -162,7 +162,7 @@
 		"shipQuality":5,
 		"numShips":2,
 		
-		"shipSize":3,
+		"shipSize":4,
 		
 		"aggression":3,
 		
