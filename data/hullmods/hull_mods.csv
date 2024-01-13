@@ -10,4 +10,4 @@ Serene Mist,kol_ea_mist,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.Cree
 Custom Shields 1,kol_ea_shields1,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.DuskyShields1,,Replaces shield style option 1,,
 Custom Shields 1,kol_ea_shields2,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.DuskyShields2,,Replaces shield style option 2,,
 Custom Shields 1,kol_ea_shields3,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.DuskyShields3,,Replaces shield style option 3,,
-Conformal Shield,kol_conformal_shield,,,,,,,,,,0,0,0,0,org.selkie.kol.impl.hullmods.ConformalShields,Conformal shield,Conformal shield,graphics/icons/skills/field_modulation.png,
+Conformal Shield,kol_conformal_shield,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.impl.hullmods.ConformalShields,This ship uses a custom shield emitter configuration that mains its front shield in close proximity to the hull. ,Conformal shield,graphics/icons/skills/field_modulation.png,

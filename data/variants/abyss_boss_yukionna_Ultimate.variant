@@ -1,15 +1,14 @@
 {
     "displayName": "Ultimate",
-    "fluxCapacitors": 17,
+    "fluxCapacitors": 9,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "abyss_boss_yukionna",
     "hullMods": [
-        "armoredweapons",
         "auxiliarythrusters",
         "fluxbreakers",
         "fluxdistributor",
-        "heavyarmor",
+        "hardenedshieldemitter",
         "stabilizedshieldemitter",
         "targetingunit",
     ],
@@ -22,46 +21,46 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "tachyonlance",
-                "WS0007": "tachyonlance",
+                "WS0008": "vpdriver",
             }
         },
         {
             "autofire": true,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "WS0018": "abyss_boss_resonator",
                 "WS0017": "abyss_boss_resonator",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0006": "ionbeam",
-                "WS0004": "gravitonbeam",
-                "WS0005": "gravitonbeam",
-                "WS0001": "ionbeam",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
+                "WS0018": "abyss_boss_resonator",
                 "WS0009": "guardian",
-                "WS0014": "ioncannon",
-                "WS0013": "ioncannon",
-                "WS0012": "lrpdlaser",
-                "WS0011": "lrpdlaser",
                 "WS0010": "guardian",
+                "WS0011": "shockrepeater",
+                "WS0012": "shockrepeater",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "heavyneedler",
-                "WS0002": "heavyneedler",
+                "WS0007": "realitydisruptor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "cryoblaster",
+                "WS0002": "disintegrator",
+                "WS0003": "disintegrator",
+                "WS0004": "cryoblaster",
+                "WS0013": "minipulser",
+                "WS0014": "minipulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "riftbeam",
+                "WS0006": "riftbeam",
             }
         },
     ],

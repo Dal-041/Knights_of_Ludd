@@ -13,7 +13,7 @@ kol_llyr,WEAPON,"A variant of the Caelia assault gun modified to fire depleted u
 kol_lunete,WEAPON,"A powerful energy torpedo that generates a lance of plasma though the controlled detonation of a nitrogen medium.  First designed for Onslaught battleships operating far from core Domain space, where the complex parts required to maintain thermal pulse cannons could not be readily supplied.",,,
 # Small,,,,,
 kol_tor,WEAPON,"A lower caliber and less demanding version of the Mauler cannon, firing antimatter charged munitions that are highly effective at destroying enemy armor. Manufacturing such an advanced weapon system is beyond the normal means of the Church, and most of these are traded by the Hegemony as part armament transfer treaties that date back to the First AI War.",,,
-,,,,,
+kol_drian,WEAPON,"A nearly forgotten predessor of the modern railgun, the Drian fires magnetized slugs at modest range and for modest damage. Its prime claim to fame is its highly efficient firing cycle, and that it can be manufactured en mass even without cutting-edge facilities. For the Knights, this weapon provides assurance that no matter what else may happen they will always continue putting ordinance downrange.",,,
 # Built-in,,,,,
 kol_brimstone,WEAPON,"""Point Toward Heathen.""",- Inscription upon Brimstone rim,,
 ,,,,,

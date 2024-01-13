@@ -1,7 +1,7 @@
 {
 	"id":"kol_phase_skip",
-	"type":"PHASE_CLOAK",
-	"aiType":"PHASE_CLOAK",
+	"type":"DISPLACER",
+	"aiType":"PHASE_DISPLACER",
 	
 	"statsScript":"org.selkie.kol.impl.shipsystems.PhasespaceSkip",
 	"runScriptWhilePaused":false, # only for the player's ship
@@ -31,4 +31,9 @@
 	
 	"loopSound":"kol_phasespace_with_system",
 	"outOfUsesSound":"system_phase_cloak_collision",
+	"aiHints":{
+		"activeSpeedIncrease":200,
+		"burstMovementPotential":500,
+		"averageSpeedIncrease":200,
+	}
 }

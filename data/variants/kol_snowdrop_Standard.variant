@@ -11,11 +11,10 @@
     "variantId": "kol_snowdrop_Standard",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "kol_tor",
-                "WS0002": "kol_tor",
+                "WS0005": "breachpod",
             }
         },
         {
@@ -35,10 +34,11 @@
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "breachpod",
+                "WS0001": "kol_tor",
+                "WS0002": "kol_tor",
             }
         },
     ],

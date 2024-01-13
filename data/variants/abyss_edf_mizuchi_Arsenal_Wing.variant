@@ -1,13 +1,12 @@
 {
     "displayName": "Arsenal Wing",
     "fluxCapacitors": 0,
-    "fluxVents": 3,
+    "fluxVents": 7,
     "goalVariant": true,
     "hullId": "abyss_edf_mizuchi",
     "hullMods": [
-        "eccm",
         "expanded_deck_crew",
-        "missleracks",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
@@ -18,34 +17,40 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "hveldriver",
-                "WS0003": "hveldriver",
+                "WS0004": "abyss_styrax_driver",
+                "WS0003": "abyss_styrax_driver",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0012": "harpoonpod",
-                "WS0011": "harpoonpod",
+                "WS0012": "annihilatorpod",
+                "WS0011": "annihilatorpod",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "taclaser",
-                "WS0002": "taclaser",
-                "WS0005": "taclaser",
-                "WS0006": "taclaser",
+                "WS0006": "kol_tor",
+                "WS0005": "kol_tor",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "pdburst",
+                "WS0001": "lightneedler",
+                "WS0002": "lightneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0008": "pdburst",
+                "WS0007": "pdburst",
             }
         },
     ],
