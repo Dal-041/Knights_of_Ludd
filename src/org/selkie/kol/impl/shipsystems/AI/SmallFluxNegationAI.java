@@ -1,4 +1,4 @@
-package org.selkie.kol.shipsystems.AI;
+package org.selkie.kol.impl.shipsystems.AI;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;

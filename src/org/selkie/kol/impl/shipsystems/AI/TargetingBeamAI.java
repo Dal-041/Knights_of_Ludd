@@ -1,4 +1,4 @@
-package org.selkie.kol.shipsystems.AI;
+package org.selkie.kol.impl.shipsystems.AI;
 
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
