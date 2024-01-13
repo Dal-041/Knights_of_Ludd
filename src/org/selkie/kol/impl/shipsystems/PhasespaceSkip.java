@@ -71,7 +71,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     } 
     if (state == ShipSystemStatsScript.State.IN || state == ShipSystemStatsScript.State.ACTIVE || state == ShipSystemStatsScript.State.OUT) {
       ship.setPhased(true);
-      float speedBonus = 1.0F + 6.0F * effectLevel;
+      float speedBonus = 1.0F + 9.0F * effectLevel;
       float mobilityBonus = 1.0F + 49.0F * effectLevel;
       stats.getMaxSpeed().modifyMult(id, speedBonus);
       stats.getAcceleration().modifyMult(id, mobilityBonus);

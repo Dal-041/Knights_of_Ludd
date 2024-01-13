@@ -1,9 +1,9 @@
 {
 	"id":"kol_slip_drive",
-	"type":"DISPLACER",
-	"aiType":"PHASE_DISPLACER",
+	"type":"PHASE_CLOAK",
+	"aiType":"PHASE_CLOAK",
 	
-	"statsScript":"org.selkie.kol.shipsystems.SlipDrive",
+	"statsScript":"org.selkie.kol.impl.shipsystems.SlipDrive",
 	
 	"weaponGlowColor":[100,165,255,0],
 	"weaponTypes":[ENERGY],
