@@ -56,14 +56,14 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		PrepareAbyss.checkAbyssalFleets();
 		PrepareAbyss.copyHighgradeEquipment();
 
-		Global.getSector().addTransientListener(new UpdateRelationships(true));
-		Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
+		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 	}
 	
 	@Override
 	public void onNewGameAfterEconomyLoad() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
-			GenerateKnights.zugg();
+			GenerateKnights.genCorvus();
 			PrepareAbyss.generate(Global.getSector());
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
@@ -73,12 +73,12 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
-		Global.getSector().addTransientListener(new UpdateRelationships(true));
-		Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
+		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 	}
 
 	@Override
 	public void onNewGameAfterTimePass() {
-		GenerateKnights.genKnightsExpeditions();
+		GenerateKnights.genAlways();
 	}
 }

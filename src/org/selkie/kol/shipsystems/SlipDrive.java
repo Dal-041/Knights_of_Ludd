@@ -55,6 +55,9 @@ public class SlipDrive extends BaseShipSystemScript {
       this.runOnce = false;
     } 
     if (state == ShipSystemStatsScript.State.IN) {
+      stats.getMaxSpeed().modifyFlat(id, 100f);
+      stats.getMaxTurnRate().modifyFlat(id, 100f);
+      stats.getTurnAcceleration().modifyFlat(id, 100f);
       stats.getAcceleration().modifyFlat(id, 500.0F);
       stats.getDeceleration().modifyFlat(id, 500.0F);
       return;
@@ -98,6 +101,9 @@ public class SlipDrive extends BaseShipSystemScript {
     } 
     stats.getDeceleration().unmodify(id);
     stats.getAcceleration().unmodify(id);
+    stats.getMaxSpeed().unmodify(id);
+    stats.getMaxTurnRate().unmodify(id);
+    stats.getTurnAcceleration().unmodify(id);
     if (ship.getSystem().getEffectLevel() <= 0.0F) {
       this.startPos = new Vector2f(0.0F, 0.0F);
       this.shadowPos = new Vector2f(0.0F, 0.0F);

@@ -71,12 +71,12 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     } 
     if (state == ShipSystemStatsScript.State.IN || state == ShipSystemStatsScript.State.ACTIVE || state == ShipSystemStatsScript.State.OUT) {
       ship.setPhased(true);
-      float speedBonus = 1.0F + 2.0F * effectLevel;
+      float speedBonus = 1.0F + 6.0F * effectLevel;
       float mobilityBonus = 1.0F + 49.0F * effectLevel;
       stats.getMaxSpeed().modifyMult(id, speedBonus);
       stats.getAcceleration().modifyMult(id, mobilityBonus);
       stats.getDeceleration().modifyMult(id, mobilityBonus);
-      stats.getMaxTurnRate().modifyMult(id, 2.0F);
+      stats.getMaxTurnRate().modifyMult(id, 5.0F);
       stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
     } 
     ship.setExtraAlphaMult(1.0F - 1.0F * effectLevel);
@@ -152,7 +152,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         } else {
           this.lastMessage = 0;
         } 
-        return new ShipSystemStatsScript.StatusData("it hates", false);
+        return new ShipSystemStatsScript.StatusData("it wails", false);
       } 
       if (index == 0 && (Math.random() < 0.013333333656191826D || this.lastMessage == 3 || this.lastMessage == 6)) {
         if (this.lastMessage == 0) {
@@ -162,11 +162,11 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         } else {
           this.lastMessage = 0;
         } 
-        return new ShipSystemStatsScript.StatusData("it rejects", false);
+        return new ShipSystemStatsScript.StatusData("it yells", false);
       } 
       if (index == 0) {
         this.lastMessage = 0;
-        return new ShipSystemStatsScript.StatusData("breaching nullspace", false);
+        return new ShipSystemStatsScript.StatusData("breaching phasespace", false);
       } 
     } 
     return null;

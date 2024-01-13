@@ -5,6 +5,7 @@ import java.util.Arrays;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.campaign.RepLevel;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.econ.EconomyAPI;
@@ -24,16 +25,37 @@ public class GenerateKnights {
 	static StarSystemAPI Eos = Global.getSector().getStarSystem("Eos Exodus");
 	static StarSystemAPI Gebbar = Global.getSector().getStarSystem("Al Gebbar");
 	
-	public static void zugg() {
+	public static void genCorvus() {
 		Eos.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");
 		Kumari.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_2.jpg");
 		Canaan.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_3.jpg");
 		Gebbar.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
-		copyChurchEquipment();
 	}
-	
+
+	public static void genAlways() {
+		copyChurchEquipment();
+		startupRelations();
+		genKnightsExpeditions();
+	}
+
+	public static void startupRelations() {
+		if (Global.getSector().getFaction(Factions.LUDDIC_CHURCH) != null && Global.getSector().getFaction(KOL_ModPlugin.kolID) != null) {
+			FactionAPI church = Global.getSector().getFaction(Factions.LUDDIC_CHURCH);
+			FactionAPI knights = Global.getSector().getFaction(KOL_ModPlugin.kolID);
+
+			if(church.getRelToPlayer().isAtWorst(RepLevel.SUSPICIOUS)) {
+				church.getRelToPlayer().setRel(Math.max(church.getRelToPlayer().getRel(), knights.getRelToPlayer().getRel()));
+				knights.getRelToPlayer().setRel(Math.max(church.getRelToPlayer().getRel(), knights.getRelToPlayer().getRel()));
+			}
+
+			for(FactionAPI faction:Global.getSector().getAllFactions()) {
+				knights.setRelationship(faction.getId(), church.getRelationship(faction.getId()));
+			}
+		}
+	}
+
 	public static void genKnightsBattlestation() {
         SectorEntityToken cygnus = Canaan.addCustomEntity("kol_cygnus", "Battlestation Cygnus", "station_lowtech2", "knights_of_selkie");
         cygnus.setCircularOrbitPointingDown(Canaan.getEntityById("canaan_gate"), 33, 275, 99);
