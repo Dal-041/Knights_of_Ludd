@@ -45,8 +45,8 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 110,
-      "angle": 90,
+      "arc": 120,
+      "angle": 85,
       "locations": [13, 82]
     },
     {
@@ -54,8 +54,8 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 110,
-      "angle": -90,
+      "arc": 120,
+      "angle": -85,
       "locations": [13, -82]
     },
     {
@@ -367,7 +367,7 @@
       "location": [13, 82],
       "length": 70,
       "width": 15,
-      "angle": 90,
+      "angle": 80,
       "contrailSize": 23.83,
       "style": "ABYSS_EDF_OMEGA"
     },
@@ -375,7 +375,7 @@
       "location": [13, -82],
       "length": 70,
       "width": 15,
-      "angle": -90,
+      "angle": -80,
       "contrailSize": 23.83,
       "style": "ABYSS_EDF_OMEGA"
     },
