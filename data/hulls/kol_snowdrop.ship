@@ -12,7 +12,8 @@
   "shieldRadius": 113,
   "viewOffset": 0,
   "builtInMods": [
-    "kol_refit"
+    "kol_refit",
+	"armoredweapons"
   ],
   "builtInWeapons": {
     "WS0012": "kol_pusherplate_lt_but_cute",
