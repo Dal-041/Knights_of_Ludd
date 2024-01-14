@@ -26,6 +26,7 @@ import org.selkie.kol.impl.world.*;
 
 import java.util.Random;
 
+import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssalFleetManager extends SeededFleetManager {
@@ -128,9 +129,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
         //fleet.getFleetData().sort();
 
         if (fleet == null) return null;
-        for (FleetMemberAPI member : fleet.getFleetData().getMembersInPriorityOrder()) {
-            if (Math.random() > 0.05f) member.getVariant().addTag(Tags.UNRECOVERABLE);
-        }
+
         setAbyssalCaptains(fleet);
         fleet.addTag(excludeTag);
         system.addEntity(fleet);

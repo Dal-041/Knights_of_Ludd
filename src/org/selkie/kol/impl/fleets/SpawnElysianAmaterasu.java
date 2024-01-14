@@ -11,6 +11,7 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianAmaterasu;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnElysianAmaterasu {
@@ -72,9 +73,6 @@ public class SpawnElysianAmaterasu {
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianBossFleet);
 		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png");
-		for (FleetMemberAPI member : elysianBossFleet.getFleetData().getMembersInPriorityOrder()) {
-			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
-		}
 		elysianBossFleet.getFleetData().sort();
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);

@@ -14,7 +14,8 @@
   "viewOffset": 0,
   "builtInMods": [
     "kol_ea_shields3",
-    "automated"
+    "automated",
+	"kol_throttle"
   ],
   "builtInWings": [
     "abyss_edf_kitsunebi"

@@ -12,6 +12,7 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageDawnBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDawnBoss {
@@ -83,10 +84,6 @@ public class SpawnDawnBoss {
 
 		AbyssalFleetManager.setAbyssalCaptains(dawnBossFleet);
 		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png");
-
-		for (FleetMemberAPI member : dawnBossFleet.getFleetData().getMembersInPriorityOrder()) {
-			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
-		}
 
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);

@@ -2,8 +2,10 @@ package org.selkie.kol.impl.hullmods;
 
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.BoundsAPI;
+import com.fs.starfarer.api.combat.ShieldAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicIncompatibleHullmods;
 
 public class ConformalShields extends BaseHullMod {
 
@@ -12,6 +14,20 @@ public class ConformalShields extends BaseHullMod {
     public final float pad = 12f;
     float radiusO;
     private boolean inited = false;
+
+    @Override
+    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        if (ship.getShield() == null) {
+            MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "kol_conformal_shield", "shieldshunt");
+            return;
+        }
+        //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
+        if (ship.getVariant().hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptiveshields", "kol_conformal_shield");
+        //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
+        if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_conformal_shield");
+        if (!ship.getVariant().hasHullMod("frontemitter")
+                && ship.getHullSpec().getShieldType().equals(ShieldAPI.ShieldType.OMNI)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "kol_conformal_shield", "adaptiveshields");
+    }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {

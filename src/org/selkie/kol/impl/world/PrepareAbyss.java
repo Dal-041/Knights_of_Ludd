@@ -31,6 +31,7 @@ public class PrepareAbyss {
 	public static final String duskID = "kol_dusk";
 	public static final String elysianID = "kol_elysians";
 	public static final String undergateID = "kol_undergate";
+	public static float attainmentFactor = 0.1f;
 	public static boolean useDomres = false;
 	public static boolean useLostech = false;
 	public static boolean useDustkeepers = false;

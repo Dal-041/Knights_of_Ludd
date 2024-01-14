@@ -16,7 +16,8 @@
     "delicate",
 	"automated",
     "kol_ea_mist",
-    "kol_ea_sparkle"
+    "kol_ea_sparkle",
+	"kol_throttle"
   ],
   "builtInWeapons": {
     "WS0007": "abyss_deco_dusk_ikiryo_tl",

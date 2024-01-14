@@ -14,7 +14,8 @@
   "builtInMods": [
     "automated",
     "kol_ea_shields3",
-    "kol_conformal_shield"
+    "kol_conformal_shield",
+	"kol_throttle"
   ],
   "builtInWeapons": {
     "WS0015": "abyss_deco_edf_engL",

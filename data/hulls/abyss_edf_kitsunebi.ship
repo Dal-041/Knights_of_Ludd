@@ -14,6 +14,7 @@
   "builtInMods": [
 	"automated",
     "kol_ea_shields3",
+	"kol_throttle"
   ],
   "weaponSlots": [
     {

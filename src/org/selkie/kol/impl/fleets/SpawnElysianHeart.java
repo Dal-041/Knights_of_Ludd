@@ -11,6 +11,7 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianCorruptingheart;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnElysianHeart {
@@ -68,9 +69,6 @@ public class SpawnElysianHeart {
 		elysianHeartFleet.setDiscoverable(true);
 		for(String support : PrepareAbyss.elysianBossSupportingFleet) {
 			elysianHeartFleet.getFleetData().addFleetMember(support);
-		}
-		for (FleetMemberAPI member : elysianHeartFleet.getFleetData().getMembersInPriorityOrder()) {
-			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);

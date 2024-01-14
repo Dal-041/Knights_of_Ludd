@@ -15,7 +15,8 @@
     "automated",
 	"solar_shielding",
     "kol_ea_shields1",
-    "advancedcore"
+    "advancedcore",
+	"kol_throttle"
   ],
   "builtInWeapons": {
     "WS0013": "abyss_deco_dawn_engL",

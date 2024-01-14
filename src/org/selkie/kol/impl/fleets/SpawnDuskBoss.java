@@ -14,6 +14,7 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageDuskBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
+import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDuskBoss {
@@ -74,9 +75,6 @@ public class SpawnDuskBoss {
 
 		for(String support : PrepareAbyss.duskBossSupportingFleet) {
 			duskBossFleet.getFleetData().addFleetMember(support);
-		}
-		for (FleetMemberAPI member : duskBossFleet.getFleetData().getMembersInPriorityOrder()) {
-			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(duskBossFleet);

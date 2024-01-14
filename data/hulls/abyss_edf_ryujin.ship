@@ -14,7 +14,8 @@
   "builtInMods": [
     "automated",
     "kol_ea_shields3",
-    "kol_conformal_shield"
+    "kol_conformal_shield",
+	"kol_throttle"
   ],
   "builtInWings": [
     "abyss_edf_kitsunebi",

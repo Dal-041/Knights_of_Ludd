@@ -14,7 +14,8 @@
   "builtInMods": [
 	"automated",
 	"solar_shielding",
-    "kol_ea_shields1"
+    "kol_ea_shields1",
+	"kol_throttle"
   ],
   "builtInWeapons": {
       "WS0005": "kol_targeting_beam_wpn",

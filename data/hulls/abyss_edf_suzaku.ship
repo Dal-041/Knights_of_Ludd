@@ -14,7 +14,8 @@
   "builtInMods": [
     "automated",
     "kol_ea_shields3",
-    "missile_autoloader"
+    "missile_autoloader",
+	"kol_throttle"
   ],
   "builtInWeapons": {
     "WS0010": "abyss_deco_edf_vortice",

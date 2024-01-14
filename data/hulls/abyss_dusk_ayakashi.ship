@@ -18,7 +18,8 @@
 	"automated",
     "kol_ea_mist",
     "kol_ea_sparkle",
-	"kol_conformal_shield"
+	"kol_conformal_shield",
+	"kol_throttle"
   ],
   "builtInWeapons": {
     "WS0009": "abyss_deco_dusk_ayakashi_lights"
