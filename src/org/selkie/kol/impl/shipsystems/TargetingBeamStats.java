@@ -23,36 +23,17 @@ import java.util.List;
 
 public class TargetingBeamStats extends BaseShipSystemScript {
     public static String LIDAR_WINDUP = "lidar_windup";
-    public static Color WEAPON_GLOW = new Color(255,50,50,155);
     public WeaponAPI lidar;
     protected boolean needsUnapply = false;
     protected boolean playedWindup = false;
     protected float lidarRange = 1000f;
     protected boolean inited = false;
-
     public static Object KEY_SHIP = new Object();
     public static Object KEY_TARGET = new Object();
-
     public static float DAM_MULT = 1.5f;
-    protected static float RANGE = 1500f;
-
     public static Color TEXT_COLOR = new Color(255,55,55,255);
-
     public static Color JITTER_COLOR = new Color(255,50,50,75);
-    public static Color JITTER_UNDER_COLOR = new Color(255,100,100,155);
 
-
-    public static class TargetData {
-        public ShipAPI ship;
-        public ShipAPI target;
-        public EveryFrameCombatPlugin targetEffectPlugin;
-        public float currDamMult;
-        public float elaspedAfterInState;
-        public TargetData(ShipAPI ship, ShipAPI target) {
-            this.ship = ship;
-            this.target = target;
-        }
-    }
 
     public void init(ShipAPI ship) {
         if (inited) return;

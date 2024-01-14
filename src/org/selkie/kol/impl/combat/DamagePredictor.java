@@ -579,7 +579,7 @@ public class DamagePredictor {
 
         return new Pair<>(armorDamage, hullDamage);
     }
-    public static float fluxToShield(DamageType damageType, float damage, float shieldEfficiency, ShipAPI ship){
+    public static float fluxToShield(DamageType damageType, float damage, ShipAPI ship){
         MutableShipStatsAPI stats = ship.getMutableStats();
 
         float shieldMultiplier = stats.getShieldDamageTakenMult().getModifiedValue();
@@ -599,7 +599,7 @@ public class DamagePredictor {
                 break;
         }
 
-        return (damage * shieldEfficiency * shieldMultiplier);
+        return (damage * ship.getShield().getFluxPerPointOfDamage() * shieldMultiplier);
     }
     public static float missileTravelTime(float startingSpeed, float maxSpeed, float acceleration, float maxTurnRate,
                                           float missileStartingAngle, Vector2f missileStartingLocation, Vector2f targetLocation, float targetRadius){

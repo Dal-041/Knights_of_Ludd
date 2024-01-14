@@ -169,7 +169,7 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
                 float timeToHit = (hit.timeToHit - timeElapsed);
                 if(timeToHit < -0.1f) continue; // skip hits that have already happened
                 if (timeToHit < (timeToBlock + bufferTime)){
-                    if (!hit.softFlux) currentShieldHardFluxSaved += fluxToShield(hit.damageType, hit.damage, shield.getFluxPerPointOfDamage(), ship);
+                    if (!hit.softFlux) currentShieldHardFluxSaved += fluxToShield(hit.damageType, hit.damage, ship);
                     Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, currentArmor, ship);
                     currentArmor = Math.max(currentArmor - trueDamage.one, 0f);
                     currentHullDamage += trueDamage.two;
