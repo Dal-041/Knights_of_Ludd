@@ -59,8 +59,8 @@ OBSOLETE DELETE ME,eis_nineng,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,SYSTEM,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 kol_sparkler_wpn,kol_sparkler_wpn,,,,500,,1,1500,,,,,0,,ENERGY,0,0,0,0.1,1,,30,30,0,0,,400,200,10000,500,,,SYSTEM,,,,,,,,,,,,,,,38.25
 ,abyss_deco_edf_ryujin_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
-lgCap,abyss_deco_edf_engL,0,,,1,70,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-sCap,abyss_deco_edf_engS,0,,,1,70,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+lgCap,abyss_deco_edf_engL,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+sCap,abyss_deco_edf_engS,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 l,abyss_deco_edf_corruptingheart_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 r,abyss_deco_edf_corruptingheart_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 l,abyss_deco_edf_amaterasu_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,

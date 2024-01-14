@@ -1,13 +1,19 @@
 package org.selkie.kol.weapons;
 
+import com.fs.graphics.Sprite;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
+import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.plugins.MagicRenderPlugin;
+import org.magiclib.util.MagicRender;
 
+import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -34,6 +40,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
     private float MAX_THRUST_CHANGE_PER_SECOND = 0;
     private float MAX_ANGLE_CHANGE_PER_SECOND = 0;
     private float TURN_RIGHT_ANGLE = 0, THRUST_TO_TURN = 0, NEUTRAL_ANGLE = 0, OFFSET = 0;
+    private float glowCompensation = 1f;
     //sprite size, could be scaled with the engine width to allow variable engine length
 
     @Override
@@ -83,11 +90,28 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             return;
         }
 
+        /*
+        SpriteAPI shipSprite = Global.getSettings().getSprite(SHIP.getHullSpec().getSpriteName());
+        shipSprite.setAngle(SHIP.getFacing() - 90f);
+        SHIP.getSpriteAPI().setColor(new Color(0,0,0,0));
+        MagicRenderPlugin.addSingleframe(shipSprite, SHIP.getLocation(), CombatEngineLayers.CAPITAL_SHIPS_LAYER);
+        */
 
         //check what the ship is doing
         float accelerateAngle = NEUTRAL_ANGLE;
         float turnAngle = NEUTRAL_ANGLE;
         float thrust = 0;
+
+        if (!ENGINES.isAccelerating() && (ENGINES.isStrafingLeft() || ENGINES.isStrafingRight() || ENGINES.isAcceleratingBackwards())) {
+            glowCompensation -= amount * 1.5f;
+            if (glowCompensation < 0.5) glowCompensation = 0.5f;
+        }else if (ENGINES.isAccelerating()) {
+            glowCompensation += amount*1.5f;
+            if (glowCompensation > 1) glowCompensation = 1;
+        } else{
+            glowCompensation += amount * 1.5f;
+            if (glowCompensation > 1.5) glowCompensation = 1.5f;
+        }
 
         if (ENGINES.isAccelerating()) {
             accelerateAngle = 180;
@@ -248,7 +272,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
                 currentThrust = targetThrust;
         }
         else {
-            currentThrust = previousThrust - amount * MAX_THRUST_CHANGE_PER_SECOND;
+            currentThrust = previousThrust - amount * MAX_THRUST_CHANGE_PER_SECOND * 2.5f;
             if (currentThrust < targetThrust)
                 currentThrust = targetThrust;
         }
@@ -268,15 +292,30 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             weapon.setCurrAngle(MathUtils.clampAngle(weapon.getCurrAngle() - amount * MAX_ANGLE_CHANGE_PER_SECOND * turnBonus));
         }
 
+
         float offset = weapon.getSprite().getHeight() - weapon.getSprite().getCenterY();
         for (ThrusterData thruster : thrusters.values()) {
             EngineSlotAPI engineSlot = thruster.engine.getEngineSlot();
-            float startingLevel = (thruster.length - offset) / thruster.length;
-            float compensatedLevel = Misc.interpolate(startingLevel, 1f, currentThrust);
-            SHIP.getEngineController().setFlameLevel(engineSlot, compensatedLevel);
-            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(thruster.width, thruster.length*compensatedLevel,1f,1f); // no clue what v2 and v3 do
+            float flameLevel = 0f;
+            if(currentThrust > 0) flameLevel = Misc.interpolate(0.8f, 1f, currentThrust);
+            SHIP.getEngineController().setFlameLevel(engineSlot, flameLevel);
+            ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(thruster.width * glowCompensation, thruster.length + offset,1f,1f); // no clue what v2 and v3 do
             engineSlot.setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
             engineSlot.setGlowSizeMult(0f);
+
+            /*
+            weapon.setForceFireOneFrame(true);
+            weapon.setRenderOffsetForDecorativeBeamWeaponsOnly(new Vector2f(0f,100f));
+            weapon.getGlowSpriteAPI().setColor(new Color(engineSlot.getColor().getRed(), engineSlot.getColor().getGreen(),engineSlot.getColor().getBlue(), (int) Misc.interpolate(0, 255, currentThrust)));
+
+            Color glowColor = new Color(engineSlot.getColor().getRed(), engineSlot.getColor().getGreen(),engineSlot.getColor().getBlue(), (int) Misc.interpolate(0, 255, currentThrust));
+
+            SpriteAPI thrusterSprite = Global.getSettings().getSprite(weapon.getSpec().getTurretSpriteName());
+            thrusterSprite.setAngle(weapon.getCurrAngle() - 90f);
+            weapon.getSprite().setColor(new Color(0,0,0,0));
+            MagicRenderPlugin.addSingleframe(thrusterSprite, weapon.getLocation(), CombatEngineLayers.CAPITAL_SHIPS_LAYER);
+            //MagicRender.singleframe(Global.getSettings().getSprite(weapon.getSpec().getTurretSpriteName()), weapon.getLocation(), new Vector2f(weapon.getSprite().getWidth(), weapon.getSprite().getWidth()), weapon.getCurrAngle()-90f, glowColor, true);
+            */
         }
     }
 
