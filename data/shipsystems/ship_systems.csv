@@ -20,7 +20,7 @@ AAF,kol_aaf,,,,,,,,,,1,5,1,10,,,,,,,,,,,,,
 #MODULE SYS,,,,,,,,,,,,,,,,,,,,,,,,,,,
 why can you see this wtf,kol_mcf,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,
 no really you should not be able to see these plz stop aaaaa,kol_flareslv,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,graphics/icons/hullsys/flare_launcher.png
-stop spawning ship modules plz,kol_smartflare,,,,,,0.1,,,,,,,0.2,,,,,,,,,,,,,graphics/icons/hullsys/active_flare_launcher.png
+stop spawning ship modules plz,kol_smartflare,,,,,,,,1,1,,,,0.2,,,,,,,,,,,,,graphics/icons/hullsys/active_flare_launcher.png
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DISABLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
