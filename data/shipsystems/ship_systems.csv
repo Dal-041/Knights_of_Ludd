@@ -9,7 +9,7 @@ temp name burn drivey wivey how long can this be aaaaaaaaa,kol_hallowedtemp,1,,,
 Lidar Array,kol_lidar,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/lidar_barrage.png
 Lidar Array,kol_lidar_smol,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/lidar_barrage.png
 Small Flux Negation,kol_small_flux_negation,,,,,,,,,,1,10,1,10,,,,,,,,,,,,,
-Fortress Flux Converter,kol_fortress_flux_converter,,,,,,,,2,0.1,0.25,2.5,0.25,,,,,,TRUE
+Fortress Flux Converter,kol_fortress_flux_converter,,,,,,,,2,0.1,0.25,2.5,0.25,,,,,,TRUE,,,,,,,,
 Targeting Beam,kol_targeting_beam,,,,,,0.2,,,,3.25,10,0,10,,,,,,,,,,,,,
 Leap of Faith,kol_lunge,,,,,,,,3,0.15,0.1,0.3,0.1,,,,,,,,,,,,TRUE,,graphics/icons/hullsys/maneuvering_jets.png
 Placeholder lunge,kol_lungeHEF,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,,TRUE,,,,,graphics/icons/hullsys/burn_drive.png
@@ -20,7 +20,7 @@ AAF,kol_aaf,,,,,,,,,,1,5,1,10,,,,,,,,,,,,,
 #MODULE SYS,,,,,,,,,,,,,,,,,,,,,,,,,,,
 why can you see this wtf,kol_mcf,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,
 no really you should not be able to see these plz stop aaaaa,kol_flareslv,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,,graphics/icons/hullsys/flare_launcher.png
-stop spawning ship modules plz,kol_smartflare,,,,,,0.1,,,,,,,5,,,,,,,,,,,,,graphics/icons/hullsys/active_flare_launcher.png
+stop spawning ship modules plz,kol_smartflare,,,,,,0.1,,,,,,,0.2,,,,,,,,,,,,,graphics/icons/hullsys/active_flare_launcher.png
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DISABLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
