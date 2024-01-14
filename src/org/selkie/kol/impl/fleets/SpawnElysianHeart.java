@@ -5,10 +5,8 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Abilities;
-import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
-import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianCorruptingheart;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -63,7 +61,7 @@ public class SpawnElysianHeart {
 		        .setMinFP(240) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_silence"))
+				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_abyss"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -71,7 +69,10 @@ public class SpawnElysianHeart {
 		for(String support : PrepareAbyss.elysianBossSupportingFleet) {
 			elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
-		elysianHeartFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		for (FleetMemberAPI member : elysianHeartFleet.getFleetData().getMembersInPriorityOrder()) {
+			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
+		}
+
 		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);
 		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png");
 

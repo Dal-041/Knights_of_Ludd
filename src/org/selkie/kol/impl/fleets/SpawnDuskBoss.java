@@ -5,9 +5,11 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageDuskBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -69,10 +71,14 @@ public class SpawnDuskBoss {
 		        .setTransponderOn(false)
 		        .create();
 		duskBossFleet.setDiscoverable(true);
+
 		for(String support : PrepareAbyss.duskBossSupportingFleet) {
 			duskBossFleet.getFleetData().addFleetMember(support);
 		}
-		duskBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		for (FleetMemberAPI member : duskBossFleet.getFleetData().getMembersInPriorityOrder()) {
+			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
+		}
+
 		AbyssalFleetManager.setAbyssalCaptains(duskBossFleet);
 		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_alphaplus.png");
 

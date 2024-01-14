@@ -5,10 +5,8 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Abilities;
-import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
-import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ManageElysianAmaterasu;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -63,7 +61,7 @@ public class SpawnElysianAmaterasu {
 		        .setMinFP(240) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_abyss"))
+				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_silence"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -71,10 +69,12 @@ public class SpawnElysianAmaterasu {
 		for(String support : PrepareAbyss.elysianBossSupportingFleet) {
 			elysianBossFleet.getFleetData().addFleetMember(support);
 		}
-		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+
 		AbyssalFleetManager.setAbyssalCaptains(elysianBossFleet);
 		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png");
-
+		for (FleetMemberAPI member : elysianBossFleet.getFleetData().getMembersInPriorityOrder()) {
+			if (Math.random() > 0.1f) member.getVariant().addTag(Tags.UNRECOVERABLE);
+		}
 		elysianBossFleet.getFleetData().sort();
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);

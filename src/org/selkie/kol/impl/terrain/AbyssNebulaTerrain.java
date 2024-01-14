@@ -12,7 +12,7 @@ public class AbyssNebulaTerrain extends NebulaTerrainPlugin {
 
     @Override
     public String getTerrainName() {
-        return "Wavebreak";
+        return "Dawnshoal";
     }
 
     @Override

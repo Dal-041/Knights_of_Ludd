@@ -128,6 +128,9 @@ public class AbyssalFleetManager extends SeededFleetManager {
         //fleet.getFleetData().sort();
 
         if (fleet == null) return null;
+        for (FleetMemberAPI member : fleet.getFleetData().getMembersInPriorityOrder()) {
+            if (Math.random() > 0.05f) member.getVariant().addTag(Tags.UNRECOVERABLE);
+        }
         setAbyssalCaptains(fleet);
         fleet.addTag(excludeTag);
         system.addEntity(fleet);
@@ -276,7 +279,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
         if (faction.equals(PrepareAbyss.dawnID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
             portrait = PrepareAbyss.portraitsDawn[level-6];
-            //persona = Personalities.AGGRESSIVE;
+            persona = Personalities.AGGRESSIVE;
         }
         else if (faction.equals(PrepareAbyss.duskID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
@@ -285,13 +288,10 @@ public class AbyssalFleetManager extends SeededFleetManager {
         }
         else if (faction.equals(PrepareAbyss.elysianID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
-            persona = Personalities.CAUTIOUS;
+            persona = Personalities.STEADY;
             portrait = PrepareAbyss.portraitsElysian[level-6];
         }
         else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
-
-        portrait.replace(PrepareAbyss.path, "");
-        portrait.replace(".png", "");
 
         return MagicCampaign.createCaptainBuilder(faction)
                 .setIsAI(true)
@@ -312,7 +312,9 @@ public class AbyssalFleetManager extends SeededFleetManager {
                 boolean found = false;
                 String portCapt = member.getCaptain().getPortraitSprite();
                 for (String port : PrepareAbyss.portraitsDawn) {
-                    if (portCapt.equalsIgnoreCase(port)) found = true;
+                    if (portCapt.equalsIgnoreCase(port)) {
+                        found = true;
+                    }
                 }
                 for (String port : PrepareAbyss.portraitsDusk) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
@@ -321,15 +323,28 @@ public class AbyssalFleetManager extends SeededFleetManager {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
                 if (!found) {
-                    member.getCaptain().setPersonality(Personalities.RECKLESS); //AI cores default to "fearless" which is one-note, we bring them down a notch
+
                     int level = Math.min(8, member.getCaptain().getStats().getLevel());
                     if (level < 6) {
                         level = 6;
                         member.getCaptain().getStats().setLevel(6);
                     }
-                    if (fac.equals(PrepareAbyss.dawnID)) member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDawnPaths[level-6]);
-                    if (fac.equals(PrepareAbyss.duskID)) member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDuskPaths[level-6]);
-                    if (fac.equals(PrepareAbyss.elysianID)) member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsElysianPaths[level-6]);
+                    //AI cores default to "fearless" which is one-note, we bring them down a notch
+                    double rand = Math.random();
+                    if (rand < 0.5f) member.getCaptain().setPersonality(Personalities.AGGRESSIVE);
+                    else if (rand > 0.8f) member.getCaptain().setPersonality(Personalities.RECKLESS);
+                    else member.getCaptain().setPersonality(Personalities.STEADY);
+
+                    if (fac.equals(PrepareAbyss.duskID)) {
+                        member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDuskPaths[level-6]);
+                    }
+                    if (fac.equals(PrepareAbyss.elysianID)) {
+                        member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsElysianPaths[level-6]);
+                    }
+                    if (fac.equals(PrepareAbyss.dawnID)) {
+                        member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDawnPaths[level-6]);
+                        member.getCaptain().setPersonality(Personalities.RECKLESS);
+                    }
                 }
             }
         }

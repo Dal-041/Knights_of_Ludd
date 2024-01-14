@@ -487,7 +487,7 @@ public class PrepareAbyss {
 
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_lunasea_theme");
 
-		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 30500, -30500, 0);
+		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
 		if (sector.getDifficulty().equals(Difficulties.EASY)) {
 			luna.setName("The Luwuna Sea");
 		}

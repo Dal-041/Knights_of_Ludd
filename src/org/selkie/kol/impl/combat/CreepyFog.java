@@ -54,7 +54,7 @@ public class CreepyFog extends BaseHullMod {
                 point = MathUtils.getRandomPointInCircle(ship.getLocation(), ship.getCollisionRadius() * 0.75f);
             }
 
-            if (useNormal && MathUtils.getRandom().nextInt() % 60 != 0) {
+            if (useNormal && MathUtils.getRandom().nextInt() % 64 != 0) {
                 engine.addNegativeNebulaParticle(
                         point,
                         MathUtils.getRandomPointInCircle(ZERO, 50f),
