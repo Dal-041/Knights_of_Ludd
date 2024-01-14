@@ -1,0 +1,13 @@
+{
+	"id":"kol_smartflare",
+	"type":"WEAPON",
+	"aiType":"CUSTOM",
+	"aiScript":"org.selkie.kol.shipsystems.AI.BratSystemAI",
+	"weaponDataId":"kol_smartflare",
+	
+	#"useSound":"system_flare_launcher_active",
+	"outOfUsesSound":"gun_out_of_ammo",
+	
+	"aiHints":{
+	}	
+}

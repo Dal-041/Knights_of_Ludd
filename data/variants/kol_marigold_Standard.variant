@@ -9,8 +9,8 @@
         "heavyarmor"
     ],
     "modules": [
-        {"WS0013": "kol_sundew_tl_Standard"},
-        {"WS0014": "kol_sundew_tr_Standard"}
+        {"WS0013": "kol_marigold_tl_Standard"},
+        {"WS0014": "kol_marigold_tr_Standard"}
     ],
     "permaMods": [],
     "sMods": [],

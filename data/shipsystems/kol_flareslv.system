@@ -4,6 +4,6 @@
 	"aiType":"CUSTOM",
 	"aiScript":"org.selkie.kol.shipsystems.AI.BratSystemAI",
 	
-	"weaponDataId":"flarelauncher1",
+	"weaponDataId":"kol_flareslv",
 	"outOfUsesSound":"gun_out_of_ammo",
 }

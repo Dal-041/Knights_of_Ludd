@@ -1,0 +1,75 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_marigold_tr",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_sundew_tr.png",
+  "style": "LOW_TECH",
+  "height": 76,
+  "width": 31,
+  "center": [13, 36],
+  "collisionRadius": 55,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 59,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "builtInWeapons": {
+    "WS0002": "eis_blinker_white",
+    "WS0003": "eis_blinker_green"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -45,
+      "locations": [-32, -15]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [9, -0]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [38, 4]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [33, 1]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -34.5, -7,
+    -34.5, -14.5,
+    8, -15,
+    31.5, -4.5,
+    32, 4.5,
+    24, 12,
+    9.5, 10,
+    9.5, 4.5,
+    2.5, 4,
+    -4.5, -3.5,
+    -21.5, -4
+  ]
+}
