@@ -8,32 +8,25 @@ import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.campaign.RepLevel;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
-import com.fs.starfarer.api.campaign.econ.EconomyAPI;
-import com.fs.starfarer.api.campaign.econ.MarketAPI;
-import com.fs.starfarer.api.campaign.econ.MarketAPI.SurveyLevel;
 import com.fs.starfarer.api.characters.FullName;
-import com.fs.starfarer.api.characters.ImportantPeopleAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import exerelin.campaign.SectorManager;
+import org.apache.log4j.Logger;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.helpers.MarketHelpers;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
-import static org.selkie.kol.helpers.MarketHelpers.*;
-
 public class GenerateKnights {
-	static StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
-	static StarSystemAPI Kumari = Global.getSector().getStarSystem("Kumari Kandam");
-	static StarSystemAPI Eos = Global.getSector().getStarSystem("Eos Exodus");
-	static StarSystemAPI Gebbar = Global.getSector().getStarSystem("Al Gebbar");
+
+	//public static Logger log = Global.getLogger(GenerateKnights.class);
 	
 	public static void genCorvus() {
-		Eos.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");
-		Kumari.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_2.jpg");
-		Canaan.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_3.jpg");
-		Gebbar.setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
+		Global.getSector().getStarSystem("Eos Exodus").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");
+		Global.getSector().getStarSystem("Kumari Kandam").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_2.jpg");
+		Global.getSector().getStarSystem("Canaan").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_3.jpg");
+		Global.getSector().getStarSystem("Al Gebbar").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
 	}
@@ -61,7 +54,9 @@ public class GenerateKnights {
 	}
 
 	public static void genKnightsBattlestation() {
-        SectorEntityToken cygnus = Canaan.addCustomEntity("kol_cygnus", "Battlestation Cygnus", "station_lowtech2", "knights_of_selkie");
+		String entID = "kol_cygnus";
+		StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
+        SectorEntityToken cygnus = Canaan.addCustomEntity(entID, "Battlestation Cygnus", "station_lowtech2", "knights_of_selkie");
         cygnus.setCircularOrbitPointingDown(Canaan.getEntityById("canaan_gate"), 33, 275, 99);
         cygnus.setCustomDescriptionId("kol_cygnus_desc");
 		//cygnus.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
@@ -100,7 +95,9 @@ public class GenerateKnights {
 	}
 	
 	public static void genKnightsStarfortress() {
-        SectorEntityToken lyra = Eos.addCustomEntity("kol_lyra", "Star Keep Lyra", "station_lowtech3", "knights_of_selkie");
+		String entID = "kol_lyra";
+		StarSystemAPI Eos = Global.getSector().getStarSystem("Eos Exodus");
+        SectorEntityToken lyra = Eos.addCustomEntity(entID, "Star Keep Lyra", "station_lowtech3", "knights_of_selkie");
         lyra.setCircularOrbitPointingDown(Eos.getEntityById("eos_exodus_gate"), 33, 275, 99);
         lyra.setCustomDescriptionId("kol_lyra_desc");
 		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
@@ -142,7 +139,7 @@ public class GenerateKnights {
 
 	public static void genKnightsExpeditions() {
 		org.selkie.kol.fleets.KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
-		Eos.addScript(expeditions);
+		Global.getSector().getStarSystem("Eos Exodus").addScript(expeditions);
 	}
 
 	public static void copyChurchEquipment() {
@@ -177,7 +174,7 @@ public class GenerateKnights {
 		}
 	}
 
-	public class KnightsFleetTypes {
+	public static class KnightsFleetTypes {
 
 		public static final String SCOUT = "kolScout";
 		public static final String HEADHUNTER = "kolHeadHunter";

@@ -184,18 +184,23 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
     @Override
     public boolean isDone() {
+        String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";
+        String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
+        String MEMKEY_KOL_ELYSIAN_BOSS2_DONE = "$kol_elysian_boss2_done";
+        String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$kol_elysian_boss1_done";
+
         switch (fac) {
             case PrepareAbyss.dawnID:
-                if (Global.getSector().getMemoryWithoutUpdate().contains(ManageDawnBoss.MEMKEY_KOL_DAWN_BOSS_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageDawnBoss.MEMKEY_KOL_DAWN_BOSS_DONE)) return true;
+                if (Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_DAWN_BOSS_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_DAWN_BOSS_DONE)) return true;
             case PrepareAbyss.duskID:
-                if (Global.getSector().getMemoryWithoutUpdate().contains(ManageDuskBoss.MEMKEY_KOL_DUSK_BOSS_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageDuskBoss.MEMKEY_KOL_DUSK_BOSS_DONE)) return true;
+                if (Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_DUSK_BOSS_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_DUSK_BOSS_DONE)) return true;
             case PrepareAbyss.elysianID:
-                if (Global.getSector().getMemoryWithoutUpdate().contains(ManageElysianAmaterasu.MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageElysianAmaterasu.MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().contains(ManageElysianCorruptingheart.MEMKEY_KOL_ELYSIAN_BOSS2_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ManageElysianCorruptingheart.MEMKEY_KOL_ELYSIAN_BOSS2_DONE)) return true;
+                if (Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_ELYSIAN_BOSS2_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_ELYSIAN_BOSS2_DONE)) return true;
             default: return false;
         }
     }

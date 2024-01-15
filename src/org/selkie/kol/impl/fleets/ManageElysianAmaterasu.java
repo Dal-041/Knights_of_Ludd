@@ -11,7 +11,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 
 public class ManageElysianAmaterasu implements FleetEventListener {
-	public static final String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$kol_elysian_boss1_done";
+	public final String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$kol_elysian_boss1_done";
 
 	//Totally not adapted from Diable or anything :>
 	@Override

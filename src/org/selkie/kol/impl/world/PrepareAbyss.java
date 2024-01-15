@@ -112,16 +112,16 @@ public class PrepareAbyss {
 	public static final String[] portraitsDusk = {"abyss_dusk_1", "abyss_dusk_2", "abyss_dusk_3"};
 	public static final String[] portraitsElysian = {"abyss_idk1", "abyss_idk2", "abyss_idk3"};
 
-    public static void generate(SectorAPI sector) {
+    public static void generate() {
 		checkAbyssalFleets();
 		copyHighgradeEquipment();
 
-    	GenerateElysia(sector);
-    	GenerateUnderworld(sector);
-    	GenerateLunaSea(sector);
-		generateDynamicDuskHole(sector);
-		generateDynamicDuskHole(sector);
-		generateDynamicDuskHole(sector);
+    	GenerateElysia();
+    	GenerateUnderworld();
+    	GenerateLunaSea();
+		generateDynamicDuskHole();
+		generateDynamicDuskHole();
+		generateDynamicDuskHole();
 
 		for (FactionAPI faction:Global.getSector().getAllFactions()) {
 			if (!faction.getId().equals(dawnID)) {
@@ -207,7 +207,7 @@ public class PrepareAbyss {
 		}
 	}
 
-    public static void GenerateElysia(SectorAPI sector) {
+    public static void GenerateElysia() {
     	
     	int beeg = 1500;
     	double posX = 2150;
@@ -217,7 +217,7 @@ public class PrepareAbyss {
     	//posX = Math.random()%(Global.getSettings().getFloat("sectorWidth")-10000);
     	//posY = Math.random()%(Global.getSettings().getFloat("sectorHeight")-8000);
         
-    	StarSystemAPI system = sector.createStarSystem("Elysia");
+    	StarSystemAPI system = Global.getSector().createStarSystem("Elysia");
     	system.getLocation().set((int)posX, (int)posY);
     	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_elysia.png");
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_elysia_theme");
@@ -367,11 +367,11 @@ public class PrepareAbyss {
 
     }
 
-	public static void GenerateUnderworld(SectorAPI sector) {
+	public static void GenerateUnderworld() {
 
 		// No direct access, see ReportTransit and TrackFleet listeners
 
-		StarSystemAPI system = sector.createStarSystem("Underspace");
+		StarSystemAPI system = Global.getSector().createStarSystem("Underspace");
 		system.setName("Underspace");
 		LocationAPI hyper = Global.getSector().getHyperspace();
 		system.addTag(Tags.THEME_HIDDEN);
@@ -453,9 +453,9 @@ public class PrepareAbyss {
 		}
 	}
 
-	public static void GenerateLunaSea(SectorAPI sector) {
+	public static void GenerateLunaSea() {
 
-		StarSystemAPI system = sector.createStarSystem("Luna Sea");
+		StarSystemAPI system = Global.getSector().createStarSystem("Luna Sea");
 		system.setName("The Luna Sea"); //No "-Star System"
 
 		LocationAPI hyper = Global.getSector().getHyperspace();
@@ -467,7 +467,7 @@ public class PrepareAbyss {
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bg_dawn.png");
 		new AbyssBackgroundWarper(system, 8, 0.25f);
 
-		if (!sector.getDifficulty().equals(Difficulties.EASY)) {
+		if (!Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula.png",
 					0, 0, // center of nebula
 					system, // location to add to
@@ -489,7 +489,7 @@ public class PrepareAbyss {
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_kol_lunasea_theme");
 
 		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
-		if (sector.getDifficulty().equals(Difficulties.EASY)) {
+		if (Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
 			luna.setName("The Luwuna Sea");
 		}
 		system.setDoNotShowIntelFromThisLocationOnMap(true);
@@ -583,7 +583,7 @@ public class PrepareAbyss {
 		system.addScript(fleetsMiniboss);
 	}
 
-	public static void generateDynamicDuskHole(SectorAPI sector) {
+	public static void generateDynamicDuskHole() {
 		//Variable location
 		double posX = Math.random()*(Global.getSettings().getFloat("sectorWidth")/2);
 		double posY = Math.random()*(Global.getSettings().getFloat("sectorHeight")/2);
@@ -592,7 +592,7 @@ public class PrepareAbyss {
 		if (Math.random() < 0.5f) posX *= -1;
 		if (Math.random() < 0.5f) posY *= -1;
 
-		StarSystemAPI system = sector.createStarSystem(ProcgenUsedNames.pickName(NameGenData.TAG_STAR, null, null).nameWithRomanSuffixIfAny);
+		StarSystemAPI system = Global.getSector().createStarSystem(ProcgenUsedNames.pickName(NameGenData.TAG_STAR, null, null).nameWithRomanSuffixIfAny);
 		system.getLocation().set((float)posX, (float)posY);
 		if (Math.random() < 0.5f) {
 			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/abyss_bh_duskbh1.png");

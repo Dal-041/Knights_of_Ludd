@@ -11,7 +11,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 
 public class ManageDuskBoss implements FleetEventListener {
-	public static final String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
+	public final String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
 
 	//Totally not adapted from Diable or anything :>
 	@Override

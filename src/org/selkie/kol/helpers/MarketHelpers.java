@@ -224,8 +224,7 @@ public class MarketHelpers {
     public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name,
                                            int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff, boolean hidden) {
         EconomyAPI globalEconomy = Global.getSector().getEconomy();
-        String planetID = primaryEntity.getId();
-        String marketID = planetID;
+        String marketID = primaryEntity.getId();
 
         MarketAPI newMarket = Global.getFactory().createMarket(marketID, name, size);
         newMarket.setFactionId(factionID);
@@ -265,7 +264,7 @@ public class MarketHelpers {
 
         if (!hidden) newMarket.setSurveyLevel(MarketAPI.SurveyLevel.FULL);
 
-        addMarketPeople(newMarket);
+        // addMarketPeople(newMarket); //Only if generating after OnNewGame
 
         return newMarket;
     }
