@@ -1,5 +1,5 @@
 {
-	"id":"kol_fortress_flux_converter",
+	"id":"abyss_edf_fortress_flux_converter",
 	"type":"SHIELD_MOD",
 	"aiType":"CUSTOM",
 	"aiScript":"org.selkie.kol.impl.shipsystems.AI.FortressFluxConverterAI",

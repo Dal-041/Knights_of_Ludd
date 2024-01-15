@@ -5,20 +5,14 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.impl.combat.EntropyAmplifierStats;
-import com.fs.starfarer.api.impl.combat.LidarArrayStats;
 import com.fs.starfarer.api.input.InputEventAPI;
-import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
-import org.lwjgl.util.vector.Vector;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 public class TargetingBeamStats extends BaseShipSystemScript {
@@ -26,13 +20,14 @@ public class TargetingBeamStats extends BaseShipSystemScript {
     public WeaponAPI lidar;
     protected boolean needsUnapply = false;
     protected boolean playedWindup = false;
-    protected float lidarRange = 1000f;
+    protected float lidarMaxRange = 1000f;
     protected boolean inited = false;
     public static Object KEY_SHIP = new Object();
     public static Object KEY_TARGET = new Object();
     public static float DAM_MULT = 1.5f;
     public static Color TEXT_COLOR = new Color(255,55,55,255);
     public static Color JITTER_COLOR = new Color(255,50,50,75);
+    public float lidarMinRange = 700f;
 
 
     public void init(ShipAPI ship) {
@@ -41,7 +36,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
         for (WeaponAPI w : ship.getAllWeapons()) {
             if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
                 lidar = w;
-                lidarRange = w.getRange();
+                lidarMaxRange = w.getRange();
             }
         }
     }
@@ -119,6 +114,13 @@ public class TargetingBeamStats extends BaseShipSystemScript {
             ShipAPI target = findTarget(ship);
             Global.getCombatEngine().getCustomData().put(targetDataKey, new EntropyAmplifierStats.TargetData(ship, target));
             if (target != null) {
+                float targetRange = MathUtils.getDistance(ship, target);
+                if (targetRange < lidarMinRange){
+                    DAM_MULT = 2f;
+                } else {
+                    DAM_MULT = Misc.interpolate(2f,1f, (targetRange - lidarMinRange)/(lidarMaxRange - lidarMinRange));
+                }
+
                 if (target.getFluxTracker().showFloaty() ||
                         ship == Global.getCombatEngine().getPlayerShip() ||
                         target == Global.getCombatEngine().getPlayerShip()) {
@@ -188,7 +190,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
     }
 
     protected ShipAPI findTarget(ShipAPI ship) {
-        float range = lidarRange;
+        float range = lidarMaxRange;
         ArrayList<ShipAPI> targets = new ArrayList<>();
         for(ShipAPI other : CombatUtils.getShipsWithinRange(ship.getLocation(), range)){
             if (other.getOwner() == ship.getOwner()) continue;

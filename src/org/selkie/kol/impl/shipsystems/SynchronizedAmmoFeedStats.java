@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class AAFStats extends BaseShipSystemScript {
+public class SynchronizedAmmoFeedStats extends BaseShipSystemScript {
 
 	public static final float ROF_BONUS = 1f;
 	public static final float FLUX_REDUCTION = 50f;

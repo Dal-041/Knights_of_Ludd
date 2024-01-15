@@ -18,7 +18,7 @@
 	"kol_throttle"
   ],
   "builtInWeapons": {
-      "WS0005": "kol_targeting_beam_wpn",
+      "WS0005": "abyss_dawn_targeting_beam_wpn",
   },
   "weaponSlots": [
       {

@@ -1,5 +1,5 @@
 {
-	"id":"kol_small_flux_negation",
+	"id":"abyss_dawn_small_flux_negation",
 	"type":"STAT_MOD",
 	"aiType":"CUSTOM",
     "aiScript":"org.selkie.kol.impl.shipsystems.AI.SmallFluxNegationAI",

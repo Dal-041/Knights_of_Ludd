@@ -69,7 +69,7 @@ r,abyss_deco_edf_amaterasu_front,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,
 ,abyss_deco_edf_amaterasu_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
 Myoga Plasma Chaingun,abyss_plasma_chaingun,2,0.5,1000,550,,60,,3,30,12,,,,ENERGY,60,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR, restricted, kol_abyss_bp",,Unknown,,General,,,,,,,,,,56
 Myoga Ultradriver,abyss_myoga_driver,3,0.2,15000,1150,,240,240,50,8,18,,,,KINETIC,360,,0,2,1,,,,,,,2500,,,300,,,,"kinetic19, LR, restricted, kol_abyss_bp",,Unknown,,Sniper,,,,,,,,,,57.4
-Targeting Beam,kol_targeting_beam_wpn,0,,0,1500,100,,,0,0,0,1000,1000,,ENERGY,,0,0.2,0.2,0.35,0,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS",lidar,,,,,,,,,,,,,,
+Targeting Beam,abyss_dawn_targeting_beam_wpn,0,,0,2100,100,,,0,0,0,1000,1000,,ENERGY,,0,0.2,0.2,0.35,0,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS",lidar,,,,,,,,,,,,,,
 OBSOLETE DELETE ME,kol_lunete_targeting_laser,0,,1,0,1,,,0,200,0,1000,1000,,ENERGY,,0,0.05,0.05,0.1,0.05,,,,,1000000,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,Special,,,,,,,,,,50
 Brimstone,kol_brimstone,3,,,800,,175,,3,60,0,120,0,0,ENERGY,50,,,0.05,2,0.05,0,0,0,0,,500,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,General,,,,,,,,,,
 Seeker Flare Launcher,kol_smartflare,,,,500,,10,400,,,,,0,,ENERGY,0,0,0,0.1,3,0.1,90,90,0,0,,400,200,7,1,,,SYSTEM,,,,,,,,,,,,,,,
