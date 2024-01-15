@@ -1,8 +1,9 @@
 {
 	"id":"abyss_dawn_damper",
 	"type":"STAT_MOD",
-	"aiType":"DAMPER_FIELD",
-	
+	"aiType":"CUSTOM",
+
+	"aiScript":"org.selkie.kol.impl.shipsystems.AI.DamperAI",
 	"statsScript":"com.fs.starfarer.api.impl.combat.DamperFieldStats",
 	
 	"jitterUnderColor":[255,165,90,155],
