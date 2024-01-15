@@ -11,13 +11,17 @@ import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.campaign.econ.EconomyAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI.SurveyLevel;
-import com.fs.starfarer.api.impl.campaign.ids.Conditions;
-import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import com.fs.starfarer.api.impl.campaign.ids.Industries;
-import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
+import com.fs.starfarer.api.characters.FullName;
+import com.fs.starfarer.api.characters.ImportantPeopleAPI;
+import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import exerelin.campaign.SectorManager;
+import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
+import org.selkie.kol.helpers.MarketHelpers;
 import org.selkie.kol.plugins.KOL_ModPlugin;
+
+import static org.selkie.kol.helpers.MarketHelpers.*;
 
 public class GenerateKnights {
 	static StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
@@ -62,7 +66,7 @@ public class GenerateKnights {
         cygnus.setCustomDescriptionId("kol_cygnus_desc");
 		//cygnus.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         
-        addMarketplace("knights_of_selkie", cygnus, null, "Battlestation Cygnus", 4,
+        MarketHelpers.addMarketplace("knights_of_selkie", cygnus, null, "Battlestation Cygnus", 4,
         		new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
                         Conditions.POPULATION_4)),
         		new ArrayList<String>(Arrays.asList(
@@ -81,7 +85,18 @@ public class GenerateKnights {
         		0.3f
         );
 
-		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add("kol_cygnus");
+		cygnus.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
+		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(cygnus.getMarket().getId());
+
+		cygnus.setInteractionImage("illustrations", "kol_garden_large");
+
+		PersonAPI master = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Master", "Blaster", "kol_master",
+				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_ARCHCURATE,
+				false, 0, 0);
+
+		PersonAPI lackie2 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_lackie_1",
+				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.KNIGHT_CAPTAIN, Ranks.POST_GUARD_LEADER,
+				false, 0, 1);
 	}
 	
 	public static void genKnightsStarfortress() {
@@ -89,8 +104,8 @@ public class GenerateKnights {
         lyra.setCircularOrbitPointingDown(Eos.getEntityById("eos_exodus_gate"), 33, 275, 99);
         lyra.setCustomDescriptionId("kol_lyra_desc");
 		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
-        
-        addMarketplace("knights_of_selkie", lyra, null, "Star Keep Lyra", 5,
+
+		MarketHelpers.addMarketplace("knights_of_selkie", lyra, null, "Star Keep Lyra", 5,
         		new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
                         Conditions.POPULATION_5)),
         		new ArrayList<String>(Arrays.asList(
@@ -111,9 +126,18 @@ public class GenerateKnights {
         		0.3f
         );
 
+		lyra.setInteractionImage("illustrations", "kol_garden_large");
 
+		lyra.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
+		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
 
-		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add("kol_lyra");
+		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Flash", "kol_grandmaster",
+				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.FACTION_LEADER, Ranks.POST_FACTION_LEADER,
+				false, 0, 0);
+
+		PersonAPI lackie2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Sister", "Syster", "kol_lackie_2",
+				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.SISTER, Ranks.POST_GUARD_LEADER,
+				false, 0, 1);
 	}
 
 	public static void genKnightsExpeditions() {
@@ -152,58 +176,6 @@ public class GenerateKnights {
 			}
 		}
 	}
-	
-	public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name,
-            int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff, boolean hidden) {
-    	EconomyAPI globalEconomy = Global.getSector().getEconomy();  
-    	String planetID = primaryEntity.getId();  
-    	String marketID = planetID;
-
-    	MarketAPI newMarket = Global.getFactory().createMarket(marketID, name, size);  
-    	newMarket.setFactionId(factionID);  
-    	newMarket.setPrimaryEntity(primaryEntity);  
-    	newMarket.getTariff().modifyFlat("generator", tariff);  
-
-    	if (null != submarkets){  
-    		for (String market : submarkets){  
-    			newMarket.addSubmarket(market);  
-    		}  
-    	}  
-
-    	for (String condition : marketConditions) {  
-    		newMarket.addCondition(condition);  
-    	}
-
-    	for (String industry : Industries) {
-    		newMarket.addIndustry(industry);
-    	}
-
-    	if (null != connectedEntities) {  
-    		for (SectorEntityToken entity : connectedEntities) {  
-    			newMarket.getConnectedEntities().add(entity);  
-    		}  
-    	}  
-
-    	globalEconomy.addMarket(newMarket, true);  
-    	primaryEntity.setMarket(newMarket);
-    	primaryEntity.setFaction(factionID);
-
-    	if (null != connectedEntities) {  
-    		for (SectorEntityToken entity : connectedEntities) {  
-    			entity.setMarket(newMarket);
-    			entity.setFaction(factionID);
-    		}
-    	}
-    	
-    	if (!hidden) newMarket.setSurveyLevel(SurveyLevel.FULL);
-
-    	return newMarket;
-	}
-	
-    public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name,
-            int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff) {
-    	return addMarketplace(factionID, primaryEntity, connectedEntities, name, size, marketConditions, Industries, submarkets, tariff, false);
-    }
 
 	public class KnightsFleetTypes {
 

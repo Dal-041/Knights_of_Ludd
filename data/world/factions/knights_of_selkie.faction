@@ -194,6 +194,21 @@
 		"hullMods":[
 		],
 	},
+	"weaponSellFrequency":{
+		"kol_caelia":10,
+		"kol_llyr":10,
+		"kol_tor":3,
+		#"kol_drian":10,
+	},
+	"hullmodSellFrequency":{
+		"heavyarmor":10,
+		"ballistic_rangefinder":10,
+		"adaptive_coils":0,
+		"phase_anchor":0,
+		"adaptiveshields":0,
+		"pointdefenseai":5,
+		"shield_shunt":10,
+	},	
 	"factionDoctrine":{
 		"warships":5,
 		"carriers":2,
@@ -228,7 +243,7 @@
 		"LOW":{
 			"soldier":10,
 			"faithful":10,
-			"pather":10,
+			"pather":4,
 		},
 		"MEDIUM":{
 			"soldier":10,
@@ -273,10 +288,41 @@
 			"graphics/portraits/kol_female_05.png",
 			"graphics/portraits/kol_female_06.png",
 		],
+	},
+	"ranks":{
+		"ranks":{
+			"spaceCommander":{"name":"Knight-Captain"},
+		},
+		"posts":{
+			"patrolCommander":{"name":"Deacon-Captain"},
+			"fleetCommander":{"name":"Curate-Commander"},
+			"baseCommander":{"name":"Bishop-Governor"},
+			"stationCommander":{"name":"Bishop-Commander"},
+			"outpostCommander":{"name":"Knight-Commander"},
+			"administrator":{"name":"Presbyter Orbis"},
+			"genericMilitary":{"name":"Knight-Commander"},
+			"portmaster":{"name":"Portwatcher"},
+			#"quartermaster":{"name":"Purser"},
+		},
+	},
+	"custom":{
+		"offersCommissions":true,
+		"engagesInHostilities":true,
+		"buysAICores":true,
+		"AICoreValueMult":0.25,
+		"AICoreRepMult":1.5,
+		"buysSurveyData":false,
+		"hostilityImpactOnGrowth":false,
+		"caresAboutAtrocities":true,
+		"punitiveExpeditionData":{
+			"vsCompetitors":false,
+			"vsFreePort":false,
+			"canBombard":false,
+			"territorial":false,
 		},
 	},
 	"fleetTypeNames":{
-		"trade":"Knight Convoy",
+		"trade":"Convoy",
 		"smallTrader":"Faithful Trader",
 		"tradeLiner":"Pilgrimage",
 		
@@ -294,6 +340,4 @@
 		
 		"taskForce":"Blessed Mission",
 	},
-	
-	
 },

@@ -251,20 +251,8 @@
 			"abyss_dusk_onryo_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 			"abyss_dusk_onryo_P_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 		},
-		"characters":{
-			"abyss_boss_alphaplus":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_alphaplus.png",
-			"abyss_boss_amaterasu":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png",
-			"abyss_boss_corrupting_heart":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png",
-			"abyss_boss_dokkaebi":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png",
-			"abyss_dawn_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dawn_1.png",
-			"abyss_dawn_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dawn_2.png",
-			"abyss_dawn_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dawn_3.png",
-			"abyss_dusk_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dusk_1.png",
-			"abyss_dusk_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dusk_2.png",
-			"abyss_dusk_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dusk_3.png",
-			"abyss_idk1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_idk1.png",
-			"abyss_idk2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_idk2.png",
-			"abyss_idk3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_idk3.png"
+		"illustrations":{
+			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",
 		},
 		"terrain":{
 			"nebula_kol_black":"graphics/terrain/nebula_kol_black_shiny.png",
@@ -282,6 +270,25 @@
 			"nebula_kol_dawntide":"graphics/terrain/nebula_kol_dawntide2b.png",
 			"nebula_kol_dawntide_map":"graphics/terrain/nebula_kol_dawntide2b_map.png",
 			"kol_abyss_wavefront":"graphics/terrain/kol_abyss_wavefront.png",
+		},
+		"characters":{
+			"kol_grandmaster":"graphics/portraits/kol_grandmaster.png",
+			"kol_master":"graphics/portraits/kol_master.png",
+			"kol_lackie_1":"graphics/portraits/kol_agent_m.png",
+			"kol_lackie_2":"graphics/portraits/kol_agent_f.png",
+			"abyss_boss_alphaplus":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_alphaplus.png",
+			"abyss_boss_amaterasu":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png",
+			"abyss_boss_corrupting_heart":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png",
+			"abyss_boss_dokkaebi":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png",
+			"abyss_dawn_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dawn_1.png",
+			"abyss_dawn_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dawn_2.png",
+			"abyss_dawn_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dawn_3.png",
+			"abyss_dusk_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dusk_1.png",
+			"abyss_dusk_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dusk_2.png",
+			"abyss_dusk_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_dusk_3.png",
+			"abyss_idk1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_idk1.png",
+			"abyss_idk2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_idk2.png",
+			"abyss_idk3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_idk3.png",
 		},
 	}
 }
