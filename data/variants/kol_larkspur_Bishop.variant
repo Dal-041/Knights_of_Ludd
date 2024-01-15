@@ -1,0 +1,55 @@
+{
+    "displayName": "Bishop",
+    "fluxCapacitors": 5,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "kol_larkspur",
+    "hullMods": [
+        "fluxbreakers",
+        "heavyarmor",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_larkspur_Bishop",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_llyr",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "pilum",
+                "WS0009": "pilum",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "heavyac",
+                "WS0004": "heavyac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "vulcan",
+                "WS0002": "flak",
+                "WS0006": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0011": "kol_larkspur_tl_Bishop"},
+        {"WS0012": "kol_larkspur_tr_Bishop"},
+    ],
+}

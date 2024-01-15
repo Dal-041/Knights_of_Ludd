@@ -1,0 +1,23 @@
+{
+    "displayName": "Close Support",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_snowdrop_tl",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_snowdrop_tl_Close_Support",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

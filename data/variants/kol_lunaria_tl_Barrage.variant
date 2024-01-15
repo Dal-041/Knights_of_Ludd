@@ -1,0 +1,15 @@
+{
+    "displayName": "Barrage",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_lunaria_tl",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lunaria_tl_Barrage",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

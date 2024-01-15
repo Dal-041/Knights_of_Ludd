@@ -1,48 +1,47 @@
 {
-    "displayName": "Attack Bomber",
-    "fluxCapacitors": 7,
-    "fluxVents": 20,
+    "displayName": "Brawler",
+    "fluxCapacitors": 9,
+    "fluxVents": 10,
     "goalVariant": true,
-    "hullId": "abyss_edf_suzaku",
+    "hullId": "kol_protea",
     "hullMods": [
-        "hardenedshieldemitter",
-        "stabilizedshieldemitter",
-        "unstable_injector",
+        "heavyarmor",
+        "missleracks",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_edf_suzaku_Attack_Bomber",
+    "variantId": "kol_protea_Custom",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "kol_tor",
-                "WS0006": "kol_tor",
+                "WS0001": "arbalest",
+                "WS0002": "arbalest",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0004": "sabot_single",
-                "WS0003": "sabot_single",
+                "WS0005": "breach",
+                "WS0006": "breach",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "abyss_styrax_driver",
-                "WS0002": "abyss_styrax_driver",
+                "WS0003": "lightmortar",
+                "WS0004": "lightmortar",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "pdburst",
+                "WS0007": "vulcan",
             }
         },
     ],

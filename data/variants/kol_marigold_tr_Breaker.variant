@@ -1,0 +1,15 @@
+{
+    "displayName": "Breaker",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_marigold_tr",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_marigold_tr_Breaker",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

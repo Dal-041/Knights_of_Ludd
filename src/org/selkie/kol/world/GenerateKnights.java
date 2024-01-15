@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.FactionAPI;
-import com.fs.starfarer.api.campaign.RepLevel;
-import com.fs.starfarer.api.campaign.SectorEntityToken;
-import com.fs.starfarer.api.campaign.StarSystemAPI;
+import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
@@ -89,9 +86,15 @@ public class GenerateKnights {
 				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_ARCHCURATE,
 				false, 0, 0);
 
-		PersonAPI lackie2 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_lackie_1",
+		PersonAPI lackie1 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_lackie_1",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.KNIGHT_CAPTAIN, Ranks.POST_GUARD_LEADER,
 				false, 0, 1);
+
+		master.setImportance(PersonImportance.HIGH);
+		master.setVoice(Voices.SOLDIER);
+
+		lackie1.setImportance(PersonImportance.MEDIUM);
+		lackie1.setVoice(Voices.FAITHFUL);
 	}
 	
 	public static void genKnightsStarfortress() {
@@ -135,6 +138,12 @@ public class GenerateKnights {
 		PersonAPI lackie2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Sister", "Syster", "kol_lackie_2",
 				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.SISTER, Ranks.POST_GUARD_LEADER,
 				false, 0, 1);
+
+		grandmaster.setImportance(PersonImportance.VERY_HIGH);
+		grandmaster.setVoice(Voices.FAITHFUL);
+
+		lackie2.setImportance(PersonImportance.HIGH);
+		lackie2.setVoice(Voices.FAITHFUL);
 	}
 
 	public static void genKnightsExpeditions() {

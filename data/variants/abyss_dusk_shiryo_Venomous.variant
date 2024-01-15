@@ -1,49 +1,46 @@
 {
-    "displayName": "Attack Bomber",
-    "fluxCapacitors": 11,
-    "fluxVents": 30,
+    "displayName": "Venomous",
+    "fluxCapacitors": 6,
+    "fluxVents": 5,
     "goalVariant": true,
-    "hullId": "abyss_edf_seiryu",
+    "hullId": "abyss_dusk_shiryo",
     "hullMods": [
-        "magazines",
+        "hardened_subsystems",
         "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_edf_seiryu_Attack_Bomber",
+    "variantId": "abyss_dusk_shiryo_Venomous",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "abyss_styrax_driver",
-                "WS0003": "abyss_styrax_driver",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0011": "phasecl",
-                "WS0010": "phasecl",
+                "WS0003": "abyss_nanten_s",
+                "WS0004": "abyss_nanten_s",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "ionpulser",
-                "WS0002": "ionpulser",
+                "WS0002": "heavyneedler",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "pdburst",
-                "WS0007": "pdburst",
-                "WS0005": "pdburst",
+                "WS0001": "phasebeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdlaser",
+                "WS0007": "pdlaser",
             }
         },
     ],

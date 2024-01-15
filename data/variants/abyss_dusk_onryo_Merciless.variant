@@ -1,0 +1,61 @@
+{
+    "displayName": "Merciless",
+    "fluxCapacitors": 1,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "abyss_dusk_onryo",
+    "hullMods": [
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "abyss_dusk_onryo_Merciless",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "plasma",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "phasecl",
+                "WS0007": "phasecl",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "abyss_styrax_driver",
+                "WS0010": "abyss_styrax_driver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0014": "railgun",
+                "WS0013": "railgun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "pdburst",
+                "WS0001": "pdburst",
+                "WS0002": "pdburst",
+                "WS0011": "pdburst",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

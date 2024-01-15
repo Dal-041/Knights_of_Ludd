@@ -1,0 +1,77 @@
+{
+    "displayName": "Barrage",
+    "fluxCapacitors": 29,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "kol_lunaria",
+    "hullMods": [
+        "ballistic_rangefinder",
+        "fluxdistributor",
+        "heavyarmor",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lunaria_Barrage",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_lunete",
+                "WS0002": "kol_lunete",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 019": "hellbore",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "mark9",
+                "WS0009": "mark9",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "lightmortar",
+                "WS0005": "lightmortar",
+                "WS0007": "lightmortar",
+                "WS0006": "lightmortar",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0014": "heavymg",
+                "WS0013": "heavymg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "flak",
+                "WS0004": "flak",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0011": "kol_lunaria_tl_Barrage"},
+        {"WS0012": "kol_lunaria_tr_Barrage"},
+        {"WS0015": "kol_lunaria_ml_Barrage"},
+        {"WS0016": "kol_lunaria_mr_Barrage"},
+        {"WS0018": "kol_lunaria_lr_Barrage"},
+        {"WS0017": "kol_lunaria_ll_Barrage"},
+    ],
+}
