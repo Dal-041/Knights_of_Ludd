@@ -1,0 +1,12 @@
+{
+	"id":"abyss_dawn_flare_wave",
+	"type":"STAT_MOD",
+	"aiType":"FLARE",
+	"statsScript":"org.selkie.kol.impl.shipsystems.FlareWave",
+	"runScriptWhileIdle":true, # unapply() never gets called
+	#"useSound":"system_flare_launcher_active",
+	"outOfUsesSound":"gun_out_of_ammo",
+
+	"aiHints":{
+	}
+}
