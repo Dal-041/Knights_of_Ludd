@@ -29,14 +29,12 @@ public class ConformalShields extends BaseHullMod {
             MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "kol_conformal_shield", "shieldshunt");
             return;
         }
-        if (Global.getSettings().isDevMode() || true) return;
+        //if (Global.getSettings().isDevMode()) return;
         //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
-        if (ship.getVariant().hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptiveshields", "kol_conformal_shield");
         //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_conformal_shield");
-        if (!ship.getVariant().hasHullMod("frontemitter")
-                && ship.getHullSpec().getShieldType().equals(ShieldAPI.ShieldType.OMNI)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "kol_conformal_shield", "adaptiveshields");
-    }
+        if (ship.getShield().getArc() >= 90f) ship.getShield().setArc(90f);
+     }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -47,8 +45,10 @@ public class ConformalShields extends BaseHullMod {
             maxY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false));
 
             //center = ship.getLocation();
-            //float radiusNew = (Math.max(maxX, maxY) + Math.min(maxX, maxY) + 30f;
-            //ship.getShield().setRadius(radiusNew);
+
+            float pad = 10 + ship.getHullSize().ordinal() * 5; //lazy method
+            float radiusNew = (Math.max(maxX, maxY)*2 - Math.min(maxX, maxY) + pad);
+            ship.getShield().setRadius(radiusNew);
             //float ratioRad = radiusO / radiusNew;
             if (maxX != 0) inited = true;
         }
@@ -73,14 +73,17 @@ public class ConformalShields extends BaseHullMod {
                 ship.getShield().setCenter(pos.getY() * -1, pos.getX());
             }
 
-            Vector2f shipLocX = new Vector2f(ship.getLocation());
-            Vector2f shipLocY = new Vector2f(ship.getLocation());
-            shipLocX.setX(shipLocX.getX()+maxX);
-            shipLocY.setY(shipLocY.getY()+maxY);
+            if (Global.getSettings().isDevMode()) {
+                Vector2f shipLocX = new Vector2f(ship.getLocation());
+                Vector2f shipLocY = new Vector2f(ship.getLocation());
+                shipLocX.setX(shipLocX.getX()+maxX);
+                shipLocY.setY(shipLocY.getY()+maxY);
 
-            if (Global.getSettings().isDevMode() || true) Global.getCombatEngine().addFloatingText(ship.getShieldCenterEvenIfNoShield(), "o", 12, Color.white, ship, 0, 0);
-            if (Global.getSettings().isDevMode() || true) Global.getCombatEngine().addFloatingText(shipLocX, "x", 24, Color.white, ship, 0, 0);
-            if (Global.getSettings().isDevMode() || true) Global.getCombatEngine().addFloatingText(shipLocY, "y", 24, Color.white, ship, 0, 0);
+                Global.getCombatEngine().addFloatingText(ship.getShieldCenterEvenIfNoShield(), "o", 12, Color.white, ship, 0, 0);
+                Global.getCombatEngine().addFloatingText(shipLocX, "x", 24, Color.white, ship, 0, 0);
+                Global.getCombatEngine().addFloatingText(shipLocY, "y", 24, Color.white, ship, 0, 0);
+            }
+
 //debug runcode $print("X: " + (Global.getCombatEngine().getPlayerShip().getShield().getLocation().getX() - Global.getCombatEngine().getPlayerShip().getLocation().getX()) + "\nY: " + (Global.getCombatEngine().getPlayerShip().getShield().getLocation().getY() - Global.getCombatEngine().getPlayerShip().getLocation().getY()));
         }
     }
