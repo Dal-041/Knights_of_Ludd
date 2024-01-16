@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="KnightsOfSelkie">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/jars/KnightsOfSelkie.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>
