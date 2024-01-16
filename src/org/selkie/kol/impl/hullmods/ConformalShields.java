@@ -1,19 +1,27 @@
 package org.selkie.kol.impl.hullmods;
 
-import com.fs.starfarer.api.combat.BaseHullMod;
-import com.fs.starfarer.api.combat.BoundsAPI;
-import com.fs.starfarer.api.combat.ShieldAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.loading.HullModSpecAPI;
+import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
+import java.awt.*;
+
 public class ConformalShields extends BaseHullMod {
 
-    public float maxX = 0;
-    public float maxY = 0;
-    public final float pad = 12f;
-    float radiusO;
-    private boolean inited = false;
+    private boolean inited;
+    float maxX;
+    float maxY;
+
+    @Override
+    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        inited = false;
+        maxX = 0;
+        maxY = 0;
+    }
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
@@ -21,6 +29,7 @@ public class ConformalShields extends BaseHullMod {
             MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "kol_conformal_shield", "shieldshunt");
             return;
         }
+        if (Global.getSettings().isDevMode() || true) return;
         //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptiveshields", "kol_conformal_shield");
         //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
@@ -31,20 +40,14 @@ public class ConformalShields extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
+        if (Global.getCombatEngine().isPaused()) return;
         if (!inited && ship.getShield() != null) {
-
-            ship.getExactBounds().update(ship.getLocation(), ship.getFacing());
-            for (BoundsAPI.SegmentAPI seg : ship.getExactBounds().getOrigSegments()) {
-                if (Math.abs(seg.getP1().getX()) > maxX) maxX = Math.abs(seg.getP1().getX()); //height
-                if (Math.abs(seg.getP1().getY()) > maxY) maxY = Math.abs(seg.getP1().getY()); //width
-            }
-            radiusO = ship.getShield().getRadius();
-            //backup fetching method
-            //maxX = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false));
-            //maxY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false));
+            float radiusO = ship.getShield().getRadius();
+            maxX = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false));
+            maxY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false));
 
             //center = ship.getLocation();
-            //float radiusNew = (Math.max(maxX, maxY) + Math.min(maxX, maxY))/2 + 30f;
+            //float radiusNew = (Math.max(maxX, maxY) + Math.min(maxX, maxY) + 30f;
             //ship.getShield().setRadius(radiusNew);
             //float ratioRad = radiusO / radiusNew;
             if (maxX != 0) inited = true;
@@ -52,21 +55,32 @@ public class ConformalShields extends BaseHullMod {
         if (ship.getShield() != null) {
             float shieldFacing = ship.getShield().getFacing();
             float shipFacing = ship.getFacing(); //Right = 0, upward = 90, etc
-            //if (shipFacing < 0) shipFacing += 360;
-            //if (shieldFacing < 0) shieldFacing += 360;
+            if (shipFacing < 0) shipFacing += 360;
+            if (shieldFacing < 0) shieldFacing += 360;
 
             shieldFacing -= shipFacing; // Relative rotation around the ship
             shieldFacing -= 180; //Get opposite side from facing
-            //if (shieldFacing < 0) shieldFacing += 360; //Can't believe this helped.
+            if (shieldFacing < 0) shieldFacing += 360;
 
             float rad = (float) Math.toRadians((shieldFacing) % 360);
-            Vector2f pos = getEllipsePosition(maxX + pad, maxY + pad/2, rad);
 
-            if (maxY > maxX) { //Wider, in theory. Haunted.
+
+            if (maxX > maxY) { //Wider
+                Vector2f pos = getEllipsePosition(maxX, maxY, rad);
                 ship.getShield().setCenter(pos.getX(), pos.getY()); //x is forward-back, y is left-right
-            } else { //Supposed to be taller ships, instead also haunted
-                ship.getShield().setCenter(pos.getY(), pos.getX());
+            } else { //Taller
+                Vector2f pos = getEllipsePosition(maxY, maxX, rad + (float)Math.toRadians(-90));
+                ship.getShield().setCenter(pos.getY() * -1, pos.getX());
             }
+
+            Vector2f shipLocX = new Vector2f(ship.getLocation());
+            Vector2f shipLocY = new Vector2f(ship.getLocation());
+            shipLocX.setX(shipLocX.getX()+maxX);
+            shipLocY.setY(shipLocY.getY()+maxY);
+
+            if (Global.getSettings().isDevMode() || true) Global.getCombatEngine().addFloatingText(ship.getShieldCenterEvenIfNoShield(), "o", 12, Color.white, ship, 0, 0);
+            if (Global.getSettings().isDevMode() || true) Global.getCombatEngine().addFloatingText(shipLocX, "x", 24, Color.white, ship, 0, 0);
+            if (Global.getSettings().isDevMode() || true) Global.getCombatEngine().addFloatingText(shipLocY, "y", 24, Color.white, ship, 0, 0);
 //debug runcode $print("X: " + (Global.getCombatEngine().getPlayerShip().getShield().getLocation().getX() - Global.getCombatEngine().getPlayerShip().getLocation().getX()) + "\nY: " + (Global.getCombatEngine().getPlayerShip().getShield().getLocation().getY() - Global.getCombatEngine().getPlayerShip().getLocation().getY()));
         }
     }
