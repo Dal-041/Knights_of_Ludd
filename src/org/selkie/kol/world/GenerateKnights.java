@@ -8,6 +8,7 @@ import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.util.Misc;
 import exerelin.campaign.SectorManager;
 import org.apache.log4j.Logger;
 import org.magiclib.util.MagicCampaign;
@@ -46,6 +47,12 @@ public class GenerateKnights {
 
 			for(FactionAPI faction:Global.getSector().getAllFactions()) {
 				knights.setRelationship(faction.getId(), church.getRelationship(faction.getId()));
+			}
+			if (Misc.getCommissionFactionId() != null && Misc.getCommissionFactionId().equals(KOL_ModPlugin.kolID)) {
+				FactionAPI player = Global.getSector().getPlayerFaction();
+				for(FactionAPI faction:Global.getSector().getAllFactions()) {
+					player.setRelationship(faction.getId(), knights.getRelationship(faction.getId()));
+				}
 			}
 		}
 	}

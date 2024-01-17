@@ -41,13 +41,14 @@ public class PrepareAbyss {
 			"kol_dusk",
  			"kol_elysians"
 	};
-	public static String[] parentIDs = {
+	public static String[] techInheritIDs = {
 			"remnant",
  			"mercenary"
 	};
 	public static String[] hullBlacklist = {
 			"guardian",
 			"radiant",
+			"tahlan_asria",
 			"tahlan_nirvana"
 	};
 	public static String[] weaponBlacklist = {
@@ -177,7 +178,7 @@ public class PrepareAbyss {
 		for (String ID : factionIDs) {
 			FactionAPI fac = Global.getSector().getFaction(ID);
 			boolean skip;
-			for (String parentID : parentIDs) {
+			for (String parentID : techInheritIDs) {
 				FactionAPI par = Global.getSector().getFaction(parentID);
 				for (String entry : par.getKnownWeapons()) {
 					skip = false;

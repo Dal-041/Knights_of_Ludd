@@ -59,7 +59,7 @@ public class SpawnElysianHeart {
 		        .setFlagshipName("00000001")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(elysianBossCaptain)
-		        .setMinFP(240) //support fleet
+		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
 				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_abyss"))

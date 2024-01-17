@@ -24,8 +24,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "abyss_edf_arbalest",
-                "WS0004": "abyss_edf_arbalest",
+                "WS0003": "abyss_bricole_m",
+                "WS0004": "abyss_bricole_m",
             }
         },
     ],

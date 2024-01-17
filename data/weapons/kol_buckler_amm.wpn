@@ -1,0 +1,28 @@
+{
+  "animationType": "MUZZLE_FLASH",
+  "id": "kol_buckler",
+  "specClass": "projectile",
+  "projectileSpecId": "kol_buckler_antimissilemissile",
+  #"everyFrameEffect": "",
+  "type": "COMPOSITE",
+  "size": "SMALL",
+  "turretSprite": "graphics/weapons/kol_amm2_s_turret.png",
+  "hardpointSprite": "graphics/weapons/kol_amm2_s_hardpoint.png",
+  "renderAboveAllWeapons": 0,
+  "turretOffsets": [7,0],
+  "turretAngleOffsets": [0],
+  "hardpointOffsets": [7.5,0],
+  "hardpointAngleOffsets": [0],
+  "barrelMode": "ALTERNATING",
+  "textureType": ROUGH,
+  "fireSoundTwo": "annihilator_fire",
+  "muzzleFlashSpec": {
+    "length": 20,
+    "particleColor": [255,255,255,160],
+    "particleCount": 5,
+    "particleDuration": 0.5,
+    "particleSizeMin": 4,
+    "particleSizeRange": 12,
+    "spread": 6
+  },
+}

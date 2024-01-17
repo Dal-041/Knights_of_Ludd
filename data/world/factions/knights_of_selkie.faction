@@ -31,6 +31,7 @@
 	},
 	"hullFrequency":{
 		"tags":{
+			"knights_of_selkie_bp":1.5,
 			"luddic_church":0.2, 
 			"LC_bp":0.2,
 		},
@@ -86,7 +87,7 @@
 	"knownShips":{
 		"tags":[
 			"knights_of_ludd",
-			"kol_bp"
+			"knights_of_selkie_bp"
 		],
 		"hulls":[
 			"kol_lunaria",
@@ -121,7 +122,10 @@
 		"hulls":[],
 	},
 	"knownFighters":{
-		"tags":["luddic_church"],
+		"tags":[
+			"luddic_church",
+			"knights_of_selkie_bp"
+		],
 		"fighters":[
 			"broadsword_wing",
 			"perdition_wing",
@@ -133,7 +137,10 @@
 		"fighters":[],
 	},
 	"knownWeapons":{
-		"tags":["luddic_church"],
+		"tags":[
+			"luddic_church",
+			"knights_of_selkie_bp",
+		],
 		"weapons":[
 			"lightmg",
 			"lightdualmg",
@@ -198,7 +205,8 @@
 		"kol_caelia":10,
 		"kol_llyr":10,
 		"kol_tor":3,
-		#"kol_drian":10,
+		"kol_drian":4,
+		"kol_buckler":10,
 	},
 	"hullmodSellFrequency":{
 		"heavyarmor":10,

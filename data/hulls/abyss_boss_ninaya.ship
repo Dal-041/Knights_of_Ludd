@@ -19,8 +19,8 @@
 	"kol_ea_sparkle"
   ],
   "builtInWeapons": {
-    "WS0003": "eis_nineng",
-    "WS0004": "eis_nineng",
+    #"WS0003": "eis_nineng",
+    #"WS0004": "eis_nineng",
     "WS0008": "abyss_deco_boss_ninaya_front",
     "WS0009": "abyss_deco_boss_ninaya_bridge"
   },

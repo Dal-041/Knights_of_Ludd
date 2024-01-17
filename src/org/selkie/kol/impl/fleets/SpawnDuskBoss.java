@@ -64,7 +64,7 @@ public class SpawnDuskBoss {
 		        .setFlagshipName("00000000")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(duskBossCaptain)
-		        .setMinFP(180) //support fleet
+		        .setMinFP(480) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.DEFEND_LOCATION)
 				.setSpawnLocation(Global.getSector().getStarSystem("Underspace").getCenter())
@@ -73,9 +73,10 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 
+		/*
 		for(String support : PrepareAbyss.duskBossSupportingFleet) {
 			duskBossFleet.getFleetData().addFleetMember(support);
-		}
+		}*/
 
 		AbyssalFleetManager.setAbyssalCaptains(duskBossFleet);
 		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_alphaplus.png");

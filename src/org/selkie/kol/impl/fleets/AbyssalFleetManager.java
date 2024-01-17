@@ -313,6 +313,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
             if (member.getCaptain() == null) {
                 member.setCaptain(createAbyssalCaptain(fac, true));
             } else {
+                if (member.getCaptain().getId().equals("tahlan_child")) return; //Special officer
                 boolean found = false;
                 String portCapt = member.getCaptain().getPortraitSprite();
                 for (String port : PrepareAbyss.portraitsDawn) {

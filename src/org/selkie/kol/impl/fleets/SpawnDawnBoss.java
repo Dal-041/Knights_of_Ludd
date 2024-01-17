@@ -62,7 +62,7 @@ public class SpawnDawnBoss {
 		        .setFlagshipName("00000010")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(dawnBossCaptain)
-		        .setMinFP(400) //support fleet
+		        .setMinFP(500) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
 				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("abyss_lunasea_four"))
