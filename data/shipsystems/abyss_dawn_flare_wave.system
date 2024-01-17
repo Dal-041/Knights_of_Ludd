@@ -1,9 +1,8 @@
 {
 	"id":"abyss_dawn_flare_wave",
-	"type":"STAT_MOD",
+	"type":"WEAPON",
 	"aiType":"FLARE",
-	"statsScript":"org.selkie.kol.impl.shipsystems.FlareWave",
-	"runScriptWhileIdle":true, # unapply() never gets called
+	"weaponDataId":"abyss_dawn_smartflare",
 	#"useSound":"system_flare_launcher_active",
 	"outOfUsesSound":"gun_out_of_ammo",
 
