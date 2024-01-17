@@ -1,0 +1,207 @@
+{
+  "hullName": "Ludd's Blood",
+  "hullId": "kol_boss_luddsbloat",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/kol_boss_luddsblood.png",
+  "style": "LOW_TECH",
+  "height": 112,
+  "width": 188,
+  "center": [94, 56],
+  "collisionRadius": 115,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 102,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": 0,
+      "locations": [7, 37]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": -0,
+      "locations": [7, -37]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [-27, 79]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [-27, -79]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": 0,
+      "locations": [28, -0]
+    },
+    {
+      "id": "WS0008",
+      "size": "LARGE",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [39, 30]
+    },
+    {
+      "id": "WS0009",
+      "size": "LARGE",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [39, -30]
+    },
+    {
+      "id": "WS0006",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [42, -0]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 45,
+      "locations": [14, 53]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -45,
+      "locations": [14, -53]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [44, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-40, 8],
+      "length": 77,
+      "width": 16,
+      "angle": 180,
+      "contrailSize": 16,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-40, -8],
+      "length": 77,
+      "width": 16,
+      "angle": -180,
+      "contrailSize": 16,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-41, 21],
+      "length": 33.5,
+      "width": 11,
+      "angle": 172.5,
+      "contrailSize": 11,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-41, -21],
+      "length": 33.5,
+      "width": 11,
+      "angle": -172.5,
+      "contrailSize": 11,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-25.5, 56],
+      "length": 71.260002,
+      "width": 26.309999,
+      "angle": 164,
+      "contrailSize": 26.309999,
+      "style": "MIDLINE"
+    },
+    {
+      "location": [-25.5, -56],
+      "length": 71.260002,
+      "width": 26.309999,
+      "angle": -164,
+      "contrailSize": 26.309999,
+      "style": "MIDLINE"
+    },
+    {
+      "location": [-38, 14.5],
+      "length": 53.5,
+      "width": 15,
+      "angle": 176,
+      "contrailSize": 15,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-38, -14.5],
+      "length": 53.5,
+      "width": 15,
+      "angle": -176,
+      "contrailSize": 15,
+      "style": "LOW_TECH"
+    }
+  ],
+  "bounds": [
+    54.5, -46.5,
+    29, -46.5,
+    -15.5, -91.5,
+    -36.5, -91.5,
+    -43.5, -78.5,
+    -29, -63.5,
+    -31.5, -44,
+    -50, -51.5,
+    -54.5, -44.5,
+    -41, -36,
+    -48, -28.5,
+    -42, -26,
+    -42, 26,
+    -48, 28.5,
+    -41, 36,
+    -54.5, 44.5,
+    -50, 51.5,
+    -31.5, 44,
+    -29, 63.5,
+    -43.5, 78.5,
+    -36.5, 91.5,
+    -15.5, 91.5,
+    29, 46.5,
+    54.5, 46.5
+  ]
+}
