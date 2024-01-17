@@ -15,11 +15,11 @@
     "kol_ea_shields2",
     "phasefield",
     "delicate",
-	"automated",
+    "automated",
     "kol_ea_mist",
     "kol_ea_sparkle",
-	"kol_conformal_shield",
-	"kol_throttle"
+    "kol_conformal_shield",
+    "kol_throttle"
   ],
   "builtInWeapons": {
     "WS0009": "abyss_deco_dusk_ayakashi_lights"
@@ -78,15 +78,6 @@
       "arc": 210,
       "angle": -0,
       "locations": [88, -50]
-    },
-    {
-      "id": "WS0004",
-      "size": "SMALL",
-      "type": "HYBRID",
-      "mount": "TURRET",
-      "arc": 210,
-      "angle": -45,
-      "locations": [80, -96]
     },
     {
       "id": "WS0013",
