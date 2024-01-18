@@ -5,16 +5,11 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
-import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.fleets.ManageDuskBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
-import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDuskBoss {
@@ -67,7 +62,7 @@ public class SpawnDuskBoss {
 		        .setMinFP(480) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.DEFEND_LOCATION)
-				.setSpawnLocation(Global.getSector().getStarSystem("Underspace").getCenter())
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.underspaceSysID).getCenter())
 		        .setIsImportant(true)
 		        .setTransponderOn(false)
 		        .create();

@@ -5,14 +5,12 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
-import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.ids.Abilities;
+import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.fleets.ManageDawnBoss;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
-import static org.selkie.kol.impl.plugins.AbyssUtils.fixVariant;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDawnBoss {
@@ -65,7 +63,7 @@ public class SpawnDawnBoss {
 		        .setMinFP(500) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("zea_lunasea_four"))
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysID).getEntityById("zea_lunasea_four"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
