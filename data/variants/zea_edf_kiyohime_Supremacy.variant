@@ -1,0 +1,52 @@
+{
+    "displayName": "Supremacy",
+    "fluxCapacitors": 6,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "zea_edf_kiyohime",
+    "hullMods": [
+        "expanded_deck_crew",
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_edf_kiyohime_Supremacy",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "gauss",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "zea_styrax_driver",
+                "WS0007": "zea_styrax_driver",
+                "WS0004": "zea_styrax_driver",
+                "WS0005": "zea_styrax_driver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdburst",
+                "WS0003": "pdburst",
+                "WS0002": "pdburst",
+            }
+        },
+    ],
+    "wings": [
+        "lux_wing",
+        "lux_wing",
+        "lux_wing",
+        "lux_wing",
+        "lux_wing",
+    ],
+    "modules": [],
+}

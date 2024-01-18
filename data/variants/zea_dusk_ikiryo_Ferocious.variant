@@ -1,0 +1,40 @@
+{
+    "displayName": "Ferocious",
+    "fluxCapacitors": 0,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "zea_dusk_ikiryo",
+    "hullMods": [
+        "hardened_subsystems",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_ikiryo_Ferocious",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "kol_tor",
+                "WS0003": "railgun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "salamanderpod",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

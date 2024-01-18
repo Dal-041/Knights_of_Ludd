@@ -1,0 +1,53 @@
+{
+    "displayName": "Disrupting",
+    "fluxCapacitors": 18,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "zea_dawn_inmyeonjo",
+    "hullMods": [
+        "pointdefenseai",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_inmyeonjo_Disrupting",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0004": "hveldriver",
+                "WS0001": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0002": "heavyburst",
+                "WS0003": "heavyburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "kol_tor",
+                "WS0005": "kol_tor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "heatseeker",
+                "WS0008": "heatseeker",
+            }
+        },
+    ],
+    "wings": [
+        "lux_wing",
+    ],
+    "modules": [],
+}

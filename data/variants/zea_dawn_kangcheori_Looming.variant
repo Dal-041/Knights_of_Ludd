@@ -1,0 +1,62 @@
+{
+    "displayName": "Looming",
+    "fluxCapacitors": 0,
+    "fluxVents": 48,
+    "goalVariant": true,
+    "hullId": "zea_dawn_kangcheori",
+    "hullMods": [
+        "expanded_deck_crew",
+        "fluxbreakers",
+        "heavyarmor",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_kangcheori_Looming",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "zea_thermal_cannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "heavyburst",
+                "WS0011": "pilum",
+                "WS0012": "pilum",
+                "WS0003": "heavyburst",
+                "WS0004": "heavyburst",
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "heavyneedler",
+                "WS0005": "heavyneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "hveldriver",
+                "WS0008": "hveldriver",
+            }
+        },
+    ],
+    "wings": [
+        "flash_wing",
+        "flash_wing",
+        "spark_wing",
+        "spark_wing",
+    ],
+    "modules": [],
+}

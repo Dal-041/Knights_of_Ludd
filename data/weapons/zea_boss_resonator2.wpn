@@ -1,0 +1,62 @@
+{
+  "id": "zea_boss_resonator2",
+  "specClass": "projectile",
+  "projectileSpecId": "zea_dusk_resonator2_shot",
+  "type": "MISSILE",
+  "size": "MEDIUM",
+  "turretSprite":"graphics/ships/decos/kol_deco_blank.png",
+  "hardpointSprite":"graphics/ships/decos/kol_deco_blank.png",
+  "turretOffsets": [
+    3.5,
+    -4,
+    3.5,
+    -4,
+    3.5,
+    4,
+    3.5,
+    4,
+    -2.5,
+    7,
+    -2.5,
+    7,
+    -2.5,
+    -1,
+    -2.5,
+    -1,
+    -2.5,
+    -8,
+    -2.5,
+    -8
+  ],
+  "turretAngleOffsets": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    -1,
+    5.5,
+    10,
+    1.5,
+    -1,
+    -3.5,
+    10,
+    -7.5
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0,
+    0,
+    0
+  ],
+  "barrelMode": "ALTERNATING",
+  "animationType": "NONE",
+  "fireSoundTwo": "resonator_fire"
+}

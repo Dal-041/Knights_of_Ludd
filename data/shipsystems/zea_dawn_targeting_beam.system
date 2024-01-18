@@ -1,0 +1,11 @@
+{
+	"id":"zea_dawn_targeting_beam",
+	"type":"STAT_MOD",
+    "statsScript":"org.selkie.kol.impl.shipsystems.TargetingBeamStats",
+    "runScriptWhileIdle":true, # unapply() never gets called
+    "aiType":"CUSTOM",
+	"aiScript":"org.selkie.kol.impl.shipsystems.AI.TargetingBeamAI",
+
+	"weaponDataId":"zea_dawn_targeting_beam_wpn",
+	"outOfUsesSound":"gun_out_of_ammo",
+}

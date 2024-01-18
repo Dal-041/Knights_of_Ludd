@@ -1,0 +1,28 @@
+{
+	"id":"zea_thermal_cannon",
+	"specClass":"projectile",
+	"type":"ENERGY",
+	"size":"LARGE",
+	"turretSprite":"graphics/weapons/kol_cannonL.png",
+	"turretGlowSprite":"graphics/weapons/kol_cannonL.png",
+	"hardpointSprite":"graphics/weapons/kol_cannonL.png",
+	"hardpointGlowSprite":"graphics/weapons/kol_cannonL.png",
+	"glowColor":[255,100,150,150],
+	"turretOffsets":[30, 0],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[40, 0],
+	"hardpointAngleOffsets":[0],
+	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+	"animationType":"GLOW_AND_FLASH",
+	"muzzleFlashSpec":{"length":-34.0,   # only used if animationType = MUZZLE_FLASH
+					   "spread":15.0,
+					   "particleSizeMin":15.0,
+					   "particleSizeRange":15.0,
+					   "particleDuration":0.15,
+					   "particleCount":30,
+					   "particleColor":[255,100,150,255]},
+	"interruptibleBurst":true,
+	"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
+	"projectileSpecId":"zea_thermal_shot",  # projectile that will be fired
+	"fireSoundTwo":"plasma_cannon_fire",
+}

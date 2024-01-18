@@ -1,0 +1,57 @@
+{
+    "displayName": "Hungry",
+    "fluxCapacitors": 0,
+    "fluxVents": 23,
+    "goalVariant": true,
+    "hullId": "zea_dawn_imugi",
+    "hullMods": [
+        "expanded_deck_crew",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_imugi_Hungry",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "hveldriver",
+                "WS0007": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pilum",
+                "WS0009": "pilum",
+                "WS0001": "pdlaser",
+                "WS0002": "pdlaser",
+                "WS0010": "pdlaser",
+                "WS0011": "pdlaser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "ionbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "lightac",
+                "WS0005": "lightac",
+            }
+        },
+    ],
+    "wings": [
+        "flash_wing",
+        "flash_wing",
+        "flash_wing",
+    ],
+    "modules": [],
+}

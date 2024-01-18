@@ -1,0 +1,69 @@
+{
+    "displayName": "Devourer",
+    "fluxCapacitors": 1,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "zea_boss_taotie",
+    "hullMods": [
+        "armoredweapons",
+        "autorepair",
+        "magazines",
+        "shield_shunt",
+        "turretgyros",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_boss_dokkaebi_Devourer",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "riftcascade",
+                "WS0006": "vpdriver",
+                "WS0007": "vpdriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "rifttorpedo",
+                "WS0002": "rifttorpedo",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "mjolnir",
+                "WS0011": "heavyac",
+                "WS0010": "mjolnir",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "flak",
+                "WS0013": "dualflak",
+                "WS0012": "dualflak",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "guardian",
+                "WS0005": "guardian",
+            }
+        },
+    ],
+    "wings": [
+        "lux_wing",
+        "spark_wing",
+        "lux_wing",
+    ],
+    "modules": [],
+}

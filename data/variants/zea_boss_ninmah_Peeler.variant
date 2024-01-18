@@ -1,0 +1,57 @@
+{
+    "displayName": "Peeler",
+    "fluxCapacitors": 8,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "zea_boss_ninmah",
+    "hullMods": [
+        "fluxbreakers",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_boss_ninmah_Peeler",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "zea_nanten_l",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0004": "amsrm",
+                "WS0005": "amsrm",
+                "WS0014": "amsrm",
+                "WS0017": "zea_boss_resonator2",
+                "WS0016": "zea_boss_resonator2",
+                "WS0011": "amsrm",
+                "WS0015": "amsrm",
+                "WS0010": "amsrm",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "heavyneedler",
+                "WS0007": "heavyneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdlaser",
+                "WS0009": "pdlaser",
+                "WS0003": "pdlaser",
+                "WS0002": "pdlaser",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

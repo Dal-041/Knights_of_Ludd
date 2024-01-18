@@ -1,0 +1,53 @@
+{
+    "displayName": "Undoer",
+    "fluxCapacitors": 10,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "zea_boss_ninmah",
+    "hullMods": [
+        "fluxbreakers",
+        "heavyarmor",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_boss_ninmah_Undoer",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "realitydisruptor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0017": "zea_boss_resonator2",
+                "WS0016": "zea_boss_resonator2",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "lrpdlaser",
+                "WS0009": "lrpdlaser",
+                "WS0003": "lrpdlaser",
+                "WS0002": "lrpdlaser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "riftbeam",
+                "WS0007": "riftbeam",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

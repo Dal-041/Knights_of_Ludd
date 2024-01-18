@@ -1,0 +1,55 @@
+{
+    "displayName": "Breakthrough",
+    "fluxCapacitors": 2,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "zea_dusk_onryo",
+    "hullMods": [
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_onryo_Breakthrough",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "phasecl",
+                "WS0008": "phasecl",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0005": "tachyonlance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "heavyneedler",
+                "WS0014": "lightneedler",
+                "WS0013": "lightneedler",
+                "WS0010": "heavyneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "pdburst",
+                "WS0001": "pdburst",
+                "WS0011": "pdburst",
+                "WS0002": "pdburst",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

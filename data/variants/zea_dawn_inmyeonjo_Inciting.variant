@@ -1,0 +1,54 @@
+{
+    "displayName": "Inciting",
+    "fluxCapacitors": 13,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "zea_dawn_inmyeonjo",
+    "hullMods": [
+        "hardened_subsystems",
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_inmyeonjo_Inciting",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "phasebeam",
+                "WS0001": "phasebeam",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "sabot",
+                "WS0007": "sabot",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "gravitonbeam",
+                "WS0002": "ionbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "pdburst",
+                "WS0005": "pdburst",
+            }
+        },
+    ],
+    "wings": [
+        "spark_wing",
+    ],
+    "modules": [],
+}

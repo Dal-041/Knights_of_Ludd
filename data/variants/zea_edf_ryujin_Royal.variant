@@ -1,0 +1,66 @@
+{
+    "displayName": "Royal",
+    "fluxCapacitors": 31,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "zea_edf_ryujin",
+    "hullMods": [
+        "expanded_deck_crew",
+        "fluxbreakers",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_edf_ryujin_Royal",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "devastator",
+                "WS0007": "devastator",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "locust",
+                "WS0010": "locust",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "zea_styrax_driver",
+                "WS0001": "zea_styrax_driver",
+                "WS0003": "zea_styrax_driver",
+                "WS0002": "zea_styrax_driver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0021": "pdburst",
+                "WS0022": "pdburst",
+                "WS0016": "pdburst",
+                "WS0011": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "dualflak",
+            }
+        },
+    ],
+    "wings": [
+        "spark_wing",
+        "spark_wing",
+    ],
+    "modules": [],
+}

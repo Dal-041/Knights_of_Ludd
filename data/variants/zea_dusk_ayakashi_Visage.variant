@@ -1,0 +1,75 @@
+{
+    "displayName": "Visage",
+    "fluxCapacitors": 13,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "zea_dusk_ayakashi",
+    "hullMods": [
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_ayakashi_Visage",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0020": "zea_nanten_l",
+                "WS0021": "zea_nanten_l",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0018": "pilum_large",
+                "WS0019": "pilum_large",
+                "WS0003": "heavyburst",
+                "WS0017": "heavyburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "zea_myoga_driver",
+                "WS0005": "zea_myoga_driver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0024": "zea_hosta_m",
+                "WS0023": "zea_hosta_m",
+                "WS0001": "zea_hosta_m",
+                "WS0002": "zea_hosta_m",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "zea_hosta_s",
+                "WS0014": "zea_hosta_s",
+                "WS0013": "zea_hosta_s",
+                "WS0015": "zea_hosta_s",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0012": "zea_nanten_s",
+                "WS0011": "zea_nanten_s",
+            }
+        },
+    ],
+    "wings": [
+        "spark_wing",
+        "spark_wing",
+    ],
+    "modules": [],
+}

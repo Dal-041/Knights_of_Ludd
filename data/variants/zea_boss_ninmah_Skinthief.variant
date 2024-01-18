@@ -1,0 +1,57 @@
+{
+    "displayName": "Skinthief",
+    "fluxCapacitors": 8,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "zea_boss_ninmah",
+    "hullMods": [
+        "fluxbreakers",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_boss_ninmah_Skinthief",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "tachyonlance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0004": "amsrm",
+                "WS0005": "amsrm",
+                "WS0014": "amsrm",
+                "WS0017": "zea_boss_resonator2",
+                "WS0016": "zea_boss_resonator2",
+                "WS0015": "amsrm",
+                "WS0011": "amsrm",
+                "WS0010": "amsrm",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "ionpulser",
+                "WS0007": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdburst",
+                "WS0009": "pdburst",
+                "WS0003": "pdburst",
+                "WS0002": "pdburst",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

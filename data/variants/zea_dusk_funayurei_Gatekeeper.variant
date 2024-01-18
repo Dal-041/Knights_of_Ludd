@@ -1,0 +1,45 @@
+{
+    "displayName": "Gatekeeper",
+    "fluxCapacitors": 0,
+    "fluxVents": 15,
+    "goalVariant": true,
+    "hullId": "zea_dusk_funayurei",
+    "hullMods": [
+        "hardened_subsystems",
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_funayurei_Gatekeeper",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "zea_nanten_l",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "hveldriver",
+                "WS0003": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "lrpdlaser",
+                "WS0006": "lrpdlaser",
+                "WS0007": "lrpdlaser",
+                "WS0005": "lrpdlaser",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

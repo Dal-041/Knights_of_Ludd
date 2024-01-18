@@ -1,0 +1,67 @@
+{
+    "displayName": "Strangler",
+    "fluxCapacitors": 17,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "zea_dusk_hashihime",
+    "hullMods": [
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_hashihime_Strangler",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "tachyonlance",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0013": "gorgonpod",
+                "WS0012": "gorgonpod",
+                "WS0011": "gorgonpod",
+                "WS0010": "gorgonpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "lightneedler",
+                "WS0009": "lightneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "kol_tor",
+                "WS0002": "kol_tor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "zea_dusk_lrsr",
+                "WS0005": "zea_dusk_lrsr",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0017": "lrpdlaser",
+                "WS0016": "lrpdlaser",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

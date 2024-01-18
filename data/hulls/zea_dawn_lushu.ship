@@ -1,0 +1,244 @@
+{
+  "hullName": "Lushu",
+  "hullId": "zea_dawn_lushu",
+  "hullSize": "DESTROYER",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dawn_lushu.png",
+  "style": "zea_DAWN_TECH",
+  "height": 175,
+  "width": 136,
+  "center": [68, 87.5],
+  "collisionRadius": 118.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 115,
+  "viewOffset": 0,
+  "builtInMods": [
+	"automated",
+	"solar_shielding",
+    "kol_ea_shields1",
+	"kol_throttle"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [78.5, 20]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [78.5, -20]
+    },
+    {
+      "id": "WS0002",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 60,
+      "locations": [19.5, 24]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -60,
+      "locations": [19.5, -24]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [-11.5, 57]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [-11.5, -57]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "SYNERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 135,
+      "locations": [-52.5, 22]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "SYNERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -135,
+      "locations": [-52.5, -22]
+    },
+    {
+      "id": "LB 2",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        8, -4,
+        8.5, 6
+      ]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 5,
+      "locations": [6, 50]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -5,
+      "locations": [6, -50]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 10,
+      "locations": [6, 50]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -10,
+      "locations": [6, -50]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 15,
+      "locations": [6, 50]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -15,
+      "locations": [6, -50]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-36.5, -0],
+      "length": 91.5,
+      "width": 15,
+      "angle": 180,
+      "contrailSize": 15,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-41.5, 35],
+      "length": 86.5,
+      "width": 15,
+      "angle": 180,
+      "contrailSize": 15,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-41.5, -35],
+      "length": 86.5,
+      "width": 15,
+      "angle": -180,
+      "contrailSize": 15,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-49, 35],
+      "length": 87,
+      "width": 8,
+      "angle": 180,
+      "contrailSize": 8,
+      "style": "CUSTOM",
+      "styleId": "zea_DAWN_ENG"
+    },
+    {
+      "location": [-49, -35],
+      "length": 87,
+      "width": 8,
+      "angle": -180,
+      "contrailSize": 8,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-47.5, -0],
+      "length": 87,
+      "width": 8,
+      "angle": 180,
+      "contrailSize": 8,
+      "style": "CUSTOM",
+      "styleId": "zea_DAWN_ENG"
+    }
+  ],
+  "bounds": [
+    33, -6.5,
+    79, -3,
+    77.5, -34.5,
+    72.5, -39.5,
+    12, -44.5,
+    1.5, -67,
+    -19.5, -64.5,
+    -21.5, -50,
+    -36, -50,
+    -43.5, -34,
+    -58, -34,
+    -68.5, -28,
+    -69, -17,
+    -63, -8,
+    -38.5, -8,
+    -38.5, 8,
+    -63, 8,
+    -69, 17,
+    -68.5, 28,
+    -58, 34,
+    -43.5, 34,
+    -36, 50,
+    -21.5, 50,
+    -19.5, 64.5,
+    1.5, 67,
+    12, 44.5,
+    72.5, 39.5,
+    77.5, 34.5,
+    79, 3,
+    33, 6.5
+  ]
+}

@@ -1,0 +1,35 @@
+{
+    "displayName": "Gremlin",
+    "fluxCapacitors": 7,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "zea_boss_ninaya",
+    "hullMods": [
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "stabilizedshieldemitter",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_boss_ninaya_Gremlin",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "heavyneedler",
+                "WS 002": "heavyneedler",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "phasecl",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

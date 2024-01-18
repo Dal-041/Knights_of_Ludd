@@ -1,0 +1,41 @@
+{
+    "displayName": "Harasser",
+    "fluxCapacitors": 2,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "zea_edf_wani",
+    "hullMods": [
+        "hardenedshieldemitter",
+        "missleracks",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_edf_wani_Harasser",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "shredder",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "annihilatorpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "lightac",
+                "WS0005": "lightac",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

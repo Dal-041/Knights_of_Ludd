@@ -1,0 +1,42 @@
+{
+    "displayName": "Nightdemon",
+    "fluxCapacitors": 0,
+    "fluxVents": 7,
+    "goalVariant": true,
+    "hullId": "zea_boss_ninaya",
+    "hullMods": [
+        "fluxbreakers",
+        "hardened_subsystems",
+        "hardenedshieldemitter",
+        "stabilizedshieldemitter",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_boss_ninaya_Nightdemon",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "cryoblaster",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "resonatormrm",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "cryoflux",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

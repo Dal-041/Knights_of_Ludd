@@ -1,0 +1,17 @@
+{
+	"id":"zea_plasma_chaingun_shot",
+	"specClass":"projectile",
+	"spawnType":"PLASMA",
+	"collisionClass":"PROJECTILE_FF",
+	"collisionClassByFighter":"PROJECTILE_FIGHTER",
+	#"width":45.0,
+	"width":10.0,
+	"fadeTime":0.5,
+	#"hitGlowRadius":38,
+	"fringeColor":[200,00,255,255],
+	"coreColor":[225,100,200,150],
+	#"fringeColor":[255,0,0,255],
+	#"coreColor":[255,100,255,255],
+	"passThroughMissiles":false,
+	"passThroughFighters":false,
+}

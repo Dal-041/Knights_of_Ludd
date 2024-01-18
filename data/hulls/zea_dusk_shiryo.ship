@@ -1,0 +1,215 @@
+{
+  "hullName": "Shiryo",
+  "hullId": "zea_dusk_shiryo",
+  "hullSize": "DESTROYER",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_shiryo.png",
+  "style": "zea_DUSK_TECH",
+  "height": 144,
+  "width": 118,
+  "center": [59, 72],
+  "collisionRadius": 96,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 90,
+  "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "delicate",
+	"automated",
+    "kol_ea_mist",
+    "kol_ea_sparkle",
+	"kol_throttle"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 0,
+      "locations": [38, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [62, -0]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [58, 28]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [58, -28]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [0, 35]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [0, -35]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 139,
+      "locations": [-5, 47]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -139,
+      "locations": [-5, -47]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-38, 12.5],
+      "length": 68.5,
+      "width": 17,
+      "angle": 180,
+      "contrailSize": 17,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-38, -12.5],
+      "length": 68.5,
+      "width": 17,
+      "angle": -180,
+      "contrailSize": 17,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-38, 19],
+      "length": 53.716648,
+      "width": 13.641319,
+      "angle": 177,
+      "contrailSize": 13.641319,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-38, -19],
+      "length": 53.716648,
+      "width": 13.641319,
+      "angle": -177,
+      "contrailSize": 13.641319,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-35, 28],
+      "length": 40.950127,
+      "width": 6.430336,
+      "angle": 180,
+      "contrailSize": 6.430336,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-35, -28],
+      "length": 40.950127,
+      "width": 6.430336,
+      "angle": -180,
+      "contrailSize": 6.430336,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-29, 28],
+      "length": 25,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "OMEGA"
+    },
+    {
+      "location": [-29, -28],
+      "length": 25,
+      "width": 6,
+      "angle": -180,
+      "contrailSize": 6,
+      "style": "OMEGA"
+    },
+    {
+      "location": [-29, 19],
+      "length": 29.32288,
+      "width": 7.594403,
+      "angle": 176.5,
+      "contrailSize": 7.594403,
+      "style": "OMEGA"
+    },
+    {
+      "location": [-29, -19],
+      "length": 29.32288,
+      "width": 7.594403,
+      "angle": -176.5,
+      "contrailSize": 7.594403,
+      "style": "OMEGA"
+    },
+    {
+      "location": [-29, 12.5],
+      "length": 35,
+      "width": 15,
+      "angle": 180,
+      "contrailSize": 15,
+      "style": "OMEGA"
+    },
+    {
+      "location": [-29, -12.5],
+      "length": 35,
+      "width": 15,
+      "angle": -180,
+      "contrailSize": 15,
+      "style": "OMEGA"
+    }
+  ],
+  "bounds": [
+    64, -11,
+    54, -25,
+    15.5, -34.5,
+    -7, -57,
+    -18, -57,
+    -30, -42.5,
+    -61, -31,
+    -39, -28,
+    -39, -7,
+    -71, -0,
+    -39, 7,
+    -39, 28,
+    -61, 31,
+    -30, 42.5,
+    -18, 57,
+    -7, 57,
+    15.5, 34.5,
+    54, 25,
+    64, 11
+  ]
+}

@@ -1,0 +1,11 @@
+{
+	"id":"zea_dawn_flare_wave",
+	"type":"WEAPON",
+	"aiType":"FLARE",
+	"weaponDataId":"zea_dawn_smartflare",
+	#"useSound":"system_flare_launcher_active",
+	"outOfUsesSound":"gun_out_of_ammo",
+
+	"aiHints":{
+	}
+}

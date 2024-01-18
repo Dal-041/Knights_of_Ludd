@@ -1,0 +1,74 @@
+{
+    "displayName": "Black",
+    "fluxCapacitors": 39,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "zea_dawn_samjoko",
+    "hullMods": [
+        "armoredweapons",
+        "fluxbreakers",
+        "heavyarmor",
+        "shield_shunt",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_samjoko_Black",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "gauss",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "guardian",
+                "WS0002": "pilum",
+                "WS0003": "pilum",
+                "WS0001": "lrpdlaser",
+                "WS0004": "lrpdlaser",
+                "WS0005": "lrpdlaser",
+                "WS0006": "lrpdlaser",
+                "WS0007": "lrpdlaser",
+                "WS0008": "lrpdlaser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0011": "tachyonlance",
+                "WS0012": "tachyonlance",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0021": "railgun",
+                "WS0022": "railgun",
+                "WS0023": "railgun",
+                "WS0024": "railgun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0020": "taclaser",
+                "WS0018": "taclaser",
+                "WS0015": "taclaser",
+                "WS0019": "taclaser",
+            }
+        },
+    ],
+    "wings": [
+        "spark_wing",
+        "spark_wing",
+    ],
+    "modules": [],
+}
