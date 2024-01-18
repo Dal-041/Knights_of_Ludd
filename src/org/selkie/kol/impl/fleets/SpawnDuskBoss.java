@@ -54,7 +54,7 @@ public class SpawnDuskBoss {
 		String variant = "zea_boss_yukionna_Ultimate";
 		CampaignFleetAPI duskBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Yukionna")
-		        .setFleetFaction("zea_dusk")
+		        .setFleetFaction(PrepareAbyss.duskID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("00000000")
 		        .setFlagshipVariant(variant)
