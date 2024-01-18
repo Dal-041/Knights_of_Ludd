@@ -5,7 +5,7 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 Tor Light Cannon,kol_tor,2,0.3,2000,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,850,,,30,,,,"he8, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,70.4
 Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,230,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he18, knights_of_selkie_bp",,,,Anti Armor,,,,,Fire rate accelerates during sustained use up to a maximum of %s after %s seconds. Flux cost per second does %s increase.,+40% | 2 | not,,,,70.5
 Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic18, knights_of_selkie_bp",,,,Anti Shield,,,,,Fire rate accelerates during sustained use up to a maximum of %s after %s seconds. Flux cost per second does %s increase.,+40% | 2 | not,,,,70.6
-Drian Coilgun,kol_drian,2,0.65,1500,700,,85,,12,24,6,,,,KINETIC,60,,0,0.75,1,,0,5,1.6,1,,750,,,30,,,,"kinetic6, knights_of_selkie_bp, kol_abyss_bp, merc, ind",,,,Anti Shield,,,,,,,,,,70.7
+Drian Coilgun,kol_drian,2,0.65,1500,700,,85,,12,24,6,,,,KINETIC,60,,0,0.75,1,,0,5,1.6,1,,750,,,30,,,,"kinetic6, knights_of_selkie_bp, zelysium_bp, merc, ind",,,,Anti Shield,,,,,,,,,,70.7
 #Buckler AMM Launcher,kol_buckler,1,0.8,800,500,,55,,1,30,4,24,2,4,FRAGMENTATION,5,,0,0.5,2,0.2,0,0,0,0,,1200,600,0.75,10,,,"PD_ONLY, DO_NOT_AIM, DO_NOT_CONSERVE","PD4, knights_of_selkie_bp",,,,Point Defense,,,,,,,,,TRUE,70.8
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -28,30 +28,30 @@ EIS Blinker White Long,eis_blinker_white30,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM
 ,kol_deco_protea_r,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,kol_deco_alysse_ll,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,kol_deco_alysse_lr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_ayakashi_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
-,abyss_deco_edf_tamamo_ml,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_edf_tamamo_mr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_boss_ninaya_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_boss_ninaya_bridge,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_ikiryo_tl,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_ikiryo_tr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_hashihime_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_hashihime_tr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_hashihime_tl,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_hashihime_mr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,abyss_deco_dusk_hashihime_ml,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-mdCap,abyss_deco_dawn_engL,0,,,1,110,,,,150,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
-lgCap,abyss_deco_dawn_engM,0,,,1,110,,,,150,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
-,abyss_deco_edf_ryujin_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
-lgCap,abyss_deco_edf_engL,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-sCap,abyss_deco_edf_engS,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-l,abyss_deco_edf_corruptingheart_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-r,abyss_deco_edf_corruptingheart_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-l,abyss_deco_edf_amaterasu_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-r,abyss_deco_edf_amaterasu_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-r,abyss_deco_edf_amaterasu_front,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
-,abyss_deco_edf_amaterasu_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
-,abyss_deco_edf_vortice,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+,zea_deco_dusk_ayakashi_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
+,zea_deco_edf_tamamo_ml,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_edf_tamamo_mr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_boss_ninaya_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_boss_ninaya_bridge,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_ikiryo_tl,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_ikiryo_tr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_hashihime_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_hashihime_tr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_hashihime_tl,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_hashihime_mr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_dusk_hashihime_ml,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+mdCap,zea_deco_dawn_engL,0,,,1,110,,,,150,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
+lgCap,zea_deco_dawn_engM,0,,,1,110,,,,150,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,,,
+,zea_deco_edf_ryujin_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
+lgCap,zea_deco_edf_engL,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+sCap,zea_deco_edf_engS,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+l,zea_deco_edf_corruptingheart_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+r,zea_deco_edf_corruptingheart_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+l,zea_deco_edf_amaterasu_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+r,zea_deco_edf_amaterasu_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+r,zea_deco_edf_amaterasu_front,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
+,zea_deco_edf_amaterasu_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
+,zea_deco_edf_vortice,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #BUILT_IN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -61,9 +61,9 @@ Canister Flak,kol_canister_flak,,,,200,,200,,,,,,0,,HIGH_EXPLOSIVE,0,0,0,0.1,5,0
 Hallowed Orion Device Launcher,kol_hallowedODLauncher,0,,200000,1000,,1000,,25,30,0,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,1,10000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 Pusher Plate (Low Tech But Slightly Smaller Haha Lol XDd),kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
 Pusher Plate (Low Tech But It's Really Really Smol And Cute),kol_pusherplate_lt_but_cute,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,42.69
-Long-Range Shock Repeater,abyss_dusk_lrsr,3,,0,500,,50,200,0,100,0,,,,ENERGY,25,,0,0.5,1,,,,,,,10000,,,,,25,"PD, SYSTEM","PD14, no_drop, no_drop_salvage",,Unknown,,Point Defense,,,,Perfect,Fires an EMP arc at the nearest target close to the weapon's current facing. The arc always hits.,,,,,
-Twilight's Gleam,abyss_boss_resonator,3,,0,3000,,250,,15,20,0,8,0.8,8,KINETIC,50,,0,1.25,8,0.25,0,0,0,,,400,200,10,250,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Havoc,Fast,Excellent,,,,,,,,
-Twilight's Ruin,abyss_boss_resonator2,3,,0,2000,,600,,15,0,0,5,0.2,5,HIGH_EXPLOSIVE,65,,0,5,5,0.25,0,0,0,,,400,200,10,225,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Slaughter,Fast,Excellent,,,,,,,,12
+Long-Range Shock Repeater,zea_dusk_lrsr,3,,0,500,,50,200,0,100,0,,,,ENERGY,25,,0,0.5,1,,,,,,,10000,,,,,25,"PD, SYSTEM","PD14, no_drop, no_drop_salvage",,Unknown,,Point Defense,,,,Perfect,Fires an EMP arc at the nearest target close to the weapon's current facing. The arc always hits.,,,,,
+Twilight's Gleam,zea_boss_resonator,3,,0,3000,,250,,15,20,0,8,0.8,8,KINETIC,50,,0,1.25,8,0.25,0,0,0,,,400,200,10,250,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Havoc,Fast,Excellent,,,,,,,,
+Twilight's Ruin,zea_boss_resonator2,3,,0,2000,,600,,15,0,0,5,0.2,5,HIGH_EXPLOSIVE,65,,0,5,5,0.25,0,0,0,,,400,200,10,225,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Slaughter,Fast,Excellent,,,,,,,,12
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #UTILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -72,20 +72,20 @@ heat,kol_heatEffect,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,,,,,,,,,,,,,,,
 #WEAPONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 kol_sparkler_wpn,kol_sparkler_wpn,,,,500,,1,1500,,,,,0,,ENERGY,0,0,0,0.1,1,,30,30,0,0,,400,200,10000,500,,,SYSTEM,,,,,,,,,,,,,,,38.25
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Targeting Beam,abyss_dawn_targeting_beam_wpn,0,,0,2100,100,,,0,0,0,1000,1000,,ENERGY,,0,0.2,0.2,0.35,0,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS",lidar,,,,,,,,,,,,,,
-Seeker Flare Launcher,abyss_dawn_smartflare,,,,500,,10,400,,,,,0,,ENERGY,0,0,0,0.1,3,1,40,40,0,0,,400,200,7,1,,,SYSTEM,,,,,,,,,,,,,,,
+Targeting Beam,zea_dawn_targeting_beam_wpn,0,,0,2100,100,,,0,0,0,1000,1000,,ENERGY,,0,0.2,0.2,0.35,0,,,,,1000000,,,,,,,"SYSTEM, DANGEROUS",lidar,,,,,,,,,,,,,,
+Seeker Flare Launcher,zea_dawn_smartflare,,,,500,,10,400,,,,,0,,ENERGY,0,0,0,0.1,3,1,40,40,0,0,,400,200,7,1,,,SYSTEM,,,,,,,,,,,,,,,
 Seeker Flare Launcher,kol_smartflare,,,,500,,10,400,,,,,0,,ENERGY,0,0,0,0.1,3,0.1,90,90,0,0,,400,200,7,1,,,SYSTEM,,,,,,,,,,,,,,,
 Flare Launcher SLV,kol_flareslv,,,,400,,10,100,,,,,0,,ENERGY,0,0,0,0.2,2,0.15,75,75,0,0,,150,300,3,1,,,SYSTEM,,,,,,,,,,,,,,,36
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Myoga Plasma Chaingun,abyss_plasma_chaingun,2,0.5,1000,550,,60,,3,30,12,,,,ENERGY,60,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR, restricted, kol_abyss_bp",,Unknown,,General,,,,,,,,,,56
-Myoga Ultradriver,abyss_myoga_driver,3,0.2,15000,1150,,240,240,50,8,18,,,,KINETIC,360,,0,2,1,,,,,,,2500,,,300,,,,"kinetic19, LR, restricted, kol_abyss_bp",,Unknown,,Sniper,,,,,,,,,,57.4
-Bricole cannon,abyss_bricole_m,2,,2800,900,,150,,10,12,10,,,,KINETIC,150,,0,1.2,1,,0,15,5,10,,800,,,30,,,,"kinetic12, restricted, kol_abyss_bp",,Unknown,,Anti Shield,,,,,,,,,,56.1
-Styrax Driver,abyss_styrax_driver,3,0.5,7500,950,,160,,24,18,14,,,,KINETIC,145,,0,1.3,2,0.2,0,10,1.6,1,,900,,,30,,,,"kinetic16, restricted, kol_abyss_bp",,Unknown,,Anti Shield,,,,,,,,,,70.7
-Konara Thermal Sniper,abyss_thermal_cannon,3,0.25,20000,1100,,150,,7,18,28,,,,ENERGY,250,,0.33,1.01,3,0.33,,,,,,820,,,150,,,,"energy20, LR, restricted, kol_abyss_bp",,Unknown,,Attrition,,,,,,,,,,55
-Mazuma Torpedo Launcher,abyss_mazuma_m,3,0.2,15000,1200,,3000,,75,6,16,16,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike28, rocket6, restricted, kol_abyss_bp",,Unknown,,Torpedo,Fast,None,,,,,,,TRUE,58.1
-Mazuma Torpedo Rack,abyss_mazuma_s,3,0.2,8000,1200,,3000,,75,10,8,4,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike18, rocket3, restricted, kol_abyss_bp",,Unknown,,Torpedo,Fast,None,,,,,,,TRUE,58.2
-Hosta Graviton Emitter,abyss_hosta_s,3,0.2,10000,700,360,,,4,30,8,,,,KINETIC,,360,0.125,0.125,0.5,0.75,,,,,15000,,,,,,,PD_ALSO,"kinetic6, beam10, PD4, restricted, kol_abyss_bp",,Unknown,,Anti Shield,,,,,,,,,,57.3
-Hosta Graviton Pulser,abyss_hosta_m,3,0.2,15000,800,750,,,12,22,14,,,,KINETIC,,875,0.25,0.5,0.5,1.25,,,,,15000,,,,,,,,"kinetic12, beam15, restricted, kol_abyss_bp",,Unknown,,Anti Shield,,,,,,,,,,57.2
-Hosta Graviton Lance,abyss_hosta_l,3,0.2,25000,1000,1750,,,25,12,28,,,,KINETIC,,1750,0.5,0.5,1,5,,,,,15000,,,,,,,,"kinetic18, beam16, LR, restricted, kol_abyss_bp",,Unknown,,Anti Shield,,,,,,,,,,57.1
-Nanten Slicer,abyss_nanten_s,3,0.7,8000,500,600,,250,0,30,8,,,,HIGH_EXPLOSIVE,,800,0.5,0.5,0.5,4.5,,,,,10000,,,,,,,,"he7, beam8, restricted, kol_abyss_bp",,Unknown,,Abuse,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.2
-Nanten Disassembler,abyss_nanten_l,3,0.25,20000,1000,1600,,1000,0,12,25,,,,HIGH_EXPLOSIVE,,2400,0.5,1,1,8,,,,,10000,,,,,,,FIRE_WHEN_INEFFICIENT,"he23, beam15, LR, restricted",,Unknown,,Cruelty,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.1
+Myoga Plasma Chaingun,zea_plasma_chaingun,2,0.5,1000,550,,60,,3,30,12,,,,ENERGY,60,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR, restricted, zelysium_bp",,Unknown,,General,,,,,,,,,,56
+Myoga Ultradriver,zea_myoga_driver,3,0.2,15000,1150,,240,240,50,8,18,,,,KINETIC,360,,0,2,1,,,,,,,2500,,,300,,,,"kinetic19, LR, restricted, zelysium_bp",,Unknown,,Sniper,,,,,,,,,,57.4
+Bricole cannon,zea_bricole_m,2,,2800,900,,150,,10,12,10,,,,KINETIC,150,,0,1.2,1,,0,15,5,10,,800,,,30,,,,"kinetic12, restricted, zelysium_bp",,Unknown,,Anti Shield,,,,,,,,,,56.1
+Styrax Driver,zea_styrax_driver,3,0.5,7500,950,,160,,24,18,14,,,,KINETIC,145,,0,1.3,2,0.2,0,10,1.6,1,,900,,,30,,,,"kinetic16, restricted, zelysium_bp",,Unknown,,Anti Shield,,,,,,,,,,70.7
+Konara Thermal Sniper,zea_thermal_cannon,3,0.25,20000,1100,,150,,7,18,28,,,,ENERGY,250,,0.33,1.01,3,0.33,,,,,,820,,,150,,,,"energy20, LR, restricted, zelysium_bp",,Unknown,,Attrition,,,,,,,,,,55
+Mazuma Torpedo Launcher,zea_mazuma_m,3,0.2,15000,1200,,3000,,75,6,16,16,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike28, rocket6, restricted, zelysium_bp",,Unknown,,Torpedo,Fast,None,,,,,,,TRUE,58.1
+Mazuma Torpedo Rack,zea_mazuma_s,3,0.2,8000,1200,,3000,,75,10,8,4,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike18, rocket3, restricted, zelysium_bp",,Unknown,,Torpedo,Fast,None,,,,,,,TRUE,58.2
+Hosta Graviton Emitter,zea_hosta_s,3,0.2,10000,700,360,,,4,30,8,,,,KINETIC,,360,0.125,0.125,0.5,0.75,,,,,15000,,,,,,,PD_ALSO,"kinetic6, beam10, PD4, restricted, zelysium_bp",,Unknown,,Anti Shield,,,,,,,,,,57.3
+Hosta Graviton Pulser,zea_hosta_m,3,0.2,15000,800,750,,,12,22,14,,,,KINETIC,,875,0.25,0.5,0.5,1.25,,,,,15000,,,,,,,,"kinetic12, beam15, restricted, zelysium_bp",,Unknown,,Anti Shield,,,,,,,,,,57.2
+Hosta Graviton Lance,zea_hosta_l,3,0.2,25000,1000,1750,,,25,12,28,,,,KINETIC,,1750,0.5,0.5,1,5,,,,,15000,,,,,,,,"kinetic18, beam16, LR, restricted, zelysium_bp",,Unknown,,Anti Shield,,,,,,,,,,57.1
+Nanten Slicer,zea_nanten_s,3,0.7,8000,500,600,,250,0,30,8,,,,HIGH_EXPLOSIVE,,800,0.5,0.5,0.5,4.5,,,,,10000,,,,,,,,"he7, beam8, restricted, zelysium_bp",,Unknown,,Abuse,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.2
+Nanten Disassembler,zea_nanten_l,3,0.25,20000,1000,1600,,1000,0,12,25,,,,HIGH_EXPLOSIVE,,2400,0.5,1,1,8,,,,,10000,,,,,,,FIRE_WHEN_INEFFICIENT,"he23, beam15, LR, restricted",,Unknown,,Cruelty,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.1

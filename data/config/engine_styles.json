@@ -15,7 +15,7 @@
 		#"contrailCampaignColor":[120,50,50,50],
 		"type":"SMOKE" # GLOW or SMOKE
 	},
-	"ABYSS_EDF_TRAIL":{
+	"zea_EDF_TRAIL":{
 		"mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
 		"contrailDuration":0.7,  #1.5
 		"contrailWidthMult":5.0, #0.67
@@ -32,7 +32,7 @@
 		"glowAlternateColor":[255,50,50,255],
 		"engineColor":[250,145,255,255],
 	},	
-	"ABYSS_DAWN_ENG":{
+	"zea_DAWN_ENG":{
 		"engineColor":[100, 214, 98,155],
 		"engineCampaignColor":[100, 214, 98,155],
 		"contrailParticleSizeMult":0,
@@ -44,7 +44,7 @@
 		"contrailCampaignColor":[63, 104, 29,75],
 		"type":"SMOKE"
 	},
-	"ABYSS_EDF_ENG":{
+	"zea_EDF_ENG":{
 		"engineColor":[255,25,25,255],
 		"contrailParticleSizeMult":1,
 		"contrailParticleDuration":3,
@@ -55,7 +55,7 @@
 		"contrailCampaignColor":[248,248,255,75], #255,50,50
 		"type":"SMOKE"
 	},
-	"ABYSS_EDF_ENG_TRAIL":{
+	"zea_EDF_ENG_TRAIL":{
 		"engineColor":[255,25,25,0],
 		"contrailParticleSizeMult":1.5,
 		"contrailParticleDuration":1.5,
@@ -67,7 +67,7 @@
 		"glowSizeMult":0,
 		"type":"SMOKE"
 	},
-	"ABYSS_EDF_ENG_S":{
+	"zea_EDF_ENG_S":{
 		"engineColor":[255,25,25,255],
 		"contrailParticleSizeMult":1,
 		"contrailParticleDuration":1.5,
@@ -78,7 +78,7 @@
 		"contrailCampaignColor":[248,248,255,75], #255,50,50
 		"type":"SMOKE"
 	},
-	"ABYSS_EDF_ENG_F":{
+	"zea_EDF_ENG_F":{
 		"engineColor":[255,50,25,255],
 		"contrailParticleSizeMult":1.75,
 		"contrailParticleDuration":1.5,
@@ -89,7 +89,7 @@
 		"contrailCampaignColor":[248,248,255,35], #255,50,50
 		"type":"SMOKE" # GLOW or SMOKE
 	},
-	"ABYSS_EDF_LT_NOGLOW":{
+	"zea_EDF_LT_NOGLOW":{
 		#"glowShape":"graphics/fx/engineflame32.png",
 		"engineColor":[255,125,25,255],
 		"engineCampaignColor":[200,90,70,255],
@@ -104,7 +104,7 @@
 		"glowSizeMult":0,
 		"type":"SMOKE" # GLOW or SMOKE
 	},
-	"ABYSS_EDF_LT_NOTRAIL":{
+	"zea_EDF_LT_NOTRAIL":{
 		#"glowShape":"graphics/fx/engineflame32.png",
 		"engineColor":[255,125,25,255],
 		"engineCampaignColor":[200,90,70,0],
@@ -118,7 +118,7 @@
 		"glowSizeMult":0.6,
 		"type":"SMOKE" # GLOW or SMOKE
 	},
-	"ABYSS_EDF_AQUILA":{
+	"zea_EDF_AQUILA":{
 		"engineColor":[255,127,163,255],
 		"engineCampaignColor":[255,127,163,255],
 		"contrailParticleSizeMult":2,
@@ -130,7 +130,7 @@
 		"contrailCampaignColor":[200,90,70,75],
 		"type":"SMOKE" # GLOW or SMOKE
 	},
-	"ABYSS_EDF_OMEGA":{
+	"zea_EDF_OMEGA":{
 		"mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
 		"contrailDuration":1.5,
 		"contrailWidthMult":0.67,

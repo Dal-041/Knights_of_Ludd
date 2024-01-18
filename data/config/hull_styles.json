@@ -12,7 +12,7 @@
 		"fluxVentCoreColor":[15,150,255,255],
 		"fluxVentFringeColor":[30,70,255,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png",
-		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/abyss_kol_radial_fx.png",
+		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_kol_radial_fx.png",
 		"engineLoopSet":"engine_loop",
 		"engineAccelerateSet":"engine_accelerate",
 		"empLoopSet":"kol_emp_loop",
@@ -41,7 +41,7 @@
 		"dHullOverlayMedium":"graphics/damage/dmod_overlay_lowtech_medium.png",
 		"dHullOverlayHeavy":"graphics/damage/dmod_overlay_lowtech_heavy.png",
 	},
-	"ABYSS_DUSK_TECH":{
+	"ZEA_DUSK_TECH":{
 		"hyperspaceJitterColor":[100,165,255,200],
 		"baseCampaignExplosionColor":[100,165,255,255],
 		"baseCombatExplosionColor":[100,165,255,255], # smooth flash
@@ -53,7 +53,7 @@
 		"shieldInnerColor":[235,125,255,75],
 		"fluxVentCoreColor":[125,0,155,255],
 		"fluxVentFringeColor":[15,150,255,255],
-		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/abyss_dusk_radial_fx.png",
+		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_radial_fx.png",
 		"engineLoopSet":"engine_loop", 					# id of entry in sounds.json
 		"engineAccelerateSet":"engine_accelerate",		# id of entry in sounds.json
 		"empLoopSet":"emp_loop",						# id of entry in sounds.json
@@ -80,7 +80,7 @@
 		"dHullOverlayMedium":"graphics/damage/dmod_overlay_hightech_medium.png",
 		"dHullOverlayHeavy":"graphics/damage/dmod_overlay_hightech_heavy.png",
 	},
-	"ABYSS_DAWN_TECH":{
+	"ZEA_DAWN_TECH":{
 		"hyperspaceJitterColor":[100,255,100,200],
 		"baseCampaignExplosionColor":[216,156,255,255],
 		"baseCombatExplosionColor":[216,156,255,255],
@@ -92,7 +92,7 @@
 		"fluxVentCoreColor":[30,70,255,255],
 		"fluxVentFringeColor":[150,255,50,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png", # optional, this is the default value
-		"fluxVentRadialTexture":"graphics/fx/abyss_dawn_radial_fx.png", # optional, this is the default value
+		"fluxVentRadialTexture":"graphics/fx/zea_dawn_radial_fx.png", # optional, this is the default value
 		"engineLoopSet":"engine_loop",
 		"engineAccelerateSet":"engine_accelerate",
 		"empLoopSet":"emp_loop",

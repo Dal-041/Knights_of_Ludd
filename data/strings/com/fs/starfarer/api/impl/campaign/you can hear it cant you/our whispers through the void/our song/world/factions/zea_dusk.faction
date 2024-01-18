@@ -183,9 +183,9 @@
 	],
 	"music":{
 		"theme":"music_kol_underworld_system",
-		"encounter_neutral":"music_kol_underworld_encounter",
-		"encounter_hostile":"music_kol_underworld_encounter",
-		"encounter_friendly":"music_kol_underworld_encounter",
+		"encounter_neutral":"music_zea_underworld_encounter",
+		"encounter_hostile":"music_zea_underworld_encounter",
+		"encounter_friendly":"music_zea_underworld_encounter",
 	},
 	"portraits":{
 		"standard_male":[

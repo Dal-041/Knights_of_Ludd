@@ -206,7 +206,7 @@
 		"kol_llyr":10,
 		"kol_tor":3,
 		"kol_drian":4,
-		"kol_buckler":10,
+		#"kol_buckler":10,
 	},
 	"hullmodSellFrequency":{
 		"heavyarmor":10,

@@ -134,64 +134,64 @@
 				"randomStart":true, 
 			},
 		],
-		"music_kol_elysia_encounter":[
+		"music_zea_elysia_encounter":[
 			{
 				"source":"sounds/music",
 				"files":[
-					"kol_abyss_elysian_encounter.ogg",
+					"zea_elysian_encounter.ogg",
 				],
 				"volume":0.8,
 				"randomStart":true,
 			},
 		],
-		"music_kol_elysia_theme":[
+		"music_zea_elysia_theme":[
 			{
 				"source":"sounds/music",
 				"files":[
-					"kol_abyss_elysian_theme.ogg",
+					"zea_elysian_theme.ogg",
 				],
 				"volume":0.5,
 				"randomStart":true,
 			},
 		],
-		"music_kol_lunasea_encounter":[
+		"music_zea_lunasea_encounter":[
 			{
 				"source":"sounds/music",
 				"files":[
-					"kol_abyss_dawntide_encounter.ogg",
+					"zea_dawntide_encounter.ogg",
 				],
 				"volume":0.8,
 				"randomStart":true,
 			},
 		],
-		"music_kol_lunasea_theme":[
+		"music_zea_lunasea_theme":[
 			{
 				"files":[
-					"kol_abyss_dawntide_theme.ogg",
+					"zea_dawntide_theme.ogg",
 				],
 				"source":"sounds/music",
 				"volume":0.5,
 				"randomStart":true,
 			},
 		],
-		"music_kol_underworld_theme":[
+		"music_zea_underworld_theme":[
 			{
 				"source":"sounds/music",
 				"volume":0.5,
 				"files":[
-					"kol_abyss_dusk_theme.ogg",
+					"zea_dusk_theme.ogg",
 				],
 				"randomStart":true,
 			},
 		],
-		"music_kol_underworld_encounter":[
+		"music_zea_underworld_encounter":[
 			{
 				"source":"sounds/music",
 				"volume":0.8,
 				"files":[
-					"kol_abyss_dusk_encounter.ogg",
-					"kol_abyss_dusk_encounter2.ogg",
-					"kol_abyss_dusk_encounter_siren.ogg",
+					"zea_dusk_encounter.ogg",
+					"zea_dusk_encounter2.ogg",
+					"zea_dusk_encounter_siren.ogg",
 				],
 				"randomStart":true, 
 			},

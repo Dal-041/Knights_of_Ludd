@@ -3,7 +3,7 @@
   "hullId": "zea_dawn_qilin",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dawn_qilin.png",
-  "style": "zea_DAWN_TECH",
+  "style": "ZEA_DAWN_TECH",
   "height": 360,
   "width": 224,
   "center": [112, 180],

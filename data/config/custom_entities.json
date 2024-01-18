@@ -1,5 +1,5 @@
 {	
-	"kol_abyss_research_station_dawn":{
+	"zea_research_station_dawn":{
 		"defaultName":"Dawntide-converted Mothership", # used if name=null in addCustomEntity()
 		"nameInText":"Dawntide-converted Mothership",
 		"shortName":"dawn mothership",
@@ -27,26 +27,26 @@
 		"renderCircleIndicatorSelectionFlash":true,
 	},
 	
-	"kol_abyss_cache_low":{
+	"zea_cache_low":{
 		"baseId":"weapons_cache",
 		"defaultName":"Shielded Cache",
-		"defaultRadius":25, 
+		"defaultRadius":20, 
 		"nameInText":"shielded cache",
 	},
-	"kol_abyss_cache_med":{
+	"zea_cache_med":{
 		"baseId":"weapons_cache",
 		"defaultName":"Shielded Cache",
-		"defaultRadius":25, 
+		"defaultRadius":28, 
 		"nameInText":"shielded cache",
 	},
-	"kol_abyss_cache_high":{
+	"zea_cache_high":{
 		"baseId":"weapons_cache",
 		"defaultName":"Shielded Cache",
-		"defaultRadius":25, 
+		"defaultRadius":35, 
 		"nameInText":"shielded cache",
 	},
 	
-	"kol_abyss_research_station_dusk":{
+	"zea_research_station_dusk":{
 		"defaultName":"Duskborne Research Station", # used if name=null in addCustomEntity()
 		"defaultRadius":45, # used if radius<0 in addCustomEntity()
 		"nameInText":"duskborne station",
@@ -70,7 +70,7 @@
 		"layers":[STATIONS], # what layer(s) to render in. See CampaignEngineLayers.java for possible values
 	},
 	
-	"kol_abyss_research_station_elysia":{
+	"zea_research_station_elysia":{
 		"defaultName":"Elysian Fleetyard", # used if name=null in addCustomEntity()
 		"defaultRadius":45, # used if radius<0 in addCustomEntity()
 		"aOrAn":"an",

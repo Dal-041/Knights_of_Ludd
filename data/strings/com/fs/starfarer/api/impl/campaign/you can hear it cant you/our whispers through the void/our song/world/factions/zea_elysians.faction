@@ -177,9 +177,9 @@
 	],
 	"music":{
 		"theme":"music_kol_elysia_system",
-		"encounter_neutral":"music_kol_elysia_encounter",
-		"encounter_hostile":"music_kol_elysia_encounter",
-		"encounter_friendly":"music_kol_elysia_encounter",
+		"encounter_neutral":"music_zea_elysia_encounter",
+		"encounter_hostile":"music_zea_elysia_encounter",
+		"encounter_friendly":"music_zea_elysia_encounter",
 	},
 	"portraits":{
 		"standard_male":[

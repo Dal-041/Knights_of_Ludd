@@ -1,19 +1,19 @@
 commodity,group,freq
 ,,
-nothing,kol_abyss_weapons_slight,200
-"wpn_:{tags:[kol_abyss_bp, !no_drop, !no_drop_salvage]}",kol_abyss_weapons_slight,100
+nothing,zea_weapons_slight,200
+"wpn_:{tags:[zelysium_bp, !no_drop, !no_drop_salvage]}",zea_weapons_slight,100
 ,,
-nothing,kol_abyss_weapons_med,100
-"wpn_:{tags:[kol_abyss_bp, !no_drop, !no_drop_salvage]}",kol_abyss_weapons_med,100
+nothing,zea_weapons_med,100
+"wpn_:{tags:[zelysium_bp, !no_drop, !no_drop_salvage]}",zea_weapons_med,100
 ,,
-nothing,kol_abyss_weapons_high,50
-"wpn_:{tags:[kol_abyss_bp, !no_drop, !no_drop_salvage]}",kol_abyss_weapons_high,100
+nothing,zea_weapons_high,50
+"wpn_:{tags:[zelysium_bp, !no_drop, !no_drop_salvage]}",zea_weapons_high,100
 ,,
-nothing,kol_omega_small_low,80%
-"wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:SMALL}",kol_omega_small_low,100
+nothing,zea_omega_small_low,80%
+"wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:SMALL}",zea_omega_small_low,100
 ,,
-nothing,kol_omega_medium_low,80%
-"wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:MEDIUM}",kol_omega_medium_low,100
+nothing,zea_omega_medium_low,80%
+"wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:MEDIUM}",zea_omega_medium_low,100
 ,,
-nothing,kol_omega_large_low,80%
-"wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:LARGE}",kol_omega_large_low,100
+nothing,zea_omega_large_low,80%
+"wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:LARGE}",zea_omega_large_low,100

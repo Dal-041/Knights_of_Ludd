@@ -3,7 +3,7 @@
   "hullId": "zea_dusk_funayurei",
   "hullSize": "DESTROYER",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei.png",
-  "style": "zea_DUSK_TECH",
+  "style": "ZEA_DUSK_TECH",
   "height": 253,
   "width": 152,
   "center": [76, 130],

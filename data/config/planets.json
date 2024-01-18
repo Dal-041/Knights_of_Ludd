@@ -1,5 +1,5 @@
 {	
-	"star_black_neutron":{
+	"zea_star_black_neutron":{
 		"name":"Black Neutron Star",
 		"tilt":0, # left-right (>0 tilts to the left)
 		"pitch":0, # towards-away from the viewer (>0 pitches towards)
@@ -18,7 +18,7 @@
 		"isPulsar":true,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
 	},
-	"red_hole":{
+	"zea_red_hole":{
 		"name":"Red Hole",
 		"tilt":0, # left-right (>0 tilts to the left)
 		"pitch":0, # towards-away from the viewer (>0 pitches towards)
@@ -41,7 +41,7 @@
 		"scaleMultStarscapeIcon":1.5,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
 	},
-	"white_hole":{
+	"zea_white_hole":{
 		"name":"White Hole",
 		"tilt":0, # left-right (>0 tilts to the left)
 		"pitch":0, # towards-away from the viewer (>0 pitches towards)

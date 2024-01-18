@@ -44,7 +44,7 @@ public class MissionDefinition implements MissionDefinitionPlugin {
 				api.addToFleet(FleetSide.PLAYER, testID, FleetMemberType.SHIP, isFlagship);
 				isFlagship = false;
 			}
-			if (testID.contains("abyss_") && Global.getSettings().getVariant(testID).getSource() == VariantSource.HULL
+			if (testID.contains("zea_") && Global.getSettings().getVariant(testID).getSource() == VariantSource.HULL
 					&& !Global.getSettings().getVariant(testID).getHullSize().equals(ShipAPI.HullSize.FIGHTER)
 					&& Global.getSettings().getVariant(testID).getHullSpec().getFleetPoints() > 0) {
 				api.addToFleet(FleetSide.ENEMY, testID, FleetMemberType.SHIP, isFlagship);
