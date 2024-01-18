@@ -1,40 +1,40 @@
 {
-    "displayName": "Breaker",
+    "displayName": "Attack",
     "fluxCapacitors": 0,
-    "fluxVents": 11,
+    "fluxVents": 9,
     "goalVariant": true,
     "hullId": "kol_marigold",
     "hullMods": [
-        "armoredweapons",
         "missleracks",
+        "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_marigold_Breaker",
+    "variantId": "kol_marigold_Attack",
     "weaponGroups": [
-        {
-            "autofire": false,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0009": "breachpod",
-                "WS0010": "breachpod",
-            }
-        },
         {
             "autofire": true,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0012": "annihilator",
-                "WS0011": "annihilator",
+                "WS0009": "annihilatorpod",
+                "WS0010": "annihilatorpod",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0011": "sabot",
+                "WS0012": "sabot",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "kol_drian",
-                "WS0002": "kol_drian",
+                "WS0001": "lightdualac",
+                "WS0002": "lightdualac",
             }
         },
         {
@@ -50,7 +50,7 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0013": "kol_marigold_tl_Breaker"},
-        {"WS0014": "kol_marigold_tr_Breaker"},
+        {"WS0013": "kol_marigold_tl_Attack"},
+        {"WS0014": "kol_marigold_tr_Attack"},
     ],
 }

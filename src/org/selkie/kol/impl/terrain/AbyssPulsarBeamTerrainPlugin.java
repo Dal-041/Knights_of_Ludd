@@ -230,7 +230,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
 
             float intensity = getIntensityAtPoint(fleet.getLocation());
             if (intensity <= 0) return;
-            if (fleet.hasTag("abyss_rulesfortheebutnotforme")) return;
+            if (fleet.hasTag("zea_rulesfortheebutnotforme")) return;
 
             String buffId = getModId();
             float buffDur = 0.1f;

@@ -1,9 +1,9 @@
 {
     "displayName": "Looming",
     "fluxCapacitors": 0,
-    "fluxVents": 48,
+    "fluxVents": 50,
     "goalVariant": true,
-    "hullId": "zea_dawn_kangcheori",
+    "hullId": "zea_dawn_qilin",
     "hullMods": [
         "expanded_deck_crew",
         "fluxbreakers",
@@ -13,26 +13,37 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_kangcheori_Looming",
+    "variantId": "zea_dawn_qilin_Looming",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0002": "zea_thermal_cannon",
             }
         },
         {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0012": "pilum",
+                "WS0011": "pilum",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
+            }
+        },
+        {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "heavyburst",
-                "WS0011": "pilum",
-                "WS0012": "pilum",
-                "WS0003": "heavyburst",
-                "WS0004": "heavyburst",
-                "WS0009": "heatseeker",
-                "WS0010": "heatseeker",
+                "WS0008": "hveldriver",
+                "WS0007": "hveldriver",
             }
         },
         {
@@ -47,8 +58,9 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "hveldriver",
-                "WS0008": "hveldriver",
+                "WS0004": "heavyburst",
+                "WS0001": "heavyburst",
+                "WS0003": "heavyburst",
             }
         },
     ],

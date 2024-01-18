@@ -23,7 +23,7 @@ public class SpawnDawnBoss {
 		//A "slightly" rampant ALLMOTHER copy.
 		FullName name = new FullName("XLLM01H3R", "", FullName.Gender.ANY);
 		dawnBossCaptain.setName(name);
-		dawnBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png");
+		dawnBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_taotie.png");
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -54,9 +54,9 @@ public class SpawnDawnBoss {
 		* @param transponderOn
 		* @return
 		*/
-		String variant = "abyss_boss_dokkaebi_Fiendish";
+		String variant = "zea_boss_taotie_Devourer";
 		CampaignFleetAPI dawnBossFleet = MagicCampaign.createFleetBuilder()
-		        .setFleetName("The Fiend")
+		        .setFleetName("The Devourer")
 		        .setFleetFaction(PrepareAbyss.dawnID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("00000010")
@@ -65,7 +65,7 @@ public class SpawnDawnBoss {
 		        .setMinFP(500) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("abyss_lunasea_four"))
+				.setSpawnLocation(Global.getSector().getStarSystem("Luna Sea").getEntityById("zea_lunasea_four"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -83,7 +83,7 @@ public class SpawnDawnBoss {
 		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
 		AbyssalFleetManager.setAbyssalCaptains(dawnBossFleet);
-		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_dokkaebi.png");
+		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_taotie.png");
 
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);

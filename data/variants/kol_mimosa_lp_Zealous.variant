@@ -1,0 +1,46 @@
+{
+    "displayName": "Zealous",
+    "fluxCapacitors": 0,
+    "fluxVents": 7,
+    "goalVariant": true,
+    "hullId": "kol_mimosa_lp",
+    "hullMods": [
+        "armoredweapons",
+        "hardened_subsystems",
+        "heavyarmor",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_mimosa_lp_Zealous",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "hellbore",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "hammerrack",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "heavymg",
+                "WS0004": "lightdualmg",
+                "WS0005": "lightdualmg",
+                "WS0001": "lightdualmg",
+                "WS0003": "lightmg",
+                "WS0002": "lightmg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

@@ -1,61 +1,61 @@
 {
-    "displayName": "Merciless",
-    "fluxCapacitors": 1,
-    "fluxVents": 10,
+    "displayName": "Rook",
+    "fluxCapacitors": 2,
+    "fluxVents": 30,
     "goalVariant": true,
-    "hullId": "abyss_dusk_onryo",
+    "hullId": "kol_larkspur",
     "hullMods": [
-        "fluxbreakers",
-        "hardenedshieldemitter",
+        "ballistic_rangefinder",
         "targetingunit",
+        "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dusk_onryo_Merciless",
+    "variantId": "kol_larkspur_Rook",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "plasma",
+                "WS0001": "kol_caelia",
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0008": "phasecl",
-                "WS0007": "phasecl",
+                "WS0009": "jackhammer",
+                "WS0010": "jackhammer",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0009": "abyss_styrax_driver",
-                "WS0010": "abyss_styrax_driver",
+                "WS0006": "kol_drian",
+                "WS0003": "kol_drian",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0014": "railgun",
-                "WS0013": "railgun",
+                "WS0002": "heavyac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "pdburst",
-                "WS0001": "pdburst",
-                "WS0002": "pdburst",
-                "WS0011": "pdburst",
+                "WS0004": "flak",
+                "WS0005": "flak",
             }
         },
     ],
     "wings": [],
-    "modules": [],
+    "modules": [
+        {"WS0011": "kol_larkspur_tl_Rook"},
+        {"WS0012": "kol_larkspur_tr_Rook"},
+    ],
 }

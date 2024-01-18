@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.selkie.kol.fleets.KnightsExpeditionAssignmentAI;
+import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 import org.selkie.kol.world.GenerateKnights;
 
@@ -302,8 +303,8 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         for(StarSystemAPI system : Global.getSector().getStarSystems()) {
             if (system.getStar() != null
                     && (system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE)
-                    || system.getStar().getTypeId().equals("white_hole")
-                    || system.getStar().getTypeId().equals("star_black_neutron"))) {
+                    || system.getStar().getTypeId().equals("zea_white_hole")
+                    || system.getStar().getTypeId().equals("zea_star_black_neutron"))) {
                 if (!system.hasTag(Tags.THEME_HIDDEN) && !system.hasTag(Tags.THEME_SPECIAL)) {
                     if (system.hasTag(Tags.THEME_UNSAFE)) {
                         picker.add(system.getId(), 5);
@@ -311,7 +312,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
                         picker.add(system.getId(), 2);
                     }
                 }
-                if (system.getId().startsWith("dusk_DBH")) {
+                if (system.getId().startsWith(PrepareAbyss.nbsSysPrefix)) {
                     picker.add(system.getId(), 10);
                 }
             }

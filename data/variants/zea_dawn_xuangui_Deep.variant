@@ -1,9 +1,9 @@
 {
     "displayName": "Deep",
-    "fluxCapacitors": 11,
+    "fluxCapacitors": 7,
     "fluxVents": 20,
     "goalVariant": true,
-    "hullId": "zea_dawn_mulguishin",
+    "hullId": "zea_dawn_xuangui",
     "hullMods": [
         "fluxbreakers",
         "hardenedshieldemitter",
@@ -11,21 +11,21 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_mulguishin_Deep",
+    "variantId": "zea_dawn_xuangui_Deep",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "heavymauler",
+                "WS0004": "zea_bricole_m",
+                "WS0003": "zea_bricole_m",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "zea_bricole_m",
-                "WS0004": "zea_bricole_m",
+                "WS0001": "heavymauler",
             }
         },
     ],

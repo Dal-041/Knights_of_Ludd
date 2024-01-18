@@ -25,7 +25,7 @@ public class SpawnDuskBoss {
 		//Songtress, an experitmental AI who was once human.
 		FullName name = new FullName("Songtress", "", FullName.Gender.FEMALE);
 		duskBossCaptain.setName(name);
-		duskBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_alphaplus.png");
+		duskBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -56,10 +56,10 @@ public class SpawnDuskBoss {
 		* @param transponderOn
 		* @return
 		*/
-		String variant = "abyss_boss_yukionna_Ultimate";
+		String variant = "zea_boss_yukionna_Ultimate";
 		CampaignFleetAPI duskBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Yukionna")
-		        .setFleetFaction("kol_dusk")
+		        .setFleetFaction("zea_dusk")
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("00000000")
 		        .setFlagshipVariant(variant)
@@ -79,7 +79,7 @@ public class SpawnDuskBoss {
 		}*/
 
 		AbyssalFleetManager.setAbyssalCaptains(duskBossFleet);
-		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_alphaplus.png");
+		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
 
 		duskBossFleet.getFleetData().sort();
 

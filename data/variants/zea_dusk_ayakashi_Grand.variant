@@ -50,10 +50,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "lightac",
+                "WS0011": "lightac",
                 "WS0012": "lightac",
                 "WS0015": "lightac",
-                "WS0011": "lightac",
+                "WS0016": "lightac",
             }
         },
         {

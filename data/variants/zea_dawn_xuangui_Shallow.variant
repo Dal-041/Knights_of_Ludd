@@ -1,31 +1,30 @@
 {
-    "displayName": "Deep",
-    "fluxCapacitors": 11,
-    "fluxVents": 20,
+    "displayName": "Shallow",
+    "fluxCapacitors": 6,
+    "fluxVents": 18,
     "goalVariant": true,
-    "hullId": "abyss_dawn_mulguishin",
+    "hullId": "zea_dawn_xuangui",
     "hullMods": [
-        "fluxbreakers",
-        "hardenedshieldemitter",
+        "heavyarmor",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dawn_mulguishin_Deep",
+    "variantId": "zea_dawn_xuangui_Shallow",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "heavymauler",
+                "WS0004": "hveldriver",
+                "WS0003": "hveldriver",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "abyss_bricole_m",
-                "WS0004": "abyss_bricole_m",
+                "WS0001": "typhoon",
             }
         },
     ],

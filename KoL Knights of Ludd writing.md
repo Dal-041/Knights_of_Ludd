@@ -126,7 +126,7 @@ A lower caliber and less demanding version of the Mauler cannon, firing antimatt
 
 #### Ryujin
 
-![](data/strings/com/fs/starfarer/api/impl/campaign/you%20can%20hear%20it%20cant%20you/our%20whispers%20through%20the%20void/our%20song/graphics/ships/abyss_edf_ryujin.png)
+![](data/strings/com/fs/starfarer/api/impl/campaign/you%20can%20hear%20it%20cant%20you/our%20whispers%20through%20the%20void/our%20song/graphics/ships/zea_edf_ryujin.png)
 
 ## Skills
 

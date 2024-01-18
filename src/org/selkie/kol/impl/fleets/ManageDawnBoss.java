@@ -23,7 +23,7 @@ public class ManageDawnBoss implements FleetEventListener {
 		}
 
 
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("abyss_boss_dokkaebi")){
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_taotie")){
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -35,7 +35,7 @@ public class ManageDawnBoss implements FleetEventListener {
 			//boss is dead,
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
-				if(f.getHullId().startsWith("abyss_boss_dokkaebi")) salvaged=true;
+				if(f.getHullId().startsWith("zea_boss_taotie")) salvaged=true;
 	                
 	                //set memkey that the wreck must never spawn
 	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DAWN_BOSS_DONE,true);
@@ -51,7 +51,7 @@ public class ManageDawnBoss implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "abyss_boss_dokkaebi_Fiendish",
+	                        "zea_boss_taotie_Devourer",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
@@ -62,6 +62,8 @@ public class ManageDawnBoss implements FleetEventListener {
 	                wreck.setName("Wreck of the Dawntide flagship");
 	                wreck.setFacing((float)Math.random()*360f);
 					wreck.addDropRandom("guaranteed_alpha", 1);
+					wreck.addDropRandom("zea_weapons_high", 6);
+					wreck.addDropRandom("zea_weapons_high", 6);
 					wreck.addDropRandom("techmining_first_find", 6);
 					wreck.addDropRandom("omega_weapons_small", 3);
 					wreck.addDropRandom("omega_weapons_medium", 2);

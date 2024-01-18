@@ -3,7 +3,7 @@
     "fluxCapacitors": 13,
     "fluxVents": 20,
     "goalVariant": true,
-    "hullId": "abyss_dawn_inmyeonjo",
+    "hullId": "zea_dawn_lushu",
     "hullMods": [
         "hardened_subsystems",
         "hardenedshieldemitter",
@@ -12,11 +12,11 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "abyss_dawn_inmyeonjo_Inciting",
+    "variantId": "zea_dawn_lushu_Inciting",
     "weaponGroups": [
         {
-            "autofire": true,
-            "mode": "LINKED",
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS0004": "phasebeam",
                 "WS0001": "phasebeam",
@@ -35,6 +35,12 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0003": "gravitonbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0002": "ionbeam",
             }
         },

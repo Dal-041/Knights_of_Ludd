@@ -14,7 +14,7 @@ public class AbyssEventHorizon extends EventHorizonPlugin {
     @Override
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
-            if (entity.hasTag("abyss_rulesfortheebutnotforme")) return;
+            if (entity.hasTag("zea_rulesfortheebutnotforme")) return;
         }
         super.applyEffect(entity, days);
     }

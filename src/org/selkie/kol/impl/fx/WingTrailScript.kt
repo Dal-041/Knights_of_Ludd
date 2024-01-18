@@ -12,7 +12,7 @@ import org.magiclib.plugins.MagicTrailPlugin
 class WingTrailScript : EveryFrameWeaponEffectPlugin {
     private val effectInterval = IntervalUtil(0.05f, 0.05f)
     private var trailID: Float? = null
-    private val trailSprite = Global.getSettings().getSprite("fx", "abyss_elysia_vortice")
+    private val trailSprite = Global.getSettings().getSprite("fx", "zea_elysia_vortice")
     override fun advance(amount: Float, engine: CombatEngineAPI, weapon: WeaponAPI) {
         if (engine.isPaused) {
             return

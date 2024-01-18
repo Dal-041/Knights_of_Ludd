@@ -1,19 +1,19 @@
 {
     "displayName": "Nametaker",
-    "fluxCapacitors": 8,
+    "fluxCapacitors": 6,
     "fluxVents": 30,
     "goalVariant": true,
-    "hullId": "zea_dawn_dalgyalguishin",
+    "hullId": "zea_dawn_bixi",
     "hullMods": [
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_dalgyalguishin_Nametaker",
+    "variantId": "zea_dawn_bixi_Nametaker",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "tachyonlance",
@@ -31,8 +31,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0011": "lightac",
-                "WS0010": "lightac",
+                "WS0011": "lightdualac",
+                "WS0010": "lightdualac",
             }
         },
         {

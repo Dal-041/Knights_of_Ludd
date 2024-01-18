@@ -1,6 +1,6 @@
 {
     "displayName": "Anointed",
-    "fluxCapacitors": 4,
+    "fluxCapacitors": 6,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "kol_tamarisk",
@@ -15,15 +15,16 @@
     "variantId": "kol_tamarisk_Anointed",
     "weaponGroups": [
         {
-            "autofire": true,
-            "mode": "LINKED",
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0001": "kol_llyr",
+                "WS0008": "miningblaster",
+                "WS0009": "miningblaster",
             }
         },
         {
-            "autofire": true,
-            "mode": "LINKED",
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS0004": "annihilator",
                 "WS0005": "annihilator",
@@ -35,16 +36,15 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "miningblaster",
-                "WS0009": "miningblaster",
+                "WS0001": "kol_llyr",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0011": "railgun",
-                "WS0010": "railgun",
+                "WS0011": "kol_drian",
+                "WS0010": "kol_drian",
             }
         },
         {

@@ -28,7 +28,7 @@ public class AbyssAsteroidImpact implements EveryFrameScript {
     public AbyssAsteroidImpact(CampaignFleetAPI fleet, boolean dealDamage) {
         this.fleet = fleet;
 
-        if (fleet.hasTag("abyss_rulesfortheebutnotforme")) {
+        if (fleet.hasTag("zea_rulesfortheebutnotforme")) {
             dV = new Vector2f();
             dV.x = 0;
             dV.y = 0;

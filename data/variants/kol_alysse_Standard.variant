@@ -1,6 +1,6 @@
 {
     "displayName": "Standard",
-    "fluxCapacitors": 5,
+    "fluxCapacitors": 1,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "kol_alysse",
@@ -40,8 +40,8 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "lightac",
-                "WS0009": "lightac",
-                "WS0011": "lightac",
+                "WS0009": "kol_drian",
+                "WS0011": "kol_drian",
                 "WS0010": "lightac",
             }
         },

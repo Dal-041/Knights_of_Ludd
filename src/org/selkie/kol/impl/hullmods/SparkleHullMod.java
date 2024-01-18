@@ -25,9 +25,9 @@ public class SparkleHullMod extends BaseHullMod {
     private static Color hfColor = new Color(255,80,100,225);
     private static Color hfEMPColor = new Color(255,80,100,255);
 
-    public static final String NINAYA = "abyss_boss_ninaya";
-    public static final String NINMAH = "abyss_boss_ninmah";
-    public static final String NINEVEH = "abyss_boss_nineveh";
+    public static final String NINAYA = "zea_boss_ninaya";
+    public static final String NINMAH = "zea_boss_ninmah";
+    public static final String NINEVEH = "zea_boss_nineveh";
     public static final String HFCOOLDOWNTAG = "HF_SPARKLE";
 
     public static float shipDamageReg = 1f;

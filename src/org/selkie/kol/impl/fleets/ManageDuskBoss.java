@@ -22,7 +22,7 @@ public class ManageDuskBoss implements FleetEventListener {
 	            return;
 		}
 	        
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("abyss_boss_yukionna")){
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_yukionna")){
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -34,7 +34,7 @@ public class ManageDuskBoss implements FleetEventListener {
 			//boss is dead,
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
-				if(f.getHullId().startsWith("abyss_boss_yukionna")) salvaged=true;
+				if(f.getHullId().startsWith("zea_boss_yukionna")) salvaged=true;
 	                
 	                //set memkey that the wreck must never spawn
 	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DUSK_BOSS_DONE,true);
@@ -50,7 +50,7 @@ public class ManageDuskBoss implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "abyss_boss_yukionna_Ultimate",
+	                        "zea_boss_yukionna_Ultimate",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,

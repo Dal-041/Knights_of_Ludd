@@ -3,17 +3,17 @@
     "fluxCapacitors": 0,
     "fluxVents": 23,
     "goalVariant": true,
-    "hullId": "zea_dawn_imugi",
+    "hullId": "zea_dawn_tianma",
     "hullMods": [
         "expanded_deck_crew",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_imugi_Hungry",
+    "variantId": "zea_dawn_tianma_Hungry",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0006": "hveldriver",
@@ -21,15 +21,11 @@
             }
         },
         {
-            "autofire": true,
-            "mode": "LINKED",
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS0008": "pilum",
                 "WS0009": "pilum",
-                "WS0001": "pdlaser",
-                "WS0002": "pdlaser",
-                "WS0010": "pdlaser",
-                "WS0011": "pdlaser",
             }
         },
         {
@@ -45,6 +41,16 @@
             "weapons": {
                 "WS0004": "lightac",
                 "WS0005": "lightac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "pdlaser",
+                "WS0011": "pdlaser",
+                "WS0002": "pdlaser",
+                "WS0010": "pdlaser",
             }
         },
     ],

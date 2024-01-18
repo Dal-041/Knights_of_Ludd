@@ -3,7 +3,7 @@
     "fluxCapacitors": 11,
     "fluxVents": 20,
     "goalVariant": true,
-    "hullId": "zea_dawn_inmyeonjo",
+    "hullId": "zea_dawn_lushu",
     "hullMods": [
         "eccm",
         "heavyarmor",
@@ -13,11 +13,11 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_inmyeonjo_Profane",
+    "variantId": "zea_dawn_lushu_Profane",
     "weaponGroups": [
         {
-            "autofire": true,
-            "mode": "ALTERNATING",
+            "autofire": false,
+            "mode": "LINKED",
             "weapons": {
                 "WS0004": "heavyac",
                 "WS0001": "heavyac",
@@ -28,8 +28,14 @@
             "mode": "ALTERNATING",
             "weapons": {
                 "WS0008": "atropos",
-                "WS0006": "atropos",
                 "WS0007": "atropos",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0006": "atropos",
                 "WS0005": "atropos",
             }
         },

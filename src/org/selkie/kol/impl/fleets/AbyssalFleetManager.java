@@ -73,11 +73,11 @@ public class AbyssalFleetManager extends SeededFleetManager {
         picker.add("derelict",1f);
         picker.add("remnant", 1f);
         float w = primary.equals(PrepareAbyss.dawnID) ? 0f : 1f;
-        picker.add("kol_dawn", w);
+        picker.add(PrepareAbyss.dawnID, w);
         w = primary.equals(PrepareAbyss.duskID) ? 0f : 1f;
-        picker.add("kol_dusk", w);
+        picker.add(PrepareAbyss.duskID, w);
         w = primary.equals(PrepareAbyss.elysianID) ? 0f : 1f;
-        picker.add("kol_elysians", w);
+        picker.add(PrepareAbyss.elysianID, w);
         if (PrepareAbyss.useDomres) picker.add("domres", 1f);
         if (PrepareAbyss.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
         w = primary.equals(PrepareAbyss.dawnID) ? 0.75f : 0f;
@@ -184,10 +184,10 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
     @Override
     public boolean isDone() {
-        String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";
-        String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
-        String MEMKEY_KOL_ELYSIAN_BOSS2_DONE = "$kol_elysian_boss2_done";
-        String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$kol_elysian_boss1_done";
+        String MEMKEY_KOL_DAWN_BOSS_DONE = "$zea_dawn_boss_done";
+        String MEMKEY_KOL_DUSK_BOSS_DONE = "$zea_dusk_boss_done";
+        String MEMKEY_KOL_ELYSIAN_BOSS2_DONE = "$zea_elysian_boss2_done";
+        String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$zea_elysian_boss1_done";
 
         switch (fac) {
             case PrepareAbyss.dawnID:

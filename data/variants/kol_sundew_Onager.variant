@@ -1,6 +1,6 @@
 {
     "displayName": "Onager",
-    "fluxCapacitors": 8,
+    "fluxCapacitors": 4,
     "fluxVents": 10,
     "goalVariant": true,
     "hullId": "kol_sundew",
@@ -25,8 +25,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "lightac",
-                "WS0002": "lightac",
+                "WS0003": "kol_drian",
+                "WS0002": "kol_drian",
             }
         },
     ],

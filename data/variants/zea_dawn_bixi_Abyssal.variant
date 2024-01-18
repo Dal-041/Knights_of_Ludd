@@ -1,19 +1,19 @@
 {
     "displayName": "Abyssal",
-    "fluxCapacitors": 0,
-    "fluxVents": 11,
+    "fluxCapacitors": 5,
+    "fluxVents": 12,
     "goalVariant": true,
-    "hullId": "zea_dawn_dalgyalguishin",
+    "hullId": "zea_dawn_bixi",
     "hullMods": [
         "safetyoverrides",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_dalgyalguishin_Abyssal",
+    "variantId": "zea_dawn_bixi_Abyssal",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "devastator",
@@ -23,30 +23,36 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0011": "lightag",
+                "WS0010": "lightag",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0007": "vulcan",
+                "WS0008": "ioncannon",
+                "WS0009": "ioncannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0002": "heavymg",
                 "WS0003": "heavymg",
-                "WS0004": "heavyneedler",
-                "WS0005": "heavyneedler",
+                "WS0004": "heavymg",
+                "WS0005": "heavymg",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0010": "lightag",
-                "WS0011": "lightag",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0008": "pdlaser",
-                "WS0009": "pdlaser",
-                "WS0006": "pdlaser",
-                "WS0007": "pdlaser",
-                "WS0013": "pdlaser",
                 "WS0012": "pdlaser",
+                "WS0013": "pdlaser",
             }
         },
     ],

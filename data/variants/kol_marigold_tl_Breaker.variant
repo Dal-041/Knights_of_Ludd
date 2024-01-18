@@ -1,8 +1,8 @@
 {
     "displayName": "Breaker",
     "fluxCapacitors": 0,
-    "fluxVents": 0,
-    "goalVariant": false,
+    "fluxVents": 1,
+    "goalVariant": true,
     "hullId": "kol_marigold_tl",
     "hullMods": [],
     "permaMods": [],

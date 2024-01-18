@@ -24,7 +24,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 
 		boolean salvaged1 = false;
 		boolean killed1 = false;
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("abyss_boss_corruptingheart")) {
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_corruptingheart")) {
 
 			//remove the fleet if flag is dead
 			if (!fleet.getMembersWithFightersCopy().isEmpty()) {
@@ -39,7 +39,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 
 		if (killed1) {
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-				if (f.getHullId().startsWith("abyss_boss_corruptingheart")) {
+				if (f.getHullId().startsWith("zea_boss_corruptingheart")) {
 					salvaged1 = true;
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
@@ -55,7 +55,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 				}
 				//spawn the derelict object
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
-						"abyss_boss_corruptingheart_Unholy",
+						"zea_boss_corruptingheart_Unholy",
 						ShipRecoverySpecial.ShipCondition.WRECKED,
 						false,
 						-1,

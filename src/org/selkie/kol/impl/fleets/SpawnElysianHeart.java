@@ -20,7 +20,7 @@ public class SpawnElysianHeart {
 
 		PersonAPI elysianBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
 		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
-		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png");
+		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png");
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -51,7 +51,7 @@ public class SpawnElysianHeart {
 		* @param transponderOn
 		* @return
 		*/
-		String variant = "abyss_boss_corruptingheart_Unholy";
+		String variant = "zea_boss_corruptingheart_Unholy";
 		CampaignFleetAPI elysianHeartFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Corrupting Heart")
 		        .setFleetFaction(PrepareAbyss.elysianID)
@@ -62,7 +62,7 @@ public class SpawnElysianHeart {
 		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_abyss"))
+				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("zea_elysia_abyss"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -72,7 +72,7 @@ public class SpawnElysianHeart {
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);
-		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_corrupting_heart.png");
+		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png");
 
 		elysianHeartFleet.getFleetData().sort();
 

@@ -19,7 +19,7 @@ public class SpawnElysianAmaterasu {
 	public static boolean SpawnElysianAmaterasu() {
 
 		PersonAPI elysianBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
-		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png");
+		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png");
 		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
 
 		/**
@@ -51,7 +51,7 @@ public class SpawnElysianAmaterasu {
 		* @param transponderOn
 		* @return
 		*/
-		String variant = "abyss_boss_amaterasu_Blinding";
+		String variant = "zea_boss_amaterasu_Blinding";
 		CampaignFleetAPI elysianBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Amaterasu")
 		        .setFleetFaction(PrepareAbyss.elysianID)
@@ -62,7 +62,7 @@ public class SpawnElysianAmaterasu {
 		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("abyss_elysia_silence"))
+				.setSpawnLocation(Global.getSector().getStarSystem("Elysia").getEntityById("zea_elysia_silence"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -72,7 +72,7 @@ public class SpawnElysianAmaterasu {
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianBossFleet);
-		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/abyss_boss_amaterasu.png");
+		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png");
 		elysianBossFleet.getFleetData().sort();
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);

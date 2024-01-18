@@ -35,7 +35,7 @@ public class TrackFleet implements EveryFrameScript {
             if (Global.getSector().getPlayerFleet() != null) {
                 fleet = Global.getSector().getPlayerFleet();
                 if (fleet.isInHyperspaceTransition()) return;
-                if (fleet.getContainingLocation().getId().equals("elysia")) {
+                if (fleet.getContainingLocation().getId().equals(PrepareAbyss.elysiaSysID)) {
                     under = Global.getSector().getStarSystem("Underspace");
                     if (under!= null && Math.abs(fleet.getLocation().getX()) <= 250 && Math.abs(fleet.getLocation().getY()) <= 250 && under.getEntityById(PrepareAbyss.undergateID) != null) {
                         iSecond.advance(amount);

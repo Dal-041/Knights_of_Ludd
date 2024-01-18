@@ -52,10 +52,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "zea_hosta_s",
-                "WS0014": "zea_hosta_s",
                 "WS0013": "zea_hosta_s",
+                "WS0014": "zea_hosta_s",
                 "WS0015": "zea_hosta_s",
+				"WS0016": "zea_hosta_s",
             }
         },
         {
