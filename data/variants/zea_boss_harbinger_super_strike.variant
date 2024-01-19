@@ -1,0 +1,43 @@
+{
+    "displayName": "Super Strike",
+    "fluxCapacitors": 20,
+    "fluxVents": 17,
+    "goalVariant": false,
+    "hullId": "harbinger",
+    "hullMods": [
+        "phase_anchor",
+    ],
+    "permaMods": [
+        "armoredweapons",
+        "heavyarmor",
+        "magazines",
+    ],
+    "sMods": [
+        "armoredweapons",
+        "heavyarmor",
+        "magazines",
+    ],
+    "suppressedMods": [],
+    "variantId": "zea_boss_harbinger_super_strike",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "phasebeam",
+                "WS 002": "ionpulser",
+                "WS 003": "ionpulser",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 004": "swarmer",
+                "WS 005": "swarmer",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

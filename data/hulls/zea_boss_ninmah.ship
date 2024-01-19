@@ -17,7 +17,8 @@
     "automated",
     "kol_ea_sparkle",
     "ex_phase_coils",
-    "kol_ea_mist"
+    "kol_ea_mist",
+    "zea_phase_boss"
   ],
   "builtInWeapons": {
     "WS0016": "zea_boss_resonator2",

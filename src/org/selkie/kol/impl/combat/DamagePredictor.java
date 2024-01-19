@@ -31,6 +31,7 @@ public class DamagePredictor {
         public float damage;
         public float empDamage;
         public boolean softFlux;
+        public String enemyId;
     }
 
     public static List<FutureHit> incomingProjectileHits(ShipAPI ship, Vector2f testPoint){
