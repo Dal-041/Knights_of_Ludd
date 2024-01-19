@@ -25,9 +25,9 @@ public class ReportTransit implements GateTransitListener {
 		if (!fleet.isPlayerFleet() || gateFrom == null || Global.getSector().getClock().getCycle() <= 206) return;
 
 		if (Math.random() <= 0.05f) { //0.05f
-			StarSystemAPI destSys = Global.getSector().getStarSystem("Underspace");
+			StarSystemAPI destSys = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
 			if (destSys == null) return;
-			SectorEntityToken dest = destSys.getEntityById(PrepareAbyss.undergateID);
+			SectorEntityToken dest = destSys.getEntityById(PrepareAbyss.nullgateID);
 			float dist = Misc.getDistanceLY(dest, gateTo);
 
 			if (dist < 12f) {

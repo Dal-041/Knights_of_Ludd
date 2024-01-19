@@ -1,6 +1,6 @@
 package org.selkie.kol.fleets;
 
-import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 
 import com.fs.starfarer.api.Global;
@@ -9,9 +9,6 @@ import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
-import com.fs.starfarer.api.impl.campaign.ids.Submarkets;
 import org.selkie.kol.fleets.ManageInvictus;
 
 public class SpawnInvictus {
@@ -19,11 +16,11 @@ public class SpawnInvictus {
 	public static boolean spawnInvictus() {
 	        
 		SectorEntityToken target=null;
-		if(Global.getSector().getEntityById("chalcedon")!=null && Global.getSector().getEntityById("chalcedon").getFaction() == Global.getSector().getFaction("luddic_path")){
+		if(Global.getSector().getEntityById("chalcedon")!=null && Global.getSector().getEntityById("chalcedon").getFaction() == Global.getSector().getFaction(Factions.LUDDIC_PATH)){
 	            target = Global.getSector().getEntityById("chalcedon");
 	        } else {
 	            for(MarketAPI markets : Global.getSector().getEconomy().getMarketsCopy()){
-	                if(markets.getFaction().getId().equals("luddic_path")){
+	                if(markets.getFaction().getId().equals(Factions.LUDDIC_PATH)){
 	                    if(target==null || 
 	                    (markets.hasSubmarket(Submarkets.GENERIC_MILITARY) 
 	                    && (!target.getMarket().hasSubmarket(Submarkets.GENERIC_MILITARY)
@@ -35,7 +32,7 @@ public class SpawnInvictus {
 	        }
 	        if(target!=null) {
 
-	            PersonAPI invictusCaptain = MagicCampaign.createCaptainBuilder("luddic_path").create();
+	            PersonAPI invictusCaptain = MagicCampaign.createCaptainBuilder(Factions.LUDDIC_PATH).create();
 
 	            /**
 	            * Creates a fleet with a defined flagship and optional escort
@@ -69,7 +66,7 @@ public class SpawnInvictus {
 	            String variant = "kol_invictus_lp_Hallowed";
 	            CampaignFleetAPI invictusFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
 	                    .setFleetName("Hammer of Ludd")
-	                    .setFleetFaction("luddic_path")
+	                    .setFleetFaction(Factions.LUDDIC_PATH)
 	                    .setFleetType(FleetTypes.TASK_FORCE)
 	                    .setFlagshipName("In the Glory of the Blessed")
 	                    .setFlagshipVariant(variant)

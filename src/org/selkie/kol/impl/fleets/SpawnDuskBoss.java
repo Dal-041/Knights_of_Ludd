@@ -62,7 +62,7 @@ public class SpawnDuskBoss {
 		        .setMinFP(480) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.DEFEND_LOCATION)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.underspaceSysID).getCenter())
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName).getCenter())
 		        .setIsImportant(true)
 		        .setTransponderOn(false)
 		        .create();

@@ -63,7 +63,7 @@ public class SpawnDawnBoss {
 		        .setMinFP(500) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysID).getEntityById("zea_lunasea_four"))
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName).getEntityById("zea_lunasea_four"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();

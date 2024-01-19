@@ -269,6 +269,8 @@
 			"nebula_zea_purpleblue_map":"graphics/terrain/nebula_kol_purpleblue_map.png",
 			"nebula_zea_dawntide":"graphics/terrain/nebula_kol_dawntide2b.png",
 			"nebula_zea_dawntide_map":"graphics/terrain/nebula_kol_dawntide2b_map.png",
+			"rings_thicc":"graphics/terrain/rings_thicc.png",
+			"rings_thicc_darkred":"graphics/terrain/rings_thicc_darkred.png",
 			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png",
 		},
 		"characters":{

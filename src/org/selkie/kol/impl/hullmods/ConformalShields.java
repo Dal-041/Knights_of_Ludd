@@ -33,7 +33,7 @@ public class ConformalShields extends BaseHullMod {
         //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
         //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_conformal_shield");
-        if (ship.getShield().getArc() >= 90f) ship.getShield().setArc(90f);
+        if (ship.getShield().getArc() >= 80f) ship.getShield().setArc(80f);
      }
 
     @Override
@@ -46,9 +46,9 @@ public class ConformalShields extends BaseHullMod {
 
             //center = ship.getLocation();
 
-            float pad = 10 + ship.getHullSize().ordinal() * 5; //lazy method
-            float radiusNew = (Math.max(maxX, maxY)*2 - Math.min(maxX, maxY) + pad);
-            ship.getShield().setRadius(radiusNew);
+            //float pad = 10 + ship.getHullSize().ordinal() * 5; //lazy method
+            //float radiusNew = (Math.max(maxX, maxY)*2 - Math.min(maxX, maxY) + pad);
+            //ship.getShield().setRadius(radiusNew);
             //float ratioRad = radiusO / radiusNew;
             if (maxX != 0) inited = true;
         }

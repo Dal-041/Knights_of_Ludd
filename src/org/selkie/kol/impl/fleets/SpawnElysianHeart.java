@@ -61,7 +61,7 @@ public class SpawnElysianHeart {
 		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysID).getEntityById("zea_elysia_abyss"))
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_abyss"))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
