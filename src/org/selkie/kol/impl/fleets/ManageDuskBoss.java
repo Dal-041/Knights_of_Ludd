@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class ManageDuskBoss implements FleetEventListener {
 	public final String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
@@ -18,11 +19,11 @@ public class ManageDuskBoss implements FleetEventListener {
 	public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
 
 		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_DUSK_BOSS_DONE)
-	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_DUSK_BOSS_DONE)){
+	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_DUSK_BOSS_DONE)) {
 	            return;
 		}
 	        
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_yukionna")){
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_yukionna")) {
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -32,6 +33,12 @@ public class ManageDuskBoss implements FleetEventListener {
 			}
 	            
 			//boss is dead,
+			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(PrepareAbyss.abilityJumpDusk)) {
+				Global.getSector().getPlayerFleet().addAbility(PrepareAbyss.abilityJumpDusk);
+				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + PrepareAbyss.abilityJumpDusk, true, 0);
+				Global.getSector().getCharacterData().addAbility(PrepareAbyss.abilityJumpDusk);
+			}
+
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
 				if(f.getHullId().startsWith("zea_boss_yukionna")) salvaged=true;

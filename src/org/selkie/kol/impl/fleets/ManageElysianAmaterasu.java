@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class ManageElysianAmaterasu implements FleetEventListener {
 	public final String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$kol_elysian_boss1_done";
@@ -18,7 +19,7 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 	public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
 
 		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_ELYSIAN_BOSS1_DONE)
-	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_ELYSIAN_BOSS1_DONE)){
+	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_ELYSIAN_BOSS1_DONE)) {
 	            return;
 		}
 
@@ -27,6 +28,15 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 
 		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_amaterasu")) {
 
+			//boss is dead,
+			if(Global.getSector().getMemoryWithoutUpdate().contains("$kol_elysian_boss2_done")
+					&& Global.getSector().getMemoryWithoutUpdate().getBoolean("$kol_elysian_boss2_done")) {
+				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(PrepareAbyss.abilityJumpElysia)) {
+					Global.getSector().getPlayerFleet().addAbility(PrepareAbyss.abilityJumpElysia);
+					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + PrepareAbyss.abilityJumpElysia, true, 0);
+					Global.getSector().getCharacterData().addAbility(PrepareAbyss.abilityJumpElysia);
+				}
+			}
 			//remove the fleet if flag is dead
 			if (!fleet.getMembersWithFightersCopy().isEmpty()) {
 				SectorEntityToken source = fleet.getCurrentAssignment().getTarget();

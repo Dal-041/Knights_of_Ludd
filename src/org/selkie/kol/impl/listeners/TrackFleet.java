@@ -12,8 +12,8 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 public class TrackFleet implements EveryFrameScript {
 
     private boolean inited = false;
-    protected IntervalUtil iMain = new IntervalUtil(10f, 10f);
-    protected IntervalUtil iSecond = new IntervalUtil(12f, 12f); //multiplied by iMain
+    protected IntervalUtil iMain = new IntervalUtil(20, 20);
+    protected IntervalUtil iSecond = new IntervalUtil(5, 5); //multiplied by iMain
     protected StarSystemAPI under = null;
     protected SectorEntityToken targ = null;
 
@@ -37,16 +37,12 @@ public class TrackFleet implements EveryFrameScript {
                 if (fleet.isInHyperspaceTransition()) return;
                 if (fleet.getContainingLocation().getId().equalsIgnoreCase(PrepareAbyss.elysiaSysName)) {
                     under = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
-                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 250 && Math.abs(fleet.getLocation().getY()) <= 250 && under.getEntityById(PrepareAbyss.nullgateID) != null) {
-                        iSecond.advance(amount);
+                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 350 && Math.abs(fleet.getLocation().getY()) <= 350 && under.getEntityById(PrepareAbyss.nullgateID) != null) {
+                        iSecond.advance(1);
                         if (iSecond.intervalElapsed()) {
                             targ = under.getEntityById(PrepareAbyss.nullgateID);
                             JumpPointAPI.JumpDestination dest = new JumpPointAPI.JumpDestination(targ, null);
                             Global.getSector().doHyperspaceTransition(fleet, fleet, dest);
-//                            fleet.getContainingLocation().removeEntity(fleet);
-//                            targ.getContainingLocation().addEntity(fleet);
-//                            Global.getSector().setCurrentLocation(targ.getContainingLocation());
-//                            fleet.setLocation(targ.getLocation().x, targ.getLocation().y);
                             fleet.setNoEngaging(1.0f);
                         }
                     } else {

@@ -109,6 +109,10 @@ public class PrepareAbyss {
 			"zea_edf_tamamo_Striker"
 	};
 
+	public static final String abilityJumpElysia = "fracture_jump_elysia";
+	public static final String abilityJumpDawn = "fracture_jump_luna_sea";
+	public static final String abilityJumpDusk = "fracture_jump_pullsar";
+
 	public static final String path = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
 	public static final String[] portraitsDawnPaths = {path.concat("zea_dawn_1.png"), path.concat("zea_dawn_2.png"), path.concat("zea_dawn_3.png")};
 	public static final String[] portraitsDuskPaths = {path.concat("zea_dusk_1.png"), path.concat("zea_dusk_2.png"), path.concat("zea_dusk_3.png")};
@@ -242,7 +246,7 @@ public class PrepareAbyss {
     	system.setName(elysiaSysName);
     	elysia.applySpecChanges();
     	SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
-    			6000,
+    			5600,
 				250,
 				elysia,
 				-10f,
@@ -316,7 +320,7 @@ public class PrepareAbyss {
     	third.getMarket().addCondition(Conditions.EXTREME_TECTONIC_ACTIVITY);
     	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
 
-		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 22, Terrain.RING, "Accretion Disk");
+		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
 
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);
