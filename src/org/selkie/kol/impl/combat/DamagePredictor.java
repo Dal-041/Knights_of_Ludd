@@ -13,6 +13,7 @@ import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
+import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.ReflectionUtils;
@@ -249,13 +250,23 @@ public class DamagePredictor {
             enemy.getFluxTracker().isVenting(); enemy.getFluxTracker().getTimeToVent();
             for (WeaponAPI weapon: enemy.getAllWeapons()){
 
-                if(weapon.isDecorative())
-                    continue;
+                if(weapon.isDecorative()) continue;
 
                 // ignore weapon if out of range
                 float distanceFromWeaponSquared = MathUtils.getDistanceSquared(weapon.getLocation(), testPoint);
                 float targetingRadius = Misc.getTargetingRadius(enemy.getLocation(), ship, false);
                 if((weapon.getRange()+targetingRadius+FUZZY_RANGE)*(weapon.getRange()+targetingRadius+FUZZY_RANGE) < distanceFromWeaponSquared) continue;
+
+                // ignore weapon if shooting through other ship
+                boolean occluded = false;
+                for(ShipAPI occlusion : nearbyEnemies){
+                    if (occlusion == enemy) continue;
+                    Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), weapon.getLocation());
+                    if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() == null ? false : occlusion.getShield().isOn())){
+                        occluded = true;
+                    }
+                }
+                if (occluded) continue;
 
                 // calculate disable time if applicable
                 float disabledTime = weapon.isDisabled() ? weapon.getDisabledDuration() : 0;
@@ -301,6 +312,7 @@ public class DamagePredictor {
                     float currentTime = preAimedTime;
                     while(currentTime < maxTime - beamDelay){
                         FutureHit futurehit = new FutureHit();
+                        futurehit.enemyId = enemy.getId();
                         futurehit.timeToHit = currentTime + beamDelay;
                         futurehit.angle = shipToWeaponAngle;
                         futurehit.damageType = weapon.getDamageType();
@@ -349,6 +361,7 @@ public class DamagePredictor {
                         while (chargeupTime > 0) { // resolve chargeup damage
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = currentTime;
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -366,6 +379,7 @@ public class DamagePredictor {
                         while (activeTime > 0) { // resolve active damage
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = currentTime;
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -383,6 +397,7 @@ public class DamagePredictor {
                         while (chargedownTime > 0) { // resolve chargedown damage
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = currentTime;
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
@@ -448,6 +463,7 @@ public class DamagePredictor {
                         currentTime += chargeupTime;
                         if(currentTime > preAimedTime){
                             FutureHit futurehit = new FutureHit();
+                            futurehit.enemyId = enemy.getId();
                             futurehit.timeToHit = (currentTime + travelTime);
                             futurehit.angle = shipToWeaponAngle;
                             futurehit.damageType = weapon.getDamageType();
@@ -494,6 +510,7 @@ public class DamagePredictor {
                         while(burstTime > 0.01f) { // avoid floating point jank
                             if (currentTime > preAimedTime) {
                                 FutureHit futurehit = new FutureHit();
+                                futurehit.enemyId = enemy.getId();
                                 futurehit.timeToHit = (currentTime + travelTime);
                                 futurehit.angle = shipToWeaponAngle;
                                 futurehit.damageType = weapon.getDamageType();
