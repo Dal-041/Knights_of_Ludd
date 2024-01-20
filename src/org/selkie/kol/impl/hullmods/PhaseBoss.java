@@ -81,6 +81,8 @@ public class PhaseBoss extends BaseHullMod {
         @Override
         public void advance(float amount) {
             engine = Global.getCombatEngine();
+            float armorRegen = 0.8f;
+            float hpRegen = 0.6f;
             float maxTime = 8f;
 
             if(phaseTwo && phaseTwoTimer < maxTime){
@@ -92,12 +94,13 @@ public class PhaseBoss extends BaseHullMod {
 
                 ship.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                 ship.getFluxTracker().setHardFlux(0f);
-                ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()/1.8f, phaseTwoTimer/maxTime));
+                ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/maxTime));
                 ArmorGridAPI armorGrid = ship.getArmorGrid();
 
                 for(int i = 0; i < armorGrid.getGrid().length; i++){
                     for(int j = 0; j < armorGrid.getGrid()[0].length; j++){
-                        armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()/1.3f, phaseTwoTimer/maxTime));
+                        if(armorGrid.getArmorValue(i, j) < armorGrid.getMaxArmorInCell()*armorRegen)
+                            armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()*armorRegen, phaseTwoTimer/maxTime));
                     }
                 }
 
@@ -266,7 +269,7 @@ public class PhaseBoss extends BaseHullMod {
     }
 
     public static class PhaseBossAIScript implements AdvanceableListener {
-        private static final boolean DEBUG_ENABLED = false;
+        private static final boolean DEBUG_ENABLED = true;
         public IntervalUtil enemyTracker = new IntervalUtil(0.8F, 1F);
         public IntervalUtil damageTracker = new IntervalUtil(0.2F, 0.3F);
         public CombatEngineAPI engine;
@@ -292,6 +295,10 @@ public class PhaseBoss extends BaseHullMod {
                 return;
             }
 
+            if(ship.getOwner() != 0 || DEBUG_ENABLED){
+                ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 100000);
+            }
+
             // Calculate Decision Flags
             enemyTracker.advance(amount);
             if (enemyTracker.intervalElapsed() || target == null || !target.isAlive()) {
@@ -309,6 +316,28 @@ public class PhaseBoss extends BaseHullMod {
                 combinedHits.addAll(incomingProjectiles);
                 combinedHits.addAll(predictedWeaponHits);
             }
+            if(ship.getOriginalCaptain() == null && (ship.getOwner() != 0 || DEBUG_ENABLED)){
+                // specially tuned for phase ships
+                PersonAPI captain = Global.getSettings().createPerson();
+                captain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
+                captain.setFaction(Factions.REMNANTS);
+                captain.setAICoreId(Commodities.ALPHA_CORE);
+                captain.getStats().setLevel(7);
+                //captain.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
+                //captain.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
+                captain.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 2);
+                captain.getStats().setSkillLevel(Skills.DAMAGE_CONTROL, 2);
+                captain.getStats().setSkillLevel(Skills.FIELD_MODULATION, 2);
+                //captain.getStats().setSkillLevel(Skills.POINT_DEFENSE, 2);
+                captain.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
+                //captain.getStats().setSkillLevel(Skills.BALLISTIC_MASTERY, 2);
+                captain.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 2);
+                //captain.getStats().setSkillLevel(Skills.MISSILE_SPECIALIZATION, 2);
+                //captain.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
+                captain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
+                captain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
+                ship.setCaptain(captain);
+            }
 
             // update ranges and block firing if system is active
             float minRange = Float.POSITIVE_INFINITY;
@@ -323,7 +352,7 @@ public class PhaseBoss extends BaseHullMod {
                 }
             }
             targetRange = minRange;
-
+            
             // calculate how much damage the ship would take if unphased/vent/used system
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
@@ -407,7 +436,7 @@ public class PhaseBoss extends BaseHullMod {
             targetVulnerability = target.getFluxTracker().isOverloadedOrVenting() ? 1 : targetVulnerability;
             if (!ventingHardFlux && ship.getHardFluxLevel() > Misc.interpolate(0.5f, 0.85f, targetVulnerability))
                 ventingHardFlux = true;
-            if (ventingHardFlux && (ship.getFluxTracker().isVenting() || ship.getHardFluxLevel() < 0.1f))
+            if (ventingHardFlux && ((ship.getFluxTracker().isVenting() && ship.getHardFluxLevel() < 0.5f) || ship.getHardFluxLevel() < 0.1f))
                 ventingHardFlux = false;
 
             if (!rechargeCharges && lowestWeaponAmmoLevel(ship) < 0.1f)
@@ -427,7 +456,7 @@ public class PhaseBoss extends BaseHullMod {
             } else{ // otherwise, ship is attacking
                 if(MathUtils.getDistance(ship.getLocation(), target.getLocation()) < targetRange + Misc.getTargetingRadius(ship.getLocation(), target, false)) {
                     // if ship is in weapon range decide to phase based on incoming damage, accounting for the reduction in damage if the system overloads an enemy
-                    if (AIUtils.canUseSystemThisFrame(ship)){
+                    if (AIUtils.canUseSystemThisFrame(ship) || ship.getSystem().isActive() || target.getFluxTracker().isOverloadedOrVenting()){
                         if((armorDamageLevelSystem > 0.07f || hullDamageLevelSystem > 0.07f || empDamageLevelSystem > 0.7f))
                             wantToPhase = true;
                         else
@@ -583,7 +612,7 @@ public class PhaseBoss extends BaseHullMod {
                     List<Vector2f> pointsToRemove = new ArrayList<>();
                     for(Vector2f potentialPoint : targetEnemy.getValue()){
                         float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
-                        float minKeepoutRadius = (enemy.getHullLevel() < 0.20f ? enemy.getShipExplosionRadius() : enemy.getCollisionRadius()) + ship.getCollisionRadius() + 50f;
+                        float minKeepoutRadius = (enemy.getHullLevel() < 0.20f ? enemy.getShipExplosionRadius() + 25f : enemy.getCollisionRadius()) + ship.getCollisionRadius() + 25f;
                         float keepoutRadius = MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) > optimalRange ? (float) (optimalRange * 0.8) : minKeepoutRadius;
                         if(CollisionUtils.getCollides(potentialPoint, ship.getLocation(), enemy.getLocation(), keepoutRadius)){
                             pointsToRemove.add(potentialPoint);

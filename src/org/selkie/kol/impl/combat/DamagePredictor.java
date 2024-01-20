@@ -248,6 +248,18 @@ public class DamagePredictor {
         for (ShipAPI enemy: nearbyEnemies) {
             enemy.getFluxTracker().getOverloadTimeRemaining();
             enemy.getFluxTracker().isVenting(); enemy.getFluxTracker().getTimeToVent();
+
+            // ignore ship if shooting through other ship
+            boolean occluded = false;
+            for(ShipAPI occlusion : nearbyEnemies){
+                if (occlusion == enemy) continue;
+                Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), enemy.getLocation());
+                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() == null ? false : occlusion.getShield().isOn())){
+                    occluded = true;
+                }
+            }
+            if (occluded) continue;
+
             for (WeaponAPI weapon: enemy.getAllWeapons()){
 
                 if(weapon.isDecorative()) continue;
@@ -256,17 +268,6 @@ public class DamagePredictor {
                 float distanceFromWeaponSquared = MathUtils.getDistanceSquared(weapon.getLocation(), testPoint);
                 float targetingRadius = Misc.getTargetingRadius(enemy.getLocation(), ship, false);
                 if((weapon.getRange()+targetingRadius+FUZZY_RANGE)*(weapon.getRange()+targetingRadius+FUZZY_RANGE) < distanceFromWeaponSquared) continue;
-
-                // ignore weapon if shooting through other ship
-                boolean occluded = false;
-                for(ShipAPI occlusion : nearbyEnemies){
-                    if (occlusion == enemy) continue;
-                    Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), weapon.getLocation());
-                    if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() == null ? false : occlusion.getShield().isOn())){
-                        occluded = true;
-                    }
-                }
-                if (occluded) continue;
 
                 // calculate disable time if applicable
                 float disabledTime = weapon.isDisabled() ? weapon.getDisabledDuration() : 0;
