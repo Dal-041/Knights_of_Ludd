@@ -8,7 +8,7 @@
 		"fighterChipIconColor":[255,200,150,255],
 		"weaponDisabledExplosionColor":[255,125,25,255],
 		"shieldRingColor":[255,255,255,255],
-		"shieldInnerColor":[15,150,255,75],
+		"shieldInnerColor":[15,150,255,175],
 		"fluxVentCoreColor":[15,150,255,255],
 		"fluxVentFringeColor":[30,70,255,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png",

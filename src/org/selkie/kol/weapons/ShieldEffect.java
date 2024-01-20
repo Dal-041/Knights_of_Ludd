@@ -25,6 +25,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     private ShieldAPI shield;
     private Color baseColorRing;
     private Color baseColorInner;
+    private Color depletedColorRing;
+    private Color depletedColorInner;
     private final IntervalUtil tracker = new IntervalUtil(0.1f, 0.3f); //Seconds
     public float lastUpdatedTime = 0f;
     public List<FutureHit> incomingProjectiles = new ArrayList<>();
@@ -44,60 +46,60 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
             if (shield!= null) {
                 baseColorRing = shield.getRingColor();
                 baseColorInner = shield.getInnerColor();
+                depletedColorRing = new Color(255, baseColorRing.getGreen()/3, baseColorRing.getBlue()/3, baseColorRing.getAlpha());
+                depletedColorInner = new Color(255, baseColorInner.getGreen()/3, baseColorInner.getBlue()/3, baseColorInner.getAlpha());
             }
             this.engine=engine;
         }
 
+        if(shield == null) return;
 
         //UI
-        float color = shieldT/MAX_SHIELD;
-        Color barColor = disabled ? Color.RED : new Color(color*0.4f+0.6f,1f-0.4f*color,0);
-        MagicUI.drawInterfaceStatusBar(ship, 1-shieldT/MAX_SHIELD, barColor, null, 0, "SHIELD", (int) (100-100*shieldT/MAX_SHIELD));
+        float shieldTLevel = shieldT/MAX_SHIELD;
+        Color barColor = disabled ? Misc.getNegativeHighlightColor() : Misc.interpolateColor(Misc.getPositiveHighlightColor(), Misc.getNegativeHighlightColor(), shieldTLevel);
+        MagicUI.drawInterfaceStatusBar(ship, 1-shieldTLevel, barColor, null, 0, "SHIELD", (int) (100-100*shieldTLevel));
         
         if (engine.isPaused() || !ship.isAlive()) {return;}
-        
-        if(shield!=null){
-            if(!disabled){
-                if(shield.isOn()){
-                    shieldT=Math.min(MAX_SHIELD, shieldT+amount);
-                } else {
-                    shieldT=Math.max(0, shieldT-(amount*2));
-                }
 
-                //FX
-
-                Color shieldColorRing = new Color(Math.min(1, (baseColorRing.getRed()/255)*(1-color)+(color)), Math.min(1, (baseColorRing.getGreen()/255)*(1-color)+(0.25f*color)), Math.min(1, (baseColorRing.getBlue()/255)*(1-color)+(0.25f*color)), baseColorRing.getAlpha()/255);
-                Color shieldColorInner = new Color(Math.min(1, (baseColorInner.getRed()/255)*(1-color)+(color)),Math.min(1, (baseColorInner.getGreen()/255)*(1-color)+(0.25f*color)),Math.min(1, (baseColorInner.getBlue()/255)*(1-color)+(0.25f*color)), baseColorRing.getAlpha()/255);
-                shield.setInnerColor(shieldColorInner);
-                shield.setRingColor(shieldColorRing);
-                //AI
-
-                //If debug is turned on, weapons that can hit the ship will be blue, and projectiles that can hit the ship will be magenta
-                if (!disabled && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)) {
-                    if (shield.isOn() ^ wantToShield(amount))
-                        ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
-                    else
-                        ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
-                }
-
-                // Overloaded Shields
-                if(shieldT==MAX_SHIELD){
-                    shield.toggleOff();
-                    ship.getFluxTracker().showOverloadFloatyIfNeeded("Shield offline.", Color.red, 2, true);
-                    ship.getFluxTracker().beginOverloadWithTotalBaseDuration(0.05f);
-                    disabled=true;
-                }
-                
+        if(!disabled){
+            if(shield.isOn()){
+                shieldT=Math.min(MAX_SHIELD, shieldT+amount);
             } else {
+                shieldT=Math.max(0, shieldT-(amount*2));
+            }
+
+            //FX
+            shield.setInnerColor(Misc.interpolateColor(baseColorInner, depletedColorInner, shieldTLevel));
+            shield.setRingColor(Misc.interpolateColor(baseColorRing, depletedColorRing, shieldTLevel));
+
+            //AI
+
+            //If debug is turned on, weapons that can hit the ship will be blue, and projectiles that can hit the ship will be magenta
+            if (!disabled && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)) {
+                if (shield.isOn() ^ wantToShield(amount))
+                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                else
+                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+            }
+
+            // Overloaded Shields
+            if(shieldT==MAX_SHIELD){
                 shield.toggleOff();
-                shieldT=Math.max(0, shieldT-(amount/2));
-                
-                if(shieldT==0){
-                    disabled=false;
-                    ship.getFluxTracker().showOverloadFloatyIfNeeded("Shield online.", Color.green, 2, true);
-                }
+                ship.getFluxTracker().showOverloadFloatyIfNeeded("Shield offline", Misc.getNegativeHighlightColor(), 2, true);
+                ship.getFluxTracker().beginOverloadWithTotalBaseDuration(0.05f);
+                disabled=true;
+            }
+
+        } else {
+            shield.toggleOff();
+            shieldT=Math.max(0, shieldT-(amount/2));
+
+            if(shieldT==0){
+                disabled=false;
+                ship.getFluxTracker().showOverloadFloatyIfNeeded("Shield online", Misc.getPositiveHighlightColor(), 2, true);
             }
         }
+
     }
 
     public boolean wantToShield(float amount){
