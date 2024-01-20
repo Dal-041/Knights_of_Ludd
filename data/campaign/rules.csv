@@ -28,3 +28,11 @@ $faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"Yo
 #END bad,,,,,,
 #END relationship level descriptions,,,,,,
 ,,,,,,
+# boss interactions,,,,,,
+,,# change to $customType == your_custom_entity score:1000,,,,
+#kol_bossA_defenderDesc,TriggerAutomatedDefenses,$faction.id == knights_of_selkie,SalvageDefenderInteraction,"As your $shipOrFleet moves into a close holding orbit, your comms officer murmurs, ""Hardly any bleed at all coming from that station, Captain. If it didn't have mass, we'd never..."" They trail off, squinting at their console.
+
+The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
+
+""You have violated an information blackout area. Don't try to run. It'll interfere with the data collection.""",,
+#kol_bossA_postCombatDesc,BeginSalvage,"$faction.id == knights_of_selkie !$usable",,"""",,
