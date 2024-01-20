@@ -292,5 +292,11 @@
 			"zea_idk2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk2.png",
 			"zea_idk3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk3.png",
 		},
+	},
+	"designTypeColors":{
+		"Knights of Ludd":[25,115,10,255],
+		"Dawntide":[0,255,100,255],
+		"Duskborne":[25,25,25,255],
+		"Elysia":[255,253,222,255]
 	}
 }
