@@ -16,6 +16,7 @@ import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.listeners.TrackFleet;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
 
@@ -23,6 +24,7 @@ import java.awt.*;
 import java.util.Random;
 
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
+import static org.selkie.kol.impl.plugins.AbyssUtils.*;
 
 public class PrepareAbyss {
 
@@ -35,91 +37,6 @@ public class PrepareAbyss {
 	public static final String lunaSeaSysName = "The Luna Sea";
 	public static final String nullspaceSysName = "Nullspace";
 	public static final String nbsSysPrefix = "zea_nbs_";
-	public static float attainmentFactor = 0.1f;
-	public static boolean useDomres = false;
-	public static boolean useLostech = false;
-	public static boolean useDustkeepers = false;
-	public static boolean useEnigma = false;
-	public static String[] factionIDs = {
-			dawnID,
-			duskID,
-			elysianID
-	};
-	public static String[] techInheritIDs = {
-			"remnant",
- 			"mercenary"
-	};
-	public static String[] hullBlacklist = {
-			"guardian",
-			"radiant",
-			"tahlan_asria",
-			"tahlan_nirvana"
-	};
-	public static String[] weaponBlacklist = {
-			"lightdualmg",
-			"lightmortar",
-			"lightmg",
-			"mininglaser",
-			"atropos_single",
-			"harpoon_single",
-			"sabot_single",
-			"hammer",
-			"hammer_single",
-			"hammerrack",
-			"jackhammer"
-	};
-	public static final String[] uwDerelictsNormal = {
-			"aurora_Assault",
-			"brawler_tritachyon_Standard",
-			"brawler_tritachyon_Standard",
-			"omen_PD",
-			"omen_PD",
-			"medusa_PD",
-			"medusa_Attack",
-			"shrike_Attack",
-			"fury_Support",
-			"buffalo_tritachyon_Standard",
-			"buffalo_tritachyon_Standard",
-			"atlas_Standard",
-			"prometheus_Super",
-			"apogee_Balanced",
-			"astral_Elite",
-			"paragon_Raider"
-	};
-	public static final String[] uwDerelictsPhase = {
-			"afflictor_Strike",
-			"shade_Assault",
-			"shade_Assault",
-			"harbinger_Strike",
-			"harbinger_Strike",
-			"doom_Attack"
-	};
-	//The flagships are spawned separately
-	public static final String[] duskBossSupportingFleet = {
-			"zea_boss_nineveh_Souleater",
-			"zea_boss_nineveh_Souleater",
-			"zea_boss_ninmah_Skinthief",
-			"zea_boss_ninmah_Skinthief",
-			"zea_boss_ninaya_Gremlin",
-			"zea_boss_ninaya_Gremlin",
-			"zea_boss_ninaya_Nightdemon"
-	};
-	public static final String[] elysianBossSupportingFleet = {
-			"zea_edf_tamamo_Striker",
-			"zea_edf_tamamo_Striker"
-	};
-
-	public static final String abilityJumpElysia = "fracture_jump_elysia";
-	public static final String abilityJumpDawn = "fracture_jump_luna_sea";
-	public static final String abilityJumpDusk = "fracture_jump_pullsar";
-
-	public static final String path = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
-	public static final String[] portraitsDawnPaths = {path.concat("zea_dawn_1.png"), path.concat("zea_dawn_2.png"), path.concat("zea_dawn_3.png")};
-	public static final String[] portraitsDuskPaths = {path.concat("zea_dusk_1.png"), path.concat("zea_dusk_2.png"), path.concat("zea_dusk_3.png")};
-	public static final String[] portraitsElysianPaths = {path.concat("zea_idk1.png"), path.concat("zea_idk2.png"), path.concat("zea_idk3.png")};
-	public static final String[] portraitsDawn = {"zea_dawn_1", "zea_dawn_2", "zea_dawn_3"};
-	public static final String[] portraitsDusk = {"zea_dusk_1", "zea_dusk_2", "zea_dusk_3"};
-	public static final String[] portraitsElysian = {"zea_idk1", "zea_idk2", "zea_idk3"};
 
     public static void generate() {
 		checkAbyssalFleets();
@@ -152,72 +69,7 @@ public class PrepareAbyss {
 		SpawnDawnBoss.SpawnDawnBoss();
     }
 
-	public static void checkAbyssalFleets() {
-		if(Global.getSettings().getModManager().isModEnabled("lost_sector")) {
-			for (FactionAPI faction:Global.getSector().getAllFactions()) {
-				if (faction.getId().equals("enigma")) useEnigma = true;
-			}
-		}
-		if(Global.getSettings().getModManager().isModEnabled("tahlan")) {
-			useLostech = true;
-		}
-		for (FactionAPI faction:Global.getSector().getAllFactions()) {
-			if (faction.getId().equals("domres")) useDomres = true;
-			if (faction.getId().equals("sotf_dustkeepers")) useDustkeepers = true;
-		}
-	}
 
-	public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to) {
-		for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
-			boolean skip = false;
-			for (String s : hullBlacklist) {
-				if (s.equals(member.getHullId())) {
-					skip = true;
-				}
-			}
-			if (skip) continue;
-			//member.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-			member.getVariant().getTags().add(Tags.UNRECOVERABLE);
-			if (member.getVariant().hasTag("auto_rec")) member.getVariant().removeTag("auto_rec");
-			if (member.isFlagship()) member.setFlagship(false);
-			member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
-			to.getFleetData().addFleetMember(member);
-		}
-	}
-
-	public static void copyHighgradeEquipment() {
-		for (String ID : factionIDs) {
-			FactionAPI fac = Global.getSector().getFaction(ID);
-			boolean skip;
-			for (String parentID : techInheritIDs) {
-				FactionAPI par = Global.getSector().getFaction(parentID);
-				for (String entry : par.getKnownWeapons()) {
-					skip = false;
-					for (String no : weaponBlacklist) {
-						if (entry.equals(no)) {
-							skip = true;
-							break;
-						}
-					}
-					if (!skip && !fac.knowsWeapon(entry)) {
-						fac.addKnownWeapon(entry, false);
-					}
-				}
-				if (parentID.equals(Factions.REMNANTS)) {
-					for (String entry : par.getKnownFighters()) {
-						if (!fac.knowsFighter(entry)) {
-							fac.addKnownFighter(entry, false);
-						}
-					}
-				}
-				for (String entry : par.getKnownHullMods()) {
-					if (!fac.knowsHullMod(entry)) {
-						fac.addKnownHullMod(entry);
-					}
-				}
-			}
-		}
-	}
 
     public static void GenerateElysia() {
     	
@@ -245,6 +97,7 @@ public class PrepareAbyss {
     	elysia.getSpec().setBlackHole(true);
     	system.setName(elysiaSysName);
     	elysia.applySpecChanges();
+		elysia.addTag(Tags.NON_CLICKABLE);
     	SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
     			5600,
 				250,
@@ -363,7 +216,8 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		AbyssalFleetManager fleets = new AbyssalFleetManager(system, elysianID, 14, 60, 240);
+		//FP bumped to account for backup capital ships getting pruned
+		AbyssalFleetManager fleets = new AbyssalFleetManager(system, elysianID, 16, 90, 300);
 		system.addScript(fleets);
 
 		EveryFrameScript tracker = new TrackFleet();
@@ -382,6 +236,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
+		system.addTag(Tags.SYSTEM_CUT_OFF_FROM_HYPER);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dusk.png");
 		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
@@ -471,19 +326,19 @@ public class PrepareAbyss {
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dawn.png");
 		new AbyssBackgroundWarper(system, 8, 0.25f);
 
-		if (!Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
-			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula.png",
+		//if (!Global.getSector().getDifficulty().equals(Difficulties.EASY)) { // Disabled
+			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_cut.png",
 					0, 0, // center of nebula
 					system, // location to add to
 					"terrain", "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					8, 8, StarAge.AVERAGE); // number of cells in texture
-		} else {
+		/*} else {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/luwunasea_nebula2.png",
 					0, 0, // center of nebula
 					system, // location to add to
 					"terrain", "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					4, 4, StarAge.AVERAGE); // number of cells in texture
-		}
+		}*/
 
 		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_layer2.png",
 					0, 0, system,
@@ -511,7 +366,7 @@ public class PrepareAbyss {
 				new AbyssCorona.CoronaParams(50000,
 						2500,
 						luna,
-						20f,
+						25f,
 						1f,
 						10f)
 		);
@@ -527,7 +382,7 @@ public class PrepareAbyss {
 		PlanetAPI first = system.addPlanet("zea_lunasea_one", luna, "Id", "barren-bombarded", 50, 150, 10900, 3000000);
 		PlanetAPI second = system.addPlanet("zea_lunasea_two", luna, "Doubt", "desert", 29, 170, 6100, 3000000);
 		PlanetAPI third = system.addPlanet("zea_lunasea_three", luna, "Wild", "jungle", 12, 70, 15800, 3000000);
-		PlanetAPI fourth = system.addPlanet("zea_lunasea_four", jumpPoint, "Slip", "frozen", 190, 250, 500, 3000000);
+		PlanetAPI fourth = system.addPlanet("zea_lunasea_four", jumpPoint, "Ego", "frozen", 190, 250, 500, 3000000);
 		PlanetAPI fifth = system.addPlanet("zea_lunasea_five", luna, "Savage", "barren", 336, 145, 12300, 3000000);
 		PlanetAPI sixth = system.addPlanet("zea_lunasea_six", luna, "Feral", "toxic", 306, 165, 8100, 3000000);
 
@@ -581,8 +436,9 @@ public class PrepareAbyss {
 		SectorEntityToken loot6 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
 		loot6.setCircularOrbitPointingDown(sixth, (float)Math.random()*60+177, (float)Math.random()*2770+3000, 100000);
 
-		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 40, 140);
-		org.selkie.kol.impl.fleets.AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, dawnID, 4, 250, 350);
+		//FP bumped to account for backup capital ships getting pruned
+		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 60, 180);
+		org.selkie.kol.impl.fleets.AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, dawnID, 4, 300, 425);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}
@@ -673,8 +529,9 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		AbyssalFleetManager fleets = new AbyssalFleetManager(system, duskID, 6, 60, 175);
-		AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, duskID, 3, 250, 350);
+		//FP bumped to account for backup capital ships getting pruned
+		AbyssalFleetManager fleets = new AbyssalFleetManager(system, duskID, 6, 70, 175);
+		AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, duskID, 3, 300, 425);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}

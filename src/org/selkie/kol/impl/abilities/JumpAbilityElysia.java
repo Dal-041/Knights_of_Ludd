@@ -101,10 +101,19 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 				float cost = computeFuelCost();
 				fleet.getCargo().removeFuel(cost);
 
-				SectorEntityToken token = null;
-				for (SectorEntityToken jp : Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getJumpPoints()) {
-					token = jp; //Order irrelvant
+				StarSystemAPI system = Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName);
+				if (system == null || system.getStar() == null) {
+					primed = null;
+					return;
 				}
+
+				float radius = system.getStar().getRadius();
+
+				Vector2f destOffset = Misc.getUnitVectorAtDegreeAngle((float) (Math.random() * 360f));
+				destOffset.scale(radius*1.35f + ((float)Math.random()*(radius*1.25f)));
+
+				Vector2f.add(system.getStar().getLocation(), destOffset, destOffset);
+				SectorEntityToken token = system.createToken(destOffset.x, destOffset.y);
 				
 				JumpDestination dest = new JumpDestination(token, null);
 				Global.getSector().doHyperspaceTransition(fleet, fleet, dest);

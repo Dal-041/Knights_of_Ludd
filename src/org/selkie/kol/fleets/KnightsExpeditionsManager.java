@@ -312,7 +312,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
                         picker.add(system.getId(), 2);
                     }
                 }
-                if (system.getId().startsWith(PrepareAbyss.nbsSysPrefix)) {
+                if (system.getStar().getTypeId().equals("zea_star_black_neutron")) {
                     picker.add(system.getId(), 10);
                 }
             }

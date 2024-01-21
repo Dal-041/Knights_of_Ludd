@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class ManageElysianCorruptingheart implements FleetEventListener {
@@ -29,10 +30,10 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 
 			if(Global.getSector().getMemoryWithoutUpdate().contains("$kol_elysian_boss1_done")
 					&& Global.getSector().getMemoryWithoutUpdate().getBoolean("$kol_elysian_boss1_done")) {
-				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(PrepareAbyss.abilityJumpElysia)) {
-					Global.getSector().getPlayerFleet().addAbility(PrepareAbyss.abilityJumpElysia);
-					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + PrepareAbyss.abilityJumpElysia, true, 0);
-					Global.getSector().getCharacterData().addAbility(PrepareAbyss.abilityJumpElysia);
+				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(AbyssUtils.abilityJumpElysia)) {
+					Global.getSector().getPlayerFleet().addAbility(AbyssUtils.abilityJumpElysia);
+					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + AbyssUtils.abilityJumpElysia, true, 0);
+					Global.getSector().getCharacterData().addAbility(AbyssUtils.abilityJumpElysia);
 				}
 			}
 

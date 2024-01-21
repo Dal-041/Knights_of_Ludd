@@ -114,10 +114,19 @@ public class JumpAbilityPullsar extends BaseDurationAbility {
 				}
 
 				StarSystemAPI system = picker.pick();
-				SectorEntityToken token = null;
-				for (SectorEntityToken jp : system.getJumpPoints()) {
-					token = jp; //irrelvant which, systems should have only 1
+
+				if (system == null || system.getStar() == null) {
+					primed = null;
+					return;
 				}
+
+				float radius = system.getStar().getRadius();
+
+				Vector2f destOffset = Misc.getUnitVectorAtDegreeAngle((float) (Math.random() * 360f));
+				destOffset.scale(radius*3f + ((float)Math.random()*(radius*3f)));
+
+				Vector2f.add(system.getStar().getLocation(), destOffset, destOffset);
+				SectorEntityToken token = system.createToken(destOffset.x, destOffset.y);
 				
 				JumpDestination dest = new JumpDestination(token, null);
 				Global.getSector().doHyperspaceTransition(fleet, fleet, dest);

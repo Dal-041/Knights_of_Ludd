@@ -19,7 +19,7 @@
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
 	},
 	"zea_red_hole":{
-		"name":"Red Hole",
+		"name":"Red Singularity",
 		"tilt":0, # left-right (>0 tilts to the left)
 		"pitch":0, # towards-away from the viewer (>0 pitches towards)
 		"rotation":-3, # degrees/second
@@ -37,8 +37,8 @@
 		"starCoronaSizeMult":5.12, # required, multiplier for star's radius
 		"isStar":true,
 		"isBlackHole":true,
-		"scaleMultMapIcon":1.0,
-		"scaleMultStarscapeIcon":1.5,
+		"scaleMultMapIcon":0.5,
+		"scaleMultStarscapeIcon":0.5,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
 	},
 	"zea_white_hole":{
@@ -60,8 +60,8 @@
 		"starCoronaSizeMult":5.12, # required, multiplier for star's radius
 		"isStar":true,
 		"isBlackHole":true,
-		"scaleMultMapIcon":2.5,
-		"scaleMultStarscapeIcon":1.5,
+		"scaleMultMapIcon":1.0,
+		"scaleMultStarscapeIcon":1.0,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
 	},
 }

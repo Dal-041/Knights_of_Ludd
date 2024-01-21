@@ -2,11 +2,8 @@ package org.selkie.kol.impl.abilities;
 
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.BattleAPI;
-import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.JumpPointAPI.JumpDestination;
-import com.fs.starfarer.api.campaign.NascentGravityWellAPI;
-import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.abilities.BaseDurationAbility;
@@ -103,10 +100,19 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 				float cost = computeFuelCost();
 				fleet.getCargo().removeFuel(cost);
 
-				SectorEntityToken token = null;
-				for (SectorEntityToken jp : Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName).getJumpPoints()) {
-					token = jp; //Order irrelvant
+				StarSystemAPI system = Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName);
+				if (system == null || system.getStar() == null) {
+					primed = null;
+					return;
 				}
+
+				float radius = system.getStar().getRadius();
+
+				Vector2f destOffset = Misc.getUnitVectorAtDegreeAngle(-90f + (float) (Math.random() * 180f));
+				destOffset.scale(radius*1.35f + ((float)Math.random()*(radius*1.75f)));
+
+				Vector2f.add(system.getStar().getLocation(), destOffset, destOffset);
+				SectorEntityToken token = system.createToken(destOffset.x, destOffset.y);
 
 				JumpDestination dest = new JumpDestination(token, null);
 				Global.getSector().doHyperspaceTransition(fleet, fleet, dest);

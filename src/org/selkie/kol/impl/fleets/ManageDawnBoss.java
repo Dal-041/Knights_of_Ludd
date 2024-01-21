@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class ManageDawnBoss implements FleetEventListener {
@@ -34,10 +35,10 @@ public class ManageDawnBoss implements FleetEventListener {
 			}
 	            
 			//boss is dead,
-			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(PrepareAbyss.abilityJumpDawn)) {
-				Global.getSector().getPlayerFleet().addAbility(PrepareAbyss.abilityJumpDawn);
-				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + PrepareAbyss.abilityJumpDawn, true, 0);
-				Global.getSector().getCharacterData().addAbility(PrepareAbyss.abilityJumpDawn);
+			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(AbyssUtils.abilityJumpDawn)) {
+				Global.getSector().getPlayerFleet().addAbility(AbyssUtils.abilityJumpDawn);
+				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + AbyssUtils.abilityJumpDawn, true, 0);
+				Global.getSector().getCharacterData().addAbility(AbyssUtils.abilityJumpDawn);
 			}
 
 			boolean salvaged=false;

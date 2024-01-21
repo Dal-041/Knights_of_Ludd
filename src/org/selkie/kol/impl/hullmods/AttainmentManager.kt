@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Tags
 import com.fs.starfarer.api.util.IntervalUtil
 import org.lazywizard.lazylib.ext.combat.getAlliesOnMap
 import org.selkie.kol.impl.world.PrepareAbyss
+import org.selkie.kol.impl.plugins.AbyssUtils
 
 class AttainmentManager : BaseHullMod() {
     //private val checkKey = "EDF_UB"
@@ -18,7 +19,7 @@ class AttainmentManager : BaseHullMod() {
         if (Global.getSector() != null && stats.fleetMember != null) {
             val faction = stats.fleetMember.fleetData?.fleet?.faction?.id
             if (!faction.equals(Global.getSector().playerFaction?.id)) {
-                if (Math.random() > PrepareAbyss.attainmentFactor) stats.variant.addTag(Tags.VARIANT_UNBOARDABLE)
+                if (Math.random() > AbyssUtils.attainmentFactor) stats.variant.addTag(Tags.VARIANT_UNBOARDABLE)
                 else stats.variant.removeTag(Tags.VARIANT_UNBOARDABLE)
             } else {
                 stats.variant.removeTag(Tags.VARIANT_UNBOARDABLE)

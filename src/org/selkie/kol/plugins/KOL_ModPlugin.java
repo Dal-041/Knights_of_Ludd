@@ -8,6 +8,7 @@ import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.impl.listeners.ReportTransit;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
@@ -53,8 +54,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		GenerateKnights.copyChurchEquipment();
-		PrepareAbyss.checkAbyssalFleets();
-		PrepareAbyss.copyHighgradeEquipment();
+		AbyssUtils.checkAbyssalFleets();
+		AbyssUtils.copyHighgradeEquipment();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);

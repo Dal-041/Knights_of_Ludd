@@ -22,6 +22,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.*;
 
 import java.util.Random;
@@ -78,12 +79,29 @@ public class AbyssalFleetManager extends SeededFleetManager {
         picker.add(PrepareAbyss.duskID, w);
         w = primary.equals(PrepareAbyss.elysianID) ? 0f : 1f;
         picker.add(PrepareAbyss.elysianID, w);
-        if (PrepareAbyss.useDomres) picker.add("domres", 1f);
-        if (PrepareAbyss.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
+        if (AbyssUtils.useDomres) picker.add("domres", 1f);
+        if (AbyssUtils.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
         w = primary.equals(PrepareAbyss.dawnID) ? 0.75f : 0f;
-        if (PrepareAbyss.useEnigma) picker.add("enigma", w);
-        if (PrepareAbyss.useLostech) picker.add("tahlan_allmother", 0.6f);
+        if (AbyssUtils.useEnigma) picker.add("enigma", w);
+        if (AbyssUtils.useLostech) picker.add("tahlan_allmother", 0.6f);
         return picker.pick();
+    }
+
+    public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to) {
+        for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
+            boolean skip = false;
+            for (String s : AbyssUtils.hullBlacklist) {
+                if (s.equals(member.getHullId())) {
+                    skip = true;
+                }
+            }
+            if (skip) continue;
+            //Unrecoverable status set by hullmod
+            if (member.getVariant().hasTag("auto_rec")) member.getVariant().removeTag("auto_rec");
+            if (member.isFlagship()) member.setFlagship(false);
+            member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
+            to.getFleetData().addFleetMember(member);
+        }
     }
 
     @Override
@@ -122,7 +140,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
         CampaignFleetAPI fleet2 = FleetFactoryV3.createFleet(params);
 
-        PrepareAbyss.copyFleetMembers(facSecond, fleet2, fleet);
+        copyFleetMembers(facSecond, fleet2, fleet);
 
         fleet2.despawn();
 
@@ -282,18 +300,18 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
         if (faction.equals(PrepareAbyss.dawnID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
-            portrait = PrepareAbyss.portraitsDawn[level-6];
+            portrait = AbyssUtils.portraitsDawn[level-6];
             persona = Personalities.AGGRESSIVE;
         }
         else if (faction.equals(PrepareAbyss.duskID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
             persona = Personalities.STEADY;
-            portrait = PrepareAbyss.portraitsDusk[level-6];
+            portrait = AbyssUtils.portraitsDusk[level-6];
         }
         else if (faction.equals(PrepareAbyss.elysianID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
             persona = Personalities.STEADY;
-            portrait = PrepareAbyss.portraitsElysian[level-6];
+            portrait = AbyssUtils.portraitsElysian[level-6];
         }
         else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
 
@@ -316,15 +334,15 @@ public class AbyssalFleetManager extends SeededFleetManager {
                 if (member.getCaptain().getId().equals("tahlan_child")) return; //Special officer
                 boolean found = false;
                 String portCapt = member.getCaptain().getPortraitSprite();
-                for (String port : PrepareAbyss.portraitsDawn) {
+                for (String port : AbyssUtils.portraitsDawn) {
                     if (portCapt.equalsIgnoreCase(port)) {
                         found = true;
                     }
                 }
-                for (String port : PrepareAbyss.portraitsDusk) {
+                for (String port : AbyssUtils.portraitsDusk) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
-                for (String port : PrepareAbyss.portraitsElysian) {
+                for (String port : AbyssUtils.portraitsElysian) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
                 if (!found) {
@@ -341,13 +359,13 @@ public class AbyssalFleetManager extends SeededFleetManager {
                     else member.getCaptain().setPersonality(Personalities.STEADY);
 
                     if (fac.equals(PrepareAbyss.duskID)) {
-                        member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDuskPaths[level-6]);
+                        member.getCaptain().setPortraitSprite(AbyssUtils.portraitsDuskPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.elysianID)) {
-                        member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsElysianPaths[level-6]);
+                        member.getCaptain().setPortraitSprite(AbyssUtils.portraitsElysianPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.dawnID)) {
-                        member.getCaptain().setPortraitSprite(PrepareAbyss.portraitsDawnPaths[level-6]);
+                        member.getCaptain().setPortraitSprite(AbyssUtils.portraitsDawnPaths[level-6]);
                         member.getCaptain().setPersonality(Personalities.RECKLESS);
                     }
                 }

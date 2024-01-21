@@ -13,7 +13,7 @@ public class TrackFleet implements EveryFrameScript {
 
     private boolean inited = false;
     protected IntervalUtil iMain = new IntervalUtil(20, 20);
-    protected IntervalUtil iSecond = new IntervalUtil(5, 5); //multiplied by iMain
+    protected IntervalUtil iSecond = new IntervalUtil(2, 2); //multiplied by iMain
     protected StarSystemAPI under = null;
     protected SectorEntityToken targ = null;
 
