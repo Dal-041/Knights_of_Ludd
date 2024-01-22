@@ -150,8 +150,8 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 50,
-      "angle": 155,
+      "arc": 45,
+      "angle": 157.5,
       "locations": [29, 28]
     },
     {
@@ -159,8 +159,8 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 50,
-      "angle": -155,
+      "arc": 45,
+      "angle": -157.5,
       "locations": [29, -28]
     },
     {
