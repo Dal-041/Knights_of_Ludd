@@ -4,7 +4,7 @@
   "hullSize": "CRUISER",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_mizuchi.png",
   "style": "MIDLINE",
-  "height": 190,
+  "height": 193,
   "width": 342,
   "center": [171, 95],
   "collisionRadius": 182.5,
@@ -15,13 +15,24 @@
     "automated",
     "kol_ea_shields3",
     "kol_conformal_shield",
-	"kol_throttle"
+    "kol_throttle"
   ],
   "builtInWeapons": {
-    "WS0015": "zea_deco_edf_engL",
-    "WS0016": "zea_deco_edf_engL",
+    "WS0010": "zea_deco_edf_mizuchi_ml",
+    "WS0014": "zea_deco_edf_mizuchi_mr",
+    "WS0015": "zea_deco_edf_engL2",
+    "WS0016": "zea_deco_edf_engL2",
     "WS0017": "zea_deco_edf_vortice",
-    "WS0018": "zea_deco_edf_vortice"
+    "WS0018": "zea_deco_edf_vortice",
+    "WS0019": "eis_blinker_red",
+    "WS0020": "eis_blinker_green",
+    "WS0021": "eis_blinker_white",
+    "WS0022": "eis_blinker_white",
+    "WS0023": "eis_blinker_white30",
+    "WS0024": "eis_blinker_white30",
+    "WS0025": "zea_deco_edf_mizuchi_lights",
+    "WS0026": "zea_deco_edf_mizuchi_tl",
+    "WS0027": "zea_deco_edf_mizuchi_tr"
   },
   "weaponSlots": [
     {
@@ -31,7 +42,8 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 0,
-      "locations": [43, 48]
+      "locations": [43, 48],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0004",
@@ -40,7 +52,8 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -0,
-      "locations": [43, -48]
+      "locations": [43, -48],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0005",
@@ -103,7 +116,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [59, 33]
+      "locations": [60, 33]
     },
     {
       "id": "WS0012",
@@ -112,7 +125,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
-      "locations": [59, -33]
+      "locations": [60, -33]
     },
     {
       "id": "WS0009",
@@ -137,18 +150,18 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 35,
-      "angle": 170,
-      "locations": [24, 29]
+      "arc": 50,
+      "angle": 155,
+      "locations": [29, 28]
     },
     {
       "id": "WS0016",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 35,
-      "angle": -170,
-      "locations": [24, -29]
+      "arc": 50,
+      "angle": -155,
+      "locations": [29, -28]
     },
     {
       "id": "LB 1",
@@ -179,7 +192,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [9, 166]
+      "locations": [14, 166]
     },
     {
       "id": "WS0018",
@@ -188,23 +201,122 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [9, -166]
+      "locations": [14, -166]
+    },
+    {
+      "id": "WS0010",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [35, 29]
+    },
+    {
+      "id": "WS0014",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [35, -29]
+    },
+    {
+      "id": "WS0019",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-2.5, 157.5]
+    },
+    {
+      "id": "WS0020",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-2.5, -157.5]
+    },
+    {
+      "id": "WS0021",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-17, 97]
+    },
+    {
+      "id": "WS0022",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-17, -97]
+    },
+    {
+      "id": "WS0023",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-47, 18.5]
+    },
+    {
+      "id": "WS0024",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-47, -18.5]
+    },
+    {
+      "id": "WS0025",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [1.5, -0]
+    },
+    {
+      "id": "WS0026",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [61, 34.5]
+    },
+    {
+      "id": "WS0027",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [61, -34.5]
     }
   ],
   "engineSlots": [
     {
-      "location": [8, 38.5],
-      "length": 118,
+      "location": [28, 29],
+      "length": 75,
       "width": 25,
-      "angle": 180,
+      "angle": 165,
       "contrailSize": 25,
       "style": "zea_EDF_ENG"
     },
     {
-      "location": [8, -38.5],
-      "length": 118,
+      "location": [28, -29],
+      "length": 75,
       "width": 25,
-      "angle": -180,
+      "angle": -165,
       "contrailSize": 25,
       "style": "zea_EDF_ENG"
     }

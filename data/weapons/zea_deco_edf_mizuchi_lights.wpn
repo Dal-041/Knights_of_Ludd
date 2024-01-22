@@ -1,5 +1,5 @@
 {
-	"id":"zea_deco_edf_amaterasu_lights",  # this id must match what's in the spreadsheet
+	"id":"zea_deco_edf_mizuchi_lights",  # this id must match what's in the spreadsheet
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"LARGE",
@@ -7,8 +7,8 @@
 	"showDamageWhenDecorative":false,
 	"renderBelowAllWeapons":true,
 	#"renderHints":["RENDER_ADDITIVE"],	
-	"turretSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/decos/zea_deco_edf_amaterasu_lights.png",
-	"hardpointSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/decos/zea_deco_edf_amaterasu_lights.png",
+	"turretSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/decos/zea_deco_edf_mizuchi_lights.png",
+	"hardpointSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/decos/zea_deco_edf_mizuchi_lights.png",
 	"turretOffsets":[0, 0],
 	"turretAngleOffsets":[0],
 	"hardpointOffsets":[0, 0],

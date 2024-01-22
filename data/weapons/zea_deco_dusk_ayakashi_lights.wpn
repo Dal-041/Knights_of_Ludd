@@ -6,7 +6,7 @@
 	"everyFrameEffect":"com.fs.starfarer.api.impl.combat.LightsEffect",
 	"showDamageWhenDecorative":false,
 	"renderBelowAllWeapons":true,
-	"renderHints":["RENDER_ADDITIVE"],	
+	#"renderHints":["RENDER_ADDITIVE"],	
 	"turretSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/decos/zea_deco_dusk_ayakashi_lights.png",
 	"hardpointSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/decos/zea_deco_dusk_ayakashi_lights.png",
 	"turretOffsets":[0, 0],
