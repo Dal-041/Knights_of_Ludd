@@ -150,18 +150,18 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 45,
-      "angle": 157.5,
-      "locations": [29, 28]
+      "arc": 25,
+      "angle": 167.5,
+      "locations": [31, 29]
     },
     {
       "id": "WS0016",
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "TURRET",
-      "arc": 45,
-      "angle": -157.5,
-      "locations": [29, -28]
+      "arc": 25,
+      "angle": -167.5,
+      "locations": [31, -29]
     },
     {
       "id": "LB 1",
@@ -305,7 +305,7 @@
   ],
   "engineSlots": [
     {
-      "location": [28, 29],
+      "location": [31, 29],
       "length": 75,
       "width": 25,
       "angle": 165,
@@ -313,7 +313,7 @@
       "style": "zea_EDF_ENG"
     },
     {
-      "location": [28, -29],
+      "location": [31, -29],
       "length": 75,
       "width": 25,
       "angle": -165,
