@@ -72,6 +72,10 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
 			"wavefront":"graphics/planets/rings_ice0.png",
         */
         //flareTexture = Global.getSettings().getSprite("graphics/planets/aurorae2.png");
+        if (spriteCat == null) {
+            spriteCat = "terrain";
+            spriteKey = "pulsar";
+        }
         flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
 
         layers = EnumSet.of(CampaignEngineLayers.TERRAIN_7);

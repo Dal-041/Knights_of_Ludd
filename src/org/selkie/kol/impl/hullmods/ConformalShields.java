@@ -41,8 +41,10 @@ public class ConformalShields extends BaseHullMod {
         if (Global.getCombatEngine().isPaused()) return;
         if (!inited && ship.getShield() != null) {
             float radiusO = ship.getShield().getRadius();
-            maxX = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false));
-            maxY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false));
+            maxX = Math.max(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false),
+                    Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 180f), ship, false));
+            maxY = Math.max(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false),
+                    Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 270), ship, false));
 
             //center = ship.getLocation();
 
