@@ -28,7 +28,9 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
             params.name = "Dawntide";
             nameTooltip = "Dawntide";
             multiplyArc(2.5f);
-            flareTexture = Global.getSettings().getSprite("terrain", "zea_wavefront");
+            spriteCat = "terrain";
+            spriteKey = "zea_wavefront";
+            flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes ...but the code doesn't call the color
             inited = true;
         }

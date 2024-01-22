@@ -23,6 +23,9 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
     public float visMult = 1f;
     public boolean single = false;
     public String nameTooltip = "Pulsar Beam";
+
+    public String spriteCat = "terrain";
+    public String spriteKey = "pulsar";
     //public static float PULSAR_ARC = 0.25f / ((float) Math.PI * 2f) * 360f;
 
     transient protected SpriteAPI flareTexture = null;
@@ -69,7 +72,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
 			"wavefront":"graphics/planets/rings_ice0.png",
         */
         //flareTexture = Global.getSettings().getSprite("graphics/planets/aurorae2.png");
-        flareTexture = Global.getSettings().getSprite("terrain", "pulsar");
+        flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
 
         layers = EnumSet.of(CampaignEngineLayers.TERRAIN_7);
         if (blocker == null) {
