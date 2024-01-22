@@ -5,7 +5,7 @@
   "size":"MEDIUM",
   "turretSprite":"graphics/weapons/kol_mazuma_m_base.png",
   "hardpointSprite":"graphics/weapons/kol_mazuma_m_base.png",
-  "renderHints":["RENDER_LOADED_MISSILES"],
+  #"renderHints":["RENDER_LOADED_MISSILES"],
   "animationType": "SMOKE",
   "barrelMode": "ALTERNATING",
   "hardpointOffsets":[20, 0],
