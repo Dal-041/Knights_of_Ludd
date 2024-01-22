@@ -6,9 +6,11 @@ import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
+import com.fs.starfarer.campaign.comms.v2.IntelManager;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.intel.AbyssAbilityIntel;
 import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
@@ -38,6 +40,10 @@ public class ManageDuskBoss implements FleetEventListener {
 				Global.getSector().getPlayerFleet().addAbility(AbyssUtils.abilityJumpDusk);
 				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + AbyssUtils.abilityJumpDusk, true, 0);
 				Global.getSector().getCharacterData().addAbility(AbyssUtils.abilityJumpDusk);
+
+				AbyssAbilityIntel notif = new AbyssAbilityIntel(fleet.getFaction().getCrest(), "A Black Neutron Star");
+				Global.getSector().getIntelManager().addIntel(notif);
+				notif.endAfterDelay(14);
 			}
 
 			boolean salvaged=false;

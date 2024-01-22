@@ -476,16 +476,16 @@ public class PrepareAbyss {
 
 		SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
 				1000,
-				50,
+				20,
 				sing,
-				-5f,
+				-18f,
 				0f,
 				5f)
 		);
 
 		SectorEntityToken dbhBeam1 = system.addTerrain("zea_blackBeam",
 				new AbyssCorona.CoronaParams(25000,
-						250,
+						50,
 						sing,
 						-70f,
 						1f,
@@ -508,16 +508,16 @@ public class PrepareAbyss {
 		}
 
 		//sophistimacated
-		float orbRadius1 = (float)(Math.random() * 8500f);
+		float orbRadius1 = 1000 + (float)(Math.random() * 8500f);
 		SectorEntityToken cacheRem = addSalvageEntity(system, getAbyssLootID(duskID, 1f), PrepareAbyss.duskID);
 		cacheRem.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius1, orbRadius1/10f);
 
-		float orbRadius2 = (float)(Math.random()*8500f);
-		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0.6f), PrepareAbyss.duskID);
+		float orbRadius2 = 1500 + (float)(Math.random()*10500f);
+		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0.5f), PrepareAbyss.duskID);
 		stationResearch.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius2, orbRadius2/10f);
 
-		float orbRadius3 = (float)(Math.random()*8500f);
-		SectorEntityToken cacheRemSmall = addSalvageEntity(system, getAbyssLootID(duskID, 2f), PrepareAbyss.duskID);
+		float orbRadius3 = 2000 + (float)(Math.random()*12500f);
+		SectorEntityToken cacheRemSmall = addSalvageEntity(system, getAbyssLootID(duskID, 1.5f), PrepareAbyss.duskID);
 		cacheRemSmall.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius3, orbRadius3/10f);
 
 		system.autogenerateHyperspaceJumpPoints(true, true); //begone evil clouds
