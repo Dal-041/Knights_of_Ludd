@@ -8,6 +8,7 @@ import com.fs.starfarer.api.impl.combat.EntropyAmplifierStats;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -192,19 +193,18 @@ public class TargetingBeamStats extends BaseShipSystemScript {
     protected ShipAPI findTarget(ShipAPI ship) {
         float range = lidarMaxRange;
         ArrayList<ShipAPI> targets = new ArrayList<>();
-        for(ShipAPI other : CombatUtils.getShipsWithinRange(ship.getLocation(), range)){
-            if (other.getOwner() == ship.getOwner()) continue;
+        for(ShipAPI other : AIUtils.getNearbyEnemies(ship, range)){
             Vector2f closestPoint = MathUtils.getNearestPointOnLine(other.getLocation(), ship.getLocation(), MathUtils.getPointOnCircumference(ship.getLocation(), range, ship.getFacing()));
-            if (MathUtils.getDistance(closestPoint, other.getLocation()) < Misc.getTargetingRadius(closestPoint, other, other.getShield() == null ? false : other.getShield().isOn())){
+            float otherDistance = Misc.getTargetingRadius(closestPoint, other, other.getShield() != null && other.getShield().isOn());
+            if (MathUtils.getDistanceSquared(closestPoint, other.getLocation()) < otherDistance*otherDistance){
                 targets.add(other);
             }
-
         }
 
         float minDistance = range;
         ShipAPI target = null;
         for(ShipAPI other : targets){
-            float otherDistance = MathUtils.getDistance(other.getLocation(), ship.getLocation());
+            float otherDistance = MathUtils.getDistanceSquared(other.getLocation(), ship.getLocation());
             if(otherDistance < minDistance){
                 minDistance = otherDistance;
                 target = other;

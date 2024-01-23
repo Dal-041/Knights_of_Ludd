@@ -23,7 +23,7 @@ import java.util.*;
 import java.util.List;
 
 public class StarficzAIUtils {
-    public static final boolean DEBUG_ENABLED = true;
+    public static final boolean DEBUG_ENABLED = false;
 
     public static class FutureHit{
         public float timeToHit;
@@ -949,8 +949,8 @@ public class StarficzAIUtils {
     }
 
     public static float linMap(float minOut,float maxOut,float minIn,float maxIn,float input){
-        if(input > maxIn) input = maxIn;
-        if(input < minIn) input = minIn;
+        if(input > maxIn) return maxOut;
+        if(input < minIn) return minOut;
         return minOut+(input-minIn)*(maxOut-minOut)/(maxIn-minIn);
     }
 }

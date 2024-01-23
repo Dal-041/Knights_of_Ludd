@@ -55,10 +55,11 @@ public class TargetingBeamAI implements ShipSystemAIScript {
             if (currentScore < bestScore) continue;
 
             boolean occluded = false;
-            for(ShipAPI occlusion : CombatUtils.getShipsWithinRange(ship.getLocation(), lidarRange)){
+            for(CombatEntityAPI occlusion : CombatUtils.getEntitiesWithinRange(ship.getLocation(), lidarRange)){
                 if (occlusion == other || occlusion == ship) continue;
                 Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), other.getLocation());
-                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, other.getShield() == null ? false : other.getShield().isOn())){
+                float occlusionDistance = Misc.getTargetingRadius(closestPoint, occlusion, other.getShield() != null && other.getShield().isOn());
+                if (MathUtils.getDistanceSquared(closestPoint, occlusion.getLocation()) < occlusionDistance*occlusionDistance){
                     occluded = true;
                     break;
                 }

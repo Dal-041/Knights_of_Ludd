@@ -23,7 +23,6 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
     Vector2f systemTargetPoint;
     public Map<ShipAPI, Map<String, Float>> nearbyEnemies = new HashMap<>();
     IntervalUtil enemyInterval = new IntervalUtil(0.2f, 0.3f);
-    boolean DEBUG_ENABLED = true;
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;
@@ -79,7 +78,7 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
         oppositePoint = MathUtils.getPointOnCircumference(target.getLocation(), targetRange + Misc.getTargetingRadius(oppositePoint, target, false) -150f, oppositeAngle);
 
         // pick which location to use depending on which is further away
-        if (AIUtils.canUseSystemThisFrame(ship) && systemTargetPoint != null && !ship.getFluxTracker().isVenting() && ship.getHardFluxLevel() < 0.6f){
+        if (AIUtils.canUseSystemThisFrame(ship) && systemTargetPoint != null && !ship.getFluxTracker().isVenting() && ship.getHardFluxLevel() < 0.5f){
             ship.setShipTarget(target);
             float distanceSquared = MathUtils.getDistanceSquared(systemTargetPoint, ship.getLocation());
             if (distanceSquared > 700*700 && distanceSquared < 1500*1500){
@@ -97,7 +96,22 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
             }
         }
 
-        if(DEBUG_ENABLED && systemTargetPoint != null){
+        // use system to escape
+        if(AIUtils.canUseSystemThisFrame(ship) && ship.getHardFluxLevel() > 0.7f){
+            List<Vector2f> escapePoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), 1500f, 40, ship.getFacing());
+            float lowestDanger = Float.POSITIVE_INFINITY;
+            Vector2f safestPoint = escapePoints.get(0);
+            for(Vector2f point : escapePoints){
+                float currentDanger = StarficzAIUtils.getPointDanger(nearbyEnemies, point);
+                if(currentDanger < lowestDanger){
+                    lowestDanger = currentDanger;
+                    safestPoint = point;
+                }
+            }
+            ship.giveCommand(ShipCommand.USE_SYSTEM, safestPoint, 0);
+        }
+
+        if(StarficzAIUtils.DEBUG_ENABLED && systemTargetPoint != null){
             float distanceSquared = MathUtils.getDistanceSquared(systemTargetPoint, ship.getLocation());
             engine.addSmoothParticle(systemTargetPoint, ship.getVelocity(), 50f, 5f, 0.1f, distanceSquared > 700*700 && distanceSquared < 1500*1500 ? Color.blue : Color.red);
             engine.addSmoothParticle(oppositePoint, ship.getVelocity(), 50f, 5f, 0.1f, distanceSquared < 700*700 ? Color.blue : Color.red);

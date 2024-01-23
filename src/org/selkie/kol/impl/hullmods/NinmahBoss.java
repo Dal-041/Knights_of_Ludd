@@ -31,15 +31,14 @@ public class NinmahBoss extends BaseHullMod {
 
     public static class NinmahBossPhaseTwoScript implements AdvanceableListener, HullDamageAboutToBeTakenListener {
         public boolean phaseTwo = false;
-        CombatEngineAPI engine;
+        public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
         public ShipAPI ship;
-        ShipAPI escortA = null, escortB = null, escortC = null;
-        String id = "phase_boss_phase_two_modifier";
+        public ShipAPI escortA = null, escortB = null, escortC = null;
+        public String id = "boss_phase_two_modifier";
         public NinmahBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
         }
-
 
         @Override
         public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI ship, Vector2f point, float damageAmount) {
@@ -58,7 +57,6 @@ public class NinmahBoss extends BaseHullMod {
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
                 return true;
             }
-
             return false;
         }
 
@@ -187,10 +185,10 @@ public class NinmahBoss extends BaseHullMod {
         }
 
         public void shipSpawnExplosion(float size, Vector2f location){
-            NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(200,125,255,155), size);
+            NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);
             p.fadeOut = 0.15f;
             p.hitGlowSizeMult = 0.25f;
-            p.underglow = new Color(255,175,255, 50);
+            p.underglow = new Color(5,120,180,150);
             p.withHitGlow = false;
             p.noiseMag = 1.25f;
             CombatEntityAPI e = Global.getCombatEngine().addLayeredRenderingPlugin(new NegativeExplosionVisual(p));
@@ -269,7 +267,6 @@ public class NinmahBoss extends BaseHullMod {
     }
 
     public static class NinmahAIScript implements AdvanceableListener {
-        private static final boolean DEBUG_ENABLED = true;
         public IntervalUtil enemyTracker = new IntervalUtil(0.8F, 1F);
         public IntervalUtil damageTracker = new IntervalUtil(0.2F, 0.3F);
         public CombatEngineAPI engine;
@@ -296,7 +293,7 @@ public class NinmahBoss extends BaseHullMod {
                 return;
             }
 
-            if (ship.getOwner() != 0 || DEBUG_ENABLED) {
+            if (ship.getOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED) {
                 ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 100000);
             }
 
@@ -317,7 +314,7 @@ public class NinmahBoss extends BaseHullMod {
                 combinedHits.addAll(incomingProjectiles);
                 combinedHits.addAll(predictedWeaponHits);
             }
-            if (ship.getOriginalCaptain() == null && (ship.getOwner() != 0 || DEBUG_ENABLED)) {
+            if (StarficzAIUtils.DEBUG_ENABLED) {
                 // specially tuned for phase ships
                 PersonAPI captain = Global.getSettings().createPerson();
                 captain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
@@ -416,7 +413,7 @@ public class NinmahBoss extends BaseHullMod {
 
             Color test = Color.blue;
 
-            if (DEBUG_ENABLED) {
+            if (StarficzAIUtils.DEBUG_ENABLED) {
                 test = (armorDamageLevel > 0.03f || hullDamageLevel > 0.03f || empDamageLevel > 0.3f) ? Color.green : test;
                 test = (armorDamageLevel > 0.05f || hullDamageLevel > 0.05f || empDamageLevel > 0.5f) ? Color.yellow : test;
                 test = (armorDamageLevel > 0.07f || hullDamageLevel > 0.07f || empDamageLevel > 0.7f) ? Color.red : test;
@@ -506,7 +503,7 @@ public class NinmahBoss extends BaseHullMod {
                     ship.setShipTarget(target);
                 }
 
-                if (DEBUG_ENABLED) {
+                if (StarficzAIUtils.DEBUG_ENABLED) {
                     if (shipTargetPoint != null) {
                         engine.addSmoothParticle(shipTargetPoint, ship.getVelocity(), 50f, 5f, 0.1f, Color.blue);
                         Vector2f shipStrafePoint = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), shipStrafeAngle);

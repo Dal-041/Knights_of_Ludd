@@ -11,25 +11,29 @@ import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
 import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
+import org.lazywizard.lazylib.combat.CombatUtils;
+import org.lazywizard.lazylib.combat.DefenseUtils;
+import org.lazywizard.lazylib.combat.WeaponUtils;
+import org.lwjgl.Sys;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicAnim;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 
 import java.awt.*;
+import java.util.EnumSet;
 
-import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class NinayaBoss extends BaseHullMod {
     public static class NinayaBossPhaseTwoScript implements AdvanceableListener, HullDamageAboutToBeTakenListener {
         public boolean phaseTwo = false;
-        CombatEngineAPI engine;
+        public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
         public ShipAPI ship;
-        ShipAPI escortA = null, escortB = null, escortC = null;
-        String id = "boss_phase_two_modifier";
+        public ShipAPI escortA = null, escortB = null;
+        public String id = "boss_phase_two_modifier";
         public NinayaBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
         }
@@ -40,7 +44,7 @@ public class NinayaBoss extends BaseHullMod {
             if (damageAmount >= hull && !phaseTwo) {
                 phaseTwo = true;
                 ship.setHitpoints(1f);
-                ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
+                applyDamper(ship, id, 1);
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
                 shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 float timeMult = ship.getMutableStats().getTimeMult().getModifiedValue();
@@ -52,16 +56,6 @@ public class NinayaBoss extends BaseHullMod {
             return false;
         }
 
-        public void stayStill(ShipAPI ship){
-            ship.giveCommand(ShipCommand.DECELERATE, null, 0);
-            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
-            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
-            ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
-            ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
-            ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
-            ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
-        }
-
         @Override
         public void advance(float amount) {
             engine = Global.getCombatEngine();
@@ -69,21 +63,20 @@ public class NinayaBoss extends BaseHullMod {
             float hpRegen = 0.6f;
             float maxTime = 8f;
 
+
+
             if(phaseTwo && phaseTwoTimer < maxTime){
 
                 phaseTwoTimer += amount;
 
                 // force phase, mitigate damage, regen hp/armor, vent flux, reset ppt/ cr
                 if (phaseTwoTimer > maxTime) {
-                    ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
-                    escortA.getMutableStats().getHullDamageTakenMult().unmodify(id);
-                    escortB.getMutableStats().getHullDamageTakenMult().unmodify(id);
+                    unapplyDamper(ship, id);
+                    unapplyDamper(escortA, id);
+                    unapplyDamper(escortB, id);
                 }
 
                 ship.getFluxTracker().setHardFlux(0f);
-                ship.giveCommand(ShipCommand.HOLD_FIRE, null ,1);
-                ship.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);
-                ship.blockCommandForOneFrame(ShipCommand.FIRE);
                 ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/maxTime));
                 ArmorGridAPI armorGrid = ship.getArmorGrid();
 
@@ -94,7 +87,10 @@ public class NinayaBoss extends BaseHullMod {
                     }
                 }
 
+                applyDamper(ship, id, StarficzAIUtils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
                 stayStill(ship);
+                holdFire(ship);
+
 
                 // specially tuned for phase ships
                 PersonAPI captain = Global.getSettings().createPerson();
@@ -128,59 +124,83 @@ public class NinayaBoss extends BaseHullMod {
                 CombatFleetManagerAPI.AssignmentInfo assignmentInfo = taskManager.createAssignment(CombatAssignmentType.DEFEND, fleetManager.getDeployedFleetMemberEvenIfDisabled(ship), false);
 
                 float escortFacing = ship.getFacing();
-                Vector2f escortASpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 250f, escortFacing + 90);
-                Vector2f escortBSpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 250f, escortFacing - 90);
+                Vector2f escortASpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 200f, escortFacing + 90);
+                Vector2f escortBSpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 200f, escortFacing - 90);
 
 
                 if(phaseTwoTimer > maxTime/3){
                     if (escortA == null) {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing + 90f, 0f, captain);
-                        escortA.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
+                        escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
                         shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortA), assignmentInfo, false);
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortA.giveCommand(ShipCommand.DECELERATE, null, 0);
+                        applyDamper(escortA, id,StarficzAIUtils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
                         stayStill(escortA);
-                        escortA.giveCommand(ShipCommand.HOLD_FIRE, null ,1);
-                        escortA.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);
-                        escortA.blockCommandForOneFrame(ShipCommand.FIRE);
+                        holdFire(ship);
                     }
                 }
 
                 if(phaseTwoTimer > maxTime*2/3){
                     if (escortB == null) {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing - 90f, 0f, captain);
-                        escortB.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
+                        escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
                         shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortB), assignmentInfo, false);
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortB.giveCommand(ShipCommand.DECELERATE, null, 0);
+                        applyDamper(escortB, id, StarficzAIUtils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
                         stayStill(escortB);
-                        escortB.giveCommand(ShipCommand.HOLD_FIRE, null ,1);
-                        escortB.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);
-                        escortB.blockCommandForOneFrame(ShipCommand.FIRE);
+                        holdFire(ship);
                     }
                 }
             }
         }
 
         public void shipSpawnExplosion(float size, Vector2f location){
-            NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(200,125,255,155), size);
+            NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);
             p.fadeOut = 0.15f;
             p.hitGlowSizeMult = 0.25f;
-            p.underglow = new Color(255,175,255, 50);
+            p.underglow = new Color(5,120,180,150);
             p.withHitGlow = false;
             p.noiseMag = 1.25f;
             CombatEntityAPI e = Global.getCombatEngine().addLayeredRenderingPlugin(new NegativeExplosionVisual(p));
             e.getLocation().set(location);
         }
+    }
+    public static void applyDamper(ShipAPI ship, String id, float level){
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getHullDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getArmorDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getEmpDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getWeaponDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getEngineDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getCombatEngineRepairTimeMult().modifyMult(id, 0.000001f);
+        stats.getCombatWeaponRepairTimeMult().modifyMult(id, 0.000001f);
 
+
+        ship.getShield().toggleOff();
+        ship.fadeToColor(id + ship.getId(), new Color(75,75,75,255), 0.1f, 0.1f, level);
+        ship.setJitterUnder(id + ship.getId(), new Color(100,165,255,255), level, 15, 0f, 15f);
+    }
+
+    public static void unapplyDamper(ShipAPI ship, String id){
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getHullDamageTakenMult().unmodify(id);
+        stats.getArmorDamageTakenMult().unmodify(id);
+        stats.getEmpDamageTakenMult().unmodify(id);
+        stats.getWeaponDamageTakenMult().unmodify(id);
+        stats.getEngineDamageTakenMult().unmodify(id);
+        stats.getCombatEngineRepairTimeMult().unmodify(id);
+        stats.getCombatWeaponRepairTimeMult().unmodify(id);
+        ship.fadeToColor(id + ship.getId(), new Color(75,75,75,255), 0.1f, 0.1f, 0);
+        ship.setJitterUnder(id + ship.getId(), new Color(100,165,255,255), 0, 15, 0f, 15f);
     }
 
     public static class NinayaAIScript implements AdvanceableListener {
-        boolean DEBUG_ENABLED = true;
         ShipAPI ship;
         CombatEngineAPI engine;
         Boolean ventingHardflux = false;
@@ -194,7 +214,7 @@ public class NinayaBoss extends BaseHullMod {
                 return;
             }
 
-            if (ship.getOriginalCaptain() == null && (ship.getOwner() != 0 || DEBUG_ENABLED)) {
+            if (StarficzAIUtils.DEBUG_ENABLED) {
                 // specially tuned for phase ships
                 PersonAPI captain = Global.getSettings().createPerson();
                 captain.setPortraitSprite("graphics/portraits/portrait_ai3b.png");
@@ -217,7 +237,8 @@ public class NinayaBoss extends BaseHullMod {
                 ship.setCaptain(captain);
             }
 
-            if (ship.getOwner() != 0 || DEBUG_ENABLED) {
+
+            if (ship.getOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED) {
                 ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 1000000);
             }
 
@@ -237,8 +258,9 @@ public class NinayaBoss extends BaseHullMod {
                 }
             }
 
+
             // back off at high hardflux
-            if(ship.getHardFluxLevel() > 0.65f){
+            if(ship.getHardFluxLevel() > 0.5f && !AIUtils.canUseSystemThisFrame(ship) || ship.getHardFluxLevel() > 0.7f){
                 ventingHardflux = true;
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACKING_OFF, 0.1f);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACK_OFF, 0.1f);
@@ -252,8 +274,8 @@ public class NinayaBoss extends BaseHullMod {
             }
 
             // dont overflux via weapons
-            if(ship.getFluxLevel() > 0.85){
-                ship.giveCommand(ShipCommand.HOLD_FIRE, null, 1);
+            if(ship.getFluxLevel() > 0.9){
+                holdFire(ship);
             }
         }
     }
@@ -267,5 +289,24 @@ public class NinayaBoss extends BaseHullMod {
 
         String key = "phaseAnchor_canDive";
         Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+    }
+
+    public static void stayStill(ShipAPI ship){
+        ship.giveCommand(ShipCommand.DECELERATE, null, 0);
+        ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
+        ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
+        ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
+        ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
+        ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
+        ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
+        ship.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);
+    }
+
+    public static void holdFire(ShipAPI ship){
+        for(WeaponAPI weapon : ship.getAllWeapons()){
+            if(!weapon.isDecorative()){
+                weapon.setForceNoFireOneFrame(true);
+            }
+        }
     }
 }
