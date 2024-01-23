@@ -11,5 +11,6 @@ Custom Shields 1,kol_ea_shields1,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hu
 Custom Shields 1,kol_ea_shields2,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.DuskyShields2,,Replaces shield style option 2,,
 Custom Shields 1,kol_ea_shields3,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.DuskyShields3,,Replaces shield style option 3,,
 Conformal Shield,kol_conformal_shield,3,0,,"no_drop, no_drop_salvage, no_dealer, restricted","Defenses, Shields",,,,,0,0,0,0,org.selkie.kol.impl.hullmods.ConformalShields,This ship uses a custom shield emitter configuration that mains its front shield in close proximity to the hull. ,Conformal shield,graphics/icons/skills/field_modulation.png,
-Ninmah Boss,zea_phase_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.PhaseBoss,,
+Ninaya Boss,zea_ninaya_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.NinayaBoss,,
+Ninmah Boss,zea_ninmah_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.NinmahBoss,,
 Scorched Skies Doctrine,kol_throttle,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.AttainmentManager,,Conformal shield,graphics/icons/skills/field_modulation.png,

@@ -1,0 +1,39 @@
+{
+    "displayName": "Strike",
+    "fluxCapacitors": 4,
+    "fluxVents": 10,
+    "goalVariant": false,
+    "hullId": "hyperion",
+    "hullMods": [
+        "advancedshieldemitter",
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "insulatedengine",
+        "unstable_injector",
+    ],
+    "permaMods": [
+        "autorepair",
+        "magazines",
+        "stabilizedshieldemitter",
+    ],
+    "sMods": [
+        "autorepair",
+        "magazines",
+        "stabilizedshieldemitter",
+    ],
+    "suppressedMods": [],
+    "variantId": "zea_boss_hyperion_Strike",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "phasebeam",
+                "WS 002": "ionpulser",
+                "WS 001": "ionpulser",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

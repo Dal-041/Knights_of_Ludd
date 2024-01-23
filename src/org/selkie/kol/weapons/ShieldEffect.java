@@ -10,7 +10,7 @@ import org.magiclib.util.MagicUI;
 import java.awt.Color;
 import java.util.*;
 
-import static org.selkie.kol.impl.combat.DamagePredictor.*;
+import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
 
 //Concept and impl by Tartiflette, AI by Starficz
 

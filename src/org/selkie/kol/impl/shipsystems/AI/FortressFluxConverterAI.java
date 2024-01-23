@@ -4,26 +4,24 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.api.util.Pair;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.combat.DamagePredictor;
+import org.selkie.kol.impl.combat.StarficzAIUtils;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.selkie.kol.impl.combat.DamagePredictor.*;
+import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
 
 public class FortressFluxConverterAI implements ShipSystemAIScript {
     private ShipAPI ship;
     private ShieldAPI shield;
     private final IntervalUtil tracker = new IntervalUtil(0.1f, 0.3f); //Seconds
     public float lastUpdatedTime = 0f;
-    public List<DamagePredictor.FutureHit> incomingProjectiles = new ArrayList<>();
-    public List<DamagePredictor.FutureHit> predictedWeaponHits = new ArrayList<>();
-    public List<DamagePredictor.FutureHit> combinedHits = new ArrayList<>();
+    public List<StarficzAIUtils.FutureHit> incomingProjectiles = new ArrayList<>();
+    public List<StarficzAIUtils.FutureHit> predictedWeaponHits = new ArrayList<>();
+    public List<StarficzAIUtils.FutureHit> combinedHits = new ArrayList<>();
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;

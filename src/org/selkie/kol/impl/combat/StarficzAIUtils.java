@@ -9,20 +9,21 @@ import com.fs.starfarer.api.util.Pair;
 import com.fs.starfarer.combat.entities.BallisticProjectile;
 import com.fs.starfarer.combat.entities.MovingRay;
 import com.fs.starfarer.combat.entities.PlasmaShot;
+import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
-import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.ReflectionUtils;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
 
-public class DamagePredictor {
+public class StarficzAIUtils {
+    public static final boolean DEBUG_ENABLED = true;
 
     public static class FutureHit{
         public float timeToHit;
@@ -659,5 +660,297 @@ public class DamagePredictor {
             else
                 return 0;
         }
+    }
+    public static Pair<Vector2f, ShipAPI> getLowestDangerTargetInRange(ShipAPI ship, Map<ShipAPI, Map<String, Float>> nearbyEnemies, float maxAngle, float targetRange, boolean los){
+        float degreeDelta = 10f;
+
+        //get the all the "outside" ships
+        List<ShipAPI> enemyShipsOnConvexHull = getConvexHull(new ArrayList<>(nearbyEnemies.keySet()));
+
+        Map<ShipAPI, List<Vector2f>> targetEnemys = new HashMap<>();
+
+        // add all the target points from enemies on the "outside edges"
+        for(ShipAPI enemy : enemyShipsOnConvexHull){
+            float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
+
+            List<Vector2f> potentialPoints = new ArrayList<>();
+            float enemyAngle = VectorUtils.getAngle(enemy.getLocation(), ship.getLocation());
+            float currentAngle = enemyAngle - maxAngle;
+            while(currentAngle < enemyAngle + maxAngle){
+                potentialPoints.add(MathUtils.getPointOnCircumference(enemy.getLocation(), optimalRange, currentAngle));
+                currentAngle += degreeDelta;
+            }
+            targetEnemys.put(enemy, potentialPoints);
+        }
+
+        // remove the points that requires ship to fly through other ships
+        for(ShipAPI enemy : Global.getCombatEngine().getShips()){
+            if (!MathUtils.isWithinRange(enemy, ship, 3000f) || enemy.isFighter() || enemy == ship || !enemy.isAlive())
+                continue;
+            for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()){
+                List<Vector2f> pointsToRemove = new ArrayList<>();
+                for(Vector2f potentialPoint : targetEnemy.getValue()){
+                    if(!los && targetEnemy.getKey() == enemy) continue;
+                    float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
+                    float minKeepoutRadius = (enemy.getHullLevel() < 0.20f ? enemy.getShipExplosionRadius() + 25f : enemy.getCollisionRadius()) + ship.getCollisionRadius() + 25f;
+                    float keepoutRadius = MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) > optimalRange ? (float) (optimalRange * 0.8) : minKeepoutRadius;
+                    if(CollisionUtils.getCollides(potentialPoint, ship.getLocation(), enemy.getLocation(), keepoutRadius)){
+                        pointsToRemove.add(potentialPoint);
+                    }
+                }
+                targetEnemy.getValue().removeAll(pointsToRemove);
+            }
+        }
+
+        // from the points left, find the safest target to attack and where to strafe to
+        Vector2f optimalStrafePoint = null;
+        ShipAPI target = null;
+        float currentDanger = Float.POSITIVE_INFINITY;
+
+        for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()) {
+            for (Vector2f potentialPoint : targetEnemy.getValue()) {
+                float pointDanger = getPointDanger(nearbyEnemies, potentialPoint);
+
+                if(DEBUG_ENABLED){
+                    Global.getCombatEngine().addFloatingText(potentialPoint, String.valueOf(pointDanger), 10, Color.white, null, 0, 0);
+                }
+
+                if (pointDanger < currentDanger) {
+                    optimalStrafePoint = potentialPoint;
+                    target = targetEnemy.getKey();
+                    currentDanger = pointDanger;
+                }
+            }
+        }
+        return new Pair<>(optimalStrafePoint, target);
+    }
+
+    public static Vector2f getBackingOffStrafePoint(ShipAPI ship){
+
+        float degreeDelta = 5f;
+
+        List<Vector2f> potentialPoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), ship.getCollisionRadius()*2, (int) (360f/degreeDelta), 0);
+        Vector2f safestPoint = null;
+        float furthestPointSumDistance = 0;
+        List<ShipAPI> enemies = AIUtils.getNearbyEnemies(ship, 3000f);
+        for (Vector2f potentialPoint : potentialPoints) {
+            float currentPointSumDistance = 0;
+            for(ShipAPI enemy : enemies){
+                currentPointSumDistance += MathUtils.getDistance(enemy, potentialPoint);
+            }
+            if(currentPointSumDistance > furthestPointSumDistance){
+                furthestPointSumDistance = currentPointSumDistance;
+                safestPoint = potentialPoint;
+            }
+        }
+
+        return safestPoint;
+    }
+
+    public static Map<String, Float> getShipStats(ShipAPI enemy, float defaultRange){
+
+        float deltaAngle = 1f;
+        float currentRelativeAngle = 0f;
+        Map<String, Float> highLowDPS = new HashMap<>();
+        float highestDPS = 0;
+        float lowestDPS = Float.POSITIVE_INFINITY;
+        float highestDPSAngle = 0;
+        float maxRange = 0;
+
+        while(currentRelativeAngle <= 360){
+            float potentialDPS = 0;
+            for (WeaponAPI weapon: enemy.getAllWeapons()){
+                if(!weapon.isDecorative() && weapon.getType() != WeaponAPI.WeaponType.MISSILE){
+                    if((Math.abs(weapon.getArcFacing() - currentRelativeAngle) < weapon.getArc()/2) && (defaultRange < weapon.getRange())){
+                        potentialDPS += Math.max(weapon.getDerivedStats().getDps(), weapon.getDerivedStats().getBurstDamage());
+                    }
+                    maxRange = Math.max(weapon.getRange(), maxRange);
+                }
+            }
+            if(potentialDPS > highestDPS){
+                highestDPS = potentialDPS;
+            }
+            if(potentialDPS < lowestDPS){
+                lowestDPS = potentialDPS;
+            }
+
+            currentRelativeAngle += deltaAngle;
+        }
+
+        currentRelativeAngle = -1f;
+
+        float lastDPS = highestDPS;
+        float highZoneStart = 0;
+        float highZoneEnd = 0;
+
+        while(currentRelativeAngle <= 360){
+            float potentialDPS = 0;
+            for (WeaponAPI weapon: enemy.getAllWeapons()){
+                if(!weapon.isDecorative() && weapon.getType() != WeaponAPI.WeaponType.MISSILE){
+                    if((Math.abs(weapon.getArcFacing() - currentRelativeAngle) < weapon.getArc()/2) && (defaultRange < weapon.getRange())){
+                        potentialDPS += Math.max(weapon.getDerivedStats().getDps(), weapon.getDerivedStats().getBurstDamage());
+                    }
+                    maxRange = Math.max(weapon.getRange(), maxRange);
+                }
+            }
+            if(potentialDPS > highestDPS*0.8f && lastDPS < highestDPS*0.8f){
+                highZoneStart = currentRelativeAngle;
+            }
+            if(potentialDPS < highestDPS*0.8f && lastDPS > highestDPS*0.8f){
+                highZoneEnd = currentRelativeAngle;
+            }
+            lastDPS = potentialDPS;
+            currentRelativeAngle += deltaAngle;
+        }
+
+        highestDPSAngle = highZoneEnd - (highZoneEnd - highZoneStart)/2;
+
+        highLowDPS.put("HighestDPS", highestDPS);
+        highLowDPS.put("LowestDPS", lowestDPS);
+        highLowDPS.put("HighestDPSAngle", highestDPSAngle);
+        highLowDPS.put("MaxRange", maxRange);
+        return highLowDPS;
+    }
+
+
+    public static int orientation(Vector2f p, Vector2f q, Vector2f r) {
+        float val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
+        if (val == 0)
+            return 0; // collinear
+        return (val > 0) ? 1 : 2; // clock or counterclockwise
+    }
+
+    public static List<ShipAPI> getConvexHull(List<ShipAPI> ships) {
+        int n = ships.size();
+        if (n < 3)
+            return ships;
+
+        List<ShipAPI> hull = new ArrayList<>();
+
+        // Find the leftmost point
+        int leftmost = 0;
+        for (int i = 1; i < n; i++) {
+            if (ships.get(i).getLocation().x < ships.get(leftmost).getLocation().x)
+                leftmost = i;
+        }
+
+        int p = leftmost, q;
+        do {
+            hull.add(ships.get(p));
+            q = (p + 1) % n;
+            for (int i = 0; i < n; i++) {
+                if (orientation(ships.get(p).getLocation(), ships.get(i).getLocation(), ships.get(q).getLocation()) == 2)
+                    q = i;
+            }
+            p = q;
+        } while (p != leftmost);
+
+        return hull;
+    }
+
+    public static float getPointDanger(Map<ShipAPI, Map<String, Float>> nearbyEnemies, Vector2f testPoint){
+        float currentPointDanger = 0f;
+        if (testPoint == null)
+            return 0f;
+
+        for (ShipAPI enemy: nearbyEnemies.keySet()) {
+
+            //float currentTargetBias = (enemy == target && MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) < targetRange * 1.2) ? 0.1f : 1f;  , ShipAPI ship, float targetRange, ShipAPI target
+            float currentTargetBias = 1;
+
+            float highestDPSAngle = enemy.getFacing() + nearbyEnemies.get(enemy).get("HighestDPSAngle");
+            float alpha = Math.abs(MathUtils.getShortestRotation(VectorUtils.getAngle(enemy.getLocation(), testPoint), highestDPSAngle))/180f;
+
+            float DPSDanger = (1f - alpha) * nearbyEnemies.get(enemy).get("HighestDPS") + alpha * nearbyEnemies.get(enemy).get("LowestDPS");
+
+            float shipDistance = MathUtils.getDistance(enemy.getLocation(), testPoint);
+            float currentlyOccluded = 1;
+            for (ShipAPI otherEnemy: nearbyEnemies.keySet()) {
+                if (otherEnemy != enemy && CollisionUtils.getCollides(enemy.getLocation(), testPoint, otherEnemy.getLocation(), otherEnemy.getCollisionRadius())){
+                    currentlyOccluded = 0;
+                }
+            }
+            if(shipDistance < nearbyEnemies.get(enemy).get("MaxRange")){
+                currentPointDanger += (DPSDanger - shipDistance/100) * (1-enemy.getFluxLevel()) * enemy.getHullLevel() * currentTargetBias * currentlyOccluded;
+            }
+        }
+        return currentPointDanger;
+    }
+
+    public static void strafeToPoint(ShipAPI ship, Vector2f strafePoint){
+        float strafeAngle = VectorUtils.getAngle(ship.getLocation(), strafePoint);
+        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
+
+        if (rotAngle < 67.5f && rotAngle > -67.5f) {
+            ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing());
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        } else{
+            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
+        }
+
+        if (rotAngle > 112.5f || rotAngle < -112.5f){
+            ship.giveCommand(ShipCommand.ACCELERATE_BACKWARDS, null,0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()+180f);
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        }else{
+            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
+        }
+
+        if (rotAngle > 22.5f && rotAngle < 157.5f){
+            ship.giveCommand(ShipCommand.STRAFE_LEFT, null,0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()+90f);
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        }else{
+            ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
+        }
+
+        if (rotAngle < -22.5f && rotAngle > -157.5f){
+            ship.giveCommand(ShipCommand.STRAFE_RIGHT, null,0);
+            if(DEBUG_ENABLED) {
+                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()-90f);
+                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
+            }
+        }else{
+            ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
+        }
+    }
+
+    public static void turnToPoint(ShipAPI ship, Vector2f turnPoint){
+        float turnAngle = VectorUtils.getAngle(ship.getLocation(), turnPoint);
+        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), turnAngle);
+
+        if (rotAngle > 0) {
+            ship.giveCommand(ShipCommand.TURN_LEFT, null, 0);
+            ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
+        } else{
+            ship.giveCommand(ShipCommand.TURN_RIGHT, null, 0);
+            ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
+        }
+    }
+
+    public static float lowestWeaponAmmoLevel(ShipAPI ship){
+        float lowestAmmoLevel = 1f;
+        for (WeaponAPI weapon: ship.getAllWeapons()){
+            if(!weapon.isDecorative() && !weapon.hasAIHint(WeaponAPI.AIHints.PD) && (weapon.getType() != WeaponAPI.WeaponType.MISSILE) && weapon.usesAmmo()){
+                float currentAmmoLevel = (float) weapon.getAmmo() / weapon.getMaxAmmo();
+                if (currentAmmoLevel < lowestAmmoLevel){
+                    lowestAmmoLevel = currentAmmoLevel;
+                }
+            }
+        }
+        return lowestAmmoLevel;
+    }
+
+    public static float linMap(float minOut,float maxOut,float minIn,float maxIn,float input){
+        if(input > maxIn) input = maxIn;
+        if(input < minIn) input = minIn;
+        return minOut+(input-minIn)*(maxOut-minOut)/(maxIn-minIn);
     }
 }

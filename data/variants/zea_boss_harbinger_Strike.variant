@@ -1,5 +1,5 @@
 {
-    "displayName": "Super Strike",
+    "displayName": "Strike",
     "fluxCapacitors": 20,
     "fluxVents": 17,
     "goalVariant": false,
@@ -18,7 +18,7 @@
         "magazines",
     ],
     "suppressedMods": [],
-    "variantId": "zea_boss_harbinger_super_strike",
+    "variantId": "zea_boss_harbinger_Strike",
     "weaponGroups": [
         {
             "autofire": false,

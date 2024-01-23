@@ -8,11 +8,11 @@
 	"runScriptWhileIdle":true,  # this means unapply() never gets called
 	"blockActionsWhileChargingDown":true,
 	
-	"phaseHighlight":"_glow2",
+	"phaseHighlight":"_glow1",
 	"phaseDiffuse":"_glow2",
 	
-	"effectColor1":[64,13,102,0],
-	"effectColor2":[64,13,102,0],
+	"effectColor1":[80,160,240,255],
+    "effectColor2":[5,120,180,150],
 	
 	"clampTurnRateAfter":true,
 	"clampMaxSpeedAfter":true,

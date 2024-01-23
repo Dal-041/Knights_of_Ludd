@@ -1,180 +1,204 @@
 package org.selkie.kol.impl.shipsystems;
 
+
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
-import org.selkie.kol.impl.fx.FakeSmokePlugin;
 import org.magiclib.util.MagicRender;
-import java.awt.Color;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.fx.FakeSmokePlugin;
+
+import java.awt.*;
 
 public class PhasespaceSkip extends BaseShipSystemScript {
-  private static final Color PHASE_COLOR = new Color(0.45F, 0.05F, 0.45F, 0.2F);
-  
-  private static final Color AFTERIMAGE_COLOR = new Color(0.25F, 0.05F, 0.4F, 0.3F);
-  
-  private static final float PHANTOM_DELAY = 0.07F;
-  
-  private static final float PHANTOM_ANGLE_DIFFERENCE = 5.0F;
-  
-  private static final float PHANTOM_DISTANCE_DIFFERENCE = 55.0F;
-  
-  private static final float PHANTOM_FLICKER_DIFFERENCE = 11.0F;
-  
-  private static final int PHANTOM_FLICKER_CLONES = 4;
-  
-  private static final float SHIP_ALPHA_MULT = 0.0F;
-  
-  private static final float SPEED_BONUS_MULT = 3.0F;
-  
-  private static final float TURN_BONUS_MULT = 2.0F;
-  
-  private static final float MOBILITY_BONUS_MULT = 50.0F;
-  
-  private int lastMessage = 0;
-  
-  private float phantomDelayCounter = 0.0F;
-  
-  private boolean runOnce = true;
-  
-  public void apply(MutableShipStatsAPI stats, String id, ShipSystemStatsScript.State state, float effectLevel) {
-    ShipAPI ship;
-    boolean player = false;
-    if (stats.getEntity() instanceof ShipAPI) {
-      ship = (ShipAPI)stats.getEntity();
-      player = (ship == Global.getCombatEngine().getPlayerShip());
-      id = id + "_" + ship.getId();
-    } else {
-      return;
-    } 
-    float amount = Global.getCombatEngine().getElapsedInLastFrame();
-    if (Global.getCombatEngine().isPaused())
-      amount = 0.0F; 
-    if (state == ShipSystemStatsScript.State.COOLDOWN || state == ShipSystemStatsScript.State.IDLE) {
-      unapply(stats, id);
-      return;
-    } 
-    if (state == ShipSystemStatsScript.State.OUT && this.runOnce) {
-      this.runOnce = false;
-      stats.getMaxSpeed().unmodify(id);
-      stats.getMaxTurnRate().unmodify(id);
-      if (ship.getAngularVelocity() > stats.getMaxTurnRate().getModifiedValue())
-        ship.setAngularVelocity(ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity()) * stats.getMaxTurnRate().getModifiedValue()); 
-      if (ship.getVelocity().length() > stats.getMaxSpeed().getModifiedValue())
-        ship.getVelocity().set((ship.getVelocity()).x / ship.getVelocity().length() * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity()).y / ship.getVelocity().length() * stats.getMaxSpeed().getModifiedValue()); 
-      return;
-    } 
-    if (state == ShipSystemStatsScript.State.IN || state == ShipSystemStatsScript.State.ACTIVE || state == ShipSystemStatsScript.State.OUT) {
-      ship.setPhased(true);
-      float speedBonus = 1.0F + 9.0F * effectLevel;
-      float mobilityBonus = 1.0F + 49.0F * effectLevel;
-      stats.getMaxSpeed().modifyMult(id, speedBonus);
-      stats.getAcceleration().modifyMult(id, mobilityBonus);
-      stats.getDeceleration().modifyMult(id, mobilityBonus);
-      stats.getMaxTurnRate().modifyMult(id, 5.0F);
-      stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
-    } 
-    ship.setExtraAlphaMult(1.0F - 1.0F * effectLevel);
-    ship.setApplyExtraAlphaToEngines(true);
-    Vector2f phantomPos = MathUtils.getRandomPointInCircle(null, 55.0F);
-    phantomPos.x += (ship.getLocation()).x;
-    phantomPos.y += (ship.getLocation()).y;
-    if (!Global.getCombatEngine().getViewport().isNearViewport(phantomPos, ship.getCollisionRadius() * 1.5F))
-      return; 
-    this.phantomDelayCounter += amount;
-    if (this.phantomDelayCounter > 0.07F) {
-      float angleDifference = MathUtils.getRandomNumberInRange(-5.0F, 5.0F) - 90.0F;
-      for (int j = 0; j < 4; j++) {
-        Vector2f modifiedPhantomPos = new Vector2f(MathUtils.getRandomNumberInRange(-11.0F, 11.0F), MathUtils.getRandomNumberInRange(-11.0F, 11.0F));
-        modifiedPhantomPos.x += phantomPos.x;
-        modifiedPhantomPos.y += phantomPos.y;
-        MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedPhantomPos, new Vector2f(0.0F, 0.0F), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), new Vector2f(0.0F, 0.0F), ship.getFacing() + angleDifference, 0.0F, AFTERIMAGE_COLOR, true, 0.1F, 0.0F, 0.3F);
-      } 
-      Color colorToUse = new Color(PHASE_COLOR.getRed() / 255.0F, PHASE_COLOR.getGreen() / 255.0F, PHASE_COLOR.getBlue() / 255.0F, PHASE_COLOR.getAlpha() / 255.0F * effectLevel);
-      MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"), new Vector2f((ship.getLocation()).x, (ship.getLocation()).y), new Vector2f(0.0F, 0.0F), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), new Vector2f(0.0F, 0.0F), ship.getFacing() - 90.0F, 0.0F, colorToUse, true, 0.0F, 0.1F, 0.2F);
-      this.phantomDelayCounter -= 0.07F;
-    } 
-    for (int i = 0; i < 900.0F * amount; i++) {
-      Vector2f pointToSpawnAt = MathUtils.getRandomPointInCircle(phantomPos, ship.getCollisionRadius());
-      int emergencyCounter = 0;
-      while (!CollisionUtils.isPointWithinBounds(pointToSpawnAt, (CombatEntityAPI)ship) && emergencyCounter < 1000) {
-        pointToSpawnAt = MathUtils.getRandomPointInCircle(phantomPos, ship.getCollisionRadius());
-        emergencyCounter++;
-      } 
-      pointToSpawnAt = MathUtils.getRandomPointInCircle(pointToSpawnAt, 50.0F);
-      FakeSmokePlugin.addFakeSmoke(MathUtils.getRandomNumberInRange(0.32F, 0.68F), MathUtils.getRandomNumberInRange(55.0F, 75.0F), pointToSpawnAt, MathUtils.getRandomPointInCircle(null, 10.0F), MathUtils.getRandomNumberInRange(-15.0F, 15.0F), 0.85F, new Color(0.0F, 0.0F, 0.0F));
-    } 
-  }
-  
-  public void unapply(MutableShipStatsAPI stats, String id) {
-    ShipAPI ship;
-    if (stats.getEntity() instanceof ShipAPI) {
-      ship = (ShipAPI)stats.getEntity();
-    } else {
-      return;
-    } 
-    this.runOnce = true;
-    stats.getMaxSpeed().unmodify(id);
-    stats.getAcceleration().unmodify(id);
-    stats.getDeceleration().unmodify(id);
-    stats.getMaxTurnRate().unmodify(id);
-    stats.getTurnAcceleration().unmodify(id);
-    if (Math.abs(ship.getAngularVelocity()) > stats.getMaxTurnRate().getModifiedValue())
-      ship.setAngularVelocity(ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity()) * stats.getMaxTurnRate().getModifiedValue()); 
-    if (ship.getVelocity().length() > stats.getMaxSpeed().getModifiedValue())
-      ship.getVelocity().set((ship.getVelocity()).x / ship.getVelocity().length() * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity()).y / ship.getVelocity().length() * stats.getMaxSpeed().getModifiedValue()); 
-    ship.setPhased(false);
-    ship.setExtraAlphaMult(1.0F);
-  }
-  
-  public ShipSystemStatsScript.StatusData getStatusData(int index, ShipSystemStatsScript.State state, float effectLevel) {
-    if (state == ShipSystemStatsScript.State.ACTIVE) {
-      if (index == 0 && (Math.random() < 0.012987012974917889D || this.lastMessage == 1 || this.lastMessage == 4)) {
-        if (this.lastMessage == 0) {
-          this.lastMessage = 1;
-        } else if (this.lastMessage == 1) {
-          this.lastMessage = 4;
+    //Main phase color
+    private static final Color PHASE_COLOR = new Color(80, 160, 240, 255);
+
+    //For nullspace phantoms
+    private static final Color AFTERIMAGE_COLOR = new Color(5, 25, 180, 150);
+    private static final float PHANTOM_DELAY = 0.07f;
+    private static final float PHANTOM_ANGLE_DIFFERENCE = 5f;
+    private static final float PHANTOM_DISTANCE_DIFFERENCE = 55f;
+    private static final float PHANTOM_FLICKER_DIFFERENCE = 11f;
+    private static final int PHANTOM_FLICKER_CLONES = 4;
+
+    private static final float SHIP_ALPHA_MULT = 0f;
+    private static final float SPEED_BONUS_MULT = 5f; // was 3, but that felt way to slow
+    private static final float TURN_BONUS_MULT = 2f;
+    private static final float MOBILITY_BONUS_MULT = 50f;
+
+    private int lastMessage = 0;
+    private float phantomDelayCounter = 0f;
+    private boolean runOnce = true;
+
+    public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
+        ShipAPI ship = null;
+        boolean player = false;
+        if (stats.getEntity() instanceof ShipAPI) {
+            ship = (ShipAPI) stats.getEntity();
+            player = ship == Global.getCombatEngine().getPlayerShip();
+            id = id + "_" + ship.getId();
         } else {
-          this.lastMessage = 0;
-        } 
-        return new ShipSystemStatsScript.StatusData("it screams", false);
-      } 
-      if (index == 0 && (Math.random() < 0.01315789483487606D || this.lastMessage == 2 || this.lastMessage == 5)) {
-        if (this.lastMessage == 0) {
-          this.lastMessage = 2;
-        } else if (this.lastMessage == 2) {
-          this.lastMessage = 5;
+            return;
+        }
+
+        //Time counter
+        float amount = Global.getCombatEngine().getElapsedInLastFrame();
+        if (Global.getCombatEngine().isPaused()) {
+            amount = 0;
+        }
+
+        //Unapplies all our applied stats if we are not using the system currently
+        if (state == State.COOLDOWN || state == State.IDLE) {
+            unapply(stats, id);
+            return;
+        }
+
+        if (state == State.OUT && runOnce) {
+            runOnce = false;
+            stats.getMaxSpeed().unmodify(id);
+            stats.getMaxTurnRate().unmodify(id);
+            if (ship.getAngularVelocity() > stats.getMaxTurnRate().getModifiedValue()) {
+                ship.setAngularVelocity((ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity())) * stats.getMaxTurnRate().getModifiedValue());
+            }
+            if (ship.getVelocity().length() > stats.getMaxSpeed().getModifiedValue()) {
+                ship.getVelocity().set((ship.getVelocity().x / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity().y / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue());
+            }
+            return;
+        }
+
+        //Checks if we should be phased or not, and applies the related mobility bonuses
+        if (state == State.IN || state == State.ACTIVE || state == State.OUT) {
+            ship.setPhased(true);
+            float speedBonus = 1f + ((SPEED_BONUS_MULT - 1f) * effectLevel);
+            float mobilityBonus = 1f + ((MOBILITY_BONUS_MULT - 1f) * effectLevel);
+            stats.getMaxSpeed().modifyMult(id, speedBonus);
+            stats.getAcceleration().modifyMult(id, mobilityBonus);
+            stats.getDeceleration().modifyMult(id, mobilityBonus);
+            stats.getMaxTurnRate().modifyMult(id, TURN_BONUS_MULT);
+            stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
+        }
+
+        //Handles ship opacity
+        ship.setExtraAlphaMult(1f - (1f - SHIP_ALPHA_MULT) * effectLevel);
+        ship.setApplyExtraAlphaToEngines(true);
+
+
+        //Moves the "phantom" to its appropriate location
+        Vector2f phantomPos = MathUtils.getRandomPointInCircle(null, PHANTOM_DISTANCE_DIFFERENCE);
+        phantomPos.x += ship.getLocation().x;
+        phantomPos.y += ship.getLocation().y;
+
+        //If we are outside the screenspace, don't do the extra visual effects
+        if (!Global.getCombatEngine().getViewport().isNearViewport(phantomPos, ship.getCollisionRadius() * 1.5f)) {
+            return;
+        }
+
+        //If enough time has passed, render a new phantom
+        phantomDelayCounter += amount;
+        if (phantomDelayCounter > PHANTOM_DELAY) {
+            float angleDifference = MathUtils.getRandomNumberInRange(-PHANTOM_ANGLE_DIFFERENCE, PHANTOM_ANGLE_DIFFERENCE) - 90f;
+
+            for (int i = 0; i < PHANTOM_FLICKER_CLONES; i++) {
+                Vector2f modifiedPhantomPos = new Vector2f(MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE), MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE));
+                modifiedPhantomPos.x += phantomPos.x;
+                modifiedPhantomPos.y += phantomPos.y;
+                MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedPhantomPos, new Vector2f(0f, 0f),
+                        new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
+                        new Vector2f(0f, 0f), ship.getFacing() + angleDifference,
+                        0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.3f);
+            }
+
+            //Special, "Semi-Fixed" phantom
+            Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
+            MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"),
+                    new Vector2f(ship.getLocation().x, ship.getLocation().y), new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
+                    new Vector2f(0f, 0f), ship.getFacing() - 90f, 0f, colorToUse, true, 0f, 0.1f, 0.2f);
+
+
+            phantomDelayCounter -= PHANTOM_DELAY;
+        }
+
+        //Always render smoke at the phantom's position...
+        for (int i = 0; i < (900 * amount); i++) {
+            Vector2f pointToSpawnAt = MathUtils.getRandomPointInCircle(phantomPos, ship.getCollisionRadius());
+            int emergencyCounter = 0;
+            while (!CollisionUtils.isPointWithinBounds(pointToSpawnAt, ship) && emergencyCounter < 1000) {
+                pointToSpawnAt = MathUtils.getRandomPointInCircle(phantomPos, ship.getCollisionRadius());
+                emergencyCounter++;
+            }
+            pointToSpawnAt = MathUtils.getRandomPointInCircle(pointToSpawnAt, 50f);
+            FakeSmokePlugin.addFakeSmoke(MathUtils.getRandomNumberInRange(0.32f, 0.68f), MathUtils.getRandomNumberInRange(55f, 75f),
+                    pointToSpawnAt, MathUtils.getRandomPointInCircle(null, 10f),
+                    MathUtils.getRandomNumberInRange(-15f, 15f), 0.85f, new Color(0f, 0f, 0f));
+        }
+    }
+
+
+    public void unapply(MutableShipStatsAPI stats, String id) {
+        ShipAPI ship = null;
+        if (stats.getEntity() instanceof ShipAPI) {
+            ship = (ShipAPI) stats.getEntity();
         } else {
-          this.lastMessage = 0;
-        } 
-        return new ShipSystemStatsScript.StatusData("it wails", false);
-      } 
-      if (index == 0 && (Math.random() < 0.013333333656191826D || this.lastMessage == 3 || this.lastMessage == 6)) {
-        if (this.lastMessage == 0) {
-          this.lastMessage = 3;
-        } else if (this.lastMessage == 3) {
-          this.lastMessage = 6;
-        } else {
-          this.lastMessage = 0;
-        } 
-        return new ShipSystemStatsScript.StatusData("it yells", false);
-      } 
-      if (index == 0) {
-        this.lastMessage = 0;
-        return new ShipSystemStatsScript.StatusData("breaching phasespace", false);
-      } 
-    } 
-    return null;
-  }
+            return;
+        }
+        runOnce = true;
+
+        stats.getMaxSpeed().unmodify(id);
+        stats.getAcceleration().unmodify(id);
+        stats.getDeceleration().unmodify(id);
+        stats.getMaxTurnRate().unmodify(id);
+        stats.getTurnAcceleration().unmodify(id);
+
+        if (Math.abs(ship.getAngularVelocity()) > stats.getMaxTurnRate().getModifiedValue()) {
+            ship.setAngularVelocity((ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity())) * stats.getMaxTurnRate().getModifiedValue());
+        }
+        if (ship.getVelocity().length() > stats.getMaxSpeed().getModifiedValue()) {
+            ship.getVelocity().set((ship.getVelocity().x / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity().y / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue());
+        }
+
+        ship.setPhased(false);
+        ship.setExtraAlphaMult(1f);
+    }
+
+
+    public StatusData getStatusData(int index, State state, float effectLevel) {
+        if (state == State.ACTIVE) {
+            if (index == 0 && (Math.random() < (1f / 77f) || lastMessage == 1 || lastMessage == 4)) {
+                if (lastMessage == 0) {
+                    lastMessage = 1;
+                } else if (lastMessage == 1) {
+                    lastMessage = 4;
+                } else {
+                    lastMessage = 0;
+                }
+                return new StatusData("it screams", false);
+            } else if (index == 0 && (Math.random() < (1f / 76f) || lastMessage == 2 || lastMessage == 5)) {
+                if (lastMessage == 0) {
+                    lastMessage = 2;
+                } else if (lastMessage == 2) {
+                    lastMessage = 5;
+                } else {
+                    lastMessage = 0;
+                }
+                return new StatusData("it hates", false);
+            } else if (index == 0 && (Math.random() < (1f / 75f) || lastMessage == 3 || lastMessage == 6)) {
+                if (lastMessage == 0) {
+                    lastMessage = 3;
+                } else if (lastMessage == 3) {
+                    lastMessage = 6;
+                } else {
+                    lastMessage = 0;
+                }
+                return new StatusData("it rejects", false);
+            } else if (index == 0) {
+                lastMessage = 0;
+                return new StatusData("breaching phasespace", false);
+            }
+        }
+        return null;
+    }
 }
-
-
-/* Location:              C:\Program Files (x86)\Fractal Softworks\Starsector old\Starsector 095\mods\sylphon\jars\SylphonRnD.jar!\data\scripts\shipsystems\SRD_NullspaceSkip.class
- * Java compiler version: 7 (51.0)
- * JD-Core Version:       1.1.3
- */
