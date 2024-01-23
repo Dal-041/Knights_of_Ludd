@@ -6,6 +6,7 @@ import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.characters.PersonalityAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.BaseFIDDelegate;
@@ -90,6 +91,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
     public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to) {
         for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
             boolean skip = false;
+            if (member.isFighterWing() || member.getHullSpec().getHullSize().equals(ShipAPI.HullSize.CAPITAL_SHIP)) continue;
             for (String s : AbyssUtils.hullBlacklist) {
                 if (s.equals(member.getHullId())) {
                     skip = true;
@@ -97,7 +99,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
             }
             if (skip) continue;
             //Unrecoverable status set by hullmod
-            if (member.getVariant().hasTag("auto_rec")) member.getVariant().removeTag("auto_rec");
+            if (member.getVariant().hasTag(Tags.AUTOMATED_RECOVERABLE)) member.getVariant().removeTag(Tags.AUTOMATED_RECOVERABLE);
             if (member.isFlagship()) member.setFlagship(false);
             member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
             to.getFleetData().addFleetMember(member);

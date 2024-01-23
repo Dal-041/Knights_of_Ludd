@@ -11,7 +11,7 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class AbyssUtils {
 
-    public static float attainmentFactor = 0.2f;
+    public static float attainmentFactor = 0.15f;
     public static boolean useDomres = false;
     public static boolean useLostech = false;
     public static boolean useDustkeepers = false;
