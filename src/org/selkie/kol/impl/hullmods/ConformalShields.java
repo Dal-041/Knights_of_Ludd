@@ -2,6 +2,7 @@ package org.selkie.kol.impl.hullmods;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
@@ -12,19 +13,13 @@ import java.awt.*;
 
 public class ConformalShields extends BaseHullMod {
 
-    private boolean inited;
-    float maxX;
-    float maxY;
-
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        inited = false;
-        maxX = 0;
-        maxY = 0;
     }
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        ship.addListener(new ConformalListener());
         if (ship.getShield() == null) {
             MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "kol_conformal_shield", "shieldshunt");
             return;
@@ -39,12 +34,16 @@ public class ConformalShields extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if (Global.getCombatEngine().isPaused()) return;
-        if (!inited && ship.getShield() != null) {
+        ConformalListener listener = null;
+        for (AdvanceableListener l : ship.getListeners(ConformalListener.class)) {
+            if (l instanceof ConformalListener) {
+                listener = (ConformalListener) l;
+            }
+        }
+        if (listener != null && !listener.isInited() && ship.getShield() != null) {
             float radiusO = ship.getShield().getRadius();
-            maxX = Math.max(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false),
-                    Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 180f), ship, false));
-            maxY = Math.max(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false),
-                    Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 270), ship, false));
+            float maxX = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false));
+            float maxY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 90f), ship, false));
 
             //center = ship.getLocation();
 
@@ -52,9 +51,12 @@ public class ConformalShields extends BaseHullMod {
             //float radiusNew = (Math.max(maxX, maxY)*2 - Math.min(maxX, maxY) + pad);
             //ship.getShield().setRadius(radiusNew);
             //float ratioRad = radiusO / radiusNew;
-            if (maxX != 0) inited = true;
+            if (maxX != 0) {
+                listener.setBounds(maxX, maxY);
+                listener.setInited(true);
+            }
         }
-        if (ship.getShield() != null) {
+        if (listener != null && ship.getShield() != null) {
             float shieldFacing = ship.getShield().getFacing();
             float shipFacing = ship.getFacing(); //Right = 0, upward = 90, etc
             if (shipFacing < 0) shipFacing += 360;
@@ -65,23 +67,24 @@ public class ConformalShields extends BaseHullMod {
             if (shieldFacing < 0) shieldFacing += 360;
 
             float rad = (float) Math.toRadians((shieldFacing) % 360);
+            float shipX = listener.getBounds().x;
+            float shipY = listener.getBounds().y;
 
-
-            if (maxX > maxY) { //Wider
-                Vector2f pos = getEllipsePosition(maxX, maxY, rad);
+            if (shipX > shipY) { //Wider
+                Vector2f pos = getEllipsePosition(shipX, shipY, rad);
                 ship.getShield().setCenter(pos.getX(), pos.getY()); //x is forward-back, y is left-right
             } else { //Taller
-                Vector2f pos = getEllipsePosition(maxY, maxX, rad + (float)Math.toRadians(-90));
+                Vector2f pos = getEllipsePosition(shipY, shipX, rad + (float)Math.toRadians(-90));
                 ship.getShield().setCenter(pos.getY() * -1, pos.getX());
             }
 
-            if (Global.getSettings().isDevMode()) {
+            if (true || Global.getSettings().isDevMode()) {
                 Vector2f shipLocX = new Vector2f(ship.getLocation());
                 Vector2f shipLocY = new Vector2f(ship.getLocation());
-                shipLocX.setX(shipLocX.getX()+maxX);
-                shipLocY.setY(shipLocY.getY()+maxY);
+                shipLocX.setX(shipLocX.getX()+shipX);
+                shipLocY.setY(shipLocY.getY()+shipY);
 
-                Global.getCombatEngine().addFloatingText(ship.getShieldCenterEvenIfNoShield(), "o", 12, Color.white, ship, 0, 0);
+                Global.getCombatEngine().addFloatingText(ship.getShieldCenterEvenIfNoShield(), "o", 24, Color.green, ship, 0, 0);
                 Global.getCombatEngine().addFloatingText(shipLocX, "x", 24, Color.white, ship, 0, 0);
                 Global.getCombatEngine().addFloatingText(shipLocY, "y", 24, Color.white, ship, 0, 0);
             }
@@ -102,3 +105,4 @@ public class ConformalShields extends BaseHullMod {
         return pos;
     }
 }
+
