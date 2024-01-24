@@ -60,8 +60,9 @@ public class StarficzAIUtils {
                     float travelTime = 0f;
                     if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius)) hit = true;
                     else {
-                        float missileMaxSpeed = missile.isMirv() ? missile.getMaxSpeed()*3 :  missile.getMaxSpeed();
-                        float missileAccel = missile.isMirv() ? missile.getAcceleration()*3 :  missile.getAcceleration();
+                        // I hate mirvs
+                        float missileMaxSpeed = missile.isMirv() ? missile.getMaxSpeed()*4 :  missile.getMaxSpeed();
+                        float missileAccel = missile.isMirv() ? missile.getAcceleration()*4 :  missile.getAcceleration();
                         travelTime = missileTravelTime(missile.getMoveSpeed(), missileMaxSpeed, missileAccel, missile.getMaxTurnRate(),
                                 VectorUtils.getFacing(missile.getVelocity()), missile.getLocation(), testPoint, shipRadius);
                         if (travelTime < (missile.getMaxFlightTime() - missile.getFlightTime())) hit = true;
@@ -433,11 +434,19 @@ public class StarficzAIUtils {
                 float travelTime;
                 MutableShipStatsAPI stats = enemy.getMutableStats();
                 if(weapon.getSpec().getProjectileSpec() instanceof MissileSpecAPI){
-                    ShipHullSpecAPI.EngineSpecAPI missileEngine = ((MissileSpecAPI) weapon.getSpec().getProjectileSpec()).getHullSpec().getEngineSpec();
+                    MissileSpecAPI spec = (MissileSpecAPI) weapon.getSpec().getProjectileSpec();
+                    ShipHullSpecAPI.EngineSpecAPI missileEngine = spec.getHullSpec().getEngineSpec();
                     float launchSpeed = ((MissileSpecAPI) weapon.getSpec().getProjectileSpec()).getLaunchSpeed();
                     float maxSpeed = stats.getMissileMaxSpeedBonus().computeEffective(missileEngine.getMaxSpeed());
                     float acceleration = stats.getMissileAccelerationBonus().computeEffective(missileEngine.getAcceleration());
                     float maxTurnRate = stats.getMissileMaxTurnRateBonus().computeEffective(missileEngine.getMaxTurnRate());
+
+                    // I hate mirvs
+                    if(spec.getBehaviorSpec() != null && spec.getBehaviorSpec().getBehavorString().contains("MIRV")){
+                        maxSpeed *= 3;
+                        acceleration *= 2;
+                        maxTurnRate *= 3;
+                    }
                     travelTime = missileTravelTime(launchSpeed, maxSpeed, acceleration, maxTurnRate, weapon.getCurrAngle(), weapon.getLocation(), ship.getLocation(), targetingRadius);
                 }
                 else {
@@ -881,7 +890,7 @@ public class StarficzAIUtils {
 
     public static void strafeToPoint(ShipAPI ship, Vector2f strafePoint){
         float strafeAngle = VectorUtils.getAngle(ship.getLocation(), strafePoint);
-        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
+           float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
 
         if (rotAngle < 67.5f && rotAngle > -67.5f) {
             ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
