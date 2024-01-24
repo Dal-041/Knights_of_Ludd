@@ -60,7 +60,9 @@ public class StarficzAIUtils {
                     float travelTime = 0f;
                     if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius)) hit = true;
                     else {
-                        travelTime = missileTravelTime(missile.getMoveSpeed(), missile.getMaxSpeed(), missile.getAcceleration(), missile.getMaxTurnRate(),
+                        float missileMaxSpeed = missile.isMirv() ? missile.getMaxSpeed()*3 :  missile.getMaxSpeed();
+                        float missileAccel = missile.isMirv() ? missile.getAcceleration()*3 :  missile.getAcceleration();
+                        travelTime = missileTravelTime(missile.getMoveSpeed(), missileMaxSpeed, missileAccel, missile.getMaxTurnRate(),
                                 VectorUtils.getFacing(missile.getVelocity()), missile.getLocation(), testPoint, shipRadius);
                         if (travelTime < (missile.getMaxFlightTime() - missile.getFlightTime())) hit = true;
                     }

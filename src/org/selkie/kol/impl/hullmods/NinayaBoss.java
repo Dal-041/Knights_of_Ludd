@@ -14,16 +14,10 @@ import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
-import org.lazywizard.lazylib.combat.CombatUtils;
-import org.lazywizard.lazylib.combat.DefenseUtils;
-import org.lazywizard.lazylib.combat.WeaponUtils;
-import org.lwjgl.Sys;
 import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.util.MagicAnim;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 
 import java.awt.*;
-import java.util.EnumSet;
 
 
 public class NinayaBoss extends BaseHullMod {
@@ -63,18 +57,18 @@ public class NinayaBoss extends BaseHullMod {
             float hpRegen = 0.6f;
             float maxTime = 8f;
 
-
+            if (phaseTwoTimer > maxTime) {
+                unapplyDamper(ship, id);
+                unapplyDamper(escortA, id);
+                unapplyDamper(escortB, id);
+            }
 
             if(phaseTwo && phaseTwoTimer < maxTime){
 
                 phaseTwoTimer += amount;
 
                 // force phase, mitigate damage, regen hp/armor, vent flux, reset ppt/ cr
-                if (phaseTwoTimer > maxTime) {
-                    unapplyDamper(ship, id);
-                    unapplyDamper(escortA, id);
-                    unapplyDamper(escortB, id);
-                }
+
 
                 ship.getFluxTracker().setHardFlux(0f);
                 ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/maxTime));
@@ -171,6 +165,7 @@ public class NinayaBoss extends BaseHullMod {
             e.getLocation().set(location);
         }
     }
+
     public static void applyDamper(ShipAPI ship, String id, float level){
         MutableShipStatsAPI stats = ship.getMutableStats();
         stats.getHullDamageTakenMult().modifyMult(id, 0.000001f);
@@ -244,6 +239,7 @@ public class NinayaBoss extends BaseHullMod {
 
             // force shields on, there is no situation where shields should be off
             if((!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)){
+
                 if(!AIUtils.getNearbyEnemies(ship, 1000).isEmpty() && ship.getShield() != null) {
                     if (ship.getShield().isOff())
                         ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
@@ -260,13 +256,11 @@ public class NinayaBoss extends BaseHullMod {
 
 
             // back off at high hardflux
-            if(ship.getHardFluxLevel() > 0.5f && !AIUtils.canUseSystemThisFrame(ship) || ship.getHardFluxLevel() > 0.7f){
+            if(ship.getHardFluxLevel() > 0.5f && !AIUtils.canUseSystemThisFrame(ship) || ship.getHardFluxLevel() > 0.6f){
                 ventingHardflux = true;
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACKING_OFF, 0.1f);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACK_OFF, 0.1f);
                 ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);
-            } else{
-                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 0.1f);
             }
             // return at low hardflux
             if(ship.getHardFluxLevel() < 0.1f){
@@ -274,7 +268,7 @@ public class NinayaBoss extends BaseHullMod {
             }
 
             // dont overflux via weapons
-            if(ship.getFluxLevel() > 0.9){
+            if(ship.getFluxLevel() > 0.8f){
                 holdFire(ship);
             }
         }

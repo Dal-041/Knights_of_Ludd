@@ -27,7 +27,7 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     private Color baseColorInner;
     private Color depletedColorRing;
     private Color depletedColorInner;
-    private final IntervalUtil tracker = new IntervalUtil(0.1f, 0.3f); //Seconds
+    private final IntervalUtil tracker = new IntervalUtil(0.2f, 0.3f); //Seconds
     public float lastUpdatedTime = 0f;
     public List<FutureHit> incomingProjectiles = new ArrayList<>();
     public List<FutureHit> predictedWeaponHits = new ArrayList<>();

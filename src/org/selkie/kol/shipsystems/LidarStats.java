@@ -182,6 +182,7 @@ public class LidarStats extends BaseShipSystemScript {
 				}
 				needsUnapply = false;
 			}
+			stats.getBeamWeaponRangeBonus().unmodify("lidararray");
 		}
 		
 		if (!active) return;

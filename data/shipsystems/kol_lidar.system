@@ -1,7 +1,8 @@
 {
 	"id":"kol_lidar",
 	"type":"STAT_MOD",
-	"aiType":"LIDAR_ARRAY",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.kol.shipsystems.AI.LidarAI",
 	
 	"statsScript":"org.selkie.kol.shipsystems.LidarStats",
 
