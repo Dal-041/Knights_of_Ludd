@@ -468,8 +468,15 @@ public class NinmahBoss extends BaseHullMod {
                     if ((ventingSoftFlux || rechargeCharges) && !maximiseDPS)
                         wantToPhase = true;
 
+                    if(target.getHullLevel() < 0.10f && MathUtils.getDistanceSquared(ship.getLocation(), target.getLocation()) < Math.pow(target.getShipExplosionRadius() + ship.getCollisionRadius(),2))
+                        wantToPhase = true;
+
                 } else { // if the ship is not in range, the acceptable damage threshold is much lower,
-                    if ((armorDamageLevel > 0.03f || hullDamageLevel > 0.03f || empDamageLevel > 0.3f) || ventingSoftFlux || rechargeCharges || ship.getHardFluxLevel() < 0.1f || ship.getEngineController().isFlamedOut())
+                    if ((armorDamageLevel > 0.03f || hullDamageLevel > 0.03f || empDamageLevel > 0.3f) || ventingSoftFlux || rechargeCharges || ship.getEngineController().isFlamedOut())
+                        wantToPhase = true;
+                    if(ship.isPhased() && ship.getHardFluxLevel() < 0.1f)
+                        wantToPhase = true;
+                    if(!ship.isPhased() && ship.getHardFluxLevel() < 0.01f)
                         wantToPhase = true;
                 }
             }

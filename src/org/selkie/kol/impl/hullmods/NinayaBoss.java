@@ -86,9 +86,9 @@ public class NinayaBoss extends BaseHullMod {
                 holdFire(ship);
 
 
-                // specially tuned for phase ships
+                // specially tuned for hyperion ships
                 PersonAPI captain = Global.getSettings().createPerson();
-                captain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
+                captain.setPortraitSprite("graphics/portraits/portrait_ai3b.png");
                 captain.setFaction(Factions.REMNANTS);
                 captain.setAICoreId(Commodities.BETA_CORE);
                 captain.getStats().setLevel(5);
@@ -210,7 +210,7 @@ public class NinayaBoss extends BaseHullMod {
             }
 
             if (StarficzAIUtils.DEBUG_ENABLED) {
-                // specially tuned for phase ships
+                // specially tuned for hyperion
                 PersonAPI captain = Global.getSettings().createPerson();
                 captain.setPortraitSprite("graphics/portraits/portrait_ai3b.png");
                 captain.setFaction(Factions.REMNANTS);
@@ -232,8 +232,7 @@ public class NinayaBoss extends BaseHullMod {
                 ship.setCaptain(captain);
             }
 
-
-            if (ship.getOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED) {
+            if (ship.getOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED || true) {
                 ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 1000000);
             }
 
