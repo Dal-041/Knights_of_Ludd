@@ -959,9 +959,5 @@ public class StarficzAIUtils {
         return lowestAmmoLevel;
     }
 
-    public static float linMap(float minOut,float maxOut,float minIn,float maxIn,float input){
-        if(input > maxIn) return maxOut;
-        if(input < minIn) return minOut;
-        return minOut+(input-minIn)*(maxOut-minOut)/(maxIn-minIn);
-    }
+
 }

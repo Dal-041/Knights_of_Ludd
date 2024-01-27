@@ -12,6 +12,7 @@
   "shieldRadius": 82,
   "viewOffset": 0,
   "builtInMods": [
+    "zea_edf_coronal_capacitor",
     "automated",
     "kol_ea_shields3",
 	"kol_throttle"

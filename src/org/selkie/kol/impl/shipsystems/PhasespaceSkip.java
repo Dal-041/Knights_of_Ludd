@@ -18,14 +18,14 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     private static final Color PHASE_COLOR = new Color(80, 160, 240, 255);
 
     //For nullspace phantoms
-    private static final Color AFTERIMAGE_COLOR = new Color(5, 25, 180, 150);
-    private static final float PHANTOM_DELAY = 0.07f;
+    private static final Color AFTERIMAGE_COLOR = new Color(30, 45, 220, 200);
+    private static final float PHANTOM_DELAY = 0.3f;
     private static final float PHANTOM_ANGLE_DIFFERENCE = 5f;
     private static final float PHANTOM_DISTANCE_DIFFERENCE = 55f;
     private static final float PHANTOM_FLICKER_DIFFERENCE = 11f;
     private static final int PHANTOM_FLICKER_CLONES = 4;
 
-    private static final float SHIP_ALPHA_MULT = 0f;
+    private static final float SHIP_ALPHA_MULT = 0.25f;
     private static final float SPEED_BONUS_MULT = 5f; // was 3, but that felt way to slow
     private static final float TURN_BONUS_MULT = 2f;
     private static final float MOBILITY_BONUS_MULT = 50f;
@@ -80,6 +80,8 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             stats.getDeceleration().modifyMult(id, mobilityBonus);
             stats.getMaxTurnRate().modifyMult(id, TURN_BONUS_MULT);
             stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
+            stats.getTimeMult().modifyMult(id, 1 + (2 * effectLevel));
+            Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + (2 * effectLevel)));
         }
 
         //Handles ship opacity
@@ -106,7 +108,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
                 Vector2f modifiedPhantomPos = new Vector2f(MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE), MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE));
                 modifiedPhantomPos.x += phantomPos.x;
                 modifiedPhantomPos.y += phantomPos.y;
-                MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedPhantomPos, new Vector2f(0f, 0f),
+                MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom2"), modifiedPhantomPos, new Vector2f(0f, 0f),
                         new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
                         new Vector2f(0f, 0f), ship.getFacing() + angleDifference,
                         0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.3f);
@@ -114,9 +116,10 @@ public class PhasespaceSkip extends BaseShipSystemScript {
 
             //Special, "Semi-Fixed" phantom
             Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
-            MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"),
-                    new Vector2f(ship.getLocation().x, ship.getLocation().y), new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
-                    new Vector2f(0f, 0f), ship.getFacing() - 90f, 0f, colorToUse, true, 0f, 0.1f, 0.2f);
+            MagicRender.objectspace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"),
+                    ship,  new Vector2f(0f, 0f),  new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),  new Vector2f(0f, 0f), 180, 0, true, colorToUse, true, 0.1f, 0.1f, 0.2f, true);
+
+
 
 
             phantomDelayCounter -= PHANTOM_DELAY;

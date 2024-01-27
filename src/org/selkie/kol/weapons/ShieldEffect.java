@@ -7,6 +7,8 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicUI;
+import org.selkie.kol.Utils;
+
 import java.awt.Color;
 import java.util.*;
 
@@ -46,8 +48,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
             if (shield!= null) {
                 baseColorRing = shield.getRingColor();
                 baseColorInner = shield.getInnerColor();
-                depletedColorRing = new Color(255, baseColorRing.getGreen()/3, baseColorRing.getBlue()/3, baseColorRing.getAlpha());
-                depletedColorInner = new Color(255, baseColorInner.getGreen()/3, baseColorInner.getBlue()/3, baseColorInner.getAlpha());
+                depletedColorRing = new Color(255, 80, 80, baseColorRing.getAlpha());
+                depletedColorInner = new Color(255, 45, 45, baseColorInner.getAlpha());
             }
             this.engine=engine;
         }
@@ -56,7 +58,7 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
 
         //UI
         float shieldTLevel = shieldT/MAX_SHIELD;
-        Color barColor = disabled ? Misc.getNegativeHighlightColor() : Misc.interpolateColor(Misc.getPositiveHighlightColor(), Misc.getNegativeHighlightColor(), shieldTLevel);
+        Color barColor = disabled ? Misc.getNegativeHighlightColor() : Utils.OKLabInterpolateColor(Misc.getPositiveHighlightColor(), Misc.getNegativeHighlightColor(), shieldTLevel);
         MagicUI.drawInterfaceStatusBar(ship, 1-shieldTLevel, barColor, null, 0, "SHIELD", (int) (100-100*shieldTLevel));
         
         if (engine.isPaused() || !ship.isAlive()) {return;}
@@ -69,8 +71,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
             }
 
             //FX
-            shield.setInnerColor(Misc.interpolateColor(baseColorInner, depletedColorInner, shieldTLevel));
-            shield.setRingColor(Misc.interpolateColor(baseColorRing, depletedColorRing, shieldTLevel));
+            shield.setInnerColor(Utils.OKLabInterpolateColor(baseColorInner, depletedColorInner, shieldTLevel));
+            shield.setRingColor(Utils.OKLabInterpolateColor(baseColorRing, depletedColorRing, shieldTLevel));
 
             //AI
 

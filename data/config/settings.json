@@ -246,7 +246,8 @@
 			"zea_shield_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_dusk.png",
 			"zea_shield_elysia":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_elysia.png",
 			"zea_dusk_ayakashi_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
-			"zea_boss_yukionna_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
+			"zea_boss_yukionna_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow1.png",
+			"zea_boss_yukionna_phantom2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow2.png",
 			"zea_dusk_ayakashi_balance_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
 			"zea_dusk_onryo_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 			"zea_dusk_onryo_P_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
@@ -292,6 +293,11 @@
 			"zea_idk2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk2.png",
 			"zea_idk3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk3.png",
 		},
+		"icons": {
+			"coronal_cap_top":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_top.png",
+			"coronal_cap_middle":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_middle.png",
+			"coronal_cap_bottom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_bottom.png"
+		}
 	},
 	"designTypeColors":{
 		"Knights of Ludd":[25,115,10,255],

@@ -11,10 +11,12 @@ import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
 import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
+import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.Utils;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 
 import java.awt.*;
@@ -40,7 +42,7 @@ public class NinayaBoss extends BaseHullMod {
                 ship.setHitpoints(1f);
                 applyDamper(ship, id, 1);
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
-                shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
+                shipSpawnExplosion(ship, ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 float timeMult = ship.getMutableStats().getTimeMult().getModifiedValue();
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
@@ -81,7 +83,7 @@ public class NinayaBoss extends BaseHullMod {
                     }
                 }
 
-                applyDamper(ship, id, StarficzAIUtils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
+                applyDamper(ship, id, Utils.linMap(1,0, maxTime*5/6, maxTime, phaseTwoTimer));
                 stayStill(ship);
                 holdFire(ship);
 
@@ -106,7 +108,6 @@ public class NinayaBoss extends BaseHullMod {
                 captain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
                 //captain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
 
-
                 CombatFleetManagerAPI fleetManager = engine.getFleetManager(ship.getOriginalOwner());
                 CombatTaskManagerAPI taskManager = (fleetManager != null) ? fleetManager.getTaskManager(ship.isAlly()) : null;
 
@@ -122,39 +123,39 @@ public class NinayaBoss extends BaseHullMod {
                 Vector2f escortBSpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 200f, escortFacing - 90);
 
 
-                if(phaseTwoTimer > maxTime/3){
+                if(phaseTwoTimer > maxTime*2/3){
                     if (escortA == null) {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing + 90f, 0f, captain);
                         escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
-                        shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
+                        shipSpawnExplosion(escortA, escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortA), assignmentInfo, false);
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortA.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        applyDamper(escortA, id,StarficzAIUtils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
+                        applyDamper(escortA, id, Utils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
                         stayStill(escortA);
-                        holdFire(ship);
+                        holdFire(escortA);
                     }
                 }
 
-                if(phaseTwoTimer > maxTime*2/3){
+                if(phaseTwoTimer > maxTime*5/6){
                     if (escortB == null) {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing - 90f, 0f, captain);
                         escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
-                        shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
+                        shipSpawnExplosion(escortB, escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortB), assignmentInfo, false);
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortB.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        applyDamper(escortB, id, StarficzAIUtils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
+                        applyDamper(escortB, id, Utils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
                         stayStill(escortB);
-                        holdFire(ship);
+                        holdFire(escortB);
                     }
                 }
             }
         }
 
-        public void shipSpawnExplosion(float size, Vector2f location){
+        public void shipSpawnExplosion(ShipAPI ship, float size, Vector2f location){
             NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);
             p.fadeOut = 0.15f;
             p.hitGlowSizeMult = 0.25f;
@@ -163,6 +164,23 @@ public class NinayaBoss extends BaseHullMod {
             p.noiseMag = 1.25f;
             CombatEntityAPI e = Global.getCombatEngine().addLayeredRenderingPlugin(new NegativeExplosionVisual(p));
             e.getLocation().set(location);
+
+            DamagingExplosionSpec spec = new DamagingExplosionSpec(
+                1f,
+                    ship.getCollisionRadius(),
+                70f,
+                100000f,
+                50000f,
+                CollisionClass.PROJECTILE_FF,
+                CollisionClass.PROJECTILE_FIGHTER,
+                0f,
+                0f,
+                0f,
+                0,
+                    new Color(0,0,0,0),
+                    new Color(0,0,0,0)
+            );
+            engine.spawnDamagingExplosion(spec, ship, location, false);
         }
     }
 

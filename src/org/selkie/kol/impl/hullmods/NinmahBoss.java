@@ -18,6 +18,7 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.Utils;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.StarficzAIUtils.*;
 
@@ -143,7 +144,7 @@ public class NinmahBoss extends BaseHullMod {
                 spawnFog(amount, 50f, escortBSpawn);
                 spawnFog(amount, 50f, escortCSpawn);
 
-                if(phaseTwoTimer > maxTime/4){
+                if(phaseTwoTimer > maxTime*4/7){
                     if (escortA == null) {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing, 0f, captain);
                         shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
@@ -156,7 +157,7 @@ public class NinmahBoss extends BaseHullMod {
                     }
                 }
 
-                if(phaseTwoTimer > maxTime*2/4){
+                if(phaseTwoTimer > maxTime*5/7){
                     if (escortB == null) {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing + 120f, 0f, captain);
                         shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
@@ -169,7 +170,7 @@ public class NinmahBoss extends BaseHullMod {
                     }
                 }
 
-                if(phaseTwoTimer > maxTime*3/4){
+                if(phaseTwoTimer > maxTime*6/7){
                     if (escortC == null) {
                         escortC = fleetManager.spawnShipOrWing(escortSpec, escortCSpawn, escortFacing + 240f, 0f, captain);
                         shipSpawnExplosion(escortC.getShieldRadiusEvenIfNoShield(), escortC.getLocation());
@@ -446,9 +447,9 @@ public class NinmahBoss extends BaseHullMod {
             // Phase Decision Tree starts here:
             boolean wantToPhase = false;
             if (ventingHardFlux) { // while retreating to vent, decide to phase based on flux and incoming damage
-                if (ship.getFluxLevel() < StarficzAIUtils.linMap(0.4f, 1f, 0f, 0.07f, armorDamageLevel) ||
-                        ship.getFluxLevel() < StarficzAIUtils.linMap(0.4f, 1f, 0f, 0.07f, hullDamageLevel) ||
-                        ship.getFluxLevel() < StarficzAIUtils.linMap(0.4f, 1f, 0.5f, 0.9f, empDamageLevel)) {
+                if (ship.getFluxLevel() < Utils.linMap(0.4f, 1f, 0f, 0.07f, armorDamageLevel) ||
+                        ship.getFluxLevel() < Utils.linMap(0.4f, 1f, 0f, 0.07f, hullDamageLevel) ||
+                        ship.getFluxLevel() < Utils.linMap(0.4f, 1f, 0.5f, 0.9f, empDamageLevel)) {
                     wantToPhase = true;
                 }
             } else { // otherwise, ship is attacking
@@ -468,6 +469,7 @@ public class NinmahBoss extends BaseHullMod {
                     if ((ventingSoftFlux || rechargeCharges) && !maximiseDPS)
                         wantToPhase = true;
 
+                    // phase to avoid getting nuked by enemy ship explosion
                     if(target.getHullLevel() < 0.10f && MathUtils.getDistanceSquared(ship.getLocation(), target.getLocation()) < Math.pow(target.getShipExplosionRadius() + ship.getCollisionRadius(),2))
                         wantToPhase = true;
 
