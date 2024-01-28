@@ -15,7 +15,7 @@ import java.awt.*;
 
 public class PhasespaceSkip extends BaseShipSystemScript {
     //Main phase color
-    private static final Color PHASE_COLOR = new Color(80, 160, 240, 255);
+    private static final Color PHASE_COLOR = new Color(80, 110, 240, 200);
 
     //For nullspace phantoms
     private static final Color AFTERIMAGE_COLOR = new Color(30, 45, 220, 200);
@@ -25,11 +25,12 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     private static final float PHANTOM_FLICKER_DIFFERENCE = 11f;
     private static final int PHANTOM_FLICKER_CLONES = 4;
 
-    private static final float SHIP_ALPHA_MULT = 0.25f;
-    private static final float SPEED_BONUS_MULT = 5f; // was 3, but that felt way to slow
+    private static final float SHIP_ALPHA_MULT = 0f;
+    private static final float SPEED_BONUS_MULT = 6f; // was 3, but that felt way to slow
     private static final float TURN_BONUS_MULT = 2f;
     private static final float MOBILITY_BONUS_MULT = 50f;
-
+    public static final float PHASE_DISSIPATION_MULT = 2f;
+    public static final float TIME_MULT = 3f;
     private int lastMessage = 0;
     private float phantomDelayCounter = 0f;
     private boolean runOnce = true;
@@ -69,7 +70,6 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             }
             return;
         }
-
         //Checks if we should be phased or not, and applies the related mobility bonuses
         if (state == State.IN || state == State.ACTIVE || state == State.OUT) {
             ship.setPhased(true);
@@ -80,8 +80,17 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             stats.getDeceleration().modifyMult(id, mobilityBonus);
             stats.getMaxTurnRate().modifyMult(id, TURN_BONUS_MULT);
             stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
-            stats.getTimeMult().modifyMult(id, 1 + (2 * effectLevel));
-            Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + (2 * effectLevel)));
+
+            stats.getFluxDissipation().modifyMult(id, PHASE_DISSIPATION_MULT);
+            stats.getBallisticRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+            stats.getEnergyRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+            stats.getMissileRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+            stats.getBallisticAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+            stats.getEnergyAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+            stats.getMissileAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+
+            stats.getTimeMult().modifyMult(id, 1 + (TIME_MULT * effectLevel));
+            Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + (TIME_MULT * effectLevel)));
         }
 
         //Handles ship opacity
@@ -118,6 +127,8 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
             MagicRender.objectspace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"),
                     ship,  new Vector2f(0f, 0f),  new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),  new Vector2f(0f, 0f), 180, 0, true, colorToUse, true, 0.1f, 0.1f, 0.2f, true);
+            MagicRender.objectspace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom2"),
+                    ship,  new Vector2f(0f, 0f),  new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),  new Vector2f(0f, 0f), 180, 0, true, colorToUse, true, 0.1f, 0.1f, 0.2f, true);
 
 
 
@@ -148,6 +159,14 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         } else {
             return;
         }
+        ship.setPhased(false);
+        //ship.setExtraAlphaMult(1f);
+
+        if(ship.getShield() != null && !runOnce){
+            ship.getShield().toggleOn();
+            ship.getShield().setActiveArc(ship.getShield().getArc());
+        }
+
         runOnce = true;
 
         stats.getMaxSpeed().unmodify(id);
@@ -155,6 +174,17 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         stats.getDeceleration().unmodify(id);
         stats.getMaxTurnRate().unmodify(id);
         stats.getTurnAcceleration().unmodify(id);
+
+        stats.getFluxDissipation().unmodifyMult(id);
+        stats.getBallisticRoFMult().unmodifyMult(id);
+        stats.getEnergyRoFMult().unmodifyMult(id);
+        stats.getMissileRoFMult().unmodifyMult(id);
+        stats.getBallisticAmmoRegenMult().unmodifyMult(id);
+        stats.getEnergyAmmoRegenMult().unmodifyMult(id);
+        stats.getMissileAmmoRegenMult().unmodifyMult(id);
+
+        stats.getTimeMult().unmodify(id);
+        Global.getCombatEngine().getTimeMult().unmodify(id);
 
         if (Math.abs(ship.getAngularVelocity()) > stats.getMaxTurnRate().getModifiedValue()) {
             ship.setAngularVelocity((ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity())) * stats.getMaxTurnRate().getModifiedValue());

@@ -35,7 +35,7 @@ public class CoronalCapacitor extends BaseHullMod {
 
         //Flux based
         public static final float MAX_CHARGEFLUX = 1f; // multiplier on ships max flux
-        public static final float FLUX_CHARGERATE = 0.05f; // percentage of bar gained per second
+        public static final float FLUX_CHARGERATE = 0.02f; // percentage of bar gained per second
 
         public static final float SPEED_BOOST = 0.3f;
         public static final float DAMAGE_BOOST = 0.3f;
@@ -67,7 +67,7 @@ public class CoronalCapacitor extends BaseHullMod {
 
         @Override
         public void advance(float amount) {
-            float fluxPerSecond = 0f;
+            float fluxPerSecond = -(ship.getFluxTracker().isVenting() ? ship.getMutableStats().getVentRateMult().getModifiedValue()*ship.getMutableStats().getFluxDissipation().getModifiedValue() * 2 : 0);
             float flatFlux = 0f;
 
             boolean charging = true;
@@ -78,7 +78,6 @@ public class CoronalCapacitor extends BaseHullMod {
                     engines.add(new Pair<>(engine.getEngineSlot(), new Pair<>(engine.getEngineSlot().getColor(), engine.getEngineSlot().getGlowAlternateColor())));
                 }
             }
-
 
             for(WeaponAPI weapon : beams){
                 if(weapon.isFiring()) {
@@ -118,12 +117,13 @@ public class CoronalCapacitor extends BaseHullMod {
             }
             capacitorLevel = Math.max(0, Math.min(1, capacitorLevel));
             for(Pair<EngineSlotAPI, Pair<Color, Color>> engineData : engines){
-                engineData.one.setColor(Utils.OKLabInterpolateColor(engineData.two.one,new Color(235, 185,20, 200), capacitorLevel));
-                if (engineData.two.two != null) engineData.one.setGlowAlternateColor(Utils.OKLabInterpolateColor(engineData.two.two, new Color(215, 175,55, 100), capacitorLevel));
+                engineData.one.setColor(Utils.OKLabInterpolateColor(engineData.two.one,new Color(235, 165,20, 150), capacitorLevel));
+                if (engineData.two.two != null) engineData.one.setGlowAlternateColor(Utils.OKLabInterpolateColor(engineData.two.two, new Color(215, 155,55, 100), capacitorLevel));
             }
 
-            ship.setJitterUnder("coronal_cap" + ship.getId(), new Color(235, 185,20, 200),
-                    Utils.linMap(0,0.6f,0.5f,1, capacitorLevel), 3, 0f, 20);
+            ship.setJitterUnder("coronal_cap" + ship.getId(), new Color(235, 165,20, 100),
+                    Utils.linMap(0,0.6f,0.5f,1, capacitorLevel), 3, 0f, 15);
+
 
 
             /*
@@ -191,7 +191,7 @@ public class CoronalCapacitor extends BaseHullMod {
         float opad = 10f;
         Color h = Misc.getHighlightColor();
         tooltip.addPara("Utilizes coronal energy from the local system to supercharge weapons and engines. This energy is represented in units of flux, with a maximum charge equal to the ships flux capacity.", opad, h, "supercharge weapons and engines");
-        tooltip.addPara("Coronal energy charges at a rate equal to %s of the ships flux capacity per second in a typical starsystem.", opad, h, "5%");
+        tooltip.addPara("Coronal energy charges at a rate equal to %s of the ships flux capacity per second in a typical starsystem. During active venting, vented flux is transformed into coronal energy.", opad, h, "2%");
         tooltip.addPara("Coronal energy depletes at a rate equal to the flux cost of any weapon upon firing.", opad);
         tooltip.addPara("The boost from a full charge results in a %s to:", opad, h, "30% increase");
         tooltip.setBulletedListMode(" - ");
