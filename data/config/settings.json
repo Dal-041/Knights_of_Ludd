@@ -246,11 +246,15 @@
 			"zea_shield_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_dusk.png",
 			"zea_shield_elysia":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_elysia.png",
 			"zea_dusk_ayakashi_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
+			"zea_dusk_ayakashi_phantom2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
 			"zea_boss_yukionna_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow1.png",
 			"zea_boss_yukionna_phantom2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow2.png",
 			"zea_dusk_ayakashi_balance_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
+			"zea_dusk_ayakashi_balance_phantom2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
 			"zea_dusk_onryo_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
+			"zea_dusk_onryo_phantom2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
 			"zea_dusk_onryo_P_phantom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png",
+			"zea_dusk_onryo_P_phantom2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Eagle_glow.png"
 		},
 		"illustrations":{
 			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",

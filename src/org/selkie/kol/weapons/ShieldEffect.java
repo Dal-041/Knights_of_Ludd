@@ -19,7 +19,6 @@ import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
 public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     
     private final float MAX_SHIELD=10;
-    private final static boolean DEBUG = true;
     private boolean runOnce = false, disabled=false;
     private float shieldT=0,aiT=0;
     private ShipAPI ship;
