@@ -102,9 +102,9 @@ public class PrepareAbyss {
     			5600,
 				250,
 				elysia,
-				-10f,
+				-13f,
 				0f,
-				5f));
+				4f));
 
     	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
                                                                     0, 0, // center of nebula
@@ -123,9 +123,9 @@ public class PrepareAbyss {
 				new AbyssCorona.CoronaParams(25000,
 						3250,
 						gaze,
-						150f,
+						50f,
 						1f,
-						5f)
+						6f)
 		);
 		gazeBeam1.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 15);
 
@@ -133,9 +133,9 @@ public class PrepareAbyss {
 				new AbyssCorona.CoronaParams(25000,
 						3250,
 						gaze,
-						150f,
+						50f,
 						1f,
-						5f)
+						6f)
 		);
 		gazeBeam2.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 16);
     	

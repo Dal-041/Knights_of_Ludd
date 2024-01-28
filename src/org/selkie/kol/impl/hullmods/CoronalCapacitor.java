@@ -83,7 +83,7 @@ public class CoronalCapacitor extends BaseHullMod {
 
         public float actual_chargemult = 0f; // resultant charge rate
         private float capacitorFactor = 1f; // 0-1
-        private float capacitorAmount = 25000f; // Gets verified
+        private float capacitorAmount = 0f; // Gets verified
         private float chargeTime = 0f;
 
         private List<Pair<EngineSlotAPI, Pair<Color, Color>>> engines;
@@ -124,14 +124,14 @@ public class CoronalCapacitor extends BaseHullMod {
             }
 
             for(WeaponAPI weapon : beams) {
-                if(weapon.getChargeLevel() > 0.2f) {
+                if(weapon.getChargeLevel() >= 0.2f) { //firing
                     fluxPerSecond += weapon.getFluxCostToFire();
                     if(!weapon.hasAIHint(WeaponAPI.AIHints.PD))
                         charging = false;
                 }
             }
             for(WeaponAPI weapon : fluxCounted.keySet()) {
-                if(weapon.getChargeLevel() >= 0.9f) {
+                if(weapon.getChargeLevel() >= 1f) { //firing
                     if(!fluxCounted.get(weapon)) {
                         fluxCounted.put(weapon, true);
                         flatFlux += weapon.getFluxCostToFire();
