@@ -93,15 +93,18 @@ public class GenerateKnights {
 				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_ARCHCURATE,
 				false, 0, 0);
 
-		PersonAPI lackie1 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_lackie_1",
+		PersonAPI lackey1 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_lackie_1",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.KNIGHT_CAPTAIN, Ranks.POST_GUARD_LEADER,
 				false, 0, 1);
+
+		master.setId("kol_knightmaster");
+		lackey1.setId("kol_km_lackey");
 
 		master.setImportance(PersonImportance.HIGH);
 		master.setVoice(Voices.SOLDIER);
 
-		lackie1.setImportance(PersonImportance.MEDIUM);
-		lackie1.setVoice(Voices.FAITHFUL);
+		lackey1.setImportance(PersonImportance.MEDIUM);
+		lackey1.setVoice(Voices.FAITHFUL);
 	}
 	
 	public static void genKnightsStarfortress() {
@@ -142,15 +145,18 @@ public class GenerateKnights {
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.FACTION_LEADER, Ranks.POST_FACTION_LEADER,
 				false, 0, 0);
 
-		PersonAPI lackie2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Sister", "Syster", "kol_lackie_2",
-				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.SISTER, Ranks.POST_GUARD_LEADER,
+		PersonAPI lackey2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Sister", "Syster", "kol_lackie_2",
+				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.SISTER, Ranks.POST_INTELLIGENCE_DIRECTOR,
 				false, 0, 1);
+
+		grandmaster.setId("kol_grandmaster");
+		lackey2.setId("kol_gm_lackey");
 
 		grandmaster.setImportance(PersonImportance.VERY_HIGH);
 		grandmaster.setVoice(Voices.FAITHFUL);
 
-		lackie2.setImportance(PersonImportance.HIGH);
-		lackie2.setVoice(Voices.FAITHFUL);
+		lackey2.setImportance(PersonImportance.HIGH);
+		lackey2.setVoice(Voices.FAITHFUL);
 	}
 
 	public static void genKnightsExpeditions() {

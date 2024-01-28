@@ -2,6 +2,8 @@ package org.selkie.kol.plugins;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.impl.campaign.ids.Ranks;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 
 import org.dark.shaders.light.LightData;
@@ -16,6 +18,8 @@ import org.selkie.kol.fleets.SpawnInvictus;
 import org.selkie.kol.fleets.SpawnRetribution;
 
 import exerelin.campaign.SectorManager;
+
+import static org.selkie.kol.helpers.MarketHelpers.getPerson;
 
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String ModID = "Knights of Ludd";
