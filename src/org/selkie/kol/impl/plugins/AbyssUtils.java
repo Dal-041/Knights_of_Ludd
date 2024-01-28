@@ -96,10 +96,10 @@ public class AbyssUtils {
     public static final String abilityJumpDusk = "fracture_jump_pullsar";
 
     public static final String path = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
-    public static final String[] portraitsDawnPaths = {path.concat("zea_dawn_1.png"), path.concat("zea_dawn_2.png"), path.concat("zea_dawn_3.png")};
+    public static final String[] portraitsDawnPaths = {path.concat("zea_dawn_1.png"), path.concat("zea_dawn_2.png"), path.concat("zea_dawn_3.png"), path + "zea_dawn_4.png", path + "zea_dawn_5.png"};
     public static final String[] portraitsDuskPaths = {path.concat("zea_dusk_1.png"), path.concat("zea_dusk_2.png"), path.concat("zea_dusk_3.png")};
     public static final String[] portraitsElysianPaths = {path.concat("zea_idk1.png"), path.concat("zea_idk2.png"), path.concat("zea_idk3.png")};
-    public static final String[] portraitsDawn = {"zea_dawn_1", "zea_dawn_2", "zea_dawn_3"};
+    public static final String[] portraitsDawn = {"zea_dawn_1", "zea_dawn_2", "zea_dawn_3", "zea_dawn_4", "zea_dawn_5"};
     public static final String[] portraitsDusk = {"zea_dusk_1", "zea_dusk_2", "zea_dusk_3"};
     public static final String[] portraitsElysian = {"zea_idk1", "zea_idk2", "zea_idk3"};
 
