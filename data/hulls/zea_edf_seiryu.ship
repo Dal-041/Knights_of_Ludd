@@ -15,11 +15,20 @@
     "zea_edf_coronal_capacitor",
     "automated",
     "kol_ea_shields3",
-	"kol_throttle"
+    "kol_throttle"
   ],
   "builtInWeapons": {
+    "WS0005": "eis_blinker_white",
+    "WS0009": "eis_blinker_white",
+    "WS0012": "eis_blinker_white",
     "WS0013": "zea_deco_edf_vortice",
-    "WS0014": "zea_deco_edf_vortice"
+    "WS0014": "zea_deco_edf_vortice",
+    "WS0015": "eis_blinker_white",
+    "WS0016": "eis_blinker_white30",
+    "WS0017": "eis_blinker_white30",
+    "WS0018": "zea_deco_edf_mizuchi_lights",
+    "WS0019": "zea_deco_edf_seiryu_ml",
+    "WS0020": "zea_deco_edf_seiryu_mr"
   },
   "weaponSlots": [
     {
@@ -29,7 +38,8 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 0,
-      "locations": [-2.5, 38]
+      "locations": [2.5, 38],
+      "renderOrderMod": 201
     },
     {
       "id": "WS0004",
@@ -38,7 +48,8 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -0,
-      "locations": [-2.5, -38]
+      "locations": [2.5, -38],
+      "renderOrderMod": 201
     },
     {
       "id": "WS0001",
@@ -47,7 +58,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 45,
-      "locations": [-32.5, 86]
+      "locations": [-27.5, 86]
     },
     {
       "id": "WS0002",
@@ -56,16 +67,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -45,
-      "locations": [-32.5, -86]
-    },
-    {
-      "id": "WS0005",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 210,
-      "angle": 0,
-      "locations": [56.5, -0]
+      "locations": [-27.5, -86]
     },
     {
       "id": "WS0006",
@@ -74,7 +76,7 @@
       "mount": "TURRET",
       "arc": 260,
       "angle": 90,
-      "locations": [-45.5, 109]
+      "locations": [-40.5, 109]
     },
     {
       "id": "WS0007",
@@ -83,7 +85,7 @@
       "mount": "TURRET",
       "arc": 260,
       "angle": -90,
-      "locations": [-45.5, -109]
+      "locations": [-40.5, -109]
     },
     {
       "id": "WS0010",
@@ -92,7 +94,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [15.5, 48]
+      "locations": [16.5, 48]
     },
     {
       "id": "WS0011",
@@ -101,16 +103,16 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
-      "locations": [15.5, -48]
+      "locations": [16.5, -48]
     },
     {
       "id": "WS0008",
-      "size": "MEDIUM",
-      "type": "BUILT_IN",
+      "size": "LARGE",
+      "type": "SYSTEM",
       "mount": "TURRET",
       "arc": 7,
       "angle": 0,
-      "locations": [126.5, -0]
+      "locations": [131.5, 0]
     },
     {
       "id": "WS0013",
@@ -119,7 +121,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-54.5, 145]
+      "locations": [-45.5, 145]
     },
     {
       "id": "WS0014",
@@ -128,12 +130,99 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [-54.5, -145]
+      "locations": [-45.5, -145]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [39, 14.5]
+    },
+    {
+      "id": "WS0012",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [39, -14.5]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-28.5, 47],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-28.5, -47],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-17.5, 32],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0017",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-17.5, -32],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0018",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-32, -0]
+    },
+    {
+      "id": "WS0019",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [17, 45],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0020",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [17, -45],
+      "renderOrderMod": 100
     }
   ],
   "engineSlots": [
     {
-      "location": [-77, 25],
+      "location": [-76, 23],
       "length": 116.5,
       "width": 27,
       "angle": 180,
@@ -141,7 +230,7 @@
       "style": "zea_EDF_ENG"
     },
     {
-      "location": [-77, -25],
+      "location": [-76, -23],
       "length": 116.5,
       "width": 27,
       "angle": -180,
