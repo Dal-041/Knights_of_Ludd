@@ -1,5 +1,5 @@
 {
-    "displayName": "NyanNyan",
+    "displayName": "Rending",
     "fluxCapacitors": 1,
     "fluxVents": 50,
     "goalVariant": true,
@@ -14,8 +14,23 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_boss_nian_Devourer",
+    "variantId": "zea_boss_nian_Rending",
     "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0014": "zea_nian_maingun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0003": "rifttorpedo",
+                "WS0002": "rifttorpedo",
+            }
+        },
         {
             "autofire": true,
             "mode": "LINKED",
@@ -29,26 +44,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "rifttorpedo",
-                "WS0002": "rifttorpedo",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
                 "WS0009": "mjolnir",
-                "WS0011": "heavyac",
                 "WS0010": "mjolnir",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "flak",
-                "WS0013": "dualflak",
-                "WS0012": "dualflak",
             }
         },
         {
@@ -57,6 +54,10 @@
             "weapons": {
                 "WS0004": "guardian",
                 "WS0005": "guardian",
+                "WS0001": "flak",
+                "WS0011": "heavyac",
+                "WS0012": "dualflak",
+                "WS0013": "dualflak",
             }
         },
     ],

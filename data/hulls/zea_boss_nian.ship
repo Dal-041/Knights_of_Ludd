@@ -17,6 +17,9 @@
 	"heavyarmor",
     "kol_ea_shields1"
   ],
+  "builtInWeapons": {
+	"WS0014":"zea_nian_maingun",
+  },
   "weaponSlots": [
     {
       "id": "LB 1",
@@ -152,20 +155,11 @@
       "id": "WS0014",
       "size": "LARGE",
       "type": "BUILT_IN",
-      "mount": "HIDDEN",
-      "arc": 7,
+      "mount": "HARDPOINT",
+      "arc": 0,
       "angle": 0,
-      "locations": [252, 60]
+      "locations": [139, 39]
     },
-    {
-      "id": "WS0015",
-      "size": "LARGE",
-      "type": "BUILT_IN",
-      "mount": "HIDDEN",
-      "arc": 7,
-      "angle": 0,
-      "locations": [252, 18]
-    }
   ],
   "engineSlots": [
     {

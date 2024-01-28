@@ -26,7 +26,7 @@ public class ManageDawnBoss implements FleetEventListener {
 		}
 
 
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_taotie")) {
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_nian")) {
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -64,7 +64,7 @@ public class ManageDawnBoss implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "zea_boss_nian_Devourer",
+	                        "zea_boss_nian_Rending",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
