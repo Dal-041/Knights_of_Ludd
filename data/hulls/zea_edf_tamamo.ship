@@ -14,6 +14,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "zea_edf_coronal_capacitor",
+    "zea_edf_pd_drones",
     "kol_ea_shields3",
     "automated",
 	"kol_throttle"

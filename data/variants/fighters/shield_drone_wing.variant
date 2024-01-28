@@ -1,0 +1,14 @@
+{
+	"quality":1,
+	"displayName":"Support Drone",
+	"hullId":"shield_drone",
+	"variantId":"shield_drone_wing",
+	"fluxVents":0,
+	"fluxCapacitors":0,
+	"hullMods":[], # array of strings
+	
+	# mode is either LINKED or ALTERNATING
+	# slot ids (WS ***) must match what's in the .ship file
+	"weaponGroups":[
+	],
+}

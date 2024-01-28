@@ -15,3 +15,4 @@ Coronal Capacitor,zea_edf_coronal_capacitor,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.
 Ninaya Boss,zea_ninaya_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.NinayaBoss,,,
 Ninmah Boss,zea_ninmah_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.NinmahBoss,,
 Scorched Skies Doctrine,kol_throttle,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.AttainmentManager,,Conformal shield,graphics/icons/skills/field_modulation.png,
+PD Drones,zea_edf_pd_drones,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.PDDrones,
