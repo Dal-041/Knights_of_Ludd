@@ -48,7 +48,7 @@ public class ManageDawnBoss implements FleetEventListener {
 
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
-				if(f.getHullId().startsWith("zea_boss_taotie")) salvaged=true;
+				if(f.getHullId().startsWith("zea_boss_nian")) salvaged=true;
 	                
 	                //set memkey that the wreck must never spawn
 	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DAWN_BOSS_DONE,true);
@@ -64,7 +64,7 @@ public class ManageDawnBoss implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "zea_boss_taotie_Devourer",
+	                        "zea_boss_nian_Devourer",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,

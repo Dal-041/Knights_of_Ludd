@@ -52,7 +52,7 @@ public class SpawnDawnBoss {
 		* @param transponderOn
 		* @return
 		*/
-		String variant = "zea_boss_taotie_Devourer";
+		String variant = "zea_boss_nian_Devourer";
 		CampaignFleetAPI dawnBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("The Devourer")
 		        .setFleetFaction(PrepareAbyss.dawnID)

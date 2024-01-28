@@ -1,9 +1,9 @@
 {
-    "displayName": "Devourer",
+    "displayName": "NyanNyan",
     "fluxCapacitors": 1,
     "fluxVents": 50,
     "goalVariant": true,
-    "hullId": "zea_boss_taotie",
+    "hullId": "zea_boss_nian",
     "hullMods": [
         "armoredweapons",
         "autorepair",
@@ -14,7 +14,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_boss_taotie_Devourer",
+    "variantId": "zea_boss_nian_Devourer",
     "weaponGroups": [
         {
             "autofire": true,

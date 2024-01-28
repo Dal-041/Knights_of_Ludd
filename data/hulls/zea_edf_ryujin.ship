@@ -9,7 +9,7 @@
   "center": [262, 132],
   "collisionRadius": 281,
   "shieldCenter": [0, 0],
-  "shieldRadius": 410,
+  "shieldRadius": 425,
   "viewOffset": 0,
   "builtInMods": [
     "zea_edf_coronal_capacitor",
