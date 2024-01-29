@@ -2,10 +2,10 @@ package org.selkie.kol.impl.shipsystems;
 
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.VectorUtils;
 import org.magiclib.plugins.MagicTrailPlugin;
 import org.magiclib.util.MagicRender;
 import org.lazywizard.lazylib.CollisionUtils;
@@ -14,6 +14,9 @@ import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.fx.FakeSmokePlugin;
 
 import java.awt.*;
+import java.util.Iterator;
+
+import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class PhasespaceSkip extends BaseShipSystemScript {
     //Main phase color
@@ -55,7 +58,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         runOnce = true;
         //Checks if we should be phased or not, and applies the related mobility bonuses
 
-        //ship.setPhased(true);
+        ship.setPhased(true);
         float speedBonus = 1f + ((SPEED_BONUS_MULT - 1f) * effectLevel);
         float mobilityBonus = 1f + ((MOBILITY_BONUS_MULT - 1f) * effectLevel);
         stats.getMaxSpeed().modifyMult(id, speedBonus);
@@ -118,6 +121,27 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             phantomDelayCounter -= PHANTOM_DELAY;
         }
 
+        // make sure to push any overlapping ships away when exiting system
+        if(state == State.OUT){
+            Iterator<Object> iterator = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(ship.getLocation(), ship.getCollisionRadius()*2 + 500f, ship.getCollisionRadius()*2 + 500f);
+            while (iterator.hasNext() ) {
+                Object next = iterator.next();
+                if (!(next instanceof CombatEntityAPI)) continue;
+                CombatEntityAPI entity = (CombatEntityAPI) next;
+                if(ship == entity) continue;
+                if(entity.getCollisionClass() != CollisionClass.SHIP) continue;
+                float distance = Misc.getTargetingRadius(ship.getLocation(), entity, false) + Misc.getTargetingRadius(entity.getLocation(), ship, false);
+                float actualDistance = MathUtils.getDistanceSquared(ship.getLocation(), entity.getLocation());
+                if (actualDistance < distance*distance) {
+
+                     float shipMoveFactor = Misc.interpolate(0, 0.005f, entity.getMass() / (entity.getMass() + ship.getMass()*0.002f));
+                    Vector2f.add(ship.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(entity.getLocation(), ship.getLocation()).scale((distance*distance - actualDistance) * shipMoveFactor), ship.getVelocity());
+                    Vector2f.add(entity.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(ship.getLocation(), entity.getLocation()).scale((distance*distance - actualDistance) * (0.005f-shipMoveFactor)), entity.getVelocity());
+                }
+            }
+        }
+
+
         //Always render smoke at the phantom's position...
         for (int i = 0; i < (900 * amount); i++) {
             Vector2f pointToSpawnAt = MathUtils.getRandomPointInCircle(phantomPos, ship.getCollisionRadius());
@@ -142,13 +166,8 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         } else {
             return;
         }
-        ship.setPhased(false);
-        //ship.setExtraAlphaMult(1f);
 
-        if(ship.getShield() != null && runOnce){
-            ship.getShield().toggleOn();
-            ship.getShield().setActiveArc(ship.getShield().getArc());
-        }
+
 
         stats.getMaxSpeed().unmodify(id);
         stats.getAcceleration().unmodify(id);
@@ -172,6 +191,11 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         }
         if (ship.getVelocity().length() > stats.getMaxSpeed().getModifiedValue()) {
             ship.getVelocity().set((ship.getVelocity().x / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity().y / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue());
+        }
+
+        if(ship.getShield() != null && runOnce){
+            ship.getShield().toggleOn();
+            ship.getShield().setActiveArc(ship.getShield().getArc());
         }
 
         ship.setPhased(false);
