@@ -37,6 +37,7 @@ public class NinmahBoss extends BaseHullMod {
         public ShipAPI ship;
         public ShipAPI escortA = null, escortB = null, escortC = null;
         public String id = "boss_phase_two_modifier";
+        public Utils.FogSpawner escortAFog, escortBFog, escortCFog;
         public NinmahBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
         }
@@ -46,6 +47,9 @@ public class NinmahBoss extends BaseHullMod {
             float hull = ship.getHitpoints();
             if (damageAmount >= hull && !phaseTwo) {
                 phaseTwo = true;
+                escortAFog = new Utils.FogSpawner();
+                escortBFog = new Utils.FogSpawner();
+                escortCFog = new Utils.FogSpawner();
                 ship.setHitpoints(1f);
                 ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
                 if (!ship.isPhased()) {
@@ -140,9 +144,10 @@ public class NinmahBoss extends BaseHullMod {
                 Vector2f escortASpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 250f, escortFacing);
                 Vector2f escortBSpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 250f, escortFacing + 120f);
                 Vector2f escortCSpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 250f, escortFacing + 240f);
-                spawnFog(amount, 50f, escortASpawn);
-                spawnFog(amount, 50f, escortBSpawn);
-                spawnFog(amount, 50f, escortCSpawn);
+
+                escortAFog.spawnFog(amount, 25f, escortASpawn);
+                escortBFog.spawnFog(amount, 25f, escortBSpawn);
+                escortCFog.spawnFog(amount, 25f, escortCSpawn);
 
                 if(phaseTwoTimer > maxTime*4/7){
                     if (escortA == null) {
@@ -197,18 +202,18 @@ public class NinmahBoss extends BaseHullMod {
         }
 
         boolean useNormal = true;
+        final IntervalUtil fogIntervalNormal = new IntervalUtil(0.1f, 0.15f);
+        final IntervalUtil fogIntervalSpecial = new IntervalUtil(0.35f, 0.6f);
         public void spawnFog(float amount, float radius, Vector2f location){
-            final IntervalUtil interval = new IntervalUtil(0.1f, 0.15f);
-            final IntervalUtil interval2 = new IntervalUtil(0.35f, 0.6f);
+
             final Color rgbPos = new Color(90,160,222,60);
             final Color rgbNeg = new Color(145,85,115,60);
             final Color specialOne = new Color(215, 30, 19, 60);
             final Color specialTwo = new Color(14, 220, 200, 60);
 
-
             CombatEngineAPI engine = Global.getCombatEngine();
-            interval.advance(amount);
-            if (interval.intervalElapsed()) {
+            fogIntervalNormal.advance(amount);
+            if (fogIntervalNormal.intervalElapsed()) {
 
                 Vector2f point = MathUtils.getRandomPointInCircle(location, radius);
 
@@ -238,8 +243,8 @@ public class NinmahBoss extends BaseHullMod {
                     );
                 } else {
                     useNormal = false;
-                    interval2.advance(amount);
-                    if (interval2.intervalElapsed()) {
+                    fogIntervalSpecial.advance(amount);
+                    if (fogIntervalSpecial.intervalElapsed()) {
                         useNormal = true;
                     }
                     engine.addNegativeNebulaParticle(

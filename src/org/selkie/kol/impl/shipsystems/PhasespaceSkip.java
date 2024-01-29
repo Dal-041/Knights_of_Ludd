@@ -5,6 +5,8 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import com.fs.starfarer.api.util.Misc;
+import org.magiclib.plugins.MagicTrailPlugin;
 import org.magiclib.util.MagicRender;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
@@ -19,13 +21,13 @@ public class PhasespaceSkip extends BaseShipSystemScript {
 
     //For nullspace phantoms
     private static final Color AFTERIMAGE_COLOR = new Color(30, 45, 220, 200);
-    private static final float PHANTOM_DELAY = 0.3f;
-    private static final float PHANTOM_ANGLE_DIFFERENCE = 5f;
-    private static final float PHANTOM_DISTANCE_DIFFERENCE = 55f;
+    private static final float PHANTOM_DELAY = 0.2f;
+    private static final float PHANTOM_ANGLE_DIFFERENCE = 10f;
+    private static final float PHANTOM_DISTANCE_DIFFERENCE = 70f;
     private static final float PHANTOM_FLICKER_DIFFERENCE = 11f;
     private static final int PHANTOM_FLICKER_CLONES = 4;
 
-    private static final float SHIP_ALPHA_MULT = 0f;
+    private static final float SHIP_ALPHA_MULT = 0.15f;
     private static final float SPEED_BONUS_MULT = 6f; // was 3, but that felt way to slow
     private static final float TURN_BONUS_MULT = 2f;
     private static final float MOBILITY_BONUS_MULT = 50f;
@@ -33,65 +35,46 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     public static final float TIME_MULT = 3f;
     private int lastMessage = 0;
     private float phantomDelayCounter = 0f;
-    private boolean runOnce = true;
+    private boolean runOnce = false;
 
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
-        ShipAPI ship = null;
-        boolean player = false;
+        ShipAPI ship;
         if (stats.getEntity() instanceof ShipAPI) {
             ship = (ShipAPI) stats.getEntity();
-            player = ship == Global.getCombatEngine().getPlayerShip();
             id = id + "_" + ship.getId();
         } else {
             return;
         }
+
 
         //Time counter
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
         if (Global.getCombatEngine().isPaused()) {
             amount = 0;
         }
-
-        //Unapplies all our applied stats if we are not using the system currently
-        if (state == State.COOLDOWN || state == State.IDLE) {
-            unapply(stats, id);
-            return;
-        }
-
-        if (state == State.OUT && runOnce) {
-            runOnce = false;
-            stats.getMaxSpeed().unmodify(id);
-            stats.getMaxTurnRate().unmodify(id);
-            if (ship.getAngularVelocity() > stats.getMaxTurnRate().getModifiedValue()) {
-                ship.setAngularVelocity((ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity())) * stats.getMaxTurnRate().getModifiedValue());
-            }
-            if (ship.getVelocity().length() > stats.getMaxSpeed().getModifiedValue()) {
-                ship.getVelocity().set((ship.getVelocity().x / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity().y / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue());
-            }
-            return;
-        }
+        runOnce = true;
         //Checks if we should be phased or not, and applies the related mobility bonuses
-        if (state == State.IN || state == State.ACTIVE || state == State.OUT) {
-            ship.setPhased(true);
-            float speedBonus = 1f + ((SPEED_BONUS_MULT - 1f) * effectLevel);
-            float mobilityBonus = 1f + ((MOBILITY_BONUS_MULT - 1f) * effectLevel);
-            stats.getMaxSpeed().modifyMult(id, speedBonus);
-            stats.getAcceleration().modifyMult(id, mobilityBonus);
-            stats.getDeceleration().modifyMult(id, mobilityBonus);
-            stats.getMaxTurnRate().modifyMult(id, TURN_BONUS_MULT);
-            stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
 
-            stats.getFluxDissipation().modifyMult(id, PHASE_DISSIPATION_MULT);
-            stats.getBallisticRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
-            stats.getEnergyRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
-            stats.getMissileRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
-            stats.getBallisticAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
-            stats.getEnergyAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
-            stats.getMissileAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+        //ship.setPhased(true);
+        float speedBonus = 1f + ((SPEED_BONUS_MULT - 1f) * effectLevel);
+        float mobilityBonus = 1f + ((MOBILITY_BONUS_MULT - 1f) * effectLevel);
+        stats.getMaxSpeed().modifyMult(id, speedBonus);
+        stats.getAcceleration().modifyMult(id, mobilityBonus);
+        stats.getDeceleration().modifyMult(id, mobilityBonus);
+        stats.getMaxTurnRate().modifyMult(id, TURN_BONUS_MULT);
+        stats.getTurnAcceleration().modifyMult(id, mobilityBonus);
 
-            stats.getTimeMult().modifyMult(id, 1 + (TIME_MULT * effectLevel));
-            Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + (TIME_MULT * effectLevel)));
-        }
+        stats.getFluxDissipation().modifyMult(id, PHASE_DISSIPATION_MULT);
+        stats.getBallisticRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+        stats.getEnergyRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+        stats.getMissileRoFMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+        stats.getBallisticAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+        stats.getEnergyAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+        stats.getMissileAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
+
+        stats.getTimeMult().modifyMult(id, 1 + ((TIME_MULT - 1f) * effectLevel));
+        Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + ((TIME_MULT - 1f) * effectLevel)));
+
 
         //Handles ship opacity
         ship.setExtraAlphaMult(1f - (1f - SHIP_ALPHA_MULT) * effectLevel);
@@ -108,6 +91,13 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             return;
         }
 
+        //Special, "Semi-Fixed" phantom
+        Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
+        MagicRender.singleframe(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"), ship.getLocation(),
+                new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
+        MagicRender.singleframe(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom2"), ship.getLocation(),
+                new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
+
         //If enough time has passed, render a new phantom
         phantomDelayCounter += amount;
         if (phantomDelayCounter > PHANTOM_DELAY) {
@@ -120,16 +110,8 @@ public class PhasespaceSkip extends BaseShipSystemScript {
                 MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom2"), modifiedPhantomPos, new Vector2f(0f, 0f),
                         new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
                         new Vector2f(0f, 0f), ship.getFacing() + angleDifference,
-                        0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.3f);
+                        0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.5f);
             }
-
-            //Special, "Semi-Fixed" phantom
-            Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
-            MagicRender.objectspace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"),
-                    ship,  new Vector2f(0f, 0f),  new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),  new Vector2f(0f, 0f), 180, 0, true, colorToUse, true, 0.1f, 0.1f, 0.2f, true);
-            MagicRender.objectspace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom2"),
-                    ship,  new Vector2f(0f, 0f),  new Vector2f(0f, 0f), new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),  new Vector2f(0f, 0f), 180, 0, true, colorToUse, true, 0.1f, 0.1f, 0.2f, true);
-
 
 
 
@@ -149,6 +131,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
                     pointToSpawnAt, MathUtils.getRandomPointInCircle(null, 10f),
                     MathUtils.getRandomNumberInRange(-15f, 15f), 0.85f, new Color(0f, 0f, 0f));
         }
+
     }
 
 
@@ -162,12 +145,10 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         ship.setPhased(false);
         //ship.setExtraAlphaMult(1f);
 
-        if(ship.getShield() != null && !runOnce){
+        if(ship.getShield() != null && runOnce){
             ship.getShield().toggleOn();
             ship.getShield().setActiveArc(ship.getShield().getArc());
         }
-
-        runOnce = true;
 
         stats.getMaxSpeed().unmodify(id);
         stats.getAcceleration().unmodify(id);

@@ -18,7 +18,7 @@ class WingTrailScript : EveryFrameWeaponEffectPlugin {
             return
         }
         val ship = weapon.ship
-        if (ship.isHulk || !ship.isAlive || ship.isPiece) {
+        if (ship.isHulk || !ship.isAlive || ship.isPiece || ship.isPhased) {
             return
         }
 

@@ -1,10 +1,92 @@
 package org.selkie.kol;
 
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.MathUtils;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 
+import static com.fs.starfarer.api.util.Misc.ZERO;
+
 public class Utils {
+
+    public static class FogSpawner{
+        boolean useNormal = true;
+        final IntervalUtil fogIntervalNormal = new IntervalUtil(0.1f, 0.15f);
+        final IntervalUtil fogIntervalSpecial = new IntervalUtil(0.35f, 0.6f);
+        public void spawnFog(float amount, float radius, Vector2f location){
+
+            final Color rgbPos = new Color(90,160,222,60);
+            final Color rgbNeg = new Color(145,85,115,60);
+            final Color specialOne = new Color(215, 30, 19, 60);
+            final Color specialTwo = new Color(14, 220, 200, 60);
+
+
+
+            CombatEngineAPI engine = Global.getCombatEngine();
+            fogIntervalNormal.advance(amount);
+            if (fogIntervalNormal.intervalElapsed()) {
+
+                Vector2f point = MathUtils.getRandomPointInCircle(location, radius);
+
+                engine.addNebulaParticle(
+                        point,
+                        MathUtils.getRandomPointInCircle(ZERO, 50f),
+                        MathUtils.getRandomNumberInRange(150f, 300f),
+                        0.3f,
+                        0.5f,
+                        0.5f,
+                        MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                        rgbPos
+                );
+
+                point = MathUtils.getRandomPointInCircle(location, radius * 0.75f);
+
+                if (useNormal && MathUtils.getRandom().nextInt() % 64 != 0) {
+                    engine.addNegativeNebulaParticle(
+                            point,
+                            MathUtils.getRandomPointInCircle(ZERO, 50f),
+                            MathUtils.getRandomNumberInRange(150f, 300f),
+                            0.3f,
+                            0.5f,
+                            0.5f,
+                            MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                            rgbNeg
+                    );
+                } else {
+                    useNormal = false;
+                    fogIntervalSpecial.advance(amount);
+                    if (fogIntervalSpecial.intervalElapsed()) {
+                        useNormal = true;
+                    }
+                    engine.addNegativeNebulaParticle(
+                            point,
+                            MathUtils.getRandomPointInCircle(ZERO, 35f),
+                            MathUtils.getRandomNumberInRange(75f, 200f),
+                            0.1f,
+                            0.5f,
+                            0.5f,
+                            MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                            specialTwo
+                    );
+                    engine.addNebulaParticle(
+                            point,
+                            MathUtils.getRandomPointInCircle(ZERO, 35f),
+                            MathUtils.getRandomNumberInRange(75f, 200f),
+                            0.1f,
+                            0.5f,
+                            0.5f,
+                            MathUtils.getRandomNumberInRange(2.0f, 3.4f),
+                            specialOne
+                    );
+                }
+            }
+        }
+    }
+
     public static class LinearSRBG {
         LinearSRBG(float R, float G, float B){
             this.R = R;

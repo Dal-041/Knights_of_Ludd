@@ -30,6 +30,7 @@ public class NinayaBoss extends BaseHullMod {
         public ShipAPI ship;
         public ShipAPI escortA = null, escortB = null;
         public String id = "boss_phase_two_modifier";
+        public Utils.FogSpawner escortAFog, escortBFog;
         public NinayaBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
         }
@@ -39,6 +40,8 @@ public class NinayaBoss extends BaseHullMod {
             float hull = ship.getHitpoints();
             if (damageAmount >= hull && !phaseTwo) {
                 phaseTwo = true;
+                escortAFog = new Utils.FogSpawner();
+                escortBFog = new Utils.FogSpawner();
                 ship.setHitpoints(1f);
                 applyDamper(ship, id, 1);
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
@@ -122,6 +125,8 @@ public class NinayaBoss extends BaseHullMod {
                 Vector2f escortASpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 200f, escortFacing + 90);
                 Vector2f escortBSpawn = MathUtils.getPointOnCircumference(ship.getLocation(), 200f, escortFacing - 90);
 
+                escortAFog.spawnFog(amount, 25f, escortASpawn);
+                escortBFog.spawnFog(amount, 25f, escortBSpawn);
 
                 if(phaseTwoTimer > maxTime*2/3){
                     if (escortA == null) {
@@ -182,6 +187,8 @@ public class NinayaBoss extends BaseHullMod {
             );
             engine.spawnDamagingExplosion(spec, ship, location, false);
         }
+
+
     }
 
     public static void applyDamper(ShipAPI ship, String id, float level){
