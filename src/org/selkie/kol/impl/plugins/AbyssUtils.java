@@ -76,16 +76,6 @@ public class AbyssUtils {
             "harbinger_Strike",
             "doom_Attack"
     };
-    //The flagships are spawned separately
-    public static final String[] duskBossSupportingFleet = {
-            "zea_boss_nineveh_Souleater",
-            "zea_boss_nineveh_Souleater",
-            "zea_boss_ninmah_Skinthief",
-            "zea_boss_ninmah_Skinthief",
-            "zea_boss_ninaya_Gremlin",
-            "zea_boss_ninaya_Gremlin",
-            "zea_boss_ninaya_Nightdemon"
-    };
     public static final String[] elysianBossSupportingFleet = {
             "zea_edf_tamamo_Striker",
             "zea_edf_tamamo_Striker"
