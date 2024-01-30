@@ -1,0 +1,63 @@
+{
+    "displayName": "Strike",
+    "fluxCapacitors": 30,
+    "fluxVents": 9,
+    "goalVariant": false,
+    "hullId": "doom",
+    "hullMods": [
+        "adaptive_coils",
+        "armoredweapons",
+    ],
+    "permaMods": [
+        "heavyarmor",
+        "missleracks",
+        "targetingunit",
+    ],
+    "sMods": [
+        "heavyarmor",
+        "missleracks",
+        "targetingunit",
+    ],
+    "suppressedMods": [],
+    "variantId": "zea_boss_doom_Strike",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 002": "typhoon",
+                "WS 001": "typhoon",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 006": "sabot",
+                "WS 004": "sabot",
+                "WS 005": "sabot",
+                "WS 003": "sabot",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 008": "ionpulser",
+                "WS 007": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 009": "pdburst",
+                "WS 011": "pdburst",
+                "WS 012": "pdburst",
+                "WS 010": "pdburst",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

@@ -946,6 +946,56 @@ public class StarficzAIUtils {
         }
     }
 
+
+    public static void stayStill(ShipAPI ship){
+        ship.giveCommand(ShipCommand.DECELERATE, null, 0);
+        ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
+        ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
+        ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
+        ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
+        ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
+        ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
+        ship.blockCommandForOneFrame(ShipCommand.USE_SYSTEM);
+    }
+
+    public static void holdFire(ShipAPI ship){
+        for(WeaponAPI weapon : ship.getAllWeapons()){
+            if(!weapon.isDecorative()){
+                weapon.setForceNoFireOneFrame(true);
+            }
+        }
+    }
+
+
+    public static void applyDamper(ShipAPI ship, String id, float level){
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getHullDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getArmorDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getEmpDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getWeaponDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getEngineDamageTakenMult().modifyMult(id, 0.000001f);
+        stats.getCombatEngineRepairTimeMult().modifyMult(id, 0.000001f);
+        stats.getCombatWeaponRepairTimeMult().modifyMult(id, 0.000001f);
+
+
+        ship.getShield().toggleOff();
+        ship.fadeToColor(id + ship.getId(), new Color(75,75,75,255), 0.1f, 0.1f, level);
+        ship.setJitterUnder(id + ship.getId(), new Color(100,165,255,255), level, 15, 0f, 15f);
+    }
+
+    public static void unapplyDamper(ShipAPI ship, String id){
+        MutableShipStatsAPI stats = ship.getMutableStats();
+        stats.getHullDamageTakenMult().unmodify(id);
+        stats.getArmorDamageTakenMult().unmodify(id);
+        stats.getEmpDamageTakenMult().unmodify(id);
+        stats.getWeaponDamageTakenMult().unmodify(id);
+        stats.getEngineDamageTakenMult().unmodify(id);
+        stats.getCombatEngineRepairTimeMult().unmodify(id);
+        stats.getCombatWeaponRepairTimeMult().unmodify(id);
+        ship.fadeToColor(id + ship.getId(), new Color(75,75,75,255), 0.1f, 0.1f, 0);
+        ship.setJitterUnder(id + ship.getId(), new Color(100,165,255,255), 0, 15, 0f, 15f);
+    }
+
     public static float lowestWeaponAmmoLevel(ShipAPI ship){
         float lowestAmmoLevel = 1f;
         for (WeaponAPI weapon: ship.getAllWeapons()){
