@@ -1,0 +1,71 @@
+{
+  "id": "zea_inferno_shot",
+  "specClass": "missile",
+  "missileType": "PHASE_CHARGE",
+  "onHitEffect": "org.selkie.kol.impl.weapons.HellfireCannonProjectileOnHitEffect",
+  "sprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/projectiles/zea_boss_nian_inferno_canister.png",
+  "size": [ 28, 54 ],
+  "center": [ 14, 27 ],
+  "collisionRadius": 14,
+  "collisionClass": "MISSILE_NO_FF",
+  "explosionColor": [ 255,80,35,255 ],  # purely visual, will get a white additively blended core on top of this color
+  "explosionRadius": 100, # purely visual
+  "fizzleOnReachingWeaponRange": true,
+  "flameoutTime": 0.05, # total time from flameout to full fadeout
+  "noEngineGlowTime": 0.05, # time spent without the engine glow being rendered
+  "fadeTime": 0.05, # fadeout duration
+  "maxFlightTime": 15,
+  "armingTime": 15,
+  "explosionSpec": { "duration": 0.1f, # not visual
+                     "radius": 75,
+                     "coreRadius": 50, # full damage within core radius
+                     "collisionClass": MISSILE_FF,
+                     "collisionClassByFighter": MISSILE_FF },
+  "behaviorSpec": { "behavior": "PROXIMITY_FUSE",
+    #"slowToMaxSpeed":true,
+                    "range": 0,
+                    "explosionSpec": { "duration": 0.12f,
+                                       "radius": 75,
+                                       "coreRadius": 50, # full damage within core radius - at least equal to proximity fuse range
+                                       "collisionClass": PROJECTILE_NO_FF,
+                                       "collisionClassByFighter": PROJECTILE_FIGHTER,
+                                       "particleSizeMin": 4.0,
+                                       "particleSizeRange": 4.0,
+                                       "particleDuration": 1,
+                                       "particleCount": 50,
+                                       "particleColor": [ 105,240,220,255 ],
+                                       "explosionColor": [ 35,80,255,255 ],
+                                       "useDetailedExplosion": true,
+                                       "useDetailedExplosionColorAlpha": true,
+                                       "detailedExplosionRadius": 80,
+                                       "detailedExplosionFlashRadius": 250,
+                                       "detailedExplosionFlashDuration": 0.5,
+                                       "detailedExplosionFlashColorFringe": [ 240,180,80,255 ],
+                                       "detailedExplosionFlashColorCore": [ 155,155,155,255 ],
+                                       "sound": "system_canister_flak_explosion" },
+  },
+  "engineSpec": { "turnAcc": 720,
+                  "turnRate": 180,
+                  "acc": 150,
+                  "dec": 150 },
+  "engineSlots": [ {
+    "id": "ES1",
+    "loc": [ 0, 0 ],
+    "style": "CUSTOM",
+    "styleSpec": {
+      "mode": "QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+      "engineColor": [ 255,75,165,255 ],
+      "contrailDuration": 3,
+      "contrailWidthMult": 1,
+      "contrailWidthAddedFractionAtEnd": -0.5f,  # can be negative. makes trail spread out/narrow at the end
+      "contrailMinSeg": 15, # min segment length, in pixels
+      "contrailMaxSpeedMult": 0.5f,
+      "contrailAngularVelocityMult": 0.5f,
+      "contrailSpawnDistMult": 1, # how far away from engine it starts
+      "contrailColor": [ 255,75,165,150 ],
+      "type": "GLOW" # GLOW or SMOKE; additive or regular blend mode
+    },
+    "width": 10.0,
+    "length": 0,
+    "angle": 180.0 } ],
+}

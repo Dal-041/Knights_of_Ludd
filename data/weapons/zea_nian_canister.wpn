@@ -1,7 +1,7 @@
 {
-  "id": "zea_nian_maingun",
+  "id": "zea_nian_canister",
   "specClass": "projectile",
-  "projectileSpecId": "zea_inferno_shot",
+  "projectileSpecId": "zea_inferno_canister_flak_proj",
   "type": "BALLISTIC",
   "size": "LARGE",
   "displayArcRadius": 25,

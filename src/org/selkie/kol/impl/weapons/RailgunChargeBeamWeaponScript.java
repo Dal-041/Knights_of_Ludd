@@ -1,4 +1,4 @@
-package org.amazigh.foundry.scripts;
+package org.selkie.kol.impl.weapons;
 
 import org.lazywizard.lazylib.MathUtils;
 import com.fs.starfarer.api.Global;

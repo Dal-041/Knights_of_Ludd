@@ -1,0 +1,14 @@
+{
+	"id":"zea_boss_fifthcircle",
+	"type":"STAT_MOD",
+	"aiType":"LIDAR_ARRAY",
+	"statsScript":"org.selkie.kol.impl.shipsystems.FifthCircleStats",
+
+	"useSound":"system_targeting_feed",
+	#"loopSound":"system_targeting_feed_loop",
+	"deactivateSound":"gun_out_of_ammo",
+	"outOfUsesSound":"gun_out_of_ammo",
+
+	"aiHints":{
+	}
+}
