@@ -26,16 +26,51 @@ $faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"Th
 relLevelVengefulKol,RelationshipLevelDesc,"$faction.rel == VENGEFUL
 $faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"You have been deemed an unholy foe. An Inquisitor has been assigned to carry out your termination, which they will name a righteous deed, just and honorable. The Knights' indoctrinal school for squires identifies you as the slavering dretch of every known demon, from Mammon, Moloch, and Belial all the way down to some possibly created just for you.",,
 #END bad,,,,,,
+,,,,,,
+greetingDawnHostile,OpenCommLink,"$faction.id == zea_dawn score:1000
+$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the sense of some burning menace sizing up its targets.",cutCommLink:Cut the comm link,
+greetingDawnFriendly,OpenCommLink,"$faction.id == zea_dawn score:1000
+$faction.friendlyToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
+greetingDawnNeutral,OpenCommLink,"$faction.id == zea_dawn score:1000
+$faction.neutralToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","There is no response, but the Dawntide's menace remains shackled.",,
+greetingDuskHostile,OpenCommLink,"$faction.id == zea_dusk score:1000
+$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
+greetingDuskFriendly,OpenCommLink,"$faction.id == zea_dusk score:1000
+$faction.friendlyToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+greetingDuskNeutral,OpenCommLink,"$faction.id == zea_dusk score:1000
+$faction.neutralToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","There is no response, but the Duskbourne's weapons remain inactive.",,
+greetingEDFHostile,OpenCommLink,"$faction.id == zea_elysians score:1000
+$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
+greetingEDFFriendly,OpenCommLink,"$faction.id == zea_elysians score:1000
+$faction.friendlyToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+greetingEDFNeutral,OpenCommLink,"$faction.id == zea_elysians score:1000
+$faction.neutralToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","There is no response, but the fleet's weapons remain inactive.",,
+,,,,,,
+,,,,,,
 #END relationship level descriptions,,,,,,
 ,,,,,,
 # boss interactions,,,,,,
-,,$customType == zea_boss_station_dusk_1 score:1000,,,,
-#kol_bossA_defenderDesc,TriggerAutomatedDefenses,$faction.id == knights_of_selkie,SalvageDefenderInteraction,"As your $shipOrFleet moves into a close holding orbit, your comms officer murmurs, ""Hardly any bleed at all coming from that station, Captain. If it didn't have mass, we'd never..."" They trail off, squinting at their console.
-
-The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
+zea_BossStationTT_stationOpenDialog,OpenInteractionDialog,"$tag:zea_boss_station_tritachyontag score:1000
+$zea_boss_station_tritachyon score:1000","SalvageGenFromSeed
+ShowDefaultVisual
+FireBest SalvageCheckHostile","As your $shipOrFleet moves into a close holding orbit, your comms officer murmurs, ""Hardly any bleed at all coming from that station, Captain. If it didn't have mass, we'd never..."" They trail off, squinting at their console.",,
+zea_BossStationTT_defender_Desc,TriggerAutomatedDefenses,"$tag:zea_boss_station_tritachyontag score:1000
+$zea_boss_station_tritachyon score:1000",SalvageDefenderInteraction,"The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
 
 ""You have violated an information blackout area. Don't try to run. It'll interfere with the data collection.""",,
-#kol_bossA_postCombatDesc,BeginSalvage,$faction.id == knights_of_selkie !$usable,,"You seize the initiative and order an approach vector before the station's defenders have a chance to throw an more surprises your way. It's when you've closed half the distance to the station that your sensor officer yells out in alarm - a spike in subspace tearing through the display. A moment later the station lights up on your monitor like the Rings of Maxios as whatever technology that was cloaking its signal vanishes from your feeds. Your salvor crew chirps in excitement - not only is the station clearly loaded with technology, it's all active. Your crew chief and science officer cry out in exultation of a wondrous haul.",zea_boss_1_station_1:Continue,
-zea_boss_1_station_1,DialogOptionSelected,$option == zea_boss_1_station_1 ,,"You watch as the station surges and glows and glitters before you with untapped promise - and then one by one each glowing node on the sensor disappears, alarms appearing as internal energy surges buck and burst throughout the station, culminating in a single massive eruption along the station's main axis. Your Science Officer mournfully gawks as their treasure burns and vanishes like active flares speared by a point defense array. The secrecy of whatever was being researched here was clearly worth an entire station's sacrifice, and an educated guess tells you the strange ship you fought had a lot to do with it. You restrain the salvors until you're sure your $shipOrFleet has a clean approach path into the fresh wreckage.",zea_boss_1_station_2:Continue,
-zea_boss_1_station_2,DialogOptionSelected,$option == zea_boss_1_station_2,,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems.",zea_boss_1_station_3:Continue,
-zea_boss_1_station_3,DialogOptionSelected,$option == zea_boss_1_station_3 ,,"However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and protecting them for electromagnetic phenomena. It doesn't take your crew long to locate a magnetic-insulated box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. Annoyingly the Cache is bio-key locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate some intact records about one ""Project Dusk.""",,
+zea_BossStationTT_PostDefenders,BeatDefendersContinue,$tag:zea_boss_station_tritachyontag score:1000,,"You seize the initiative and order an approach vector before the station's defenders have a chance to throw any more surprises your way. It's when you've closed half the distance to the station that your sensor officer yells out in alarm - a spike in subspace tearing through the display. A moment later the station lights up on your monitor like the Rings of Maxios as whatever technology that was cloaking its signal vanishes from your feeds. Your salvor crew chirps in excitement - not only is the station clearly loaded with technology, it's all active. Your crew chief and science officer cry out in exultation of a wondrous haul.",0:salBeatDefendersContinue:Move in!,
+zea_BossStationTT_Salvage,BeginSalvage,$tag:zea_boss_station_tritachyontag score:1000,,"You watch as the station glows and glitters before you with untapped promise - and then one by one each glowing node on the sensor disappears, alarms appearing as internal energy surges flare throughout the station, culminating in a single massive eruption along the station's main axis.
+Your Science Officer mournfully gawks as their treasure vanishes like swarmers wandering by a flak array. The secrecy of whatever was being researched here was clearly worth an entire station's sacrifice, and an educated guess tells you the strange ship you fought had a lot to do with it. 
+
+You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.",0:zea_bossTTStationpage2:Get me a full report.,
+zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and protecting them for electromagnetic phenomena. 
+
+It doesn't take your crew long to locate a magnetic-insulated box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3: Let them come.,
+zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
+,,,,,,
