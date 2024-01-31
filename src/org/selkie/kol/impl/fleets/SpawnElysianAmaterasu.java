@@ -62,7 +62,7 @@ public class SpawnElysianAmaterasu {
 		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_silence"))
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getCustomEntitiesWithTag("edf_Hypershunt").get(0))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();

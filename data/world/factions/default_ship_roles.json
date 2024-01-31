@@ -37,11 +37,11 @@
 		"zea_dawn_bixi_Abyssal":100,
 		"zea_dawn_bixi_Nametaker":100,
 		"zea_dawn_tianma_Hungry":100,
-		"zea_boss_ninmah_Skinthief":0,
 		"zea_dusk_hashihime_Strangler":100,
 		"zea_dusk_onryo_Breakthrough":100,
 		"zea_edf_mizuchi_Arsenal_Wing":100,
 		"zea_edf_seiryu_Attack_Bomber":100,
+		"zea_boss_ninmah_Undoer":1,
 	},
 	"combatMedium":{
 		"kol_snowdrop_Standard":1,
@@ -60,7 +60,6 @@
 		"zea_dusk_funayurei_Chivalrous":50,
 		"zea_dusk_shiryo_Leecher":40,
 		"zea_edf_suzaku_Attack_Bomber":40,
-
 	},
 	"combatSmall":{
 		"kol_protea_Brawler":1,
@@ -69,7 +68,6 @@
 		"kol_sundew_Standard":1,
 		"kol_sundew_Onager":1,
 		"zea_boss_ninaya_Nightdemon":0,
-		"zea_boss_ninaya_Gremlin":0,
 		"zea_dusk_ikiryo_Draconic":40,
 		"zea_edf_tamamo_Striker":0,
 		"zea_edf_wani_Attack":10,

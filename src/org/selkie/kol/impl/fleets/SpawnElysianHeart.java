@@ -3,6 +3,7 @@ package org.selkie.kol.impl.fleets;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
+import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
@@ -52,6 +53,12 @@ public class SpawnElysianHeart {
 		* @return
 		*/
 		String variant = "zea_boss_corruptingheart_Unholy";
+		SectorEntityToken token;
+		if (Math.random() > 0.5f) {
+			token = Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_abyss");
+		} else {
+			token = Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_gaze");
+		}
 		CampaignFleetAPI elysianHeartFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Corrupting Heart")
 		        .setFleetFaction(PrepareAbyss.elysianID)
@@ -62,7 +69,7 @@ public class SpawnElysianHeart {
 		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_abyss"))
+				.setSpawnLocation(token)
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();

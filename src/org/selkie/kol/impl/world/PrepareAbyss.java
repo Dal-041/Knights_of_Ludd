@@ -23,6 +23,7 @@ import org.selkie.kol.impl.terrain.AbyssEventHorizon;
 import java.awt.*;
 import java.util.Random;
 
+import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
 import static org.selkie.kol.impl.plugins.AbyssUtils.*;
 
@@ -84,7 +85,7 @@ public class PrepareAbyss {
     	StarSystemAPI system = Global.getSector().createStarSystem(elysiaSysName);
     	system.getLocation().set((int)posX, (int)posY);
     	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_elysia.png");
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_zea_elysia_theme");
+		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_theme");
 
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
@@ -189,6 +190,15 @@ public class PrepareAbyss {
 		system.addAsteroidBelt(elysia, 200, 4024, 1024, 40, 30, "zea_asteroidBelt", null);
 		system.addAsteroidBelt(elysia, 200, 4536, 1024, 40, 40, "zea_asteroidBelt", null);
 
+		//Placed entities
+		SectorEntityToken hypershunt = system.addCustomEntity("zea_edf_silence_tap", "Coronal Hypershunt", "zea_edf_coronal_tap", Factions.NEUTRAL);
+		hypershunt.setCircularOrbitPointingDown(silence, (float)Math.random() * 360f, silence.getRadius() + 500f, 1111);
+		hypershunt.addTag("edf_Hypershunt");
+		SectorEntityToken edfResearchStation = addSalvageEntity(system, "zea_research_station_elysia", PrepareAbyss.elysianID);
+		edfResearchStation.setCircularOrbitPointingDown(gaze, (float)Math.random() * 360f, gaze.getRadius() + 100f, 51);
+		edfResearchStation.addTag("edf_Headquarters");
+
+		//Random loot
         SectorEntityToken derelict1 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict1.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3100, 20);
         SectorEntityToken derelict2 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
@@ -239,7 +249,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.SYSTEM_CUT_OFF_FROM_HYPER);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dusk.png");
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
+		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
 		system.getLocation().set(2100, -5200);
 		SectorEntityToken center = system.initNonStarCenter();
@@ -345,7 +355,7 @@ public class PrepareAbyss {
 					"terrain", "nebula_zea_dawntide",
 					4, 4, "nebula_zea_abyss", StarAge.AVERAGE);
 
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
+		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
 
 		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
 		if (Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
@@ -459,7 +469,7 @@ public class PrepareAbyss {
 		} else {
 			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bh_duskbh2.png");
 		}
-		system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
+		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.THEME_SPECIAL);

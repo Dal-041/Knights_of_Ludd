@@ -12,6 +12,7 @@ import org.dark.shaders.util.TextureData;
 import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.kol.impl.world.PrepareDarkDeeds;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
 import org.selkie.kol.fleets.SpawnInvictus;
@@ -70,6 +71,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
+			PrepareDarkDeeds.andBegin();
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
 			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);
