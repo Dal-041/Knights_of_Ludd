@@ -77,7 +77,7 @@ public class SpawnTT1Boss {
 		String variant = "zea_boss_ninaya_Nightdemon";
 		SectorEntityToken token = Global.getSector().getStarSystem("Unknown Location").createToken(11111,11111); //cache loc
 		CampaignFleetAPI TT1BossFleet = MagicCampaign.createFleetBuilder()
-		        .setFleetName("Unidentified Fleet")
+		        .setFleetName("Unidentified Vessel")
 		        .setFleetFaction(Factions.TRITACHYON)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("TTS Ninaya")

@@ -51,7 +51,7 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
         //Misc.addDefeatTrigger(fleet, "PK14thDefeated");
 
         fleet.setNoFactionInName(true);
-        fleet.setName("Unidentified Defender");
+        fleet.setName("Unidentified Vessel");
 
 
         fleet.getFleetData().clear();
