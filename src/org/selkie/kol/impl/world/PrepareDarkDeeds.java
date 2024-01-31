@@ -1,6 +1,8 @@
 package org.selkie.kol.impl.world;
 
 import java.awt.Color;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Random;
 
 import com.fs.starfarer.api.campaign.*;
@@ -47,6 +49,7 @@ public class PrepareDarkDeeds {
 
     public static String NASCENT_WELL_KEY = "$zea_TT3BlackSite_well";
     public static String DEFEATED_NINEVEH_KEY = "$zea_defeatedNineveh";
+    public static final String TTBOSS2_STATION_KEY = "$zea_boss_station_tritachyon";
     public static final String ninmahTritachID = "zea_tritachyon";
 
     public static void andBegin() {
@@ -79,9 +82,10 @@ public class PrepareDarkDeeds {
         token = Global.getSector().getStarSystem("Corvus").getPlanets().get(2);
 
         CustomCampaignEntityAPI stationBoss = token.getContainingLocation().addCustomEntity("zea_boss_station_tritachyon", "Suspicious Research Station", "zea_boss_station_tritachyon", Factions.NEUTRAL);
+        stationBoss.getMemoryWithoutUpdate().set(TTBOSS2_STATION_KEY, true);
+        stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
         stationBoss.setCircularOrbitPointingDown(token, 0, 150f, 60);
-        stationBoss.getMemoryWithoutUpdate().set("$zea_boss_station_tritachyon", true);
-        Misc.setDefenderOverride(stationBoss, new DefenderDataOverride(ninmahTritachID, 1f, 40, 40, 10));
+        Misc.setDefenderOverride(stationBoss, new DefenderDataOverride(Factions.TRITACHYON, 1f, 20, 20, 1)); // doesnt matter, will be overwriten by plugin
         stationBoss.setDiscoverable(true);
     }
 
@@ -265,11 +269,27 @@ public class PrepareDarkDeeds {
     }
 
     public static void addTT3Fleet(SectorEntityToken rock, StarSystemAPI system) {
+        Map<String, Integer> skills = new HashMap<>();
+        skills.put(Skills.HELMSMANSHIP, 2);
+        skills.put(Skills.COMBAT_ENDURANCE, 2);
+        skills.put(Skills.FIELD_MODULATION, 2);
+        skills.put(Skills.TARGET_ANALYSIS, 2);
+        skills.put(Skills.SYSTEMS_EXPERTISE, 2);
+        skills.put(Skills.GUNNERY_IMPLANTS, 2);
+        skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
+
         PersonAPI TT3BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setPersonality(Personalities.AGGRESSIVE)
                 .setLevel(7)
-                .setSkillPreference(OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE)
+                .setSkillLevels(skills)
                 .create();
+
+        TT3BossCaptain.getStats().setSkipRefresh(true);
+        TT3BossCaptain.getStats().setSkillLevel(Skills.PHASE_CORPS, 1);
+        TT3BossCaptain.getStats().setSkillLevel(Skills.ELECTRONIC_WARFARE, 1);
+        TT3BossCaptain.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
+        TT3BossCaptain.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
+        TT3BossCaptain.getStats().setSkipRefresh(false);
 
         String variant = "zea_boss_nineveh_Souleater";
 

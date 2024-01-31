@@ -17,17 +17,33 @@ import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.world.PrepareDarkDeeds;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnTT1Boss {
 	
 	public static boolean SpawnTT1Boss() {
 
+		Map<String, Integer> skills = new HashMap<>();
+		skills.put(Skills.HELMSMANSHIP, 2);
+		skills.put(Skills.COMBAT_ENDURANCE, 2);
+		skills.put(Skills.FIELD_MODULATION, 2);
+		skills.put(Skills.TARGET_ANALYSIS, 2);
+		skills.put(Skills.SYSTEMS_EXPERTISE, 2);
+		skills.put(Skills.GUNNERY_IMPLANTS, 2);
+		skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
+
 		PersonAPI TT1BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
 				.setLevel(7)
-				.setPersonality(Personalities.RECKLESS)
-				.setSkillPreference(OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_NO_MISSILE_YES_DEFENSE)
+				.setPersonality(Personalities.AGGRESSIVE)
+				.setSkillLevels(skills)
 				.create();
+
+		TT1BossCaptain.getStats().setSkipRefresh(true);
+		TT1BossCaptain.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
+		TT1BossCaptain.getStats().setSkipRefresh(false);
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort

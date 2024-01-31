@@ -106,6 +106,7 @@ public class NinevehBoss extends BaseHullMod {
                 doomCaptain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
                 doomCaptain.setFaction(Factions.REMNANTS);
                 doomCaptain.setAICoreId(Commodities.ALPHA_CORE);
+                doomCaptain.getStats().setSkipRefresh(true);
                 doomCaptain.getStats().setLevel(7);
                 //captain.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
                 //captain.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
@@ -120,12 +121,14 @@ public class NinevehBoss extends BaseHullMod {
                 //captain.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
                 doomCaptain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
                 doomCaptain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
+                doomCaptain.getStats().setSkipRefresh(false);
 
                 // specially tuned for harbinger ships
                 PersonAPI harbingerCaptain = Global.getSettings().createPerson();
                 harbingerCaptain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
                 harbingerCaptain.setFaction(Factions.REMNANTS);
                 harbingerCaptain.setAICoreId(Commodities.ALPHA_CORE);
+                doomCaptain.getStats().setSkipRefresh(true);
                 harbingerCaptain.getStats().setLevel(7);
                 //captain.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
                 //captain.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
@@ -140,12 +143,14 @@ public class NinevehBoss extends BaseHullMod {
                 //captain.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
                 harbingerCaptain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
                 harbingerCaptain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
+                doomCaptain.getStats().setSkipRefresh(false);
 
                 // specially tuned for hyperion ships
                 PersonAPI hyperionCaptain = Global.getSettings().createPerson();
                 hyperionCaptain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
                 hyperionCaptain.setFaction(Factions.REMNANTS);
                 hyperionCaptain.setAICoreId(Commodities.ALPHA_CORE);
+                doomCaptain.getStats().setSkipRefresh(true);
                 hyperionCaptain.getStats().setLevel(7);
                 hyperionCaptain.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
                 hyperionCaptain.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
@@ -160,6 +165,7 @@ public class NinevehBoss extends BaseHullMod {
                 hyperionCaptain.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
                 hyperionCaptain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
                 //captain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
+                doomCaptain.getStats().setSkipRefresh(false);
 
 
                 CombatFleetManagerAPI fleetManager = engine.getFleetManager(ship.getOriginalOwner());

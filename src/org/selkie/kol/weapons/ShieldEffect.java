@@ -100,7 +100,6 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
                 ship.getFluxTracker().showOverloadFloatyIfNeeded("Shield online", Misc.getPositiveHighlightColor(), 2, true);
             }
         }
-
     }
 
     public boolean wantToShield(float amount){
@@ -204,10 +203,10 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
         float highDamage = 0.020f; // 2.0% hull damage
 
         // shield based on the current flux level and shield timer
-        boolean wantToShield = (hullDamageIfNoShield + armorDamageIfNoShield + empDamageIfNoShield/3) > ship.getHitpoints() * (alpha * highDamage + (1 - alpha) * lowDamage);
+        boolean wantToShield = (hullDamageIfNoShield + armorDamageIfNoShield + empDamageIfNoShield/3) > ship.getHitpoints() * Misc.interpolate(lowDamage, highDamage, alpha);
 
         // if the damage is high enough to shield, but flux is high/ shield timer is low, armor tank KE
-        if (wantToShield && shieldHardFluxSavedIfNoShield/(hullDamageIfNoShield + armorDamageIfNoShield)  > (alpha * 2f + (1 - alpha) * 7f))
+        if (wantToShield && shieldHardFluxSavedIfNoShield/(hullDamageIfNoShield + armorDamageIfNoShield)  > Misc.interpolate(7f,2f, alpha))
             wantToShield = false;
 
         float emergencyArcSaved = Math.min(ship.getShield().getUnfoldTime() / (ship.getShield().getArc() / 80), ship.getShield().getUnfoldTime());
