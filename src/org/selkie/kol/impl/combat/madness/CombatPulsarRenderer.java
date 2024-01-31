@@ -1,5 +1,10 @@
 package org.selkie.kol.impl.combat.madness;
 
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.BaseCombatLayeredRenderingPlugin;
+import com.fs.starfarer.api.combat.CombatEngineLayers;
+import com.fs.starfarer.api.combat.CombatEntityAPI;
+import com.fs.starfarer.api.combat.ViewportAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.terrain.PulsarRenderer;
 import com.fs.starfarer.api.impl.campaign.terrain.RangeBlockerUtil;
@@ -11,8 +16,9 @@ import java.awt.*;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.util.EnumSet;
 
-public class CombatPulsarRenderer {
+public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
     public static interface CombatPulsarRendererDelegate {
         float getPulsarInnerRadius();
         float getPulsarOuterRadius();
@@ -28,6 +34,8 @@ public class CombatPulsarRenderer {
 
         float getPulsarScrollSpeed();
     }
+
+    protected float alphaMult = 0.4f;
 
     private CombatPulsarRendererDelegate delegate;
     private float texOffset = 0f;
@@ -45,8 +53,20 @@ public class CombatPulsarRenderer {
         this.currAngle = currAngle;
     }
 
+    protected EnumSet<CombatEngineLayers> layers = EnumSet.of(CombatEngineLayers.BELOW_SHIPS_LAYER);
+    @Override
+    public EnumSet<CombatEngineLayers> getActiveLayers() {
+        return layers;
+    }
 
+    public void init(CombatEntityAPI entity) {
+        super.init(entity);
+    }
+
+    @Override
     public void advance(float amount) {
+        if (Global.getCombatEngine().isPaused()) return;
+
         //float days = Global.getSector().getClock().convertToDays(amount);
         //texOffset += days * delegate.getFlareScrollSpeed();
         float imageWidth = delegate.getPulsarTexture().getWidth();
@@ -66,8 +86,10 @@ public class CombatPulsarRenderer {
     transient private FloatBuffer vertexBuffer, textureBuffer;
     transient private ByteBuffer colorBuffer;
     transient private boolean rendered = false;
-    public void render(float alphaMult) {
-        if (alphaMult <= 0) return;
+
+    public void render(CombatEngineLayers layer, ViewportAPI viewport) {
+        this.alphaMult = viewport.getAlphaMult();
+        if (viewport.getAlphaMult() <= 0) return;
 
         float distClose = delegate.getPulsarInnerRadius();
         float distFar = delegate.getPulsarOuterRadius();

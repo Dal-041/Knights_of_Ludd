@@ -59,7 +59,7 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
 
 
         FleetMemberAPI member = fleet.getFleetData().addFleetMember("zea_boss_ninmah_Undoer");
-        //member.setShipName("HSS Sentinel");
+        member.setShipName("TTS Ninmah");
         member.setId("tt2boss_" + random.nextLong());
 
         Map<String, Integer> skills = new HashMap<>();

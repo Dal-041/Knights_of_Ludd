@@ -33,7 +33,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected String name = "Pulsar Wave";
 
     //Terrain plugin
-    public float PULSAR_ARC = 120f; //1 / ((float) Math.PI * 2f) * 360f;
+    public float PULSAR_ARC = 90f; //1 / ((float) Math.PI * 2f) * 360f;
     public float visMult = 1f;
     public boolean single = false;
     public String nameTooltip = "Pulsar Wave";
@@ -43,13 +43,14 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     protected SpriteAPI flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
     protected SpriteAPI auroraTexture = null;
+    protected BaseCombatLayeredRenderingPlugin CombatLayer;
     Color color = null;
 
     protected CombatPulsarRenderer flare1, flare2;
     protected CombatAuroraRenderer renderer;
     protected CombatFlareManager flareManager;
     protected CombatPulsarCorona.CombatCoronaParams params;
-    protected CombatRangeBlockerUtil blocker = null;
+    protected CombatRangeBlockerUtil blocker = new CombatRangeBlockerUtil(1, 3000f);
 
     protected float pulsarAngle = (float) Math.random() * 360f;
     protected float pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
@@ -84,7 +85,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     public void init() {
         if (!inited) {
-            this.params = new CombatPulsarCorona.CombatCoronaParams(4000f, ship.getCollisionRadius()+50f, ship, 500f, 1f, 250f);
+            this.params = new CombatPulsarCorona.CombatCoronaParams(3000f, ship.getCollisionRadius()+250f, ship, 500f, 1f, 250f);
             this.single = false;
             name = "The Blizzard";
             params.name = "The Blizzard";
@@ -163,14 +164,14 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
 
         if (isNearViewport(pulsarAngle, viewport)) {
-            flare1.render(viewport.getAlphaMult());
+            flare1.render(layer, viewport); //viewport.getAlphaMult()
         }
 //		else {
 //			System.out.println("SKIP1");
 //		}
 
         if (!single && isNearViewport(pulsarAngle + 180f, viewport)) {
-            flare2.render(viewport.getAlphaMult());
+            flare2.render(layer, viewport);
         }
 //		else {
 //			System.out.println("SKIP2");
@@ -501,7 +502,6 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
 
     public CombatRangeBlockerUtil getPulsarBlocker() {
-        //return null;
         return blocker;
     }
 
