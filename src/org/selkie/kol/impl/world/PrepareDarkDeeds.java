@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Random;
 
 import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.ids.*;
@@ -44,6 +45,7 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.SpawnTT1Boss;
 
 import static org.selkie.kol.impl.fleets.AbyssalFleetManager.copyFleetMembers;
+import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class PrepareDarkDeeds {
 
@@ -272,15 +274,22 @@ public class PrepareDarkDeeds {
         Map<String, Integer> skills = new HashMap<>();
         skills.put(Skills.HELMSMANSHIP, 2);
         skills.put(Skills.COMBAT_ENDURANCE, 2);
+        skills.put(Skills.IMPACT_MITIGATION, 2);
+        skills.put(Skills.DAMAGE_CONTROL, 2);
         skills.put(Skills.FIELD_MODULATION, 2);
         skills.put(Skills.TARGET_ANALYSIS, 2);
         skills.put(Skills.SYSTEMS_EXPERTISE, 2);
         skills.put(Skills.GUNNERY_IMPLANTS, 2);
-        skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
 
         PersonAPI TT3BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
+                .setIsAI(true)
+                .setAICoreType("alpha_core")
+                .setPortraitId("zea_boss_alphaplus")
+                .setLevel(8)
+                .setFirstName("Alpha")
+                .setLastName("(+)")
+                .setGender(FullName.Gender.ANY)
                 .setPersonality(Personalities.AGGRESSIVE)
-                .setLevel(7)
                 .setSkillLevels(skills)
                 .create();
 
@@ -294,13 +303,13 @@ public class PrepareDarkDeeds {
         String variant = "zea_boss_nineveh_Souleater";
 
         CampaignFleetAPI TT3BossFleet = MagicCampaign.createFleetBuilder()
-                .setFleetName("Unidentified Fleet")
+                .setFleetName("Black Site Fleet")
                 .setFleetFaction(Factions.TRITACHYON)
                 .setFleetType(FleetTypes.TASK_FORCE)
                 .setFlagshipName("TTS Nineveh")
                 .setFlagshipVariant(variant)
                 .setCaptain(TT3BossCaptain)
-                .setMinFP(175) //support fleet
+                .setMinFP(175) //Tritach fleet
                 .setQualityOverride(5f)
                 .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
                 .setSpawnLocation(rock)
@@ -325,7 +334,7 @@ public class PrepareDarkDeeds {
         );
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
-        params.officerNumberMult = 1f;
+        params.officerNumberMult = 3f;
         //params.officerLevelBonus = 0;
         params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_MIXED;
         params.random = new Random();
@@ -345,6 +354,9 @@ public class PrepareDarkDeeds {
         TT3BossFleet.getMemoryWithoutUpdate().set("$zea_nineveh", true);
 
         TT3BossFleet.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
+        TT3BossFleet.addTag(excludeTag);
 
 
 //      TT3BossFleet.clearAbilities();

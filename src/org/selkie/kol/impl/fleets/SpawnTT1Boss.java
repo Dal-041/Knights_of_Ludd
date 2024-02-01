@@ -2,6 +2,7 @@ package org.selkie.kol.impl.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
@@ -12,6 +13,7 @@ import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.AICores;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
@@ -29,15 +31,22 @@ public class SpawnTT1Boss {
 		Map<String, Integer> skills = new HashMap<>();
 		skills.put(Skills.HELMSMANSHIP, 2);
 		skills.put(Skills.COMBAT_ENDURANCE, 2);
+		skills.put(Skills.IMPACT_MITIGATION, 2);
+		skills.put(Skills.DAMAGE_CONTROL, 2);
 		skills.put(Skills.FIELD_MODULATION, 2);
 		skills.put(Skills.TARGET_ANALYSIS, 2);
 		skills.put(Skills.SYSTEMS_EXPERTISE, 2);
-		skills.put(Skills.GUNNERY_IMPLANTS, 2);
 		skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
 
 		PersonAPI TT1BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
-				.setLevel(7)
-				.setPersonality(Personalities.AGGRESSIVE)
+				.setIsAI(true)
+				.setAICoreType("alpha_core")
+				.setPortraitId("zea_boss_alphaplus")
+				.setLevel(8)
+				.setFirstName("Alpha")
+				.setLastName("(+)")
+				.setGender(FullName.Gender.ANY)
+				.setPersonality(Personalities.RECKLESS) // With the Ninaya's flux stats Reckless will still back off enough
 				.setSkillLevels(skills)
 				.create();
 
@@ -105,7 +114,7 @@ public class SpawnTT1Boss {
 		//fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true); // so it keeps transponder on
 		TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
 		TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
-		TT1BossFleet.getMemoryWithoutUpdate().set("$zea_nineveh", true);
+		TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
 
 		TT1BossFleet.getFleetData().sort();
 
@@ -188,7 +197,7 @@ public class SpawnTT1Boss {
 					Misc.setSalvageSpecial(entity, data);
 
 					dialog.setInteractionTarget(entity);
-					RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_AfterNinevehDefeat");
+					RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_AfterNinayaDefeat");
 					dialog.setPlugin(plugin);
 					plugin.init(dialog);
 				}

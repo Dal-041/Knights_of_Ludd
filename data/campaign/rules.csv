@@ -64,17 +64,48 @@ zea_BossStationTT_defender_Desc,TriggerAutomatedDefenses,"$tag:zea_boss_station_
 $zea_boss_station_tritachyon score:1000",SalvageDefenderInteraction,"The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
 
 ""You have violated an information blackout area. Don't try to run. It'll interfere with the data collection.""",,
-zea_BossStationTT_PostDefenders,BeatDefendersContinue,$tag:zea_boss_station_tritachyontag score:1000,,"You seize the initiative and order an approach vector before the station's defenders have a chance to throw any more surprises your way. It's when you've closed half the distance to the station that your sensor officer yells out in alarm - a spike in subspace tearing through the display. A moment later the station lights up on your monitor like the Rings of Maxios as whatever technology that was cloaking its signal vanishes from your feeds. Your salvor crew chirps in excitement - not only is the station clearly loaded with technology, it's all active. Your crew chief and science officer cry out in exultation of a wondrous haul.",0:salBeatDefendersContinue:Move in!,
-zea_BossStationTT_Salvage,BeginSalvage,$tag:zea_boss_station_tritachyontag score:1000,,"You watch as the station glows and glitters before you with untapped promise - and then one by one each glowing node on the sensor disappears, alarms appearing as internal energy surges flare throughout the station, culminating in a single massive eruption along the station's main axis.
-Your Science Officer mournfully gawks as their treasure vanishes like swarmers wandering by a flak array. The secrecy of whatever was being researched here was clearly worth an entire station's sacrifice, and an educated guess tells you the strange ship you fought had a lot to do with it. 
+zea_BossStationTT_PostDefenders,BeatDefendersContinue,$tag:zea_boss_station_tritachyontag score:1000,,"You seize the initiative and order an approach vector before the station's defenders have a chance to throw any more surprises your way.
+
+It's when you've closed half the distance to the station that your sensor officer yells out in alarm - a spike in subspace tearing through the display. A moment later the station lights up on your monitor like the Rings of Maxios as whatever technology that was cloaking its signal dispels from your feeds. Your salvor crew chirps in excitement - not only is the station clearly loaded with technology, it's all active. Your crew chief and science officer cry out in exultation of the record haul.",0:salBeatDefendersContinue:Move in!,
+zea_BossStationTT_Salvage,BeginSalvage,$tag:zea_boss_station_tritachyontag score:1000,,"You watch as the station glows and glitters before you with untapped promise - and then one by one each glowing node on the sensor disappears, alarms appearing as energy surges flare throughout the station, culminating in a single massive eruption along the station's main axis that shatters it utterly.
+
+Your officers mournfully gawk as their treasure vanishes like swarmers meandering into a flak field. The secrecy of whatever was being researched here was clearly worth the entire station's sacrifice, and an educated guess tells you the strange ship you fought had a lot to do with it. 
 
 You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.",0:zea_bossTTStationpage2:Get me a full report.,
-zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and protecting them for electromagnetic phenomena. 
+zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments. 
 
-It doesn't take your crew long to locate a magnetic-insulated box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
+It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
 zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
 ,,,,,,
-zea_BossTT3Defeated,zea_AfterNinevehDefeat,,,Congratulations! *Clap clap*,0:zea_bossTT3salvage:Let's finish what we came for.,
-zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3salvage,SalvageEntity performSalvage,,,
-zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,Congratulations! *Clap clap*,0:zea_bossTT1salvage:Let's finish what we came for.,
-zea_BossTT1Defeated2,DialogOptionSelected,$option == zea_bossTT1salvage,SalvageEntity performSalvage,,,
+zea_BossTT1Encounted,BeginFleetEncounter,"$zea_ninaya score:1000
+$global.gaPZ_scannedZiggurat",,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic. A comm request comes through from the strange vessel and your comms officer brings it to your display. 
+
+""INTERLOPER. YOU HAVE COME FOR WHAT IS NOT YOURS. POWER DOWN AND YOU WILL NOT BE UNNECESSARILY HARMED.""
+
+The link cuts. A warning or a threat, and from a fully coherent AI core. Great. Perhaps the ship that didn't speak was preferrable. Shaking off these thoughts, you issue the orders to your bridge crew.",,
+zea_BossTT1EncountedNoZig,BeginFleetEncounter,"$zea_ninaya score:1000
+!$global.gaPZ_scannedZiggurat",,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic.
+
+There appear to be small, bright EM sources, ""-Only partially overlapping the visual spectrum,"" your sensors officer reports. They orbit with uncanny motion around the strange vessel. Your bridge crew murmurs speculation between their stations: some kind of point defense field? Microsat thruster bursts? The speculation is far from concensus. A ping from the comm panel rings out before you can ponder further.
+
+""INTERLOPER. YOU HAVE COME FOR WHAT IS NOT YOURS. POWER DOWN AND YOU WILL NOT BE UNNECESSARILY HARMED.""
+
+The link cuts as abruptly as it began. A threat from a fully coherent AI core. Great. A moment goes by but your attention lingers on some far away sound - as if catching a melody on the wind. When you attempt to focus on the harmony the impression evaporates as quickly as it came. Gathering yourself, you issue the orders to your bridge crew.",,
+zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volumn, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.",0:zea_bossTT1defeated:Let's get what we came for.,
+zea_BossTT1Defeated2,DialogOptionSelected,$option == zea_bossTT1defeated,DismissDialog,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+,,,,,,
+zea_BossTT3Encounted,BeginFleetEncounter,"$zea_nineveh score:1000",,"The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
+
+The small, bright motes orbiting the vessel are but an afterthought before the Tri-Tachyon defense fleet. Your tactical thought processes are interrupted by your comm panel lighting up.
+
+""POWER DOWN AND YOU WILL NOT BE UNNECESSARILY HARMED.""
+
+Short, to the point, and backed up by an armada's firepower - if you weren't on the receiving end you might like their style. Wasting no time, you begin issuing tactical orders to your bridge crew.",,
+zea_BossTT3Defeated,zea_AfterNinevehDefeat,,,"The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and the fresh wreckage in high orbit for light years in any direction.",0:zea_bossTT3defeated:What was theirs is now ours.,
+zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3defeated,DismissDialog,,,

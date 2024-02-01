@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.world;
+package org.selkie.kol.impl.fleets;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,6 +7,7 @@ import java.util.Random;
 import com.fs.starfarer.api.campaign.AICoreOfficerPlugin;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
@@ -22,6 +23,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.Sal
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.world.PrepareDarkDeeds;
 
 public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageDefenderModificationPlugin {
 
@@ -53,7 +55,6 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
         fleet.setNoFactionInName(true);
         fleet.setName("Unidentified Vessel");
 
-
         fleet.getFleetData().clear();
         fleet.getFleetData().setShipNameRandom(random);
 
@@ -63,17 +64,24 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
         member.setId("tt2boss_" + random.nextLong());
 
         Map<String, Integer> skills = new HashMap<>();
+        skills.put(Skills.HELMSMANSHIP, 2);
+        skills.put(Skills.COMBAT_ENDURANCE, 2);
         skills.put(Skills.IMPACT_MITIGATION, 2);
         skills.put(Skills.DAMAGE_CONTROL, 2);
         skills.put(Skills.FIELD_MODULATION, 2);
         skills.put(Skills.TARGET_ANALYSIS, 2);
         skills.put(Skills.SYSTEMS_EXPERTISE, 2);
         skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
-        skills.put(Skills.POLARIZED_ARMOR, 2);
 
         PersonAPI TT2BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
+                .setIsAI(true)
+                .setAICoreType("alpha_core")
+                .setPortraitId("zea_boss_alphaplus")
+                .setLevel(8)
+                .setFirstName("Alpha")
+                .setLastName("(+)")
+                .setGender(FullName.Gender.ANY)
                 .setPersonality(Personalities.AGGRESSIVE)
-                .setLevel(7)
                 .setSkillLevels(skills)
                 .create();
 
