@@ -182,6 +182,23 @@ public class LidarStats extends BaseShipSystemScript {
 				}
 				needsUnapply = false;
 			}
+
+		}
+
+		if(state == State.IN){
+			Color glowColor = WEAPON_GLOW;
+
+			float lidarRange = 500;
+			for (WeaponAPI w : ship.getAllWeapons()) {
+				if (!w.isDecorative() && w.getSlot().isTurret() &&
+						(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
+					lidarRange = Math.max(lidarRange, w.getRange());
+					w.setGlowAmount(effectLevel, glowColor);
+				}
+			}
+			lidarRange += 100f;
+			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange);
+		} else{
 			stats.getBeamWeaponRangeBonus().unmodify("lidararray");
 		}
 		
@@ -202,18 +219,7 @@ public class LidarStats extends BaseShipSystemScript {
 			}
 		}
 		
-		Color glowColor = WEAPON_GLOW;
-		
-		float lidarRange = 500;
-		for (WeaponAPI w : ship.getAllWeapons()) {
-			if (!w.isDecorative() && w.getSlot().isTurret() &&
-					(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && w.getSize() == WeaponSize.LARGE) {
-				lidarRange = Math.max(lidarRange, w.getRange());
-				w.setGlowAmount(effectLevel, glowColor);
-			}
-		}
-		lidarRange += 100f;
-		stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange);
+
 //		for (WeaponAPI w : ship.getAllWeapons()) {
 //			if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
 //				if (state == State.IN) {

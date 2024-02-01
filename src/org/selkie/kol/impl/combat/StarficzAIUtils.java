@@ -9,10 +9,7 @@ import com.fs.starfarer.api.util.Pair;
 import com.fs.starfarer.combat.entities.BallisticProjectile;
 import com.fs.starfarer.combat.entities.MovingRay;
 import com.fs.starfarer.combat.entities.PlasmaShot;
-import org.lazywizard.lazylib.CollisionUtils;
-import org.lazywizard.lazylib.FastTrig;
-import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
+import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -740,7 +737,21 @@ public class StarficzAIUtils {
 
         float degreeDelta = 5f;
 
-        List<Vector2f> potentialPoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), ship.getCollisionRadius()*2, (int) (360f/degreeDelta), 0);
+        List<Vector2f> potentialPoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), 1000f, (int) (360f/degreeDelta), 0);
+        CollectionUtils.CollectionFilter<Vector2f> filterBorder = new CollectionUtils.CollectionFilter<Vector2f>() {
+            @Override
+            public boolean accept(Vector2f point) {
+                if(point.getX() > (Global.getCombatEngine().getMapWidth()/2 - 200f) || point.getX() < (200f - Global.getCombatEngine().getMapWidth()/2))
+                    return false;
+                else if(point.getY() > (Global.getCombatEngine().getMapHeight()/2 - 200f) || point.getY() < (200f - Global.getCombatEngine().getMapHeight()/2))
+                    return false;
+                else
+                    return true;
+            }
+        };
+
+
+        potentialPoints = CollectionUtils.filter(potentialPoints, filterBorder);
         Vector2f safestPoint = null;
         float furthestPointSumDistance = 0;
         List<ShipAPI> enemies = AIUtils.getNearbyEnemies(ship, 3000f);
@@ -767,6 +778,7 @@ public class StarficzAIUtils {
         float lowestDPS = Float.POSITIVE_INFINITY;
         float highestDPSAngle = 0;
         float maxRange = 0;
+        float minRange = Float.POSITIVE_INFINITY;
 
         while(currentRelativeAngle <= 360){
             float potentialDPS = 0;
@@ -775,7 +787,10 @@ public class StarficzAIUtils {
                     if((Math.abs(weapon.getArcFacing() - currentRelativeAngle) < weapon.getArc()/2) && (defaultRange < weapon.getRange())){
                         potentialDPS += Math.max(weapon.getDerivedStats().getDps(), weapon.getDerivedStats().getBurstDamage());
                     }
-                    maxRange = Math.max(weapon.getRange(), maxRange);
+                    if(!weapon.hasAIHint(WeaponAPI.AIHints.PD)){
+                        maxRange = Math.max(weapon.getRange(), maxRange);
+                        minRange = Math.min(weapon.getRange(), minRange);
+                    }
                 }
             }
             if(potentialDPS > highestDPS){
@@ -801,7 +816,6 @@ public class StarficzAIUtils {
                     if((Math.abs(weapon.getArcFacing() - currentRelativeAngle) < weapon.getArc()/2) && (defaultRange < weapon.getRange())){
                         potentialDPS += Math.max(weapon.getDerivedStats().getDps(), weapon.getDerivedStats().getBurstDamage());
                     }
-                    maxRange = Math.max(weapon.getRange(), maxRange);
                 }
             }
             if(potentialDPS > highestDPS*0.8f && lastDPS < highestDPS*0.8f){
@@ -820,6 +834,7 @@ public class StarficzAIUtils {
         highLowDPS.put("LowestDPS", lowestDPS);
         highLowDPS.put("HighestDPSAngle", highestDPSAngle);
         highLowDPS.put("MaxRange", maxRange);
+        highLowDPS.put("MinRange", minRange);
         return highLowDPS;
     }
 
@@ -865,14 +880,15 @@ public class StarficzAIUtils {
             return 0f;
 
         for (ShipAPI enemy: nearbyEnemies.keySet()) {
+            Map<String, Float> enemyStat = nearbyEnemies.get(enemy);
 
             //float currentTargetBias = (enemy == target && MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) < targetRange * 1.2) ? 0.1f : 1f;  , ShipAPI ship, float targetRange, ShipAPI target
             float currentTargetBias = 1;
 
-            float highestDPSAngle = enemy.getFacing() + nearbyEnemies.get(enemy).get("HighestDPSAngle");
+            float highestDPSAngle = enemy.getFacing() + enemyStat.get("HighestDPSAngle");
             float alpha = Math.abs(MathUtils.getShortestRotation(VectorUtils.getAngle(enemy.getLocation(), testPoint), highestDPSAngle))/180f;
 
-            float DPSDanger = (1f - alpha) * nearbyEnemies.get(enemy).get("HighestDPS") + alpha * nearbyEnemies.get(enemy).get("LowestDPS");
+            float DPSDanger = (1f - alpha) * enemyStat.get("HighestDPS") + alpha * enemyStat.get("LowestDPS");
 
             float shipDistance = MathUtils.getDistance(enemy.getLocation(), testPoint);
             float currentlyOccluded = 1;
@@ -881,8 +897,9 @@ public class StarficzAIUtils {
                     currentlyOccluded = 0;
                 }
             }
-            if(shipDistance < nearbyEnemies.get(enemy).get("MaxRange")){
-                currentPointDanger += (DPSDanger - shipDistance/100) * (1-enemy.getFluxLevel()) * enemy.getHullLevel() * currentTargetBias * currentlyOccluded;
+            if(shipDistance < enemyStat.get("MaxRange")){
+                currentPointDanger += (DPSDanger) * (1 - Math.max(0, Math.min((shipDistance - enemyStat.get("MinRange"))/enemyStat.get("MaxRange"), 1)))
+                        * (1-enemy.getFluxLevel()) * enemy.getHullLevel() * currentTargetBias * currentlyOccluded;
             }
         }
         return currentPointDanger;

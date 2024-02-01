@@ -242,7 +242,7 @@ public class NinayaBoss extends BaseHullMod {
                         ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
                 }
                 // make sure to drain flux before approaching again
-                if(ventingHardflux && ship.getShield().isOn()){
+                if(ventingHardflux){
                     Vector2f point = StarficzAIUtils.getBackingOffStrafePoint(ship);
                     if(point != null)
                         StarficzAIUtils.strafeToPoint(ship, point);
@@ -251,15 +251,20 @@ public class NinayaBoss extends BaseHullMod {
 
 
             // back off at high hardflux
-            if(ship.getHardFluxLevel() > 0.5f && !AIUtils.canUseSystemThisFrame(ship) || ship.getHardFluxLevel() > 0.6f){
+            if((ship.getHardFluxLevel() > 0.6f && !AIUtils.canUseSystemThisFrame(ship)) || ship.getHardFluxLevel() > 0.75f){
                 ventingHardflux = true;
-                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACKING_OFF, 0.1f);
-                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACK_OFF, 0.1f);
-                ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF);
             }
+
             // return at low hardflux
             if(ship.getHardFluxLevel() < 0.1f){
                 ventingHardflux = false;
+            }
+
+            if(ventingHardflux){
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN, 0.1f); // repurposing an unused flag
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACK_OFF, 0.1f);
+            } else{
+                ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN);
             }
 
             // dont overflux via weapons

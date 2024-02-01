@@ -76,7 +76,8 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         stats.getMissileAmmoRegenMult().modifyMult(id, PHASE_DISSIPATION_MULT);
 
         stats.getTimeMult().modifyMult(id, 1 + ((TIME_MULT - 1f) * effectLevel));
-        Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + ((TIME_MULT - 1f) * effectLevel)));
+        if(ship == Global.getCombatEngine().getPlayerShip())
+            Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / (1 + ((TIME_MULT - 1f) * effectLevel)));
 
 
         //Handles ship opacity
@@ -184,7 +185,9 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         stats.getMissileAmmoRegenMult().unmodifyMult(id);
 
         stats.getTimeMult().unmodify(id);
-        Global.getCombatEngine().getTimeMult().unmodify(id);
+
+        if(ship == Global.getCombatEngine().getPlayerShip())
+            Global.getCombatEngine().getTimeMult().unmodify(id);
 
         if (Math.abs(ship.getAngularVelocity()) > stats.getMaxTurnRate().getModifiedValue()) {
             ship.setAngularVelocity((ship.getAngularVelocity() / Math.abs(ship.getAngularVelocity())) * stats.getMaxTurnRate().getModifiedValue());

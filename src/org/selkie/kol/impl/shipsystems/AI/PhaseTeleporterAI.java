@@ -78,11 +78,12 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
         oppositePoint = MathUtils.getPointOnCircumference(target.getLocation(), targetRange + Misc.getTargetingRadius(oppositePoint, target, false) -150f, oppositeAngle);
 
         // pick which location to use depending on which is further away
-        if (AIUtils.canUseSystemThisFrame(ship) && systemTargetPoint != null && !ship.getFluxTracker().isVenting() && ship.getHardFluxLevel() < 0.5f){
+        if (AIUtils.canUseSystemThisFrame(ship) && systemTargetPoint != null && !ship.getFluxTracker().isVenting() && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN)){
             ship.setShipTarget(target);
             float distanceSquared = MathUtils.getDistanceSquared(systemTargetPoint, ship.getLocation());
             if (distanceSquared > 700*700 && distanceSquared < 1500*1500){
                 ship.giveCommand(ShipCommand.USE_SYSTEM, systemTargetPoint, 0);
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 1f);
             }
             else if(distanceSquared < 700*700 && target.getShield() != null && Math.abs(MathUtils.getShortestRotation(target.getShield().getFacing(), oppositeAngle)) > target.getShield().getActiveArc()/2 ){
                 boolean safeToTeleport = true;
@@ -91,23 +92,19 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
                     if(MathUtils.isWithinRange(enemy.getLocation(), oppositePoint, enemy.getCollisionRadius() + 200))
                         safeToTeleport = false;
                 }
-                if(safeToTeleport)
+                if(safeToTeleport){
                     ship.giveCommand(ShipCommand.USE_SYSTEM, oppositePoint, 0);
+                    ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 1f);
+                }
+
             }
         }
 
         // use system to escape
-        if(AIUtils.canUseSystemThisFrame(ship) && ship.getHardFluxLevel() > 0.7f){
-            List<Vector2f> escapePoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), 1500f, 40, ship.getFacing());
-            float lowestDanger = Float.POSITIVE_INFINITY;
-            Vector2f safestPoint = escapePoints.get(0);
-            for(Vector2f point : escapePoints){
-                float currentDanger = StarficzAIUtils.getPointDanger(nearbyEnemies, point);
-                if(currentDanger < lowestDanger){
-                    lowestDanger = currentDanger;
-                    safestPoint = point;
-                }
-            }
+        Vector2f safestPoint = StarficzAIUtils.getBackingOffStrafePoint(ship);
+        if(safestPoint != null && AIUtils.canUseSystemThisFrame(ship) && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN)){
+            safestPoint = MathUtils.getPointOnCircumference(ship.getLocation(), 1500f, VectorUtils.getAngle(ship.getLocation(), safestPoint));
+            ship.setShipTarget(null);
             ship.giveCommand(ShipCommand.USE_SYSTEM, safestPoint, 0);
         }
 
