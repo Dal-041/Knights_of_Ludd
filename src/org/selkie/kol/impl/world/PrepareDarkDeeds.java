@@ -188,7 +188,7 @@ public class PrepareDarkDeeds {
 
         system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
-        system.setBackgroundTextureFilename("graphics/backgrounds/background4.jpg");
+        system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_delta_site.png");
         //system.getLocation().set(2500, 3000);
         system.getLocation().set(-sectorWidthR + 30000f, -sectorHeightR + 15000f);
 

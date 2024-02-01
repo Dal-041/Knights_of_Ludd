@@ -12,7 +12,6 @@
   "shieldRadius": 76.5,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
     "high_maintenance",
     "delicate",
 	"advancedshieldemitter",

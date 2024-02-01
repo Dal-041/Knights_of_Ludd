@@ -12,7 +12,6 @@
   "shieldRadius": 146,
   "viewOffset": 0,
   "builtInMods": [
-    "automated",
     "phasefield",
     "delicate",
     "kol_ea_sparkle",
