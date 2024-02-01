@@ -18,8 +18,9 @@
     "kol_ea_shields1"
   ],
   "builtInWeapons": {
-	"WS0014":"zea_nian_maingun",
-    "WS0015":"zea_dawn_targeting_beam_wpn"
+	"WS0014":"zea_nian_maingun_l",
+    "WS0015":"zea_dawn_targeting_beam_wpn",
+	"WS0016":"zea_nian_maingun_r"
   },
   "weaponSlots": [
     {
@@ -159,7 +160,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [139, 39]
+      "locations": [139, 60] #Left
     },
     {
       "id": "WS0015",
@@ -169,6 +170,15 @@
       "arc": 0,
       "angle": 0,
       "locations": [139, 39]
+    },
+	{
+      "id": "WS0016", 
+      "size": "LARGE",
+      "type": "BUILT_IN",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [139, 18] #Right
     },
   ],
   "engineSlots": [

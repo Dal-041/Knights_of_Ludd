@@ -77,7 +77,9 @@ Long-Range Shock Repeater,zea_dusk_lrsr,3,,0,500,,50,200,0,100,0,,,,ENERGY,25,,0
 Twilight's Gleam,zea_boss_resonator,3,,0,3000,,250,,15,20,0,8,0.8,8,KINETIC,50,,0,1.25,8,0.25,0,0,0,,,400,200,10,250,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Havoc,Fast,Excellent,,,,,,,,
 Twilight's Ruin,zea_boss_resonator2,3,,0,2000,,600,,15,0,0,5,0.2,5,HIGH_EXPLOSIVE,65,,0,5,5,0.25,0,0,0,,,400,200,10,225,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage",,Unknown,,Slaughter,Fast,Excellent,,,,,,,,
 Harpoon MRM,zea_edf_harpoon_single,0,,100,2500,,750,,15,30,0,1,0.0333,1,HIGH_EXPLOSIVE,0,,0,10,1,,0,0,0,,,300,100,12.5,150,,,DO_NOT_AIM,"no_drop, no_drop_salvage",,,,Finisher,Medium,Medium,,,,,,,TRUE,
-Infernobore,zea_nian_maingun,3,0,100000,1500,,1000,1000,200,0,0,,,,HIGH_EXPLOSIVE,500,,0,1,1,4,5,60,30,10,,500,500,15,6000,,,SYSTEM,"no_drop, no_drop_salvage",,Unknown,,Pulverizer,Slow,None,,,,,,,,
+Infernobore L,zea_nian_maingun_l,3,0,100000,1500,,1000,1000,200,0,0,,,,HIGH_EXPLOSIVE,500,,0,1,1,8,5,60,30,10,,500,500,15,6000,,,SYSTEM,"no_drop, no_drop_salvage",,Unknown,,Pulverizer,Slow,None,,,,,,,,
+Infernobore R,zea_nian_maingun_r,3,0,100000,1500,,1000,1000,200,0,0,,,,HIGH_EXPLOSIVE,500,,0,1,1,8,5,60,30,10,,500,500,15,6000,,,SYSTEM,"no_drop, no_drop_salvage",,Unknown,,Pulverizer,Slow,None,,,,,,,,
+#,zea_nian_maingun,3,0,100000,1500,,1000,1000,200,0,0,,,,HIGH_EXPLOSIVE,500,,0,1,1,4,5,60,30,10,,500,500,15,6000,,,SYSTEM,"no_drop, no_drop_salvage",,Unknown,,Pulverizer,Slow,None,,,,,,,,
 Canister Flak,zea_nian_canister,,,,200,,200,,,,,,0,,HIGH_EXPLOSIVE,0,0,0,0.1,5,0.5,50,50,0,0,,50,30,15,1000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,35.5
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #UTILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

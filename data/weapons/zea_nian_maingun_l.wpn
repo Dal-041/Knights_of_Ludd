@@ -1,0 +1,46 @@
+{
+  "id": "zea_nian_maingun_l",
+  "specClass": "projectile",
+  "projectileSpecId": "zea_inferno_shot",
+  "type": "BALLISTIC",
+  "size": "LARGE",
+  "displayArcRadius": 25,
+  "turretSprite": "graphics/weapons/kol_niangun_hardpoint_l_base.png",
+  "turretGunSprite": "graphics/weapons/kol_niangun_hardpoint_l_recoil.png",
+  "hardpointSprite": "graphics/weapons/kol_niangun_hardpoint_l_base.png",
+  "hardpointGunSprite": "graphics/weapons/kol_niangun_hardpoint_l_recoil.png",
+  "renderAboveAllWeapons": 1,
+  "visualRecoil": 9,
+  "turretOffsets": [
+    5,0
+  ],
+  "turretAngleOffsets": [
+    0
+  ],
+  "hardpointOffsets": [
+    5,0
+  ],
+  "hardpointAngleOffsets": [
+    0
+  ],
+  "barrelMode": "ALTERNATING",
+  "animationType": "MUZZLE_FLASH",
+  "muzzleFlashSpec": {
+    "length": 88,
+    "spread": 20,
+    "particleSizeMin": 18,
+    "particleSizeRange": 24,
+    "particleDuration": 0.12,
+    "particleCount": 52,
+    "particleColor": [
+      255,
+      150,
+      120,
+      245
+    ]
+  },
+  "textureType": ROUGH,
+  "fireSoundTwo": "hellbore_fire",
+  "unaffectedByProjectileSpeedBonuses": true,
+  "everyFrameEffect":"org.selkie.kol.impl.weapons.HellfireCannonWeaponScript"
+}

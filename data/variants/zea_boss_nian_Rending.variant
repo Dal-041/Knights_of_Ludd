@@ -20,7 +20,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0014": "zea_nian_maingun",
+                "WS0014": "zea_nian_maingun_l",
+                "WS0016": "zea_nian_maingun_r",
             }
         },
         {
