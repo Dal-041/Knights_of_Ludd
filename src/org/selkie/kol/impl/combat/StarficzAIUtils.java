@@ -244,7 +244,6 @@ public class StarficzAIUtils {
     public static List<FutureHit> generatePredictedWeaponHits(ShipAPI ship, Vector2f testPoint, float maxTime){
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
-        float FUZZY_RANGE = 100f;
         List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,MAX_RANGE);
         for (ShipAPI enemy: nearbyEnemies) {
             enemy.getFluxTracker().getOverloadTimeRemaining();
@@ -254,6 +253,7 @@ public class StarficzAIUtils {
             boolean occluded = false;
             for(ShipAPI occlusion : nearbyEnemies){
                 if (occlusion == enemy) continue;
+                if (occlusion.getParentStation() == enemy) continue;
                 Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), enemy.getLocation());
                 if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() == null ? false : occlusion.getShield().isOn())){
                     occluded = true;
@@ -266,9 +266,13 @@ public class StarficzAIUtils {
                 if(weapon.isDecorative()) continue;
 
                 // ignore weapon if out of range
-                float distanceFromWeaponSquared = MathUtils.getDistanceSquared(weapon.getLocation(), testPoint);
+                float distanceFromWeapon = MathUtils.getDistance(weapon.getLocation(), testPoint);
                 float targetingRadius = Misc.getTargetingRadius(enemy.getLocation(), ship, false);
-                if((weapon.getRange()+targetingRadius+FUZZY_RANGE)*(weapon.getRange()+targetingRadius+FUZZY_RANGE) < distanceFromWeaponSquared) continue;
+                float outOfRangeTime = 0;
+                if(distanceFromWeapon > (weapon.getRange() + targetingRadius) ){
+                    outOfRangeTime = (distanceFromWeapon - weapon.getRange()+targetingRadius)/ship.getMaxSpeed();
+                }
+
 
                 // calculate disable time if applicable
                 float disabledTime = weapon.isDisabled() ? weapon.getDisabledDuration() : 0;
@@ -286,10 +290,12 @@ public class StarficzAIUtils {
                 // if not guided, calculate aim time if in arc, otherwise skip weapon
                 float aimTime = 0f;
                 if(!(weapon.hasAIHint(WeaponAPI.AIHints.DO_NOT_AIM) || weapon.hasAIHint(WeaponAPI.AIHints.GUIDED_POOR))){
-                    if(inArc) aimTime = Math.abs(MathUtils.getShortestRotation(weapon.getCurrAngle(), MathUtils.clampAngle(shipToWeaponAngle + 180f)))/weapon.getTurnRate();
-                    else continue;
+                    aimTime = Math.abs(MathUtils.getShortestRotation(weapon.getCurrAngle(), MathUtils.clampAngle(shipToWeaponAngle + 180f)))/weapon.getTurnRate();
+                    if(!inArc){
+                        aimTime += weapon.distanceFromArc(ship.getLocation())/(enemy.getMaxTurnRate()/2);
+                    }
                 }
-                float preAimedTime = disabledTime + aimTime;
+                float preAimedTime = disabledTime + aimTime + outOfRangeTime;
 
                 /* TODO: track and deal with ammo
                 int currentAmmo = Integer.MAX_VALUE;
@@ -449,7 +455,7 @@ public class StarficzAIUtils {
                 else {
                     Vector2f projectileVector = VectorUtils.resize(VectorUtils.getDirectionalVector(weapon.getLocation(), testPoint), weapon.getProjectileSpeed());
                     Vector2f relativeVelocity = Vector2f.add(Vector2f.sub(projectileVector, ship.getVelocity(), null), enemy.getVelocity(), null);
-                    travelTime = (float) (Math.sqrt(distanceFromWeaponSquared)-targetingRadius) / relativeVelocity.length();
+                    travelTime = (distanceFromWeapon-targetingRadius) / relativeVelocity.length();
                 }
 
 

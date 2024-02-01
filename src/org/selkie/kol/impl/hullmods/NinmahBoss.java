@@ -405,7 +405,7 @@ public class NinmahBoss extends BaseHullMod {
                         wantToPhase = true;
 
                     // phase to avoid getting nuked by enemy ship explosion
-                    if(target.getHullLevel() < 0.10f && MathUtils.getDistanceSquared(ship.getLocation(), target.getLocation()) < Math.pow(target.getShipExplosionRadius() + ship.getCollisionRadius(),2))
+                    if(target.getHullLevel() < 0.15f && MathUtils.getDistanceSquared(ship.getLocation(), target.getLocation()) < Math.pow(target.getShipExplosionRadius() + ship.getCollisionRadius(),2))
                         wantToPhase = true;
 
                 } else { // if the ship is not in range, the acceptable damage threshold is much lower,

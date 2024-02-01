@@ -96,7 +96,6 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
                     ship.giveCommand(ShipCommand.USE_SYSTEM, oppositePoint, 0);
                     ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 1f);
                 }
-
             }
         }
 
