@@ -1,5 +1,5 @@
 {
-	"id":"hephag_shot",
+	"id":"kol_caelia_shot",
 	"specClass":"projectile",
 	"spawnType":"BALLISTIC",
 	"collisionClass":"PROJECTILE_FF",

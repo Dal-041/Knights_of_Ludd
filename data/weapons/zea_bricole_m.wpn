@@ -23,6 +23,6 @@
 					   "particleDuration":0.5,
 					   "particleCount":20,
 					  "particleColor":[255,225,225,235]},
-	"projectileSpecId":"arbalest_shot",  # projectile that will be fired	
+	"projectileSpecId":"zea_bricole_m_shot",  # projectile that will be fired	
 	"fireSoundTwo":"autocannon_fire",
 }

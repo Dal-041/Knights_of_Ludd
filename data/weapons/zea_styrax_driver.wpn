@@ -15,6 +15,6 @@
 	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
 	"animationType":"GLOW",
 	"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
-	"projectileSpecId":"railgun_shot",  # projectile that will be fired
+	"projectileSpecId":"zea_styrax_driver_shot",  # projectile that will be fired
 	"fireSoundTwo":"railgun_fire",
 }

@@ -1,7 +1,7 @@
 {
   "id": "kol_caelia",
   "specClass": "projectile",
-  "projectileSpecId": "hephag_shot",
+  "projectileSpecId": "kol_caelia_shot",
   "type": "BALLISTIC",
   "size": "LARGE",
   "everyFrameEffect": "org.selkie.kol.weapons.Caelia",

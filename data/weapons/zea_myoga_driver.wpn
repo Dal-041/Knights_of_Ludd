@@ -23,6 +23,6 @@
 					   "particleDuration":0.25,
 					   "particleCount":33,
 					   "particleColor":[160,40,220,160]},	
-	"projectileSpecId":"hveldriver_shot",  # projectile that will be fired
+	"projectileSpecId":"zea_myoga_driver_shot",  # projectile that will be fired
 	"fireSoundTwo":"hypervel_driver_fire",	
 }

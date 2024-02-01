@@ -1,7 +1,7 @@
 {
   "id": "kol_llyr",
   "specClass": "projectile",
-  "projectileSpecId": "mark9_shot",
+  "projectileSpecId": "kol_llyr_shot",
   "type": "BALLISTIC",
   "size": "LARGE",
   "everyFrameEffect": "org.selkie.kol.weapons.Caelia",

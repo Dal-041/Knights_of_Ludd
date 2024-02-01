@@ -1,7 +1,7 @@
 {
   "id": "kol_tor",
   "specClass": "projectile",
-  "projectileSpecId": "heavymauler_shot",
+  "projectileSpecId": "kol_tor_shot",
   "type": "BALLISTIC",
   "size": "SMALL",
   "turretSprite": "graphics/weapons/kol_tor_turret_base.png",
