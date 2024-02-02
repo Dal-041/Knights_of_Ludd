@@ -58,7 +58,7 @@
     },
     {
       "id": "WS0006",
-      "size": "MEDIUM",
+      "size": "LARGE",
       "type": "HYBRID",
       "mount": "TURRET",
       "arc": 210,
@@ -67,12 +67,12 @@
     },
     {
       "id": "WS0007",
-      "size": "MEDIUM",
+      "size": "LARGE",
       "type": "HYBRID",
       "mount": "TURRET",
-      "arc": 120,
-      "angle": -15,
-      "locations": [52, -63]
+      "arc": 210,
+      "angle": -65,
+      "locations": [47, -55]
     },
     {
       "id": "WS0002",
