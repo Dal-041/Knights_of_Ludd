@@ -79,47 +79,9 @@ public class StarficzAIUtils {
             }
 
             // Non Guided projectiles (including missiles that have stopped tracking)
-            float maxDistance;
-            if (useBackup) {
-                maxDistance = threat.getWeapon().getRange();
-                if (threat.getWeapon() != null){
-                    maxDistance -= MathUtils.getDistance(threat.getWeapon().getLocation(), threat.getLocation());
-                }
-            }
-            else {
-                try { // do really funky reflection to get max distance of the projectile
-                    if(threat instanceof MissileAPI){
-                        MissileAPI missile = (MissileAPI) threat;
-                        maxDistance = (missile.getMaxFlightTime() - missile.getFlightTime()) * missile.getMaxSpeed();
-                    }
-                    else if (threat instanceof PlasmaShot){
-                        PlasmaShot nearbyPlasma = (PlasmaShot) threat;
-                        float flightTime = (float) ReflectionUtils.INSTANCE.get("flightTime", nearbyPlasma);
-                        float maxFlightTime = (float) ReflectionUtils.INSTANCE.get("maxFlightTime", nearbyPlasma);
-                        maxDistance = (maxFlightTime - flightTime) * threat.getMoveSpeed();
-                    }
-                    else if (threat instanceof BallisticProjectile) {
-
-                        BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
-                        com.fs.starfarer.combat.entities.OoOO trailExtender = (com.fs.starfarer.combat.entities.OoOO) ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
-                        float elapsedLifeTime = trailExtender.Ó00000();
-                        float maxLifeTime = trailExtender.Õ00000();
-                        maxDistance = (maxLifeTime - elapsedLifeTime) * threat.getMoveSpeed();
-                    }
-                    else if (threat instanceof MovingRay) {
-                        MovingRay nearbyRay = (MovingRay) threat;
-                        com.fs.starfarer.combat.entities.L rayExtender = (com.fs.starfarer.combat.entities.L) ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-                        float currentRayDistance = rayExtender.Õ00000();
-                        float maxRayDistance = (float) ReflectionUtils.INSTANCE.get("Ò00000", rayExtender);
-                        maxDistance = maxRayDistance - currentRayDistance;
-                    }
-                    else continue; // skip if not one of these classes
-
-                } catch (Exception e) { // backup use getDistance, switch over to this for all other projectiles if hit exception last time
-                    useBackup = true;
-                    continue;
-                }
-            }
+            if(threat.getWeapon() == null) continue;
+            float range = threat.getWeapon().getRange();
+            float maxDistance = range - threat.getElapsed() * threat.getMoveSpeed();
 
             // circle-line collision checks for unguided projectiles,
 

@@ -1,0 +1,53 @@
+{
+    "hullName": "Chiwen",
+    "hullId": "zea_dawn_chiwen",
+    "hullSize": "FIGHTER",
+    "style": "ZEA_DAWN_TECH",
+    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_dawn_chiwen.png",
+    "height": 26,
+    "width": 64,
+    "center": [
+        32, 25
+    ],
+    "collisionRadius": 70,
+    "coversColor": "",
+    "shieldCenter": [
+        -59, 0
+    ],
+    "shieldRadius": 100,
+    "viewOffset": 0,
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [],
+    "engineSlots": [
+        {
+            "location": [
+                -14.5, 18.5
+            ],
+            "length": 26,
+            "width": 9,
+            "angle": 160,
+            "contrailSize": 64,
+            "style": "zea_DAWN_ENG"
+        },
+        {
+            "location": [
+                -14.5, -18.5
+            ],
+            "length": 26,
+            "width": 9,
+            "angle": 200,
+            "contrailSize": 64,
+            "style": "zea_DAWN_ENG"
+        }
+    ],
+    "bounds": [
+           -22.5,       13,
+             -12,       29,
+            -1.5,       29,
+            -1.5,      -29,
+             -12,      -29,
+        
+           -22.5,      -13
+    ]
+}
