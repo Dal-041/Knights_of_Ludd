@@ -99,6 +99,7 @@ public class StarficzAIUtils {
                         maxDistance = (maxFlightTime - flightTime) * threat.getMoveSpeed();
                     }
                     else if (threat instanceof BallisticProjectile) {
+
                         BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
                         com.fs.starfarer.combat.entities.OoOO trailExtender = (com.fs.starfarer.combat.entities.OoOO) ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
                         float elapsedLifeTime = trailExtender.Ó00000();
@@ -265,12 +266,13 @@ public class StarficzAIUtils {
 
                 if(weapon.isDecorative()) continue;
 
-                // ignore weapon if out of range
+                // if weapon out of range, add time for ship to reach you
                 float distanceFromWeapon = MathUtils.getDistance(weapon.getLocation(), testPoint);
                 float targetingRadius = Misc.getTargetingRadius(enemy.getLocation(), ship, false);
                 float outOfRangeTime = 0;
                 if(distanceFromWeapon > (weapon.getRange() + targetingRadius) ){
                     outOfRangeTime = (distanceFromWeapon - weapon.getRange()+targetingRadius)/ship.getMaxSpeed();
+                    distanceFromWeapon = weapon.getRange();
                 }
 
 
@@ -287,7 +289,7 @@ public class StarficzAIUtils {
                 float linkedBarrels = Math.round((weapon.getDerivedStats().getDamagePerShot()/weapon.getDamage().getDamage()));
                 if(linkedBarrels == 0) linkedBarrels = weapon.getSpec().getTurretFireOffsets().size(); // beam fallback
 
-                // if not guided, calculate aim time if in arc, otherwise skip weapon
+                // if not guided, calculate aim time if in arc, otherwise add time for ships to rotate (overestimates by allowing all weapons to hit, but better to over then underestimate)
                 float aimTime = 0f;
                 if(!(weapon.hasAIHint(WeaponAPI.AIHints.DO_NOT_AIM) || weapon.hasAIHint(WeaponAPI.AIHints.GUIDED_POOR))){
                     aimTime = Math.abs(MathUtils.getShortestRotation(weapon.getCurrAngle(), MathUtils.clampAngle(shipToWeaponAngle + 180f)))/weapon.getTurnRate();

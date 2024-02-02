@@ -17,3 +17,4 @@ Ninmah Boss,zea_ninmah_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmod
 Nineveh Boss,zea_nineveh_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.NinevehBoss
 Scorched Skies Doctrine,kol_throttle,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.AttainmentManager,,Conformal shield,graphics/icons/skills/field_modulation.png,
 PD Drones,zea_edf_pd_drones,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.PDDrones,
+Ball Lightning,zea_edf_ball_lightning,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.BallLightningHullmod

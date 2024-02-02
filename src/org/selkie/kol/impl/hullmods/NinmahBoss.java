@@ -399,6 +399,7 @@ public class NinmahBoss extends BaseHullMod {
                         if ((armorDamageLevel > 0.07f || hullDamageLevel > 0.07f || empDamageLevel > 0.7f))
                             wantToPhase = true;
                     }
+
                     // if the ship is not in immense danger of damage, but needs to reload/vent soft flux, also phase. (unless the enemy is overloaded, to maximize dps in that window)
                     boolean maximiseDPS = target.getFluxTracker().isOverloaded() || ship.getSystem().isActive();
                     if ((ventingSoftFlux || rechargeCharges) && !maximiseDPS)
