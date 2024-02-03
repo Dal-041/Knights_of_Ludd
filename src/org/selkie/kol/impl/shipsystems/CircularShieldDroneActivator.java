@@ -75,6 +75,11 @@ public class CircularShieldDroneActivator extends DroneActivator {
     }
 
     @Override
+    public PIDController getPIDController() {
+        return new PIDController(15f,3.5f,10f,2f);
+    }
+
+    @Override
     public void advance(float amount) {
         for (ShipAPI drone : getActiveWings().keySet()) {
             if (drone.getShield().isOff() && !drone.getFluxTracker().isOverloadedOrVenting()) {
@@ -126,7 +131,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
         private final float rotationSpeed = 0.2f;
         private float currentRotation = 0f;
 
-        private IntervalUtil droneAIInterval = new IntervalUtil(0.5f, 1);
+        private IntervalUtil droneAIInterval = new IntervalUtil(0.3f, 0.5f);
         public float lastUpdatedTime = 0f;
         public List<FutureHit> incomingProjectiles = new ArrayList<>();
         public List<FutureHit> predictedWeaponHits = new ArrayList<>();
@@ -193,7 +198,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
                         if(alreadyBlocked) continue;
 
                         // if the drone can block it, note down that stats
-                        if(Misc.isInArc(droneAngle, DRONE_ARC, hit.angle) && hit.timeToHit > timeElapsed + 0.1f) {
+                        if(Misc.isInArc(droneAngle, DRONE_ARC, hit.angle) && hit.timeToHit > timeElapsed + 0.15f) {
                             Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armor, ship);
                             damageBlocked += trueDamage.one + trueDamage.two;
                             lowestTime = Math.min(lowestTime, hit.timeToHit - timeElapsed);
@@ -230,7 +235,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
             List<ShipAPI> usedDrones = new ArrayList<>();
             for(float angle : blockedDirections.isEmpty() ? idleAngles : blockedDirections){
                 Vector2f desiredLocation = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getShieldRadiusEvenIfNoShield() * 1.1f, angle);
-                //Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.red);
+                Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.red);
                 float closestDistance = Float.POSITIVE_INFINITY;
                 ShipAPI closestDrone = null;
                 for (ShipAPI drone : drones.keySet()){
@@ -250,7 +255,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
                 for (ShipAPI drone : drones.keySet()){
                     if (usedDrones.contains(drone)) continue;
 
-                    Vector2f desiredLocation = MathUtils.getPointOnCircumference(ship.getLocation(), MathUtils.getDistance(usedDrones.get(usedDrones.size()-1).getLocation(), ship.getLocation()) * 0.9f,
+                    Vector2f desiredLocation = MathUtils.getPointOnCircumference(ship.getLocation(), MathUtils.getDistance(usedDrones.get(usedDrones.size()-1).getLocation(), ship.getLocation()) * 0.8f,
                             Misc.getAngleInDegrees(ship.getLocation(), usedDrones.get(0).getLocation()));
                     Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.blue);
                     drones.get(drone).move(desiredLocation, drone);
