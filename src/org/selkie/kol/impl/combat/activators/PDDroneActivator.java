@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.shipsystems;
+package org.selkie.kol.impl.combat.activators;
 
 import activators.drones.DroneActivator;
 import activators.drones.DroneFormation;
@@ -17,8 +17,8 @@ import java.util.Map;
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class IonDroneActivator extends DroneActivator {
-    public IonDroneActivator(ShipAPI ship) {
+public class PDDroneActivator extends DroneActivator {
+    public PDDroneActivator(ShipAPI ship) {
         super(ship);
     }
 
@@ -76,7 +76,7 @@ public class IonDroneActivator extends DroneActivator {
 
     @Override
     public String getDisplayText() {
-        return "Ion Drones";
+        return "PD Drones";
     }
 
     @Override
@@ -111,7 +111,7 @@ public class IonDroneActivator extends DroneActivator {
 
     @Override
     public String getDroneVariant() {
-        return "ion_drone_wing";
+        return "zea_edf_shachi_wing";
     }
 
     @NotNull
@@ -133,7 +133,7 @@ public class IonDroneActivator extends DroneActivator {
                     angle += 30;
                 else
                     angle -= 30;
-                Vector2f desiredLocation = MathUtils.getPointOnCircumference(shipLocation, ship.getCollisionRadius() * 1.2f, angle);
+                Vector2f desiredLocation = MathUtils.getPointOnCircumference(shipLocation, ship.getShieldRadiusEvenIfNoShield() * 1.15f, angle);
                 controller.move(desiredLocation, drone);
 
                 Iterator<Object> iter = Global.getCombatEngine().getShipGrid().getCheckIterator(drone.getLocation(), 100f, 100f);

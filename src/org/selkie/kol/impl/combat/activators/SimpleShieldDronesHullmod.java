@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.activators;
+package org.selkie.kol.impl.combat.activators;
 
 import activators.ActivatorManager;
 import com.fs.starfarer.api.combat.BaseHullMod;

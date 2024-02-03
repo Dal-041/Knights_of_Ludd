@@ -1,11 +1,11 @@
-package org.selkie.kol.impl.activators;
+package org.selkie.kol.impl.combat.activators;
 
 import activators.ActivatorManager;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 
-public class BallLightningHullmod extends BaseHullMod {
+public class SmartShieldDronesHullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ActivatorManager.addActivator(ship, new BallLightningActivator(ship));
+        ActivatorManager.addActivator(ship, new SmartShieldDronesActivator(ship));
     }
 }

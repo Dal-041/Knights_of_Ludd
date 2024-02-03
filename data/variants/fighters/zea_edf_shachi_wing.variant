@@ -1,0 +1,18 @@
+{
+    "displayName": "PD Drone",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_edf_shachi",
+    "hullMods": [],
+    "variantId": "zea_edf_shachi_wing",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 000": "pdburst"
+            }
+        }
+    ]
+}

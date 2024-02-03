@@ -77,6 +77,7 @@ Redemptor,kol_boss_ret_lp,Battlecruiser,Low Tech,ammofeed,30,15000,1650,16500,,7
 Ion Drone,ion_drone,,Low Tech,flarelauncher_fighter,,750,100,80,,10,0,,200,400,350,90,180,30,NONE,,0,0,0,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,104
 Shield Drone,shield_drone,,High Tech,,,450,50,600,,50,0,,160,300,250,90,180,30,FRONT,,180,0,0.5,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,103
 Chiwen,zea_dawn_chiwen,,Dawntide,,,750,100,2000,,100,0,,200,400,300,90,180,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
+Shachi,zea_edf_shachi,,Elysia,flarelauncher_active,,750,100,2000,,100,0,,200,400,300,90,180,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 #FRIGATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ikiryo,zea_dusk_ikiryo,Lyrics of the Living Soul,Dusk,entropyamplifier,9,1500,400,3000,,325,50,,100,100,100,65,120,280,PHASE,zea_dusk_phasecloak,90,,,0.03,0.04,5,10,25,50,1,50,10,42000,8,30,200,0.25,10,10,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,2,,
 Onibi,zea_dusk_onibi,Fiery Verse,Dusk,emp,7,1100,250,3000,,260,50,,155,220,175,120,360,100,OMNI,,360,0.3,0.5,,,10,20,30,20,1,20,10,33000,10,20,180,0.25,6,6,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,2,,205

@@ -1,15 +1,11 @@
-package org.selkie.kol.impl.activators;
+package org.selkie.kol.impl.combat.activators;
 
 import activators.drones.DroneActivator;
 import activators.drones.DroneFormation;
 import activators.drones.PIDController;
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.api.util.Pair;
-import kotlin.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -17,8 +13,6 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 import java.util.List;
 import java.util.*;
-
-import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
 
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
