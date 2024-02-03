@@ -128,7 +128,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
     private class FacingSpinningCircleFormation extends DroneFormation {
         private final static float DRONE_ARC = 30f;
         private Map<Integer, ShipAPI> droneIndexMap = new HashMap<>();
-        private final float rotationSpeed = 0.2f;
+        private final float rotationSpeed = 35;
         private float currentRotation = 0f;
 
         private IntervalUtil droneAIInterval = new IntervalUtil(0.3f, 0.5f);
@@ -208,7 +208,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
                     if (damageBlocked > 0) potentialAngles.add(new Triple<Float, Float, Float>(droneAngle, lowestTime, damageBlocked));
                 }
 
-                potentialAngles.sort(new Comparator<Triple<Float, Float, Float>>() {
+                Collections.sort(potentialAngles, new Comparator<Triple<Float, Float, Float>>() {
                     @Override
                     public int compare(Triple<Float, Float, Float> angleA, Triple<Float, Float, Float> angleB) {
                         // sort by closest damage, with every 1000 damage = 1 second closer
@@ -226,12 +226,15 @@ public class CircularShieldDroneActivator extends DroneActivator {
                 }
             }
 
+            List<Vector2f> droneLocations = new ArrayList<>();
 
-            currentRotation += rotationSpeed;
+            // in case of nothing incoming, set idle angles
+            currentRotation += rotationSpeed*amount;
             List<Float> idleAngles = new ArrayList<>();
             for (int i = 0; i < drones.size(); i++) {
                 idleAngles.add( currentRotation + angleIncrease * i);
             }
+            // move closest drone to its point
             List<ShipAPI> usedDrones = new ArrayList<>();
             for(float angle : blockedDirections.isEmpty() ? idleAngles : blockedDirections){
                 Vector2f desiredLocation = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getShieldRadiusEvenIfNoShield() * 1.1f, angle);

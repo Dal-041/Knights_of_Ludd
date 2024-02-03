@@ -2,7 +2,7 @@
     "displayName": "Undoer",
     "fluxCapacitors": 22,
     "fluxVents": 22,
-    "goalVariant": false,
+    "goalVariant": true,
     "hullId": "zea_boss_ninmah",
     "hullMods": [
         "phase_anchor",
