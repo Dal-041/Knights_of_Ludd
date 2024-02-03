@@ -16,7 +16,8 @@
 	"solar_shielding",
     "kol_ea_shields1",
     "advancedcore",
-	"kol_throttle"
+	"kol_throttle",
+	"zea_dawn_simple_shield_drones"
   ],
   "builtInWeapons": {
     "WS0013": "zea_deco_dawn_engL",

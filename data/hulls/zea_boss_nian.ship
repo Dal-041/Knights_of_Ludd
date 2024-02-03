@@ -15,7 +15,8 @@
     "automated",
 	"advancedcore",
 	"heavyarmor",
-    "kol_ea_shields1"
+    "kol_ea_shields1",
+    "zea_dawn_smart_shield_drones"
   ],
   "builtInWeapons": {
 	"WS0014":"zea_nian_maingun_l",

@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.shipsystems;
+package org.selkie.kol.impl.activators;
 
 import activators.CombatActivator;
 import com.fs.starfarer.api.Global;

@@ -1,11 +1,9 @@
-package org.selkie.kol.impl.shipsystems;
+package org.selkie.kol.impl.activators;
 
 import activators.drones.DroneActivator;
 import activators.drones.DroneFormation;
 import activators.drones.PIDController;
-import activators.drones.SpinningCircleFormation;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.ShieldAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.IntervalUtil;
@@ -14,7 +12,6 @@ import com.fs.starfarer.api.util.Pair;
 import kotlin.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 
@@ -22,17 +19,15 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
-
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class CircularShieldDroneActivator extends DroneActivator {
+public class SmartShieldDronesActivator extends DroneActivator {
     private static Color BASE_SHIELD_COLOR = Color.cyan;
     private static Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static float SHIELD_ALPHA = 0.25f;
 
-    public CircularShieldDroneActivator(ShipAPI ship) {
+    public SmartShieldDronesActivator(ShipAPI ship) {
         super(ship);
     }
     @Override
@@ -107,11 +102,11 @@ public class CircularShieldDroneActivator extends DroneActivator {
     }
 
     @Override
-    public int getMaxCharges() { return 3; }
+    public int getMaxCharges() { return 5; }
 
     @Override
     public int getMaxDeployedDrones() {
-        return 3;
+        return 5;
     }
 
     @Override
@@ -127,28 +122,21 @@ public class CircularShieldDroneActivator extends DroneActivator {
 
     private class FacingSpinningCircleFormation extends DroneFormation {
         private final static float DRONE_ARC = 30f;
-        private Map<Integer, ShipAPI> droneIndexMap = new HashMap<>();
-        private final float rotationSpeed = 35;
+        private final static float ROTATION_SPEED = 20;
         private float currentRotation = 0f;
-
-        private IntervalUtil droneAIInterval = new IntervalUtil(0.3f, 0.5f);
-        public float lastUpdatedTime = 0f;
-        public List<FutureHit> incomingProjectiles = new ArrayList<>();
-        public List<FutureHit> predictedWeaponHits = new ArrayList<>();
-        public List<FutureHit> combinedHits = new ArrayList<>();
-        public List<Float> omniShieldDirections = new ArrayList<>();
+        private final IntervalUtil droneAIInterval = new IntervalUtil(0.3f, 0.5f);
+        private float lastUpdatedTime = 0f;
+        private List<StarficzAIUtils.FutureHit> combinedHits = new ArrayList<>();
+        private List<Float> omniShieldDirections = new ArrayList<>();
         @Override
         public void advance(@NotNull ShipAPI ship, @NotNull Map<ShipAPI, ? extends PIDController> drones, float amount) {
 
-            float angleIncrease = 360f / getMaxDeployedDrones();
             droneAIInterval.advance(amount);
             if (droneAIInterval.intervalElapsed()) {
                 lastUpdatedTime = Global.getCombatEngine().getTotalElapsedTime(false);
-                incomingProjectiles = incomingProjectileHits(ship, ship.getLocation());
-                predictedWeaponHits = generatePredictedWeaponHits(ship, ship.getLocation(), 3f);
                 combinedHits = new ArrayList<>();
-                combinedHits.addAll(incomingProjectiles);
-                combinedHits.addAll(predictedWeaponHits);
+                combinedHits.addAll(StarficzAIUtils.incomingProjectileHits(ship, ship.getLocation()));
+                combinedHits.addAll(StarficzAIUtils.generatePredictedWeaponHits(ship, ship.getLocation(), 3f));
 
                 // prefilter expensive one time functions
                 java.util.List<Float> candidateShieldDirections = new ArrayList<>();
@@ -165,12 +153,10 @@ public class CircularShieldDroneActivator extends DroneActivator {
 
             }
 
-
             // calculate how much damage the ship would take if shields went down
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
-            float armor = getWeakestTotalArmor(ship);
-
+            float armor = StarficzAIUtils.getWeakestTotalArmor(ship);
 
             List<Float> droneAngles = new ArrayList<>();
             droneAngles.addAll(omniShieldDirections);
@@ -186,7 +172,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
                     float damageBlocked = 0f;
                     float lowestTime = Float.POSITIVE_INFINITY;
                     // for each future hit check if its blocked, if so at what time and how much
-                    for(FutureHit hit : combinedHits){
+                    for(StarficzAIUtils.FutureHit hit : combinedHits){
                         // skip damage already blocked by other drones
                         boolean alreadyBlocked = false;
                         for(float block : blockedDirections){
@@ -199,7 +185,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
 
                         // if the drone can block it, note down that stats
                         if(Misc.isInArc(droneAngle, DRONE_ARC, hit.angle) && hit.timeToHit > timeElapsed + 0.15f) {
-                            Pair<Float, Float> trueDamage = damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armor, ship);
+                            Pair<Float, Float> trueDamage = StarficzAIUtils.damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armor, ship);
                             damageBlocked += trueDamage.one + trueDamage.two;
                             lowestTime = Math.min(lowestTime, hit.timeToHit - timeElapsed);
                         }
@@ -208,6 +194,7 @@ public class CircularShieldDroneActivator extends DroneActivator {
                     if (damageBlocked > 0) potentialAngles.add(new Triple<Float, Float, Float>(droneAngle, lowestTime, damageBlocked));
                 }
 
+                // find the best direction and add it to blocked directions
                 Collections.sort(potentialAngles, new Comparator<Triple<Float, Float, Float>>() {
                     @Override
                     public int compare(Triple<Float, Float, Float> angleA, Triple<Float, Float, Float> angleB) {
@@ -226,45 +213,40 @@ public class CircularShieldDroneActivator extends DroneActivator {
                 }
             }
 
-            List<Vector2f> droneLocations = new ArrayList<>();
+            // rotate idle
+            currentRotation += ROTATION_SPEED * amount;
 
-            // in case of nothing incoming, set idle angles
-            currentRotation += rotationSpeed*amount;
-            List<Float> idleAngles = new ArrayList<>();
+            // generate all locations by doubling up on locations if too many drones
+            List<Vector2f> droneLocations = new ArrayList<>();
+            float droneDistance = ship.getShieldRadiusEvenIfNoShield()*0.95f;
             for (int i = 0; i < drones.size(); i++) {
-                idleAngles.add( currentRotation + angleIncrease * i);
+                float droneAngle;
+                if(blockedDirections.isEmpty()){
+                    droneAngle = currentRotation + 360f/drones.size() * i;
+                } else{
+                    droneAngle = blockedDirections.get(i % blockedDirections.size());
+                }
+                droneLocations.add(MathUtils.getPointOnCircumference(ship.getLocation(), droneDistance, droneAngle));
+                if (!blockedDirections.isEmpty() && i % blockedDirections.size() == blockedDirections.size()-1) droneDistance += 30f;
             }
-            // move closest drone to its point
-            List<ShipAPI> usedDrones = new ArrayList<>();
-            for(float angle : blockedDirections.isEmpty() ? idleAngles : blockedDirections){
-                Vector2f desiredLocation = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getShieldRadiusEvenIfNoShield() * 1.1f, angle);
-                Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.red);
-                float closestDistance = Float.POSITIVE_INFINITY;
-                ShipAPI closestDrone = null;
-                for (ShipAPI drone : drones.keySet()){
-                    if (usedDrones.contains(drone)) continue;
-                    float droneDistance = MathUtils.getDistanceSquared(desiredLocation, drone.getLocation());
-                    if(droneDistance < closestDistance){
-                        closestDistance = droneDistance;
-                        closestDrone = drone;
+
+            // move each drone to its closest location
+            List<Vector2f> assignedPoints = new ArrayList<>();
+            for (ShipAPI drone : drones.keySet()){
+                Vector2f desiredLocation = null;
+                float lowestDistance = Float.POSITIVE_INFINITY;
+                for(Vector2f point : droneLocations){
+                    if(assignedPoints.contains(point)) continue;
+                    float currentDistance = MathUtils.getDistanceSquared(drone.getLocation(), point);
+                    if(currentDistance < lowestDistance){
+                        lowestDistance = currentDistance;
+                        desiredLocation = point;
                     }
                 }
-                usedDrones.add(closestDrone);
-                drones.get(closestDrone).move(desiredLocation, closestDrone);
-                drones.get(closestDrone).rotate(Misc.getAngleInDegrees(ship.getLocation(), closestDrone.getLocation()), closestDrone);
-            }
-
-            if(!usedDrones.isEmpty()){
-                for (ShipAPI drone : drones.keySet()){
-                    if (usedDrones.contains(drone)) continue;
-
-                    Vector2f desiredLocation = MathUtils.getPointOnCircumference(ship.getLocation(), MathUtils.getDistance(usedDrones.get(usedDrones.size()-1).getLocation(), ship.getLocation()) * 0.8f,
-                            Misc.getAngleInDegrees(ship.getLocation(), usedDrones.get(0).getLocation()));
-                    Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.blue);
-                    drones.get(drone).move(desiredLocation, drone);
-                    drones.get(drone).rotate(Misc.getAngleInDegrees(ship.getLocation(), drone.getLocation()), drone);
-                    usedDrones.add(drone);
-                }
+                assignedPoints.add(desiredLocation);
+                if(StarficzAIUtils.DEBUG_ENABLED) Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.blue);
+                drones.get(drone).move(desiredLocation, drone);
+                drones.get(drone).rotate(Misc.getAngleInDegrees(ship.getLocation(), drone.getLocation()), drone);
             }
         }
     }

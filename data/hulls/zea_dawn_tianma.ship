@@ -15,7 +15,8 @@
 	"automated",
 	"solar_shielding",
     "kol_ea_shields1",
-	"kol_throttle"
+	"kol_throttle",
+    "zea_dawn_simple_shield_drones"
   ],
   "weaponSlots": [
     {
