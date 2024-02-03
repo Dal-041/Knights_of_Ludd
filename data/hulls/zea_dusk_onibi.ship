@@ -1,0 +1,110 @@
+{
+  "hullName": "Onibi",
+  "hullId": "zea_dusk_onibi",
+  "hullSize": "FRIGATE",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_onibi.png",
+  "style": "ZEA_DUSK_TECH",
+  "height": 84,
+  "width": 100,
+  "center": [50, 42],
+  "collisionRadius": 81.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 71.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 0,
+      "locations": [9, 17]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -0,
+      "locations": [9, -17]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [-19, 21]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [-19, -21]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-37, 9],
+      "length": 30,
+      "width": 10,
+      "angle": 174,
+      "contrailSize": 30,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-37, -9],
+      "length": 30,
+      "width": 10,
+      "angle": -174,
+      "contrailSize": 30,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-39, 16],
+      "length": 30,
+      "width": 10,
+      "angle": 170,
+      "contrailSize": 30,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-39, -16],
+      "length": 30,
+      "width": 10,
+      "angle": -170,
+      "contrailSize": 30,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-37, -0],
+      "length": 40.5,
+      "width": 15,
+      "angle": 180,
+      "contrailSize": 15,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    7, -5,
+    33.5, -6.5,
+    36, -27,
+    18, -33.5,
+    15, -45.5,
+    2.5, -49,
+    -40, -19,
+    -40, 19,
+    2.5, 49,
+    15, 45.5,
+    18, 33.5,
+    36, 27,
+    33.5, 6.5,
+    7, 5
+  ]
+}
