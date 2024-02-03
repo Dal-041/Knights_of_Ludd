@@ -162,7 +162,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-8, 207]
+      "locations": [3, 219]
     },
     {
       "id": "WS0018",
@@ -171,7 +171,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [-8, -207]
+      "locations": [3, -219]
     },
     {
       "id": "LB 1",
