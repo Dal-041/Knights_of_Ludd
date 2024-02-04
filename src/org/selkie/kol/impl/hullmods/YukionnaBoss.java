@@ -7,6 +7,7 @@ import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.Utils;
@@ -37,6 +38,9 @@ public class YukionnaBoss extends BaseHullMod {
                 ship.setHitpoints(1f);
                 ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
                 ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
+                for(ShipAPI other : AIUtils.getAlliesOnMap(ship)){
+                    other.setCustomData("HF_SPARKLE_BOSS", true);
+                }
                 ship.setWeaponGlow(1f, Misc.setAlpha(PHASE_COLOR, 255), EnumSet.of(WeaponAPI.WeaponType.ENERGY) );
                 if (!ship.isPhased()) {
                     Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
