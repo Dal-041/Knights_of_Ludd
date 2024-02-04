@@ -1,0 +1,30 @@
+{
+	"id":"zea_dusk_subspace_glide",
+	"type":"ENGINE_MOD",
+	"aiType":"MANEUVERING_JETS",
+
+	"statsScript":"org.selkie.kol.impl.shipsystems.SubspaceGlide",
+
+	"engineGlowLengthMult":1,
+	"engineGlowWidthMult":1,
+	"engineGlowGlowMult":2,
+
+	"flameoutOnImpactChance":0,
+
+	"clampTurnRateAfter":true,
+	"clampMaxSpeedAfter":false,
+
+	"soundFilterType":"LOWPASS",
+    "soundFilterGain":0.95,
+    "soundFilterGainHF":0.55,
+
+	"useSound":"system_phase_cloak_activate",
+	"deactivateSound":"system_phase_cloak_deactivate",
+	"outOfUsesSound":"system_phase_cloak_collision",
+
+	"aiHints":{
+		"activeSpeedIncrease":100,
+		"burstMovementPotential":0,
+		"averageSpeedIncrease":65,
+	}
+}
