@@ -9,21 +9,33 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FifthCircleStats extends BaseShipSystemScript {
-    private static final String INFERNO_CANNON_ID = "zea_nian_maingun";
+public class SupernovaStats extends BaseShipSystemScript {
+    private static final String FIRED_INFERNO_CANNON = "FIRED_INFERNO_CANNON";
+    private static final String FIRED_INFERNO_CANNON_IDS = "FIRED_INFERNO_CANNON_IDS";
+    private static final List<String> INFERNO_CANNON_IDS = new ArrayList<>();
+    static {
+        INFERNO_CANNON_IDS.add("zea_nian_maingun_l");
+        INFERNO_CANNON_IDS.add("zea_nian_maingun_r");
+    }
 
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {
         ShipAPI ship = (ShipAPI) stats.getEntity();
-
-        for (WeaponAPI lidar : getLidars(ship)) {
-            lidar.setForceFireOneFrame(true);
+        if (state == State.IN) {
+            ship.setCustomData(FIRED_INFERNO_CANNON, false);
         }
 
-        if (state == State.ACTIVE) {
+        if (state != State.OUT) {
+            for (WeaponAPI lidar : getLidars(ship)) {
+                lidar.setForceFireOneFrame(true);
+            }
+        }
+
+        if (state == State.ACTIVE && !((Boolean) ship.getCustomData().get(FIRED_INFERNO_CANNON))) {
             WeaponAPI infernoCannon = getInfernoCannon(ship);
             if (infernoCannon != null) {
                 infernoCannon.setForceNoFireOneFrame(false);
                 infernoCannon.setForceFireOneFrame(true);
+                ship.setCustomData(FIRED_INFERNO_CANNON, true);
             }
         }
     }
@@ -35,12 +47,29 @@ public class FifthCircleStats extends BaseShipSystemScript {
     }
 
     public static WeaponAPI getInfernoCannon(ShipAPI ship) {
+        List<WeaponAPI> cannons = new ArrayList<>();
         for (WeaponAPI weapon : ship.getAllWeapons()) {
-            if (weapon.getId().equals(INFERNO_CANNON_ID)) {
-                return weapon;
+            if (INFERNO_CANNON_IDS.contains(weapon.getId())) {
+                cannons.add(weapon);
             }
         }
-        return null;
+        WeaponAPI cannonToFire = cannons.get(0);
+
+        List<WeaponAPI> firedCannons = new ArrayList<>();
+        if (ship.getCustomData().containsKey(FIRED_INFERNO_CANNON_IDS)) {
+            firedCannons = (List<WeaponAPI>) ship.getCustomData().get(FIRED_INFERNO_CANNON_IDS);
+            if (firedCannons.size() == cannons.size()) {
+                firedCannons.clear();
+            } else {
+                cannons.removeAll(firedCannons);
+                cannonToFire = cannons.get(0);
+            }
+        } else {
+            ship.setCustomData(FIRED_INFERNO_CANNON_IDS, firedCannons);
+        }
+        firedCannons.add(cannonToFire);
+
+        return cannonToFire;
     }
 
     public static List<WeaponAPI> getLidars(ShipAPI ship) {

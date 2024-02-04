@@ -13,27 +13,29 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 import java.util.List;
 
-public class HellfireCannonProjectileScript extends BaseEveryFrameCombatPlugin {
-    private static float TIER_1_ANGLE = 60f;
-    private static float TIER_2_ANGLE = 45f;
-    private static float TIER_3_ANGLE = 45f;
-    private static Color TIER_1_EXPLOSION_COLOR = new Color(230, 200, 70, 200);
-    private static Color TIER_2_EXPLOSION_COLOR = new Color(255, 140, 70, 200);
-    private static Color TIER_3_EXPLOSION_COLOR = new Color(255, 110, 60, 200);
+public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
+    private static final float TIER_1_ANGLE = 60f;
+    private static final float TIER_2_ANGLE = 45f;
+    private static final float TIER_3_ANGLE = 45f;
+    private static final Color TIER_1_EXPLOSION_COLOR = new Color(230, 200, 70, 200);
+    private static final Color TIER_2_EXPLOSION_COLOR = new Color(255, 140, 70, 200);
+    private static final Color TIER_3_EXPLOSION_COLOR = new Color(255, 110, 60, 200);
+    private static final float EXPLOSION_DELAY = 4.5f; //time in State.RELEASING until the canister explodes.
 
     private final DamagingProjectileAPI infernoShot;
     private State state = State.INITIALIZE;
     private float elapsedStageTime = 0f;
     private final IntervalUtil blink = new IntervalUtil(0.4f, 0.4f);
-    private IntervalUtil canisterReleaseInterval = new IntervalUtil(0.04f, 0.04f);
+    private IntervalUtil canisterReleaseInterval = new IntervalUtil(0.075f, 0.12f);
     private int canisterTier = 1;
     private int canistersReleased = 0;
     private float canisterExplosionTime = 0f;
+    private float desiredAngularVelocity = 0f;
 
     /**
-     * @param proj           inferno cannon shot
+     * @param proj inferno cannon shot
      */
-    public HellfireCannonProjectileScript(DamagingProjectileAPI proj) {
+    public SupernovaProjectileScript(DamagingProjectileAPI proj) {
         this.infernoShot = proj;
         proj.setMass(500f);
 
@@ -41,7 +43,7 @@ public class HellfireCannonProjectileScript extends BaseEveryFrameCombatPlugin {
         if (MathUtils.getRandomNumberInRange(0f, 1f) >= 0.5f) {
             angularVelocity *= -1;
         }
-        infernoShot.setAngularVelocity(angularVelocity);
+        desiredAngularVelocity = angularVelocity;
     }
 
     @Override
@@ -55,8 +57,14 @@ public class HellfireCannonProjectileScript extends BaseEveryFrameCombatPlugin {
             return;
         }
 
-        if  (state == State.INITIALIZE) {
+        if (state == State.INITIALIZE) {
             state = State.INACTIVE;
+        }
+
+        //spin the canister
+        if (state == State.INACTIVE || state == State.PRIMING) {
+            infernoShot.setAngularVelocity(desiredAngularVelocity);
+            desiredAngularVelocity *= 1f - amount;
         }
 
         elapsedStageTime += amount;
@@ -77,13 +85,11 @@ public class HellfireCannonProjectileScript extends BaseEveryFrameCombatPlugin {
             infernoShot.getVelocity().scale(0.98f);
 
             if (canisterTier <= 3) {
-                //don't explode early, so reset stage time to 0 while we''re still spawning idiots.
-                elapsedStageTime = 0f;
                 canisterReleaseInterval.advance(amount);
                 if (canisterReleaseInterval.intervalElapsed()) {
                     //every time we finish a full circle, go to the next tier.
                     if (canisterExplosionTime == 0f) {
-                        canisterExplosionTime = Global.getCombatEngine().getTotalElapsedTime(false) + 4.5f + canisterTier * 0.33f;
+                        canisterExplosionTime = Global.getCombatEngine().getTotalElapsedTime(false) + EXPLOSION_DELAY + canisterTier * 0.33f;
                     }
 
                     Color explosionColor = TIER_1_EXPLOSION_COLOR;
@@ -107,11 +113,23 @@ public class HellfireCannonProjectileScript extends BaseEveryFrameCombatPlugin {
                         DamagingProjectileAPI proj = (DamagingProjectileAPI) Global.getCombatEngine().spawnProjectile(infernoShot.getSource(), infernoShot.getWeapon(), "zea_nian_canister", infernoShot.getLocation(), facing,
                                 canisterVelocity);
 
-                        Global.getCombatEngine().addPlugin(new HellfireCannonSubmunitionScript(proj, canisterExplosionTime, explosionColor));
+                        Global.getCombatEngine().addPlugin(new SupernovaSubmunitionScript(proj, canisterExplosionTime, explosionColor));
                         Global.getSoundPlayer().playSound("system_canister_flak_fire", 1f, 1f, infernoShot.getLocation(), canisterVelocity);
+
+                        Global.getCombatEngine().spawnExplosion(
+                                infernoShot.getLocation(),
+                                MathUtils.getPoint(
+                                        new Vector2f(),
+                                        66,
+                                        facing
+                                ),
+                                Color.DARK_GRAY,
+                                30f,
+                                0.45f
+                        );
                     }
 
-                    if (facing >= (360f  + infernoShot.getFacing())) {
+                    if (facing >= (360f + infernoShot.getFacing())) {
                         canisterTier++;
                         canisterExplosionTime = 0f;
                         canistersReleased = 0;
@@ -126,10 +144,10 @@ public class HellfireCannonProjectileScript extends BaseEveryFrameCombatPlugin {
                     blink.setInterval(Math.max(0.1f, blink.getMinInterval() * ramp), Math.max(0.1f, blink.getMinInterval() * ramp));
                     Global.getCombatEngine().addHitParticle(infernoShot.getLocation(), infernoShot.getVelocity(), 100f, Math.min(1, infernoShot.getElapsed() / 2f), 0.1f, Color.red);
                 }
+            }
 
-                if (elapsedStageTime >= 3f) {
-                    state = State.EXPLOSION;
-                }
+            if (elapsedStageTime >= EXPLOSION_DELAY) {
+                state = State.EXPLOSION;
             }
         } else if (state == State.EXPLOSION) {
             //boom

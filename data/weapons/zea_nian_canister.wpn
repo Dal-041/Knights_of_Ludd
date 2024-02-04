@@ -50,5 +50,5 @@
   "textureType": ROUGH,
   "fireSoundTwo": "hellbore_fire",
   "unaffectedByProjectileSpeedBonuses": true,
-  "everyFrameEffect":"org.selkie.kol.impl.weapons.HellfireCannonWeaponScript"
+  "everyFrameEffect":"org.selkie.kol.impl.weapons.SupernovaWeaponScript"
 }

@@ -2,7 +2,7 @@
   "id": "zea_inferno_shot",
   "specClass": "missile",
   "missileType": "PHASE_CHARGE",
-  "onHitEffect": "org.selkie.kol.impl.weapons.HellfireCannonProjectileOnHitEffect",
+  "onHitEffect": "org.selkie.kol.impl.weapons.SupernovaProjectileOnHitEffect",
   "sprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/projectiles/zea_boss_nian_inferno_canister.png",
   "size": [ 28, 54 ],
   "center": [ 14, 27 ],

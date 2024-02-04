@@ -3,19 +3,16 @@ package org.selkie.kol.impl.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CollisionClass;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.List;
 
-public class HellfireCannonSubmunitionScript extends BaseEveryFrameCombatPlugin {
+public class SupernovaSubmunitionScript extends BaseEveryFrameCombatPlugin {
     private final DamagingProjectileAPI infernoCanister;
     private final float explosionTime;
     private final Color explosionColor;
@@ -23,7 +20,7 @@ public class HellfireCannonSubmunitionScript extends BaseEveryFrameCombatPlugin 
     /**
      * @param proj           inferno cannon shot
      */
-    public HellfireCannonSubmunitionScript(DamagingProjectileAPI proj, float explosionTime, Color explosionColor) {
+    public SupernovaSubmunitionScript(DamagingProjectileAPI proj, float explosionTime, Color explosionColor) {
         this.infernoCanister = proj;
         this.explosionTime = explosionTime;
         this.explosionColor = explosionColor;
@@ -69,7 +66,7 @@ public class HellfireCannonSubmunitionScript extends BaseEveryFrameCombatPlugin 
                     ),
                     Color.DARK_GRAY,
                     200f,
-                    1f
+                    2.3f
             );
 
             Global.getSoundPlayer().playSound("system_canister_flak_explosion", 1f, 1f, infernoCanister.getLocation(), new Vector2f());

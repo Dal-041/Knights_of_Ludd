@@ -1,8 +1,8 @@
 {
-	"id":"zea_boss_fifthcircle",
+	"id":"zea_boss_supernova",
 	"type":"STAT_MOD",
 	"aiType":"LIDAR_ARRAY",
-	"statsScript":"org.selkie.kol.impl.shipsystems.FifthCircleStats",
+	"statsScript":"org.selkie.kol.impl.shipsystems.SupernovaStats",
 
 	"useSound":"system_targeting_feed",
 	#"loopSound":"system_targeting_feed_loop",
