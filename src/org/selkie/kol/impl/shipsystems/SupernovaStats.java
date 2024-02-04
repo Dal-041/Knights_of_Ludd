@@ -13,6 +13,7 @@ public class SupernovaStats extends BaseShipSystemScript {
     private static final String FIRED_INFERNO_CANNON = "FIRED_INFERNO_CANNON";
     private static final String FIRED_INFERNO_CANNON_IDS = "FIRED_INFERNO_CANNON_IDS";
     private static final List<String> INFERNO_CANNON_IDS = new ArrayList<>();
+
     static {
         INFERNO_CANNON_IDS.add("zea_nian_maingun_l");
         INFERNO_CANNON_IDS.add("zea_nian_maingun_r");
@@ -32,11 +33,11 @@ public class SupernovaStats extends BaseShipSystemScript {
 
         if (state == State.ACTIVE && !((Boolean) ship.getCustomData().get(FIRED_INFERNO_CANNON))) {
             WeaponAPI infernoCannon = getInfernoCannon(ship);
-            if (infernoCannon != null) {
-                infernoCannon.setForceNoFireOneFrame(false);
-                infernoCannon.setForceFireOneFrame(true);
-                ship.setCustomData(FIRED_INFERNO_CANNON, true);
-            }
+            infernoCannon.setForceNoFireOneFrame(false);
+            infernoCannon.setForceFireOneFrame(true);
+
+            setFiredInfernoCannon(ship, infernoCannon);
+            ship.setCustomData(FIRED_INFERNO_CANNON, true);
         }
     }
 
@@ -46,6 +47,16 @@ public class SupernovaStats extends BaseShipSystemScript {
         ship.getCustomData().remove(id + "drone");
     }
 
+    private static void setFiredInfernoCannon(ShipAPI ship, WeaponAPI infernoCannon) {
+        List<WeaponAPI> firedCannons = new ArrayList<>();
+        if (ship.getCustomData().containsKey(FIRED_INFERNO_CANNON_IDS)) {
+            firedCannons = (List<WeaponAPI>) ship.getCustomData().get(FIRED_INFERNO_CANNON_IDS);
+        } else {
+            ship.setCustomData(FIRED_INFERNO_CANNON_IDS, firedCannons);
+        }
+        firedCannons.add(infernoCannon);
+    }
+
     public static WeaponAPI getInfernoCannon(ShipAPI ship) {
         List<WeaponAPI> cannons = new ArrayList<>();
         for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -53,21 +64,17 @@ public class SupernovaStats extends BaseShipSystemScript {
                 cannons.add(weapon);
             }
         }
-        WeaponAPI cannonToFire = cannons.get(0);
 
-        List<WeaponAPI> firedCannons = new ArrayList<>();
+        WeaponAPI cannonToFire = cannons.get(0);
         if (ship.getCustomData().containsKey(FIRED_INFERNO_CANNON_IDS)) {
-            firedCannons = (List<WeaponAPI>) ship.getCustomData().get(FIRED_INFERNO_CANNON_IDS);
+            List<WeaponAPI> firedCannons = (List<WeaponAPI>) ship.getCustomData().get(FIRED_INFERNO_CANNON_IDS);
             if (firedCannons.size() == cannons.size()) {
                 firedCannons.clear();
             } else {
                 cannons.removeAll(firedCannons);
                 cannonToFire = cannons.get(0);
             }
-        } else {
-            ship.setCustomData(FIRED_INFERNO_CANNON_IDS, firedCannons);
         }
-        firedCannons.add(cannonToFire);
 
         return cannonToFire;
     }
@@ -85,7 +92,7 @@ public class SupernovaStats extends BaseShipSystemScript {
     private static float getMaxRange(List<WeaponAPI> weapons) {
         float lidarMaxRange = 0f;
         for (WeaponAPI w : weapons) {
-            if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR) && w.getRange() >  lidarMaxRange) {
+            if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR) && w.getRange() > lidarMaxRange) {
                 lidarMaxRange = w.getRange();
             }
         }

@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicRender;
 
 import java.awt.*;
 import java.util.List;
@@ -20,6 +21,8 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
     private static final Color TIER_1_EXPLOSION_COLOR = new Color(230, 200, 70, 200);
     private static final Color TIER_2_EXPLOSION_COLOR = new Color(255, 140, 70, 200);
     private static final Color TIER_3_EXPLOSION_COLOR = new Color(255, 110, 60, 200);
+    private static final float INACTIVE_DELAY = 2f; //time in State.PRIMING until the canister releases submunitions.
+    private static final float PRIMING_DELAY = 1.25f; //time in State.PRIMING until the canister releases submunitions.
     private static final float EXPLOSION_DELAY = 4.5f; //time in State.RELEASING until the canister explodes.
 
     private final DamagingProjectileAPI infernoShot;
@@ -31,6 +34,7 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
     private int canistersReleased = 0;
     private float canisterExplosionTime = 0f;
     private float desiredAngularVelocity = 0f;
+    private float targetingAngle = MathUtils.getRandomNumberInRange(-180f, 180f);
 
     /**
      * @param proj inferno cannon shot
@@ -57,8 +61,10 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
             return;
         }
 
-        if (state == State.INITIALIZE) {
-            state = State.INACTIVE;
+        elapsedStageTime += amount;
+        if (state.length - elapsedStageTime <= 0f) {
+            state = State.values()[state.ordinal() + 1];
+            elapsedStageTime = 0f;
         }
 
         //spin the canister
@@ -67,23 +73,21 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
             desiredAngularVelocity *= 1f - amount;
         }
 
-        elapsedStageTime += amount;
-        if (state == State.INACTIVE) {
-            if (elapsedStageTime >= 2f) {
-                Global.getCombatEngine().addHitParticle(infernoShot.getLocation(), infernoShot.getVelocity(), 200f, Math.min(1, infernoShot.getElapsed() / 2f), 0.1f, Color.red);
-                state = State.PRIMING;
-                elapsedStageTime = 0f;
-            }
-        } else if (state == State.PRIMING) {
-            infernoShot.getVelocity().scale(0.995f);
+        float velDecrease = 1f * amount;
+        infernoShot.getVelocity().scale(1f - velDecrease);
 
-            if (elapsedStageTime >= 1.25f) {
-                state = State.RELEASING;
-                elapsedStageTime = 0f;
-            }
-        } else if (state == State.RELEASING) {
-            infernoShot.getVelocity().scale(0.98f);
+        targetingAngle += amount * 5f;
+        MagicRender.singleframe(
+                Global.getSettings().getSprite("fx", "zea_nian_targetingRing"),
+                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
+                new Vector2f(1200, 1200), //size
+                targetingAngle, //angle
+                new Color(255, 100, 0, 128),
+                true, //additive
+                CombatEngineLayers.UNDER_SHIPS_LAYER
+        );
 
+        if (state == State.RELEASING) {
             if (canisterTier <= 3) {
                 canisterReleaseInterval.advance(amount);
                 if (canisterReleaseInterval.intervalElapsed()) {
@@ -145,10 +149,6 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
                     Global.getCombatEngine().addHitParticle(infernoShot.getLocation(), infernoShot.getVelocity(), 100f, Math.min(1, infernoShot.getElapsed() / 2f), 0.1f, Color.red);
                 }
             }
-
-            if (elapsedStageTime >= EXPLOSION_DELAY) {
-                state = State.EXPLOSION;
-            }
         } else if (state == State.EXPLOSION) {
             //boom
             Global.getCombatEngine().spawnExplosion(
@@ -188,16 +188,41 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
 
     public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
         if (state == State.INACTIVE) {
-            elapsedStageTime = 999f;
             //immediately prime
+            elapsedStageTime = 0f;
+            state = State.RELEASING;
         }
     }
 
+    // Function to calculate the total distance traveled
+    public static float calculateTotalDistance(double initialSpeed, double decreasePercentage, float totalTime) {
+        // Convert percentage decrease to a decimal
+        double x = decreasePercentage / 100;
+
+        // Calculate total distance using the formula for the sum of a geometric sequence
+        double totalDistance = initialSpeed * (1 - Math.pow(1 - x, totalTime)) / x;
+
+        return (float) totalDistance;
+    }
+
     private enum State {
-        INITIALIZE,
-        INACTIVE,
-        PRIMING,
-        RELEASING,
-        EXPLOSION
+        INITIALIZE(0f),
+        INACTIVE(2f),
+        PRIMING(1.25f),
+        RELEASING(4.5f),
+        EXPLOSION(0f);
+
+        private final float length;
+        State(float length) {
+            this.length = length;
+        }
+
+        float timeToExplode(float elapsedStageTime) {
+            float totalTime = this.length - elapsedStageTime;
+            for (int i = this.ordinal() + 1; i < State.values().length; i++) {
+                totalTime += State.values()[i].length;
+            }
+            return totalTime;
+        }
     }
 }

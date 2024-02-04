@@ -250,6 +250,7 @@
 		"fx":{
 			"kol_shield":"graphics/fx/kol_shield_fx.png",
 			"zea_elysia_vortice":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_elysia_vortice.png",
+			"zea_nian_targetingRing":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_nian_targetingring.png"
 		},
 		"kol_fx":{
 			"zea_shield_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_dawn.png",
