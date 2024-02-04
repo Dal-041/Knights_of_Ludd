@@ -21,7 +21,8 @@ public class SparkleOnHitEffect implements OnHitEffectPlugin {
 		ShipAPI source = projectile.getSource();
 		if (target instanceof ShipAPI) {
 			ShipAPI ship = (ShipAPI) target;
-			if (!ship.isFighter() && source.hasTag(SparkleControlScript.HFCOOLDOWNTAG)) {
+			if (!ship.isFighter() && source.hasTag(SparkleControlScript.HFCOOLDOWNTAG)
+					|| !ship.isFighter() && source.getCustomData().containsKey("HF_SPARKLE_BOSS")) {
 				float pierceChance = 1f;
 				pierceChance *= ship.getMutableStats().getDynamic().getValue(Stats.SHIELD_PIERCED_MULT);
 				boolean piercedShield = shieldHit && (float) Math.random() < pierceChance;
@@ -29,7 +30,8 @@ public class SparkleOnHitEffect implements OnHitEffectPlugin {
 				if (!shieldHit || piercedShield) {
 					float emp = projectile.getEmpAmount();
 					float dam = 1f;
-					if (source.getCustomData().containsKey("HF_SPARKLE") && source.getCustomData().get("HF_SPARKLE").equals(true)) {
+					if (source.getCustomData().containsKey("HF_SPARKLE") && source.getCustomData().get("HF_SPARKLE").equals(true)
+							|| source.getCustomData().containsKey("HF_SPARKLE_BOSS") && source.getCustomData().get("HF_SPARKLE_BOSS").equals(true)) {
 						dam = SparkleHullMod.shipDamageHF; // 300
 					} else {
 						dam = SparkleHullMod.shipDamageReg; // 1

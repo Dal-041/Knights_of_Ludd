@@ -175,7 +175,7 @@ public class SparkleHullMod extends BaseHullMod {
         }
 
         HFGraceInterval.advance(amount);
-        if ((!madeHF && makeHFSparkles(ship)) || (madeHF && !HFGraceInterval.intervalElapsed())) { //make mean
+        if (ship.getCustomData().containsKey("HF_SPARKLE_BOSS") || (!madeHF && makeHFSparkles(ship)) || (madeHF && !HFGraceInterval.intervalElapsed())) { //make mean
             for (int i = 0; i < data.drones.size(); i++) {
                 MissileAPI orig = data.drones.get(i);
                 // NEW PLAN: set a custom tag for the onHit to pick up
@@ -185,13 +185,13 @@ public class SparkleHullMod extends BaseHullMod {
             }
             if (makeHFSparkles(ship)) {
                 HFGraceInterval.setElapsed(0f);
-                ship.getCustomData().put("HF_SPARKLE", true);
+                ship.setCustomData("HF_SPARKLE", true);
             }
             madeHF = true;
         } else {
-            ship.getCustomData().put("HF_SPARKLE", false);
+            ship.setCustomData("HF_SPARKLE", false);
         }
-        if (madeHF && HFGraceInterval.intervalElapsed()) { //make chill
+        if (madeHF && HFGraceInterval.intervalElapsed() && !ship.getCustomData().containsKey("HF_SPARKLE_BOSS")) { //make chill
             for (int i = 0; i < data.drones.size(); i++) {
                 MissileAPI orig = data.drones.get(i);
                 //orig.setNoGlowTime(0.01f); //One frame,ish
@@ -199,7 +199,7 @@ public class SparkleHullMod extends BaseHullMod {
                 orig.getEngineController().fadeToOtherColor(this,jitterColor,hfColor,1f,1f);
             }
             madeHF = false;
-            ship.getCustomData().remove("HF_SPARKLE");
+            ship.removeCustomData("HF_SPARKLE");
         }
     }
 
