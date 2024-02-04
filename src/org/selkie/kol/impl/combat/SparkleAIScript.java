@@ -392,7 +392,6 @@ public class SparkleAIScript implements MissileAIPlugin {
     public CombatEntityAPI getTarget() {
         return target;
     }
-
     public void setTarget(CombatEntityAPI target) {
         this.target = target;
     }

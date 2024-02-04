@@ -73,13 +73,13 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
             desiredAngularVelocity *= 1f - amount;
         }
 
-        float velDecrease = 1f * amount;
+        float velDecrease = 0.05f * amount;
         infernoShot.getVelocity().scale(1f - velDecrease);
 
         targetingAngle += amount * 5f;
         MagicRender.singleframe(
                 Global.getSettings().getSprite("fx", "zea_nian_targetingRing"),
-                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
+                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), 0.05f, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
                 new Vector2f(1200, 1200), //size
                 targetingAngle, //angle
                 new Color(255, 100, 0, 128),

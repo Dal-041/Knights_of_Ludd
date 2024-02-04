@@ -2,6 +2,9 @@ package org.selkie.kol;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
+import com.fs.starfarer.api.combat.CombatEntityAPI;
+import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
+import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
@@ -85,6 +88,17 @@ public class Utils {
                 }
             }
         }
+    }
+
+    public static void shipSpawnExplosion(float size, Vector2f location){
+        NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);
+        p.fadeOut = 0.15f;
+        p.hitGlowSizeMult = 0.25f;
+        p.underglow = new Color(5,120,180,150);
+        p.withHitGlow = false;
+        p.noiseMag = 1.25f;
+        CombatEntityAPI e = Global.getCombatEngine().addLayeredRenderingPlugin(new NegativeExplosionVisual(p));
+        e.getLocation().set(location);
     }
 
     public static class LinearSRBG {

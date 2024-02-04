@@ -62,15 +62,18 @@ public class NinayaBoss extends BaseHullMod {
             float hpRegen = 0.6f;
             float maxTime = 8f;
 
-            if (phaseTwoTimer > maxTime) {
-                StarficzAIUtils.unapplyDamper(ship, id);
-                StarficzAIUtils.unapplyDamper(escortA, id);
-                StarficzAIUtils.unapplyDamper(escortB, id);
-            }
+
 
             if(phaseTwo && phaseTwoTimer < maxTime){
 
                 phaseTwoTimer += amount;
+
+                if (phaseTwoTimer > maxTime) {
+                    StarficzAIUtils.unapplyDamper(ship, id);
+                    StarficzAIUtils.unapplyDamper(escortA, id);
+                    StarficzAIUtils.unapplyDamper(escortB, id);
+                    return;
+                }
 
                 // force phase, mitigate damage, regen hp/armor, vent flux, reset ppt/ cr
 
@@ -187,8 +190,6 @@ public class NinayaBoss extends BaseHullMod {
             );
             engine.spawnDamagingExplosion(spec, ship, location, false);
         }
-
-
     }
 
     public static class NinayaAIScript implements AdvanceableListener {

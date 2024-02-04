@@ -1,7 +1,8 @@
 {
 	"id":"zea_dusk_phase_skip",
 	"type":"ENGINE_MOD",
-	"aiType":"MANEUVERING_JETS",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.kol.impl.shipsystems.AI.PhasespaceSkipAI",
 	
 	"statsScript":"org.selkie.kol.impl.shipsystems.PhasespaceSkip",
 

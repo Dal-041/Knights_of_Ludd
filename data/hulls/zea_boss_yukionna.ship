@@ -19,7 +19,8 @@
 	"advancedshieldemitter",
     "kol_ea_mist",
     "kol_ea_sparkle",
-    "zea_edf_ball_lightning"
+    "zea_edf_ball_lightning",
+    "zea_dusk_yukionna_boss"
   ],
   "builtInWeapons": {
     "WS0017": "zea_boss_resonator",

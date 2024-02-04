@@ -56,7 +56,7 @@ public class NinmahBoss extends BaseHullMod {
                     Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
-                shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
+                Utils.shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 float timeMult = ship.getMutableStats().getTimeMult().getModifiedValue();
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
@@ -65,16 +65,6 @@ public class NinmahBoss extends BaseHullMod {
             return false;
         }
 
-        public void stayStill(ShipAPI ship){
-            ship.giveCommand(ShipCommand.DECELERATE, null, 0);
-            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
-            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
-            ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
-            ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
-            ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
-            ship.blockCommandForOneFrame(ShipCommand.TURN_LEFT);
-
-        }
 
         @Override
         public void advance(float amount) {
@@ -83,12 +73,18 @@ public class NinmahBoss extends BaseHullMod {
             float hpRegen = 0.6f;
             float maxTime = 8f;
 
+
+
             if(phaseTwo && phaseTwoTimer < maxTime){
 
                 phaseTwoTimer += amount;
 
+                if (phaseTwoTimer > maxTime){
+                    ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
+                    return;
+                }
+
                 // force phase, mitigate damage, regen hp/armor, vent flux, reset ppt/ cr
-                if (phaseTwoTimer > maxTime) ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
 
                 if(ship.getPhaseCloak() != null)
                     ship.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
@@ -107,7 +103,7 @@ public class NinmahBoss extends BaseHullMod {
                     }
                 }
 
-                stayStill(ship);
+                StarficzAIUtils.stayStill(ship);
 
                 // specially tuned for phase ships
                 PersonAPI captain = Global.getSettings().createPerson();
@@ -152,53 +148,42 @@ public class NinmahBoss extends BaseHullMod {
                 if(phaseTwoTimer > maxTime*4/7){
                     if (escortA == null) {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing, 0f, captain);
-                        shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
+                        Utils.shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortA), assignmentInfo, false);
                     } else{
                         escortA.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
                         escortA.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        stayStill(escortA);
+                        StarficzAIUtils.stayStill(escortA);
                     }
                 }
 
                 if(phaseTwoTimer > maxTime*5/7){
                     if (escortB == null) {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing + 120f, 0f, captain);
-                        shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
+                        Utils.shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortB), assignmentInfo, false);
                     } else{
                         escortB.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
                         escortB.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        stayStill(escortB);
+                        StarficzAIUtils.stayStill(escortB);
                     }
                 }
 
                 if(phaseTwoTimer > maxTime*6/7){
                     if (escortC == null) {
                         escortC = fleetManager.spawnShipOrWing(escortSpec, escortCSpawn, escortFacing + 240f, 0f, captain);
-                        shipSpawnExplosion(escortC.getShieldRadiusEvenIfNoShield(), escortC.getLocation());
+                        Utils.shipSpawnExplosion(escortC.getShieldRadiusEvenIfNoShield(), escortC.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortC), assignmentInfo, false);
                     } else{
                         escortC.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
                         escortC.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        stayStill(escortC);
+                        StarficzAIUtils.stayStill(escortC);
                     }
                 }
             }
-        }
-
-        public void shipSpawnExplosion(float size, Vector2f location){
-            NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);
-            p.fadeOut = 0.15f;
-            p.hitGlowSizeMult = 0.25f;
-            p.underglow = new Color(5,120,180,150);
-            p.withHitGlow = false;
-            p.noiseMag = 1.25f;
-            CombatEntityAPI e = Global.getCombatEngine().addLayeredRenderingPlugin(new NegativeExplosionVisual(p));
-            e.getLocation().set(location);
         }
     }
 

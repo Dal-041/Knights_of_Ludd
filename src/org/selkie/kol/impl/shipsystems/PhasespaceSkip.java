@@ -20,8 +20,7 @@ import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class PhasespaceSkip extends BaseShipSystemScript {
     //Main phase color
-    private static final Color PHASE_COLOR = new Color(80, 110, 240, 200);
-
+    private static final Color PHASE_COLOR = new Color(70, 90, 240, 230);
     //For nullspace phantoms
     private static final Color AFTERIMAGE_COLOR = new Color(30, 45, 220, 200);
     private static final float PHANTOM_DELAY = 0.2f;

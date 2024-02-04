@@ -53,7 +53,7 @@ public class NinevehBoss extends BaseHullMod {
                     Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
-                shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
+                Utils.shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 float timeMult = ship.getMutableStats().getTimeMult().getModifiedValue();
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
@@ -70,17 +70,20 @@ public class NinevehBoss extends BaseHullMod {
             float hpRegen = 0.6f;
             float maxTime = 8f;
 
-            if (phaseTwoTimer > maxTime) {
-                StarficzAIUtils.unapplyDamper(escortHyperionA, id);
-                StarficzAIUtils.unapplyDamper(escortHyperionB, id);
-            }
+
 
             if(phaseTwo && phaseTwoTimer < maxTime){
 
                 phaseTwoTimer += amount;
 
+                if (phaseTwoTimer > maxTime) {
+                    StarficzAIUtils.unapplyDamper(escortHyperionA, id);
+                    StarficzAIUtils.unapplyDamper(escortHyperionB, id);
+                    ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
+                    return;
+                }
+
                 // force phase, mitigate damage, regen hp/armor, vent flux, reset ppt/ cr
-                if (phaseTwoTimer > maxTime) ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
 
                 if(ship.getPhaseCloak() != null)
                     ship.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
@@ -211,11 +214,11 @@ public class NinevehBoss extends BaseHullMod {
                 if(phaseTwoTimer > maxTime*4/7){
                     if (escortHyperionA == null) {
                         escortHyperionA = fleetManager.spawnShipOrWing("zea_boss_hyperion_Strike", escortHyperionASpawn, escortFacing + 60f, 0f, hyperionCaptain);
-                        shipSpawnExplosion(escortHyperionA.getShieldRadiusEvenIfNoShield(), escortHyperionA.getLocation());
+                        Utils.shipSpawnExplosion(escortHyperionA.getShieldRadiusEvenIfNoShield(), escortHyperionA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHyperionA), assignmentInfo, false);
 
                         escortHyperionB = fleetManager.spawnShipOrWing("zea_boss_hyperion_Strike", escortHyperionBSpawn, escortFacing + 240f, 0f, hyperionCaptain);
-                        shipSpawnExplosion(escortHyperionB.getShieldRadiusEvenIfNoShield(), escortHyperionB.getLocation());
+                        Utils.shipSpawnExplosion(escortHyperionB.getShieldRadiusEvenIfNoShield(), escortHyperionB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHyperionB), assignmentInfo, false);
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
@@ -234,11 +237,11 @@ public class NinevehBoss extends BaseHullMod {
                 if(phaseTwoTimer > maxTime*5/7){
                     if (escortHarbingerA == null || escortHarbingerB == null) {
                         escortHarbingerA = fleetManager.spawnShipOrWing("zea_boss_harbinger_Strike", escortHarbingerASpawn, escortFacing + 120f, 0f, harbingerCaptain);
-                        shipSpawnExplosion(escortHarbingerA.getShieldRadiusEvenIfNoShield(), escortHarbingerA.getLocation());
+                        Utils.shipSpawnExplosion(escortHarbingerA.getShieldRadiusEvenIfNoShield(), escortHarbingerA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHarbingerA), assignmentInfo, false);
 
                         escortHarbingerB = fleetManager.spawnShipOrWing("zea_boss_harbinger_Strike", escortHarbingerBSpawn, escortFacing + 300f, 0f, harbingerCaptain);
-                        shipSpawnExplosion(escortHarbingerB.getShieldRadiusEvenIfNoShield(), escortHarbingerB.getLocation());
+                        Utils.shipSpawnExplosion(escortHarbingerB.getShieldRadiusEvenIfNoShield(), escortHarbingerB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHarbingerB), assignmentInfo, false);
                     } else{
                         escortHarbingerA.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
@@ -255,11 +258,11 @@ public class NinevehBoss extends BaseHullMod {
                 if(phaseTwoTimer > maxTime*6/7){
                     if (escortDoomA == null || escortDoomB == null) {
                         escortDoomA = fleetManager.spawnShipOrWing("zea_boss_doom_Strike", escortDoomASpawn, escortFacing, 0f, doomCaptain);
-                        shipSpawnExplosion(escortDoomA.getShieldRadiusEvenIfNoShield(), escortDoomA.getLocation());
+                        Utils.shipSpawnExplosion(escortDoomA.getShieldRadiusEvenIfNoShield(), escortDoomA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortDoomA), assignmentInfo, false);
 
                         escortDoomB = fleetManager.spawnShipOrWing("zea_boss_doom_Strike", escortDoomBSpawn, escortFacing + 180f, 0f, doomCaptain);
-                        shipSpawnExplosion(escortDoomB.getShieldRadiusEvenIfNoShield(), escortDoomB.getLocation());
+                        Utils.shipSpawnExplosion(escortDoomB.getShieldRadiusEvenIfNoShield(), escortDoomB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortDoomB), assignmentInfo, false);
                     } else{
                         escortDoomA.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
@@ -274,17 +277,6 @@ public class NinevehBoss extends BaseHullMod {
                     }
                 }
             }
-        }
-
-        public void shipSpawnExplosion(float size, Vector2f location){
-            NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);
-            p.fadeOut = 0.15f;
-            p.hitGlowSizeMult = 0.25f;
-            p.underglow = new Color(5,120,180,150);
-            p.withHitGlow = false;
-            p.noiseMag = 1.25f;
-            CombatEntityAPI e = Global.getCombatEngine().addLayeredRenderingPlugin(new NegativeExplosionVisual(p));
-            e.getLocation().set(location);
         }
     }
 
