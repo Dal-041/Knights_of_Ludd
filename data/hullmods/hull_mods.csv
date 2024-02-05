@@ -22,4 +22,5 @@ PD Drones,zea_edf_pd_drones,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.
 Flare Wave,zea_dawn_flare_wave,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.NianFlaresHullmod,,,
 Shield Drones,zea_dawn_smart_shield_drones,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.SmartShieldDronesHullmod,
 Shield Drones,zea_dawn_simple_shield_drones,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.SimpleShieldDronesHullmod,
+Shachihoko Drone,zea_edf_shachihoko_drone,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.ShachihokoDroneHullmod,
 Ball Lightning,zea_edf_ball_lightning,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.BallLightningHullmod

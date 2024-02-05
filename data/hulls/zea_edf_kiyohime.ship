@@ -17,7 +17,8 @@
     "automated",
     "kol_ea_shields3",
     "kol_conformal_shield",
-    "kol_throttle"
+    "kol_throttle",
+    "zea_edf_shachihoko_drone"
   ],
   "builtInWeapons": {
     "WS0009": "zea_deco_edf_engS",
