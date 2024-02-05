@@ -161,7 +161,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
         }
 
         initElysianFleetProperties(random, fleet, false);
-
+        addLoreToFleetCheck(fleet);
         fleet.addScript(new AbyssAssignmentAI(fleet, system, pickEntityToGuard(new Random(), system, fleet)));
 
         return fleet;
@@ -372,6 +372,15 @@ public class AbyssalFleetManager extends SeededFleetManager {
                     }
                 }
             }
+        }
+    }
+
+    public void addLoreToFleetCheck(CampaignFleetAPI fleet) {
+        String faction = fleet.getFaction().getId();
+        if (!faction.equals(PrepareAbyss.dawnID) && faction.equals(PrepareAbyss.duskID) && faction.equals(PrepareAbyss.elysianID)) return;
+        float chance = 0.1f;
+        if (Math.random() <= chance) {
+            fleet.addDropRandom(faction + "_lore", 1);
         }
     }
 }
