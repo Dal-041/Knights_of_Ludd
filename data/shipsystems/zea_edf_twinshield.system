@@ -1,0 +1,24 @@
+{
+	"id":"zea_edf_twinshield",
+	"type":"SHIELD_MOD",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.kol.impl.shipsystems.AI.TwinShieldAI",
+
+	"statsScript":"org.selkie.kol.impl.shipsystems.TwinShieldStats",
+	"runScriptWhilePaused":true, # only for the player's ship
+	"runScriptWhileIdle":true,  # this means unapply() never gets called
+
+    "shieldRingColor":[200,225,255,255],
+    "shieldInnerColor":[50,150,255,175],
+    "shieldThicknessMult":1,
+    "shieldFluctuationMult":1.5,
+
+    "soundFilterType":"LOWPASS",
+    "soundFilterGain":0.5,
+    "soundFilterGainHF":1.5,
+
+	"useSound":"shield_raise",
+	"deactivateSound":"shield_lower",
+	"loopSound":"system_fortress_shield_loop",
+    "outOfUsesSound":"gun_out_of_ammo",
+}

@@ -10,6 +10,7 @@ Lidar Array,kol_lidar,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/l
 Lidar Array,kol_lidar_smol,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/lidar_barrage.png
 Small Flux Negation,zea_dawn_small_flux_negation,,,,,,,,,,1,10,1,10,,,,,,,,,,,,,
 Fortress Flux Converter,zea_edf_fortress_flux_converter,,,,,,,,2,0.1,0.25,2.5,0.25,,,,,,TRUE,,,,,,,,
+Twin-Layer Shielding,zea_edf_twinshield,,,,,,0.05,,,,0.25,,1,3,TRUE,,,TRUE,,,,,,,,,data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/twin_shield.png
 Targeting Beam,zea_dawn_targeting_beam,,,,,,0.2,,,,3.25,10,0,10,,,,,,,,,,,,,
 Damper Field,zea_dawn_damper,1,,,,,,,3,0.05,0.1,1.5,0.1,2,,,,,,,,,TRUE,,,uses_damper_ai,
 Leap of Faith,kol_lunge,,,,,,,,3,0.15,0.1,0.3,0.1,,,,,,,,,,,,TRUE,,graphics/icons/hullsys/maneuvering_jets.png

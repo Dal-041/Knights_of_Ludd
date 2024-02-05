@@ -97,7 +97,7 @@ public class SimpleShieldDronesActivator extends DroneActivator {
     }
 
     @Override
-    public int getMaxCharges() { return 3; }
+    public int getMaxCharges() { return 0; }
 
     @Override
     public int getMaxDeployedDrones() {

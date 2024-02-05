@@ -102,7 +102,7 @@ public class SmartShieldDronesActivator extends DroneActivator {
     }
 
     @Override
-    public int getMaxCharges() { return 5; }
+    public int getMaxCharges() { return 0; }
 
     @Override
     public int getMaxDeployedDrones() {

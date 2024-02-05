@@ -14,7 +14,7 @@ import org.magiclib.util.MagicRender;
 
 import java.awt.*;
 
-public class SubspaceGlide extends BaseShipSystemScript {
+public class SubspaceGlideStats extends BaseShipSystemScript {
     private static final Color PHASE_COLOR = new Color(70, 90, 240, 230);
     private static final float SHIP_ALPHA_MULT = 0.50f;
     public static float SPEED_BONUS = 100f;

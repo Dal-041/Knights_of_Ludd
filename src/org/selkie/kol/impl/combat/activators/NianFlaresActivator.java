@@ -2,11 +2,14 @@ package org.selkie.kol.impl.combat.activators;
 
 import activators.CombatActivator;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.BoundsAPI;
+import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.hullmods.NianBoss;
@@ -74,7 +77,7 @@ public class NianFlaresActivator extends CombatActivator {
                 flaresInterval.advance(amount);
                 if (flaresInterval.intervalElapsed()) {
                     Vector2f launchVelocity = (Vector2f) new Vector2f(ship.getVelocity()).scale(0.5f);
-
+                    ship.getExactBounds().update(ship.getLocation(), ship.getFacing()); // fixes lazylib bug
                     float leftLaunchAngle = ship.getFacing() + 90f + MathUtils.getRandomNumberInRange(-30f, 30f);
                     Vector2f leftLaunchPos = CollisionUtils.getNearestPointOnBounds(MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), leftLaunchAngle), ship);
                     Global.getCombatEngine().spawnProjectile(ship, null, "flarelauncher3", leftLaunchPos, leftLaunchAngle, launchVelocity);
