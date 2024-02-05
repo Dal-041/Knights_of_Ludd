@@ -67,32 +67,48 @@ public class PrepareDarkDeeds {
     public static void generateTT2Station() {
         //Get valid Remnant systems, pick a nexus
         // spawn station around Nexus
-        WeightedRandomPicker<SectorEntityToken> picker = new WeightedRandomPicker<>();
-        String systag = Tags.THEME_REMNANT_RESURGENT;
-        if (Math.random() < 0.5f) systag = Tags.THEME_REMNANT_SUPPRESSED;
+        WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<StarSystemAPI>();
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-            if (system.hasTag(systag)) {
-                if (system.getStar() != null) picker.add(system.getStar(), 1f);
-                for (CampaignFleetAPI fleet : system.getFleets()) {
-                    if (fleet.getFlagship() == null) continue;
-                    if (fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("remnant_station")) {
-                        picker.add(fleet.getInteractionTarget(), 2f);
-                    }
-                }
+            if (system.hasTag(Tags.THEME_REMNANT_RESURGENT) && system.hasTag(Tags.THEME_REMNANT_MAIN)) {
+                picker.add(system);
             }
         }
         if (picker.isEmpty()) {
             log.warn("ZEA: Could not locate any valid TT2Station spawn target!");
             return;
         }
-        SectorEntityToken token = picker.pick();
-        token.getContainingLocation().getMemoryWithoutUpdate().set(TTBOSS2_SYSTEM_KEY, true);
 
-        CustomCampaignEntityAPI stationBoss = token.getContainingLocation().addCustomEntity("zea_boss_station_tritachyon", "Suspicious Research Station", "zea_boss_station_tritachyon", Factions.NEUTRAL);
+        StarSystemAPI system = picker.pick();
+        SectorEntityToken token = system.getStar();
+
+        for (CampaignFleetAPI fleet : system.getFleets()) {
+            if (fleet.getFlagship() == null) continue;
+            if (fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("remnant_station")) {
+                token = fleet;
+            }
+        }
+
+        system.getMemoryWithoutUpdate().set(TTBOSS2_SYSTEM_KEY, true);
+
+        /* Runcode
+        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+            if (system.getMemoryWithoutUpdate().contains("$zea_tt_boss2_system")) {
+                $print(system.getId());
+            }
+        }
+        //Debug runcode
+        for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+            if (system.hasTag("theme_remnant_main") && system.hasTag("theme_remnant_resurgent")) {
+                $print(system.getBaseName());
+            }
+        }
+         */
+
+        CustomCampaignEntityAPI stationBoss = system.addCustomEntity("zea_boss_station_tritachyon", "Suspicious Research Station", "zea_boss_station_tritachyon", Factions.NEUTRAL);
         stationBoss.getMemoryWithoutUpdate().set(TTBOSS2_STATION_KEY, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
         if (token.isStar()) {
-            stationBoss.setCircularOrbitPointingDown(token, 0, token.getRadius()+500f, token.getRadius()/10f);
+            stationBoss.setCircularOrbitPointingDown(token, 0, token.getRadius()+500f, (token.getRadius()+500f)/10f);
         } else {
             stationBoss.setCircularOrbitPointingDown(token, 0, 150f, 60);
         }
@@ -143,12 +159,12 @@ public class PrepareDarkDeeds {
 
                     PerShipData ship = new PerShipData("zea_boss_nineveh_Souleater", ShipCondition.WRECKED, 0f);
                     ship.shipName = "TTS Nineveh";
-                    DerelictShipData params = new DerelictShipData(ship, false);
+                    DerelictShipData params = new DerelictShipData(ship, true);
                     CustomCampaignEntityAPI entity = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
                     Misc.makeImportant(entity, "zea_nineveh");
-                    //entity.getMemoryWithoutUpdate().set("$ziggurat", true);
+                    entity.getMemoryWithoutUpdate().set("$zea_nineveh_wreck", true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -163,6 +179,19 @@ public class PrepareDarkDeeds {
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
                     data.addShip(copy);
+
+                    CustomCampaignEntityAPI lootbox = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
+                            fleet.getContainingLocation(),
+                            Entities.EQUIPMENT_CACHE_SMALL, Factions.TRITACHYON);
+                    lootbox.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
+                    lootbox.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
+                    Misc.makeImportant(lootbox, "zea_nineveh");
+                    lootbox.addDropValue("basic", 40000);
+                    lootbox.addDropRandom("omega_weapons_small", 1);
+                    lootbox.addDropRandom("zea_omega_small_low", 7);
+                    lootbox.addDropRandom("omega_weapons_medium", 1);
+                    lootbox.addDropRandom("zea_omega_medium_low", 3); //avg: +0.6
+                    lootbox.addDropRandom("zea_omega_large_low", 2); //0.4
 
                     Misc.setSalvageSpecial(entity, data);
 
@@ -248,7 +277,7 @@ public class PrepareDarkDeeds {
                 ));
         field.setCircularOrbit(rock, 0, 0, 75);
 
-        CustomCampaignEntityAPI beacon = system.addCustomEntity(null, null, Entities.WARNING_BEACON, Factions.TRITACHYON);
+        CustomCampaignEntityAPI beacon = system.addCustomEntity(null, null, Entities.WARNING_BEACON, Factions.NEUTRAL);
         beacon.setCircularOrbitPointingDown(rock, 0, 2500, 60);
 
         beacon.getMemoryWithoutUpdate().set("$zea_TT3BlackSite", true);
@@ -256,7 +285,6 @@ public class PrepareDarkDeeds {
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_FREQ_KEY, 1.5f);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_COLOR_KEY, new Color(250,125,0,255));
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.GLOW_COLOR_KEY, new Color(250,55,0,255));
-
 
         SectorEntityToken cache = BaseThemeGenerator.addSalvageEntity(system, Entities.ALPHA_SITE_WEAPONS_CACHE, Factions.NEUTRAL);
         cache.getMemoryWithoutUpdate().set("$zea_TT3WeaponsCache", true);

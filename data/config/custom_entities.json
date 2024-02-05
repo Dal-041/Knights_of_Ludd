@@ -1,4 +1,24 @@
 {	
+	
+	"zea_cache_low":{
+		"baseId":"weapons_cache",
+		"defaultName":"Shielded Cache",
+		"defaultRadius":20, 
+		"nameInText":"shielded cache",
+	},
+	"zea_cache_med":{
+		"baseId":"weapons_cache",
+		"defaultName":"Shielded Cache",
+		"defaultRadius":28, 
+		"nameInText":"shielded cache",
+	},
+	"zea_cache_high":{
+		"baseId":"weapons_cache",
+		"defaultName":"Shielded Cache",
+		"defaultRadius":35, 
+		"nameInText":"shielded cache",
+	},
+	
 	"zea_research_station_dawn":{
 		"defaultName":"Dawntide-converted Mothership", # used if name=null in addCustomEntity()
 		"nameInText":"Dawntide-converted Mothership",
@@ -25,25 +45,6 @@
 		"layers":[STATIONS], # what layer(s) to render in. See CampaignEngineLayers.java for possible values
 		"renderCircleIndicator":true,
 		"renderCircleIndicatorSelectionFlash":true,
-	},
-	
-	"zea_cache_low":{
-		"baseId":"weapons_cache",
-		"defaultName":"Shielded Cache",
-		"defaultRadius":20, 
-		"nameInText":"shielded cache",
-	},
-	"zea_cache_med":{
-		"baseId":"weapons_cache",
-		"defaultName":"Shielded Cache",
-		"defaultRadius":28, 
-		"nameInText":"shielded cache",
-	},
-	"zea_cache_high":{
-		"baseId":"weapons_cache",
-		"defaultName":"Shielded Cache",
-		"defaultRadius":35, 
-		"nameInText":"shielded cache",
 	},
 	
 	"zea_research_station_dusk":{

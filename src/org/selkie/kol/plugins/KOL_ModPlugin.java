@@ -71,6 +71,11 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	@Override
 	public void onNewGame() {
+		super.onNewGame();
+	}
+
+	@Override
+	public void onNewGameAfterProcGen() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
@@ -84,6 +89,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+
 	}
 
 	@Override

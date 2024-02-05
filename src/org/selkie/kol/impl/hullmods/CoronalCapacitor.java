@@ -291,10 +291,10 @@ public class CoronalCapacitor extends BaseHullMod {
         float pad = 3f;
         float opad = 10f;
         Color h = Misc.getHighlightColor();
-        tooltip.addPara("Utilizes stellar energy from local stars to supercharge weapons and engines.", opad, h, "supercharge weapons and engines");
-        tooltip.addPara("Coronal energy charges at a rate equal to %s per second in this location. Active venting increases this rate by %s.",
-                opad, h, String.format("%.2f", rate*100)+"%", String.format("%.2f", ship.getMutableStats().getVentRateMult().getModifiedValue()*2)+"x");
-        tooltip.addPara("This energy depletes at a rate proportional to the flux cost of every active weapon.", opad);
+        tooltip.addPara("Utilizes energy from local stars to supercharge weapons and engines.", opad, h, "supercharge weapons and engines");
+        tooltip.addPara("Stellar energy charges at a rate equal to %s in this location. Active venting increases this rate by %s.",
+                opad, h, String.format("%.2f", rate*100)+"% per second", String.format("%.2f", ship.getMutableStats().getVentRateMult().getModifiedValue()*2)+"x");
+        tooltip.addPara("Firing weapons deletes energy at a rate proportional to their flux cost.", opad);
         tooltip.addPara("The boost from a full charge results in a %s to:", opad, h, "30% increase");
         tooltip.setBulletedListMode(" - ");
         tooltip.addPara("Energy Weapon Damage", pad, h, "Energy Weapon Damage");

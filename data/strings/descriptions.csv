@@ -78,6 +78,7 @@ zea_nanten_l,WEAPON,"Where the Nanten 'Slicer' walks, the Disassembler sprints. 
 zea_myoga_driver,WEAPON,"The Myoga Ultradriver is a sniper's dream. Extreme range, good damage, and best-in-class projectile velocity mean no opponent is beyond the reach of this weapon. Poor flux performance is the notable drawback, and foes that close the gap will find themselves at a good advantage against the wielder.",,,
 ,,,,,
 #Exploration,,,,,
-zea_boss_station_dusk_1_desc,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that often means good loot.",,,
+zea_boss_station_dusk_1_desc,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
+zea_boss_station_tritachyon,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
 #Ship Systems,,,,,
 zea_boss_supernova,SHIP_SYSTEM,"""What the hell is that?"" - Last recording from a now-unrecognizable capital hull shattered into endless pieces.",,
