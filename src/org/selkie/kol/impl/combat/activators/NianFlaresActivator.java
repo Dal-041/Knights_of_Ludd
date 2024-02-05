@@ -9,18 +9,19 @@ import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.hullmods.NianBoss;
 
 import java.awt.*;
 import java.util.List;
 
 public class NianFlaresActivator extends CombatActivator {
-    private static final int FLARES_PER_WAVE_PER_SIDE = 6;
+    private static final int FLARES_PER_WAVE_PER_SIDE = 36;
     private static final int FLARE_WAVES_NORMAL = 1;
     private static final int FLARE_WAVES_ENRAGED = 3;
     private static final float FLARE_WAVE_DELAY = 0.75f;
     private static final float MISSILE_SEARCH_RANGE = 800f;
 
-    IntervalUtil flaresInterval = new IntervalUtil(0.07f, 0.15f);
+    IntervalUtil flaresInterval = new IntervalUtil(0.03f, 0.09f);
     IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
     IntervalUtil nextWaveInterval = new IntervalUtil(FLARE_WAVE_DELAY, FLARE_WAVE_DELAY);
     int flaresReleasedInWave = 0;
@@ -122,7 +123,7 @@ public class NianFlaresActivator extends CombatActivator {
 
     public void onActivate() {
         int flareWaves = FLARE_WAVES_NORMAL;
-        if (ship.getHullLevel() <= 0.5f) {
+        if (ship.getCustomData().containsKey(NianBoss.NianBossEnragedScript.ENRAGED_ID) && (Boolean) ship.getCustomData().get(NianBoss.NianBossEnragedScript.ENRAGED_ID)) {
             flareWaves = FLARE_WAVES_ENRAGED;
         }
         wavesToLaunch = flareWaves;

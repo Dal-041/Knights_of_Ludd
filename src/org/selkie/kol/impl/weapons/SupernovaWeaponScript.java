@@ -29,18 +29,10 @@ public class SupernovaWeaponScript implements EveryFrameWeaponEffectPlugin, OnFi
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        if (engine.isPaused()) {
-            return;
-        }
-
-        ShipAPI ship = weapon.getShip();
-        if (!ship.isAlive()) {
-            return;
-        }
-
-        boolean canFire = ship.getSystem().isStateActive();
-        if (!canFire) {
-            //weapon.setForceNoFireOneFrame(true);
+        weapon.setForceNoFireOneFrame(true);
+        weapon.setCurrHealth(weapon.getMaxHealth());
+        if (weapon.isDisabled()) {
+            weapon.repair();
         }
     }
 

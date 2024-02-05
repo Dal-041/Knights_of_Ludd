@@ -19,8 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SupernovaStats extends BaseShipSystemScript {
+    private static final float IN_STATE_DURATION = 4f;
+    private static final float ACTIVE_STATE_DURATION = 4f;
     private static final String SUPERNOVA = "SUPERNOVA";
-    private static final String FIRED_INFERNO_CANNON = "FIRED_INFERNO_CANNON";
     private static final String FIRED_INFERNO_CANNON_IDS = "FIRED_INFERNO_CANNON_IDS";
     private static final List<String> INFERNO_CANNON_IDS = new ArrayList<>();
 
@@ -59,19 +60,21 @@ public class SupernovaStats extends BaseShipSystemScript {
                 }
 
                 if (state == State.ACTIVE) {
-                    WeaponAPI infernoCannon = getInfernoCannon(ship);
+                    WeaponAPI infernoCannon = getInfernoCannon(ship, data);
                     infernoCannon.setForceNoFireOneFrame(false);
                     infernoCannon.setForceFireOneFrame(true);
 
-                    setFiredInfernoCannon(ship, infernoCannon);
+                    data.firedWeapons.add(infernoCannon);
                     data.finished = true;
                 }
             } else {
-                if (state == State.IN) {
-                    ship.setJitter(id, new Color(1f, 1f, 0f, MathUtils.clamp((effectLevel - 0.25f) * 4f, 0f, 1f)), effectLevel, 4, 5f + 10f * effectLevel);
-                    ship.setJitterUnder(id, new Color(1f, 0f, 0f, MathUtils.clamp((effectLevel - 0.25f) * 4f, 0f, 1f)), effectLevel, 20, 6f + 20f * effectLevel);
+                if (state == State.IN || state == State.ACTIVE) {
+                    data.supernovaInActiveTime += amount;
+                    float jitterLevel = data.supernovaInActiveTime / (IN_STATE_DURATION + ACTIVE_STATE_DURATION);
+                    ship.setJitter(id, new Color(1f, 1f, 0f, MathUtils.clamp(jitterLevel, 0f, 1f)), effectLevel, 4, 5f + 10f * jitterLevel);
+                    ship.setJitterUnder(id, new Color(1f, 0f, 0f, MathUtils.clamp(jitterLevel, 0f, 1f)), effectLevel, 20, 6f + 20f * jitterLevel);
 
-                    data.targetingAngle += amount * (5f + MathUtils.clamp(effectLevel - 0.25f, 0f, 1f) * 20f);
+                    data.targetingAngle += amount * (5f + jitterLevel * 20f);
                     MagicRender.singleframe(
                             Global.getSettings().getSprite("fx", "zea_nian_targetingRing"),
                             ship.getLocation(), //location
@@ -83,7 +86,7 @@ public class SupernovaStats extends BaseShipSystemScript {
                     );
                 }
 
-                if (state == State.ACTIVE) {
+                if (state == State.OUT) {
                     //boom
                     Global.getCombatEngine().spawnExplosion(
                             ship.getLocation(),
@@ -149,17 +152,7 @@ public class SupernovaStats extends BaseShipSystemScript {
         ship.getCustomData().remove(id + "drone");
     }
 
-    private static void setFiredInfernoCannon(ShipAPI ship, WeaponAPI infernoCannon) {
-        List<WeaponAPI> firedCannons = new ArrayList<>();
-        if (ship.getCustomData().containsKey(FIRED_INFERNO_CANNON_IDS)) {
-            firedCannons = (List<WeaponAPI>) ship.getCustomData().get(FIRED_INFERNO_CANNON_IDS);
-        } else {
-            ship.setCustomData(FIRED_INFERNO_CANNON_IDS, firedCannons);
-        }
-        firedCannons.add(infernoCannon);
-    }
-
-    public static WeaponAPI getInfernoCannon(ShipAPI ship) {
+    public static WeaponAPI getInfernoCannon(ShipAPI ship, SupernovaData data) {
         List<WeaponAPI> cannons = new ArrayList<>();
         for (WeaponAPI weapon : ship.getAllWeapons()) {
             if (INFERNO_CANNON_IDS.contains(weapon.getId())) {
@@ -168,14 +161,12 @@ public class SupernovaStats extends BaseShipSystemScript {
         }
 
         WeaponAPI cannonToFire = cannons.get(0);
-        if (ship.getCustomData().containsKey(FIRED_INFERNO_CANNON_IDS)) {
-            List<WeaponAPI> firedCannons = (List<WeaponAPI>) ship.getCustomData().get(FIRED_INFERNO_CANNON_IDS);
-            if (firedCannons.size() == cannons.size()) {
-                firedCannons.clear();
-            } else {
-                cannons.removeAll(firedCannons);
-                cannonToFire = cannons.get(0);
-            }
+        List<WeaponAPI> firedCannons = data.firedWeapons;
+        if (firedCannons.size() == cannons.size()) {
+            firedCannons.clear();
+        } else {
+            cannons.removeAll(firedCannons);
+            cannonToFire = cannons.get(0);
         }
 
         return cannonToFire;
@@ -191,16 +182,6 @@ public class SupernovaStats extends BaseShipSystemScript {
         return lidars;
     }
 
-    private static float getMaxRange(List<WeaponAPI> weapons) {
-        float lidarMaxRange = 0f;
-        for (WeaponAPI w : weapons) {
-            if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR) && w.getRange() > lidarMaxRange) {
-                lidarMaxRange = w.getRange();
-            }
-        }
-        return lidarMaxRange;
-    }
-
     public static SupernovaData getSupernovaData(ShipAPI ship) {
         if (ship.getCustomData().containsKey(SUPERNOVA)) {
             return ((SupernovaData) ship.getCustomData().get(SUPERNOVA));
@@ -212,7 +193,8 @@ public class SupernovaStats extends BaseShipSystemScript {
         private boolean finished = false;
         private boolean superNova = false;
         private float targetingAngle = 0f;
-        private List<String> firedWeapons = new ArrayList<>();
+        private float supernovaInActiveTime = 0f;
+        private List<WeaponAPI> firedWeapons = new ArrayList<>();
 
         private SupernovaData() {
         }
