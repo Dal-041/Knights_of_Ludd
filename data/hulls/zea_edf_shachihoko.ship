@@ -1,0 +1,53 @@
+{
+  "hullName": "Shachihoko",
+  "hullId": "zea_edf_shachihoko",
+  "hullSize": "FIGHTER",
+  "style": "MIDLINE",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_shachihoko.png",
+  "height": 50,
+  "width": 82,
+  "center": [
+    41, 25
+  ],
+  "collisionRadius": 42,
+  "coversColor": "",
+  "shieldCenter": [
+    0, 0
+  ],
+  "shieldRadius": 54,
+  "viewOffset": 0,
+  "builtInWings": [ ],
+  "builtInModules": null,
+  "weaponSlots": [
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 45,
+      "angle": 0,
+      "locations": [
+        0, 0
+      ]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [
+        -24.5, 17
+      ],
+      "length": 23,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    }
+  ],
+  "bounds": [
+    -19.5, 9.5,
+    1.5, 40,
+    25.5, 0,
+    1.5, -40,
+    -19.5, -9.5
+  ]
+}

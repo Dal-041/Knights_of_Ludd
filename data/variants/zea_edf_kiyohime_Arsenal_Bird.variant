@@ -1,14 +1,14 @@
 {
     "displayName": "Arsenal Bird",
-    "fluxCapacitors": 34,
-    "fluxVents": 10,
+    "fluxCapacitors": 10,
+    "fluxVents": 27,
     "goalVariant": true,
     "hullId": "zea_edf_kiyohime",
     "hullMods": [
         "eccm",
-        "expanded_cargo_holds",
         "hardenedshieldemitter",
         "missleracks",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
@@ -19,23 +19,23 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "squall",
+                "WS0007": "gauss",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0004": "harpoonpod",
-                "WS0005": "harpoonpod",
+                "WS0004": "breachpod",
+                "WS0005": "breachpod",
+                "WS0001": "breachpod",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "hveldriver",
-                "WS0007": "hveldriver",
+                "WS0006": "mark9",
             }
         },
         {

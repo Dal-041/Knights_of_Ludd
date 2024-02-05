@@ -48,6 +48,7 @@
 			"zea_edf_suzaku",
 			"zea_edf_seiryu",
 			"zea_edf_mizuchi",
+			"zea_edf_kiyohime",
 		],
 	},
 	"knownShips":{
@@ -62,15 +63,23 @@
 			"zea_edf_suzaku",
 			"zea_edf_seiryu",
 			"zea_edf_mizuchi",
+			"zea_edf_kiyohime",
 		],
 	},
 	"priorityShips":{
 		"tags":[],
 		"hulls":[
+			"zea_edf_tamamo",
+			"zea_edf_ryujin",
+			"zea_edf_wani",
+			"zea_edf_suzaku",
+			"zea_edf_seiryu",
+			"zea_edf_mizuchi",
+			"zea_edf_kiyohime",
 		],
 	},
 	"knownFighters":{
-		"tags":["remnant", "zelysium_bp"],
+		"tags":["remnant", "zea_common_bp"],
 		"fighters":[
 		],
 	},
@@ -79,7 +88,7 @@
 		"fighters":[],
 	},
 	"knownWeapons":{
-		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zelysium_bp", "remnant"],
+		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zea_common_bp", "remnant"],
 		"weapons":[
 			"lightneedler",
 			"railgun",

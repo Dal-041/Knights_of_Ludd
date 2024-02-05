@@ -6,8 +6,13 @@ import com.fs.starfarer.api.combat.CollisionClass;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
+import org.dark.shaders.distortion.DistortionShader;
+import org.dark.shaders.distortion.RippleDistortion;
+import org.dark.shaders.light.LightShader;
+import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 import java.util.List;
@@ -70,6 +75,24 @@ public class SupernovaSubmunitionScript extends BaseEveryFrameCombatPlugin {
             );
 
             Global.getSoundPlayer().playSound("system_canister_flak_explosion", 1f, 1f, infernoCanister.getLocation(), new Vector2f());
+
+            if (KOL_ModPlugin.hasGraphicsLib) {
+                RippleDistortion ripple = new RippleDistortion(infernoCanister.getLocation(), new Vector2f());
+                ripple.setSize(200f);
+                ripple.setIntensity(25f);
+                ripple.setFrameRate(60f);
+                ripple.fadeInSize(0.1f);
+                ripple.fadeOutIntensity(0.6f);
+                DistortionShader.addDistortion(ripple);
+
+                StandardLight light = new StandardLight(infernoCanister.getLocation(), new Vector2f(), new Vector2f(), null);
+                light.setSize(200f);
+                light.setIntensity(8f);
+                light.setLifetime(0.45f);
+                light.setAutoFadeOutTime(0.3f);
+                light.setColor(new Color(255, 125, 25, 255));
+                LightShader.addLight(light);
+            }
 
             Global.getCombatEngine().removeEntity(infernoCanister);
             Global.getCombatEngine().removePlugin(this);

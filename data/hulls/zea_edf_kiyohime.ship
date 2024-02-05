@@ -9,14 +9,16 @@
   "center": [240, 148],
   "collisionRadius": 256,
   "shieldCenter": [0, -0],
-  "shieldRadius": 242,
+  "shieldRadius": 420,
   "viewOffset": 0,
   "builtInMods": [
     "zea_edf_coronal_capacitor",
     "zea_edf_pd_drones",
     "automated",
     "kol_ea_shields3",
-    "kol_throttle"
+    "kol_conformal_shield",
+    "kol_throttle",
+    "zea_edf_shachihoko_drone"
   ],
   "builtInWeapons": {
     "WS0009": "zea_deco_edf_engS",

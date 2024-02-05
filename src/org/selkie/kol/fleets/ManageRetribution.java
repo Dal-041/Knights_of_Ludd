@@ -56,7 +56,7 @@ public class ManageRetribution implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "kol_boss_ret_lp_Hull",
+	                        "kol_boss_ret_lp_Overdriven",
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,

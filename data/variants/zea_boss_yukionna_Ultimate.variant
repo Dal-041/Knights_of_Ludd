@@ -1,6 +1,6 @@
 {
     "displayName": "Ultimate",
-    "fluxCapacitors": 9,
+    "fluxCapacitors": 12,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_boss_yukionna",
@@ -22,45 +22,51 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "vpdriver",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0017": "zea_boss_resonator",
-                "WS0018": "zea_boss_resonator",
-                "WS0009": "guardian",
-                "WS0010": "guardian",
-                "WS0011": "shockrepeater",
-                "WS0012": "shockrepeater",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
                 "WS0007": "realitydisruptor",
             }
         },
         {
             "autofire": true,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0001": "cryoblaster",
-                "WS0002": "disintegrator",
-                "WS0003": "disintegrator",
-                "WS0004": "cryoblaster",
-                "WS0013": "minipulser",
-                "WS0014": "minipulser",
+                "WS0018": "zea_boss_resonator",
+                "WS0017": "zea_boss_resonator",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "riftbeam",
+                "WS0004": "cryoblaster",
+                "WS0001": "cryoblaster",
+                "WS0003": "disintegrator",
+                "WS0002": "disintegrator",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0011": "minipulser",
+                "WS0012": "minipulser",
+                "WS0013": "lightneedler",
+                "WS0014": "lightneedler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "guardian",
+                "WS0010": "guardian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0006": "riftbeam",
+                "WS0005": "riftbeam",
             }
         },
     ],

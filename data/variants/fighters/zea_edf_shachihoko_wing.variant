@@ -1,0 +1,11 @@
+{
+    "displayName": "Shield Drone",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_edf_shachihoko",
+    "hullMods": [],
+    "variantId": "zea_edf_shachihoko_wing",
+    "weaponGroups": [
+    ]
+}

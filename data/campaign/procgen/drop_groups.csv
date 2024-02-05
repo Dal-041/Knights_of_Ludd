@@ -1,19 +1,25 @@
 commodity,group,freq
 ,,
 nothing,zea_weapons_slight,200
-"wpn_:{tags:[zelysium_bp, !no_drop, !no_drop_salvage]}",zea_weapons_slight,100
+"wpn_:{tags:[zea_common_bp, !no_drop, !no_drop_salvage]}",zea_weapons_slight,100
 ,,
 nothing,zea_weapons_med,100
-"wpn_:{tags:[zelysium_bp, !no_drop, !no_drop_salvage]}",zea_weapons_med,100
+"wpn_:{tags:[zea_common_bp, !no_drop, !no_drop_salvage]}",zea_weapons_med,100
 ,,
 nothing,zea_weapons_high,50
-"wpn_:{tags:[zelysium_bp, !no_drop, !no_drop_salvage]}",zea_weapons_high,100
+"wpn_:{tags:[zea_common_bp, !no_drop, !no_drop_salvage]}",zea_weapons_high,100
 ,,
-nothing,zea_omega_small_low,80%
+nothing,zea_omega_small_low,80
 "wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:SMALL}",zea_omega_small_low,100
 ,,
-nothing,zea_omega_medium_low,80%
+nothing,zea_omega_medium_low,80
 "wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:MEDIUM}",zea_omega_medium_low,100
 ,,
-nothing,zea_omega_large_low,80%
+nothing,zea_omega_large_low,80
 "wpn_:{tags:[omega, !no_drop, !no_drop_salvage], weaponSize:LARGE}",zea_omega_large_low,100
+,,
+item_zea_recorder_dusk,zea_dusk_lore,100
+,,
+item_zea_recorder_dawn,zea_dawn_lore,100
+,,
+item_zea_recorder_edf,zea_elysians_lore,100

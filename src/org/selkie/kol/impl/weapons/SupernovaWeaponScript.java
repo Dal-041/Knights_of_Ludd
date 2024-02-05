@@ -3,8 +3,13 @@ package org.selkie.kol.impl.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
+import org.dark.shaders.distortion.DistortionShader;
+import org.dark.shaders.distortion.RippleDistortion;
+import org.dark.shaders.light.LightShader;
+import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 
@@ -24,18 +29,10 @@ public class SupernovaWeaponScript implements EveryFrameWeaponEffectPlugin, OnFi
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        if (engine.isPaused()) {
-            return;
-        }
-
-        ShipAPI ship = weapon.getShip();
-        if (!ship.isAlive()) {
-            return;
-        }
-
-        boolean canFire = ship.getSystem().isStateActive();
-        if (!canFire) {
-            //weapon.setForceNoFireOneFrame(true);
+        weapon.setForceNoFireOneFrame(true);
+        weapon.setCurrHealth(weapon.getMaxHealth());
+        if (weapon.isDisabled()) {
+            weapon.repair();
         }
     }
 
@@ -111,5 +108,23 @@ public class SupernovaWeaponScript implements EveryFrameWeaponEffectPlugin, OnFi
                 new Color(255, 170, 30, 0)
         );
         Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, weapon.getShip(), loc, false);
+
+        if (KOL_ModPlugin.hasGraphicsLib) {
+            RippleDistortion ripple = new RippleDistortion(weapon.getLocation(), new Vector2f());
+            ripple.setSize(166f);
+            ripple.setIntensity(60f);
+            ripple.setFrameRate(60f);
+            ripple.fadeInSize(0.1f);
+            ripple.fadeOutIntensity(0.6f);
+            DistortionShader.addDistortion(ripple);
+
+            StandardLight light = new StandardLight(weapon.getLocation(), new Vector2f(), new Vector2f(), null);
+            light.setSize(200f);
+            light.setIntensity(8f);
+            light.setLifetime(0.45f);
+            light.setAutoFadeOutTime(0.3f);
+            light.setColor(new Color(255, 125, 25, 255));
+            LightShader.addLight(light);
+        }
     }
 }

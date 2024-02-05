@@ -13,7 +13,9 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "suppressedMods": [],
+    "suppressedMods": [
+		"ill_advised"
+	],
     "variantId": "kol_boss_ret_lp_Overdriven",
     "weaponGroups": [
         {

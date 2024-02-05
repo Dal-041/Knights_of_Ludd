@@ -25,7 +25,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String kolID = "knights_of_selkie";
 
 	public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
-	boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
+	public static boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
 	boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
 
 	public static final String MEMKEY_KOL_INVICTUS_SPAWNED = "$kol_lp_invictus_spawned";
@@ -74,7 +74,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
-			PrepareDarkDeeds.andBegin();
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
 			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);

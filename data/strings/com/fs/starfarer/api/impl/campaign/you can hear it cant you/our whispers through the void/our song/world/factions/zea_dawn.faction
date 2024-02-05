@@ -82,7 +82,7 @@
 		"tags":[
 			"remnant",
 			"derelict",
-			"zelysium_bp"
+			"zea_common_bp"
 		],
 		"fighters":[
 		],
@@ -92,7 +92,7 @@
 		"fighters":[],
 	},
 	"knownWeapons":{
-		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zelysium_bp", "remnant", "derelict"],
+		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zea_common_bp", "remnant", "derelict"],
 		"weapons":[
 			"lightneedler",
 			"railgun",

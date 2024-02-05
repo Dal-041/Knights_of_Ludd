@@ -6,10 +6,15 @@ import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.IntervalUtil;
+import org.dark.shaders.distortion.DistortionShader;
+import org.dark.shaders.distortion.RippleDistortion;
+import org.dark.shaders.light.LightShader;
+import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
+import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 import java.util.List;
@@ -73,19 +78,18 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
             desiredAngularVelocity *= 1f - amount;
         }
 
-        float velDecrease = 0.05f * amount;
-        infernoShot.getVelocity().scale(1f - velDecrease);
-
+        float velDecrease = 0.4f;
         targetingAngle += amount * 5f;
         MagicRender.singleframe(
                 Global.getSettings().getSprite("fx", "zea_nian_targetingRing"),
-                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), 0.05f, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
+                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
                 new Vector2f(1200, 1200), //size
                 targetingAngle, //angle
                 new Color(255, 100, 0, 128),
                 true, //additive
                 CombatEngineLayers.UNDER_SHIPS_LAYER
         );
+        infernoShot.getVelocity().scale(1f - velDecrease * amount);
 
         if (state == State.RELEASING) {
             if (canisterTier <= 3) {
@@ -181,6 +185,24 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
             Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, infernoShot.getSource(), infernoShot.getLocation(), false);
             Global.getSoundPlayer().playSound("system_orion_device_explosion", 1f, 1f, infernoShot.getLocation(), new Vector2f());
 
+            if (KOL_ModPlugin.hasGraphicsLib) {
+                RippleDistortion ripple = new RippleDistortion(infernoShot.getLocation(), new Vector2f());
+                ripple.setSize(400f);
+                ripple.setIntensity(50f);
+                ripple.setFrameRate(60f);
+                ripple.fadeInSize(0.2f);
+                ripple.fadeOutIntensity(1.5f);
+                DistortionShader.addDistortion(ripple);
+
+                StandardLight light = new StandardLight(infernoShot.getLocation(), new Vector2f(), new Vector2f(), null);
+                light.setSize(500f);
+                light.setIntensity(10f);
+                light.setLifetime(0.45f);
+                light.setAutoFadeOutTime(0.3f);
+                light.setColor(new Color(255, 125, 25, 255));
+                LightShader.addLight(light);
+            }
+
             Global.getCombatEngine().removePlugin(this);
             Global.getCombatEngine().removeEntity(infernoShot);
         }
@@ -196,11 +218,8 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
 
     // Function to calculate the total distance traveled
     public static float calculateTotalDistance(double initialSpeed, double decreasePercentage, float totalTime) {
-        // Convert percentage decrease to a decimal
-        double x = decreasePercentage / 100;
-
         // Calculate total distance using the formula for the sum of a geometric sequence
-        double totalDistance = initialSpeed * (1 - Math.pow(1 - x, totalTime)) / x;
+        double totalDistance = initialSpeed * (1 - Math.pow(1 - decreasePercentage, totalTime)) / decreasePercentage;
 
         return (float) totalDistance;
     }
