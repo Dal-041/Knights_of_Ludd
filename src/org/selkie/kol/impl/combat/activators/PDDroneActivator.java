@@ -11,6 +11,7 @@ import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
+import java.awt.*;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -133,7 +134,10 @@ public class PDDroneActivator extends DroneActivator {
                     angle += 30;
                 else
                     angle -= 30;
-                Vector2f desiredLocation = MathUtils.getPointOnCircumference(shipLocation, ship.getShieldRadiusEvenIfNoShield() * 1.15f, angle);
+                Vector2f desiredLocation = MathUtils.getPointOnCircumference(shipLocation, 1000f, angle);
+                desiredLocation = MathUtils.getPointOnCircumference(shipLocation, Misc.getTargetingRadius(desiredLocation, ship, false) + 50f, angle);
+                desiredLocation = MathUtils.getRandomPointInCircle(desiredLocation, 0.2f);
+                //Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.blue);
                 controller.move(desiredLocation, drone);
 
                 Iterator<Object> iter = Global.getCombatEngine().getShipGrid().getCheckIterator(drone.getLocation(), 100f, 100f);
