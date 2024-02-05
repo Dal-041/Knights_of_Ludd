@@ -13,8 +13,10 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
 import com.fs.starfarer.api.impl.campaign.procgen.DefenderDataOverride;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.Themes;
+import com.fs.starfarer.api.impl.campaign.rulecmd.Nex_CargoScan;
 import com.fs.starfarer.api.impl.campaign.world.ZigLeashAssignmentAI;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.apache.log4j.Logger;
 import org.lwjgl.util.vector.Vector2f;
 
 import com.fs.starfarer.api.Global;
@@ -51,8 +53,10 @@ public class PrepareDarkDeeds {
 
     public static String NASCENT_WELL_KEY = "$zea_TT3BlackSite_well";
     public static String DEFEATED_NINEVEH_KEY = "$zea_defeatedNineveh";
-    public static final String TTBOSS2_STATION_KEY = "$zea_boss_station_tritachyon";
+    public static final String TTBOSS2_SYSTEM_KEY = "$zea_tt_boss2_system";
+    public static final String TTBOSS2_STATION_KEY = "$zea_boss_station_tritachyon"; //Sync with rules.csv
     public static final String ninmahTritachID = "zea_tritachyon";
+    private static final Logger log = Logger.getLogger(PrepareDarkDeeds.class);
 
     public static void andBegin() {
         SpawnTT1Boss.SpawnTT1Boss();
@@ -64,29 +68,34 @@ public class PrepareDarkDeeds {
         //Get valid Remnant systems, pick a nexus
         // spawn station around Nexus
         WeightedRandomPicker<SectorEntityToken> picker = new WeightedRandomPicker<>();
+        String systag = Tags.THEME_REMNANT_RESURGENT;
+        if (Math.random() < 0.5f) systag = Tags.THEME_REMNANT_SUPPRESSED;
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-            if (system.hasTag(Tags.THEME_REMNANT_RESURGENT)) {
+            if (system.hasTag(systag)) {
+                if (system.getStar() != null) picker.add(system.getStar(), 1f);
                 for (CampaignFleetAPI fleet : system.getFleets()) {
                     if (fleet.getFlagship() == null) continue;
-                    if (fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("remnant_station2_Standard")) {
-                        picker.add(fleet.getInteractionTarget(), 1);
+                    if (fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("remnant_station")) {
+                        picker.add(fleet.getInteractionTarget(), 2f);
                     }
                 }
             }
         }
         if (picker.isEmpty()) {
-            //Log error
-            //return;
+            log.warn("ZEA: Could not locate any valid TT2Station spawn target!");
+            return;
         }
         SectorEntityToken token = picker.pick();
-
-        // Debug:
-        token = Global.getSector().getStarSystem("Corvus").getPlanets().get(2);
+        token.getContainingLocation().getMemoryWithoutUpdate().set(TTBOSS2_SYSTEM_KEY, true);
 
         CustomCampaignEntityAPI stationBoss = token.getContainingLocation().addCustomEntity("zea_boss_station_tritachyon", "Suspicious Research Station", "zea_boss_station_tritachyon", Factions.NEUTRAL);
         stationBoss.getMemoryWithoutUpdate().set(TTBOSS2_STATION_KEY, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
-        stationBoss.setCircularOrbitPointingDown(token, 0, 150f, 60);
+        if (token.isStar()) {
+            stationBoss.setCircularOrbitPointingDown(token, 0, token.getRadius()+500f, token.getRadius()/10f);
+        } else {
+            stationBoss.setCircularOrbitPointingDown(token, 0, 150f, 60);
+        }
         Misc.setDefenderOverride(stationBoss, new DefenderDataOverride(Factions.TRITACHYON, 1f, 20, 20, 1)); // doesnt matter, will be overwriten by plugin
         stationBoss.setDiscoverable(true);
     }

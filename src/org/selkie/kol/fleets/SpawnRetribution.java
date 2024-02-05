@@ -63,7 +63,7 @@ public class SpawnRetribution {
 	            * @param transponderOn
 	            * @return 
 	            */
-	            String variant = "kol_boss_ret_lp_Hull";
+	            String variant = "kol_boss_ret_lp_Overdriven";
 	            CampaignFleetAPI RetributionFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
 	                    .setFleetName("Ludd's Embrace")
 	                    .setFleetFaction(Factions.LUDDIC_PATH)

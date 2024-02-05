@@ -1,6 +1,6 @@
 {
     "displayName": "Standard",
-    "fluxCapacitors": 1,
+    "fluxCapacitors": 5,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "kol_alysse",

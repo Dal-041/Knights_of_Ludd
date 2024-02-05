@@ -74,7 +74,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
-			PrepareDarkDeeds.andBegin();
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
 			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);

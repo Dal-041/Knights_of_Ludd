@@ -523,6 +523,7 @@ zea_deco_dusk_ikiryo_tr,turret,,0.5,normal,graphics/maps/ship_normals/decos/zea_
 ,,,,,
 zea_dusk_onryo,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_onryo_normal.png
 zea_dusk_shiryo,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_shiryo_normal.png
+zea_dusk_onibi,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_onibi_normal.png
 zea_edf_kiyohime,ship,,0.5,normal,graphics/maps/ship_normals/zea_edf_kiyohime_normal.png
 zea_edf_mizuchi,ship,,0.5,normal,graphics/maps/ship_normals/zea_edf_mizuchi_normal.png
 zea_edf_ryujin,ship,,0.5,normal,graphics/maps/ship_normals/zea_edf_ryujin_normal.png
@@ -540,6 +541,9 @@ zea_dawn_qilin,ship,,0.5,normal,graphics/maps/ship_normals/zea_dawn_qilin_normal
 zea_dawn_tianma,ship,,0.5,normal,graphics/maps/ship_normals/zea_dawn_tianma_normal.png
 zea_dawn_xuangui,ship,,0.5,normal,graphics/maps/ship_normals/zea_dawn_xuangui_normal.png
 ,,,,,
+zea_dawn_chiwen,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_dawn_chiwen_normal.png
+zea_edf_shachi,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_shachi_normal.png
+zea_edf_shachihoko,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_shachihoko_normal.png
 ,,,,,
 #we have gun too you know,,,,,
 zea_bricole_m,hardpoint,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_hardpoint_base_normal.png
@@ -610,6 +614,7 @@ zea_deco_dusk_ikiryo_tr,turret,,,material,graphics/maps/ship_glib/decos/zea_deco
 ,,,,,
 zea_dusk_onryo,ship,,,material,graphics/maps/ship_glib/zea_dusk_onryo_material.png
 zea_dusk_shiryo,ship,,,material,graphics/maps/ship_glib/zea_dusk_shiryo_material.png
+zea_dusk_onibi,ship,,,material,graphics/maps/ship_glib/zea_dusk_onibi_material.png
 zea_edf_kiyohime,ship,,,material,graphics/maps/ship_glib/zea_edf_kiyohime_material.png
 zea_edf_mizuchi,ship,,,material,graphics/maps/ship_glib/zea_edf_mizuchi_material.png
 zea_edf_ryujin,ship,,,material,graphics/maps/ship_glib/zea_edf_ryujin_material.png
@@ -626,6 +631,10 @@ zea_dawn_lushu,ship,,,material,graphics/maps/ship_glib/zea_dawn_lushu_material.p
 zea_dawn_qilin,ship,,,material,graphics/maps/ship_glib/zea_dawn_qilin_material.png
 zea_dawn_tianma,ship,,,material,graphics/maps/ship_glib/zea_dawn_tianma_material.png
 zea_dawn_xuangui,ship,,,material,graphics/maps/ship_glib/zea_dawn_xuangui_material.png
+,,,,,
+zea_dawn_chiwen,ship,,,material,graphics/maps/ship_glib/fighters/zea_dawn_chiwen_material.png
+zea_edf_shachi,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_shachi_material.png
+zea_edf_shachihoko,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_shachihoko_material.png
 ,,,,,
 #its really gun,,,,,
 zea_bricole_m,hardpoint,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_material.png
@@ -697,6 +706,7 @@ zea_deco_dusk_ikiryo_tr,turret,,,surface,graphics/maps/ship_glib/decos/zea_deco_
 ,,,,,
 zea_dusk_onryo,ship,,,surface,graphics/maps/ship_glib/zea_dusk_onryo_surface.png
 zea_dusk_shiryo,ship,,,surface,graphics/maps/ship_glib/zea_dusk_shiryo_surface.png
+zea_dusk_onibi,ship,,,surface,graphics/maps/ship_glib/zea_dusk_onibi_surface.png
 zea_edf_kiyohime,ship,,,surface,graphics/maps/ship_glib/zea_edf_kiyohime_surface.png
 zea_edf_mizuchi,ship,,,surface,graphics/maps/ship_glib/zea_edf_mizuchi_surface.png
 zea_edf_ryujin,ship,,,surface,graphics/maps/ship_glib/zea_edf_ryujin_surface.png
@@ -713,6 +723,10 @@ zea_dawn_lushu,ship,,,surface,graphics/maps/ship_glib/zea_dawn_lushu_surface.png
 zea_dawn_qilin,ship,,,surface,graphics/maps/ship_glib/zea_dawn_qilin_surface.png
 zea_dawn_tianma,ship,,,surface,graphics/maps/ship_glib/zea_dawn_tianma_surface.png
 zea_dawn_xuangui,ship,,,surface,graphics/maps/ship_glib/zea_dawn_xuangui_surface.png
+,,,,,
+zea_dawn_chiwen,ship,,,surface,graphics/maps/ship_glib/fighters/zea_dawn_chiwen_surface.png
+zea_edf_shachi,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_shachi_surface.png
+zea_edf_shachihoko,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_shachihoko_surface.png
 ,,,,,
 #it work and it shoot,,,,,
 zea_bricole_m,hardpoint,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_surface.png

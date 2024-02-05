@@ -1,0 +1,35 @@
+{
+    "displayName": "Wild",
+    "fluxCapacitors": 6,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "zea_dusk_onibi",
+    "hullMods": [
+        "hardened_subsystems",
+        "safetyoverrides",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_onibi_Wild",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "amblaster",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "irpulse",
+                "WS0005": "irpulse",
+                "WS0004": "irpulse",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

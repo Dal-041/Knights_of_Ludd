@@ -37,7 +37,7 @@ public class PrepareAbyss {
 	public static final String elysiaSysName = "Elysia";
 	public static final String lunaSeaSysName = "The Luna Sea";
 	public static final String nullspaceSysName = "Nullspace";
-	public static final String nbsSysPrefix = "zea_nbs_";
+	public static final String nbsSysPrefix = "zea_nbs_"; //Neutron black star
 
     public static void generate() {
 		checkAbyssalFleets();
@@ -68,6 +68,7 @@ public class PrepareAbyss {
 		SpawnElysianAmaterasu.SpawnElysianAmaterasu();
 		SpawnElysianHeart.SpawnElysianHeart();
 		SpawnDawnBoss.SpawnDawnBoss();
+		PrepareDarkDeeds.andBegin();
     }
 
 

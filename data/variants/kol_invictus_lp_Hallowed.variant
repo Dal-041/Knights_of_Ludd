@@ -11,7 +11,9 @@
     ],
     "permaMods": [],
     "sMods": [],
-    "suppressedMods": [],
+    "suppressedMods": [
+		"ill_advised",	
+	],
     "variantId": "kol_invictus_lp_Hallowed",
     "weaponGroups": [
         {
