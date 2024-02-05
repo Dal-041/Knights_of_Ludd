@@ -48,6 +48,7 @@
 			"zea_dusk_ikiryo",
 			"zea_dusk_onryo",
 			"zea_dusk_shiryo",
+			"zea_dusk_onibi",
 		],
 	},
 	"knownShips":{
@@ -62,6 +63,7 @@
 			"zea_dusk_ikiryo",
 			"zea_dusk_onryo",
 			"zea_dusk_shiryo",
+			"zea_dusk_onibi",
 		],
 	},
 	"priorityShips":{
@@ -73,10 +75,11 @@
 			"zea_dusk_ikiryo",
 			"zea_dusk_onryo",
 			"zea_dusk_shiryo",
+			"zea_dusk_onibi",
 		],
 	},
 	"knownFighters":{
-		"tags":["remnant", "zelysium_bp"],
+		"tags":["remnant", "zea_common_bp"],
 		"fighters":[
 		],
 	},
@@ -85,7 +88,7 @@
 		"fighters":[],
 	},
 	"knownWeapons":{
-		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zelysium_bp", "remnant"],
+		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zea_common_bp", "remnant"],
 		"weapons":[
 			"lightneedler",
 			"railgun",
