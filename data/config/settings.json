@@ -291,9 +291,9 @@
 		},
 		"characters":{
 			"kol_grandmaster":"graphics/portraits/kol_grandmaster.png",
-			"kol_master":"graphics/portraits/kol_master.png",
-			"kol_lackie_1":"graphics/portraits/kol_agent_m.png",
-			"kol_lackie_2":"graphics/portraits/kol_agent_f.png",
+			"kol_chaptermaster":"graphics/portraits/kol_master.png",
+			"kol_agent_m":"graphics/portraits/kol_agent_m.png",
+			"kol_agent_f":"graphics/portraits/kol_agent_f.png",
 			"zea_boss_alphaplus":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png",
 			"zea_boss_amaterasu":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png",
 			"zea_boss_corrupting_heart":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png",
@@ -314,12 +314,20 @@
 			"coronal_cap_top":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_top.png",
 			"coronal_cap_middle":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_middle.png",
 			"coronal_cap_bottom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_bottom.png"
-		}
+		},
+		"lore_item": {
+			"zea_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dawn.png",
+			"zea_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dusk.png",
+			"zea_elysians":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_edf.png",
+		},
 	},
 	"designTypeColors":{
 		"Knights of Ludd":[25,115,10,255],
 		"Dawntide":[0,255,100,255],
 		"Duskborne":[25,25,25,255],
 		"Elysia":[255,253,222,255]
-	}
+	},
+	"ruleCommandPackages": [
+        "org.selkie.kol.impl.rulecmd",
+    ],
 }

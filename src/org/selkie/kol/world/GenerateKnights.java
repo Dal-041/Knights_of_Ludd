@@ -89,16 +89,16 @@ public class GenerateKnights {
 
 		cygnus.setInteractionImage("illustrations", "kol_garden_large");
 
-		PersonAPI master = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Master", "Blaster", "kol_master",
+		PersonAPI master = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Master", "Helensis", "kol_chaptermaster",
 				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_ARCHCURATE,
-				false, 0, 0);
-
-		PersonAPI lackey1 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_lackie_1",
-				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.KNIGHT_CAPTAIN, Ranks.POST_GUARD_LEADER,
 				false, 0, 1);
 
-		master.setId("kol_knightmaster");
-		lackey1.setId("kol_km_lackey");
+		PersonAPI lackey1 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_agent_m",
+				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.KNIGHT_CAPTAIN, Ranks.POST_GUARD_LEADER,
+				false, 0, 0);
+
+		master.setId("kol_chaptermaster");
+		lackey1.setId("kol_knightcaptain");
 
 		master.setImportance(PersonImportance.HIGH);
 		master.setVoice(Voices.SOLDIER);
@@ -141,16 +141,16 @@ public class GenerateKnights {
 		lyra.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
 
-		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Flash", "kol_grandmaster",
+		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Luthor", "kol_grandmaster",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.FACTION_LEADER, Ranks.POST_FACTION_LEADER,
-				false, 0, 0);
-
-		PersonAPI lackey2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Sister", "Syster", "kol_lackie_2",
-				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.SISTER, Ranks.POST_INTELLIGENCE_DIRECTOR,
 				false, 0, 1);
 
+		PersonAPI lackey2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Rebecca", "Greenflight", "kol_agent_f",
+				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.SISTER, Ranks.POST_INTELLIGENCE_DIRECTOR,
+				false, 0, 0);
+
 		grandmaster.setId("kol_grandmaster");
-		lackey2.setId("kol_gm_lackey");
+		lackey2.setId("kol_intel_director");
 
 		grandmaster.setImportance(PersonImportance.VERY_HIGH);
 		grandmaster.setVoice(Voices.FAITHFUL);
