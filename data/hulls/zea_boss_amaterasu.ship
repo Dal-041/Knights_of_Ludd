@@ -3,7 +3,7 @@
   "hullId": "zea_boss_amaterasu",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_amaterasu.png",
-  "style": "LOW_TECH",
+  "style": "ZEA_ELYSIAN_TECH",
   "height": 366,
   "width": 250,
   "center": [125, 183],

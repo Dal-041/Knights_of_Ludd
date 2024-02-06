@@ -3,7 +3,7 @@
   "hullId": "zea_edf_suzaku",
   "hullSize": "DESTROYER",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_suzaku.png",
-  "style": "MIDLINE",
+  "style": "ZEA_ELYSIAN_TECH",
   "height": 188,
   "width": 156,
   "center": [78, 94],

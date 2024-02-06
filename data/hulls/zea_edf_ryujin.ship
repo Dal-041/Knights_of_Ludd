@@ -3,7 +3,7 @@
   "hullId": "zea_edf_ryujin",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_ryujin.png",
-  "style": "HIGH_TECH",
+  "style": "ZEA_ELYSIAN_TECH",
   "height": 264,
   "width": 524,
   "center": [262, 132],

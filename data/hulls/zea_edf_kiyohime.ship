@@ -3,7 +3,7 @@
   "hullId": "zea_edf_kiyohime",
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_kiyohime.png",
-  "style": "MIDLINE",
+  "style": "ZEA_ELYSIAN_TECH",
   "height": 294,
   "width": 480,
   "center": [240, 148],

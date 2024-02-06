@@ -3,7 +3,7 @@
   "hullId": "zea_edf_mizuchi",
   "hullSize": "CRUISER",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_mizuchi.png",
-  "style": "MIDLINE",
+  "style": "ZEA_ELYSIAN_TECH",
   "height": 193,
   "width": 342,
   "center": [171, 95],
