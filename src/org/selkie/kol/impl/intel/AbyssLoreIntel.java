@@ -1,10 +1,12 @@
 package org.selkie.kol.impl.intel;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 
 import java.awt.*;
 import java.io.IOException;
@@ -83,11 +85,17 @@ public class AbyssLoreIntel extends BaseIntelPlugin {
     public void createSmallDescription(TooltipMakerAPI info, float width, float height) {
         Color gray = Misc.getGrayColor();
         info.addSpacer(10f);
-        TooltipMakerAPI imageTooltip = info.beginImageWithText(icon, 64f);
+        TooltipMakerAPI imageTooltip = info.beginImageWithText(icon, 32f);
         imageTooltip.addPara(desc,
                 0f, Misc.getTextColor(), Misc.getHighlightColor(), descHighlights);
         info.addImageWithText(0f);
         info.addSpacer(10f);
+    }
+
+    public Set<String> getIntelTags(SectorMapAPI map) {
+        Set<String> tags = super.getIntelTags(map);
+        tags.add(AbyssUtils.IntelLoreTag);
+        return tags;
     }
 
     @Override

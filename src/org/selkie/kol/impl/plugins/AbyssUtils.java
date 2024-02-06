@@ -22,6 +22,8 @@ public class AbyssUtils {
             PrepareAbyss.duskID,
             PrepareAbyss.elysianID
     };
+    public static final String IntelLoreTag = "Elysian Lore";
+
     public static String[] techInheritIDs = {
             "remnant",
             "mercenary"

@@ -49,6 +49,7 @@
 			"zea_dusk_onryo",
 			"zea_dusk_shiryo",
 			"zea_dusk_onibi",
+			"zea_dusk_furaribi",
 		],
 	},
 	"knownShips":{
@@ -64,6 +65,7 @@
 			"zea_dusk_onryo",
 			"zea_dusk_shiryo",
 			"zea_dusk_onibi",
+			"zea_dusk_furaribi",
 		],
 	},
 	"priorityShips":{
@@ -76,6 +78,7 @@
 			"zea_dusk_onryo",
 			"zea_dusk_shiryo",
 			"zea_dusk_onibi",
+			"zea_dusk_furaribi",
 		],
 	},
 	"knownFighters":{

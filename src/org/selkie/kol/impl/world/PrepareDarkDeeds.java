@@ -7,13 +7,13 @@ import java.util.Random;
 
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
-import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
+import com.fs.starfarer.api.impl.campaign.*;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
 import com.fs.starfarer.api.impl.campaign.procgen.DefenderDataOverride;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.Themes;
-import com.fs.starfarer.api.impl.campaign.rulecmd.Nex_CargoScan;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.impl.campaign.world.ZigLeashAssignmentAI;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.apache.log4j.Logger;
@@ -23,15 +23,10 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
-import com.fs.starfarer.api.impl.campaign.CoreLifecyclePluginImpl;
-import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin.DerelictShipData;
-import com.fs.starfarer.api.impl.campaign.FleetEncounterContext;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.BaseFIDDelegate;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfig;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfigGen;
-import com.fs.starfarer.api.impl.campaign.RuleBasedInteractionDialogPluginImpl;
-import com.fs.starfarer.api.impl.campaign.WarningBeaconEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
@@ -44,24 +39,182 @@ import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.MagneticFieldTerrainPlugin.MagneticFieldParams;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.fleets.SpawnTT1Boss;
 
 import static org.selkie.kol.impl.fleets.AbyssalFleetManager.copyFleetMembers;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class PrepareDarkDeeds {
 
-    public static String NASCENT_WELL_KEY = "$zea_TT3BlackSite_well";
-    public static String DEFEATED_NINEVEH_KEY = "$zea_defeatedNineveh";
+    public static final String NASCENT_WELL_KEY = "$zea_TT3BlackSite_well";
+    public static final String DEFEATED_NINEVEH_KEY = "$zea_defeatedNineveh";
     public static final String TTBOSS2_SYSTEM_KEY = "$zea_tt_boss2_system";
+    public static final String TTBOSS3_SYSTEM_KEY = "$zea_tt_boss3_system";
     public static final String TTBOSS2_STATION_KEY = "$zea_boss_station_tritachyon"; //Sync with rules.csv
     public static final String ninmahTritachID = "zea_tritachyon";
     private static final Logger log = Logger.getLogger(PrepareDarkDeeds.class);
 
     public static void andBegin() {
-        SpawnTT1Boss.SpawnTT1Boss();
+        SpawnTT1Boss();
         generateTT2Station();
         generateTT3Site();
+    }
+
+    public static void SpawnTT1Boss() {
+
+        Map<String, Integer> skills = new HashMap<>();
+        skills.put(Skills.HELMSMANSHIP, 2);
+        skills.put(Skills.COMBAT_ENDURANCE, 2);
+        skills.put(Skills.IMPACT_MITIGATION, 2);
+        skills.put(Skills.DAMAGE_CONTROL, 2);
+        skills.put(Skills.FIELD_MODULATION, 2);
+        skills.put(Skills.TARGET_ANALYSIS, 2);
+        skills.put(Skills.SYSTEMS_EXPERTISE, 2);
+        skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
+
+        PersonAPI TT1BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
+                .setIsAI(true)
+                .setAICoreType("alpha_core")
+                .setPortraitId("zea_boss_alphaplus")
+                .setLevel(8)
+                .setFirstName("Alpha")
+                .setLastName("(+)")
+                .setGender(FullName.Gender.ANY)
+                .setPersonality(Personalities.RECKLESS) // With the Ninaya's flux stats Reckless will still back off enough
+                .setSkillLevels(skills)
+                .create();
+
+        TT1BossCaptain.getStats().setSkipRefresh(true);
+        TT1BossCaptain.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
+        TT1BossCaptain.getStats().setSkipRefresh(false);
+
+        String variant = "zea_boss_ninaya_Nightdemon";
+        SectorEntityToken token = Global.getSector().getStarSystem("Unknown Location").createToken(11111,11111); //cache loc
+        CampaignFleetAPI TT1BossFleet = MagicCampaign.createFleetBuilder()
+                .setFleetName("Unidentified Vessel")
+                .setFleetFaction(Factions.TRITACHYON)
+                .setFleetType(FleetTypes.TASK_FORCE)
+                .setFlagshipName("TTS Ninaya")
+                .setFlagshipVariant(variant)
+                .setCaptain(TT1BossCaptain)
+                .setMinFP(0) //support fleet
+                .setQualityOverride(5f)
+                .setAssignment(FleetAssignment.DEFEND_LOCATION)
+                .setSpawnLocation(token)
+                .setIsImportant(true)
+                .setTransponderOn(false)
+                .create();
+        TT1BossFleet.setDiscoverable(true);
+
+		/*
+		for(String support : PrepareAbyss.duskBossSupportingFleet) {
+			duskBossFleet.getFleetData().addFleetMember(support);
+		}*/
+
+        TT1BossFleet.setNoFactionInName(true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_HOSTILE, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_AGGRESSIVE, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_REP_IMPACT, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_LOW_REP_IMPACT, true);
+        //fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true); // so it keeps transponder on
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
+
+        TT1BossFleet.getFleetData().sort();
+
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
+        TT1BossFleet.addTag(excludeTag);
+
+        //Using FID config instead
+        //TT1BossFleet.addEventListener(new ManageTT1Boss());
+
+        TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
+                new TT1FIDConfig());
+
+    }
+
+    public static class TT1FIDConfig implements FleetInteractionDialogPluginImpl.FIDConfigGen {
+        public FleetInteractionDialogPluginImpl.FIDConfig createConfig() {
+            FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
+
+//			config.alwaysAttackVsAttack = true;
+//			config.leaveAlwaysAvailable = true;
+//			config.showFleetAttitude = false;
+            config.showTransponderStatus = false;
+            config.showEngageText = false;
+            config.alwaysPursue = true;
+            config.dismissOnLeave = false;
+            //config.lootCredits = false;
+            config.withSalvage = false;
+            //config.showVictoryText = false;
+            config.printXPToDialog = true;
+
+            config.noSalvageLeaveOptionText = "Continue";
+//			config.postLootLeaveOptionText = "Continue";
+//			config.postLootLeaveHasShortcut = false;
+
+            config.delegate = new FleetInteractionDialogPluginImpl.BaseFIDDelegate() {
+                public void postPlayerSalvageGeneration(InteractionDialogAPI dialog, FleetEncounterContext context, CargoAPI salvage) {
+                    new RemnantSeededFleetManager.RemnantFleetInteractionConfigGen().createConfig().delegate.
+                            postPlayerSalvageGeneration(dialog, context, salvage);
+                }
+                public void notifyLeave(InteractionDialogAPI dialog) {
+
+                    SectorEntityToken other = dialog.getInteractionTarget();
+                    if (!(other instanceof CampaignFleetAPI)) {
+                        dialog.dismiss();
+                        return;
+                    }
+                    CampaignFleetAPI fleet = (CampaignFleetAPI) other;
+
+                    if (!fleet.isEmpty()) {
+                        dialog.dismiss();
+                        return;
+                    }
+
+                    //Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINAYA_KEY, true);
+
+                    ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData("zea_boss_ninaya_Nightdemon", ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
+                    ship.shipName = "TTS Ninaya";
+                    DerelictShipEntityPlugin.DerelictShipData params = new DerelictShipEntityPlugin.DerelictShipData(ship, false);
+                    CustomCampaignEntityAPI entity = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
+                            fleet.getContainingLocation(),
+                            Entities.WRECK, Factions.NEUTRAL, params);
+                    Misc.makeImportant(entity, "zea_ninaya");
+                    entity.getMemoryWithoutUpdate().set("$zea_ninaya_wreck", true);
+
+                    entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
+                    entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
+
+                    ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
+                    data.notNowOptionExits = true;
+                    data.noDescriptionText = true;
+                    DerelictShipEntityPlugin dsep = (DerelictShipEntityPlugin) entity.getCustomPlugin();
+                    ShipRecoverySpecial.PerShipData copy = (ShipRecoverySpecial.PerShipData) dsep.getData().ship.clone();
+                    copy.variant = Global.getSettings().getVariant(copy.variantId).clone();
+                    copy.variantId = null;
+                    copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
+                    copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
+                    data.addShip(copy);
+
+                    Misc.setSalvageSpecial(entity, data);
+
+                    dialog.setInteractionTarget(entity);
+                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_AfterNinayaDefeat");
+                    dialog.setPlugin(plugin);
+                    plugin.init(dialog);
+                }
+
+                public void battleContextCreated(InteractionDialogAPI dialog, BattleCreationContext bcc) {
+                    bcc.aiRetreatAllowed = false;
+                    bcc.objectivesAllowed = false;
+                    bcc.fightToTheLast = true;
+                    bcc.enemyDeployAll = true;
+                }
+            };
+            return config;
+        }
     }
 
     public static void generateTT2Station() {
@@ -192,6 +345,7 @@ public class PrepareDarkDeeds {
                     lootbox.addDropRandom("omega_weapons_medium", 1);
                     lootbox.addDropRandom("zea_omega_medium_low", 3); //avg: +0.6
                     lootbox.addDropRandom("zea_omega_large_low", 2); //0.4
+                    lootbox.addDropRandom("zea_tritach_delta_site_log", 1);
 
                     Misc.setSalvageSpecial(entity, data);
 
@@ -217,6 +371,7 @@ public class PrepareDarkDeeds {
         float sectorHeightR = Global.getSettings().getFloat("sectorHeight")/2f;
 
         StarSystemAPI system = Global.getSector().createStarSystem("zea_SiteDelta");
+        system.getMemoryWithoutUpdate().set(TTBOSS3_SYSTEM_KEY, true);
         system.setBaseName("Delta Site");
         //system.setType(StarSystemType.NEBULA);
         system.setName("Unknown Location"); // to get rid of "Star System" at the end of the name

@@ -272,8 +272,8 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
             if (system.hasTag(Tags.THEME_REMNANT)) {
                 if (!system.hasTag(Tags.THEME_HIDDEN) && !system.hasTag(Tags.THEME_SPECIAL)) {
                     if (system.hasTag(Tags.THEME_REMNANT_MAIN)) {
-                        picker.add(system.getId(), 2);
-                    } else if (system.hasTag(Tags.THEME_REMNANT_RESURGENT)) {
+                        picker.add(system.getId(), 0.1f);
+                    } else if (system.hasTag(Tags.THEME_REMNANT_RESURGENT)) { //Secondaries
                         picker.add(system.getId(), 3);
                     } else if (system.hasTag(Tags.THEME_REMNANT_SUPPRESSED)) {
                         picker.add(system.getId(), 4);
@@ -285,7 +285,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         if (picker.isEmpty()) {
             for(StarSystemAPI system : Global.getSector().getStarSystems()) {
                 if (!system.hasTag(Tags.THEME_HIDDEN) && !system.hasTag(Tags.THEME_SPECIAL)) {
-                    if (system.hasTag(Tags.THEME_INTERESTING)) picker.add(system.getId(), 1);
+                    if (system.hasTag(Tags.THEME_INTERESTING)) picker.add(system.getId(), 10);
                     if (system.hasTag(Tags.THEME_INTERESTING_MINOR)) picker.add(system.getId(), 1);
                 }
             }
@@ -313,7 +313,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
                     }
                 }
                 if (system.getStar().getTypeId().equals("zea_star_black_neutron")) {
-                    picker.add(system.getId(), 10);
+                    picker.add(system.getId(), 14);
                 }
             }
         }

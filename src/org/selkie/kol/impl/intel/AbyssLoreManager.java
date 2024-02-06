@@ -8,6 +8,7 @@ import com.fs.starfarer.api.campaign.econ.SubmarketAPI;
 import com.fs.starfarer.api.campaign.impl.items.BaseSpecialItemPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import com.fs.starfarer.api.impl.campaign.rulecmd.AddRemoveCommodity;
 import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
@@ -99,6 +100,7 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 if (intel.getIcon().equals(crest)) count++;
             }
             if (count >= edfLore.length) {
+                //AddRemoveCommodity.addCreditsGainText(reward, dialog.getTextPanel());
                 Global.getSector().getPlayerFleet().getCargo().getCredits().add(defaultCredits);
                 return;
             }
@@ -165,11 +167,6 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
     }
 
     @Override
-    public boolean isTooltipExpandable() {
-        return false;
-    }
-
-    @Override
     public int getPrice(MarketAPI market, SubmarketAPI submarket) {
         return super.getPrice(market, submarket);
     }
@@ -189,23 +186,20 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
         float cx = x + w/2f;
         float cy = y + h/2f;
 
-        w = 40;
-        h = 40;
-
-        float p = 1;
-        float blX = cx - 12f - p;
-        float blY = cy - 22f - p;
-        float tlX = cx - 26f - p;
-        float tlY = cy + 19f + p;
-        float trX = cx + 20f + p;
-        float trY = cy + 24f + p;
-        float brX = cx + 34f + p;
-        float brY = cy - 9f - p;
+        float blX = cx - 31f;
+        float blY = cy - 16f;
+        float tlX = cx - 22f;
+        float tlY = cy + 27f;
+        float trX = cx + 23f;
+        float trY = cy + 27f;
+        float brX = cx + 15f;
+        float brY = cy - 19f;
 
         boolean known = false; //TODO if player has all intel entries for faction, dull appearance
         float mult = 1f;
 
         sprite.setAlphaMult(alphaMult * mult);
+        sprite.setColor(new Color(255,100,100, 250));
         sprite.setNormalBlend();
         sprite.renderWithCorners(blX, blY, tlX, tlY, trX, trY, brX, brY);
 
