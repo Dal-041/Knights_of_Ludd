@@ -11,6 +11,14 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 87.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "kol_ea_shields2",
+    "phasefield",
+    "automated",
+    "kol_ea_mist",
+    "kol_ea_sparkle",
+    "kol_throttle"
+  ],
   "weaponSlots": [
     {
       "id": "WS0003",
@@ -56,6 +64,24 @@
       "arc": 7,
       "angle": 0,
       "locations": [30.5, -0]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 140.5,
+      "locations": [-28.5, 48.5]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -140.5,
+      "locations": [-28.5, -48.5]
     }
   ],
   "engineSlots": [
