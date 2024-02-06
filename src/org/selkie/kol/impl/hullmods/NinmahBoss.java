@@ -487,7 +487,7 @@ public class NinmahBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getOriginalOwner() == 1 || StarficzAIUtils.DEBUG_ENABLED){
+        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED){
             ship.addListener(new NinmahBossPhaseTwoScript(ship));
 
             if(ship.getHullSpec().getBaseHullId().endsWith("ninmah"))

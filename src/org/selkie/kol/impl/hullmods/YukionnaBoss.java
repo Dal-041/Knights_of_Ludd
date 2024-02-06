@@ -97,7 +97,6 @@ public class YukionnaBoss extends BaseHullMod {
                             armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()*armorRegen, phaseTwoTimer/maxTime));
                     }
                 }
-
                 StarficzAIUtils.stayStill(ship);
                 ship.getShield().toggleOff();
                 ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
@@ -106,7 +105,7 @@ public class YukionnaBoss extends BaseHullMod {
     }
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getOriginalOwner() == 1 || StarficzAIUtils.DEBUG_ENABLED){
+        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED){
             ship.addListener(new YukionnaBoss.YukionnaBossPhaseTwoScript(ship));
 
             String key = "phaseAnchor_canDive";

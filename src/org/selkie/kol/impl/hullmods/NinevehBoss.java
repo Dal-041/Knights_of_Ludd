@@ -282,7 +282,7 @@ public class NinevehBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getOriginalOwner() == 1 || StarficzAIUtils.DEBUG_ENABLED) {
+        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new NinevehBoss.NinevehBossPhaseTwoScript(ship));
 
             String key = "phaseAnchor_canDive";

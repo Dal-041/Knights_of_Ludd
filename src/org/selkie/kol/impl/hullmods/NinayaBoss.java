@@ -12,6 +12,7 @@ import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
 import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
+import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
@@ -277,9 +278,8 @@ public class NinayaBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getOriginalOwner() == 1 || StarficzAIUtils.DEBUG_ENABLED) {
+        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new NinayaBoss.NinayaBossPhaseTwoScript(ship));
-
             if (ship.getHullSpec().getBaseHullId().endsWith("ninaya"))
                 ship.addListener(new NinayaBoss.NinayaAIScript(ship));
 
