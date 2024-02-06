@@ -277,7 +277,7 @@ public class NinayaBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getOriginalOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED) {
+        if(ship.getOriginalOwner() == 1 || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new NinayaBoss.NinayaBossPhaseTwoScript(ship));
 
             if (ship.getHullSpec().getBaseHullId().endsWith("ninaya"))

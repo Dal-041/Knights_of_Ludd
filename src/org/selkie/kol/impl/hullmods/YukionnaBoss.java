@@ -106,7 +106,7 @@ public class YukionnaBoss extends BaseHullMod {
     }
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getOriginalOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED){
+        if(ship.getOriginalOwner() == 1 || StarficzAIUtils.DEBUG_ENABLED){
             ship.addListener(new YukionnaBoss.YukionnaBossPhaseTwoScript(ship));
 
             String key = "phaseAnchor_canDive";
