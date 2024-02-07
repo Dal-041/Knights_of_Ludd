@@ -1,0 +1,12 @@
+{
+	"id":"zea_dawn_gracious_light",
+	"type":"STAT_MOD",
+	"aiType":"TARGETING_FEED",
+
+	"statsScript":"org.selkie.kol.impl.shipsystems.GraciousLightStats",
+
+	"useSound":"system_damper",
+	"loopSound":"system_damper_loop",
+	"deactivateSound":"system_damper_off",
+	"outOfUsesSound":"gun_out_of_ammo"
+}

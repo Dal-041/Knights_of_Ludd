@@ -20,6 +20,8 @@
     "kol_throttle"
   ],
   "builtInWeapons": {
+    "WS0009": "zea_edf_locust_medium",
+    "WS0013": "zea_edf_locust_medium",
     "WS0010": "zea_deco_edf_mizuchi_ml",
     "WS0014": "zea_deco_edf_mizuchi_mr",
     "WS0015": "zea_deco_edf_engL2",

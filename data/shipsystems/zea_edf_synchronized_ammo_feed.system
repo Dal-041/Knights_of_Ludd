@@ -1,5 +1,5 @@
 {
-	"id":"zea_dawn_synchronized_ammo_feed",
+	"id":"zea_edf_synchronized_ammo_feed",
 	"type":"STAT_MOD",
 	"aiType":"TARGETING_FEED",
 

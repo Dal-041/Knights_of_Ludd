@@ -3,6 +3,7 @@ package org.selkie.kol.impl.shipsystems;
 import activators.ActivatorManager;
 import activators.CombatActivator;
 import activators.drones.DroneActivator;
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.FighterWingAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -74,9 +75,12 @@ public class PlasmaFightersStats extends BaseShipSystemScript {
     public static List<MutableShipStatsAPI> getStatsForShipFightersAndDrones(ShipAPI ship) {
         List<MutableShipStatsAPI> returnedStats = new ArrayList<>();
         returnedStats.add(ship.getMutableStats());
-        for (FighterWingAPI wing : ship.getAllWings()) {
-            for (ShipAPI wingMember : wing.getWingMembers()) {
-                returnedStats.add(wingMember.getMutableStats());
+
+        for (ShipAPI wing : Global.getCombatEngine().getShips()) {
+            if (!wing.isFighter()) continue;
+            if (wing.getWing() == null) continue;
+            if (wing.getWing().getSourceShip() == ship) {
+                returnedStats.add(wing.getMutableStats());
             }
         }
 
