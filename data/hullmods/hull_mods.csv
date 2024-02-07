@@ -24,4 +24,5 @@ Advanced Chiwen Drones,zea_dawn_smart_shield_drones,,,,,,,,TRUE,,0,0,0,0,org.sel
 Chiwen Drones,zea_dawn_simple_shield_drones,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.impl.combat.activators.SimpleShieldDronesHullmod,,,,data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/hullmods/zea_dawn_chiwen.png,
 Shachihoko Drone,zea_edf_shachihoko_drone,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.ShachihokoDroneHullmod,,,,,
 Ball Lightning,zea_edf_ball_lightning,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.BallLightningHullmod,,,,,
+IFF Override,zea_edf_iff_override,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.combat.activators.IFFOverrideHullmod,,,,,
 Prototype Phase Coils,zea_ex_phase_coils,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.impl.hullmods.PrototypePhaseCoils,Reduces phase cloak cooldown by %s.,Greatly reduces phase cloak cooldown.,,graphics/hullmods/phase_coils_experimental.png,

@@ -16,7 +16,8 @@
     "zea_edf_pd_drones",
     "automated",
     "kol_ea_shields3",
-    "kol_throttle"
+    "kol_throttle",
+    "zea_edf_iff_override"
   ],
   "builtInWeapons": {
     "WS0005": "eis_blinker_white",
