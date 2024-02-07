@@ -54,14 +54,16 @@ FireAll PopulateOptions",,,
 #END Knightmaster,,,,,,
 ,,,,,,
 # Grandmaster Lackey,,,,,,
-defaultGrandmasterLackeyGreting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Hello! Yes, I work for the Order, no, I can't get you an audience with the Master. No, I don't take inquiries. No, they haven't assigned me a squire to handle this. Was there an intelligence concern for me? No? Well, I have a lot of work on my plate, go swipe a Tri-Tachyon cache or something. Burn bright, Starfarer. Grace be with you.""
-The line closes about as swiftly as it opened. Well, at least you got a suggestion.",,
-,,,"ShowDefaultVisual
+defaultGrandmasterLackeyGreeting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Hello! Yes, I work for the Order, and no, I can't get you an audience with the Master. No, I don't take inquiries. No, they haven't assigned me a squire to handle this. Was there an intelligence concern for me? No? Well, I have a lot of work on my plate, go swipe a Tri-Tachyon cache or something. Burn bright, Starfarer. Grace be with you.""
+
+The line closes about as swiftly as it opened. Well, at least you got a suggestion.",0:kol_gm_lackey_greetingContinue:Continue,
+defaultGrandmasterLackeyGreeting2,DialogOptionSelected,$option == kol_gm_lackey_greetingContinue,"ShowDefaultVisual
 FireAll PopulateOptions",,,
+,,,,,,
 #END Grandmaster Lackey,,,,,,
 ,,,,,,
 # Knightmaster Lackey,,,,,,
-defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"Hello! Yes, I work for the Master, unfortunately right now we're quite swamped over here. If you're looking for work, please contact one of the administrators, they'll get you paying jobs. Check in later patches and we may have some contracts ready.",0:kol_km_lackey_expeditions:Continue,
+defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. Our Intelligence Director on Lyra may also need a lead investigated. Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""sometime soon,"" but for some reason the comm transcriber says ""later patches."" How strange. - ""Till next we meet, Captain!""ù",0:kol_km_lackey_expeditions:Continue,
 defaultKnightmasterLackeyExpeditionsBlurb,DialogOptionSelected,$option == kol_km_lackey_expeditions,"ShowDefaultVisual
 FireAll PopulateOptions","Ah! And perhaps if you're the valiant type, you can find our expeditions gather for patrols about twice a month, as soon as one returns, or... if we lose contact. Please, if you provide them escort they're sure to go somewhere interesting. You'd be doing us a great favor. Blessings be upon you, Captain.",,
 ,,,,,,
@@ -100,7 +102,8 @@ FireAll PopulateOptions","There is no response, but the fleet's weapons remain i
 zea_BossStationTT_stationOpenDialog,OpenInteractionDialog,"$tag:zea_boss_station_tritachyontag score:1000
 $zea_boss_station_tritachyon score:1000","SalvageGenFromSeed
 ShowDefaultVisual
-FireBest SalvageCheckHostile","As your $shipOrFleet moves into a close holding orbit, your comms officer murmurs, ""Hardly any bleed at all coming from that station, Captain. If it didn't have mass, we'd never..."" They trail off, squinting at their console.",,
+FireBest SalvageCheckHostile","As your $shipOrFleet moves into a close holding orbit, your comms officer murmurs, ""Hardly any bleed at all coming from that station, Captain. If it didn't have mass, we'd never..."" They trail off, squinting at their console.
+",,
 zea_BossStationTT_defender_Desc,TriggerAutomatedDefenses,"$tag:zea_boss_station_tritachyontag score:1000
 $zea_boss_station_tritachyon score:1000",SalvageDefenderInteraction,"The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
 
@@ -166,7 +169,8 @@ Your crew lead resumes before you can get overwhelmed in your thoughts.
 ,,,,,,
 ,,,,,,
 ,,,,,,
-zea_BossTT3Encounted,BeginFleetEncounter,"$zea_nineveh score:1000",,"The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
+zea_BossTT3Encounted,BeginFleetEncounter,"$zea_nineveh score:1000
+",,"The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
 
 The small, bright motes orbiting the vessel are but an afterthought before the Tri-Tachyon defense fleet. Your tactical thought processes are interrupted by your comm panel lighting up.
 

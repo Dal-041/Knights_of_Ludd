@@ -1,6 +1,6 @@
 {	
 	"zea_star_black_neutron":{
-		"name":"Black Neutron Star",
+		"name":"Black Pulsar",
 		"tilt":0, # left-right (>0 tilts to the left)
 		"pitch":0, # towards-away from the viewer (>0 pitches towards)
 		"rotation":-3, # degrees/second

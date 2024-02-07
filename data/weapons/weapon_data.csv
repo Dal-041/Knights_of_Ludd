@@ -98,7 +98,7 @@ Flare Launcher SLV,kol_flareslv,,,,400,,10,100,,,,,0,,ENERGY,0,0,0,0.2,2,0.15,75
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Yomogi Plasma Autogun,zea_plasma_chaingun,2,0.5,1000,550,,60,,3,30,12,,,,ENERGY,60,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR, restricted, zea_common_bp",,Unknown,,General,,,,,,,,,,56
 Myoga Ultradriver,zea_myoga_driver,3,0.2,15000,1150,,240,240,50,8,18,,,,KINETIC,360,,0,2,1,,,,,,,2500,,,300,,,,"kinetic16, LR, restricted, zea_common_bp",,Unknown,,Sniper,,,,,,,,,,57.4
-Bricole cannon,zea_bricole_m,2,0.5,2800,900,,150,,10,12,10,,,,KINETIC,150,,0,1.2,1,,0,15,5,10,,800,,,30,,,,"kinetic11, restricted, zea_common_bp",,Unknown,,Anti Shield,,,,,,,,,,56.1
+Bricole cannon,zea_bricole_m,2,0.5,2800,900,,150,,10,12,10,,,,KINETIC,150,,0,1,1,,0,15,5,10,,800,,,30,,,,"kinetic11, restricted, zea_common_bp",,Unknown,,Anti Shield,,,,,,,,,,56.1
 Styrax Driver,zea_styrax_driver,3,0.5,7500,950,,160,,24,18,14,,,,KINETIC,145,,0,1.3,2,0.2,0,10,1.6,1,,900,,,30,,,,"kinetic16, restricted, zea_common_bp",,Unknown,,Anti Shield,,,,,,,,,,70.7
 Konara Thermal Sniper,zea_thermal_cannon,3,0.25,20000,1100,,150,,7,18,28,,,,ENERGY,250,,0.33,1.01,3,0.33,,,,,,820,,,150,,,,"energy20, LR, restricted, zea_common_bp",,Unknown,,Attrition,,,,,,,,,,55
 Mazuma Torpedo Launcher,zea_mazuma_m,3,0.2,15000,1200,,3000,,75,6,16,16,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike28, rocket6, restricted, zea_common_bp",,Unknown,,Torpedo,Fast,None,,,,,,,TRUE,58.1

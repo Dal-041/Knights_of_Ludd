@@ -209,8 +209,8 @@
 		"fightToTheLast":true, # order a full assault instead of retreating, in most cases
 	},	
 	"fleetTypeNames":{
-		"patrolSmall":"Figment",
-		"patrolMedium":"Mirage",
-		"patrolLarge":"Nightmare",
+		"patrolSmall":"Security Detachment",
+        "patrolMedium":"Deterrence Group",
+        "patrolLarge":"Peacekeeper Flotilla",
 	},	
 },
