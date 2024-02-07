@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.combat.StarficzAIUtils;
 
 import java.awt.*;
 import java.util.List;
@@ -131,22 +132,23 @@ public class SimpleShieldDronesActivator extends DroneActivator {
                 float droneAngle = currentRotation + 360f/drones.size() * i;
                 droneLocations.add(MathUtils.getPointOnCircumference(ship.getLocation(), droneDistance, droneAngle));
             }
-
-            // move each drone to its closest location
-            List<Vector2f> assignedPoints = new ArrayList<>();
-            for (ShipAPI drone : drones.keySet()){
-                Vector2f desiredLocation = null;
-                float lowestDistance = Float.POSITIVE_INFINITY;
-                for(Vector2f point : droneLocations){
-                    if(assignedPoints.contains(point)) continue;
-                    float currentDistance = MathUtils.getDistanceSquared(drone.getLocation(), point);
-                    if(currentDistance < lowestDistance){
-                        lowestDistance = currentDistance;
-                        desiredLocation = point;
-                    }
+            List<ShipAPI> activeDrones =  new ArrayList<>(drones.keySet());
+            // fill weights for Hungarian Algorithm
+            float[][] weights = new float[activeDrones.size()][droneLocations.size()];
+            for (int i = 0; i < activeDrones.size(); i++) {
+                float[] weightRow = new float[droneLocations.size()];
+                for (int j = 0; j < droneLocations.size(); j++) {
+                    weightRow[j] = Misc.getDistance(droneLocations.get(j), activeDrones.get(i).getLocation());
                 }
-                assignedPoints.add(desiredLocation);
-                drones.get(drone).move(desiredLocation, drone);
+                weights[i] = weightRow;
+            }
+
+            // execute and move drones
+            StarficzAIUtils.HungarianAlgorithm algo = new StarficzAIUtils.HungarianAlgorithm(weights);
+            int[] results = algo.execute();
+            for (int i = 0; i < activeDrones.size(); i++) {
+                ShipAPI drone = activeDrones.get(i);
+                drones.get(drone).move(droneLocations.get(results[i]), drone);
                 drones.get(drone).rotate(Misc.getAngleInDegrees(ship.getLocation(), drone.getLocation()), drone);
             }
         }

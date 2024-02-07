@@ -131,6 +131,17 @@ public class SmartShieldDronesActivator extends DroneActivator {
         @Override
         public void advance(@NotNull ShipAPI ship, @NotNull Map<ShipAPI, ? extends PIDController> drones, float amount) {
 
+            List<ShipAPI> activeDrones = new ArrayList<>();
+            List<ShipAPI> ventingDrones = new ArrayList<>();
+
+            for(ShipAPI drone : drones.keySet()){
+                if (drone.getFluxLevel() < 0.8f && !drone.getFluxTracker().isOverloadedOrVenting()) activeDrones.add(drone);
+                else {
+                    ventingDrones.add(drone);
+                    drone.getFluxTracker().ventFlux();
+                }
+            }
+
             droneAIInterval.advance(amount);
             if (droneAIInterval.intervalElapsed()) {
                 lastUpdatedTime = Global.getCombatEngine().getTotalElapsedTime(false);
@@ -165,7 +176,7 @@ public class SmartShieldDronesActivator extends DroneActivator {
             List<Float> blockedDirections = new ArrayList<>();
 
             // get as many drone angles as we have drones
-            for(int i=0; i < drones.size(); i++){
+            for(int i=0; i < activeDrones.size(); i++){
                 List<Triple<Float, Float, Float>> potentialAngles = new ArrayList<>();
                 // for each angle where there is incoming damage
                 for(float droneAngle : droneAngles){
@@ -216,37 +227,67 @@ public class SmartShieldDronesActivator extends DroneActivator {
             // rotate idle
             currentRotation += ROTATION_SPEED * amount;
 
-            // generate all locations by doubling up on locations if too many drones
-            List<Vector2f> droneLocations = new ArrayList<>();
-            float droneDistance = ship.getShieldRadiusEvenIfNoShield()*0.95f;
-            for (int i = 0; i < drones.size(); i++) {
-                float droneAngle;
-                if(blockedDirections.isEmpty()){
-                    droneAngle = currentRotation + 360f/drones.size() * i;
-                } else{
-                    droneAngle = blockedDirections.get(i % blockedDirections.size());
+            if(!activeDrones.isEmpty()) {
+                // generate all locations by doubling up on locations if too many drones
+                List<Vector2f> droneLocations = new ArrayList<>();
+                float droneDistance = ship.getShieldRadiusEvenIfNoShield() * 0.95f;
+                for (int i = 0; i < activeDrones.size(); i++) {
+                    float droneAngle;
+                    if (blockedDirections.isEmpty()) {
+                        droneAngle = currentRotation + 360f / activeDrones.size() * i;
+                    } else {
+                        droneAngle = blockedDirections.get(i % blockedDirections.size());
+                    }
+                    droneLocations.add(MathUtils.getPointOnCircumference(ship.getLocation(), droneDistance, droneAngle));
+                    if (!blockedDirections.isEmpty() && i % blockedDirections.size() == blockedDirections.size() - 1) droneDistance += 30f;
                 }
-                droneLocations.add(MathUtils.getPointOnCircumference(ship.getLocation(), droneDistance, droneAngle));
-                if (!blockedDirections.isEmpty() && i % blockedDirections.size() == blockedDirections.size()-1) droneDistance += 30f;
+
+                // fill weights for Hungarian Algorithm
+                float[][] weights = new float[activeDrones.size()][droneLocations.size()];
+                for (int i = 0; i < activeDrones.size(); i++) {
+                    float[] weightRow = new float[droneLocations.size()];
+                    for (int j = 0; j < droneLocations.size(); j++) {
+                        weightRow[j] = Misc.getDistance(droneLocations.get(j), activeDrones.get(i).getLocation());
+                    }
+                    weights[i] = weightRow;
+                }
+
+                // execute and move drones
+                StarficzAIUtils.HungarianAlgorithm algo = new StarficzAIUtils.HungarianAlgorithm(weights);
+                int[] results = algo.execute();
+                for (int i = 0; i < activeDrones.size(); i++) {
+                    ShipAPI drone = activeDrones.get(i);
+                    drones.get(drone).move(droneLocations.get(results[i]), drone);
+                    drones.get(drone).rotate(Misc.getAngleInDegrees(ship.getLocation(), drone.getLocation()), drone);
+                }
             }
 
-            // move each drone to its closest location
-            List<Vector2f> assignedPoints = new ArrayList<>();
-            for (ShipAPI drone : drones.keySet()){
-                Vector2f desiredLocation = null;
-                float lowestDistance = Float.POSITIVE_INFINITY;
-                for(Vector2f point : droneLocations){
-                    if(assignedPoints.contains(point)) continue;
-                    float currentDistance = MathUtils.getDistanceSquared(drone.getLocation(), point);
-                    if(currentDistance < lowestDistance){
-                        lowestDistance = currentDistance;
-                        desiredLocation = point;
-                    }
+            if(!ventingDrones.isEmpty()){
+                // deal with venting drones
+                List<Vector2f> droneVentingLocations = new ArrayList<>();
+                for (int i = 0; i < ventingDrones.size(); i++) {
+                    droneVentingLocations.add(MathUtils.getPointOnCircumference(ship.getLocation(),  ship.getShieldRadiusEvenIfNoShield()*0.3f, currentRotation + 360f/ventingDrones.size() * i));
                 }
-                assignedPoints.add(desiredLocation);
-                if(StarficzAIUtils.DEBUG_ENABLED) Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.blue);
-                drones.get(drone).move(desiredLocation, drone);
-                drones.get(drone).rotate(Misc.getAngleInDegrees(ship.getLocation(), drone.getLocation()), drone);
+
+                // move each drone to its closest location
+                // fill weights for Hungarian Algorithm
+                float[][] ventingWeights = new float[ventingDrones.size()][droneVentingLocations.size()];
+                for (int i = 0; i < ventingDrones.size(); i++){
+                    float[] weightRow = new float[droneVentingLocations.size()];
+                    for(int j = 0; j < droneVentingLocations.size(); j++){
+                        weightRow[j] = Misc.getDistance(droneVentingLocations.get(j), ventingDrones.get(i).getLocation());
+                    }
+                    ventingWeights[i] = weightRow;
+                }
+
+                // execute and move drones
+                StarficzAIUtils.HungarianAlgorithm ventAlgo = new StarficzAIUtils.HungarianAlgorithm(ventingWeights);
+                int[] ventResults = ventAlgo.execute();
+                for (int i = 0; i < ventingDrones.size(); i++){
+                    ShipAPI drone = ventingDrones.get(i);
+                    drones.get(drone).move(droneVentingLocations.get(ventResults[i]), drone);
+                    drones.get(drone).rotate(Misc.getAngleInDegrees(ship.getLocation(), drone.getLocation()), drone);
+                }
             }
         }
     }
