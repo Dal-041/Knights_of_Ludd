@@ -3,50 +3,46 @@ package org.selkie.kol.impl.shipsystems;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
-import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.api.util.Pair;
 import com.fs.starfarer.combat.entities.BallisticProjectile;
 import com.fs.starfarer.combat.entities.MovingRay;
-import com.fs.starfarer.combat.entities.OoOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO;
-import com.fs.starfarer.combat.entities.PlasmaShot;
-import com.fs.starfarer.prototype.Utils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.ReflectionUtils;
 
 import java.awt.*;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Random;
 
 public class BulletTimeField extends BaseShipSystemScript {
-    public static class DamagingProjectileInfo{
+    public static class DamagingProjectileInfo {
         float startingTime;
         float startingDistance;
         float adjustedElapsedTime;
         float adjustedElapsedDistance;
         float initialSpeed;
-        DamagingProjectileInfo(DamagingProjectileAPI threat){
+
+        DamagingProjectileInfo(DamagingProjectileAPI threat) {
             float amount = Global.getCombatEngine().getElapsedInLastFrame();
             startingTime = threat.getElapsed();
             adjustedElapsedTime = startingTime + (SLOWDOWN * amount);
-            if(threat instanceof BallisticProjectile){
+            if (threat instanceof BallisticProjectile) {
                 initialSpeed = threat.getVelocity().length();
-            }
-            else if(threat instanceof MovingRay){
+            } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
                 Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
                 initialSpeed = (float) ReflectionUtils.INSTANCE.get("return", rayExtender); // bullet speed
                 startingDistance = (float) ReflectionUtils.INSTANCE.get("Ø00000", rayExtender);
-                adjustedElapsedDistance = startingDistance  + (initialSpeed * SLOWDOWN * amount);
-            }
-            else if (threat instanceof MissileAPI) {
+                adjustedElapsedDistance = startingDistance + (initialSpeed * SLOWDOWN * amount);
+            } else if (threat instanceof MissileAPI) {
                 initialSpeed = ((MissileAPI) threat).getMaxSpeed();
 
             }
         }
     }
+
     public static final float SLOWDOWN = 0.2f;
     public static final float SLOWDOWN_RADIUS = 400f;
     public static final float DEFLECTION_ANGLE = 40f;
@@ -54,11 +50,12 @@ public class BulletTimeField extends BaseShipSystemScript {
     public float shieldRadius;
     public float shieldArc;
     Map<DamagingProjectileAPI, DamagingProjectileInfo> slowedProjectiles = new HashMap<>();
+
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
         ShipAPI ship = (ShipAPI) stats.getEntity();
 
-        if(!init){
+        if (!init) {
             shieldRadius = ship.getShield().getRadius();
             shieldArc = ship.getShield().getArc();
             init = true;
@@ -72,8 +69,8 @@ public class BulletTimeField extends BaseShipSystemScript {
         ship.getShield().setArc(360f);
         ship.getShield().setRadius(10f);
         ship.getShield().toggleOn();
-        ship.getShield().setInnerColor(new Color(100,255,100));
-        ship.getShield().setRingColor(new Color(100,255,100));
+        ship.getShield().setInnerColor(new Color(100, 255, 100));
+        ship.getShield().setRingColor(new Color(100, 255, 100));
         ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
 
 
@@ -85,15 +82,15 @@ public class BulletTimeField extends BaseShipSystemScript {
             DamagingProjectileAPI threat = (DamagingProjectileAPI) next;
             //if(threat.getSource() == stats.getEntity()) continue;
             // Add threats in range to be slowed
-            if(MathUtils.getDistanceSquared(threat.getLocation(), stats.getEntity().getLocation()) < SLOWDOWN_RADIUS*SLOWDOWN_RADIUS){
-                if(!slowedProjectiles.containsKey(threat)){
+            if (MathUtils.getDistanceSquared(threat.getLocation(), stats.getEntity().getLocation()) < SLOWDOWN_RADIUS * SLOWDOWN_RADIUS) {
+                if (!slowedProjectiles.containsKey(threat)) {
                     slowedProjectiles.put(threat, new DamagingProjectileInfo(threat));
 
-                    float angle = (float) (rand.nextGaussian()*DEFLECTION_ANGLE);
+                    float angle = (float) (rand.nextGaussian() * DEFLECTION_ANGLE);
 
-                    if(threat instanceof BallisticProjectile || threat instanceof MissileAPI){
+                    if (threat instanceof BallisticProjectile || threat instanceof MissileAPI) {
                         VectorUtils.rotate(threat.getVelocity(), angle);
-                    } else if(threat instanceof MovingRay){
+                    } else if (threat instanceof MovingRay) {
                         MovingRay nearbyRay = (MovingRay) threat;
                         Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
                         Vector2f velocity = (Vector2f) ReflectionUtils.INSTANCE.get("o00000", rayExtender);
@@ -101,8 +98,8 @@ public class BulletTimeField extends BaseShipSystemScript {
                     }
                     threat.setFacing(threat.getFacing() + angle);
                 }
-            } else{ // remove threats that have gone out of range
-                if (slowedProjectiles.containsKey(threat)){
+            } else { // remove threats that have gone out of range
+                if (slowedProjectiles.containsKey(threat)) {
                     VectorUtils.resize(threat.getVelocity(), slowedProjectiles.get(threat).initialSpeed);
                     slowedProjectiles.remove(threat);
                 }
@@ -110,58 +107,56 @@ public class BulletTimeField extends BaseShipSystemScript {
         }
 
         // stop tracking expired threats
-        for (Iterator<Map.Entry<DamagingProjectileAPI, DamagingProjectileInfo>> i = slowedProjectiles.entrySet().iterator(); i.hasNext();) {
+        for (Iterator<Map.Entry<DamagingProjectileAPI, DamagingProjectileInfo>> i = slowedProjectiles.entrySet().iterator(); i.hasNext(); ) {
             if (i.next().getKey().isExpired()) {
                 i.remove();
             }
         }
 
 
-        for(DamagingProjectileAPI threat : slowedProjectiles.keySet()){
+        for (DamagingProjectileAPI threat : slowedProjectiles.keySet()) {
             DamagingProjectileInfo threatInfo = slowedProjectiles.get(threat);
-            if(threat instanceof BallisticProjectile){
+            if (threat instanceof BallisticProjectile) {
                 BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
 
                 Object trailExtender = ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
                 ReflectionUtils.INSTANCE.set("ö00000", trailExtender, threatInfo.adjustedElapsedTime); //elapsed time
-                ReflectionUtils.INSTANCE.set("elapsed", nearbyBallistic,threatInfo.adjustedElapsedTime);
+                ReflectionUtils.INSTANCE.set("elapsed", nearbyBallistic, threatInfo.adjustedElapsedTime);
 
-                threatInfo.adjustedElapsedTime += amount*SLOWDOWN;
-                VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed*SLOWDOWN);
-            }
-            else if (threat instanceof MovingRay) {
+                threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
+                VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * SLOWDOWN);
+            } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
                 Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
                 ReflectionUtils.INSTANCE.set("elapsed", nearbyRay, threatInfo.adjustedElapsedTime);
                 //ReflectionUtils.INSTANCE.set("Ø00000", rayExtender, threatInfo.adjustedElapsedDistance);
-                ReflectionUtils.INSTANCE.set("return", rayExtender, threatInfo.initialSpeed*SLOWDOWN);
+                ReflectionUtils.INSTANCE.set("return", rayExtender, threatInfo.initialSpeed * SLOWDOWN);
 
-                threatInfo.adjustedElapsedTime += amount*SLOWDOWN;
-                threatInfo.adjustedElapsedDistance += amount*SLOWDOWN*threatInfo.initialSpeed;
-                VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed*SLOWDOWN);
-            }
-            else if (threat instanceof MissileAPI) {
+                threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
+                threatInfo.adjustedElapsedDistance += amount * SLOWDOWN * threatInfo.initialSpeed;
+                VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * SLOWDOWN);
+            } else if (threat instanceof MissileAPI) {
                 MissileAPI nearbyMissile = (MissileAPI) threat;
                 ReflectionUtils.INSTANCE.set("elapsed", nearbyMissile, threatInfo.adjustedElapsedTime);
                 nearbyMissile.setFlightTime(threatInfo.adjustedElapsedTime);
 
-                threatInfo.adjustedElapsedTime += amount*SLOWDOWN;
-                VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed*SLOWDOWN);
+                threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
+                VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * SLOWDOWN);
             }
         }
     }
+
     public void unapply(MutableShipStatsAPI stats, String id) {
         stats.getMaxSpeed().unmodify(id);
         stats.getAcceleration().unmodify(id);
         stats.getDeceleration().unmodify(id);
         stats.getEntity().getShield().setArc(shieldArc);
         stats.getEntity().getShield().setRadius(shieldRadius);
-        for(DamagingProjectileAPI threat : slowedProjectiles.keySet()){
+        for (DamagingProjectileAPI threat : slowedProjectiles.keySet()) {
             DamagingProjectileInfo threatInfo = slowedProjectiles.get(threat);
-            if(threat instanceof BallisticProjectile || threat instanceof MissileAPI){
+            if (threat instanceof BallisticProjectile || threat instanceof MissileAPI) {
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed);
-            }
-            else if (threat instanceof MovingRay) {
+            } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
                 Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
                 ReflectionUtils.INSTANCE.set("return", rayExtender, threatInfo.initialSpeed);

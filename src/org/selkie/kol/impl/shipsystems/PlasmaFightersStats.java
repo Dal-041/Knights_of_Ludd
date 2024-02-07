@@ -14,15 +14,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlasmaFightersStats extends BaseShipSystemScript {
-    public static float SPEED_BONUS = 125f;
-    public static float TURN_BONUS = 20f;
-
-    private Color color = new Color(100, 255, 100, 255);
+    private static float SPEED_BONUS = 125f;
+    private static float TURN_BONUS = 20f;
+    private static final Color color = new Color(100, 255, 100, 255);
 
 	@Override
     public void apply(MutableShipStatsAPI systemStats, String id, State state, float effectLevel) {
         ShipAPI ship = (ShipAPI) systemStats.getEntity();
         List<MutableShipStatsAPI> statsToModify = getStatsForShipFightersAndDrones(ship);
+        statsToModify.add(systemStats);
 
 		for (MutableShipStatsAPI stats : statsToModify) {
 			if (state == State.OUT) {
@@ -52,6 +52,7 @@ public class PlasmaFightersStats extends BaseShipSystemScript {
     public void unapply(MutableShipStatsAPI systemStats, String id) {
 		ShipAPI ship = (ShipAPI) systemStats.getEntity();
 		List<MutableShipStatsAPI> statsToModify = getStatsForShipFightersAndDrones(ship);
+        statsToModify.add(systemStats);
 
 		for (MutableShipStatsAPI stats : statsToModify) {
 			stats.getMaxSpeed().unmodify(id);
@@ -74,8 +75,6 @@ public class PlasmaFightersStats extends BaseShipSystemScript {
 
     public static List<MutableShipStatsAPI> getStatsForShipFightersAndDrones(ShipAPI ship) {
         List<MutableShipStatsAPI> returnedStats = new ArrayList<>();
-        returnedStats.add(ship.getMutableStats());
-
         for (ShipAPI wing : Global.getCombatEngine().getShips()) {
             if (!wing.isFighter()) continue;
             if (wing.getWing() == null) continue;
