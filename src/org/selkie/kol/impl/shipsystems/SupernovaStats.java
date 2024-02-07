@@ -5,25 +5,48 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
+import com.fs.starfarer.api.loading.WeaponSlotAPI;
+import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.ui.P;
+import kotlin.Lazy;
 import org.dark.shaders.distortion.DistortionShader;
 import org.dark.shaders.distortion.RippleDistortion;
 import org.dark.shaders.light.LightShader;
 import org.dark.shaders.light.StandardLight;
+import org.lazywizard.lazylib.LazyLib;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static org.lazywizard.lazylib.combat.WeaponUtils.getEnemiesInArc;
+import static org.lazywizard.lazylib.combat.WeaponUtils.isWithinArc;
+
 public class SupernovaStats extends BaseShipSystemScript {
-    private static final float IN_STATE_DURATION = 4f;
+    private static final float IN_STATE_DURATION = 2f;
     private static final float ACTIVE_STATE_DURATION = 4f;
     private static final String SUPERNOVA = "SUPERNOVA";
     private static final String FIRED_INFERNO_CANNON_IDS = "FIRED_INFERNO_CANNON_IDS";
     private static final List<String> INFERNO_CANNON_IDS = new ArrayList<>();
+
+    private static final float assessmentArc = 35f;
+    private static final float assessmentRange = 1500f;
+    private static final float assessmentThreshold = 15f;
+    public static HashMap<ShipAPI.HullSize, Float> scoresHull = new HashMap<>();
+    static {
+        scoresHull.put(ShipAPI.HullSize.FIGHTER, 1f);
+        scoresHull.put(ShipAPI.HullSize.FRIGATE, 3f);
+        scoresHull.put(ShipAPI.HullSize.DESTROYER, 5f);
+        scoresHull.put(ShipAPI.HullSize.CRUISER, 8f);
+        scoresHull.put(ShipAPI.HullSize.CAPITAL_SHIP, 100f);
+        scoresHull.put(ShipAPI.HullSize.DEFAULT, 0f);
+    }
 
     static {
         INFERNO_CANNON_IDS.add("zea_nian_maingun_l");
@@ -47,8 +70,17 @@ public class SupernovaStats extends BaseShipSystemScript {
             if (!data.superNova) {
                 if (state == State.IN) {
                     if (effectLevel >= 0.25f) {
-                        //todo - evaluate conditions for supernova
-                        if (MathUtils.getRandomNumberInRange(0f, 1f) <= 1f) {
+                        float scorePotential = 0f;
+                        WeaponAPI lidarWep = null;
+                        for (WeaponAPI wep : ship.getAllWeapons()) {
+                            if (wep.getSpec().getWeaponId().equals("zea_dawn_targeting_beam_wpn")) lidarWep = wep;
+                        }
+                        ship.getMutableStats().getBeamWeaponRangeBonus().modifyMult("nian_gun_assessment", 2f);
+                        for (ShipAPI enemy: getEnemiesInArc(lidarWep)) {
+                            scorePotential += scoresHull.get(enemy.getHullSize());
+                        }
+                        ship.getMutableStats().getBeamWeaponRangeBonus().unmodify("nian_gun_assessment");
+                        if (scorePotential < assessmentThreshold) {
                             data.superNova = true;
                             return;
                         }

@@ -131,6 +131,15 @@ public class LungeStats extends BaseShipSystemScript {
             stats.getMaxSpeed().unmodify(id);
             stats.getMaxTurnRate().unmodify(id);
             stats.getTurnAcceleration().modifyMult(id,20f);
+            /* Player-only drifting
+            if (!((ShipAPI) stats.getEntity()).getCaptain().isPlayer()) {
+                float speed = ship.getVelocity().length();
+                if (speed > ship.getMutableStats().getMaxSpeed().getModifiedValue()) {
+                    ship.getVelocity().normalise();
+                    ship.getVelocity().scale(ship.getMutableStats().getMaxSpeed().getModifiedValue());
+                }
+            }
+            */
             if (!decel) intervalDecel.advance(engine.getElapsedInLastFrame());
 
             if (intervalDecel.intervalElapsed()) {
@@ -140,7 +149,7 @@ public class LungeStats extends BaseShipSystemScript {
                 float speed = ship.getVelocity().length();
                 if (speed > ship.getMutableStats().getMaxSpeed().getModifiedValue()) {
                     ship.getVelocity().normalise();
-                    ship.getVelocity().scale(speed - elapsed * 3600f);
+                    ship.getVelocity().scale(ship.getMutableStats().getMaxSpeed().getModifiedValue());
                 }
             }
         }
