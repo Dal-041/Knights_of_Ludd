@@ -97,13 +97,15 @@ public class PrepareAbyss {
     	//PlanetAPI elysia = system.addPlanet("zea_elysia_abyss", system.getCenter(), "Elysia", "zea_red_hole", 0f, beeg, 0f, 10000f);
 		PlanetAPI elysia = system.getStar();
 		elysia.setName("Elysian Abyss");
-    	elysia.getSpec().setBlackHole(true);
+    	elysia.getSpec().setBlackHole(false); //Minimize fleet mishandling
+		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
+		elysia.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
     	system.setName(elysiaSysName);
     	elysia.applySpecChanges();
 		elysia.addTag(Tags.NON_CLICKABLE);
     	SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
-    			5600,
-				250,
+    			5200,
+				150,
 				elysia,
 				-13f,
 				0f,
@@ -340,6 +342,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
+		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dawn.png");
 		new AbyssBackgroundWarper(system, 8, 0.25f);
@@ -481,6 +484,7 @@ public class PrepareAbyss {
 
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.THEME_SPECIAL);
+		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 
 		//fancy bg script
 
@@ -489,7 +493,7 @@ public class PrepareAbyss {
 		system.setName(tempName);
 		sing.setName(tempName);
 		ProcgenUsedNames.notifyUsed(system.getBaseName());
-		sing.getSpec().setBlackHole(true);
+		sing.getSpec().setBlackHole(false); //Avoid fleet weirdness
 		sing.applySpecChanges();
 
 		SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(

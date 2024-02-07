@@ -51,7 +51,14 @@ public class TrackFleet implements EveryFrameScript {
                 } else if (fleet.getContainingLocation() instanceof StarSystemAPI
                         && ((StarSystemAPI)fleet.getContainingLocation()).getStar() != null
                         && ((StarSystemAPI)fleet.getContainingLocation()).getStar().getTypeId().equalsIgnoreCase("zea_star_black_neutron")) {
-                    if (Math.abs(fleet.getLocation().getX()) <= 50 && Math.abs(fleet.getLocation().getY()) <= 50) {
+                    StarSystemAPI system = (StarSystemAPI) fleet.getContainingLocation();
+                    CampaignFleetAPI victim = null;
+                    for (CampaignFleetAPI sysFleet : system.getFleets()) {
+                        if (sysFleet != victim && Math.abs(sysFleet.getLocation().getX()) <= 50 && Math.abs(sysFleet.getLocation().getY()) <= 50) {
+                            victim = sysFleet;
+                        }
+                    }
+                    if (victim != null) {
                         WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>(new Random());
                         for (StarSystemAPI sys : Global.getSector().getStarSystems()) {
                             if (sys.isCurrentLocation()) continue;
@@ -59,15 +66,17 @@ public class TrackFleet implements EveryFrameScript {
                         }
                         if (!picker.isEmpty()) {
                             StarSystemAPI dest = picker.pick();
-                            fleet.getContainingLocation().removeEntity(fleet);
-                            dest.addEntity(fleet);
-                            Global.getSector().setCurrentLocation(dest);
-                            fleet.setLocation(dest.getStar().getLocation().x,
-                                    dest.getStar().getLocation().y);
-                            fleet.setNoEngaging(2.0f);
-                            fleet.clearAssignments();
+                            system.removeEntity(victim);
+                            dest.addEntity(victim);
+                            if (victim.equals(fleet)) {
+                                Global.getSector().setCurrentLocation(dest);
+                                fleet.setNoEngaging(2.0f);
+                                fleet.clearAssignments();
+                            }
+                            victim.setLocation(dest.getStar().getLocation().x, dest.getStar().getLocation().y);
+                            victim.setNoEngaging(2.0f);
                             CampaignEngine.getInstance().getCampaignUI().showNoise(0.5f, 0.25f, 1.5f);
-                            fleet.getVelocity().normalise().scale(3000f);
+                            victim.getVelocity().normalise().scale(3000f);
                         }
                     }
                 }

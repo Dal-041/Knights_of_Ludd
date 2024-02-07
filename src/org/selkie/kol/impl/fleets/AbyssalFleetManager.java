@@ -19,6 +19,7 @@ import com.fs.starfarer.api.impl.campaign.fleets.SeededFleetManager;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
@@ -178,11 +179,11 @@ public class AbyssalFleetManager extends SeededFleetManager {
         }
 
         for (SectorEntityToken entity : system.getJumpPoints()) {
-            picker.add(entity, 2f);
+            picker.add(entity, 0.5f);
         }
 
         for (SectorEntityToken entity : system.getPlanets()) {
-            picker.add(entity, 0.2f);
+            picker.add(entity, 0.1f);
         }
 
         return picker.pick();

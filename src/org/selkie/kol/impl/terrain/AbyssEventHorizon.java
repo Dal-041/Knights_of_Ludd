@@ -36,4 +36,10 @@ public class AbyssEventHorizon extends EventHorizonPlugin {
         }
         return flag == TerrainAIFlags.BREAK_OTHER_ORBITS;
     }
+
+    //Hasty debug
+    @Override
+    public boolean hasAIFlag(Object flag) {
+        return flag == TerrainAIFlags.EFFECT_DIMINISHED_WITH_RANGE;
+    }
 }
