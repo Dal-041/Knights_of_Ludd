@@ -46,11 +46,12 @@ import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 public class PrepareDarkDeeds {
 
     public static final String NASCENT_WELL_KEY = "$zea_TT3BlackSite_well";
+    public static final String DEFEATED_NINAYA_KEY = "$zea_defeatedNinaya";
+    public static final String DEFEATED_NINMAH_KEY = "$zea_defeatedNinmah";
     public static final String DEFEATED_NINEVEH_KEY = "$zea_defeatedNineveh";
     public static final String TTBOSS2_SYSTEM_KEY = "$zea_tt_boss2_system";
     public static final String TTBOSS3_SYSTEM_KEY = "$zea_tt_boss3_system";
     public static final String TTBOSS2_STATION_KEY = "$zea_boss_station_tritachyon"; //Sync with rules.csv
-    public static final String ninmahTritachID = "zea_tritachyon";
     private static final Logger log = Logger.getLogger(PrepareDarkDeeds.class);
 
     public static void andBegin() {
@@ -119,6 +120,7 @@ public class PrepareDarkDeeds {
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
         TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
+        TT1BossFleet.getFlagship().getVariant().addTag("kol_boss");
 
         TT1BossFleet.getFleetData().sort();
 
@@ -131,6 +133,10 @@ public class PrepareDarkDeeds {
 
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
                 new TT1FIDConfig());
+
+    }
+
+    public static void spawnNinmahWreck() {
 
     }
 
@@ -173,7 +179,7 @@ public class PrepareDarkDeeds {
                         return;
                     }
 
-                    //Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINAYA_KEY, true);
+                    Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINAYA_KEY, true);
 
                     ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData("zea_boss_ninaya_Nightdemon", ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
                     ship.shipName = "TTS Ninaya";
@@ -196,6 +202,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
+                    copy.variant.removeTag("kol_boss");
                     data.addShip(copy);
 
                     Misc.setSalvageSpecial(entity, data);
@@ -331,6 +338,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
+                    copy.variant.removeTag("kol_boss");
                     data.addShip(copy);
 
                     CustomCampaignEntityAPI lootbox = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
@@ -345,7 +353,7 @@ public class PrepareDarkDeeds {
                     lootbox.addDropRandom("omega_weapons_medium", 1);
                     lootbox.addDropRandom("zea_omega_medium_low", 3); //avg: +0.6
                     lootbox.addDropRandom("zea_omega_large_low", 2); //0.4
-                    lootbox.addDropRandom("zea_tritach_delta_site_log", 1);
+                    //lootbox.addDropRandom("zea_tritach_delta_site_log", 1); //handled by intel
 
                     Misc.setSalvageSpecial(entity, data);
 
@@ -550,6 +558,7 @@ public class PrepareDarkDeeds {
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
         TT3BossFleet.addTag(excludeTag);
 
+        TT3BossFleet.getFlagship().getVariant().addTag("kol_boss");
 
 //      TT3BossFleet.clearAbilities();
 //		TT3BossFleet.addAbility(Abilities.TRANSPONDER);
@@ -571,27 +580,4 @@ public class PrepareDarkDeeds {
         TT3BossFleet.addScript(new ZigLeashAssignmentAI(TT3BossFleet, rock));
 
     }
-
-    public static SectorEntityToken addDerelict(StarSystemAPI system, SectorEntityToken focus,
-                                                String variantId, String name, String id,
-                                                ShipCondition condition, float orbitRadius, boolean recoverable) {
-        DerelictShipData params = new DerelictShipData(new PerShipData(variantId, condition, 0f), false);
-        if (name != null) {
-            params.ship.shipName = name;
-            params.ship.nameAlwaysKnown = true;
-            params.ship.fleetMemberId = id;
-        }
-        SectorEntityToken ship = BaseThemeGenerator.addSalvageEntity(system, Entities.WRECK, Factions.NEUTRAL, params);
-        ship.setDiscoverable(true);
-
-        float orbitDays = orbitRadius / (10f + (float) Math.random() * 5f);
-        ship.setCircularOrbit(focus, (float) Math.random() * 360f, orbitRadius, orbitDays);
-
-        if (recoverable) {
-            ShipRecoverySpecialCreator creator = new ShipRecoverySpecialCreator(null, 0, 0, false, null, null);
-            Misc.setSalvageSpecial(ship, creator.createSpecial(ship, null));
-        }
-        return ship;
-    }
-
 }

@@ -287,8 +287,13 @@ public class PrepareAbyss {
 		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0), PrepareAbyss.duskID); //Highest tier
 		stationResearch.setFixedLocation(-5230, 8860);
 
+		float count = uwDerelictsNormal.length; //16
+		float odds = 0.45f;
+		count *= odds;
+		int target = 5; //3 entries, some redundancy
+		float oddsLore = target/count;
 		for(String variant:uwDerelictsNormal) {
-			if (Math.random() <= 0.45f) {
+			if (Math.random() <= odds) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
 						variant,
 						ShipRecoverySpecial.ShipCondition.WRECKED,
@@ -302,6 +307,7 @@ public class PrepareAbyss {
 				);
 				wreck.setFacing((float)Math.random()*360f);
 				if (Math.random() > 0.33f) wreck.addTag(Tags.UNRECOVERABLE);
+				if (Math.random() < oddsLore) wreck.addDropRandom("zea_ttfleet_lore", 1);
 				//system.addEntity(wreck);
 			}
 		}

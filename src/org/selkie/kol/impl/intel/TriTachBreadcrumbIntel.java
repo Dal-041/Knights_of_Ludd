@@ -13,10 +13,12 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BreadcrumbSpec
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.selkie.kol.impl.plugins.AbyssUtils;
 
 import java.awt.*;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
 
@@ -24,12 +26,15 @@ public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
     protected String rewardID;
     protected String name;
     public String desc;
+    public String descShort;
+    protected String icon = Global.getSector().getFaction(Factions.TRITACHYON).getLogo();
 
     public TriTachBreadcrumbIntel (String name, String desc, SectorEntityToken target) {
         this.entity = target;
         //this.rewardID = ID;
         this.name = name;
         this.desc = desc;
+        this.descShort = desc;
     }
 
     @Override
@@ -60,10 +65,9 @@ public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
 
         Color gray = Misc.getGrayColor();
         info.addSpacer(10f);
-        TooltipMakerAPI imageTooltip = info.beginImageWithText(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), 24f);
-        imageTooltip.addPara(desc,
-                0f, Misc.getTextColor(), Misc.getHighlightColor(), null);
-        info.addImageWithText(0f);
+        //TooltipMakerAPI imageTooltip = info.beginImageWithText(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), 24f);
+        //imageTooltip.addPara(desc, 0f, Misc.getTextColor(), Misc.getHighlightColor(), null);
+        //info.addImageWithText(0f);
         info.addSpacer(10f);
 
         String loc = BreadcrumbSpecial.getLocatedString(entity, true);
@@ -75,16 +79,39 @@ public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
 
         Color gray = Misc.getGrayColor();
 
+        String name = "";
+        String shortName = "";
+        String isOrAre = "is";
+        String aOrAn = "a";
+
+        if (entity.getCustomEntitySpec() != null) {
+            name = entity.getCustomEntitySpec().getNameInText();
+            shortName = entity.getCustomEntitySpec().getShortName();
+            isOrAre = entity.getCustomEntitySpec().getIsOrAre();
+            aOrAn = entity.getCustomEntitySpec().getAOrAn();
+        } else {
+            name = entity.getName();
+            shortName = entity.getName();
+        }
+        String loc = BreadcrumbSpecial.getLocatedString(entity, true);
+
         info.addSpacer(3f);
-        info.addPara("", 0f, Misc.getTextColor(), Misc.getHighlightColor(), null);
+        //info.addPara("", 0f, Misc.getTextColor(), Misc.getHighlightColor(), null);
+        info.addPara("The " + shortName + " " + isOrAre + " " + loc + ".", 10f);
     }
 
     @Override
     public void createIntelInfo(TooltipMakerAPI info, ListInfoMode mode) {
         Color c = getTitleColor(mode);
-        info.addPara(getName(), c, 0f);
+        info.addPara(name, c, 0f);
 
         addBulletPoints(info, mode);
+    }
+
+    public Set<String> getIntelTags(SectorMapAPI map) {
+        Set<String> tags = super.getIntelTags(map);
+        tags.add(AbyssUtils.IntelBreadcrumbTag);
+        return tags;
     }
 
     @Override
@@ -100,6 +127,16 @@ public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
     }
 
     @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public String getIcon() {
+        return icon;
+    }
+
+    @Override
     public boolean callEvent(String ruleId, final InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
         String action = params.get(0).getString(memoryMap);
 
@@ -109,11 +146,16 @@ public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
 
         if (action.equals("zea_BossStationTT_Salvage2")) {
             Global.getSector().getPlayerStats().addXP(200000, dialog.getTextPanel());
+            ReputationActionResponsePlugin.ReputationAdjustmentResult result = Global.getSector().adjustPlayerReputation(
+                    new CoreReputationPlugin.RepActionEnvelope(CoreReputationPlugin.RepActions.MISSION_SUCCESS, -5,
+                            null, dialog.getTextPanel(), true, false),
+                    Factions.TRITACHYON);
             endAfterDelay();
         }
 
         if (action.equals("zea_AfterNinevehDefeat")) {
-            AddRemoveCommodity.addItemGainText(item, 1, dialog.getTextPanel());
+
+            Global.getSector().getPlayerStats().addXP(250000, dialog.getTextPanel());
 
             ReputationActionResponsePlugin.ReputationAdjustmentResult result = Global.getSector().adjustPlayerReputation(
                     new CoreReputationPlugin.RepActionEnvelope(CoreReputationPlugin.RepActions.MISSION_SUCCESS, -5,

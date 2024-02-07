@@ -54,7 +54,8 @@ FireAll PopulateOptions",,,
 #END Knightmaster,,,,,,
 ,,,,,,
 # Grandmaster Lackey,,,,,,
-defaultGrandmasterLackeyGreting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Hello! Yes, I work for the Order, no, I can't get you an audience. No, I don't take inquiries. Was there an intelligence concern for me? No? Burn bright, Starfarer."" She whisks you off the line about as swiftly as it opened.",,
+defaultGrandmasterLackeyGreting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Hello! Yes, I work for the Order, no, I can't get you an audience with the Master. No, I don't take inquiries. No, they haven't assigned me a squire to handle this. Was there an intelligence concern for me? No? Well, I have a lot of work on my plate, go swipe a Tri-Tachyon cache or something. Burn bright, Starfarer. Grace be with you.""
+The line closes about as swiftly as it opened. Well, at least you got a suggestion.",,
 ,,,"ShowDefaultVisual
 FireAll PopulateOptions",,,
 #END Grandmaster Lackey,,,,,,
@@ -68,6 +69,31 @@ FireAll PopulateOptions","Ah! And perhaps if you're the valiant type, you can fi
 #END Knightmaster Lackey,,,,,,
 #END character interactions (VNSectorlol),,,,,,
 ,,,,,,
+#BEGIN relationship level descriptions,,,,,,
+greetingDawnHostile,OpenCommLink,"$faction.id == zea_dawn score:1000
+$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the sense of some burning menace sizing up its targets.",cutCommLink:Cut the comm link,
+greetingDawnFriendly,OpenCommLink,"$faction.id == zea_dawn score:1000
+$faction.friendlyToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
+greetingDawnNeutral,OpenCommLink,"$faction.id == zea_dawn score:1000
+$faction.neutralToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","There is no response, but the Dawntide's menace remains shackled.",,
+greetingDuskHostile,OpenCommLink,"$faction.id == zea_dusk score:1000
+$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
+greetingDuskFriendly,OpenCommLink,"$faction.id == zea_dusk score:1000
+$faction.friendlyToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+greetingDuskNeutral,OpenCommLink,"$faction.id == zea_dusk score:1000
+$faction.neutralToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","There is no response, but the Duskbourne's weapons remain inactive.",,
+greetingEDFHostile,OpenCommLink,"$faction.id == zea_elysians score:1000
+$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
+greetingEDFFriendly,OpenCommLink,"$faction.id == zea_elysians score:1000
+$faction.friendlyToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+greetingEDFNeutral,OpenCommLink,"$faction.id == zea_elysians score:1000
+$faction.neutralToPlayer","$menuState = fleetConvMain 0
+FireAll PopulateOptions","There is no response, but the fleet's weapons remain inactive.",,
 #END relationship level descriptions,,,,,,
 ,,,,,,
 # boss interactions,,,,,,
@@ -122,16 +148,18 @@ $zea_ninaya_wreck score:1000
 !$first_ninaya_visit","
 AbyssIntelCMD addIntelTTBoss1","Salvage teams hook their tethers into the fragmented vessel's hull and get to work. Tense minutes pass until the chatter from the boarding party picks up in excitement.
 
-""$PlayerSirOrMadam, this ship is astounding - the level of tech, and the design! it's like an alien imagined a ship for humans. The command pod was destroyed, or scuttled, and there's no sign of other crew, but other systems are mostly intact."" 
+""$PlayerSirOrMadam, this ship is astounding - the level of sophistication, and the design! It's like stepping into an alien world!"" The chief takes a moment to recover some of his professionalism before continuing.
 
-He continues quickly. ""Together we've recovered an entry in the systems from the ship's last refit - it was recent. The location's out in the fringes, nothing on record out there, but this would indicate they've got some active facility out there. There could be more of this tech! Here, I'm sending what we've got.""
+""The command pod was destroyed, or scuttled, and there's no sign of other crew, but other systems are mostly intact. We don't understand how a piece of this thing works but the interfaces seem normal enough."" 
+
+He continues quickly. ""Together we've recovered an entry in the systems from the ship's last refit - it was recent. The location's out in the fringes, nothing on record, but this would indicate there's some kind of facility out there. There could be more of this tech! Here, I'm sending what we've got.""
 
 ",0:zea_bossTT1wreck3:Continue,
 zea_BossTT1Wreck3,DialogOptionSelected,$option == zea_bossTT1wreck3,"$first_ninaya_visit = true
 
-SalvageSpecialInteraction","It seems someone's excited by the find, and you can't deny its magnitude, but there's no doubt in your mind that wherever this instrument came from will be yet more fiercely guarded than this cache. Is it really worth provoking the worst of the corporation to delve its darkest secrets? It's not too late to scrap the ship and move on...
+SalvageSpecialInteraction","It seems someone's excited by the find, and you can't deny its magnitude, but there's no doubt in your mind that wherever this instrument came from will be yet more fiercely guarded than this cache. Is it really worth provoking the worst of the corporation to delve its darkest secrets? It's not too late to forget this ship and move on...
 
-Your crew lead resumes before you can ponder for too long. 
+Your crew lead resumes before you can get overwhelmed in your thoughts.
 
 ""From what we can determine - which, granted, isn't that much - the ship's systems are mostly compatible with our own. We'll need a lot of our supplies, and time, but we could try to restore operation,"" he reports in both eagerness and trepidation, ""just give us the word.""",,
 ,,,,,,
@@ -145,5 +173,7 @@ The small, bright motes orbiting the vessel are but an afterthought before the T
 ""Power down and you will not be unnecessarily harmed,"" the voice intones before the signal cuts.
 
 Short, to the point, and backed up by an armada's firepower - if you weren't on the receiving end you might like their style. Wasting no time, you begin issuing tactical orders to your bridge crew.",,
-zea_BossTT3Defeated,zea_AfterNinevehDefeat,,,"The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and fresh wreckage for light years in any direction.",0:zea_bossTT3defeated:What was theirs is now ours.,
+zea_BossTT3Defeated,zea_AfterNinevehDefeat,,AbyssIntelCMD addIntelTTBoss3,"The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and fresh wreckage for light years in any direction.
+
+Your eye catches on a datacore glinting in the debris that must have broken free during the fight. Perhaps they didn't have time to fully scrub it. You give a nod to your salvors and in short order it's brought on board.",0:zea_bossTT3defeated:What was theirs is now ours.,
 zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3defeated,DismissDialog,,,

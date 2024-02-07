@@ -35,18 +35,19 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
     };
     public static ArrayList<String[]> dawnLoreHLs = new ArrayList<>();
     public static final String[] TTFleetLore = {
-            "We anticipated a goose chase across the fringe, not to end up a courier's hop from Hybrasil. We should have anticipated that she'd go the most unlikely place. We caught the fleet's fracture jump off the anomaly and find ourselves in this pocket-space. There's a gate in the region, of course inactive, which suggests our dear Domain once knew this place, but no company chart has returned a match. She led us here, so if there's a way home we'll find it in her wreck.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
-            "The space here is more hostile than first assumed. System failures are increasing and our supplies are falling well short of the allocation budgets. For reasons we've yet to determine, the phase craft are weathering this place better than the others, but better is relative. Two of the support craft have been scuttled to maintain the paragon's overhead, and at this rate the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Exec's ordered an emergency burn to the eye of the storm, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
-            "This is a Tri-Tachyon automated distress beacon. This vessel has suffered extreme structural failure. 847 Cryopods recorded launched in this vicinity; please commence recovery of any company personnel. You will be fairly compensated upon their return to a registered Tri-Tachyon facility.\n" +
-                    " Reminder: Tri-Tachyon equipment remains property of the Corporation. Thieves will be persecuted. Thank you for your service to the Corporation today."
+            "We anticipated a goose chase across the fringe, not to end up %s. We should have anticipated that she'd go the most unlikely place. We caught the fleet's fracture jump off %s and found ourselves in this pocket-space. There's a gate in the region, of course inactive, which suggests our dear Domain once knew this place, but no company chart has returned a match. She led us here, so if there's a way home we'll find it in her wreck.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
+            "The space here is more hostile than first assumed. System failures are increasing and our supplies are falling well short of the allocation budgets. For reasons we've yet to determine, the phase craft are weathering this place better than the others, but better is relative. Two of the support craft have been scuttled to maintain the paragon's overhead, and at this rate the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Exec's ordered an emergency burn to %s, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
+            "This is a Tri-Tachyon automated distress beacon. This vessel has suffered extreme structural failure. %s recorded launched in this vicinity; please commence recovery of any company personnel. You will be fairly compensated upon their return to a registered Tri-Tachyon facility.\n" +
+                    " %s %s for your service to the Corporation today."
     };
     public static ArrayList<String[]> TTFleetLoreHLs = new ArrayList<>();
-    public static final String TT1Drop = "The remaining samples have integrated into the prototypes better than we could have hoped for, though their use for security purposes is... a regrettable reflection of our situation. The fleet is due to return with the command core later this month, at which point we can put all this unfortunate incident behind us.\n - Chief Executive's Log, C206, Project Duskfall";
-    //In the wreckage you find reference to a command structure in the %key system. There may be further answers - and greater dangers - there.
-    public static final String TT2Drop = "We're able to consistently attract -- but stabilizing spacetime around -- energetic instances has proven difficult. We're using every caution on this, there's no telling what -- the high voli-- manifested in stable form. Did Projec-- same problem? We never got a reason for their briefings -- their loss will be our opportunity, we're back our schedule. The new prototypes will go into production any day now, and the bonus I'm due is going set me up for life. Might even -- those private chateaus the execs seem to love so much.\n - Engineer's log, C204, Project Duskfall";
-    public static final String TT3Drop = "204-4: H-C integration trials proceeding on schedule, rejection rates within expected parameters. 7 rejected within one minute. 2 within ten minutes, 1 candidate achieved a full hour before expiry.\n" +
+    public static final String TT1Drop = "The %s have integrated into the prototypes better than we could have hoped for, though their use for security purposes is... a regrettable reflection of %s. The fleet is due to return with %s later this month, at which point we can put all this unfortunate incident behind us.\n - Executive's Log, C206\nProject Dusk";
+    public static final String[] TT1DropHLs = { "remaining samples", "our situation", "the command core" };
+    public static final String TT2Drop = "We're able to consistently attract -- but stabilizing spacetime around --ergetic instances has proven dif-- every caution on this, there's no telling what -- the %s manifested in stable form. The flocks don't -- only when the engineering personnel and artifi-- --ectively manage the swarms. Did Projec-- same problem? We never got a reason why their briefin-- their loss will be our opportunity, as our team is back on schedule. The %s will go into production any day now, and the bonus I'm due is going set me up for life.\n Might even -- those private chateaus the execs seem to love so much.\n - Engineer's log, C204, Project Dusk";
+    public static final String[] TT2DropHLs = { "high voli--", "new prototypes" };
+    public static final String TT3Drop = "204-4: %s proceeding on schedule, rejection rates within expected parameters. 7 rejected within one minute. 2 within ten minutes, 1 candidate achieved a full hour before expiry.\n" +
             "...\n" +
-            "205-1: The first Project Dusk expedition has returned successfully. Eight days out and back; recovery, fabrication, and defense trials have all passed. Autonomous and semi-autonomous system synchronization were with tolerance for the vast majority of the trial.\n" +
+            "205-1: The first Project Dusk expedition has returned successfully. Eight days out and back; recovery, fabrication, and defense trials have all passed. %s were synchronized within tolerance for almost the entire duration.\n" +
             "...\n" +
             "205-4: Specification:\n" +
             " Capital Class\n" +
@@ -54,15 +55,16 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
             " :Hyperdimensional Energy Shunt \n" +
             " :Fabrication Suite\n" +
             " :Integrated Command Core\n" +
-            "Commission approved.\n" +
+            "%s\n" +
             "...\n" +
-            "205-8: Continuing suspicious activity around the Duskfall modules from the Alphas. The team assigned to mitigations was clearly in over their heads, they've been reassigned to site security. It's ultimately of little consequence; the human oversight will keep the cores in line. We're bringing in the integration candidates for full production. The board will be delighted to hear of our progress.\n" +
+            "205-8: Continuing suspicious activity from the Alphas around the Duskfall modules. The team assigned to mitigations was clearly in over their heads, they've been reassigned to site security. It's ultimately of little consequence; the %s will keep the cores in line. We're bringing in the integration candidates for full production. The board will be delighted to hear of our progress.\n" +
             "...\n" +
             "205-*: [Catastrophic data loss]\n" +
             "...\n" +
-            "206-1: ...Finally recovered some fragments of the systems. The situation is spiraling out of control, and the board is demanding the recovery of the Project Flagship before it can flee. They might as well suggest we take a swim across the Orion Abyss, for all the good it'll do. The meeting demonstrated how few options we have remaining for that. Our best proposal is a system that can repurpose old Explorarium motherships and overwhelm the target, but we'll need to copy/modify one of the restricted cores to run it all. H-C integration is evidently a dead-end, so it's back-to-reliable-basics for this.\n" +
+            "206-1: ...Finally recovered some fragments of the systems. The situation is spiraling out of control, and the board is demanding the recovery of the %s before it can flee. They might as well suggest we take a swim across the Orion Abyss, for all the good it'll do. The meeting demonstrated how few options we have remaining for that. Our best proposal is a system that can repurpose old Explorarium vessels and overwhelm the target, but we'll need to copy/modify %s to run it all. H-C integration is evidently a dead-end, so it's back to proven tactics for \"Operation Dawn\".\n" +
             "...\n" +
             "206-*: [Catastrophic data loss]";
+    public static final String[] TT3DropHLs = { "H-C integration trials", "Autonomous and semi-autonomous systems", "Commission approved.", "human factors", "Project Flagship", "one of the restricted cores" };
 
     public static void loadHighlightLists() {
         String[] empty = null;
@@ -76,7 +78,21 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
             duskLoreHLs.add(null);
         }
         for (int i = 0; i < TTFleetLore.length; i++) {
-            TTFleetLoreHLs.add(null);
+            if (i == 0) {
+                String[] highlights = { "a courier's hop from Hybrasil", "the singularity" };
+                TTFleetLoreHLs.add(highlights);
+            }
+            if (i == 1) {
+                String[] highlights = { "the eye of the storm" };
+                TTFleetLoreHLs.add(highlights);
+            }
+            if (i == 1) {
+                String[] highlights = { "847 cryopods", "Reminder: Tri-Tachyon equipment remains property of the Corporation. Thieves will be persecuted.", "Thank you" };
+                TTFleetLoreHLs.add(highlights);
+            }
+            else {
+                TTFleetLoreHLs.add(null);
+            }
         }
     }
 

@@ -78,7 +78,7 @@ public class AbyssLoreIntel extends BaseIntelPlugin {
         Color gray = Misc.getGrayColor();
 
         info.addSpacer(3f);
-        info.addPara("", 0f, Misc.getTextColor(), Misc.getHighlightColor(), null);
+        info.addPara("A fragment of hidden knowledge", 0f);
     }
 
     @Override

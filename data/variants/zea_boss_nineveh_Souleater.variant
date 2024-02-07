@@ -1,15 +1,20 @@
 {
     "displayName": "Souleater",
-    "fluxCapacitors": 5,
-    "fluxVents": 23,
+    "fluxCapacitors": 18,
+    "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_boss_nineveh",
     "hullMods": [
+        "neural_interface",
+    ],
+    "permaMods": [
         "heavyarmor",
         "targetingunit",
     ],
-    "permaMods": [],
-    "sMods": [],
+    "sMods": [
+        "heavyarmor",
+        "targetingunit",
+    ],
     "suppressedMods": [],
     "variantId": "zea_boss_nineveh_Souleater",
     "weaponGroups": [
