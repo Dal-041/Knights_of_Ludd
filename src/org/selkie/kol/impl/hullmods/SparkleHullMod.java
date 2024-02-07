@@ -9,6 +9,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicIncompatibleHullmods;
 import org.selkie.kol.impl.combat.SparkleAIScript;
 
 import java.awt.*;
@@ -75,8 +76,7 @@ public class SparkleHullMod extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        //unused.
-        //if (ship.getVariant().hasHullMod("adaptive_coils")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "sparkleHullmod");
+        if (ship.getVariant().hasHullMod("adaptive_coils")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "sparkleHullmod");
     }
 
     public void advanceInCombat(ShipAPI ship, float amount) {

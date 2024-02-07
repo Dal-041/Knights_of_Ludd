@@ -4,8 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.AICoreOfficerPlugin;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.CustomCampaignEntityAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
@@ -13,17 +15,23 @@ import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.BaseGenericPlugin;
 import com.fs.starfarer.api.impl.campaign.DModManager;
+import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent;
 import com.fs.starfarer.api.impl.campaign.fleets.DefaultFleetInflater;
 import com.fs.starfarer.api.impl.campaign.fleets.DefaultFleetInflaterParams;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.MiscellaneousThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SDMParams;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SalvageDefenderModificationPlugin;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
+import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.world.PrepareDarkDeeds;
+
+import static org.selkie.kol.impl.world.PrepareDarkDeeds.DEFEATED_NINMAH_KEY;
 
 public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageDefenderModificationPlugin {
 
@@ -45,7 +53,7 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
     }
 
     public void reportDefeated(SDMParams p, SectorEntityToken entity, CampaignFleetAPI fleet) {
-
+        Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINMAH_KEY, true);
     }
 
     public void modifyFleet(SDMParams p, CampaignFleetAPI fleet, Random random, boolean withOverride) {
@@ -96,6 +104,8 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
         for (FleetMemberAPI curr : fleet.getFleetData().getMembersListCopy()) {
             curr.getRepairTracker().setCR(curr.getRepairTracker().getMaxCR());
         }
+
+        fleet.getFlagship().getVariant().addTag("kol_boss");
     }
 
 

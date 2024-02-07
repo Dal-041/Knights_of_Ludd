@@ -82,6 +82,7 @@ public class SpawnDuskBoss {
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 		duskBossFleet.addTag(excludeTag);
+		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		duskBossFleet.addEventListener(new ManageDuskBoss());
 
 		return true;

@@ -13,7 +13,7 @@
 	"frameRate":1,
 	"turretOffsets":[16, 0],
 	"turretAngleOffsets":[0],
-	"hardpointOffsets":[16, 0],
+	"hardpointOffsets":[26, 0],
 	"hardpointAngleOffsets":[0],
 	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
 	"animationType":"MUZZLE_FLASH",  # NONE, GLOW, MUZZLE_FLASH, SMOKE

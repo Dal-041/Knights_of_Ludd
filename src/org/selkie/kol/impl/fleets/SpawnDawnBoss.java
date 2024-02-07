@@ -85,6 +85,7 @@ public class SpawnDawnBoss {
 
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);
+		dawnBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		dawnBossFleet.addEventListener(new ManageDawnBoss());
 
 		return true;

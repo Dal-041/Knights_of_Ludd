@@ -96,6 +96,7 @@ public class SpawnElysianHeart {
 		elysianHeartFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 
 		elysianHeartFleet.addTag(excludeTag);
+		elysianHeartFleet.getFlagship().getVariant().addTag("kol_boss");
 		elysianHeartFleet.addEventListener(new ManageElysianCorruptingheart());
 
 		return true;

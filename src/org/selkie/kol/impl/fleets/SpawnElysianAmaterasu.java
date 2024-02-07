@@ -87,6 +87,7 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
 		elysianBossFleet.addTag(excludeTag);
+		elysianBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
 
 		return true;
