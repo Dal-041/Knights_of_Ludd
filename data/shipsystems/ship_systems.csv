@@ -17,7 +17,7 @@ Leap of Faith,kol_lunge,,,,,,,,3,0.15,0.1,0.3,0.1,,,,,,,,,,,,TRUE,,graphics/icon
 Placeholder lunge,kol_lungeHEF,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,,TRUE,,,,,graphics/icons/hullsys/burn_drive.png
 Afterburner,zea_edf_microburn,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,TRUE,TRUE,,,,,graphics/icons/hullsys/burn_drive.png
 Linked Plasma Burn,zea_edf_plasmafighters,1,,,,,,,2,0.1,0.5,4,1,,,,,,,,TRUE,TRUE,,,,,graphics/icons/hullsys/burn_drive.png
-MiniJump,zea_edf_minijump,,,,,,,,5,"0.1	",0.25,0.25,1,,,,,,,,,,,,,,graphics/icons/hullsys/infernium_injector.png
+MiniJump,zea_edf_minijump,,,,,,,,5,0.1	,0.25,0.25,1,,,,,,,,,,,,,,graphics/icons/hullsys/infernium_injector.png
 Flare Burn,zea_dawn_flare_burn,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,TRUE,TRUE,,,,,graphics/icons/hullsys/infernium_injector.png
 Flare Wave,zea_dawn_flare_wave,,,,,,0.1,,,,,,,5,,,,,,,,,,,,,graphics/icons/hullsys/active_flare_launcher.png
 Synchronized Ammo Feeder,zea_edf_synchronized_ammo_feed,,,,,,,,,,1,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/ammo_feeder.png
@@ -43,5 +43,5 @@ Drone Control,kol_sparkler,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphics/ic
 Drone Targeter,kol_bottlerocket,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphics/icons/hullsys/reserve_deployment.png
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #Absurd,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Blizzard,zea_boss_blizzard,1,,,,,,,,0.1,0.1,2.5,0.1,2,,,TRUE,,TRUE,,,,TRUE,TRUE,,restricted,graphics/icons/hullsys/damper_field.png
-Supernova,zea_boss_supernova,1,,,,,,,,4,4,4,0.1,4,,,,,,,,,,TRUE,,restricted,graphics/icons/hullsys/lidar_barrage.png
+Blizzard,zea_boss_blizzard,1,,,,,,,,0.1,0.1,5,0.1,24.8,,,TRUE,,TRUE,,,,TRUE,TRUE,,restricted,graphics/icons/hullsys/damper_field.png
+Supernova,zea_boss_supernova,1,,,,,,,,4,4,4,0.1,27.9,,,,,,,,,,TRUE,,restricted,graphics/icons/hullsys/lidar_barrage.png

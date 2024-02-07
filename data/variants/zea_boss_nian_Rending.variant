@@ -1,18 +1,24 @@
 {
     "displayName": "Rending",
-    "fluxCapacitors": 1,
-    "fluxVents": 50,
+    "fluxCapacitors": 0,
+    "fluxVents": 48,
     "goalVariant": true,
     "hullId": "zea_boss_nian",
     "hullMods": [
-        "armoredweapons",
         "autorepair",
-        "magazines",
+        "fluxbreakers",
+        "pointdefenseai",
         "shield_shunt",
         "turretgyros",
     ],
-    "permaMods": [],
-    "sMods": [],
+    "permaMods": [
+        "armoredweapons",
+        "magazines",
+    ],
+    "sMods": [
+        "armoredweapons",
+        "magazines",
+    ],
     "suppressedMods": [],
     "variantId": "zea_boss_nian_Rending",
     "weaponGroups": [
@@ -56,16 +62,16 @@
                 "WS0004": "guardian",
                 "WS0005": "guardian",
                 "WS0001": "flak",
-                "WS0011": "heavyac",
-                "WS0012": "dualflak",
                 "WS0013": "dualflak",
+                "WS0012": "dualflak",
+                "WS0011": "heavyac",
             }
         },
     ],
     "wings": [
         "lux_wing",
         "spark_wing",
-        "lux_wing",
+        "spark_wing",
     ],
     "modules": [],
 }

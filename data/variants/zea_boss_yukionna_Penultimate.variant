@@ -1,6 +1,6 @@
 {
-    "displayName": "Ultimate",
-    "fluxCapacitors": 32,
+    "displayName": "Penultimate",
+    "fluxCapacitors": 28,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_boss_yukionna",
@@ -8,7 +8,6 @@
         "fluxbreakers",
         "fluxdistributor",
         "hardenedshieldemitter",
-        "pointdefenseai",
         "targetingunit",
     ],
     "permaMods": [
@@ -20,14 +19,14 @@
         "stabilizedshieldemitter",
     ],
     "suppressedMods": [],
-    "variantId": "zea_boss_yukionna_Ultimate",
+    "variantId": "zea_boss_yukionna_Penultimate",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "vpdriver",
-                "WS0007": "realitydisruptor",
+                "WS0007": "vpdriver",
+                "WS0008": "plasma",
             }
         },
         {
@@ -42,10 +41,16 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0009": "tachyonlance",
+                "WS0010": "realitydisruptor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0004": "cryoblaster",
                 "WS0001": "cryoblaster",
-                "WS0003": "disintegrator",
-                "WS0002": "disintegrator",
             }
         },
         {
@@ -54,16 +59,16 @@
             "weapons": {
                 "WS0014": "lightneedler",
                 "WS0013": "lightneedler",
-                "WS0012": "minipulser",
-                "WS0011": "minipulser",
+                "WS0003": "disintegrator",
+                "WS0002": "disintegrator",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0009": "guardian",
-                "WS0010": "guardian",
+                "WS0012": "minipulser",
+                "WS0011": "minipulser",
             }
         },
         {
