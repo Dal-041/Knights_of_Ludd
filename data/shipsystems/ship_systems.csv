@@ -18,6 +18,7 @@ Placeholder lunge,kol_lungeHEF,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,,TRUE,,,,,graphi
 Afterburner,zea_edf_microburn,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,TRUE,TRUE,,,,,graphics/icons/hullsys/burn_drive.png
 Linked Plasma Burn,zea_edf_plasmafighters,1,,,,,,,2,0.1,0.5,4,1,,,,,,,,TRUE,TRUE,,,,,graphics/icons/hullsys/burn_drive.png
 MiniJump,zea_edf_minijump,,,,,,,,5,0.1	,0.25,0.25,1,,,,,,,,,,,,,,graphics/icons/hullsys/infernium_injector.png
+Bullet Time Field,zea_edf_bullet_time_field,,,,,,,,,,1,20,1,10,,,,,,,,,,,,,graphics/icons/hullsys/infernium_injector.png
 Flare Burn,zea_dawn_flare_burn,1,,,,,,,2,0.1,0.5,0.5,0.5,,,,,,,,TRUE,TRUE,,,,,graphics/icons/hullsys/infernium_injector.png
 Flare Wave,zea_dawn_flare_wave,,,,,,0.1,,,,,,,5,,,,,,,,,,,,,graphics/icons/hullsys/active_flare_launcher.png
 Synchronized Ammo Feeder,zea_edf_synchronized_ammo_feed,,,,,,,,,,1,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/ammo_feeder.png

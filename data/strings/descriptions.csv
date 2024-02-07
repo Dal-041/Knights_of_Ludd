@@ -100,7 +100,7 @@ zea_edf_synchronized_ammo_feed,SHIP_SYSTEM,The vessel and its launched craft rec
 zea_dawn_flare_burn,SHIP_SYSTEM,Thrusts the ship forward and launches a large wave of smart flares.,Defensive,,
 zea_dawn_flare_wave,SHIP_SYSTEM,Launches a wave of smart flares that screen out nearby hostile ordnance. ,Defensive,,
 zea_dawn_gracious_light,SHIP_SYSTEM,Generates a massive aura of damaging light that also heals fighters and reduces their flux.,Special,,
-zea_dusk_subspace_glide,SHIP_SYSTEM,"Skims the membrane between normal and phase space, moving swiftly and taking slightly reduced damage for the duration.",Movement,,
+zea_dusk_subspace_glide,SHIP_SYSTEM,"Skims the membrane between normal and phase space, moving swiftly and venting more flux for the duration.",Movement,,
 zea_dusk_phasecloak,SHIP_SYSTEM,Shifts the craft into phase space at great efficiency.,Movement,,
 zea_dusk_phaseteleporter,SHIP_SYSTEM,Instantly relocates the ship to a chosen nearby location and charges deployed motes. Motes travel to the in location via normal space.,Special,,
 zea_dusk_phase_skip,SHIP_SYSTEM,Activates the onboard phase coils to shunt the ship into phase for a brief period. Mobility is greatly enhanced and shields are restored after use.,Special,,
