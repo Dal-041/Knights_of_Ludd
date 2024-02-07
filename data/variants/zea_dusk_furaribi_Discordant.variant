@@ -1,0 +1,43 @@
+{
+    "displayName": "Discordant",
+    "fluxCapacitors": 14,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "zea_dusk_furaribi",
+    "hullMods": [
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "unstable_injector",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_furaribi_Discordant",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "heavyblaster",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "ioncannon",
+                "WS0003": "ioncannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lightneedler",
+                "WS0002": "lightneedler",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

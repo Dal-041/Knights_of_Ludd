@@ -1,0 +1,43 @@
+{
+    "displayName": "Cacophanous",
+    "fluxCapacitors": 7,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "zea_dusk_furaribi",
+    "hullMods": [
+        "hardened_subsystems",
+        "safetyoverrides",
+        "unstable_injector",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dusk_furaribi_Cacophanous",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "heavyblaster",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "irpulse",
+                "WS0003": "ioncannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lightdualmg",
+                "WS0002": "lightdualmg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

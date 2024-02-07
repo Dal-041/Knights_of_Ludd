@@ -1,0 +1,50 @@
+{
+    "displayName": "Artillery",
+    "fluxCapacitors": 0,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "kol_invictus",
+    "hullMods": [
+        "armoredweapons",
+        "auxiliarythrusters",
+        "fluxbreakers",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_invictus_Artillery",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 001": "kol_llyr",
+                "WS 002": "kol_llyr",
+                "WS 009": "kol_llyr",
+                "WS 010": "kol_llyr",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 004": "locust",
+                "WS 007": "locust",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 000": "devastator",
+                "WS 026": "devastator",
+                "WS 003": "devastator",
+                "WS 008": "devastator",
+                "WS 005": "devastator",
+                "WS 006": "devastator",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

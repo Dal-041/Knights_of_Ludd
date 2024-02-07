@@ -81,12 +81,10 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
             if (i == 0) {
                 String[] highlights = { "a courier's hop from Hybrasil", "the singularity" };
                 TTFleetLoreHLs.add(highlights);
-            }
-            if (i == 1) {
+            } else if (i == 1) {
                 String[] highlights = { "the eye of the storm" };
                 TTFleetLoreHLs.add(highlights);
-            }
-            if (i == 1) {
+            } else if (i == 2) {
                 String[] highlights = { "847 cryopods", "Reminder: Tri-Tachyon equipment remains property of the Corporation. Thieves will be persecuted.", "Thank you" };
                 TTFleetLoreHLs.add(highlights);
             }
@@ -197,6 +195,7 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                        float glowMult, SpecialItemRendererAPI renderer) {
 
         SpriteAPI sprite = Global.getSettings().getSprite("lore_item", currentFaction, true);
+        if (currentFaction.equals(Factions.TRITACHYON)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.TRITACHYON).getCrest());
         if (sprite.getTextureId() == 0) return; // no texture for a "holo", so no custom rendering
 
         float cx = x + w/2f;

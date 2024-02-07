@@ -5,6 +5,7 @@
 		"kol_alysse_Standard":1,
 		"kol_boss_ret_lp_Overdriven":0,
 		"kol_invictus_lp_Hallowed":0,
+		"kol_invictus_Artillery":10,
 		"zea_dawn_ao_Black":100,
 		"zea_dawn_ao_Eclipsed":100,
 		"zea_dawn_qilin_Inevitable":100,
@@ -59,6 +60,8 @@
 		"zea_dusk_funayurei_Gatekeeper":50,
 		"zea_dusk_funayurei_Chivalrous":50,
 		"zea_dusk_shiryo_Leecher":40,
+		"zea_dusk_furaribi_Cacophanous":20,
+		"zea_dusk_furaribi_Discordant":40,
 		"zea_edf_suzaku_Attack_Bomber":40,
 	},
 	"combatSmall":{
