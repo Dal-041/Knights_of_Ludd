@@ -7,6 +7,7 @@ import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.apache.log4j.Logger;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.util.ArrayList;
@@ -39,7 +40,7 @@ import java.util.Map;
     */
 
 public class KnightRefit extends BaseHullMod {
-
+    private static final Logger log = Logger.getLogger(KnightRefit.class);
     public static final int flux_cap_smol  = 10;
     public static final int flux_cap_med  = 25;
     public static final int flux_cap_lorge  = 50;
@@ -135,10 +136,11 @@ public class KnightRefit extends BaseHullMod {
                 true,
                 new Object[]{"Name", width - 80f * 2 - 8f, "Hull", 80f, "Armor", 80f});
 
-        System.out.println("KOL Refit modules:");
+        log.info("KOL Refit modules:");
         for (String module : ship.getVariant().getStationModules().values()) {
-            System.out.printf("module [%s] variant not null [%s] hullspec not null if variant not null [%s]%n",
-                    module, Global.getSettings().getVariant(module) != null, Global.getSettings().getVariant(module) != null && Global.getSettings().getVariant(module).getHullSpec() != null);
+            log.info(String.format("module [%s] variant not null [%s] hullspec not null if variant not null [%s]",
+                    module, Global.getSettings().getVariant(module) != null, Global.getSettings().getVariant(module) != null && Global.getSettings().getVariant(module).getHullSpec() != null));
+
             // for some insane reason, the hullspec can return null
             if (Global.getSettings().getVariant(module) == null
                     || Global.getSettings().getVariant(module).getHullSpec() == null) continue;
