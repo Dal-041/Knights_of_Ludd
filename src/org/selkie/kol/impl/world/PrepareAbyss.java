@@ -671,12 +671,17 @@ public class PrepareAbyss {
 	}
 
 	public static boolean isWithinCoreSpace(float x, float y) {
-		float coreW = 12500;
-		float coreH = 10000;
+		float coreW = 20000;
+		float coreH = 20000;
 		Vector2f center = new Vector2f(0,0);
 		Vector2f candidate = new Vector2f(x, y);
 
 		if (MathUtils.getDistance(center, candidate) <= (Math.max(coreW, coreH)+5000)) return true;
+		for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+			if (system.hasTag(Tags.THEME_CORE) || system.hasTag(Tags.THEME_CORE_POPULATED)) {
+				if (MathUtils.getDistance(system.getLocation(), candidate) < 10000) return true;
+			}
+		}
 
 		return false;
 	}
