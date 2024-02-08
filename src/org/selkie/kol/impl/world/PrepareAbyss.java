@@ -8,7 +8,9 @@ import com.fs.starfarer.api.impl.campaign.procgen.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
+import com.fs.starfarer.api.impl.campaign.terrain.BaseTiledTerrain;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
+import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.magiclib.util.MagicCampaign;
@@ -17,7 +19,11 @@ import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.awt.image.Raster;
+import java.io.IOException;
 import java.util.Random;
 
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
@@ -254,11 +260,12 @@ public class PrepareAbyss {
 
 		system.getLocation().set(2100, -5200);
 		SectorEntityToken center = system.initNonStarCenter();
-		SectorEntityToken underspace_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
+		SectorEntityToken nullspace_nebula = addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula_big.png",
 				0, 0, // center of nebula
 				system, // location to add to
 				"terrain", "nebula_zea_black_shiny", // texture to use, uses xxx_map for map
-				4, 4, StarAge.AVERAGE); // number of cells in texture
+				4, 4, // number of cells in texture
+				"nebula_zea_storm", StarAge.AVERAGE, 10000); //terrain plugin, age, nebula resolution
 
 		system.setLightColor(new Color(225,170,255,255)); // light color in entire system, affects all entities
 		new AbyssBackgroundWarper(system, 8, 0.125f);
@@ -577,5 +584,76 @@ public class PrepareAbyss {
 		picker.add("zea_research_station_elysia", w);
 
 		return picker.pick();
+	}
+
+	public static SectorEntityToken addNebulaFromPNG(String image, float centerX, float centerY, LocationAPI location,
+													 String category, String key, int tilesWide, int tilesHigh,
+													 String terrainType, StarAge age, int chunkSize) {
+		try {
+			BufferedImage img = null;
+			//img = ImageIO.read(new File("../starfarer.res/res/data/campaign/terrain/nebula_test.png"));
+			img = ImageIO.read(Global.getSettings().openStream(image));
+
+			// int chunkSize = 10000;
+			int w = img.getWidth();
+			int h = img.getHeight();
+			Raster data = img.getData();
+			for (int i = 0; i < w; i += chunkSize) {
+				for (int j = 0; j < h; j += chunkSize) {
+
+					int chunkWidth = chunkSize;
+					if (i + chunkSize > w) chunkWidth = w - i;
+					int chunkHeight = chunkSize;
+					if (j + chunkSize > h) chunkHeight = h - i;
+
+//		    		boolean hasAny = false;
+//		    		for (int x = i; x < i + chunkWidth; x++) {
+//		    			for (int y = j; y < j + chunkHeight; y++) {
+//		    				int [] pixel = data.getPixel(i, h - j - 1, (int []) null);
+//		    				int total = pixel[0] + pixel[1] + pixel[2];
+//		    				if (total > 0) {
+//		    					hasAny = true;
+//		    					break;
+//		    				}
+//		    			}
+//		    		}
+//		    		if (!hasAny) continue;
+
+					StringBuilder string = new StringBuilder();
+					for (int y = j + chunkHeight - 1; y >= j; y--) {
+						for (int x = i; x < i + chunkWidth; x++) {
+							int [] pixel = data.getPixel(x, h - y - 1, (int []) null);
+							int total = pixel[0] + pixel[1] + pixel[2];
+							if (total > 0) {
+								string.append("x");
+							} else {
+								string.append(" ");
+							}
+						}
+					}
+
+					float tileSize = NebulaTerrainPlugin.TILE_SIZE;
+					float x = centerX - tileSize * (float) w / 2f + (float) i * tileSize + chunkWidth / 2f * tileSize;
+					float y = centerY - tileSize * (float) h / 2f + (float) j * tileSize + chunkHeight / 2f * tileSize;
+
+					SectorEntityToken curr = location.addTerrain(terrainType, new BaseTiledTerrain.TileParams(string.toString(),
+							chunkWidth, chunkHeight,
+							category, key, tilesWide, tilesHigh, null));
+					curr.getLocation().set(x, y);
+
+					if (location instanceof StarSystemAPI) {
+						StarSystemAPI system = (StarSystemAPI) location;
+
+						system.setAge(age);
+						system.setHasSystemwideNebula(true);
+					}
+
+					return curr;
+				}
+			}
+			return null;
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

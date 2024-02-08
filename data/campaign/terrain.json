@@ -54,9 +54,16 @@
 		# inside nebula
 		"loopOne":"terrain_nebula",
 	},
+	"nebula_zea_storm":{
+		"plugin":"org.selkie.kol.impl.terrain.AbyssStormNebula",
+		
+		"musicSuppression":1,
+		# inside nebula
+		"loopOne":"terrain_nebula",
+	},
 	
 	"nebula_zea_abyss":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssNebulaTerrain",
+		"plugin":"org.selkie.kol.impl.terrain.AbyssShoalNebulaTerrain",
 		
 		"musicSuppression":1,
 		# inside nebula
