@@ -76,7 +76,6 @@ public class PrepareAbyss {
 		SpawnElysianAmaterasu.SpawnElysianAmaterasu();
 		SpawnElysianHeart.SpawnElysianHeart();
 		SpawnDawnBoss.SpawnDawnBoss();
-		PrepareDarkDeeds.andBegin();
     }
 
 

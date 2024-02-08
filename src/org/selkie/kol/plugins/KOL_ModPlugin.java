@@ -12,6 +12,7 @@ import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.helpers.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.impl.fleets.TTBoss2DefenderPlugin;
+import org.selkie.kol.impl.world.PrepareDarkDeeds;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
 import org.selkie.kol.fleets.SpawnInvictus;
@@ -27,6 +28,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public static boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
 	boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
 
+	public static final String MEMKEY_KOL_INTIALIZED = "$kol_initialized";
 	public static final String MEMKEY_KOL_INVICTUS_SPAWNED = "$kol_lp_invictus_spawned";
 	public static final String MEMKEY_KOL_RETRIBUTION_SPAWNED = "$kol_lp_retribution_spawned";
 
@@ -43,13 +45,9 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public void onGameLoad(boolean newGame) {
 		Global.getSector().addTransientListener(new UpdateRelationships(true));
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
-			if(!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_INVICTUS_SPAWNED)) {
-				SpawnInvictus.spawnInvictus();
-				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);
-			}
-			if(!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_RETRIBUTION_SPAWNED)) {
-				SpawnRetribution.spawnRetribution();
-				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_RETRIBUTION_SPAWNED, true);
+			if(!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_INTIALIZED)) {
+				addToOngoingGame();
+				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
 			}
 		}
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
@@ -58,41 +56,56 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		GenerateKnights.copyChurchEquipment();
 		AbyssUtils.checkAbyssalFleets();
 		AbyssUtils.copyHighgradeEquipment();
+		PrepareDarkDeeds.andContinue();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
-
-		GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
-		if (!plugins.hasPlugin(TTBoss2DefenderPlugin.class)) {
-			plugins.addPlugin(new TTBoss2DefenderPlugin(), true);
-		}
 	}
 
 	@Override
 	public void onNewGame() {
-		super.onNewGame();
-	}
-
-	@Override
-	public void onNewGameAfterProcGen() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
 			SpawnInvictus.spawnInvictus();
 			SpawnRetribution.spawnRetribution();
-			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INVICTUS_SPAWNED, true);
-			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_RETRIBUTION_SPAWNED, true);
+		}
+		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
+	}
+
+	@Override
+	public void onNewGameAfterProcGen() {
+		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
+			PrepareDarkDeeds.andBegin();
+			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 		}
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
-		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+
 
 	}
 
 	@Override
 	public void onNewGameAfterTimePass() {
+		GenerateKnights.genAlways();
+	}
+
+	protected void addToOngoingGame() {
+		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
+			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
+		}
+		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
+		if (!haveNex || haveNex && SectorManager.getManager().isCorvusMode()) {
+			GenerateKnights.genCorvus();
+			PrepareAbyss.generate();
+			SpawnInvictus.spawnInvictus();
+			SpawnRetribution.spawnRetribution();
+			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+			PrepareDarkDeeds.andBegin();
+			PrepareDarkDeeds.andContinue();
+		}
 		GenerateKnights.genAlways();
 	}
 }

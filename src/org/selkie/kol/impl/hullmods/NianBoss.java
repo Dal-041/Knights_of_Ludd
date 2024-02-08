@@ -70,8 +70,11 @@ public class NianBoss extends BaseHullMod {
                     }
 
                     StarficzAIUtils.stayStill(ship);
-                    ship.getShield().toggleOff();
-                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+                    if (ship.getShield() != null) {
+                        ship.getShield().toggleOff();
+                        ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+                    }
+
                 } else {
                     ship.setJitterUnder(ENRAGED_ID, new Color(125, 255, 65), 1f, 5, 10f);
                 }

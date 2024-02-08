@@ -39,6 +39,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.MagneticFieldTerrainPlugin.MagneticFieldParams;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.fleets.TTBoss2DefenderPlugin;
 
 import static org.selkie.kol.impl.fleets.AbyssalFleetManager.copyFleetMembers;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
@@ -58,6 +59,13 @@ public class PrepareDarkDeeds {
         SpawnTT1Boss();
         generateTT2Station();
         generateTT3Site();
+    }
+
+    public static void andContinue() {
+        GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
+        if (!plugins.hasPlugin(TTBoss2DefenderPlugin.class)) {
+            plugins.addPlugin(new TTBoss2DefenderPlugin(), true);
+        }
     }
 
     public static void SpawnTT1Boss() {

@@ -76,6 +76,8 @@ zea_hosta_l,WEAPON,The Hosta line of weapons does one thing and it does it well:
 zea_nanten_s,WEAPON,"A potent strike beam. Don't let its modest damage per second fool you, this weapon is for punishing shieldless ships and it guarantees to deliver.",,,
 zea_nanten_l,WEAPON,"Where the Nanten 'Slicer' walks, the Disassembler sprints. Strikes from this devastating weapon can often turn a battle all on their own.",,,
 zea_myoga_driver,WEAPON,"The Myoga Ultradriver is a sniper's dream. Extreme range, good damage, and best-in-class projectile velocity mean no opponent is beyond the reach of this weapon. Poor flux performance is the notable drawback, and foes that close the gap will find themselves at a good advantage against the wielder.",,,
+zea_niangun_l,WEAPON,"What, did you think this one was better?",,,,
+zea_niangun_r,WEAPON,"You're not supposed to see these!",,,,
 #,,,,,
 #Terrain
 zea_asteroidBelt,TERRAIN,"An orbital ring abundant with asteroids and dangers.",,,
