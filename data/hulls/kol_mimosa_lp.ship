@@ -11,6 +11,10 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 102,
   "viewOffset": 0,
+  "builtInMods": [
+    "safetyoverrides",
+    "ill_advised"
+  ],
   "weaponSlots": [
     {
       "id": "WS0001",

@@ -5,7 +5,7 @@
   "type": "ENERGY",
   "mountTypeOverride": "HYBRID",
   "size": "LARGE",
-  "everyFrameEffect": "com.fs.starfarer.api.impl.combat.CryofluxTransducerEffect",
+  "everyFrameEffect": "org.selkie.kol.weapons.Brimstone",
   "turretSprite": "graphics/ships/decos/kol_deco_blank.png",
   "turretGlowSprite": "graphics/ships/decos/kol_deco_blank.png",
   "hardpointSprite": "graphics/ships/decos/kol_deco_blank.png",
