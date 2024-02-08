@@ -1,37 +1,32 @@
 {
-    "displayName": "Draconic",
+    "displayName": "World",
     "fluxCapacitors": 2,
-    "fluxVents": 10,
+    "fluxVents": 20,
     "goalVariant": true,
-    "hullId": "zea_dusk_ikiryo",
+    "hullId": "zea_dawn_xuangui",
     "hullMods": [
-        "hardened_subsystems",
+        "escort_package",
+        "fluxbreakers",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_ikiryo_Draconic",
+    "variantId": "zea_dawn_xuangui_World",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 002": "ionpulser",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "WS 003": "typhoon",
+                "WS0004": "zea_bricole_m",
+                "WS0003": "zea_bricole_m",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "pdburst",
-                "WS0003": "pdburst",
+                "WS0001": "heavymauler",
             }
         },
     ],

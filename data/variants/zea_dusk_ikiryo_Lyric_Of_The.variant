@@ -1,37 +1,37 @@
 {
-    "displayName": "Ferocious",
+    "displayName": "Lyric Of The",
     "fluxCapacitors": 0,
-    "fluxVents": 10,
+    "fluxVents": 8,
     "goalVariant": true,
     "hullId": "zea_dusk_ikiryo",
     "hullMods": [
-        "hardened_subsystems",
+        "missleracks",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_ikiryo_Ferocious",
+    "variantId": "zea_dusk_ikiryo_Lyric_Of_The",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS 002": "ionpulser",
+                "WS 002": "zea_plasma_chaingun",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 003": "breachpod",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "kol_tor",
-                "WS0003": "railgun",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS 003": "salamanderpod",
+                "WS0004": "pdburst",
+                "WS0003": "pdburst",
             }
         },
     ],

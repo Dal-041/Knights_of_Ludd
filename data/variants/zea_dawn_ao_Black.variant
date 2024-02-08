@@ -1,6 +1,6 @@
 {
     "displayName": "Black",
-    "fluxCapacitors": 24,
+    "fluxCapacitors": 20,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_dawn_ao",
@@ -17,25 +17,25 @@
     "weaponGroups": [
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0009": "plasma",
+                "WS0011": "gigacannon",
+                "WS0012": "gigacannon",
             }
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS0003": "annihilatorpod",
                 "WS0002": "annihilatorpod",
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0012": "gigacannon",
-                "WS0011": "gigacannon",
+                "WS0009": "plasma",
             }
         },
         {
@@ -66,15 +66,9 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "pdburst",
+                "WS0006": "pdburst",
                 "WS0007": "pdburst",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0006": "vulcan",
-                "WS0005": "vulcan",
+                "WS0005": "pdburst",
             }
         },
     ],

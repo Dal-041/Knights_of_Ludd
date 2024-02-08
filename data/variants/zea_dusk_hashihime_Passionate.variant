@@ -1,16 +1,16 @@
 {
-    "displayName": "Strangler",
+    "displayName": "Passionate",
     "fluxCapacitors": 17,
-    "fluxVents": 20,
+    "fluxVents": 15,
     "goalVariant": true,
     "hullId": "zea_dusk_hashihime",
     "hullMods": [
-        "targetingunit",
+        "missleracks",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_hashihime_Strangler",
+    "variantId": "zea_dusk_hashihime_Passionate",
     "weaponGroups": [
         {
             "autofire": true,

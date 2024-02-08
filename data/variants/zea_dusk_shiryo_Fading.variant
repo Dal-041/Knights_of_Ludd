@@ -1,41 +1,46 @@
 {
-    "displayName": "Chivalrous",
-    "fluxCapacitors": 1,
-    "fluxVents": 20,
+    "displayName": "Fading",
+    "fluxCapacitors": 17,
+    "fluxVents": 0,
     "goalVariant": true,
-    "hullId": "zea_dusk_funayurei",
+    "hullId": "zea_dusk_shiryo",
     "hullMods": [
-        "targetingunit",
+        "hardened_subsystems",
         "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_funayurei_Chivalrous",
+    "variantId": "zea_dusk_shiryo_Fading",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS 001": "tachyonlance",
+                "WS0002": "ionpulser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "heavyneedler",
-                "WS0003": "heavyneedler",
+                "WS0004": "irpulse",
+                "WS0003": "irpulse",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "lrpdlaser",
-                "WS0006": "lrpdlaser",
-                "WS0007": "lrpdlaser",
-                "WS0005": "lrpdlaser",
+                "WS0001": "phasebeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdburst",
+                "WS0007": "pdburst",
             }
         },
     ],

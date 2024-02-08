@@ -15,7 +15,7 @@
     "variantId": "zea_dawn_qilin_Unwavering",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0002": "hil",
@@ -23,7 +23,7 @@
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS0012": "gorgonpod",
                 "WS0011": "gorgonpod",
@@ -43,6 +43,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0003": "ionbeam",
                 "WS0004": "gravitonbeam",
             }
         },
@@ -50,20 +51,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "ionbeam",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
                 "WS0001": "guardian",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
                 "WS0009": "pdburst",
                 "WS0010": "pdburst",
             }

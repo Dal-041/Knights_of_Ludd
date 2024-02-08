@@ -1,5 +1,5 @@
 {
-    "displayName": "Grand",
+    "displayName": "Vengeful",
     "fluxCapacitors": 12,
     "fluxVents": 50,
     "goalVariant": true,
@@ -12,10 +12,10 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_ayakashi_Grand",
+    "variantId": "zea_dusk_ayakashi_Vengeful",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0020": "tachyonlance",
@@ -34,8 +34,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "hveldriver",
-                "WS0005": "hveldriver",
+                "WS0016": "lightac",
+                "WS0012": "lightac",
+                "WS0015": "lightac",
+                "WS0011": "lightac",
             }
         },
         {
@@ -50,10 +52,16 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0011": "lightac",
-                "WS0012": "lightac",
-                "WS0015": "lightac",
-                "WS0016": "lightac",
+                "WS0006": "hveldriver",
+                "WS0005": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0013": "lrpdlaser",
+                "WS0014": "lrpdlaser",
             }
         },
         {
@@ -64,8 +72,6 @@
                 "WS0002": "heavyburst",
                 "WS0003": "heavyburst",
                 "WS0017": "heavyburst",
-                "WS0013": "lrpdlaser",
-                "WS0014": "lrpdlaser",
             }
         },
     ],

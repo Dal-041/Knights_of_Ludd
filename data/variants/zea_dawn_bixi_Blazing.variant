@@ -1,58 +1,58 @@
 {
-    "displayName": "Abyssal",
-    "fluxCapacitors": 5,
-    "fluxVents": 12,
+    "displayName": "Blazing",
+    "fluxCapacitors": 6,
+    "fluxVents": 30,
     "goalVariant": true,
     "hullId": "zea_dawn_bixi",
     "hullMods": [
-        "safetyoverrides",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_bixi_Abyssal",
+    "variantId": "zea_dawn_bixi_Blazing",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "devastator",
+                "WS0001": "tachyonlance",
+                "WS0002": "hveldriver",
+                "WS0003": "hveldriver",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0011": "lightag",
-                "WS0010": "lightag",
+                "WS0011": "lightdualac",
+                "WS0010": "lightdualac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "vulcan",
-                "WS0007": "vulcan",
-                "WS0008": "ioncannon",
-                "WS0009": "ioncannon",
+                "WS0006": "lrpdlaser",
+                "WS0007": "lrpdlaser",
+                "WS0008": "lrpdlaser",
+                "WS0009": "lrpdlaser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "heavymg",
-                "WS0003": "heavymg",
-                "WS0004": "heavymg",
-                "WS0005": "heavymg",
+                "WS0004": "dualflak",
+                "WS0005": "dualflak",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0012": "pdlaser",
-                "WS0013": "pdlaser",
+                "WS0012": "lrpdlaser",
+                "WS0013": "lrpdlaser",
             }
         },
     ],

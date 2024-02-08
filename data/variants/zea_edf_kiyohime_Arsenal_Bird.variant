@@ -1,6 +1,6 @@
 {
     "displayName": "Arsenal Bird",
-    "fluxCapacitors": 10,
+    "fluxCapacitors": 7,
     "fluxVents": 27,
     "goalVariant": true,
     "hullId": "zea_edf_kiyohime",
@@ -35,7 +35,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "mark9",
+                "WS0006": "kol_llyr",
             }
         },
         {

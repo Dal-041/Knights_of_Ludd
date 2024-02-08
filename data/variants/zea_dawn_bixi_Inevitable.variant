@@ -1,5 +1,5 @@
 {
-    "displayName": "Stalwart",
+    "displayName": "Inevitable",
     "fluxCapacitors": 0,
     "fluxVents": 29,
     "goalVariant": true,
@@ -11,7 +11,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_bixi_Stalwart",
+    "variantId": "zea_dawn_bixi_Inevitable",
     "weaponGroups": [
         {
             "autofire": false,
@@ -21,7 +21,7 @@
             }
         },
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0003": "heavyac",

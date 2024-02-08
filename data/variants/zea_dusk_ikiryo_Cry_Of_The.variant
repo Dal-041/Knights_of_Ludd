@@ -1,46 +1,43 @@
 {
-    "displayName": "Venomous",
-    "fluxCapacitors": 6,
-    "fluxVents": 5,
+    "displayName": "Cry Of The",
+    "fluxCapacitors": 4,
+    "fluxVents": 10,
     "goalVariant": true,
-    "hullId": "zea_dusk_shiryo",
+    "hullId": "zea_dusk_ikiryo",
     "hullMods": [
         "hardened_subsystems",
-        "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_shiryo_Venomous",
+    "variantId": "zea_dusk_ikiryo_Cry_Of_The",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "zea_nanten_s",
-                "WS0004": "zea_nanten_s",
+                "WS 002": "ionpulser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "heavyneedler",
+                "WS 003": "salamanderpod",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "phasebeam",
+                "WS0004": "kol_tor",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "pdlaser",
-                "WS0007": "pdlaser",
+                "WS0003": "railgun",
             }
         },
     ],

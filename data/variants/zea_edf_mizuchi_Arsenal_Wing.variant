@@ -14,19 +14,21 @@
     "variantId": "zea_edf_mizuchi_Arsenal_Wing",
     "weaponGroups": [
         {
-            "autofire": true,
-            "mode": "LINKED",
+            "autofire": false,
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0004": "zea_styrax_driver",
-                "WS0003": "zea_styrax_driver",
+                "WS0011": "annihilatorpod",
+                "WS0012": "annihilatorpod",
             }
         },
         {
             "autofire": true,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "WS0012": "annihilatorpod",
-                "WS0011": "annihilatorpod",
+                "WS0009": "zea_edf_locust_medium",
+                "WS0013": "zea_edf_locust_medium",
+                "WS0007": "pdburst",
+                "WS0008": "pdburst",
             }
         },
         {
@@ -41,16 +43,16 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "lightneedler",
-                "WS0002": "lightneedler",
+                "WS0004": "zea_styrax_driver",
+                "WS0003": "zea_styrax_driver",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "pdburst",
-                "WS0007": "pdburst",
+                "WS0001": "lightneedler",
+                "WS0002": "lightneedler",
             }
         },
     ],

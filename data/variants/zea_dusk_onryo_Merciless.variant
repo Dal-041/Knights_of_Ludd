@@ -1,11 +1,10 @@
 {
     "displayName": "Merciless",
-    "fluxCapacitors": 1,
-    "fluxVents": 10,
+    "fluxCapacitors": 5,
+    "fluxVents": 22,
     "goalVariant": true,
     "hullId": "zea_dusk_onryo",
     "hullMods": [
-        "fluxbreakers",
         "hardenedshieldemitter",
         "targetingunit",
     ],
@@ -15,25 +14,19 @@
     "variantId": "zea_dusk_onryo_Merciless",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "plasma",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0008": "phasecl",
-                "WS0007": "phasecl",
+                "WS0005": "zea_nanten_l",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0008": "zea_styrax_driver",
                 "WS0009": "zea_styrax_driver",
+                "WS0007": "zea_styrax_driver",
                 "WS0010": "zea_styrax_driver",
             }
         },
@@ -41,18 +34,18 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0014": "railgun",
-                "WS0013": "railgun",
+                "WS0014": "pdburst",
+                "WS0013": "pdburst",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "pdburst",
-                "WS0001": "pdburst",
-                "WS0002": "pdburst",
-                "WS0011": "pdburst",
+                "WS0006": "ioncannon",
+                "WS0001": "lrpdlaser",
+                "WS0011": "ioncannon",
+                "WS0002": "lrpdlaser",
             }
         },
     ],

@@ -1,7 +1,7 @@
 {
-    "displayName": "Inevitable",
+    "displayName": "Eternal",
     "fluxCapacitors": 0,
-    "fluxVents": 41,
+    "fluxVents": 45,
     "goalVariant": true,
     "hullId": "zea_dawn_qilin",
     "hullMods": [
@@ -13,27 +13,28 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_qilin_Inevitable",
+    "variantId": "zea_dawn_qilin_Eternal",
     "weaponGroups": [
         {
             "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0011": "phasecl",
+                "WS0012": "phasecl",
+            }
+        },
+        {
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0002": "tachyonlance",
             }
         },
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
-                "WS0012": "phasecl",
-                "WS0011": "phasecl",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "ALTERNATING",
-            "weapons": {
+                "WS0001": "heavyburst",
                 "WS0009": "heatseeker",
                 "WS0010": "heatseeker",
             }
@@ -54,13 +55,6 @@
             "weapons": {
                 "WS0004": "irautolance",
                 "WS0003": "irautolance",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "heavyburst",
             }
         },
     ],

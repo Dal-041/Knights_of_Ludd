@@ -1,5 +1,5 @@
 {
-    "displayName": "Looming",
+    "displayName": "Luminous",
     "fluxCapacitors": 5,
     "fluxVents": 16,
     "goalVariant": true,
@@ -11,7 +11,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_tianma_Looming",
+    "variantId": "zea_dawn_tianma_Luminous",
     "weaponGroups": [
         {
             "autofire": true,
@@ -22,10 +22,8 @@
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
-                "WS0008": "pilum",
-                "WS0009": "pilum",
                 "WS0003": "harpoonpod",
             }
         },
@@ -40,12 +38,14 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0008": "pilum",
+                "WS0009": "pilum",
                 "WS0004": "lrpdlaser",
                 "WS0005": "lrpdlaser",
                 "WS0001": "lrpdlaser",
-                "WS0011": "lrpdlaser",
                 "WS0002": "lrpdlaser",
                 "WS0010": "lrpdlaser",
+                "WS0011": "lrpdlaser",
             }
         },
     ],

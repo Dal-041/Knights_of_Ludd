@@ -1,5 +1,5 @@
 {
-    "displayName": "Disrupting",
+    "displayName": "Withering",
     "fluxCapacitors": 13,
     "fluxVents": 20,
     "goalVariant": true,
@@ -12,7 +12,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_lushu_Disrupting",
+    "variantId": "zea_dawn_lushu_Withering",
     "weaponGroups": [
         {
             "autofire": true,

@@ -1,6 +1,6 @@
 {
-    "displayName": "Looming",
-    "fluxCapacitors": 0,
+    "displayName": "Watching",
+    "fluxCapacitors": 4,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_dawn_qilin",
@@ -13,29 +13,34 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_qilin_Looming",
+    "variantId": "zea_dawn_qilin_Watching",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0002": "zea_thermal_cannon",
             }
         },
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
-                "WS0012": "pilum",
+                "WS0001": "heavyburst",
                 "WS0011": "pilum",
+                "WS0012": "pilum",
+                "WS0003": "heavyburst",
+                "WS0004": "heavyburst",
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
             }
         },
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "WS0009": "heatseeker",
-                "WS0010": "heatseeker",
+                "WS0005": "heavymauler",
+                "WS0006": "heavymauler",
             }
         },
         {
@@ -44,23 +49,6 @@
             "weapons": {
                 "WS0008": "hveldriver",
                 "WS0007": "hveldriver",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0006": "heavyneedler",
-                "WS0005": "heavyneedler",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0004": "heavyburst",
-                "WS0001": "heavyburst",
-                "WS0003": "heavyburst",
             }
         },
     ],

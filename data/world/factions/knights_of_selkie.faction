@@ -312,7 +312,7 @@
 			"portmaster":{"name":"Portwatcher"},
 			#"quartermaster":{"name":"Purser"},
 			"factionLeader":{"name":"Grandmaster"},
-			"guardLeader":{"name":"Chaptermasster"},
+			"guardLeader":{"name":"Chaptermaster"},
 		},
 	},
 	"custom":{

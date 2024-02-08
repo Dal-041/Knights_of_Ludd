@@ -1,42 +1,46 @@
 {
-    "displayName": "Gatekeeper",
-    "fluxCapacitors": 0,
-    "fluxVents": 15,
+    "displayName": "Lingering",
+    "fluxCapacitors": 6,
+    "fluxVents": 5,
     "goalVariant": true,
-    "hullId": "zea_dusk_funayurei",
+    "hullId": "zea_dusk_shiryo",
     "hullMods": [
         "hardened_subsystems",
-        "hardenedshieldemitter",
-        "targetingunit",
+        "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_funayurei_Gatekeeper",
+    "variantId": "zea_dusk_shiryo_Lingering",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS 001": "zea_nanten_l",
+                "WS0003": "zea_nanten_s",
+                "WS0004": "zea_nanten_s",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "hveldriver",
-                "WS0003": "hveldriver",
+                "WS0002": "heavyneedler",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "lrpdlaser",
-                "WS0006": "lrpdlaser",
-                "WS0007": "lrpdlaser",
-                "WS0005": "lrpdlaser",
+                "WS0001": "phasebeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pdlaser",
+                "WS0007": "pdlaser",
             }
         },
     ],

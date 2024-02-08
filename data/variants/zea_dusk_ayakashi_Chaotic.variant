@@ -1,30 +1,30 @@
 {
-    "displayName": "Glowing",
-    "fluxCapacitors": 0,
-    "fluxVents": 49,
+    "displayName": "Chaotic",
+    "fluxCapacitors": 19,
+    "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_dusk_ayakashi",
     "hullMods": [
-        "hardenedshieldemitter",
+        "fluxbreakers",
         "stabilizedshieldemitter",
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_ayakashi_Glowing",
+    "variantId": "zea_dusk_ayakashi_Chaotic",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0020": "tachyonlance",
-                "WS0021": "tachyonlance",
+                "WS0020": "hil",
+                "WS0021": "zea_nanten_l",
             }
         },
         {
             "autofire": false,
-            "mode": "LINKED",
+            "mode": "ALTERNATING",
             "weapons": {
                 "WS0018": "hydra",
                 "WS0019": "hydra",
@@ -34,26 +34,26 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0024": "irautolance",
-                "WS0023": "irautolance",
+                "WS0006": "heavyac",
+                "WS0005": "heavyac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0024": "zea_hosta_m",
+                "WS0023": "zea_hosta_m",
                 "WS0001": "ionbeam",
-                "WS0002": "ionbeam",
+                "WS0002": "gravitonbeam",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "zea_styrax_driver",
-                "WS0005": "zea_styrax_driver",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0014": "railgun",
-                "WS0013": "railgun",
+                "WS0014": "lightac",
+                "WS0013": "lightac",
             }
         },
         {
@@ -61,8 +61,8 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0017": "heavyburst",
-                "WS0003": "heavyburst",
                 "WS0012": "pdburst",
+                "WS0003": "heavyburst",
                 "WS0011": "pdburst",
             }
         },

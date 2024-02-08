@@ -1,12 +1,12 @@
 {
     "displayName": "Supremacy",
-    "fluxCapacitors": 6,
+    "fluxCapacitors": 19,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_edf_kiyohime",
     "hullMods": [
-        "expanded_deck_crew",
         "hardenedshieldemitter",
+        "magazines",
         "targetingunit",
     ],
     "permaMods": [],
@@ -18,17 +18,35 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "gauss",
+                "WS0006": "multineedler",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "zea_styrax_driver",
-                "WS0007": "zea_styrax_driver",
-                "WS0004": "zea_styrax_driver",
-                "WS0005": "zea_styrax_driver",
+                "WS0007": "autopulse",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "pulselaser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "zea_styrax_driver",
             }
         },
         {

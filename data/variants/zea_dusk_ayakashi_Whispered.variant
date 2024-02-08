@@ -1,5 +1,5 @@
 {
-    "displayName": "Visage",
+    "displayName": "Whispered",
     "fluxCapacitors": 13,
     "fluxVents": 50,
     "goalVariant": true,
@@ -10,10 +10,10 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dusk_ayakashi_Visage",
+    "variantId": "zea_dusk_ayakashi_Whispered",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0020": "zea_nanten_l",
@@ -34,8 +34,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "zea_myoga_driver",
-                "WS0005": "zea_myoga_driver",
+                "WS0014": "zea_hosta_s",
+                "WS0013": "zea_hosta_s",
+                "WS0016": "zea_hosta_s",
+                "WS0015": "zea_hosta_s",
             }
         },
         {
@@ -52,10 +54,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0013": "zea_hosta_s",
-                "WS0014": "zea_hosta_s",
-                "WS0015": "zea_hosta_s",
-				"WS0016": "zea_hosta_s",
+                "WS0006": "zea_myoga_driver",
+                "WS0005": "zea_myoga_driver",
             }
         },
         {

@@ -1,25 +1,24 @@
 {
-    "displayName": "Deep",
-    "fluxCapacitors": 2,
-    "fluxVents": 20,
+    "displayName": "Skies",
+    "fluxCapacitors": 5,
+    "fluxVents": 17,
     "goalVariant": true,
     "hullId": "zea_dawn_xuangui",
     "hullMods": [
         "escort_package",
-        "fluxbreakers",
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_xuangui_Deep",
+    "variantId": "zea_dawn_xuangui_Skies",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "zea_bricole_m",
-                "WS0003": "zea_bricole_m",
+                "WS0004": "hveldriver",
+                "WS0003": "hveldriver",
             }
         },
         {
