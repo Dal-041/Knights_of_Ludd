@@ -256,6 +256,7 @@
 			"zea_shield_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_dawn.png",
 			"zea_shield_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_dusk.png",
 			"zea_shield_elysia":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_elysia.png",
+			"zea_shield_elysia_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_elysia_2.png",
 		},
 		"zea_phase_glows": {
 			"zea_boss_yukionna_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow1.png",
