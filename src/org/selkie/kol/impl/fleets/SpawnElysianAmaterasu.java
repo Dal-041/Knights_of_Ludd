@@ -8,6 +8,7 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -88,6 +89,7 @@ public class SpawnElysianAmaterasu {
 
 		elysianBossFleet.addTag(excludeTag);
 		elysianBossFleet.getFlagship().getVariant().addTag("kol_boss");
+		elysianBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
 
 		return true;

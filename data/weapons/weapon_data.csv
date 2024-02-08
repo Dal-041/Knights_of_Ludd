@@ -2,18 +2,18 @@ name,id,tier,rarity,base value,range,damage/second,damage/shot,emp,impact,turn r
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #WEAPONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,230,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he20, knights_of_selkie_bp",,,,Anti Armor,,,,,Fire rate accelerates during sustained use up to a maximum of %s after %s seconds. Flux cost per second does %s increase.,+40% | 2 | not,,,,70.1
-Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic20, knights_of_selkie_bp",,,,Anti Shield,,,,,Fire rate accelerates during sustained use up to a maximum of %s after %s seconds. Flux cost per second does %s increase.,+40% | 2 | not,,,,70.2
+Caelia Assault Cannon,kol_caelia,2,,5000,900,,200,,20,10,23,,,,HIGH_EXPLOSIVE,230,,0,0.5,1,,10,24,3,4.5,,700,,,50,,,,"he20, knights_of_selkie_bp",,Knights of Ludd,,Anti Armor,,,,,Fire rate accelerates during sustained use up to a maximum of %s after %s seconds. Flux cost per second does %s increase.,+40% | 2 | not,,,,70.1
+Llyr Autocannon,kol_llyr,2,,4500,900,,130,,10,10,21,,,,KINETIC,150,,0,0.4,1,,5,24,2,5,,700,,,100,,,,"kinetic20, knights_of_selkie_bp",,Knights of Ludd,,Anti Shield,,,,,Fire rate accelerates during sustained use up to a maximum of %s after %s seconds. Flux cost per second does %s increase.,+40% | 2 | not,,,,70.2
 Bricole Cannon,zea_bricole_m,1,0.25,2800,900,,150,,10,12,10,,,,KINETIC,150,,0,1,1,,0,15,5,10,,800,,,30,,,,"kinetic11, rare_bp, merc",,Common,,Anti Shield,,,,,,,,,,70.4
-Tor Light Cannon,kol_tor,2,0.3,2000,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,850,,,30,,,,"he8, remnant, rare_bp, merc, ind",,,,Anti Armor,,,,,,,,,,70.5
-Drian Coilgun,kol_drian,2,0.65,1500,700,,85,,12,24,6,,,,KINETIC,60,,0,0.75,1,,0,5,1.6,1,,750,,,30,,,,"kinetic6, knights_of_selkie_bp, remnant, merc, ind",,,,Anti Shield,,,,,,,,,,70.6
+Tor Light Cannon,kol_tor,2,0.3,2000,700,,90,,8,20,7,,,,HIGH_EXPLOSIVE,100,,0,2.7,3,0.3,0,5,1,10,,850,,,30,,,,"he8, remnant, rare_bp, merc, ind",,Knights of Ludd,,Anti Armor,,,,,,,,,,70.5
+Drian Coilgun,kol_drian,2,0.65,1500,700,,85,,12,24,6,,,,KINETIC,60,,0,0.75,1,,0,5,1.6,1,,750,,,30,,,,"kinetic6, knights_of_selkie_bp, remnant, merc, ind",,Knights of Ludd,,Anti Shield,,,,,,,,,,70.6
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #Buckler AMM Launcher,kol_buckler,1,0.8,800,500,,55,,1,30,4,24,2,4,FRAGMENTATION,5,,0,0.5,2,0.2,0,0,0,0,,1200,600,0.75,10,,,"PD_ONLY, DO_NOT_CONSERVE","PD4, knights_of_selkie_bp",,,,Point Defense,,,,,,,,,TRUE,70.8
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #BUILT_IN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Lunete Thermal Lance,kol_lunete,1,,0,900,1000,,,15,30,0,15,0,,HIGH_EXPLOSIVE,0,2000,0.5,1,1,8,,,,,,,,,,,,"SYSTEM, USE_LESS_VS_SHIELDS","no_drop, no_drop_salvage",,,,Assault / Finisher,Slow,None,,,"Fires a high-powered laser at the target, dealing approximately %s high-explosive damage in a short burst.",3400,,,TRUE,
-Brimstone,kol_brimstone,3,,,800,,175,,3,60,0,120,0,0,ENERGY,50,,,0.05,2,0.05,0,0,0,0,,500,,,,,,"SYSTEM, USE_LESS_VS_SHIELDS","no_drop, no_drop_salvage",,,,General,,,,,,,,,,
+Lunete Thermal Lance,kol_lunete,1,,0,900,1000,,,15,30,0,15,0,,HIGH_EXPLOSIVE,0,2000,0.5,1,1,8,,,,,,,,,,,,"SYSTEM, USE_LESS_VS_SHIELDS","no_drop, no_drop_salvage",,Knights of Ludd,,Assault / Finisher,Slow,None,,,"Fires a high-powered laser at the target, dealing approximately %s high-explosive damage in a short burst.",3400,,,TRUE,
+Brimstone,kol_brimstone,3,,,800,,175,,3,60,0,120,0,0,ENERGY,50,,,0.05,2,0.05,0,0,0,0,,500,,,,,,"SYSTEM, USE_LESS_VS_SHIELDS","no_drop, no_drop_salvage",,Knights of Ludd,,General,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #SYSTEM,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

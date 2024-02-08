@@ -8,6 +8,7 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
@@ -86,6 +87,7 @@ public class SpawnDawnBoss {
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);
 		dawnBossFleet.getFlagship().getVariant().addTag("kol_boss");
+		dawnBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		dawnBossFleet.addEventListener(new ManageDawnBoss());
 
 		return true;

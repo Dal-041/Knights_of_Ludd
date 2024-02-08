@@ -129,6 +129,7 @@ public class PrepareDarkDeeds {
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
         TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
         TT1BossFleet.getFlagship().getVariant().addTag("kol_boss");
+        TT1BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
 
@@ -211,6 +212,7 @@ public class PrepareDarkDeeds {
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
                     copy.variant.removeTag("kol_boss");
+                    copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
                     Misc.setSalvageSpecial(entity, data);
@@ -347,6 +349,7 @@ public class PrepareDarkDeeds {
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
                     copy.variant.removeTag("kol_boss");
+                    copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
                     CustomCampaignEntityAPI lootbox = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
@@ -567,7 +570,7 @@ public class PrepareDarkDeeds {
         TT3BossFleet.addTag(excludeTag);
 
         TT3BossFleet.getFlagship().getVariant().addTag("kol_boss");
-
+        TT3BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 //      TT3BossFleet.clearAbilities();
 //		TT3BossFleet.addAbility(Abilities.TRANSPONDER);
 //		TT3BossFleet.getAbility(Abilities.TRANSPONDER).activate();

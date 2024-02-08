@@ -67,6 +67,7 @@ public class AbyssIntelCMD extends BaseCommandPlugin {
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     if (!variant.hasTag(Tags.SHIP_UNIQUE_SIGNATURE)) variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
                     if (variant.hasTag("kol_boss")) variant.removeTag("kol_boss");
+                    if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
                 }
             }

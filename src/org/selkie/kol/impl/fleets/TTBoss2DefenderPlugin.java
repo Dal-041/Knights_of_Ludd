@@ -106,6 +106,7 @@ public class TTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageD
         }
 
         fleet.getFlagship().getVariant().addTag("kol_boss");
+        fleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
     }
 
 
