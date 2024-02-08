@@ -1,5 +1,5 @@
 {
-	"id":"eis_blinker_white30",  # this id must match what's in the spreadsheet
+	"id":"kol_blinker_white30",  # this id must match what's in the spreadsheet
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
@@ -7,8 +7,8 @@
 	"showDamageWhenDecorative":false,
 	"renderBelowAllWeapons":true,
 	"renderHints":["RENDER_ADDITIVE"],	
-	"turretSprite":"graphics/weapons/decorative/eis_blinker_white30/eis_blinker_white30_00.png",
-	"hardpointSprite":"graphics/weapons/decorative/eis_blinker_white30/eis_blinker_white30_00.png",
+	"turretSprite":"graphics/weapons/decorative/kol_blinker_white30/kol_blinker_white30_00.png",
+	"hardpointSprite":"graphics/weapons/decorative/kol_blinker_white30/kol_blinker_white30_00.png",
 	"numFrames":30,
 	"frameRate":16,
 	"alwaysAnimate":"true",
