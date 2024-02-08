@@ -3,6 +3,7 @@ package org.selkie.kol.impl.world;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.impl.campaign.enc.AbyssalRogueStellarObjectEPEC;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
@@ -13,6 +14,8 @@ import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.lazywizard.lazylib.MathUtils;
+import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.listeners.TrackFleet;
@@ -470,15 +473,10 @@ public class PrepareAbyss {
 
 	public static void generateDynamicDuskHole() {
 		//Variable location
-		double posX = Math.random()*(Global.getSettings().getFloat("sectorWidth")/2);
-		double posY = Math.random()*(Global.getSettings().getFloat("sectorHeight")/2);
-		if (Math.abs(posX) < 20000) posX += 20000; //Coreworld area
-		if (Math.abs(posY) < 20000) posY += 20000;
-		if (Math.random() < 0.5f) posX *= -1;
-		if (Math.random() < 0.5f) posY *= -1;
+		Vector2f pos = getRandomHyperspaceCoordForSystem();
 
 		StarSystemAPI system = Global.getSector().createStarSystem(ProcgenUsedNames.pickName(NameGenData.TAG_STAR, null, null).nameWithRomanSuffixIfAny);
-		system.getLocation().set((float)posX, (float)posY);
+		system.getLocation().set(pos.getX(), pos.getY());
 		if (Math.random() < 0.5f) {
 			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_duskbh1.png");
 		} else {
@@ -519,19 +517,7 @@ public class PrepareAbyss {
 		);
 		dbhBeam1.setCircularOrbit(sing, (float)(Math.random() * 360), 0, 20);
 
-		if (Math.random() < 0.4f) {
-			double orbit = 800+Math.random()*4000;
-			PlanetAPI p1 = system.addPlanet("dusk_DBH_P1", sing, "Yours?", "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
-			PlanetConditionGenerator.generateConditionsForPlanet(p1, StarAge.OLD);
-			p1.getMarket().addCondition(Conditions.IRRADIATED);
-		}
-
-		if (Math.random() < 0.4f) {
-			double orbit = 2200+Math.random()*4000;
-			PlanetAPI p2 = system.addPlanet("dusk_DBH_P2", sing, "Theirs?", "barren", (float)Math.random()*360f, (float)(50+Math.random()*175f), (float)orbit, (float)orbit / 100f);
-			PlanetConditionGenerator.generateConditionsForPlanet(p2, StarAge.OLD);
-			p2.getMarket().addCondition(Conditions.IRRADIATED);
-		}
+		StarSystemGenerator.addOrbitingEntities(system, sing, StarAge.YOUNG, 1, 2, 2500, 0, false, false);
 
 		//sophistimacated
 		float orbRadius1 = 1000 + (float)(Math.random() * 8500f);
@@ -586,6 +572,7 @@ public class PrepareAbyss {
 		return picker.pick();
 	}
 
+	//Same as the method in Misc, but allows custom chunkSizes
 	public static SectorEntityToken addNebulaFromPNG(String image, float centerX, float centerY, LocationAPI location,
 													 String category, String key, int tilesWide, int tilesHigh,
 													 String terrainType, StarAge age, int chunkSize) {
@@ -655,5 +642,52 @@ public class PrepareAbyss {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
+	}
+
+	public static Vector2f getRandomHyperspaceCoordForSystem() {
+		int attempts = 0;
+		while (attempts < 50) {
+			float rW = (float) Math.random()*(Global.getSettings().getFloat("sectorWidth")/2);
+			float rH = (float) Math.random()*(Global.getSettings().getFloat("sectorHeight")/2);
+			float x = MathUtils.getRandomNumberInRange(-rW, rW);
+			float y = MathUtils.getRandomNumberInRange(-rH, rH);
+
+			if (!isWithinOrionAbyss(x, y) && !isWithinCoreSpace(x, y)) {
+				return new Vector2f(x, y);
+			}
+			attempts++;
+		}
+		return null;
+	}
+
+	public static boolean isWithinCoreSpace(float x, float y) {
+		float coreW = 12500;
+		float coreH = 10000;
+		Vector2f center = new Vector2f(0,0);
+		Vector2f candidate = new Vector2f(x, y);
+
+		if (MathUtils.getDistance(center, candidate) <= (Math.max(coreW, coreH)+5000)) return true;
+
+		return false;
+	}
+
+	public static boolean isWithinOrionAbyss(Vector2f loc) {
+		return isWithinOrionAbyss(loc.getX(), loc.getY());
+	}
+
+	public static boolean isWithinOrionAbyss(float x, float y) {
+		float w = -Global.getSettings().getFloat("sectorWidth")/2f;
+		float h = -Global.getSettings().getFloat("sectorHeight")/2f;
+
+		// Box bounds, rough
+		//-w +8000, -h + 18500
+		//-w +8000 + 15000, -h + 16000
+		//-w +8000 + 15000 + 10000, -h + 7500
+
+		if (x < w+8000 && y < h+18500) return true;
+		if (x < w+8000+15000 && y < h+16000) return true;
+		if (x < w+8000+15000+10000 && y < h+7500) return true;
+
+		return false;
 	}
 }
