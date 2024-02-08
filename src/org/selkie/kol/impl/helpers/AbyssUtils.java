@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.plugins;
+package org.selkie.kol.impl.helpers;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FactionAPI;
