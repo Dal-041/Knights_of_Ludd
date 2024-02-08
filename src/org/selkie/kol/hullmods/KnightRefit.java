@@ -10,6 +10,7 @@ import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.apache.log4j.Logger;
 import com.fs.starfarer.rpg.Person;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
@@ -45,6 +46,7 @@ public class KnightRefit extends BaseHullMod {
 
     public static final int FLUX_CAP_PER_OP = 25;
     public static final int FLUX_DISS_PER_OP = 5;
+    private static final Logger log = Logger.getLogger(KnightRefit.class);
 
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS = 0.25f;
@@ -149,7 +151,11 @@ public class KnightRefit extends BaseHullMod {
                 true,
                 new Object[]{"Armor Plate Name", width - 80f * 2 - HEIGHT - 25f, "Hull", 80f, "Armor", 80f});
 
+        log.info("KOL Refit modules:");
         for (String module : ship.getVariant().getStationModules().values()) {
+            log.info(String.format("module [%s] variant not null [%s] hullspec not null if variant not null [%s]",
+                    module, Global.getSettings().getVariant(module) != null, Global.getSettings().getVariant(module) != null && Global.getSettings().getVariant(module).getHullSpec() != null));
+
             // for some insane reason, the hullspec can return null
             if (Global.getSettings().getVariant(module) == null
                     || Global.getSettings().getVariant(module).getHullSpec() == null) continue;

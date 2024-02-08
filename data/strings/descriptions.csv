@@ -96,6 +96,7 @@ kol_lungeHEF,SHIP_SYSTEM,Launches the ship in the desired direction and empowers
 zea_edf_microburn,SHIP_SYSTEM,Quickly thrusts the ship in a chosen direction.,Movement,,
 zea_edf_plasmafighters,SHIP_SYSTEM,Thrusts the ship and the ship's fighters forward with a burst of speed.,Movement,,
 zea_edf_minijump,SHIP_SYSTEM,Quickly jumps the ship in a chosen direction.,Movement,,
+zea_edf_relativisticdrift,SHIP_SYSTEM,"Massively increases the time flow of the ship for a moment while moving in a specific direction.",Movement,,
 zea_edf_synchronized_ammo_feed,SHIP_SYSTEM,The vessel and its launched craft receive a 50% increase in weapon ROF and a corresponding flux cost reduction.,Offensive,,
 zea_dawn_flare_burn,SHIP_SYSTEM,Thrusts the ship forward and launches a large wave of smart flares.,Defensive,,
 zea_dawn_flare_wave,SHIP_SYSTEM,Launches a wave of smart flares that screen out nearby hostile ordnance. ,Defensive,,
