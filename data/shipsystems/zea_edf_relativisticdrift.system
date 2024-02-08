@@ -1,0 +1,20 @@
+{
+	"id":"zea_edf_relativisticdrift",
+    "type":"ENGINE_MOD",
+    "aiType":"MANEUVERING_JETS",
+
+	"statsScript":"org.selkie.kol.impl.shipsystems.RelativisticDriftStats",
+
+    "engineGlowLengthMult":1.5,
+
+    "flameoutOnImpactChance":0,
+
+	"useSound":"system_burn_drive_deactivate",
+    "outOfUsesSound":"engine_disabled",
+
+    "aiHints":{
+		"activeSpeedIncrease":200,
+		"burstMovementPotential":150,
+		"averageSpeedIncrease":100,
+    }
+}
