@@ -1,5 +1,5 @@
 {
-    "displayName": "Artillery",
+    "displayName": "Wrath",
     "fluxCapacitors": 0,
     "fluxVents": 20,
     "goalVariant": true,
@@ -12,7 +12,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_invictus_Artillery",
+    "variantId": "kol_invictus_Wrath",
     "weaponGroups": [
         {
             "autofire": true,

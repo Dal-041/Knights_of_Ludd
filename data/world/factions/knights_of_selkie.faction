@@ -51,6 +51,7 @@
 			"mora":0.5,
 			"retribution":0.5,
 			"invictus":1,
+			"kol_invictus":1,
 		},
 	},
 	"shipsWhenImporting":{
@@ -114,7 +115,7 @@
 			"condor",
 			"mora",
 			"retribution",
-			"invictus",
+			"kol_invictus",
 		],
 	},
 	"priorityShips":{
@@ -206,7 +207,6 @@
 		"kol_llyr":10,
 		"kol_tor":3,
 		"kol_drian":4,
-		#"kol_buckler":10,
 	},
 	"hullmodSellFrequency":{
 		"heavyarmor":10,
@@ -235,7 +235,7 @@
 		"combatFreighterCombatUseFractionWhenPriority":1,   # as part of normal combat lineup, when marked as priority ship
 		"autofitRandomizeProbability":0.25,
 
-		"commanderSkillsShuffleProbability":0,
+		"commanderSkillsShuffleProbability":0.3,
 		"commanderSkills":[
 			"crew_training",
 			"tactical_drills",
@@ -255,10 +255,10 @@
 		},
 		"MEDIUM":{
 			"soldier":10,
-			"faithful":10,
+			"faithful":15,
 		},
 		"HIGH":{
-			"soldier":10,
+			"soldier":15,
 			"faithful":10,
 		},
 	},
@@ -311,6 +311,8 @@
 			"genericMilitary":{"name":"Knight-Commander"},
 			"portmaster":{"name":"Portwatcher"},
 			#"quartermaster":{"name":"Purser"},
+			"factionLeader":{"name":"Grandmaster"},
+			"guardLeader":{"name":"Chaptermasster"},
 		},
 	},
 	"custom":{

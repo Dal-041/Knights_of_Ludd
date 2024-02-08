@@ -3,13 +3,9 @@ package org.selkie.kol.impl.hullmods
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.MutableShipStatsAPI
-import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.impl.campaign.ids.Tags
-import com.fs.starfarer.api.util.IntervalUtil
-import org.lazywizard.lazylib.ext.combat.getAlliesOnMap
-import org.selkie.kol.impl.world.PrepareAbyss
-import org.selkie.kol.impl.plugins.AbyssUtils
+import org.selkie.kol.impl.helpers.AbyssUtils
 
 class AttainmentManager : BaseHullMod() {
     //private val checkKey = "EDF_UB"

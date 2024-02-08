@@ -19,6 +19,7 @@ import org.selkie.kol.plugins.KOL_ModPlugin;
 public class GenerateKnights {
 
 	//public static Logger log = Global.getLogger(GenerateKnights.class);
+	public static int baseKnightExpeditions = 2;
 	
 	public static void genCorvus() {
 		Global.getSector().getStarSystem("Eos Exodus").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");

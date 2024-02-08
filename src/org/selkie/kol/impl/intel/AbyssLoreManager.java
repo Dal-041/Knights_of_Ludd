@@ -8,13 +8,10 @@ import com.fs.starfarer.api.campaign.econ.SubmarketAPI;
 import com.fs.starfarer.api.campaign.impl.items.BaseSpecialItemPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import com.fs.starfarer.api.impl.campaign.rulecmd.AddRemoveCommodity;
-import org.selkie.kol.impl.plugins.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
 
 public class AbyssLoreManager extends BaseSpecialItemPlugin {
     protected String currentFaction = "";

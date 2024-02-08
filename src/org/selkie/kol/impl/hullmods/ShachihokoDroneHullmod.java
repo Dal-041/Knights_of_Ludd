@@ -42,5 +42,3 @@ public class ShachihokoDroneHullmod extends BaseHullMod {
         tooltip.setBulletedListMode(null);
     }
 }
-
-}

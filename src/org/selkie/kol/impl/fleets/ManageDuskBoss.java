@@ -6,13 +6,11 @@ import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
-import com.fs.starfarer.campaign.comms.v2.IntelManager;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.intel.AbyssAbilityIntel;
-import org.selkie.kol.impl.plugins.AbyssUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.kol.impl.helpers.AbyssUtils;
 
 public class ManageDuskBoss implements FleetEventListener {
 	public final String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";

@@ -9,7 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.plugins.AbyssUtils;
+import org.selkie.kol.impl.helpers.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;

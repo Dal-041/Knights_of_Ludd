@@ -1,12 +1,11 @@
 package org.selkie.kol.impl.intel;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.plugins.AbyssUtils;
+import org.selkie.kol.impl.helpers.AbyssUtils;
 
 import java.awt.*;
 import java.io.IOException;

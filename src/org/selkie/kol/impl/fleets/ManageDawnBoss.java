@@ -10,8 +10,7 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.intel.AbyssAbilityIntel;
-import org.selkie.kol.impl.plugins.AbyssUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.kol.impl.helpers.AbyssUtils;
 
 public class ManageDawnBoss implements FleetEventListener {
 	public final String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";

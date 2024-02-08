@@ -15,6 +15,8 @@ import org.selkie.kol.world.GenerateKnights;
 
 import java.util.Random;
 
+import static org.selkie.kol.world.GenerateKnights.baseKnightExpeditions;
+
 public class KnightsExpeditionsManager extends BaseRouteFleetManager {
 
     public static final Integer ROUTE_PREPARE = 1;
@@ -142,7 +144,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
 
     @Override
     protected int getMaxFleets() {
-        int count = 0;
+        int count = baseKnightExpeditions;
         for(MarketAPI m : Global.getSector().getEconomy().getMarketsCopy()) {
             if (m.getFactionId().equals(KOL_ModPlugin.kolID)) count += 1;
             if (m.getFactionId().equals("kol")) count += 1;
@@ -171,7 +173,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         MarketAPI startMarket = null;
         if(goodSourceMarket(Global.getSector().getEntityById("kol_lyra")) && Global.getSector().getEntityById("kol_lyra").getFaction() == Global.getSector().getFaction(KOL_ModPlugin.kolID)) {
             startMarket = Global.getSector().getEntityById("kol_lyra").getMarket();
-        } else if (goodSourceMarket(Global.getSector().getEntityById("kol_cygnus")) && Global.getSector().getEntityById("kol_cygnus").getFaction() == Global.getSector().getFaction(KOL_ModPlugin.kolID)) {
+        } else if (Math.random() < 0.33f && goodSourceMarket(Global.getSector().getEntityById("kol_cygnus")) && Global.getSector().getEntityById("kol_cygnus").getFaction() == Global.getSector().getFaction(KOL_ModPlugin.kolID)) {
             startMarket = Global.getSector().getEntityById("kol_cygnus").getMarket();
         } else {
             for(MarketAPI markets : Global.getSector().getEconomy().getMarketsCopy()) {
