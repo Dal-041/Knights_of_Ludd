@@ -17,16 +17,16 @@
   ],
   "builtInWeapons": {
     "WS0013": "kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol",
-    "WS0014": "eis_blinker_white30",
-    "WS0015": "eis_blinker_white30",
-    "WS0020": "eis_blinker_white30",
-    "WS0021": "eis_blinker_white30",
-    "WS0022": "eis_blinker_white",
-    "WS0023": "eis_blinker_white",
-    "WS0024": "eis_blinker_white",
-    "WS0025": "eis_blinker_white",
-    "WS0026": "eis_blinker_white",
-    "WS0027": "eis_blinker_white"
+    "WS0014": "kol_blinker_white30",
+    "WS0015": "kol_blinker_white30",
+    "WS0020": "kol_blinker_white30",
+    "WS0021": "kol_blinker_white30",
+    "WS0022": "kol_blinker_white",
+    "WS0023": "kol_blinker_white",
+    "WS0024": "kol_blinker_white",
+    "WS0025": "kol_blinker_white",
+    "WS0026": "kol_blinker_white",
+    "WS0027": "kol_blinker_white"
   },
   "weaponSlots": [
     {

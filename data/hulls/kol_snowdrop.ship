@@ -17,12 +17,12 @@
   ],
   "builtInWeapons": {
     "WS0012": "kol_pusherplate_lt_but_cute",
-    "WS0013": "eis_blinker_white30",
-    "WS0014": "eis_blinker_white30",
+    "WS0013": "kol_blinker_white30",
+    "WS0014": "kol_blinker_white30",
     "WS0015": "kol_deco_snowdrop_tl",
     "WS0016": "kol_deco_snowdrop_tr",
-    "WS0018": "eis_blinker_white",
-    "WS0019": "eis_blinker_white"
+    "WS0018": "kol_blinker_white",
+    "WS0019": "kol_blinker_white"
   },
   "weaponSlots": [
     {

@@ -14,13 +14,22 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class AbyssLoreManager extends BaseSpecialItemPlugin {
-    protected String currentFaction = "";
+    protected String params = "";
 
     public static final int defaultCredits = 25000;
     public static final String[] edfLore = {
             "--Outer Rim has finally -- breakthrough. The AI cores respond -- our greatest foe will -- It will be many --fore declassified use, but this -- the Hegemony. May ... new beginning for the Sector.\n - Project Outer Rim, Recovered Engineering Log",
             "It wasn't enough. Damn -- hubris, it wasn't enough. The fleet escaped during the third shakedown patrol - the capitals, most of the cruisers... the -- didn't follow along were destroyed by the flagships. So many on --. This shouldn't have broken -- it shouldn't have eve-- --sible! The safeguards were *active*, flaw-- We did everything right! Now --ve lost it all, the prototypes, the project, the pilots, and wherever th-- beyond our scopes. --s gonna have my head. Tell my family, I love them. I may not -- the surface for a while.\n - Project Outer Rim, Incident Log Fragment, Chief Engineer",
     };
+    public static final String[] edfSystemLore = {
+            "\"[System note: The beginning 8 words of this log consist only of profanity, they have been censored for your consideration.]\n -- They're alive, the [profanity]! Still in their [profanity] %s and everything! We--! They--! We... ...We got [profanity] crushed. The task force is gone. They slaughted us! So many loyal men, dead, and if you're reading this then that includes me. Don't let it be for nothing, take this report back if I can't. Before things went to [profanity] we got the drop on one of their little groups, took a boarding party into the [profanity] that didn't scuttle. On the bridge, there, still %s [profanity] %s One of ours - one of the damn %s - still hooked up, hooked into the ship, trying to get it flying again! I only saw his look on the feed before it cut, when he realized we were there, and %s [profanity] %s. The [profanity] aren't dead! They're still in there, they're just %s*!\"\n" +
+                    "*System query: profanity?"
+    };
+    public static ArrayList<String[]> edfSystemLoreHLs = new ArrayList<>();
+    static {
+        String[] temp = { "syncpods", "wearing the", "phoenix!", "test pilots", "it wasn't", "gratitude for rescue", "traitorous corefuckers" };
+        edfSystemLoreHLs.add(temp);
+    }
     public static final String edfLoreDrop = "\"[This section of the log consists only of profanity] -- They're alive, the [profanity]! Still in their [profanity] syncpods and everything! We--! They--! We... ...We got [profanity] crushed! The task force is gone. A lot of good men are dead, and if you're reading this then that includes me. But we got the drop on one of their little groups, took a boarding party into the bastard that didn't scuttle. On the bridge, there, still in the [profanity] colors! One of ours - one of the damn test crew - still hooked up, hooked into the ship, trying to get it flying again. I only saw his look on the feed before it cut, when he realized we were there, and it wasn't [profanity] gratitude for rescue. The [profanity] are still in there, and they're just corefuckers*!\"\n*System query: profanity?\n - Hegemony Cruiser Black Box";
     public static ArrayList<String[]> edfLoreHLs = new ArrayList<>();
     public static final String[] duskLore = {
@@ -94,19 +103,19 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
     @Override
     public void performRightClickAction() {
         Global.getSoundPlayer().playUISound("ui_acquired_blueprint", 1, 1);
-        AddLoreIntel(currentFaction);
+        AddLoreIntel(params);
     }
 
-    public static void AddLoreIntel(String fac) {
+    public static void AddLoreIntel(String params) {
         int count = 0;
 
-        if (Global.getSector() == null || Global.getSector().getPlayerFleet() == null || fac == null) return;
+        if (Global.getSector() == null || Global.getSector().getPlayerFleet() == null || params == null) return;
 
         if (edfLoreHLs.isEmpty()) loadHighlightLists();
 
-        String crest = Global.getSector().getFaction(fac).getCrest();
+        String crest = Global.getSector().getFaction(params).getCrest();
 
-        if (fac.equals(PrepareAbyss.elysianID)) {
+        if (params.equals(PrepareAbyss.elysianID)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -116,11 +125,11 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Elysian data fragment " + String.valueOf(count + 1), edfLore[count], edfLoreHLs.get(count));
+            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Elysian data fragment #" + String.valueOf(count + 1), edfLore[count], edfLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
-        if (fac.equals(PrepareAbyss.duskID)) {
+        if (params.equals(PrepareAbyss.duskID)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -129,12 +138,12 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Duskborne data fragment " + String.valueOf(count + 1), duskLore[count], duskLoreHLs.get(count));
+            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Duskborne data fragment #" + String.valueOf(count + 1), duskLore[count], duskLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
 
             return;
         }
-        if (fac.equals(PrepareAbyss.dawnID)) {
+        if (params.equals(PrepareAbyss.dawnID)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -143,12 +152,12 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Dawntide data fragment " + String.valueOf(count + 1), dawnLore[count], dawnLoreHLs.get(count));
+            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Dawntide data fragment #" + String.valueOf(count + 1), dawnLore[count], dawnLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
 
             return;
         }
-        if (fac.equals(Factions.TRITACHYON)) {
+        if (params.equals(Factions.TRITACHYON)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -157,7 +166,20 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Tri-Tachyon Fleet Log " + String.valueOf(count + 1), TTFleetLore[count], TTFleetLoreHLs.get(count));
+            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Tri-Tachyon Fleet Log #" + String.valueOf(count + 1), TTFleetLore[count], TTFleetLoreHLs.get(count));
+            Global.getSector().getIntelManager().addIntel(lore);
+            return;
+        }
+        if (params.equals(Factions.HEGEMONY)) {
+            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+                if (intel.getIcon().equals(crest)) count++;
+            }
+            if (count >= edfSystemLore.length) {
+                Global.getSector().getPlayerFleet().getCargo().getCredits().add(defaultCredits);
+                return;
+            }
+
+            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Hegemony Termination Fleet Recorder #" + String.valueOf(count + 1), edfSystemLore[count], edfSystemLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
@@ -169,7 +191,7 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
     public void init(CargoStackAPI stack) {
         super.init(stack);
 
-        currentFaction = spec.getParams();
+        params = spec.getParams();
     }
 
     @Override
@@ -187,27 +209,47 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
         return super.getName();
     }
 
+    public boolean knowsAll () {
+        int count = 0;
+        for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+            if (intel.getIcon().equals(Global.getSector().getFaction(params).getCrest())) count++;
+        }
+        String[] ref = null;
+        if (params.equals(PrepareAbyss.duskID)) ref = duskLore;
+        else if (params.equals(PrepareAbyss.dawnID)) ref = dawnLore;
+        else if (params.equals(PrepareAbyss.elysianID)) ref = edfLore;
+        else if (params.equals(Factions.TRITACHYON)) ref = TTFleetLore;
+        else if (params.equals(Factions.HEGEMONY)) ref = edfSystemLore;
+        if (ref == null) return false;
+
+        if (count >= ref.length) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public void render(float x, float y, float w, float h, float alphaMult,
                        float glowMult, SpecialItemRendererAPI renderer) {
 
-        SpriteAPI sprite = Global.getSettings().getSprite("lore_item", currentFaction, true);
-        if (currentFaction.equals(Factions.TRITACHYON)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.TRITACHYON).getCrest());
+        SpriteAPI sprite = Global.getSettings().getSprite("lore_item", params, true);
+        if (params.equals(Factions.TRITACHYON)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.TRITACHYON).getCrest());
+        if (params.equals(Factions.HEGEMONY)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.HEGEMONY).getCrest());
         if (sprite.getTextureId() == 0) return; // no texture for a "holo", so no custom rendering
 
         float cx = x + w/2f;
         float cy = y + h/2f;
 
-        float blX = cx - 29f;
+        float blX = cx - 30f;
         float blY = cy - 11f;
         float tlX = cx - 15f;
         float tlY = cy + 24f;
-        float trX = cx + 21f;
-        float trY = cy + 20f;
+        float trX = cx + 23f;
+        float trY = cy + 19f;
         float brX = cx + 6f;
         float brY = cy - 21f;
 
-        boolean known = false; //TODO if player has all intel entries for faction, dull appearance
+        boolean known = knowsAll();
         float mult = 1f;
 
         sprite.setAlphaMult(alphaMult * mult);

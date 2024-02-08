@@ -9,6 +9,7 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.AbyssUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -75,7 +76,7 @@ public class SpawnElysianHeart {
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
 		for(String support : AbyssUtils.elysianBossSupportingFleet) {
-			elysianHeartFleet.getFleetData().addFleetMember(support);
+			//elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);
@@ -97,6 +98,7 @@ public class SpawnElysianHeart {
 
 		elysianHeartFleet.addTag(excludeTag);
 		elysianHeartFleet.getFlagship().getVariant().addTag("kol_boss");
+		elysianHeartFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		elysianHeartFleet.addEventListener(new ManageElysianCorruptingheart());
 
 		return true;

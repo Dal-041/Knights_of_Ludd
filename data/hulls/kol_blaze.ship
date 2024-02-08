@@ -18,12 +18,12 @@
   ],
   "builtInWeapons": {
     "WS0009": "kol_brimstone",
-    "WS0010": "eis_blinker_white30",
-    "WS0011": "eis_blinker_white30",
-    "WS0012": "eis_blinker_white",
-    "WS0013": "eis_blinker_white",
-    "WS0014": "eis_blinker_red",
-    "WS0015": "eis_blinker_green"
+    "WS0010": "kol_blinker_white30",
+    "WS0011": "kol_blinker_white30",
+    "WS0012": "kol_blinker_white",
+    "WS0013": "kol_blinker_white",
+    "WS0014": "kol_blinker_red",
+    "WS0015": "kol_blinker_green"
   },
   "weaponSlots": [
     {

@@ -22,10 +22,10 @@
   "builtInWeapons": {
     "WS0008": "kol_deco_protea_mid",
     "WS0009": "kol_flickerShield",
-    "WS0010": "eis_blinker_white",
-    "WS0011": "eis_blinker_white",
-    "WS0012": "eis_blinker_red",
-    "WS0013": "eis_blinker_green",
+    "WS0010": "kol_blinker_white",
+    "WS0011": "kol_blinker_white",
+    "WS0012": "kol_blinker_red",
+    "WS0013": "kol_blinker_green",
     "WS0014": "kol_deco_protea_l",
     "WS0015": "kol_deco_protea_r"
   },

@@ -20,14 +20,14 @@
     "zea_edf_iff_override"
   ],
   "builtInWeapons": {
-    "WS0005": "eis_blinker_white",
-    "WS0009": "eis_blinker_white",
-    "WS0012": "eis_blinker_white",
+    "WS0005": "kol_blinker_white",
+    "WS0009": "kol_blinker_white",
+    "WS0012": "kol_blinker_white",
     "WS0013": "zea_deco_edf_vortice",
     "WS0014": "zea_deco_edf_vortice",
-    "WS0015": "eis_blinker_white",
-    "WS0016": "eis_blinker_white30",
-    "WS0017": "eis_blinker_white30",
+    "WS0015": "kol_blinker_white",
+    "WS0016": "kol_blinker_white30",
+    "WS0017": "kol_blinker_white30",
     "WS0018": "zea_deco_edf_mizuchi_lights",
     "WS0019": "zea_deco_edf_seiryu_ml",
     "WS0020": "zea_deco_edf_seiryu_mr"

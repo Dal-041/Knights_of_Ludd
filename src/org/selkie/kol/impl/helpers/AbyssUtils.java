@@ -11,6 +11,7 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class AbyssUtils {
 
+
     public static float attainmentFactor = 0.15f;
     public static boolean useDomres = false;
     public static boolean useLostech = false;
@@ -24,6 +25,7 @@ public class AbyssUtils {
     };
     public static final String IntelBreadcrumbTag = "Dark Deeds";
     public static final String IntelLoreTag = "Elysian Lore";
+    public static final String KEY_ELYSIA_WITNESS = "$zea_elysian_witness";
 
     public static String[] techInheritIDs = {
             "remnant",
