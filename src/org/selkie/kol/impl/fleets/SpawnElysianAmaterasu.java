@@ -68,7 +68,7 @@ public class SpawnElysianAmaterasu {
 		        .create();
 		elysianBossFleet.setDiscoverable(true);
 		for(String support : AbyssUtils.elysianBossSupportingFleet) {
-			elysianBossFleet.getFleetData().addFleetMember(support);
+			//elysianBossFleet.getFleetData().addFleetMember(support);
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianBossFleet);

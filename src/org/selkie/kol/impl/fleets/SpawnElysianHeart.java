@@ -75,7 +75,7 @@ public class SpawnElysianHeart {
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
 		for(String support : AbyssUtils.elysianBossSupportingFleet) {
-			elysianHeartFleet.getFleetData().addFleetMember(support);
+			//elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
 
 		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);

@@ -6,7 +6,7 @@
 	#"turretSprite":"",
 	#"hardpointSprite":"",
 	"turretSprite":"graphics/weapons/missile_rack_open_s_1x_turret_base.png",
-	"hardpointSprite":"graphics/weapons/missile_rack_open_s_1x_hardpoint_base.png",	
+	"hardpointSprite":"graphics/weapons/missile_rack_open_s_1x_hardpoint_base.png",
 	"hardpointOffsets":[12, 0],
 	"turretOffsets":[5, 0],
 	"hardpointAngleOffsets":[0],
