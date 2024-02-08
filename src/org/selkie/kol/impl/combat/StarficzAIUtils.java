@@ -704,10 +704,12 @@ public class StarficzAIUtils {
     }
 
     public static Vector2f getBackingOffStrafePoint(ShipAPI ship){
-
+        float secondsInFuture = 1f;
         float degreeDelta = 5f;
-
-        List<Vector2f> potentialPoints = MathUtils.getPointsAlongCircumference(ship.getLocation(), 1000f, (int) (360f/degreeDelta), 0);
+        Vector2f futureLocation= new Vector2f();
+        Vector2f.add(ship.getLocation(), ship.getVelocity(), futureLocation);
+        futureLocation.scale(secondsInFuture);
+        List<Vector2f> potentialPoints = MathUtils.getPointsAlongCircumference(futureLocation, 1000f, (int) (360f/degreeDelta), 0);
         CollectionUtils.CollectionFilter<Vector2f> filterBorder = new CollectionUtils.CollectionFilter<Vector2f>() {
             @Override
             public boolean accept(Vector2f point) {
