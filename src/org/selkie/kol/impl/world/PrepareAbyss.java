@@ -3,7 +3,6 @@ package org.selkie.kol.impl.world;
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
-import com.fs.starfarer.api.impl.campaign.enc.AbyssalRogueStellarObjectEPEC;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
@@ -14,11 +13,11 @@ import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.apache.log4j.Logger;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
-import org.selkie.kol.impl.helpers.AbyssUtils;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -35,6 +34,8 @@ import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerat
 import static org.selkie.kol.impl.helpers.AbyssUtils.*;
 
 public class PrepareAbyss {
+
+	public static Logger log = Global.getLogger(PrepareAbyss.class);
 
 	public static final String excludeTag = "zea_rulesfortheebutnotforme";
 	public static final String dawnID = "zea_dawn";
@@ -486,7 +487,12 @@ public class PrepareAbyss {
 		Vector2f pos = getRandomHyperspaceCoordForSystem();
 
 		StarSystemAPI system = Global.getSector().createStarSystem(ProcgenUsedNames.pickName(NameGenData.TAG_STAR, null, null).nameWithRomanSuffixIfAny);
-		system.getLocation().set(pos.getX(), pos.getY());
+		try {
+			system.getLocation().set(pos.getX(), pos.getY());
+		} catch (NullPointerException e) {
+			log.error("ZEA: Could not find valid location for Black Pulsar!");
+			return;
+		}
 		if (Math.random() < 0.5f) {
 			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_duskbh1.png");
 		} else {
@@ -656,7 +662,7 @@ public class PrepareAbyss {
 
 	public static Vector2f getRandomHyperspaceCoordForSystem() {
 		int attempts = 0;
-		while (attempts < 50) {
+		while (attempts < 500) {
 			float rW = (float) Math.random()*(Global.getSettings().getFloat("sectorWidth")/2);
 			float rH = (float) Math.random()*(Global.getSettings().getFloat("sectorHeight")/2);
 			float x = MathUtils.getRandomNumberInRange(-rW, rW);
