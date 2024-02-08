@@ -1,0 +1,61 @@
+{
+    "displayName": "Abyssal",
+    "fluxCapacitors": 5,
+    "fluxVents": 12,
+    "goalVariant": true,
+    "hullId": "zea_dawn_bixi",
+    "hullMods": [
+        "safetyoverrides",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_bixi_Abyssal",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "devastator",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0011": "lightag",
+                "WS0010": "lightag",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0007": "vulcan",
+                "WS0008": "ioncannon",
+                "WS0009": "ioncannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "heavymg",
+                "WS0003": "heavymg",
+                "WS0004": "heavymg",
+                "WS0005": "heavymg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0012": "pdlaser",
+                "WS0013": "pdlaser",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}
