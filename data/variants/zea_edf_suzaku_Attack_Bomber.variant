@@ -1,6 +1,6 @@
 {
     "displayName": "Attack Bomber",
-    "fluxCapacitors": 7,
+    "fluxCapacitors": 18,
     "fluxVents": 20,
     "goalVariant": true,
     "hullId": "zea_edf_suzaku",
@@ -18,24 +18,30 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "kol_tor",
-                "WS0006": "kol_tor",
+                "WS0001": "zea_plasma_chaingun",
             }
         },
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "WS0004": "sabot_single",
-                "WS0003": "sabot_single",
+                "WS0002": "ionpulser",
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "zea_styrax_driver",
-                "WS0002": "zea_styrax_driver",
+                "WS0005": "kol_drian",
+                "WS0006": "kol_drian",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "zea_edf_harpoon_single",
+                "WS0004": "zea_edf_harpoon_single",
             }
         },
         {

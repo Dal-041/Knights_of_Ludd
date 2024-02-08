@@ -1,64 +1,65 @@
 {
-    "displayName": "Vengeful",
-    "fluxCapacitors": 16,
-    "fluxVents": 50,
+    "displayName": "Stalwart",
+    "fluxCapacitors": 0,
+    "fluxVents": 29,
     "goalVariant": true,
-    "hullId": "zea_dawn_linggui",
+    "hullId": "zea_dawn_bixi",
     "hullMods": [
-        "auxiliarythrusters",
         "heavyarmor",
-        "missleracks",
         "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_linggui_Vengeful",
+    "variantId": "zea_dawn_bixi_Stalwart",
     "weaponGroups": [
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "zea_nanten_l",
+                "WS0001": "hellbore",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "hurricane",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "kol_llyr",
+                "WS0003": "heavyac",
+                "WS0002": "heavyac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0010": "guardian",
+                "WS0006": "lightac",
+                "WS0007": "lightac",
+                "WS0011": "lightac",
+                "WS0010": "lightac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "lrpdlaser",
-                "WS0009": "lrpdlaser",
-                "WS0005": "lrpdlaser",
-                "WS0003": "lrpdlaser",
+                "WS0004": "heavymauler",
+                "WS0005": "heavymauler",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "dualflak",
-                "WS0007": "dualflak",
+                "WS0008": "pdburst",
+                "WS0009": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0013": "lrpdlaser",
+                "WS0012": "lrpdlaser",
             }
         },
     ],

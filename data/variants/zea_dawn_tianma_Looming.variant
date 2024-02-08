@@ -1,0 +1,58 @@
+{
+    "displayName": "Looming",
+    "fluxCapacitors": 5,
+    "fluxVents": 16,
+    "goalVariant": true,
+    "hullId": "zea_dawn_tianma",
+    "hullMods": [
+        "expanded_deck_crew",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_tianma_Looming",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "ionbeam",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "pilum",
+                "WS0009": "pilum",
+                "WS0003": "harpoonpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "gravitonbeam",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "lrpdlaser",
+                "WS0005": "lrpdlaser",
+                "WS0001": "lrpdlaser",
+                "WS0011": "lrpdlaser",
+                "WS0002": "lrpdlaser",
+                "WS0010": "lrpdlaser",
+            }
+        },
+    ],
+    "wings": [
+        "lux_wing",
+        "lux_wing",
+        "lux_wing",
+    ],
+    "modules": [],
+}

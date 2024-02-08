@@ -1,80 +1,77 @@
 {
-    "displayName": "Black",
-    "fluxCapacitors": 24,
-    "fluxVents": 50,
+    "displayName": "Glowing",
+    "fluxCapacitors": 0,
+    "fluxVents": 49,
     "goalVariant": true,
-    "hullId": "zea_dawn_ao",
+    "hullId": "zea_dusk_ayakashi",
     "hullMods": [
-        "armoredweapons",
-        "defensive_targeting_array",
-        "heavyarmor",
+        "hardenedshieldemitter",
         "stabilizedshieldemitter",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_ao_Black",
+    "variantId": "zea_dusk_ayakashi_Glowing",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0009": "plasma",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0003": "annihilatorpod",
-                "WS0002": "annihilatorpod",
+                "WS0020": "tachyonlance",
+                "WS0021": "tachyonlance",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0012": "gigacannon",
-                "WS0011": "gigacannon",
+                "WS0018": "hydra",
+                "WS0019": "hydra",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0020": "railgun",
-                "WS0021": "lightac",
-                "WS0024": "lightac",
-                "WS0004": "lightac",
-                "WS0022": "lightac",
-                "WS0023": "lightac",
-                "WS0001": "lightac",
-                "WS0018": "railgun",
-                "WS0015": "railgun",
-                "WS0019": "railgun",
+                "WS0024": "irautolance",
+                "WS0023": "irautolance",
+                "WS0001": "ionbeam",
+                "WS0002": "ionbeam",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0010": "guardian",
+                "WS0006": "zea_styrax_driver",
+                "WS0005": "zea_styrax_driver",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "pdburst",
-                "WS0007": "pdburst",
+                "WS0014": "railgun",
+                "WS0013": "railgun",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "vulcan",
-                "WS0005": "vulcan",
+                "WS0017": "heavyburst",
+                "WS0003": "heavyburst",
+                "WS0012": "pdburst",
+                "WS0011": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0016": "lrpdlaser",
+                "WS0015": "lrpdlaser",
             }
         },
     ],

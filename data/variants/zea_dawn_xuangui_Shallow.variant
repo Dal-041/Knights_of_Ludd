@@ -1,11 +1,12 @@
 {
     "displayName": "Shallow",
-    "fluxCapacitors": 6,
-    "fluxVents": 18,
+    "fluxCapacitors": 5,
+    "fluxVents": 17,
     "goalVariant": true,
     "hullId": "zea_dawn_xuangui",
     "hullMods": [
-        "heavyarmor",
+        "escort_package",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],
@@ -24,7 +25,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "typhoon",
+                "WS0001": "heavymauler",
             }
         },
     ],

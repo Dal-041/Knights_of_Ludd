@@ -1,12 +1,13 @@
 {
     "displayName": "Deep",
-    "fluxCapacitors": 7,
+    "fluxCapacitors": 2,
     "fluxVents": 20,
     "goalVariant": true,
     "hullId": "zea_dawn_xuangui",
     "hullMods": [
+        "escort_package",
         "fluxbreakers",
-        "hardenedshieldemitter",
+        "targetingunit",
     ],
     "permaMods": [],
     "sMods": [],

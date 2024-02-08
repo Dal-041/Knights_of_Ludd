@@ -1,12 +1,11 @@
 {
     "displayName": "Attack",
-    "fluxCapacitors": 2,
+    "fluxCapacitors": 7,
     "fluxVents": 10,
     "goalVariant": true,
     "hullId": "zea_edf_wani",
     "hullMods": [
         "fluxbreakers",
-        "hardenedshieldemitter",
     ],
     "permaMods": [],
     "sMods": [],
