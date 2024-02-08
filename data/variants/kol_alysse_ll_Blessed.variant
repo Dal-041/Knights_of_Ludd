@@ -1,5 +1,5 @@
 {
-    "displayName": "Standard",
+    "displayName": "Blessed",
     "fluxCapacitors": 0,
     "fluxVents": 1,
     "goalVariant": true,
@@ -8,7 +8,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_alysse_ll_Standard",
+    "variantId": "kol_alysse_ll_Blessed",
     "weaponGroups": [
         {
             "autofire": true,

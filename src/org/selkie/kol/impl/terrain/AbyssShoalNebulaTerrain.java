@@ -4,11 +4,10 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
-import com.fs.starfarer.api.util.Misc;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
-public class AbyssNebulaTerrain extends NebulaTerrainPlugin {
+public class AbyssShoalNebulaTerrain extends NebulaTerrainPlugin {
 
     @Override
     public String getTerrainName() {

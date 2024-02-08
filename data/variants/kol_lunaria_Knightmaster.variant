@@ -1,6 +1,6 @@
 {
-    "displayName": "Standard",
-    "fluxCapacitors": 0,
+    "displayName": "Knightmaster",
+    "fluxCapacitors": 24,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "kol_lunaria",
@@ -13,11 +13,11 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_lunaria_Standard",
+    "variantId": "kol_lunaria_Knightmaster",
     "weaponGroups": [
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
                 "WS0001": "kol_lunete",
                 "WS0002": "kol_lunete",
@@ -67,11 +67,11 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0011": "kol_lunaria_tl_Standard"},
-        {"WS0012": "kol_lunaria_tr_Standard"},
-        {"WS0015": "kol_lunaria_ml_Standard"},
-        {"WS0016": "kol_lunaria_mr_Standard"},
-        {"WS0018": "kol_lunaria_lr_Standard"},
-        {"WS0017": "kol_lunaria_ll_Standard"},
+        {"WS0011": "kol_lunaria_tl_Knightmaster"},
+        {"WS0012": "kol_lunaria_tr_Knightmaster"},
+        {"WS0015": "kol_lunaria_ml_Knightmaster"},
+        {"WS0016": "kol_lunaria_mr_Knightmaster"},
+        {"WS0018": "kol_lunaria_lr_Knightmaster"},
+        {"WS0017": "kol_lunaria_ll_Knightmaster"},
     ],
 }

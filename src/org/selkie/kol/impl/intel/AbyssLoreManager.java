@@ -33,8 +33,8 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
     public static ArrayList<String[]> dawnLoreHLs = new ArrayList<>();
     public static final String[] TTFleetLore = {
             "We anticipated a goose chase across the fringe, not to end up %s. We should have anticipated that she'd go the most unlikely place. We caught the fleet's fracture jump off %s and found ourselves in this pocket-space. There's a gate in the region, of course inactive, which suggests our dear Domain once knew this place, but no company chart has returned a match. She led us here, so if there's a way home we'll find it in her wreck.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
-            "The space here is more hostile than first assumed. System failures are increasing and our supplies are falling well short of the allocation budgets. For reasons we've yet to determine, the phase craft are weathering this place better than the others, but better is relative. Two of the support craft have been scuttled to maintain the paragon's overhead, and at this rate the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Exec's ordered an emergency burn to %s, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
-            "This is a Tri-Tachyon automated distress beacon. This vessel has suffered extreme structural failure. %s recorded launched in this vicinity; please commence recovery of any company personnel. You will be fairly compensated upon their return to a registered Tri-Tachyon facility.\n" +
+            "The space here is more hostile than we first assumed. System failures are increasing and our supplies are falling well short of the authorized allocations. For reasons we've yet to determine, the phase craft are weathering this place signicantly better than our conventional vessels, though better is relative. Two of the support craft have already been scuttled to maintain our flagship's overhead, and at this consumption rate the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Boss has ordered an emergency burn to %s, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
+            "This is a Tri-Tachyon automated distress beacon. This vessel has suffered extreme structural failure. %s recorded launched in this vicinity; please commence recovery of company personnel. You will be fairly compensated upon their return to a registered Tri-Tachyon facility.\n" +
                     " %s %s for your service to the Corporation today."
     };
     public static ArrayList<String[]> TTFleetLoreHLs = new ArrayList<>();
@@ -198,20 +198,20 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
         float cx = x + w/2f;
         float cy = y + h/2f;
 
-        float blX = cx - 31f;
-        float blY = cy - 16f;
-        float tlX = cx - 22f;
-        float tlY = cy + 27f;
-        float trX = cx + 23f;
-        float trY = cy + 27f;
-        float brX = cx + 15f;
-        float brY = cy - 19f;
+        float blX = cx - 29f;
+        float blY = cy - 11f;
+        float tlX = cx - 15f;
+        float tlY = cy + 24f;
+        float trX = cx + 21f;
+        float trY = cy + 20f;
+        float brX = cx + 6f;
+        float brY = cy - 21f;
 
         boolean known = false; //TODO if player has all intel entries for faction, dull appearance
         float mult = 1f;
 
         sprite.setAlphaMult(alphaMult * mult);
-        sprite.setColor(new Color(255,100,100, 250));
+        sprite.setColor(new Color(255,35,50, 255));
         sprite.setNormalBlend();
         sprite.renderWithCorners(blX, blY, tlX, tlY, trX, trY, brX, brY);
 

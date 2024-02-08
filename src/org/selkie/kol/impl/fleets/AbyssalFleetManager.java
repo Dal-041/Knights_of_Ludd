@@ -297,6 +297,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
             else level = 6; core = "gamma_core";
         }
         //TODO handle modified AI core levels, portrait pools
+        //Levels: G3, B5, A7, O9
         if (faction.equals(PrepareAbyss.dawnID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
             portrait = AbyssUtils.portraitsDawn[level-6];

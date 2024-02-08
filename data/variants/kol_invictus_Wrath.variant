@@ -1,7 +1,7 @@
 {
     "displayName": "Wrath",
     "fluxCapacitors": 0,
-    "fluxVents": 20,
+    "fluxVents": 18,
     "goalVariant": true,
     "hullId": "kol_invictus",
     "hullMods": [
@@ -15,17 +15,17 @@
     "variantId": "kol_invictus_Wrath",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS 001": "kol_llyr",
+                "WS 001": "kol_caelia",
                 "WS 002": "kol_llyr",
                 "WS 009": "kol_llyr",
                 "WS 010": "kol_llyr",
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
                 "WS 004": "locust",

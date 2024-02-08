@@ -1,47 +1,50 @@
 {
-    "displayName": "Standard",
-    "fluxCapacitors": 10,
+    "displayName": "Knight",
+    "fluxCapacitors": 0,
     "fluxVents": 10,
     "goalVariant": true,
     "hullId": "kol_protea",
     "hullMods": [
-        "hardened_subsystems",
+        "heavyarmor",
         "unstable_injector",
-        "armoredweapons"
     ],
     "permaMods": [],
     "sMods": [],
-    "variantId": "kol_protea_Standard",
+    "suppressedMods": [],
+    "variantId": "kol_protea_Knight",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "arbalest",
-                "WS0002": "arbalest"
+                "WS0001": "heavymauler",
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0005": "hammer",
-                "WS0006": "hammer"
+                "WS0006": "breach",
+                "WS0005": "breach",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "lightac",
-                "WS0004": "lightac"
+                "WS0002": "arbalest",
+                "WS0003": "kol_drian",
+                "WS0004": "kol_drian",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0007": "vulcan"}
-        }
+            "weapons": {
+                "WS0007": "vulcan",
+            }
+        },
     ],
-    "wings": []
+    "wings": [],
+    "modules": [],
 }
