@@ -1,17 +1,20 @@
 package org.selkie.kol.hullmods;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
+import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
+import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.loading.WeaponSpecAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.rpg.Person;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
-import java.util.ArrayList;
+import java.awt.*;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /*
@@ -40,17 +43,11 @@ import java.util.Map;
 
 public class KnightRefit extends BaseHullMod {
 
-    public static final int flux_cap_smol  = 10;
-    public static final int flux_cap_med  = 25;
-    public static final int flux_cap_lorge  = 50;
-    public static final int flux_cap_per_op  = 25;
-    public static final int flux_diss_smol  = 5;
-    public static final int flux_diss_med  = 5;
-    public static final int flux_diss_lorge  = 10;
-    public static final int flux_diss_per_op  = 5;
+    public static final int FLUX_CAP_PER_OP = 25;
+    public static final int FLUX_DISS_PER_OP = 5;
 
     private final String knightRefitID = "knightRefit";
-    private final float SPEED_BONUS=0.25f;
+    private final float SPEED_BONUS = 0.25f;
     private float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
 
     @Override
@@ -64,54 +61,67 @@ public class KnightRefit extends BaseHullMod {
         if (ship.getVariant().hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptiveshields", "kol_refit");
         if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_refit");
+
+        PersonAPI captain = ship.getOriginalCaptain();
+        MutableCharacterStatsAPI stats = captain == null ? null : captain.getFleetCommanderStats();
+        float capBonus = 0;
+        float dissBonus = 0;
+        for(WeaponAPI weapon : ship.getAllWeapons()){
+            if (weapon.getSlot().getWeaponType() == WeaponAPI.WeaponType.COMPOSITE ){
+                int opCost = (int) weapon.getSpec().getOrdnancePointCost(stats, ship.getMutableStats());
+                capBonus += opCost* FLUX_CAP_PER_OP;
+                dissBonus += opCost* FLUX_DISS_PER_OP;
+            }
+        }
+        ship.getMutableStats().getFluxCapacity().modifyFlat(id, capBonus);
+        ship.getMutableStats().getFluxDissipation().modifyFlat(id, dissBonus);
     }
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
+    }
 
-        float capBonus = 0;
-        float dissBonus = 0;
+    @Override
+    public float getTooltipWidth() {
+        return 400f;
+    }
+    @Override
+    public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+        float HEIGHT = 64f;
+        float headingPad = 20f;
+        float underHeadingPad = 5f;
+        float listPad = 3f;
+        Color YELLOW = new Color(241, 199, 0);
 
-        for (String weaponSlot:stats.getVariant().getFittedWeaponSlots()) {
-            WeaponSpecAPI wep = stats.getVariant().getWeaponSpec(weaponSlot);
-            if (wep.getType() == WeaponAPI.WeaponType.BALLISTIC && stats.getVariant().getSlot(weaponSlot).getWeaponType() == WeaponAPI.WeaponType.COMPOSITE) {
-                /*
-                //Bonus based on size
-                switch (wep.getSize()) {
-                    case LARGE:
-                        capBonus += wep.getOrdnancePointCost(cStats) * flux_cap_lorge;
-                    case MEDIUM:
-                        capBonus += wep.getOrdnancePointCost(cStats) * flux_cap_med;
-                    case SMALL:
-                        capBonus += wep.getOrdnancePointCost(cStats) * flux_cap_smol;
-                }
-                 */
-                // bonus based on OP
-                int opCost = (int)(wep.getOrdnancePointCost(null)+0.1f); //I hope so much this is paranoia
-                capBonus += opCost*flux_cap_per_op;
-                dissBonus += opCost*flux_diss_per_op;
+        boolean hasComposite = false;
+        for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){
+            if (slot.getWeaponType() == WeaponAPI.WeaponType.COMPOSITE){
+                hasComposite = true;
+                break;
             }
         }
 
-        stats.getFluxCapacity().modifyFlat(id, capBonus);
-        stats.getFluxDissipation().modifyFlat(id, dissBonus);
-    }
+        if(hasComposite){
+            tooltip.addSectionHeading("Integrated Ballistics", YELLOW, Global.getSettings().getColor("buttonBgDark"), Alignment.MID, headingPad);
+            TooltipMakerAPI integratedBallistics = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "kol_composite"), HEIGHT);
+            //integratedBallistics.addTitle("Integrated Ballistics", YELLOW);
+            integratedBallistics.setBulletedListMode(" • ");
+            integratedBallistics.addPara("Every ordnance point spent on ballistic weapons installed into composite slots increases Flux Capacity by %s, and Flux Dissipation by %s.",
+                    listPad, Misc.getPositiveHighlightColor(), ""+FLUX_CAP_PER_OP, ""+FLUX_DISS_PER_OP);
+            tooltip.addImageWithText(underHeadingPad);
+        }
 
-    @Override
-    public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {
-        if (index == 0) return "" + (int) flux_cap_per_op;
-        if (index == 1) return "" + (int) flux_diss_per_op;
-        if (index == 2) return "" + (int) 100 * SPEED_BONUS;
-        return null;
-    }
+        if(ship.getShield() != null){
+            tooltip.addSectionHeading("Primitive Capacitor Shields", YELLOW, Global.getSettings().getColor("buttonBgDark"), Alignment.MID, headingPad);
+            TooltipMakerAPI capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "kol_primshield"), HEIGHT);
+            //capacitorShields.addTitle("Primitive Capacitor Shields", YELLOW);
+            capacitorShields.setBulletedListMode(" • ");
+            capacitorShields.addPara("Shields rely on a charge and can only stay online for a max of %s at a time.",listPad, Misc.getPositiveHighlightColor(), "10 seconds");
+            capacitorShields.addPara("Shield charge regenerates while shields are offline.",listPad);
+            capacitorShields.addPara("Shield emitters undergo a forced shutdown when charge reaches %s, and can only be reactivated once recharged to %s.",listPad, YELLOW, "0%", "100%");
+            tooltip.addImageWithText(underHeadingPad);
+        }
 
-    @Override
-    public void addPostDescriptionSection(
-            TooltipMakerAPI tooltip,
-            ShipAPI.HullSize hullSize,
-            ShipAPI ship,
-            float width,
-            boolean isForModSpec) {
 
         ShipVariantAPI variant = ship.getVariant();
 
@@ -124,26 +134,27 @@ public class KnightRefit extends BaseHullMod {
         if (ship.getVariant().getStationModules().isEmpty()) return;
 
         // title
-        tooltip.addSectionHeading("Modular Armor Stats", Alignment.MID, 15);
+        tooltip.addSectionHeading("Modular Armor", YELLOW, Global.getSettings().getColor("buttonBgDark"), Alignment.MID, headingPad);
+        TooltipMakerAPI modularArmor = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "kol_modules"), HEIGHT);
+        //modularArmor.addTitle("Modular Armor", YELLOW);
+        modularArmor.setBulletedListMode(" • ");
+        modularArmor.addPara("Increases top speed and maneuverability by up to %s as armor panels are destroyed.", listPad, Misc.getPositiveHighlightColor(), "25%");
 
-        tooltip.beginTable(
+        modularArmor.beginTable(
                 Misc.getBasePlayerColor(),
                 Misc.getDarkPlayerColor(),
                 Misc.getBrightPlayerColor(),
                 20f,
                 true,
                 true,
-                new Object[]{"Name", width - 80f * 2 - 8f, "Hull", 80f, "Armor", 80f});
+                new Object[]{"Armor Plate Name", width - 80f * 2 - HEIGHT - 25f, "Hull", 80f, "Armor", 80f});
 
-        System.out.println("KOL Refit modules:");
         for (String module : ship.getVariant().getStationModules().values()) {
-            System.out.printf("module [%s] variant not null [%s] hullspec not null if variant not null [%s]%n",
-                    module, Global.getSettings().getVariant(module) != null, Global.getSettings().getVariant(module) != null && Global.getSettings().getVariant(module).getHullSpec() != null);
             // for some insane reason, the hullspec can return null
             if (Global.getSettings().getVariant(module) == null
                     || Global.getSettings().getVariant(module).getHullSpec() == null) continue;
             ShipHullSpecAPI hull = Global.getSettings().getVariant(module).getHullSpec();
-            tooltip.addRow(
+            modularArmor.addRow(
                     Alignment.LMID,
                     Misc.getTextColor(),
                     hull.getHullName(),
@@ -154,15 +165,16 @@ public class KnightRefit extends BaseHullMod {
                     Misc.getTextColor(),
                     String.valueOf(Math.round(hull.getArmorRating())));
         }
-        tooltip.addTable("-", 0, 4f);
+        modularArmor.addTable("-", 0, 4f);
 
-        tooltip.addPara("These hullmods also apply to your modules:", 10);
+        modularArmor.addPara("The following hullmods affects your modules:", 10);
         for (String hullmodId : variant.getHullMods()) {
             if (hullmodEffects.containsKey(hullmodId)) {
-                tooltip.addPara(Global.getSettings().getHullModSpec(hullmodId).getDisplayName(), 4f);
-                hullmodEffects.get(hullmodId).addTooltipText(tooltip, ship);
+                modularArmor.addPara(Global.getSettings().getHullModSpec(hullmodId).getDisplayName(), 4f);
+                hullmodEffects.get(hullmodId).addTooltipText(modularArmor, ship);
             }
         }
+        tooltip.addImageWithText(underHeadingPad);
     }
 
     @Override
@@ -216,14 +228,6 @@ public class KnightRefit extends BaseHullMod {
         hullmodEffects.put("reinforcedhull", new ArmorEffect(0, 1, 0.72f, 1, 1, 1));
         //hullmodEffects.put("TADA_lightArmor", new ArmorEffect(0, 2, 1, 1, 1, 1));
         //hullmodEffects.put("TADA_reactiveArmor", new ArmorEffect(0, 1, 1, 1.25f, 1.25f, 0.66f));
-    }
-
-    public static void applyHullmodModificationsToStats(MutableShipStatsAPI stats, ShipHullSpecAPI moduleSpec, ShipVariantAPI parentVariant) {
-        for (String hullmodId : parentVariant.getHullMods()) {
-            if (hullmodEffects.containsKey(hullmodId)) {
-                hullmodEffects.get(hullmodId).applyToStats(hullmodId, stats, moduleSpec);
-            }
-        }
     }
 
     protected static class ArmorEffect {

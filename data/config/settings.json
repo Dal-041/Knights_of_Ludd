@@ -313,7 +313,10 @@
 		"icons": {
 			"coronal_cap_top":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_top.png",
 			"coronal_cap_middle":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_middle.png",
-			"coronal_cap_bottom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_bottom.png"
+			"coronal_cap_bottom":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_bottom.png",
+			"kol_composite": "graphics/icons/hullsys/kol_composite_ico.png",
+			"kol_primshield": "graphics/icons/hullsys/kol_primshield_ico.png",
+			"kol_modules": "graphics/icons/hullsys/kol_modules_ico.png"
 		},
 		"lore_item": {
 			"zea_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dawn.png",
