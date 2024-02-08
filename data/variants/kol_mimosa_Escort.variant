@@ -1,0 +1,49 @@
+{
+    "displayName": "Escort",
+    "fluxCapacitors": 14,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "kol_mimosa",
+    "hullMods": [
+        "ballistic_rangefinder",
+        "escort_package",
+        "hardened_subsystems",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_mimosa_Escort",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "heavymauler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "lightac",
+                "WS0001": "lightac",
+                "WS0003": "lightac",
+                "WS0002": "lightac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0005": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0009": "kol_mimosa_tl_Escort"},
+        {"WS0010": "kol_mimosa_tr_Escort"},
+    ],
+}

@@ -1,5 +1,5 @@
 {
-    "displayName": "Standard",
+    "displayName": "Righteous",
     "fluxCapacitors": 5,
     "fluxVents": 50,
     "goalVariant": true,
@@ -12,7 +12,7 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_alysse_Standard",
+    "variantId": "kol_alysse_Righteous",
     "weaponGroups": [
         {
             "autofire": true,
@@ -58,9 +58,9 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0012": "kol_alysse_tl_Standard"},
-        {"WS0018": "kol_alysse_tr_Standard"},
-        {"WS0016": "kol_alysse_ll_Standard"},
-        {"WS0017": "kol_alysse_lr_Standard"},
+        {"WS0012": "kol_alysse_tl_Righteous"},
+        {"WS0018": "kol_alysse_tr_Righteous"},
+        {"WS0016": "kol_alysse_ll_Righteous"},
+        {"WS0017": "kol_alysse_lr_Righteous"},
     ],
 }

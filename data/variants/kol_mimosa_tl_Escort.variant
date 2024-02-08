@@ -1,0 +1,15 @@
+{
+    "displayName": "Escort",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_mimosa_tl",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_mimosa_tl_Escort",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

@@ -1,20 +1,20 @@
 {
-    "displayName": "Standard",
+    "displayName": "Knightmaster",
     "fluxCapacitors": 0,
     "fluxVents": 1,
     "goalVariant": true,
-    "hullId": "kol_alysse_lr",
+    "hullId": "kol_lunaria_ll",
     "hullMods": [],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_alysse_lr_Standard",
+    "variantId": "kol_lunaria_ll_Knightmaster",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "dualflak",
+                "WS0001": "vulcan",
             }
         },
     ],

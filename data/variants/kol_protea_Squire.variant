@@ -1,50 +1,47 @@
 {
-    "displayName": "Harasser",
-    "fluxCapacitors": 0,
+    "displayName": "Squire",
+    "fluxCapacitors": 10,
     "fluxVents": 10,
     "goalVariant": true,
     "hullId": "kol_protea",
     "hullMods": [
-        "heavyarmor",
+        "hardened_subsystems",
         "unstable_injector",
+        "armoredweapons"
     ],
     "permaMods": [],
     "sMods": [],
-    "suppressedMods": [],
-    "variantId": "kol_protea_Harasser",
+    "variantId": "kol_protea_Squire",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "heavymauler",
+                "WS0001": "arbalest",
+                "WS0002": "arbalest"
             }
         },
         {
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0006": "breach",
-                "WS0005": "breach",
+                "WS0005": "hammer",
+                "WS0006": "hammer"
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "arbalest",
-                "WS0003": "kol_drian",
-                "WS0004": "kol_drian",
+                "WS0003": "lightac",
+                "WS0004": "lightac"
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {
-                "WS0007": "vulcan",
-            }
-        },
+            "weapons": {"WS0007": "vulcan"}
+        }
     ],
-    "wings": [],
-    "modules": [],
+    "wings": []
 }

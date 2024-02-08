@@ -1,0 +1,23 @@
+{
+    "displayName": "Knightmaster",
+    "fluxCapacitors": 0,
+    "fluxVents": 1,
+    "goalVariant": true,
+    "hullId": "kol_lunaria_mr",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lunaria_mr_Knightmaster",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}
