@@ -25,9 +25,9 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
     public void applyEffect(SectorEntityToken entity, float days) {
         if (!inited) {
             single = true;
-            params.name = "Pull of the Abyss";
-            name = "Pull of the Abyss";
-            nameTooltip = "Pull of the Abyss";
+            params.name = "Lure of the Abyss";
+            name = "Lure of the Abyss";
+            nameTooltip = "Lure of the Abyss";
             multiplyArc(0.65f);
             flareTexture = Global.getSettings().getSprite("terrain", "aurora");
             //pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
@@ -59,7 +59,7 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
                 if (loss > curr) loss = curr;
 
                 if (resistance > 0) {
-                    member.getRepairTracker().applyCREvent(loss, "corona", "Pulsar beam effect");
+                    member.getRepairTracker().applyCREvent(loss, "corona", "Pullsar beam effect");
                 }
 
                 float peakFraction = 1f / Math.max(1.3333f, 1f + params.crLossMult * intensity);

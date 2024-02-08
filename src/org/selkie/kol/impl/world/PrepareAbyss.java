@@ -18,6 +18,7 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
+import org.selkie.kol.impl.helpers.AbyssUtils;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -208,6 +209,16 @@ public class PrepareAbyss {
 		edfResearchStation.setCircularOrbitPointingDown(gaze, (float)Math.random() * 360f, gaze.getRadius() + 100f, 51);
 		edfResearchStation.addTag("edf_Headquarters");
 
+		//Hegemony witness
+		SectorEntityToken wreckHeg = MagicCampaign.createDerelict("dominator_XIV_Elite", ShipRecoverySpecial.ShipCondition.WRECKED, true, 5000, false, silence, (float) Math.random() * 360f, 3333f + (float)Math.random()*4777f, 200);
+		wreckHeg.addTag(Tags.UNRECOVERABLE);
+		wreckHeg.addDropRandom("zea_hegfleet_lore", 1);
+		wreckHeg.addDropRandom("low_weapons2", 6);
+		wreckHeg.addDropRandom("any_hullmod_high", 2);
+		//wreckHeg.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
+		wreckHeg.getMemoryWithoutUpdate().set(KEY_ELYSIA_WITNESS, true);
+
+
 		//Random loot
         SectorEntityToken derelict1 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
         derelict1.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3100, 20);
@@ -371,7 +382,7 @@ public class PrepareAbyss {
 		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_layer2.png",
 					0, 0, system,
 					"terrain", "nebula_zea_dawntide",
-					4, 4, "nebula_zea_abyss", StarAge.AVERAGE);
+					4, 4, "nebula_zea_shoal", StarAge.AVERAGE);
 
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
 

@@ -62,7 +62,7 @@
 		"loopOne":"terrain_nebula",
 	},
 	
-	"nebula_zea_abyss":{
+	"nebula_zea_shoal":{
 		"plugin":"org.selkie.kol.impl.terrain.AbyssShoalNebulaTerrain",
 		
 		"musicSuppression":1,

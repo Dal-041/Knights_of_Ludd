@@ -112,6 +112,9 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
             if (member.isMothballed()) {
                 w *= 0.1f;
             }
+            if (member.isPhaseShip()) {
+                w *= 0.2f;
+            }
             picker.add(member, w);
         }
         FleetMemberAPI member = picker.pick();
@@ -132,6 +135,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 
         float resistance = member.getStats().getDynamic().getValue(Stats.CORONA_EFFECT_MULT);
         strikeDamage *= resistance;
+        if (member.isPhaseShip()) strikeDamage *= 0.3f;
 
         if (strikeDamage > STORM_MAX_STRIKE_DAMAGE) {
             strikeDamage = STORM_MAX_STRIKE_DAMAGE;
