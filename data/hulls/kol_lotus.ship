@@ -17,10 +17,10 @@
   ],
   "builtInWeapons": {
     "WS0015": "kol_flickerShield",
-    "WS0016": "eis_blinker_white",
-    "WS0017": "eis_blinker_white",
-    "WS0018": "eis_blinker_white",
-    "WS0019": "eis_blinker_white"
+    "WS0016": "kol_blinker_white",
+    "WS0017": "kol_blinker_white",
+    "WS0018": "kol_blinker_white",
+    "WS0019": "kol_blinker_white"
   },
   "weaponSlots": [
     {

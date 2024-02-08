@@ -1,5 +1,5 @@
 {
-	"id":"eis_blinker_white",  # this id must match what's in the spreadsheet
+	"id":"kol_blinker_white",  # this id must match what's in the spreadsheet
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",

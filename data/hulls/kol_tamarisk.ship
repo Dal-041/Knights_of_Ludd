@@ -17,12 +17,12 @@
   ],
   "builtInWeapons": {
     "FLICKERSHIELD": "kol_flickerShield",
-    "WS0014": "eis_blinker_white30",
-    "WS0015": "eis_blinker_white30",
-    "WS0018": "eis_blinker_white",
-    "WS0019": "eis_blinker_white",
-    "WS0020": "eis_blinker_white",
-    "WS0021": "eis_blinker_white",
+    "WS0014": "kol_blinker_white30",
+    "WS0015": "kol_blinker_white30",
+    "WS0018": "kol_blinker_white",
+    "WS0019": "kol_blinker_white",
+    "WS0020": "kol_blinker_white",
+    "WS0021": "kol_blinker_white",
     "WS0022": "kol_deco_tamarisk_tl",
     "WS0023": "kol_deco_tamarisk_tr",
     "WS0024": "kol_deco_tamarisk_front"

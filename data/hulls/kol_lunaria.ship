@@ -20,12 +20,12 @@
     "FLICKERSHIELD": "kol_flickerShield",
     "WS0001": "kol_lunete",
     "WS0002": "kol_lunete",
-    "WS0020": "eis_blinker_white30",
-    "WS0021": "eis_blinker_white30",
-    "WS0023": "eis_blinker_white30",
-    "WS0024": "eis_blinker_white30",
-    "WS0025": "eis_blinker_white30",
-    "WS0026": "eis_blinker_white30",
+    "WS0020": "kol_blinker_white30",
+    "WS0021": "kol_blinker_white30",
+    "WS0023": "kol_blinker_white30",
+    "WS0024": "kol_blinker_white30",
+    "WS0025": "kol_blinker_white30",
+    "WS0026": "kol_blinker_white30",
     "WS0027": "lidardish"
   },
   "weaponSlots": [

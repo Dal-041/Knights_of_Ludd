@@ -20,8 +20,8 @@
   ],
   "builtInWeapons": {
     "WS0001": "vulcan",
-    "WS0002": "eis_blinker_white",
-    "WS0003": "eis_blinker_green"
+    "WS0002": "kol_blinker_white",
+    "WS0003": "kol_blinker_green"
   },
   "weaponSlots": [
     {

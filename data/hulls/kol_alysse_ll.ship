@@ -21,8 +21,8 @@
   "builtInWeapons": {
     "WS0001": "dualflak",
     "WS0002": "kol_deco_alysse_ll",
-    "WS0003": "eis_blinker_white",
-    "WS0004": "eis_blinker_white30"
+    "WS0003": "kol_blinker_white",
+    "WS0004": "kol_blinker_white30"
   },
   "weaponSlots": [
     {

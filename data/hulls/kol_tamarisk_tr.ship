@@ -17,8 +17,8 @@
     "always_detaches"
   ],
   "builtInWeapons": {
-    "WS0001": "eis_blinker_white",
-    "WS0002": "eis_blinker_green"
+    "WS0001": "kol_blinker_white",
+    "WS0002": "kol_blinker_green"
   },
   "weaponSlots": [
     {
