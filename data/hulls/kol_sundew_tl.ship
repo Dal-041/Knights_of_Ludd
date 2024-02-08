@@ -27,7 +27,7 @@
       "type": "SYSTEM",
       "mount": "HIDDEN",
       "arc": 0,
-      "angle": 90,
+      "angle": 45,
       "locations": [-32, 15]
     },
     {
