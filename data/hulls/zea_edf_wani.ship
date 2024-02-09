@@ -16,9 +16,11 @@
     "zea_edf_pd_drones",
     "automated",
     "kol_ea_shields3",
-	"kol_throttle"
+    "kol_throttle"
   ],
   "builtInWeapons": {
+    "WS0003": "zea_deco_edf_wani_ml",
+    "WS0004": "zea_deco_edf_wani_mr",
     "WS0007": "zea_deco_edf_vortice",
     "WS0008": "zea_deco_edf_vortice"
   },
@@ -48,7 +50,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 45,
-      "locations": [-28, 21]
+      "locations": [-28, 21],
+      "renderOrderMod": 200
     },
     {
       "id": "WS0006",
@@ -57,7 +60,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -45,
-      "locations": [-28, -21]
+      "locations": [-28, -21],
+      "renderOrderMod": 200
     },
     {
       "id": "WS0007",
@@ -76,6 +80,26 @@
       "arc": 0,
       "angle": -0,
       "locations": [3, -58]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-4.5, 19],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-4.5, -19],
+      "renderOrderMod": 100
     }
   ],
   "engineSlots": [
