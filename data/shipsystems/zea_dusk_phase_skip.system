@@ -14,7 +14,8 @@
 	"soundFilterType":"LOWPASS",
 	"soundFilterGain":0.8,
 	"soundFilterGainHF":0.25,
-	
+
+	"useSound":"kol_phasespace_lightning_impact",
 	"loopSound":"kol_phasespace_with_system",
 	"outOfUsesSound":"system_phase_cloak_collision",
 	"aiHints":{
