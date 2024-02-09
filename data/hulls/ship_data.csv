@@ -173,7 +173,7 @@ Ion Drone,ion_drone,,Low Tech,flarelauncher_fighter,,750,100,80,,10,0,,200,400,3
 Shield Drone,shield_drone,,High Tech,,,450,50,600,,50,0,,160,300,250,150,300,30,FRONT,,180,0,0.5,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,103
 Chiwen,zea_dawn_chiwen,,Dawntide,,,900,100,2000,,100,0,,200,400,300,150,300,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 Shachi,zea_edf_shachi,,Elysia,kol_smartflare2,,750,100,2000,,100,0,,200,400,300,150,300,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
-Shachihoko,zea_edf_shachihoko,,Elysia,kol_smartflare2,,750,100,4000,,100,0,,200,400,300,150,300,30,FRONT,,360,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
+Shachihoko,zea_edf_shachihoko,,Elysia,kol_smartflare2,,750,100,4000,,100,0,,400,400,300,150,300,30,FRONT,,360,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 Kitsunebi,zea_edf_kitsunebi,,Elysia,,,650,150,200,,50,0,,175,325,265,215,325,27,FRONT,,160,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 #FRIGATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ikiryo,zea_dusk_ikiryo,Living Soul,Dusk,entropyamplifier,9,1500,400,3000,,325,50,,100,100,100,65,120,280,PHASE,zea_dusk_phasecloak,90,,,0.03,0.04,5,10,25,50,1,50,10,42000,8,30,200,0.25,10,10,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,2,,

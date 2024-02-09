@@ -9,6 +9,7 @@ import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
 import kotlin.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
@@ -23,11 +24,16 @@ import java.util.List;
 import java.util.*;
 
 public class ShachihokoDroneActivator extends DroneActivator {
-    private static final Color BASE_SHIELD_COLOR = Color.cyan;
+    private static final Color BASE_SHIELD_COLOR = new Color(255,115,65, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
 
+    private static final float nearbyRange = 2000;
+    private IntervalUtil interval = new IntervalUtil(10f, 10f);
+
     private ShipAPI target = null;
+    private ShipAPI droneTarget = null;
+    private PIDController PID = new PIDController(6f, 4f, 8f, 3f);
 
     public ShachihokoDroneActivator(ShipAPI ship) {
         super(ship);
@@ -54,15 +60,32 @@ public class ShachihokoDroneActivator extends DroneActivator {
     }
 
     @Override
+    public boolean canActivate() {
+        return super.canActivate();
+    }
+
+    @Override
     public boolean shouldActivateAI(float amount) {
-        return canActivate();
+        interval.advance(amount);
+        // Weird crash avoidance that I'm not going to diagnose in detail
+        if (!canActivate()) return false;
+        if (droneTarget == null) return true;
+        if (!droneTarget.isAlive()) return true;
+        if (droneTarget.isPhased()) return true;
+        if (AIUtils.getNearbyEnemies(droneTarget, nearbyRange).isEmpty()) return true;
+        if (ship.getShipTarget()!= null && ship.getShipTarget().getOwner() == ship.getOwner() && ship.getShipTarget() != droneTarget) return true;
+        if (interval.intervalElapsed()) return true;
+
+        return false;
     }
 
     @Override
     public void onActivate() {
         ShipAPI nextTarget = null;
         if (ship.getShipTarget() == null || ship.getShipTarget().getOwner() != ship.getOwner()) {
-            if (target != ship) {
+            if (ship.getCaptain() != Global.getSector().getPlayerPerson()) {
+                nextTarget = getAppropriateAlly(ship, true);
+            } else if (target != ship) {
                 nextTarget = ship;
             }
         } else if (ship.getShipTarget() != null && ship.getShipTarget().getOwner() == ship.getOwner()) {
@@ -71,22 +94,24 @@ public class ShachihokoDroneActivator extends DroneActivator {
             }
         }
 
+
         if (getActiveWings().containsKey(nextTarget)) {
             nextTarget = null;
         }
 
+        /*
         if (nextTarget == null) {
             for (ShipAPI drone : getActiveWings().keySet()) {
                 drone.giveCommand(ShipCommand.VENT_FLUX, null, 0);
             }
-        }
+        }*/
 
         target = nextTarget;
     }
 
     @Override
     public PIDController getPIDController() {
-        return new PIDController(6f, 4f, 8f, 3f);
+        return PID;
     }
 
     @Override
@@ -95,7 +120,7 @@ public class ShachihokoDroneActivator extends DroneActivator {
             target = null;
         }
 
-        ShipAPI droneTarget = ship;
+        droneTarget = ship;
         if (target != null) {
             droneTarget = target;
         }
@@ -232,6 +257,29 @@ public class ShachihokoDroneActivator extends DroneActivator {
             return drone.getHullSpec().getShieldSpec().getRadius();
         }
 
-        return Math.max(150f, droneTarget.getCollisionRadius());
+        return Math.max(150f, droneTarget.getCollisionRadius()*1.35f);
+    }
+
+    private static ShipAPI getAppropriateAlly(ShipAPI ship, boolean includeSelf) {
+        WeightedRandomPicker<ShipAPI> picker = new WeightedRandomPicker<>();
+        if (includeSelf) picker.add(ship, scoreShipDanger(ship));
+        for (ShipAPI ally : AIUtils.getNearbyAllies(ship, nearbyRange)) {
+            if (ally.isFighter()) continue;
+            picker.add(ally, scoreShipDanger(ally));
+        }
+        return picker.pick();
+    }
+
+    protected static float scoreShipDanger(ShipAPI ship) {
+        //How close we are to overloading
+        float fluxRatio = ship.getHardFluxLevel()/ship.getMaxFlux();
+        //Inverse of max flux, if we're a vulerable craft, times above risk
+        float danger = 1/ship.getMaxFlux() * fluxRatio;
+
+        //The inverse of the enemy's flux usage multiplied by its potential usage for every relevant enemy
+        for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, 1500)) {
+            danger *= 1/(enemy.getHardFluxLevel()+1/enemy.getMaxFlux()+1) * enemy.getMaxFlux();
+        }
+        return danger;
     }
 }
