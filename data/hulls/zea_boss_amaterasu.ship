@@ -15,7 +15,8 @@
     "zea_edf_coronal_capacitor",
     "zea_edf_pd_drones",
     "automated",
-    "kol_ea_shields3"
+    "kol_ea_shields3",
+    "zea_boss_radiance"
   ],
   "builtInWeapons": {
     "WS0001": "zea_deco_edf_amaterasu_l",

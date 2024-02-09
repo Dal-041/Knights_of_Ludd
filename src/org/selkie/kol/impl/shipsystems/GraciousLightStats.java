@@ -38,13 +38,7 @@ public class GraciousLightStats extends BaseShipSystemScript {
         ship.setJitter(id, new Color(1f, 1f, 0f, MathUtils.clamp(effectLevel * 0.2f, 0f, 1f)), effectLevel * 0.66f, 3, 5f + 10f * effectLevel);
         ship.setJitterUnder(id, new Color(1f, 0f, 0f, MathUtils.clamp(effectLevel * 0.2f, 0f, 1f)), effectLevel * 0.66f, 8, 6f + 20f * effectLevel);
 
-        GraciousLightData data = getGraciousLightData(ship);
-        if (data == null) {
-            data = new GraciousLightData();
-            ship.setCustomData(GRACIOUS_LIGHT_KEY, data);
-        }
-        data.auraInterval.advance(amount);
-        if (data.auraInterval.intervalElapsed()) {
+        if (state == State.ACTIVE || effectLevel == 1f) {
             burningAura(ship);
             healingAura(ship);
         }

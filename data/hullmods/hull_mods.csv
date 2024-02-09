@@ -24,4 +24,5 @@ Shachihoko Drone,zea_edf_shachihoko_drone,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.ko
 Ball Lightning,zea_edf_ball_lightning,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.BallLightningHullmod,,,,,
 IFF Override,zea_edf_iff_override,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.IFFOverrideHullmod,,,,,
 Passive IFF Disruptor,zea_edf_passive_iff_disruptor,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.PassiveIFFDisruptorHullmod,,,,,
+Radiance,zea_boss_radiance,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.RadianceHullmod,,,,,
 Prototype Phase Coils,zea_ex_phase_coils,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.impl.hullmods.PrototypePhaseCoils,Reduces phase cloak cooldown by %s.,Greatly reduces phase cloak cooldown.,,graphics/hullmods/phase_coils_experimental.png,
