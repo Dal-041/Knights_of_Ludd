@@ -31,7 +31,7 @@ public class GraciousLightAI implements ShipSystemAIScript {
         }
 
         if (ship.getSystem().isActive()) {
-            if (ship.getFluxLevel() > 0.75f) {
+            if (ship.getFluxLevel() > 0.9f || ship.getHardFluxLevel() > 0.75f) {
                 wasHighFlux = true;
                 ship.useSystem();
             } else if (!isFighterNear) {
