@@ -257,7 +257,7 @@ public class ShachihokoDroneActivator extends DroneActivator {
             return drone.getHullSpec().getShieldSpec().getRadius();
         }
 
-        return Math.max(150f, droneTarget.getCollisionRadius()*1.35f);
+        return Math.max(200f, droneTarget.getCollisionRadius()*1.4f);
     }
 
     private static ShipAPI getAppropriateAlly(ShipAPI ship, boolean includeSelf) {

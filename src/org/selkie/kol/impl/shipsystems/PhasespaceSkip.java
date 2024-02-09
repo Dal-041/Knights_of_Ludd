@@ -95,10 +95,15 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         }
 
         //Special, "Semi-Fixed" phantom
+        float offsetY = 0f;
+        if (ship.getHullSpec().getBaseHullId().contains("ayakashi")) offsetY = -26f;
+        Vector2f loc = new Vector2f(ship.getLocation());
+        loc.setY(loc.getY()+offsetY);
         Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
-        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1"), ship.getLocation(),
+
+        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1"), loc,
                 new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
-        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow2"), ship.getLocation(),
+        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow2"), loc,
                 new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
 
         //If enough time has passed, render a new phantom
@@ -109,7 +114,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             for (int i = 0; i < PHANTOM_FLICKER_CLONES; i++) {
                 Vector2f modifiedPhantomPos = new Vector2f(MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE), MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE));
                 modifiedPhantomPos.x += phantomPos.x;
-                modifiedPhantomPos.y += phantomPos.y;
+                modifiedPhantomPos.y += phantomPos.y + offsetY;
                 MagicRender.battlespace(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1"), modifiedPhantomPos, new Vector2f(0f, 0f),
                         new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
                         new Vector2f(0f, 0f), ship.getFacing() + angleDifference,

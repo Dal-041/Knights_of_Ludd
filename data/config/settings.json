@@ -261,8 +261,8 @@
 		"zea_phase_glows": {
 			"zea_boss_yukionna_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow1.png",
 			"zea_boss_yukionna_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow2.png",
-			"zea_dusk_ayakashi_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow1.png",
-			"zea_dusk_ayakashi_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/SRD_Equilibrium_glow2.png",
+			"zea_dusk_ayakashi_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_ayakashi_glow1.png",
+			"zea_dusk_ayakashi_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_ayakashi_glow2.png",
 			"zea_dusk_onryo_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_onryo_glow1.png",
 			"zea_dusk_onryo_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_onryo_glow2.png",
 			"zea_dusk_funayurei_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow1.png",
