@@ -1,7 +1,8 @@
 {
 	"id":"zea_dawn_gracious_light",
 	"type":"STAT_MOD",
-	"aiType":"TARGETING_FEED",
+	"aiType":"CUSTOM",
+	"aiScript":"org.selkie.kol.impl.shipsystems.AI.GraciousLightAI",
 
 	"statsScript":"org.selkie.kol.impl.shipsystems.GraciousLightStats",
 
