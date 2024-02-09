@@ -22,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 public class CoronalCapacitor extends BaseHullMod {
+    public static final String CAPACITY_FACTOR_KEY = "coronal_cap_modifier";
     public static class CoronalCapacitorListener implements AdvanceableListener {
 
         private ShipAPI ship;
@@ -166,8 +167,8 @@ public class CoronalCapacitor extends BaseHullMod {
                     chargeTime = 0;
                     capacitorFactor -= amount/MAX_CHARGETIME;
                 }
-
             }
+
             capacitorFactor = Math.max(0, Math.min(1, capacitorFactor));
             for(Pair<EngineSlotAPI, Pair<Color, Color>> engineData : engines){
                 engineData.one.setColor(Utils.OKLabInterpolateColor(engineData.two.one,new Color(235, 165,20, 150), capacitorFactor));
@@ -197,17 +198,17 @@ public class CoronalCapacitor extends BaseHullMod {
             }*/
 
 
-            String id = "coronal_cap_modifier";
+            ship.setCustomData(CAPACITY_FACTOR_KEY, capacitorFactor);
             MutableShipStatsAPI stats = ship.getMutableStats();
-            stats.getMaxSpeed().modifyPercent(id, 100*SPEED_BOOST*capacitorFactor);
-            stats.getAcceleration().modifyPercent(id, 100*SPEED_BOOST*capacitorFactor);
-            stats.getDeceleration().modifyPercent(id, 100*SPEED_BOOST*capacitorFactor);
-            stats.getMaxTurnRate().modifyPercent(id, 100*SPEED_BOOST*capacitorFactor);
-            stats.getTurnAcceleration().modifyPercent(id, 100*SPEED_BOOST*capacitorFactor);
+            stats.getMaxSpeed().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
+            stats.getAcceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
+            stats.getDeceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
+            stats.getMaxTurnRate().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
+            stats.getTurnAcceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
 
-            stats.getEnergyWeaponDamageMult().modifyMult(id, 1+DAMAGE_BOOST*capacitorFactor);
-            stats.getBallisticRoFMult().modifyMult(id, 1+ROF_BOOST*capacitorFactor);
-            stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1/(1+ROF_BOOST*capacitorFactor));
+            stats.getEnergyWeaponDamageMult().modifyMult(CAPACITY_FACTOR_KEY, 1+DAMAGE_BOOST*capacitorFactor);
+            stats.getBallisticRoFMult().modifyMult(CAPACITY_FACTOR_KEY, 1+ROF_BOOST*capacitorFactor);
+            stats.getBallisticWeaponFluxCostMod().modifyMult(CAPACITY_FACTOR_KEY, 1/(1+ROF_BOOST*capacitorFactor));
 
             if(engine.getPlayerShip() == ship){
                 engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName("icons", "coronal_cap_bottom"),

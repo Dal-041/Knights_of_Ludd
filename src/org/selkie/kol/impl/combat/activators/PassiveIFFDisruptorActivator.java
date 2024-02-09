@@ -8,6 +8,7 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.hullmods.CoronalCapacitor;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -76,6 +77,11 @@ public class PassiveIFFDisruptorActivator extends CombatActivator {
         return false;
     }
 
+    @Override
+    public boolean canActivate() {
+        return ship.getCustomData().containsKey(CoronalCapacitor.CAPACITY_FACTOR_KEY) && ((Float) ship.getCustomData().get(CoronalCapacitor.CAPACITY_FACTOR_KEY) > 20f);
+    }
+
     private float getHackingRange() {
         return REFLECT_RANGE + ship.getCollisionRadius();
     }
@@ -130,15 +136,15 @@ public class PassiveIFFDisruptorActivator extends CombatActivator {
         if (ship.getFluxTracker().isOverloaded()) {
             chargeRechargeMult = 1f;
         } else {
-            chargeRechargeMult += amount * 2f;
+            chargeRechargeMult += amount * (0.5f + 2f * (Float) ship.getCustomData().get(CoronalCapacitor.CAPACITY_FACTOR_KEY));
         }
 
         if (!chargeInterval.intervalElapsed()) {
             chargeInterval.advance(amount * (chargeRechargeMult - 1f));
         }
-        List<MissileAPI> missilesInRange = CombatUtils.getMissilesWithinRange(ship.getLocation(), getHackingRange());
 
-        if (state == State.READY && charges > 0) {
+        List<MissileAPI> missilesInRange = CombatUtils.getMissilesWithinRange(ship.getLocation(), getHackingRange());
+        if (state == State.READY && charges > 0 && !ship.getFluxTracker().isOverloadedOrVenting()) {
             CombatEntityAPI entityToHack = null;
             float biggestThreat = 0f;
             for (MissileAPI missile : missilesInRange) {

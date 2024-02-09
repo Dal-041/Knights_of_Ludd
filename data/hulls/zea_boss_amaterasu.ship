@@ -15,8 +15,7 @@
     "zea_edf_coronal_capacitor",
     "zea_edf_pd_drones",
     "automated",
-    "kol_ea_shields3",
-    "zea_edf_passive_iff_disruptor"
+    "kol_ea_shields3"
   ],
   "builtInWeapons": {
     "WS0001": "zea_deco_edf_amaterasu_l",
