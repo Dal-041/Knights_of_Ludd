@@ -16,7 +16,8 @@
     "zea_edf_pd_drones",
     "automated",
     "kol_ea_shields3",
-    "zea_edf_passive_iff_disruptor"
+    "zea_edf_passive_iff_disruptor",
+    "zea_edf_shachihoko_drone"
   ],
   "builtInWeapons": {
     "WS0016": "zea_deco_edf_engS",
