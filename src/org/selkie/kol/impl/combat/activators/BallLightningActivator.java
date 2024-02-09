@@ -75,7 +75,9 @@ public class BallLightningActivator extends CombatActivator {
             arcL.setCoreWidthOverride(20f);
             arcR.setCoreWidthOverride(20f);
 
-
+            if(getEffectLevel() > 0 && !ship.isPhased()) {
+                Global.getSoundPlayer().playSound("realitydisruptor_emp_impact", 1f, 1f, centerTarget, ship.getVelocity());
+            }
         }
 
         if(getEffectLevel() > 0 && !ship.isPhased()){
@@ -91,7 +93,7 @@ public class BallLightningActivator extends CombatActivator {
                             DAMAGE,
                             EMP_DAMAGE, // emp
                             100000f, // max range
-                            "shock_repeater_emp_impact",
+                            "realitydisruptor_emp_impact",
                             5f, // thickness
                             glowFringe,
                             glowCenter

@@ -103,6 +103,7 @@ public class IFFOverrideActivator extends CombatActivator {
                 if (!missileMap.containsKey(missile) && missile.getOwner() != ship.getOwner()) {
                     missileMap.put(missile, new MissileTracker(missile));
                     Global.getCombatEngine().spawnEmpArcVisual(ship.getLocation(), ship, missile.getLocation(), missile, MathUtils.getRandomNumberInRange(2f, 5f), new Color(255, 0, 0), new Color(255, 200, 200));
+                    Global.getSoundPlayer().playSound("shock_repeater_emp_impact", 1f, 1f, missile.getLocation(), missile.getVelocity());
                 }
             }
         }
