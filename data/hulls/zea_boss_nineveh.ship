@@ -13,7 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
-	"delicate",
+    "delicate",
     "kol_ea_sparkle",
     "zea_ex_phase_coils",
     "kol_ea_mist",
@@ -271,6 +271,24 @@
       "arc": 7,
       "angle": -132.5,
       "locations": [54.5, -29]
+    },
+    {
+      "id": "WS0029",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 161.5,
+      "locations": [-70.5, 81]
+    },
+    {
+      "id": "WS0030",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -161.5,
+      "locations": [-70.5, -81]
     }
   ],
   "engineSlots": [
