@@ -27,10 +27,10 @@ import java.util.List;
 
 public class GraciousLightStats extends BaseShipSystemScript {
     private static final String GRACIOUS_LIGHT_KEY = "GraciousLight";
-    private static final float HEALING_LIGHT_RANGE = 1600f;
-    private static final float BURNING_LIGHT_RANGE = 1600f;
-    private static final float HEALING_FLUX_MULT = 0.2f; // current flux reduced by this amount of current flux
-    private static final float HEALING_HULL_MULT = 0.2f; // current hull healed by this amount of missing hull
+    public static final float HEALING_LIGHT_RANGE = 1600f;
+    private static final float BURNING_LIGHT_RANGE = 1200f;
+    private static final float HEALING_FLUX_MULT = 0.4f; // current flux reduced by this amount of current flux
+    private static final float HEALING_HULL_MULT = 0.4f; // current hull healed by this amount of missing hull
 
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
@@ -61,8 +61,8 @@ public class GraciousLightStats extends BaseShipSystemScript {
                 0.5f,
                 BURNING_LIGHT_RANGE,
                 BURNING_LIGHT_RANGE / 2f,
-                500f,
-                200f,
+                250f,
+                100f,
                 CollisionClass.PROJECTILE_NO_FF,
                 CollisionClass.PROJECTILE_FIGHTER,
                 1f,
@@ -72,18 +72,19 @@ public class GraciousLightStats extends BaseShipSystemScript {
                 new Color(255, 200, 30, 0),
                 null
         );
+        explosionSpec.setDamageType(DamageType.FRAGMENTATION);
         explosionSpec.setShowGraphic(false);
         Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, ship, ship.getLocation(), false);
 
         ShockwaveVisual.ShockwaveParams params = new ShockwaveVisual.ShockwaveParams();
         params.loc = ship.getLocation();
-        params.color = new Color(MathUtils.getRandomNumberInRange(225, 255), 120, 50, 50);
-        params.radius = BURNING_LIGHT_RANGE / 1.5f;
+        params.color = new Color(MathUtils.getRandomNumberInRange(225, 255), 120, 50, 20);
+        params.radius = BURNING_LIGHT_RANGE / 1.2f;
         ShockwaveVisual.spawnShockwave(params);
 
         if (KOL_ModPlugin.hasGraphicsLib) {
             RippleDistortion ripple = new RippleDistortion(ship.getLocation(), new Vector2f());
-            ripple.setSize(BURNING_LIGHT_RANGE - 500f);
+            ripple.setSize(BURNING_LIGHT_RANGE / 1.2f);
             ripple.setIntensity(66f);
             ripple.setFrameRate(60f);
             ripple.fadeInSize(0.2f);
@@ -91,7 +92,7 @@ public class GraciousLightStats extends BaseShipSystemScript {
             DistortionShader.addDistortion(ripple);
 
             StandardLight light = new StandardLight(ship.getLocation(), new Vector2f(), new Vector2f(), null);
-            light.setSize(BURNING_LIGHT_RANGE - 400f);
+            light.setSize(BURNING_LIGHT_RANGE / 1.1f);
             light.setIntensity(2f);
             light.setLifetime(0.66f);
             light.setAutoFadeOutTime(0.5f);
