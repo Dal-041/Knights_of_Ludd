@@ -30,7 +30,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     private static final int PHANTOM_FLICKER_CLONES = 4;
 
     private static final float SHIP_ALPHA_MULT = 0.15f;
-    private static final float SPEED_BONUS_MULT = 6f; // was 3, but that felt way to slow
+    private static final float SPEED_BONUS_FLAT = 150f;
     private static final float TURN_BONUS_MULT = 2f;
     private static final float MOBILITY_BONUS_MULT = 50f;
     public static final float PHASE_DISSIPATION_MULT = 2f;
@@ -58,9 +58,9 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         //Checks if we should be phased or not, and applies the related mobility bonuses
 
         ship.setPhased(true);
-        float speedBonus = 1f + ((SPEED_BONUS_MULT - 1f) * effectLevel);
+        float speedBonus = SPEED_BONUS_FLAT * effectLevel;
         float mobilityBonus = 1f + ((MOBILITY_BONUS_MULT - 1f) * effectLevel);
-        stats.getMaxSpeed().modifyMult(id, speedBonus);
+        stats.getMaxSpeed().modifyFlat(id, speedBonus);
         stats.getAcceleration().modifyMult(id, mobilityBonus);
         stats.getDeceleration().modifyMult(id, mobilityBonus);
         stats.getMaxTurnRate().modifyMult(id, TURN_BONUS_MULT);
