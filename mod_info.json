@@ -4,21 +4,24 @@
 	"author":"Selkie & Dal",
 	"version":"1.0.0",
 	"description":"Adds the Knights of Ludd faction and content!",
-    "gameVersion": "0.97a-RC7",
+    "gameVersion": "0.97a-RC8",
 	"jars": ["jars/KnightsOfSelkie.jar"],
 	"modPlugin":"org.selkie.kol.plugins.KOL_ModPlugin",
 	"dependencies": [
         {
             "id": "lw_lazylib",
             "name": "LazyLib",
+            "version": { "major": "2", "minor": "8", "patch": "0"}
         },
         {
             "id": "MagicLib",
             "name": "MagicLib",
+            "version": { "major": "1", "minor": "3", "patch": "9"}
         },
         {
             "id": "lunalib",
             "name": "LunaLib",
+            "version": { "major": "1", "minor": "8", "patch": "4"}
         },
         {
             "id": "combatactivators",
