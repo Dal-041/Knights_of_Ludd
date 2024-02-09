@@ -1,10 +1,11 @@
 {
     "displayName": "Attack Bomber",
-    "fluxCapacitors": 11,
+    "fluxCapacitors": 8,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "zea_edf_seiryu",
     "hullMods": [
+        "fluxbreakers",
         "magazines",
         "unstable_injector",
     ],
@@ -43,7 +44,7 @@
             "weapons": {
                 "WS0006": "pdburst",
                 "WS0007": "pdburst",
-                "WS0005": "pdburst",
+                "WS0005": "kol_blinker_white",
             }
         },
     ],

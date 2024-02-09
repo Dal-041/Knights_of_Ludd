@@ -1,19 +1,20 @@
 {
     "displayName": "Hallowed",
     "fluxCapacitors": 0,
-    "fluxVents": 44,
+    "fluxVents": 30,
     "goalVariant": true,
     "hullId": "kol_invictus_lp",
     "hullMods": [
         "armoredweapons",
         "eccm",
         "fluxbreakers",
+        "reinforcedhull",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [
-		"ill_advised",	
-	],
+        "ill_advised",
+    ],
     "variantId": "kol_invictus_lp_Hallowed",
     "weaponGroups": [
         {

@@ -1,13 +1,14 @@
 {
     "displayName": "Zealous",
-    "fluxCapacitors": 0,
-    "fluxVents": 7,
+    "fluxCapacitors": 1,
+    "fluxVents": 0,
     "goalVariant": true,
     "hullId": "kol_mimosa_lp",
     "hullMods": [
         "armoredweapons",
         "hardened_subsystems",
         "heavyarmor",
+        "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],

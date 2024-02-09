@@ -1,43 +1,39 @@
 {
-    "displayName": "Astral",
-    "fluxCapacitors": 13,
+    "displayName": "Scathing",
+    "fluxCapacitors": 11,
     "fluxVents": 20,
     "goalVariant": true,
     "hullId": "zea_dawn_lushu",
     "hullMods": [
-        "heavyarmor",
-        "missleracks",
-        "targetingunit",
+        "safetyoverrides",
     ],
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "zea_dawn_lushu_Astral",
+    "variantId": "zea_dawn_lushu_Scathing",
     "weaponGroups": [
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "heavyac",
-                "WS0001": "heavyac",
-            }
-        },
-        {
-            "autofire": false,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0008": "atropos",
-                "WS0006": "atropos",
-                "WS0007": "atropos",
-                "WS0005": "atropos",
+                "WS0004": "heavymg",
+                "WS0001": "heavymg",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "pdburst",
-                "WS0002": "pdburst",
+                "WS0003": "heavyblaster",
+                "WS0002": "ionpulser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0005": "vulcan",
             }
         },
     ],

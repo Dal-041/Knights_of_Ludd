@@ -1,7 +1,7 @@
 {
     "displayName": "Support",
-    "fluxCapacitors": 5,
-    "fluxVents": 9,
+    "fluxCapacitors": 0,
+    "fluxVents": 15,
     "goalVariant": true,
     "hullId": "kol_lotus",
     "hullMods": [
@@ -17,25 +17,10 @@
     "weaponGroups": [
         {
             "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "hveldriver",
-            }
-        },
-        {
-            "autofire": true,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0008": "heatseeker",
-                "WS0007": "heatseeker",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "ALTERNATING",
-            "weapons": {
-                "WS0009": "heatseeker",
-                "WS0010": "heatseeker",
+                "WS0002": "heavymauler",
+                "WS0003": "heavymauler",
             }
         },
         {
@@ -43,8 +28,11 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0004": "pilum_large",
-                "WS0002": "flak",
-                "WS0003": "flak",
+                "WS0001": "dualflak",
+                "WS0007": "heatseeker",
+                "WS0008": "heatseeker",
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
                 "WS0005": "vulcan",
                 "WS0006": "vulcan",
             }

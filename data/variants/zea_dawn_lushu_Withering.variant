@@ -1,12 +1,11 @@
 {
     "displayName": "Withering",
-    "fluxCapacitors": 13,
+    "fluxCapacitors": 9,
     "fluxVents": 20,
     "goalVariant": true,
     "hullId": "zea_dawn_lushu",
     "hullMods": [
         "escort_package",
-        "stabilizedshieldemitter",
         "targetingunit",
     ],
     "permaMods": [],
@@ -26,10 +25,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "heatseeker",
                 "WS0008": "heatseeker",
-                "WS0005": "pdburst",
                 "WS0006": "pdburst",
+                "WS0007": "heatseeker",
+                "WS0005": "pdburst",
             }
         },
         {

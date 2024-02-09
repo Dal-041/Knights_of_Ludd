@@ -1,77 +1,79 @@
 {
-  "displayName": "Blinding",
-  "fluxCapacitors": 36,
-  "fluxVents": 50,
-  "goalVariant": true,
-  "hullId": "zea_boss_amaterasu",
-  "hullMods": [
-    "autorepair",
-    "fluxbreakers",
-    "stabilizedshieldemitter"
-  ],
-  "permaMods": [
-    "targetingunit",
-    "hardenedshieldemitter",
-    "magazines"
-  ],
-  "sMods": [
-    "targetingunit",
-    "hardenedshieldemitter",
-    "magazines"
-  ],
-  "suppressedMods": [ ],
-  "variantId": "zea_boss_amaterasu_Blinding",
-  "weaponGroups": [
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0030": "realitydisruptor",
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0008": "vpdriver",
-        "WS0009": "vpdriver",
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0006": "plasma",
-        "WS0007": "plasma",
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0010": "guardian",
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0014": "pdburst",
-        "WS0013": "pdburst",
-      }
-    },
-    {
-      "autofire": true,
-      "mode": "LINKED",
-      "weapons": {
-        "WS0012": "lrpdlaser",
-        "WS0011": "lrpdlaser",
-      }
-    },
-  ],
-  "wings": [
-    "lux_wing",
-    "lux_wing",
-  ],
-  "modules": [ ],
+    "displayName": "Blinding",
+    "fluxCapacitors": 7,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "zea_boss_amaterasu",
+    "hullMods": [
+        "autorepair",
+        "extendedshieldemitter",
+        "fluxbreakers",
+        "stabilizedshieldemitter",
+        "turretgyros",
+    ],
+    "permaMods": [
+        "hardenedshieldemitter",
+        "magazines",
+        "targetingunit",
+    ],
+    "sMods": [
+        "hardenedshieldemitter",
+        "magazines",
+        "targetingunit",
+    ],
+    "suppressedMods": [],
+    "variantId": "zea_boss_amaterasu_Blinding",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0030": "realitydisruptor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "vpdriver",
+                "WS0009": "vpdriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "plasma",
+                "WS0007": "plasma",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "guardian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0014": "pdburst",
+                "WS0013": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0012": "lrpdlaser",
+                "WS0011": "lrpdlaser",
+            }
+        },
+    ],
+    "wings": [
+        "lux_wing",
+        "lux_wing",
+    ],
+    "modules": [],
 }

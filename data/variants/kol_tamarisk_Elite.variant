@@ -1,8 +1,8 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 6,
+    "fluxCapacitors": 13,
     "fluxVents": 30,
-    "goalVariant": false,
+    "goalVariant": true,
     "hullId": "kol_tamarisk",
     "hullMods": [
         "auxiliarythrusters",
@@ -33,16 +33,16 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "heatseeker",
                 "WS0003": "heatseeker",
+                "WS0002": "heatseeker",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0009": "heavymauler",
                 "WS0008": "heavymauler",
+                "WS0009": "heavymauler",
             }
         },
         {
@@ -56,9 +56,9 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0016": "kol_tamarisk_tl_Gauss"},
-        {"WS0012": "kol_tamarisk_ll_Gauss"},
-        {"WS0013": "kol_tamarisk_lr_Gauss"},
-        {"WS0017": "kol_tamarisk_tr_Gauss"},
+        {"WS0016": "kol_tamarisk_tl_Elite"},
+        {"WS0012": "kol_tamarisk_ll_Elite"},
+        {"WS0013": "kol_tamarisk_lr_Elite"},
+        {"WS0017": "kol_tamarisk_tr_Elite"},
     ],
 }

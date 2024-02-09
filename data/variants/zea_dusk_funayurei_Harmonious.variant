@@ -1,6 +1,6 @@
 {
     "displayName": "Harmonious",
-    "fluxCapacitors": 0,
+    "fluxCapacitors": 4,
     "fluxVents": 15,
     "goalVariant": true,
     "hullId": "zea_dusk_funayurei",
@@ -34,9 +34,15 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "lrpdlaser",
-                "WS0006": "lrpdlaser",
                 "WS0007": "lrpdlaser",
-                "WS0005": "lrpdlaser",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "pdburst",
+                "WS0006": "pdburst",
             }
         },
     ],

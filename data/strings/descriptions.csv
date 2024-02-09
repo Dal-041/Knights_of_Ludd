@@ -41,7 +41,7 @@ kol_alysse,SHIP,"A treasured battleship often found as the leading element withi
 The Alysse once represented an evolutionary step for the militarization of the Orion Drive technology first implemented by the Retribution. The inclusion of robust modular plating serving a dual purpose, augmenting both survivability and relieving strain on the ship's inertial compensators. Strategic command likely remained unconvinced, and no combat or procurement records exist for the ship within known Domain Battlegroups.
 
 Every Alysse-class vessel that exists today is a painstaking reconstruction of the forgotten prototypes, artisanally assembled and sanctified for their sacred duty to the Church.",,,
-,,,,,
+kol_hex,SHIP,"These crudely-slaved point defense drops serve the double duty of defending the vulnerable protea and embodying its fury. Though not high tech, they are potent and both screening light threats and at striking them down.",,,
 ,,,,,
 # SHIP SYSTEMS,,,,,
 kol_lunge,SHIP_SYSTEM,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,Movement,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,three
@@ -63,8 +63,8 @@ zea_white_hole,PLANET,"A singularity that cannot be entered from the outside, bu
 zea_red_hole,PLANET,"A enormous, unbelievably deep gravity well, so potent that the light from its ergosphere barely shines beyond the infrared. It calls to you, begging you to submit to its pull.",,,
 zea_star_black_neutron,PLANET,"A rapidly spinning singularity, anomalous in the unceasing gravitational waves your sensors are reading. Its gravitational grip seems so great as to drag spacetime itself along in a twist. Tread with extreme caution. ",,,
 ,,,,,
-zea_edf_kitsunebi,SHIP,"A set of point defense drones that excel at crushing targets under heavy frag damage. Lightly armored targets that find themselves in range and lacking evasion are not long for this world.",,,,
-#
+zea_edf_kitsunebi,SHIP,A set of point defense drones that excel at crushing targets under heavy frag damage. Lightly armored targets that find themselves in range and lacking evasion are not long for this world.,,,
+#,,,,,
 #Weapons2,,,,,
 zea_bricole_m,WEAPON,"An unassuming up-rated variant of the Arbalest, the Bricole Cannon delivers respectable damage at above-average ranges, but wins no awards for assault potential. The Bricole tends to find a home on skirmishers with a need to outrange the classic Heavy Autocannon without paying a premium.",,,
 zea_plasma_chaingun,WEAPON,"The Plasma Autogun is a potent general-purpose weapon, known for shattering stalwart shields and ruining the armor underneath. For a ship with the flux to burn this weapon will bring ruin to its enemies.",,,
@@ -86,18 +86,18 @@ zea_dusk_lrsr,WEAPON,"A reproduction of an even more awesome weapon, the emplace
 zea_edf_locust_medium,WEAPON,"A cut-down and integrated launcher for the classic locust. Together they are no less effective than the genuine article at fully saturating the battlefield with missiles.",,,,
 zea_edf_harpoon_single,WEAPON,"An emplaced harpoon missile launcher with autoloader.",,,,
 #,,,,,
-#Terrain
-zea_asteroidBelt,TERRAIN,"An orbital ring abundant with asteroids and dangers.",,,
-zea_asteroidField,TERRAIN,"A volume of space abundant with asteroids and dangers.",,,
-zea_corona,TERRAIN,"A halo of high temperature plasma which surrounds a star; most ships are not built to withstand prolonged exposure to the extreme radiation bombardment from the corona and will take damage if they remain within it.",,,
-zea_eventHorizon,TERRAIN,"The gravitational flux near the event horizon of a black hole is extreme. The gravitational flux near the event horizon of THIS singularity is unquantifiable.",,,
+#Terrain,,,,,
+zea_asteroidBelt,TERRAIN,An orbital ring abundant with asteroids and dangers.,,,
+zea_asteroidField,TERRAIN,A volume of space abundant with asteroids and dangers.,,,
+zea_corona,TERRAIN,A halo of high temperature plasma which surrounds a star; most ships are not built to withstand prolonged exposure to the extreme radiation bombardment from the corona and will take damage if they remain within it.,,,
+zea_eventHorizon,TERRAIN,The gravitational flux near the event horizon of a black hole is extreme. The gravitational flux near the event horizon of THIS singularity is unquantifiable.,,,
 zea_pulsarBeam,TERRAIN,"A relativistic, magnetized jet combined with intense radiation. Commonly emitted by neutron stars.",,,
 zea_blackBeam,TERRAIN,"Did I say 'pulsar'? Well, I meant 'pullsar'. Innocent typo.",,,
 zea_seaWave,TERRAIN,"An enormous pulse wave, buffeting everything caught in its energies with hazardous radiation. Combat readiness suffers, but a stalwart fleet can move against the tide if they're careful - or desperate.",,,
 nebula_zea_shoal,TERRAIN,"A refuge from the tide, though not from the Tide. Fleets hiding among the dense 'shoals' are immune from damage during the tide, but their burn speed is greatly reduced.",,,
 nebula_zea_storm_normal,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,
 nebula_zea_storm_storm,TERRAIN,"The choatic energies of the storm tear at passing ships, regularly dealing damage to fleet members. For whatever reason phase ships seem less affected.",,,
-nebula_zea_black,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,,,,
+nebula_zea_black,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,
 #Exploration,,,,,
 zea_boss_station_dusk_1_desc,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
 zea_boss_station_tritachyon,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
@@ -117,7 +117,7 @@ kol_lungeHEF,SHIP_SYSTEM,Launches the ship in the desired direction and empowers
 zea_edf_microburn,SHIP_SYSTEM,Quickly thrusts the ship in a chosen direction.,Movement,,
 zea_edf_plasmafighters,SHIP_SYSTEM,Thrusts the ship and the ship's fighters forward with a burst of speed.,Movement,,
 zea_edf_minijump,SHIP_SYSTEM,Quickly jumps the ship in a chosen direction.,Movement,,
-zea_edf_relativisticdrift,SHIP_SYSTEM,"Massively increases the time flow of the ship for a moment while moving in a specific direction.",Movement,,
+zea_edf_relativisticdrift,SHIP_SYSTEM,Massively increases the time flow of the ship for a moment while moving in a specific direction.,Movement,,
 zea_edf_synchronized_ammo_feed,SHIP_SYSTEM,The vessel and its launched craft receive a 50% increase in weapon ROF and a corresponding flux cost reduction.,Offensive,,
 zea_dawn_flare_burn,SHIP_SYSTEM,Thrusts the ship forward and launches a large wave of smart flares.,Defensive,,
 zea_dawn_flare_wave,SHIP_SYSTEM,Launches a wave of smart flares that screen out nearby hostile ordnance. ,Defensive,,
@@ -126,8 +126,8 @@ zea_dusk_subspace_glide,SHIP_SYSTEM,"Skims the membrane between normal and phase
 zea_dusk_phasecloak,SHIP_SYSTEM,Shifts the craft into phase space at great efficiency.,Movement,,
 zea_dusk_phaseteleporter,SHIP_SYSTEM,Instantly relocates the ship to a chosen nearby location and charges deployed motes. Motes travel to the in location via normal space.,Special,,
 zea_dusk_phase_skip,SHIP_SYSTEM,Activates the onboard phase coils to shunt the ship into phase for a brief period. Mobility is greatly enhanced and shields are restored after use.,Special,,
-#
-#Ships
+#,,,,,
+#Ships,,,,,
 zea_dusk_ikiryo,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",

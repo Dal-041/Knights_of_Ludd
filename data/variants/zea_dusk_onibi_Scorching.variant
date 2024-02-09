@@ -1,7 +1,7 @@
 {
     "displayName": "Scorching",
     "fluxCapacitors": 0,
-    "fluxVents": 7,
+    "fluxVents": 8,
     "goalVariant": true,
     "hullId": "zea_dusk_onibi",
     "hullMods": [

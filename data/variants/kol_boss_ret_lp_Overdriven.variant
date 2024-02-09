@@ -1,6 +1,6 @@
 {
     "displayName": "Overdriven",
-    "fluxCapacitors": 4,
+    "fluxCapacitors": 17,
     "fluxVents": 0,
     "goalVariant": true,
     "hullId": "kol_boss_ret_lp",
@@ -14,8 +14,8 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [
-		"ill_advised"
-	],
+        "ill_advised",
+    ],
     "variantId": "kol_boss_ret_lp_Overdriven",
     "weaponGroups": [
         {
@@ -29,8 +29,8 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS 021": "heatseeker",
                 "WS 009": "heatseeker",
+                "WS 021": "heatseeker",
             }
         },
         {
@@ -45,8 +45,8 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS 020": "sabot",
                 "WS 008": "sabot",
+                "WS 020": "sabot",
                 "WS 010": "sabot",
                 "WS 007": "sabot",
             }
@@ -76,8 +76,8 @@
             "weapons": {
                 "WS 005": "heavymg",
                 "WS 014": "lightdualmg",
-                "WS 013": "lightdualmg",
                 "WS 006": "heavymg",
+                "WS 013": "lightdualmg",
             }
         },
     ],

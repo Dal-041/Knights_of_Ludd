@@ -1,6 +1,6 @@
 {
     "displayName": "Watching",
-    "fluxCapacitors": 4,
+    "fluxCapacitors": 10,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_dawn_qilin",
@@ -26,12 +26,12 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "heavyburst",
-                "WS0011": "pilum",
-                "WS0012": "pilum",
-                "WS0003": "heavyburst",
-                "WS0004": "heavyburst",
                 "WS0009": "heatseeker",
+                "WS0004": "heavyburst",
+                "WS0001": "heavyburst",
+                "WS0003": "heavyburst",
+                "WS0012": "pilum",
+                "WS0011": "pilum",
                 "WS0010": "heatseeker",
             }
         },
@@ -39,8 +39,8 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "heavymauler",
                 "WS0006": "heavymauler",
+                "WS0005": "heavymauler",
             }
         },
         {

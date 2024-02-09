@@ -1,7 +1,7 @@
 {
     "displayName": "Resentful",
-    "fluxCapacitors": 1,
-    "fluxVents": 20,
+    "fluxCapacitors": 5,
+    "fluxVents": 25,
     "goalVariant": true,
     "hullId": "zea_dusk_funayurei",
     "hullMods": [
@@ -33,9 +33,9 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "lrpdlaser",
-                "WS0006": "lrpdlaser",
+                "WS0006": "pdburst",
                 "WS0007": "lrpdlaser",
-                "WS0005": "lrpdlaser",
+                "WS0005": "pdburst",
             }
         },
     ],
