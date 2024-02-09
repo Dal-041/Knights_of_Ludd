@@ -10,7 +10,7 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.intel.AbyssAbilityIntel;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageElysianAmaterasu implements FleetEventListener {
 	public final String MEMKEY_KOL_ELYSIAN_BOSS1_DONE = "$kol_elysian_boss1_done";
@@ -32,10 +32,10 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 			//boss is dead,
 			if(Global.getSector().getMemoryWithoutUpdate().contains("$kol_elysian_boss2_done")
 					&& Global.getSector().getMemoryWithoutUpdate().getBoolean("$kol_elysian_boss2_done")) {
-				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(AbyssUtils.abilityJumpElysia)) {
-					Global.getSector().getPlayerFleet().addAbility(AbyssUtils.abilityJumpElysia);
-					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + AbyssUtils.abilityJumpElysia, true, 0);
-					Global.getSector().getCharacterData().addAbility(AbyssUtils.abilityJumpElysia);
+				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaUtils.abilityJumpElysia)) {
+					Global.getSector().getPlayerFleet().addAbility(ZeaUtils.abilityJumpElysia);
+					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpElysia, true, 0);
+					Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpElysia);
 
 					AbyssAbilityIntel notif = new AbyssAbilityIntel(fleet.getFaction().getCrest(), "Elysia");
 					Global.getSector().getIntelManager().addIntel(notif);

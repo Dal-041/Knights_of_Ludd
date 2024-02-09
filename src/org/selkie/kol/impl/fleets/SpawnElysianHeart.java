@@ -11,7 +11,7 @@ import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
@@ -75,7 +75,7 @@ public class SpawnElysianHeart {
 		        .setTransponderOn(true)
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
-		for(String support : AbyssUtils.elysianBossSupportingFleet) {
+		for(String support : ZeaUtils.elysianBossSupportingFleet) {
 			//elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
 

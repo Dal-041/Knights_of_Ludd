@@ -31,7 +31,7 @@ import java.util.Random;
 
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
-import static org.selkie.kol.impl.helpers.AbyssUtils.*;
+import static org.selkie.kol.impl.helpers.ZeaUtils.*;
 
 public class PrepareAbyss {
 

@@ -5,7 +5,7 @@ import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.awt.*;
 import java.io.IOException;
@@ -93,7 +93,7 @@ public class AbyssLoreIntel extends BaseIntelPlugin {
 
     public Set<String> getIntelTags(SectorMapAPI map) {
         Set<String> tags = super.getIntelTags(map);
-        tags.add(AbyssUtils.IntelLoreTag);
+        tags.add(ZeaUtils.IntelLoreTag);
         return tags;
     }
 

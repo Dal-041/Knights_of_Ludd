@@ -9,7 +9,9 @@ import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
-public class AbyssUtils {
+import java.util.ArrayList;
+
+public class ZeaUtils {
 
 
     public static float attainmentFactor = 0.15f;
@@ -154,18 +156,16 @@ public class AbyssUtils {
                     }
                 }
             }
-        }
-    }
-
-    public static void pruneLowgradeEquipment() {
-        for (String ID : factionIDs) {
-            FactionAPI fac = Global.getSector().getFaction(ID);
+            ArrayList<String> toRemove = new ArrayList<>();
             for (String entry : fac.getKnownWeapons()) {
                 for (String no : weaponBlacklist) {
                     if (entry.equals(no)) {
-                        fac.removeKnownWeapon(entry);
+                        toRemove.add(entry);
                     }
                 }
+            }
+            for (String entry : toRemove) {
+                fac.removeKnownWeapon(entry);
             }
         }
     }

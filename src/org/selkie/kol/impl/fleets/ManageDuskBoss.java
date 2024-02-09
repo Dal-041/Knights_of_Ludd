@@ -10,7 +10,7 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.intel.AbyssAbilityIntel;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageDuskBoss implements FleetEventListener {
 	public final String MEMKEY_KOL_DUSK_BOSS_DONE = "$kol_dusk_boss_done";
@@ -34,10 +34,10 @@ public class ManageDuskBoss implements FleetEventListener {
 			}
 	            
 			//boss is dead,
-			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(AbyssUtils.abilityJumpDusk)) {
-				Global.getSector().getPlayerFleet().addAbility(AbyssUtils.abilityJumpDusk);
-				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + AbyssUtils.abilityJumpDusk, true, 0);
-				Global.getSector().getCharacterData().addAbility(AbyssUtils.abilityJumpDusk);
+			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaUtils.abilityJumpDusk)) {
+				Global.getSector().getPlayerFleet().addAbility(ZeaUtils.abilityJumpDusk);
+				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpDusk, true, 0);
+				Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpDusk);
 
 				AbyssAbilityIntel notif = new AbyssAbilityIntel(fleet.getFaction().getCrest(), "A Black Neutron Star");
 				Global.getSector().getIntelManager().addIntel(notif);

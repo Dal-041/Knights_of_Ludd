@@ -2,16 +2,14 @@ package org.selkie.kol.plugins;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.GenericPluginManagerAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.impl.listeners.ReportTransit;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
-import org.selkie.kol.impl.fleets.TTBoss2DefenderPlugin;
 import org.selkie.kol.impl.world.PrepareDarkDeeds;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
@@ -19,8 +17,6 @@ import org.selkie.kol.fleets.SpawnInvictus;
 import org.selkie.kol.fleets.SpawnRetribution;
 
 import exerelin.campaign.SectorManager;
-
-import static org.selkie.kol.impl.helpers.AbyssUtils.copyHighgradeEquipment;
 
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String ModID = "Knights of Ludd";
@@ -56,8 +52,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		GenerateKnights.copyChurchEquipment();
-		AbyssUtils.checkAbyssalFleets();
-		AbyssUtils.copyHighgradeEquipment();
+		ZeaUtils.checkAbyssalFleets();
+		ZeaUtils.copyHighgradeEquipment();
 		PrepareDarkDeeds.andContinue();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
@@ -85,7 +81,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
-		AbyssUtils.pruneLowgradeEquipment();
 	}
 
 	@Override

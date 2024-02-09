@@ -21,7 +21,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.*;
 
 import java.util.Random;
@@ -77,11 +77,11 @@ public class AbyssalFleetManager extends SeededFleetManager {
         picker.add(PrepareAbyss.duskID, w);
         w = primary.equals(PrepareAbyss.elysianID) ? 0f : 1f;
         picker.add(PrepareAbyss.elysianID, w);
-        if (AbyssUtils.useDomres) picker.add("domres", 1f);
-        if (AbyssUtils.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
+        if (ZeaUtils.useDomres) picker.add("domres", 1f);
+        if (ZeaUtils.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
         w = primary.equals(PrepareAbyss.dawnID) ? 0.75f : 0f;
-        if (AbyssUtils.useEnigma) picker.add("enigma", w);
-        if (AbyssUtils.useLostech) picker.add("tahlan_allmother", 0.6f);
+        if (ZeaUtils.useEnigma) picker.add("enigma", w);
+        if (ZeaUtils.useLostech) picker.add("tahlan_allmother", 0.6f);
         return picker.pick();
     }
 
@@ -89,7 +89,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
         for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
             boolean skip = false;
             if (member.isFighterWing() || member.getHullSpec().getHullSize().equals(ShipAPI.HullSize.CAPITAL_SHIP)) continue;
-            for (String s : AbyssUtils.hullBlacklist) {
+            for (String s : ZeaUtils.hullBlacklist) {
                 if (s.equals(member.getHullId())) {
                     skip = true;
                 }
@@ -171,7 +171,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
             float w = 5f; //1f
             if (entity.hasTag(Tags.NEUTRINO_HIGH)) w = 15f;
             if (entity.hasTag(Tags.NEUTRINO_LOW)) w = 1.5f;
-            if (entity.getMemoryWithoutUpdate().contains(AbyssUtils.KEY_ELYSIA_WITNESS)) w = 0f;
+            if (entity.getMemoryWithoutUpdate().contains(ZeaUtils.KEY_ELYSIA_WITNESS)) w = 0f;
             picker.add(entity, w);
         }
 
@@ -301,18 +301,18 @@ public class AbyssalFleetManager extends SeededFleetManager {
         //Levels: G3, B5, A7, O9
         if (faction.equals(PrepareAbyss.dawnID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
-            portrait = AbyssUtils.portraitsDawn[level-6];
+            portrait = ZeaUtils.portraitsDawn[level-6];
             persona = Personalities.AGGRESSIVE;
         }
         else if (faction.equals(PrepareAbyss.duskID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
             persona = Personalities.STEADY;
-            portrait = AbyssUtils.portraitsDusk[level-6];
+            portrait = ZeaUtils.portraitsDusk[level-6];
         }
         else if (faction.equals(PrepareAbyss.elysianID)) {
             skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
             persona = Personalities.STEADY;
-            portrait = AbyssUtils.portraitsElysian[level-6];
+            portrait = ZeaUtils.portraitsElysian[level-6];
         }
         else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
 
@@ -335,15 +335,15 @@ public class AbyssalFleetManager extends SeededFleetManager {
                 if (member.getCaptain().getId().equals("tahlan_child")) return; //Special officer
                 boolean found = false;
                 String portCapt = member.getCaptain().getPortraitSprite();
-                for (String port : AbyssUtils.portraitsDawn) {
+                for (String port : ZeaUtils.portraitsDawn) {
                     if (portCapt.equalsIgnoreCase(port)) {
                         found = true;
                     }
                 }
-                for (String port : AbyssUtils.portraitsDusk) {
+                for (String port : ZeaUtils.portraitsDusk) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
-                for (String port : AbyssUtils.portraitsElysian) {
+                for (String port : ZeaUtils.portraitsElysian) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
                 if (!found) {
@@ -360,13 +360,13 @@ public class AbyssalFleetManager extends SeededFleetManager {
                     else member.getCaptain().setPersonality(Personalities.STEADY);
 
                     if (fac.equals(PrepareAbyss.duskID)) {
-                        member.getCaptain().setPortraitSprite(AbyssUtils.portraitsDuskPaths[level-6]);
+                        member.getCaptain().setPortraitSprite(ZeaUtils.portraitsDuskPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.elysianID)) {
-                        member.getCaptain().setPortraitSprite(AbyssUtils.portraitsElysianPaths[level-6]);
+                        member.getCaptain().setPortraitSprite(ZeaUtils.portraitsElysianPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.dawnID)) {
-                        member.getCaptain().setPortraitSprite(AbyssUtils.portraitsDawnPaths[level-6]);
+                        member.getCaptain().setPortraitSprite(ZeaUtils.portraitsDawnPaths[level-6]);
                         member.getCaptain().setPersonality(Personalities.RECKLESS);
                     }
                 }

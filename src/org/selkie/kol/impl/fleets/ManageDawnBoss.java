@@ -10,7 +10,7 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.intel.AbyssAbilityIntel;
-import org.selkie.kol.impl.helpers.AbyssUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageDawnBoss implements FleetEventListener {
 	public final String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";
@@ -35,10 +35,10 @@ public class ManageDawnBoss implements FleetEventListener {
 			}
 	            
 			//boss is dead,
-			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(AbyssUtils.abilityJumpDawn)) {
-				Global.getSector().getPlayerFleet().addAbility(AbyssUtils.abilityJumpDawn);
-				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + AbyssUtils.abilityJumpDawn, true, 0);
-				Global.getSector().getCharacterData().addAbility(AbyssUtils.abilityJumpDawn);
+			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaUtils.abilityJumpDawn)) {
+				Global.getSector().getPlayerFleet().addAbility(ZeaUtils.abilityJumpDawn);
+				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpDawn, true, 0);
+				Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpDawn);
 
 				AbyssAbilityIntel notif = new AbyssAbilityIntel(fleet.getFaction().getCrest(), "Luna Sea");
 				Global.getSector().getIntelManager().addIntel(notif);
