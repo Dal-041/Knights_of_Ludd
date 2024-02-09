@@ -78,8 +78,8 @@ zea_hosta_l,WEAPON,The Hosta line of weapons does one thing and it does it well:
 zea_nanten_s,WEAPON,"A potent strike beam. Don't let its modest damage per second fool you, this weapon is for punishing shieldless ships and it guarantees to deliver.",,,
 zea_nanten_l,WEAPON,"Where the Nanten 'Slicer' walks, the Disassembler sprints. Strikes from this devastating weapon can often turn a battle all on their own.",,,
 zea_myoga_driver,WEAPON,"The Myoga Ultradriver is a sniper's dream. Extreme range, good damage, and best-in-class projectile velocity mean no opponent is beyond the reach of this weapon. Poor flux performance is the notable drawback, and foes that close the gap will find themselves at a good advantage against the wielder.",,,
-zea_niangun_l,WEAPON,"What, did you think this one was better?",,,,
-zea_niangun_r,WEAPON,"You're not supposed to see these!",,,,
+zea_nian_maingun_l,WEAPON,"What, did you think this one was better?",,,,
+zea_nian_maingun_r,WEAPON,"You're not supposed to see these!",,,,
 zea_boss_resonator,WEAPON,"A missile potent in both damage and tracking that reliably punishes targets. Combined with an autoloader, their only weakness is that there is but a single set of them.",,,,
 zea_boss_resonator2,WEAPON,"A missile potent in both damage and tracking that reliably punishes targets. Combined with an autoloader, their only weakness is that there is but a single set of them.",,,,
 zea_dusk_lrsr,WEAPON,"A reproduction of an even more awesome weapon, the emplaced long range shock repeater projects withering EMP bolts at targets.",,,,
@@ -128,148 +128,90 @@ zea_dusk_phaseteleporter,SHIP_SYSTEM,Instantly relocates the ship to a chosen ne
 zea_dusk_phase_skip,SHIP_SYSTEM,Activates the onboard phase coils to shunt the ship into phase for a brief period. Mobility is greatly enhanced and shields are restored after use.,Special,,
 #
 #Ships
-zea_dusk_ikiryo,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_ikiryo,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_onibi,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_onibi,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_shiryo,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_shiryo,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_furaribi,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_furaribi,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_lushu,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_lushu,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_xuangui,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_xuangui,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_funayurei,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_funayurei,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_onryo,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_onryo,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_hashihime,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_hashihime,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_bixi,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_bixi,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_tianma,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_tianma,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dusk_ayakashi,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dusk_ayakashi,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_linggui,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_linggui,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_ao,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_ao,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_dawn_qilin,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_dawn_qilin,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_wani,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_wani,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_suzaku,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_suzaku,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_mizuchi,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_mizuchi,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_seiryu,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_seiryu,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_kiyohime,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_kiyohime,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_ryujin,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_ryujin,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_edf_tamamo,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_edf_tamamo,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_boss_ninaya,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_ninaya,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_boss_ninmah,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_ninmah,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_boss_nineveh,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_nineveh,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_boss_yukionna,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_yukionna,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_boss_nian,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_nian,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",,
-zea_boss_corruptingheart,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_corruptingheart,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",
-zea_boss_amaterasu,SHIP,"UNKNOWN ENTRY
-
-Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
+zea_boss_amaterasu,SHIP,"UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.",Unidentified Vessel,"UNKNOWN ENTRY
 
 Please register your Tri-Tachyon datapad to receive the latest news and updates.",

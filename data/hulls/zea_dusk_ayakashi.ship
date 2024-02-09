@@ -135,7 +135,7 @@
             "id": "WS0016",
             "size": "SMALL",
             "type": "HYBRID",
-            "mount": "HARDPOINT",
+            "mount": "TURRET",
             "arc": 210,
             "angle": -30,
             "locations": [
