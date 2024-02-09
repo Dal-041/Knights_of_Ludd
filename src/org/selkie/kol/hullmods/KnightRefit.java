@@ -151,11 +151,7 @@ public class KnightRefit extends BaseHullMod {
                 true,
                 new Object[]{"Armor Plate Name", width - 80f * 2 - HEIGHT - 25f, "Hull", 80f, "Armor", 80f});
 
-        log.info("KOL Refit modules:");
         for (String module : ship.getVariant().getStationModules().values()) {
-            log.info(String.format("module [%s] variant not null [%s] hullspec not null if variant not null [%s]",
-                    module, Global.getSettings().getVariant(module) != null, Global.getSettings().getVariant(module) != null && Global.getSettings().getVariant(module).getHullSpec() != null));
-
             // for some insane reason, the hullspec can return null
             if (Global.getSettings().getVariant(module) == null
                     || Global.getSettings().getVariant(module).getHullSpec() == null) continue;

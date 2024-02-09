@@ -52,6 +52,11 @@ public class SimpleShieldDronesActivator extends DroneActivator {
     }
 
     @Override
+    public boolean canActivate() {
+        return false;
+    }
+
+    @Override
     public boolean shouldActivateAI(float amount) {
         return canActivate();
     }
@@ -95,6 +100,11 @@ public class SimpleShieldDronesActivator extends DroneActivator {
     @Override
     public String getDisplayText() {
         return "Shield Drones";
+    }
+
+    @Override
+    public String getStateText() {
+        return "";
     }
 
     @Override
