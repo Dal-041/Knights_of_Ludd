@@ -33,7 +33,7 @@ public class BulletTimeField extends BaseShipSystemScript {
             } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
                 Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-                initialSpeed = (float) ReflectionUtils.INSTANCE.get("return", rayExtender); // bullet speed
+                initialSpeed = (float) ReflectionUtils.INSTANCE.get("Ö00000", rayExtender); // bullet speed
                 startingDistance = (float) ReflectionUtils.INSTANCE.get("Ø00000", rayExtender);
                 adjustedElapsedDistance = startingDistance + (initialSpeed * SLOWDOWN * amount);
             } else if (threat instanceof MissileAPI) {
@@ -120,7 +120,7 @@ public class BulletTimeField extends BaseShipSystemScript {
                 BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
 
                 Object trailExtender = ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
-                ReflectionUtils.INSTANCE.set("ö00000", trailExtender, threatInfo.adjustedElapsedTime); //elapsed time
+                ReflectionUtils.INSTANCE.set("if", trailExtender, threatInfo.adjustedElapsedTime); //elapsed time
                 ReflectionUtils.INSTANCE.set("elapsed", nearbyBallistic, threatInfo.adjustedElapsedTime);
 
                 threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
@@ -130,7 +130,7 @@ public class BulletTimeField extends BaseShipSystemScript {
                 Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
                 ReflectionUtils.INSTANCE.set("elapsed", nearbyRay, threatInfo.adjustedElapsedTime);
                 //ReflectionUtils.INSTANCE.set("Ø00000", rayExtender, threatInfo.adjustedElapsedDistance);
-                ReflectionUtils.INSTANCE.set("return", rayExtender, threatInfo.initialSpeed * SLOWDOWN);
+                ReflectionUtils.INSTANCE.set("Ø00000", rayExtender, threatInfo.initialSpeed * SLOWDOWN);
 
                 threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
                 threatInfo.adjustedElapsedDistance += amount * SLOWDOWN * threatInfo.initialSpeed;

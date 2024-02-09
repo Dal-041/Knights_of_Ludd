@@ -36,7 +36,6 @@ public class StarficzAIUtils {
     public static List<FutureHit> incomingProjectileHits(ShipAPI ship, Vector2f testPoint){
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
-        boolean useBackup = false;
 
         Iterator<Object> iterator = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(testPoint, MAX_RANGE * 2, MAX_RANGE * 2);
         while (iterator.hasNext()) {
