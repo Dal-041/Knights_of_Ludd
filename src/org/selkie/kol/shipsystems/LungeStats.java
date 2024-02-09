@@ -69,7 +69,13 @@ public class LungeStats extends BaseShipSystemScript {
         stats.getTurnAcceleration().modifyMult(id, 10f);
 
         if (state == State.IN) {
-            ship.getMutableStats().getAcceleration().modifyFlat(id, 5000f);
+            if (ship.getEngineController().isAcceleratingBackwards()) {
+                ship.getMutableStats().getAcceleration().unmodify(id);
+                ship.getMutableStats().getAcceleration().modifyFlat(id, 100f);
+            } else {
+                ship.getMutableStats().getAcceleration().unmodify(id);
+                ship.getMutableStats().getAcceleration().modifyFlat(id, 5000f);
+            }
             ship.getMutableStats().getDeceleration().modifyFlat(id, 1000f);
             stats.getMaxSpeed().modifyFlat(id, 600f);
             intervalSmoke.advance(elapsed);
