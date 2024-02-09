@@ -69,13 +69,12 @@ public class LungeStats extends BaseShipSystemScript {
         stats.getTurnAcceleration().modifyMult(id, 10f);
 
         if (state == State.IN) {
-
             ship.getMutableStats().getAcceleration().modifyFlat(id, 5000f);
-            ship.getMutableStats().getDeceleration().modifyFlat(id, 5000f);
+            ship.getMutableStats().getDeceleration().modifyFlat(id, 1000f);
             stats.getMaxSpeed().modifyFlat(id, 600f);
             intervalSmoke.advance(elapsed);
             if (intervalSmoke.intervalElapsed()) {
-                for (int i = 0; i < 3; i++) {
+                for (int i = 0; i < 6; i++) {
                     Vector2f point = new Vector2f(MathUtils.getRandomPointInCircle(ship.getLocation(), ship.getCollisionRadius()));
                     while (!CollisionUtils.isPointWithinBounds(point, ship)) {
                         point = MathUtils.getRandomPointInCircle(ship.getLocation(), ship.getCollisionRadius());
@@ -124,32 +123,20 @@ public class LungeStats extends BaseShipSystemScript {
                 ship.getVelocity().scale(speed + driftAmount * 3600f);
             }
             */
-        } else {
 
-
-
+        }  else if (state == State.OUT) {
             stats.getMaxSpeed().unmodify(id);
             stats.getMaxTurnRate().unmodify(id);
             stats.getTurnAcceleration().modifyMult(id,20f);
-            /* Player-only drifting
-            if (!((ShipAPI) stats.getEntity()).getCaptain().isPlayer()) {
-                float speed = ship.getVelocity().length();
-                if (speed > ship.getMutableStats().getMaxSpeed().getModifiedValue()) {
-                    ship.getVelocity().normalise();
-                    ship.getVelocity().scale(ship.getMutableStats().getMaxSpeed().getModifiedValue());
-                }
-            }
-            */
-            if (!decel) intervalDecel.advance(engine.getElapsedInLastFrame());
 
-            if (intervalDecel.intervalElapsed()) {
+        } else {
+            if (!decel) {
                 stats.getDeceleration().unmodify(id);
                 decel = true;
-                intervalDecel.forceCurrInterval(0f);
                 float speed = ship.getVelocity().length();
                 if (speed > ship.getMutableStats().getMaxSpeed().getModifiedValue()) {
                     ship.getVelocity().normalise();
-                    ship.getVelocity().scale(ship.getMutableStats().getMaxSpeed().getModifiedValue());
+                    ship.getVelocity().scale(ship.getMaxSpeedWithoutBoost());
                 }
             }
         }

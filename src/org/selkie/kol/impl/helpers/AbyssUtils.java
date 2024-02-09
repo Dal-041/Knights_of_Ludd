@@ -133,18 +133,11 @@ public class AbyssUtils {
     public static void copyHighgradeEquipment() {
         for (String ID : factionIDs) {
             FactionAPI fac = Global.getSector().getFaction(ID);
-            boolean skip;
+
             for (String parentID : techInheritIDs) {
                 FactionAPI par = Global.getSector().getFaction(parentID);
                 for (String entry : par.getKnownWeapons()) {
-                    skip = false;
-                    for (String no : weaponBlacklist) {
-                        if (entry.equals(no)) {
-                            skip = true;
-                            break;
-                        }
-                    }
-                    if (!skip && !fac.knowsWeapon(entry)) {
+                    if (!fac.knowsWeapon(entry)) {
                         fac.addKnownWeapon(entry, false);
                     }
                 }
@@ -164,4 +157,16 @@ public class AbyssUtils {
         }
     }
 
+    public static void pruneLowgradeEquipment() {
+        for (String ID : factionIDs) {
+            FactionAPI fac = Global.getSector().getFaction(ID);
+            for (String entry : fac.getKnownWeapons()) {
+                for (String no : weaponBlacklist) {
+                    if (entry.equals(no)) {
+                        fac.removeKnownWeapon(entry);
+                    }
+                }
+            }
+        }
+    }
 }

@@ -20,6 +20,8 @@ import org.selkie.kol.fleets.SpawnRetribution;
 
 import exerelin.campaign.SectorManager;
 
+import static org.selkie.kol.impl.helpers.AbyssUtils.copyHighgradeEquipment;
+
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String ModID = "Knights of Ludd";
 	public static final String kolID = "knights_of_selkie";
@@ -83,8 +85,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
-
-
+		AbyssUtils.pruneLowgradeEquipment();
 	}
 
 	@Override

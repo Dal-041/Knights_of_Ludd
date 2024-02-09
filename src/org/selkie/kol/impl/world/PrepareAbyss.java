@@ -50,7 +50,6 @@ public class PrepareAbyss {
     public static void generate() {
 		checkAbyssalFleets();
 		copyHighgradeEquipment();
-
     	GenerateElysia();
     	GenerateUnderworld();
     	GenerateLunaSea();
