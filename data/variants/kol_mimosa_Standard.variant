@@ -10,8 +10,8 @@
         "unstable_injector"
     ],
     "modules": [
-        {"WS0009": "kol_mimosa_tl_Standard"},
-        {"WS0010": "kol_mimosa_tr_Standard"}
+        {"ARMOR_MODULE_TL": "kol_mimosa_tl_Standard"},
+        {"ARMOR_MODULE_TR": "kol_mimosa_tr_Standard"}
     ],
     "permaMods": [],
     "sMods": [],
@@ -28,7 +28,7 @@
         {
             "autofire": true,
             "mode": "LINKED",
-            "weapons": {"WS0008": "heavyac"}
+            "weapons": {"WS0007": "heavyac"}
         },
         {
             "autofire": true,

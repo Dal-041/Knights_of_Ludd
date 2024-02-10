@@ -1,44 +1,57 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_mimosa_tr",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_mimosa_tr.png",
-  "style": "LOW_TECH",
-  "height": 42,
-  "width": 68,
-  "center": [24, 11],
-  "collisionRadius": 55,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 59,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "ablative_armor",
-    "reduced_explosion",
-    "always_detaches"
-  ],
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -90,
-      "locations": [9, -10]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    -10, -15.5,
-    2, -41.5,
-    19.5, -42,
-    29.5, -6.5,
-    25, 0.5,
-    30, 6.5,
-    30.5, 17,
-    25, 23,
-    -5, 11.5,
-    -9, 4.5
-  ]
+    "hullName": "Armor",
+    "hullId": "kol_mimosa_tr",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_mimosa_tr.png",
+    "height": 42,
+    "width": 68,
+    "center": [
+        -16, -22
+    ],
+    "collisionRadius": 100,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 98,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "reduced_explosion",
+        "always_detaches"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": -90,
+            "locations": [
+                      42,      -50
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+            24.5,       -35,
+              23,       -56,
+            30.5,       -76,
+              36,       -82,
+            52.5,     -81.5,
+
+            63.5,     -48.5,
+              59,     -39.5,
+              63,     -33.5,
+              63,       -23,
+              58,       -18,
+
+            29.5,       -29
+    # 11 points total.
+    ]
 }
