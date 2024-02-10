@@ -62,7 +62,7 @@
             ]
         },
         {
-            "id": "ARMOR_MODULE_BL",
+            "id": "ARMOR_MODULE_LL",
             "size": "LARGE",
             "type": "STATION_MODULE",
             "mount": "TURRET",
@@ -73,7 +73,7 @@
             ]
         },
         {
-            "id": "ARMOR_MODULE_BR",
+            "id": "ARMOR_MODULE_LR",
             "size": "LARGE",
             "type": "STATION_MODULE",
             "mount": "TURRET",
