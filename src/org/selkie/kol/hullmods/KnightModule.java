@@ -13,6 +13,19 @@ public class KnightModule extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
+        /*
+        if (ship.getParentStation() != null) {
+            for (String ID:ship.getVariant().getNonBuiltInHullmods()) {
+                ship.getVariant().removeMod(ID);
+            }
+            for (String hullmodID : ship.getParentStation().getVariant().getNonBuiltInHullmods()) {
+                ship.getVariant().addMod(hullmodID);
+            }
+            for (String hullmodID : ship.getParentStation().getVariant().getSMods()) {
+                ship.getVariant().addMod(hullmodID);
+            }
+        }
+         */
         // avoid the enemy AI being scared of armor modules as if they are ships
         ship.setDrone(true);
     }
@@ -20,6 +33,7 @@ public class KnightModule extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         //Manual method
+        /* removed in favor of multiplier method on KnightRefit
         if(!ship.isAlive())return;
         if(Global.getCombatEngine().getTotalElapsedTime(false)<=2.05 && Global.getCombatEngine().getTotalElapsedTime(false)>2) {
             if (ship.getParentStation() != null && ship.getParentStation().isAlive()) {
@@ -35,5 +49,6 @@ public class KnightModule extends BaseHullMod {
                 }
             }
         }
+        */
     }
 }
