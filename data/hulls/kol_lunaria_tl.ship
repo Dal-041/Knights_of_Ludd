@@ -1,62 +1,78 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_lunaria_tl",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_lunaria_tl.png",
-  "style": "LOW_TECH",
-  "height": 90,
-  "width": 55,
-  "center": [27.5, 45],
-  "collisionRadius": 52,
-  "shieldCenter": [0, 0],
-  "shieldRadius": 56.5,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "ablative_armor",
-    "reduced_explosion",
-    "always_detaches"
-  ],
-  "builtInWeapons": {
-    "WS0002": "kol_blinker_white",
-    "WS0003": "kol_blinker_white"
-  },
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [20, -15.5]
+    "hullName": "Armor",
+    "hullId": "kol_lunaria_tl",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_lunaria_tl.png",
+    "height": 90,
+    "width": 55,
+    "center": [
+        87, -66
+    ],
+    "collisionRadius": 211,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 200,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "reduced_explosion",
+        "always_detaches"
+    ],
+    "builtInWeapons": {
+        "WS0002": "kol_blinker_white",
+        "WS0003": "kol_blinker_white"
     },
-    {
-      "id": "WS0002",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [20, -5.5]
-    },
-    {
-      "id": "WS0003",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [0, 7.5]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    35, -24.5,
-    41.5, -18,
-    42, -12.5,
-    -14, 20.5,
-    -36.5, 25.5,
-    -41, 14.5
-  ]
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     131,       44
+            ]
+        },
+        {
+            "id": "WS0002",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     131,       54
+            ]
+        },
+        {
+            "id": "WS0003",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     111,       67
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+             145,       34,
+             155,       44,
+             155,     47.5,
+              98,     80.5,
+              78,       86,
+        
+              74,       82,
+              69,       66,
+             133,       34
+    ]
 }

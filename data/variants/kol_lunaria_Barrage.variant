@@ -20,7 +20,7 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS 019": "hellbore",
+                "WS0013": "hellbore",
             }
         },
         {
@@ -60,19 +60,19 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0004": "flak",
-                "WS0014": "flak",
-                "WS0013": "flak",
+                "WS0011": "flak",
+                "WS0012": "flak",
                 "WS0003": "flak",
             }
         },
     ],
     "wings": [],
     "modules": [
-        {"WS0011": "kol_lunaria_tl_Barrage"},
-        {"WS0012": "kol_lunaria_tr_Barrage"},
-        {"WS0015": "kol_lunaria_ml_Barrage"},
-        {"WS0016": "kol_lunaria_mr_Barrage"},
-        {"WS0018": "kol_lunaria_lr_Barrage"},
-        {"WS0017": "kol_lunaria_ll_Barrage"},
+        {"ARMOR_MODULE_TL": "kol_lunaria_tl_Barrage"},
+        {"ARMOR_MODULE_TR": "kol_lunaria_tr_Barrage"},
+        {"ARMOR_MODULE_ML": "kol_lunaria_ml_Barrage"},
+        {"ARMOR_MODULE_MR": "kol_lunaria_mr_Barrage"},
+        {"ARMOR_MODULE_LL": "kol_lunaria_ll_Barrage"},
+        {"ARMOR_MODULE_LR": "kol_lunaria_lr_Barrage"},
     ],
 }
