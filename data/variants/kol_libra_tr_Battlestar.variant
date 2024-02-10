@@ -1,0 +1,76 @@
+{
+    "displayName": "Battlestar",
+    "fluxCapacitors": 0,
+    "fluxVents": 19,
+    "goalVariant": true,
+    "hullId": "kol_libra_tr",
+    "hullMods": [
+        "armoredweapons",
+        "fluxbreakers",
+        "reinforcedhull",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_libra_tr_Battlestar",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "kol_llyr",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "kol_caelia",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lidardish",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "devastator",
+                "WS0007": "devastator",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "dualflak",
+                "WS0013": "dualflak",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0011": "kol_tor",
+                "WS0012": "kol_tor",
+            }
+        },
+    ],
+    "wings": [
+        "hoplon_wing",
+        "hoplon_wing",
+        "hoplon_wing",
+    ],
+    "modules": [],
+}

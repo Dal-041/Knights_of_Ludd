@@ -1,0 +1,15 @@
+{
+    "displayName": "Battlestation",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_libra_under",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_libra_under_Battlestation",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

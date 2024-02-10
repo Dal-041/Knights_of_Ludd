@@ -1,0 +1,82 @@
+{
+    "displayName": "Battlestar",
+    "fluxCapacitors": 0,
+    "fluxVents": 29,
+    "goalVariant": true,
+    "hullId": "kol_libra_rear",
+    "hullMods": [
+        "heavyarmor",
+        "insulatedengine",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_libra_rear_Battlestar",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0020": "pilum",
+                "WS0021": "pilum",
+                "WS0004": "pilum",
+                "WS0005": "pilum",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0003": "salamanderpod",
+                "WS0002": "salamanderpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0025": "kol_llyr",
+                "WS0022": "kol_llyr",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "hveldriver",
+                "WS0009": "hveldriver",
+                "WS0007": "hveldriver",
+                "WS0011": "hveldriver",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "kol_drian",
+                "WS0010": "kol_drian",
+                "WS0018": "kol_drian",
+                "WS0019": "kol_drian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0024": "devastator",
+                "WS0023": "devastator",
+                "WS0001": "devastator",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0027": "dualflak",
+                "WS0026": "dualflak",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

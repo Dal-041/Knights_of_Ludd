@@ -1,6 +1,7 @@
 id,type,frame,magnitude,map,path
 kol_blaze,ship,,0.5,normal,graphics/maps/ship_normals/kol_blaze_normal.png
 kol_boss_retribution_path,ship,,0.5,normal,graphics/maps/ship_normals/kol_boss_retribution_path_normal.png
+kol_invictus,ship,,0.5,normal,graphics/maps/ship_normals/kol_invictus_normal.png
 kol_invictus_lp,ship,,0.5,normal,graphics/maps/ship_normals/kol_invictus_lp_normal.png
 ,,,,,
 kol_hex,ship,,0.5,normal,graphics/maps/ship_normals/fighters/kol_hex_normal.png
@@ -83,6 +84,36 @@ kol_lotus_lr,ship,,0.5,normal,graphics/maps/ship_normals/modules/kol_lotus_lr_no
 kol_lotus_tl,ship,,0.5,normal,graphics/maps/ship_normals/modules/kol_lotus_tl_normal.png
 kol_lotus_tr,ship,,0.5,normal,graphics/maps/ship_normals/modules/kol_lotus_tr_normal.png
 ,,,,,
+kol_libra,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_normal.png
+kol_libra_under,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_under_normal.png
+kol_libra_rear,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_rear_normal.png
+kol_libra_tl,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_tl_normal.png
+kol_libra_tr,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_tr_normal.png
+kol_libra_ml,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_ml_normal.png
+kol_libra_mr,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_mr_normal.png
+kol_libra_ml2,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_ml2_normal.png
+kol_libra_mr2,ship,,0.5,normal,graphics/maps/ships_normals/kol_libra_mr2_normal.png
+,,,,,
+kol_libra,ship,,,material,graphics/maps/ships_glib/kol_libra_material.png
+kol_libra_under,ship,,,material,graphics/maps/ships_glib/kol_libra_under_material.png
+kol_libra_rear,ship,,,material,graphics/maps/ships_glib/kol_libra_rear_material.png
+kol_libra_tl,ship,,,material,graphics/maps/ships_glib/kol_libra_tl_material.png
+kol_libra_tr,ship,,,material,graphics/maps/ships_glib/kol_libra_tr_material.png
+kol_libra_ml,ship,,,material,graphics/maps/ships_glib/kol_libra_ml_material.png
+kol_libra_mr,ship,,,material,graphics/maps/ships_glib/kol_libra_mr_material.png
+kol_libra_ml2,ship,,,material,graphics/maps/ships_glib/kol_libra_ml2_material.png
+kol_libra_mr2,ship,,,material,graphics/maps/ships_glib/kol_libra_mr2_material.png
+,,,,,
+kol_libra,ship,,,surface,graphics/maps/ships_glib/kol_libra_surface.png
+kol_libra_under,ship,,,surface,graphics/maps/ships_glib/kol_libra_under_surface.png
+kol_libra_rear,ship,,,surface,graphics/maps/ships_glib/kol_libra_rear_surface.png
+kol_libra_tl,ship,,,surface,graphics/maps/ships_glib/kol_libra_tl_surface.png
+kol_libra_tr,ship,,,surface,graphics/maps/ships_glib/kol_libra_tr_surface.png
+kol_libra_ml,ship,,,surface,graphics/maps/ships_glib/kol_libra_ml_surface.png
+kol_libra_mr,ship,,,surface,graphics/maps/ships_glib/kol_libra_mr_surface.png
+kol_libra_ml2,ship,,,surface,graphics/maps/ships_glib/kol_libra_ml2_surface.png
+kol_libra_mr2,ship,,,surface,graphics/maps/ships_glib/kol_libra_mr2_surface.png
+,,,,,
 # weapon,,,,,
 kol_caelia,hardpoint,,0.5,normal,graphics/maps/weapon_normals/kol_caelia_hardpoint_base_normal.png
 kol_caelia,hardpointbarrel,,0.5,normal,graphics/maps/weapon_normals/kol_caelia_hardpoint_recoil_normal.png
@@ -151,6 +182,10 @@ zea_deco_edf_engL2,hardpoint,,0.5,normal,graphics/maps/weapon_normals/decos/zea_
 zea_deco_edf_engL2,turret,,0.5,normal,graphics/maps/weapon_normals/decos/zea_deco_edf_engL2_normal.png
 zea_deco_edf_engS,hardpoint,,0.5,normal,graphics/maps/weapon_normals/decos/zea_deco_edf_engS_normal.png
 zea_deco_edf_engS,turret,,0.5,normal,graphics/maps/weapon_normals/decos/zea_deco_edf_engS_normal.png
+zea_deco_edf_wani_ml,hardpoint,,0.5,normal,graphics/maps/ship_normals/decos/zea_deco_edf_wani_ml_normal.png
+zea_deco_edf_wani_ml,turret,,0.5,normal,graphics/maps/ship_normals/decos/zea_deco_edf_wani_ml_normal.png
+zea_deco_edf_wani_mr,hardpoint,,0.5,normal,graphics/maps/ship_normals/decos/zea_deco_edf_wani_mr_normal.png
+zea_deco_edf_wani_mr,turret,,0.5,normal,graphics/maps/ship_normals/decos/zea_deco_edf_wani_mr_normal.png
 kol_deco_snowdrop_tl,hardpoint,,0.5,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tl_normal.png
 kol_deco_snowdrop_tl,turret,,0.5,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tl_normal.png
 kol_deco_snowdrop_tr,hardpoint,,0.5,normal,graphics/maps/ship_normals/decos/kol_deco_snowdrop_tr_normal.png
@@ -159,10 +194,11 @@ kol_deco_snowdrop_tr,turret,,0.5,normal,graphics/maps/ship_normals/decos/kol_dec
 #mat,,,,,
 kol_blaze,ship,,,material,graphics/maps/ship_glib/kol_blaze_material.png
 kol_boss_retribution_path,ship,,,material,graphics/maps/ship_glib/kol_boss_retribution_path_material.png
+kol_invictus,ship,,,material,graphics/maps/ship_glib/kol_invictus_material.png
 kol_invictus_lp,ship,,,material,graphics/maps/ship_glib/kol_invictus_lp_material.png
 ,,,,,
 kol_hex,ship,,,material,graphics/maps/ship_glib/fighters/kol_hex_material.png
-,,,,,
+,,,,,graphics/maps/ship_glib/fighters/kol_hex_material.png
 kol_alysse,ship,,,material,graphics/maps/ship_glib/kol_alysse_material.png
 kol_alysse_tl,ship,,,material,graphics/maps/ship_glib/modules/kol_alysse_tl_material.png
 kol_alysse_tr,ship,,,material,graphics/maps/ship_glib/modules/kol_alysse_tr_material.png
@@ -303,6 +339,10 @@ zea_deco_edf_engL2,hardpoint,,,material,graphics/maps/weapon_glib/decos/zea_deco
 zea_deco_edf_engL2,turret,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engL2_material.png
 zea_deco_edf_engS,hardpoint,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_material.png
 zea_deco_edf_engS,turret,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_material.png
+zea_deco_edf_wani_ml,hardpoint,,,material,graphics/maps/ship_glib/decos/zea_deco_edf_wani_ml_material.png
+zea_deco_edf_wani_ml,turret,,,material,graphics/maps/ship_glib/decos/zea_deco_edf_wani_ml_material.png
+zea_deco_edf_wani_mr,hardpoint,,,material,graphics/maps/ship_glib/decos/zea_deco_edf_wani_mr_material.png
+zea_deco_edf_wani_mr,turret,,,material,graphics/maps/ship_glib/decos/zea_deco_edf_wani_mr_material.png
 kol_deco_snowdrop_tl,hardpoint,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_material.png
 kol_deco_snowdrop_tl,turret,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_material.png
 kol_deco_snowdrop_tr,hardpoint,,,material,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tr_material.png
@@ -311,6 +351,7 @@ kol_deco_snowdrop_tr,turret,,,material,graphics/maps/ship_glib/decos/kol_deco_sn
 #surface,,,,,
 kol_blaze,ship,,,surface,graphics/maps/ship_glib/kol_blaze_surface.png
 kol_boss_retribution_path,ship,,,surface,graphics/maps/ship_glib/kol_boss_retribution_path_surface.png
+kol_invictus,ship,,,surface,graphics/maps/ship_glib/kol_invictus_surface.png
 kol_invictus_lp,ship,,,surface,graphics/maps/ship_glib/kol_invictus_lp_surface.png
 ,,,,,
 kol_hex,ship,,,surface,graphics/maps/ship_glib/fighters/kol_hex_surface.png
@@ -455,6 +496,10 @@ zea_deco_edf_engL2,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf
 zea_deco_edf_engL2,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engL2_surface.png
 zea_deco_edf_engS,hardpoint,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_surface.png
 zea_deco_edf_engS,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_surface.png
+zea_deco_edf_wani_ml,hardpoint,,,surface,graphics/maps/ship_glib/decos/zea_deco_edf_wani_ml_surface.png
+zea_deco_edf_wani_ml,turret,,,surface,graphics/maps/ship_glib/decos/zea_deco_edf_wani_ml_surface.png
+zea_deco_edf_wani_mr,hardpoint,,,surface,graphics/maps/ship_glib/decos/zea_deco_edf_wani_mr_surface.png
+zea_deco_edf_wani_mr,turret,,,surface,graphics/maps/ship_glib/decos/zea_deco_edf_wani_mr_surface.png
 kol_deco_snowdrop_tl,hardpoint,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_surface.png
 kol_deco_snowdrop_tl,turret,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tl_surface.png
 kol_deco_snowdrop_tr,hardpoint,,,surface,graphics/maps/ship_glib/decos/kol_deco_snowdrop_tr_surface.png
@@ -521,6 +566,7 @@ zea_deco_dusk_ikiryo_tl,turret,,0.5,normal,graphics/maps/ship_normals/decos/zea_
 zea_deco_dusk_ikiryo_tr,hardpoint,,0.5,normal,graphics/maps/ship_normals/decos/zea_deco_dusk_ikiryo_tr_normal.png
 zea_deco_dusk_ikiryo_tr,turret,,0.5,normal,graphics/maps/ship_normals/decos/zea_deco_dusk_ikiryo_tr_normal.png
 ,,,,,
+zea_dusk_furaribi,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_furaribi_normal.png
 zea_dusk_onryo,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_onryo_normal.png
 zea_dusk_shiryo,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_shiryo_normal.png
 zea_dusk_onibi,ship,,0.5,normal,graphics/maps/ship_normals/zea_dusk_onibi_normal.png
@@ -544,6 +590,9 @@ zea_dawn_xuangui,ship,,0.5,normal,graphics/maps/ship_normals/zea_dawn_xuangui_no
 zea_dawn_chiwen,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_dawn_chiwen_normal.png
 zea_edf_shachi,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_shachi_normal.png
 zea_edf_shachihoko,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_shachihoko_normal.png
+zea_edf_kokakucho,ship,,0.5,normal,graphics/maps/ship_normals//fighters/zea_edf_kokakucho_normal.png
+zea_edf_onmoraki,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_onmoraki_normal.png
+zea_edf_suzaku,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_suzaku_normal.png
 ,,,,,
 #we have gun too you know,,,,,
 zea_bricole_m,hardpoint,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_hardpoint_base_normal.png
@@ -612,6 +661,7 @@ zea_deco_dusk_ikiryo_tl,turret,,,material,graphics/maps/ship_glib/decos/zea_deco
 zea_deco_dusk_ikiryo_tr,hardpoint,,,material,graphics/maps/ship_glib/decos/zea_deco_dusk_ikiryo_tr_material.png
 zea_deco_dusk_ikiryo_tr,turret,,,material,graphics/maps/ship_glib/decos/zea_deco_dusk_ikiryo_tr_material.png
 ,,,,,
+zea_dusk_furaribi,ship,,,material,graphics/maps/ship_glib/zea_dusk_furaribi_material.png
 zea_dusk_onryo,ship,,,material,graphics/maps/ship_glib/zea_dusk_onryo_material.png
 zea_dusk_shiryo,ship,,,material,graphics/maps/ship_glib/zea_dusk_shiryo_material.png
 zea_dusk_onibi,ship,,,material,graphics/maps/ship_glib/zea_dusk_onibi_material.png
@@ -635,6 +685,9 @@ zea_dawn_xuangui,ship,,,material,graphics/maps/ship_glib/zea_dawn_xuangui_materi
 zea_dawn_chiwen,ship,,,material,graphics/maps/ship_glib/fighters/zea_dawn_chiwen_material.png
 zea_edf_shachi,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_shachi_material.png
 zea_edf_shachihoko,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_shachihoko_material.png
+zea_edf_kokakucho,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_kokakucho_material.png
+zea_edf_onmoraki,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_onmoraki_material.png
+zea_edf_suzaku,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_suzaku_material.png
 ,,,,,
 #its really gun,,,,,
 zea_bricole_m,hardpoint,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_material.png
@@ -704,6 +757,7 @@ zea_deco_dusk_ikiryo_tl,turret,,,surface,graphics/maps/ship_glib/decos/zea_deco_
 zea_deco_dusk_ikiryo_tr,hardpoint,,,surface,graphics/maps/ship_glib/decos/zea_deco_dusk_ikiryo_tr_surface.png
 zea_deco_dusk_ikiryo_tr,turret,,,surface,graphics/maps/ship_glib/decos/zea_deco_dusk_ikiryo_tr_surface.png
 ,,,,,
+zea_dusk_furaribi,ship,,,surface,graphics/maps/ship_glib/zea_dusk_furaribi_surface.png
 zea_dusk_onryo,ship,,,surface,graphics/maps/ship_glib/zea_dusk_onryo_surface.png
 zea_dusk_shiryo,ship,,,surface,graphics/maps/ship_glib/zea_dusk_shiryo_surface.png
 zea_dusk_onibi,ship,,,surface,graphics/maps/ship_glib/zea_dusk_onibi_surface.png
@@ -727,6 +781,9 @@ zea_dawn_xuangui,ship,,,surface,graphics/maps/ship_glib/zea_dawn_xuangui_surface
 zea_dawn_chiwen,ship,,,surface,graphics/maps/ship_glib/fighters/zea_dawn_chiwen_surface.png
 zea_edf_shachi,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_shachi_surface.png
 zea_edf_shachihoko,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_shachihoko_surface.png
+zea_edf_kokakucho,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_kokakucho_surface.png
+zea_edf_onmoraki,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_onmoraki_surface.png
+zea_edf_suzaku,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_suzaku_surface.png
 ,,,,,
 #it work and it shoot,,,,,
 zea_bricole_m,hardpoint,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_surface.png

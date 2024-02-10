@@ -1,0 +1,70 @@
+{
+    "displayName": "Battlestar",
+    "fluxCapacitors": 8,
+    "fluxVents": 50,
+    "goalVariant": true,
+    "hullId": "kol_libra",
+    "hullMods": [
+        "fluxbreakers",
+        "hardenedshieldemitter",
+        "heavyarmor",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_libra_Battlestar",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0006": "atropos",
+                "WS0007": "hammer",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0004": "hammer",
+                "WS0005": "hammer",
+                "WS0003": "hammer",
+                "WS0002": "hammer",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0013": "gauss",
+                "WS0012": "gauss",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0016": "gauss",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0014": "dualflak",
+                "WS0015": "dualflak",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"WS0017": "kol_libra_ml2_Battlestar"},
+        {"WS0018": "kol_libra_mr2_Battlestar"},
+        {"WS0010": "kol_libra_tl_Battlestar"},
+        {"WS0011": "kol_libra_tr_Battlestar"},
+        {"SECTION_REAR": "kol_libra_rear_Battlestar"},
+        {"WS0008": "kol_libra_ml_Battlestar"},
+        {"WS0009": "kol_libra_mr_Battlestar"},
+        {"SECTION_BASE": "kol_libra_under_Battlestar"},
+    ],
+}

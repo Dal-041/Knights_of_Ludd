@@ -1,0 +1,78 @@
+{
+  "hullName": "Gunnery Module",
+  "hullId": "kol_libra_ml",
+  "hullSize": "CRUISER",
+  "spriteName": "graphics/ships/libra/kol_libra_ml.png",
+  "style": "KOL_TECH",
+  "height": 138,
+  "width": 146,
+  "center": [78, 61],
+  "collisionRadius": 114,
+  "shieldCenter": [0, 0.5],
+  "shieldRadius": 113.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "reduced_explosion",
+	"kol_module",
+	"missile_reload",
+    "targetingunit",
+    "always_detaches"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 75,
+      "locations": [59, -11]
+    },
+    {
+      "id": "WS0003",
+      "size": "LARGE",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 5,
+      "angle": 90,
+      "locations": [-32, 62]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 115,
+      "angle": 105,
+      "locations": [-50, 13]
+    },
+    {
+      "id": "WS0002",
+      "size": "LARGE",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [28, -2]
+    },
+    {
+      "id": "WS0004",
+      "size": "LARGE",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [-24, -2]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -32.5, -59.5,
+    53, -56.5,
+    73.5, -25,
+    72, 15,
+    9.5, 72,
+    -48, 73,
+    -59.5, 7
+  ]
+}

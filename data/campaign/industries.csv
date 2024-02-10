@@ -1,2 +1,16 @@
 id,name,cost mult,build time,income,upkeep,downgrade,upgrade,tags,data,image,plugin,desc,order,disruptDanger
 kol_garden,Sanctuary of Repose,10,90,0,3,,,"unraidable, structure",,graphics/illustrations/kol_gardens_smol.png,org.selkie.kol.campaign.kol_garden,This retreat offers a much needed respite from the stresses of interstellar chivalry.,205,
+kol_battlestation_libra,Battlestation Liba,200,180,0,6,,kol_battlestar_libra,"station, battlestation, unraidable, structure","{
+radius:60,
+variant:kol_libra_Battlestation,
+fleetName:Battlestation,
+}",graphics/icons/industry/battlestation.png,com.fs.starfarer.api.impl.campaign.econ.impl.OrbitalStation,"A warship-turned-battlestation, augmented with heavy ablative armor and overlapping defense modules.
+
+Must be reduced before a bombardment can be attempted.",2110,
+kol_battlestar_librar,Battlestar Libra,400,180,0,10,kol_battlestar_libra,,"station, starfortress, unraidable, structure","{
+radius:75,
+variant:kol_libra_Battlestar,
+fleetName:Libra Prime
+}",graphics/icons/industry/battlestation.png,com.fs.starfarer.api.impl.campaign.econ.impl.OrbitalStation,"A glorious, restored battlestar sporting a truly intimidating level of firepowerand an extensive minefield.
+
+Must be reduced before a bombardment can be attempted",2111,

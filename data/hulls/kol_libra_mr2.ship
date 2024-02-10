@@ -1,0 +1,68 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_libra_mr2",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/libra/kol_libra_mr2.png",
+  "style": "LOW_TECH",
+  "height": 90,
+  "width": 88,
+  "center": [-23, -20.5],
+  "collisionRadius": 135.5,
+  "shieldCenter": [62.5, -65],
+  "shieldRadius": 77.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "no_weapon_flux",
+    "reduced_explosion",
+    "always_detaches",
+    "kol_vulcan"
+  ],
+  "builtInWeapons": {
+    "WS0001": "vulcan"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -60,
+      "locations": [46.5, -64]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -10,
+      "locations": [107.5, -34.5]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -30,
+      "locations": [83, -68.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    34.5, -59,
+    24, -93,
+    29.5, -101.5,
+    49, -110.5,
+    103.5, -43,
+    109.5, -29.5,
+    104, -23.5,
+    95.5, -23.5,
+    89.5, -29.5,
+    82, -30,
+    66, -46.5,
+    58.5, -46
+  ]
+}

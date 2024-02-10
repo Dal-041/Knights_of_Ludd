@@ -2,15 +2,19 @@ package org.selkie.kol.world;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Random;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
 import exerelin.campaign.SectorManager;
 import org.apache.log4j.Logger;
+import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.helpers.MarketHelpers;
@@ -28,6 +32,7 @@ public class GenerateKnights {
 		Global.getSector().getStarSystem("Al Gebbar").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
+		genBattlestarLibra();
 	}
 
 	public static void genAlways() {
@@ -88,11 +93,11 @@ public class GenerateKnights {
 		cygnus.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(cygnus.getMarket().getId());
 
-		cygnus.setInteractionImage("illustrations", "kol_garden_large");
+		cygnus.setInteractionImage("illustrations", "kol_citadel_large");
 
 		PersonAPI master = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Master", "Helensis", "kol_chaptermaster",
-				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_ARCHCURATE,
-				false, 0, 1);
+				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_MILITARY_ADMINISTRATOR,
+				false, 1, 1);
 
 		PersonAPI lackey1 = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Brother", "Enarms", "kol_agent_m",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.KNIGHT_CAPTAIN, Ranks.POST_GUARD_LEADER,
@@ -137,12 +142,12 @@ public class GenerateKnights {
         		0.3f
         );
 
-		lyra.setInteractionImage("illustrations", "kol_garden_large");
+		lyra.setInteractionImage("illustrations", "kol_citadel_large");
 
 		lyra.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
 
-		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Luthor", "kol_grandmaster",
+		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Lyon", "kol_grandmaster",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.FACTION_LEADER, Ranks.POST_FACTION_LEADER,
 				false, 0, 1);
 
@@ -159,6 +164,87 @@ public class GenerateKnights {
 		lackey2.setImportance(PersonImportance.HIGH);
 		lackey2.setVoice(Voices.FAITHFUL);
 	}
+
+	public static void genBattlestarLibra() {
+		String entID = "kol_libra";
+		StarSystemAPI home = getLibraHome(Long.parseLong(Global.getSector().getSeedString().substring(3)));
+		SectorEntityToken libra = home.addCustomEntity(entID, "Battlestar Libra", "station_sporeship_derelict", "knights_of_selkie");
+		libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
+		libra.setCustomDescriptionId("kol_libra_port_desc");
+		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
+
+		MarketAPI libraMarket = MarketHelpers.addMarketplace("knights_of_selkie", libra, null, "Star Port Libra", 4,
+				new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
+						Conditions.POPULATION_4)),
+				new ArrayList<String>(Arrays.asList(
+						Industries.POPULATION,
+						Industries.SPACEPORT,
+						"kol_garden",
+						Industries.HIGHCOMMAND,
+						Industries.HEAVYBATTERIES,
+						"kol_battlestation_libra",
+						Industries.WAYSTATION)),
+				new ArrayList<String>(Arrays.asList(
+						Submarkets.SUBMARKET_STORAGE,
+						Submarkets.GENERIC_MILITARY,
+						Submarkets.SUBMARKET_BLACK)),
+				1f
+		);
+
+		home.getMemoryWithoutUpdate().set("$kol_libra_start_system", true);
+
+		libra.setDiscoverable(true);
+		libra.setDiscoveryXP(10000f);
+		libraMarket.setHidden(true);
+		libraMarket.setSurveyLevel(MarketAPI.SurveyLevel.NONE);
+		libra.setInteractionImage("illustrations", "kol_garden_large");
+
+		//This one does have a black tradeBa
+		//if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
+
+		PersonAPI elder = MagicCampaign.addCustomPerson(libra.getMarket(), "Knightmaster", "Martins", "kol_grandmaster",
+				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_STATION_COMMANDER,
+				true, 1, 0);
+
+		elder.setId("kol_libramaster");
+
+		elder.setImportance(PersonImportance.VERY_HIGH);
+		elder.setVoice(Voices.SOLDIER);
+	}
+
+	protected static final String[] libraExclusionTags = {
+			Tags.NOT_RANDOM_MISSION_TARGET,
+			Tags.THEME_HIDDEN,
+			Tags.THEME_REMNANT_MAIN,
+			Tags.THEME_REMNANT_RESURGENT,
+			Tags.THEME_UNSAFE,
+			Tags.THEME_SPECIAL,
+			Tags.THEME_CORE,
+	};
+
+	public static StarSystemAPI getLibraHome(long seed) {
+		WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>(new Random(seed));
+		float width = Global.getSettings().getFloat("sectorWidth");
+		float height = Global.getSettings().getFloat("sectorHeight");
+		OUTER: for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+			if (system.getStar() == null || system.getStar().getTypeId().equals(StarTypes.NEUTRON_STAR) || system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE) || system.getStar().getTypeId().equals(StarTypes.BLUE_SUPERGIANT)) continue;
+			if (system.getPlanets().isEmpty()) continue;
+			for (String tag : libraExclusionTags) {
+				if (system.hasTag(tag)) {
+					continue OUTER;
+				}
+			}
+			float w = 1f;
+			if (system.hasTag(Tags.THEME_INTERESTING)) w *= 10f;
+			if (system.hasTag(Tags.THEME_INTERESTING_MINOR)) w *= 5f;
+			if (system.getLocation().getX() <= width + 5000) w *= 5f; //West bias
+			if (system.getLocation().getX() <= width + 10000) w *= 10f; //West bias
+			if (system.getLocation().getX() <= width + 20000) w *= 5f; //West bias
+			picker.add(system, w);
+		}
+		return picker.pick();
+	}
+
 
 	public static void genKnightsExpeditions() {
 		org.selkie.kol.fleets.KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
