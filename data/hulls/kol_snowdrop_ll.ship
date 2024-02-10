@@ -1,52 +1,64 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_snowdrop_ll",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_snowdrop_ll.png",
-  "style": "KOL_TECH",
-  "height": 56,
-  "width": 58,
-  "center": [29, 28],
-  "collisionRadius": 45.5,
-  "shieldCenter": [0, 0],
-  "shieldRadius": 41.5,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "ablative_armor",
-    "no_weapon_flux",
-    "reduced_explosion",
-    "always_detaches"
-  ],
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": 135,
-      "locations": [0, 17]
-    },
-    {
-      "id": "WS0002",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "HIDDEN",
-      "arc": 0,
-      "angle": 155,
-      "locations": [-25, -16.5]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    -3, -27,
-    15.5, -5.5,
-    24, 12,
-    12, 28,
-    7, 28,
-    -27.5, -15,
-    -27.5, -22,
-    -21.5, -27.5
-  ]
+    "hullName": "Armor",
+    "hullId": "kol_snowdrop_ll",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_snowdrop_ll.png",
+    "height": 56,
+    "width": 58,
+    "center": [
+        83, 67
+    ],
+    "collisionRadius": 95,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 95,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "no_weapon_flux",
+        "reduced_explosion",
+        "always_detaches"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "HIDDEN",
+            "arc": 0,
+            "angle": 135,
+            "locations": [
+                     -39,       71
+            ]
+        },
+        {
+            "id": "WS0002",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "HIDDEN",
+            "arc": 0,
+            "angle": 155,
+            "locations": [
+                     -64,     37.5
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+             -41,     27.5,
+           -24.5,       45,
+             -15,     66.5,
+           -27.5,       82,
+             -33,       82,
+        
+             -66,     39.5,
+             -66,       31,
+             -61,       27
+    ]
 }
