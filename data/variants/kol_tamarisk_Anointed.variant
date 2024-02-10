@@ -58,9 +58,9 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0016": "kol_tamarisk_tl_Anointed"},
-        {"WS0012": "kol_tamarisk_ll_Anointed"},
-        {"WS0013": "kol_tamarisk_lr_Anointed"},
-        {"WS0017": "kol_tamarisk_tr_Anointed"},
+        {"ARMOR_MODULE_TL": "kol_tamarisk_tl_Anointed"},
+        {"ARMOR_MODULE_TR": "kol_tamarisk_tr_Anointed"},
+        {"ARMOR_MODULE_LL": "kol_tamarisk_ll_Anointed"},
+        {"ARMOR_MODULE_LR": "kol_tamarisk_lr_Anointed"},
     ],
 }

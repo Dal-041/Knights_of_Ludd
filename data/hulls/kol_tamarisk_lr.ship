@@ -1,41 +1,51 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_tamarisk_lr",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_tamarisk_lr.png",
-  "style": "LOW_TECH",
-  "height": 62,
-  "width": 26,
-  "center": [13, 31],
-  "collisionRadius": 35,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 33,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "ablative_armor",
-    "reduced_explosion",
-    "always_detaches"
-  ],
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-17, -3]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    -29, -3,
-    -22, -11.5,
-    6.5, -5,
-    28.5, 7,
-    22, 12,
-    3, 4,
-    -16, 3.5
-  ]
+    "hullName": "Armor",
+    "hullId": "kol_tamarisk_lr",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_tamarisk_lr.png",
+    "height": 62,
+    "width": 26,
+    "center": [
+        -40, 80
+    ],
+    "collisionRadius": 135,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 130,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "reduced_explosion",
+        "always_detaches"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     -66,      -56
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+             -79,       -56,
+             -73,       -64,
+             -47,     -59.5,
+           -19.5,       -46,
+           -26.5,     -41.5,
+
+             -46,     -49.5,
+           -68.5,       -50
+    ]
 }

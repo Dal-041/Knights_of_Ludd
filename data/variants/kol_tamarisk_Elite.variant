@@ -56,9 +56,9 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0016": "kol_tamarisk_tl_Elite"},
-        {"WS0012": "kol_tamarisk_ll_Elite"},
-        {"WS0013": "kol_tamarisk_lr_Elite"},
-        {"WS0017": "kol_tamarisk_tr_Elite"},
+        {"ARMOR_MODULE_TL": "kol_tamarisk_tl_Elite"},
+        {"ARMOR_MODULE_TR": "kol_tamarisk_tr_Elite"},
+        {"ARMOR_MODULE_LL": "kol_tamarisk_ll_Elite"},
+        {"ARMOR_MODULE_LR": "kol_tamarisk_lr_Elite"},
     ],
 }

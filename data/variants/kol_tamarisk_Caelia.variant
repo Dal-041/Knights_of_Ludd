@@ -60,9 +60,9 @@
         "broadsword_wing",
     ],
     "modules": [
-        {"WS0016": "kol_tamarisk_tl_Caelia"},
-        {"WS0012": "kol_tamarisk_ll_Caelia"},
-        {"WS0013": "kol_tamarisk_lr_Caelia"},
-        {"WS0017": "kol_tamarisk_tr_Caelia"},
+        {"ARMOR_MODULE_TL": "kol_tamarisk_tl_Caelia"},
+        {"ARMOR_MODULE_TR": "kol_tamarisk_tr_Caelia"},
+        {"ARMOR_MODULE_LL": "kol_tamarisk_ll_Caelia"},
+        {"ARMOR_MODULE_LR": "kol_tamarisk_lr_Caelia"},
     ],
 }
