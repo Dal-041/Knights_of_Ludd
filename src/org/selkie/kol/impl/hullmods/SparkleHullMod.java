@@ -17,14 +17,11 @@ import java.util.List;
 import java.util.*;
 
 public class SparkleHullMod extends BaseHullMod {
+    private Color jitterColor = new Color(100, 165, 255, 175);
+    private Color droneEMPColor = new Color(100, 165, 255, 255);
 
-
-
-    private Color jitterColor = new Color(100,165,255,175);
-    private Color droneEMPColor = new Color(100,165,255,255);
-
-    private static Color hfColor = new Color(255,80,100,225);
-    private static Color hfEMPColor = new Color(255,80,100,255);
+    private static Color hfColor = new Color(255, 80, 100, 225);
+    private static Color hfEMPColor = new Color(255, 80, 100, 255);
 
     public static final String NINAYA = "zea_boss_ninaya";
     public static final String NINMAH = "zea_boss_ninmah";
@@ -34,7 +31,8 @@ public class SparkleHullMod extends BaseHullMod {
     public static float shipDamageReg = 1f;
     public static float shipDamageHF = 300f;
 
-    private static Map maxDrones = new HashMap();
+    private static final Map<ShipAPI.HullSize, Integer> maxDrones = new HashMap<>();
+
     static {
         maxDrones.put(ShipAPI.HullSize.FIGHTER, 2);
         maxDrones.put(ShipAPI.HullSize.FRIGATE, 6);
@@ -76,7 +74,8 @@ public class SparkleHullMod extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship.getVariant().hasHullMod("adaptive_coils")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "sparkleHullmod");
+        if (ship.getVariant().hasHullMod("adaptive_coils"))
+            MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "sparkleHullmod");
     }
 
     public void advanceInCombat(ShipAPI ship, float amount) {
@@ -141,7 +140,7 @@ public class SparkleHullMod extends BaseHullMod {
                 Vector2f loc = slot.computePosition(ship);
                 float dir = slot.computeMidArcAngle(ship);
                 float arc = slot.getArc();
-                dir += arc * (float) Math.random() - arc /2f;
+                dir += arc * (float) Math.random() - arc / 2f;
 
                 String weaponId = WEAPON;
                 MissileAPI drone = (MissileAPI) engine.spawnProjectile(ship, null,
@@ -180,8 +179,8 @@ public class SparkleHullMod extends BaseHullMod {
                 MissileAPI orig = data.drones.get(i);
                 // NEW PLAN: set a custom tag for the onHit to pick up
                 //orig.setNoGlowTime(0.01f); //One frame,ish
-                orig.setJitter(this, hfColor, (HFGraceInterval.getElapsed()/(HFGraceInterval.getMaxInterval()/3)) * 3, 1, orig.getGlowRadius());
-                orig.getEngineController().fadeToOtherColor(this,hfColor,hfColor,2f,0.75f);
+                orig.setJitter(this, hfColor, (HFGraceInterval.getElapsed() / (HFGraceInterval.getMaxInterval() / 3)) * 3, 1, orig.getGlowRadius());
+                orig.getEngineController().fadeToOtherColor(this, hfColor, hfColor, 2f, 0.75f);
             }
             if (makeHFSparkles(ship)) {
                 HFGraceInterval.setElapsed(0f);
@@ -196,7 +195,7 @@ public class SparkleHullMod extends BaseHullMod {
                 MissileAPI orig = data.drones.get(i);
                 //orig.setNoGlowTime(0.01f); //One frame,ish
                 //orig.setJitter(this, jitterColor, 1f, 1, orig.getGlowRadius());
-                orig.getEngineController().fadeToOtherColor(this,jitterColor,hfColor,1f,1f);
+                orig.getEngineController().fadeToOtherColor(this, jitterColor, hfColor, 1f, 1f);
             }
             madeHF = false;
             ship.removeCustomData("HF_SPARKLE");
@@ -207,8 +206,10 @@ public class SparkleHullMod extends BaseHullMod {
     }
 
     protected boolean makeHFSparkles(ShipAPI ship) {
-        if (ship.getSystem().isActive() && (ship.getHullSpec().getBaseHullId().equals(NINMAH) || ship.getHullSpec().getBaseHullId().equals(NINAYA) || ship.getHullSpec().getBaseHullId().equals(NINEVEH))) return true;
-        return false;
+        return ship.getSystem().isActive()
+                && (ship.getHullSpec().getBaseHullId().equals(NINMAH)
+                || ship.getHullSpec().getBaseHullId().equals(NINAYA)
+                || ship.getHullSpec().getBaseHullId().equals(NINEVEH));
     }
 
     protected void findDroneSlots(ShipAPI ship) {
@@ -224,15 +225,17 @@ public class SparkleHullMod extends BaseHullMod {
             }
         }
     }
+
     public static SharedAIData getSharedData(ShipAPI source) {
         String key = source + TEST_DATA_KEY;
-        SharedAIData data = (SharedAIData)Global.getCombatEngine().getCustomData().get(key);
+        SharedAIData data = (SharedAIData) Global.getCombatEngine().getCustomData().get(key);
         if (data == null) {
             data = new SharedAIData();
             Global.getCombatEngine().getCustomData().put(key, data);
         }
         return data;
     }
+
     public static class SharedAIData {
         public float elapsed = 0f;
 
@@ -259,6 +262,7 @@ public class SparkleHullMod extends BaseHullMod {
         data.droneTarget = targetLoc;
 
     }
+
     public Vector2f getDroneTargetedLocation(ShipAPI from) {
         Vector2f loc = from.getSystem().getTargetLoc();
         if (loc == null) {
@@ -266,6 +270,7 @@ public class SparkleHullMod extends BaseHullMod {
         }
         return loc;
     }
+
     public Vector2f getTargetLoc(ShipAPI from) {
         findDroneSlots(from);
 
@@ -279,6 +284,7 @@ public class SparkleHullMod extends BaseHullMod {
         }
         return targetLoc;
     }
+
     public ShipAPI getDroneLockTarget(ShipAPI from, Vector2f loc) {
         Vector2f slotLoc = lock.computePosition(from);
         for (ShipAPI other : Global.getCombatEngine().getShips()) {

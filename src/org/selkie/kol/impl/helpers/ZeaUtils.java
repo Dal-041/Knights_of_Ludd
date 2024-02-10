@@ -95,10 +95,10 @@ public class ZeaUtils {
     public static final String pathPortraits = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
     public static final String[] portraitsDawnPaths = {pathPortraits.concat("zea_dawn_1.png"), pathPortraits.concat("zea_dawn_2.png"), pathPortraits.concat("zea_dawn_3.png"), pathPortraits + "zea_dawn_4.png", pathPortraits + "zea_dawn_5.png"};
     public static final String[] portraitsDuskPaths = {pathPortraits.concat("zea_dusk_1.png"), pathPortraits.concat("zea_dusk_2.png"), pathPortraits.concat("zea_dusk_3.png")};
-    public static final String[] portraitsElysianPaths = {pathPortraits.concat("zea_idk1.png"), pathPortraits.concat("zea_idk2.png"), pathPortraits.concat("zea_idk3.png")};
+    public static final String[] portraitsElysianPaths = {pathPortraits.concat("zea_idk1.png"), pathPortraits.concat("zea_edf2.png"), pathPortraits.concat("zea_edf1.png")};
     public static final String[] portraitsDawn = {"zea_dawn_1", "zea_dawn_2", "zea_dawn_3", "zea_dawn_4", "zea_dawn_5"};
     public static final String[] portraitsDusk = {"zea_dusk_1", "zea_dusk_2", "zea_dusk_3"};
-    public static final String[] portraitsElysian = {"zea_idk1", "zea_idk2", "zea_idk3"};
+    public static final String[] portraitsElysian = {"zea_idk1", "zea_edf2", "zea_edf1"};
 
     public static final String pathCrests = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/";
     public static final String crestDawn = "zea_crest_dawntide";

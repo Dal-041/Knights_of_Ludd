@@ -2,7 +2,7 @@
   "hullName": "Kiyohime",
   "hullId": "zea_edf_kiyohime",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_kiyohime.png",
+  "spriteName": "graphics/ships/zea_edf_kiyohime.png",
   "style": "ZEA_ELYSIAN_TECH",
   "height": 294,
   "width": 480,
@@ -27,8 +27,19 @@
     "WS0012": "zea_deco_edf_engS",
     "WS0013": "zea_deco_edf_engS",
     "WS0014": "zea_deco_edf_engS",
+    "WS0015": "zea_deco_edf_mizuchi_lights",
+    "WS0016": "eis_blinker_white",
     "WS0017": "zea_deco_edf_vortice",
-    "WS0018": "zea_deco_edf_vortice"
+    "WS0018": "zea_deco_edf_vortice",
+    "WS0019": "eis_blinker_white",
+    "WS0020": "eis_blinker_white",
+    "WS0021": "eis_blinker_white",
+    "WS0022": "eis_blinker_red",
+    "WS0023": "eis_blinker_green",
+    "WS0024": "eis_blinker_white30",
+    "WS0025": "eis_blinker_white30",
+    "WS0026": "eis_blinker_white30",
+    "WS0027": "eis_blinker_white30"
   },
   "weaponSlots": [
     {
@@ -192,6 +203,105 @@
         83, 62,
         87, 50.5
       ]
+    },
+    {
+      "id": "WS0015",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [22.5, -0]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-20.5, 220.5]
+    },
+    {
+      "id": "WS0019",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-20.5, -220.5]
+    },
+    {
+      "id": "WS0020",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-31.5, 161.5]
+    },
+    {
+      "id": "WS0021",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-31.5, -161.5]
+    },
+    {
+      "id": "WS0022",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [93.5, 40.5]
+    },
+    {
+      "id": "WS0023",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [93.5, -40.5]
+    },
+    {
+      "id": "WS0024",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [6.5, 22.5]
+    },
+    {
+      "id": "WS0025",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [6.5, -22.5]
+    },
+    {
+      "id": "WS0026",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-105, 27]
+    },
+    {
+      "id": "WS0027",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-105, -27]
     }
   ],
   "engineSlots": [
