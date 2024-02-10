@@ -81,7 +81,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
         if (KOL_ModPlugin.hasGraphicsLib) {
             val ripple = RippleDistortion(ship.location, Vector2f())
             ripple.size = DAMAGE_RANGE / 1.2f
-            ripple.intensity = 12f
+            ripple.intensity = 8f
             ripple.frameRate = 60f
             ripple.fadeInSize(1f)
             ripple.fadeOutIntensity(4f)
