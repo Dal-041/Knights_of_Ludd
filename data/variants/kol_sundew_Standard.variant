@@ -10,8 +10,8 @@
         "armoredweapons"
     ],
     "modules": [
-        {"WS0004": "kol_sundew_tl_Standard"},
-        {"WS0005": "kol_sundew_tr_Standard"}
+        {"ARMOR_MODULE_TL": "kol_sundew_tl_Standard"},
+        {"ARMOR_MODULE_TR": "kol_sundew_tr_Standard"}
     ],
     "permaMods": [],
     "sMods": [],

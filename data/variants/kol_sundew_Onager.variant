@@ -32,7 +32,7 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0004": "kol_sundew_tl_Onager"},
-        {"WS0005": "kol_sundew_tr_Onager"},
+        {"ARMOR_MODULE_TL": "kol_sundew_tl_Onager"},
+        {"ARMOR_MODULE_TR": "kol_sundew_tr_Onager"},
     ],
 }
