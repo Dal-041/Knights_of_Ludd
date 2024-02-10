@@ -273,6 +273,7 @@
 		},
 		"illustrations":{
 			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",
+			"kol_citadel_large":"graphics/illustrations/kol_citadel_big.png",
 		},
 		"terrain":{
 			"nebula_zea_black":"graphics/terrain/nebula_kol_black_shiny.png",
