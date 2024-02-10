@@ -50,8 +50,8 @@
 			"condor":0.5,
 			"mora":0.5,
 			"retribution":0.5,
-			"invictus":1,
-			"kol_invictus":1,
+			"invictus":0.1,
+			"kol_invictus":0.3,
 		},
 	},
 	"shipsWhenImporting":{
