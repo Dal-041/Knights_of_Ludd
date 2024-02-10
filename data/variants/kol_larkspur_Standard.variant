@@ -25,8 +25,8 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0009": "breachpod",
-                "WS0010": "breachpod",
+                "WS0007": "breachpod",
+                "WS0008": "breachpod",
             }
         },
         {
@@ -49,7 +49,7 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0011": "kol_larkspur_tl_Standard"},
-        {"WS0012": "kol_larkspur_tr_Standard"},
+        {"ARMOR_MODULE_TL": "kol_larkspur_tl_Standard"},
+        {"ARMOR_MODULE_TR": "kol_larkspur_tr_Standard"},
     ],
 }

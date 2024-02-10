@@ -25,8 +25,8 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0009": "sabotpod",
-                "WS0010": "sabotpod",
+                "WS0007": "sabotpod",
+                "WS0008": "sabotpod",
             }
         },
         {
@@ -49,7 +49,7 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0011": "kol_larkspur_tl_Hellfire"},
-        {"WS0012": "kol_larkspur_tr_Hellfire"},
+        {"ARMOR_MODULE_TL": "kol_larkspur_tl_Hellfire"},
+        {"ARMOR_MODULE_TR": "kol_larkspur_tr_Hellfire"},
     ],
 }
