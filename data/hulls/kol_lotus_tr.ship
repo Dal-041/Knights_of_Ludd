@@ -1,61 +1,79 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_lotus_tr",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_lotus_tr.png",
-  "style": "LOW_TECH",
-  "height": 95,
-  "width": 52,
-  "center": [30, 48],
-  "collisionRadius": 55,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 53,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "ablative_armor",
-    "reduced_explosion",
-    "always_detaches"
-  ],
-  "builtInWeapons": {
-    "WS0002": "kol_blinker_white30"
-  },
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [13, 4]
+    "hullName": "Armor",
+    "hullId": "kol_lotus_tr",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_lotus_tr.png",
+    "height": 95,
+    "width": 52,
+    "center": [
+        -18, -11
+    ],
+    "collisionRadius": 133,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 122,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "reduced_explosion",
+        "always_detaches"
+    ],
+    "builtInWeapons": {
+        "WS0002": "kol_blinker_white30"
     },
-    {
-      "id": "WS0002",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [19, 21]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    -46, -18,
-    -30, 0.5,
-    -18.5, 2.5,
-    -9, 21.5,
-    9, 21.5,
-    12, 26.5,
-    30.5, 26,
-    32, 17.5,
-    46, 10,
-    44.5, -6.5,
-    12, -18,
-    1, -12.5,
-    -6.5, -20,
-    -17, -20,
-    -21.5, -15.5
-  ]
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                      72,      -44
+            ]
+        },
+        {
+            "id": "WS0002",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                      78,      -27
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+              49,     -26.5,
+              66,       -26,
+            70.5,       -22,
+            86.5,       -22,
+              92,       -32,
+
+            98.5,       -33,
+           103.5,     -38.5,
+             104,       -54,
+              70,       -66,
+              61,     -59.5,
+
+            51.5,       -68,
+              42,     -67.5,
+            36.5,       -63,
+            16.5,       -68,
+            12.5,     -65.5,
+
+              30,     -47.5,
+            40.5,     -46.5,
+            47.5,     -38.5
+    # 18 points total.
+    ]
 }

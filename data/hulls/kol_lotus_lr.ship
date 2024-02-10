@@ -1,44 +1,57 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_lotus_lr",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_lotus_lr.png",
-  "style": "LOW_TECH",
-  "height": 61,
-  "width": 30,
-  "center": [10, 33],
-  "collisionRadius": 39.5,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 35.5,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "ablative_armor",
-    "reduced_explosion",
-    "always_detaches"
-  ],
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [17, -2]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    -32, -2.5,
-    -26, 8.5,
-    -6, 1,
-    7, 1,
-    19.5, 8,
-    27.5, -1,
-    14, -18,
-    6.5, -18,
-    -11.5, -11,
-    -17, -13.5
-  ]
+    "hullName": "Armor",
+    "hullId": "kol_lotus_lr",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_lotus_lr.png",
+    "height": 61,
+    "width": 30,
+    "center": [
+        -52, 91
+    ],
+    "collisionRadius": 133,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 122,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "reduced_explosion",
+        "always_detaches"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 335,
+            "locations": [
+                     -44,      -68
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+             -84,       -53,
+             -90,     -65.5,
+             -75,       -75,
+           -70.5,     -72.5,
+             -51,       -80,
+
+             -45,       -80,
+             -31,       -65,
+             -31,     -61.5,
+             -38,       -53,
+             -51,       -61,
+
+             -63,       -61
+    # 11 points total.
+    ]
 }
