@@ -1,83 +1,102 @@
 {
-  "hullName": "Armor",
-  "hullId": "kol_alysse_lr",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_alysse_lr.png",
-  "style": "LOW_TECH",
-  "height": 108,
-  "width": 66,
-  "center": [33.5, 54.5],
-  "collisionRadius": 74.5,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 71,
-  "viewOffset": 0,
-  "builtInMods": [
-    "kol_module",
-    "no_weapon_flux",
-    "reduced_explosion",
-    "always_detaches",
-    "kol_vulcan"
-  ],
-  "builtInWeapons": {
-    "WS0001": "dualflak",
-    "WS0002": "kol_deco_alysse_lr",
-    "WS0003": "kol_blinker_white",
-    "WS0004": "kol_blinker_white30"
-  },
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "MEDIUM",
-      "type": "BUILT_IN",
-      "mount": "TURRET",
-      "arc": 165,
-      "angle": -90,
-      "locations": [26.5, -9.5]
+    "hullName": "Armor",
+    "hullId": "kol_alysse_lr",
+    "hullSize": "FRIGATE",
+    "style": "KOL_TECH",
+    "spriteName": "graphics/ships/modules/kol_alysse_lr.png",
+    "height": 108,
+    "width": 66,
+    "center": [
+        -76, 112
+    ],
+    "collisionRadius": 177,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 176,
+    "viewOffset": 0,
+    "builtInMods": [
+        "kol_module",
+        "ablative_armor",
+        "no_weapon_flux",
+        "reduced_explosion",
+        "always_detaches",
+        "kol_vulcan"
+    ],
+    "builtInWeapons": {
+        "WS0001": "dualflak",
+        "WS0002": "kol_deco_alysse_lr",
+        "WS0003": "kol_blinker_white",
+        "WS0004": "kol_blinker_white30"
     },
-    {
-      "id": "WS0002",
-      "size": "LARGE",
-      "type": "DECORATIVE",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 0,
-      "locations": [8.5, -5.5],
-      "renderOrderMod": 100
-    },
-    {
-      "id": "WS0003",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [-36.5, -11.5]
-    },
-    {
-      "id": "WS0004",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [15, 22]
-    }
-  ],
-  "engineSlots": [],
-  "bounds": [
-    -53, -11,
-    -53.5, -14.5,
-    -41.5, -31.5,
-    13.5, -20.5,
-    18, -25.5,
-    33, -26,
-    40, -20.5,
-    38.5, -10,
-    36, -5.5,
-    52.5, 10,
-    52.5, 15,
-    36, 32,
-    18.5, 27,
-    8, 30.5
-  ]
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "MEDIUM",
+            "type": "BUILT_IN",
+            "mount": "TURRET",
+            "arc": 165,
+            "angle": -90,
+            "locations": [
+                     -31,     -119
+            ]
+        },
+        {
+            "id": "WS0002",
+            "size": "LARGE",
+            "type": "DECORATIVE",
+            "mount": "HARDPOINT",
+            "renderOrderMod": 100,
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     -49,     -115
+            ]
+        },
+        {
+            "id": "WS0003",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     -94,   -120.5
+            ]
+        },
+        {
+            "id": "WS0004",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                   -42.5,      -87
+            ]
+        }
+    ],
+    "engineSlots": [],
+    "bounds": [
+           -21.5,      -78,
+              -5,      -95,
+              -5,     -102,
+             -20,   -115.5,
+             -18,     -124,
+        
+           -20.5,     -132,
+             -26,     -135,
+             -35,     -135,
+             -44,   -130.5,
+           -98.5,     -140,
+        
+            -111,   -123.5,
+            -111,   -120.5,
+             -49,      -79,
+           -39.5,      -83
+    # 14 points total.
+    ]
 }

@@ -35,14 +35,14 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0003": "heavyac",
-                "WS0002": "heavyac",
+                "WS0004": "heavyac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "devastator",
+                "WS0002": "devastator",
                 "WS0001": "devastator",
             }
         },
@@ -59,9 +59,9 @@
     ],
     "wings": [],
     "modules": [
-        {"WS0012": "kol_alysse_tl_Blessed"},
-        {"WS0018": "kol_alysse_tr_Blessed"},
-        {"WS0016": "kol_alysse_ll_Blessed"},
-        {"WS0017": "kol_alysse_lr_Blessed"},
+        {"ARMOR_MODULE_TL": "kol_alysse_tl_Blessed"},
+        {"ARMOR_MODULE_TR": "kol_alysse_tr_Blessed"},
+        {"ARMOR_MODULE_BL": "kol_alysse_ll_Blessed"},
+        {"ARMOR_MODULE_BR": "kol_alysse_lr_Blessed"},
     ],
 }

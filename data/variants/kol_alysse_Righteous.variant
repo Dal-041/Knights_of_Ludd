@@ -18,7 +18,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "kol_caelia",
+                "WS0002": "kol_caelia",
             }
         },
         {
@@ -40,9 +40,9 @@
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "lightac",
-                "WS0009": "kol_drian",
+                "WS0010": "kol_drian",
                 "WS0011": "kol_drian",
-                "WS0010": "lightac",
+                "WS0009": "lightac",
             }
         },
         {
@@ -52,15 +52,15 @@
                 "WS0006": "flak",
                 "WS0005": "flak",
                 "WS0003": "dualflak",
-                "WS0002": "dualflak",
+                "WS0004": "dualflak",
             }
         },
     ],
     "wings": [],
     "modules": [
-        {"WS0012": "kol_alysse_tl_Righteous"},
-        {"WS0018": "kol_alysse_tr_Righteous"},
-        {"WS0016": "kol_alysse_ll_Righteous"},
-        {"WS0017": "kol_alysse_lr_Righteous"},
+        {"ARMOR_MODULE_TL": "kol_alysse_tl_Righteous"},
+        {"ARMOR_MODULE_TR": "kol_alysse_tr_Righteous"},
+        {"ARMOR_MODULE_BL": "kol_alysse_ll_Righteous"},
+        {"ARMOR_MODULE_BR": "kol_alysse_lr_Righteous"},
     ],
 }
