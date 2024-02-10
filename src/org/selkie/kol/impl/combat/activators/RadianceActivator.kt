@@ -81,10 +81,10 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
         if (KOL_ModPlugin.hasGraphicsLib) {
             val ripple = RippleDistortion(ship.location, Vector2f())
             ripple.size = DAMAGE_RANGE / 1.2f
-            ripple.intensity = 22f
+            ripple.intensity = 12f
             ripple.frameRate = 60f
-            ripple.fadeInSize(0.2f)
-            ripple.fadeOutIntensity(1.5f)
+            ripple.fadeInSize(1f)
+            ripple.fadeOutIntensity(4f)
             DistortionShader.addDistortion(ripple)
 
             val light = StandardLight(ship.location, Vector2f(), Vector2f(), null)
@@ -105,31 +105,69 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 
             PARTICLE_INTERVAL.advance(amount)
             if (PARTICLE_INTERVAL.intervalElapsed()) {
-                for (i in 0 until MathUtils.getRandomNumberInRange(6, 12)) {
-                    val randomX = DAMAGE_RANGE * MathUtils.getRandomNumberInRange(-0.5f, 0.5f)
-                    val randomY = DAMAGE_RANGE * MathUtils.getRandomNumberInRange(-0.5f, 0.5f)
-                    val particlePos = Vector2f.add(ship.location, Vector2f(randomX, randomY), null)
-                    val distance = MathUtils.getDistanceSquared(ship.location, particlePos)
+                for (i in 0 until MathUtils.getRandomNumberInRange(12, 24)) {
+                    val randomPos = MathUtils.getRandomPointInCircle(ship.location, DAMAGE_RANGE)
+                    val distance = MathUtils.getDistanceSquared(ship.location, randomPos)
                     val color = ParticleController.mergeColors(
-                        Color(MathUtils.getRandomNumberInRange(255, 200), 200, 100, MathUtils.getRandomNumberInRange(75, 125)),
-                        Color(MathUtils.getRandomNumberInRange(255, 200), 200, 100, MathUtils.getRandomNumberInRange(75, 125)),
-                        (distance / DAMAGE_RANGE * DAMAGE_RANGE).coerceIn(0f..1f))
-                    val direction = VectorUtils.getDirectionalVector(ship.location, particlePos)
-                    val velocity = Vector2f(-direction.y, direction.x).scale(MathUtils.getRandomNumberInRange(35f, 45f)) as Vector2f
+                        Color(
+                            MathUtils.getRandomNumberInRange(255, 225),
+                            120,
+                            70,
+                            MathUtils.getRandomNumberInRange(175, 255)
+                        ),
+                        Color(MathUtils.getRandomNumberInRange(255, 225), MathUtils.getRandomNumberInRange(120, 180), 80, MathUtils.getRandomNumberInRange(175, 255)),
+                        (distance / (DAMAGE_RANGE * DAMAGE_RANGE)).coerceIn(0f..1f)
+                    )
+                    val direction = VectorUtils.getDirectionalVector(ship.location, randomPos)
+                    val velocity = Vector2f(-direction.y, direction.x).scale(
+                        MathUtils.getRandomNumberInRange(
+                            35f,
+                            45f
+                        )
+                    ) as Vector2f
 
                     ParticleController.addParticle(
                         FlameParticleData(
-                            x = ship.location.x + randomX,
-                            y = ship.location.y + randomY,
+                            x = randomPos.x,
+                            y = randomPos.y,
                             xVel = velocity.x,
                             yVel = velocity.y,
                             angle = MathUtils.getRandomNumberInRange(0f, 360f),
                             aVel = MathUtils.getRandomNumberInRange(0f, 100f),
-                            startingSize = 20f,
-                            endSize = 5f,
+                            startingSize = 200f,
+                            endSize = 80f,
                             ttl = 1f,
                             startingColor = color,
-                            endColor = color.setAlpha(color.alpha / 2)
+                            endColor = color.setAlpha(0)
+                        )
+                    )
+                }
+
+                for (i in 0 until MathUtils.getRandomNumberInRange(6, 12)) {
+                    val randomPos = MathUtils.getPointOnCircumference(
+                        ship.location,
+                        DAMAGE_RANGE,
+                        MathUtils.getRandomNumberInRange(20f, 60f) * i
+                    )
+                    val distance = MathUtils.getDistanceSquared(ship.location, randomPos)
+                    val color = Color(100, 100, 100, MathUtils.getRandomNumberInRange(175, 255))
+                    val direction = VectorUtils.getDirectionalVector(ship.location, randomPos)
+                    val velocity = Vector2f(-direction.y, direction.x).scale(MathUtils.getRandomNumberInRange(80f, 120f)
+                    ) as Vector2f
+
+                    ParticleController.addParticle(
+                        FlameParticleData(
+                            x = randomPos.x,
+                            y = randomPos.y,
+                            xVel = velocity.x,
+                            yVel = velocity.y,
+                            angle = MathUtils.getRandomNumberInRange(0f, 360f),
+                            aVel = MathUtils.getRandomNumberInRange(0f, 100f),
+                            startingSize = 120f,
+                            endSize = 200f,
+                            ttl = 1f,
+                            startingColor = color,
+                            endColor = color.setAlpha(0)
                         )
                     )
                 }
@@ -143,8 +181,19 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 }
 
 
-class FlameParticleData(x: Float, y: Float, xVel: Float, yVel: Float, angle: Float, aVel: Float, ttl: Float, startingSize: Float, endSize: Float, startingColor: Color, endColor: Color)
-    : ParticleData(
+class FlameParticleData(
+    x: Float,
+    y: Float,
+    xVel: Float,
+    yVel: Float,
+    angle: Float,
+    aVel: Float,
+    ttl: Float,
+    startingSize: Float,
+    endSize: Float,
+    startingColor: Color,
+    endColor: Color
+) : ParticleData(
     sprite = Global.getSettings().getSprite("graphics/fx/cleaner_clouds00.png"),
     x = x,
     y = y,
@@ -159,4 +208,5 @@ class FlameParticleData(x: Float, y: Float, xVel: Float, yVel: Float, angle: Flo
     startingColor = startingColor,
     endColor = endColor,
     spritesInRow = 2,
-    spritesInColumn = 2)
+    spritesInColumn = 2
+)
