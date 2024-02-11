@@ -1,6 +1,7 @@
 package org.selkie.kol.helpers;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.CommDirectoryEntryAPI;
 import com.fs.starfarer.api.campaign.PersonImportance;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
@@ -9,13 +10,20 @@ import com.fs.starfarer.api.campaign.econ.Industry;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.ImportantPeopleAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.combat.ShipVariantAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Ranks;
+import com.fs.starfarer.api.impl.campaign.intel.bases.PirateBaseIntel;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
+import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
+import com.fs.starfarer.campaign.econ.Market;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class MarketHelpers {
     // Copied from Nexerelin / Histidine
@@ -272,6 +280,52 @@ public class MarketHelpers {
     public static MarketAPI addMarketplace(String factionID, SectorEntityToken primaryEntity, ArrayList<SectorEntityToken> connectedEntities, String name,
                                            int size, ArrayList<String> marketConditions, ArrayList<String> Industries, ArrayList<String> submarkets, float tariff) {
         return addMarketplace(factionID, primaryEntity, connectedEntities, name, size, marketConditions, Industries, submarkets, tariff, false);
+    }
+
+    public static Industry getStationIndustry(MarketAPI market) {
+        for (Industry curr : market.getIndustries()) {
+            if (curr.getSpec().hasTag(Industries.TAG_STATION)) {
+                return curr;
+            }
+        }
+        return null;
+    }
+
+    public static void updateStationIfNeeded(MarketAPI market, Industry curr, String goalIndID) {
+        if (curr == null) return;
+
+        String currIndId = (getStationIndustry(market).getId());
+
+        if (currIndId.equals(goalIndID)) return;
+
+        market.removeIndustry(curr.getId(), null, false);
+
+        market.addIndustry(goalIndID);
+        curr = getStationIndustry(market);
+        if (curr == null) return;
+
+        curr.finishBuildingOrUpgrading();
+
+
+        CampaignFleetAPI fleet = Misc.getStationFleet(market.getPrimaryEntity());
+        if (fleet == null) return;
+
+        List<FleetMemberAPI> members = fleet.getFleetData().getMembersListCopy();
+        if (members.size() < 1) return;
+
+        fleet.inflateIfNeeded();
+
+        FleetMemberAPI station = members.get(0);
+
+        WeightedRandomPicker<Integer> picker = new WeightedRandomPicker<Integer>();
+        int index = 1; // index 0 is station body
+        for (String slotId : station.getVariant().getModuleSlots()) {
+            ShipVariantAPI mv = station.getVariant().getModuleVariant(slotId);
+            if (Misc.isActiveModule(mv)) {
+                picker.add(index, 1f);
+            }
+            index++;
+        }
     }
 
 }

@@ -2,6 +2,7 @@ package org.selkie.kol.world;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 import com.fs.starfarer.api.Global;
@@ -10,6 +11,8 @@ import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.intel.deciv.DecivTracker;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import exerelin.campaign.SectorManager;
@@ -168,12 +171,40 @@ public class GenerateKnights {
 	public static void genBattlestarLibra() {
 		String entID = "kol_libra";
 		StarSystemAPI home = getLibraHome(Long.parseLong(Global.getSector().getSeedString().substring(3)));
-		SectorEntityToken libra = home.addCustomEntity(entID, "Battlestar Libra", "station_sporeship_derelict", "knights_of_selkie");
-		libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
-		libra.setCustomDescriptionId("kol_libra_port_desc");
-		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
+		//SectorEntityToken libra = home.addCustomEntity(entID, "Battlestar Libra", "kol_battlestar_libra_entity", "knights_of_selkie");
+		//libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
 
-		MarketAPI libraMarket = MarketHelpers.addMarketplace("knights_of_selkie", libra, null, "Star Port Libra", 4,
+		LinkedHashMap<BaseThemeGenerator.LocationType, Float> weights = new LinkedHashMap<BaseThemeGenerator.LocationType, Float>();
+		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_BELT, 10f);
+		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_FIELD, 10f);
+		weights.put(BaseThemeGenerator.LocationType.IN_RING, 10f);
+		weights.put(BaseThemeGenerator.LocationType.IN_SMALL_NEBULA, 10f);
+		weights.put(BaseThemeGenerator.LocationType.GAS_GIANT_ORBIT, 10f);
+		weights.put(BaseThemeGenerator.LocationType.PLANET_ORBIT, 10f);
+		WeightedRandomPicker<BaseThemeGenerator.EntityLocation> locs = BaseThemeGenerator.getLocations(null, home, null, 100f, weights);
+		BaseThemeGenerator.EntityLocation loc = locs.pick();
+
+		if (loc == null) {;
+			//log.error("KOL: Could not find location for Libra in %s", home.getId());
+			return;
+		}
+
+		home.getMemoryWithoutUpdate().set("$kol_libra_start_system", true);
+		// Debug
+		/*
+		runcode for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+			if (system.getMemoryWithoutUpdate().contains("$kol_libra_start_system")) {
+				$print(system.getId());
+			}
+		}
+		 */
+
+		String name = "Battlestar Libra";
+
+		BaseThemeGenerator.AddedEntity added = BaseThemeGenerator.addNonSalvageEntity(home, loc, "kol_battlestar_libra_entity", KOL_ModPlugin.kolID);
+		SectorEntityToken libra = added.entity;
+
+		MarketAPI market = MarketHelpers.addMarketplace("knights_of_selkie", libra, null, name, 4,
 				new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
 						Conditions.POPULATION_4)),
 				new ArrayList<String>(Arrays.asList(
@@ -191,22 +222,50 @@ public class GenerateKnights {
 				1f
 		);
 
-		home.getMemoryWithoutUpdate().set("$kol_libra_start_system", true);
-
-		libra.setDiscoverable(true);
-		libra.setDiscoveryXP(10000f);
-		libraMarket.setHidden(true);
-		libraMarket.setSurveyLevel(MarketAPI.SurveyLevel.NONE);
+		libra.setName(name);
+		libra.setCustomDescriptionId("kol_libra_port_desc");
 		libra.setInteractionImage("illustrations", "kol_garden_large");
+		libra.setDiscoverable(true);
+		libra.setSensorProfile(1f);
+		libra.getDetectedRangeMod().modifyFlat("gen", 5000f);
+		libra.setDiscoveryXP(10000f);
 
-		//This one does have a black tradeBa
+		market.setHidden(true);
+		market.setSurveyLevel(MarketAPI.SurveyLevel.NONE);
+		market.getMemoryWithoutUpdate().set("$kol_market_libra", true);
+		market.getMemoryWithoutUpdate().set(MemFlags.HIDDEN_BASE_MEM_FLAG, true);
+		market.setSurveyLevel(MarketAPI.SurveyLevel.FULL);
+		market.setEconGroup(market.getId());
+		market.getMemoryWithoutUpdate().set(DecivTracker.NO_DECIV_KEY, true);
+
+//		boolean down = false;
+//		if (entity.getOrbitFocus() instanceof PlanetAPI) {
+//			PlanetAPI planet = (PlanetAPI) entity.getOrbitFocus();
+//			if (!planet.isStar()) {
+//				down = true;
+//			}
+//		}
+//		if (down) {
+//			BaseThemeGenerator.convertOrbitPointingDown(entity);
+//		}
+		BaseThemeGenerator.convertOrbitWithSpin(libra, -2f);
+
+		market.reapplyIndustries();
+
+		Global.getSector().getEconomy().addMarket(market, true);
+
+		//log.info(String.format("KOL: Added pirate base in [%s]", home.getName()));
+
+		//This one does have a black market
 		//if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
 
-		PersonAPI elder = MagicCampaign.addCustomPerson(libra.getMarket(), "Knightmaster", "Martins", "kol_grandmaster",
+		PersonAPI elder = MagicCampaign.addCustomPerson(market, "Knightmaster", "Martins", "kol_grandmaster",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_STATION_COMMANDER,
 				true, 1, 0);
 
 		elder.setId("kol_libramaster");
+		elder.addTag(Tags.CONTACT_MILITARY);
+		elder.addTag(Tags.CONTACT_TRADE);
 
 		elder.setImportance(PersonImportance.VERY_HIGH);
 		elder.setVoice(Voices.SOLDIER);

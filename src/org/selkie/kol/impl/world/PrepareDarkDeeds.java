@@ -277,6 +277,8 @@ public class PrepareDarkDeeds {
         CustomCampaignEntityAPI stationBoss = system.addCustomEntity("zea_boss_station_tritachyon", "Suspicious Research Station", "zea_boss_station_tritachyon", Factions.NEUTRAL);
         stationBoss.getMemoryWithoutUpdate().set(TTBOSS2_STATION_KEY, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
+        stationBoss.setSensorProfile(1f);
+        stationBoss.getDetectedRangeMod().modifyFlat("gen", 5000f);
         if (token.isStar()) {
             stationBoss.setCircularOrbitPointingDown(token, 0, token.getRadius()+500f, (token.getRadius()+500f)/10f);
         } else {

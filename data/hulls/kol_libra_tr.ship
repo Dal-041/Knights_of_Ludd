@@ -138,7 +138,7 @@
       "id": "WS0012",
       "size": "SMALL",
       "type": "BALLISTIC",
-      "mount": "HIDDEN",
+      "mount": "TURRET",
       "arc": 360,
       "angle": -90,
       "locations": [-19, -12]
