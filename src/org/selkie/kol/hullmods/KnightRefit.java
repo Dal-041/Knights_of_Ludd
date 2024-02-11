@@ -4,17 +4,18 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.apache.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.awt.*;
+import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -176,28 +177,21 @@ public class KnightRefit extends BaseHullMod {
 
                 if(matcher.find()){
                     ShipHullSpecAPI hull = Global.getSettings().getHullSpec(matcher.group());
+                    float hullMult = getTotalHullMult(ship.getVariant(), hull.getHitpoints());
+                    float armorMult = getTotalArmorMult(ship.getVariant(), hull.getArmorRating());
+
+                    Color hullTextColor = hullMult < 0.99f ? Misc.getPositiveHighlightColor() : (hullMult > 1.01f ? Misc.getNegativeHighlightColor() : Misc.getTextColor());
+                    Color armorTextColor = armorMult < 0.99f ? Misc.getPositiveHighlightColor() : (armorMult > 1.01f ? Misc.getNegativeHighlightColor() : Misc.getTextColor());
 
                     modularArmor.addRow(Alignment.MID, Misc.getTextColor(), hull.getHullName(),
-                            Alignment.MID, Misc.getTextColor(), String.valueOf(Math.round(hull.getHitpoints())),
-                            Alignment.MID, Misc.getTextColor(), String.valueOf(Math.round(hull.getArmorRating())));
+                            Alignment.MID, hullTextColor, String.valueOf(Math.round(hull.getHitpoints() / hullMult)),
+                            Alignment.MID, armorTextColor, String.valueOf(Math.round(hull.getArmorRating() / armorMult)));
                 }
             }
             modularArmor.addTable("-", 0, 4f);
 
             modularArmor.setBulletedListMode("");
             modularArmor.setBulletWidth(0f);
-
-            boolean addedHeading = false;
-            for (String hullmodId : variant.getHullMods()) {
-                if (hullmodEffects.containsKey(hullmodId)) {
-                    if(!addedHeading){
-                        modularArmor.addPara("Modules are receiving the following bonuses from your hullmods:", 10);
-                        addedHeading = true;
-                    }
-                    modularArmor.addPara(Global.getSettings().getHullModSpec(hullmodId).getDisplayName(), 4f);
-                    hullmodEffects.get(hullmodId).addTooltipText(modularArmor, ship);
-                }
-            }
 
             modularArmor.addPara("Hold 1 to highlight armor locations, 2 to revert.", Misc.getGrayColor(), 10);
             Color fadeAwayColor = Keyboard.isKeyDown(2) ? new Color(200,200,255, 80) : Color.white;
@@ -244,12 +238,10 @@ public class KnightRefit extends BaseHullMod {
             modules++;
             if(!s.isAlive()) continue;
             alive++;
-            if(ship.getVariant() == null) continue;
-            for(String hullmodId : ship.getVariant().getHullMods()){
-                if (hullmodEffects.containsKey(hullmodId)) {
-                    hullmodEffects.get(hullmodId).applyToStats("kol_modular_buff", s.getMutableStats(), ship.getHullSpec());
-                }
-            }
+            if(ship.getVariant() == null || s.getVariant() == null) continue;
+
+            s.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", getTotalHullMult(ship.getVariant(), s.getVariant().getHullSpec().getHitpoints()));
+            s.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", getTotalArmorMult(ship.getVariant(), s.getVariant().getHullSpec().getArmorRating()));
         }
 
         if(modules!=0){
@@ -275,73 +267,71 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
     }
 
-    private static final Map<String, ArmorEffect> hullmodEffects = new HashMap<>();
-
-    static {
-        hullmodEffects.put("heavyarmor", new ArmorEffect(150, 1, 1, 1, 1, 1));
-        hullmodEffects.put("reinforcedhull", new ArmorEffect(0, 1, 0.72f, 1, 1, 1));
-        //hullmodEffects.put("TADA_lightArmor", new ArmorEffect(0, 2, 1, 1, 1, 1));
-        //hullmodEffects.put("TADA_reactiveArmor", new ArmorEffect(0, 1, 1, 1.25f, 1.25f, 0.66f));
+    public float getTotalArmorMult(ShipVariantAPI variant, float baseArmor){
+        if(variant == null) return 1f;
+        Map<String, ArmorEffect> effects = HULLMOD_EFFECTS.get(variant.getHullSize());
+        float totalFlat = 0;
+        float totalPercent = 0;
+        boolean isAblative = true; //TODO: fix this hack
+        for(String hullmodID : variant.getHullMods()){
+            if(effects.containsKey(hullmodID)){
+                totalFlat += effects.get(hullmodID).armorFlat;
+                totalPercent += effects.get(hullmodID).armorPercent;
+            }
+            if(Objects.equals(hullmodID, "ablative_armor")) isAblative = true;
+        }
+        baseArmor = baseArmor * (isAblative ? 0.1f :1f);
+        return baseArmor / (baseArmor + totalFlat + (baseArmor * totalPercent));
     }
 
-    protected static class ArmorEffect {
-        public float armorDamageTakenModifier;
-        public float armorDamageTakenMult;
-        public float hullDamageTakenMult;
-        public float energyDamageTakenMult;
-        public float kineticDamageTakenMult;
-        public float heDamageTakenMult;
-
-        public ArmorEffect(float armorDamageTakenModifier, float armorDamageTakenMult, float hullDamageTakenMult, float energyDamageTakenMult, float kineticDamageTakenMult, float heDamageTakenMult) {
-            this.armorDamageTakenModifier = armorDamageTakenModifier;
-            this.armorDamageTakenMult = armorDamageTakenMult;
-            this.hullDamageTakenMult = hullDamageTakenMult;
-            this.energyDamageTakenMult = energyDamageTakenMult;
-            this.kineticDamageTakenMult = kineticDamageTakenMult;
-            this.heDamageTakenMult = heDamageTakenMult;
+    public float getTotalHullMult(ShipVariantAPI variant, float baseHull){
+        if(variant == null) return 1f;
+        Map<String, ArmorEffect> effects = HULLMOD_EFFECTS.get(variant.getHullSize());
+        float totalFlat = 0;
+        float totalPercent = 0;
+        for(String hullmodID : variant.getHullMods()){
+            if(effects.containsKey(hullmodID)){
+                totalFlat += effects.get(hullmodID).hullFlat;
+                totalPercent += effects.get(hullmodID).hullPercent;
+            }
         }
+        return baseHull / (baseHull + totalFlat + (baseHull * totalPercent));
+    }
 
-        public float calcArmorDamageMult(float baseArmor) {
-            return baseArmor / (baseArmor + armorDamageTakenModifier) * armorDamageTakenMult;
-        }
+    private static final Map<ShipAPI.HullSize, Map<String, ArmorEffect>> HULLMOD_EFFECTS = new HashMap<>();
 
-        public void applyToStats(String buffId, MutableShipStatsAPI stats, ShipHullSpecAPI spec) {
-            stats.getArmorDamageTakenMult().modifyMult(buffId, calcArmorDamageMult(spec.getArmorRating()));
-            stats.getHullDamageTakenMult().modifyMult(buffId, hullDamageTakenMult);
-            stats.getEnergyDamageTakenMult().modifyMult(buffId, energyDamageTakenMult);
-            stats.getKineticDamageTakenMult().modifyMult(buffId, kineticDamageTakenMult);
-            stats.getHighExplosiveDamageTakenMult().modifyMult(buffId, heDamageTakenMult);
-        }
+    static {
+        Map<String, ArmorEffect> hullmodMap = new HashMap<>();
+        hullmodMap.put(HullMods.REINFORCEDHULL, new ArmorEffect(0,0,0,0.4f));
+        hullmodMap.put(HullMods.BLAST_DOORS, new ArmorEffect(0,0,0,0.2f));
+        hullmodMap.put(HullMods.INSULATEDENGINE, new ArmorEffect(0,0,0,0.1f));
+        hullmodMap.put(HullMods.ARMOREDWEAPONS, new ArmorEffect(0,0.1f,0,0));
 
-        public void addTooltipText(TooltipMakerAPI tooltip, ShipAPI ship) {
-            tooltip.setBulletedListMode("- ");
-            float armorDamageTaken = calcArmorDamageMult(ship.getHullSpec().getArmorRating());
-            if (armorDamageTaken != 1) {
-                String text = Misc.getRoundedValue(armorDamageTaken);
-                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
-            }
+        Map<String, ArmorEffect> capitalHullmodMap = new HashMap<>(hullmodMap);
+        capitalHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(500,0,0,0));
+        HULLMOD_EFFECTS.put(ShipAPI.HullSize.CAPITAL_SHIP, capitalHullmodMap);
 
-            if (hullDamageTakenMult != 1) {
-                String text = Misc.getRoundedValue(hullDamageTakenMult);
-                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
-            }
+        Map<String, ArmorEffect> cruiserHullmodMap = new HashMap<>(hullmodMap);
+        cruiserHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(400,0,0,0));
+        HULLMOD_EFFECTS.put(ShipAPI.HullSize.CRUISER, cruiserHullmodMap);
 
-            if (energyDamageTakenMult != 1) {
-                String text = Misc.getRoundedValue(energyDamageTakenMult);
-                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
-            }
+        Map<String, ArmorEffect> destroyerHullmodMap = new HashMap<>(hullmodMap);
+        destroyerHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(300,0,0,0));
+        HULLMOD_EFFECTS.put(ShipAPI.HullSize.DESTROYER, destroyerHullmodMap);
 
-            if (kineticDamageTakenMult != 1) {
-                String text = Misc.getRoundedValue(kineticDamageTakenMult);
-                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
-            }
+        Map<String, ArmorEffect> frigateHullmodMap = new HashMap<>(hullmodMap);
+        frigateHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(150,0,0,0));
+        HULLMOD_EFFECTS.put(ShipAPI.HullSize.FRIGATE, frigateHullmodMap);
 
-            if (heDamageTakenMult != 1) {
-                String text = Misc.getRoundedValue(heDamageTakenMult);
-                tooltip.addPara(text, 4f, Misc.getHighlightColor(), text);
-            }
+        Map<String, ArmorEffect> fighterHullmodMap = new HashMap<>(hullmodMap);
+        fighterHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(75,0,0,0));
+        HULLMOD_EFFECTS.put(ShipAPI.HullSize.FIGHTER, fighterHullmodMap);
+    }
 
-            tooltip.setBulletedListMode(null);
+    public static class ArmorEffect {
+        public float armorFlat, armorPercent, hullFlat, hullPercent;
+        ArmorEffect(float aF, float aP, float hF, float hP){
+            armorFlat = aF; armorPercent = aP; hullFlat = hF; hullPercent = hP;
         }
     }
 }
