@@ -2,9 +2,8 @@ package org.selkie.kol.impl.combat.activators
 
 import activators.CombatActivator
 import com.fs.starfarer.api.Global
-import com.fs.starfarer.api.combat.CollisionClass
-import com.fs.starfarer.api.combat.DamageType
-import com.fs.starfarer.api.combat.ShipAPI
+import com.fs.starfarer.api.combat.*
+import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI
 import com.fs.starfarer.api.loading.DamagingExplosionSpec
 import com.fs.starfarer.api.util.IntervalUtil
 import org.dark.shaders.distortion.DistortionShader
@@ -44,7 +43,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     }
 
     override fun getBaseCooldownDuration(): Float {
-        return 1f
+        return 0.66f
     }
 
     override fun shouldActivateAI(amount: Float): Boolean {
@@ -57,9 +56,13 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
         } else false
     }
 
+    private fun getDamage(): Float {
+        return BASE_DAMAGE + (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float) * DAMAGE_PER_BOOST
+    }
+
     override fun onActivate() {
         //spawn an explosion with no effects
-        val explosionDamage = 100f + ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float
+        val explosionDamage = getDamage()
         val explosionSpec = DamagingExplosionSpec(
             0.5f,
             DAMAGE_RANGE,
@@ -77,7 +80,9 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
         )
         explosionSpec.damageType = DamageType.HIGH_EXPLOSIVE
         explosionSpec.isShowGraphic = false
+        explosionSpec.effect = RadianceOnHitEffect()
         Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, ship, ship.location, false)
+
         if (KOL_ModPlugin.hasGraphicsLib) {
             val ripple = RippleDistortion(ship.location, Vector2f())
             ripple.size = DAMAGE_RANGE / 1.2f
@@ -107,15 +112,20 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
             if (PARTICLE_INTERVAL.intervalElapsed()) {
                 for (i in 0 until MathUtils.getRandomNumberInRange(12, 24)) {
                     val randomPos = MathUtils.getRandomPointInCircle(ship.location, DAMAGE_RANGE)
-                    val distance = MathUtils.getDistanceSquared(ship.location, randomPos)
+                    val distance = MathUtils.getDistanceSquared(ship.location, randomPos) * 1.5f
                     val color = ParticleController.mergeColors(
                         Color(
-                            MathUtils.getRandomNumberInRange(255, 225),
-                            120,
-                            70,
+                            MathUtils.getRandomNumberInRange(200, 225),
+                            MathUtils.getRandomNumberInRange(160, 195),
+                            95,
                             MathUtils.getRandomNumberInRange(175, 255)
                         ),
-                        Color(MathUtils.getRandomNumberInRange(255, 225), MathUtils.getRandomNumberInRange(120, 180), 80, MathUtils.getRandomNumberInRange(175, 255)),
+                        Color(
+                            MathUtils.getRandomNumberInRange(225, 255),
+                            MathUtils.getRandomNumberInRange(100, 130),
+                            50,
+                            MathUtils.getRandomNumberInRange(175, 255)
+                        ),
                         (distance / (DAMAGE_RANGE * DAMAGE_RANGE)).coerceIn(0f..1f)
                     )
                     val direction = VectorUtils.getDirectionalVector(ship.location, randomPos)
@@ -150,9 +160,10 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
                         MathUtils.getRandomNumberInRange(20f, 60f) * i
                     )
                     val distance = MathUtils.getDistanceSquared(ship.location, randomPos)
-                    val color = Color(100, 100, 100, MathUtils.getRandomNumberInRange(175, 255))
+                    val color = Color(120, 60, 10, MathUtils.getRandomNumberInRange(175, 255))
                     val direction = VectorUtils.getDirectionalVector(ship.location, randomPos)
-                    val velocity = Vector2f(-direction.y, direction.x).scale(MathUtils.getRandomNumberInRange(80f, 120f)
+                    val velocity = Vector2f(-direction.y, direction.x).scale(
+                        MathUtils.getRandomNumberInRange(80f, 120f)
                     ) as Vector2f
 
                     ParticleController.addParticle(
@@ -175,8 +186,23 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
         }
     }
 
+    private inner class RadianceOnHitEffect : OnHitEffectPlugin {
+        override fun onHit(
+            projectile: DamagingProjectileAPI?,
+            target: CombatEntityAPI,
+            point: Vector2f,
+            shieldHit: Boolean,
+            damageResult: ApplyDamageResultAPI,
+            engine: CombatEngineAPI
+        ) {
+            damageResult.empDamage = getDamage()
+        }
+    }
+
     companion object {
         private const val DAMAGE_RANGE = 600f
+        private const val BASE_DAMAGE = 100f
+        private const val DAMAGE_PER_BOOST = 1f
     }
 }
 
@@ -194,7 +220,7 @@ class FlameParticleData(
     startingColor: Color,
     endColor: Color
 ) : ParticleData(
-    sprite = Global.getSettings().getSprite("graphics/fx/cleaner_clouds00.png"),
+    sprite = Global.getSettings().getSprite("graphics/fx/nebula_colorless.png"),
     x = x,
     y = y,
     xVel = xVel,
@@ -207,6 +233,6 @@ class FlameParticleData(
     endSize = endSize,
     startingColor = startingColor,
     endColor = endColor,
-    spritesInRow = 2,
-    spritesInColumn = 2
+    spritesInRow = 4,
+    spritesInColumn = 4
 )
