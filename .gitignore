@@ -12,6 +12,7 @@
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/kotlinScripting.xml
+.idea/
 
 # Generated files
 .idea/**/contentModel.xml
@@ -86,27 +87,3 @@ gradle-app.setting
 .idea/csv-plugin.xml
 .idea/csv-editor.xml
 Knights\ of\ Ludd.iml
-knights_of_ludd.iml
-.run/Run Starsector w_o Launcher.run.xml
-.idea/vcs.xml
-.idea/uiDesigner.xml
-.idea/modules.xml
-.idea/misc.xml
-.idea/kotlinc.xml
-.idea/icon.svg
-.idea/artifacts/KnightsOfSelkie_jar.xml
-.idea/artifacts/Create__jar.xml
-.idea/artifacts/KnightsOfSelkie_jar.xml
-.idea/icon.svg
-.idea/kotlinc.xml
-.idea/modules.xml
-.idea/uiDesigner.xml
-.idea/vcs.xml
-.run/Run Starsector w_o Launcher.run.xml
-.run/Run Starsector w_o Launcher.run.xml
-.idea/vcs.xml
-.idea/uiDesigner.xml
-.idea/modules.xml
-.idea/kotlinc.xml
-.idea/icon.svg
-.idea/artifacts/KnightsOfSelkie_jar.xml
