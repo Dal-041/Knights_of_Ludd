@@ -1,19 +1,20 @@
 package org.selkie.kol.impl.shipsystems;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.ModPlugin;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.graphics.SpriteAPI;
+import com.fs.starfarer.api.impl.campaign.terrain.RangeBlockerUtil;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.loading.Description;
 import com.fs.starfarer.api.loading.TerrainSpecAPI;
+import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.combat.ai.missile.MissileAI;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.combat.activators.IFFOverrideActivator;
 import org.selkie.kol.impl.combat.madness.*;
 
 import java.awt.*;
@@ -24,6 +25,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     //apply, getStatusData, unapply
     public boolean inited = false;
     public ShipAPI ship = null;
+    protected State state = null;
 
     //BaseTerrain
     public static final float EXTRA_SOUND_RADIUS = 100f;
@@ -33,8 +35,9 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected String name = "Pulsar Wave";
 
     //Terrain plugin
-    public float PULSAR_ARC = 90f; //1 / ((float) Math.PI * 2f) * 360f;
-    public float visMult = 1f;
+    public float PULSAR_ARC = 190f; //1 / ((float) Math.PI * 2f) * 360f;
+    public float PULSAR_LENGTH = 3000f; //1 / ((float) Math.PI * 2f) * 360f;
+    public float fxMult = 1f;
     public boolean single = false;
     public String nameTooltip = "Pulsar Wave";
 
@@ -50,15 +53,16 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected CombatAuroraRenderer renderer;
     protected CombatFlareManager flareManager;
     protected CombatPulsarCorona.CombatCoronaParams params;
-    protected CombatRangeBlockerUtil blocker = new CombatRangeBlockerUtil(1, 3000f);
+    protected CombatRangeBlockerUtil blocker = null; //new CombatRangeBlockerUtil(1400, PULSAR_LENGTH);
 
-    protected float pulsarAngle = (float) Math.random() * 360f;
-    protected float pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
+    protected float pulsarAngle = 90f;
+    protected float pulsarRotation = -1f * (15f);
 
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
         this.entity = stats.getEntity();
+        this.state = state;
         if (stats.getEntity() instanceof ShipAPI) {
             ship = (ShipAPI) stats.getEntity();
             id = id + "_" + ship.getId();
@@ -66,9 +70,12 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         } else {
             return;
         }
+        if (!ship.isAlive() || ship.isPhased()) return;
 
+        advance(amount);
+        fxMult = 0.2f;
         if (state == State.ACTIVE) {
-            advance(amount);
+            fxMult = 0.9f;
             applyEffect(ship, amount);
         }
     }
@@ -85,18 +92,22 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     public void init() {
         if (!inited) {
-            this.params = new CombatPulsarCorona.CombatCoronaParams(3000f, ship.getCollisionRadius()+250f, ship, 500f, 1f, 250f);
+            this.params = new CombatPulsarCorona.CombatCoronaParams(PULSAR_LENGTH, ship.getCollisionRadius()+50f, ship, 500f, 0f, 0f);
             this.single = false;
+            if (blocker == null) {
+                blocker = new CombatRangeBlockerUtil(2000, PULSAR_LENGTH + PULSAR_LENGTH*0.25f);
+            }
             name = "The Blizzard";
             params.name = "The Blizzard";
             nameTooltip = "The Blizzard";
-            //multiplyArc(2.5f);
             spriteCat = "terrain";
             spriteKey = "zea_wavefront";
             flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes
             flare1 = new CombatPulsarRenderer(this);
             flare2 = new CombatPulsarRenderer(this);
+            Global.getCombatEngine().addLayeredRenderingPlugin(flare1);
+            Global.getCombatEngine().addLayeredRenderingPlugin(flare2);
             inited = true;
         }
     }
@@ -121,6 +132,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected float getLoopOneVolume() {
         if (Global.getCombatEngine().getPlayerShip() == null) return 0f;
         float intensity = getIntensityAtPoint(Global.getCombatEngine().getPlayerShip().getLocation());
+        intensity *= fxMult;
         return intensity;
     }
 
@@ -132,6 +144,11 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 //		float extra = 0f;
 //
 //		return base + extra;
+    }
+
+
+    public float getFXMult() {
+        return fxMult;
     }
 
     public void advance(float amount) {
@@ -154,14 +171,13 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             blocker.advance(amount, 100f, 0.5f);
         }
 
-        render(CombatEngineLayers.BELOW_SHIPS_LAYER, Global.getCombatEngine().getViewport());
+        render(CombatEngineLayers.CAPITAL_SHIPS_LAYER, Global.getCombatEngine().getViewport());
     }
 
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
         if (blocker != null && !blocker.wasEverUpdated()) {
-            blocker.updateAndSync(entity, params.relatedEntity, 0.1f);
+            blocker.updateAndSync(entity, params.relatedEntity, 1f);
         }
-
 
         if (isNearViewport(pulsarAngle, viewport)) {
             flare1.render(layer, viewport); //viewport.getAlphaMult()
@@ -199,7 +215,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                 return true;
             }
         }
-        return false;
+        return true; // No need to hide
     }
 
     protected float getMinRadiusForContains() {
@@ -248,10 +264,13 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             for (CombatEntityAPI enemy : AIUtils.getNearbyEnemies(ship, params.bandWidthInEngine)) {
                 if (enemy instanceof ShipAPI) {
                     ShipAPI tgtShip = (ShipAPI) enemy;
+                    if (tgtShip.isPhased()) continue;
                     float intensity = getIntensityAtPoint(tgtShip.getLocation());
                     if (intensity <= 0) return;
                     if (tgtShip.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) intensity = intensity / 2f;
-                    tgtShip.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 2f, "Blizzard");
+                    tgtShip.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 3f, "Blizzard");
+                    tgtShip.getFluxTracker().increaseFlux(amount*200f*intensity, false);
+                    tgtShip.getFluxTracker().increaseFlux(amount, true);
                     // "wind" effect - adjust velocity
                     float maxSpeed = tgtShip.getMaxSpeed();
                     float currSpeed = tgtShip.getVelocity().length();
@@ -301,10 +320,15 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             for (CombatEntityAPI ally : AIUtils.getNearbyAllies(ship, params.bandWidthInEngine)) {
                 if (ally instanceof ShipAPI) {
                     ShipAPI tgtShip = (ShipAPI) ally;
+                    if (tgtShip.isPhased()) continue;
                     float intensity = getIntensityAtPoint(tgtShip.getLocation());
                     if (intensity <= 0) return;
-                    if (tgtShip.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) intensity = intensity / 2f;
+                    if (tgtShip.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) {
+                        intensity = intensity / 2f;
+                    }
                     tgtShip.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 2f, "Blizzard");
+                    tgtShip.getFluxTracker().increaseFlux(amount*150f*intensity, false);
+                    tgtShip.getFluxTracker().increaseFlux(amount, true);
                     // "wind" effect - adjust velocity
                     float maxSpeed = tgtShip.getMaxSpeed();
                     float currSpeed = tgtShip.getVelocity().length();
@@ -357,7 +381,16 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                     float intensity = getIntensityAtPoint(tgt.getLocation()) / 2f;
                     if (intensity <= 0) return;
 
-                    tgt.setMissileAI(null);
+                    if (tgt.getOwner() != ship.getOwner()) {
+                        if (tgt.getMissileAI() instanceof GuidedMissileAI) {
+                            ((GuidedMissileAI) tgt.getMissileAI()).setTarget(tgt.getSource());
+                        } else if (tgt.isGuided()) {
+                            tgt.setMissileAI(new IFFOverrideActivator.DummyMissileAI(tgt, tgt.getSource()));
+                        } //Salamander sourced missiles
+
+                        tgt.setOwner(ship.getOwner());
+                        tgt.setSource(ship);
+                    }
 
                     // "wind" effect - adjust velocity
                     float maxSpeed = tgt.getMaxSpeed();
@@ -548,7 +581,8 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     }
 
     public float getPulsarScrollSpeed() {
-        return 50f;
+        if (state == State.ACTIVE) return 150f;
+        return 25f;
     }
 
     public SpriteAPI getPulsarTexture() {
@@ -638,9 +672,10 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     public java.util.List<Color> getFlareColorRange() {
         List<Color> result = new ArrayList<Color>();
 
-        if (params.relatedEntity instanceof PlanetAPI) {
-            Color color = ((PlanetAPI)params.relatedEntity).getSpec().getCoronaColor();
-            result.add(Misc.setAlpha(color, 255));
+        if (params.relatedEntity instanceof ShipAPI) {
+            Color color = ((ShipAPI)params.relatedEntity).getHullSpec().getShieldSpec().getRingColor();
+            int alpha = (int) (255 * fxMult);
+            result.add(Misc.setAlpha(color, alpha));
         } else {
             result.add(Color.white);
         }

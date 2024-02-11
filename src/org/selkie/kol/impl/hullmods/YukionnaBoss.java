@@ -1,9 +1,11 @@
 package org.selkie.kol.impl.hullmods;
 
+import activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
@@ -12,6 +14,8 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.Utils;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.impl.combat.activators.BallLightningActivator;
+import org.selkie.kol.impl.combat.activators.BlizzardActivator;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -45,6 +49,7 @@ public class YukionnaBoss extends BaseHullMod {
                 if (!ship.isPhased()) {
                     Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
+                ActivatorManager.addActivator(ship, new BlizzardActivator(ship));
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
                 Utils.shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 return true;
@@ -105,11 +110,13 @@ public class YukionnaBoss extends BaseHullMod {
     }
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED){
+        ActivatorManager.addActivator(ship, new BallLightningActivator(ship));
+        if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new YukionnaBoss.YukionnaBossPhaseTwoScript(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+            //for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) { member.getVariant().addTag("kol_boss"); }
         }
     }
 }

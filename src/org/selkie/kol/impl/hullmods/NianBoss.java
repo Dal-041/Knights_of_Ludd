@@ -1,5 +1,6 @@
 package org.selkie.kol.impl.hullmods;
 
+import activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
@@ -7,6 +8,7 @@ import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.impl.combat.activators.NianFlaresActivator;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -84,8 +86,9 @@ public class NianBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        //if(ship.getOriginalOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED){
+        ActivatorManager.addActivator(ship, new NianFlaresActivator(ship));
+        if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new NianBossEnragedScript(ship));
-        //}
+        }
     }
 }

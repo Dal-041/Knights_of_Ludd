@@ -239,11 +239,11 @@ public class IFFOverrideActivator extends CombatActivator {
         }
     }
 
-    private static class DummyMissileAI implements MissileAIPlugin, GuidedMissileAI {
+    public static class DummyMissileAI implements MissileAIPlugin, GuidedMissileAI {
         CombatEntityAPI target;
         MissileAPI missile;
 
-        private DummyMissileAI(MissileAPI missile, CombatEntityAPI target) {
+        public DummyMissileAI(MissileAPI missile, CombatEntityAPI target) {
             setTarget(target);
             this.missile = missile;
         }

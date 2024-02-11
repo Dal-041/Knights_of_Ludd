@@ -99,12 +99,11 @@ public class CombatRangeBlockerUtil {
         isAnythingShortened = false;
 
         for (ShipAPI ent : Global.getCombatEngine().getShips()) {
-            if (ent == entity || ent == exclude) continue;
+            if (ent == entity || ent == exclude || ent.isFighter() || ent.isPhased()) continue;
             float dist = Misc.getDistance(entity.getLocation(), ent.getLocation());
             if (dist > maxRange) continue;
 
-            float graceRadius = 25f;
-            graceRadius += ent.getShipExplosionRadius();
+            float graceRadius = 5f;
             float span = Misc.computeAngleSpan(ent.getShipExplosionRadius() + graceRadius, dist);
 
             float angle = Misc.getAngleInDegrees(entity.getLocation(), ent.getLocation());

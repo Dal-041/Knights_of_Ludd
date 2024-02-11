@@ -7,15 +7,10 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.IntervalUtil;
-import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.api.util.Pair;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
-import kotlin.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
-import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 
@@ -24,12 +19,12 @@ import java.util.List;
 import java.util.*;
 
 public class ShachihokoDroneActivator extends DroneActivator {
-    private static final Color BASE_SHIELD_COLOR = new Color(255,115,65, 255);
+    private static final Color BASE_SHIELD_COLOR = new Color(255,185,75, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
 
     private static final float nearbyRange = 2000;
-    private IntervalUtil interval = new IntervalUtil(10f, 10f);
+    private IntervalUtil intervalCheck = new IntervalUtil(10f, 10f);
 
     private ShipAPI target = null;
     private ShipAPI droneTarget = null;
@@ -66,7 +61,7 @@ public class ShachihokoDroneActivator extends DroneActivator {
 
     @Override
     public boolean shouldActivateAI(float amount) {
-        interval.advance(amount);
+        intervalCheck.advance(amount);
         // Weird crash avoidance that I'm not going to diagnose in detail
         if (!canActivate()) return false;
         if (droneTarget == null) return true;
@@ -74,7 +69,7 @@ public class ShachihokoDroneActivator extends DroneActivator {
         if (droneTarget.isPhased()) return true;
         if (AIUtils.getNearbyEnemies(droneTarget, nearbyRange).isEmpty()) return true;
         if (ship.getShipTarget()!= null && ship.getShipTarget().getOwner() == ship.getOwner() && ship.getShipTarget() != droneTarget) return true;
-        if (interval.intervalElapsed()) return true;
+        if (intervalCheck.intervalElapsed()) return true;
 
         return false;
     }

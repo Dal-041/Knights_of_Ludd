@@ -33,6 +33,8 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
         CombatRangeBlockerUtil getPulsarBlocker();
 
         float getPulsarScrollSpeed();
+
+        float getFXMult();
     }
 
     protected float alphaMult = 0.4f;
@@ -88,7 +90,7 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
     transient private boolean rendered = false;
 
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
-        this.alphaMult = viewport.getAlphaMult();
+        this.alphaMult = viewport.getAlphaMult() * delegate.getFXMult();
         if (viewport.getAlphaMult() <= 0) return;
 
         float distClose = delegate.getPulsarInnerRadius();
