@@ -9,7 +9,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.intel.AbyssAbilityIntel;
+import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageDuskBoss implements FleetEventListener {
@@ -39,7 +39,7 @@ public class ManageDuskBoss implements FleetEventListener {
 				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpDusk, true, 0);
 				Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpDusk);
 
-				AbyssAbilityIntel notif = new AbyssAbilityIntel(fleet.getFaction().getCrest(), "A Black Neutron Star");
+				ZeaAbilityIntel notif = new ZeaAbilityIntel(fleet.getFaction().getCrest(), "A Black Neutron Star");
 				Global.getSector().getIntelManager().addIntel(notif);
 				notif.endAfterDelay(14);
 			}

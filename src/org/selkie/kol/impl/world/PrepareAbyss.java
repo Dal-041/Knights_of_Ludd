@@ -247,7 +247,7 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
 		//FP bumped to account for backup capital ships getting pruned
-		AbyssalFleetManager fleets = new AbyssalFleetManager(system, elysianID, 16, 90, 300);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, elysianID, 16, 90, 300);
 		system.addScript(fleets);
 
 		EveryFrameScript tracker = new TrackFleet();
@@ -475,8 +475,8 @@ public class PrepareAbyss {
 		loot6.setCircularOrbitPointingDown(sixth, (float)Math.random()*60+177, (float)Math.random()*2770+3000, 100000);
 
 		//FP bumped to account for backup capital ships getting pruned
-		org.selkie.kol.impl.fleets.AbyssalFleetManager fleets = new org.selkie.kol.impl.fleets.AbyssalFleetManager(system, dawnID, 16, 60, 180);
-		org.selkie.kol.impl.fleets.AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, dawnID, 4, 300, 425);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, dawnID, 16, 60, 180);
+		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, dawnID, 4, 300, 425);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}
@@ -557,8 +557,8 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
 		//FP bumped to account for backup capital ships getting pruned
-		AbyssalFleetManager fleets = new AbyssalFleetManager(system, duskID, 6, 70, 175);
-		AbyssalFleetManager fleetsMiniboss = new AbyssalFleetManager(system, duskID, 3, 300, 425);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, duskID, 6, 70, 175);
+		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, duskID, 3, 300, 425);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}

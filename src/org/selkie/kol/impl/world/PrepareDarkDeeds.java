@@ -31,7 +31,6 @@ import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager.RemnantFleetInteractionConfigGen;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.SalvageSpecialAssigner.ShipRecoverySpecialCreator;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial.PerShipData;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial.ShipCondition;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial.ShipRecoverySpecialData;
@@ -39,9 +38,9 @@ import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.MagneticFieldTerrainPlugin.MagneticFieldParams;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.fleets.TTBoss2DefenderPlugin;
+import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
 
-import static org.selkie.kol.impl.fleets.AbyssalFleetManager.copyFleetMembers;
+import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class PrepareDarkDeeds {
@@ -63,8 +62,8 @@ public class PrepareDarkDeeds {
 
     public static void andContinue() {
         GenericPluginManagerAPI plugins = Global.getSector().getGenericPlugins();
-        if (!plugins.hasPlugin(TTBoss2DefenderPlugin.class)) {
-            plugins.addPlugin(new TTBoss2DefenderPlugin(), true);
+        if (!plugins.hasPlugin(ZeaTTBoss2DefenderPlugin.class)) {
+            plugins.addPlugin(new ZeaTTBoss2DefenderPlugin(), true);
         }
     }
 

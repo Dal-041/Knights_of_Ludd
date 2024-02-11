@@ -9,7 +9,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.intel.AbyssAbilityIntel;
+import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageDawnBoss implements FleetEventListener {
@@ -40,7 +40,7 @@ public class ManageDawnBoss implements FleetEventListener {
 				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpDawn, true, 0);
 				Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpDawn);
 
-				AbyssAbilityIntel notif = new AbyssAbilityIntel(fleet.getFaction().getCrest(), "Luna Sea");
+				ZeaAbilityIntel notif = new ZeaAbilityIntel(fleet.getFaction().getCrest(), "Luna Sea");
 				Global.getSector().getIntelManager().addIntel(notif);
 				notif.endAfterDelay(14);
 			}

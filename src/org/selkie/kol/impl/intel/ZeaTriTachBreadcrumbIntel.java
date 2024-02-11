@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
+public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
 
     protected SectorEntityToken entity;
     protected String rewardID;
@@ -26,7 +26,7 @@ public class TriTachBreadcrumbIntel extends BaseIntelPlugin {
     public String descShort;
     protected String icon = Global.getSector().getFaction(Factions.TRITACHYON).getLogo();
 
-    public TriTachBreadcrumbIntel (String name, String desc, SectorEntityToken target) {
+    public ZeaTriTachBreadcrumbIntel(String name, String desc, SectorEntityToken target) {
         this.entity = target;
         //this.rewardID = ID;
         this.name = name;

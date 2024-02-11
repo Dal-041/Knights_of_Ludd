@@ -11,14 +11,14 @@ import java.awt.*;
 import java.io.IOException;
 import java.util.Set;
 
-public class AbyssLoreIntel extends BaseIntelPlugin {
+public class ZeaLoreIntel extends BaseIntelPlugin {
 
     private String name;
     private String icon;
     private String desc;
     private String[] descHighlights;
 
-    public AbyssLoreIntel(String icon, String name) {
+    public ZeaLoreIntel(String icon, String name) {
         try {
             Global.getSettings().loadTexture(icon);
         } catch (IOException e) {
@@ -28,7 +28,7 @@ public class AbyssLoreIntel extends BaseIntelPlugin {
         this.icon = icon;
     }
 
-    public AbyssLoreIntel(String icon, String name, String desc, String[] descHighlights) {
+    public ZeaLoreIntel(String icon, String name, String desc, String[] descHighlights) {
         try {
             Global.getSettings().loadTexture(icon);
         } catch (IOException e) {

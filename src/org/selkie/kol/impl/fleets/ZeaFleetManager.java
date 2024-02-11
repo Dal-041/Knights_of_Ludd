@@ -28,7 +28,7 @@ import java.util.Random;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
-public class AbyssalFleetManager extends SeededFleetManager {
+public class ZeaFleetManager extends SeededFleetManager {
 
     public static class AbyssalFleetInteractionConfigGen implements FIDConfigGen {
         public FIDConfig createConfig() {
@@ -51,7 +51,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
     String fac;
     protected IntervalUtil interval = new IntervalUtil(3, 5);
 
-    public AbyssalFleetManager(StarSystemAPI system, String factionID, int maxFleets, int minPts, int maxPts) {
+    public ZeaFleetManager(StarSystemAPI system, String factionID, int maxFleets, int minPts, int maxPts) {
         super(system, 1f);
 
         this.minPts = minPts;
@@ -159,7 +159,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
         initElysianFleetProperties(random, fleet, false);
         addLoreToFleetCheck(fleet);
-        fleet.addScript(new AbyssAssignmentAI(fleet, system, pickEntityToGuard(new Random(), system, fleet)));
+        fleet.addScript(new ZeaAssignmentAI(fleet, system, pickEntityToGuard(new Random(), system, fleet)));
 
         return fleet;
     }
@@ -270,7 +270,7 @@ public class AbyssalFleetManager extends SeededFleetManager {
 
     public static void addElysianInteractionConfig(CampaignFleetAPI fleet) {
         fleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
-                new AbyssalFleetManager.AbyssalFleetInteractionConfigGen());
+                new ZeaFleetManager.AbyssalFleetInteractionConfigGen());
     }
 
     public PersonAPI createAbyssalCaptain() {

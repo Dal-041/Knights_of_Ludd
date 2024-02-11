@@ -92,6 +92,11 @@ public class ZeaUtils {
     public static final String abilityJumpDawn = "fracture_jump_luna_sea";
     public static final String abilityJumpDusk = "fracture_jump_pullsar";
 
+    public static final String systemIDBlizzard = "zea_boss_blizzard";
+    public static final String systemIDSupernova = "zea_boss_supernova";
+    public static final String systemIDRadiance = "zea_radiance";
+    public static final String systemIDShieldDrone = "zea_shield_drone";
+
     public static final String pathPortraits = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
     public static final String[] portraitsDawnPaths = {pathPortraits.concat("zea_dawn_1.png"), pathPortraits.concat("zea_dawn_2.png"), pathPortraits.concat("zea_dawn_3.png"), pathPortraits + "zea_dawn_4.png", pathPortraits + "zea_dawn_5.png"};
     public static final String[] portraitsDuskPaths = {pathPortraits.concat("zea_dusk_1.png"), pathPortraits.concat("zea_dusk_2.png"), pathPortraits.concat("zea_dusk_3.png")};

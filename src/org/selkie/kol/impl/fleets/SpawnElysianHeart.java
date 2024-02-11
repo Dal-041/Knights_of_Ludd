@@ -20,7 +20,7 @@ public class SpawnElysianHeart {
 	
 	public static boolean SpawnElysianHeart() {
 
-		PersonAPI elysianBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
+		PersonAPI elysianBossCaptain = ZeaFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
 		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
 		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png");
 
@@ -79,7 +79,7 @@ public class SpawnElysianHeart {
 			//elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
 
-		AbyssalFleetManager.setAbyssalCaptains(elysianHeartFleet);
+		ZeaFleetManager.setAbyssalCaptains(elysianHeartFleet);
 		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png");
 
 		elysianHeartFleet.getFleetData().sort();

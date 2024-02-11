@@ -18,7 +18,7 @@ public class SpawnDawnBoss {
 	
 	public static boolean SpawnDawnBoss() {
 
-		PersonAPI dawnBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.dawnID);
+		PersonAPI dawnBossCaptain = ZeaFleetManager.createAbyssalCaptain(PrepareAbyss.dawnID);
 		//A "slightly" rampant ALLMOTHER copy.
 		FullName name = new FullName("XLLM01H3R", "", FullName.Gender.ANY);
 		dawnBossCaptain.setName(name);
@@ -81,7 +81,7 @@ public class SpawnDawnBoss {
 		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
-		AbyssalFleetManager.setAbyssalCaptains(dawnBossFleet);
+		ZeaFleetManager.setAbyssalCaptains(dawnBossFleet);
 		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_nian.png");
 
 		dawnBossFleet.getFleetData().sort();

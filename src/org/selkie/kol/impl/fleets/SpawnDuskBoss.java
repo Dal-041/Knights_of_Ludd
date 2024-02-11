@@ -17,7 +17,7 @@ public class SpawnDuskBoss {
 	
 	public static boolean SpawnDuskBoss() {
 
-		PersonAPI duskBossCaptain = AbyssalFleetManager.createAbyssalCaptain(PrepareAbyss.duskID);
+		PersonAPI duskBossCaptain = ZeaFleetManager.createAbyssalCaptain(PrepareAbyss.duskID);
 		//Songtress, an experitmental AI who was once human.
 		FullName name = new FullName("Songtress", "", FullName.Gender.FEMALE);
 		duskBossCaptain.setName(name);
@@ -74,7 +74,7 @@ public class SpawnDuskBoss {
 			duskBossFleet.getFleetData().addFleetMember(support);
 		}*/
 
-		AbyssalFleetManager.setAbyssalCaptains(duskBossFleet);
+		ZeaFleetManager.setAbyssalCaptains(duskBossFleet);
 		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
 
 		duskBossFleet.getFleetData().sort();

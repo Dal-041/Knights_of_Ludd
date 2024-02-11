@@ -13,7 +13,7 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class AbyssLoreManager extends BaseSpecialItemPlugin {
+public class ZeaLoreManager extends BaseSpecialItemPlugin {
     protected String params = "";
 
     public static final int defaultCredits = 25000;
@@ -116,7 +116,7 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
         String crest = Global.getSector().getFaction(params).getCrest();
 
         if (params.equals(PrepareAbyss.elysianID)) {
-            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
             if (count >= edfLore.length) {
@@ -125,12 +125,12 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Elysian data fragment #" + String.valueOf(count + 1), edfLore[count], edfLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Elysian data fragment #" + String.valueOf(count + 1), edfLore[count], edfLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
         if (params.equals(PrepareAbyss.duskID)) {
-            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
             if (count >= duskLore.length) {
@@ -138,13 +138,13 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Duskborne data fragment #" + String.valueOf(count + 1), duskLore[count], duskLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Duskborne data fragment #" + String.valueOf(count + 1), duskLore[count], duskLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
 
             return;
         }
         if (params.equals(PrepareAbyss.dawnID)) {
-            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
             if (count >= dawnLore.length) {
@@ -152,13 +152,13 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Dawntide data fragment #" + String.valueOf(count + 1), dawnLore[count], dawnLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Dawntide data fragment #" + String.valueOf(count + 1), dawnLore[count], dawnLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
 
             return;
         }
         if (params.equals(Factions.TRITACHYON)) {
-            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
             if (count >= TTFleetLore.length) {
@@ -166,12 +166,12 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Tri-Tachyon Fleet Log #" + String.valueOf(count + 1), TTFleetLore[count], TTFleetLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Tri-Tachyon Fleet Log #" + String.valueOf(count + 1), TTFleetLore[count], TTFleetLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
         if (params.equals(Factions.HEGEMONY)) {
-            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+            for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
             if (count >= edfSystemLore.length) {
@@ -179,7 +179,7 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            AbyssLoreIntel lore = new AbyssLoreIntel(crest, "Hegemony Termination Fleet Recorder #" + String.valueOf(count + 1), edfSystemLore[count], edfSystemLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Hegemony Termination Fleet Recorder #" + String.valueOf(count + 1), edfSystemLore[count], edfSystemLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
@@ -211,7 +211,7 @@ public class AbyssLoreManager extends BaseSpecialItemPlugin {
 
     public boolean knowsAll () {
         int count = 0;
-        for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(AbyssLoreIntel.class)) {
+        for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
             if (intel.getIcon().equals(Global.getSector().getFaction(params).getCrest())) count++;
         }
         String[] ref = null;

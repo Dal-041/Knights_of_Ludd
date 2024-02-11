@@ -63,7 +63,7 @@ FireAll PopulateOptions",,,
 #END Grandmaster Lackey,,,,,,
 ,,,,,,
 # Knightmaster Lackey,,,,,,
-defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. Our Intelligence Director on Lyra may also need a lead investigated. Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""sometime soon,"" but for some reason the comm transcriber says ""later patches."" How strange. - ""Till next we meet, Captain!""ù",0:kol_km_lackey_expeditions:Continue,
+defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. Our Intelligence Director on Lyra may also need a lead investigated. Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""sometime soon,"" but for some reason the comm transcriber says ""later patches."" How strange. - ""Till next we meet, Captain!""ÔøΩ",0:kol_km_lackey_expeditions:Continue,
 defaultKnightmasterLackeyExpeditionsBlurb,DialogOptionSelected,$option == kol_km_lackey_expeditions,"ShowDefaultVisual
 FireAll PopulateOptions","Ah! And perhaps if you're the valiant type, you can find our expeditions gather for patrols about twice a month, as soon as one returns, or... if we lose contact. Please, if you provide them escort they're sure to go somewhere interesting. You'd be doing us a great favor. Blessings be upon you, Captain.",,
 ,,,,,,
@@ -116,7 +116,7 @@ zea_BossStationTT_Salvage,BeginSalvage,$tag:zea_boss_station_tritachyontag score
 Your officers mournfully gawk as their treasure vanishes like swarmers meandering into a flak field. The secrecy of whatever was being researched here was clearly worth the entire station's sacrifice, and an educated guess tells you the strange ship you fought had a lot to do with it. 
 
 You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.",0:zea_bossTTStationpage2:Get me a full report.,
-zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,AbyssIntelCMD addIntelTTBoss2,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments. 
+zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,ZeaIntelCMD addIntelTTBoss2,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments.
 
 It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
 zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
@@ -149,7 +149,7 @@ $customType == wreck
 $zea_ninaya_wreck score:1000
 
 !$first_ninaya_visit","
-AbyssIntelCMD addIntelTTBoss1","Salvage teams hook their tethers into the fragmented vessel's hull and get to work. Tense minutes pass until the chatter from the boarding party picks up in excitement.
+ZeaIntelCMD addIntelTTBoss1","Salvage teams hook their tethers into the fragmented vessel's hull and get to work. Tense minutes pass until the chatter from the boarding party picks up in excitement.
 
 ""$PlayerSirOrMadam, this ship is astounding - the level of sophistication, and the design! It's like stepping into an alien world!"" The chief takes a moment to recover some of his professionalism before continuing.
 
@@ -177,7 +177,7 @@ The small, bright motes orbiting the vessel are but an afterthought before the T
 ""Power down and you will not be unnecessarily harmed,"" the voice intones before the signal cuts.
 
 Short, to the point, and backed up by an armada's firepower - if you weren't on the receiving end you might like their style. Wasting no time, you begin issuing tactical orders to your bridge crew.",,
-zea_BossTT3Defeated,zea_AfterNinevehDefeat,,AbyssIntelCMD addIntelTTBoss3,"The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and fresh wreckage for light years in any direction.
+zea_BossTT3Defeated,zea_AfterNinevehDefeat,,ZeaIntelCMD addIntelTTBoss3,"The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and fresh wreckage for light years in any direction.
 
 Your eye catches on a datacore glinting in the debris that must have broken free during the fight. Perhaps they didn't have time to fully scrub it. You give a nod to your salvors and in short order it's brought on board.",0:zea_bossTT3defeated:What was theirs is now ours.,
 zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3defeated,DismissDialog,,,
