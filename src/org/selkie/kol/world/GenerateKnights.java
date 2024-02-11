@@ -15,6 +15,7 @@ import com.fs.starfarer.api.impl.campaign.intel.deciv.DecivTracker;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import com.fs.starfarer.campaign.econ.Market;
 import exerelin.campaign.SectorManager;
 import org.apache.log4j.Logger;
 import org.lazywizard.lazylib.MathUtils;
@@ -25,7 +26,8 @@ import org.selkie.kol.plugins.KOL_ModPlugin;
 
 public class GenerateKnights {
 
-	//public static Logger log = Global.getLogger(GenerateKnights.class);
+	public static Logger log = Global.getLogger(GenerateKnights.class);
+
 	public static int baseKnightExpeditions = 2;
 	
 	public static void genCorvus() {
@@ -98,6 +100,8 @@ public class GenerateKnights {
 
 		cygnus.setInteractionImage("illustrations", "kol_citadel_large");
 
+		MarketHelpers.addMarketPeople(cygnus.getMarket());
+
 		PersonAPI master = MagicCampaign.addCustomPerson(cygnus.getMarket(), "Master", "Helensis", "kol_chaptermaster",
 				FullName.Gender.FEMALE, KOL_ModPlugin.kolID, Ranks.ELDER, Ranks.POST_MILITARY_ADMINISTRATOR,
 				false, 1, 1);
@@ -150,6 +154,8 @@ public class GenerateKnights {
 		lyra.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
 
+		MarketHelpers.addMarketPeople(lyra.getMarket());
+
 		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Lyon", "kol_grandmaster",
 				FullName.Gender.MALE, KOL_ModPlugin.kolID, Ranks.FACTION_LEADER, Ranks.POST_FACTION_LEADER,
 				false, 0, 1);
@@ -175,24 +181,27 @@ public class GenerateKnights {
 		//libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
 
 		LinkedHashMap<BaseThemeGenerator.LocationType, Float> weights = new LinkedHashMap<BaseThemeGenerator.LocationType, Float>();
-		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_BELT, 10f);
+		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_BELT, 2f);
 		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_FIELD, 10f);
-		weights.put(BaseThemeGenerator.LocationType.IN_RING, 10f);
-		weights.put(BaseThemeGenerator.LocationType.IN_SMALL_NEBULA, 10f);
-		weights.put(BaseThemeGenerator.LocationType.GAS_GIANT_ORBIT, 10f);
-		weights.put(BaseThemeGenerator.LocationType.PLANET_ORBIT, 10f);
+		weights.put(BaseThemeGenerator.LocationType.IN_RING, 5f);
+		weights.put(BaseThemeGenerator.LocationType.IN_SMALL_NEBULA, 6f);
+		weights.put(BaseThemeGenerator.LocationType.GAS_GIANT_ORBIT, 3f);
+		weights.put(BaseThemeGenerator.LocationType.PLANET_ORBIT, 3f);
+		weights.put(BaseThemeGenerator.LocationType.STAR_ORBIT, 0.01f);
+		weights.put(BaseThemeGenerator.LocationType.JUMP_ORBIT, 0.03f);
 		WeightedRandomPicker<BaseThemeGenerator.EntityLocation> locs = BaseThemeGenerator.getLocations(null, home, null, 100f, weights);
 		BaseThemeGenerator.EntityLocation loc = locs.pick();
 
 		if (loc == null) {;
-			//log.error("KOL: Could not find location for Libra in %s", home.getId());
+			log.error(String.format("KOL: Could not find a location for Libra in %s", home.getId()));
 			return;
 		}
 
 		home.getMemoryWithoutUpdate().set("$kol_libra_start_system", true);
 		// Debug
 		/*
-		runcode for (StarSystemAPI system : Global.getSector().getStarSystems()) {
+		runcode org.selkie.kol.world.GenerateKnights.genBattlestarLibra();
+		for (StarSystemAPI system : Global.getSector().getStarSystems()) {
 			if (system.getMemoryWithoutUpdate().contains("$kol_libra_start_system")) {
 				$print(system.getId());
 			}
@@ -254,7 +263,9 @@ public class GenerateKnights {
 
 		Global.getSector().getEconomy().addMarket(market, true);
 
-		//log.info(String.format("KOL: Added pirate base in [%s]", home.getName()));
+		log.info(String.format("KOL: Initialized libra market in [%s]", home.getName()));
+
+		MarketHelpers.addMarketPeople(market);
 
 		//This one does have a black market
 		//if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
@@ -269,6 +280,8 @@ public class GenerateKnights {
 
 		elder.setImportance(PersonImportance.VERY_HIGH);
 		elder.setVoice(Voices.SOLDIER);
+
+		MarketHelpers.addMarketPeople(market);
 	}
 
 	protected static final String[] libraExclusionTags = {

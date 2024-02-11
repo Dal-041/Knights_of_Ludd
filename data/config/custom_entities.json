@@ -11,7 +11,7 @@
 		"icon":"graphics/icons/abyssal_light.png",
 		"iconWidth":20,
 		"iconHeight":20,
-		"sprite":"graphics/battlestars/kol_battlestar_libra_armed.png",
+		"sprite":"graphics/battlestars/kol_battlestar_libra.png",
 		"spriteWidth":75,
 		"spriteHeight":100,
 		"renderShadow":true,

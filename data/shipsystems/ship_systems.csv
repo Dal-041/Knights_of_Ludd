@@ -45,5 +45,5 @@ Drone Control,kol_sparkler,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphics/ic
 Drone Targeter,kol_bottlerocket,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphics/icons/hullsys/reserve_deployment.png
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #Absurd,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Blizzard,zea_boss_blizzard,1,,,,,,,,,0.1,5,0.1,24.8,,,TRUE,,TRUE,,,,TRUE,TRUE,,restricted,graphics/icons/hullsys/damper_field.png
+Fubuki ,zea_boss_blizzard,1,,,,,,,,,0.1,5,0.1,24.8,,,TRUE,,TRUE,,,,TRUE,TRUE,,restricted,graphics/icons/hullsys/damper_field.png
 Supernova,zea_boss_supernova,1,,,,,,,,,2,4,0.1,27.9,,,,,,,,,,TRUE,,restricted,graphics/icons/hullsys/lidar_barrage.png
