@@ -9,7 +9,7 @@
 	#"collisionClassByFighter":"RAY_FIGHTER",
 	"length":120.0,
 	"width":7.5,
-	"fadeTime":0.3,
+	"fadeTime":0.18,
 	"fringeColor":[255,220,50,255],
 	"coreColor":[255,220,200,220],
 	"hitGlowRadius":100,
