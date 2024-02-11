@@ -204,9 +204,9 @@ public class GenerateKnights {
 		BaseThemeGenerator.AddedEntity added = BaseThemeGenerator.addNonSalvageEntity(home, loc, "kol_battlestar_libra_entity", KOL_ModPlugin.kolID);
 		SectorEntityToken libra = added.entity;
 
-		MarketAPI market = MarketHelpers.addMarketplace("knights_of_selkie", libra, null, name, 4,
+		MarketAPI market = MarketHelpers.addMarketplace("knights_of_selkie", libra, null, name, 3,
 				new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
-						Conditions.POPULATION_4)),
+						Conditions.POPULATION_3)),
 				new ArrayList<String>(Arrays.asList(
 						Industries.POPULATION,
 						Industries.SPACEPORT,
@@ -297,8 +297,12 @@ public class GenerateKnights {
 			if (system.hasTag(Tags.THEME_INTERESTING)) w *= 10f;
 			if (system.hasTag(Tags.THEME_INTERESTING_MINOR)) w *= 5f;
 			if (system.getLocation().getX() <= width/-2 + 5000) w *= 5f; //West bias
-			if (system.getLocation().getX() <= width/-2 + 10000) w *= 10f; //West bias
+			if (system.getLocation().getX() <= width/-2 + 10000) w *= 5f; //West bias
 			if (system.getLocation().getX() <= width/-2 + 20000) w *= 5f; //West bias
+			if (system.hasSystemwideNebula()) w *= 2f;
+			if (Misc.getNumStableLocations(system) < 1) w *= 0.1;
+			if (Misc.getNumStableLocations(system) < 2) w *= 0.5;
+
 			picker.add(system, w);
 		}
 		return picker.pick();
