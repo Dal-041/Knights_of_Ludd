@@ -1,4 +1,31 @@
 {	
+	"kol_battlestar_libra_entity":{
+		"defaultName":"Battlestar Libra", # used if name=null in addCustomEntity()
+		"nameInText":"Battlestar Libra",
+		"shortName":"battlestar libra",
+		"aOrAn":"a",
+		"isOrAre":"is",
+		"defaultRadius":60, # used if radius<0 in addCustomEntity()
+		"customDescriptionId":"kol_battlestar_libra_entity",
+		"interactionImage":"graphics/illustrations/space_wreckage.jpg",
+		"icon":"graphics/icons/abyssal_light.png",
+		"iconWidth":32,
+		"iconHeight":32,
+		"sprite":"graphics/battlestars/kol_battlestar_libra.png",
+		"spriteWidth":150,
+		"spriteHeight":200,
+		"renderShadow":true,
+		"useLightColor":true,
+		"showInCampaign":false,
+		"showIconOnMap":false,
+		"showNameOnMap":true,
+		"scaleNameWithZoom":true,
+		"scaleIconWithZoom":true,
+		"tags":["has_interaction_dialog"],
+		"layers":[STATIONS], # what layer(s) to render in. See CampaignEngineLayers.java for possible values
+		"renderCircleIndicator":true,
+		"renderCircleIndicatorSelectionFlash":true,
+	},
 	
 	"zea_cache_low":{
 		"baseId":"weapons_cache",

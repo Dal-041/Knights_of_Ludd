@@ -237,9 +237,9 @@ public class GenerateKnights {
 			float w = 1f;
 			if (system.hasTag(Tags.THEME_INTERESTING)) w *= 10f;
 			if (system.hasTag(Tags.THEME_INTERESTING_MINOR)) w *= 5f;
-			if (system.getLocation().getX() <= width + 5000) w *= 5f; //West bias
-			if (system.getLocation().getX() <= width + 10000) w *= 10f; //West bias
-			if (system.getLocation().getX() <= width + 20000) w *= 5f; //West bias
+			if (system.getLocation().getX() <= width/-2 + 5000) w *= 5f; //West bias
+			if (system.getLocation().getX() <= width/-2 + 10000) w *= 10f; //West bias
+			if (system.getLocation().getX() <= width/-2 + 20000) w *= 5f; //West bias
 			picker.add(system, w);
 		}
 		return picker.pick();
