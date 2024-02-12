@@ -47,7 +47,7 @@ public class IFFOverrideActivator extends CombatActivator {
 
     @Override
     public float getBaseCooldownDuration() {
-        return 10f;
+        return 20f;
     }
 
     @Override

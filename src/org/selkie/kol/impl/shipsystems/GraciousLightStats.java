@@ -5,6 +5,7 @@ import activators.CombatActivator;
 import activators.drones.DroneActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.impl.combat.ShockwaveVisual;
@@ -29,8 +30,8 @@ public class GraciousLightStats extends BaseShipSystemScript {
     private static final String GRACIOUS_LIGHT_KEY = "GraciousLight";
     public static final float HEALING_LIGHT_RANGE = 1600f;
     private static final float BURNING_LIGHT_RANGE = 1200f;
-    private static final float HEALING_FLUX_MULT = 0.4f; // current flux reduced by this amount of current flux
-    private static final float HEALING_HULL_MULT = 0.4f; // current hull healed by this amount of missing hull
+    private static final float HEALING_FLUX_MULT = 0.75f; // current flux reduced by this amount of current flux
+    private static final float HEALING_HULL_MULT = 0.75f; // current hull healed by this amount of missing hull
 
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
@@ -55,8 +56,8 @@ public class GraciousLightStats extends BaseShipSystemScript {
                 0.5f,
                 BURNING_LIGHT_RANGE,
                 BURNING_LIGHT_RANGE / 2f,
-                250f,
-                100f,
+                500f,
+                150f,
                 CollisionClass.PROJECTILE_NO_FF,
                 CollisionClass.PROJECTILE_FIGHTER,
                 1f,
@@ -140,6 +141,18 @@ public class GraciousLightStats extends BaseShipSystemScript {
         public IntervalUtil auraInterval = new IntervalUtil(1f, 1f);
 
         private GraciousLightData() {
+        }
+    }
+
+    private class GraciousLightExplosionOnHitEffect implements OnHitEffectPlugin {
+        @Override
+        public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
+            if (target != null && (target instanceof MissileAPI || (target instanceof ShipAPI && ((ShipAPI) target).isFighter()))) {
+                damageResult.setDamageToHull(damageResult.getDamageToHull() * 2f);
+                damageResult.setDamageToShields(damageResult.getDamageToShields() * 2f);
+                damageResult.setDamageToPrimaryArmorCell(damageResult.getDamageToPrimaryArmorCell() * 2f);
+                damageResult.setTotalDamageToArmor(damageResult.getTotalDamageToArmor() * 2f);
+            }
         }
     }
 }

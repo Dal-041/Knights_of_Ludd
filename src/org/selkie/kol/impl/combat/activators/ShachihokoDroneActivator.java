@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.*;
 
 public class ShachihokoDroneActivator extends DroneActivator {
-    private static final Color BASE_SHIELD_COLOR = new Color(255,185,75, 255);
+    private static final Color BASE_SHIELD_COLOR = new Color(255, 230, 120, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
 
@@ -109,6 +109,14 @@ public class ShachihokoDroneActivator extends DroneActivator {
         return PID;
     }
 
+    @NotNull
+    @Override
+    public ShipAPI spawnDrone() {
+        ShipAPI drone = super.spawnDrone();
+        drone.getMutableStats().getHardFluxDissipationFraction().modifyFlat("shachihokoHardFluxDiss", 10f / 100f);
+        return drone;
+    }
+
     @Override
     public void advance(float amount) {
         if (target != null && !target.isAlive()) {
@@ -161,13 +169,19 @@ public class ShachihokoDroneActivator extends DroneActivator {
                     //keep shield off otherwise
                     drone.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
 
-                    //and vent if we need to
+                    //and vent if we can
                     if (drone.getFluxLevel() > 0.05f) {
                         drone.giveCommand(ShipCommand.VENT_FLUX, null, 0);
                     }
                 }
             }
+
+            //vent if we absolutely need to
+            if (drone.getFluxLevel() > 0.90f) {
+                drone.giveCommand(ShipCommand.VENT_FLUX, null, 0);
+            }
         }
+
     }
 
     @Override
