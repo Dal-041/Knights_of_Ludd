@@ -33,7 +33,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 
     private val EFFECT_RANGE =
         DAMAGE_RANGE-(DAMAGE_RANGE*0.05f) //"For "player visual purposes" we reduce it by 5% See some random player theory crap."
-    private val effectSize = Vector2f(EFFECT_RANGE*10, EFFECT_RANGE*10)
+    private val effectSize = Vector2f(EFFECT_RANGE*2, EFFECT_RANGE*2)
 
     override fun canAssignKey(): Boolean {
         return false
@@ -129,9 +129,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
             if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
                 return;
             } else {
-                if (ship.system.isActive || ship.isHulk || ship.isPiece || !ship.isAlive) {
-                    //
-                } else {
+                if (!ship.isHulk && !ship.isPiece && ship.isAlive) {
                     MagicRender.singleframe(spriteRing, ship.location, effectSize, 0f, glowColorNow, true)
                 }
             }

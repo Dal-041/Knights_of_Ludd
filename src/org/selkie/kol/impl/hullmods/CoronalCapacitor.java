@@ -152,7 +152,7 @@ public class CoronalCapacitor extends BaseHullMod {
                 }
             }
 
-            float effectiveChargeRate = actual_chargemult;
+            float effectiveChargeRate = actual_chargemult * amount; // TODO BAD CODE STENCH
             if (ship.getFluxTracker().isVenting()) {
                 effectiveChargeRate *= ship.getMutableStats().getVentRateMult().getModifiedValue()*2;
             }
@@ -231,9 +231,9 @@ public class CoronalCapacitor extends BaseHullMod {
 
         public static float getSystemStellarIntensity(ShipAPI ship) {
             if (Global.getSector() == null || Global.getSector().getCurrentLocation() == null) return 1f;
+            if (Global.getSector().getCurrentLocation().isHyperspace()) return MIN_CHARGEMULT;
             StarSystemAPI system = (StarSystemAPI) Global.getSector().getCurrentLocation();
             if (system.getStar() == null) return MIN_CHARGEMULT;
-            if (system.isHyperspace()) return MIN_CHARGEMULT;
 
             if (ship.getFleetMember() == null || ship.getFleetMember().getFleetData() == null || ship.getFleetMember().getFleetData().getFleet() == null) return 1f;
 
@@ -258,9 +258,9 @@ public class CoronalCapacitor extends BaseHullMod {
 
         public static float getSystemStellarIntensity(FleetMemberAPI member) {
             if (Global.getSector() == null || Global.getSector().getCurrentLocation() == null) return 1f;
+            if (Global.getSector().getCurrentLocation().isHyperspace()) return MIN_CHARGEMULT;
             StarSystemAPI system = (StarSystemAPI) Global.getSector().getCurrentLocation();
             if (system.getStar() == null) return MIN_CHARGEMULT;
-            if (system.isHyperspace()) return MIN_CHARGEMULT;
 
             if (member == null || member.getFleetData() == null || member.getFleetData().getFleet() == null) return 1f;
 
