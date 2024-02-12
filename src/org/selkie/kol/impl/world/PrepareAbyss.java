@@ -526,7 +526,7 @@ public class PrepareAbyss {
 				new AbyssCorona.CoronaParams(25000,
 						50,
 						sing,
-						-70f,
+						-50f,
 						1f,
 						8f)
 		);

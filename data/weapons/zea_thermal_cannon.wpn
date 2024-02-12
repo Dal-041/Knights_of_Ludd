@@ -21,7 +21,7 @@
 					   "particleDuration":0.15,
 					   "particleCount":30,
 					   "particleColor":[255,100,150,255]},
-	"interruptibleBurst":true,
+	#"interruptibleBurst":true,
 	"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
 	"projectileSpecId":"zea_thermal_shot",  # projectile that will be fired
 	"fireSoundTwo":"plasma_cannon_fire",

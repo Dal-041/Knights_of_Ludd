@@ -103,8 +103,10 @@ public class CombatRangeBlockerUtil {
             float dist = Misc.getDistance(entity.getLocation(), ent.getLocation());
             if (dist > maxRange) continue;
 
-            float graceRadius = 5f;
-            float span = Misc.computeAngleSpan(ent.getShipExplosionRadius() + graceRadius, dist);
+            float graceRadius = 25f;
+            float span = Misc.computeAngleSpan(ent.getCollisionRadius()*1.0f + graceRadius, dist);
+
+            if (!ent.isAlive()) span *= 0.35f;
 
             float angle = Misc.getAngleInDegrees(entity.getLocation(), ent.getLocation());
 

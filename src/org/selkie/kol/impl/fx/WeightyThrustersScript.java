@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.plugins;
+package org.selkie.kol.impl.fx;
 
 import com.fs.starfarer.api.combat.*;
 

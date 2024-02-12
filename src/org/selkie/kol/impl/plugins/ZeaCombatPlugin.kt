@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.plugins
+package org.selkie.kol.impl.plugins
 
 import com.fs.starfarer.api.GameState
 import com.fs.starfarer.api.Global
@@ -17,7 +17,7 @@ import org.selkie.kol.impl.combat.StarficzAIUtils
 import java.awt.Color
 import java.util.regex.Pattern
 
-class KOLCombatPlugin : BaseEveryFrameCombatPlugin() {
+class ZeaCombatPlugin : BaseEveryFrameCombatPlugin() {
     private val MAX_RANGE = 250f;
 
     private val PAPERDOLL_SCALE: Map<String, Float> = mapOf("kol_lunaria" to 0.455f, "kol_alysse" to 0.615f,

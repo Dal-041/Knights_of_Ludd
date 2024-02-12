@@ -116,9 +116,9 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
         FlareManager.Flare curr = flareManager.getActiveFlare();
         if (curr != null) {
             float outerRadiusWithFlare = computeRadiusWithFlare(flareManager.getActiveFlare());
-            return outerRadiusWithFlare + 200f;
+            return outerRadiusWithFlare + 3000f;
         }
-        return 1000f;
+        return 1000000f;
     }
 
     public boolean containsPoint(Vector2f point, float radius) {
