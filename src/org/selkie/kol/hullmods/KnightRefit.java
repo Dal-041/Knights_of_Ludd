@@ -10,6 +10,7 @@ import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import exerelin.utilities.ReflectionUtils;
 import org.lwjgl.input.Keyboard;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
@@ -236,7 +237,7 @@ public class KnightRefit extends BaseHullMod {
         float alive = 0;
         for(ShipAPI module : ship.getChildModulesCopy()){
             modules++;
-            if(!module.isAlive()) continue;
+            if (ship.getHitpoints() <= 0f) continue;
             alive++;
             if(ship.getVariant() == null || module.getVariant() == null) continue;
 
@@ -245,6 +246,8 @@ public class KnightRefit extends BaseHullMod {
 
             module.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", hullmult);
             module.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", armorMult);
+
+
         }
 
         if(modules!=0){

@@ -8,6 +8,7 @@ import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.FaderUtil;
 import com.fs.starfarer.api.util.Misc;
+import exerelin.utilities.ReflectionUtils;
 
 import java.awt.*;
 
@@ -53,7 +54,7 @@ public class hideDeco implements EveryFrameWeaponEffectPlugin {
                 module = getCorrespondingModule(ship, weapon.getSpec().getWeaponId());
                 if (module != null) gotMod = true;
             }
-            if (gotMod && !module.isAlive()) {
+            if (gotMod && (module.getHitpoints() <= 0f)) {
                 weapon.getSprite().setNormalBlend();
                 SpriteAPI sprite = weapon.getSprite();
                 sprite.setColor(new Color(0,0,0,0));

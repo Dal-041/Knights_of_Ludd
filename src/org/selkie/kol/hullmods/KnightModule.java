@@ -1,8 +1,13 @@
 package org.selkie.kol.hullmods;
 
+import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
+import com.fs.starfarer.combat.entities.Ship;
+import exerelin.utilities.ReflectionUtils;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.util.Collection;
 
@@ -13,43 +18,36 @@ public class KnightModule extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        /*
-        if (ship.getParentStation() != null) {
-            for (String ID:ship.getVariant().getNonBuiltInHullmods()) {
-                ship.getVariant().removeMod(ID);
-            }
-            for (String hullmodID : ship.getParentStation().getVariant().getNonBuiltInHullmods()) {
-                ship.getVariant().addMod(hullmodID);
-            }
-            for (String hullmodID : ship.getParentStation().getVariant().getSMods()) {
-                ship.getVariant().addMod(hullmodID);
-            }
-        }
-         */
-        // avoid the enemy AI being scared of armor modules as if they are ships
-        ship.setDrone(true);
-       // ship.setHulk(true);
+        //if(!ship.hasListenerOfClass(Hulkinator.class)) ship.addListener(new Hulkinator(ship));
+
     }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        //Manual method
-        /* removed in favor of multiplier method on KnightRefit
-        if(!ship.isAlive())return;
-        if(Global.getCombatEngine().getTotalElapsedTime(false)<=2.05 && Global.getCombatEngine().getTotalElapsedTime(false)>2) {
-            if (ship.getParentStation() != null && ship.getParentStation().isAlive()) {
+        if (Global.getCurrentState() == GameState.COMBAT && !ship.hasTag("KOL_moduleHulked")){
+            Vector2f.add(ship.getLocation(), new Vector2f(10000,0), ship.getLocation());
+            ship.setHulk(true);
+            ship.setDrone(true);
+            ship.addTag("KOL_moduleHulked");
+        }
+        boolean moduleDead = (ship.getParentStation() != null && !ship.getParentStation().isAlive()) || ship.getHitpoints() <= 0.0f;
 
-                Collection<String> mods = ship.getParentStation().getVariant().getHullMods();
+        // make sure to actually kill and explode armor when dead, as hulk means the game wont auto do this
+        if(moduleDead && !ship.hasTag("KOL_moduleDead")){
+            ship.addTag("KOL_moduleDead");
+            if (ship.getStationSlot() != null) {
+                ship.setStationSlot(null);
+                ((Ship) ship).setSpawnDebris(false);
+                Ship.disable((Ship) ship, ship);
+            }
+        }
 
-                if (mods.contains("heavyarmor")) {
-                    float fakeArmor = ship.getHullSpec().getArmorRating() / (ship.getHullSpec().getArmorRating() + 100);
-                    ship.getMutableStats().getArmorDamageTakenMult().modifyMult(id, fakeArmor);
-                }
-                if (mods.contains("reinforcedhull")) {
-                    ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0.72f);
+        if(!moduleDead){
+            for(WeaponAPI weapon : ship.getAllWeapons()){
+                if(!weapon.isDecorative() && weapon.getType() != WeaponAPI.WeaponType.SYSTEM){
+                    //weapon.setForceFireOneFrame(true);
                 }
             }
         }
-        */
     }
 }

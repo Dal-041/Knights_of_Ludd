@@ -9,6 +9,7 @@ import com.fs.starfarer.api.combat.ViewportAPI
 import com.fs.starfarer.api.input.InputEventAPI
 import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
+import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.combat.ParticleController
 import org.selkie.kol.combat.StarficzAIUtils
@@ -63,7 +64,7 @@ class KOL_CombatPlugin : BaseEveryFrameCombatPlugin() {
             val shipScale = PAPERDOLL_SCALE[ship.hullSpec.hullId]!! * scale;
             val alpha = Math.round(Misc.interpolate(0f,255f, Utils.getUIAlpha(true)))
             for (module in ship.childModulesCopy) {
-                if (!module.isAlive) continue
+                if (ship.hitpoints <= 0f) continue
 
                 var moduleSprite = Global.getSettings().getSprite(module.hullSpec.spriteName)
                 val matcher = kolPattern.matcher(module.hullSpec.spriteName)
