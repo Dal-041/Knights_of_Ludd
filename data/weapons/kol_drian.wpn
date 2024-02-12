@@ -13,7 +13,16 @@
 	"hardpointOffsets":[15, 0],
 	"hardpointAngleOffsets":[0],
 	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
-	"animationType":"GLOW",
+	"animationType": "GLOW_AND_FLASH",
+
+	"muzzleFlashSpec":{"length":45.0,   # only used if animationType = MUZZLE_FLASH
+					   "spread":5.0,
+					   "particleSizeMin":8.0,
+					   "particleSizeRange":10.0,
+					   "particleDuration":0.15,
+					   "particleCount":15,
+					  "particleColor":[160,245,180,190]},
+
 	"autocharge":true,  # whether the weapon will continue charging and fire if the LMB is tapped instead of held
 	"projectileSpecId":"kol_drian_shot",  # projectile that will be fired
 	"fireSoundTwo":"railgun_fire",

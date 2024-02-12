@@ -303,12 +303,10 @@ public class StarficzAIUtils {
                     float chargeupTime = 0, activeTime = 0, chargedownTime = 0, cooldownTime = 0;
                     if(!weapon.isFiring()){ // weapon is in cooldown/idle
                         cooldownTime = weapon.getCooldownRemaining();
-                        if(cooldownTime != 0) cooldownTime += weapon.getSpec().getBeamChargedownTime(); // TODO: delete when vanilla bug is fixed
                     }
                     else if(weapon.getCooldownRemaining() > 0){ // weapon is in chargedown, chargedown and cooldown overlap by Starsector's standards (Blame Alex)
                         cooldownTime = weapon.getCooldown() - weapon.getSpec().getBeamChargedownTime();
                         chargedownTime = weapon.getCooldownRemaining() - cooldownTime;
-                        chargedownTime += weapon.getSpec().getBeamChargedownTime(); // TODO: delete when vanilla bug is fixed
                     }
                     else if(weapon.getBurstFireTimeRemaining() < weapon.getSpec().getBurstDuration()){ // weapon is in active
                         activeTime = weapon.getBurstFireTimeRemaining();
