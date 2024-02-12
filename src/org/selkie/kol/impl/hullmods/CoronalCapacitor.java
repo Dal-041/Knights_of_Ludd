@@ -6,8 +6,6 @@ import com.fs.starfarer.api.campaign.PlanetAPI;
 import com.fs.starfarer.api.campaign.StarSystemAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
@@ -23,14 +21,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.selkie.kol.impl.hullmods.CoronalCapacitor.CoronalCapacitorListener.getSystemStellarIntensity;
-
 public class CoronalCapacitor extends BaseHullMod {
-    public static final String CAPACITY_FACTOR_KEY = "$cc_cap_modifier";
-    public static final String CHARGE_CHECK_KEY = "$cc_check_time";
+    public static final String CAPACITY_FACTOR_KEY = "coronal_cap_modifier";
     public static class CoronalCapacitorListener implements AdvanceableListener {
 
-        private FleetMemberAPI member;
         private ShipAPI ship;
         private CombatEngineAPI engine;
         private HashMap<WeaponAPI, Boolean> fluxCounted = new HashMap<>();
@@ -88,8 +82,7 @@ public class CoronalCapacitor extends BaseHullMod {
             starLux.put("quasar", 8f);
         }
 
-        private static boolean inited = false;
-        public static float actual_chargemult = 1f; // resultant charge rate
+        public float actual_chargemult = 0f; // resultant charge rate
         private float capacitorFactor = 1f; // 0-1
         private float capacitorAmount = 0f; // Gets verified
         private float chargeTime = 0f;
@@ -105,6 +98,7 @@ public class CoronalCapacitor extends BaseHullMod {
         CoronalCapacitorListener(ShipAPI ship) {
             this.ship = ship;
             engine = Global.getCombatEngine();
+            actual_chargemult = FLUX_CHARGERATE * getSystemStellarIntensity(ship);
             for(WeaponAPI weapon : ship.getAllWeapons()) {
                 if(!weapon.isDecorative()) {
                     if (weapon.isBeam() && !weapon.isBurstBeam()) {
@@ -122,8 +116,6 @@ public class CoronalCapacitor extends BaseHullMod {
             float fluxPerSecond = 0;
             float flatFlux = 0f;
             boolean charging = true;
-
-            if (!ship.isAlive() || ship.isHulk() || engine.isPaused()) return;
 
             if (engines == null) {
                 engines = new ArrayList<>();
@@ -152,7 +144,7 @@ public class CoronalCapacitor extends BaseHullMod {
                 }
             }
 
-            float effectiveChargeRate = actual_chargemult * amount; // TODO BAD CODE STENCH
+            float effectiveChargeRate = actual_chargemult;
             if (ship.getFluxTracker().isVenting()) {
                 effectiveChargeRate *= ship.getMutableStats().getVentRateMult().getModifiedValue()*2;
             }
@@ -218,7 +210,7 @@ public class CoronalCapacitor extends BaseHullMod {
             stats.getBallisticRoFMult().modifyMult(CAPACITY_FACTOR_KEY, 1+ROF_BOOST*capacitorFactor);
             stats.getBallisticWeaponFluxCostMod().modifyMult(CAPACITY_FACTOR_KEY, 1/(1+ROF_BOOST*capacitorFactor));
 
-            if(engine.getPlayerShip() == ship) {
+            if(engine.getPlayerShip() == ship){
                 engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName("icons", "coronal_cap_bottom"),
                         "+" + Math.round(100*SPEED_BOOST*capacitorFactor) + "% top speed", "improved maneuverability", false);
                 engine.maintainStatusForPlayerShip(STATUSKEY2,Global.getSettings().getSpriteName("icons", "coronal_cap_middle"),
@@ -230,41 +222,12 @@ public class CoronalCapacitor extends BaseHullMod {
         }
 
         public static float getSystemStellarIntensity(ShipAPI ship) {
-            if (Global.getSector() == null || Global.getSector().getCurrentLocation() == null) return 1f;
-            if (Global.getSector().getCurrentLocation().isHyperspace()) return MIN_CHARGEMULT;
-            StarSystemAPI system = (StarSystemAPI) Global.getSector().getCurrentLocation();
-            if (system.getStar() == null) return MIN_CHARGEMULT;
-
             if (ship.getFleetMember() == null || ship.getFleetMember().getFleetData() == null || ship.getFleetMember().getFleetData().getFleet() == null) return 1f;
-
             CampaignFleetAPI fleet = ship.getFleetMember().getFleetData().getFleet();
-            Vector2f loc = fleet.getLocation();
 
-            float lux = 0f;
-            PlanetAPI primary = system.getStar();
-            lux += getStarIntensity(primary, loc);
-            PlanetAPI secondary;
-            PlanetAPI tertiary;
-
-            if (system.getSecondary() != null) {
-                lux += getStarIntensity(system.getSecondary(), loc);
-            }
-            if (system.getTertiary() != null) {
-                lux += getStarIntensity(system.getTertiary(), loc);
-            }
-
-            return Math.max(MIN_CHARGEMULT, Math.min(lux, MAX_CHARGEMULT));
-        }
-
-        public static float getSystemStellarIntensity(FleetMemberAPI member) {
-            if (Global.getSector() == null || Global.getSector().getCurrentLocation() == null) return 1f;
-            if (Global.getSector().getCurrentLocation().isHyperspace()) return MIN_CHARGEMULT;
-            StarSystemAPI system = (StarSystemAPI) Global.getSector().getCurrentLocation();
+            if (fleet.isInHyperspace()) return MIN_CHARGEMULT;
+            StarSystemAPI system = (StarSystemAPI) fleet.getContainingLocation();
             if (system.getStar() == null) return MIN_CHARGEMULT;
-
-            if (member == null || member.getFleetData() == null || member.getFleetData().getFleet() == null) return 1f;
-
-            CampaignFleetAPI fleet = member.getFleetData().getFleet();
             Vector2f loc = fleet.getLocation();
 
             float lux = 0f;
@@ -303,21 +266,12 @@ public class CoronalCapacitor extends BaseHullMod {
         public float getActualRecharge() {
             return FLUX_CHARGERATE * getSystemStellarIntensity(ship);
         }
-
-        public float getActualRecharge(FleetMemberAPI member) {
-            return FLUX_CHARGERATE * getSystemStellarIntensity(member);
-        }
     }
 
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship.getListeners(CoronalCapacitorListener.class).isEmpty()) ship.addListener(new CoronalCapacitor.CoronalCapacitorListener(ship));
-    }
-
-    @Override
-    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        //if (stats.getListeners(CoronalCapacitorListener.class).isEmpty() && stats.getFleetMember() != null) stats.addListener(new CoronalCapacitorListener(stats.getFleetMember()));
+        ship.addListener(new CoronalCapacitor.CoronalCapacitorListener(ship));
     }
 
     @Override
@@ -328,18 +282,6 @@ public class CoronalCapacitor extends BaseHullMod {
     @Override
     public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
         return false;
-    }
-
-    @Override
-    public void advanceInCampaign(FleetMemberAPI member, float amount) {
-        if (member != null &&
-                member.getFleetData() != null
-                && member.getFleetData().getFleet() != null
-                && (!member.getFleetData().getFleet().getCustomData().containsKey(CHARGE_CHECK_KEY)
-                || (long) member.getFleetData().getFleet().getCustomData().get(CHARGE_CHECK_KEY) >= Global.getSector().getClock().getTimestamp() + 1000)) {
-            CoronalCapacitorListener.actual_chargemult = getSystemStellarIntensity(member);
-            member.getFleetData().getFleet().getCustomData().put(CHARGE_CHECK_KEY, Global.getSector().getClock().getTimestamp());
-        }
     }
 
     @Override

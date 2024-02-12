@@ -36,7 +36,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     //Terrain plugin
     public float PULSAR_ARC = 90f; //1 / ((float) Math.PI * 2f) * 360f;
-    public float PULSAR_LENGTH = 3000f; //1 / ((float) Math.PI * 2f) * 360f;
+    public float PULSAR_LENGTH = 2000f; //1 / ((float) Math.PI * 2f) * 360f;
     public float fxMult = 1f;
     public boolean single = false;
     public String nameTooltip = "Pulsar Wave";
@@ -92,10 +92,10 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     public void init() {
         if (!inited) {
-            this.params = new CombatPulsarCorona.CombatCoronaParams(PULSAR_LENGTH, ship.getCollisionRadius()+50f, ship, 500f, 1f, 0f);
+            this.params = new CombatPulsarCorona.CombatCoronaParams(PULSAR_LENGTH*2, ship.getCollisionRadius()+50f, ship, 500f, 1f, 0f);
             this.single = false;
             if (blocker == null) {
-                blocker = new CombatRangeBlockerUtil(2000, PULSAR_LENGTH + PULSAR_LENGTH*0.25f);
+                blocker = new CombatRangeBlockerUtil(2000, PULSAR_LENGTH*2f);
             }
             name = "The Blizzard";
             params.name = "The Blizzard";
@@ -227,7 +227,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     }
 
     public float getRenderRange() {
-        return params.middleRadius + params.bandWidthInEngine / 2f + 50f;
+        return params.middleRadius + params.bandWidthInEngine / 2f + 100000f;
         //return getPulsarOuterRadius() + 1000f;
     }
 
@@ -261,7 +261,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             String buffId = getModId();
             float buffDur = 0.1f;
 
-            for (CombatEntityAPI enemy : AIUtils.getNearbyEnemies(ship, params.bandWidthInEngine)) {
+            for (CombatEntityAPI enemy : AIUtils.getNearbyEnemies(ship, params.bandWidthInEngine/2)) {
                 if (enemy instanceof ShipAPI) {
                     ShipAPI tgtShip = (ShipAPI) enemy;
                     if (tgtShip.isPhased()) continue;
@@ -317,7 +317,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                 }
             }
 
-            for (CombatEntityAPI ally : AIUtils.getNearbyAllies(ship, params.bandWidthInEngine)) {
+            for (CombatEntityAPI ally : AIUtils.getNearbyAllies(ship, params.bandWidthInEngine/2)) {
                 if (ally instanceof ShipAPI) {
                     ShipAPI tgtShip = (ShipAPI) ally;
                     if (tgtShip.isPhased()) continue;
@@ -375,7 +375,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                 }
             }
 
-            for (CombatEntityAPI missile : AIUtils.getNearbyEnemyMissiles(ship, params.bandWidthInEngine)) {
+            for (CombatEntityAPI missile : AIUtils.getNearbyEnemyMissiles(ship, params.bandWidthInEngine/2)) {
                 if (missile instanceof MissileAPI) {
                     MissileAPI tgt = (MissileAPI) missile;
                     float intensity = getIntensityAtPoint(tgt.getLocation()) / 2f;

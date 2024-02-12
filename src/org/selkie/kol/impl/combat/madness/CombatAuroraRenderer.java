@@ -234,6 +234,7 @@ public class CombatAuroraRenderer {
     public float getRenderDistMax(float angle) {
         float radStart = delegate.getAuroraInnerRadius();
         float radEnd = delegate.getAuroraOuterRadius();
+
         if (radEnd < radStart + 10f) radEnd = radStart + 10f;
 
         float angleRad = (float) Math.toRadians(angle);
@@ -282,6 +283,6 @@ public class CombatAuroraRenderer {
             if (rOuter > max) max = rOuter;
         }
 
-        return max;
+        return 10000000f; //return max;
     }
 }
