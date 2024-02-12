@@ -12,13 +12,12 @@ import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
 import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.mission.FleetSide;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.awt.*;
 

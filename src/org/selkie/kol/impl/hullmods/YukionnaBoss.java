@@ -5,7 +5,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
@@ -13,7 +12,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.BallLightningActivator;
 import org.selkie.kol.impl.combat.activators.BlizzardActivator;
 

@@ -372,7 +372,7 @@
 		"Elysia":[255,253,222,255]
 	},
 	"plugins": {
-		"KOLParticleController": "org.selkie.kol.impl.plugins.ZeaCombatPlugin"
+		"KOL_CombatPlugin": "org.selkie.kol.plugins.KOL_CombatPlugin"
 	},
 	"ruleCommandPackages": [
         "org.selkie.kol.impl.rulecmd"

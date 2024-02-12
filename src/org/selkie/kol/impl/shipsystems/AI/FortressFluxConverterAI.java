@@ -7,12 +7,12 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
+import static org.selkie.kol.combat.StarficzAIUtils.*;
 
 public class FortressFluxConverterAI implements ShipSystemAIScript {
     private ShipAPI ship;

@@ -9,8 +9,6 @@ import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
-import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
-import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
@@ -19,14 +17,12 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
-import org.selkie.kol.impl.combat.StarficzAIUtils.*;
+import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils.*;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
-import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class NinmahBoss extends BaseHullMod {
 

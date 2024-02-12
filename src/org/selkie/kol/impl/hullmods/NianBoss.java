@@ -6,8 +6,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.NianFlaresActivator;
 
 import java.awt.*;

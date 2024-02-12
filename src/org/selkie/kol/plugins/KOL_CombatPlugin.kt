@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.plugins
+package org.selkie.kol.plugins
 
 import com.fs.starfarer.api.GameState
 import com.fs.starfarer.api.Global
@@ -8,16 +8,14 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ViewportAPI
 import com.fs.starfarer.api.input.InputEventAPI
 import com.fs.starfarer.api.util.Misc
-import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
-import org.magiclib.util.MagicRender
 import org.selkie.kol.Utils
-import org.selkie.kol.impl.combat.ParticleController
-import org.selkie.kol.impl.combat.StarficzAIUtils
+import org.selkie.kol.combat.ParticleController
+import org.selkie.kol.combat.StarficzAIUtils
 import java.awt.Color
 import java.util.regex.Pattern
 
-class ZeaCombatPlugin : BaseEveryFrameCombatPlugin() {
+class KOL_CombatPlugin : BaseEveryFrameCombatPlugin() {
     private val MAX_RANGE = 250f;
 
     private val PAPERDOLL_SCALE: Map<String, Float> = mapOf("kol_lunaria" to 0.455f, "kol_alysse" to 0.615f,
@@ -63,7 +61,7 @@ class ZeaCombatPlugin : BaseEveryFrameCombatPlugin() {
         val kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE)
         if (PAPERDOLL_SCALE.containsKey(ship.hullSpec.hullId) ) {
             val shipScale = PAPERDOLL_SCALE[ship.hullSpec.hullId]!! * scale;
-            val alpha = Math.round(Misc.interpolate(0f,230f, Utils.getUIAlpha()))
+            val alpha = Math.round(Misc.interpolate(0f,255f, Utils.getUIAlpha(true)))
             for (module in ship.childModulesCopy) {
                 if (!module.isAlive) continue
 
@@ -89,9 +87,9 @@ class ZeaCombatPlugin : BaseEveryFrameCombatPlugin() {
                 */
                 moduleSprite.setSize(moduleSprite.width * shipScale, moduleSprite.height * shipScale)
                 moduleSprite.color = paperdollColor;
-                moduleSprite.setNormalBlend();
+                moduleSprite.setAdditiveBlend();
                 //moduleSprite.setBlendFunc(GL11.GL_ONE, GL11.GL_ZERO)
-                moduleSprite.angle= ship.facing - 90f
+                moduleSprite.angle = ship.facing - 90f
                 moduleSprite.renderAtCenter(paperDollLocation.x, paperDollLocation.y)
             }
         }

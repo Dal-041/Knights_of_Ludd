@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat;
+package org.selkie.kol.combat;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;

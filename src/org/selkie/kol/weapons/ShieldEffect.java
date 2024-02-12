@@ -12,7 +12,7 @@ import org.selkie.kol.Utils;
 import java.awt.Color;
 import java.util.*;
 
-import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
+import static org.selkie.kol.combat.StarficzAIUtils.*;
 
 //Concept and impl by Tartiflette, AI by Starficz
 

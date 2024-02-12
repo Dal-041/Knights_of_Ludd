@@ -14,7 +14,7 @@ import org.dark.shaders.light.LightShader
 import org.dark.shaders.light.StandardLight
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.util.MagicRender
-import org.selkie.kol.impl.combat.ParticleData
+import org.selkie.kol.combat.ParticleData
 import org.selkie.kol.impl.hullmods.CoronalCapacitor
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
