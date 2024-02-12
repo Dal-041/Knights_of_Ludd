@@ -271,7 +271,7 @@ public class CoronalCapacitor extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ship.addListener(new CoronalCapacitor.CoronalCapacitorListener(ship));
+        if(!ship.hasListenerOfClass(CoronalCapacitorListener.class)) ship.addListener(new CoronalCapacitorListener(ship));
     }
 
     @Override

@@ -111,7 +111,7 @@ public class YukionnaBoss extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ActivatorManager.addActivator(ship, new BallLightningActivator(ship));
         if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
-            ship.addListener(new YukionnaBoss.YukionnaBossPhaseTwoScript(ship));
+            if(!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class)) ship.addListener(new YukionnaBossPhaseTwoScript(ship));
             ActivatorManager.addActivator(ship, new BlizzardActivator(ship));
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

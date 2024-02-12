@@ -278,7 +278,7 @@ public class NinevehBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
-            ship.addListener(new NinevehBoss.NinevehBossPhaseTwoScript(ship));
+            if(!ship.hasListenerOfClass(NinevehBossPhaseTwoScript.class)) ship.addListener(new NinevehBossPhaseTwoScript(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
