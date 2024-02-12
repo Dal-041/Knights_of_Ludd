@@ -15,7 +15,7 @@
   "hardpointOffsets": [10,0],
   "hardpointAngleOffsets": [0],
   "darkCore":true,
-  #"width":25.0,
+  "width":22.0,
   "textureScrollSpeed":223.0,
   "pixelsPerTexel":5.0,
   "pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],

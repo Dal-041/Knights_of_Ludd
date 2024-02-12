@@ -5,9 +5,7 @@
 	"MagicVectorThrusterSelkieY2": 100,
 	"MagicVectorThrusterSelkieX3": 10,
 	"MagicVectorThrusterSelkieY3": 75,
-	"plugins": {
-		"KOLParticleController": "org.selkie.kol.impl.combat.plugins.KOLCombatPlugin"
-	},
+
 
 	
 	
@@ -254,6 +252,7 @@
 			"kol_shield":"graphics/fx/kol_shield_fx.png",
 			"zea_elysia_vortice":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_elysia_vortice.png",
 			"zea_nian_targetingRing":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_nian_targetingring.png",
+			"zea_ring_targeting":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_ring_targeting.png",
 			"fake_vulcan":"graphics/weapons/vulcan_cannon_turret.png"
 		},
 		"kol_fx":{
@@ -341,6 +340,9 @@
 		"Dawntide":[0,255,100,255],
 		"Duskborne":[25,25,25,255],
 		"Elysia":[255,253,222,255]
+	},
+	"plugins": {
+		"KOLParticleController": "org.selkie.kol.impl.plugins.ZeaCombatPlugin"
 	},
 	"ruleCommandPackages": [
         "org.selkie.kol.impl.rulecmd"
