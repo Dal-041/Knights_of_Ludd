@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.*;
 
 public class ShachihokoDroneActivator extends DroneActivator {
-    private static final Color BASE_SHIELD_COLOR = new Color(255, 230, 120, 255);
+    private static final Color BASE_SHIELD_COLOR = new Color(220, 190, 70, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
 

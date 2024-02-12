@@ -1,6 +1,6 @@
 {
 	# high-tech minelayer, used by high-tech star fortress system and by the Doom
-	"id":"kol_hallowedODLauncher",
+	"id":"zea_radiance_dummy_wpn",
 	"specClass":"projectile",
 	"type":"MISSILE",
 	"size":"MEDIUM",
