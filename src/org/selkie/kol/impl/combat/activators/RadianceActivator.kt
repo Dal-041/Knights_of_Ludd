@@ -22,6 +22,8 @@ import java.awt.Color
 
 class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     private val PARTICLE_INTERVAL = IntervalUtil(0.05f, 0.1f)
+    private var dummyMine: CombatEntityAPI? = null
+
     override fun canAssignKey(): Boolean {
         return false
     }
@@ -104,6 +106,12 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 
     override fun advance(amount: Float) {
         if (canActivate()) {
+            if (dummyMine == null) {
+                dummyMine = Global.getCombatEngine().spawnProjectile(ship, null, "zea_radiance_dummy_wpn", ship.location, 0f, Vector2f())
+            } else {
+                dummyMine!!.location.set(ship.location)
+            }
+
             if (state == State.READY) {
                 activate()
             }
@@ -182,6 +190,10 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
                         )
                     )
                 }
+            }
+        } else {
+            if (dummyMine != null) {
+                Global.getCombatEngine().removeEntity(dummyMine)
             }
         }
     }

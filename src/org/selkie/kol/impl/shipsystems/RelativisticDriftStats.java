@@ -22,7 +22,7 @@ public class RelativisticDriftStats extends BaseShipSystemScript {
 	private static final Integer ACCEL_BUFF = 500;
 	private static final Integer DECCEL_BUFF = 300;
 	private static final Integer SPEED_BUFF = 100;
-	private static final Integer TIME_BUFF = 1000;
+	private static final Integer TIME_BUFF = 10;
 	public static final float INSTANT_BOOST_FLAT = 30f;
 	public static final float INSTANT_BOOST_MULT = 2f;
 
@@ -98,7 +98,13 @@ public class RelativisticDriftStats extends BaseShipSystemScript {
 		stats.getDeceleration().modifyPercent(id, DECCEL_BUFF);
 
 		//time drift
-		stats.getTimeMult().modifyPercent(id, TIME_BUFF * effectLevel);
+		float timeMult = 1f + TIME_BUFF * effectLevel;
+		stats.getTimeMult().modifyMult(id, timeMult);
+		if (ship == Global.getCombatEngine().getPlayerShip()) {
+			Global.getCombatEngine().getTimeMult().modifyMult(id, 1f / timeMult);
+		} else {
+			Global.getCombatEngine().getTimeMult().unmodify(id);
+		}
 
 
 		if (state == State.OUT) {
@@ -235,6 +241,10 @@ public class RelativisticDriftStats extends BaseShipSystemScript {
 		stats.getDeceleration().unmodify(id);
 
 		stats.getTimeMult().unmodify(id);
+
+		if (ship == Global.getCombatEngine().getPlayerShip()) {
+			Global.getCombatEngine().getTimeMult().unmodify(id);
+		}
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
