@@ -35,7 +35,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected String name = "Pulsar Wave";
 
     //Terrain plugin
-    public float PULSAR_ARC = 190f; //1 / ((float) Math.PI * 2f) * 360f;
+    public float PULSAR_ARC = 90f; //1 / ((float) Math.PI * 2f) * 360f;
     public float PULSAR_LENGTH = 3000f; //1 / ((float) Math.PI * 2f) * 360f;
     public float fxMult = 1f;
     public boolean single = false;
@@ -73,7 +73,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         if (!ship.isAlive() || ship.isPhased()) return;
 
         advance(amount);
-        fxMult = 0.2f;
+        fxMult = 0.4f;
         if (state == State.ACTIVE) {
             fxMult = 0.9f;
             applyEffect(ship, amount);
@@ -92,7 +92,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     public void init() {
         if (!inited) {
-            this.params = new CombatPulsarCorona.CombatCoronaParams(PULSAR_LENGTH, ship.getCollisionRadius()+50f, ship, 500f, 0f, 0f);
+            this.params = new CombatPulsarCorona.CombatCoronaParams(PULSAR_LENGTH, ship.getCollisionRadius()+50f, ship, 500f, 1f, 0f);
             this.single = false;
             if (blocker == null) {
                 blocker = new CombatRangeBlockerUtil(2000, PULSAR_LENGTH + PULSAR_LENGTH*0.25f);

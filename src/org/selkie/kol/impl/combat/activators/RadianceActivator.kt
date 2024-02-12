@@ -6,23 +6,34 @@ import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI
 import com.fs.starfarer.api.loading.DamagingExplosionSpec
 import com.fs.starfarer.api.util.IntervalUtil
+import com.fs.starfarer.api.util.Misc
+import com.fs.starfarer.api.util.Misc.ZERO
 import org.dark.shaders.distortion.DistortionShader
 import org.dark.shaders.distortion.RippleDistortion
 import org.dark.shaders.light.LightShader
 import org.dark.shaders.light.StandardLight
-import org.lazywizard.lazylib.MathUtils
-import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
-import org.magiclib.kotlin.setAlpha
-import org.selkie.kol.impl.combat.ParticleController
+import org.magiclib.util.MagicRender
 import org.selkie.kol.impl.combat.ParticleData
 import org.selkie.kol.impl.hullmods.CoronalCapacitor
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
+import java.io.IOException
+
 
 class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     private val PARTICLE_INTERVAL = IntervalUtil(0.05f, 0.1f)
     private var dummyMine: CombatEntityAPI? = null
+
+    private var waveCnt = 0;
+    private var rotation = 0f
+    private var opacity = 0f
+    private val spriteRing = Global.getSettings().getSprite("fx", "zea_ring_targeting")
+    private val SPRITE_PATH = ""
+
+    private val EFFECT_RANGE =
+        DAMAGE_RANGE-(DAMAGE_RANGE*0.05f) //"For "player visual purposes" we reduce it by 5% See some random player theory crap."
+    private val effectSize = Vector2f(EFFECT_RANGE*10, EFFECT_RANGE*10)
 
     override fun canAssignKey(): Boolean {
         return false
@@ -45,7 +56,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     }
 
     override fun getBaseCooldownDuration(): Float {
-        return 0.66f
+        return 0.1f
     }
 
     override fun shouldActivateAI(amount: Float): Boolean {
@@ -59,7 +70,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     }
 
     private fun getDamage(): Float {
-        return BASE_DAMAGE + (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float) * DAMAGE_PER_BOOST
+        return (BASE_DAMAGE + (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float) * DAMAGE_PER_BOOST) * baseCooldownDuration
     }
 
     override fun onActivate() {
@@ -86,25 +97,46 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
         Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, ship, ship.location, false)
 
         if (KOL_ModPlugin.hasGraphicsLib) {
-            val ripple = RippleDistortion(ship.location, Vector2f())
-            ripple.size = DAMAGE_RANGE / 1.2f
-            ripple.intensity = 8f
-            ripple.frameRate = 60f
-            ripple.fadeInSize(1f)
-            ripple.fadeOutIntensity(4f)
-            DistortionShader.addDistortion(ripple)
+            if (waveCnt % 20 == 0) {
+                val ripple = RippleDistortion(ship.location, Vector2f())
+                ripple.size = DAMAGE_RANGE / 1.2f
+                ripple.intensity = 5f
+                ripple.frameRate = 60f
+                ripple.fadeInSize(1f)
+                ripple.fadeOutIntensity(2f)
+                ripple.velocity = Vector2f(1f,1f)
+                DistortionShader.addDistortion(ripple)
 
-            val light = StandardLight(ship.location, Vector2f(), Vector2f(), null)
-            light.size = DAMAGE_RANGE / 1.1f
-            light.intensity = 2f
-            light.setLifetime(0.66f)
-            light.autoFadeOutTime = 1f
-            light.setColor(Color(255, 125, 25, 255))
-            LightShader.addLight(light)
+                val light = StandardLight(ship.location, Vector2f(), Vector2f(), null)
+                light.size = DAMAGE_RANGE / 1.1f
+                light.intensity = 2f
+                light.setLifetime(0.66f)
+                light.autoFadeOutTime = 1f
+                light.setColor(Color(255, 125, 25, 255))
+                LightShader.addLight(light)
+            }
+
+            waveCnt++
         }
     }
 
     override fun advance(amount: Float) {
+        if (ship.isAlive) {
+            val glowColorFull = Color(200,150,50, 200)
+            val glowColorEmpty = Color(255,100,25, 0)
+            val glowColorNow = Misc.interpolateColor(glowColorEmpty, glowColorFull, ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float)
+            Global.getCombatEngine().addSmoothParticle(ship.location, ZERO, DAMAGE_RANGE*4f, 1f, 0.01f, glowColorNow)
+            if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
+                return;
+            } else {
+                if (ship.system.isActive || ship.isHulk || ship.isPiece || !ship.isAlive) {
+                    //
+                } else {
+                    MagicRender.singleframe(spriteRing, ship.location, effectSize, 0f, glowColorNow, true)
+                }
+            }
+        };
+
         if (canActivate()) {
             if (dummyMine == null) {
                 dummyMine = Global.getCombatEngine().spawnProjectile(ship, null, "zea_radiance_dummy_wpn", ship.location, 0f, Vector2f())
@@ -118,6 +150,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 
             PARTICLE_INTERVAL.advance(amount)
             if (PARTICLE_INTERVAL.intervalElapsed()) {
+                /*
                 for (i in 0 until MathUtils.getRandomNumberInRange(12, 24)) {
                     val randomPos = MathUtils.getRandomPointInCircle(ship.location, DAMAGE_RANGE)
                     val distance = MathUtils.getDistanceSquared(ship.location, randomPos) * 1.5f
@@ -190,12 +223,30 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
                         )
                     )
                 }
+
+                 */
             }
         } else {
             if (dummyMine != null) {
                 Global.getCombatEngine().removeEntity(dummyMine)
             }
         }
+    }
+
+    override fun init() {
+        super.init()
+        if (spriteRing == null) {
+            // Load sprite if it hasn't been loaded yet - not needed if you add it to settings.json
+            try {
+                Global.getSettings().loadTexture(SPRITE_PATH)
+            } catch (ex: IOException) {
+                throw RuntimeException("Failed to load sprite '$SPRITE_PATH'!", ex)
+            }
+        }
+    }
+
+    override fun getBarFill(): Float {
+        return 1f
     }
 
     private inner class RadianceOnHitEffect : OnHitEffectPlugin {

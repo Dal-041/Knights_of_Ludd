@@ -15,7 +15,6 @@ import org.lwjgl.input.Keyboard;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.awt.*;
-import java.security.PublicKey;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;

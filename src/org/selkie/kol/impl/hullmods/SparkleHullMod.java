@@ -109,6 +109,14 @@ public class SparkleHullMod extends BaseHullMod {
             }
         }
 
+        if (!ship.isAlive()) {
+            for (MissileAPI drone : data.drones) {
+                drone.explode();
+                Global.getCombatEngine().removeEntity(drone);
+                return;
+            }
+        }
+
         CombatEngineAPI engine = Global.getCombatEngine();
 
         launchInterval.advance(amount * 3f);
