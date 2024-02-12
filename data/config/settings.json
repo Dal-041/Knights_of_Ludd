@@ -274,7 +274,7 @@
 		},
 		"illustrations":{
 			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",
-			"kol_citadel_large":"graphics/illustrations/kol_citadel_big.png",
+			"kol_citadel_large":"graphics/illustrations/kol_citadel_big.png"
 		},
 		"terrain":{
 			"nebula_zea_black":"graphics/terrain/nebula_kol_black_shiny.png",
@@ -294,7 +294,7 @@
 			"nebula_zea_dawntide_map":"graphics/terrain/nebula_kol_dawntide2b_map.png",
 			"rings_thicc":"graphics/terrain/rings_thicc.png",
 			"rings_thicc_darkred":"graphics/terrain/rings_thicc_darkred.png",
-			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png",
+			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png"
 		},
 		"characters":{
 			"kol_grandmaster":"graphics/portraits/kol_grandmaster.png",
@@ -334,6 +334,36 @@
 			"zea_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dawn.png",
 			"zea_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dusk.png",
 			"zea_elysians":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_edf.png"
+		},
+		"paperdolls": {
+			"kol_lunaria_tl" : "graphics/ships/modules/paperdolls/kol_lunaria_tl_paperdoll.png",
+			"kol_lunaria_tr" : "graphics/ships/modules/paperdolls/kol_lunaria_tr_paperdoll.png",
+			"kol_lunaria_ml" : "graphics/ships/modules/paperdolls/kol_lunaria_ml_paperdoll.png",
+			"kol_lunaria_mr" : "graphics/ships/modules/paperdolls/kol_lunaria_mr_paperdoll.png",
+			"kol_lunaria_ll" : "graphics/ships/modules/paperdolls/kol_lunaria_ll_paperdoll.png",
+			"kol_lunaria_lr" : "graphics/ships/modules/paperdolls/kol_lunaria_lr_paperdoll.png",
+			"kol_alysse_tl" : "graphics/ships/modules/paperdolls/kol_alysse_tl_paperdoll.png",
+			"kol_alysse_tr" : "graphics/ships/modules/paperdolls/kol_alysse_tr_paperdoll.png",
+			"kol_alysse_ll" : "graphics/ships/modules/paperdolls/kol_alysse_ll_paperdoll.png",
+			"kol_alysse_lr" : "graphics/ships/modules/paperdolls/kol_alysse_lr_paperdoll.png",
+			"kol_lotus_tl" : "graphics/ships/modules/paperdolls/kol_lotus_tl_paperdoll.png",
+			"kol_lotus_tr" : "graphics/ships/modules/paperdolls/kol_lotus_tr_paperdoll.png",
+			"kol_lotus_ll" : "graphics/ships/modules/paperdolls/kol_lotus_ll_paperdoll.png",
+			"kol_lotus_lr" : "graphics/ships/modules/paperdolls/kol_lotus_lr_paperdoll.png",
+			"kol_snowdrop_tl" : "graphics/ships/modules/paperdolls/kol_snowdrop_tl_paperdoll.png",
+			"kol_snowdrop_tr" : "graphics/ships/modules/paperdolls/kol_snowdrop_tr_paperdoll.png",
+			"kol_snowdrop_ll" : "graphics/ships/modules/paperdolls/kol_snowdrop_ll_paperdoll.png",
+			"kol_snowdrop_lr" : "graphics/ships/modules/paperdolls/kol_snowdrop_lr_paperdoll.png",
+			"kol_tamarisk_tl" : "graphics/ships/modules/paperdolls/kol_tamarisk_tl_paperdoll.png",
+			"kol_tamarisk_tr" : "graphics/ships/modules/paperdolls/kol_tamarisk_tr_paperdoll.png",
+			"kol_tamarisk_ll" : "graphics/ships/modules/paperdolls/kol_tamarisk_ll_paperdoll.png",
+			"kol_tamarisk_lr" : "graphics/ships/modules/paperdolls/kol_tamarisk_lr_paperdoll.png",
+			"kol_sundew_tl" : "graphics/ships/modules/paperdolls/kol_sundew_tl_paperdoll.png",
+			"kol_sundew_tr" : "graphics/ships/modules/paperdolls/kol_sundew_tr_paperdoll.png",
+			"kol_larkspur_tl" : "graphics/ships/modules/paperdolls/kol_larkspur_tl_paperdoll.png",
+			"kol_larkspur_tr" : "graphics/ships/modules/paperdolls/kol_larkspur_tr_paperdoll.png",
+			"kol_mimosa_tl" : "graphics/ships/modules/paperdolls/kol_mimosa_tl_paperdoll.png",
+			"kol_mimosa_tr" : "graphics/ships/modules/paperdolls/kol_mimosa_tr_paperdoll.png"
 		}
 	},
 	"designTypeColors":{

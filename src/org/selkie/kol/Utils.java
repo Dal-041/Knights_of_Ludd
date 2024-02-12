@@ -89,6 +89,33 @@ public class Utils {
             }
         }
     }
+    private static long dialogTime = 0;
+    private static long commandTime = 0;
+    private static long hudTime = 0;
+    public static float getUIAlpha() {
+        final float DIALOG_ALPHA = 0.33f;
+        final float DIALOG_FADE_OUT_TIME = 333f;
+        final float DIALOG_FADE_IN_TIME = 250f;
+        final float COMMAND_FADE_OUT_TIME = 300f;
+        final float COMMAND_FADE_IN_TIME = 111f;
+
+        // Used to properly interpolate between UI fade colors
+        float alpha;
+        if (Global.getCombatEngine().isUIShowingDialog()) {
+            dialogTime = System.currentTimeMillis();
+            alpha = Misc.interpolate(1f, DIALOG_ALPHA, Math.min((dialogTime - hudTime) / DIALOG_FADE_OUT_TIME, 1f));
+        } else if (Global.getCombatEngine().getCombatUI().isShowingCommandUI()) {
+            commandTime = System.currentTimeMillis();
+            alpha = Misc.interpolate(1f, 0f, Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f));
+        } else if (dialogTime > commandTime) {
+            hudTime = System.currentTimeMillis();
+            alpha = Misc.interpolate(DIALOG_ALPHA, 1f, Math.min((hudTime - dialogTime) / DIALOG_FADE_IN_TIME, 1f));
+        } else {
+            hudTime = System.currentTimeMillis();
+            alpha = Misc.interpolate(0f, 1f, Math.min((hudTime - commandTime) / COMMAND_FADE_IN_TIME, 1f));
+        }
+        return MathUtils.clamp(alpha, 0f, 1f);
+    }
 
     public static void shipSpawnExplosion(float size, Vector2f location){
         NegativeExplosionVisual.NEParams p = RiftCascadeMineExplosion.createStandardRiftParams(new Color(80,160,240,255), size);

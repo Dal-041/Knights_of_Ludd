@@ -6,14 +6,10 @@ import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
-import com.fs.starfarer.combat.entities.BallisticProjectile;
-import com.fs.starfarer.combat.entities.MovingRay;
-import com.fs.starfarer.combat.entities.PlasmaShot;
 import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.ReflectionUtils;
 
 import java.awt.*;
 import java.util.*;
@@ -340,7 +336,7 @@ public class StarficzAIUtils {
                                 futurehit.empDamage = (trueSingleInstanceEMPDamage * linkedBarrels) / 30;
                                 futureHits.add(futurehit);
                             }
-                            chargeupTime -= 0.1;
+                            chargeupTime -= 0.1f;
                             currentTime += 0.1f;
                         }
 
@@ -358,7 +354,7 @@ public class StarficzAIUtils {
                                 futurehit.empDamage = (trueSingleInstanceEMPDamage * linkedBarrels) / 10;
                                 futureHits.add(futurehit);
                             }
-                            activeTime -= 0.1;
+                            activeTime -= 0.1f;
                             currentTime += 0.1f;
                         }
 
@@ -376,7 +372,7 @@ public class StarficzAIUtils {
                                 futurehit.empDamage = (trueSingleInstanceEMPDamage * linkedBarrels) / 30;
                                 futureHits.add(futurehit);
                             }
-                            chargedownTime -= 0.1;
+                            chargedownTime -= 0.1f;
                             currentTime += 0.1f;
                         }
 
@@ -518,18 +514,20 @@ public class StarficzAIUtils {
             return 0f;
         }
         ArmorGridAPI armorGrid = ship.getArmorGrid();
+        float[][] armorGridGrid = armorGrid.getGrid();
+        List<Float> armorList = new ArrayList<>();
         org.lwjgl.util.Point worstPoint = DefenseUtils.getMostDamagedArmorCell(Global.getCombatEngine().getPlayerShip());
         if(worstPoint != null){
             float totalArmor = 0;
-            for (int x = 0; x < armorGrid.getGrid().length; x++) {
-                for (int y = 0; y < armorGrid.getGrid()[x].length; y++) {
-                    if(x >= worstPoint.getX()-2 && x <= worstPoint.getX()+2 && y >= worstPoint.getY()-2 && y <= worstPoint.getY()+2){
-                        totalArmor += armorGrid.getArmorValue(worstPoint.getX(), worstPoint.getY())/2;
-                    }
-                    if(x >= worstPoint.getX()-1 && x <= worstPoint.getX()+1 && y >= worstPoint.getY()-1 && y <= worstPoint.getY()+1){
-                        totalArmor += armorGrid.getArmorValue(worstPoint.getX(), worstPoint.getY())/2;
-                    }
+            for (int x = 0; x < armorGridGrid.length; x++) {
+                for (int y = 0; y < armorGridGrid[x].length; y++) {
+                    armorList.add(armorGridGrid[x][y]);
                 }
+            }
+            Collections.sort(armorList);
+            for(int i = 0; i < 21; i++){
+                if(i < 9) totalArmor += armorList.get(i);
+                else  totalArmor += armorList.get(i)/2;
             }
             return totalArmor;
         } else{

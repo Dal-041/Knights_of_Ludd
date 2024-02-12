@@ -5,17 +5,11 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.loading.WeaponSlotAPI;
-import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.ui.P;
-import kotlin.Lazy;
 import org.dark.shaders.distortion.DistortionShader;
 import org.dark.shaders.distortion.RippleDistortion;
 import org.dark.shaders.light.LightShader;
 import org.dark.shaders.light.StandardLight;
-import org.lazywizard.lazylib.LazyLib;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.plugins.KOL_ModPlugin;
@@ -26,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import static org.lazywizard.lazylib.combat.WeaponUtils.getEnemiesInArc;
-import static org.lazywizard.lazylib.combat.WeaponUtils.isWithinArc;
 
 public class SupernovaStats extends BaseShipSystemScript {
     private static final float IN_STATE_DURATION = 2f;

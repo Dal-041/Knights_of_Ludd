@@ -7,14 +7,14 @@
     "height": 91,
     "width": 56,
     "center": [
-        -72, 143
+        28, 45.5
     ],
-    "collisionRadius": 211,
+    "collisionRadius": 60,
     "coversColor": "",
     "shieldCenter": [
         0, 0
     ],
-    "shieldRadius": 200,
+    "shieldRadius": 50,
     "viewOffset": 0,
     "builtInMods": [
         "kol_module",
@@ -39,7 +39,7 @@
             "arc": 165,
             "angle": -145,
             "locations": [
-                     -91,     -100
+                     6.5,        0
             ]
         },
         {
@@ -50,20 +50,20 @@
             "arc": 0,
             "angle": 0,
             "locations": [
-                    -120,      -85
+                   -22.5,       15
             ]
         }
     ],
     "engineSlots": [],
     "bounds": [
-          -135.5,     -74.5,
-            -143,       -86,
-             -87,      -121,
-           -65.5,      -125,
-           -54.5,    -110.5,
-
-           -80.5,      -100,
-           -85.5,       -91,
-            -103,     -90.5
+             -38,     25.5,
+           -45.5,       14,
+            10.5,      -21,
+              32,      -25,
+              43,    -10.5,
+        
+              17,        0,
+              12,        9,
+            -5.5,      9.5
     ]
 }

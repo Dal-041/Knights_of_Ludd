@@ -28,6 +28,7 @@ public class KnightModule extends BaseHullMod {
          */
         // avoid the enemy AI being scared of armor modules as if they are ships
         ship.setDrone(true);
+       // ship.setHulk(true);
     }
 
     @Override

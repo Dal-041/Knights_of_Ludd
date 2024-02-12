@@ -1,22 +1,28 @@
 package org.selkie.kol.hullmods;
 
+import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.apache.log4j.Logger;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
+import org.magiclib.util.MagicRender;
+import org.selkie.kol.Utils;
+import org.selkie.kol.impl.combat.StarficzAIUtils;
 
 import java.awt.*;
-import java.security.PublicKey;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.regex.Matcher;
@@ -49,11 +55,8 @@ public class KnightRefit extends BaseHullMod {
 
     public static final int FLUX_CAP_PER_OP = 25;
     public static final int FLUX_DISS_PER_OP = 5;
-    private static final Logger log = Logger.getLogger(KnightRefit.class);
-
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS = 0.25f;
-    private float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
 
     @Override
     public void init(HullModSpecAPI spec) {
@@ -81,6 +84,7 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getFluxCapacity().modifyFlat(id, capBonus);
         ship.getMutableStats().getFluxDissipation().modifyFlat(id, dissBonus);
     }
+
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
@@ -223,7 +227,7 @@ public class KnightRefit extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         //Yoinked whole-cloth from SCY. <3 ya Tarty
-        if (Global.getCombatEngine().isPaused() || ship==null || ship.getOriginalOwner() == -1) {
+        if (ship==null) {
             return;
         }
 
@@ -232,16 +236,23 @@ public class KnightRefit extends BaseHullMod {
             return;
         }
 
-        float modules =0;
-        float alive =0;
-        for(ShipAPI s : ship.getChildModulesCopy()){
-            modules++;
-            if(!s.isAlive()) continue;
-            alive++;
-            if(ship.getVariant() == null || s.getVariant() == null) continue;
 
-            s.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", getTotalHullMult(ship.getVariant(), s.getVariant().getHullSpec().getHitpoints()));
-            s.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", getTotalArmorMult(ship.getVariant(), s.getVariant().getHullSpec().getArmorRating()));
+        if(Global.getCombatEngine().isPaused()) return;
+
+        // apply speed boost for main ship and durability buffs to modules from main ships hullmods
+        float modules = 0;
+        float alive = 0;
+        for(ShipAPI module : ship.getChildModulesCopy()){
+            modules++;
+            if(!module.isAlive()) continue;
+            alive++;
+            if(ship.getVariant() == null || module.getVariant() == null) continue;
+
+            float hullmult =  getTotalHullMult(ship.getVariant(), module.getVariant().getHullSpec().getHitpoints());
+            float armorMult =  getTotalArmorMult(ship.getVariant(), module.getVariant().getHullSpec().getArmorRating());
+
+            module.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", hullmult);
+            module.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", armorMult);
         }
 
         if(modules!=0){
