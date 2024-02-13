@@ -41,12 +41,20 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
     };
     public static ArrayList<String[]> dawnLoreHLs = new ArrayList<>();
     public static final String[] TTFleetLore = {
-            "We anticipated a goose chase across the fringe, not to end up %s. We should have anticipated that she'd go the most unlikely place. We caught the fleet's fracture jump off %s and found ourselves in this pocket-space. There's a gate in the region, of course inactive, which suggests our dear Domain once knew this place, but no company chart has returned a match. She led us here, so if there's a way home we'll find it in her wreck.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
-            "The space here is more hostile than we first assumed. System failures are increasing and our supplies are falling well short of the authorized allocations. For reasons we've yet to determine, the phase craft are weathering this place signicantly better than our conventional vessels, though better is relative. Two of the support craft have already been scuttled to maintain our flagship's overhead, and at this consumption rate the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Boss has ordered an emergency burn to %s, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, C206-2\n - Location undetermined",
+            "We anticipated a goose chase across the fringe, not to end up %s. We should have anticipated that she'd go the most unlikely place.\n We caught the fleet's fracture jump off %s and found ourselves in this pocket-space. There's a gate in the region, of course inactive, which suggests our dear Domain once knew this place, but no company chart has yet returned a match. She led us here, so if there's a way home we'll find it in her wreck. The objective is unchanged.\n - Assistant Recovery Specialist's log, Expedition 328b\n - Location undetermined",
+            "The space here is %s. System failures are increasing and our supplies are falling well short of the authorized allocations. For reasons we've yet to determine, the %s are weathering this place signicantly better than our conventional vessels, though better is relative.\n Two of the support craft have been scuttled to maintain our flagship's overhead, and at this rate of over-consumption the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Boss has ordered an emergency burn to %s, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, Expedition 328b\n - Location undetermined",
             "This is a Tri-Tachyon automated distress beacon. This vessel has suffered extreme structural failure. %s recorded launched in this vicinity; please commence recovery of company personnel. You will be fairly compensated upon their return to a registered Tri-Tachyon facility.\n" +
                     " %s %s for your service to the Corporation today."
     };
     public static ArrayList<String[]> TTFleetLoreHLs = new ArrayList<>();
+    static {
+        String[] highlights1 = { "a courier's hop from Hybrasil", "the singularity" };
+        TTFleetLoreHLs.add(highlights1);
+        String[] highlights2 = { "more hostile than we first assumed", "phase craft", "the eye of the storm" };
+        TTFleetLoreHLs.add(highlights2);
+        String[] highlights3 = { "847 cryopods", "Reminder: Tri-Tachyon equipment remains property of the Corporation. Thieves will be persecuted.", "Thank you" };
+        TTFleetLoreHLs.add(highlights3);
+    }
     public static final String TT1Drop = "The %s have integrated into the prototypes better than we could have hoped for, though their use for security purposes is... a regrettable reflection of %s. The fleet is due to return with %s later this month, at which point we can put all this unfortunate incident behind us.\n - Executive's Log, C206\nProject Dusk";
     public static final String[] TT1DropHLs = { "remaining samples", "our situation", "the command core" };
     public static final String TT2Drop = "We're able to consistently attract -- but stabilizing spacetime around --ergetic instances has proven dif-- every caution on this, there's no telling what -- the %s manifested in stable form. The flocks don't -- only when the engineering personnel and artifi-- --ectively manage the swarms. Did Projec-- same problem? We never got a reason why their briefin-- their loss will be our opportunity, as our team is back on schedule. The %s will go into production any day now, and the bonus I'm due is going set me up for life.\n Might even -- those private chateaus the execs seem to love so much.\n - Engineer's log, C204, Project Dusk";
@@ -82,21 +90,6 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
         }
         for (int i = 0; i < duskLore.length; i++) {
             duskLoreHLs.add(null);
-        }
-        for (int i = 0; i < TTFleetLore.length; i++) {
-            if (i == 0) {
-                String[] highlights = { "a courier's hop from Hybrasil", "the singularity" };
-                TTFleetLoreHLs.add(highlights);
-            } else if (i == 1) {
-                String[] highlights = { "the eye of the storm" };
-                TTFleetLoreHLs.add(highlights);
-            } else if (i == 2) {
-                String[] highlights = { "847 cryopods", "Reminder: Tri-Tachyon equipment remains property of the Corporation. Thieves will be persecuted.", "Thank you" };
-                TTFleetLoreHLs.add(highlights);
-            }
-            else {
-                TTFleetLoreHLs.add(null);
-            }
         }
     }
 

@@ -136,4 +136,9 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
         }
         return flag == TerrainAIFlags.HIDING_STATIONARY;
     }
+
+    @Override
+    public float getPulsarScrollSpeed() {
+        return -35f;
+    }
 }

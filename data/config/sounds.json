@@ -158,6 +158,16 @@
 				"randomStart":true,
 			},
 		],
+		"music_zea_elysia_system":[
+			{
+				"source":"sounds/music",
+				"files":[
+					"zea_elysian_system.ogg",
+				],
+				"volume":0.5,
+				"randomStart":true,
+			},
+		],
 		"music_zea_lunasea_encounter":[
 			{
 				"source":"sounds/music",

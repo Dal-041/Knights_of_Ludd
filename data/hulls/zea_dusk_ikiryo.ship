@@ -4,9 +4,9 @@
   "hullSize": "FRIGATE",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_ikiryo.png",
   "style": "ZEA_DUSK_TECH",
-  "height": 115,
-  "width": 116,
-  "center": [58, 72],
+  "height": 125,
+  "width": 126,
+  "center": [63, 72],
   "collisionRadius": 92,
   "shieldCenter": [0, -0],
   "shieldRadius": 89,
@@ -14,10 +14,10 @@
   "builtInMods": [
     "phasefield",
     "delicate",
-	"automated",
+    "automated",
     "kol_ea_mist",
     "kol_ea_sparkle",
-	"kol_throttle"
+    "kol_throttle"
   ],
   "builtInWeapons": {
     "WS0007": "zea_deco_dusk_ikiryo_tl",
@@ -31,7 +31,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [20, 23]
+      "locations": [25, 23]
     },
     {
       "id": "WS 003",
@@ -40,7 +40,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [20, -23]
+      "locations": [25, -23]
     },
     {
       "id": "WS0003",
@@ -49,7 +49,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 45,
-      "locations": [6, 29],
+      "locations": [11, 29],
       "renderOrderMod": 100
     },
     {
@@ -59,7 +59,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -45,
-      "locations": [6, -29],
+      "locations": [11, -29],
       "renderOrderMod": 100
     },
     {
@@ -69,7 +69,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": 160,
-      "locations": [-13, 5]
+      "locations": [-8, 5]
     },
     {
       "id": "WS0002",
@@ -78,7 +78,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": -160,
-      "locations": [-13, -5]
+      "locations": [-8, -5]
     },
     {
       "id": "WS0007",
@@ -87,7 +87,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [21, 21]
+      "locations": [26, 21]
     },
     {
       "id": "WS0008",
@@ -96,12 +96,12 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [21, -21]
+      "locations": [26, -21]
     }
   ],
   "engineSlots": [
     {
-      "location": [-36, 8],
+      "location": [-31, 8],
       "length": 27.5,
       "width": 4,
       "angle": 176.5,
@@ -109,7 +109,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-36, -8],
+      "location": [-31, -8],
       "length": 27.5,
       "width": 4,
       "angle": -176.5,
@@ -117,63 +117,63 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-35, 13],
+      "location": [-30, 13],
       "length": 42.294697,
       "width": 8.404433,
-      "angle": 174,
+      "angle": 167,
       "contrailSize": 8.404433,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-35, -13],
+      "location": [-30, -13],
       "length": 42.294697,
       "width": 8.404433,
-      "angle": -174,
+      "angle": -167,
       "contrailSize": 8.404433,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-35, 19],
-      "length": 45.979999,
-      "width": 7.48,
-      "angle": 171,
-      "contrailSize": 7.48,
+      "location": [-30, 19],
+      "length": 42.294697,
+      "width": 8.404433,
+      "angle": 160.5,
+      "contrailSize": 8.404433,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-35, -19],
-      "length": 45.981186,
-      "width": 7.478152,
-      "angle": -171,
-      "contrailSize": 7.478152,
+      "location": [-30, -19],
+      "length": 42.294697,
+      "width": 8.404433,
+      "angle": -160.5,
+      "contrailSize": 8.404433,
       "style": "HIGH_TECH"
     }
   ],
   "bounds": [
-    32, -14,
-    31.5, -32,
-    25.5, -33,
-    19.5, -39.5,
-    11, -34,
-    -1, -57,
-    -11, -57,
-    -31.5, -41.5,
-    -25, -23,
-    -36, -23,
-    -36, -8,
-    -70, -0,
-    -36, 8,
-    -36, 23,
-    -25, 23,
-    -24, 36.5,
-    -31.5, 41.5,
-    -11, 57,
-    -1, 57,
-    11, 34,
-    19.5, 39.5,
-    25.5, 33,
-    31.5, 32,
-    32, 14,
-    43, -0
+    37, -14,
+    36.5, -32,
+    30.5, -33,
+    24.5, -39.5,
+    16, -34,
+    4, -57,
+    -6, -57,
+    -26.5, -41.5,
+    -20, -23,
+    -31, -23,
+    -31, -8,
+    -65, 0,
+    -31, 8,
+    -31, 23,
+    -20, 23,
+    -19, 36.5,
+    -26.5, 41.5,
+    -6, 57,
+    4, 57,
+    16, 34,
+    24.5, 39.5,
+    30.5, 33,
+    36.5, 32,
+    37, 14,
+    48, 0
   ]
 }

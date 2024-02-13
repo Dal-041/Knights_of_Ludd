@@ -93,7 +93,7 @@ public class PrepareAbyss {
     	StarSystemAPI system = Global.getSector().createStarSystem(elysiaSysName);
     	system.getLocation().set((int)posX, (int)posY);
     	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_elysia.png");
-		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_theme");
+		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_system");
 
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
@@ -309,8 +309,8 @@ public class PrepareAbyss {
 		float count = uwDerelictsNormal.length; //16
 		float odds = 0.45f;
 		count *= odds;
-		int target = 5; //3 entries, some redundancy
-		float oddsLore = target/count;
+		//int target = 5; //3 entries, some redundancy
+		//float oddsLore = target/count;
 		for(String variant:uwDerelictsNormal) {
 			if (Math.random() <= odds) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
@@ -326,7 +326,7 @@ public class PrepareAbyss {
 				);
 				wreck.setFacing((float)Math.random()*360f);
 				if (Math.random() > 0.33f) wreck.addTag(Tags.UNRECOVERABLE);
-				if (Math.random() < oddsLore) wreck.addDropRandom("zea_ttfleet_lore", 1);
+				if (Math.random() < 0.5f) wreck.addDropRandom("zea_ttfleet_lore", 1);
 				//system.addEntity(wreck);
 			}
 		}
@@ -526,7 +526,7 @@ public class PrepareAbyss {
 				new AbyssCorona.CoronaParams(25000,
 						50,
 						sing,
-						-70f,
+						-50f,
 						1f,
 						8f)
 		);

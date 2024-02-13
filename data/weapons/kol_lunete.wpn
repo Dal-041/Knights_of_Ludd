@@ -5,6 +5,7 @@
 	"size":"LARGE",
 	"turretSprite":"graphics/weapons/missile_rack_open_m_2x_turret_base.png",
 	"hardpointSprite":"graphics/weapons/kol_lunete_hardpoint.png",	
+	"hardpointGlowSprite":"graphics/weapons/kol_lunete_hardpoint_glow.png",
 	"hardpointOffsets":[8, -4, 8, 4],
 	"turretOffsets":[3, -4, 3, 4],
 	"hardpointAngleOffsets":[0, 0],

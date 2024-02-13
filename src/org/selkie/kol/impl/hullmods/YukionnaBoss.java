@@ -42,6 +42,7 @@ public class YukionnaBoss extends BaseHullMod {
                 ship.setHitpoints(1f);
                 ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
                 ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
+                ship.setCustomData("HF_SPARKLE_BOSS", true);
                 for(ShipAPI other : AIUtils.getAlliesOnMap(ship)){
                     other.setCustomData("HF_SPARKLE_BOSS", true);
                 }
@@ -49,7 +50,6 @@ public class YukionnaBoss extends BaseHullMod {
                 if (!ship.isPhased()) {
                     Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
-                ActivatorManager.addActivator(ship, new BlizzardActivator(ship));
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
                 Utils.shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 return true;
@@ -113,7 +113,7 @@ public class YukionnaBoss extends BaseHullMod {
         ActivatorManager.addActivator(ship, new BallLightningActivator(ship));
         if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new YukionnaBoss.YukionnaBossPhaseTwoScript(ship));
-
+            ActivatorManager.addActivator(ship, new BlizzardActivator(ship));
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
             //for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) { member.getVariant().addTag("kol_boss"); }

@@ -1,0 +1,50 @@
+{
+	"id":"zea_radiance_dummy",
+	"specClass":"missile",
+	"missileType":"PHASE_MINE",
+	#"onFireEffect":"com.fs.starfarer.api.impl.combat.CanisterFlakPlugin",
+	"sprite":"graphics/missiles/canister_flak.png",
+	"size":[6,10],	
+	"center":[3,5],
+	"collisionRadius":9,
+	"collisionClass":"MISSILE_NO_FF",
+	"explosionColor":[255,125,25,255],  # purely visual, will get a white additively blended core on top of this color
+	"explosionRadius":600, # purely visual
+	"fizzleOnReachingWeaponRange":true,
+	"flameoutTime":0.05, # total time from flameout to full fadeout
+	"noEngineGlowTime":0.05, # time spent without the engine glow being rendered
+	"fadeTime":0.05, # fadeout duration
+	"renderTargetIndicator":false,		
+	"explosionSpec":{"duration":0.1f, # not visual
+					 "radius":600,
+					 "coreRadius":600, # full damage within core radius
+					 "collisionClass":MISSILE_NO_FF,
+					 "collisionClassByFighter":MISSILE_NO_FF},
+	"behaviorSpec":{"behavior":"PROXIMITY_FUSE",
+					"range":-1,
+					"explosionSpec":{"duration":0.12f,
+									 "radius":600,
+									 "coreRadius":600, # full damage within core radius - at least equal to proximity fuse range
+									 "collisionClass":PROJECTILE_NO_FF,
+									 "collisionClassByFighter":PROJECTILE_FIGHTER,
+									 "particleSizeMin":4.0,
+									 "particleSizeRange":4.0,
+									 "particleDuration":1.5,
+									 "particleCount":0,
+									 "particleSpawnRadius":0,
+									 "particleColor":[59,193,255,255],
+									 "explosionColor":[9,93,155,255],
+									 "useDetailedExplosion":false,
+									 "useDetailedExplosionColorAlpha":false,
+									 "detailedExplosionRadius":0,
+									 "detailedExplosionFlashRadius":0,
+									 "detailedExplosionFlashDuration":1.0,
+									 "detailedExplosionFlashColorFringe":[20,100,200,255],
+									 "detailedExplosionFlashColorCore":[255,255,255,255],
+									 "sound":"system_orion_device_explosion"},									 
+					},
+	"engineSpec":{"turnAcc":100,
+				  "turnRate":10,
+				  "acc":0,
+				  "dec":0}
+}

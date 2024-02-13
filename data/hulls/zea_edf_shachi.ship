@@ -1,64 +1,51 @@
 {
-    "hullName": "Shachi",
-    "hullId": "zea_edf_shachi",
-    "hullSize": "FIGHTER",
-    "style": "ZEA_ELYSIAN_TECH",
-    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_shachi.png",
-    "height": 28,
-    "width": 48,
-    "center": [
-        24, 14
-    ],
-    "collisionRadius": 35,
-    "coversColor": "",
-    "shieldCenter": [
-        0, 0
-    ],
-    "shieldRadius": 28,
-    "viewOffset": 0,
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "WS 000",
-            "size": "SMALL",
-            "type": "ENERGY",
-            "mount": "HIDDEN",
-            "arc": 360,
-            "angle": 0,
-            "locations": [
-                       0,        0
-            ]
-        },
-        {
-            "id": "WS 001",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "HIDDEN",
-            "arc": 45,
-            "angle": 0,
-            "locations": [
-                       0,        0
-            ]
-        }
-    ],
-    "engineSlots": [
-        {
-            "location": [
-                -13.5, 0
-            ],
-            "length": 23,
-            "width": 9,
-            "angle": 180,
-            "contrailSize": 64,
-            "style": "zea_EDF_ENG_F"
-        }
-    ],
-    "bounds": [
-             -11,     12.5,
-            -1.5,     23.5,
-              12,        0,
-            -1.5,    -23.5,
-             -11,    -12.5
-    ]
+  "hullName": "Shachi",
+  "hullId": "zea_edf_shachi",
+  "hullSize": "FIGHTER",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_shachi.png",
+  "style": "ZEA_ELYSIAN_TECH",
+  "height": 28,
+  "width": 48,
+  "center": [24, 14],
+  "collisionRadius": 35,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 28,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS 000",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HIDDEN",
+      "arc": 160,
+      "angle": 0,
+      "locations": [0, 0]
+    },
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 45,
+      "angle": 0,
+      "locations": [0, 0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-13.5, 0],
+      "length": 23,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    }
+  ],
+  "bounds": [
+    -11, 12.5,
+    -1.5, 23.5,
+    12, 0,
+    -1.5, -23.5,
+    -11, -12.5
+  ]
 }

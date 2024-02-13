@@ -253,6 +253,20 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
     }
 
     @Override
+    public float getStormCellTimeMultOutsideBaseArea() {
+        return 0f; //0
+    }
+
+    @Override
+    public float getExtraDistanceAroundPlayerToAdvanceStormCells() {
+        return 0f; //0
+    }
+
+    public void setExtraDistanceAroundPlayerToAdvanceStormCells(float extraDistanceAroundPlayerToAdvanceStormCells) {
+        this.extraDistanceAroundPlayerToAdvanceStormCells = extraDistanceAroundPlayerToAdvanceStormCells;
+    }
+
+    @Override
     public String getTerrainName() {
         CampaignFleetAPI player = Global.getSector().getPlayerFleet();
         int[] tile = getTilePreferStorm(player.getLocation(), player.getRadius());
@@ -310,4 +324,134 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 
         return temp;
     }
+
+    @Override
+    public void turnOffStorms(Vector2f loc, float radius) {
+        setTileState(loc, radius, CellState.OFF, -1f, -1f);
+    }
+
+    @Override
+    public void advance(float amount) {
+        //if (true) return;
+        if (!clearedCellsPostLoad && Global.getSector().getPlayerFleet() != null) {
+            clearCellsNotNearPlayer(this);
+            clearedCellsPostLoad = true;
+        }
+
+        playStormStrikeSoundsIfNeeded();
+
+        float days = Global.getSector().getClock().convertToDays(amount);
+//		for (int i = 0; i < 100; i++) {
+//			auto.advance(days * 10f);
+//		}
+        auto.advance(days * 1f);
+
+        int [][] cells = auto.getCells();
+
+//		int count = 0;
+//		for (int i = 0; i < activeCells.length; i++) {
+//			for (int j = 0; j < activeCells[0].length; j++) {
+//				if (tiles[i][j] < 0) continue;
+//				CellStateTracker curr = activeCells[i][j];
+//				if (curr != null) {
+//					count++;
+//				}
+//			}
+//		}
+//		System.out.println("Count: " + count + "(out of " + (activeCells.length * activeCells[0].length));
+
+        CampaignFleetAPI playerFleet = Global.getSector().getPlayerFleet();
+        Vector2f test = new Vector2f();
+        if (playerFleet != null) {
+            test = playerFleet.getLocation();
+        }
+
+        float x = this.entity.getLocation().x;
+        float y = this.entity.getLocation().y;
+        float size = getTileSize();
+
+        float w = tiles.length * size;
+        float h = tiles[0].length * size;
+        x -= w/2f;
+        y -= h/2f;
+        int xIndex = (int) ((test.x - x) / size);
+        int yIndex = (int) ((test.y - y) / size);
+        if (xIndex < 0) xIndex = 0;
+        if (yIndex < 0) yIndex = 0;
+        if (xIndex >= tiles.length) xIndex = tiles.length - 1;
+        if (yIndex >= tiles[0].length) yIndex = tiles[0].length - 1;
+
+        float subgridDist = 10000f + extraDistanceAroundPlayerToAdvanceStormCells;
+        float baseSubgridDist = 10000f;
+
+        int subgridSize = (int) ((subgridDist / size + 1) * 2f);
+
+        int minX = Math.max(0, xIndex - subgridSize/2);
+        int maxX = xIndex + subgridSize/2 ;
+        int minY = Math.max(0, yIndex - subgridSize/2);
+        int maxY = yIndex + subgridSize/2;
+
+        int baseSubgridSize = (int) ((baseSubgridDist / size + 1) * 2f);
+
+        int baseMinX = Math.max(0, xIndex - baseSubgridSize/2);
+        int baseMaxX = xIndex + baseSubgridSize/2 ;
+        int baseMinY = Math.max(0, yIndex - baseSubgridSize/2);
+        int baseMaxY = yIndex + baseSubgridSize/2;
+
+        // clean up area around the "active" area so that as the player moves around,
+        // they don't leave frozen storm cells behind (which would then make it into the savefile)
+        int pad = 4;
+        for (int i = minX - pad; i <= maxX + pad && i < tiles.length; i++) {
+            for (int j = minY - pad; j <= maxY + pad && j < tiles[0].length; j++) {
+                if (i < minX || j < minY || i > maxX || j > maxY) {
+                    if (i >= 0 && j >= 0) {
+                        activeCells[i][j] = null;
+                    }
+                }
+            }
+        }
+
+        for (int i = minX; i <= maxX && i < tiles.length; i++) {
+            for (int j = minY; j <= maxY && j < tiles[0].length; j++) {
+//		for (int i = 0; i < activeCells.length; i++) {
+//			for (int j = 0; j < activeCells[0].length; j++) {
+                if (tiles[i][j] < 0) continue;
+
+                CellStateTracker curr = activeCells[i][j];
+                int val = cells[i][j];
+                float interval = auto.getInterval().getIntervalDuration();
+
+                if (val == 1 && curr == null) {
+                    curr = activeCells[i][j] = new CellStateTracker(i, j,
+                            interval * 0f + interval * 1.5f * (float) Math.random(),
+                            interval * 0.5f + interval * 0.5f * (float) Math.random());
+//							interval * 0f + interval * 0.5f * (float) Math.random(),
+//							interval * 0.25f + interval * 0.25f * (float) Math.random());
+                }
+
+                if (curr != null) {
+                    if (val != 1 && curr.isStorming() && !curr.isWaning()) {
+                        //curr.wane(interval * 0.25f + interval * 0.25f * (float) Math.random());
+                        curr.wane(interval * 0.5f + interval * 0.5f * (float) Math.random());
+//						curr.wane(interval * 0.5f * (float) Math.random() +
+//								  interval * 0.25f + interval * 0.25f * (float) Math.random());
+                    }
+                    float timeMult = 1f;
+                    if (extraDistanceAroundPlayerToAdvanceStormCells > 0 && stormCellTimeMultOutsideBaseArea > 0) {
+                        if (i < baseMinX || j < baseMinY || i > baseMaxX || j > baseMaxY) {
+                            timeMult = stormCellTimeMultOutsideBaseArea;
+                        }
+                    }
+                    curr.advance(days * timeMult);
+                    if (curr.isOff()) {
+                        activeCells[i][j] = null;
+                    }
+                }
+            }
+        }
+
+        //stormCellTimeMultOutsideBaseArea = 0f;
+        //extraDistanceAroundPlayerToAdvanceStormCells = 0f;
+    }
+
 }

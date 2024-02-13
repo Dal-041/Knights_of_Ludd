@@ -1,246 +1,200 @@
 {
-    "hullName": "Funayrei",
-    "hullId": "zea_dusk_funayurei",
-    "hullSize": "CRUISER",
-    "style": "ZEA_DUSK_TECH",
-    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei.png",
-    "height": 253,
-    "width": 152,
-    "center": [
-        76, 126.5
-    ],
-    "collisionRadius": 167,
-    "coversColor": "",
-    "shieldCenter": [
-        3.5, 0
-    ],
-    "shieldRadius": 155,
-    "viewOffset": 0,
-    "builtInMods": [
-        "kol_ea_shields2",
-        "phasefield",
-        "automated",
-        "kol_ea_mist",
-        "kol_ea_sparkle",
-        "kol_throttle"
-    ],
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "WS 001",
-            "size": "LARGE",
-            "type": "ENERGY",
-            "mount": "HARDPOINT",
-            "arc": 6,
-            "angle": 0,
-            "locations": [
-                    54.5,        0
-            ]
-        },
-        {
-            "id": "WS0003",
-            "size": "MEDIUM",
-            "type": "HYBRID",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": 45,
-            "locations": [
-                    31.5,       37
-            ]
-        },
-        {
-            "id": "WS0004",
-            "size": "MEDIUM",
-            "type": "HYBRID",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": -45,
-            "locations": [
-                    31.5,      -37
-            ]
-        },
-        {
-            "id": "WS0005",
-            "size": "SMALL",
-            "type": "HYBRID",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": 45,
-            "locations": [
-                    56.5,       30
-            ]
-        },
-        {
-            "id": "WS0006",
-            "size": "SMALL",
-            "type": "HYBRID",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": -45,
-            "locations": [
-                    56.5,      -30
-            ]
-        },
-        {
-            "id": "WS0007",
-            "size": "SMALL",
-            "type": "ENERGY",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": 90,
-            "locations": [
-                   -54.5,       35
-            ]
-        },
-        {
-            "id": "WS0008",
-            "size": "SMALL",
-            "type": "ENERGY",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": -90,
-            "locations": [
-                   -54.5,      -35
-            ]
-        },
-        {
-            "id": "WS0009",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "TURRET",
-            "arc": 7,
-            "angle": 132,
-            "locations": [
-                   -59.5,       47
-            ]
-        },
-        {
-            "id": "WS0010",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "TURRET",
-            "arc": 7,
-            "angle": -132,
-            "locations": [
-                   -59.5,      -47
-            ]
-        }
-    ],
-    "engineSlots": [
-        {
-            "location": [
-                -91.5, 12.5
-            ],
-            "length": 64,
-            "width": 10,
-            "angle": -177.5,
-            "contrailSize": 10,
-            "style": "HIGH_TECH"
-        },
-        {
-            "location": [
-                -91.5, -12.5
-            ],
-            "length": 64,
-            "width": 10,
-            "angle": 177.5,
-            "contrailSize": 10,
-            "style": "HIGH_TECH"
-        },
-        {
-            "location": [
-                -91.5, 19.5
-            ],
-            "length": 109,
-            "width": 14,
-            "angle": 175.5,
-            "contrailSize": 14,
-            "style": "HIGH_TECH"
-        },
-        {
-            "location": [
-                -91.5, -19.5
-            ],
-            "length": 109,
-            "width": 14,
-            "angle": -175.5,
-            "contrailSize": 14,
-            "style": "HIGH_TECH"
-        },
-        {
-            "location": [
-                -89.5, 29
-            ],
-            "length": 43.720314,
-            "width": 8.193692,
-            "angle": 177.5,
-            "contrailSize": 8,
-            "style": "HIGH_TECH"
-        },
-        {
-            "location": [
-                -89.5, -29
-            ],
-            "length": 43.720314,
-            "width": 8.193692,
-            "angle": -177.5,
-            "contrailSize": 8,
-            "style": "HIGH_TECH"
-        }
-    ],
-    "bounds": [
-              62,     -9.5,
-              97,      -10,
-             125,    -17.5,
-            48.5,      -42,
-              40,    -54.5,
-        
-              33,      -55,
-            15.5,    -73.5,
-              -2,    -62.5,
-           -30.5,    -57.5,
-           -11.5,    -46.5,
-        
-             -15,    -35.5,
-              -9,      -34,
-           -13.5,    -26.5,
-           -36.5,    -38.5,
-             -42,    -36.5,
-        
-           -62.5,      -57,
-           -71.5,    -57.5,
-           -82.5,    -42.5,
-          -115.5,    -31.5,
-           -93.5,      -27,
-        
-           -93.5,       -8,
-          -125.5,        0,
-           -93.5,        8,
-           -93.5,       27,
-          -115.5,     31.5,
-        
-           -82.5,     42.5,
-           -71.5,     57.5,
-           -62.5,       57,
-             -42,     36.5,
-           -36.5,     38.5,
-        
-           -13.5,     26.5,
-              -9,       34,
-             -15,     35.5,
-           -11.5,     46.5,
-           -30.5,     57.5,
-        
-              -2,     62.5,
-            15.5,     73.5,
-              33,       55,
-              40,     54.5,
-            48.5,       42,
-        
-             125,     17.5,
-              97,       10,
-              62,      9.5
-    # 43 points total.
-    ]
+  "hullName": "Funayrei",
+  "hullId": "zea_dusk_funayurei",
+  "hullSize": "CRUISER",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei.png",
+  "style": "ZEA_DUSK_TECH",
+  "height": 262,
+  "width": 160,
+  "center": [80, 126.5],
+  "collisionRadius": 167,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 155,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_ea_shields2",
+    "phasefield",
+    "automated",
+    "kol_ea_mist",
+    "kol_ea_sparkle",
+    "kol_throttle"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS 001",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 6,
+      "angle": 0,
+      "locations": [59.5, 0]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [36.5, 37]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -45,
+      "locations": [36.5, -37]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [61.5, 30]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -45,
+      "locations": [61.5, -30]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [-49.5, 35]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [-49.5, -35]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": 132,
+      "locations": [-54.5, 47]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 7,
+      "angle": -132,
+      "locations": [-54.5, -47]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-87.5, 12.5],
+      "length": 64,
+      "width": 10,
+      "angle": -177.5,
+      "contrailSize": 10,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-87.5, -12.5],
+      "length": 64,
+      "width": 10,
+      "angle": 177.5,
+      "contrailSize": 10,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-87.5, 19.5],
+      "length": 109,
+      "width": 14,
+      "angle": 175.5,
+      "contrailSize": 14,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-87.5, -19.5],
+      "length": 109,
+      "width": 14,
+      "angle": -175.5,
+      "contrailSize": 14,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-85.5, 29],
+      "length": 43.720314,
+      "width": 8.193692,
+      "angle": 177.5,
+      "contrailSize": 8,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-85.5, -29],
+      "length": 43.720314,
+      "width": 8.193692,
+      "angle": -177.5,
+      "contrailSize": 8,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    67, -9.5,
+    102, -10,
+    130, -17.5,
+    53.5, -42,
+    45, -54.5,
+    38, -55,
+    20.5, -73.5,
+    3, -62.5,
+    -25.5, -57.5,
+    -6.5, -46.5,
+    -10, -35.5,
+    -4, -34,
+    -8.5, -26.5,
+    -31.5, -38.5,
+    -37, -36.5,
+    -57.5, -57,
+    -66.5, -57.5,
+    -77.5, -42.5,
+    -110.5, -31.5,
+    -88.5, -27,
+    -88.5, -8,
+    -120.5, 0,
+    -88.5, 8,
+    -88.5, 27,
+    -110.5, 31.5,
+    -77.5, 42.5,
+    -66.5, 57.5,
+    -57.5, 57,
+    -37, 36.5,
+    -31.5, 38.5,
+    -8.5, 26.5,
+    -4, 34,
+    -10, 35.5,
+    -6.5, 46.5,
+    -25.5, 57.5,
+    3, 62.5,
+    20.5, 73.5,
+    38, 55,
+    45, 54.5,
+    53.5, 42,
+    130, 17.5,
+    102, 10,
+    67, 9.5
+  ]
 }

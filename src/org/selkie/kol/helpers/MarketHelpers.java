@@ -178,6 +178,7 @@ public class MarketHelpers {
         ImportantPeopleAPI ip = Global.getSector().getImportantPeople();
 
         if (market.getMemoryWithoutUpdate().getBoolean(MemFlags.MARKET_DO_NOT_INIT_COMM_LISTINGS)) return;
+        if (KOL_ModPlugin.haveNex) return;
 
         boolean addedPerson = false;
         if (market.hasIndustry(Industries.MILITARYBASE) || market.hasIndustry(Industries.HIGHCOMMAND)) {
