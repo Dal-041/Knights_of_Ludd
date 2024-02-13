@@ -3,11 +3,13 @@ package org.selkie.kol;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -189,4 +191,26 @@ public class Utils {
         return minOut + (input - minIn) * (maxOut - minOut) / (maxIn - minIn);
     }
 
+    private static final String DRONE_SHIELD_TARGET_KEY = "droneShieldTargetKey";
+
+    public static ShipAPI getDroneShieldTarget(ShipAPI drone) {
+        return drone.getCustomData().containsKey(DRONE_SHIELD_TARGET_KEY) ? (ShipAPI) drone.getCustomData().get(DRONE_SHIELD_TARGET_KEY) : null;
+    }
+
+    public static void setDroneShieldTarget(ShipAPI drone, ShipAPI target) {
+        if (target == null) {
+            drone.getCustomData().remove(DRONE_SHIELD_TARGET_KEY);
+        } else {
+            drone.setCustomData(DRONE_SHIELD_TARGET_KEY, target);
+        }
+    }
+
+    public static boolean anyDronesShieldingShip(ShipAPI target) {
+        for (ShipAPI drone : AIUtils.getAlliesOnMap(target)) {
+            if (drone.getCustomData().containsKey(DRONE_SHIELD_TARGET_KEY) && drone.getCustomData().get(DRONE_SHIELD_TARGET_KEY) == target) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

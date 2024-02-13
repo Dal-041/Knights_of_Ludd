@@ -94,19 +94,12 @@ public class ShachihokoDroneActivator extends DroneActivator {
             nextTarget = null;
         }
 
-        /*
-        if (nextTarget == null) {
-            for (ShipAPI drone : getActiveWings().keySet()) {
-                drone.giveCommand(ShipCommand.VENT_FLUX, null, 0);
-            }
-        }*/
-
         target = nextTarget;
     }
 
     @Override
     public PIDController getPIDController() {
-        return PID;
+        return PID.copy();
     }
 
     @NotNull

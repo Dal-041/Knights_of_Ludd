@@ -109,6 +109,7 @@ zea_research_station_elysia,CUSTOM,A converted habitat turned factory and fleet 
 #Ship Systems,,,,,
 zea_boss_blizzard,SHIP_SYSTEM,"""HOW IS THIS POSSIBLE?!"" - Crew member simultaneously frozen, burned, irradiated, and quite surprised.",Annihilation,,
 zea_boss_supernova,SHIP_SYSTEM,"""What the hell is that?"" - Last recording from a now-unrecognizable capital hull shattered into endless pieces.",Annihilation,,
+zea_boss_corruptionjets,SHIP_SYSTEM,"""THEY'RE ALL OVER US!"" - Voice message found on a Tri-Pad in a derelict ship with weapons damage in almost all bulkheads.",Corruption,,
 zea_dawn_small_flux_negation,SHIP_SYSTEM,A dedicated flux dissipation system negates the flux use of all weapons in small mounts for a time.,Offensive,,
 zea_edf_fortress_flux_converter,SHIP_SYSTEM,Reduces incoming damage to the shield to a minimum and converts hard flux to soft.,Defensive,,
 zea_edf_twinshield,SHIP_SYSTEM,Activates a secondary shield system with a smaller arc but greater efficiency and ability to rotate around the ship. ,Defensive,,
