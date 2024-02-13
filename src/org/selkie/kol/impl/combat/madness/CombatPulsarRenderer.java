@@ -37,6 +37,11 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
         float getFXMult();
     }
 
+    @Override
+    public float getRenderRadius() {
+        return delegate.getPulsarOuterRadius()*10;
+    }
+
     protected float alphaMult = 0.4f;
 
     private CombatPulsarRendererDelegate delegate;

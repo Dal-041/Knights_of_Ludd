@@ -110,7 +110,7 @@ public class CombatRangeBlockerUtil {
 
             float angle = Misc.getAngleInDegrees(entity.getLocation(), ent.getLocation());
 
-            float offsetSize = maxRange * 0.2f;
+            float offsetSize = maxRange * 0.1f;
 
             float spanOffset = span * 0.4f * 1f / diffMult;
             spanOffset = 0f;
@@ -128,7 +128,40 @@ public class CombatRangeBlockerUtil {
 
 
                 int index = getIndexForAngle(f);
-                limits[index] = Math.min(dist - (ent.getShipExplosionRadius()) * 0.5f + offset, limits[index]);
+                limits[index] = Math.min(dist - (ent.getCollisionRadius()) * 0.5f + offset, limits[index]);
+                isAnythingShortened = true;
+            }
+        }
+
+        for (CombatEntityAPI ent : Global.getCombatEngine().getAsteroids()) {
+            if (ent == entity || ent == exclude) continue;
+            float dist = Misc.getDistance(entity.getLocation(), ent.getLocation());
+            if (dist > maxRange) continue;
+
+            float graceRadius = 15f;
+            float span = Misc.computeAngleSpan(ent.getCollisionRadius()*0.8f + graceRadius, dist);
+
+            float angle = Misc.getAngleInDegrees(entity.getLocation(), ent.getLocation());
+
+            float offsetSize = maxRange * 0.1f;
+
+            float spanOffset = span * 0.4f * 1f / diffMult;
+            spanOffset = 0f;
+            for (float f = angle - span/2f - spanOffset; f <= angle + span/2f - spanOffset; f += degreesPerUnit) {
+                float offset = Math.abs(f - angle) / (span / 2f);
+                if (offset > 1) offset = 1;
+                offset = (1f - (float) Math.cos(offset * 3.1416f / 2f));
+                //offset = (float) Math.sqrt(offset);
+//				offset += 1f;
+                offset *= offset;
+//				offset *= offset;
+//				offset -= 1f;
+                //offset *= planet.getRadius() + graceRadius;
+                offset *= offsetSize;
+
+
+                int index = getIndexForAngle(f);
+                limits[index] = Math.min(dist - (ent.getCollisionRadius()) * 0.5f + offset, limits[index]);
                 isAnythingShortened = true;
             }
         }
