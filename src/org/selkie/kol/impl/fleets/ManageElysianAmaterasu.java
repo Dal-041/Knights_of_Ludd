@@ -4,6 +4,8 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.ids.Entities;
+import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import org.lazywizard.lazylib.VectorUtils;
@@ -57,8 +59,30 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
 				if (f.getHullId().startsWith("zea_boss_amaterasu")) {
 					salvaged1 = true;
+
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS1_DONE, true);
+
+					f.getVariant().removeTag("kol_boss");
+
+					//Replacement cache
+					Vector2f location = fleet.getLocation();
+					LocationAPI system = fleet.getContainingLocation();
+					if (location == null) {
+						location = primaryWinner.getLocation();
+						system = primaryWinner.getContainingLocation();
+					}
+
+					SectorEntityToken wreck = system.addCustomEntity(null, "Ejected Cache", Entities.EQUIPMENT_CACHE_SMALL, Factions.NEUTRAL);
+					wreck.setFacing((float) Math.random() * 360f);
+					wreck.addDropRandom("guaranteed_alpha", 1);
+					wreck.addDropRandom("zea_weapons_high", 6);
+					wreck.addDropRandom("zea_weapons_high", 6);
+					wreck.addDropRandom("techmining_first_find", 6);
+					wreck.addDropRandom("omega_weapons_small", 3);
+					wreck.addDropRandom("omega_weapons_medium", 2);
+					wreck.addDropRandom("omega_weapons_large", 1);
+					wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 				}
 			}
 
@@ -82,6 +106,8 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 				wreck.setName("Wreck of the Elysian flagship");
 				wreck.setFacing((float) Math.random() * 360f);
 				wreck.addDropRandom("guaranteed_alpha", 1);
+				wreck.addDropRandom("zea_weapons_high", 6);
+				wreck.addDropRandom("zea_weapons_high", 6);
 				wreck.addDropRandom("techmining_first_find", 6);
 				wreck.addDropRandom("omega_weapons_small", 3);
 				wreck.addDropRandom("omega_weapons_medium", 2);

@@ -57,7 +57,7 @@ public class SpawnElysianAmaterasu {
 		        .setFleetName("Amaterasu")
 		        .setFleetFaction(PrepareAbyss.elysianID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
-		        .setFlagshipName("00000001")
+		        .setFlagshipName("Amaterasu")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(elysianBossCaptain)
 		        .setMinFP(440) //support fleet
