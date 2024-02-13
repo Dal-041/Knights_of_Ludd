@@ -50,7 +50,7 @@ class DuskBossCoreOfficerPlugin : AICoreOfficerPlugin {
         var skill = Global.getSettings().getSkillSpec(uniqueSkillID)
         var pointsMult = automatedPointsMult.toInt()
 
-        AICoreUtil.addTooltip(person, tooltip, pointsMult, skill)
+        AICoreUtil.addTooltip(person, tooltip, pointsMult, skill, AICoreUtil.BossCore.Dusk)
     }
 
 }

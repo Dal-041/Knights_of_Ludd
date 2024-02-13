@@ -349,5 +349,9 @@
 	},
 	"ruleCommandPackages": [
         "org.selkie.kol.impl.rulecmd"
-    ]
+    ],
+	
+	"drop_prob_officer_zea_dusk_boss_core":0,
+	"drop_prob_officer_zea_dawn_boss_core":0,
+	"drop_prob_officer_zea_elysia_boss_core":0,
 }
