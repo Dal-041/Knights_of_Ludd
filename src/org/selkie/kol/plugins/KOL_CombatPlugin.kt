@@ -64,7 +64,7 @@ class KOL_CombatPlugin : BaseEveryFrameCombatPlugin() {
             val shipScale = PAPERDOLL_SCALE[ship.hullSpec.hullId]!! * scale;
             val alpha = Math.round(Misc.interpolate(0f,255f, Utils.getUIAlpha(true)))
             for (module in ship.childModulesCopy) {
-                if (ship.hitpoints <= 0f) continue
+                if (module.hitpoints <= 0f) continue
 
                 var moduleSprite = Global.getSettings().getSprite(module.hullSpec.spriteName)
                 val matcher = kolPattern.matcher(module.hullSpec.spriteName)

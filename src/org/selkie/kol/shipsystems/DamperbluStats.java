@@ -3,7 +3,6 @@ package org.selkie.kol.shipsystems;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import exerelin.utilities.ReflectionUtils;
 
 import java.awt.*;
 

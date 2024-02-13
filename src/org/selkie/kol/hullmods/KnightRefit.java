@@ -4,14 +4,15 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import exerelin.utilities.ReflectionUtils;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.awt.*;
@@ -76,6 +77,23 @@ public class KnightRefit extends BaseHullMod {
         }
         ship.getMutableStats().getFluxCapacity().modifyFlat(id, capBonus);
         ship.getMutableStats().getFluxDissipation().modifyFlat(id, dissBonus);
+
+        if(!ship.hasListenerOfClass(ModuleUnhulker.class)) ship.addListener(new ModuleUnhulker());
+    }
+
+    public static class ModuleUnhulker implements HullDamageAboutToBeTakenListener {
+        @Override
+        public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI ship, Vector2f point, float damageAmount) {
+            if(ship.getHitpoints() <= damageAmount) {
+                for(ShipAPI module: ship.getChildModulesCopy()){
+                    if(!module.hasTag("KOL_moduleDead")){
+                        module.setHulk(false);
+                        module.addTag("KOL_moduleDead");
+                    }
+                }
+            }
+            return false;
+        }
     }
 
 
@@ -237,7 +255,7 @@ public class KnightRefit extends BaseHullMod {
         float alive = 0;
         for(ShipAPI module : ship.getChildModulesCopy()){
             modules++;
-            if (ship.getHitpoints() <= 0f) continue;
+            if (module.getHitpoints() <= 0f) continue;
             alive++;
             if(ship.getVariant() == null || module.getVariant() == null) continue;
 

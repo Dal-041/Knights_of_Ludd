@@ -28,7 +28,7 @@ public class ModuleVulcan extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if(Global.getCurrentState() != GameState.COMBAT) return;
-        if(!Global.getCombatEngine().isEntityInPlay(ship) || !ship.isAlive()) return;
+        if(!Global.getCombatEngine().isEntityInPlay(ship) || ship.getHitpoints() <= 0f) return;
 
         // fake snowdrops vulcan cannons
         if(ship.getHullSpec().getHullId().contains("kol_snowdrop")){
