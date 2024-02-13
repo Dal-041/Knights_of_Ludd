@@ -6,6 +6,7 @@ import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
@@ -100,6 +101,16 @@ public class SpawnElysianHeart {
 		elysianHeartFleet.getFlagship().getVariant().addTag("kol_boss");
 		elysianHeartFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		elysianHeartFleet.addEventListener(new ManageElysianCorruptingheart());
+		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
+		FID.setAlwaysAttack(true);
+		FID.setAlwaysPursue(true);
+		FID.setLeaveAlwaysAvailable(false);
+		FID.setWithSalvage(true);
+		FID.aiRetreatToggle = false;
+		FID.deployallToggle = true;
+		FID.objectivesToggle = true;
+		FID.fttlToggle = true;
+		elysianHeartFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
 		return true;
 	}

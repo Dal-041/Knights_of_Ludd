@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
@@ -86,6 +87,16 @@ public class SpawnDuskBoss {
 		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		duskBossFleet.addEventListener(new ManageDuskBoss());
+		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
+		FID.setAlwaysAttack(false);
+		FID.setAlwaysPursue(true);
+		FID.setLeaveAlwaysAvailable(true);
+		FID.setWithSalvage(true);
+		FID.aiRetreatToggle = true;
+		FID.deployallToggle = true;
+		FID.objectivesToggle = false;
+		FID.fttlToggle = false;
+		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
 		return true;
 	}

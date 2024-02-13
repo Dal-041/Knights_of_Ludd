@@ -299,7 +299,7 @@ public class PrepareDarkDeeds {
             config.alwaysPursue = true;
             config.dismissOnLeave = false;
             //config.lootCredits = false;
-            config.withSalvage = false;
+            config.withSalvage = true;
             //config.showVictoryText = false;
             config.printXPToDialog = true;
 

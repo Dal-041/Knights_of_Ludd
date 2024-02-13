@@ -1,10 +1,20 @@
 package org.selkie.kol.impl.helpers;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
+import com.fs.starfarer.api.impl.campaign.FleetEncounterContext;
+import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl;
+import com.fs.starfarer.api.impl.campaign.RuleBasedInteractionDialogPluginImpl;
+import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -172,6 +182,89 @@ public class ZeaUtils {
             for (String entry : toRemove) {
                 fac.removeKnownWeapon(entry);
             }
+        }
+    }
+
+    public static class ZeaBossGenFIDConfig implements FleetInteractionDialogPluginImpl.FIDConfigGen {
+        FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
+
+        public static interface FIDConfigGen {
+            FleetInteractionDialogPluginImpl.FIDConfig createConfig();
+        }
+
+        public boolean aiRetreatToggle = false;
+        public boolean objectivesToggle = false;
+        public boolean fttlToggle = true;
+        public boolean deployallToggle = true;
+
+        /* Per-Fleet stuff
+//			config.alwaysAttackVsAttack = true;
+//			config.leaveAlwaysAvailable = true;
+//			config.showFleetAttitude = false;
+            config.showTransponderStatus = false;
+            config.showEngageText = false;
+            config.alwaysPursue = true;
+            config.dismissOnLeave = false;
+            //config.lootCredits = false;
+            config.withSalvage = false;
+            //config.showVictoryText = false;
+            config.printXPToDialog = true;
+
+            config.noSalvageLeaveOptionText = "Continue";
+//			config.postLootLeaveOptionText = "Continue";
+//			config.postLootLeaveHasShortcut = false;
+        */
+
+
+        public FleetInteractionDialogPluginImpl.FIDConfig createConfig() {
+            config.delegate = new FleetInteractionDialogPluginImpl.BaseFIDDelegate() {
+
+                public void postPlayerSalvageGeneration(InteractionDialogAPI dialog, FleetEncounterContext context, CargoAPI salvage) {
+                    new RemnantSeededFleetManager.RemnantFleetInteractionConfigGen().createConfig().delegate.
+                            postPlayerSalvageGeneration(dialog, context, salvage);
+                }
+
+                public void notifyLeave(InteractionDialogAPI dialog) {
+
+                    SectorEntityToken other = dialog.getInteractionTarget();
+                    if (!(other instanceof CampaignFleetAPI)) {
+                        dialog.dismiss();
+                        return;
+                    }
+                    CampaignFleetAPI fleet = (CampaignFleetAPI) other;
+
+                    if (!fleet.isEmpty()) {
+                        dialog.dismiss();
+                        return;
+                    }
+
+                    //Do stuff to the fleet here if desired
+                }
+
+                public void battleContextCreated(InteractionDialogAPI dialog, BattleCreationContext bcc) {
+                    bcc.aiRetreatAllowed = aiRetreatToggle;
+                    bcc.objectivesAllowed = objectivesToggle;
+                    bcc.fightToTheLast = fttlToggle;
+                    bcc.enemyDeployAll = deployallToggle;
+                }
+            };
+            return config;
+        }
+
+        public void setAlwaysAttack (boolean set) {
+            config.alwaysAttackVsAttack = set;
+        }
+        public void setAlwaysPursue (boolean set) {
+            config.alwaysPursue = set;
+        }
+        public void setLeaveAlwaysAvailable (boolean set) {
+            config.leaveAlwaysAvailable = set;
+        }
+        public void setWithSalvage (boolean set) {
+            config.withSalvage = set;
+        }
+        public void setNoSalvageLeaveOptionText (String set) {
+            config.noSalvageLeaveOptionText = set;
         }
     }
 }
