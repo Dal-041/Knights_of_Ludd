@@ -55,12 +55,12 @@ public class TwinShieldAI implements ShipSystemAIScript {
         boolean wantToTwinShield = false;
         if(enemiesTotal > 0){
             Collections.sort(enemyAngles);
-            if(enemyAngles.get(enemyAngles.size()-1)-enemyAngles.get(0) < ship.getShield().getArc()/2) wantToTwinShield = true;
-            if(((float) enemiesInFront) /enemiesTotal < 0.6f ) wantToTwinShield = true;
+            if(enemyAngles.size() > 0 && enemyAngles.get(enemyAngles.size()-1)-enemyAngles.get(0) < ship.getShield().getArc()/2) wantToTwinShield = true;
+            if((float) enemiesInFront /enemiesTotal < 0.6f ) wantToTwinShield = true;
         }
 
         if(missilesTotal > 0){
-            if(((float) missilesInFront) /missilesTotal < 0.6f ) wantToTwinShield = true;
+            if((float) missilesInFront /missilesTotal < 0.6f ) wantToTwinShield = true;
         }
 
 
