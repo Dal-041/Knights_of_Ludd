@@ -19,6 +19,10 @@
     "zea_edf_passive_iff_disruptor",
     "zea_edf_shachihoko_drone"
   ],
+  "builtInWings": [
+    "zea_edf_kitsunebi",
+    "zea_edf_kitsunebi"
+  ],
   "builtInWeapons": {
     "WS0016": "zea_deco_edf_engS",
     "WS0017": "zea_deco_edf_engS",
