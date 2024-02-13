@@ -15,7 +15,7 @@ import com.fs.starfarer.api.util.Misc
 import org.lazywizard.lazylib.combat.CombatUtils
 import org.selkie.kol.impl.skills.cores.BaseCoreOfficerSkill
 
-class DawnBossCoreSkill : BaseCoreOfficerSkill() {
+class DuskBossCoreSkill : BaseCoreOfficerSkill() {
 
     var modID = "zea_dawn_boss_skill"
 
@@ -25,8 +25,7 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
 
     override fun createCustomDescription(stats: MutableCharacterStatsAPI?,  skill: SkillSpecAPI?, info: TooltipMakerAPI?,  width: Float) {
         info!!.addSpacer(2f)
-        info!!.addPara("Deploys smart shield drones during combat.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
-        info!!.addPara("Once per deployment, if the ship is below 50%% of its total hull, a temporary damper field activates for 8 seconds, reducing damage taken by 80%%.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
+        info!!.addPara("", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
         info.addSpacer(2f)
     }
 

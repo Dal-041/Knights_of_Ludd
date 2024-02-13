@@ -3,11 +3,13 @@ package org.selkie.kol.impl.campaign.cores
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.characters.FullName
 import com.fs.starfarer.api.characters.PersonAPI
+import com.fs.starfarer.api.characters.SkillSpecAPI
 import com.fs.starfarer.api.impl.campaign.ids.Personalities
+import com.fs.starfarer.api.impl.campaign.ids.Strings
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.lazywizard.lazylib.combat.AIUtils
+import org.selkie.kol.impl.skills.cores.DawnBossCoreSkill
 
 object AICoreUtil
 {
@@ -29,9 +31,23 @@ object AICoreUtil
         return core
     }
 
+
     @JvmStatic
-    fun addPersonalityTooltip(person: PersonAPI?, tooltip: TooltipMakerAPI?)
+    fun addTooltip(person: PersonAPI, tooltip: TooltipMakerAPI, pointsMult: Int, skill: SkillSpecAPI)
     {
+
+        tooltip.addSpacer(10f)
+        tooltip.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f, Misc.getTextColor(), Misc.getHighlightColor(),  "Automated Points Multiplier")
+        tooltip.addSpacer(10f)
+
+        tooltip.addSectionHeading("Signature Skill: ${skill.name}", Alignment.MID, 0f)
+        tooltip.addSpacer(10f)
+
+        var skillImg = tooltip.beginImageWithText(skill.spriteName, 48f)
+        DawnBossCoreSkill().createCustomDescription(null, null, skillImg, tooltip.widthSoFar)
+
+        tooltip.addImageWithText(0f)
+
         val opad = 10f
         val text = person!!.faction.baseUIColor
         val bg = person.faction.darkUIColor

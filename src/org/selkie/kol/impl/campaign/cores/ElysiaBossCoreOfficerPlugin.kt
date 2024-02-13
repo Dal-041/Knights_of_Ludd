@@ -14,11 +14,11 @@ import java.util.*
 
 
 
-class DawnBossCoreOfficerPlugin : AICoreOfficerPlugin {
+class ElysiaBossCoreOfficerPlugin : AICoreOfficerPlugin {
 
     var automatedPointsMult = 4f
-    var uniqueSkillID = "zea_dawn_boss_core_skill"
-    var portraitID = "zea_dawn_boss_core"
+    var uniqueSkillID = "zea_elysia_boss_core_skill"
+    var portraitID = "zea_elysia_boss_core"
 
     override fun createPerson(aiCoreId: String?, factionId: String?, random: Random?): PersonAPI {
         var core = AICoreUtil.createCorePerson(aiCoreId, factionId)
