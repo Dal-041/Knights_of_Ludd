@@ -66,7 +66,7 @@ public class ZeaFleetManager extends SeededFleetManager {
         }
     }
 
-    public String getSecondFaction(long seed, String primary) {
+    public static String getSecondFaction(long seed, String primary) {
         WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(new Random(seed));
 
         picker.add("derelict",1f);
@@ -103,19 +103,36 @@ public class ZeaFleetManager extends SeededFleetManager {
         }
     }
 
-    @Override
-    protected CampaignFleetAPI spawnFleet(long seed) {
+    public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to, boolean pruneCaps) {
+        for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
+            boolean skip = false;
+            if (member.isFighterWing()) continue;
+            if (pruneCaps && member.getHullSpec().getHullSize().equals(ShipAPI.HullSize.CAPITAL_SHIP)) continue;
+            for (String s : ZeaUtils.hullBlacklist) {
+                if (s.equals(member.getHullId())) {
+                    skip = true;
+                }
+            }
+            if (skip) continue;
+            //Unrecoverable status set by hullmod
+            if (member.getVariant().hasTag(Tags.AUTOMATED_RECOVERABLE)) member.getVariant().removeTag(Tags.AUTOMATED_RECOVERABLE);
+            if (member.isFlagship()) member.setFlagship(false);
+            member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
+            to.getFleetData().addFleetMember(member);
+        }
+    }
 
+    public static CampaignFleetAPI spawnFleet(long seed, float factorSecond, StarSystemAPI sys, String fac, int min, int max) {
         Random random = new Random(seed);
-        float factorMain = 0.65f;
+        float factorMain = 1f-factorSecond;
         boolean mixAll = false;
 
         FleetParamsV3 params = new FleetParamsV3(
-                system.getLocation(),
+                sys.getLocation(),
                 fac,
                 5f,
                 FleetTypes.PATROL_LARGE,
-                MathUtils.getRandomNumberInRange(minPts, maxPts), // combatPts
+                MathUtils.getRandomNumberInRange(min, max), // combatPts
                 0f, // freighterPts
                 0f, // tankerPts
                 0f, // transportPts
@@ -125,7 +142,7 @@ public class ZeaFleetManager extends SeededFleetManager {
         );
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
-        params.commander = createAbyssalCaptain();
+        params.commander = createAbyssalCaptain(fac);
         params.officerNumberMult = 1f;
         //params.officerLevelBonus = 0;
         params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_MIXED;
@@ -145,6 +162,15 @@ public class ZeaFleetManager extends SeededFleetManager {
 
         //fleet.getFleetData().sort();
 
+        return fleet;
+    }
+
+    @Override
+    protected CampaignFleetAPI spawnFleet(long seed) {
+        float ratioOther = 0.35f;
+        Random random = new Random(seed);
+        CampaignFleetAPI fleet = spawnFleet(seed, ratioOther, system, fac, minPts, maxPts);
+
         if (fleet == null) return null;
 
         setAbyssalCaptains(fleet);
@@ -158,9 +184,9 @@ public class ZeaFleetManager extends SeededFleetManager {
         }
 
         initElysianFleetProperties(random, fleet, false);
-        addLoreToFleetCheck(fleet);
         fleet.addScript(new ZeaAssignmentAI(fleet, system, pickEntityToGuard(new Random(), system, fleet)));
 
+        addLoreToFleetCheck(fleet);
         return fleet;
     }
 
@@ -271,10 +297,6 @@ public class ZeaFleetManager extends SeededFleetManager {
     public static void addElysianInteractionConfig(CampaignFleetAPI fleet) {
         fleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
                 new ZeaFleetManager.AbyssalFleetInteractionConfigGen());
-    }
-
-    public PersonAPI createAbyssalCaptain() {
-        return createAbyssalCaptain(fac, false);
     }
 
     public static PersonAPI createAbyssalCaptain(String faction) {

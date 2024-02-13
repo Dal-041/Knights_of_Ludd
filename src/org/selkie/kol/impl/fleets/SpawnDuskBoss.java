@@ -61,7 +61,7 @@ public class SpawnDuskBoss {
 		        .setFlagshipName("00000000")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(duskBossCaptain)
-		        .setMinFP(480) //support fleet
+		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.DEFEND_LOCATION)
 				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName).getCenter())
@@ -70,10 +70,11 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 
-		/*
-		for(String support : PrepareAbyss.duskBossSupportingFleet) {
+		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
+
+		for(String support : ZeaUtils.duskBossSupportingFleet) {
 			duskBossFleet.getFleetData().addFleetMember(support);
-		}*/
+		}
 
 		ZeaFleetManager.setAbyssalCaptains(duskBossFleet);
 		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
