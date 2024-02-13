@@ -90,9 +90,9 @@ public class SpawnDuskBoss {
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
 		FID.setAlwaysAttack(false);
 		FID.setAlwaysPursue(true);
-		FID.setLeaveAlwaysAvailable(true);
+		FID.setLeaveAlwaysAvailable(false);
 		FID.setWithSalvage(true);
-		FID.aiRetreatToggle = true;
+		FID.aiRetreatToggle = false;
 		FID.deployallToggle = true;
 		FID.objectivesToggle = false;
 		FID.fttlToggle = false;

@@ -61,25 +61,6 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
 					f.getVariant().removeTag("kol_boss");
-
-					//Replacement cache
-					Vector2f location = fleet.getLocation();
-					LocationAPI system = fleet.getContainingLocation();
-					if (location == null) {
-						location = primaryWinner.getLocation();
-						system = primaryWinner.getContainingLocation();
-					}
-
-					SectorEntityToken wreck = system.addCustomEntity(null, "Ejected Cache", Entities.EQUIPMENT_CACHE_SMALL, Factions.NEUTRAL);
-					wreck.setFacing((float) Math.random() * 360f);
-					wreck.addDropRandom("guaranteed_alpha", 1);
-					wreck.addDropRandom("zea_weapons_high", 6);
-					wreck.addDropRandom("zea_weapons_high", 6);
-					wreck.addDropRandom("techmining_first_find", 6);
-					wreck.addDropRandom("omega_weapons_small", 3);
-					wreck.addDropRandom("omega_weapons_medium", 2);
-					wreck.addDropRandom("omega_weapons_large", 1);
-					wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 				}
 			}
 
@@ -102,18 +83,25 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 				//MagicCampaign.placeOnStableOrbit(wreck, true);
 				wreck.setName("Wreck of the Elysian flagship");
 				wreck.setFacing((float) Math.random() * 360f);
-				wreck.addDropRandom("guaranteed_alpha", 1);
-				wreck.addDropRandom("zea_weapons_high", 6);
-				wreck.addDropRandom("zea_weapons_high", 6);
-				wreck.addDropRandom("techmining_first_find", 6);
-				wreck.addDropRandom("omega_weapons_small", 3);
-				wreck.addDropRandom("omega_weapons_medium", 2);
-				wreck.addDropRandom("omega_weapons_large", 1);
 				wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 
 				//set memkey that the wreck exist
 				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
 			}
+
+			//Replacement cache
+			LocationAPI system = primaryWinner.getContainingLocation();
+			SectorEntityToken wreck = system.addCustomEntity(null, "Ejected Cache", Entities.EQUIPMENT_CACHE_SMALL, Factions.NEUTRAL);
+			wreck.setFacing((float)Math.random()*360f);
+			wreck.addDropRandom("guaranteed_alpha", 1);
+			wreck.addDropRandom("zea_weapons_high", 6);
+			wreck.addDropRandom("zea_weapons_high", 6);
+			wreck.addDropRandom("techmining_first_find", 6);
+			wreck.addDropRandom("omega_weapons_small", 3);
+			wreck.addDropRandom("omega_weapons_medium", 2);
+			wreck.addDropRandom("omega_weapons_large", 1);
+			wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
+			wreck.setLocation(primaryWinner.getLocation().getX(), primaryWinner.getLocation().getY());
 		}
 	}
 

@@ -309,8 +309,8 @@ public class PrepareAbyss {
 		float count = uwDerelictsNormal.length; //16
 		float odds = 0.45f;
 		count *= odds;
-		int target = 5; //3 entries, some redundancy
-		float oddsLore = target/count;
+		//int target = 5; //3 entries, some redundancy
+		//float oddsLore = target/count;
 		for(String variant:uwDerelictsNormal) {
 			if (Math.random() <= odds) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
@@ -326,7 +326,7 @@ public class PrepareAbyss {
 				);
 				wreck.setFacing((float)Math.random()*360f);
 				if (Math.random() > 0.33f) wreck.addTag(Tags.UNRECOVERABLE);
-				if (Math.random() < oddsLore) wreck.addDropRandom("zea_ttfleet_lore", 1);
+				if (Math.random() < 0.5f) wreck.addDropRandom("zea_ttfleet_lore", 1);
 				//system.addEntity(wreck);
 			}
 		}
