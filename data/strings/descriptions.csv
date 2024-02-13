@@ -95,7 +95,7 @@ zea_eventHorizon,TERRAIN,The gravitational flux near the event horizon of a blac
 zea_pulsarBeam,TERRAIN,"A relativistic, magnetized jet combined with intense radiation. Commonly emitted by neutron stars.",,,
 zea_blackBeam,TERRAIN,"Did I say 'pulsar'? Well, I may have meant 'pullsar.'",,,
 zea_seaWave,TERRAIN,"An enormous pulse wave, buffeting everything caught in its energies with hazardous radiation. Combat readiness suffers, but a stalwart fleet can move against the tide if they're careful - or desperate.",,,
-nebula_zea_shoal,TERRAIN,"A refuge from the tide, though not from the Tide. Fleets hiding among the dense 'shoals' are immune from damage during the tide, but their burn speed is greatly reduced.",,,
+nebula_zea_shoal,TERRAIN,"A refuge from the tide, though not from the warfleets bearing the same name. Fleets hiding among the dense 'shoals' are immune from damage during the tide, but their burn speed is greatly reduced.",,,
 nebula_zea_storm_normal,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,
 nebula_zea_storm_storm,TERRAIN,"The choatic energies of the storm tear at passing ships, regularly dealing damage to fleet members. For whatever reason phase ships seem less affected.",,,
 nebula_zea_black,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,

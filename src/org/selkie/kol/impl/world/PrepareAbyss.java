@@ -93,7 +93,7 @@ public class PrepareAbyss {
     	StarSystemAPI system = Global.getSector().createStarSystem(elysiaSysName);
     	system.getLocation().set((int)posX, (int)posY);
     	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_elysia.png");
-		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_theme");
+		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_system");
 
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
