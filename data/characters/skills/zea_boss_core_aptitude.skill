@@ -1,0 +1,12 @@
+{
+	"id":"zea_boss_core_aptitude",
+	"governingAptitude":"zea_boss_core_aptitude",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":0,
+			"effects":[
+				{"type":"DESCRIPTION", "script":"org.selkie.kol.impl.skills.cores.CoresAptitudeDesc"},
+			]
+		},
+	],
+}

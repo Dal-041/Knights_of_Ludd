@@ -11,6 +11,7 @@ import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
+import org.selkie.kol.impl.campaign.AICoreCampaignPlugin;
 import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -59,6 +60,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		ZeaUtils.checkAbyssalFleets();
 		ZeaUtils.copyHighgradeEquipment();
 		PrepareDarkDeeds.andContinue();
+
+		Global.getSector().registerPlugin(new AICoreCampaignPlugin());
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
