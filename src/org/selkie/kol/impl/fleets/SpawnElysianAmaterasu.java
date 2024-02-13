@@ -57,7 +57,7 @@ public class SpawnElysianAmaterasu {
 		        .setFleetName("Amaterasu")
 		        .setFleetFaction(PrepareAbyss.elysianID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
-		        .setFlagshipName("00000001")
+		        .setFlagshipName("Amaterasu")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(elysianBossCaptain)
 		        .setMinFP(440) //support fleet
@@ -91,6 +91,16 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		elysianBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
+		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
+		FID.setAlwaysAttack(true);
+		FID.setAlwaysPursue(true);
+		FID.setLeaveAlwaysAvailable(false);
+		FID.setWithSalvage(true);
+		FID.aiRetreatToggle = false;
+		FID.deployallToggle = true;
+		FID.objectivesToggle = true;
+		FID.fttlToggle = true;
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
 		return true;
 	}

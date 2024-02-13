@@ -1,15 +1,30 @@
 package org.selkie.kol.impl.helpers;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.FactionAPI;
+import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
+import com.fs.starfarer.api.impl.campaign.FleetEncounterContext;
+import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl;
+import com.fs.starfarer.api.impl.campaign.RuleBasedInteractionDialogPluginImpl;
+import com.fs.starfarer.api.impl.campaign.fleets.FleetParams;
+import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.MathUtils;
+import org.selkie.kol.impl.fleets.ZeaFleetManager;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.util.ArrayList;
+
+import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
 
 public class ZeaUtils {
 
@@ -87,6 +102,10 @@ public class ZeaUtils {
             "zea_edf_tamamo_Striker",
             "zea_edf_tamamo_Striker"
     };
+    public static final String[] duskBossSupportingFleet = {
+            "zea_dusk_ayakashi_Vengeful",
+            "zea_dusk_ayakashi_Whispered",
+    };
 
     public static final String abilityJumpElysia = "fracture_jump_elysia";
     public static final String abilityJumpDawn = "fracture_jump_luna_sea";
@@ -100,10 +119,10 @@ public class ZeaUtils {
     public static final String pathPortraits = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/";
     public static final String[] portraitsDawnPaths = {pathPortraits.concat("zea_dawn_1.png"), pathPortraits.concat("zea_dawn_2.png"), pathPortraits.concat("zea_dawn_3.png"), pathPortraits + "zea_dawn_4.png", pathPortraits + "zea_dawn_5.png"};
     public static final String[] portraitsDuskPaths = {pathPortraits.concat("zea_dusk_1.png"), pathPortraits.concat("zea_dusk_2.png"), pathPortraits.concat("zea_dusk_3.png")};
-    public static final String[] portraitsElysianPaths = {pathPortraits.concat("zea_idk1.png"), pathPortraits.concat("zea_edf2.png"), pathPortraits.concat("zea_edf1.png")};
+    public static final String[] portraitsElysianPaths = {pathPortraits.concat("zea_idk1.png"), pathPortraits.concat("zea_edf_2.png"), pathPortraits.concat("zea_edf_1.png")};
     public static final String[] portraitsDawn = {"zea_dawn_1", "zea_dawn_2", "zea_dawn_3", "zea_dawn_4", "zea_dawn_5"};
     public static final String[] portraitsDusk = {"zea_dusk_1", "zea_dusk_2", "zea_dusk_3"};
-    public static final String[] portraitsElysian = {"zea_idk1", "zea_edf2", "zea_edf1"};
+    public static final String[] portraitsElysian = {"zea_idk1", "zea_edf_2", "zea_edf_1"};
 
     public static final String pathCrests = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/";
     public static final String crestDawn = "zea_crest_dawntide";
@@ -172,6 +191,100 @@ public class ZeaUtils {
             for (String entry : toRemove) {
                 fac.removeKnownWeapon(entry);
             }
+        }
+    }
+
+    public static CampaignFleetAPI ZeaBossGenFleetWeaver (CampaignFleetAPI fleet, int fp) {
+        String fac = fleet.getFaction().getId();
+        int cut = 180;
+        while (fp > 0) {
+            CampaignFleetAPI support = ZeaFleetManager.spawnFleet(MathUtils.getRandom().nextLong(), 0, fleet.getStarSystem(), fac, Math.min(fp, cut), Math.min(fp, cut));
+            copyFleetMembers(fac, support, fleet, false);
+            fp -= Math.min(fp, cut);
+        }
+        return fleet;
+    }
+
+    public static class ZeaBossGenFIDConfig implements FleetInteractionDialogPluginImpl.FIDConfigGen {
+        FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
+
+        public static interface FIDConfigGen {
+            FleetInteractionDialogPluginImpl.FIDConfig createConfig();
+        }
+
+        public boolean aiRetreatToggle = false;
+        public boolean objectivesToggle = false;
+        public boolean fttlToggle = true;
+        public boolean deployallToggle = true;
+
+        /* Per-Fleet stuff
+//			config.alwaysAttackVsAttack = true;
+//			config.leaveAlwaysAvailable = true;
+//			config.showFleetAttitude = false;
+            config.showTransponderStatus = false;
+            config.showEngageText = false;
+            config.alwaysPursue = true;
+            config.dismissOnLeave = false;
+            //config.lootCredits = false;
+            config.withSalvage = false;
+            //config.showVictoryText = false;
+            config.printXPToDialog = true;
+
+            config.noSalvageLeaveOptionText = "Continue";
+//			config.postLootLeaveOptionText = "Continue";
+//			config.postLootLeaveHasShortcut = false;
+        */
+
+
+        public FleetInteractionDialogPluginImpl.FIDConfig createConfig() {
+            config.delegate = new FleetInteractionDialogPluginImpl.BaseFIDDelegate() {
+
+                public void postPlayerSalvageGeneration(InteractionDialogAPI dialog, FleetEncounterContext context, CargoAPI salvage) {
+                    new RemnantSeededFleetManager.RemnantFleetInteractionConfigGen().createConfig().delegate.
+                            postPlayerSalvageGeneration(dialog, context, salvage);
+                }
+
+                public void notifyLeave(InteractionDialogAPI dialog) {
+
+                    SectorEntityToken other = dialog.getInteractionTarget();
+                    if (!(other instanceof CampaignFleetAPI)) {
+                        dialog.dismiss();
+                        return;
+                    }
+                    CampaignFleetAPI fleet = (CampaignFleetAPI) other;
+
+                    if (!fleet.isEmpty()) {
+                        dialog.dismiss();
+                        return;
+                    }
+
+                    //Do stuff to the fleet here if desired
+                }
+
+                public void battleContextCreated(InteractionDialogAPI dialog, BattleCreationContext bcc) {
+                    bcc.aiRetreatAllowed = aiRetreatToggle;
+                    bcc.objectivesAllowed = objectivesToggle;
+                    bcc.fightToTheLast = fttlToggle;
+                    bcc.enemyDeployAll = deployallToggle;
+                }
+            };
+            return config;
+        }
+
+        public void setAlwaysAttack (boolean set) {
+            config.alwaysAttackVsAttack = set;
+        }
+        public void setAlwaysPursue (boolean set) {
+            config.alwaysPursue = set;
+        }
+        public void setLeaveAlwaysAvailable (boolean set) {
+            config.leaveAlwaysAvailable = set;
+        }
+        public void setWithSalvage (boolean set) {
+            config.withSalvage = set;
+        }
+        public void setNoSalvageLeaveOptionText (String set) {
+            config.noSalvageLeaveOptionText = set;
         }
     }
 }

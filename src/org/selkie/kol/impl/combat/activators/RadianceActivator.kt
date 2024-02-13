@@ -121,6 +121,7 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     }
 
     override fun advance(amount: Float) {
+        if (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] == null) return; //Hopefully just one frame
         if (ship.isAlive) {
             val glowColorFull = Color(200,150,50, 200)
             val glowColorEmpty = Color(255,100,25, 0)

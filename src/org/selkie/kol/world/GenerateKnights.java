@@ -22,6 +22,8 @@ import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.helpers.MarketHelpers;
+import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 public class GenerateKnights {
@@ -177,6 +179,10 @@ public class GenerateKnights {
 	public static void genBattlestarLibra() {
 		String entID = "kol_libra";
 		StarSystemAPI home = getLibraHome(Long.parseLong(Global.getSector().getSeedString().substring(3)));
+		if (home == null) {;
+			log.error(String.format("KOL: Could not find a system for Libra"));
+			return;
+		}
 		//SectorEntityToken libra = home.addCustomEntity(entID, "Battlestar Libra", "kol_battlestar_libra_entity", "knights_of_selkie");
 		//libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
 
@@ -301,6 +307,7 @@ public class GenerateKnights {
 		OUTER: for (StarSystemAPI system : Global.getSector().getStarSystems()) {
 			if (system.getStar() == null || system.getStar().getTypeId().equals(StarTypes.NEUTRON_STAR) || system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE) || system.getStar().getTypeId().equals(StarTypes.BLUE_SUPERGIANT)) continue;
 			if (system.getPlanets().isEmpty()) continue;
+			if (PrepareAbyss.isWithinCoreSpace(system.getLocation().getX(), system.getLocation().getY())) continue;
 			for (String tag : libraExclusionTags) {
 				if (system.hasTag(tag)) {
 					continue OUTER;
@@ -312,6 +319,7 @@ public class GenerateKnights {
 			if (system.getLocation().getX() <= width/-2 + 5000) w *= 5f; //West bias
 			if (system.getLocation().getX() <= width/-2 + 10000) w *= 5f; //West bias
 			if (system.getLocation().getX() <= width/-2 + 20000) w *= 5f; //West bias
+			if (system.getLocation().getX() <= width/-2 + 35000) w *= 5f; //West bias
 			if (system.hasSystemwideNebula()) w *= 2f;
 			if (Misc.getNumStableLocations(system) < 1) w *= 0.1;
 			if (Misc.getNumStableLocations(system) < 2) w *= 0.5;

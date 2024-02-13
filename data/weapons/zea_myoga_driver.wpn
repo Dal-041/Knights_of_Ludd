@@ -5,9 +5,10 @@
 	"size":"MEDIUM",
 	"displayArcRadius":1200,
 	"turretSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_ultravelocity_driver.png",
-	"turretGunSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_ultravelocity_driver.png",
+	"turretGlowSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_ultravelocity_driver_glow.png",
 	"hardpointSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_ultravelocity_driver.png",
-	"hardpointGunSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_ultravelocity_driver.png",
+	"hardpointGlowSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_ultravelocity_driver_glow.png",
+	"glowColor":[255,255,255,255],
 	"visualRecoil":0.0,  # the gun sprites are only used if this is non-0
 	#"renderHints":[RENDER_BARREL_BELOW],
 	"turretOffsets":[4, 0],
@@ -15,7 +16,7 @@
 	"hardpointOffsets":[4, 0],
 	"hardpointAngleOffsets":[0],	
 	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
-	"animationType":"MUZZLE_FLASH",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
+	"animationType":"GLOW_AND_FLASH",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
 	"muzzleFlashSpec":{"length":120.0,   # only used if animationType = MUZZLE_FLASH
 					   "spread":2.0,
 					   "particleSizeMin":12.0,

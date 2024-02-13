@@ -116,7 +116,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
         FlareManager.Flare curr = flareManager.getActiveFlare();
         if (curr != null) {
             float outerRadiusWithFlare = computeRadiusWithFlare(flareManager.getActiveFlare());
-            return outerRadiusWithFlare + 3000f;
+            return outerRadiusWithFlare + 300000f;
         }
         return 1000000f;
     }
@@ -152,7 +152,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
 
     protected float computeRadiusWithFlare(FlareManager.Flare flare) {
         float inner = getAuroraInnerRadius();
-        float outer = params.middleRadius + params.bandWidthInEngine * 0.5f;
+        float outer = params.middleRadius + params.bandWidthInEngine * 1f; //0.5
         float thickness = outer - inner;
 
         thickness *= flare.extraLengthMult;
@@ -397,10 +397,6 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
         return 1f;
     }
 
-
-
-
-
     public java.util.List<Color> getFlareColorRange() {
         List<Color> result = new ArrayList<Color>();
 
@@ -523,11 +519,11 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
     }
 
     public int getFlareMaxSmallCount() {
-        return 3;
+        return 0;
     }
 
     public int getFlareMinSmallCount() {
-        return 5;
+        return 0;
     }
 
     public float getFlareSkipLargeProbability() {

@@ -50,13 +50,16 @@ public class BallLightningActivator extends CombatActivator {
     @Override
     public boolean shouldActivateAI(float amount) {
         aiInterval.advance(amount);
-        if(aiInterval.intervalElapsed()){
+        if(aiInterval.intervalElapsed() && canActivate()) {
             List missiles = AIUtils.getNearbyEnemyMissiles(ship, MAX_RANGE + 100f);
             List enemies = AIUtils.getNearbyEnemies(ship, MAX_RANGE + 100f);
-            return canActivate() && (!missiles.isEmpty() || !enemies.isEmpty());
-        } else{
-            return false;
+            if (missiles.size() + enemies.size() >= 5) {
+                Vector2f center = MathUtils.getPointOnCircumference(ship.getLocation(), 85, ship.getFacing());
+                List<CombatEntityAPI> targets = findTargets(center, MAX_TARGETS);
+                return (targets.size() >= 3);
+            }
         }
+        return false;
     }
 
     @Override

@@ -2,6 +2,10 @@ package org.selkie.kol.plugins;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.PluginPick;
+import com.fs.starfarer.api.combat.ShipAIPlugin;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 
 import org.dark.shaders.light.LightData;
@@ -103,5 +107,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			PrepareDarkDeeds.andContinue();
 		}
 		GenerateKnights.genAlways();
+	}
+
+	@Override
+	public PluginPick<ShipAIPlugin> pickShipAI(FleetMemberAPI member, ShipAPI ship) {
+		return KOL_ShipAITweaker.pickShipAI(member, ship);
 	}
 }

@@ -9,6 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
@@ -60,7 +61,7 @@ public class SpawnDuskBoss {
 		        .setFlagshipName("00000000")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(duskBossCaptain)
-		        .setMinFP(480) //support fleet
+		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.DEFEND_LOCATION)
 				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName).getCenter())
@@ -69,10 +70,11 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 
-		/*
-		for(String support : PrepareAbyss.duskBossSupportingFleet) {
+		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
+
+		for(String support : ZeaUtils.duskBossSupportingFleet) {
 			duskBossFleet.getFleetData().addFleetMember(support);
-		}*/
+		}
 
 		ZeaFleetManager.setAbyssalCaptains(duskBossFleet);
 		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
@@ -86,6 +88,16 @@ public class SpawnDuskBoss {
 		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		duskBossFleet.addEventListener(new ManageDuskBoss());
+		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
+		FID.setAlwaysAttack(false);
+		FID.setAlwaysPursue(true);
+		FID.setLeaveAlwaysAvailable(false);
+		FID.setWithSalvage(true);
+		FID.aiRetreatToggle = false;
+		FID.deployallToggle = true;
+		FID.objectivesToggle = false;
+		FID.fttlToggle = false;
+		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
 		return true;
 	}

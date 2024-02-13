@@ -142,7 +142,7 @@ public class CombatFlareManager {
         return isInActiveFlareArc(angle);
     }
 
-    public boolean isInActiveFlareArc(SectorEntityToken other) {
+    public boolean isInActiveFlareArc(CombatEntityAPI other) {
         float angle = Misc.getAngleInDegrees(delegate.getFlareCenterEntity().getLocation(), other.getLocation());
         return isInActiveFlareArc(angle);
     }

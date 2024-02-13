@@ -36,7 +36,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     //Terrain plugin
     public float PULSAR_ARC = 90f; //1 / ((float) Math.PI * 2f) * 360f;
-    public float PULSAR_LENGTH = 2000f; //1 / ((float) Math.PI * 2f) * 360f;
+    public float PULSAR_LENGTH = 3000f; //1 / ((float) Math.PI * 2f) * 360f;
     public float fxMult = 1f;
     public boolean single = false;
     public String nameTooltip = "Pulsar Wave";
@@ -55,8 +55,8 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected CombatPulsarCorona.CombatCoronaParams params;
     protected CombatRangeBlockerUtil blocker = null; //new CombatRangeBlockerUtil(1400, PULSAR_LENGTH);
 
-    protected float pulsarAngle = 90f;
-    protected float pulsarRotation = -1f * (15f);
+    protected float pulsarAngle = 60f;
+    protected float pulsarRotation = -1f * (20f);
 
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -70,12 +70,12 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         } else {
             return;
         }
-        if (!ship.isAlive() || ship.isPhased()) return;
+        if (!ship.isAlive() || ship.isHulk()) return;
 
         advance(amount);
-        fxMult = 0.4f;
-        if (state == State.ACTIVE) {
-            fxMult = 0.9f;
+        fxMult = 0.2f;
+        if (state == State.ACTIVE && !ship.isPhased()) {
+            fxMult = 0.65f;
             applyEffect(ship, amount);
         }
     }
@@ -101,7 +101,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             params.name = "The Blizzard";
             nameTooltip = "The Blizzard";
             spriteCat = "terrain";
-            spriteKey = "zea_wavefront";
+            spriteKey = "pulsar";
             flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes
             flare1 = new CombatPulsarRenderer(this);
@@ -171,7 +171,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             blocker.advance(amount, 100f, 0.5f);
         }
 
-        render(CombatEngineLayers.CAPITAL_SHIPS_LAYER, Global.getCombatEngine().getViewport());
+        render(CombatEngineLayers.BELOW_SHIPS_LAYER, Global.getCombatEngine().getViewport());
     }
 
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
@@ -215,7 +215,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                 return true;
             }
         }
-        return true; // No need to hide
+        return false;
     }
 
     protected float getMinRadiusForContains() {
@@ -665,13 +665,16 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         return 1f;
     }
 
-
-
-
-
     public java.util.List<Color> getFlareColorRange() {
         List<Color> result = new ArrayList<Color>();
 
+        result.add(Color.RED);
+        result.add(Color.YELLOW);
+        result.add(Color.GREEN);
+        result.add(Color.BLUE);
+        result.add(Color.MAGENTA);
+
+        /*
         if (params.relatedEntity instanceof ShipAPI) {
             Color color = ((ShipAPI)params.relatedEntity).getHullSpec().getShieldSpec().getRingColor();
             int alpha = (int) (255 * fxMult);
@@ -679,6 +682,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         } else {
             result.add(Color.white);
         }
+        */
         //result.add(Misc.setAlpha(getAuroraColorForAngle(0), 127));
         return result;
     }
@@ -700,11 +704,11 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     }
 
     public float getFlareExtraLengthMultMax() {
-        return 1.5f;
+        return 1.25f;
     }
 
     public float getFlareExtraLengthMultMin() {
-        return 1;
+        return 1.1f;
     }
 
     public float getFlareFadeInMax() {
@@ -792,11 +796,11 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     }
 
     public int getFlareMaxSmallCount() {
-        return 3;
+        return 0;
     }
 
     public int getFlareMinSmallCount() {
-        return 5;
+        return 0;
     }
 
     public float getFlareSkipLargeProbability() {
