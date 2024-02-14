@@ -19,7 +19,7 @@ public class SpawnElysianAmaterasu {
 	
 	public static boolean SpawnElysianAmaterasu() {
 
-		PersonAPI elysianBossCaptain = ZeaFleetManager.createAbyssalCaptain(PrepareAbyss.elysianID);
+		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
 		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png");
 		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
 
@@ -60,7 +60,7 @@ public class SpawnElysianAmaterasu {
 		        .setFlagshipName("Amaterasu")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(elysianBossCaptain)
-		        .setMinFP(440) //support fleet
+		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
 				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getCustomEntitiesWithTag("edf_Hypershunt").get(0))
@@ -68,11 +68,14 @@ public class SpawnElysianAmaterasu {
 		        .setTransponderOn(true)
 		        .create();
 		elysianBossFleet.setDiscoverable(true);
+
+		ZeaUtils.ZeaBossGenFleetWeaver(elysianBossFleet, 440);
+
 		for(String support : ZeaUtils.elysianBossSupportingFleet) {
 			//elysianBossFleet.getFleetData().addFleetMember(support);
 		}
 
-		ZeaFleetManager.setAbyssalCaptains(elysianBossFleet);
+		ZeaFleetManager.setAICaptains(elysianBossFleet);
 		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png");
 		elysianBossFleet.getFleetData().sort();
 

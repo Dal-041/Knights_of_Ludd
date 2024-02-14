@@ -1,15 +1,22 @@
 package org.selkie.kol.hullmods;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.PluginPick;
+import com.fs.starfarer.api.campaign.CampaignPlugin;
+import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 public class KnightModule extends BaseHullMod {
     private final String id = "knightModule";
-    public void init(HullModSpecAPI spec) {
-    }
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
@@ -32,6 +39,7 @@ public class KnightModule extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
+
         //Manual method
         /* removed in favor of multiplier method on KnightRefit
         if(!ship.isAlive())return;

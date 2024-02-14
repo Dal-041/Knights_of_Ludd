@@ -58,6 +58,8 @@ public class ConformalShields extends BaseHullMod {
         }
     }
 
+    protected final float maxArc = 80f;
+
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
 
@@ -70,7 +72,7 @@ public class ConformalShields extends BaseHullMod {
         //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
         //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
         if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_conformal_shield");
-        if (ship.getShield().getArc() >= 85f) ship.getShield().setArc(85f);
+        if (ship.getShield().getArc() >= maxArc) ship.getShield().setArc(maxArc);
      }
 
     public static Vector2f getEllipsePosition(float a, float b, float rad) {

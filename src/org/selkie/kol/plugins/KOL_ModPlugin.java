@@ -56,6 +56,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		GenerateKnights.copyChurchEquipment();
+		GenerateKnights.addKoLIntel();
 		ZeaUtils.checkAbyssalFleets();
 		ZeaUtils.copyHighgradeEquipment();
 		PrepareDarkDeeds.andContinue();

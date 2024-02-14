@@ -23,6 +23,7 @@ import org.selkie.kol.impl.fleets.ZeaFleetManager;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
 
@@ -106,6 +107,11 @@ public class ZeaUtils {
             "zea_dusk_ayakashi_Vengeful",
             "zea_dusk_ayakashi_Whispered",
     };
+
+    public static final HashMap<String, Float> skillPrefs = new HashMap<>(10);
+    static {
+        skillPrefs.put("", 1f);
+    }
 
     public static final String abilityJumpElysia = "fracture_jump_elysia";
     public static final String abilityJumpDawn = "fracture_jump_luna_sea";

@@ -26,6 +26,7 @@ public class KOL_ShipAITweaker {
         List<String> assaultHulls = new ArrayList<>(2);
         assaultHulls.add("kol_larkspur");
         assaultHulls.add("kol_alysse");
+        assaultHulls.add("kol_snowdrop");
 
         //HullSize size = ship.getHullSize();
 
@@ -33,7 +34,7 @@ public class KOL_ShipAITweaker {
         config.alwaysStrafeOffensively = true;
         config.backingOffWhileNotVentingAllowed = true;
         config.turnToFaceWithUndamagedArmor = true;
-        config.burnDriveIgnoreEnemies = false;
+        config.burnDriveIgnoreEnemies = true;
 
         boolean carrier = false;
         boolean support = false;
