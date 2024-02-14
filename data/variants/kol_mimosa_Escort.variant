@@ -1,14 +1,15 @@
 {
     "displayName": "Escort",
-    "fluxCapacitors": 14,
-    "fluxVents": 20,
+    "fluxCapacitors": 0,
+    "fluxVents": 19,
     "goalVariant": true,
     "hullId": "kol_mimosa",
     "hullMods": [
-        "ballistic_rangefinder",
+        "armoredweapons",
         "escort_package",
-        "hardened_subsystems",
-        "targetingunit",
+        "heavyarmor",
+        "pointdefenseai",
+        "reinforcedhull",
     ],
     "permaMods": [],
     "sMods": [],
@@ -19,25 +20,31 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "heavymauler",
+                "WS0007": "zea_bricole_m",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "lightac",
-                "WS0001": "lightac",
-                "WS0003": "lightac",
-                "WS0002": "lightac",
+                "WS0001": "kol_tor",
+                "WS0002": "kol_tor",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "vulcan",
+                "WS0003": "lightdualac",
+                "WS0004": "lightdualac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0005": "vulcan",
+                "WS0006": "vulcan",
             }
         },
     ],

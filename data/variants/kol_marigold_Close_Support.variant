@@ -1,0 +1,75 @@
+{
+    "displayName": "Close Support",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_marigold",
+    "hullMods": [
+        "eccm",
+        "missleracks",
+        "reinforcedhull",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_marigold_Close_Support",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "sabotpod",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0009": "harpoonpod",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "harpoon",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "sabot",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_drian",
+                "WS0002": "kol_tor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "vulcan",
+                "WS0004": "vulcan",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "lightmg",
+                "WS0007": "lightmg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_marigold_tl_Close_Support"},
+        {"ARMOR_MODULE_TR": "kol_marigold_tr_Close_Support"},
+    ],
+}

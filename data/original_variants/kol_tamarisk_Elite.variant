@@ -1,0 +1,64 @@
+{
+    "displayName": "Elite",
+    "fluxCapacitors": 13,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "kol_tamarisk",
+    "hullMods": [
+        "auxiliarythrusters",
+        "stabilizedshieldemitter",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_tamarisk_Elite",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "gauss",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "sabot",
+                "WS0005": "sabot",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "heatseeker",
+                "WS0002": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0008": "heavymauler",
+                "WS0009": "heavymauler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0011": "vulcan",
+                "WS0010": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_tamarisk_tl_Elite"},
+        {"ARMOR_MODULE_TR": "kol_tamarisk_tr_Elite"},
+        {"ARMOR_MODULE_LL": "kol_tamarisk_ll_Elite"},
+        {"ARMOR_MODULE_LR": "kol_tamarisk_lr_Elite"},
+    ],
+}

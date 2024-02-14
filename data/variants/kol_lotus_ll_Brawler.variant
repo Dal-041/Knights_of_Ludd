@@ -1,0 +1,15 @@
+{
+    "displayName": "Brawler",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_lotus_ll",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lotus_ll_Brawler",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

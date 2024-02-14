@@ -1,14 +1,14 @@
 {
     "displayName": "Support",
     "fluxCapacitors": 0,
-    "fluxVents": 15,
+    "fluxVents": 6,
     "goalVariant": true,
     "hullId": "kol_lotus",
     "hullMods": [
         "eccm",
         "heavyarmor",
-        "reinforcedhull",
-        "targetingunit",
+        "missleracks",
+        "unstable_injector",
     ],
     "permaMods": [],
     "sMods": [],
@@ -16,10 +16,26 @@
     "variantId": "kol_lotus_Support",
     "weaponGroups": [
         {
-            "autofire": true,
-            "mode": "ALTERNATING",
+            "autofire": false,
+            "mode": "LINKED",
             "weapons": {
-                "WS0002": "heavymauler",
+                "WS0004": "squall",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "heatseeker",
+                "WS0008": "heatseeker",
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0003": "heavymauler",
             }
         },
@@ -27,12 +43,14 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "pilum_large",
+                "WS0002": "zea_bricole_m",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0001": "dualflak",
-                "WS0007": "heatseeker",
-                "WS0008": "heatseeker",
-                "WS0009": "heatseeker",
-                "WS0010": "heatseeker",
                 "WS0005": "vulcan",
                 "WS0006": "vulcan",
             }

@@ -5,8 +5,7 @@
     "goalVariant": true,
     "hullId": "kol_protea",
     "hullMods": [
-        "heavyarmor",
-        "missleracks",
+        "reinforcedhull",
     ],
     "permaMods": [],
     "sMods": [],
@@ -23,18 +22,24 @@
         },
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
                 "WS0005": "breach",
-                "WS0006": "breach",
             }
         },
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "lightmortar",
-                "WS0004": "lightmortar",
+                "WS0006": "sabot",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "kol_tor",
+                "WS0004": "kol_tor",
             }
         },
         {

@@ -1,0 +1,15 @@
+{
+    "displayName": "Pressure",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_marigold_tl",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_marigold_tl_Pressure",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

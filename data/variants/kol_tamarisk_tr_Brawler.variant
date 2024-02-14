@@ -1,0 +1,15 @@
+{
+    "displayName": "Brawler",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "kol_tamarisk_tr",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_tamarisk_tr_Brawler",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [],
+}

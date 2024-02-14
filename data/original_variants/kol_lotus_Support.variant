@@ -1,0 +1,48 @@
+{
+    "displayName": "Support",
+    "fluxCapacitors": 0,
+    "fluxVents": 15,
+    "goalVariant": true,
+    "hullId": "kol_lotus",
+    "hullMods": [
+        "eccm",
+        "heavyarmor",
+        "reinforcedhull",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lotus_Support",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0002": "heavymauler",
+                "WS0003": "heavymauler",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "pilum_large",
+                "WS0001": "dualflak",
+                "WS0007": "heatseeker",
+                "WS0008": "heatseeker",
+                "WS0009": "heatseeker",
+                "WS0010": "heatseeker",
+                "WS0005": "vulcan",
+                "WS0006": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_lotus_tl_Support"},
+        {"ARMOR_MODULE_TR": "kol_lotus_tr_Support"},
+        {"ARMOR_MODULE_LL": "kol_lotus_ll_Support"},
+        {"ARMOR_MODULE_LR": "kol_lotus_lr_Support"},
+    ],
+}

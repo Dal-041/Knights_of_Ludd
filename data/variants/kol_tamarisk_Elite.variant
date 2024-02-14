@@ -1,12 +1,11 @@
 {
     "displayName": "Elite",
-    "fluxCapacitors": 13,
+    "fluxCapacitors": 26,
     "fluxVents": 30,
     "goalVariant": true,
     "hullId": "kol_tamarisk",
     "hullMods": [
-        "auxiliarythrusters",
-        "stabilizedshieldemitter",
+        "ballistic_rangefinder",
         "targetingunit",
     ],
     "permaMods": [],
@@ -15,42 +14,44 @@
     "variantId": "kol_tamarisk_Elite",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "gauss",
+                "WS0001": "hellbore",
             }
         },
         {
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "sabot",
-                "WS0005": "sabot",
+                "WS0009": "kol_drian",
+                "WS0010": "kol_drian",
+                "WS0011": "kol_drian",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "swarmer",
+                "WS0004": "swarmer",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "heatseeker",
-                "WS0002": "heatseeker",
+                "WS0002": "harpoon_single",
+                "WS0003": "harpoon_single",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "heavymauler",
-                "WS0009": "heavymauler",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0011": "vulcan",
-                "WS0010": "vulcan",
+                "WS0008": "dualflak",
+                "WS0007": "vulcan",
+                "WS0006": "vulcan",
             }
         },
     ],
