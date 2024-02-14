@@ -8,6 +8,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 
+import mmm.missions.DefenseMission;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
@@ -22,13 +23,16 @@ import org.selkie.kol.fleets.SpawnRetribution;
 
 import exerelin.campaign.SectorManager;
 
+import java.util.Set;
+
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String ModID = "Knights of Ludd";
 	public static final String kolID = "knights_of_selkie";
 
 	public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
 	public static boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
-	boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
+	public static boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
+	public static boolean hasMMM = Global.getSettings().getModManager().isModEnabled("MoreMilitaryMissions");
 
 	public static final String MEMKEY_KOL_INTIALIZED = "$kol_initialized";
 	public static final String MEMKEY_KOL_INVICTUS_SPAWNED = "$kol_lp_invictus_spawned";
@@ -40,6 +44,12 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			ShaderLib.init();
 			LightData.readLightDataCSV("data/lights/kol_light_data.csv");
 			TextureData.readTextureDataCSV("data/lights/kol_texture_data.csv");
+		}
+		if (hasMMM) { //Remove after week 1
+			Set<String> BL = DefenseMission.FACTION_BLACKLIST;
+			for (String faction : ZeaUtils.factionIDs) {
+				if (!BL.contains(faction)) BL.add(faction);
+			}
 		}
 	}
 
@@ -56,6 +66,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		GenerateKnights.copyChurchEquipment();
+		GenerateKnights.addKoLIntel();
 		ZeaUtils.checkAbyssalFleets();
 		ZeaUtils.copyHighgradeEquipment();
 		PrepareDarkDeeds.andContinue();

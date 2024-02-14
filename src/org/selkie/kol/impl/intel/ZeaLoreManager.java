@@ -202,7 +202,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
         return super.getName();
     }
 
-    public boolean knowsAll () {
+    public boolean knowsAllLore() {
         int count = 0;
         for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
             if (intel.getIcon().equals(Global.getSector().getFaction(params).getCrest())) count++;
@@ -242,7 +242,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
         float brX = cx + 6f;
         float brY = cy - 21f;
 
-        boolean known = knowsAll();
+        boolean known = knowsAllLore();
         float mult = 1f;
 
         sprite.setAlphaMult(alphaMult * mult);

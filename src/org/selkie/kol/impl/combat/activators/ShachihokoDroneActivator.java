@@ -22,13 +22,12 @@ public class ShachihokoDroneActivator extends DroneActivator {
     private static final Color BASE_SHIELD_COLOR = new Color(220, 190, 70, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
-
     private static final float nearbyRange = 2000;
-    private IntervalUtil intervalCheck = new IntervalUtil(10f, 10f);
+    private final IntervalUtil intervalCheck = new IntervalUtil(10f, 10f);
+    private final PIDController PID = new PIDController(6f, 4f, 8f, 3f);
 
     private ShipAPI target = null;
     private ShipAPI droneTarget = null;
-    private PIDController PID = new PIDController(6f, 4f, 8f, 3f);
 
     public ShachihokoDroneActivator(ShipAPI ship) {
         super(ship);
@@ -94,19 +93,12 @@ public class ShachihokoDroneActivator extends DroneActivator {
             nextTarget = null;
         }
 
-        /*
-        if (nextTarget == null) {
-            for (ShipAPI drone : getActiveWings().keySet()) {
-                drone.giveCommand(ShipCommand.VENT_FLUX, null, 0);
-            }
-        }*/
-
         target = nextTarget;
     }
 
     @Override
     public PIDController getPIDController() {
-        return PID;
+        return PID.copy();
     }
 
     @NotNull

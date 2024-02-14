@@ -2,6 +2,9 @@ package org.selkie.kol.hullmods;
 
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.PluginPick;
+import com.fs.starfarer.api.campaign.CampaignPlugin;
+import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
@@ -17,8 +20,6 @@ import java.util.Iterator;
 
 public class KnightModule extends BaseHullMod {
     private final String id = "knightModule";
-    public void init(HullModSpecAPI spec) {
-    }
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {

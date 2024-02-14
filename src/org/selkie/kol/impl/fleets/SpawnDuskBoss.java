@@ -18,7 +18,7 @@ public class SpawnDuskBoss {
 	
 	public static boolean SpawnDuskBoss() {
 
-		PersonAPI duskBossCaptain = ZeaFleetManager.createAbyssalCaptain(PrepareAbyss.duskID);
+		PersonAPI duskBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.duskID);
 		//Songtress, an experitmental AI who was once human.
 		FullName name = new FullName("Songtress", "", FullName.Gender.FEMALE);
 		duskBossCaptain.setName(name);
@@ -58,7 +58,7 @@ public class SpawnDuskBoss {
 		        .setFleetName("Yukionna")
 		        .setFleetFaction(PrepareAbyss.duskID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
-		        .setFlagshipName("00000000")
+		        .setFlagshipName("Yukionna")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(duskBossCaptain)
 		        .setMinFP(0) //support fleet
@@ -69,6 +69,8 @@ public class SpawnDuskBoss {
 		        .setTransponderOn(false)
 		        .create();
 		duskBossFleet.setDiscoverable(true);
+		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
+		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
 
@@ -76,7 +78,7 @@ public class SpawnDuskBoss {
 			duskBossFleet.getFleetData().addFleetMember(support);
 		}
 
-		ZeaFleetManager.setAbyssalCaptains(duskBossFleet);
+		ZeaFleetManager.setAICaptains(duskBossFleet);
 		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
 
 		duskBossFleet.getFleetData().sort();
@@ -85,8 +87,6 @@ public class SpawnDuskBoss {
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 		duskBossFleet.addTag(excludeTag);
-		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
-		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		duskBossFleet.addEventListener(new ManageDuskBoss());
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
 		FID.setAlwaysAttack(false);

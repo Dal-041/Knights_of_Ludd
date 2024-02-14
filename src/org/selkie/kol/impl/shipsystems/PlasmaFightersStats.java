@@ -43,7 +43,7 @@ public class PlasmaFightersStats extends BaseShipSystemScript {
 
 				statsShip.getEngineController().fadeToOtherColor(this, color, new Color(0, 0, 0, 0), effectLevel, 0.67f);
 				//ship.getEngineController().fadeToOtherColor(this, Color.white, new Color(0,0,0,0), effectLevel, 0.67f);
-				statsShip.getEngineController().extendFlame(this, 2f * effectLevel, 0f * effectLevel, 0f * effectLevel);
+				statsShip.getEngineController().extendFlame(this, 1.5f * effectLevel, 0f * effectLevel, 0f * effectLevel);
 			}
 		}
     }

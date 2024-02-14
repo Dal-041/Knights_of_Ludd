@@ -23,6 +23,7 @@ import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.helpers.MarketHelpers;
 import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.intel.ZeaMechanicIntel;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
@@ -46,6 +47,7 @@ public class GenerateKnights {
 		copyChurchEquipment();
 		startupRelations();
 		genKnightsExpeditions();
+		GenerateKnights.addKoLIntel();
 	}
 
 	public static void startupRelations() {
@@ -67,6 +69,13 @@ public class GenerateKnights {
 					player.setRelationship(faction.getId(), knights.getRelationship(faction.getId()));
 				}
 			}
+		}
+	}
+
+	public static void addKoLIntel() {
+		if (Global.getSector() == null) return;
+		while (ZeaMechanicIntel.unknownMechanics(KOL_ModPlugin.kolID) > 0) {
+			Global.getSector().getIntelManager().addIntel(ZeaMechanicIntel.getNextMechanicIntel(KOL_ModPlugin.kolID));
 		}
 	}
 

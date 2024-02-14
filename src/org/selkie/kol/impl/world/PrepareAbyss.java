@@ -312,7 +312,7 @@ public class PrepareAbyss {
 		//int target = 5; //3 entries, some redundancy
 		//float oddsLore = target/count;
 		for(String variant:uwDerelictsNormal) {
-			if (Math.random() <= odds) {
+			if (MathUtils.getRandom().nextFloat() <= odds) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
 						variant,
 						ShipRecoverySpecial.ShipCondition.WRECKED,
@@ -325,13 +325,13 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
-				if (Math.random() > 0.33f) wreck.addTag(Tags.UNRECOVERABLE);
-				if (Math.random() < 0.5f) wreck.addDropRandom("zea_ttfleet_lore", 1);
+				if (MathUtils.getRandom().nextFloat() > 0.33f || variant.contains("paragon") || variant.contains("astral")) wreck.addTag(Tags.UNRECOVERABLE);
+				if (MathUtils.getRandom().nextFloat() < 0.5f) wreck.addDropRandom("zea_ttfleet_lore", 1);
 				//system.addEntity(wreck);
 			}
 		}
 		for(String variant:uwDerelictsPhase) {
-			if (Math.random() <= 0.66f) {
+			if (MathUtils.getRandom().nextFloat() <= 0.66f) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
 						variant,
 						ShipRecoverySpecial.ShipCondition.AVERAGE,
@@ -344,7 +344,7 @@ public class PrepareAbyss {
 						100000
 				);
 				wreck.setFacing((float)Math.random()*360f);
-				if (Math.random() > 0.4f) wreck.addTag(Tags.UNRECOVERABLE);
+				if (MathUtils.getRandom().nextFloat() > 0.4f) wreck.addTag(Tags.UNRECOVERABLE);
 			}
 		}
 	}
