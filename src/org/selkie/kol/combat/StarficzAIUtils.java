@@ -1307,4 +1307,57 @@ public class StarficzAIUtils {
         }
     }
 
+    public static Pair<Float, Float> calculateFiringAngle(Vector2f shooterPos, Vector2f shooterVel, Vector2f targetPos, Vector2f targetVel, float bulletSpeed, float maxRange) {
+
+        // Step 1: Relative Motion
+        Vector2f relativePos = Vector2f.sub(targetPos, shooterPos, null);
+        Vector2f relativeVel = Vector2f.sub(targetVel, shooterVel, null);
+
+        // Step 2: Quadratic Equation (ax^2 + bx + c = 0)
+        float a = Vector2f.dot(relativeVel, relativeVel) - bulletSpeed * bulletSpeed;
+        float b = 2 * Vector2f.dot(relativePos, relativeVel);
+        float c = Vector2f.dot(relativePos, relativePos);
+
+        // Step 3: Solve the quadratic equation
+        float discriminant = b * b - 4 * a * c;
+
+        if (discriminant < 0) {
+            // No solution (bullet cannot reach the target)
+            return null;
+        }
+
+        float sqrtDiscriminant = (float) Math.sqrt(discriminant);
+        float t1 = (-b + sqrtDiscriminant) / (2 * a);
+        float t2 = (-b - sqrtDiscriminant) / (2 * a);
+
+
+        if (Math.max(t1, t2) < 0) {
+            // No solution in the future
+            return null;
+        }
+
+        // Choose the smaller positive time
+        float timeToIntercept = t1 < 0 ? t2 : (t2 < 0 ? t1 : Math.min(t1, t2));
+
+        // Step 4: Angle Calculation
+        Vector2f interceptPoint = new Vector2f(
+                targetPos.x + targetVel.x * timeToIntercept,
+                targetPos.y + targetVel.y * timeToIntercept);
+
+        Vector2f shooterPoint = new Vector2f(
+                shooterPos.x + shooterVel.x * timeToIntercept,
+                shooterPos.y + shooterVel.y * timeToIntercept);
+
+        // No solution (out of range of shooter)
+        if(MathUtils.getDistanceSquared(interceptPoint, shooterPoint) > maxRange * maxRange){
+            return null;
+        }
+
+        Vector2f firingDirection = Vector2f.sub(interceptPoint, shooterPos, null);
+        firingDirection.normalise();
+
+        float firingAngle = (float) Math.toDegrees(Math.atan2(firingDirection.y, firingDirection.x));
+
+        return new Pair<>(firingAngle, timeToIntercept);
+    }
 }

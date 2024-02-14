@@ -1,5 +1,5 @@
 {
-	"id":"kol_smartflare2",
+	"id":"zea_edf_smartflare",
 	"specClass":"projectile",
 	"type":"SYSTEM",
 	"size":"SMALL",
@@ -22,6 +22,6 @@
 				 "blowbackLength":30.0,
 				 "blowbackSpread":10.0,
 				 "particleColor":[100,100,100,150]},			 
-	"projectileSpecId":"kol_smartflare2",
+	"projectileSpecId":"zea_edf_smartflare",
 	"fireSoundTwo":"system_flare_launcher_active",
 }

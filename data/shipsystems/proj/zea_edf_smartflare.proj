@@ -1,5 +1,5 @@
 {
-	"id":"kol_smartflare2",
+	"id":"zea_edf_smartflare",
 	"specClass":"missile",	
 	"missileType":"FLARE",
 	"sprite":"graphics/missiles/bomblet0.png",

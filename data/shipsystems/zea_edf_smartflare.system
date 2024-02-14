@@ -1,0 +1,9 @@
+{
+	"id":"zea_edf_smartflare",
+	"type":"WEAPON",
+	"aiType":"FLARE",
+
+
+    "weaponDataId":"zea_edf_smartflare",
+	"outOfUsesSound":"gun_out_of_ammo",
+}

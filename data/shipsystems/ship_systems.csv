@@ -30,11 +30,9 @@ Phase Skip,zea_dusk_phase_skip,1,,,,,0.1,,,,0.5,1.5,0.5,9,,,TRUE,,TRUE,,,,TRUE,T
 Gracious Light,zea_dawn_gracious_light,,,,,,0.1,,3,0.0825,1,,1,2,,,TRUE,TRUE,,,,,,,,,graphics/icons/hullsys/quantum_disruptor.png
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #MODULE SYS,,,,,,,,,,,,,,,,,,,,,,,,,,,
-why can you see this wtf,kol_mcf,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,restricted,
-no really you should not be able to see these plz stop aaaaa,kol_flareslv,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,restricted,graphics/icons/hullsys/flare_launcher.png
-stop spawning ship modules plz,kol_simpleflare,,,,,,,,1,1,,,,0.2,,,,,,,,,,,,restricted,graphics/icons/hullsys/active_flare_launcher.png
-:(,kol_smartflare,,,,,,,,1,1,,,,0.2,,,,,,,,,,,,restricted,graphics/icons/hullsys/active_flare_launcher.png
-:),kol_smartflare2,,,,,,,,1,1,,,,5,,,,,,,,,,,,restricted,graphics/icons/hullsys/active_flare_launcher.png
+Canister Flak,kol_canister_flak,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,restricted,
+Flare Launcher,kol_simpleflare,,,,,,,,1,1,,,,0.2,,,,,,,,,,,,restricted,graphics/icons/hullsys/flare_launcher.png
+:),zea_edf_smartflare,,,,,,,,1,1,,,,5,,,,,,,,,,,,restricted,graphics/icons/hullsys/active_flare_launcher.png
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DISABLED,,,,,,,,,,,,,,,,,,,,,,,,,,,
