@@ -1,0 +1,23 @@
+{
+    "displayName": "Blank",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_alysse_tr",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_alysse_tr_Blank",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

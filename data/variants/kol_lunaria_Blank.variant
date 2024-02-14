@@ -1,0 +1,31 @@
+{
+    "displayName": "Blank",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_lunaria",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lunaria_Blank",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_lunete",
+                "WS0002": "kol_lunete",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_lunaria_tl_Blank"},
+        {"ARMOR_MODULE_TR": "kol_lunaria_tr_Blank"},
+        {"ARMOR_MODULE_ML": "kol_lunaria_ml_Blank"},
+        {"ARMOR_MODULE_MR": "kol_lunaria_mr_Blank"},
+        {"ARMOR_MODULE_LL": "kol_lunaria_ll_Blank"},
+        {"ARMOR_MODULE_LR": "kol_lunaria_lr_Blank"},
+    ],
+}

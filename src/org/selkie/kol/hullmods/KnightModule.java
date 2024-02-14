@@ -77,9 +77,15 @@ public class KnightModule extends BaseHullMod {
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
-        if(ship.getParentStation() == null || !ship.getParentStation().isAlive() || ship.getHitpoints() <= 0.0f) return;
-        if (Global.getCurrentState() == GameState.COMBAT && !ship.hasTag("KOL_moduleHulked")){
-            Vector2f.add(ship.getLocation(), new Vector2f(10000,0), ship.getLocation());
+        if(ship.getParentStation() == null || !ship.getParentStation().isAlive() || ship.getHitpoints() <= 0.0f ||
+                Global.getCurrentState() != GameState.COMBAT || !Global.getCombatEngine().isEntityInPlay(ship) ) return;
+
+        if (!ship.hasTag("KOL_moduleHulked") && ship.getLocation().getY() > -Global.getCombatEngine().getMapHeight()/2 && ship.getLocation().getY() < Global.getCombatEngine().getMapHeight()/2){
+
+            // only teleport to inside the map border
+            ship.getLocation().set(ship.getLocation().getX() > 0 ? Global.getCombatEngine().getMapWidth()/2 : -Global.getCombatEngine().getMapWidth()/2,
+                    ship.getLocation().getY() > 0 ? Global.getCombatEngine().getMapHeight()/2 : -Global.getCombatEngine().getMapHeight()/2);
+
             ship.setHulk(true);
             ship.setDrone(true);
             ship.addTag("KOL_moduleHulked");

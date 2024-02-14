@@ -1,0 +1,20 @@
+{
+    "displayName": "Blank",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_alysse",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_alysse_Blank",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_alysse_tl_Blank"},
+        {"ARMOR_MODULE_TR": "kol_alysse_tr_Blank"},
+        {"ARMOR_MODULE_LL": "kol_alysse_ll_Blank"},
+        {"ARMOR_MODULE_LR": "kol_alysse_lr_Blank"},
+    ],
+}

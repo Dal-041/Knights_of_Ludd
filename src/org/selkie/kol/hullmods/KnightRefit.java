@@ -166,7 +166,7 @@ public class KnightRefit extends BaseHullMod {
         tooltip.addImageWithText(underHeadingPad);
 
 
-        ShipVariantAPI variant = ship.getVariant() != null ? ship.getVariant() : Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Standard");
+        ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
         boolean hasModules = variant != null && !variant.getStationModules().isEmpty();
         tooltip.addSectionHeading("Modular Armor", hasModules ? activeHighlightColor : inactiveHighlightColor,
                 hasModules ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
@@ -191,7 +191,7 @@ public class KnightRefit extends BaseHullMod {
             // getting the stats of child modules in refit shouldn't have to be this hard
             Pattern kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE);
 
-            for (String module : ship.getVariant().getStationModules().values()) {
+            for (String module : variant.getStationModules().values()) {
                 Matcher matcher = kolPattern.matcher(module);
 
                 if(matcher.find()){

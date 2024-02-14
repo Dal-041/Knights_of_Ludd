@@ -1,0 +1,18 @@
+{
+    "displayName": "Blank",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_sundew",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_sundew_Blank",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_sundew_tl_Blank"},
+        {"ARMOR_MODULE_TR": "kol_sundew_tr_Blank"},
+    ],
+}
