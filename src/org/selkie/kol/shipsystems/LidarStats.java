@@ -1,11 +1,5 @@
 package org.selkie.kol.shipsystems;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -15,6 +9,12 @@ import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 
 public class LidarStats extends BaseShipSystemScript {
 
@@ -257,8 +257,8 @@ public class LidarStats extends BaseShipSystemScript {
 	protected void modify(String id, MutableShipStatsAPI stats, float effectLevel) {
 		float mult = 1f + ROF_BONUS * effectLevel;
 		//float mult = 1f + ROF_BONUS;
-		stats.getBallisticWeaponRangeBonus().modifyPercent(id, RANGE_BONUS);
-		stats.getEnergyWeaponRangeBonus().modifyPercent(id, RANGE_BONUS);
+		stats.getBallisticWeaponRangeBonus().modifyPercent(id, RANGE_BONUS*effectLevel);
+		stats.getEnergyWeaponRangeBonus().modifyPercent(id, RANGE_BONUS*effectLevel);
 		stats.getBallisticRoFMult().modifyMult(id, mult);
 		stats.getEnergyRoFMult().modifyMult(id, mult);
 		//stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
