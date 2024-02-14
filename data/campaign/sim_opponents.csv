@@ -1,16 +1,11 @@
 variant id
-kol_sundew_Standoff
-kol_protea_Brawler
-kol_snowdrop_Assault
-kol_snowdrop_Brawler
-kol_mimosa_Pressure
-kol_marigold_Close_Support
-kol_marigold_Pressure
-kol_larkspur_Elite
-kol_larkspur_Brawler
-kol_lotus_Support
-kol_lotus_Brawler
-kol_tamarisk_Elite
-kol_tamarisk_Brawler
+kol_sundew_Squire
+kol_protea_Squire
+kol_snowdrop_Chivalrous
+kol_mimosa_Heavy
+kol_marigold_Attack
+kol_larkspur_Knight
+kol_lotus_Guardsman
+kol_tamarisk_Hellfire
 kol_alysse_Righteous
 kol_lunaria_Knightmaster

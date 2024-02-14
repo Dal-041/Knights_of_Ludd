@@ -1,0 +1,71 @@
+{
+    "displayName": "Guardsman",
+    "fluxCapacitors": 8,
+    "fluxVents": 18,
+    "goalVariant": true,
+    "hullId": "kol_lotus",
+    "hullMods": [
+        "eccm",
+        "missleracks",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_lotus_Guardsman",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "locust",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "harpoon",
+                "WS0007": "harpoon",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0009": "harpoon",
+                "WS0010": "harpoon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "kol_bricole",
+                "WS0002": "kol_bricole",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0005": "vulcan",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "dualflak",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_lotus_tl_Guardsman"},
+        {"ARMOR_MODULE_TR": "kol_lotus_tr_Guardsman"},
+        {"ARMOR_MODULE_LL": "kol_lotus_ll_Guardsman"},
+        {"ARMOR_MODULE_LR": "kol_lotus_lr_Guardsman"},
+    ],
+}

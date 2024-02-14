@@ -1,0 +1,47 @@
+{
+    "displayName": "Zealous",
+    "fluxCapacitors": 0,
+    "fluxVents": 5,
+    "goalVariant": true,
+    "hullId": "kol_snowdrop",
+    "hullMods": [
+        "heavyarmor",
+        "reinforcedhull",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_snowdrop_Zealous",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "chaingun",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "heavymg",
+                "WS0003": "heavymg",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lightdualmg",
+                "WS0002": "lightdualmg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_snowdrop_tl_Zealous"},
+        {"ARMOR_MODULE_TR": "kol_snowdrop_tr_Zealous"},
+        {"ARMOR_MODULE_LL": "kol_snowdrop_ll_Zealous"},
+        {"ARMOR_MODULE_LR": "kol_snowdrop_lr_Zealous"},
+    ],
+}
