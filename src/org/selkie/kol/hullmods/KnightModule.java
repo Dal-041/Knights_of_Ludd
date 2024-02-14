@@ -2,13 +2,9 @@ package org.selkie.kol.hullmods;
 
 import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.PluginPick;
-import com.fs.starfarer.api.campaign.CampaignPlugin;
-import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
-import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
@@ -159,6 +155,7 @@ public class KnightModule extends BaseHullMod {
         float rotationNeeded = MathUtils.getShortestRotation(weapon.getCurrAngle(), bestAngle);
         float maxRotaion = Math.min(amount * weapon.getTurnRate(), Math.abs(rotationNeeded));
         weapon.setFacing(weapon.getCurrAngle() + (rotationNeeded > 0 ? maxRotaion : -maxRotaion));
+        weapon.setCurrHealth(weapon.getMaxHealth()); // hack until I bother to fix this
         if(Math.abs(rotationNeeded) < 1f && hasTarget) {
             weapon.setForceFireOneFrame(true);
         }

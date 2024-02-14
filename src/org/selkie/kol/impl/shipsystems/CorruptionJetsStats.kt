@@ -19,9 +19,9 @@ import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.opengl.GL14
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
-import org.selkie.kol.impl.combat.GL14ParticleData
-import org.selkie.kol.impl.combat.ParticleController
-import org.selkie.kol.impl.combat.ParticleData
+import org.selkie.kol.combat.GL14ParticleData
+import org.selkie.kol.combat.ParticleController
+import org.selkie.kol.combat.ParticleData
 import java.awt.Color
 import java.util.*
 

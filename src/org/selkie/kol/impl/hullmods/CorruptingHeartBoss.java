@@ -12,8 +12,8 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.ParticleController;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.ParticleController;
+import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.ShachihokoDroneActivator;
 import org.selkie.kol.impl.combat.activators.ShachihokoTideActivator;
 import org.selkie.kol.impl.shipsystems.CorruptionJetsStats;
@@ -75,7 +75,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
                 if (phaseTwoTimer > maxTime) {
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
                     ship.setPhased(false);
-                    ActivatorManager.removeActivator(ship, ShachihokoDroneActivator.class);
+                    //ActivatorManager.removeActivator(ship, ShachihokoDroneActivator.class);
                     ActivatorManager.addActivator(ship, new ShachihokoTideActivator(ship));
                     return;
                 }
