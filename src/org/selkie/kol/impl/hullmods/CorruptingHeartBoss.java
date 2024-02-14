@@ -2,28 +2,41 @@ package org.selkie.kol.impl.hullmods;
 
 import activators.ActivatorManager;
 import activators.CombatActivator;
+import activators.drones.DroneActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
 import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
+import org.selkie.kol.impl.combat.ParticleController;
 import org.selkie.kol.impl.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.ShachihokoDroneActivator;
 import org.selkie.kol.impl.combat.activators.ShachihokoTideActivator;
+import org.selkie.kol.impl.shipsystems.CorruptionJetsStats;
 
-import java.awt.*;
+import java.awt.Color;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class CorruptingHeartBoss extends BaseHullMod {
+    private static final float BALLISTIC_DAMAGE_BUFF = 25f;
+    private static final float ENERGY_ROF_BUFF = 25f;
+    private static final float ENERGY_FLUX_PER_SHOT_BUFF = -25f;
+
     public static class CorruptingHeartPhaseTwoScript implements AdvanceableListener, HullDamageAboutToBeTakenListener {
         public boolean phaseTwo = false;
         public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
         public ShipAPI ship;
         public String id = "boss_phase_two_modifier";
+        public String corruptionBuffId = "corrupting_heart_buff";
+        public Map<ShipAPI, ShipAPI> droneTargetMap = new HashMap<>();
 
         public CorruptingHeartPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
@@ -62,7 +75,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
                 if (phaseTwoTimer > maxTime) {
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
                     ship.setPhased(false);
-                    ((Map<Class<?>, CombatActivator>) ship.getCustomData().get("combatActivators")).remove(ShachihokoDroneActivator.class);
+                    ActivatorManager.removeActivator(ship, ShachihokoDroneActivator.class);
                     ActivatorManager.addActivator(ship, new ShachihokoTideActivator(ship));
                     return;
                 }
@@ -87,14 +100,71 @@ public class CorruptingHeartBoss extends BaseHullMod {
 
                 StarficzAIUtils.stayStill(ship);
             }
+
+            List<ShipAPI> validDrones = new ArrayList<>();
+            for (CombatActivator activator : ActivatorManager.getActivators(ship)) {
+                if (activator instanceof DroneActivator) {
+                    List<ShipAPI> wings = new ArrayList<>(((DroneActivator) activator).getActiveWings().keySet());
+                    for (ShipAPI fighter : wings) {
+                        validDrones.add(fighter);
+
+                        boolean doEffect = false;
+                        ShipAPI target = Utils.getDroneShieldTarget(fighter);
+                        if (target != null) {
+                            boolean applyBuff = !droneTargetMap.containsKey(fighter);
+                            if (!applyBuff) {
+                                //remove buffs from old target if needed to, and target new target
+                                ShipAPI oldTarget = droneTargetMap.get(fighter);
+                                if (oldTarget != target) {
+                                    oldTarget.getMutableStats().getBallisticWeaponDamageMult().unmodify(corruptionBuffId);
+                                    oldTarget.getMutableStats().getEnergyWeaponFluxCostMod().unmodify(corruptionBuffId);
+                                    oldTarget.getMutableStats().getEnergyRoFMult().unmodify(corruptionBuffId);
+                                    applyBuff = true;
+                                }
+                            }
+
+                            if (applyBuff) {
+                                droneTargetMap.put(fighter, target);
+
+                                target.getMutableStats().getBallisticWeaponDamageMult().modifyPercent(corruptionBuffId, BALLISTIC_DAMAGE_BUFF);
+                                target.getMutableStats().getEnergyWeaponFluxCostMod().modifyPercent(corruptionBuffId, ENERGY_FLUX_PER_SHOT_BUFF);
+                                target.getMutableStats().getEnergyRoFMult().modifyPercent(corruptionBuffId, ENERGY_FLUX_PER_SHOT_BUFF);
+                            }
+
+                            doEffect = MathUtils.getRandomNumberInRange(0f, 1f) < 0.01f;
+                        } else {
+                            doEffect = MathUtils.getRandomNumberInRange(0f, 3f) < 0.01f;
+                        }
+
+                        if (doEffect) {
+                            ShipAPI effectTarget = target != null ? target : ship;
+                            ParticleController.Companion.addParticle(CorruptionJetsStats.Companion.getRandomParticleData(effectTarget));
+                            Global.getCombatEngine().spawnEmpArcVisual(fighter.getLocation(), fighter, effectTarget.getLocation(), effectTarget, 3f, Color.RED, Color.RED.brighter().brighter());
+                        }
+                    }
+                }
+            }
+
+            for (Map.Entry<ShipAPI, ShipAPI> droneTarget : new ArrayList<>(droneTargetMap.entrySet())) {
+                ShipAPI drone = droneTarget.getKey();
+                if (!validDrones.contains(drone)) {
+                    ShipAPI target = droneTarget.getValue();
+
+                    target.getMutableStats().getBallisticWeaponDamageMult().unmodify(corruptionBuffId);
+                    target.getMutableStats().getEnergyWeaponFluxCostMod().unmodify(corruptionBuffId);
+                    target.getMutableStats().getEnergyRoFMult().unmodify(corruptionBuffId);
+
+                    droneTargetMap.remove(drone);
+                }
+            }
         }
     }
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED || true) {
+        if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
-            ActivatorManager.addActivator(ship, new ShachihokoTideActivator(ship));
+            ActivatorManager.addActivator(ship, new ShachihokoDroneActivator(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

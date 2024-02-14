@@ -15,7 +15,6 @@ import com.fs.starfarer.api.plugins.ShipSystemStatsScript.StatusData
 import com.fs.starfarer.api.util.IntervalUtil
 import com.fs.starfarer.api.util.Misc
 import org.lazywizard.lazylib.MathUtils
-import org.lazywizard.lazylib.VectorUtils
 import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.opengl.GL14
 import org.lwjgl.util.vector.Vector2f
@@ -25,8 +24,6 @@ import org.selkie.kol.impl.combat.ParticleController
 import org.selkie.kol.impl.combat.ParticleData
 import java.awt.Color
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashSet
 
 class CorruptionJetsStats : BaseShipSystemScript() {
     override fun apply(
@@ -176,6 +173,43 @@ class CorruptionJetsStats : BaseShipSystemScript() {
             return data
         }
 
+        fun getRandomParticleData(ship: ShipAPI): ParticleData {
+            val darkenedColor = RiftLanceEffect.getColorForDarkening(RIFT_COLOR)
+            val dir = MathUtils.getRandomPointOnCircumference(Vector2f(), 1f)
+
+            val particleData =
+                if (MathUtils.getRandomNumberInRange(0f, 1f) < 0.4f) {
+                    RedEngineParticleData(
+                        ship.location.x,
+                        ship.location.y,
+                        dir.x,
+                        dir.y,
+                        MathUtils.getRandomNumberInRange(0f, 360f),
+                        MathUtils.getRandomNumberInRange(-6f, 6f),
+                        2f,
+                        ship.collisionRadius.coerceAtLeast(100f),
+                        ship.collisionRadius.coerceAtLeast(100f),
+                        UNDERCOLOR,
+                        UNDERCOLOR.setAlpha(0)
+                    )
+                } else {
+                    DarkEngineParticleData(
+                        ship.location.x,
+                        ship.location.y,
+                        dir.x,
+                        dir.y,
+                        MathUtils.getRandomNumberInRange(0f, 360f),
+                        MathUtils.getRandomNumberInRange(-6f, 6f),
+                        2f,
+                        ship.collisionRadius.coerceAtLeast(100f),
+                        ship.collisionRadius.coerceAtLeast(100f),
+                        darkenedColor,
+                        darkenedColor.setAlpha(0)
+                    )
+                }
+            return particleData
+        }
+
         class CorruptedEnginesRenderPlugin(val ship: ShipAPI, val baseShip: ShipAPI) :
             BaseCombatLayeredRenderingPlugin() {
             private val particleInterval = IntervalUtil(0.5f, 1f)
@@ -191,41 +225,7 @@ class CorruptionJetsStats : BaseShipSystemScript() {
             override fun advance(amount: Float) {
                 particleInterval.advance(amount)
                 if (particleInterval.intervalElapsed()) {
-                    val darkenedColor = RiftLanceEffect.getColorForDarkening(RIFT_COLOR)
-                    val dir = MathUtils.getRandomPointOnCircumference(Vector2f(), 1f)
-
-                    val particleData =
-                        if (MathUtils.getRandomNumberInRange(0f, 1f) < 0.4f) {
-                            RedEngineParticleData(
-                                ship.location.x,
-                                ship.location.y,
-                                dir.x,
-                                dir.y,
-                                MathUtils.getRandomNumberInRange(0f, 360f),
-                                MathUtils.getRandomNumberInRange(-6f, 6f),
-                                2f,
-                                ship.collisionRadius.coerceAtLeast(100f),
-                                ship.collisionRadius.coerceAtLeast(100f),
-                                UNDERCOLOR,
-                                UNDERCOLOR.setAlpha(0)
-                            )
-                        } else {
-                            DarkEngineParticleData(
-                                ship.location.x,
-                                ship.location.y,
-                                dir.x,
-                                dir.y,
-                                MathUtils.getRandomNumberInRange(0f, 360f),
-                                MathUtils.getRandomNumberInRange(-6f, 6f),
-                                2f,
-                                ship.collisionRadius.coerceAtLeast(100f),
-                                ship.collisionRadius.coerceAtLeast(100f),
-                                darkenedColor,
-                                darkenedColor.setAlpha(0)
-                            )
-                        }
-
-                    ParticleController.addParticle(particleData)
+                    ParticleController.addParticle(getRandomParticleData(ship))
                 }
             }
         }

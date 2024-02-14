@@ -27,8 +27,8 @@ public class ShachihokoTideActivator extends DroneActivator {
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
     private static final float nearbyRange = 2000;
-    private IntervalUtil intervalCheck = new IntervalUtil(0.25f, 0.5f);
-    private PIDController PID = new PIDController(2f, 3f, 3f, 0.66f);
+    private final IntervalUtil intervalCheck = new IntervalUtil(0.25f, 0.5f);
+    private final PIDController PID = new PIDController(6f, 4f, 8f, 3f);
 
     public ShachihokoTideActivator(ShipAPI ship) {
         super(ship);
@@ -68,7 +68,7 @@ public class ShachihokoTideActivator extends DroneActivator {
     @Override
     public ShipAPI spawnDrone() {
         ShipAPI drone = super.spawnDrone();
-        drone.getMutableStats().getHardFluxDissipationFraction().modifyFlat("shachihokoHardFluxDiss", 10f / 100f);
+        drone.getMutableStats().getHardFluxDissipationFraction().modifyMult("shachihokoCorruptedHardFluxDiss", 0f);
         return drone;
     }
 
@@ -184,7 +184,7 @@ public class ShachihokoTideActivator extends DroneActivator {
 
     @Override
     public int getMaxCharges() {
-        return 8;
+        return 2;
     }
 
     @Override
