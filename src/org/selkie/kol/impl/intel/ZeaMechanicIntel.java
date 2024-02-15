@@ -87,16 +87,6 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
     }
 
     @Override
-    public boolean isImportant() {
-        return true;
-    }
-
-    @Override
-    public boolean canTurnImportantOff() {
-        return true;
-    }
-
-    @Override
     protected String getName() {
         return name;
     }

@@ -14,6 +14,7 @@ import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.listeners.SpoilersNotif;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.impl.world.PrepareDarkDeeds;
 import org.selkie.kol.listeners.UpdateRelationships;
@@ -71,8 +72,9 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		ZeaUtils.copyHighgradeEquipment();
 		PrepareDarkDeeds.andContinue();
 
-		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
+		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+		Global.getSector().addTransientScript(new SpoilersNotif());
 	}
 
 	@Override
@@ -95,7 +97,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
-		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
+		Global.getSector().addTransientListener(new UpdateRelationships(false));
+		Global.getSector().addTransientScript(new SpoilersNotif());
 	}
 
 	@Override
@@ -107,7 +110,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
-		if (!Global.getSector().getListenerManager().hasListenerOfClass(UpdateRelationships.class)) Global.getSector().addTransientListener(new UpdateRelationships(false));
+		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!haveNex || haveNex && SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();

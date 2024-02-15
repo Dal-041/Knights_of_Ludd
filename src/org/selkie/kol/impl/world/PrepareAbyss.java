@@ -18,6 +18,8 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
+import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.listeners.SpoilersNotif;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -98,6 +100,8 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
+		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
+		system.addTag(ZeaUtils.THEME_ZEA);
 
 		system.initStar("zea_elysia_abyss", "zea_red_hole", beeg, -beeg/2f);
     	//PlanetAPI elysia = system.addPlanet("zea_elysia_abyss", system.getCenter(), "Elysia", "zea_red_hole", 0f, beeg, 0f, 10000f);
@@ -267,6 +271,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.SYSTEM_CUT_OFF_FROM_HYPER);
+		system.addTag(ZeaUtils.THEME_ZEA);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dusk.png");
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
@@ -360,6 +365,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
+		system.addTag(ZeaUtils.THEME_ZEA);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dawn.png");
 		new AbyssBackgroundWarper(system, 8, 0.25f);
@@ -502,6 +508,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
+		system.addTag(ZeaUtils.THEME_ZEA);
 
 		//fancy bg script
 
