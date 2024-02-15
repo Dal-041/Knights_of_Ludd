@@ -312,7 +312,7 @@ public class KnightRefit extends BaseHullMod {
         CombatEngineAPI engine = Global.getCombatEngine();
         if(engine.getPlayerShip() == ship && speedRatio > 0.01f){
             String modularIcon = Global.getSettings().getSpriteName("icons", "kol_modules");
-            engine.maintainStatusForPlayerShip(STATUSKEY1, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS)) + " top speed" , false);
+            engine.maintainStatusForPlayerShip(STATUSKEY1, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS * 100)) + " top speed" , false);
         }
     }
 
