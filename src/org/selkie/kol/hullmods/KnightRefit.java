@@ -255,7 +255,8 @@ public class KnightRefit extends BaseHullMod {
         if(Global.getCombatEngine().isPaused()) return;
 
         // apply speed boost for main ship and durability buffs to modules from main ships hullmods
-        float modules = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank").getStationModules().size();
+        ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
+        float modules = variant == null ? 0 : variant.getStationModules().size();
 
         float alive = 0;
         for(ShipAPI module : ship.getChildModulesCopy()){
@@ -309,7 +310,7 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
 
         CombatEngineAPI engine = Global.getCombatEngine();
-        if(engine.getPlayerShip() == ship){
+        if(engine.getPlayerShip() == ship && speedRatio > 0.01f){
             String modularIcon = Global.getSettings().getSpriteName("icons", "kol_modules");
             engine.maintainStatusForPlayerShip(STATUSKEY1, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS)) + " top speed" , false);
         }
