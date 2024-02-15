@@ -1,5 +1,9 @@
 id,trigger,conditions,script,text,options,notes
 #RULESET_NAME KOL,,,,,,
+flavorTextMarketKoL,TradePanelFlavorText,"$global.tradePanelMode == MARKET
+$faction.id == knights_of_selkie","AddText ""The port concourse is sparsely attended to by the handful of traders who serve the Order. Luddic merchants in muted dress await meetings with offloading ship captains. There are few pilgrims here, scribes conduct the business with the airs of duty and strict convention. While the Knights have lesser need for outsiders, they maintain the tolerance shown in all Luddic markets if for no other reason than to keep the peace. Their handspun robes of Luddic green grace every berth of the trading district."" marketFlavorTextColor",,,
+bar_descKoL,BarPrintDesc,$faction.id == knights_of_selkie,ShowImageVisual teahouse,You duck past notices encouraging temperance and restraint as you enter the bar. Someone is playing a stringed instrument in an alcove. A row of handworked samovars suggests that tea is served as often as the weak grain-brew favored by the crew of local spacers at the bar. Many of the patrons at tables or booths seem to be off-worlders or local unbelievers huddling in the closest analog to a den of sin that can be found.,,
+,,,,,,
 ,,,,,,
 # relationship level descriptions,,,,,,
 ,,,,,,
@@ -48,24 +52,30 @@ defaultGrandmasterMeetingResponseAnswer,GrandmasterMeetingResponse,,$askedToMeet
 #END Grandmaster,,,,,,
 ,,,,,,
 # Knightmaster,,,,,,
-defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a prefunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs.",,
+defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a prefunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
 ,,,"ShowDefaultVisual
 FireAll PopulateOptions",,,
 #END Knightmaster,,,,,,
 ,,,,,,
 # Grandmaster Lackey,,,,,,
-defaultGrandmasterLackeyGreeting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Hello! Yes, I work for the Order, and no, I can't get you an audience with the Master. No, I don't take inquiries. No, they haven't assigned me a squire to handle this. Was there an intelligence concern for me? No? Well, I have a lot of work on my plate, go swipe a Tri-Tachyon cache or something. Burn bright, Starfarer. Grace be with you.""
+defaultGrandmasterLackeyGreeting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Many blessings, Captain. Though you may not know me, my office certainly knows of you. I can see your questions forming. Yes, I work for the Order; no, I can't get you an audience with the Grandmaster. No, they haven't assigned me an initiate to handle this. And no, I don't take inquiries. Please find me should you have intelligence that would concern the faith. 
 
-The line closes about as swiftly as it opened. Well, at least you got a suggestion.",0:kol_gm_lackey_greetingContinue:Continue,
+Regrettably, I have a lot of work on my plate, so providence sees that I can’t employ you today, no matter the asset that you so assuredly would be. If you wish to serve the Order, no doubt there are Tri-Tachyon servants to root out or hidden caches yet to be claimed - you might start there. Burn bright, Starfarer. Grace be with you.""
+
+The line closes without further ceremony. Well, you did get a suggestion.",0:kol_gm_lackey_greetingContinue:Continue,
 defaultGrandmasterLackeyGreeting2,DialogOptionSelected,$option == kol_gm_lackey_greetingContinue,"ShowDefaultVisual
 FireAll PopulateOptions",,,
 ,,,,,,
 #END Grandmaster Lackey,,,,,,
 ,,,,,,
 # Knightmaster Lackey,,,,,,
-defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. Our Intelligence Director on Lyra may also need a lead investigated. Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""sometime soon,"" but for some reason the comm transcriber says ""later patches."" How strange. - ""Till next we meet, Captain!""�",0:kol_km_lackey_expeditions:Continue,
+defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. 
+
+Our Master of Agents on our sister-station Lyra may also need a lead investigated. 
+
+Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""soon,"" but for some reason the comm transcriber says ""in later patches."" How strange. - ""Till next we meet, Captain!""",0:kol_km_lackey_expeditions:Continue,
 defaultKnightmasterLackeyExpeditionsBlurb,DialogOptionSelected,$option == kol_km_lackey_expeditions,"ShowDefaultVisual
-FireAll PopulateOptions","Ah! And perhaps if you're the valiant type, you can find our expeditions gather for patrols about twice a month, as soon as one returns, or... if we lose contact. Please, if you provide them escort they're sure to go somewhere interesting. You'd be doing us a great favor. Blessings be upon you, Captain.",,
+FireAll PopulateOptions","Ah, another thing, Captain. Perhaps if you're the valiant type, you can find our expeditions gather about twice a month, as soon as one returns, or... if we lose contact. Please, if you provide them escort they're sure to go somewhere interesting. You'd be doing us a great favor. Blessings upon you, Captain.",,
 ,,,,,,
 ,,,,,,
 #END Knightmaster Lackey,,,,,,
