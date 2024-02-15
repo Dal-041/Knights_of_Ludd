@@ -10,12 +10,11 @@ import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
+import org.selkie.kol.combat.ShipExplosionListener;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -54,7 +53,6 @@ public class KnightRefit extends BaseHullMod {
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS = 0.25f;
     protected Object STATUSKEY1 = new Object();
-    public static IntervalUtil scriptInt = new IntervalUtil(0.5f, 0.5f);
 
     @Override
     public void init(HullModSpecAPI spec) {
@@ -83,6 +81,7 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getFluxDissipation().modifyFlat(id, dissBonus);
 
         if(!ship.hasListenerOfClass(ModuleUnhulker.class)) ship.addListener(new ModuleUnhulker());
+        if(!ship.hasListenerOfClass(ShipExplosionListener.class)) ship.addListener(new ShipExplosionListener());
     }
 
     public static class ModuleUnhulker implements HullDamageAboutToBeTakenListener {
@@ -103,6 +102,7 @@ public class KnightRefit extends BaseHullMod {
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
+        //
     }
 
     @Override
@@ -275,22 +275,6 @@ public class KnightRefit extends BaseHullMod {
             //speed bonus applies linearly
             float speedRatio=1 - (alive / modules);
             applyStats(speedRatio, ship);
-        }
-
-        scriptInt.advance(amount);
-        if (scriptInt.intervalElapsed()) {
-            for (ShipAPI poorsap : AIUtils.getNearbyEnemies(ship, 400)) {
-                if (poorsap.isFighter() || !poorsap.isAlive() || poorsap.isPhased()) continue;
-                if (!poorsap.hasListenerOfClass(ShipAboutToExplodeListener.class)) {
-                    poorsap.addListener(new ShipAboutToExplodeListener());
-                }
-            }
-            for (ShipAPI noblewarrior : AIUtils.getNearbyAllies(ship, 400)) {
-                if (noblewarrior.isFighter() || !noblewarrior.isAlive() || noblewarrior.isPhased()) continue;
-                if (!noblewarrior.hasListenerOfClass(ShipAboutToExplodeListener.class)) {
-                    noblewarrior.addListener(new ShipAboutToExplodeListener());
-                }
-            }
         }
     }
 
