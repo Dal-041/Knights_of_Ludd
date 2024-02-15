@@ -75,7 +75,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
                 if (phaseTwoTimer > maxTime) {
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
                     ship.setPhased(false);
-                    //ActivatorManager.removeActivator(ship, ShachihokoDroneActivator.class);
+                    ActivatorManager.removeActivator(ship, ShachihokoDroneActivator.class);
                     ActivatorManager.addActivator(ship, new ShachihokoTideActivator(ship));
                     return;
                 }

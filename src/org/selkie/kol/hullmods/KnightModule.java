@@ -122,7 +122,7 @@ public class KnightModule extends BaseHullMod {
         while (objectGrid.hasNext()){
             Object next = objectGrid.next();
 
-            // if its a ship and the best target is a missile, skip. If its neither a ship nor missile, also skip.
+            // if it's a ship and the best target is a missile, skip. If its neither a ship nor missile, also skip.
             if(next instanceof ShipAPI){
                 if(isBestTargetMissile) continue;
             } else if(!(next instanceof MissileAPI)){
@@ -165,8 +165,8 @@ public class KnightModule extends BaseHullMod {
 
         // aim towards angle and fire
         float rotationNeeded = MathUtils.getShortestRotation(weapon.getCurrAngle(), bestAngle);
-        float maxRotaion = Math.min(amount * weapon.getTurnRate(), Math.abs(rotationNeeded));
-        weapon.setFacing(weapon.getCurrAngle() + (rotationNeeded > 0 ? maxRotaion : -maxRotaion));
+        float maxRotation = Math.min(amount * weapon.getTurnRate(), Math.abs(rotationNeeded));
+        weapon.setFacing(weapon.getCurrAngle() + (rotationNeeded > 0 ? maxRotation : -maxRotation));
         weapon.setCurrHealth(weapon.getMaxHealth()); // hack until I bother to fix this
         if(Math.abs(rotationNeeded) < 1f && hasTarget) {
             weapon.setForceFireOneFrame(true);
