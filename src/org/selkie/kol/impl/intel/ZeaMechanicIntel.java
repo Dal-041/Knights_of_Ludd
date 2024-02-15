@@ -22,6 +22,7 @@ public class ZeaMechanicIntel extends BaseIntelPlugin {
     private String icon;
     private String desc;
     private String[] descHighlights;
+    private String ID;
 
     private static String[] dawn = {
             "drones!"
@@ -64,22 +65,24 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
         KoLHLs.add(hl2);
     };
 
-    public ZeaMechanicIntel(String icon, String name) {
+    public ZeaMechanicIntel(String id, String icon, String name) {
         try {
             Global.getSettings().loadTexture(icon);
         } catch (IOException e) {
 
         }
+        this.ID = id;
         this.name = name;
         this.icon = icon;
     }
 
-    public ZeaMechanicIntel(String icon, String name, String desc, String[] descHighlights) {
+    public ZeaMechanicIntel(String id, String icon, String name, String desc, String[] descHighlights) {
         try {
             Global.getSettings().loadTexture(icon);
         } catch (IOException e) {
 
         }
+        this.ID = id;
         this.name = name;
         this.icon = icon;
         this.desc = desc;
@@ -158,30 +161,35 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
         return icon;
     }
 
-    //Could combine these, maybe later
-    public static int unknownMechanics(String fac) {
-        int count = 0;
-        for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaMechanicIntel.class)) {
-            if (intel.getIcon().equals(Global.getSector().getFaction(fac).getCrest())) count++;
-        }
-        String[] ref = null;
-        if (fac.equals(PrepareAbyss.duskID)) ref = dusk;
-        else if (fac.equals(PrepareAbyss.dawnID)) ref = dawn;
-        else if (fac.equals(PrepareAbyss.elysianID)) ref = edf;
-        else if (fac.equals(Factions.TRITACHYON)) ref = TT;
-        else if (fac.equals(KOL_ModPlugin.kolID)) ref = KoL;
-        if (ref == null) return 0;
+    public String getID() {
+        return ID;
+    }
 
-        if (count < ref.length) {
-            return ref.length - count;
+    //Could combine these, maybe later
+    public static int unknownMechanics(String id) {
+        int count = 0;
+        int total = 0;
+        for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaMechanicIntel.class)) {
+            ZeaMechanicIntel thisIntel = (ZeaMechanicIntel) intel;
+            if (thisIntel.getID().equals(id)) count++;
+        }
+
+        if (id.equals(PrepareAbyss.duskID)) total = dusk.length;
+        else if (id.equals(PrepareAbyss.dawnID)) total = dawn.length;
+        else if (id.equals(PrepareAbyss.elysianID)) total = edf.length;
+        else if (id.equals(Factions.TRITACHYON)) total = TT.length;
+        else if (id.equals(KOL_ModPlugin.kolID)) total = KoL.length;
+
+        if (count < total) {
+            return total - count;
         }
         return 0;
     }
 
-    public static ZeaMechanicIntel getNextMechanicIntel(String fac) {
+    public static ZeaMechanicIntel getNextMechanicIntel(String id) {
         String[] desc;
         ArrayList<String[]> hl;
-        switch (fac) {
+        switch (id) {
             case PrepareAbyss.duskID:
                 desc = dusk;
                 hl = duskHLs;
@@ -205,9 +213,11 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
             default:
                 return null;
         }
-        int entry = desc.length - unknownMechanics(fac);
-        String title = Global.getSector().getFaction(fac).getDisplayName() + " Assessment #" + Integer.toString(entry+1);
+        int unknown = unknownMechanics(id);
+        if (unknown == 0) return null;
+        int entry = desc.length - unknown;
+        String title = Global.getSector().getFaction(id).getDisplayName() + " Assessment #" + Integer.toString(entry+1);
 
-        return new ZeaMechanicIntel(Global.getSector().getFaction(fac).getCrest(), title, desc[entry], hl.get(entry));
+        return new ZeaMechanicIntel(id, Global.getSector().getFaction(id).getCrest(), title, desc[entry], hl.get(entry));
     }
 }

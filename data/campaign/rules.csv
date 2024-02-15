@@ -181,3 +181,6 @@ zea_BossTT3Defeated,zea_AfterNinevehDefeat,,ZeaIntelCMD addIntelTTBoss3,"The bur
 
 Your eye catches on a datacore glinting in the debris that must have broken free during the fight. Perhaps they didn't have time to fully scrub it. You give a nod to your salvors and in short order it's brought on board.",0:zea_bossTT3defeated:What was theirs is now ours.,
 zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3defeated,DismissDialog,,,
+,,,,,,
+zea_SpoilersDialog,zea_spoilers_popup,,,,"0:zea_spoilers_close:Now, good luck with those fleets!",
+zea_SpoilersDialog2,DialogOptionSelected,$option == zea_spoilers_close,DismissDialog,,,
