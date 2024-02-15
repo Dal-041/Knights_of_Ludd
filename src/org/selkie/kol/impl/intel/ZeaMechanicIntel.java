@@ -22,7 +22,7 @@ public class ZeaMechanicIntel extends BaseIntelPlugin {
     private String icon;
     private String desc;
     private String[] descHighlights;
-    private String ID;
+    public String ID;
 
     private static String[] dawn = {
             "drones!"
@@ -171,6 +171,7 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
         int total = 0;
         for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaMechanicIntel.class)) {
             ZeaMechanicIntel thisIntel = (ZeaMechanicIntel) intel;
+            if (thisIntel.ID == null) return 0;
             if (thisIntel.getID().equals(id)) count++;
         }
 

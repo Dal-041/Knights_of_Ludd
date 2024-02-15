@@ -24,7 +24,7 @@ public class SpoilersNotif implements EveryFrameScript {
     public static boolean fire = false;
 
     public static final String icon = Global.getSettings().getSpriteName("icons", "game_icon");
-    public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a %s of hidden content. We worked very hard on it and hope you enjoy it very much.\n\nWe ask that you %s for the first couple weeks after release. Its our hope that players can organically discover all that the mod contains.\n\n Thanks, and once again enjoy [Our Song], %s and %s.\n- The Knights of Ludd team";
+    public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a %s of hidden content. We worked very hard on it and hope you enjoy it very much.\n\nWe ask that you %s for the first couple weeks after release. Its our hope that players can organically discover all that the mod contains.\n\nThanks, and once again please enjoy our mods, %s and %s.\n- The Knights of Ludd/Elysium team";
     public static final String[] descHLs = { "Welcome to Elysium.", "lot", "please don't post openly about the secrets", "The Knights of Ludd", "Elysium" };
     public static final String desc2 = "%s\n" +
             "The Knights %s.\n" +
@@ -80,7 +80,7 @@ public class SpoilersNotif implements EveryFrameScript {
         ZeaLoreIntel intel = new ZeaLoreIntel(icon, "A quick message from the KoL team", desc, descHLs);
         InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
         TextPanelAPI textpanel = dialog.getTextPanel();
-        if (Math.random() < 0.15f) { intel = new ZeaLoreIntel(icon, "Forsooth, you have received an urgent missive!", desc2, descHLs2);}
+        if (Math.random() < 0.1f) { intel = new ZeaLoreIntel(icon, "Forsooth, you have received an urgent missive!", desc2, descHLs2);}
         textpanel.setOrbitronMode(true);
         textpanel.addPara("Thank you for playing the Knights of Ludd!");
         textpanel.setOrbitronMode(false);
