@@ -53,7 +53,7 @@ public class KnightRefit extends BaseHullMod {
     public static final int FLUX_DISS_PER_OP = 5;
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS = 0.25f;
-
+    protected Object STATUSKEY1 = new Object();
     public static IntervalUtil scriptInt = new IntervalUtil(0.5f, 0.5f);
 
     @Override
@@ -255,10 +255,10 @@ public class KnightRefit extends BaseHullMod {
         if(Global.getCombatEngine().isPaused()) return;
 
         // apply speed boost for main ship and durability buffs to modules from main ships hullmods
-        float modules = 0;
+        float modules = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank").getStationModules().size();
+
         float alive = 0;
         for(ShipAPI module : ship.getChildModulesCopy()){
-            modules++;
             if (module.getHitpoints() <= 0f) continue;
             alive++;
             if(ship.getVariant() == null || module.getVariant() == null) continue;
@@ -268,8 +268,6 @@ public class KnightRefit extends BaseHullMod {
 
             module.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", hullmult);
             module.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", armorMult);
-
-
         }
 
         if(modules!=0){
@@ -309,6 +307,12 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getDeceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
         ship.getMutableStats().getMaxTurnRate().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
         ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if(engine.getPlayerShip() == ship){
+            String modularIcon = Global.getSettings().getSpriteName("icons", "kol_modules");
+            engine.maintainStatusForPlayerShip(STATUSKEY1, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS)) + " top speed" , false);
+        }
     }
 
     public float getTotalArmorMult(ShipVariantAPI variant, float baseArmor){
@@ -350,6 +354,9 @@ public class KnightRefit extends BaseHullMod {
         hullmodMap.put(HullMods.BLAST_DOORS, new ArmorEffect(0,0,0,0.2f));
         hullmodMap.put(HullMods.INSULATEDENGINE, new ArmorEffect(0,0,0,0.1f));
         hullmodMap.put(HullMods.ARMOREDWEAPONS, new ArmorEffect(0,0.1f,0,0));
+        hullmodMap.put(HullMods.COMP_HULL, new ArmorEffect(0,0f,0,-0.2f));
+        hullmodMap.put(HullMods.COMP_ARMOR, new ArmorEffect(0,-0.2f,0,0));
+        hullmodMap.put(HullMods.COMP_STRUCTURE, new ArmorEffect(0,-0.2f,0,-0.2f));
 
         Map<String, ArmorEffect> capitalHullmodMap = new HashMap<>(hullmodMap);
         capitalHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(500,0,0,0));
