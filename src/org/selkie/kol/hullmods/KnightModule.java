@@ -4,12 +4,12 @@ import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
-import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
+import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
+import com.fs.starfarer.api.combat.listeners.DamageListener;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lazywizard.lazylib.MathUtils;
-import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.util.Iterator;
@@ -23,13 +23,10 @@ public class KnightModule extends BaseHullMod {
         if(!ship.hasListenerOfClass(ModuleSystemChild.class)) ship.addListener(new ModuleSystemChild(ship));
     }
 
-    public static class ModuleUnhulker implements HullDamageAboutToBeTakenListener {
-        public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI ship, Vector2f point, float damageAmount) {
-            if(ship.getHitpoints() <= damageAmount && !ship.hasTag("KOL_moduleDead")) {
-                ship.setHulk(false);
-                ship.addTag("KOL_moduleDead");
-            }
-            return false;
+    public static class ModuleUnhulker implements DamageListener {
+        @Override
+        public void reportDamageApplied(Object source, CombatEntityAPI target, ApplyDamageResultAPI result) {
+            if(((ShipAPI) target).isHulk() && target.getHitpoints() > 0) ((ShipAPI) target).setHulk(false);
         }
     }
 
@@ -89,19 +86,17 @@ public class KnightModule extends BaseHullMod {
             ship.setHulk(true);
             ship.setDrone(true);
             ship.addTag("KOL_moduleHulked");
+        } else if(!ship.isHulk()){
+            ship.setHulk(true);
         }
 
         for(WeaponAPI weapon : ship.getAllWeapons()){
             if(weapon.isDecorative()) continue;
 
-            if(weapon.getType() == WeaponAPI.WeaponType.SYSTEM && ship.getParentStation().getSystem().isActive()){
-                ship.addTag("KOL_moduleSystemActivated");
-            }
-            else if(weapon.hasAIHint(WeaponAPI.AIHints.PD)){
+            if(weapon.hasAIHint(WeaponAPI.AIHints.PD)){
                 aimAndFirePD(ship, weapon, amount);
             }
         }
-
     }
 
     public void aimAndFirePD(ShipAPI ship, WeaponAPI weapon, float amount){

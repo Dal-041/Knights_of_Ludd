@@ -272,7 +272,7 @@ public class NinmahBoss extends BaseHullMod {
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
             float bufferTime = 0.2f; // 0.2 sec of buffer time before getting hit
-            float armorBase = StarficzAIUtils.getWeakestTotalArmor(ship);
+            float armorBase = StarficzAIUtils.getCurrentArmorRating(ship);
             float armorMax = ship.getArmorGrid().getArmorRating();
             float armorMinLevel = ship.getMutableStats().getMinArmorFraction().getModifiedValue();
             float armorUnphase = armorBase;

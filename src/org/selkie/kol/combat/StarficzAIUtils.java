@@ -509,7 +509,7 @@ public class StarficzAIUtils {
         }
         return futureHits;
     }
-    public static float getWeakestTotalArmor(ShipAPI ship){
+    public static float getCurrentArmorRating(ShipAPI ship){
         if (ship == null || !Global.getCombatEngine().isEntityInPlay(ship)) {
             return 0f;
         }

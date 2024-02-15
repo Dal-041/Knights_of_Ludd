@@ -30,10 +30,10 @@ public class HellfireStats extends BaseShipSystemScript {
 		//float mult2 = 1f + DAMAGE_BONUS * effectLevel;
 		float bonusPercent2 = (int) ((mult - 1f) * 100f);
 		if (index == 0) {
-			return new StatusData("ballistics damage bonus +" + (int) bonusPercent1 + "%", false);
+			return new StatusData("ballistics damage bonus +" + Math.round(bonusPercent1) + "%", false);
 		}
 		if (index == 1) {
-			return new StatusData("ballistics projectile speed +" + (int) bonusPercent2 + "%", false);
+			return new StatusData("ballistics projectile speed +" + Math.round(bonusPercent2) + "%", false);
 		}
 		return null;
 	}

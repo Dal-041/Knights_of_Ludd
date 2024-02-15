@@ -146,7 +146,7 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
         // calculate how much damage the ship would take if shields went down
         float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
         float timeElapsed = currentTime - lastUpdatedTime;
-        float armor = getWeakestTotalArmor(ship);
+        float armor = getCurrentArmorRating(ship);
 
         float unfoldTime = shield.getUnfoldTime();
         float bufferTime = unfoldTime/4; //TODO: get real shield activate delay, unfoldTime/4 is: "looks about right"

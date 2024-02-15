@@ -9,7 +9,6 @@ import com.fs.starfarer.api.combat.ViewportAPI
 import com.fs.starfarer.api.input.InputEventAPI
 import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
-import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.combat.ParticleController
 import org.selkie.kol.combat.StarficzAIUtils
@@ -78,7 +77,7 @@ class KOL_CombatPlugin : BaseEveryFrameCombatPlugin() {
                 val paperDollLocation = Vector2f()
                 Vector2f.sub(location, offset, paperDollLocation)
 
-                val armorHullLevel = (StarficzAIUtils.getWeakestTotalArmor(module) + module.hitpoints) / (module.armorGrid.armorRating + module.maxHitpoints)
+                val armorHullLevel = (StarficzAIUtils.getCurrentArmorRating(module) + module.hitpoints) / (module.armorGrid.armorRating + module.maxHitpoints)
                 val paperdollColor = Utils.OKLabInterpolateColor(Color(255, 30, 30, alpha), Color(150, 200, 255, alpha), armorHullLevel)
                 /*
                 MagicRender.screenspace(
