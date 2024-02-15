@@ -4,14 +4,17 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
-import org.apache.log4j.Logger;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 
 import java.awt.*;
@@ -48,11 +51,10 @@ public class KnightRefit extends BaseHullMod {
 
     public static final int FLUX_CAP_PER_OP = 25;
     public static final int FLUX_DISS_PER_OP = 5;
-    private static final Logger log = Logger.getLogger(KnightRefit.class);
-
     private final String knightRefitID = "knightRefit";
     private final float SPEED_BONUS = 0.25f;
-    private float topArmorAvg = 0f, topHullAvg = 0f, middleArmorAvg = 0f, middleHullAvg = 0f, rearArmorAvg = 0f, rearHullAvg = 0f;
+    protected Object STATUSKEY1 = new Object();
+    public static IntervalUtil scriptInt = new IntervalUtil(0.5f, 0.5f);
 
     @Override
     public void init(HullModSpecAPI spec) {
@@ -79,7 +81,25 @@ public class KnightRefit extends BaseHullMod {
         }
         ship.getMutableStats().getFluxCapacity().modifyFlat(id, capBonus);
         ship.getMutableStats().getFluxDissipation().modifyFlat(id, dissBonus);
+
+        if(!ship.hasListenerOfClass(ModuleUnhulker.class)) ship.addListener(new ModuleUnhulker());
     }
+
+    public static class ModuleUnhulker implements HullDamageAboutToBeTakenListener {
+        @Override
+        public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI ship, Vector2f point, float damageAmount) {
+            if(ship.getHitpoints() <= damageAmount) {
+                for(ShipAPI module: ship.getChildModulesCopy()){
+                    if(!module.hasTag("KOL_moduleDead")){
+                        module.setHulk(false);
+                        module.addTag("KOL_moduleDead");
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
 
     @Override
     public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
@@ -146,7 +166,7 @@ public class KnightRefit extends BaseHullMod {
         tooltip.addImageWithText(underHeadingPad);
 
 
-        ShipVariantAPI variant = ship.getVariant() != null ? ship.getVariant() : Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Standard");
+        ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
         boolean hasModules = variant != null && !variant.getStationModules().isEmpty();
         tooltip.addSectionHeading("Modular Armor", hasModules ? activeHighlightColor : inactiveHighlightColor,
                 hasModules ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
@@ -171,7 +191,7 @@ public class KnightRefit extends BaseHullMod {
             // getting the stats of child modules in refit shouldn't have to be this hard
             Pattern kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE);
 
-            for (String module : ship.getVariant().getStationModules().values()) {
+            for (String module : variant.getStationModules().values()) {
                 Matcher matcher = kolPattern.matcher(module);
 
                 if(matcher.find()){
@@ -222,7 +242,7 @@ public class KnightRefit extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         //Yoinked whole-cloth from SCY. <3 ya Tarty
-        if (Global.getCombatEngine().isPaused() || ship==null || ship.getOriginalOwner() == -1) {
+        if (ship==null) {
             return;
         }
 
@@ -231,22 +251,46 @@ public class KnightRefit extends BaseHullMod {
             return;
         }
 
-        float modules =0;
-        float alive =0;
-        for(ShipAPI s : ship.getChildModulesCopy()){
-            modules++;
-            if(!s.isAlive()) continue;
-            alive++;
-            if(ship.getVariant() == null || s.getVariant() == null) continue;
 
-            s.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", getTotalHullMult(ship.getVariant(), s.getVariant().getHullSpec().getHitpoints()));
-            s.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", getTotalArmorMult(ship.getVariant(), s.getVariant().getHullSpec().getArmorRating()));
+        if(Global.getCombatEngine().isPaused()) return;
+
+        // apply speed boost for main ship and durability buffs to modules from main ships hullmods
+        ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
+        float modules = variant == null ? 0 : variant.getStationModules().size();
+
+        float alive = 0;
+        for(ShipAPI module : ship.getChildModulesCopy()){
+            if (module.getHitpoints() <= 0f) continue;
+            alive++;
+            if(ship.getVariant() == null || module.getVariant() == null) continue;
+
+            float hullmult =  getTotalHullMult(ship.getVariant(), module.getVariant().getHullSpec().getHitpoints());
+            float armorMult =  getTotalArmorMult(ship.getVariant(), module.getVariant().getHullSpec().getArmorRating());
+
+            module.getMutableStats().getHullDamageTakenMult().modifyMult("kol_module_parent_hullmods", hullmult);
+            module.getMutableStats().getArmorDamageTakenMult().modifyMult("kol_module_parent_hullmods", armorMult);
         }
 
         if(modules!=0){
             //speed bonus applies linearly
             float speedRatio=1 - (alive / modules);
             applyStats(speedRatio, ship);
+        }
+
+        scriptInt.advance(amount);
+        if (scriptInt.intervalElapsed()) {
+            for (ShipAPI poorsap : AIUtils.getNearbyEnemies(ship, 400)) {
+                if (poorsap.isFighter() || !poorsap.isAlive() || poorsap.isPhased()) continue;
+                if (!poorsap.hasListenerOfClass(ShipAboutToExplodeListener.class)) {
+                    poorsap.addListener(new ShipAboutToExplodeListener());
+                }
+            }
+            for (ShipAPI noblewarrior : AIUtils.getNearbyAllies(ship, 400)) {
+                if (noblewarrior.isFighter() || !noblewarrior.isAlive() || noblewarrior.isPhased()) continue;
+                if (!noblewarrior.hasListenerOfClass(ShipAboutToExplodeListener.class)) {
+                    noblewarrior.addListener(new ShipAboutToExplodeListener());
+                }
+            }
         }
     }
 
@@ -264,6 +308,12 @@ public class KnightRefit extends BaseHullMod {
         ship.getMutableStats().getDeceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
         ship.getMutableStats().getMaxTurnRate().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
         ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+
+        CombatEngineAPI engine = Global.getCombatEngine();
+        if(engine.getPlayerShip() == ship && speedRatio > 0.01f){
+            String modularIcon = Global.getSettings().getSpriteName("icons", "kol_modules");
+            engine.maintainStatusForPlayerShip(STATUSKEY1, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS * 100)) + " top speed" , false);
+        }
     }
 
     public float getTotalArmorMult(ShipVariantAPI variant, float baseArmor){
@@ -305,6 +355,9 @@ public class KnightRefit extends BaseHullMod {
         hullmodMap.put(HullMods.BLAST_DOORS, new ArmorEffect(0,0,0,0.2f));
         hullmodMap.put(HullMods.INSULATEDENGINE, new ArmorEffect(0,0,0,0.1f));
         hullmodMap.put(HullMods.ARMOREDWEAPONS, new ArmorEffect(0,0.1f,0,0));
+        hullmodMap.put(HullMods.COMP_HULL, new ArmorEffect(0,0f,0,-0.2f));
+        hullmodMap.put(HullMods.COMP_ARMOR, new ArmorEffect(0,-0.2f,0,0));
+        hullmodMap.put(HullMods.COMP_STRUCTURE, new ArmorEffect(0,-0.2f,0,-0.2f));
 
         Map<String, ArmorEffect> capitalHullmodMap = new HashMap<>(hullmodMap);
         capitalHullmodMap.put(HullMods.HEAVYARMOR, new ArmorEffect(500,0,0,0));

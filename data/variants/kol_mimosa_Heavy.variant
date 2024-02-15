@@ -1,0 +1,55 @@
+{
+    "displayName": "Heavy",
+    "fluxCapacitors": 6,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "kol_mimosa",
+    "hullMods": [
+        "armoredweapons",
+        "autorepair",
+        "heavyarmor",
+        "reinforcedhull",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_mimosa_Heavy",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_tor",
+                "WS0002": "kol_tor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0004": "lightdualac",
+                "WS0003": "lightdualac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "heavyac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0005": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_mimosa_tl_Heavy"},
+        {"ARMOR_MODULE_TR": "kol_mimosa_tr_Heavy"},
+    ],
+}

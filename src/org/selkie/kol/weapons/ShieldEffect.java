@@ -12,7 +12,7 @@ import org.selkie.kol.Utils;
 import java.awt.Color;
 import java.util.*;
 
-import static org.selkie.kol.impl.combat.StarficzAIUtils.*;
+import static org.selkie.kol.combat.StarficzAIUtils.*;
 
 //Concept and impl by Tartiflette, AI by Starficz
 
@@ -77,10 +77,14 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
 
             //If debug is turned on, weapons that can hit the ship will be blue, and projectiles that can hit the ship will be magenta
             if (!disabled && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)) {
-                if (shield.isOn() ^ wantToShield(amount))
-                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
-                else
-                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+                // lockout from spamming shields
+                if(shield.isOff() || shield.getActiveArc()/shield.getArc() > 0.5f){
+                    if (shield.isOn() ^ wantToShield(amount))
+                        ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                    else
+                        ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+                }
+
             }
 
             // Overloaded Shields
@@ -142,7 +146,7 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
         // calculate how much damage the ship would take if shields went down
         float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
         float timeElapsed = currentTime - lastUpdatedTime;
-        float armor = getWeakestTotalArmor(ship);
+        float armor = getCurrentArmorRating(ship);
 
         float unfoldTime = shield.getUnfoldTime();
         float bufferTime = unfoldTime/4; //TODO: get real shield activate delay, unfoldTime/4 is: "looks about right"

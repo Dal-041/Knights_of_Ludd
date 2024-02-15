@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.characters.SkillSpecAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
@@ -17,16 +18,21 @@ import com.fs.starfarer.api.impl.campaign.fleets.SeededFleetManager;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
+import com.fs.starfarer.api.plugins.OfficerLevelupPlugin;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.intel.ZeaMechanicIntel;
 import org.selkie.kol.impl.world.*;
 
+import java.util.List;
 import java.util.Random;
 
+import static com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent.pickSkill;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
+import static org.selkie.kol.impl.world.PrepareAbyss.log;
 
 public class ZeaFleetManager extends SeededFleetManager {
 
@@ -85,24 +91,6 @@ public class ZeaFleetManager extends SeededFleetManager {
         return picker.pick();
     }
 
-    public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to) {
-        for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
-            boolean skip = false;
-            if (member.isFighterWing() || member.getHullSpec().getHullSize().equals(ShipAPI.HullSize.CAPITAL_SHIP)) continue;
-            for (String s : ZeaUtils.hullBlacklist) {
-                if (s.equals(member.getHullId())) {
-                    skip = true;
-                }
-            }
-            if (skip) continue;
-            //Unrecoverable status set by hullmod
-            if (member.getVariant().hasTag(Tags.AUTOMATED_RECOVERABLE)) member.getVariant().removeTag(Tags.AUTOMATED_RECOVERABLE);
-            if (member.isFlagship()) member.setFlagship(false);
-            member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
-            to.getFleetData().addFleetMember(member);
-        }
-    }
-
     public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to, boolean pruneCaps) {
         for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
             boolean skip = false;
@@ -138,12 +126,12 @@ public class ZeaFleetManager extends SeededFleetManager {
                 0f, // transportPts
                 0f, // linerPts
                 0f, // utilityPts
-                5f // qualityMod, won't get used since routes mostly have quality override set
+                5f // qualityMod
         );
         params.averageSMods = 1;
         params.ignoreMarketFleetSizeMult = true;
-        params.commander = createAbyssalCaptain(fac);
-        params.officerNumberMult = 1f;
+        params.commander = createAICaptain(fac);
+        params.officerNumberMult = 6f;
         //params.officerLevelBonus = 0;
         params.aiCores = HubMissionWithTriggers.OfficerQuality.AI_MIXED;
         params.random = random;
@@ -156,7 +144,7 @@ public class ZeaFleetManager extends SeededFleetManager {
 
         CampaignFleetAPI fleet2 = FleetFactoryV3.createFleet(params);
 
-        copyFleetMembers(facSecond, fleet2, fleet);
+        copyFleetMembers(facSecond, fleet2, fleet, true);
 
         fleet2.despawn();
 
@@ -173,7 +161,7 @@ public class ZeaFleetManager extends SeededFleetManager {
 
         if (fleet == null) return null;
 
-        setAbyssalCaptains(fleet);
+        setAICaptains(fleet);
         fleet.addTag(excludeTag);
         system.addEntity(fleet);
         fleet.setFacing(random.nextFloat() * 360f);
@@ -251,6 +239,12 @@ public class ZeaFleetManager extends SeededFleetManager {
 
     @Override
     public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
+        //Handle Coronal Capacitor intel
+        if (fleet.getFaction().getId().equals(PrepareAbyss.elysianID)) {
+            ZeaMechanicIntel mechanic = ZeaMechanicIntel.getNextMechanicIntel(fleet.getFaction().getId());
+            if (mechanic != null) Global.getSector().getIntelManager().addIntel(mechanic);
+        }
+
         if (fleet.getMembersWithFightersCopy().isEmpty()) {
             for (SeededFleet curr : fleets) {
                 if (curr.fleet != null && curr.fleet == fleet) {
@@ -299,44 +293,59 @@ public class ZeaFleetManager extends SeededFleetManager {
                 new ZeaFleetManager.AbyssalFleetInteractionConfigGen());
     }
 
-    public static PersonAPI createAbyssalCaptain(String faction) {
-        return createAbyssalCaptain(faction, false);
+    public static OfficerManagerEvent.SkillPickPreference getFactionSkillPref (String faction) {
+
+        switch (faction) {
+            case PrepareAbyss.dawnID:
+                return OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
+
+            case PrepareAbyss.duskID:
+                return OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+
+            case PrepareAbyss.elysianID:
+                return OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
+            default:
+                return OfficerManagerEvent.SkillPickPreference.ANY;
+        }
     }
 
-    public static PersonAPI createAbyssalCaptain(String faction, boolean random) {
+    public static PersonAPI createAICaptain(String faction) {
+        return createAICaptain(faction, false);
+    }
+
+    public static PersonAPI createAICaptain(String faction, boolean randCore) {
         OfficerManagerEvent.SkillPickPreference skillPref;
         String persona = Personalities.AGGRESSIVE;
         String portrait = Global.getSector().getFaction(faction).getPortraits(FullName.Gender.ANY).pick();
 
         int level = 8;
         String core = "alpha_core";
-        if (random) {
-            float rand = (float) Math.random();
-            if (rand < 0.35f);
-            else if (rand < 0.75f) {
+        if (randCore) {
+            float rand = MathUtils.getRandom().nextFloat();
+            if (rand < 0.35f) {
                 level = 7;
                 core = "beta_core";
+            } else if (rand < 0.70f) {
+                level = 6;
+                core = "gamma_core";
             }
-            else level = 6; core = "gamma_core";
         }
         //TODO handle modified AI core levels, portrait pools
-        //Levels: G3, B5, A7, O9
+        //Vanilla levels (integrated): G4, B6, A8, O9
+        skillPref = getFactionSkillPref(faction);
+
         if (faction.equals(PrepareAbyss.dawnID)) {
-            skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_NO_MISSILE_YES_DEFENSE;
             portrait = ZeaUtils.portraitsDawn[level-6];
             persona = Personalities.AGGRESSIVE;
         }
         else if (faction.equals(PrepareAbyss.duskID)) {
-            skillPref = OfficerManagerEvent.SkillPickPreference.YES_ENERGY_NO_BALLISTIC_YES_MISSILE_YES_DEFENSE;
             persona = Personalities.STEADY;
             portrait = ZeaUtils.portraitsDusk[level-6];
         }
         else if (faction.equals(PrepareAbyss.elysianID)) {
-            skillPref = OfficerManagerEvent.SkillPickPreference.NO_ENERGY_YES_BALLISTIC_YES_MISSILE_YES_DEFENSE;
             persona = Personalities.STEADY;
             portrait = ZeaUtils.portraitsElysian[level-6];
         }
-        else skillPref = OfficerManagerEvent.SkillPickPreference.ANY;
 
         return MagicCampaign.createCaptainBuilder(faction)
                 .setIsAI(true)
@@ -348,15 +357,16 @@ public class ZeaFleetManager extends SeededFleetManager {
                 .create();
     }
 
-    public static void setAbyssalCaptains(CampaignFleetAPI fleet) {
+    public static void setAICaptains(CampaignFleetAPI fleet) {
         String fac = fleet.getFaction().getId();
         for (FleetMemberAPI member : fleet.getMembersWithFightersCopy()) {
-            if (member.getCaptain() == null) {
-                member.setCaptain(createAbyssalCaptain(fac, true));
+            PersonAPI captain = member.getCaptain();
+            if (captain == null) {
+                member.setCaptain(createAICaptain(fac, true));
             } else {
-                if (member.getCaptain().getId().equals("tahlan_child")) return; //Special officer
+                if (captain.getId().equals("tahlan_child")) return; //Special officer
                 boolean found = false;
-                String portCapt = member.getCaptain().getPortraitSprite();
+                String portCapt = captain.getPortraitSprite();
                 for (String port : ZeaUtils.portraitsDawn) {
                     if (portCapt.equalsIgnoreCase(port)) {
                         found = true;
@@ -370,26 +380,41 @@ public class ZeaFleetManager extends SeededFleetManager {
                 }
                 if (!found) {
 
-                    int level = Math.min(8, member.getCaptain().getStats().getLevel());
+                    int level = Math.min(8, captain.getStats().getLevel());
                     if (level < 6) {
                         level = 6;
-                        member.getCaptain().getStats().setLevel(6);
+                        captain.getStats().setLevel(6);
+                        captain.getStats().refreshCharacterStatsEffects();
                     }
                     //AI cores default to "fearless" which is one-note, we bring them down a notch
                     double rand = Math.random();
-                    if (rand < 0.5f) member.getCaptain().setPersonality(Personalities.AGGRESSIVE);
-                    else if (rand > 0.8f) member.getCaptain().setPersonality(Personalities.RECKLESS);
-                    else member.getCaptain().setPersonality(Personalities.STEADY);
+                    if (rand < 0.5f) captain.setPersonality(Personalities.AGGRESSIVE);
+                    else if (rand > 0.8f) captain.setPersonality(Personalities.RECKLESS);
+                    else captain.setPersonality(Personalities.STEADY);
 
                     if (fac.equals(PrepareAbyss.duskID)) {
-                        member.getCaptain().setPortraitSprite(ZeaUtils.portraitsDuskPaths[level-6]);
+                        captain.setPortraitSprite(ZeaUtils.portraitsDuskPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.elysianID)) {
-                        member.getCaptain().setPortraitSprite(ZeaUtils.portraitsElysianPaths[level-6]);
+                        captain.setPortraitSprite(ZeaUtils.portraitsElysianPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.dawnID)) {
-                        member.getCaptain().setPortraitSprite(ZeaUtils.portraitsDawnPaths[level-6]);
-                        member.getCaptain().setPersonality(Personalities.RECKLESS);
+                        captain.setPortraitSprite(ZeaUtils.portraitsDawnPaths[level-6]);
+                        captain.setPersonality(Personalities.RECKLESS);
+                    }
+
+                }
+                //Re-inflate skills
+                int toAdd = captain.getStats().getLevel() - captain.getStats().getSkillsCopy().size();
+                if (toAdd > 0) {
+                    OfficerLevelupPlugin plugin = (OfficerLevelupPlugin) Global.getSettings().getPlugin("officerLevelUp");
+                    Random random = MathUtils.getRandom();
+                    for (int i = 0; i < toAdd; i++) {
+                        List<String> skills = plugin.pickLevelupSkills(captain, random);
+                        String skillId = pickSkill(captain, skills, getFactionSkillPref(fac), 0, random);
+                        if (skillId != null) {
+                            captain.getStats().setSkillLevel(skillId, 2);
+                        }
                     }
                 }
             }
@@ -398,7 +423,7 @@ public class ZeaFleetManager extends SeededFleetManager {
 
     public void addLoreToFleetCheck(CampaignFleetAPI fleet) {
         String faction = fleet.getFaction().getId();
-        if (!faction.equals(PrepareAbyss.dawnID) && faction.equals(PrepareAbyss.duskID) && faction.equals(PrepareAbyss.elysianID)) return;
+        if (!faction.equals(PrepareAbyss.dawnID) && !faction.equals(PrepareAbyss.duskID) && !faction.equals(PrepareAbyss.elysianID)) return;
         float chance = 0.1f;
         if (Math.random() <= chance) {
             fleet.addDropRandom(faction + "_lore", 1);

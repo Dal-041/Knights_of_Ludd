@@ -1,0 +1,18 @@
+{
+    "displayName": "Blank",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "kol_marigold",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_marigold_Blank",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_marigold_tl_Blank"},
+        {"ARMOR_MODULE_TR": "kol_marigold_tr_Blank"},
+    ],
+}

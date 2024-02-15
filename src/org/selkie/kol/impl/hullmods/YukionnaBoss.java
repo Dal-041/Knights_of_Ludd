@@ -5,7 +5,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
@@ -13,7 +12,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.BallLightningActivator;
 import org.selkie.kol.impl.combat.activators.BlizzardActivator;
 
@@ -112,7 +111,7 @@ public class YukionnaBoss extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ActivatorManager.addActivator(ship, new BallLightningActivator(ship));
         if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
-            ship.addListener(new YukionnaBoss.YukionnaBossPhaseTwoScript(ship));
+            if(!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class)) ship.addListener(new YukionnaBossPhaseTwoScript(ship));
             ActivatorManager.addActivator(ship, new BlizzardActivator(ship));
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

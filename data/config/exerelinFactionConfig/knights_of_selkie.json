@@ -7,7 +7,7 @@
     "directoryUseShortName":true,
 
     "startRelationships":{ "tritachyon":-0.6 },
-    "maxRelationships":{ "tritachyon":-0.1, "remnant":-0.51},
+    "maxRelationships":{ "tritachyon":-0.1, "remnant":-1},
     "diplomacyPositiveChance":{ "tritachyon":0.8 },
     "diplomacyNegativeChance":{ "tritachyon":1.2 },
     "morality":"good",
@@ -37,23 +37,23 @@
     "specialForcesNamerClass":"exerelin.campaign.intel.specialforces.namer.LuddicNamer",
     
     "startShipsSolo":[
-	  ["kol_sundew_Onager"],
-	  ["kol_protea_Squire"]
+	  ["kol_sundew_Squire"],
+	  ["kol_protea_Knight"]
 	],
     "startShipsCombatSmall":[
-      ["kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Onager"],
-      ["kol_mimosa_Standard", "kol_protea_Knight", "kol_protea_Squire"]
+      ["kol_snowdrop_Chivalrous", "kol_sundew_Squire", "kol_sundew_Onager"],
+      ["kol_mimosa_Zealous", "kol_protea_Squire", "kol_protea_Brawler"]
     ],
     "startShipsTradeSmall":[["tarsus_Standard", "cerberus_Standard", "kol_protea_Squire"]],
     "startShipsCombatLarge":[
-      ["kol_larkspur_Standard", "kol_snowdrop_Standard", "kol_sundew_Standard", "kol_sundew_Onager"],
-      ["kol_lotus_Standard", "kol_marigold_Escort", "kol_protea_Squire", "kol_protea_Brawler"]
+      ["kol_larkspur_Hellfire", "kol_snowdrop_Close_Support", "kol_sundew_Onager", "kol_sundew_Squire"],
+      ["kol_lotus_Battering", "kol_marigold_Attendant", "kol_protea_Knight", "kol_protea_Squire"]
     ],
     "startShipsTradeLarge":[["colossus_Standard", "mule_Standard", "wayfarer_Standard"]],
-    "startShipsExplorerLarge":[["venture_Balanced", "buffalo_luddic_church_Standard", "kol_protea_Knight", "kol_sundew_Standard"]],
-    "startShipsCarrierSmall":[["condor_Attack", "lasher_luddic_church_Standard", "kol_protea_Squire"]],
+    "startShipsExplorerLarge":[["venture_Balanced", "buffalo_luddic_church_Standard", "kol_protea_Brawler", "kol_sundew_Squire"]],
+    "startShipsCarrierSmall":[["condor_Attack", "lasher_luddic_church_Standard", "kol_protea_Brawler"]],
 	"startShipsGrandFleet":[
-	  ["kol_alysse_Righteous","kol_larkspur_Standard","kol_tamarisk_Standard","kol_mimosa_Standard","kol_mimosa_Standard","kol_sundew_Standard","kol_sundew_Onager","dram_Light"]
+	  ["kol_alysse_Righteous","kol_larkspur_Hellfire","kol_tamarisk_Anointed","kol_mimosa_Artillery","kol_mimosa_Barrage","kol_sundew_Squire","kol_sundew_Onager","dram_Light"]
 	],
     
     "startSpecialItems":[],

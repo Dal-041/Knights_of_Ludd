@@ -595,10 +595,10 @@ zea_edf_onmoraki,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_on
 zea_edf_suzaku,ship,,0.5,normal,graphics/maps/ship_normals/fighters/zea_edf_suzaku_normal.png
 ,,,,,
 #we have gun too you know,,,,,
-zea_bricole_m,hardpoint,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_hardpoint_base_normal.png
-zea_bricole_m,hardpointbarrel,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_hardpoint_recoil_normal.png
-zea_bricole_m,turret,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_turret_base_normal.png
-zea_bricole_m,turretbarrel,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_turret_recoil_normal.png
+kol_bricole,hardpoint,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_hardpoint_base_normal.png
+kol_bricole,hardpointbarrel,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_hardpoint_recoil_normal.png
+kol_bricole,turret,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_turret_base_normal.png
+kol_bricole,turretbarrel,,0.5,normal,graphics/maps/weapon_normals/zea_edf_arbalest_turret_recoil_normal.png
 ,,,,,
 #can you hear,,,,,
 zea_edf_tamamo,ship,,,material,graphics/maps/ship_glib/zea_edf_tamamo_material.png
@@ -690,10 +690,10 @@ zea_edf_onmoraki,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_onmora
 zea_edf_suzaku,ship,,,material,graphics/maps/ship_glib/fighters/zea_edf_suzaku_material.png
 ,,,,,
 #its really gun,,,,,
-zea_bricole_m,hardpoint,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_material.png
-zea_bricole_m,hardpointbarrel,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_recoil_material.png
-zea_bricole_m,turret,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_turret_base_material.png
-zea_bricole_m,turretbarrel,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_turret_recoil_material.png
+kol_bricole,hardpoint,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_material.png
+kol_bricole,hardpointbarrel,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_recoil_material.png
+kol_bricole,turret,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_turret_base_material.png
+kol_bricole,turretbarrel,,,material,graphics/maps/weapon_glib/zea_edf_arbalest_turret_recoil_material.png
 ,,,,,
 #can you hear,,,,,
 zea_edf_tamamo,ship,,,surface,graphics/maps/ship_glib/zea_edf_tamamo_surface.png
@@ -786,7 +786,7 @@ zea_edf_onmoraki,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_onmorak
 zea_edf_suzaku,ship,,,surface,graphics/maps/ship_glib/fighters/zea_edf_suzaku_surface.png
 ,,,,,
 #it work and it shoot,,,,,
-zea_bricole_m,hardpoint,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_surface.png
-zea_bricole_m,hardpointbarrel,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_recoil_surface.png
-zea_bricole_m,turret,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_turret_base_surface.png
-zea_bricole_m,turretbarrel,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_turret_recoil_surface.png
+kol_bricole,hardpoint,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_base_surface.png
+kol_bricole,hardpointbarrel,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_hardpoint_recoil_surface.png
+kol_bricole,turret,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_turret_base_surface.png
+kol_bricole,turretbarrel,,,surface,graphics/maps/weapon_glib/zea_edf_arbalest_turret_recoil_surface.png

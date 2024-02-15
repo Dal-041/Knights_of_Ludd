@@ -18,8 +18,8 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "zea_bricole_m",
-                "WS0003": "zea_bricole_m",
+                "WS0004": "kol_bricole",
+                "WS0003": "kol_bricole",
             }
         },
         {

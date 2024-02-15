@@ -552,7 +552,7 @@ public class PrepareDarkDeeds {
         params.random = new Random();
 
         CampaignFleetAPI support = FleetFactoryV3.createFleet(params);
-        copyFleetMembers(Factions.REMNANTS, support, TT3BossFleet);
+        copyFleetMembers(Factions.REMNANTS, support, TT3BossFleet, false);
         support.despawn();
 
         TT3BossFleet.setNoFactionInName(true);

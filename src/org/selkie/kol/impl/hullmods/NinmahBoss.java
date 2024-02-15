@@ -9,8 +9,6 @@ import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
-import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
-import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
@@ -19,14 +17,12 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
-import org.selkie.kol.impl.combat.StarficzAIUtils.*;
+import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils.*;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
-
-import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class NinmahBoss extends BaseHullMod {
 
@@ -276,7 +272,7 @@ public class NinmahBoss extends BaseHullMod {
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
             float bufferTime = 0.2f; // 0.2 sec of buffer time before getting hit
-            float armorBase = StarficzAIUtils.getWeakestTotalArmor(ship);
+            float armorBase = StarficzAIUtils.getCurrentArmorRating(ship);
             float armorMax = ship.getArmorGrid().getArmorRating();
             float armorMinLevel = ship.getMutableStats().getMinArmorFraction().getModifiedValue();
             float armorUnphase = armorBase;
@@ -488,10 +484,8 @@ public class NinmahBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED){
-            ship.addListener(new NinmahBossPhaseTwoScript(ship));
-
-            if(ship.getHullSpec().getBaseHullId().endsWith("ninmah"))
-                ship.addListener(new NinmahBoss.NinmahAIScript(ship));
+            if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));
+            if(!ship.hasListenerOfClass(NinmahAIScript.class)) ship.addListener(new NinmahAIScript(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

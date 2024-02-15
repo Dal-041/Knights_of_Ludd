@@ -1,0 +1,55 @@
+{
+    "displayName": "Knight",
+    "fluxCapacitors": 6,
+    "fluxVents": 30,
+    "goalVariant": true,
+    "hullId": "kol_larkspur",
+    "hullMods": [
+        "armoredweapons",
+        "ballistic_rangefinder",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_larkspur_Knight",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_llyr",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0008": "breachpod",
+                "WS0007": "breachpod",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "heavyac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "vulcan",
+                "WS0004": "flak",
+                "WS0005": "flak",
+                "WS0003": "vulcan",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_larkspur_tl_Knight"},
+        {"ARMOR_MODULE_TR": "kol_larkspur_tr_Knight"},
+    ],
+}

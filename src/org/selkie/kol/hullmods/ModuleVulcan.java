@@ -11,24 +11,18 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 
 import java.awt.*;
-import java.io.IOException;
 
 public class ModuleVulcan extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ship.getVariant().assignUnassignedWeapons();
         ship.getMutableStats().getBallisticWeaponRangeBonus().modifyFlat(id, 300f);
-        try {
-            Global.getSettings().loadTexture("graphics/weapons/vulcan_cannon_turret.png");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         if(Global.getCurrentState() != GameState.COMBAT) return;
-        if(!Global.getCombatEngine().isEntityInPlay(ship) || !ship.isAlive()) return;
+        if(!Global.getCombatEngine().isEntityInPlay(ship) || ship.getHitpoints() <= 0f) return;
 
         // fake snowdrops vulcan cannons
         if(ship.getHullSpec().getHullId().contains("kol_snowdrop")){

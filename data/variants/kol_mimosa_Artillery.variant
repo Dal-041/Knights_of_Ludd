@@ -1,0 +1,49 @@
+{
+    "displayName": "Artillery",
+    "fluxCapacitors": 10,
+    "fluxVents": 20,
+    "goalVariant": true,
+    "hullId": "kol_mimosa",
+    "hullMods": [
+        "armoredweapons",
+        "ballistic_rangefinder",
+        "escort_package",
+        "targetingunit",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "kol_mimosa_Artillery",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "heavyac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0006": "lightac",
+                "WS0004": "kol_drian",
+                "WS0005": "lightac",
+                "WS0003": "kol_drian",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "kol_tor",
+                "WS0002": "kol_tor",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_mimosa_tl_Artillery"},
+        {"ARMOR_MODULE_TR": "kol_mimosa_tr_Artillery"},
+    ],
+}

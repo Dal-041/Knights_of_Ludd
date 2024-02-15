@@ -131,6 +131,7 @@
 			"broadsword_wing",
 			"perdition_wing",
 			"talon_wing",
+			"sarissa_wing",
 		],
 	},
 	"priorityFighters":{
@@ -187,6 +188,7 @@
 			"pilum_large",
 			"hurricane",
 			"hammerrack",
+			"locust",
 			
 			"mininglaser",
 			"miningblaster",
@@ -308,11 +310,14 @@
 			"stationCommander":{"name":"Bishop-Commander"},
 			"outpostCommander":{"name":"Knight-Commander"},
 			"administrator":{"name":"Presbyter Orbis"},
+			"military_administrator":{"name":"Chaptermaster"},
+			"militaryAdministrator":{"name":"Chaptermaster"},
 			"genericMilitary":{"name":"Knight-Commander"},
 			"portmaster":{"name":"Portwatcher"},
 			#"quartermaster":{"name":"Purser"},
 			"factionLeader":{"name":"Grandmaster"},
-			"guardLeader":{"name":"Chaptermaster"},
+			"guardLeader":{"name":"Knight-Leader"},
+			"intelligenceDirector":{"name":"Master of Agents"},
 		},
 	},
 	"custom":{

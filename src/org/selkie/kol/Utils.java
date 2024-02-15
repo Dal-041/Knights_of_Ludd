@@ -3,11 +3,13 @@ package org.selkie.kol;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -88,6 +90,35 @@ public class Utils {
                 }
             }
         }
+    }
+    private static long dialogTime = 0;
+    private static long commandTime = 0;
+    private static long hudTime = 0;
+    public static float getUIAlpha(boolean isPauseIncluded) {
+        final float DIALOG_ALPHA = 0.33f;
+        final float DIALOG_FADE_OUT_TIME = 333f;
+        final float DIALOG_FADE_IN_TIME = 250f;
+        final float COMMAND_FADE_OUT_TIME = 200f;
+        final float COMMAND_FADE_IN_TIME = 111f;
+
+        // Used to properly interpolate between UI fade colors
+        float alpha;
+        if (Global.getCombatEngine().getCombatUI().isShowingCommandUI()) {
+            commandTime = System.currentTimeMillis();
+            alpha = 1-(float) Math.pow(Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f), 10f);
+        } else if (Global.getCombatEngine().isUIShowingDialog()) {
+            dialogTime = System.currentTimeMillis();
+            if (isPauseIncluded) alpha = 1;
+            else alpha = Misc.interpolate(1f, DIALOG_ALPHA, Math.min((dialogTime - hudTime) / DIALOG_FADE_OUT_TIME, 1f));
+        }  else if (dialogTime > commandTime) {
+            hudTime = System.currentTimeMillis();
+            if (isPauseIncluded) alpha = 1;
+            else alpha = Misc.interpolate(DIALOG_ALPHA, 1f, Math.min((hudTime - dialogTime) / DIALOG_FADE_IN_TIME, 1f));
+        } else {
+            hudTime = System.currentTimeMillis();
+            alpha =(float) Math.pow(Math.min((hudTime - commandTime) / COMMAND_FADE_IN_TIME, 1f), 0.5f);
+        }
+        return MathUtils.clamp(alpha, 0f, 1f);
     }
 
     public static void shipSpawnExplosion(float size, Vector2f location){
@@ -189,4 +220,26 @@ public class Utils {
         return minOut + (input - minIn) * (maxOut - minOut) / (maxIn - minIn);
     }
 
+    private static final String DRONE_SHIELD_TARGET_KEY = "droneShieldTargetKey";
+
+    public static ShipAPI getDroneShieldTarget(ShipAPI drone) {
+        return drone.getCustomData().containsKey(DRONE_SHIELD_TARGET_KEY) ? (ShipAPI) drone.getCustomData().get(DRONE_SHIELD_TARGET_KEY) : null;
+    }
+
+    public static void setDroneShieldTarget(ShipAPI drone, ShipAPI target) {
+        if (target == null) {
+            drone.getCustomData().remove(DRONE_SHIELD_TARGET_KEY);
+        } else {
+            drone.setCustomData(DRONE_SHIELD_TARGET_KEY, target);
+        }
+    }
+
+    public static boolean anyDronesShieldingShip(ShipAPI target) {
+        for (ShipAPI drone : AIUtils.getAlliesOnMap(target)) {
+            if (drone.getCustomData().containsKey(DRONE_SHIELD_TARGET_KEY) && drone.getCustomData().get(DRONE_SHIELD_TARGET_KEY) == target) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

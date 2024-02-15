@@ -9,19 +9,14 @@ import com.fs.starfarer.api.impl.campaign.ids.Commodities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Skills;
 import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
-import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
-import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.awt.*;
-
-import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class NinevehBoss extends BaseHullMod {
     public static class NinevehBossPhaseTwoScript implements AdvanceableListener, HullDamageAboutToBeTakenListener {
@@ -283,7 +278,7 @@ public class NinevehBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
-            ship.addListener(new NinevehBoss.NinevehBossPhaseTwoScript(ship));
+            if(!ship.hasListenerOfClass(NinevehBossPhaseTwoScript.class)) ship.addListener(new NinevehBossPhaseTwoScript(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

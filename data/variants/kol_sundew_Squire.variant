@@ -1,0 +1,34 @@
+{
+    "displayName": "Squire",
+    "fluxCapacitors": 9,
+    "fluxVents": 10,
+    "goalVariant": true,
+    "hullId": "kol_sundew",
+    "hullMods": [
+        "hardened_subsystems",
+        "heavyarmor",
+        "armoredweapons"
+    ],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_sundew_tl_Squire"},
+        {"ARMOR_MODULE_TR": "kol_sundew_tr_Squire"}
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "variantId": "kol_sundew_Squire",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "lightmortar",
+                "WS0003": "lightmortar"
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {"WS0001": "kol_llyr"}
+        }
+    ]
+}

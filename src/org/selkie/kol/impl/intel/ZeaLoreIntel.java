@@ -64,7 +64,19 @@ public class ZeaLoreIntel extends BaseIntelPlugin {
     public void setDesc(String text, boolean append, String[] highlights) {
         if (append) {
             desc.concat(" " + text);
-            //Add a loop for concatting highlights
+            int oldSize = this.descHighlights.length;
+            int newSize = this.descHighlights.length+highlights.length;
+            if (newSize > oldSize) {
+                String[] temp = new String[newSize];
+                for (int i = 0; i < newSize; i++) {
+                    if (i < oldSize) {
+                        temp[i] = this.descHighlights[i];
+                    } else {
+                        temp[i] = highlights[i];
+                    }
+                }
+                this.descHighlights = temp;
+            }
             return;
         }
         this.desc = text;

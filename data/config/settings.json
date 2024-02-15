@@ -269,11 +269,12 @@
 			"zea_dusk_onryo_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_onryo_glow1.png",
 			"zea_dusk_onryo_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_onryo_glow2.png",
 			"zea_dusk_funayurei_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow1.png",
-			"zea_dusk_funayurei_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow2.png"
+			"zea_dusk_funayurei_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow2.png",
 		},
 		"illustrations":{
 			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",
 			"kol_citadel_large":"graphics/illustrations/kol_citadel_big.png",
+			"zea_banner":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/illustrations/zea_banner.png",
 		},
 		"terrain":{
 			"nebula_zea_black":"graphics/terrain/nebula_kol_black_shiny.png",
@@ -312,14 +313,9 @@
 			"zea_dusk_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_dusk_1.png",
 			"zea_dusk_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_dusk_2.png",
 			"zea_dusk_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_dusk_3.png",
-			"zea_idk1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk1.png",
-			"zea_idk2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk2.png",
-			"zea_idk3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_idk3.png",
 			"zea_edf_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_1.png",
 			"zea_edf_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_2.png",
-			"zea_dawn_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_dawn_boss_core.png",
-			"zea_dusk_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_dusk_boss_core.png",
-			"zea_elysia_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_elysia_boss_core.png"
+			"zea_edf_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_3.png",
 		},
 		"icons": {
 			"coronal_cap_top":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_top.png",
@@ -330,28 +326,56 @@
 			"kol_modules": "graphics/icons/hullsys/kol_modules_ico.png",
 			"kol_composite_grey": "graphics/icons/hullsys/kol_composite_grey_ico.png",
 			"kol_primshield_grey": "graphics/icons/hullsys/kol_primshield_grey_ico.png",
-			"kol_modules_grey": "graphics/icons/hullsys/kol_modules_grey_ico.png"
+			"kol_modules_grey": "graphics/icons/hullsys/kol_modules_grey_ico.png",
+			"kol_USC_ping":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/PING.png",
+			"game_icon":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/icon.png",
 		},
 		"lore_item": {
 			"zea_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dawn.png",
 			"zea_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dusk.png",
-			"zea_elysians":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_edf.png"
+			"zea_elysians":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_edf.png",
+		},
+		"paperdolls": {
+			"kol_lunaria_tl" : "graphics/ships/modules/paperdolls/kol_lunaria_tl_paperdoll.png",
+			"kol_lunaria_tr" : "graphics/ships/modules/paperdolls/kol_lunaria_tr_paperdoll.png",
+			"kol_lunaria_ml" : "graphics/ships/modules/paperdolls/kol_lunaria_ml_paperdoll.png",
+			"kol_lunaria_mr" : "graphics/ships/modules/paperdolls/kol_lunaria_mr_paperdoll.png",
+			"kol_lunaria_ll" : "graphics/ships/modules/paperdolls/kol_lunaria_ll_paperdoll.png",
+			"kol_lunaria_lr" : "graphics/ships/modules/paperdolls/kol_lunaria_lr_paperdoll.png",
+			"kol_alysse_tl" : "graphics/ships/modules/paperdolls/kol_alysse_tl_paperdoll.png",
+			"kol_alysse_tr" : "graphics/ships/modules/paperdolls/kol_alysse_tr_paperdoll.png",
+			"kol_alysse_ll" : "graphics/ships/modules/paperdolls/kol_alysse_ll_paperdoll.png",
+			"kol_alysse_lr" : "graphics/ships/modules/paperdolls/kol_alysse_lr_paperdoll.png",
+			"kol_lotus_tl" : "graphics/ships/modules/paperdolls/kol_lotus_tl_paperdoll.png",
+			"kol_lotus_tr" : "graphics/ships/modules/paperdolls/kol_lotus_tr_paperdoll.png",
+			"kol_lotus_ll" : "graphics/ships/modules/paperdolls/kol_lotus_ll_paperdoll.png",
+			"kol_lotus_lr" : "graphics/ships/modules/paperdolls/kol_lotus_lr_paperdoll.png",
+			"kol_snowdrop_tl" : "graphics/ships/modules/paperdolls/kol_snowdrop_tl_paperdoll.png",
+			"kol_snowdrop_tr" : "graphics/ships/modules/paperdolls/kol_snowdrop_tr_paperdoll.png",
+			"kol_snowdrop_ll" : "graphics/ships/modules/paperdolls/kol_snowdrop_ll_paperdoll.png",
+			"kol_snowdrop_lr" : "graphics/ships/modules/paperdolls/kol_snowdrop_lr_paperdoll.png",
+			"kol_tamarisk_tl" : "graphics/ships/modules/paperdolls/kol_tamarisk_tl_paperdoll.png",
+			"kol_tamarisk_tr" : "graphics/ships/modules/paperdolls/kol_tamarisk_tr_paperdoll.png",
+			"kol_tamarisk_ll" : "graphics/ships/modules/paperdolls/kol_tamarisk_ll_paperdoll.png",
+			"kol_tamarisk_lr" : "graphics/ships/modules/paperdolls/kol_tamarisk_lr_paperdoll.png",
+			"kol_sundew_tl" : "graphics/ships/modules/paperdolls/kol_sundew_tl_paperdoll.png",
+			"kol_sundew_tr" : "graphics/ships/modules/paperdolls/kol_sundew_tr_paperdoll.png",
+			"kol_larkspur_tl" : "graphics/ships/modules/paperdolls/kol_larkspur_tl_paperdoll.png",
+			"kol_larkspur_tr" : "graphics/ships/modules/paperdolls/kol_larkspur_tr_paperdoll.png",
+			"kol_mimosa_tl" : "graphics/ships/modules/paperdolls/kol_mimosa_tl_paperdoll.png",
+			"kol_mimosa_tr" : "graphics/ships/modules/paperdolls/kol_mimosa_tr_paperdoll.png",
 		}
 	},
 	"designTypeColors":{
 		"Knights of Ludd":[25,115,10,255],
 		"Dawntide":[0,255,100,255],
 		"Duskborne":[25,25,25,255],
-		"Elysia":[255,253,222,255]
+		"Elysia":[255,253,222,255],
 	},
 	"plugins": {
-		"KOLParticleController": "org.selkie.kol.impl.plugins.ZeaCombatPlugin"
+		"KOL_CombatPlugin": "org.selkie.kol.plugins.KOL_CombatPlugin",
 	},
 	"ruleCommandPackages": [
-        "org.selkie.kol.impl.rulecmd"
-    ],
-	
-	"drop_prob_officer_zea_dusk_boss_core":0,
-	"drop_prob_officer_zea_dawn_boss_core":0,
-	"drop_prob_officer_zea_elysia_boss_core":0,
+        "org.selkie.kol.impl.rulecmd",
+    ]
 }

@@ -12,11 +12,11 @@ import java.util.Random;
 
 public class TrackFleet implements EveryFrameScript {
 
-    private boolean inited = false;
     protected IntervalUtil iMain = new IntervalUtil(2, 2); //Seconds
     protected IntervalUtil iSecond = new IntervalUtil(3, 3); //multiplied by iMain
     protected StarSystemAPI under = null;
     protected SectorEntityToken targ = null;
+    public static boolean zEAVisit = false;
 
     @Override
     public boolean isDone() {

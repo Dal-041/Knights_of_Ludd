@@ -1,5 +1,5 @@
 {
-	"id":"kol_mcf",
+	"id":"kol_canister_flak",
 	"type":"WEAPON",
 	"aiType":"CUSTOM",
 	"aiScript":"org.selkie.kol.shipsystems.AI.BratSystemAI",

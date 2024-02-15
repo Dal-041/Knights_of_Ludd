@@ -6,7 +6,6 @@ import activators.drones.DroneActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.impl.combat.ShockwaveVisual;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
@@ -16,10 +15,7 @@ import org.dark.shaders.distortion.RippleDistortion;
 import org.dark.shaders.light.LightShader;
 import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.util.MagicRender;
-import org.magiclib.util.MagicTargeting;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -56,7 +52,7 @@ public class GraciousLightStats extends BaseShipSystemScript {
                 0.5f,
                 BURNING_LIGHT_RANGE,
                 BURNING_LIGHT_RANGE / 2f,
-                500f,
+                1000f,
                 150f,
                 CollisionClass.PROJECTILE_NO_FF,
                 CollisionClass.PROJECTILE_FIGHTER,
@@ -74,12 +70,12 @@ public class GraciousLightStats extends BaseShipSystemScript {
         ShockwaveVisual.ShockwaveParams params = new ShockwaveVisual.ShockwaveParams();
         params.loc = ship.getLocation();
         params.color = new Color(MathUtils.getRandomNumberInRange(225, 255), 120, 50, 20);
-        params.radius = BURNING_LIGHT_RANGE / 1.2f;
+        params.radius = BURNING_LIGHT_RANGE;
         ShockwaveVisual.spawnShockwave(params);
 
         if (KOL_ModPlugin.hasGraphicsLib) {
             RippleDistortion ripple = new RippleDistortion(ship.getLocation(), new Vector2f());
-            ripple.setSize(BURNING_LIGHT_RANGE / 1.2f);
+            ripple.setSize(BURNING_LIGHT_RANGE);
             ripple.setIntensity(66f);
             ripple.setFrameRate(60f);
             ripple.fadeInSize(0.2f);
@@ -87,7 +83,7 @@ public class GraciousLightStats extends BaseShipSystemScript {
             DistortionShader.addDistortion(ripple);
 
             StandardLight light = new StandardLight(ship.getLocation(), new Vector2f(), new Vector2f(), null);
-            light.setSize(BURNING_LIGHT_RANGE / 1.1f);
+            light.setSize(BURNING_LIGHT_RANGE);
             light.setIntensity(2f);
             light.setLifetime(0.66f);
             light.setAutoFadeOutTime(0.5f);

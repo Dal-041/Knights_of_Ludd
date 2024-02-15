@@ -13,7 +13,7 @@ import kotlin.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.combat.StarficzAIUtils;
+import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.awt.*;
 import java.util.*;
@@ -167,7 +167,7 @@ public class SmartShieldDronesActivator extends DroneActivator {
             // calculate how much damage the ship would take if shields went down
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
             float timeElapsed = currentTime - lastUpdatedTime;
-            float armor = StarficzAIUtils.getWeakestTotalArmor(ship);
+            float armor = StarficzAIUtils.getCurrentArmorRating(ship);
 
             List<Float> droneAngles = new ArrayList<>();
             droneAngles.addAll(omniShieldDirections);

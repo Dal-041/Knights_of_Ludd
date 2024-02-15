@@ -1,7 +1,7 @@
 {
     "displayName": "Rook",
-    "fluxCapacitors": 2,
-    "fluxVents": 30,
+    "fluxCapacitors": 0,
+    "fluxVents": 28,
     "goalVariant": true,
     "hullId": "kol_larkspur",
     "hullMods": [
@@ -23,10 +23,9 @@
         },
         {
             "autofire": false,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
-                "WS0007": "jackhammer",
-                "WS0008": "jackhammer",
+                "WS0008": "sabotpod",
             }
         },
         {
@@ -48,6 +47,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0007": "salamanderpod",
                 "WS0004": "flak",
                 "WS0005": "flak",
             }

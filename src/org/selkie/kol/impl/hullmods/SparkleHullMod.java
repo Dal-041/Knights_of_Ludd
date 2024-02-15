@@ -41,7 +41,7 @@ public class SparkleHullMod extends BaseHullMod {
         maxDrones.put(ShipAPI.HullSize.CAPITAL_SHIP, 20);
     }
 
-    private static String WEAPON = "kol_sparkler_wpn";
+    private static String WEAPON = "zea_dusk_sparkler_wpn";
     private static final String TEST_DATA_KEY = "_test_AI_shared";
 
     public static float FLUX_THRESHOLD_INCREASE_PERCENT = 150f; //Adjusts high flux target, not min flux threshold. Values > 100 allowed and effective

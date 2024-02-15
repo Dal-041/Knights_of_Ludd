@@ -27,7 +27,7 @@ public class DamperbluStats extends BaseShipSystemScript {
         @SuppressWarnings("unused")
 		int dead = 0;
         for (ShipAPI child : ship.getChildModulesCopy()) {
-            if (child.isAlive()) {
+            if ((child.getHitpoints() > 0f)) {
                 child.setJitter(id, JITTER_COLOR, effectLevel, 2, 5);
                 child.setJitterUnder(id, JITTER_UNDER_COLOR, effectLevel, 25, 7);
                 child.getMutableStats().getArmorDamageTakenMult().modifyMult(id, DAMAGE_MULT);
