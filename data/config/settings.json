@@ -316,6 +316,9 @@
 			"zea_edf_1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_1.png",
 			"zea_edf_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_2.png",
 			"zea_edf_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_3.png",
+			"zea_dawn_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_dawn_boss_core.png",
+			"zea_dusk_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_dusk_boss_core.png",
+			"zea_elysia_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_elysia_boss_core.png",
 		},
 		"icons": {
 			"coronal_cap_top":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_top.png",
@@ -377,5 +380,9 @@
 	},
 	"ruleCommandPackages": [
         "org.selkie.kol.impl.rulecmd",
-    ]
+    ],
+	
+	"drop_prob_officer_zea_dusk_boss_core":0,
+	"drop_prob_officer_zea_dawn_boss_core":0,
+	"drop_prob_officer_zea_elysia_boss_core":0,
 }
