@@ -116,6 +116,7 @@ public class PhaseCloakStats extends BaseShipSystemScript {
         ShipAPI ship;
         if (stats.getEntity() instanceof ShipAPI) {
             ship = (ShipAPI) stats.getEntity();
+            id = id + "_" + ship.getId();
         } else {
             return;
         }
