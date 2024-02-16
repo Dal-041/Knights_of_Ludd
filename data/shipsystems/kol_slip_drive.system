@@ -24,7 +24,7 @@
 	"fadeActivationSoundOnChargedown":false,
 	
 	#"useSound":"system_teleport",
-	"loopSound":"kol_phasespace_with_system",	
+	"loopSound":"zea_dusk_phase_skip",
 	"outOfUsesSound":"gun_out_of_ammo",
 	
 	

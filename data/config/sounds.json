@@ -18,7 +18,7 @@
 	[
 		{"file":"sounds/sfx_wpn_energy/gas_burn_loop.ogg","pitch":1.6,"volume":1.4},
 	],
-	"kol_phasespace_lightning_impact":[
+	"zea_dusk_phasespace_lightning_impact":[
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.15,"volume":0.35},
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.20,"volume":0.35},
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.25,"volume":0.35},
@@ -29,8 +29,11 @@
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_3.ogg","pitch":1.20,"volume":0.35},
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_3.ogg","pitch":1.25,"volume":0.35},
 	],
-	"kol_phasespace_with_system":[
+	"zea_dusk_phase_skip":[
 		{"file":"sounds/phasespace_fx/kol_nullspace_with_system.ogg","pitch":1.3,"volume":0.8},
+	],
+	"zea_dusk_phase_cloak":[
+		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_loop_alt.ogg","pitch":1,"volume":1},
 	],
 	"kol_shield_burnout":{
 	        "sounds":[

@@ -15,8 +15,8 @@
 	"soundFilterGain":0.8,
 	"soundFilterGainHF":0.25,
 
-	"useSound":"kol_phasespace_lightning_impact",
-	"loopSound":"kol_phasespace_with_system",
+	"useSound":"zea_dusk_phasespace_lightning_impact",
+	"loopSound":"zea_dusk_phase_skip",
 	"outOfUsesSound":"system_phase_cloak_collision",
 	"aiHints":{
 		"activeSpeedIncrease":200,
