@@ -3,11 +3,13 @@ package org.selkie.kol.impl.intel;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CargoStackAPI;
 import com.fs.starfarer.api.campaign.comm.IntelInfoPlugin;
+import com.fs.starfarer.api.campaign.econ.CommoditySpecAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.SubmarketAPI;
 import com.fs.starfarer.api.campaign.impl.items.BaseSpecialItemPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.awt.*;
@@ -15,6 +17,15 @@ import java.util.ArrayList;
 
 public class ZeaLoreManager extends BaseSpecialItemPlugin {
     protected String params = "";
+
+    protected static ArrayList<String> paramList = new ArrayList<>();
+    static {
+            paramList.add(PrepareAbyss.dawnID);
+            paramList.add(PrepareAbyss.duskID);
+            paramList.add(PrepareAbyss.elysianID);
+            paramList.add(Factions.TRITACHYON);
+            paramList.add(Factions.HEGEMONY);
+    }
 
     public static final int defaultCredits = 25000;
     public static final String[] edfLore = {
@@ -80,6 +91,25 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
             "206-*: [Catastrophic data loss]";
     public static final String[] TT3DropHLs = { "H-C integration trials", "Autonomous and semi-autonomous systems", "Commission approved.", "human factors", "Project Flagship", "one of the restricted cores" };
 
+    //Needed if manipulating as normal cargo
+    //CommoditySpecAPI commoditySpec;
+
+    @Override
+    public void init(CargoStackAPI stack) {
+        super.init(stack);
+
+        params = spec.getParams();
+
+        String data = stack.getSpecialDataIfSpecial().getData();
+
+        if (data == null || !paramList.contains(data)) {
+            data = "default";
+            stack.getSpecialDataIfSpecial().setData(data);
+        } else {
+            params = data;
+        }
+    }
+
     public static void loadHighlightLists() {
         String[] empty = null;
         for (int i = 0; i < dawnLore.length; i++) {
@@ -102,7 +132,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
     public static void AddLoreIntel(String params) {
         int count = 0;
 
-        if (Global.getSector() == null || Global.getSector().getPlayerFleet() == null || params == null) return;
+        if (Global.getSector() == null || Global.getSector().getPlayerFleet() == null || params.equals("")) return;
 
         if (edfLoreHLs.isEmpty()) loadHighlightLists();
 
@@ -178,13 +208,6 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
         }
         //No factions???
         Global.getSector().getPlayerFleet().getCargo().getCredits().add(defaultCredits);
-    }
-
-    @Override
-    public void init(CargoStackAPI stack) {
-        super.init(stack);
-
-        params = spec.getParams();
     }
 
     @Override
