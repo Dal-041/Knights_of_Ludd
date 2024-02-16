@@ -79,10 +79,14 @@ public class SpawnRetribution {
 	                    .setTransponderOn(true)
 	                    .create();
 	            RetributionFleet.setDiscoverable(false);
+				RetributionFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+				RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+
 				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 	            RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 	            RetributionFleet.addEventListener(new ManageRetribution());
+
 	        }
 
 		return true;

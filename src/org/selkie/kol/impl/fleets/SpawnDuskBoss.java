@@ -7,6 +7,7 @@ import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
+import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -71,6 +72,8 @@ public class SpawnDuskBoss {
 		duskBossFleet.setDiscoverable(true);
 		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
 		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+		duskBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+		duskBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
 

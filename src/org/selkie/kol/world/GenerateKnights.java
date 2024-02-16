@@ -109,7 +109,7 @@ public class GenerateKnights {
 		cygnus.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(cygnus.getMarket().getId());
 
-		cygnus.setInteractionImage("illustrations", "kol_citadel_large");
+		cygnus.setInteractionImage("illustrations", "kol_tree_canaan_large");
 
 		MarketHelpers.addMarketPeople(cygnus.getMarket());
 

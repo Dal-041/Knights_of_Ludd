@@ -12,7 +12,6 @@
   "shieldRadius": 397.5,
   "viewOffset": 0,
   "builtInMods": [
-    "kol_module",
 	"ablative_armor",
     "reduced_explosion",
     "targetingunit",

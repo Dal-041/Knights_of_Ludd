@@ -242,7 +242,7 @@
 	
 	
 	
-	#Fine, but don't post spoilers.
+	#Fine, but don't post spoilers please.
 	
 	"graphics":{
 		"blueprint_packages":{
@@ -273,6 +273,8 @@
 		},
 		"illustrations":{
 			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",
+			"kol_forest_path_large":"graphics/illustrations/kol_forest_path_big.png",
+			"kol_tree_canaan_large":"graphics/illustrations/kol_tree_canaan_big.png",
 			"kol_citadel_large":"graphics/illustrations/kol_citadel_big.png",
 			"zea_banner":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/illustrations/zea_banner.png",
 		},

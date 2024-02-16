@@ -6,10 +6,7 @@ import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Abilities;
-import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
-import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
-import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -75,6 +72,8 @@ public class SpawnElysianHeart {
 		        .setTransponderOn(true)
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
+		elysianHeartFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+		elysianHeartFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(elysianHeartFleet, 440);
 

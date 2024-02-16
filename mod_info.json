@@ -4,7 +4,7 @@
 	"author":"Selkie, Dal, Starficz",
 	"version":"1.0.0",
 	"description":"Adds the Knights of Ludd faction and content!",
-    "gameVersion": "0.97a-RC8",
+    "gameVersion": "0.97a-RC10",
 	"jars": ["jars/KnightsOfSelkie.jar"],
 	"modPlugin":"org.selkie.kol.plugins.KOL_ModPlugin",
 	"dependencies": [

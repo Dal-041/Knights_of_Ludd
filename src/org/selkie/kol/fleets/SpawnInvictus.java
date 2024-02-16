@@ -79,6 +79,8 @@ public class SpawnInvictus {
 	                    .setTransponderOn(true)
 	                    .create();
 	            invictusFleet.setDiscoverable(false);
+				invictusFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+
 				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 	            invictusFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);

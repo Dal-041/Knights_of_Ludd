@@ -5,10 +5,7 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.impl.campaign.ids.Abilities;
-import com.fs.starfarer.api.impl.campaign.ids.FleetTypes;
-import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
-import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -68,6 +65,8 @@ public class SpawnElysianAmaterasu {
 		        .setTransponderOn(true)
 		        .create();
 		elysianBossFleet.setDiscoverable(true);
+		elysianBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(elysianBossFleet, 440);
 
