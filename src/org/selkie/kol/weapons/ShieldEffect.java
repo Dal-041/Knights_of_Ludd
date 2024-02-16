@@ -5,19 +5,21 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import org.apache.log4j.Logger;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicUI;
 import org.selkie.kol.Utils;
 
-import java.awt.Color;
-import java.util.*;
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.selkie.kol.combat.StarficzAIUtils.*;
 
 //Concept and impl by Tartiflette, AI by Starficz
 
 public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
-    
+    private static final Logger log = Global.getLogger(ShieldEffect.class);
     private final float MAX_SHIELD=10;
     private boolean runOnce = false, disabled=false;
     private float shieldT=0,aiT=0;
@@ -35,11 +37,20 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     public List<FutureHit> combinedHits = new ArrayList<>();
     public List<Float> omniShieldDirections = new ArrayList<>();
     public float lastShieldOnTime = 0f;
+    public long debugTime = 0;
+
+    private final IntervalUtil debugTracker = new IntervalUtil(10f, 10f); //Seconds
     
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        
-        
+
+        debugTracker.advance(amount);
+        if(debugTracker.intervalElapsed()){
+            log.debug("nanoseconds " + weapon.getShip().getHullSpec().getHullId() + ":"+ weapon.getShip().getName() + " spent in shield ai in the last " +
+                    debugTracker.getMaxInterval() + " seconds: " + debugTime + " (" + debugTime*0.000000001 + " seconds)");
+            debugTime = 0;
+        }
+
         if (!runOnce){
             runOnce=true;
             ship=weapon.getShip();
@@ -84,7 +95,6 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
                     else
                         ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
                 }
-
             }
 
             // Overloaded Shields
@@ -107,6 +117,7 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     }
 
     public boolean wantToShield(float amount){
+        long startTime = System.nanoTime();
         tracker.advance(amount);
         if (tracker.intervalElapsed()) {
             lastUpdatedTime = Global.getCombatEngine().getTotalElapsedTime(false);
@@ -223,6 +234,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
         if ((hullDamageIfNoShield + armorDamageIfNoShield) > 4000f) // Unless a reaper is on the way, in that case try and block it no matter what
             wantToShield = true;
 
+        long endTime = System.nanoTime();
+        debugTime += (endTime - startTime);
         return wantToShield;
     }
 
