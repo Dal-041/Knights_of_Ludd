@@ -16,8 +16,8 @@ public class BlizzardActivator extends CombatActivator {
     public static float tActive = entry.getActive();
     public float tCD = entry.getCooldown(stats);
     public float tRegen = entry.getRegen(stats);
-    public static PulsarSystem pulsar = new PulsarSystem();
-    public static float beamRange = pulsar.PULSAR_LENGTH;
+    public PulsarSystem pulsar = new PulsarSystem();
+    public float beamRange = pulsar.PULSAR_LENGTH;
 
     IntervalUtil intervalAI = new IntervalUtil(0.5f, 1f);
     IntervalUtil intervalActive = new IntervalUtil(0.5f, 1f);

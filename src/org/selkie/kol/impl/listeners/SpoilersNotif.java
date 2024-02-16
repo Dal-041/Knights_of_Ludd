@@ -19,9 +19,9 @@ import static org.selkie.kol.impl.helpers.ZeaUtils.KEY_ZEA_SPOILERS;
 
 public class SpoilersNotif implements EveryFrameScript {
 
-    public static IntervalUtil check = new IntervalUtil(8,11);
-    public static IntervalUtil delay = new IntervalUtil(15,15);
-    public static boolean fire = false;
+    public IntervalUtil check = new IntervalUtil(8,11);
+    public IntervalUtil delay = new IntervalUtil(15,15);
+    public boolean fire = false;
 
     public static final String icon = Global.getSettings().getSpriteName("icons", "game_icon");
     public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a %s of hidden content. We worked very hard on it and hope you enjoy it very much.\n\nWe ask that you %s for the first couple weeks after release. Its our hope that players can organically discover all that the mod contains.\n\nThanks, and once again please enjoy our mods, %s and %s.\n- The Knights of Ludd/Elysium team";

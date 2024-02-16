@@ -31,6 +31,9 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     private val spriteRing = Global.getSettings().getSprite("fx", "zea_ring_targeting")
     private val SPRITE_PATH = ""
 
+    private val glowColorFull = Color(200,150,50, 200)
+    private val glowColorEmpty = Color(255,100,25, 0)
+
     private val EFFECT_RANGE =
         DAMAGE_RANGE-(DAMAGE_RANGE*0.05f) //"For "player visual purposes" we reduce it by 5% See some random player theory crap."
     private val effectSize = Vector2f(EFFECT_RANGE*2, EFFECT_RANGE*2)
@@ -74,6 +77,11 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
     }
 
     override fun onActivate() {
+        if (ship.isAlive) {
+            val glowColorNow = Misc.interpolateColor(glowColorEmpty, glowColorFull, ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float)
+            Global.getCombatEngine().addSmoothParticle(ship.location, ZERO, DAMAGE_RANGE*4f, 1f, 0.1f, glowColorNow)
+        }
+
         //spawn an explosion with no effects
         val explosionDamage = getDamage()
         val explosionSpec = DamagingExplosionSpec(
@@ -122,19 +130,14 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 
     override fun advance(amount: Float) {
         if (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] == null) return; //Hopefully just one frame
-        if (ship.isAlive) {
-            val glowColorFull = Color(200,150,50, 200)
-            val glowColorEmpty = Color(255,100,25, 0)
-            val glowColorNow = Misc.interpolateColor(glowColorEmpty, glowColorFull, ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float)
-            Global.getCombatEngine().addSmoothParticle(ship.location, ZERO, DAMAGE_RANGE*4f, 1f, 0.01f, glowColorNow)
-            if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
-                return;
-            } else {
-                if (!ship.isHulk && !ship.isPiece && ship.isAlive) {
-                    MagicRender.singleframe(spriteRing, ship.location, effectSize, 0f, glowColorNow, true)
-                }
+        if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
+            return;
+        } else {
+            if (!ship.isHulk && !ship.isPiece && ship.isAlive) {
+                val glowColorNow = Misc.interpolateColor(glowColorEmpty, glowColorFull, ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float)
+                MagicRender.singleframe(spriteRing, ship.location, effectSize, 0f, glowColorNow, true)
             }
-        };
+        }
 
         if (canActivate()) {
             if (dummyMine == null) {

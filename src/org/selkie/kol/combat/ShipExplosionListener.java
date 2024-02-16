@@ -10,8 +10,6 @@ import java.util.HashMap;
 
 public class ShipExplosionListener implements DamageTakenModifier {
 
-    public final float REDUCED_EXPLOSION_MULT = 0.2f;
-
     //Inherited from Iron Shell, HMI, Rubi, and many who've come before.
     @Override
     public String modifyDamageTaken(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f point, boolean shieldHit) {
@@ -24,7 +22,7 @@ public class ShipExplosionListener implements DamageTakenModifier {
                     && !proj.getSource().isAlive()
                     && proj.getSpawnType().equals(ProjectileSpawnType.OTHER)
                     && MathUtils.getDistance(proj.getSpawnLocation(), proj.getSource().getLocation()) < 0.5f) {
-                damage.getModifier().modifyMult(this.getClass().getName(), REDUCED_EXPLOSION_MULT);
+                damage.getModifier().modifyMult(this.getClass().getName(), 0.2f);
                 return this.getClass().getName();
             }
         }
