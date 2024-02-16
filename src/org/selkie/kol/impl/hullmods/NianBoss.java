@@ -86,7 +86,10 @@ public class NianBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ActivatorManager.addActivator(ship, new NianFlaresActivator(ship));
-        if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
+        boolean isBoss = ship.getVariant().hasTag("kol_boss") || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains("kol_boss"))));
+
+        if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NianBossEnragedScript.class)) ship.addListener(new NianBossEnragedScript(ship));
         }
     }

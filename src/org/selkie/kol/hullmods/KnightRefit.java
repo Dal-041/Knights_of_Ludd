@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.listeners.DamageTakenModifier;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
 import com.fs.starfarer.api.loading.HullModSpecAPI;
@@ -11,15 +12,18 @@ import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.combat.entities.DamagingExplosion;
+import org.lazywizard.lazylib.CollisionUtils;
+import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 import org.selkie.kol.combat.ShipExplosionListener;
+import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /*
@@ -82,6 +86,7 @@ public class KnightRefit extends BaseHullMod {
 
         if(!ship.hasListenerOfClass(ModuleUnhulker.class)) ship.addListener(new ModuleUnhulker());
         if(!ship.hasListenerOfClass(ShipExplosionListener.class)) ship.addListener(new ShipExplosionListener());
+        if(!ship.hasListenerOfClass(ExplosionOcclusionRaycast.class)) ship.addListener(new ExplosionOcclusionRaycast());
     }
 
     public static class ModuleUnhulker implements HullDamageAboutToBeTakenListener {
@@ -96,6 +101,85 @@ public class KnightRefit extends BaseHullMod {
                 }
             }
             return false;
+        }
+    }
+
+    public static class ExplosionOcclusionRaycast implements DamageTakenModifier {
+        public static final int NUM_RAYCASTS = 36;
+        @Override
+        public String modifyDamageTaken(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f point, boolean shieldHit) {
+            // checking for explosions
+            if (param instanceof MissileAPI || param instanceof DamagingExplosion) {
+                Vector2f explosionLocation;
+                float radius;
+                if(param instanceof MissileAPI ){
+                    MissileAPI missile = (MissileAPI) param;
+                    explosionLocation = missile.getLocation();
+                    radius = missile.getSpec().getExplosionRadius();
+                } else{
+                    DamagingExplosion explosion = (DamagingExplosion) param;
+                    explosionLocation = explosion.getLocation();
+                    radius = explosion.getCollisionRadius();
+                }
+
+                // note down all potential occlusions, skip if nothing is in range
+                ShipAPI closestModule = null;
+                float closestDistance = Float.POSITIVE_INFINITY;
+                List<ShipAPI> potentialOcclusions = new ArrayList<>();
+                for (ShipAPI occlusion : ((ShipAPI) target).getChildModulesCopy()){
+                    float explosionDistance = Misc.getTargetingRadius(explosionLocation, occlusion, false) + radius;
+                    float moduleDistance = MathUtils.getDistanceSquared(explosionLocation, occlusion.getLocation());
+                    if(occlusion.getHitpoints() > 0 && moduleDistance < (explosionDistance * explosionDistance)){
+                        potentialOcclusions.add(occlusion);
+                        if(moduleDistance < closestDistance){
+                            closestDistance = moduleDistance;
+                            closestModule = occlusion;
+                        }
+                    }
+                }
+
+                if(potentialOcclusions.isEmpty() || closestModule == null) return null;
+
+                // for everything in range ray cast a bunch of lines
+                int hitShip = 0;
+                int hitModule = 0;
+                List<Vector2f> rayEndpoints = MathUtils.getPointsAlongCircumference(explosionLocation, radius, NUM_RAYCASTS, 0f);
+                for(Vector2f endpoint : rayEndpoints){
+                    float closestDistanceSquared = radius * radius;
+                    for(ShipAPI occlusion : potentialOcclusions){
+                        Vector2f pointOnModuleBounds = CollisionUtils.getCollisionPoint(explosionLocation, endpoint, occlusion);
+                        if(pointOnModuleBounds != null){
+                            closestDistanceSquared = Math.min(closestDistanceSquared, MathUtils.getDistanceSquared(explosionLocation, pointOnModuleBounds));
+                        }
+                    }
+
+                    Vector2f pointOnShipBounds = CollisionUtils.getCollisionPoint(explosionLocation, endpoint, target);
+                    if(pointOnShipBounds != null){
+                        if(closestDistanceSquared < MathUtils.getDistanceSquared(explosionLocation, pointOnShipBounds)){
+                            hitModule++;
+                        } else{
+                            hitShip++;
+                        }
+                    }
+                }
+
+                // if rays hit nothing skip
+                if(hitModule + hitShip == 0) return null;
+
+                // otherwise calculate and apply damage mod
+                float maxNegation = closestModule.getHitpoints() + StarficzAIUtils.getCurrentArmorRating(closestModule);
+
+                float damageMult = (float) hitShip /(hitModule + hitShip);
+
+                if (damage.getDamage() * (1 - damageMult) > maxNegation){
+                    damage.getModifier().modifyFlat(this.getClass().getName(), -maxNegation);
+                } else{
+                    damage.getModifier().modifyMult(this.getClass().getName(), damageMult);
+                }
+                return this.getClass().getName();
+            }
+
+            return null;
         }
     }
 

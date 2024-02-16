@@ -26,6 +26,7 @@ public class ShipExplosionListener implements DamageTakenModifier {
                     && proj.getSpawnType().equals(ProjectileSpawnType.OTHER)
                     && MathUtils.getDistance(proj.getSpawnLocation(), proj.getSource().getLocation()) < 0.5f) {
                 damage.getModifier().modifyMult(this.getClass().getName(), REDUCED_EXPLOSION_MULT);
+                return this.getClass().getName();
             }
         }
         return null;

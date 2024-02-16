@@ -12,6 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.util.Iterator;
@@ -23,6 +24,7 @@ public class KnightModule extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         if(!ship.hasListenerOfClass(ModuleUnhulker.class)) ship.addListener(new ModuleUnhulker());
         if(!ship.hasListenerOfClass(ModuleSystemChild.class)) ship.addListener(new ModuleSystemChild(ship));
+        if(!ship.hasListenerOfClass(ShipExplosionListener.class)) ship.addListener(new ShipExplosionListener());
     }
 
     public static class ModuleUnhulker implements DamageListener, HullDamageAboutToBeTakenListener {

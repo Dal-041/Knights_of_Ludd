@@ -27,6 +27,8 @@ public class NinayaBoss extends BaseHullMod {
         public boolean phaseTwo = false;
         public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
+
+        public static final float MAX_TIME = 8f;
         public ShipAPI ship;
         public ShipAPI escortA = null, escortB = null;
         public String id = "boss_phase_two_modifier";
@@ -50,6 +52,8 @@ public class NinayaBoss extends BaseHullMod {
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
                 return true;
+            } else if(phaseTwo && phaseTwoTimer < MAX_TIME){
+                return true;
             }
 
             return false;
@@ -60,15 +64,14 @@ public class NinayaBoss extends BaseHullMod {
             engine = Global.getCombatEngine();
             float armorRegen = 0.8f;
             float hpRegen = 0.6f;
-            float maxTime = 8f;
 
 
 
-            if(phaseTwo && phaseTwoTimer < maxTime){
+            if(phaseTwo && phaseTwoTimer < MAX_TIME){
 
                 phaseTwoTimer += amount;
 
-                if (phaseTwoTimer > maxTime) {
+                if (phaseTwoTimer > MAX_TIME) {
                     StarficzAIUtils.unapplyDamper(ship, id);
                     StarficzAIUtils.unapplyDamper(escortA, id);
                     StarficzAIUtils.unapplyDamper(escortB, id);
@@ -79,17 +82,17 @@ public class NinayaBoss extends BaseHullMod {
 
 
                 ship.getFluxTracker().setHardFlux(0f);
-                ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/maxTime));
+                ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/MAX_TIME));
                 ArmorGridAPI armorGrid = ship.getArmorGrid();
 
                 for(int i = 0; i < armorGrid.getGrid().length; i++){
                     for(int j = 0; j < armorGrid.getGrid()[0].length; j++){
                         if(armorGrid.getArmorValue(i, j) < armorGrid.getMaxArmorInCell()*armorRegen)
-                            armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()*armorRegen, phaseTwoTimer/maxTime));
+                            armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()*armorRegen, phaseTwoTimer/MAX_TIME));
                     }
                 }
 
-                StarficzAIUtils.applyDamper(ship, id, Utils.linMap(1,0, maxTime*5/6, maxTime, phaseTwoTimer));
+                StarficzAIUtils.applyDamper(ship, id, Utils.linMap(1,0, MAX_TIME*5/6, MAX_TIME, phaseTwoTimer));
                 StarficzAIUtils.stayStill(ship);
                 StarficzAIUtils.holdFire(ship);
 
@@ -131,7 +134,7 @@ public class NinayaBoss extends BaseHullMod {
                 escortAFog.spawnFog(amount, 25f, escortASpawn);
                 escortBFog.spawnFog(amount, 25f, escortBSpawn);
 
-                if(phaseTwoTimer > maxTime*2/3){
+                if(phaseTwoTimer > MAX_TIME*2/3){
                     if (escortA == null) {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing + 90f, 0f, captain);
                         escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
@@ -140,13 +143,13 @@ public class NinayaBoss extends BaseHullMod {
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortA.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        StarficzAIUtils.applyDamper(escortA, id, Utils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
+                        StarficzAIUtils.applyDamper(escortA, id, Utils.linMap(1,0, MAX_TIME*2/3, MAX_TIME, phaseTwoTimer));
                         StarficzAIUtils.stayStill(escortA);
                         StarficzAIUtils.holdFire(escortA);
                     }
                 }
 
-                if(phaseTwoTimer > maxTime*5/6){
+                if(phaseTwoTimer > MAX_TIME*5/6){
                     if (escortB == null) {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing - 90f, 0f, captain);
                         escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
@@ -155,7 +158,7 @@ public class NinayaBoss extends BaseHullMod {
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortB.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        StarficzAIUtils.applyDamper(escortB, id, Utils.linMap(1,0, maxTime*2/3, maxTime, phaseTwoTimer));
+                        StarficzAIUtils.applyDamper(escortB, id, Utils.linMap(1,0, MAX_TIME*2/3, MAX_TIME, phaseTwoTimer));
                         StarficzAIUtils.stayStill(escortB);
                         StarficzAIUtils.holdFire(escortB);
                     }
@@ -277,7 +280,10 @@ public class NinayaBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
+        boolean isBoss = ship.getVariant().hasTag("kol_boss") || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains("kol_boss"))));
+
+        if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinayaBossPhaseTwoScript.class)) ship.addListener(new NinayaBossPhaseTwoScript(ship));
             if(!ship.hasListenerOfClass(NinayaAIScript.class)) ship.addListener(new NinayaAIScript(ship));
 

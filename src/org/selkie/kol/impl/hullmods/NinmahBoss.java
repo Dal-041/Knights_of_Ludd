@@ -30,6 +30,7 @@ public class NinmahBoss extends BaseHullMod {
         public boolean phaseTwo = false;
         public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
+        public static final float MAX_TIME = 8f;
         public ShipAPI ship;
         public ShipAPI escortA = null, escortB = null, escortC = null;
         public String id = "boss_phase_two_modifier";
@@ -47,7 +48,7 @@ public class NinmahBoss extends BaseHullMod {
                 escortBFog = new Utils.FogSpawner();
                 escortCFog = new Utils.FogSpawner();
                 ship.setHitpoints(1f);
-                ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0f);
+                ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0.000001f);
                 if (!ship.isPhased()) {
                     Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
@@ -56,6 +57,8 @@ public class NinmahBoss extends BaseHullMod {
                 float timeMult = ship.getMutableStats().getTimeMult().getModifiedValue();
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
+                return true;
+            } else if(phaseTwo && phaseTwoTimer < MAX_TIME){
                 return true;
             }
             return false;
@@ -67,15 +70,13 @@ public class NinmahBoss extends BaseHullMod {
             engine = Global.getCombatEngine();
             float armorRegen = 0.8f;
             float hpRegen = 0.6f;
-            float maxTime = 8f;
 
 
-
-            if(phaseTwo && phaseTwoTimer < maxTime){
+            if(phaseTwo && phaseTwoTimer < MAX_TIME){
 
                 phaseTwoTimer += amount;
 
-                if (phaseTwoTimer > maxTime){
+                if (phaseTwoTimer > MAX_TIME){
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
                     return;
                 }
@@ -89,13 +90,13 @@ public class NinmahBoss extends BaseHullMod {
                 }
 
                 ship.getFluxTracker().setHardFlux(0f);
-                ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/maxTime));
+                ship.setHitpoints(Misc.interpolate(1f, ship.getMaxHitpoints()*hpRegen, phaseTwoTimer/MAX_TIME));
                 ArmorGridAPI armorGrid = ship.getArmorGrid();
 
                 for(int i = 0; i < armorGrid.getGrid().length; i++){
                     for(int j = 0; j < armorGrid.getGrid()[0].length; j++){
                         if(armorGrid.getArmorValue(i, j) < armorGrid.getMaxArmorInCell()*armorRegen)
-                            armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()*armorRegen, phaseTwoTimer/maxTime));
+                            armorGrid.setArmorValue(i, j, Misc.interpolate(armorGrid.getArmorValue(i, j), armorGrid.getMaxArmorInCell()*armorRegen, phaseTwoTimer/MAX_TIME));
                     }
                 }
 
@@ -141,7 +142,7 @@ public class NinmahBoss extends BaseHullMod {
                 escortBFog.spawnFog(amount, 25f, escortBSpawn);
                 escortCFog.spawnFog(amount, 25f, escortCSpawn);
 
-                if(phaseTwoTimer > maxTime*4/7){
+                if(phaseTwoTimer > MAX_TIME*4/7){
                     if (escortA == null) {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing, 0f, captain);
                         Utils.shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
@@ -154,7 +155,7 @@ public class NinmahBoss extends BaseHullMod {
                     }
                 }
 
-                if(phaseTwoTimer > maxTime*5/7){
+                if(phaseTwoTimer > MAX_TIME*5/7){
                     if (escortB == null) {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing + 120f, 0f, captain);
                         Utils.shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
@@ -167,7 +168,7 @@ public class NinmahBoss extends BaseHullMod {
                     }
                 }
 
-                if(phaseTwoTimer > maxTime*6/7){
+                if(phaseTwoTimer > MAX_TIME*6/7){
                     if (escortC == null) {
                         escortC = fleetManager.spawnShipOrWing(escortSpec, escortCSpawn, escortFacing + 240f, 0f, captain);
                         Utils.shipSpawnExplosion(escortC.getShieldRadiusEvenIfNoShield(), escortC.getLocation());
@@ -483,7 +484,10 @@ public class NinmahBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED){
+        boolean isBoss = ship.getVariant().hasTag("kol_boss") || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains("kol_boss"))));
+
+        if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));
             if(!ship.hasListenerOfClass(NinmahAIScript.class)) ship.addListener(new NinmahAIScript(ship));
 
