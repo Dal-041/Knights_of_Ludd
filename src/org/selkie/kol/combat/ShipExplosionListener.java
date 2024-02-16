@@ -10,8 +10,7 @@ import java.util.HashMap;
 
 public class ShipExplosionListener implements DamageTakenModifier {
 
-    public static final float REDUCED_EXPLOSION_MULT = 0.2f;
-    private static HashMap<ShipAPI, Integer> modifiedShips = new HashMap();
+    public final float REDUCED_EXPLOSION_MULT = 0.2f;
 
     //Inherited from Iron Shell, HMI, Rubi, and many who've come before.
     @Override
