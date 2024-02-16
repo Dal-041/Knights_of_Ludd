@@ -9,12 +9,12 @@
   "center": [
     26, 31
   ],
-  "collisionRadius": 0,
+  "collisionRadius": 30,
   "coversColor": "",
   "shieldCenter": [
     0, 0
   ],
-  "shieldRadius": 0,
+  "shieldRadius": 35,
   "viewOffset": 0,
   "builtInWeapons": {
     "WS 000": "zea_edf_locust_fighter",

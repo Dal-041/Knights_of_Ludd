@@ -9,12 +9,12 @@
   "center": [
     22, 26
   ],
-  "collisionRadius": 0,
+  "collisionRadius": 20,
   "coversColor": "",
   "shieldCenter": [
     0, 0
   ],
-  "shieldRadius": 0,
+  "shieldRadius": 25,
   "viewOffset": 0,
   "builtInWeapons": {
     "WS 000": "zea_hosta_s",

@@ -4,8 +4,23 @@
     "fluxVents": 0,
     "goalVariant": false,
     "hullId": "zea_edf_onmoraki",
-    "hullMods": ["no_weapon_flux"],
+    "hullMods": ["no_weapon_flux", "zea_edf_resilientshieldemitter"],
     "variantId": "zea_edf_onmoraki_wing",
     "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 000": "zea_edf_locust_fighter",
+                "WS 001": "zea_edf_locust_fighter"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 002": "pdburst_fighter"
+            }
+        }
     ]
 }
