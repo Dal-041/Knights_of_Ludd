@@ -54,6 +54,7 @@ public class ZeaUtils {
     public static final String KEY_ELYSIA_WITNESS = "$zea_elysian_witness";
     public static final String KEY_ZEA_SPOILERS = "$zea_spoilers";
     public static final String THEME_ZEA = "theme_zea";
+    public static final String THEME_STORM = "theme_zea_storm";
 
     public static String[] techInheritIDs = {
             "remnant",

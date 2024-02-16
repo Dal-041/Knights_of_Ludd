@@ -14,18 +14,20 @@ import org.selkie.kol.impl.intel.ZeaLoreIntel;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.awt.*;
+import java.io.IOException;
 
 import static org.selkie.kol.impl.helpers.ZeaUtils.KEY_ZEA_SPOILERS;
 
 public class SpoilersNotif implements EveryFrameScript {
 
+    private final String filename = "kolSpoilersSeen";
     public IntervalUtil check = new IntervalUtil(8,11);
     public IntervalUtil delay = new IntervalUtil(15,15);
     public boolean fire = false;
 
     public static final String icon = Global.getSettings().getSpriteName("icons", "game_icon");
-    public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a %s of hidden content. We worked very hard on it and hope you enjoy it very much.\n\nWe ask that you %s for the first couple weeks after release. Its our hope that players can organically discover all that the mod contains.\n\nThanks, and once again please enjoy our mods, %s and %s.\n- The Knights of Ludd/Elysium team";
-    public static final String[] descHLs = { "Welcome to Elysium.", "lot", "please don't post openly about the secrets", "The Knights of Ludd", "Elysium" };
+    public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a lot of hidden content. In truth, it's the vast majority of the mod. We worked very hard on every piece and hope you enjoy it very much.\n\nWe ask that you %s for the first week or so after release. Its our hope that players can organically discover all that the mod contains.\n\nThanks, and once again please enjoy %s and %s.\n";
+    public static final String[] descHLs = { "Welcome to Elysium.", "please don't spoil the secrets", "The Knights of Ludd", "Elysium" };
     public static final String desc2 = "%s\n" +
             "The Knights %s.\n" +
             "\n" +
@@ -61,13 +63,14 @@ public class SpoilersNotif implements EveryFrameScript {
         }
         if (fire) {
             long march = 1709280000000L;
-            if (System.currentTimeMillis() > march) {
+            if (checkFile() || System.currentTimeMillis() > march) {
                 Global.getSector().getMemoryWithoutUpdate().set(KEY_ZEA_SPOILERS, true);
                 return;
             }
             delay.advance(amount);
             if (delay.intervalElapsed() && !Global.getSector().getMemoryWithoutUpdate().contains(KEY_ZEA_SPOILERS)) {
                 doSpoilersTalk();
+                writeFile();
                 Global.getSector().getMemoryWithoutUpdate().set(KEY_ZEA_SPOILERS, true);
             }
         }
@@ -87,5 +90,27 @@ public class SpoilersNotif implements EveryFrameScript {
         textpanel.addImage("illustrations", "zea_banner");
         textpanel.addPara(desc, Misc.getTextColor(), Misc.getHighlightColor(), descHLs);
         Global.getSector().getIntelManager().addIntel(intel, false, textpanel);
+    }
+
+    protected void writeFile() {
+        String text = "Thank you for playing Knights of Ludd!";
+        try {
+            Global.getSettings().writeTextFileToCommon(filename, text);
+        } catch (IOException e) {
+            return;
+        }
+    }
+
+    protected boolean checkFile() {
+        String text = "";
+        try {
+            text = Global.getSettings().readTextFileFromCommon(filename);
+        } catch (IOException e) {
+            return false;
+        }
+        if (text.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 }

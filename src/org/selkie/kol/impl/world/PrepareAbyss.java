@@ -270,7 +270,8 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.SYSTEM_CUT_OFF_FROM_HYPER);
-		system.addTag(ZeaUtils.THEME_ZEA);
+		system.addTag(THEME_ZEA);
+		system.addTag(THEME_STORM);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dusk.png");
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
@@ -282,7 +283,7 @@ public class PrepareAbyss {
 				system, // location to add to
 				"terrain", "nebula_zea_black_shiny", // texture to use, uses xxx_map for map
 				4, 4, // number of cells in texture
-				"nebula_zea_storm", StarAge.AVERAGE, 10000); //terrain plugin, age, nebula resolution
+				"nebula_zea_storm", StarAge.AVERAGE, 10000, 2); //terrain plugin, age, nebula resolution, tile size
 
 		system.setLightColor(new Color(225,170,255,255)); // light color in entire system, affects all entities
 		new AbyssBackgroundWarper(system, 8, 0.125f);
@@ -593,10 +594,10 @@ public class PrepareAbyss {
 		return picker.pick();
 	}
 
-	//Same as the method in Misc, but allows custom chunkSizes
+	//Same as the method in Misc, but allows custom chunkSizes and tilesize mults
 	public static SectorEntityToken addNebulaFromPNG(String image, float centerX, float centerY, LocationAPI location,
 													 String category, String key, int tilesWide, int tilesHigh,
-													 String terrainType, StarAge age, int chunkSize) {
+													 String terrainType, StarAge age, int chunkSize, float tileMult) {
 		try {
 			BufferedImage img = null;
 			//img = ImageIO.read(new File("../starfarer.res/res/data/campaign/terrain/nebula_test.png"));
@@ -640,7 +641,7 @@ public class PrepareAbyss {
 						}
 					}
 
-					float tileSize = NebulaTerrainPlugin.TILE_SIZE;
+					float tileSize = NebulaTerrainPlugin.TILE_SIZE*tileMult;
 					float x = centerX - tileSize * (float) w / 2f + (float) i * tileSize + chunkWidth / 2f * tileSize;
 					float y = centerY - tileSize * (float) h / 2f + (float) j * tileSize + chunkHeight / 2f * tileSize;
 

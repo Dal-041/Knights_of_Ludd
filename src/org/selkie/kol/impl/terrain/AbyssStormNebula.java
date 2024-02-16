@@ -17,6 +17,8 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.world.PrepareAbyss;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
@@ -249,7 +251,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 
     @Override
     public int getNumMapSamples() {
-        return 5;
+        return 10;
     }
 
     @Override
@@ -260,10 +262,6 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
     @Override
     public float getExtraDistanceAroundPlayerToAdvanceStormCells() {
         return 0f; //0
-    }
-
-    public void setExtraDistanceAroundPlayerToAdvanceStormCells(float extraDistanceAroundPlayerToAdvanceStormCells) {
-        this.extraDistanceAroundPlayerToAdvanceStormCells = extraDistanceAroundPlayerToAdvanceStormCells;
     }
 
     @Override
@@ -332,10 +330,15 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 
     @Override
     public void advance(float amount) {
-        //if (true) return;
+
         if (!clearedCellsPostLoad && Global.getSector().getPlayerFleet() != null) {
             clearCellsNotNearPlayer(this);
             clearedCellsPostLoad = true;
+        }
+
+        if (Global.getSector()!= null && Global.getSector().getCurrentLocation() != null
+                && !Global.getSector().getCurrentLocation().hasTag(ZeaUtils.THEME_STORM)) {
+            return;
         }
 
         playStormStrikeSoundsIfNeeded();
