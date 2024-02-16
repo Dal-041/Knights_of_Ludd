@@ -7,10 +7,8 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
+import com.fs.starfarer.api.impl.campaign.terrain.*;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
-import com.fs.starfarer.api.impl.campaign.terrain.BaseTiledTerrain;
-import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
-import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.apache.log4j.Logger;
@@ -112,7 +110,9 @@ public class PrepareAbyss {
     	system.setName(elysiaSysName);
     	elysia.applySpecChanges();
 		elysia.addTag(Tags.NON_CLICKABLE);
-    	SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
+		//system.addTerrain(Terrain.EVENT_HORIZON, new EventHorizonPlugin.CoronaParams(2300, 1500, elysia, -5, 0, 1));
+
+		SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
     			5200,
 				150,
 				elysia,
@@ -188,7 +188,6 @@ public class PrepareAbyss {
     	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
 
 		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
-		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 1500, 11, Terrain.RING, "Accretion Disk");
 
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);

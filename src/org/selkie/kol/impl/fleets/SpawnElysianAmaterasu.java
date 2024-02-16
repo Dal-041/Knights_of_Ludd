@@ -66,7 +66,8 @@ public class SpawnElysianAmaterasu {
 		        .create();
 		elysianBossFleet.setDiscoverable(true);
 		elysianBossFleet.getFleetData().ensureHasFlagship();
-		elysianBossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set("$zea_amaterasu", true);
+		elysianBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		elysianBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
@@ -92,7 +93,6 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
 		elysianBossFleet.addTag(excludeTag);
-		elysianBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		elysianBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();

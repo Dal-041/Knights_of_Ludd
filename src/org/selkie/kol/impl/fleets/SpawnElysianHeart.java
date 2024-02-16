@@ -73,7 +73,8 @@ public class SpawnElysianHeart {
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
 		elysianHeartFleet.getFleetData().ensureHasFlagship();
-		elysianHeartFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+		elysianHeartFleet.getMemoryWithoutUpdate().set("$zea_corruptingheart", true);
+		elysianHeartFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		elysianHeartFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		elysianHeartFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
@@ -101,7 +102,6 @@ public class SpawnElysianHeart {
 		elysianHeartFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 
 		elysianHeartFleet.addTag(excludeTag);
-		elysianHeartFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		elysianHeartFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		elysianHeartFleet.addEventListener(new ManageElysianCorruptingheart());
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();

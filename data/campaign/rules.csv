@@ -180,7 +180,7 @@ Your crew lead resumes before you can get overwhelmed in your thoughts.
 ,,,,,,
 ,,,,,,
 zea_BossTT3Encounted,BeginFleetEncounter,"$zea_nineveh score:1000
-",,"The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
+",ZeaIntelCMD addBossTags,"The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
 
 The small, bright motes orbiting the vessel are but an afterthought before the Tri-Tachyon defense fleet. Your tactical thought processes are interrupted by your comm panel lighting up.
 
@@ -194,3 +194,9 @@ zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3defeated,Dismiss
 ,,,,,,
 zea_SpoilersDialog,zea_spoilers_popup,,,,"0:zea_spoilers_close:Now, good luck with those fleets!",
 zea_SpoilersDialog2,DialogOptionSelected,$option == zea_spoilers_close,DismissDialog,,,
+,,,,,,
+zea_BossEnc,BeginFleetEncounter,$zea_boss score:1000,ZeaIntelCMD addBossTags,"Prepare yourself, this foe will be unlike any you have faced before.",,
+zea_BossAmaterasuEnc,BeginFleetEncounter,$zea_amaterasu score:1000,ZeaIntelCMD addBossTags,Amaterasu beckons.,,
+zea_BossHeartEnc,BeginFleetEncounter,$zea_corruptingheart score:1000,ZeaIntelCMD addBossTags,The Heart welcomes.,,
+zea_BossNianEnc,BeginFleetEncounter,$zea_nian score:1000,ZeaIntelCMD addBossTags,Nian hungers.,,
+zea_BossYukionnaEnc,BeginFleetEncounter,$zea_yukionna score:1000,ZeaIntelCMD addBossTags,Yukionna embraces.,,

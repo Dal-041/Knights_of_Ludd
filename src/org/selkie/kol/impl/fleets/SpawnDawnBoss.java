@@ -56,7 +56,7 @@ public class SpawnDawnBoss {
 		        .setFleetName("The Devourer")
 		        .setFleetFaction(PrepareAbyss.dawnID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
-		        .setFlagshipName("00000010")
+		        .setFlagshipName("Nian")
 		        .setFlagshipVariant(variant)
 		        .setCaptain(dawnBossCaptain)
 		        .setMinFP(0) //support fleet
@@ -69,6 +69,8 @@ public class SpawnDawnBoss {
 		dawnBossFleet.setDiscoverable(true);
 		dawnBossFleet.getFleetData().ensureHasFlagship();
 		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set("$zea_nian", true);
+		dawnBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		dawnBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		dawnBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
@@ -90,7 +92,6 @@ public class SpawnDawnBoss {
 
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);
-		dawnBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		dawnBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		dawnBossFleet.addEventListener(new ManageDawnBoss());
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();

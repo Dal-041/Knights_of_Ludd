@@ -71,10 +71,10 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 		duskBossFleet.getFleetData().ensureHasFlagship();
-		duskBossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
-		duskBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+		duskBossFleet.getMemoryWithoutUpdate().set("$zea_yukionna", true);
+		duskBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG); //Now confirmed by fleet rule.
 		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		duskBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+		duskBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE); //Now confirmed by fleet rule.
 		duskBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 		//duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
 
