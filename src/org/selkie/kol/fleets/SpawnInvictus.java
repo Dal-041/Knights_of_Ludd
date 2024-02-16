@@ -64,7 +64,7 @@ public class SpawnInvictus {
 	            * @return 
 	            */
 	            String variant = "kol_invictus_lp_Hallowed";
-	            CampaignFleetAPI invictusFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
+	            CampaignFleetAPI invictusFleet = MagicCampaign.createFleetBuilder()
 	                    .setFleetName("Hammer of Ludd")
 	                    .setFleetFaction(Factions.LUDDIC_PATH)
 	                    .setFleetType(FleetTypes.TASK_FORCE)

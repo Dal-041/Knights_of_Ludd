@@ -1,17 +1,23 @@
 package org.selkie.kol.impl.rulecmd;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.InteractionDialogAPI;
-import com.fs.starfarer.api.campaign.PlanetAPI;
-import com.fs.starfarer.api.campaign.SectorEntityToken;
-import com.fs.starfarer.api.campaign.StarSystemAPI;
+import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
+import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.util.Misc;
+import org.lazywizard.lazylib.VectorUtils;
+import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
 import org.selkie.kol.impl.intel.ZeaLoreManager;
 import org.selkie.kol.impl.intel.ZeaTriTachBreadcrumbIntel;
@@ -32,7 +38,13 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
         String command = params.get(0).getString(memoryMap);
         if (command == null) return false;
 
-        SectorEntityToken entity = dialog.getInteractionTarget();
+        SectorEntityToken entity = dialog.getInteractionTarget();;
+        CampaignFleetAPI otherFleet = null;
+
+        if (dialog.getInteractionTarget() instanceof CampaignFleetAPI) {
+            otherFleet = (CampaignFleetAPI) dialog.getInteractionTarget();
+        }
+
         if (entity.getMarket() != null && !entity.getMarket().isPlanetConditionMarketOnly()) {
             PlanetAPI planet = entity.getMarket().getPlanetEntity();
             if (planet != null) {
@@ -57,19 +69,46 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
 
         } else if ("addIntelTTBoss2".equals(command)) {
 
+            CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
+
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #1", ZeaLoreManager.TT2Drop, ZeaLoreManager.TT2DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, true, dialog.getTextPanel());
 
+            if (fleet == null) return false;
+
             //Handle ninmah recovery
-            for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getMembersWithFightersCopy()) {
+            boolean foundNinmah = false;
+            for (FleetMemberAPI member : fleet.getMembersWithFightersCopy()) {
                 if (member.getVariant().getHullSpec().getBaseHullId().startsWith("zea_boss")) {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     if (!variant.hasTag(Tags.SHIP_UNIQUE_SIGNATURE)) variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    if (variant.hasTag("kol_boss")) variant.removeTag("kol_boss");
+                    if (variant.hasTag(ZeaUtils.BOSS_TAG)) variant.removeTag(ZeaUtils.BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
+                    if (variant.getHullSpec().getBaseHullId().startsWith("zea_boss_ninmah")) foundNinmah = true;
                 }
+            }
+
+            if (!foundNinmah) {
+                //make sure there is a valid location to avoid spawning in the sun
+                Vector2f location = fleet.getLocation();
+
+                //spawn the derelict object
+                ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData("zea_boss_ninmah_Undoer", ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
+                ship.shipName = "TTS Ninmah";
+                DerelictShipEntityPlugin.DerelictShipData DSD = new DerelictShipEntityPlugin.DerelictShipData(ship, true);
+                CustomCampaignEntityAPI wreck = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
+                        fleet.getContainingLocation(),
+                        Entities.WRECK, Factions.NEUTRAL, DSD);
+                Misc.makeImportant(wreck, "zea_ninmah");
+                wreck.getMemoryWithoutUpdate().set("$zea_ninmah_wreck", true);
+                wreck.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
+                wreck.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
+                wreck.setFacing((float)Math.random()*360f);
+                wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
+
+                ZeaUtils.bossWreckCleaner(wreck, true);
             }
 
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
@@ -101,6 +140,15 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
         } else if ("endMusic".equals(command)) {
             Global.getSoundPlayer().restartCurrentMusic();
             return true;
+        } else if ("addBossTags".equals(command)) {
+            if (otherFleet != null) {
+                for (FleetMemberAPI member : otherFleet.getMembersWithFightersCopy()) {
+                    if (member.getHullId().startsWith("zea_boss")) {
+                        if (!member.getVariant().hasTag(Tags.VARIANT_UNBOARDABLE)) member.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+                        if (!member.getVariant().hasTag(ZeaUtils.BOSS_TAG))member.getVariant().addTag(ZeaUtils.BOSS_TAG);
+                    }
+                }
+            }
         }
 
         return false;

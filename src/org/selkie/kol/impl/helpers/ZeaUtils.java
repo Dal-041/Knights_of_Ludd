@@ -30,6 +30,7 @@ import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
 public class ZeaUtils {
 
 
+    public static final String BOSS_TAG = "$zea_boss";
     public static float attainmentFactor = 0.15f;
     public static boolean useDomres = false;
     public static boolean useLostech = false;
@@ -213,6 +214,29 @@ public class ZeaUtils {
             fp -= Math.min(fp, cut);
         }
         return fleet;
+    }
+
+    public static void bossWreckCleaner(SectorEntityToken wreck) {
+        bossWreckCleaner(wreck, false);
+    }
+
+    public static void bossWreckCleaner(SectorEntityToken wreck, boolean uniqueSig) {
+        ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
+        data.notNowOptionExits = true;
+        data.noDescriptionText = true;
+        DerelictShipEntityPlugin dsep = (DerelictShipEntityPlugin) wreck.getCustomPlugin();
+        ShipRecoverySpecial.PerShipData copy = dsep.getData().ship.clone();
+        copy.variant = Global.getSettings().getVariant(copy.variantId).clone();
+        copy.variantId = null;
+        copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
+        if (uniqueSig) copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
+        copy.variant.removeTag(ZeaUtils.BOSS_TAG);
+        copy.variant.removeTag(Tags.VARIANT_UNBOARDABLE);
+        //TODO: Special desciption updating logic
+        //copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
+        data.addShip(copy);
+
+        Misc.setSalvageSpecial(wreck, data);
     }
 
     public static class ZeaBossGenFIDConfig implements FleetInteractionDialogPluginImpl.FIDConfigGen {

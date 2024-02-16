@@ -8,6 +8,7 @@ import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.NianFlaresActivator;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -86,8 +87,8 @@ public class NianBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         ActivatorManager.addActivator(ship, new NianFlaresActivator(ship));
-        boolean isBoss = ship.getVariant().hasTag("kol_boss") || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains("kol_boss"))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaUtils.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaUtils.BOSS_TAG))));
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NianBossEnragedScript.class)) ship.addListener(new NianBossEnragedScript(ship));

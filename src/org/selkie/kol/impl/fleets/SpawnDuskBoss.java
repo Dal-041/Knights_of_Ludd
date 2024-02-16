@@ -70,10 +70,13 @@ public class SpawnDuskBoss {
 		        .setTransponderOn(false)
 		        .create();
 		duskBossFleet.setDiscoverable(true);
-		duskBossFleet.getFlagship().getVariant().addTag("kol_boss");
+		duskBossFleet.getFleetData().ensureHasFlagship();
+		duskBossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+		duskBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		duskBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		duskBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		duskBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		//duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
 

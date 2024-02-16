@@ -104,7 +104,6 @@ public class PrepareAbyss {
 		system.addTag(ZeaUtils.THEME_ZEA);
 
 		system.initStar("zea_elysia_abyss", "zea_red_hole", beeg, -beeg/2f);
-    	//PlanetAPI elysia = system.addPlanet("zea_elysia_abyss", system.getCenter(), "Elysia", "zea_red_hole", 0f, beeg, 0f, 10000f);
 		PlanetAPI elysia = system.getStar();
 		elysia.setName("Elysian Abyss");
     	elysia.getSpec().setBlackHole(false); //Minimize fleet mishandling
@@ -189,6 +188,7 @@ public class PrepareAbyss {
     	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
 
 		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
+		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 1500, 11, Terrain.RING, "Accretion Disk");
 
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);

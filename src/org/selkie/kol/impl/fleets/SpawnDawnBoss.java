@@ -67,6 +67,8 @@ public class SpawnDawnBoss {
 		        .setTransponderOn(true)
 		        .create();
 		dawnBossFleet.setDiscoverable(true);
+		dawnBossFleet.getFleetData().ensureHasFlagship();
+		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
 		dawnBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		dawnBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
@@ -88,7 +90,7 @@ public class SpawnDawnBoss {
 
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);
-		dawnBossFleet.getFlagship().getVariant().addTag("kol_boss");
+		dawnBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
 		dawnBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		dawnBossFleet.addEventListener(new ManageDawnBoss());
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();

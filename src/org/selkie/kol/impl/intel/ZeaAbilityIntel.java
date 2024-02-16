@@ -55,4 +55,9 @@ public class ZeaAbilityIntel extends BaseIntelPlugin {
     public String getIcon() {
         return icon;
     }
+
+    @Override
+    public boolean isImportant() {
+        return true;
+    }
 }

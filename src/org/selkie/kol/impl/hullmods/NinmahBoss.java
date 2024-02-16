@@ -19,6 +19,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.combat.StarficzAIUtils.*;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.awt.*;
 import java.util.*;
@@ -484,8 +485,8 @@ public class NinmahBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        boolean isBoss = ship.getVariant().hasTag("kol_boss") || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains("kol_boss"))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaUtils.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains(ZeaUtils.BOSS_TAG))));
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));

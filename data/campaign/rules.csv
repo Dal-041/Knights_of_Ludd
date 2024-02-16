@@ -132,13 +132,13 @@ It doesn't take your crew long to locate a mag-safe box underneath the paneling 
 zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
 ,,,,,,
 zea_BossTT1Encounted,BeginFleetEncounter,"$zea_ninaya score:1000
-$global.gaPZ_scannedZiggurat",,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic. A comm request comes through from the strange vessel and your comms officer brings it to your display. 
+$global.gaPZ_scannedZiggurat",ZeaIntelCMD addBossTags,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic. A comm request comes through from the strange vessel and your comms officer brings it to your display. 
 
 ""Interloper. You have come for what is not yours. Power down and you will not be unnecessarily harmed.""
 
 The link cuts. A warning or a threat, and from a fully coherent AI core. Great. Perhaps the ship that didn't speak was preferrable. Shaking off these thoughts, you issue the orders to your bridge crew.",,
 zea_BossTT1EncountedNoZig,BeginFleetEncounter,"$zea_ninaya score:1000
-!$global.gaPZ_scannedZiggurat",,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic.
+!$global.gaPZ_scannedZiggurat",ZeaIntelCMD addBossTags,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic.
 
 There appear to be small, bright EM sources, ""-Only partially overlapping the visual spectrum,"" your sensors officer reports. They orbit with uncanny motion around the strange vessel. Your bridge crew murmurs speculation between their stations: some kind of point defense field? Microsat thruster bursts? The speculation is far from concensus. A ping from the comm panel rings out before you can ponder further.
 

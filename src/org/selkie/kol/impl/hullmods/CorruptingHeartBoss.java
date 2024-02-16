@@ -16,6 +16,7 @@ import org.selkie.kol.combat.ParticleController;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.ShachihokoDroneActivator;
 import org.selkie.kol.impl.combat.activators.ShachihokoTideActivator;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.shipsystems.CorruptionJetsStats;
 
 import java.awt.Color;
@@ -162,7 +163,10 @@ public class CorruptingHeartBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship.getVariant().hasTag("kol_boss") || StarficzAIUtils.DEBUG_ENABLED) {
+        boolean isBoss = ship.getVariant().hasTag(ZeaUtils.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaUtils.BOSS_TAG))));
+
+        if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
             ActivatorManager.addActivator(ship, new ShachihokoDroneActivator(ship));
 

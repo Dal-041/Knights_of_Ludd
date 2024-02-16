@@ -64,7 +64,7 @@ public class SpawnRetribution {
 	            * @return 
 	            */
 	            String variant = "kol_boss_ret_lp_Overdriven";
-	            CampaignFleetAPI RetributionFleet = (CampaignFleetAPI)MagicCampaign.createFleetBuilder()
+	            CampaignFleetAPI RetributionFleet = MagicCampaign.createFleetBuilder()
 	                    .setFleetName("Ludd's Embrace")
 	                    .setFleetFaction(Factions.LUDDIC_PATH)
 	                    .setFleetType(FleetTypes.TASK_FORCE)
@@ -84,7 +84,6 @@ public class SpawnRetribution {
 
 				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
-	            RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 	            RetributionFleet.addEventListener(new ManageRetribution());
 
 	        }

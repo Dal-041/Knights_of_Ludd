@@ -39,6 +39,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.MagneticFieldTerrainPlugin.Mag
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
@@ -127,7 +128,8 @@ public class PrepareDarkDeeds {
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
         TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
-        TT1BossFleet.getFlagship().getVariant().addTag("kol_boss");
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+        TT1BossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
         TT1BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
@@ -137,7 +139,7 @@ public class PrepareDarkDeeds {
         TT1BossFleet.addTag(excludeTag);
 
         //Using FID config instead
-        //TT1BossFleet.addEventListener(new ManageTT1Boss());
+        //TT1BossFleet.addEventListener(new ManageBossTag());
 
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
                 new TT1FIDConfig());
@@ -201,20 +203,7 @@ public class PrepareDarkDeeds {
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
 
-                    ShipRecoverySpecial.ShipRecoverySpecialData data = new ShipRecoverySpecial.ShipRecoverySpecialData(null);
-                    data.notNowOptionExits = true;
-                    data.noDescriptionText = true;
-                    DerelictShipEntityPlugin dsep = (DerelictShipEntityPlugin) entity.getCustomPlugin();
-                    ShipRecoverySpecial.PerShipData copy = (ShipRecoverySpecial.PerShipData) dsep.getData().ship.clone();
-                    copy.variant = Global.getSettings().getVariant(copy.variantId).clone();
-                    copy.variantId = null;
-                    copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
-                    copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    copy.variant.removeTag("kol_boss");
-                    copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
-                    data.addShip(copy);
-
-                    Misc.setSalvageSpecial(entity, data);
+                    ZeaUtils.bossWreckCleaner(entity, false);
 
                     dialog.setInteractionTarget(entity);
                     RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_AfterNinayaDefeat");
@@ -230,6 +219,8 @@ public class PrepareDarkDeeds {
                 }
             };
             return config;
+
+
         }
     }
 
@@ -349,7 +340,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    copy.variant.removeTag("kol_boss");
+                    copy.variant.removeTag(ZeaUtils.BOSS_TAG);
                     copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
@@ -529,6 +520,10 @@ public class PrepareDarkDeeds {
                 .setTransponderOn(false)
                 .create();
         TT3BossFleet.setDiscoverable(true);
+        TT3BossFleet.getFleetData().ensureHasFlagship();
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+        TT3BossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+        TT3BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         //Support fleet stuff
         FleetParamsV3 params = new FleetParamsV3(
@@ -570,8 +565,6 @@ public class PrepareDarkDeeds {
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
         TT3BossFleet.addTag(excludeTag);
 
-        TT3BossFleet.getFlagship().getVariant().addTag("kol_boss");
-        TT3BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 //      TT3BossFleet.clearAbilities();
 //		TT3BossFleet.addAbility(Abilities.TRANSPONDER);
 //		TT3BossFleet.getAbility(Abilities.TRANSPONDER).activate();

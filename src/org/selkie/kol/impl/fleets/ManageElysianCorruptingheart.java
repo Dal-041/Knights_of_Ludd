@@ -60,7 +60,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 					salvaged1 = true;
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
-					f.getVariant().removeTag("kol_boss");
+					f.getVariant().removeTag(ZeaUtils.BOSS_TAG);
 				}
 			}
 
@@ -77,13 +77,15 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 						ShipRecoverySpecial.ShipCondition.WRECKED,
 						false,
 						-1,
-						false,
+						true,
 						//orbitCenter,angle,radius,period);
 						fleet.getStarSystem().getCenter(), VectorUtils.getAngle(new Vector2f(), location), location.length(), 360);
 				//MagicCampaign.placeOnStableOrbit(wreck, true);
 				wreck.setName("Wreck of the Elysian flagship");
 				wreck.setFacing((float) Math.random() * 360f);
 				wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
+
+				ZeaUtils.bossWreckCleaner(wreck, true);
 
 				//set memkey that the wreck exist
 				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
