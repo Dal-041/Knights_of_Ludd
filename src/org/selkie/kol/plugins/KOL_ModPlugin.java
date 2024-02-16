@@ -13,6 +13,7 @@ import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.impl.campaign.AICoreCampaignPlugin;
+import org.selkie.kol.impl.campaign.cores.AICoreReplacerScript;
 import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.listeners.SpoilersNotif;
@@ -78,6 +79,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().addTransientScript(new SpoilersNotif());
 
 		Global.getSector().registerPlugin(new AICoreCampaignPlugin());
+		Global.getSector().addTransientScript(new AICoreReplacerScript());
 	}
 
 	@Override

@@ -92,10 +92,20 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         tooltip.addSpacer(10f)
         tooltip.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f, Misc.getTextColor(), Misc.getHighlightColor(),  "Automated Points Multiplier")
 
+        if (commoditySpec.id == "zea_dusk_boss_core") {
+            tooltip.addSpacer(10f)
+            tooltip.addSectionHeading("Transcendence", Alignment.MID, 0f)
+            tooltip.addSpacer(10f)
+
+            tooltip.addPara("This core can interface with crewed and automated ships. To slot it in to crewed ships, navigate to the refit screen and select \"Additional Options\". " +
+                    "Its skills can not be configured on crewed ships.", 0f,
+                Misc.getTextColor(), Misc.getHighlightColor(), "crewed and automated", "Additional Options")
+        }
+
+
         tooltip.addSpacer(10f)
         tooltip.addSectionHeading("Unique Skill: ${skillSpec.name}", Alignment.MID, 0f)
         tooltip.addSpacer(10f)
-
 
         var skillImg = tooltip.beginImageWithText(skillSpec.spriteName, 48f)
 
@@ -106,6 +116,7 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         }
 
         tooltip.addImageWithText(0f)
+
 
         addCostLabel(tooltip, opad, transferHandler, stackSource)
     }
