@@ -1,71 +1,84 @@
 {
-    "displayName": "Unholy",
-    "fluxCapacitors": 10,
-    "fluxVents": 50,
-    "goalVariant": true,
-    "hullId": "zea_boss_corruptingheart",
-    "hullMods": [
-        "fluxbreakers",
-        "stabilizedshieldemitter",
-        "targetingunit",
-    ],
-    "permaMods": [],
-    "sMods": [],
-    "suppressedMods": [],
-    "variantId": "zea_boss_corruptingheart_Unholy",
-    "weaponGroups": [
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0002": "rifttorpedo",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0003": "gauss",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0004": "hveldriver",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "hveldriver",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0005": "flak",
-                "WS0006": "flak",
-                "WS0011": "dualflak",
-                "WS0012": "dualflak",
-                "WS0015": "pdburst",
-                "WS0009": "heatseeker",
-                "WS0010": "heatseeker",
-                "WS0007": "vulcan",
-                "WS0008": "vulcan",
-                "WS0013": "vulcan",
-                "WS0014": "vulcan",
-            }
-        },
-    ],
-    "wings": [
-        "flash_wing",
-        "flash_wing",
-        "flash_wing",
-        "spark_wing",
-        "spark_wing",
-    ],
-    "modules": [],
+  "displayName": "Unholy",
+  "fluxCapacitors": 0,
+  "fluxVents": 50,
+  "goalVariant": true,
+  "hullId": "zea_boss_corruptingheart",
+  "hullMods": [
+    "fluxbreakers",
+    "stabilizedshieldemitter",
+  ],
+  "permaMods": [
+    "targetingunit",
+    "advancedoptics",
+    "armoredweapons",
+  ],
+  "sMods": [
+    "targetingunit",
+    "advancedoptics",
+    "armoredweapons",
+  ],
+  "suppressedMods": [ ],
+  "variantId": "zea_boss_corruptingheart_Unholy",
+  "weaponGroups": [
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0002": "riftcascade",
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0003": "zea_nanten_l",
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0004": "ionbeam",
+        "WS0001": "ionbeam",
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0005": "heavyneedler",
+        "WS0006": "heavyneedler",
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "ALTERNATING",
+      "weapons": {
+        "WS0009": "amsrm",
+        "WS0010": "amsrm",
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0011": "riftbeam",
+        "WS0012": "riftbeam",
+        "WS0015": "pdburst",
+        "WS0007": "vulcan",
+        "WS0008": "vulcan",
+        "WS0013": "vulcan",
+        "WS0014": "vulcan",
+      }
+    },
+  ],
+  "wings": [
+    "zea_edf_itsumade_wing",
+    "zea_edf_onmoraki_wing",
+    "zea_edf_kokakucho_wing",
+    "zea_edf_kokakucho_wing",
+    "zea_edf_kokakucho_wing",
+  ],
+  "modules": [ ],
 }
