@@ -1,0 +1,15 @@
+id
+# NOTES
+# Ship IDs entered here will be allowed by the Engineering hub (Reverse Engineering ship hulls)
+# Ships that would break the game (Balance/Technical/Lore) if the player could produce them via blueprint should not be on this list.
+"# Remember that we are all in this to have fun. Reverse Engineering is neither easy nor cheap, and forbidding too much takes away from player experience."
+kol_protea
+kol_sundew
+kol_mimosa
+kol_snowdrop
+kol_marigold
+kol_lotus
+kol_tamarisk
+kol_larkspur
+kol_alysse
+kol_lunaria

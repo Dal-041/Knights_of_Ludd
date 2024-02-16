@@ -1,0 +1,15 @@
+id
+# NOTES
+# Ship IDs entered here will be allowed for duplication.
+"# This feature is very hard to get working in campaign as a player, and lorewise, allows for duplication of even the most complex hulls."
+"# Please do not go overboard with forbidding stuff here. Hulls that have been duplicated, can no longer be duplicated themselves, and are prone to malfunctions."
+kol_protea
+kol_sundew
+kol_mimosa
+kol_snowdrop
+kol_marigold
+kol_lotus
+kol_tamarisk
+kol_larkspur
+kol_alysse
+kol_lunaria

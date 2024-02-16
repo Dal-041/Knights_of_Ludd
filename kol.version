@@ -2,8 +2,8 @@
   "masterVersionFile": "https://raw.githubusercontent.com/Dal-041/Knights_of_Ludd/master/kol.version",
   "modName": "Knights of Ludd",
   # "modThreadId": "27431",
-  #"directDownloadURL": "https://github.com/Dal-041/Knights_of_Ludd/releases/download/latest/KnightsOfLudd.zip",
-  #"changelogURL": "https://raw.githubusercontent.com/Dal-041/Knights_of_Ludd/master/CHANGELOGS.md",
+  "directDownloadURL": "https://github.com/Dal-041/Knights_of_Ludd/releases/download/latest/KnightsOfLudd.zip",
+  "changelogURL": "https://raw.githubusercontent.com/Dal-041/Knights_of_Ludd/master/changelog.md",
   "modVersion":
     {
       "major": "1",

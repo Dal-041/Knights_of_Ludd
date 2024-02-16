@@ -1,5 +1,5 @@
 # Knights of Ludd
-An expansion mod for the Sector's most pious defenders.
+An ambitious expansion for the Sector's most pious defenders.
 
 Featuring:
 - A full faction of ships, weapons and characters for the Knights
@@ -12,18 +12,18 @@ Featuring:
 
 ## Credits
 - Ships: Selkie
-- Code: Dal, Starficz, Preisdent Matt Damon, Rubi, Nia
+- Code: Dal, Starficz, President Matt Damon, Lukas04, NiaTahl, CeruleanPancake
 
-- Weapons: SkylordZero
-- VFX: NiaTahl, Starfics, Himemi
+- Weapons: SkylordZero, SnazzyPantsMcGee
+- VFX: NiaTahl, President Matt Damon, Starfics, Dal, Himemi, Wisp
 - Portraits (Human): Stable Diffusion using GhostMix checkpoint and Severian-Void's Starsector checkpoint.
 - Portraits (AI): Selkie (ironic, right?)
-- Art contributions: SnazzyPantsMcGee, Nes, Quacken, Pyrophage, Sleepyfish, Alfonzo, Nia, CY, Dal
+- Art contributions: SnazzyPantsMcGee, Nes, Quacken, Pyrophage, Sleepyfish, Sirhartley, Alfonzo, NiaTahl, Dal
 
-- Writing: Wisp, Alfonzo, WMGreywind, Candlebury
+- Writing: Wisp, Dal, Alfonzo, Candlebury, WMGreywind
 - Sounds: Mesotronik
 - Music: Haplogynae
 
-- Special Thanks : Amazigh, Timid, Pogre, Sirhartley
+- Special Thanks : Amazigh, Timid, Pogre, and our valued beta testers
 - Tartiflette : Stellar backgrounds, Seeker & Torchship art, shield and boss code reference
-- Dark.Revenant : Terrain code 
+- Dark.Revenant : Terrain code reference
