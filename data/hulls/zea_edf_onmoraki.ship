@@ -1,0 +1,93 @@
+{
+  "hullName": "Onmoraki",
+  "hullId": "zea_edf_onmoraki",
+  "hullSize": "FIGHTER",
+  "style": "ZEA_ELYSIAN_TECH",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_onmoraki.png",
+  "height": 62,
+  "width": 52,
+  "center": [
+    26, 31
+  ],
+  "collisionRadius": 30,
+  "coversColor": "",
+  "shieldCenter": [
+    0, 0
+  ],
+  "shieldRadius": 35,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS 000": "zea_edf_locust_fighter",
+    "WS 001": "zea_edf_locust_fighter",
+    "WS 002": "pdburst_fighter"
+  },
+  "builtInWings": [ ],
+  "builtInModules": null,
+  "weaponSlots": [
+    {
+      "id": "WS 000",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 180,
+      "angle": 0,
+      "locations": [
+        -0.5,        5
+      ]
+    },
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 180,
+      "angle": 0,
+      "locations": [
+        -0.5,       -5
+      ]
+    },
+    {
+      "id": "WS 002",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        19,        0
+      ]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [
+        -29, 5.5
+      ],
+      "length": 23,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    },
+    {
+      "location": [
+        -29, -5.5
+      ],
+      "length": 23,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    }
+  ],
+  "bounds": [
+    -28.5,     -8.5,
+    -3.5,    -24.5,
+    6,     -9.5,
+    29.5,        0,
+    6,      9.5,
+
+    -3.5,     24.5,
+    -28.5,      8.5
+  ]
+}

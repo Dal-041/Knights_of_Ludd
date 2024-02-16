@@ -1,0 +1,19 @@
+{
+    "displayName": "Fighter Drone",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_edf_itsumade",
+    "hullMods": ["no_weapon_flux", "zea_edf_resilientshieldemitter"],
+    "variantId": "zea_edf_itsumade_wing",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS 000": "zea_hosta_s",
+                "WS 001": "zea_hosta_s"
+            }
+        }
+    ]
+}

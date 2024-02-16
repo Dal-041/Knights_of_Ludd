@@ -246,6 +246,9 @@ Chiwen,zea_dawn_chiwen,,Dawntide,,,900,100,2000,,100,0,,200,400,300,150,300,30,F
 Shachi,zea_edf_shachi,,Elysia,zea_edf_smartflare,,750,100,2000,,100,0,,200,400,300,150,300,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 Shachihoko,zea_edf_shachihoko,,Elysia,zea_edf_smartflare,,750,100,4000,,100,0,,400,400,300,150,300,30,FRONT,,360,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 Kitsunebi,zea_edf_kitsunebi,,Elysia,,,650,150,200,,50,0,,175,325,265,215,325,27,FRONT,,160,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
+Kokakucho,zea_edf_kokakucho,,Elysia,,,500,150,300,,50,0,,175,325,265,175,325,40,FRONT,,160,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
+Itsumade,zea_edf_itsumade,,Elysia,zea_edf_smartflare,,800,300,400,,50,0,,200,325,300,260,325,27,FRONT,,160,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
+Onmoraki,zea_edf_onmoraki,,Elysia,,,600,200,400,,50,0,,300,600,600,300,600,35,FRONT,,160,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 #FRIGATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ikiryo,zea_dusk_ikiryo,Living Soul,Dusk,entropyamplifier,9,1500,400,3000,,325,50,,100,100,100,65,120,280,PHASE,zea_dusk_phasecloak,90,,,0.03,0.04,5,10,25,50,1,50,10,42000,8,30,200,0.25,10,10,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,2,,
 Onibi,zea_dusk_onibi,Verse,Dusk,emp,7,1100,250,3000,,260,50,,140,220,175,120,360,100,OMNI,,360,0.3,0.5,,,10,20,30,20,1,20,10,33000,10,20,200,0.25,6,6,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,2,,205

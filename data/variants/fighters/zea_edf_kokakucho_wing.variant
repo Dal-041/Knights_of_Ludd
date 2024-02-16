@@ -1,0 +1,25 @@
+{
+    "displayName": "Bomber Drone",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_edf_kokakucho",
+    "hullMods": ["no_weapon_flux", "zea_edf_resilientshieldemitter"],
+    "variantId": "zea_edf_kokakucho_wing",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 000": "zea_edf_breach_salvo"
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS 001": "zea_edf_harpoon_bomber"
+            }
+        }
+    ]
+}

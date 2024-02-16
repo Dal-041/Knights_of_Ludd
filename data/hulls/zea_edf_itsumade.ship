@@ -1,0 +1,77 @@
+{
+  "hullName": "Itsumade",
+  "hullId": "zea_edf_itsumade",
+  "hullSize": "FIGHTER",
+  "style": "ZEA_ELYSIAN_TECH",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_itsumade.png",
+  "height": 52,
+  "width": 44,
+  "center": [
+    22, 26
+  ],
+  "collisionRadius": 20,
+  "coversColor": "",
+  "shieldCenter": [
+    0, 0
+  ],
+  "shieldRadius": 25,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS 000": "zea_hosta_s",
+    "WS 001": "zea_hosta_s"
+  },
+  "builtInWings": [ ],
+  "builtInModules": null,
+  "weaponSlots": [
+    {
+      "id": "WS 000",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 15,
+      "angle": 0,
+      "locations": [
+        7,     10.5
+      ]
+    },
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 15,
+      "angle": 0,
+      "locations": [
+        7,    -10.5
+      ]
+    },
+    {
+      "id": "WS 002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 45,
+      "angle": 0,
+      "locations": [ 0, 0 ]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [
+        -15, 0
+      ],
+      "length": 23,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    }
+  ],
+  "bounds": [
+    -19.5,     -7.5,
+    6,    -19.5,
+    24,        0,
+    6,     19.5,
+    -19.5,      7.5
+  ]
+}

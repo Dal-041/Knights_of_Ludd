@@ -1,0 +1,67 @@
+{
+  "hullName": "Kokakucho",
+  "hullId": "zea_edf_kokakucho",
+  "hullSize": "FIGHTER",
+  "style": "ZEA_ELYSIAN_TECH",
+  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_kokakucho.png",
+  "height": 68,
+  "width": 60,
+  "center": [
+    30, 34
+  ],
+  "collisionRadius": 35,
+  "coversColor": "",
+  "shieldCenter": [
+    0, 0
+  ],
+  "shieldRadius": 40,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS 000": "zea_edf_breach_salvo",
+    "WS 001": "zea_edf_harpoon_bomber"
+  },
+  "builtInWings": [ ],
+  "builtInModules": null,
+  "weaponSlots": [
+    {
+      "id": "WS 000",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 0,
+      "locations": [
+        -3.5,     16.5
+      ]
+    },
+    {
+      "id": "WS 001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 0,
+      "locations": [
+        -4,    -14.5
+      ]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [
+        -31.5, 0
+      ],
+      "length": 23,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    }
+  ],
+  "bounds": [
+    -14.5,      -27,
+    33,        0,
+    -14.5,       27,
+    -32.5,        0
+  ]
+}
