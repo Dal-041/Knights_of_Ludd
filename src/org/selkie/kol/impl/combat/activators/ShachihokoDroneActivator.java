@@ -132,6 +132,7 @@ public class ShachihokoDroneActivator extends DroneActivator {
             } else if (desiredShieldRadius < drone.getShield().getRadius()) {
                 drone.getShield().setRadius(Math.max(desiredShieldRadius, drone.getShield().getRadius() - amount * 250f));
             }
+            drone.setCollisionRadius(drone.getShieldRadiusEvenIfNoShield());
 
             float distanceToTarget = MathUtils.getDistance(drone.getLocation(), droneTarget.getLocation());
             if (drone.getShield().isOn()) {

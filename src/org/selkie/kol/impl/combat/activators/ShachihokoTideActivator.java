@@ -120,6 +120,7 @@ public class ShachihokoTideActivator extends DroneActivator {
             } else if (desiredShieldRadius < drone.getShield().getRadius()) {
                 drone.getShield().setRadius(Math.max(desiredShieldRadius, drone.getShield().getRadius() - amount * 250f));
             }
+            drone.setCollisionRadius(drone.getShieldRadiusEvenIfNoShield());
 
             if (droneTarget == null) {
                 if (drone.getFluxLevel() > 0f) {
