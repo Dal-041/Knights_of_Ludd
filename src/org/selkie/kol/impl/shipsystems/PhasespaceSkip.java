@@ -2,21 +2,21 @@ package org.selkie.kol.impl.shipsystems;
 
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.CollisionClass;
+import com.fs.starfarer.api.combat.CombatEntityAPI;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.VectorUtils;
-import org.magiclib.plugins.MagicTrailPlugin;
-import org.magiclib.util.MagicRender;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.util.MagicRender;
 import org.selkie.kol.impl.fx.FakeSmokePlugin;
 
 import java.awt.*;
 import java.util.Iterator;
-
-import static com.fs.starfarer.api.util.Misc.ZERO;
 
 public class PhasespaceSkip extends BaseShipSystemScript {
     //Main phase color
@@ -161,8 +161,10 @@ public class PhasespaceSkip extends BaseShipSystemScript {
 
     public void unapply(MutableShipStatsAPI stats, String id) {
         ShipAPI ship = null;
+        boolean player = false;
         if (stats.getEntity() instanceof ShipAPI) {
             ship = (ShipAPI) stats.getEntity();
+            id = id + "_" + ship.getId();
         } else {
             return;
         }
@@ -175,13 +177,13 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         stats.getMaxTurnRate().unmodify(id);
         stats.getTurnAcceleration().unmodify(id);
 
-        stats.getFluxDissipation().unmodifyMult(id);
-        stats.getBallisticRoFMult().unmodifyMult(id);
-        stats.getEnergyRoFMult().unmodifyMult(id);
-        stats.getMissileRoFMult().unmodifyMult(id);
-        stats.getBallisticAmmoRegenMult().unmodifyMult(id);
-        stats.getEnergyAmmoRegenMult().unmodifyMult(id);
-        stats.getMissileAmmoRegenMult().unmodifyMult(id);
+        stats.getFluxDissipation().unmodify(id);
+        stats.getBallisticRoFMult().unmodify(id);
+        stats.getEnergyRoFMult().unmodify(id);
+        stats.getMissileRoFMult().unmodify(id);
+        stats.getBallisticAmmoRegenMult().unmodify(id);
+        stats.getEnergyAmmoRegenMult().unmodify(id);
+        stats.getMissileAmmoRegenMult().unmodify(id);
 
         stats.getTimeMult().unmodify(id);
 
