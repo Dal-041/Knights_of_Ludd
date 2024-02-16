@@ -12,6 +12,7 @@ import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -22,15 +23,16 @@ import java.util.List;
 import static org.lazywizard.lazylib.combat.WeaponUtils.getEnemiesInArc;
 
 public class SupernovaStats extends BaseShipSystemScript {
-    private static final float IN_STATE_DURATION = 2f;
-    private static final float ACTIVE_STATE_DURATION = 4f;
+    protected static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaUtils.systemIDSupernova);
+    private static final float IN_STATE_DURATION = entry.getIn(); //2f;
+    private static final float ACTIVE_STATE_DURATION = entry.getActive(); //4f;
     private static final String SUPERNOVA = "SUPERNOVA";
     private static final String FIRED_INFERNO_CANNON_IDS = "FIRED_INFERNO_CANNON_IDS";
     private static final List<String> INFERNO_CANNON_IDS = new ArrayList<>();
 
-    private static final float assessmentArc = 35f;
-    private static final float assessmentRange = 1500f;
-    private static final float assessmentThreshold = 15f;
+    //private static final float assessmentArc = 35f; //Determined by weapon mount
+    //private static final float assessmentRange = 1500f;
+    private static final float assessmentThreshold = 10f;
     public static HashMap<ShipAPI.HullSize, Float> scoresHull = new HashMap<>();
     static {
         scoresHull.put(ShipAPI.HullSize.FIGHTER, 1f);
@@ -67,6 +69,10 @@ public class SupernovaStats extends BaseShipSystemScript {
                         WeaponAPI lidarWep = null;
                         for (WeaponAPI wep : ship.getAllWeapons()) {
                             if (wep.getSpec().getWeaponId().equals("zea_dawn_targeting_beam_wpn")) lidarWep = wep;
+                        }
+                        if (lidarWep == null) {
+                            data.superNova = true;
+                            return;
                         }
                         ship.getMutableStats().getBeamWeaponRangeBonus().modifyMult("nian_gun_assessment", 2f);
                         for (ShipAPI enemy: getEnemiesInArc(lidarWep)) {

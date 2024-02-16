@@ -1,5 +1,5 @@
 {
-    "displayName": "Zealous",
+    "displayName": "Zealot",
     "fluxCapacitors": 1,
     "fluxVents": 0,
     "goalVariant": true,
@@ -13,10 +13,10 @@
     "permaMods": [],
     "sMods": [],
     "suppressedMods": [],
-    "variantId": "kol_mimosa_lp_Zealous",
+    "variantId": "kol_mimosa_lp_Zealot",
     "weaponGroups": [
         {
-            "autofire": true,
+            "autofire": false,
             "mode": "LINKED",
             "weapons": {
                 "WS0008": "hellbore",

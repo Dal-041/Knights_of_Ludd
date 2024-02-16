@@ -169,7 +169,7 @@
       "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
-      "arc": 35,
+      "arc": 60,
       "angle": 0,
       "locations": [139, 39]
     },
