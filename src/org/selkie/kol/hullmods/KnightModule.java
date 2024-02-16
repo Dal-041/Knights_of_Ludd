@@ -99,7 +99,7 @@ public class KnightModule extends BaseHullMod {
             ship.setHulk(true);
             ship.setDrone(true);
             ship.addTag("KOL_moduleHulked");
-        } else if(!ship.isHulk()){
+        } else if(!ship.isHulk() && ship.hasTag("KOL_moduleHulked")){
             ship.setHulk(true);
         }
 
