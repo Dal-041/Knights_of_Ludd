@@ -1,8 +1,8 @@
 {
-	"id":"zea_edf_locust_medium",
+	"id":"zea_edf_locust_fighter",
 	"specClass":"projectile",
 	"type":"MISSILE",
-	"size":"MEDIUM",
+	"size":"SMALL",
 	"turretSprite":"graphics/weapons/locust_turret.png",
 	"hardpointSprite":"graphics/weapons/locust_hardpoint.png",
 	#"turretOffsets":[9, -12, 9, -9, 9, -3, 9, 3, 9, 9, 9, -12, 14, -8, 14, -3, 14, 3, 14, 8, 18, -3, 18, 3],

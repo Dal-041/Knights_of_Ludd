@@ -1,0 +1,11 @@
+{
+    "displayName": "Air Superiority Drone",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_edf_onmoraki",
+    "hullMods": ["no_weapon_flux"],
+    "variantId": "zea_edf_onmoraki_wing",
+    "weaponGroups": [
+    ]
+}

@@ -6,3 +6,6 @@ shield_drone_wing,shield_drone_wing,"no_drop, no_sell, low",3,0.5,7,18,V,0,500,,
 zea_dawn_chiwen_wing,zea_dawn_chiwen_wing,"no_drop, no_sell, low",0,,4,0,BOX,0,500,,1,SUPPORT,Drone,5,1000
 zea_edf_shachi_wing,zea_edf_shachi_wing,"no_drop, no_sell, low",0,,4,0,BOX,0,500,,1,SUPPORT,Drone,5,1000
 zea_edf_shachihoko_wing,zea_edf_shachihoko_wing,"no_drop, no_sell, low",0,,4,0,BOX,0,500,,1,SUPPORT,Drone,5,1000
+zea_edf_kokakucho_wing,zea_edf_kokakucho_wing,"no_sell, bomber, bomber5, zea_common_bp, auto_fighter",3,,8,18,V,2000,750,750,2,BOMBER,Bomber Drone,16,15000,,,,,,,,,,,,,
+zea_edf_itsumade_wing,zea_edf_itsumade_wing,"no_sell, fighter, fighter5, zea_common_bp, auto_fighter",3,,7,15,BOX,2500,400,400,3,FIGHTER,Fighter Drone,13,10000,,,,,,,,,,,,,
+zea_edf_onmoraki_wing,zea_edf_onmoraki_wing,"no_sell, interceptor, interceptor5, zea_common_bp, auto_fighter",3,,6,16,BOX,4000,600,600,2,INTERCEPTOR,Interceptor Drone,14,6000,,,,,,,,,,,,,

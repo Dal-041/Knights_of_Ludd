@@ -1,0 +1,11 @@
+{
+    "displayName": "Bomber Drone",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_edf_kokakucho",
+    "hullMods": ["no_weapon_flux"],
+    "variantId": "zea_edf_kokakucho_wing",
+    "weaponGroups": [
+    ]
+}
