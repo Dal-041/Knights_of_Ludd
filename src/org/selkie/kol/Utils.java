@@ -103,7 +103,9 @@ public class Utils {
 
         // Used to properly interpolate between UI fade colors
         float alpha;
-        if (Global.getCombatEngine().getCombatUI().isShowingCommandUI()) {
+        if(!Global.getCombatEngine().isUIShowingHUD() && !Global.getCombatEngine().isUIShowingDialog()){
+            alpha = 0;
+        } else if (Global.getCombatEngine().getCombatUI().isShowingCommandUI()) {
             commandTime = System.currentTimeMillis();
             alpha = 1-(float) Math.pow(Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f), 10f);
         } else if (Global.getCombatEngine().isUIShowingDialog()) {
