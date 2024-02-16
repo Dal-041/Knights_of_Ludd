@@ -80,21 +80,22 @@ public class SparkleHullMod extends BaseHullMod {
 
     public void advanceInCombat(ShipAPI ship, float amount) {
         super.advanceInCombat(ship, amount);
- /*
 
-
-        ShipAPI ship = null;
-        if (stats.getEntity() instanceof ShipAPI) {
-            ship = (ShipAPI) stats.getEntity();
-        } else {
-            return;
-        }
-
-        float amount = Global.getCombatEngine().getElapsedInLastFrame();
-*/
         ShipAPI.HullSize hullSize = ship.getHullSize();
         SharedAIData data = getSharedData(ship);
         data.elapsed += amount;
+
+        if (!ship.isAlive()) {
+            for (MissileAPI drone : data.drones) {
+                drone.explode();
+                Global.getCombatEngine().removeEntity(drone);
+            }
+            data.droneTarget = null;
+            data.targetLock = null;
+            data.lockRemaining = 0;
+            data.drones.clear();
+            return;
+        }
 
         int maxMotes = (int) maxDrones.get(hullSize);
 
@@ -106,14 +107,6 @@ public class SparkleHullMod extends BaseHullMod {
                 data.droneTarget = null;
                 data.targetLock = null;
                 data.lockRemaining = 0;
-            }
-        }
-
-        if (!ship.isAlive()) {
-            for (MissileAPI drone : data.drones) {
-                drone.explode();
-                Global.getCombatEngine().removeEntity(drone);
-                return;
             }
         }
 
