@@ -227,7 +227,7 @@
   ],
   "engineSlots": [
     {
-      "location": [-53, 193.5],
+      "location": [-51.5, 188.5],
       "length": 126.943695,
       "width": 37.124016,
       "angle": 137,
@@ -235,7 +235,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-53, -183.5],
+      "location": [-51.5, -188.5],
       "length": 126.943695,
       "width": 37.124016,
       "angle": -137,
@@ -243,7 +243,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-109.5, 30],
+      "location": [-108, 25],
       "length": 76,
       "width": 16,
       "angle": 180,
@@ -251,7 +251,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-109.5, -20],
+      "location": [-108, -25],
       "length": 76,
       "width": 16,
       "angle": -180,
@@ -259,7 +259,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-51.5, 200.5],
+      "location": [-50, 195.5],
       "length": 102.616173,
       "width": 21.440256,
       "angle": 129.5,
@@ -267,7 +267,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-51.5, -190.5],
+      "location": [-50, -195.5],
       "length": 102.616173,
       "width": 21.440256,
       "angle": -129.5,
@@ -275,7 +275,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-48, 205.5],
+      "location": [-46.5, 200.5],
       "length": 102.616173,
       "width": 21.440256,
       "angle": 121,
@@ -283,7 +283,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-48, -195.5],
+      "location": [-46.5, -200.5],
       "length": 102.616173,
       "width": 21.440256,
       "angle": -121,
@@ -291,7 +291,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-43, 210.5],
+      "location": [-41.5, 205.5],
       "length": 102.616173,
       "width": 21.440256,
       "angle": 113,
@@ -299,7 +299,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [-43, -200.5],
+      "location": [-41.5, -205.5],
       "length": 102.616173,
       "width": 21.440256,
       "angle": -113,

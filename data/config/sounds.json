@@ -33,7 +33,7 @@
 		{"file":"sounds/phasespace_fx/kol_nullspace_with_system.ogg","pitch":1.3,"volume":0.8},
 	],
 	"zea_dusk_phase_cloak":[
-		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_loop_alt.ogg","pitch":1,"volume":1},
+		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_loop_alt.ogg","pitch":0.6,"volume":0.5},
 	],
 	"kol_shield_burnout":{
 	        "sounds":[
