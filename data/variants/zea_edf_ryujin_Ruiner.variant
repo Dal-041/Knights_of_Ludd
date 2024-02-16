@@ -1,7 +1,7 @@
 {
     "displayName": "Ruiner",
     "fluxCapacitors": 0,
-    "fluxVents": 50,
+    "fluxVents": 38,
     "goalVariant": true,
     "hullId": "zea_edf_ryujin",
     "hullMods": [
@@ -51,17 +51,23 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0005": "dualflak",
-                "WS0011": "pdburst",
-                "WS0016": "pdburst",
                 "WS0021": "pdburst",
                 "WS0022": "pdburst",
+                "WS0016": "pdburst",
+                "WS0011": "pdburst",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "dualflak",
             }
         },
     ],
     "wings": [
-        "lux_wing",
-        "lux_wing",
+        "zea_edf_onmoraki_wing",
+        "zea_edf_onmoraki_wing",
     ],
     "modules": [],
 }

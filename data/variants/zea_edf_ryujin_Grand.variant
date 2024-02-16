@@ -1,7 +1,7 @@
 {
     "displayName": "Grand",
-    "fluxCapacitors": 8,
-    "fluxVents": 50,
+    "fluxCapacitors": 0,
+    "fluxVents": 42,
     "goalVariant": true,
     "hullId": "zea_edf_ryujin",
     "hullMods": [
@@ -17,7 +17,7 @@
     "weaponGroups": [
         {
             "autofire": true,
-            "mode": "ALTERNATING",
+            "mode": "LINKED",
             "weapons": {
                 "WS0008": "mjolnir",
                 "WS0007": "mjolnir",
@@ -60,8 +60,8 @@
         },
     ],
     "wings": [
-        "lux_wing",
-        "lux_wing",
+        "zea_edf_kokakucho_wing",
+        "zea_edf_kokakucho_wing",
     ],
     "modules": [],
 }

@@ -1,7 +1,7 @@
 {
     "displayName": "Arsenal Bird",
-    "fluxCapacitors": 7,
-    "fluxVents": 27,
+    "fluxCapacitors": 0,
+    "fluxVents": 22,
     "goalVariant": true,
     "hullId": "zea_edf_kiyohime",
     "hullMods": [
@@ -19,7 +19,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "gauss",
+                "WS0006": "kol_llyr",
             }
         },
         {
@@ -35,7 +35,7 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "kol_llyr",
+                "WS0007": "gauss",
             }
         },
         {
@@ -49,9 +49,9 @@
         },
     ],
     "wings": [
-        "flash_wing",
-        "flash_wing",
-        "flash_wing",
+        "zea_edf_kokakucho_wing",
+        "zea_edf_itsumade_wing",
+        "zea_edf_itsumade_wing",
         "spark_wing",
         "spark_wing",
     ],

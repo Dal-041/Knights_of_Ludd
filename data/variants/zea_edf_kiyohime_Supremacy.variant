@@ -1,6 +1,6 @@
 {
     "displayName": "Supremacy",
-    "fluxCapacitors": 19,
+    "fluxCapacitors": 5,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_edf_kiyohime",
@@ -60,11 +60,11 @@
         },
     ],
     "wings": [
-        "lux_wing",
-        "lux_wing",
-        "lux_wing",
-        "lux_wing",
-        "lux_wing",
+        "zea_edf_onmoraki_wing",
+        "zea_edf_onmoraki_wing",
+        "zea_edf_onmoraki_wing",
+        "spark_wing",
+        "spark_wing",
     ],
     "modules": [],
 }
