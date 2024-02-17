@@ -3,21 +3,22 @@ package org.selkie.kol.impl.shipsystems;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
-import java.util.*;
+import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class MiniJump extends BaseShipSystemScript {
 	public static final float MAX_TURN_BONUS = 50f;
 	public static final float TURN_ACCEL_BONUS = 50f;
-	public static final float INSTANT_BOOST_FLAT = 250f;
-	public static final float INSTANT_BOOST_MULT = 4.5f;
+	public static final float INSTANT_BOOST_FLAT = 350f;
+	public static final float INSTANT_BOOST_MULT = 6.5f;
 
 	private static final Color ENGINE_COLOR = new Color(255, 10, 10);
 	private static final Color BOOST_COLOR = new Color(255, 175, 175, 200);
@@ -29,6 +30,17 @@ public class MiniJump extends BaseShipSystemScript {
 	private float boostScale = 0.75f;
 	private float boostVisualDir = 0f;
 	private boolean boostForward = false;
+
+	private float HEFTimer = 0f;
+
+	public static final float DAMAGE_BONUS_PERCENT = 50f;
+	public static final float  FIRERATE_BONUS_PERCENT = 50f;
+	public static final float HEF_BUFF_DURATION = 3f;
+
+	private static Color HEF_COLOR = new Color(255, 0, 191);
+	private static final float MAX_GLOW_PERCENT = 0.8f;
+	private static final float FADE_IN_OUT_TIME = 0.2f;
+	private final EnumSet<WeaponAPI.WeaponType> WEAPON_TYPES = EnumSet.of(WeaponAPI.WeaponType.ENERGY, WeaponAPI.WeaponType.BALLISTIC);
 
 
 	@Override
@@ -199,7 +211,49 @@ public class MiniJump extends BaseShipSystemScript {
 								2.5f * 2f * boostScale * eng.getEngineSlot().getWidth(), 0.15f);
 					}
 				}
+
+				// HEF BUFF STUFF
+				HEFTimer = HEF_BUFF_DURATION;
+				stats.getEnergyRoFMult().modifyPercent(id, FIRERATE_BONUS_PERCENT);
+				stats.getBallisticWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
 			}
+		}
+
+		if(state == State.COOLDOWN ||state == State.IDLE ){
+			unapply(stats, id);
+		}
+
+		String HEFBuffId = this.getClass().getName() + "_" + ship.getId() + "HEF";
+		String AAFBuffId = this.getClass().getName() + "_" + ship.getId() + "AAF";
+		if(HEFTimer > 0){
+			HEFTimer -= amount;
+			if (ship == Global.getCombatEngine().getPlayerShip()) {
+				Global.getCombatEngine().maintainStatusForPlayerShip(HEFBuffId, "graphics/icons/hullsys/high_energy_focus.png", "Temporal Energy Shell"
+						, "+" + (int) FIRERATE_BONUS_PERCENT + "% energy weapon firerate. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
+						, false);
+				Global.getCombatEngine().maintainStatusForPlayerShip(AAFBuffId, "graphics/icons/hullsys/ammo_feeder.png", "Entropy Loaded Ballistics"
+						, "+" + (int) DAMAGE_BONUS_PERCENT + "% ballistic damage. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
+						, false);
+			}
+			Global.getSoundPlayer().playLoop("system_high_energy_focus_loop", ship, 1f, 0.6f, ship.getLocation(), ship.getVelocity());
+
+			// COLOR / GLOW STUFF
+			// aaaaaaaaaaaaaa Selkie why did you make me do this
+			// don't swap the max and mins, they're there to clamp glow between 0 and 1 in case of float errors or something
+			// i'll kill you.
+			if (HEFTimer > HEF_BUFF_DURATION - FADE_IN_OUT_TIME) {
+				ship.setWeaponGlow(Math.min(MAX_GLOW_PERCENT
+						, -MAX_GLOW_PERCENT / FADE_IN_OUT_TIME * HEFTimer + HEF_BUFF_DURATION * MAX_GLOW_PERCENT / FADE_IN_OUT_TIME), HEF_COLOR, WEAPON_TYPES);
+			} else if (HEFTimer < FADE_IN_OUT_TIME) {
+				ship.setWeaponGlow(Math.max(0f, MAX_GLOW_PERCENT / FADE_IN_OUT_TIME * HEFTimer), HEF_COLOR, WEAPON_TYPES);
+			} else {
+				ship.setWeaponGlow(MAX_GLOW_PERCENT, HEF_COLOR, WEAPON_TYPES);
+			}
+		}
+		if (HEFTimer <= 0f) {
+			ship.setWeaponGlow(0f, HEF_COLOR, WEAPON_TYPES);
+			stats.getEnergyWeaponDamageMult().unmodify(id);
+			stats.getBallisticWeaponDamageMult().unmodify(id);
 		}
 	}
 
@@ -221,9 +275,6 @@ public class MiniJump extends BaseShipSystemScript {
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {
-		if (index == 0) {
-			return new StatusData("increased engine power", false);
-		}
 		return null;
 	}
 

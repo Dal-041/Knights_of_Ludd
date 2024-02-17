@@ -31,7 +31,7 @@ public class LungeHEFStats extends BaseShipSystemScript {
     private final CombatEngineAPI engine = Global.getCombatEngine();
 
     public static final float DAMAGE_BONUS_PERCENT = 50f;
-    public static final float HEF_BUFF_DURATION = 3f;
+    public static final float HEF_BUFF_DURATION = 5f;
 
     private static Color HEF_COLOR = new Color(255, 0, 191);
     private static final float MAX_GLOW_PERCENT = 0.8f;
