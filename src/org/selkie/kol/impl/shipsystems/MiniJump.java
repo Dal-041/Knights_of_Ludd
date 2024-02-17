@@ -219,14 +219,13 @@ public class MiniJump extends BaseShipSystemScript {
 			}
 		}
 
-		if(state == State.COOLDOWN ||state == State.IDLE ){
+		if(state == State.COOLDOWN || state == State.IDLE ){
 			unapply(stats, id);
 		}
 
 		String HEFBuffId = this.getClass().getName() + "_" + ship.getId() + "HEF";
 		String AAFBuffId = this.getClass().getName() + "_" + ship.getId() + "AAF";
 		if(HEFTimer > 0){
-			HEFTimer -= amount;
 			if (ship == Global.getCombatEngine().getPlayerShip()) {
 				Global.getCombatEngine().maintainStatusForPlayerShip(HEFBuffId, "graphics/icons/hullsys/high_energy_focus.png", "Temporal Energy Shell"
 						, "+" + (int) FIRERATE_BONUS_PERCENT + "% energy weapon firerate. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
@@ -235,6 +234,7 @@ public class MiniJump extends BaseShipSystemScript {
 						, "+" + (int) DAMAGE_BONUS_PERCENT + "% ballistic damage. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
 						, false);
 			}
+			HEFTimer -= amount;
 			Global.getSoundPlayer().playLoop("system_high_energy_focus_loop", ship, 1f, 0.6f, ship.getLocation(), ship.getVelocity());
 
 			// COLOR / GLOW STUFF

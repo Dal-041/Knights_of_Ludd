@@ -272,7 +272,7 @@ Qilin,zea_dawn_qilin,Starlight,Dawntide,zea_dawn_gracious_light,30,20000,1650,12
 #Elysia,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Wani,zea_edf_wani,Empyrean Frigate,Elysia,zea_edf_minijump,8,1750,250,2500,,180,50,,140,120,100,45,90,200,FRONT,,120,0.4,0.8,,,1,1,40,25,1,25,10,10000,8,10,220,0.25,7,7,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,2,,
-Suzaku,zea_edf_suzaku,Empyrean Destroyer,Elysia,highenergyfocus,16,4000,400,5500,,400,105,,115,80,60,30,30,400,FRONT,,120,0.4,0.8,,,1,15,80,50,2,25,9,45000,6,15,300,0.25,12,12,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,
+Suzaku,zea_edf_suzaku,Empyrean Destroyer,Elysia,zea_edf_minijump,16,4000,400,5500,,400,105,,115,80,60,30,30,400,FRONT,,120,0.4,0.8,,,1,15,80,50,2,25,9,45000,6,15,300,0.25,12,12,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,
 Mizuchi,zea_edf_mizuchi,Empyrean Cruiser,Elysia,zea_edf_synchronized_ammo_feed,18,8000,900,11000,,550,155,3,80,40,30,15,20,1200,FRONT,,120,0.4,0.7,,,3,200,150,100,3,33,8,100000,6,12,480,0.25,24,24,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,
 Seiryu,zea_edf_seiryu,Empyrean Cruiser,Elysia,zea_edf_twinshield,16,6000,750,7000,,600,155,,90,70,50,20,25,650,OMNI,,120,0.4,0.8,,,2,60,120,100,3,33,9,80000,6,12,480,0.25,20,20,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,
 Kiyohime,zea_edf_kiyohime,Empyrean Carrier,Elysia,zea_edf_plasmafighters,32,12000,1000,18000,,800,280,5,50,15,20,12,12,2800,FRONT,,90,0.4,0.8,,,3,550,300,300,8,25,8,390000,4,15,600,0.25,50,50,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,,,,,
