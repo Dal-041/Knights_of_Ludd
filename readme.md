@@ -20,10 +20,10 @@ Featuring:
 - Portraits (AI): Selkie (ironic, right?)
 - Art contributions: SnazzyPantsMcGee, Nes, Quacken, Pyrophage, Sleepyfish, Sirhartley, Alfonzo, NiaTahl, Dal
 
-- Writing: Wisp, Dal, Alfonzo, Candlebury, WMGreywind
+- Writing: Wisp, Dal, Alfonzo, Candlebury, Demto, WMGreywind
 - Sounds: Mesotronik
 - Music: Haplogynae
 
-- Special Thanks : Amazigh, Timid, Pogre, and our valued beta testers
+- Special Thanks : Amazigh, Timid, Avanitia, Pogre, and our valued beta testers
 - Tartiflette : Stellar backgrounds, Seeker & Torchship art, shield and boss code reference
 - Dark.Revenant : Terrain code reference
