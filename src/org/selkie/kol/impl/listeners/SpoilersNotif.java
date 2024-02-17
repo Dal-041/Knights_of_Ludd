@@ -2,18 +2,14 @@ package org.selkie.kol.impl.listeners;
 
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.*;
+import com.fs.starfarer.api.campaign.InteractionDialogAPI;
+import com.fs.starfarer.api.campaign.TextPanelAPI;
 import com.fs.starfarer.api.impl.campaign.RuleBasedInteractionDialogPluginImpl;
-import com.fs.starfarer.api.impl.campaign.ids.Entities;
-import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageEntity;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
-import java.awt.*;
 import java.io.IOException;
 
 import static org.selkie.kol.impl.helpers.ZeaUtils.KEY_ZEA_SPOILERS;
@@ -69,6 +65,9 @@ public class SpoilersNotif implements EveryFrameScript {
             }
             delay.advance(amount);
             if (delay.intervalElapsed() && !Global.getSector().getMemoryWithoutUpdate().contains(KEY_ZEA_SPOILERS)) {
+                if(Global.getSector().getCampaignUI().getCurrentInteractionDialog() == null){
+                    return; //check again after 15 sec, player is in area without the ability to have interaction
+                }
                 doSpoilersTalk();
                 writeFile();
                 Global.getSector().getMemoryWithoutUpdate().set(KEY_ZEA_SPOILERS, true);
