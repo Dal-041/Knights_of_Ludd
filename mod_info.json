@@ -2,7 +2,7 @@
 	"id":"knights_of_ludd", # internal id
 	"name":"The Knights of Ludd", # displayed to the player
 	"author":"Selkie, Dal, Starficz",
-	"version":"1.0.0",
+	"version":"1.0.1",
 	"description":"Adds the Knights of Ludd faction and content!",
     "gameVersion": "0.97a-RC10",
 	"jars": ["jars/KnightsOfSelkie.jar"],
