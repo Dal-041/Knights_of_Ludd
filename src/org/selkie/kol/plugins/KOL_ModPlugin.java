@@ -43,10 +43,13 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	@Override
 	public void onApplicationLoad() {
-		if (hasGraphicsLib && hasKOLGraphics) {
+		if (hasGraphicsLib) {
 			ShaderLib.init();
 			LightData.readLightDataCSV("data/lights/kol_light_data.csv");
-			TextureData.readTextureDataCSV("data/lights/kol_texture_data.csv");
+			TextureData.readTextureDataCSV("data/lights/kol_glib_normals.csv");
+			if (hasKOLGraphics) {
+				TextureData.readTextureDataCSV("data/lights/kol_glib_extended.csv");
+			}
 		}
 		if (hasMMM) { //Remove after week 1
 			Set<String> BL = DefenseMission.FACTION_BLACKLIST;

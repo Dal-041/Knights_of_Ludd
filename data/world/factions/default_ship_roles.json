@@ -26,6 +26,7 @@
 		"zea_edf_ryujin_Ruiner":75,
 		"zea_edf_ryujin_Royal":75,
 		"zea_edf_kiyohime_Arsenal_Bird":25,
+		"zea_edf_kiyohime_Oppressor":20,
 		"zea_edf_kiyohime_Supremacy":35,
 	},
 	"combatLarge":{
@@ -41,7 +42,8 @@
 		"kol_lotus_Guardsman":1,
 		"kol_lotus_Knightly":1,
 		"kol_lotus_Support":1,
-		"kol_blaze_Standard":1,
+		"kol_blaze_Standard":5,
+		"kol_blaze_Blazing":1,
 		"zea_dawn_bixi_Abyssal":100,
 		"zea_dawn_bixi_Blazing":100,
 		"zea_dawn_bixi_Inevitable":100,
