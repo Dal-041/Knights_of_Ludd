@@ -76,6 +76,7 @@ public class TrackFleet implements EveryFrameScript {
                             victim.setLocation(dest.getStar().getLocation().x, dest.getStar().getLocation().y);
                             victim.setNoEngaging(2.0f);
                             CampaignEngine.getInstance().getCampaignUI().showNoise(0.5f, 0.25f, 1.5f);
+                            if (victim.getVelocity().length() == 0) victim.getVelocity().setX(0.1f);
                             victim.getVelocity().normalise().scale(3000f);
                         }
                     }
