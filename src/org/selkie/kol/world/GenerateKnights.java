@@ -21,6 +21,8 @@ import org.apache.log4j.Logger;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
+import org.selkie.kol.fleets.SpawnInvictus;
+import org.selkie.kol.fleets.SpawnRetribution;
 import org.selkie.kol.helpers.MarketHelpers;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaMechanicIntel;
@@ -44,6 +46,8 @@ public class GenerateKnights {
 	}
 
 	public static void genAlways() {
+		SpawnInvictus.spawnInvictus();
+		SpawnRetribution.spawnRetribution();
 		copyChurchEquipment();
 		startupRelations();
 		genKnightsExpeditions();

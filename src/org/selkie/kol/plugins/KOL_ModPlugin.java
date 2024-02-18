@@ -99,8 +99,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			PrepareDarkDeeds.andBegin();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
-			SpawnInvictus.spawnInvictus();
-			SpawnRetribution.spawnRetribution();
 		}
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
@@ -122,8 +120,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || haveNex && SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
-			SpawnInvictus.spawnInvictus();
-			SpawnRetribution.spawnRetribution();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 			PrepareDarkDeeds.andBegin();
 			PrepareDarkDeeds.andContinue();
