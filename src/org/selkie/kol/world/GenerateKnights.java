@@ -345,7 +345,7 @@ public class GenerateKnights {
 			Global.getSector().getStarSystem("Eos Exodus").addScript(expeditions);
 		} else {
 			//Random sector
-			WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker();
+			WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>();
 
 			for (MarketAPI market : Global.getSector().getEconomy().getMarketsCopy()) {
 				if (market.getFactionId().equals(Factions.LUDDIC_CHURCH)) {

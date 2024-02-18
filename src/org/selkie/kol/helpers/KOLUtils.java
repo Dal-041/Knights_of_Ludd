@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public class KOLUtils {
+    public static final String BOSS_INVICTUS_KEY = "$kol_boss_invictus";
+    public static final String BOSS_RETRIBTUION_KEY = "$kol_boss_retribution";
+
     public static final String[] knightsShips = {
             "kol_alysse",
             "kol_larkspur",
@@ -19,4 +22,6 @@ public class KOLUtils {
             "kol_tamarisk"
     };
     public static final ArrayList<String> knightsShipsList = new ArrayList<>(Arrays.asList(knightsShips));
+
+
 }

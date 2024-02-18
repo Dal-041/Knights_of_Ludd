@@ -10,6 +10,7 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import org.selkie.kol.fleets.ManageRetribution;
+import org.selkie.kol.helpers.KOLUtils;
 
 public class SpawnRetribution {
 	
@@ -73,13 +74,14 @@ public class SpawnRetribution {
 	                    .setCaptain(RetributionCaptain)
 	                    .setMinFP(275) //support fleet
 	                    .setQualityOverride(2f)
-	                    .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
+	                    .setAssignment(FleetAssignment.DEFEND_LOCATION)
 	                    .setAssignmentTarget(target)
 	                    .setIsImportant(true)
 	                    .setTransponderOn(true)
 	                    .create();
-	            RetributionFleet.setDiscoverable(false);
+	            RetributionFleet.setDiscoverable(true);
 				RetributionFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+				RetributionFleet.getMemoryWithoutUpdate().set(KOLUtils.BOSS_RETRIBTUION_KEY, true);
 				RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);

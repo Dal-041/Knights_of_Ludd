@@ -79,7 +79,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
-		Global.getSector().addTransientScript(new SpoilersNotif());
+		//Global.getSector().addTransientScript(new SpoilersNotif());
 
 		Global.getSector().registerPlugin(new AICoreCampaignPlugin());
 		Global.getSector().addTransientScript(new AICoreReplacerScript());
@@ -90,8 +90,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
-			SpawnInvictus.spawnInvictus();
-			SpawnRetribution.spawnRetribution();
 		}
 		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
 	}
@@ -101,12 +99,14 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			PrepareDarkDeeds.andBegin();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
+			SpawnInvictus.spawnInvictus();
+			SpawnRetribution.spawnRetribution();
 		}
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
-		Global.getSector().addTransientScript(new SpoilersNotif());
+		//Global.getSector().addTransientScript(new SpoilersNotif());
 	}
 
 	@Override
