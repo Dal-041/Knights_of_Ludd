@@ -252,7 +252,7 @@ public class MiniJump extends BaseShipSystemScript {
 		}
 		if (HEFTimer <= 0f) {
 			ship.setWeaponGlow(0f, HEF_COLOR, WEAPON_TYPES);
-			stats.getEnergyWeaponDamageMult().unmodify(id);
+			stats.getEnergyRoFMult().unmodify(id);
 			stats.getBallisticWeaponDamageMult().unmodify(id);
 		}
 	}
