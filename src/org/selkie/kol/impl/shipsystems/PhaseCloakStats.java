@@ -1,16 +1,14 @@
 package org.selkie.kol.impl.shipsystems;
 
 
-import java.awt.Color;
-import java.util.Iterator;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.combat.AIUtils;
+
+import java.util.Iterator;
 
 public class PhaseCloakStats extends BaseShipSystemScript {
 
@@ -116,7 +114,6 @@ public class PhaseCloakStats extends BaseShipSystemScript {
         ShipAPI ship;
         if (stats.getEntity() instanceof ShipAPI) {
             ship = (ShipAPI) stats.getEntity();
-            id = id + "_" + ship.getId();
         } else {
             return;
         }
