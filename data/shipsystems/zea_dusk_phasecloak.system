@@ -33,9 +33,8 @@
 	"shipAlpha":1, # handled in stats script
 	#"shipAlpha":0.25,
 
-	"useSound":"system_phase_cloak_activate",
+	"useSound":"zea_dusk_phase_cloak_activate",
 	"loopSound":"zea_dusk_phase_cloak",
-	#"deactivateSound":"system_phase_cloak_deactivate",
-	"deactivateSound":"system_phase_cloak_deactivate",
+	"deactivateSound":"zea_dusk_phase_cloak_deactivate",
 	"outOfUsesSound":"system_phase_cloak_collision",
 }

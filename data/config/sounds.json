@@ -35,6 +35,13 @@
 	"zea_dusk_phase_cloak":[
 		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_loop_alt.ogg","pitch":0.6,"volume":0.5},
 	],
+	"zea_dusk_phase_cloak_activate":[ 
+		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_activate_alt.ogg","pitch":1,"volume":1.0},
+	],
+
+	"zea_dusk_phase_cloak_deactivate":[ 
+		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_deactivate_alt.ogg","pitch":1,"volume":1.0},
+	],
 	"kol_shield_burnout":{
 	        "sounds":[
                         {"file":"sounds/shields/kol_shields_burnout.ogg","pitch":1,"volume":1},
