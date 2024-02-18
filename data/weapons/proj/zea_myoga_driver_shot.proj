@@ -1,6 +1,9 @@
 {
 	"id":"zea_myoga_driver_shot",
 	"specClass":"projectile",
+
+	"onFireEffect":"org.selkie.kol.weapons.KOL_MyogaOnFireEffect",
+
 	"spawnType":"BALLISTIC",
 	"collisionClass":"PROJECTILE_FF",
 	"collisionClassByFighter":"PROJECTILE_FIGHTER",	

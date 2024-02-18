@@ -1,6 +1,9 @@
 {
 	"id":"kol_llyr_shot",
 	"specClass":"projectile",
+
+	"onFireEffect":"org.selkie.kol.weapons.KOL_LlyrOnFireEffect",
+
 	"spawnType":"BALLISTIC",
 	"collisionClass":"PROJECTILE_FF",
 	"collisionClassByFighter":"PROJECTILE_FIGHTER",

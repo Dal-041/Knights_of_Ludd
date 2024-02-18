@@ -3,6 +3,9 @@
   "specClass": "beam",
   "type": "ENERGY",
   "size": "SMALL",
+
+  "beamEffect":"org.selkie.kol.weapons.KOL_SparkleBeamEffect",
+
   "turretSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_hosta_s_base.png",
   "turretGlowSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_hosta_s_glow.png",
   "hardpointSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_hosta_s_base.png",

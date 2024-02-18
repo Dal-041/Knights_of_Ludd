@@ -3,7 +3,10 @@
 	"specClass":"beam",
 	"type":"ENERGY",
 	"size":"LARGE",
-	"turretSprite":"graphics/weapons/missile_rack_open_m_2x_turret_base.png",
+
+	"beamEffect":"org.selkie.kol.weapons.KOL_SmokeBeamEffect",
+
+	"turretSprite":"graphics/weapons/kol_lunete_hardpoint.png",
 	"hardpointSprite":"graphics/weapons/kol_lunete_hardpoint.png",	
 	"hardpointGlowSprite":"graphics/weapons/kol_lunete_hardpoint_glow.png",
 	"hardpointOffsets":[8, -4, 8, 4],
