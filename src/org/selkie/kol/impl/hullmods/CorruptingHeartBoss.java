@@ -1,8 +1,8 @@
 package org.selkie.kol.impl.hullmods;
 
-import activators.ActivatorManager;
-import activators.CombatActivator;
-import activators.drones.DroneActivator;
+import org.magiclib.activators.ActivatorManager;
+import org.magiclib.activators.CombatActivator;
+import org.magiclib.activators.drones.DroneActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;

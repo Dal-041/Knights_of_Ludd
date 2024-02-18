@@ -22,11 +22,6 @@
             "id": "lunalib",
             "name": "LunaLib",
             "version": { "major": "1", "minor": "8", "patch": "4"}
-        },
-        {
-            "id": "combatactivators",
-            "name": "Combat Activators",
-            "version": { "major": "1", "minor": "3", "patch": "0"}
         }
     ]
 }

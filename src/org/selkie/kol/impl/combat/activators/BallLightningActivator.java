@@ -1,6 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.CombatActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
@@ -8,6 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.activators.CombatActivator;
 
 import java.awt.*;
 import java.util.*;

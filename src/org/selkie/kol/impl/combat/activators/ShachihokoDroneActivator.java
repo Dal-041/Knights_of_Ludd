@@ -1,8 +1,8 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.drones.DroneActivator;
-import activators.drones.DroneFormation;
-import activators.drones.PIDController;
+import org.magiclib.activators.drones.DroneActivator;
+import org.magiclib.activators.drones.DroneFormation;
+import org.magiclib.activators.drones.PIDController;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;

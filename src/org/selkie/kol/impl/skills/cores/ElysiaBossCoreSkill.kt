@@ -1,7 +1,5 @@
 package org.selkie.kol.impl.skills.cores
 
-import activators.ActivatorManager
-import activators.ActivatorManager.addActivator
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
@@ -10,6 +8,7 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.impl.campaign.ids.Stats
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
+import org.magiclib.activators.ActivatorManager
 import org.selkie.kol.impl.combat.activators.PDDroneActivator
 
 class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
@@ -40,10 +39,6 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
                 ActivatorManager.addActivator(ship, PDDroneActivator(ship))
             }
         }
-
-
-
-
     }
 
     override fun unapply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?) {
