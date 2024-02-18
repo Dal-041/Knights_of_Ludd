@@ -1,0 +1,51 @@
+{
+    "displayName": "Overdriven",
+    "fluxCapacitors": 7,
+    "fluxVents": 0,
+    "goalVariant": true,
+    "hullId": "zea_edf_seiryu",
+    "hullMods": [
+        "hardened_subsystems",
+        "safetyoverrides",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_edf_seiryu_Overdriven",
+    "weaponGroups": [
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "zea_plasma_chaingun",
+                "WS0004": "zea_plasma_chaingun",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "ALTERNATING",
+            "weapons": {
+                "WS0011": "zea_mazuma_m",
+                "WS0010": "zea_mazuma_m",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "ioncannon",
+                "WS0006": "ioncannon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "heavymg",
+                "WS0002": "heavymg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

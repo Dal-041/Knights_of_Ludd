@@ -1,0 +1,40 @@
+{
+    "displayName": "Strike",
+    "fluxCapacitors": 4,
+    "fluxVents": 10,
+    "goalVariant": ture,
+    "hullId": "zea_edf_wani",
+    "hullMods": [
+        "eccm",
+    ],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_edf_wani_Strike",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "heavyneedler",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0002": "typhoon",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0005": "lightmg",
+                "WS0006": "lightmg",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

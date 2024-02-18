@@ -22,7 +22,11 @@ public class SpoilersNotif implements EveryFrameScript {
     public boolean fire = false;
 
     public static final String icon = Global.getSettings().getSpriteName("icons", "game_icon");
-    public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a lot of hidden content. In truth, it's the vast majority of the mod. We worked very hard on every piece and hope you enjoy it very much.\n\nWe ask that you %s for the first week or so after release. Its our hope that players can organically discover all that the mod contains.\n\nThanks, and once again please enjoy %s and %s.\n";
+    public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a lot of hidden content. " +
+            "In truth, it's the vast majority of the mod. We worked very hard on every piece and hope you enjoy it very much.\n\n" +
+            "We ask that you %s for the first week or so after release. Its our hope that players can organically discover all that the mod contains.\n\n" +
+            "Thanks, and once again please enjoy %s and %s.\n\n" +
+            "PS: We have a spoilers-discussion thread on the Unofficial Starsector Discord server, you're welcome to join us there. :)";
     public static final String[] descHLs = { "Welcome to Elysium.", "please don't spoil the secrets", "The Knights of Ludd", "Elysium" };
     public static final String desc2 = "%s\n" +
             "The Knights %s.\n" +
@@ -45,7 +49,7 @@ public class SpoilersNotif implements EveryFrameScript {
 
     @Override
     public boolean runWhilePaused() {
-        return true;
+        return false;
     }
 
     @Override
@@ -79,7 +83,7 @@ public class SpoilersNotif implements EveryFrameScript {
         //SectorEntityToken dummy = Global.getSector().getPlayerFleet().getContainingLocation().addCustomEntity("zea_spoiler_entity", "dummy", Entities.WARNING_BEACON, Factions.NEUTRAL);
         RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_spoilers_popup");
         boolean gotDialog = Global.getSector().getCampaignUI().showInteractionDialog(plugin, Global.getSector().getPlayerFleet());
-        ZeaLoreIntel intel = new ZeaLoreIntel(icon, "A quick message from the KoL team", desc, descHLs);
+        ZeaLoreIntel intel = new ZeaLoreIntel(icon, "A quick message from the KOL team", desc, descHLs);
         InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
         TextPanelAPI textpanel = dialog.getTextPanel();
         if (Math.random() < 0.1f) { intel = new ZeaLoreIntel(icon, "Forsooth, you have received an urgent missive!", desc2, descHLs2);}

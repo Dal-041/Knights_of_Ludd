@@ -57,7 +57,9 @@
 		"zea_dusk_funayurei_Harmonious":65,
 		"zea_edf_mizuchi_Arsenal_Wing":100,
 		"zea_edf_mizuchi_Predatory":100,
-		"zea_edf_seiryu_Attack_Bomber":100,
+		"zea_edf_seiryu_Attack_Bomber":75,
+		"zea_edf_seiryu_Overdriven":75,
+		"zea_edf_seiryu_Ranger":75,
 		"zea_boss_ninmah_Undoer":1,
 	},
 	"combatMedium":{
@@ -82,6 +84,7 @@
 		"zea_dusk_furaribi_Cacophanous":30,
 		"zea_dusk_furaribi_Discordant":50,
 		"zea_edf_suzaku_Attack_Bomber":40,
+		"zea_edf_suzaku_Lancer":40,
 	},
 	"combatSmall":{
 		"kol_protea_Brawler":0.5,
