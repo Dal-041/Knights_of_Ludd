@@ -29,6 +29,7 @@ public class StarficzAIUtils {
         public String enemyId;
     }
 
+    public static final float SINGLE_FRAME = (float) 1 /60;
     public static List<FutureHit> incomingProjectileHits(ShipAPI ship, Vector2f testPoint){
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
@@ -446,7 +447,7 @@ public class StarficzAIUtils {
                             futurehit.empDamage = (trueSingleInstanceEMPDamage * linkedBarrels);
                             futureHits.add(futurehit);
                         }
-                        currentTime += cooldownTime;
+                        currentTime += Math.max(SINGLE_FRAME, cooldownTime);
                         currentTime = Math.max(currentTime, preAimedTime); // wait for weapon to finish aiming if not yet aimed
 
                         // reset chargeup/cooldown to idle weapon stats
@@ -493,10 +494,10 @@ public class StarficzAIUtils {
                                 futurehit.empDamage = (trueSingleInstanceEMPDamage * linkedBarrels);
                                 futureHits.add(futurehit);
                             }
-                            burstTime -= burstDelay;
-                            currentTime += burstDelay;
+                            burstTime -= Math.max(SINGLE_FRAME, burstDelay);
+                            currentTime += Math.max(SINGLE_FRAME, burstDelay);
                         }
-                        currentTime += cooldownTime;
+                        currentTime += Math.max(SINGLE_FRAME, cooldownTime);
                         currentTime = Math.max(currentTime, preAimedTime); // wait for weapon to finish aiming if not yet aimed
 
                         // reset chargeup/cooldown to idle weapon stats
@@ -509,6 +510,7 @@ public class StarficzAIUtils {
         }
         return futureHits;
     }
+
     public static float getCurrentArmorRating(ShipAPI ship){
         if (ship == null || !Global.getCombatEngine().isEntityInPlay(ship)) {
             return 0f;
