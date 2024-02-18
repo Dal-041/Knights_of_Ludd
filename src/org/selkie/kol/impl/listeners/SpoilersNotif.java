@@ -26,8 +26,8 @@ public class SpoilersNotif implements EveryFrameScript {
             "In truth, it's the vast majority of the mod. We worked very hard on every piece and hope you enjoy it very much.\n\n" +
             "We ask that you %s for the first week or so after release. Its our hope that players can organically discover all that the mod contains.\n\n" +
             "Thanks, and once again please enjoy %s and %s.\n\n" +
-            "PS: We have a spoilers-discussion thread on the Unofficial Starsector Discord server, you're welcome to join us there. :)";
-    public static final String[] descHLs = { "Welcome to Elysium.", "please don't spoil the secrets", "The Knights of Ludd", "Elysium" };
+            "PS: We have a spoilers-discussion thread on the Unofficial Starsector Discord server, you're welcome to join us.";
+    public static final String[] descHLs = { "Welcome to Elysium.", "please don't openly spoil the secrets", "The Knights of Ludd", "Elysium" };
     public static final String desc2 = "%s\n" +
             "The Knights %s.\n" +
             "\n" +
