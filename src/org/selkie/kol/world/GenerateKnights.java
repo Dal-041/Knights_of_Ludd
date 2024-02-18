@@ -341,7 +341,22 @@ public class GenerateKnights {
 
 	public static void genKnightsExpeditions() {
 		org.selkie.kol.fleets.KnightsExpeditionsManager expeditions = new KnightsExpeditionsManager();
-		Global.getSector().getStarSystem("Eos Exodus").addScript(expeditions);
+		if (Global.getSector().getStarSystem("Eos Exodus") != null) {
+			Global.getSector().getStarSystem("Eos Exodus").addScript(expeditions);
+		} else {
+			//Random sector
+			WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker();
+
+			for (MarketAPI market : Global.getSector().getEconomy().getMarketsCopy()) {
+				if (market.getFactionId().equals(Factions.LUDDIC_CHURCH)) {
+					picker.add((StarSystemAPI) market.getContainingLocation(), 1f);
+				}
+				if (market.getFactionId().equals(KOL_ModPlugin.kolID)) {
+					picker.add((StarSystemAPI) market.getContainingLocation(), 100f);
+				}
+			}
+			picker.pick().addScript(expeditions);
+		}
 	}
 
 	public static void copyChurchEquipment() {
