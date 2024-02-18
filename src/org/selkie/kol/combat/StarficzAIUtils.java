@@ -450,7 +450,7 @@ public class StarficzAIUtils {
                         currentTime += Math.max(0, cooldownTime);
                         currentTime = Math.max(currentTime, preAimedTime); // wait for weapon to finish aiming if not yet aimed
 
-                        currentTime += (chargeupTime + cooldownTime) <= 0 ? SINGLE_FRAME : 0; // make sure to not get stuck in an infinite
+                        currentTime += (chargeupTime + cooldownTime) <= SINGLE_FRAME ? SINGLE_FRAME : 0; // make sure to not get stuck in an infinite
 
                         // reset chargeup/cooldown to idle weapon stats
                         chargeupTime = applyROFMulti(weapon.getSpec().getChargeTime(), weapon, enemy.getMutableStats());
@@ -502,7 +502,7 @@ public class StarficzAIUtils {
                         currentTime += Math.max(0, cooldownTime);
                         currentTime = Math.max(currentTime, preAimedTime); // wait for weapon to finish aiming if not yet aimed
 
-                        currentTime += (chargeupTime + cooldownTime) <= 0 ? SINGLE_FRAME : 0; // make sure to not get stuck in an infinite
+                        currentTime += (chargeupTime + cooldownTime) <= SINGLE_FRAME ? SINGLE_FRAME : 0; // make sure to not get stuck in an infinite
 
                         // reset chargeup/cooldown to idle weapon stats
                         chargeupTime = applyROFMulti(weapon.getSpec().getChargeTime(), weapon, enemy.getMutableStats());
