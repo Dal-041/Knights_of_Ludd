@@ -59,8 +59,8 @@ class KOL_CombatPlugin : BaseEveryFrameCombatPlugin() {
 
     private fun drawPaperdoll(viewport: ViewportAPI, ship: ShipAPI, location: Vector2f, scale: Float){
         val kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE)
-        if (PAPERDOLL_SCALE.containsKey(ship.hullSpec.hullId) ) {
-            val shipScale = PAPERDOLL_SCALE[ship.hullSpec.hullId]!! * scale;
+        if (PAPERDOLL_SCALE.containsKey(ship.hullSpec.baseHullId) ) {
+            val shipScale = PAPERDOLL_SCALE[ship.hullSpec.baseHullId]!! * scale;
             val alpha = Math.round(Misc.interpolate(0f,255f, Utils.getUIAlpha(true)))
             for (module in ship.childModulesCopy) {
                 if (module.hitpoints <= 0f) continue
