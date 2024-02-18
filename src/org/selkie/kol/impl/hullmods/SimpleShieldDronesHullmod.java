@@ -1,6 +1,6 @@
 package org.selkie.kol.impl.hullmods;
 
-import activators.ActivatorManager;
+import org.magiclib.activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;

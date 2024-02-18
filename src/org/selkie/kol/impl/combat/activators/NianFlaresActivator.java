@@ -1,6 +1,6 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.CombatActivator;
+import org.magiclib.activators.CombatActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BoundsAPI;
 import com.fs.starfarer.api.combat.CombatEntityAPI;

@@ -1,6 +1,5 @@
 package org.selkie.kol.impl.combat.activators
 
-import activators.CombatActivator
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.CombatEntityAPI
 import com.fs.starfarer.api.combat.DamageType
@@ -17,11 +16,11 @@ import org.lazywizard.lazylib.combat.CombatUtils
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
 import org.magiclib.util.MagicRender
+import org.magiclib.activators.CombatActivator
 import org.selkie.kol.combat.ParticleData
 import org.selkie.kol.impl.hullmods.CoronalCapacitor
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
-import java.io.IOException
 
 
 class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
