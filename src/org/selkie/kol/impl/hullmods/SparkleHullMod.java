@@ -75,7 +75,7 @@ public class SparkleHullMod extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         if (ship.getVariant().hasHullMod("adaptive_coils"))
-            MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "sparkleHullmod");
+            MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptive_coils", "kol_ea_sparkle");
     }
 
     public void advanceInCombat(ShipAPI ship, float amount) {
