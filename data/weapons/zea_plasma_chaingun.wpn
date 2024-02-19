@@ -1,7 +1,8 @@
 {
 	"id":"zea_plasma_chaingun",  # this id must match what's in the spreadsheet
 	"specClass":"projectile",
-	"type":"HYBRID",
+	"type":"ENERGY",
+	"mountTypeOverride":"HYBRID",
 	"size":"MEDIUM",
 	"visualRecoil":4.0,  # the gun sprites are only used if this is non-0
 	"renderHints":[RENDER_BARREL_BELOW],
