@@ -201,6 +201,7 @@ public class StarficzAIUtils {
     }
 
     public static List<FutureHit> generatePredictedWeaponHits(ShipAPI ship, Vector2f testPoint, float maxTime){
+        maxTime = Math.min(maxTime, 30); // limit to 30 seconds in the future
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
         List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,MAX_RANGE);
@@ -415,7 +416,7 @@ public class StarficzAIUtils {
                     Vector2f relativeVelocity = Vector2f.add(Vector2f.sub(projectileVector, ship.getVelocity(), null), enemy.getVelocity(), null);
                     travelTime = (distanceFromWeapon-targetingRadius) / relativeVelocity.length();
                 }
-
+                travelTime = Math.max(travelTime, 0); // travel time cant be negative
 
                 if(weapon.getSpec().getBurstSize() == 1){ // non burst projectile weapons
                     // derive the actual times spent in each phase from all the whack ass API calls
@@ -498,6 +499,7 @@ public class StarficzAIUtils {
                             }
                             burstTime -= Math.max(SINGLE_FRAME, burstDelay);
                             currentTime += Math.max(SINGLE_FRAME, burstDelay);
+                            if(currentTime > (maxTime - travelTime)) break;
                         }
                         currentTime += Math.max(0, cooldownTime);
                         currentTime = Math.max(currentTime, preAimedTime); // wait for weapon to finish aiming if not yet aimed
@@ -879,8 +881,16 @@ public class StarficzAIUtils {
     }
 
     public static void strafeToPoint(ShipAPI ship, Vector2f strafePoint){
-        float strafeAngle = VectorUtils.getAngle(ship.getLocation(), strafePoint);
-           float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
+
+        Vector2f headingVec = Vector2f.sub(VectorUtils.resize(VectorUtils.getDirectionalVector(ship.getLocation(), strafePoint), ship.getMaxSpeed()*1.2f), ship.getVelocity(), null);
+
+        float strafeAngle = VectorUtils.getFacing(headingVec);
+        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
+
+        if(DEBUG_ENABLED) {
+            Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, strafeAngle);
+            Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.yellow);
+        }
 
         if (rotAngle < 67.5f && rotAngle > -67.5f) {
             ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
