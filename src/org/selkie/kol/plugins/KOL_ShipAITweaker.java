@@ -9,21 +9,26 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import org.selkie.kol.helpers.KOLUtils;
+import org.selkie.kol.impl.helpers.ZeaUtils;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
 public class KOL_ShipAITweaker {
     public static PluginPick<ShipAIPlugin> pickShipAI(FleetMemberAPI member, ShipAPI ship) {
         if (ship.isFighter()) return null;
-        String hullId = ship.getHullSpec().getHullId();
+        String hullId = ship.getHullSpec().getBaseHullId();
 
-        if (!KOLUtils.knightsShipsList.contains(hullId)) return null;
+        if (!Arrays.asList(KOLUtils.knightsShips).contains(hullId) && !Arrays.asList(ZeaUtils.zeaSupportShips).contains(hullId)) return null;
 
-        List<String> supportHulls = new ArrayList<>(2);
+        List<String> supportHulls = new ArrayList<>(5);
         supportHulls.add("kol_mimosa");
         supportHulls.add("kol_lotus");
-        List<String> assaultHulls = new ArrayList<>(2);
+        supportHulls.add("zea_edf_kiyohime"); //Helps when the player gets them and can only use reckless cores
+        supportHulls.add("zea_edf_mizuchi");
+        supportHulls.add("zea_dawn_tianma");
+        List<String> assaultHulls = new ArrayList<>(3);
         assaultHulls.add("kol_larkspur");
         assaultHulls.add("kol_alysse");
         assaultHulls.add("kol_snowdrop");

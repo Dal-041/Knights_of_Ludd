@@ -42,10 +42,10 @@ public class GenerateKnights {
 		Global.getSector().getStarSystem("Al Gebbar").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
-		genBattlestarLibra();
 	}
 
 	public static void genAlways() {
+		genBattlestarLibra();
 		SpawnInvictus.spawnInvictus();
 		SpawnRetribution.spawnRetribution();
 		copyChurchEquipment();
