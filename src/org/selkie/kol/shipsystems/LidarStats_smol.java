@@ -167,7 +167,7 @@ public class LidarStats_smol extends BaseShipSystemScript {
 					w.setForceNoFireOneFrame(true); //w.disable();
 				}
 			}
-			modify(id, stats, effectLevel);
+			modify(id, stats, state == State.IN ? 1 : effectLevel);
 			needsUnapply = true;
 		} else {
 			if (needsUnapply) {
@@ -178,16 +178,28 @@ public class LidarStats_smol extends BaseShipSystemScript {
 							(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
 						w.setGlowAmount(0, null);
 					}
-					/*
-					if (!w.getSpec().hasTag(Tags.LIDAR) && w.getType() == WeaponType.MISSILE)) {
-						w.repair();
-					}
-					*/
 				}
 				needsUnapply = false;
 			}
 		}
-		
+
+		if(state == State.IN){
+			Color glowColor = WEAPON_GLOW;
+
+			float lidarRange = 500;
+			for (WeaponAPI w : ship.getAllWeapons()) {
+				if (!w.isDecorative() && w.getSlot().isTurret() &&
+						(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY) && !w.getSpec().hasTag(Tags.LIDAR)) {
+					lidarRange = Math.max(lidarRange, w.getRange());
+					w.setGlowAmount(effectLevel, glowColor);
+				}
+			}
+			lidarRange += 100f;
+			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange/(1+(RANGE_BONUS/100)));
+		} else{
+			stats.getBeamWeaponRangeBonus().unmodify("lidararray");
+		}
+
 		if (!active) return;
 		
 
@@ -204,26 +216,7 @@ public class LidarStats_smol extends BaseShipSystemScript {
 				}
 			}
 		}
-		
-		Color glowColor = WEAPON_GLOW;
-		
-		float lidarRange = 500;
-		for (WeaponAPI w : ship.getAllWeapons()) {
-			if (!w.isDecorative() && w.getSlot().isTurret() &&
-					(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY)) {
-				lidarRange = Math.max(lidarRange, w.getRange());
-				w.setGlowAmount(effectLevel, glowColor);
-			}
-		}
-		lidarRange += 100f;
-		stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange);
-//		for (WeaponAPI w : ship.getAllWeapons()) {
-//			if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
-//				if (state == State.IN) {
-//					w.setForceFireOneFrame(true);
-//				}
-//			}
-//		}
+
 		
 		// always wait a quarter of a second before starting to fire the targeting lasers
 		// this is the worst-case turn time required for the dishes to face front
@@ -254,8 +247,8 @@ public class LidarStats_smol extends BaseShipSystemScript {
 	protected void modify(String id, MutableShipStatsAPI stats, float effectLevel) {
 		float mult = 1f + ROF_BONUS * effectLevel;
 		//float mult = 1f + ROF_BONUS;
-		stats.getBallisticWeaponRangeBonus().modifyPercent(id, RANGE_BONUS);
-		stats.getEnergyWeaponRangeBonus().modifyPercent(id, RANGE_BONUS);
+		stats.getBallisticWeaponRangeBonus().modifyPercent(id, RANGE_BONUS*effectLevel);
+		stats.getEnergyWeaponRangeBonus().modifyPercent(id, RANGE_BONUS*effectLevel);
 		stats.getBallisticRoFMult().modifyMult(id, mult);
 		stats.getEnergyRoFMult().modifyMult(id, mult);
 		//stats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));

@@ -168,7 +168,7 @@ public class LidarStats extends BaseShipSystemScript {
 					w.setForceNoFireOneFrame(true); //w.disable();
 				}
 			}
-			modify(id, stats, effectLevel);
+			modify(id, stats, state == State.IN ? 1 : effectLevel);
 			needsUnapply = true;
 		} else {
 			if (needsUnapply) {
@@ -197,7 +197,7 @@ public class LidarStats extends BaseShipSystemScript {
 				}
 			}
 			lidarRange += 100f;
-			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange);
+			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange/(1+(RANGE_BONUS/110))); //TODO: 110 is itu fudging, actually calc this proper
 		} else{
 			stats.getBeamWeaponRangeBonus().unmodify("lidararray");
 		}
@@ -218,15 +218,7 @@ public class LidarStats extends BaseShipSystemScript {
 				}
 			}
 		}
-		
 
-//		for (WeaponAPI w : ship.getAllWeapons()) {
-//			if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
-//				if (state == State.IN) {
-//					w.setForceFireOneFrame(true);
-//				}
-//			}
-//		}
 		
 		// always wait a quarter of a second before starting to fire the targeting lasers
 		// this is the worst-case turn time required for the dishes to face front
