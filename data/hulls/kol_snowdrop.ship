@@ -18,7 +18,8 @@
     "viewOffset": 0,
     "builtInMods": [
         "kol_refit",
-        "armoredweapons"
+        "armoredweapons",
+		"rugged"
     ],
     "builtInWeapons": {
         "PUSHER_PLATE": "kol_pusherplate_lt_but_cute",
