@@ -13,7 +13,7 @@ import com.fs.starfarer.api.impl.combat.NegativeExplosionVisual;
 import com.fs.starfarer.api.impl.combat.RiftCascadeMineExplosion;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.*;
+import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
@@ -21,6 +21,7 @@ import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.awt.*;
+import java.util.EnumSet;
 
 
 public class NinayaBoss extends BaseHullMod {
@@ -197,9 +198,19 @@ public class NinayaBoss extends BaseHullMod {
     }
 
     public static class NinayaAIScript implements AdvanceableListener {
+        public final static float STARTING_NOSYS_HARDFLUX_LEVEL = 0.6f;
+        public final static float STARTING_YESSYS_HARDFLUX_LEVEL = 0.75f;
+        public final static float MAX_HARDFLUX_LEVEL = 0.9f;
+        public final static float RAMP_FACTOR = 0.1f;
         ShipAPI ship;
         CombatEngineAPI engine;
-        Boolean ventingHardflux = false;
+        float cycleStartArmorHp = 0;
+        boolean ventingHardflux = false;
+        boolean hasShotThisCycle = true;
+        boolean hasBeenDamagedThisCycle = true;
+        int riskLevel = 0;
+        int dangerThreshold = 0;
+        int safeVentCycles = dangerThreshold;
         public NinayaAIScript(ShipAPI ship) {
             this.ship = ship;
         }
@@ -237,10 +248,10 @@ public class NinayaBoss extends BaseHullMod {
                 ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 1000000);
             }
 
-            // force shields on, there is no situation where shields should be off
+            // force shields on, there is no situation where shields should be off (newly added in 1.0.8: unless about to overload for a suicide run)
             if((!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)){
 
-                if(!AIUtils.getNearbyEnemies(ship, 1000).isEmpty() && ship.getShield() != null) {
+                if(!AIUtils.getNearbyEnemies(ship, 1000).isEmpty() && ship.getShield() != null && ship.getHardFluxLevel() < 0.9f) {
                     if (ship.getShield().isOff())
                         ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
                     else
@@ -254,22 +265,52 @@ public class NinayaBoss extends BaseHullMod {
                 }
             }
 
+            if(!hasBeenDamagedThisCycle){
+                if ((StarficzAIUtils.getCurrentArmorRating(ship) + ship.getHitpoints()) < cycleStartArmorHp * 0.9f) hasBeenDamagedThisCycle = true;
+            }
+
+            if(!hasShotThisCycle){
+                for(WeaponAPI weapon : ship.getAllWeapons()){
+                    if(!weapon.isDecorative() && weapon.isFiring() && !EnumSet.of(WeaponAPI.WeaponType.SYSTEM, WeaponAPI.WeaponType.BUILT_IN).contains(weapon.getType())){
+                        hasShotThisCycle = true;
+                        break;
+                    }
+                }
+            }
 
             // back off at high hardflux
-            if((ship.getHardFluxLevel() > 0.6f && !AIUtils.canUseSystemThisFrame(ship)) || ship.getHardFluxLevel() > 0.75f){
+            if(((ship.getHardFluxLevel() > Misc.interpolate(STARTING_NOSYS_HARDFLUX_LEVEL, MAX_HARDFLUX_LEVEL, riskLevel*RAMP_FACTOR) && !AIUtils.canUseSystemThisFrame(ship))
+                    || ship.getHardFluxLevel() > Misc.interpolate(STARTING_YESSYS_HARDFLUX_LEVEL, MAX_HARDFLUX_LEVEL, riskLevel*RAMP_FACTOR))
+                    && (hasShotThisCycle || hasBeenDamagedThisCycle) && !ventingHardflux){
                 ventingHardflux = true;
             }
 
             // return at low hardflux
-            if(ship.getHardFluxLevel() < 0.1f){
+            if(ship.getHardFluxLevel() < 0.1f && ventingHardflux){
                 ventingHardflux = false;
+                cycleStartArmorHp = StarficzAIUtils.getCurrentArmorRating(ship) + ship.getHitpoints();
+
+                if(!hasBeenDamagedThisCycle){
+                    if(safeVentCycles >= dangerThreshold){
+                        riskLevel = Math.round(Math.min(riskLevel + 1, 1/RAMP_FACTOR));
+                    }
+                    safeVentCycles += 1;
+
+                } else{
+                    riskLevel = Math.max(riskLevel - 2, 0);
+                    safeVentCycles = 0;
+                    dangerThreshold += 3;
+                }
             }
 
             if(ventingHardflux){
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN, 0.1f); // repurposing an unused flag
-                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACK_OFF, 0.1f);
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.BACKING_OFF, 0.1f);
+                hasBeenDamagedThisCycle = false;
+                hasShotThisCycle = false;
             } else{
                 ship.getAIFlags().removeFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN);
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 0.1f);
             }
 
             // dont overflux via weapons

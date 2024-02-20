@@ -10,10 +10,11 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.impl.hullmods.NinayaBoss;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class PhaseTeleporterAI implements ShipSystemAIScript {
     ShipAPI ship;
@@ -78,12 +79,14 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
         oppositePoint = MathUtils.getPointOnCircumference(target.getLocation(), targetRange + Misc.getTargetingRadius(oppositePoint, target, false) -150f, oppositeAngle);
 
         // pick which location to use depending on which is further away
-        if (AIUtils.canUseSystemThisFrame(ship) && systemTargetPoint != null && !ship.getFluxTracker().isVenting() && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN)){
+        if (AIUtils.canUseSystemThisFrame(ship) && systemTargetPoint != null && !ship.getFluxTracker().isVenting()
+                && !ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN) && ship.getHardFluxLevel() < NinayaBoss.NinayaAIScript.STARTING_NOSYS_HARDFLUX_LEVEL){
             ship.setShipTarget(target);
             float distanceSquared = MathUtils.getDistanceSquared(systemTargetPoint, ship.getLocation());
             if (distanceSquared > 700*700 && distanceSquared < 1500*1500){
-                ship.giveCommand(ShipCommand.USE_SYSTEM, systemTargetPoint, 0);
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.TARGET_FOR_SHIP_SYSTEM, 0.5f, target);
                 ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 1f);
+                ship.giveCommand(ShipCommand.USE_SYSTEM, systemTargetPoint, 0);
             }
             else if(distanceSquared < 700*700 && target.getShield() != null && Math.abs(MathUtils.getShortestRotation(target.getShield().getFacing(), oppositeAngle)) > target.getShield().getActiveArc()/2 ){
                 boolean safeToTeleport = true;
@@ -93,8 +96,9 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
                         safeToTeleport = false;
                 }
                 if(safeToTeleport){
-                    ship.giveCommand(ShipCommand.USE_SYSTEM, oppositePoint, 0);
+                    ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.TARGET_FOR_SHIP_SYSTEM, 0.5f, target);
                     ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 1f);
+                    ship.giveCommand(ShipCommand.USE_SYSTEM, oppositePoint, 0);
                 }
             }
         }
@@ -104,6 +108,7 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
         if(safestPoint != null && AIUtils.canUseSystemThisFrame(ship) && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.PHASE_ATTACK_RUN)){
             safestPoint = MathUtils.getPointOnCircumference(ship.getLocation(), 1500f, VectorUtils.getAngle(ship.getLocation(), safestPoint));
             ship.setShipTarget(null);
+            ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.TARGET_FOR_SHIP_SYSTEM, 0.1f, null);
             ship.giveCommand(ShipCommand.USE_SYSTEM, safestPoint, 0);
         }
 
