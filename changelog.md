@@ -4,4 +4,4 @@ v1.0.2: Fixes a crash when starting Random Sector games, some polish, including 
 v1.0.3: Adjusted Pather Boss spawns to hopefully be more reliable, misc polish. 
 v1.0.4: Fixed an AI issue that was making certain boss fights much less deadly than intended. Also rebalanced them slightly. 
 v1.0.5: Added Rugged Construction to shieldless Knights ships. Fixed an issue with Knights shield AI that could bloat memory when faced with exotic weapons. Added Battlestation Libra to new randomsector games. Misc polish.
-v1.0.5: Blance adjustments, boss behavior improvement. Fixed an incompatible-hullmods crash, further loop-prevention checks on the shield AI. 
+v1.0.6: Balance adjustments, boss behavior improvement. Fixed an incompatible-hullmods crash, further loop-prevention checks on the shield AI. 
