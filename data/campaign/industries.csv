@@ -7,7 +7,7 @@ fleetName:Battlestation,
 }",graphics/icons/industry/battlestation.png,org.selkie.kol.campaign.kol_battlestar,"A warship-turned-battlestation, augmented with heavy ablative armor and overlapping defense modules.
 
 Must be reduced before a bombardment can be attempted.",2110,
-kol_battlestar_librar,Battlestar Libra,400,180,0,10,kol_battlestar_libra,,"station, starfortress, unraidable, structure","{
+kol_battlestar_libra,Battlestar Libra,400,180,0,10,kol_battlestar_libra,,"station, starfortress, unraidable, structure","{
 radius:75,
 variant:kol_libra_Battlestar,
 fleetName:Libra Prime
