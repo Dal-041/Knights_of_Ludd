@@ -87,7 +87,7 @@ public class GenerateKnights {
 		String entID = "kol_cygnus";
 		StarSystemAPI Canaan = Global.getSector().getStarSystem("Canaan");
         SectorEntityToken cygnus = Canaan.addCustomEntity(entID, "Battlestation Cygnus", "station_lowtech2", "knights_of_selkie");
-        cygnus.setCircularOrbitPointingDown(Canaan.getEntityById("canaan_gate"), 33, 275, 99);
+        cygnus.setCircularOrbitPointingDown(Canaan.getEntityById("canaan_gate"), 33, 475, 99);
         cygnus.setCustomDescriptionId("kol_cygnus_desc");
 		//cygnus.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         
@@ -139,7 +139,7 @@ public class GenerateKnights {
 		String entID = "kol_lyra";
 		StarSystemAPI Eos = Global.getSector().getStarSystem("Eos Exodus");
         SectorEntityToken lyra = Eos.addCustomEntity(entID, "Star Keep Lyra", "station_lowtech3", "knights_of_selkie");
-        lyra.setCircularOrbitPointingDown(Eos.getEntityById("eos_exodus_gate"), 33, 275, 99);
+        lyra.setCircularOrbitPointingDown(Eos.getEntityById("eos_exodus_gate"), 33, 475, 99);
         lyra.setCustomDescriptionId("kol_lyra_desc");
 		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
 

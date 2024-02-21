@@ -34,7 +34,7 @@ public class UpdateRelationships extends BaseCampaignEventListener {
     	if (factionId.equals(Factions.LUDDIC_CHURCH)) {
 			Global.getSector().getFaction(KOL_ModPlugin.kolID).adjustRelationship("player", delta);
     		if (Misc.getCommissionFactionId() != null && Misc.getCommissionFactionId().equals(KOL_ModPlugin.kolID)) {
-    			if (Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getRelToPlayer().getLevel().isAtWorst(RepLevel.INHOSPITABLE)) {
+    			if (Global.getSector().getFaction(Factions.LUDDIC_CHURCH).getRelToPlayer().getRepInt() <= -50) {
     				List<IntelInfoPlugin> intels =  Global.getSector().getIntelManager().getIntel(FactionCommissionIntel.class);
     				for (IntelInfoPlugin intel : intels) {
     					FactionCommissionIntel intelTemp = (FactionCommissionIntel) intel;
@@ -53,7 +53,7 @@ public class UpdateRelationships extends BaseCampaignEventListener {
 		if (factionId.equals(KOL_ModPlugin.kolID)) {
 			Global.getSector().getFaction(Factions.LUDDIC_CHURCH).adjustRelationship("player", delta);
 			if (Misc.getCommissionFactionId() != null && Misc.getCommissionFactionId().equals(Factions.LUDDIC_CHURCH)) {
-				if (Global.getSector().getFaction(KOL_ModPlugin.kolID).getRelToPlayer().getLevel().isAtWorst(RepLevel.INHOSPITABLE)) {
+				if (Global.getSector().getFaction(KOL_ModPlugin.kolID).getRelToPlayer().getRepInt() <= -50) {
 					List<IntelInfoPlugin> intels =  Global.getSector().getIntelManager().getIntel(FactionCommissionIntel.class);
 					for (IntelInfoPlugin intel : intels) {
 						FactionCommissionIntel intelTemp = (FactionCommissionIntel) intel;

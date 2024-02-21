@@ -22,28 +22,4 @@ class AttainmentManager : BaseHullMod() {
             }
         }
     }
-
-    /* Non-functional dynamic unboardable allies, probably needs a different assignment
-    override fun advanceInCombat(ship: ShipAPI?, amount: Float) {
-        interval.advance(amount)
-        if (interval.intervalElapsed()) {
-            if (Global.getSector() != null && ship != null) {
-                if (ship.fleetMember?.fleetData?.fleet?.faction?.isPlayerFaction == true || ship.customData.containsKey(checkKey)) return;
-
-                if (Math.random() > PrepareAbyss.attainmentFactor) ship.variant.addTag(Tags.VARIANT_UNBOARDABLE)
-                else ship.variant.removeTag(Tags.VARIANT_UNBOARDABLE)
-                ship.customData.set(checkKey, true)
-
-                for (ally in ship.getAlliesOnMap()) {
-                    if (ally.customData.containsKey(checkKey)) continue
-                    else {
-                        if (Math.random() > PrepareAbyss.attainmentFactor) ally.variant?.addTag(Tags.VARIANT_UNBOARDABLE)
-                        else ally.variant?.removeTag(Tags.VARIANT_UNBOARDABLE)
-                        ally.customData.set(checkKey, true)
-                    }
-                }
-            }
-        }
-    }
-     */
 }

@@ -45,7 +45,7 @@ public class ZeaMechanicIntel extends BaseIntelPlugin {
             String[] hl1 = { "strongly recommended", "avoid direct combat with their fleets", "avoid detection", "They are likely to win combat on their terms." };
             edfHLs.add(hl1);
             String[] hl2 = { "harvest energy from nearby stars", "Coronal Capacitors", "depending where in the system they are", "30%",
-            "weapons and engines", "when they fire their weapons", "much easier the farther from local stars that we are." };
+            "weapons and engines", "much easier the farther from local stars that we are." };
             edfHLs.add(hl2);
     };
     private static String[] TT = {
