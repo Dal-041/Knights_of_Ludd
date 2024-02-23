@@ -1,24 +1,25 @@
 package org.selkie.kol.impl.combat.activators;
 
-import org.magiclib.activators.drones.DroneActivator;
-import org.magiclib.activators.drones.DroneFormation;
-import org.magiclib.activators.drones.PIDController;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.Misc;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.drones.DroneFormation;
+import org.magiclib.subsystems.drones.MagicDroneSubsystem;
+import org.magiclib.subsystems.drones.PIDController;
 import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.*;
+import java.util.Map;
 
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class SimpleShieldDronesActivator extends DroneActivator {
+public class SimpleShieldDronesActivator extends MagicDroneSubsystem {
     private static Color BASE_SHIELD_COLOR = Color.cyan;
     private static Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static float SHIELD_ALPHA = 0.25f;
@@ -26,6 +27,7 @@ public class SimpleShieldDronesActivator extends DroneActivator {
     public SimpleShieldDronesActivator(ShipAPI ship) {
         super(ship);
     }
+
     @Override
     public boolean canAssignKey() {
         return false;
@@ -72,11 +74,12 @@ public class SimpleShieldDronesActivator extends DroneActivator {
 
     @Override
     public PIDController getPIDController() {
-        return new PIDController(15f,4f,10f,2f);
+        return new PIDController(15f, 4f, 10f, 2f);
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         for (ShipAPI drone : getActiveWings().keySet()) {
             if (drone.getShield().isOff() && !drone.getFluxTracker().isOverloadedOrVenting()) {
                 drone.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
@@ -108,7 +111,9 @@ public class SimpleShieldDronesActivator extends DroneActivator {
     }
 
     @Override
-    public int getMaxCharges() { return 0; }
+    public int getMaxCharges() {
+        return 0;
+    }
 
     @Override
     public int getMaxDeployedDrones() {
@@ -129,6 +134,7 @@ public class SimpleShieldDronesActivator extends DroneActivator {
     private class SpinningCircleFormation extends DroneFormation {
         private final static float ROTATION_SPEED = 20;
         private float currentRotation = 0f;
+
         @Override
         public void advance(@NotNull ShipAPI ship, @NotNull Map<ShipAPI, ? extends PIDController> drones, float amount) {
 
@@ -137,12 +143,12 @@ public class SimpleShieldDronesActivator extends DroneActivator {
 
             // generate all locations by doubling up on locations if too many drones
             List<Vector2f> droneLocations = new ArrayList<>();
-            float droneDistance = ship.getShieldRadiusEvenIfNoShield()*1.15f;
+            float droneDistance = ship.getShieldRadiusEvenIfNoShield() * 1.15f;
             for (int i = 0; i < drones.size(); i++) {
-                float droneAngle = currentRotation + 360f/drones.size() * i;
+                float droneAngle = currentRotation + 360f / drones.size() * i;
                 droneLocations.add(MathUtils.getPointOnCircumference(ship.getLocation(), droneDistance, droneAngle));
             }
-            List<ShipAPI> activeDrones =  new ArrayList<>(drones.keySet());
+            List<ShipAPI> activeDrones = new ArrayList<>(drones.keySet());
             // fill weights for Hungarian Algorithm
             float[][] weights = new float[activeDrones.size()][droneLocations.size()];
             for (int i = 0; i < activeDrones.size(); i++) {

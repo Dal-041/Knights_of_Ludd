@@ -1,17 +1,16 @@
 package org.selkie.kol.impl.combat.activators;
 
-import org.magiclib.activators.CombatActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.ShipSystemAPI;
 import com.fs.starfarer.api.combat.ShipSystemSpecAPI;
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.combat.AIUtils;
+import org.magiclib.subsystems.MagicSubsystem;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.shipsystems.PulsarSystem;
 
-public class BlizzardActivator extends CombatActivator {
+public class BlizzardActivator extends MagicSubsystem {
     public static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaUtils.systemIDBlizzard);
     public static float tActive = entry.getActive();
     public float tCD = entry.getCooldown(stats);
@@ -27,7 +26,7 @@ public class BlizzardActivator extends CombatActivator {
     }
 
     @Override
-    public boolean usesChargesOnActivate()  {
+    public boolean usesChargesOnActivate() {
         return false;
     }
 
@@ -35,6 +34,7 @@ public class BlizzardActivator extends CombatActivator {
     public float getBaseChargeRechargeDuration() {
         return tRegen;
     }
+
     @Override
     public float getBaseActiveDuration() {
         return tActive;
@@ -86,7 +86,8 @@ public class BlizzardActivator extends CombatActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         pulsar.apply(ship.getMutableStats(), entry.getName(), translateState(getState()), 1f);
 
         if (isOn()) {
