@@ -1,23 +1,20 @@
 package org.selkie.kol.impl.combat.activators;
 
-import org.magiclib.activators.CombatActivator;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.BoundsAPI;
-import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystem;
 import org.selkie.kol.impl.hullmods.NianBoss;
 
 import java.awt.*;
 import java.util.List;
 
-public class NianFlaresActivator extends CombatActivator {
+public class NianFlaresActivator extends MagicSubsystem {
     private static final int FLARES_PER_WAVE_PER_SIDE = 36;
     private static final int FLARE_WAVES_NORMAL = 1;
     private static final int FLARE_WAVES_ENRAGED = 3;
@@ -71,7 +68,8 @@ public class NianFlaresActivator extends CombatActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         if (wavesToLaunch > 0) {
             if (flaresReleasedInWave < FLARES_PER_WAVE_PER_SIDE * 2) {
                 flaresInterval.advance(amount);

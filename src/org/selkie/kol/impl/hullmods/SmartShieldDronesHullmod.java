@@ -1,21 +1,19 @@
 package org.selkie.kol.impl.hullmods;
 
-import org.magiclib.activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.SettingsAPI;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.magiclib.subsystems.MagicSubsystemsManager;
 import org.selkie.kol.impl.combat.activators.SmartShieldDronesActivator;
-import org.selkie.kol.impl.hullmods.CoronalCapacitor;
 
 import java.awt.*;
 
 public class SmartShieldDronesHullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ActivatorManager.addActivator(ship, new SmartShieldDronesActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new SmartShieldDronesActivator(ship));
     }
 
     public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {

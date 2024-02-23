@@ -1,11 +1,11 @@
 package org.selkie.kol.impl.hullmods;
 
-import org.magiclib.activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystemsManager;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.activators.NianFlaresActivator;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -86,7 +86,7 @@ public class NianBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ActivatorManager.addActivator(ship, new NianFlaresActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new NianFlaresActivator(ship));
         boolean isBoss = ship.getVariant().hasTag(ZeaUtils.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
                 (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaUtils.BOSS_TAG))));
 

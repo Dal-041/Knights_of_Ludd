@@ -15,22 +15,22 @@ import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.combat.CombatUtils
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
+import org.magiclib.subsystems.MagicSubsystem
 import org.magiclib.util.MagicRender
-import org.magiclib.activators.CombatActivator
 import org.selkie.kol.combat.ParticleData
 import org.selkie.kol.impl.hullmods.CoronalCapacitor
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
 
 
-class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
+class RadianceActivator(ship: ShipAPI?) : MagicSubsystem(ship) {
     private val PARTICLE_INTERVAL = IntervalUtil(1f, 1f)
     private var dummyMine: CombatEntityAPI? = null
 
     private val spriteRing = Global.getSettings().getSprite("fx", "zea_ring_targeting")
 
-    private val glowColorFull = Color(200,150,50, 200)
-    private val glowColorEmpty = Color(255,100,25, 0)
+    private val glowColorFull = Color(200, 150, 50, 200)
+    private val glowColorEmpty = Color(255, 100, 25, 0)
 
     private val EFFECT_RANGE =
         DAMAGE_RANGE - (DAMAGE_RANGE * 0.05f) //"For "player visual purposes" we reduce it by 5% See some random player theory crap."
@@ -98,10 +98,15 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
             }
     }
 
-    override fun advance(amount: Float) {
+    override fun advance(amount: Float, isPaused: Boolean) {
+        if (isPaused) return
         if (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] == null) return; //Hopefully just one frame
 
-        val glowColorNow = Misc.interpolateColor(glowColorEmpty, glowColorFull, ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float)
+        val glowColorNow = Misc.interpolateColor(
+            glowColorEmpty,
+            glowColorFull,
+            ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float
+        )
         if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
             return;
         } else {
@@ -112,9 +117,11 @@ class RadianceActivator(ship: ShipAPI?) : CombatActivator(ship) {
 
         if (ship.isAlive) {
             Global.getCombatEngine()
-                .addSmoothParticle(ship.location, ZERO, DAMAGE_RANGE * 4f, 0.25f, 0.01f * amount, glowColorNow.setAlpha(
-                    (glowColorNow.alpha * 0.7f).toInt()
-                ))
+                .addSmoothParticle(
+                    ship.location, ZERO, DAMAGE_RANGE * 4f, 0.25f, 0.01f * amount, glowColorNow.setAlpha(
+                        (glowColorNow.alpha * 0.7f).toInt()
+                    )
+                )
 
             if (KOL_ModPlugin.hasGraphicsLib) {
                 PARTICLE_INTERVAL.advance(amount)
