@@ -1,20 +1,19 @@
 package org.selkie.kol.impl.hullmods;
 
-import activators.ActivatorManager;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.magiclib.subsystems.MagicSubsystemsManager;
 import org.selkie.kol.impl.combat.activators.ShachihokoDroneActivator;
-import org.selkie.kol.impl.combat.activators.SimpleShieldDronesActivator;
 
 import java.awt.*;
 
 public class ShachihokoDroneHullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        ActivatorManager.addActivator(ship, new ShachihokoDroneActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneActivator(ship));
     }
 
     @Override

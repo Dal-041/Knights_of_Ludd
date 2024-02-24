@@ -1,8 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.drones.DroneActivator;
-import activators.drones.DroneFormation;
-import activators.drones.PIDController;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
@@ -10,15 +7,17 @@ import com.fs.starfarer.api.util.Misc;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.drones.DroneFormation;
+import org.magiclib.subsystems.drones.MagicDroneSubsystem;
+import org.magiclib.subsystems.drones.PIDController;
 
-import java.awt.*;
 import java.util.Iterator;
 import java.util.Map;
 
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class PDDroneActivator extends DroneActivator {
+public class PDDroneActivator extends MagicDroneSubsystem {
     public PDDroneActivator(ShipAPI ship) {
         super(ship);
     }
@@ -44,7 +43,8 @@ public class PDDroneActivator extends DroneActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         if (ship.getFluxTracker().isOverloaded()) {
             for (ShipAPI wing : getActiveWings().keySet()) {
                 if (!wing.getFluxTracker().isOverloaded()) {

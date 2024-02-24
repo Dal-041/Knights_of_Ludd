@@ -1,8 +1,5 @@
 package org.selkie.kol.impl.shipsystems;
 
-import activators.ActivatorManager;
-import activators.CombatActivator;
-import activators.drones.DroneActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
@@ -16,6 +13,9 @@ import org.dark.shaders.light.LightShader;
 import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystem;
+import org.magiclib.subsystems.MagicSubsystemsManager;
+import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -102,11 +102,11 @@ public class GraciousLightStats extends BaseShipSystemScript {
             }
         }
 
-        List<CombatActivator> activators = ActivatorManager.getActivators(ship);
+        List<MagicSubsystem> activators = MagicSubsystemsManager.getSubsystemsForShipCopy(ship);
         if (activators != null) {
-            for (CombatActivator activator : activators) {
-                if (activator instanceof DroneActivator) {
-                    DroneActivator droneActivator = (DroneActivator) activator;
+            for (MagicSubsystem activator : activators) {
+                if (activator instanceof MagicDroneSubsystem) {
+                    MagicDroneSubsystem droneActivator = (MagicDroneSubsystem) activator;
                     fighters.addAll(droneActivator.getActiveWings().keySet());
                 }
             }

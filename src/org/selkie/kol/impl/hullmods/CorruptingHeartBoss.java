@@ -1,8 +1,5 @@
 package org.selkie.kol.impl.hullmods;
 
-import activators.ActivatorManager;
-import activators.CombatActivator;
-import activators.drones.DroneActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener;
@@ -11,6 +8,9 @@ import com.fs.starfarer.api.impl.campaign.skills.NeuralLinkScript;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystem;
+import org.magiclib.subsystems.MagicSubsystemsManager;
+import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.ParticleController;
 import org.selkie.kol.combat.StarficzAIUtils;
@@ -76,8 +76,8 @@ public class CorruptingHeartBoss extends BaseHullMod {
                 if (phaseTwoTimer > maxTime) {
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
                     ship.setPhased(false);
-                    ActivatorManager.removeActivator(ship, ShachihokoDroneActivator.class);
-                    ActivatorManager.addActivator(ship, new ShachihokoTideActivator(ship));
+                    MagicSubsystemsManager.removeSubsystemFromShip(ship, ShachihokoDroneActivator.class);
+                    MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoTideActivator(ship));
                     return;
                 }
 
@@ -103,9 +103,9 @@ public class CorruptingHeartBoss extends BaseHullMod {
             }
 
             List<ShipAPI> validDrones = new ArrayList<>();
-            for (CombatActivator activator : ActivatorManager.getActivators(ship)) {
-                if (activator instanceof DroneActivator) {
-                    List<ShipAPI> wings = new ArrayList<>(((DroneActivator) activator).getActiveWings().keySet());
+            for (MagicSubsystem activator : MagicSubsystemsManager.getSubsystemsForShipCopy(ship)) {
+                if (activator instanceof MagicDroneSubsystem) {
+                    List<ShipAPI> wings = new ArrayList<>(((MagicDroneSubsystem) activator).getActiveWings().keySet());
                     for (ShipAPI fighter : wings) {
                         validDrones.add(fighter);
 
@@ -168,7 +168,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
-            ActivatorManager.addActivator(ship, new ShachihokoDroneActivator(ship));
+            MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneActivator(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

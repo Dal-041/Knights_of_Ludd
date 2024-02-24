@@ -1,6 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.CombatActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import org.lazywizard.lazylib.MathUtils;
@@ -8,6 +7,7 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystem;
 import org.selkie.kol.impl.hullmods.CoronalCapacitor;
 
 import java.awt.*;
@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class PassiveIFFDisruptorActivator extends CombatActivator {
+public class PassiveIFFDisruptorActivator extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
     private float chargeRechargeMult = 1f;
@@ -132,7 +132,8 @@ public class PassiveIFFDisruptorActivator extends CombatActivator {
 
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         if (ship.getFluxTracker().isOverloaded()) {
             chargeRechargeMult = 1f;
         } else {

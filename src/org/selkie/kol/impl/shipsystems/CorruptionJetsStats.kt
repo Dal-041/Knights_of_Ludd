@@ -1,7 +1,5 @@
 package org.selkie.kol.impl.shipsystems
 
-import activators.ActivatorManager.getActivators
-import activators.drones.DroneActivator
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.BaseCombatLayeredRenderingPlugin
 import com.fs.starfarer.api.combat.CombatEngineLayers
@@ -19,6 +17,8 @@ import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.opengl.GL14
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
+import org.magiclib.subsystems.MagicSubsystemsManager
+import org.magiclib.subsystems.drones.MagicDroneSubsystem
 import org.selkie.kol.combat.GL14ParticleData
 import org.selkie.kol.combat.ParticleController
 import org.selkie.kol.combat.ParticleData
@@ -144,15 +144,17 @@ class CorruptionJetsStats : BaseShipSystemScript() {
                     returnedStats.add(wing.mutableStats)
                 }
             }
+
             for (wing in AIUtils.getNearbyAllies(ship, BUFF_RADIUS)) {
                 if (!wing.isFighter) continue
                 if (wing.wing == null) continue
                 returnedStats.add(wing.mutableStats)
             }
-            val activators = getActivators(ship)
+
+            val activators = MagicSubsystemsManager.getSubsystemsForShipCopy(ship)
             if (activators != null) {
                 for (activator in activators) {
-                    if (activator is DroneActivator) {
+                    if (activator is MagicDroneSubsystem) {
                         for (drone in activator.activeWings.keys) {
                             returnedStats.add(drone.mutableStats)
                         }
