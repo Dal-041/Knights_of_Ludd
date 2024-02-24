@@ -50,14 +50,15 @@ kol_tor_shot_3_cinder,kol_tor_shot,base_trail_rough,10,0,0.05,0.1,4,7,"[255,210,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Med Baller,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-kol_bricole_shot,kol_bricole_shot,base_trail_smooth,20,0,0.05,0.25,8,2.5,"[235,255,215]","[40,50,20]",0.8,300,10,true,15,6,0,0,TRUE,TRUE,TRUE,20,69,0.35,0,0,0,true,false
+kol_bricole_shot_1,kol_bricole_shot,base_trail_smooth,20,0,0.05,0.25,8,2.5,"[235,255,215]","[40,50,20]",0.8,300,10,true,15,6,0,0,TRUE,TRUE,TRUE,20,69,0.35,0,0,0,true,false
+kol_bricole_shot_2,kol_bricole_shot,base_trail_heavyBurn,10,0,0,0.5,10,20,"[100,100,100]","[100,100,100]",0.4,160,12,TRUE,20,3,1,0,TRUE,FALSE,TRUE,40,100,0.2,0,0,0,FALSE,TRUE
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-zea_styrax_driver_shot_1,zea_styrax_driver_shot,base_trail_zapWithCore,10,0,0.05,0.2,12,4,"[140,140,255]","[180,180,190]",0.4,-1,0,TRUE,10,0,1,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
-zea_styrax_driver_shot_2,zea_styrax_driver_shot,base_trail_zap,10,0,0,0.3,17,17,"[85,85,255]","[60,60,150]",0.25,128,10,TRUE,10,0,1,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
+zea_styrax_driver_shot_1,zea_styrax_driver_shot,base_trail_zapWithCore,10,0,0.05,0.2,6,2,"[240,240,255]","[230,0,0]",0.6,128,0,TRUE,10,0,1,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
+zea_styrax_driver_shot_2,zea_styrax_driver_shot,base_trail_zap,10,0,0,0.3,12,12,"[85,130,255]","[60,60,60]",0.5,128,10,TRUE,10,0,1,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-zea_myoga_driver_shot_1,zea_myoga_driver_shot,base_trail_zapWithCore,10,0,0.1,0.15,13,4,"[255,220,85]","[190,185,170]",0.35,-1,0,TRUE,20,0,1,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
-zea_myoga_driver_shot_2,zea_myoga_driver_shot,base_trail_zap,10,0,0,0.35,20,20,"[245,205,50]","[220,90,255]",0.2,128,10,TRUE,20,0,1,0,TRUE,FALSE,TRUE,0,10,0,0,0,0,false,false
-zea_myoga_driver_shot_3,zea_myoga_driver_shot,base_trail_heavyBurn,10,0,0,0.8,22,30,"[165,75,195]","[135,80,115]",0.4,160,12,TRUE,20,3,1,0,TRUE,FALSE,TRUE,40,100,0.2,0,0,0,FALSE,TRUE
+zea_myoga_driver_shot_1,zea_myoga_driver_shot,base_trail_zapWithCore,10,0,0,0.4,8,2,"[255,140,55]","[190,125,170]",0.35,128,0,TRUE,20,0,1,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false
+zea_myoga_driver_shot_2,zea_myoga_driver_shot,base_trail_zap,10,0,0,0.35,15,15,"[245,205,50]","[220,90,255]",0.2,128,10,TRUE,20,0,1,0,TRUE,FALSE,TRUE,0,10,0,0,0,0,false,false
+zea_myoga_driver_shot_3,zea_myoga_driver_shot,base_trail_heavyBurn,10,0,0,1.4,10,20,"[165,75,195]","[135,80,115]",0.4,160,12,TRUE,20,3,1,0,TRUE,FALSE,TRUE,40,100,0.2,0,0,0,FALSE,TRUE
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
