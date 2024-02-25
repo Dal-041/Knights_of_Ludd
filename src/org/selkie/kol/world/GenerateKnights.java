@@ -16,7 +16,13 @@ import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import com.fs.starfarer.campaign.econ.Market;
+import exerelin.campaign.AllianceManager;
+import exerelin.campaign.DiplomacyManager;
+import exerelin.campaign.PlayerFactionStore;
 import exerelin.campaign.SectorManager;
+import exerelin.campaign.alliances.Alliance;
+import exerelin.utilities.NexConfig;
+import exerelin.utilities.NexFactionConfig;
 import org.apache.log4j.Logger;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
@@ -71,6 +77,23 @@ public class GenerateKnights {
 				FactionAPI player = Global.getSector().getPlayerFaction();
 				for(FactionAPI faction:Global.getSector().getAllFactions()) {
 					player.setRelationship(faction.getId(), knights.getRelationship(faction.getId()));
+				}
+			}
+			
+			// THE CHURCH OF GALACTIC REDEMPTION.
+			if (KOL_ModPlugin.haveNex) {
+				knights.setRelationship(Factions.LUDDIC_CHURCH, 1.00f);
+				if (true || Global.getSettings().getBoolean("foundCOGH")) {
+					Alliance COGH = AllianceManager.createAlliance(KOL_ModPlugin.kolID, Factions.LUDDIC_CHURCH, AllianceManager.getBestAlignment(KOL_ModPlugin.kolID, Factions.LUDDIC_CHURCH));
+					COGH.addPermaMember(KOL_ModPlugin.kolID);
+					COGH.addPermaMember(Factions.LUDDIC_CHURCH);
+					COGH.setName(Global.getSettings().getString("knights_of_ludd", "ChurchOfGalacticRedemption"));
+				}
+
+				NexFactionConfig factionConfig = NexConfig.getFactionConfig(KOL_ModPlugin.kolID);
+				if (!DiplomacyManager.isRandomFactionRelationships()) {factionConfig.minRelationships.clear();factionConfig.minRelationships.put(Factions.LUDDIC_CHURCH, 0.251f);}
+				if (KOL_ModPlugin.kolID.equals(PlayerFactionStore.getPlayerFactionIdNGC()) || Factions.LUDDIC_CHURCH.equals(PlayerFactionStore.getPlayerFactionIdNGC())) {
+					knights.setRelationship(Factions.LUDDIC_CHURCH, 0.75f); //Prevents you from instantly gaining 1 story point repping up to 100...
 				}
 			}
 		}

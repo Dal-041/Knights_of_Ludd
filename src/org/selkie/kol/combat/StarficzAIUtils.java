@@ -666,7 +666,8 @@ public class StarficzAIUtils {
 
         // remove the points that requires ship to fly through other ships
         for(ShipAPI enemy : Global.getCombatEngine().getShips()){
-            if (!MathUtils.isWithinRange(enemy, ship, 3000f) || enemy.isFighter() || enemy == ship || !enemy.isAlive())
+            // Ignore fighters, yourself, your own modules, dead ships, and ships that are too far away
+            if (enemy.isFighter() || enemy == ship || enemy.getParentStation() == ship || !enemy.isAlive() || !MathUtils.isWithinRange(enemy, ship, 3000f))
                 continue;
             for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()){
                 List<Vector2f> pointsToRemove = new ArrayList<>();

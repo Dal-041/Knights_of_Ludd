@@ -1,6 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.CombatActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
@@ -9,12 +8,13 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystem;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class IFFOverrideActivator extends CombatActivator {
+public class IFFOverrideActivator extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
     IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
@@ -129,7 +129,8 @@ public class IFFOverrideActivator extends CombatActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         List<MissileAPI> missilesInRange = CombatUtils.getMissilesWithinRange(ship.getLocation(), getHackingRange());
 
         if (state == State.ACTIVE) {

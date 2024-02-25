@@ -1,0 +1,15 @@
+{
+	"staticNames":{
+		"knights_of_selkie":{
+			"hegemony":["Protectors of Order"],
+			"luddic_church":["Church of Galactic Redemption"],
+			"luddic_path":["Order of Galactic Penitence"],
+			"persean":["United Faith"],
+			"independent":["Protectors of the Needy"],
+			"player":["Holy Union"],
+		},
+		"luddic_church":{
+			"knights_of_selkie":["Church of Galactic Redemption"],
+		},
+	},
+}

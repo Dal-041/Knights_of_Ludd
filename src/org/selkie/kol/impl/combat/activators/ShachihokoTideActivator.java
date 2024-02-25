@@ -1,8 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.drones.DroneActivator;
-import activators.drones.DroneFormation;
-import activators.drones.PIDController;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShieldAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -13,6 +10,9 @@ import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.drones.DroneFormation;
+import org.magiclib.subsystems.drones.MagicDroneSubsystem;
+import org.magiclib.subsystems.drones.PIDController;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
 
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShachihokoTideActivator extends DroneActivator {
+public class ShachihokoTideActivator extends MagicDroneSubsystem {
     private static final Color BASE_SHIELD_COLOR = new Color(220, 190, 70, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
@@ -101,7 +101,8 @@ public class ShachihokoTideActivator extends DroneActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         for (ShipAPI drone : getActiveWings().keySet()) {
             ShipAPI droneTarget = Utils.getDroneShieldTarget(drone);
             if (droneTarget != null && !droneTarget.isAlive()) {

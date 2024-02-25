@@ -1,8 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.drones.DroneActivator;
-import activators.drones.DroneFormation;
-import activators.drones.PIDController;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
@@ -13,6 +10,9 @@ import kotlin.Triple;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.drones.DroneFormation;
+import org.magiclib.subsystems.drones.MagicDroneSubsystem;
+import org.magiclib.subsystems.drones.PIDController;
 import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class SmartShieldDronesActivator extends DroneActivator {
+public class SmartShieldDronesActivator extends MagicDroneSubsystem {
     private static Color BASE_SHIELD_COLOR = Color.cyan;
     private static Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static float SHIELD_ALPHA = 0.25f;
@@ -75,7 +75,8 @@ public class SmartShieldDronesActivator extends DroneActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         for (ShipAPI drone : getActiveWings().keySet()) {
             if (drone.getShield().isOff() && !drone.getFluxTracker().isOverloadedOrVenting()) {
                 drone.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);

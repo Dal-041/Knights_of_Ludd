@@ -1,6 +1,5 @@
 package org.selkie.kol.impl.combat.activators;
 
-import activators.CombatActivator;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.util.IntervalUtil;
@@ -8,12 +7,13 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.subsystems.MagicSubsystem;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class BallLightningActivator extends CombatActivator {
+public class BallLightningActivator extends MagicSubsystem {
     private static final int MAX_TARGETS = 5;
     private static final float MAX_RANGE = 500f;
     private static final float MAX_ARC = 90f;
@@ -63,7 +63,8 @@ public class BallLightningActivator extends CombatActivator {
     }
 
     @Override
-    public void advance(float amount) {
+    public void advance(float amount, boolean isPaused) {
+        if (isPaused) return;
         Color glowFringe = new Color(100,100,255, ship.isPhased() ? 10 : 100);
         Color glowCenter = new Color(200,220,255, ship.isPhased() ? 20 : 200);
         lightningInterval.advance(amount);
