@@ -45,4 +45,4 @@ Drone Targeter,kol_bottlerocket,,,,,,0,,,,0.1,,0.4,,,,,,,,,,,,,restricted,graphi
 #Absurd,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Fubuki ,zea_boss_blizzard,1,,,,,,,,,0.1,8,0.1,26.8,,,TRUE,,TRUE,,,,TRUE,TRUE,,restricted,graphics/icons/hullsys/damper_field.png
 Supernova,zea_boss_supernova,1,,,,,,,,,2,4,0.1,27.9,,,,,,,,,,TRUE,,restricted,graphics/icons/hullsys/lidar_barrage.png
-Corrupting Heart,zea_boss_corruptionjets,1,,,,,,,2,0.1,0.5,4,1,,,,,,,,,,,,,,graphics/icons/hullsys/burn_drive.png
+Corrupting Heart,zea_boss_corruptionjets,1,,,,,,,2,0.05,0.5,8,1,,,,,,,,,,,,,,graphics/icons/hullsys/burn_drive.png
