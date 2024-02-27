@@ -7,11 +7,11 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.DamageTakenModifier;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
-import com.fs.starfarer.api.loading.HullModSpecAPI;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.Pair;
 import com.fs.starfarer.combat.entities.DamagingExplosion;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
@@ -20,10 +20,11 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.helpers.KOLStaticStrings;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 /*
@@ -54,21 +55,16 @@ public class KnightRefit extends BaseHullMod {
 
     public static final int FLUX_CAP_PER_OP = 25;
     public static final int FLUX_DISS_PER_OP = 5;
-    private final String knightRefitID = "knightRefit";
-    private final float SPEED_BONUS = 0.25f;
-    protected Object STATUSKEY1 = new Object();
-
-    @Override
-    public void init(HullModSpecAPI spec) {
-
-    }
+    public static final float SPEED_BONUS = 0.25f;
+    protected Object SPEED_STATUS_KEY = new Object();
+    public static final String KNIGHT_REFIT_STATMOD_ID = "knightRefit";
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
-        if (ship.getVariant().hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "adaptiveshields", "kol_refit");
-        if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
-        if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_refit");
+        if (ship.getVariant().hasHullMod(HullMods.ACCELERATED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.ACCELERATED_SHIELDS, KOLStaticStrings.KNIGHT_REFIT);
+        if (ship.getVariant().hasHullMod(HullMods.OMNI_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.OMNI_SHIELD_CONVERSION, KOLStaticStrings.KNIGHT_REFIT);
+        if (ship.getVariant().hasHullMod(HullMods.FRONT_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.FRONT_SHIELD_CONVERSION, KOLStaticStrings.KNIGHT_REFIT);
+        if (ship.getVariant().hasHullMod(HullMods.EXTENDED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.EXTENDED_SHIELDS, KOLStaticStrings.KNIGHT_REFIT);
 
         PersonAPI captain = ship.getOriginalCaptain();
         MutableCharacterStatsAPI stats = captain == null ? null : captain.getFleetCommanderStats();
@@ -77,8 +73,8 @@ public class KnightRefit extends BaseHullMod {
         for(WeaponAPI weapon : ship.getAllWeapons()){
             if (weapon.getSlot().getWeaponType() == WeaponAPI.WeaponType.COMPOSITE ){
                 int opCost = (int) weapon.getSpec().getOrdnancePointCost(stats, ship.getMutableStats());
-                capBonus += opCost* FLUX_CAP_PER_OP;
-                dissBonus += opCost* FLUX_DISS_PER_OP;
+                capBonus += opCost * FLUX_CAP_PER_OP;
+                dissBonus += opCost * FLUX_DISS_PER_OP;
             }
         }
         ship.getMutableStats().getFluxCapacity().modifyFlat(id, capBonus);
@@ -94,9 +90,9 @@ public class KnightRefit extends BaseHullMod {
         public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI ship, Vector2f point, float damageAmount) {
             if(ship.getHitpoints() <= damageAmount) {
                 for(ShipAPI module: ship.getChildModulesCopy()){
-                    if(!module.hasTag("KOL_moduleDead")){
+                    if(!module.hasTag(KnightModule.KOL_MODULE_DEAD)){
                         module.setHulk(false);
-                        module.addTag("KOL_moduleDead");
+                        module.addTag(KnightModule.KOL_MODULE_DEAD);
                     }
                 }
             }
@@ -106,88 +102,155 @@ public class KnightRefit extends BaseHullMod {
 
     public static class ExplosionOcclusionRaycast implements DamageTakenModifier {
         public static final int NUM_RAYCASTS = 36;
+        public static final String RAYCAST_KEY = "kol_module_explosion_raycast";
         @Override
         public String modifyDamageTaken(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f point, boolean shieldHit) {
-            // checking for explosions
-            if (param instanceof MissileAPI || param instanceof DamagingExplosion) {
-                Vector2f explosionLocation;
-                float radius;
-                if(param instanceof MissileAPI ){
-                    MissileAPI missile = (MissileAPI) param;
+            ShipAPI ship = (ShipAPI) target;
+            ShipAPI parent = ship.getParentStation() == null ? ship : ship.getParentStation();
+
+            if (param instanceof DamagingExplosion || param instanceof MissileAPI) {
+                DamagingProjectileAPI projectile = (DamagingProjectileAPI) param;
+
+
+                HashMap<DamagingProjectileAPI, HashMap<String, Float>> explosionMap = (HashMap<DamagingProjectileAPI, HashMap<String, Float>>) parent.getCustomData().get(RAYCAST_KEY);
+
+                // if this is the explosion from the missile, look up the cached result and use that
+                if(projectile instanceof DamagingExplosion){
+                    for(DamagingProjectileAPI pastProjectile : explosionMap.keySet()){
+                        if (pastProjectile instanceof MissileAPI && pastProjectile.getSource() == projectile.getSource() &&
+                                MathUtils.getDistanceSquared(pastProjectile.getLocation(), projectile.getSpawnLocation()) < 1f){
+                            projectile = pastProjectile;
+                            break;
+                        }
+                    }
+                }
+
+                generateExplosionRayhitMap(projectile, damage, parent);
+                explosionMap = (HashMap<DamagingProjectileAPI, HashMap<String, Float>>) parent.getCustomData().get(RAYCAST_KEY);
+
+                damage.getModifier().modifyMult(this.getClass().getName(), explosionMap.get(projectile).get(ship.getId()));
+
+                return this.getClass().getName();
+            }
+            return null;
+        }
+
+        public void generateExplosionRayhitMap(DamagingProjectileAPI projectile, DamageAPI damage, ShipAPI parent){
+
+            if(!parent.getCustomData().containsKey(RAYCAST_KEY) || !(parent.getCustomData().get(RAYCAST_KEY) instanceof HashMap)){
+                parent.setCustomData(RAYCAST_KEY, new HashMap<DamagingProjectileAPI, HashMap<String, Float>>());
+            }
+            HashMap<DamagingProjectileAPI, HashMap<String, Float>> explosionMap = (HashMap<DamagingProjectileAPI, HashMap<String, Float>>) parent.getCustomData().get(RAYCAST_KEY);
+            if(explosionMap.containsKey(projectile)){
+                return;
+            }
+
+            HashMap<String, Float> damageReductionMap = new HashMap<>();
+            explosionMap.put(projectile, damageReductionMap);
+            damageReductionMap.put("RemovalTime", Global.getCombatEngine().getTotalElapsedTime(false) + 1f);
+
+            // remove old cached explosions
+            for(Iterator<Map.Entry<DamagingProjectileAPI, HashMap<String, Float>>> pastProjectileIterator = explosionMap.entrySet().iterator(); pastProjectileIterator.hasNext();){
+                Map.Entry<DamagingProjectileAPI, HashMap<String, Float>> pastProjectile = pastProjectileIterator.next();
+                if (pastProjectile.getValue().get("RemovalTime") < Global.getCombatEngine().getTotalElapsedTime(false)) pastProjectileIterator.remove();
+            }
+
+            // init all occlusions
+            List<ShipAPI> potentialOcclusions = parent.getChildModulesCopy();
+            potentialOcclusions.add(parent);
+            for(ShipAPI occlusion: potentialOcclusions){
+                damageReductionMap.put(occlusion.getId(), 1f);
+            }
+
+            // skip if not an explosion
+            Vector2f explosionLocation;
+            List<CombatEntityAPI> damagedAlready = new ArrayList<>();
+            float radius;
+            if (projectile instanceof MissileAPI || projectile instanceof DamagingExplosion) {
+                if(projectile instanceof MissileAPI ){
+                    MissileAPI missile = (MissileAPI) projectile;
+                    if(missile.getDamagedAlready() != null) damagedAlready = missile.getDamagedAlready();
                     explosionLocation = missile.getLocation();
                     radius = missile.getSpec().getExplosionRadius();
                 } else{
-                    DamagingExplosion explosion = (DamagingExplosion) param;
+                    DamagingExplosion explosion = (DamagingExplosion) projectile;
+                    if(explosion.getDamagedAlready() != null) damagedAlready = explosion.getDamagedAlready();
                     explosionLocation = explosion.getLocation();
                     radius = explosion.getCollisionRadius();
                 }
-
-                // note down all potential occlusions, skip if nothing is in range
-                ShipAPI closestModule = null;
-                float closestDistance = Float.POSITIVE_INFINITY;
-                List<ShipAPI> potentialOcclusions = new ArrayList<>();
-                for (ShipAPI occlusion : ((ShipAPI) target).getChildModulesCopy()){
-                    float explosionDistance = Misc.getTargetingRadius(explosionLocation, occlusion, false) + radius;
-                    float moduleDistance = MathUtils.getDistanceSquared(explosionLocation, occlusion.getLocation());
-                    if(occlusion.getHitpoints() > 0 && moduleDistance < (explosionDistance * explosionDistance)){
-                        potentialOcclusions.add(occlusion);
-                        if(moduleDistance < closestDistance){
-                            closestDistance = moduleDistance;
-                            closestModule = occlusion;
-                        }
-                    }
-                }
-
-                if(potentialOcclusions.isEmpty() || closestModule == null) return null;
-
-                // for everything in range ray cast a bunch of lines
-                int hitShip = 0;
-                int hitModule = 0;
-                List<Vector2f> rayEndpoints = MathUtils.getPointsAlongCircumference(explosionLocation, radius, NUM_RAYCASTS, 0f);
-                for(Vector2f endpoint : rayEndpoints){
-                    float closestDistanceSquared = radius * radius;
-                    for(ShipAPI occlusion : potentialOcclusions){
-                        Vector2f pointOnModuleBounds = CollisionUtils.getCollisionPoint(explosionLocation, endpoint, occlusion);
-                        if(pointOnModuleBounds != null){
-                            closestDistanceSquared = Math.min(closestDistanceSquared, MathUtils.getDistanceSquared(explosionLocation, pointOnModuleBounds));
-                        }
-                    }
-
-                    Vector2f pointOnShipBounds = CollisionUtils.getCollisionPoint(explosionLocation, endpoint, target);
-                    if(pointOnShipBounds != null){
-                        if(closestDistanceSquared < MathUtils.getDistanceSquared(explosionLocation, pointOnShipBounds)){
-                            hitModule++;
-                        } else{
-                            hitShip++;
-                        }
-                    }
-                }
-
-                // if rays hit nothing skip
-                if(hitModule + hitShip == 0) return null;
-
-                // otherwise calculate and apply damage mod
-                float maxNegation = closestModule.getHitpoints() + StarficzAIUtils.getCurrentArmorRating(closestModule);
-
-                float damageMult = (float) hitShip /(hitModule + hitShip);
-
-                if (damage.getDamage() * (1 - damageMult) > maxNegation){
-                    damage.getModifier().modifyFlat(this.getClass().getName(), -maxNegation);
-                } else{
-                    damage.getModifier().modifyMult(this.getClass().getName(), damageMult);
-                }
-                return this.getClass().getName();
+            } else{
+                return;
             }
 
-            return null;
+
+            // remove out of range occlusions
+            for (Iterator<ShipAPI> occlusionIter = potentialOcclusions.iterator(); occlusionIter.hasNext();){
+                ShipAPI occlusion = occlusionIter.next();
+                float explosionDistance = Misc.getTargetingRadius(explosionLocation, occlusion, false) + radius;
+                float moduleDistance = MathUtils.getDistanceSquared(explosionLocation, occlusion.getLocation());
+                if(moduleDistance > (explosionDistance * explosionDistance)){
+                    occlusionIter.remove();
+                }
+            }
+
+            // skip if there is 0 or 1 ship in range
+            if(potentialOcclusions.isEmpty() || potentialOcclusions.size() == 1){
+                return;
+            }
+
+            // if more then 1 thing is in range, then raycast to check for explosion mults
+            HashMap<String, Integer> hitsMap = new HashMap<>();
+            for(ShipAPI occlusion : potentialOcclusions){
+                hitsMap.put(occlusion.getId(), 0);
+            }
+            int totalRayHits = 0;
+
+            List<Vector2f> rayEndpoints = MathUtils.getPointsAlongCircumference(explosionLocation, radius, NUM_RAYCASTS, 0f);
+            for(Vector2f endpoint : rayEndpoints){
+                float closestDistanceSquared = radius * radius;
+                String occlusionID = null;
+                for(ShipAPI occlusion : potentialOcclusions){ //  for each ray loop past all occlusions
+                    Vector2f pointOnModuleBounds = CollisionUtils.getCollisionPoint(explosionLocation, endpoint, occlusion);
+
+                    if(pointOnModuleBounds != null){ // if one is hit
+                        float occlusionDistance = MathUtils.getDistanceSquared(explosionLocation, pointOnModuleBounds);
+                        if(occlusionDistance < closestDistanceSquared){ // check the distance, if its shorter remember it
+                            occlusionID = occlusion.getId();
+                            closestDistanceSquared = occlusionDistance;
+                        }
+                    }
+                }
+                if(occlusionID != null){ // only not null if something is hit, in that case inc TotalRayHits
+                    totalRayHits++;
+                    hitsMap.put(occlusionID, hitsMap.get(occlusionID) + 1);
+                }
+            }
+            if(totalRayHits == 0) return;
+
+            float overkillDamage = 0f;
+            for(ShipAPI occlusion : potentialOcclusions){
+                if(occlusion == parent) continue; // special case the parent
+                // calculate and set the damage mult
+                float rayHits = (float) hitsMap.get(occlusion.getId());
+                float damageMult = Math.min(1f, Math.max(rayHits / totalRayHits, rayHits /((float) NUM_RAYCASTS /2)));
+                damageReductionMap.put(occlusion.getId(), damageMult);
+
+                // calculate the actual hp left over after the hit, if damage > hp, note down the overflow
+                float moduleArmor = StarficzAIUtils.getCurrentArmorRating(occlusion);
+                Pair<Float, Float> damageResult = StarficzAIUtils.damageAfterArmor(damage.getType(), damage.getDamage()*damageMult, damage.getDamage(), moduleArmor, occlusion);
+                float hullDamage = damageResult.two;
+
+                if(hullDamage > occlusion.getHitpoints() && !damagedAlready.contains(occlusion)){
+                    overkillDamage += hullDamage - occlusion.getHitpoints();
+                }
+            }
+
+            // do the same mult calc for the parent, except also subtract overkill from the reduction
+            float damageMult = (float) hitsMap.get(parent.getId()) / totalRayHits;
+            damageReductionMap.put(parent.getId(), ((damage.getDamage() * damageMult) + overkillDamage)/damage.getDamage());
         }
     }
 
-
-    @Override
-    public void applyEffectsBeforeShipCreation(ShipAPI.HullSize hullSize, MutableShipStatsAPI stats, String id) {
-        //
-    }
 
     @Override
     public float getTooltipWidth() {
@@ -326,6 +389,7 @@ public class KnightRefit extends BaseHullMod {
     @Override
     public void advanceInCombat(ShipAPI ship, float amount) {
         //Yoinked whole-cloth from SCY. <3 ya Tarty
+        //Note by Starficz, I've refactored this code so much I have no clue how much was from Tart anymore
         if (ship==null) {
             return;
         }
@@ -334,7 +398,6 @@ public class KnightRefit extends BaseHullMod {
             removeStats(ship);
             return;
         }
-
 
         if(Global.getCombatEngine().isPaused()) return;
 
@@ -363,24 +426,24 @@ public class KnightRefit extends BaseHullMod {
     }
 
     private void removeStats(ShipAPI ship) {
-        ship.getMutableStats().getMaxSpeed().unmodify(knightRefitID);
-        ship.getMutableStats().getAcceleration().unmodify(knightRefitID);
-        ship.getMutableStats().getDeceleration().unmodify(knightRefitID);
-        ship.getMutableStats().getMaxTurnRate().unmodify(knightRefitID);
-        ship.getMutableStats().getTurnAcceleration().unmodify(knightRefitID);
+        ship.getMutableStats().getMaxSpeed().unmodify(KNIGHT_REFIT_STATMOD_ID);
+        ship.getMutableStats().getAcceleration().unmodify(KNIGHT_REFIT_STATMOD_ID);
+        ship.getMutableStats().getDeceleration().unmodify(KNIGHT_REFIT_STATMOD_ID);
+        ship.getMutableStats().getMaxTurnRate().unmodify(KNIGHT_REFIT_STATMOD_ID);
+        ship.getMutableStats().getTurnAcceleration().unmodify(KNIGHT_REFIT_STATMOD_ID);
     }
 
     private void applyStats(float speedRatio, ShipAPI ship) {
-        ship.getMutableStats().getMaxSpeed().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getDeceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getMaxTurnRate().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getTurnAcceleration().modifyMult(knightRefitID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getMaxSpeed().modifyMult(KNIGHT_REFIT_STATMOD_ID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getAcceleration().modifyMult(KNIGHT_REFIT_STATMOD_ID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getDeceleration().modifyMult(KNIGHT_REFIT_STATMOD_ID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getMaxTurnRate().modifyMult(KNIGHT_REFIT_STATMOD_ID, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getTurnAcceleration().modifyMult(KNIGHT_REFIT_STATMOD_ID, (1 + (speedRatio * SPEED_BONUS)));
 
         CombatEngineAPI engine = Global.getCombatEngine();
         if(engine.getPlayerShip() == ship && speedRatio > 0.01f){
             String modularIcon = Global.getSettings().getSpriteName("icons", "kol_modules");
-            engine.maintainStatusForPlayerShip(STATUSKEY1, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS * 100)) + " top speed" , false);
+            engine.maintainStatusForPlayerShip(SPEED_STATUS_KEY, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS * 100)) + " top speed" , false);
         }
     }
 

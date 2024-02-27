@@ -9,8 +9,7 @@ import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
-import org.selkie.kol.fleets.ManageInvictus;
-import org.selkie.kol.helpers.KOLUtils;
+import org.selkie.kol.helpers.KOLStaticStrings;
 
 public class SpawnInvictus {
 	
@@ -81,7 +80,7 @@ public class SpawnInvictus {
 	                    .create();
 	            invictusFleet.setDiscoverable(true);
 				invictusFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-				invictusFleet.getMemoryWithoutUpdate().set(KOLUtils.BOSS_INVICTUS_KEY, true);
+				invictusFleet.getMemoryWithoutUpdate().set(KOLStaticStrings.BOSS_INVICTUS_KEY, true);
 
 				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);

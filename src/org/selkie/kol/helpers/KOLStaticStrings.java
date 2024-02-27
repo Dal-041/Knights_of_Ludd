@@ -1,9 +1,8 @@
 package org.selkie.kol.helpers;
 
-public class KOLUtils {
+public class KOLStaticStrings {
     public static final String BOSS_INVICTUS_KEY = "$kol_boss_invictus";
     public static final String BOSS_RETRIBTUION_KEY = "$kol_boss_retribution";
-
     public static final String[] knightsShips = {
             "kol_alysse",
             "kol_larkspur",
@@ -17,4 +16,7 @@ public class KOLUtils {
             "kol_sundew",
             "kol_tamarisk"
     };
+
+    // Hullmods
+    public static final String KNIGHT_REFIT = "kol_refit";
 }

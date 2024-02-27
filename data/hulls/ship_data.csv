@@ -16,7 +16,7 @@ Tamarisk,kol_tamarisk,Cruiser,Knights of Ludd,kol_hellfire,20,8750,950,9000,0,40
 Larkspur,kol_larkspur,Cruiser,Knights of Ludd,kol_lunge,20,8500,750,9000,0,550,150,,65,50,40,30,25,1400,FRONT,,100,0.4,1,,,120,170,100,120,4,30,9,125000,4,12,540,0.25,24,24,,,,,,,SHIP_WITH_MODULES,rare_bp,,0.5,2,4,,
 Lotus,kol_lotus,Missile Cruiser,Knights of Ludd,forgevats,16,8000,950,8500,0,250,150,,55,40,40,25,20,1200,FRONT,,100,0.5,0.8,,,150,250,120,80,3,27,8,110000,4,12,480,0.25,20,20,,,,,,,SHIP_WITH_MODULES,knights_of_selkie_bp,,0.5,2,3,,
 #CAPITALS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Lunaria,kol_lunaria,Battleship,Knights of Ludd,kol_lidar,40,18000,1300,18000,0,750,275,,36,18,16,10,6,2500,FRONT,,100,0.4,0.8,,,600,1100,300,360,12,30,7,400000,4,12,660,0.25,60,60,,,,,,,SHIP_WITH_MODULES,rare_bp,,0.4,2,3,,
+Lunaria,kol_lunaria,Battleship,Knights of Ludd,kol_lidar,40,18000,1300,18000,0,750,275,,36,18,16,10,6,2500,FRONT,,100,0.4,0.8,,,600,1100,300,360,12,30,7,400000,4,12,660,0.25,50,50,,,,,,,SHIP_WITH_MODULES,rare_bp,,0.4,2,3,,
 Alysse,kol_alysse,Fast Battleship,Knights of Ludd,kol_onion,34,18000,1150,12000,0,650,255,,42,21,20,15,12,2000,PHASE,kol_damper,,0.4,,,,475,800,250,360,12,30,7,400000,3,12,600,0.25,50,50,,,,,,,SHIP_WITH_MODULES,"rare_bp, special_allows_system_use, system_allows_special_use",,0.4,2,4,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #MODULES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

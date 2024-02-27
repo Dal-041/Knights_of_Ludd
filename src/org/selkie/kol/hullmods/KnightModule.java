@@ -18,96 +18,117 @@ import org.selkie.kol.combat.StarficzAIUtils;
 import java.util.Iterator;
 
 public class KnightModule extends BaseHullMod {
-    private final String id = "knightModule";
+    public static final String KOL_MODULE_HULKED = "kol_module_hulked";
+    public static final String KOL_MODULE_DEAD = "kol_module_dead";
+    @Override
+    public void advanceInCombat(ShipAPI module, float amount) {
+        if(module.getParentStation() == null || !module.getParentStation().isAlive() || module.getHitpoints() <= 0.0f || module.hasTag(KOL_MODULE_DEAD) ||
+                Global.getCurrentState() != GameState.COMBAT || !Global.getCombatEngine().isEntityInPlay(module) ) return;
+
+        CombatEngineAPI engine = Global.getCombatEngine();
+
+        /*
+        Enemy AI prioritizes targeting modules over the base hull. While logical for ship/station sections, this creates issues with armor modules.
+        To prevent this, I set the module to a 'hulk' state, causing the AI to ignore it.
+        However, this triggers a distracting visual whiteout ship explosion the first time it is done.
+        My solution is to teleport the module offscreen (currently, a map corner) before marking it as a hulk.
+        This must be done after the ship is loaded into the map and within its borders to prevent the game from despawning it.
+        */
+        if (!module.hasTag(KOL_MODULE_HULKED) && module.getLocation().getY() > -engine.getMapHeight()/2 && module.getLocation().getY() < engine.getMapHeight()/2 &&
+                module.getLocation().getX() > -engine.getMapWidth()/2 && module.getLocation().getX() < engine.getMapWidth()/2){
+
+            // only teleport to inside the map border
+            float borderEdgeX = module.getLocation().getX() > 0 ? engine.getMapWidth()/2 : -engine.getMapWidth()/2;
+            float borderEdgeY = module.getLocation().getY() > 0 ? engine.getMapHeight()/2 : -engine.getMapHeight()/2;
+            module.getLocation().set(borderEdgeX, borderEdgeY);
+            module.setHulk(true);
+
+            /*
+            I set the modules to be station drones, this makes the enemy AI not see the ship as a group of ships. (ie: a capital with 4 frigate escorts)
+            Without this enemies AI would not try to fight KoL ships as they think it is a 5v1.
+            This can also be avoided by setting the hullsize to be a fighter, but that has other rendering issues. (fighters always render over everything else)
+            */
+            module.setDrone(true);
+            module.addTag(KOL_MODULE_HULKED);
+        }
+        // re-set the module to be a hulk if it's not, this happens after hulk is unset for vanilla damage fx's
+        else if(!module.isHulk() && module.hasTag(KOL_MODULE_HULKED)){
+            module.setHulk(true);
+        }
+
+        // modules as hulks do not fire weapons (as the ship is dead), thus we need to implement custom firing AI for any weapon on modules.
+        // KoL only has direct fire pd, thus I only cover that here.
+        for(WeaponAPI weapon : module.getAllWeapons()){
+            if(!weapon.isDecorative() && weapon.getType() != WeaponAPI.WeaponType.MISSILE && weapon.hasAIHint(WeaponAPI.AIHints.PD)){
+                aimAndFirePD(module, weapon, amount);
+            }
+        }
+    }
 
     @Override
-    public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if(!ship.hasListenerOfClass(ModuleUnhulker.class)) ship.addListener(new ModuleUnhulker());
-        if(!ship.hasListenerOfClass(ModuleSystemChild.class)) ship.addListener(new ModuleSystemChild(ship));
-        if(!ship.hasListenerOfClass(ShipExplosionListener.class)) ship.addListener(new ShipExplosionListener());
+    public void applyEffectsAfterShipCreation(ShipAPI module, String id) {
+        if(!module.hasListenerOfClass(ModuleUnhulker.class)) module.addListener(new ModuleUnhulker());
+        if(!module.hasListenerOfClass(ModuleSystemChild.class)) module.addListener(new ModuleSystemChild(module));
+        if(!module.hasListenerOfClass(ShipExplosionListener.class)) module.addListener(new ShipExplosionListener());
+        if(!module.hasListenerOfClass(KnightRefit.ExplosionOcclusionRaycast.class)) module.addListener(new KnightRefit.ExplosionOcclusionRaycast());
     }
 
     public static class ModuleUnhulker implements DamageListener, HullDamageAboutToBeTakenListener {
-        @Override
+        @Override // unset hulk for right before any damage gets dealt to the module, this allows for normal processing of hit explosions
         public void reportDamageApplied(Object source, CombatEntityAPI target, ApplyDamageResultAPI result) {
-            if(((ShipAPI) target).isHulk() && target.getHitpoints() > 0) ((ShipAPI) target).setHulk(false);
+            ShipAPI module = (ShipAPI) target;
+            if(module.isHulk() && module.getHitpoints() > 0 && !module.hasTag(KOL_MODULE_DEAD)) module.setHulk(false);
         }
 
-        @Override
-        public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI ship, Vector2f point, float damageAmount) {
-            if(ship.getHitpoints() <= damageAmount && !ship.hasTag("KOL_moduleDead")){
-                ship.setHulk(false);
-                ship.addTag("KOL_moduleDead");
+        @Override // for some reason the above listener doesn't catch when the module is actually going to be dead.
+        public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI module, Vector2f point, float damageAmount) {
+            if(module.getHitpoints() <= damageAmount && !module.hasTag(KOL_MODULE_DEAD)){
+                module.setHulk(false);
+                module.addTag(KOL_MODULE_DEAD);
             }
             return false;
         }
     }
 
-    public static class ModuleSystemChild implements AdvanceableListener{
-        ShipAPI ship;
-        float DELAY = 0.8f;
-        IntervalUtil delay = new IntervalUtil(DELAY, DELAY);
-        boolean parentActivated = false;
-        boolean childFired = false;
+    // Slaves the child module's system weapons to activate on parent activation. using ship.useSystem() doesn't work as the module is dead.
+    public static class ModuleSystemChild implements AdvanceableListener {
+        public final static float MODULE_SYSTEM_DELAY = 0.8f;
+        private IntervalUtil delay = new IntervalUtil(MODULE_SYSTEM_DELAY, MODULE_SYSTEM_DELAY);
+        private final ShipAPI module;
+        private boolean parentActivated = false;
+        private boolean childFired = false;
 
-        ModuleSystemChild(ShipAPI ship){
-            this.ship = ship;
+        ModuleSystemChild(ShipAPI module){
+            this.module = module;
         }
         @Override
         public void advance(float amount) {
-            if(ship.getParentStation() == null || !ship.getParentStation().isAlive() || ship.getHitpoints() <= 0.0f) return;
+            if(module.getParentStation() == null || !module.getParentStation().isAlive() || module.getHitpoints() <= 0.0f || module.hasTag(KOL_MODULE_DEAD)) return;
 
-            if(ship.getParentStation().getSystem().isActive()){
+            // note down if the parent has used system, this accounts for if parent system is shorter then delay
+            if(module.getParentStation().getSystem().isActive()){
                 parentActivated = true;
             }
 
+            // only fire child after delay and make sure child can't fire again
             if(parentActivated && !childFired){
                 delay.advance(amount);
-            } else {
-                delay = new IntervalUtil(DELAY, DELAY);
-            }
-
-            if(delay.intervalElapsed()){
-                for(WeaponAPI weapon : ship.getAllWeapons()){
-                    if(weapon.isDecorative()) continue;
-
-                    if(weapon.getType() == WeaponAPI.WeaponType.SYSTEM){
-                        weapon.setForceFireOneFrame(true);
+                if(delay.intervalElapsed()){
+                    childFired = true;
+                    for(WeaponAPI weapon : module.getAllWeapons()){
+                        if(!weapon.isDecorative() && weapon.getType() == WeaponAPI.WeaponType.SYSTEM){
+                            weapon.setForceFireOneFrame(true);
+                        }
                     }
                 }
-                childFired = true;
+            } else {
+                delay = new IntervalUtil(MODULE_SYSTEM_DELAY, MODULE_SYSTEM_DELAY);
             }
 
-            if(parentActivated && childFired && !ship.getParentStation().getSystem().isActive()){
+            // reset when both flags have been triggered, and parent system is back offline
+            if(parentActivated && childFired && !module.getParentStation().getSystem().isActive()){
                 parentActivated = false;
                 childFired = false;
-            }
-        }
-    }
-
-    @Override
-    public void advanceInCombat(ShipAPI ship, float amount) {
-        if(ship.getParentStation() == null || !ship.getParentStation().isAlive() || ship.getHitpoints() <= 0.0f ||
-                Global.getCurrentState() != GameState.COMBAT || !Global.getCombatEngine().isEntityInPlay(ship) ) return;
-
-        if (!ship.hasTag("KOL_moduleHulked") && ship.getLocation().getY() > -Global.getCombatEngine().getMapHeight()/2 && ship.getLocation().getY() < Global.getCombatEngine().getMapHeight()/2){
-
-            // only teleport to inside the map border
-            ship.getLocation().set(ship.getLocation().getX() > 0 ? Global.getCombatEngine().getMapWidth()/2 : -Global.getCombatEngine().getMapWidth()/2,
-                    ship.getLocation().getY() > 0 ? Global.getCombatEngine().getMapHeight()/2 : -Global.getCombatEngine().getMapHeight()/2);
-
-            ship.setHulk(true);
-            ship.setDrone(true);
-            ship.addTag("KOL_moduleHulked");
-        } else if(!ship.isHulk() && ship.hasTag("KOL_moduleHulked")){
-            ship.setHulk(true);
-        }
-
-        for(WeaponAPI weapon : ship.getAllWeapons()){
-            if(weapon.isDecorative()) continue;
-
-            if(weapon.hasAIHint(WeaponAPI.AIHints.PD)){
-                aimAndFirePD(ship, weapon, amount);
             }
         }
     }
@@ -119,7 +140,6 @@ public class KnightModule extends BaseHullMod {
         float bestInterceptTime = Float.POSITIVE_INFINITY;
         boolean isBestTargetMissile = false;
         boolean hasTarget = false;
-
         Iterator<Object> objectGrid = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(weapon.getLocation(), weapon.getRange()*3, weapon.getRange()*3);
         while (objectGrid.hasNext()){
             Object next = objectGrid.next();

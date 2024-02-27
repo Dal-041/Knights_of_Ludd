@@ -379,6 +379,7 @@
 	},
 	"plugins": {
 		"KOL_CombatPlugin": "org.selkie.kol.plugins.KOL_CombatPlugin",
+		"KOL_ArmorPaperdolls": "org.selkie.kol.plugins.KOL_ArmorPaperdolls"
 	},
 	"ruleCommandPackages": [
         "org.selkie.kol.impl.rulecmd",

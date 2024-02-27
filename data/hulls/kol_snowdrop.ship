@@ -19,12 +19,14 @@
     "builtInMods": [
         "kol_refit",
         "armoredweapons",
-		"rugged"
+        "rugged"
     ],
     "builtInWeapons": {
         "PUSHER_PLATE": "kol_pusherplate_lt_but_cute",
         "DECO_LEFT_COVER": "kol_deco_snowdrop_tl",
         "DECO_RIGHT_COVER": "kol_deco_snowdrop_tr",
+        "DECO_LEFT_COVER_VULCAN": "kol_deco_snowdrop_vulcan_tl",
+        "DECO_RIGHT_COVER_VULCAN": "kol_deco_snowdrop_vulcan_tr",
         "DECO_0001": "kol_blinker_white30",
         "DECO_0002": "kol_blinker_white30",
         "DECO_0003": "kol_blinker_white",
@@ -235,7 +237,7 @@
             "arc": 0,
             "angle": 0,
             "locations": [
-                      21,       39
+                       8,       48
             ]
         },
         {
@@ -247,7 +249,31 @@
             "arc": 0,
             "angle": 0,
             "locations": [
-                      21,      -39
+                       8,      -48
+            ]
+        },
+        {
+            "id": "DECO_LEFT_COVER_VULCAN",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "renderOrderMod": 150,
+            "arc": 210,
+            "angle": 45,
+            "locations": [
+                      -1,       48
+            ]
+        },
+        {
+            "id": "DECO_RIGHT_COVER_VULCAN",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "renderOrderMod": 150,
+            "arc": 210,
+            "angle": -45,
+            "locations": [
+                      -1,      -48
             ]
         }
     ],

@@ -14,7 +14,7 @@ object ReflectionUtils {
     private val methodClass = Class.forName("java.lang.reflect.Method", false, Class::class.java.classLoader)
     private val getMethodNameHandle = MethodHandles.lookup().findVirtual(methodClass, "getName", MethodType.methodType(String::class.java))
     private val invokeMethodHandle = MethodHandles.lookup().findVirtual(methodClass, "invoke", MethodType.methodType(Any::class.java, Any::class.java, Array<Any>::class.java))
-
+    @JvmStatic
     fun set(fieldName: String, instanceToModify: Any, newValue: Any?)
     {
         var field: Any? = null
@@ -25,7 +25,7 @@ object ReflectionUtils {
         setFieldAccessibleHandle.invoke(field, true)
         setFieldHandle.invoke(field, instanceToModify, newValue)
     }
-
+    @JvmStatic
     fun get(fieldName: String, instanceToGetFrom: Any): Any? {
         var field: Any? = null
         try {  field = instanceToGetFrom.javaClass.getField(fieldName) } catch (e: Throwable) {

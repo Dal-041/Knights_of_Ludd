@@ -32,9 +32,9 @@ public class BulletTimeField extends BaseShipSystemScript {
                 initialSpeed = threat.getVelocity().length();
             } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
-                Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-                initialSpeed = (float) ReflectionUtils.INSTANCE.get("Ö00000", rayExtender); // bullet speed
-                startingDistance = (float) ReflectionUtils.INSTANCE.get("Ø00000", rayExtender);
+                Object rayExtender = ReflectionUtils.get("rayExtender", nearbyRay);
+                initialSpeed = (float) ReflectionUtils.get("Ö00000", rayExtender); // bullet speed
+                startingDistance = (float) ReflectionUtils.get("Ø00000", rayExtender);
                 adjustedElapsedDistance = startingDistance + (initialSpeed * SLOWDOWN * amount);
             } else if (threat instanceof MissileAPI) {
                 initialSpeed = ((MissileAPI) threat).getMaxSpeed();
@@ -92,9 +92,9 @@ public class BulletTimeField extends BaseShipSystemScript {
                         VectorUtils.rotate(threat.getVelocity(), angle);
                     } else if (threat instanceof MovingRay) {
                         MovingRay nearbyRay = (MovingRay) threat;
-                        Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-                        Vector2f velocity = (Vector2f) ReflectionUtils.INSTANCE.get("o00000", rayExtender);
-                        ReflectionUtils.INSTANCE.set("o00000", rayExtender, VectorUtils.rotate(velocity, angle));
+                        Object rayExtender = ReflectionUtils.get("rayExtender", nearbyRay);
+                        Vector2f velocity = (Vector2f) ReflectionUtils.get("o00000", rayExtender);
+                        ReflectionUtils.set("o00000", rayExtender, VectorUtils.rotate(velocity, angle));
                     }
                     threat.setFacing(threat.getFacing() + angle);
                 }
@@ -119,25 +119,25 @@ public class BulletTimeField extends BaseShipSystemScript {
             if (threat instanceof BallisticProjectile) {
                 BallisticProjectile nearbyBallistic = (BallisticProjectile) threat;
 
-                Object trailExtender = ReflectionUtils.INSTANCE.get("trailExtender", nearbyBallistic);
-                ReflectionUtils.INSTANCE.set("if", trailExtender, threatInfo.adjustedElapsedTime); //elapsed time
-                ReflectionUtils.INSTANCE.set("elapsed", nearbyBallistic, threatInfo.adjustedElapsedTime);
+                Object trailExtender = ReflectionUtils.get("trailExtender", nearbyBallistic);
+                ReflectionUtils.set("if", trailExtender, threatInfo.adjustedElapsedTime); //elapsed time
+                ReflectionUtils.set("elapsed", nearbyBallistic, threatInfo.adjustedElapsedTime);
 
                 threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * SLOWDOWN);
             } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
-                Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-                ReflectionUtils.INSTANCE.set("elapsed", nearbyRay, threatInfo.adjustedElapsedTime);
-                //ReflectionUtils.INSTANCE.set("Ø00000", rayExtender, threatInfo.adjustedElapsedDistance);
-                ReflectionUtils.INSTANCE.set("Ø00000", rayExtender, threatInfo.initialSpeed * SLOWDOWN);
+                Object rayExtender = ReflectionUtils.get("rayExtender", nearbyRay);
+                ReflectionUtils.set("elapsed", nearbyRay, threatInfo.adjustedElapsedTime);
+                //ReflectionUtils.set("Ø00000", rayExtender, threatInfo.adjustedElapsedDistance);
+                ReflectionUtils.set("Ø00000", rayExtender, threatInfo.initialSpeed * SLOWDOWN);
 
                 threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
                 threatInfo.adjustedElapsedDistance += amount * SLOWDOWN * threatInfo.initialSpeed;
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * SLOWDOWN);
             } else if (threat instanceof MissileAPI) {
                 MissileAPI nearbyMissile = (MissileAPI) threat;
-                ReflectionUtils.INSTANCE.set("elapsed", nearbyMissile, threatInfo.adjustedElapsedTime);
+                ReflectionUtils.set("elapsed", nearbyMissile, threatInfo.adjustedElapsedTime);
                 nearbyMissile.setFlightTime(threatInfo.adjustedElapsedTime);
 
                 threatInfo.adjustedElapsedTime += amount * SLOWDOWN;
@@ -158,8 +158,8 @@ public class BulletTimeField extends BaseShipSystemScript {
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed);
             } else if (threat instanceof MovingRay) {
                 MovingRay nearbyRay = (MovingRay) threat;
-                Object rayExtender = ReflectionUtils.INSTANCE.get("rayExtender", nearbyRay);
-                ReflectionUtils.INSTANCE.set("return", rayExtender, threatInfo.initialSpeed);
+                Object rayExtender = ReflectionUtils.get("rayExtender", nearbyRay);
+                ReflectionUtils.set("return", rayExtender, threatInfo.initialSpeed);
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed);
             }
         }

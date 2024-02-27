@@ -8,7 +8,7 @@ import com.fs.starfarer.api.combat.ShipAIPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
-import org.selkie.kol.helpers.KOLUtils;
+import org.selkie.kol.helpers.KOLStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.util.Arrays;
@@ -20,7 +20,7 @@ public class KOL_ShipAITweaker {
         if (ship.isFighter()) return null;
         String hullId = ship.getHullSpec().getBaseHullId();
 
-        if (!Arrays.asList(KOLUtils.knightsShips).contains(hullId) && !Arrays.asList(ZeaUtils.zeaSupportShips).contains(hullId)) return null;
+        if (!Arrays.asList(KOLStaticStrings.knightsShips).contains(hullId) && !Arrays.asList(ZeaUtils.zeaSupportShips).contains(hullId)) return null;
 
         List<String> supportHulls = new ArrayList<>(5);
         supportHulls.add("kol_mimosa");

@@ -20,7 +20,7 @@ public class hideDeco implements EveryFrameWeaponEffectPlugin {
             hidden = true;
         }
         else{
-            // dont check the length as that will silently fail
+            // note that the modules are named like "kol_snowdrop_tl" and the decos "kol_deco_snowdrop_tl", "kol_deco_snowdrop_vulcan_tl", ect
             String weaponID = weapon.getSpec().getWeaponId().substring(weapon.getSpec().getWeaponId().length() - 2);
             boolean moduleDead = true;
             for(ShipAPI module : ship.getChildModulesCopy()){
@@ -29,6 +29,13 @@ public class hideDeco implements EveryFrameWeaponEffectPlugin {
                     moduleDead = false;
                     float healthLevel = StarficzAIUtils.getCurrentArmorRating(module) / module.getArmorGrid().getArmorRating();
                     weapon.setCurrHealth(weapon.getMaxHealth() * healthLevel);
+                    if(weapon.getSpec().getWeaponId().contains("vulcan")){
+                        for(WeaponAPI moduleWeapon : module.getAllWeapons()){
+                            if(moduleWeapon.getSpec().getWeaponId().contains("vulcan")){
+                                weapon.setFacing(moduleWeapon.getCurrAngle());
+                            }
+                        }
+                    }
                 }
             }
             if(moduleDead) hidden = true;
@@ -38,6 +45,10 @@ public class hideDeco implements EveryFrameWeaponEffectPlugin {
             weapon.getSprite().setNormalBlend();
             SpriteAPI sprite = weapon.getSprite();
             sprite.setColor(new Color(0,0,0,0));
+
+            if (weapon.getBarrelSpriteAPI() != null){
+                weapon.getBarrelSpriteAPI().setColor(new Color(0,0,0,0));
+            }
         }
     }
 }

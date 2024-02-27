@@ -12,8 +12,8 @@ import org.lazywizard.lazylib.combat.DefenseUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class StarficzAIUtils {
     public static final boolean DEBUG_ENABLED = false;
@@ -524,7 +524,7 @@ public class StarficzAIUtils {
         ArmorGridAPI armorGrid = ship.getArmorGrid();
         float[][] armorGridGrid = armorGrid.getGrid();
         List<Float> armorList = new ArrayList<>();
-        org.lwjgl.util.Point worstPoint = DefenseUtils.getMostDamagedArmorCell(Global.getCombatEngine().getPlayerShip());
+        org.lwjgl.util.Point worstPoint = DefenseUtils.getMostDamagedArmorCell(ship);
         if(worstPoint != null){
             float totalArmor = 0;
             for (int x = 0; x < armorGridGrid.length; x++) {
@@ -546,6 +546,7 @@ public class StarficzAIUtils {
         MutableShipStatsAPI stats = ship.getMutableStats();
 
         float armorMultiplier = stats.getArmorDamageTakenMult().getModifiedValue();
+        float effectiveArmorMult = stats.getEffectiveArmorBonus().getMult();
         float hullMultiplier = stats.getHullDamageTakenMult().getModifiedValue();
         float minArmor = stats.getMinArmorFraction().getModifiedValue();
         float maxDR = stats.getMaxArmorDamageReduction().getModifiedValue();
@@ -570,7 +571,7 @@ public class StarficzAIUtils {
                 break;
         }
 
-        damage *= Math.max((1f - maxDR), ((hitStrength * armorMultiplier) / (armorValue + hitStrength * armorMultiplier)));
+        damage *= Math.max((1f - maxDR), ((hitStrength * armorMultiplier) / (armorValue * effectiveArmorMult + hitStrength * armorMultiplier)));
 
         float armorDamage = damage * armorMultiplier;
         float hullDamage = 0;
@@ -1371,9 +1372,14 @@ public class StarficzAIUtils {
         }
 
         Vector2f firingDirection = Vector2f.sub(interceptPoint, shooterPos, null);
-        firingDirection.normalise();
+        float firingAngle;
+        if(firingDirection.length() != 0){
+            firingDirection.normalise();
+            firingAngle = (float) Math.toDegrees(Math.atan2(firingDirection.y, firingDirection.x));
+        } else{
+            firingAngle = 0;
+        }
 
-        float firingAngle = (float) Math.toDegrees(Math.atan2(firingDirection.y, firingDirection.x));
 
         return new Pair<>(firingAngle, timeToIntercept);
     }
