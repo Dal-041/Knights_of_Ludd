@@ -115,7 +115,7 @@ public class KnightRefit extends BaseHullMod {
                 HashMap<DamagingProjectileAPI, HashMap<String, Float>> explosionMap = (HashMap<DamagingProjectileAPI, HashMap<String, Float>>) parent.getCustomData().get(RAYCAST_KEY);
 
                 // if this is the explosion from the missile, look up the cached result and use that
-                if(projectile instanceof DamagingExplosion){
+                if(projectile instanceof DamagingExplosion && explosionMap != null){
                     for(DamagingProjectileAPI pastProjectile : explosionMap.keySet()){
                         if (pastProjectile instanceof MissileAPI && pastProjectile.getSource() == projectile.getSource() &&
                                 MathUtils.getDistanceSquared(pastProjectile.getLocation(), projectile.getSpawnLocation()) < 1f){
