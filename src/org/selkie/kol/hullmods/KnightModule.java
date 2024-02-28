@@ -63,6 +63,11 @@ public class KnightModule extends BaseHullMod {
                 aimAndFirePD(module, weapon, amount);
             }
         }
+
+        // sync hardflux level with parent hull for polarized armor purposes
+        float moduleFlux = module.getParentStation().getFluxLevel() * module.getMaxFlux();
+        module.getFluxTracker().setCurrFlux(moduleFlux);
+        module.getFluxTracker().setHardFlux(moduleFlux);
     }
 
     @Override
