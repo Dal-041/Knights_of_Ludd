@@ -158,8 +158,10 @@ public class KnightRefit extends BaseHullMod {
             // init all occlusions
             List<ShipAPI> potentialOcclusions = parent.getChildModulesCopy();
             potentialOcclusions.add(parent);
+            HashMap<String, Integer> hitsMap = new HashMap<>();
             for(ShipAPI occlusion: potentialOcclusions){
                 damageReductionMap.put(occlusion.getId(), 1f);
+                hitsMap.put(occlusion.getId(), 0);
             }
 
             // skip if not an explosion
@@ -199,10 +201,6 @@ public class KnightRefit extends BaseHullMod {
             }
 
             // if more then 1 thing is in range, then raycast to check for explosion mults
-            HashMap<String, Integer> hitsMap = new HashMap<>();
-            for(ShipAPI occlusion : potentialOcclusions){
-                hitsMap.put(occlusion.getId(), 0);
-            }
             int totalRayHits = 0;
 
             List<Vector2f> rayEndpoints = MathUtils.getPointsAlongCircumference(explosionLocation, radius, NUM_RAYCASTS, 0f);
