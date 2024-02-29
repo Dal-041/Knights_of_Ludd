@@ -16,6 +16,8 @@ import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.opengl.GL14
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.modify
+import org.magiclib.kotlin.scaleColor
 import org.magiclib.kotlin.setAlpha
 import org.magiclib.subsystems.MagicSubsystemsManager
 import org.magiclib.subsystems.drones.MagicDroneSubsystem
@@ -181,6 +183,9 @@ class CorruptionJetsStats : BaseShipSystemScript() {
 
             val particleData =
                 if (MathUtils.getRandomNumberInRange(0f, 1f) < 0.4f) {
+
+                    val blue = (UNDERCOLOR.blue + MathUtils.getRandomNumberInRange(-20,20)).coerceIn(0,255)
+
                     RedEngineParticleData(
                         ship.location.x,
                         ship.location.y,
@@ -191,8 +196,8 @@ class CorruptionJetsStats : BaseShipSystemScript() {
                         2f,
                         ship.collisionRadius.coerceAtLeast(100f),
                         ship.collisionRadius.coerceAtLeast(100f),
-                        UNDERCOLOR,
-                        UNDERCOLOR.setAlpha(0)
+                        UNDERCOLOR.modify(blue = blue),
+                        UNDERCOLOR.modify(blue = blue, alpha = 0)
                     )
                 } else {
                     DarkEngineParticleData(
@@ -264,7 +269,8 @@ class CorruptionJetsStats : BaseShipSystemScript() {
         ) {
 
             override fun preDraw() {
-                if (MathUtils.getRandomNumberInRange(0f, 1f) <= 0.016f) {
+                if ((MathUtils.getRandomNumberInRange(0f, 1f) <= 0.016f) && !Global.getCombatEngine().isPaused) {
+                    val blue = (UNDERCOLOR.blue + MathUtils.getRandomNumberInRange(-20,20)).coerceIn(0,255)
                     ParticleController.addParticle(
                         RedParticleData(
                             x,
@@ -273,11 +279,11 @@ class CorruptionJetsStats : BaseShipSystemScript() {
                             yVel * -0.1f,
                             MathUtils.getRandomNumberInRange(0f, 360f),
                             MathUtils.getRandomNumberInRange(-6f, 6f),
-                            ttl,
+                            1f,
                             startingSize * 0.5f,
                             endSize * 3f,
-                            UNDERCOLOR,
-                            UNDERCOLOR.setAlpha(0)
+                            UNDERCOLOR.modify(blue = blue),
+                            UNDERCOLOR.modify(blue = blue, alpha = 0)
                         )
                     )
                 }

@@ -5,9 +5,10 @@
 	
 	"statsScript":"org.selkie.kol.impl.shipsystems.CorruptionJetsStats",
 	
-	"useSound":"system_targeting_feed",
-	#"loopSound":"system_targeting_feed_loop",
-	"deactivateSound":"gun_out_of_ammo",
+	#"useSound":"system_targeting_feed",
+	"useSound":"zea_elysian_corr_activate",
+	"loopSound":"zea_elysian_corr_loop",
+	"deactivateSound":"",
 	"outOfUsesSound":"gun_out_of_ammo",
 	
 	"aiHints":{

@@ -17,8 +17,8 @@ import java.util.Map;
 public class MiniJump extends BaseShipSystemScript {
 	public static final float MAX_TURN_BONUS = 50f;
 	public static final float TURN_ACCEL_BONUS = 50f;
-	public static final float INSTANT_BOOST_FLAT = 350f;
-	public static final float INSTANT_BOOST_MULT = 6.5f;
+	public static final float INSTANT_BOOST_FLAT = 500f;
+	public static final float INSTANT_BOOST_MULT = 10f;
 
 	private static final Color ENGINE_COLOR = new Color(255, 10, 10);
 	private static final Color BOOST_COLOR = new Color(255, 175, 175, 200);

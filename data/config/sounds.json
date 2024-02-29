@@ -42,6 +42,12 @@
 	"zea_dusk_phase_cloak_deactivate":[ 
 		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_deactivate_alt.ogg","pitch":1,"volume":1.0},
 	],
+	"zea_elysian_corr_activate":[
+		{"file":"sounds/sfx_systems/kol_corr_in.ogg","pitch":1,"volume":1.2},
+	],
+	"zea_elysian_corr_loop":[
+		{"file":"sounds/sfx_systems/kol_corr_loop.ogg","pitch":1,"volume":0.5},
+	],
 	"kol_shield_burnout":{
 	        "sounds":[
                         {"file":"sounds/shields/kol_shields_burnout.ogg","pitch":1,"volume":1},
