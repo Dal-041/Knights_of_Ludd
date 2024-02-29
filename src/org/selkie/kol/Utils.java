@@ -1,5 +1,6 @@
 package org.selkie.kol;
 
+import com.fs.graphics.util.Fader;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
@@ -107,7 +108,7 @@ public class Utils {
             alpha = 0;
         } else if (Global.getCombatEngine().getCombatUI().isShowingCommandUI()) {
             commandTime = System.currentTimeMillis();
-            alpha = 1-(float) Math.pow(Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f), 10f);
+            alpha = (isPauseIncluded ? 1f : 0.5f) - (float) Math.pow(Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f), 10f);
         } else if (Global.getCombatEngine().isUIShowingDialog()) {
             dialogTime = System.currentTimeMillis();
             if (isPauseIncluded) alpha = 1;
@@ -120,7 +121,7 @@ public class Utils {
             hudTime = System.currentTimeMillis();
             alpha =(float) Math.pow(Math.min((hudTime - commandTime) / COMMAND_FADE_IN_TIME, 1f), 0.5f);
         }
-        return MathUtils.clamp(alpha, 0f, 1f);
+        return MathUtils.clamp(alpha, 0f, ((Fader) ReflectionUtils.get("fader", Global.getCombatEngine().getCombatUI())).getBrightness());
     }
 
     public static void shipSpawnExplosion(float size, Vector2f location){
