@@ -363,8 +363,7 @@ public class KnightRefit extends BaseHullMod {
                 ship.getSpriteAPI().setColor(fadeAwayColor);
                 for(ShipEngineControllerAPI.ShipEngineAPI engine : ship.getEngineController().getShipEngines()){
                     EngineSlotAPI engineSlot = engine.getEngineSlot();
-                    Color originalCOlor = engineSlot.getColor();
-                    engineSlot.setColor(new Color(originalCOlor.getRed(), originalCOlor.getGreen(), originalCOlor.getBlue(), 20));
+                    engineSlot.setColor(Misc.setAlpha(engineSlot.getColor(), Keyboard.isKeyDown(2) ? 20 : 255));
                 }
                 for(WeaponAPI weapon : ship.getAllWeapons()){
                     if(Objects.equals(weapon.getSlot().getId(), "PUSHER_PLATE")){

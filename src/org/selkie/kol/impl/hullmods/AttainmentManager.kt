@@ -12,6 +12,8 @@ class AttainmentManager : BaseHullMod() {
     //private val interval = IntervalUtil(60f, 60f)
 
     override fun applyEffectsBeforeShipCreation(hullSize: HullSize?, stats: MutableShipStatsAPI, id: String?) {
+        // disabling this until we can track down the bug where the ships are unrecoverable in the player fleet.
+        /*
         if (Global.getSector() != null && stats.fleetMember != null) {
             val faction = stats.fleetMember.fleetData?.fleet?.faction?.id
             if (!faction.equals(Global.getSector().playerFaction?.id)) {
@@ -21,5 +23,6 @@ class AttainmentManager : BaseHullMod() {
                 stats.variant.removeTag(Tags.VARIANT_UNBOARDABLE)
             }
         }
+         */
     }
 }

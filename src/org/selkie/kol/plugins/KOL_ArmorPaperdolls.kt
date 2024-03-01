@@ -6,18 +6,20 @@ import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin
 import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ViewportAPI
 import com.fs.starfarer.api.graphics.SpriteAPI
+import com.fs.starfarer.api.input.InputEventAPI
 import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.setAlpha
+import org.magiclib.util.MagicUI
 import org.selkie.kol.Utils
 import org.selkie.kol.combat.StarficzAIUtils
 import java.awt.Color
 import java.util.regex.Pattern
 
 class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
-    override fun renderInUICoords(viewport: ViewportAPI?) {
-        super.renderInUICoords(viewport)
-        if(viewport == null) return
-        if(Global.getCurrentState() != GameState.COMBAT) return
+    override fun advance(amount: Float, events: MutableList<InputEventAPI>?) {
+        super.advance(amount, events)
+        if (Global.getCurrentState() != GameState.COMBAT) return
         val engine = Global.getCombatEngine()
         val ship = engine.playerShip ?: return
 
@@ -37,19 +39,25 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
         */
 
         // draw paperdoll for armor
-        val center = Vector2f(120f, 120f) //TODO: make sure this doesnt change across ui scales
-        drawPaperdoll(viewport, ship, center, 1f)
+        val center = Vector2f(120f, 120f) //TODO: make sure this doesn't change across ui scales
+        MagicUI.openGLForMiscWithinViewport()
+        drawPaperdoll(ship, center, 1f)
+        MagicUI.closeGLForMiscWithinViewport()
     }
 
     //TODO: Hardcoded bullshit, no clue how alex scales sprites here.
     private val PAPERDOLL_SCALE: Map<String, Float> = mapOf("kol_lunaria" to 0.455f, "kol_alysse" to 0.615f,
         "kol_larkspur" to 0.66f, "kol_tamarisk" to 0.565f, "kol_lotus" to 0.635f,
         "kol_snowdrop" to 0.75f, "kol_marigold" to 0.64f,"kol_mimosa" to 0.555f, "kol_sundew" to 0.61f)
-    private fun drawPaperdoll(viewport: ViewportAPI, ship: ShipAPI, location: Vector2f, scale: Float){
+
+    private val noHPColor = Color(200, 30, 30, 255)
+    private val fullHPColor = Color(120, 230, 0, 255)
+
+    private fun drawPaperdoll(ship: ShipAPI, location: Vector2f, scale: Float){
 
         if (PAPERDOLL_SCALE.containsKey(ship.hullSpec.baseHullId) ) {
             val shipScale = PAPERDOLL_SCALE[ship.hullSpec.baseHullId]!! * scale;
-            val alpha = Math.round(Misc.interpolate(0f,255f, Utils.getUIAlpha(true)))
+            val alpha = Math.round(Misc.interpolate(0f,170f, Utils.getUIAlpha(false)))
             val kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE)
             for (module in ship.childModulesCopy) {
                 if (module.hitpoints <= 0f) continue
@@ -68,11 +76,11 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
                 val paperDollLocation = Vector2f.sub(location, offset, null)
 
                 val armorHullLevel = (StarficzAIUtils.getCurrentArmorRating(module) + module.hitpoints) / (module.armorGrid.armorRating + module.maxHitpoints)
-                val paperdollColor = Utils.OKLabInterpolateColor(Color(255, 30, 30, alpha), Color(150, 200, 255, alpha), armorHullLevel)
+                val paperdollColor = Utils.OKLabInterpolateColor(noHPColor.setAlpha(alpha), fullHPColor.setAlpha(alpha), armorHullLevel)
 
                 moduleSprite.setSize(moduleSprite.width * shipScale, moduleSprite.height * shipScale)
                 moduleSprite.color = paperdollColor
-                moduleSprite.setAdditiveBlend()
+                //moduleSprite.setAdditiveBlend()
                 moduleSprite.angle = ship.facing - 90f
                 moduleSprite.renderAtCenter(paperDollLocation.x, paperDollLocation.y)
             }
