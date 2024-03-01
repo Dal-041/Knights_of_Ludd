@@ -123,7 +123,8 @@ public class CoronalCapacitor extends BaseHullMod {
             if (engines == null) {
                 engines = new ArrayList<>();
                 for(ShipEngineControllerAPI.ShipEngineAPI engine : ship.getEngineController().getShipEngines()){
-                    engines.add(new Pair<>(engine.getEngineSlot(), new Pair<>(engine.getEngineSlot().getColor(), engine.getEngineSlot().getGlowAlternateColor())));
+                    if(engine.getEngineSlot().getColor().getAlpha() > 10)
+                        engines.add(new Pair<>(engine.getEngineSlot(), new Pair<>(engine.getEngineSlot().getColor(), engine.getEngineSlot().getGlowAlternateColor())));
                 }
             }
 
