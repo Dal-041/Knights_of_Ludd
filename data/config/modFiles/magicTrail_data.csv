@@ -77,16 +77,18 @@ kol_llyr_shot_2,kol_llyr_shot,base_trail_heavyBurn,10,0,0,0.3,12,18,"[125,170,14
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 # Plasma...,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-zea_thermal_shot_1,zea_thermal_shot,base_trail_zap,10,0,0,0.3,12,14,"[205,205,255]","[145,0,205]",0.7,200,200,TRUE,15,20,1,0,TRUE,FALSE,TRUE,100,100,0.3,0,0,420,true,false
-zea_thermal_shot_2,zea_thermal_shot,base_trail_zap,10,0,0,0.25,12,9,"[205,100,255]","[255,50,100]",0.8,200,200,TRUE,15,10,1,0,TRUE,FALSE,TRUE,125,20,0.2,0,800,120,true,false
-zea_thermal_shot_3,zea_thermal_shot,base_trail_zapWithCore,10,0,0,0.2,12,10,"[205,100,255]","[255,50,100]",0.9,200,200,TRUE,15,5,1,0,TRUE,FALSE,TRUE,150,20,0.1,0,1000,100,true,false
-zea_thermal_shot_4_smk,zea_thermal_shot,base_trail_smoke,10,0,0.05,0.35,15,30,"[150,10,255]","[50,50,255]",0.2,500,0,TRUE,0,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,false,false
-zea_thermal_shot_5_contrail,zea_thermal_shot,base_trail_contrail,10,0,0,0.35,15,20,"[150,10,255]","[50,50,255]",0.3,500,0,TRUE,0,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,false,false
+zea_thermal_shot_1,zea_thermal_shot,base_trail_zap,10,0,0,0.2,12,14,"[205,205,255]","[145,0,205]",0.7,200,200,TRUE,15,20,1,0,TRUE,FALSE,TRUE,100,100,0.3,0,0,420,true,false
+zea_thermal_shot_2,zea_thermal_shot,base_trail_zap,10,0,0,0.18,12,9,"[105,200,255]","[255,50,100]",0.8,200,200,TRUE,15,10,1,0,TRUE,FALSE,TRUE,125,20,0.2,0,800,120,true,false
+zea_thermal_shot_3,zea_thermal_shot,base_trail_zapWithCore,10,0,0,0.16,12,10,"[105,200,255]","[255,50,100]",0.9,200,200,TRUE,15,5,1,0,TRUE,FALSE,TRUE,150,20,0.1,0,1000,100,true,false
+zea_thermal_shot_4,zea_thermal_shot,base_trail_smooth,10,0,0,0.22,8,2,"[255,255,255]","[255,50,100]",0.9,200,200,TRUE,15,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,true,false
+zea_thermal_shot_4_smk,zea_thermal_shot,base_trail_smoke,10,0,0.05,0.3,15,30,"[10,150,255]","[50,50,255]",0.2,500,0,TRUE,0,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,false,false
+zea_thermal_shot_5_contrail,zea_thermal_shot,base_trail_contrail,10,0,0,0.3,15,20,"[10,150,255]","[50,50,255]",0.3,500,0,TRUE,0,10,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,false,false
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-zea_plasma_chaingun_shot_1,zea_plasma_chaingun_shot,base_trail_zap,10,0,0,0.15,8,10,"[205,205,255]","[145,0,205]",0.6,200,200,TRUE,10,25,1,0,TRUE,FALSE,TRUE,80,100,0.3,0,2000,100,true,false
-zea_plasma_chaingun_shot_2,zea_plasma_chaingun_shot,base_trail_zap,10,0,0,0.13,8,9,"[205,205,255]","[145,0,205]",0.69,200,200,TRUE,10,21,1,0,TRUE,FALSE,TRUE,69,100,0.25,0,2000,100,true,false
-zea_plasma_chaingun_shot_3,zea_plasma_chaingun_shot,base_trail_zapWithCore,10,0,0,0.1,8,7,"[205,100,255]","[255,50,100]",0.8,200,200,TRUE,10,15,1,0,TRUE,FALSE,TRUE,200,20,0.2,0,0,800,true,false
-zea_plasma_chaingun_shot_4_contrail,zea_plasma_chaingun_shot,base_trail_contrail,10,0,0,0.16,10,14,"[150,10,255]","[50,50,255]",0.15,500,0,TRUE,0,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,false,false
+zea_plasma_chaingun_shot_1,zea_plasma_chaingun_shot,base_trail_zap,10,0,0,0.14,12,12,"[205,205,255]","[145,0,205]",0.6,200,200,TRUE,5,25,1,0,TRUE,FALSE,TRUE,80,100,0.3,0,2000,100,true,false
+zea_plasma_chaingun_shot_2,zea_plasma_chaingun_shot,base_trail_zap,10,0,0,0.12,10,10,"[205,205,255]","[145,0,205]",0.69,200,200,TRUE,5,21,1,0,TRUE,FALSE,TRUE,69,100,0.25,0,2000,100,true,false
+zea_plasma_chaingun_shot_3,zea_plasma_chaingun_shot,base_trail_zapWithCore,10,0,0,0.1,8,6,"[205,100,255]","[255,50,100]",0.8,200,200,TRUE,5,15,1,0,TRUE,FALSE,TRUE,200,20,0.2,0,0,800,true,false
+zea_plasma_chaingun_shot_4_contrail,zea_plasma_chaingun_shot,base_trail_contrail,10,0,0,0.16,8,10,"[150,10,255]","[50,50,255]",0.15,500,0,TRUE,0,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,false,false
+zea_plasma_chaingun_shot_4,zea_plasma_chaingun_shot,base_trail_smooth,10,0,0.02,0.05,10,2,"[255,255,255]","[255,50,100]",0.9,200,200,TRUE,5,5,1,0,TRUE,FALSE,TRUE,150,20,0,0,0,0,true,false
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

@@ -5,7 +5,7 @@
 	"collisionClass":"PROJECTILE_FF",
 	"collisionClassByFighter":"PROJECTILE_FIGHTER",
 	#"width":45.0,
-	"width":10.0,
+	"width":15.0,
 	"fadeTime":0.5,
 	#"hitGlowRadius":38,
 	"fringeColor":[200,00,255,255],
