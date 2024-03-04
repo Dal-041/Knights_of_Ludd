@@ -846,7 +846,7 @@ public class StarficzAIUtils {
                     q = i;
             }
             p = q;
-        } while (p != leftmost);
+        } while (p != leftmost && hull.size() < n);
 
         return hull;
     }

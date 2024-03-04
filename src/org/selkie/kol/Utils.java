@@ -95,7 +95,7 @@ public class Utils {
     private static long dialogTime = 0;
     private static long commandTime = 0;
     private static long hudTime = 0;
-    public static float getUIAlpha(boolean isPauseIncluded) {
+    public static float getUIAlpha(boolean inUIRenderMethod) {
         final float DIALOG_ALPHA = 0.33f;
         final float DIALOG_FADE_OUT_TIME = 333f;
         final float DIALOG_FADE_IN_TIME = 250f;
@@ -108,14 +108,14 @@ public class Utils {
             alpha = 0;
         } else if (Global.getCombatEngine().getCombatUI().isShowingCommandUI()) {
             commandTime = System.currentTimeMillis();
-            alpha = (isPauseIncluded ? 1f : 0.5f) - (float) Math.pow(Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f), 10f);
+            alpha = (inUIRenderMethod ? 1f : 0.5f) - (float) Math.pow(Math.min((commandTime - hudTime) / COMMAND_FADE_OUT_TIME, 1f), 10f);
         } else if (Global.getCombatEngine().isUIShowingDialog()) {
             dialogTime = System.currentTimeMillis();
-            if (isPauseIncluded) alpha = 1;
+            if (inUIRenderMethod) alpha = 1;
             else alpha = Misc.interpolate(1f, DIALOG_ALPHA, Math.min((dialogTime - hudTime) / DIALOG_FADE_OUT_TIME, 1f));
         }  else if (dialogTime > commandTime) {
             hudTime = System.currentTimeMillis();
-            if (isPauseIncluded) alpha = 1;
+            if (inUIRenderMethod) alpha = 1;
             else alpha = Misc.interpolate(DIALOG_ALPHA, 1f, Math.min((hudTime - dialogTime) / DIALOG_FADE_IN_TIME, 1f));
         } else {
             hudTime = System.currentTimeMillis();
