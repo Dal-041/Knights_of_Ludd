@@ -1,0 +1,21 @@
+{
+    "portraits":{
+        "standard_female":[
+            "graphics/portraits/kol_female_01.png",
+            "graphics/portraits/kol_female_02.png",
+            "graphics/portraits/kol_female_03.png",
+            "graphics/portraits/kol_female_04.png",
+            "graphics/portraits/kol_female_05.png",
+            "graphics/portraits/kol_female_06.png",
+            "graphics/portraits/kol_female_07.png",
+],
+        "standard_male":[
+            "graphics/portraits/kol_male_01.png",
+            "graphics/portraits/kol_male_02.png",
+            "graphics/portraits/kol_male_03.png",
+            "graphics/portraits/kol_male_04.png",
+            "graphics/portraits/kol_male_05.png",
+            "graphics/portraits/kol_male_06.png",
+]
+    },
+}
