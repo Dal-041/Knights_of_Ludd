@@ -39,9 +39,9 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
         */
 
         // draw paperdoll for armor
-        val center = Vector2f(120f, 120f) //TODO: make sure this doesn't change across ui scales
+        val center = Vector2f(120f, 120f).scale(Global.getSettings().screenScaleMult) as Vector2f
         MagicUI.openGLForMiscWithinViewport()
-        drawPaperdoll(ship, center, 1f)
+        drawPaperdoll(ship, center, Global.getSettings().screenScaleMult)
         MagicUI.closeGLForMiscWithinViewport()
     }
 
