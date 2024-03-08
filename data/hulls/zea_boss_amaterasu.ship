@@ -13,7 +13,6 @@
   "viewOffset": 0,
   "builtInMods": [
     "zea_edf_coronal_capacitor",
-    #"zea_edf_pd_drones",
     "automated",
     "kol_ea_shields3",
     "zea_boss_radiance"
@@ -32,7 +31,7 @@
     "WS0020": "kol_blinker_white30",
     "WS0021": "kol_blinker_white30",
     "WS0022": "kol_blinker_white30",
-    "WS0023": "blinker_red",
+    "WS0023": "kol_blinker_red",
     "WS0024": "kol_blinker_green",
     "WS0025": "kol_blinker_white",
     "WS0026": "kol_blinker_white",
