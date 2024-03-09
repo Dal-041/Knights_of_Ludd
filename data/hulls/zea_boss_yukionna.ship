@@ -23,7 +23,8 @@
   ],
   "builtInWeapons": {
     "WS0017": "zea_boss_resonator",
-    "WS0018": "zea_boss_resonator"
+    "WS0018": "zea_boss_resonator",
+    "WS0023": "zea_deco_boss_yukionna_lights"
   },
   "weaponSlots": [
     {
@@ -223,6 +224,15 @@
       "arc": 7,
       "angle": -104,
       "locations": [-82.5, -181.5]
+    },
+    {
+      "id": "WS0023",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [28, -0]
     }
   ],
   "engineSlots": [
