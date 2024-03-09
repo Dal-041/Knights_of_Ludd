@@ -27,6 +27,7 @@ public class Crusaders {
 
 
     public static void startSchism() {
+        //TODO break the COGR alliance
         Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_SCHISMED, true);
         setCrusadeNames();
         setCrusadeDoctrine();
