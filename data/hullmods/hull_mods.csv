@@ -16,6 +16,7 @@ Ninmah Boss,zea_ninmah_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmod
 Nineveh Boss,zea_nineveh_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.NinevehBoss,,,,,
 Yukionna Boss,zea_dusk_yukionna_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.YukionnaBoss,,,,,
 Corrupting Heart Boss,zea_corruptingheart_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.CorruptingHeartBoss,,,,,
+Amaterasu Boss,zea_amaterasu_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.AmaterasuBoss,,,,,
 Scorched Skies Doctrine,kol_throttle,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.impl.hullmods.AttainmentManager,,Conformal shield,,graphics/icons/skills/field_modulation.png,
 Shachi Drones,zea_edf_pd_drones,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.impl.hullmods.PDDronesHullmod,,,,data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/hullmods/zea_edf_shachi.png,
 Advanced Chiwen Drones,zea_dawn_smart_shield_drones,,,,,,,,TRUE,,0,0,0,0,org.selkie.kol.impl.hullmods.SmartShieldDronesHullmod,,,,data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/hullmods/zea_dawn_chiwen.png,

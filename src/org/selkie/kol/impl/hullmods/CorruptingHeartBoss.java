@@ -172,6 +172,9 @@ public class CorruptingHeartBoss extends BaseHullMod {
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+
+            ship.getMutableStats().getShieldDamageTakenMult().modifyMult("kol_boss_buff", 0.8f);
+            ship.getMutableStats().getFluxCapacity().modifyMult("kol_boss_buff", 1.5f);
         }
     }
 }
