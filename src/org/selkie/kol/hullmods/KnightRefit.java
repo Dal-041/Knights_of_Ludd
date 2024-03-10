@@ -71,7 +71,7 @@ public class KnightRefit extends BaseHullMod {
         float capBonus = 0;
         float dissBonus = 0;
         for(WeaponAPI weapon : ship.getAllWeapons()){
-            if (weapon.getSlot().getWeaponType() == WeaponAPI.WeaponType.COMPOSITE ){
+            if (weapon.getSlot().getWeaponType() == WeaponAPI.WeaponType.COMPOSITE && weapon.getType() == WeaponAPI.WeaponType.BALLISTIC){
                 int opCost = (int) weapon.getSpec().getOrdnancePointCost(stats, ship.getMutableStats());
                 capBonus += opCost * FLUX_CAP_PER_OP;
                 dissBonus += opCost * FLUX_DISS_PER_OP;
