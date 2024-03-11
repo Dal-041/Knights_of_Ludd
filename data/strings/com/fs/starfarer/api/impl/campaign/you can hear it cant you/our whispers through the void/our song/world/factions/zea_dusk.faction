@@ -33,7 +33,8 @@
 			#"derelict":0.1,
 		},
 		"hulls":{
-			
+			"zea_dusk_ikiryo":0.5,
+			"zea_dusk_shiryo":0.5,
 		},
 	},
 	"shipsWhenImporting":{
@@ -160,7 +161,7 @@
 		],
 	},
 	"factionDoctrine":{
-		"warships":3,
+		"warships":4,
 		"carriers":1,
 		"phaseShips":5,
 		
@@ -168,7 +169,7 @@
 		"shipQuality":5,
 		"numShips":2,
 		
-		"shipSize":3,
+		"shipSize":4,
 		
 		"aggression":3,
 		
