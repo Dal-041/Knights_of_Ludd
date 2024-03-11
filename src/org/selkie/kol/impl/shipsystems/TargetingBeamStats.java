@@ -1,7 +1,10 @@
 package org.selkie.kol.impl.shipsystems;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.impl.combat.EntropyAmplifierStats;
@@ -9,7 +12,6 @@ import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
-import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
@@ -205,7 +207,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
         ShipAPI target = null;
         for(ShipAPI other : targets){
             float otherDistance = MathUtils.getDistanceSquared(other.getLocation(), ship.getLocation());
-            if(otherDistance < minDistance){
+            if(otherDistance < minDistance*minDistance){
                 minDistance = otherDistance;
                 target = other;
             }

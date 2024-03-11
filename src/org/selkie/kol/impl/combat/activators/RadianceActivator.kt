@@ -7,6 +7,8 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.util.IntervalUtil
 import com.fs.starfarer.api.util.Misc
 import com.fs.starfarer.api.util.Misc.ZERO
+import com.fs.starfarer.combat.entities.BallisticProjectile
+import com.fs.starfarer.combat.entities.PlasmaShot
 import org.dark.shaders.distortion.DistortionShader
 import org.dark.shaders.distortion.RippleDistortion
 import org.dark.shaders.light.LightShader
@@ -79,7 +81,7 @@ class RadianceActivator(ship: ShipAPI?) : MagicSubsystem(ship) {
         val explosionDamage = getDamage()
 
         CombatUtils.getEntitiesWithinRange(ship.location, DAMAGE_RANGE)
-            .filterNot { it.owner == ship.owner }
+            .filterNot { it.owner == ship.owner || it is BallisticProjectile || it is PlasmaShot }
             .map { it to 1f - MathUtils.getDistance(ship, it).coerceAtLeast(ship.collisionRadius) / DAMAGE_RANGE }
             .forEach { (target, rangeRatio) ->
                 val effectiveDamage = rangeRatio * explosionDamage
