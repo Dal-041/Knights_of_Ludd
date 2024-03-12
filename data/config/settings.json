@@ -369,6 +369,8 @@
 			"kol_larkspur_tr" : "graphics/ships/modules/paperdolls/kol_larkspur_tr_paperdoll.png",
 			"kol_mimosa_tl" : "graphics/ships/modules/paperdolls/kol_mimosa_tl_paperdoll.png",
 			"kol_mimosa_tr" : "graphics/ships/modules/paperdolls/kol_mimosa_tr_paperdoll.png",
+			"kol_marigold_tl" : "graphics/ships/modules/paperdolls/kol_marigold_tl_paperdoll.png",
+			"kol_marigold_tr" : "graphics/ships/modules/paperdolls/kol_marigold_tr_paperdoll.png",
 		}
 	},
 	"designTypeColors":{

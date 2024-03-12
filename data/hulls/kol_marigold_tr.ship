@@ -1,94 +1,77 @@
 {
-    "hullName": "Armor",
-    "hullId": "kol_marigold_tr",
-    "hullSize": "FRIGATE",
-    "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_sundew_tr.png",
-    "height": 76,
-    "width": 31,
-    "center": [
-        15.5, 38
-    ],
-    "collisionRadius": 45,
-    "coversColor": "",
-    "shieldCenter": [
-        0, 0
-    ],
-    "shieldRadius": 37,
-    "viewOffset": 0,
-    "builtInMods": [
-        "kol_module",
-        "ablative_armor",
-        "reduced_explosion",
-        "always_detaches"
-    ],
-    "builtInWeapons": {
-        "WS0002": "kol_blinker_white",
-        "WS0003": "kol_blinker_green"
+  "hullName": "Armor",
+  "hullId": "kol_marigold_tr",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_marigold_tr.png",
+  "style": "KOL_TECH",
+  "height": 78,
+  "width": 44,
+  "center": [15.5, 38],
+  "collisionRadius": 45,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 37,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "ablative_armor",
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "builtInWeapons": {
+    "WS0002": "kol_blinker_white",
+    "WS0003": "kol_blinker_green"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -45,
+      "locations": [1, -11.5]
     },
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "WS0001",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "HIDDEN",
-            "arc": 0,
-            "angle": -45,
-            "locations": [
-                     -34,    -12.5
-            ]
-        },
-        {
-            "id": "WS0002",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                       7,      2.5
-            ]
-        },
-        {
-            "id": "WS0003",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                      36,      6.5
-            ]
-        },
-        {
-            "id": "WS0004",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "HIDDEN",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                      31,      3.5
-            ]
-        }
-    ],
-    "engineSlots": [],
-    "bounds": [
-           -36.5,     -4.5,
-           -36.5,      -12,
-               6,    -12.5,
-            29.5,       -2,
-              30,        7,
-        
-              22,     14.5,
-             7.5,     12.5,
-             7.5,        7,
-             0.5,      6.5,
-            -6.5,       -1,
-        
-           -23.5,     -1.5
-    # 11 points total.
-    ]
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [9, -4.5]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [38, -0.5]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [38, -5.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    31, -9.5,
+    -21, -24.5,
+    -36, -25.5,
+    -36, -20.5,
+    -25, -3.5,
+    -17, -7.5,
+    -3, -7.5,
+    9, 4.5,
+    7, 9.5,
+    14, 13.5,
+    24, 13.5,
+    31, 6.5
+  ]
 }
