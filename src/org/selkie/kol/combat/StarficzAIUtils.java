@@ -735,7 +735,8 @@ public class StarficzAIUtils {
         for (Vector2f potentialPoint : potentialPoints) {
             float currentPointSumDistance = 0;
             for(ShipAPI enemy : enemies){
-                currentPointSumDistance += MathUtils.getDistance(enemy, potentialPoint);
+                if(enemy.getHullSize() != ShipAPI.HullSize.FIGHTER)
+                    currentPointSumDistance += MathUtils.getDistance(enemy, potentialPoint);
             }
             if(currentPointSumDistance > furthestPointSumDistance){
                 furthestPointSumDistance = currentPointSumDistance;

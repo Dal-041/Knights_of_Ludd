@@ -443,11 +443,13 @@ public class NinmahBoss extends BaseHullMod {
 
         private void getOptimalTarget() {
             // Cache any newly detected enemies, getShipStats is expensive
-            List<ShipAPI> foundEnemies = AIUtils.getNearbyEnemies(ship, 3000f);
+            List<ShipAPI> foundEnemies = AIUtils.getNearbyEnemies(ship, 5000f);
             for (ShipAPI foundEnemy : foundEnemies) {
-                if (!nearbyEnemies.containsKey(foundEnemy) && foundEnemy.isAlive() && !foundEnemy.isFighter()) {
-                    Map<String, Float> shipStats = StarficzAIUtils.getShipStats(foundEnemy, targetRange);
-                    nearbyEnemies.put(foundEnemy, shipStats);
+                if(foundEnemy.getHullSize() != ShipAPI.HullSize.FIGHTER) {
+                    if (!nearbyEnemies.containsKey(foundEnemy) && foundEnemy.isAlive() && !foundEnemy.isFighter()) {
+                        Map<String, Float> shipStats = StarficzAIUtils.getShipStats(foundEnemy, targetRange);
+                        nearbyEnemies.put(foundEnemy, shipStats);
+                    }
                 }
             }
 
