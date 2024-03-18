@@ -89,12 +89,12 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
             //If debug is turned on, weapons that can hit the ship will be blue, and projectiles that can hit the ship will be magenta
             if (!disabled && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)) {
                 // lockout from spamming shields
-                if(shield.isOff() || shield.getActiveArc()/shield.getArc() > 0.5f){
-                    if (shield.isOn() ^ wantToShield(amount))
-                        ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
-                    else
-                        ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
-                }
+                boolean lockoutOver = shield.isOff() || shield.getActiveArc()/shield.getArc() > 0.5f;
+
+                if ((shield.isOn() ^ wantToShield(amount)) && lockoutOver)
+                    ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                else
+                    ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
             }
 
             // Overloaded Shields

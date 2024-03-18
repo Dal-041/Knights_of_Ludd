@@ -25,7 +25,7 @@ public class LidarStats extends BaseShipSystemScript {
 	public static float RANGE_BONUS = 100f;
 	public static float PASSIVE_RANGE_BONUS = 0f;
 	public static float ROF_BONUS = 2f;
-	public static float RECOIL_BONUS = 75f;
+	public static float RECOIL_BONUS = 85f;
 	public static float PROJECTILE_SPEED_BONUS = 50f;
 	
 	public static float SPEED_PENALTY = -50f;
@@ -197,7 +197,7 @@ public class LidarStats extends BaseShipSystemScript {
 				}
 			}
 			lidarRange += 100f;
-			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange/(1+(RANGE_BONUS/110))); //TODO: 110 is itu fudging, actually calc this proper
+			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange); //TODO: 110 is itu fudging, actually calc this proper
 		} else{
 			stats.getBeamWeaponRangeBonus().unmodify("lidararray");
 		}
