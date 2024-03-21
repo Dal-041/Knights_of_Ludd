@@ -8,7 +8,7 @@
   "width": 640,
   "center": [320, 208],
   "collisionRadius": 352,
-  "shieldCenter": [0, -0],
+  "shieldCenter": [-8, -0],
   "shieldRadius": 334,
   "viewOffset": 0,
   "builtInMods": [
@@ -70,7 +70,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 57.5,
-      "locations": [-13, 76]
+      "locations": [11, 103],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0006",
@@ -79,7 +80,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -57.5,
-      "locations": [-13, -76]
+      "locations": [11, -103],
+      "renderOrderMod": 100
     },
     {
       "id": "WS0007",

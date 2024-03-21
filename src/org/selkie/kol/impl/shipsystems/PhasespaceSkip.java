@@ -6,9 +6,11 @@ import com.fs.starfarer.api.combat.CollisionClass;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.CollisionUtils;
+import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -17,6 +19,8 @@ import org.selkie.kol.impl.fx.FakeSmokePlugin;
 
 import java.awt.*;
 import java.util.Iterator;
+
+import static org.selkie.kol.helpers.MathHelpers.computeSpriteCenter;
 
 public class PhasespaceSkip extends BaseShipSystemScript {
     //Main phase color
@@ -83,11 +87,13 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         ship.setExtraAlphaMult(1f - (1f - SHIP_ALPHA_MULT) * effectLevel);
         ship.setApplyExtraAlphaToEngines(true);
 
+        //We need to compute the actual sprite center to account for the ship center offset
+        Vector2f spriteCenter = computeSpriteCenter(ship);
 
         //Moves the "phantom" to its appropriate location
         Vector2f phantomPos = MathUtils.getRandomPointInCircle(null, PHANTOM_DISTANCE_DIFFERENCE);
-        phantomPos.x += ship.getLocation().x;
-        phantomPos.y += ship.getLocation().y;
+        phantomPos.x += spriteCenter.x;
+        phantomPos.y += spriteCenter.y;
 
         //If we are outside the screenspace, don't do the extra visual effects
         if (!Global.getCombatEngine().getViewport().isNearViewport(phantomPos, ship.getCollisionRadius() * 1.5f)) {
@@ -96,9 +102,9 @@ public class PhasespaceSkip extends BaseShipSystemScript {
 
         //Special, "Semi-Fixed" phantom
         Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
-        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1"), ship.getLocation(),
+        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1"), spriteCenter,
                 new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
-        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow2"), ship.getLocation(),
+        MagicRender.singleframe(Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow2"), spriteCenter,
                 new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
 
         //If enough time has passed, render a new phantom
