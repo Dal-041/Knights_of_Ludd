@@ -18,12 +18,14 @@ public class KOL_SparkleBeamEffect implements BeamEffectPlugin {
 		
 		interval1.advance(engine.getElapsedInLastFrame());
         if (interval1.intervalElapsed()) {
+
+            float width = beam.getWidth() / 2f; // halved due to unusally wide beams for wide beam glow visual
         	
-            float size = beam.getWidth() * MathUtils.getRandomNumberInRange(1.9f, 2.1f);
+            float size = width * MathUtils.getRandomNumberInRange(1.9f, 2.1f);
             
             float dur = MathUtils.getRandomNumberInRange(0.1f,0.2f);
             
-            engine.addHitParticle(beam.getFrom(), beam.getSource().getVelocity(), beam.getWidth(), 0.6f, dur, beam.getCoreColor());
+            engine.addHitParticle(beam.getFrom(), beam.getSource().getVelocity(), width, 0.6f, dur, beam.getCoreColor());
             engine.addHitParticle(beam.getFrom(), beam.getSource().getVelocity(), size, 0.6f, dur, beam.getFringeColor().brighter());
             
     		if (beam.getBrightness() >= 0.9f) {
@@ -35,7 +37,7 @@ public class KOL_SparkleBeamEffect implements BeamEffectPlugin {
     				Color sparkleColor = new Color (beam.getFringeColor().getRed(),beam.getFringeColor().getGreen(),beam.getFringeColor().getBlue(),(int)(beam.getFringeColor().getAlpha() * timeScale));
     				
                 	Vector2f sparklePoint = MathUtils.getPointOnCircumference(beam.getFrom(), size * 4.4f * rangeScale, beam.getWeapon().getCurrAngle());
-                	engine.addSmoothParticle(MathUtils.getRandomPointInCircle(sparklePoint, beam.getWidth() * 0.5f), beam.getSource().getVelocity(), size * MathUtils.getRandomNumberInRange(0.15f, 0.35f), 0.69f, dur * 3f * timeScale, sparkleColor);
+                	engine.addSmoothParticle(MathUtils.getRandomPointInCircle(sparklePoint, width * 0.5f), beam.getSource().getVelocity(), size * MathUtils.getRandomNumberInRange(0.15f, 0.35f), 0.69f, dur * 3f * timeScale, sparkleColor);
                 }
                 
         	}

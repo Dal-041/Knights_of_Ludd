@@ -11,19 +11,23 @@
   "hardpointSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_hosta_s_hardpoint_base.png",
   "hardpointGlowSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_hosta_s_hardpoint_glow.png",
   "fringeColor":[40,80,215,255],
-  "coreColor":[200,130,255,255],
+  "coreColor":[230,170,255,220],
   "glowColor": [100,150,240,255],
   "turretOffsets": [0,0],
   "turretAngleOffsets": [0],
   "hardpointOffsets": [6,0],
   "hardpointAngleOffsets": [0],
-  "darkCore":true,
-  #"width":25.0,
+  #"darkCore":true,
+  "width":30.0,
   "textureScrollSpeed":223.0,
-  "pixelsPerTexel":5.0,
+  "pixelsPerTexel":1.0,
   #"pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],
   "barrelMode": "ALTERNATING",
   "animationType": "GLOW",
-  "textureType": ROUGH,
+  #"textureType": ROUGH,
+  "textureType": [
+    "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_beam_fringe.png",
+    "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_hosta_beam_core.png"
+  ],
   "fireSoundTwo": "tachyon_lance_fire"
 }

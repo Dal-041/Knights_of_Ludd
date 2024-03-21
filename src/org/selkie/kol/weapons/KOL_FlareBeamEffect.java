@@ -37,12 +37,14 @@ public class KOL_FlareBeamEffect implements BeamEffectPlugin {
 
 		interval1.advance(engine.getElapsedInLastFrame());
         if (interval1.intervalElapsed()) {
-        	
-            float size = beam.getWidth() * MathUtils.getRandomNumberInRange(1.9f, 2.2f);
+
+			float width = beam.getWidth() / 2f; // halving due to unusually wide beams for wide beam glow visual
+
+            float size = width * MathUtils.getRandomNumberInRange(1.9f, 2.2f);
             
             float dur = MathUtils.getRandomNumberInRange(0.1f,0.2f);
             
-            engine.addHitParticle(beam.getFrom(), beam.getSource().getVelocity(), beam.getWidth(), 0.6f, dur, beam.getCoreColor());
+            engine.addHitParticle(beam.getFrom(), beam.getSource().getVelocity(), width, 0.6f, dur, beam.getCoreColor());
             engine.addHitParticle(beam.getFrom(), beam.getSource().getVelocity(), size, 0.6f, dur, beam.getFringeColor().brighter());
             
             if (beam.didDamageThisFrame()) {
@@ -52,8 +54,8 @@ public class KOL_FlareBeamEffect implements BeamEffectPlugin {
         			    engine,
         			    beam.getSource(),
         			    beam.getTo(),
-        			    beam.getWidth() * 0.5f,
-        			    beam.getWidth() * 10f,
+						width * 0.5f,
+						width * 10f,
         			    beam.getWeapon().getCurrAngle() + 90f,
         			    beam.getFringeColor(),
         			    beam.getCoreColor());
@@ -63,15 +65,17 @@ public class KOL_FlareBeamEffect implements BeamEffectPlugin {
         
         interval2.advance(engine.getElapsedInLastFrame());
         if (interval2.intervalElapsed()) {
-        	
-        	Vector2f flarePoint = MathUtils.getPointOnCircumference(beam.getFrom(), MathUtils.getRandomNumberInRange(0f, beam.getWidth()), beam.getWeapon().getCurrAngle());
+
+			float width = beam.getWidth() / 2f;
+
+        	Vector2f flarePoint = MathUtils.getPointOnCircumference(beam.getFrom(), MathUtils.getRandomNumberInRange(0f, width), beam.getWeapon().getCurrAngle());
         	
     		MagicLensFlare.createSharpFlare(
     			    engine,
     			    beam.getSource(),
     			    flarePoint,
-    			    beam.getWidth() * wepFlareSizeMult.get(beam.getWeapon().getSize()),
-    			    beam.getWidth() * wepFlareSizeMult.get(beam.getWeapon().getSize()) * 20f,
+					width * wepFlareSizeMult.get(beam.getWeapon().getSize()),
+					width * wepFlareSizeMult.get(beam.getWeapon().getSize()) * 20f,
     			    beam.getWeapon().getCurrAngle() + 90f,
     			    new Color (beam.getFringeColor().getRed(),beam.getFringeColor().getGreen(),beam.getFringeColor().getBlue(),(int)(beam.getFringeColor().getAlpha() * wepFlareAlphaMult.get(beam.getWeapon().getSize()))),
     			    new Color (beam.getCoreColor().getRed(),beam.getCoreColor().getGreen(),beam.getCoreColor().getBlue(),(int)(beam.getCoreColor().getAlpha() * wepFlareAlphaMult.get(beam.getWeapon().getSize()))));
