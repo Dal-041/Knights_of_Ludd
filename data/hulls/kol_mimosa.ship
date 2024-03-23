@@ -17,7 +17,8 @@
     "shieldRadius": 106,
     "viewOffset": 0,
     "builtInMods": [
-        "kol_refit"
+        "kol_refit",
+		"rugged"
     ],
     "builtInWeapons": {
         "LIDAR_DISH": "lidardish",
