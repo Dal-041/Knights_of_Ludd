@@ -1,0 +1,3 @@
+id,weight,FPMulti,lootMulti,averageSmod,quality,effectPlugin,countsAs
+#sub factions,,,,,,,
+knights_of_selkie,0,1,1,,0.9,data.world.systems.ptes_genericSystem,luddic_church
