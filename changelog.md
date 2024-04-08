@@ -24,3 +24,23 @@ v1.1.1:
 - Fixed blinker deco on [VERY REDACTED3] other boss
 - AI code optimizations
 - Various minor fixes and improvements
+v1.2.0:
+- Fixed an issue with extreme reputation changes
+- Exiled Space support courtesy of Pure Tilt
+- Added smaller fleets of [VERY REDACTED3] to their home (new game required)
+- Fixed an issue that may have been limiting [EXTREMELY REDACTED MEGASTRUCTURE] spawns sector-wide (new game required)
+- Adjusted [VERY REDACTED2] spawn weights to reduce small ship spam
+- Reduced maximum recoil for the Caelia & Llyr weapons
+- Made Bricoles appear 5x more often at KOL markets
+- Mimosa : added Rugged Construction
+- Tamarisk : Hellfire buffed from 30% to 40% extra damage
+- Lunaria : LIDAR recoil buffed from -75% to -85%
+- Larkspur : Sprite adjustments
+- Marigold : Sprite adjustments
+   - module width doubled, should now be easier to block incoming fire
+- New [VERY REDACTED2] beam weapon visuals courtesy of Nia Tahl
+- Minor [VERY REDACTED1] sprite and visuals touchups
+- [VERY REDACTED3] boss flux nerf in players' hands
+- Two bosses have had their OP reduced
+- fixed Targeting Beam system
+- various improvements, tweaks, and polish

@@ -250,8 +250,10 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
 		//FP bumped to account for backup capital ships getting pruned
-		ZeaFleetManager fleets = new ZeaFleetManager(system, elysianID, 16, 90, 300);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, elysianID, 6, 60, 180);
+		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, elysianID, 12, 180, 340);
 		system.addScript(fleets);
+		system.addScript(fleetsMiniboss);
 
 		EveryFrameScript tracker = new TrackFleet();
 		system.addScript(tracker);
