@@ -60,4 +60,9 @@ public class ZeaAbilityIntel extends BaseIntelPlugin {
     public boolean isImportant() {
         return true;
     }
+
+    @Override
+    public boolean canTurnImportantOff() {
+        return true;
+    }
 }

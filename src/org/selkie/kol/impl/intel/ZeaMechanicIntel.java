@@ -157,6 +157,11 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
     }
 
     @Override
+    public boolean canTurnImportantOff() {
+        return true;
+    }
+
+    @Override
     public String getIcon() {
         return icon;
     }

@@ -113,4 +113,9 @@ public class ZeaLoreIntel extends BaseIntelPlugin {
     public String getIcon() {
         return icon;
     }
+
+    @Override
+    public boolean canTurnImportantOff() {
+        return true;
+    }
 }

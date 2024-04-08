@@ -118,7 +118,7 @@ public class ZeaUtils {
             "zea_dusk_ayakashi_Vengeful",
             "zea_dusk_ayakashi_Whispered",
     };
-    public static final String[] zeaSupportShips = {
+    public static final String[] zeaAIOverrideShips = {
             "zea_edf_kiyohime",
             "zea_edf_mizuchi",
             "zea_dawn_tianma",

@@ -13,7 +13,7 @@ public class AmaterasuBoss extends BaseHullMod {
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.getMutableStats().getShieldDamageTakenMult().modifyMult("kol_boss_buff", 0.8f);
-            ship.getMutableStats().getFluxCapacity().modifyMult("kol_boss_buff", 1.5f);
+            ship.getMutableStats().getFluxCapacity().modifyMult("kol_boss_buff", 1.25f);
         }
     }
 }

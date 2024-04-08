@@ -38,8 +38,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public static boolean hasMMM = Global.getSettings().getModManager().isModEnabled("MoreMilitaryMissions");
 
 	public static final String MEMKEY_KOL_INTIALIZED = "$kol_initialized";
-	public static final String MEMKEY_KOL_INVICTUS_SPAWNED = "$kol_lp_invictus_spawned";
-	public static final String MEMKEY_KOL_RETRIBUTION_SPAWNED = "$kol_lp_retribution_spawned";
+	public static final String MEMKEY_ZEA_INTIALIZED = "$zea_initialized";
 
 	@Override
 	public void onApplicationLoad() {
@@ -61,7 +60,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	@Override
 	public void onGameLoad(boolean newGame) {
-		Global.getSector().addTransientListener(new UpdateRelationships(true));
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			if(!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_INTIALIZED)) {
 				addToOngoingGame();
@@ -77,25 +75,31 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		ZeaUtils.copyHighgradeEquipment();
 		PrepareDarkDeeds.andContinue();
 
-		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 		//Global.getSector().addTransientScript(new SpoilersNotif());
 
 		Global.getSector().registerPlugin(new AICoreCampaignPlugin());
 		Global.getSector().addTransientScript(new AICoreReplacerScript());
+
+		//Handle very silly bug duplicating listeners
+		while (Global.getSector().getListenerManager().getListeners(UpdateRelationships.class).size() > 0) {
+			Global.getSector().getListenerManager().removeListenerOfClass(UpdateRelationships.class);
+		}
+
+		Global.getSector().addTransientListener(new UpdateRelationships(false));
 	}
 
 	@Override
 	public void onNewGame() {
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			GenerateKnights.genCorvus();
-			PrepareAbyss.generate();
 		}
 		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
 	}
 
 	@Override
 	public void onNewGameAfterProcGen() {
+		PrepareAbyss.generate();
 		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
 			PrepareDarkDeeds.andBegin();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
@@ -103,6 +107,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
+		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_ZEA_INTIALIZED, true);
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		//Global.getSector().addTransientScript(new SpoilersNotif());
 	}

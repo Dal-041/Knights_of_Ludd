@@ -20,54 +20,77 @@ public class KOL_ShipAITweaker {
         if (ship.isFighter()) return null;
         String hullId = ship.getHullSpec().getBaseHullId();
 
-        if (!Arrays.asList(KOLStaticStrings.knightsShips).contains(hullId) && !Arrays.asList(ZeaUtils.zeaSupportShips).contains(hullId)) return null;
-
-        List<String> supportHulls = new ArrayList<>(5);
-        supportHulls.add("kol_mimosa");
-        supportHulls.add("kol_lotus");
-        supportHulls.add("zea_edf_kiyohime"); //Helps when the player gets them and can only use reckless cores
-        supportHulls.add("zea_edf_mizuchi");
-        supportHulls.add("zea_dawn_tianma");
-        List<String> assaultHulls = new ArrayList<>(3);
-        assaultHulls.add("kol_larkspur");
-        assaultHulls.add("kol_alysse");
-        assaultHulls.add("kol_snowdrop");
+        if (!Arrays.asList(KOLStaticStrings.knightsShips).contains(hullId) && !Arrays.asList(ZeaUtils.zeaAIOverrideShips).contains(hullId)) return null;
 
         //HullSize size = ship.getHullSize();
 
         ShipAIConfig config = new ShipAIConfig();
-        config.alwaysStrafeOffensively = true;
+        config.alwaysStrafeOffensively = false;
         config.backingOffWhileNotVentingAllowed = true;
         config.turnToFaceWithUndamagedArmor = true;
-        config.burnDriveIgnoreEnemies = true;
+        config.burnDriveIgnoreEnemies = false;
 
-        boolean carrier = false;
-        boolean support = false;
-        boolean assault = false;
-        if (ship.getVariant() != null) {
-            carrier = ship.getVariant().isCarrier() && !ship.getVariant().isCombat();
+        boolean reckless = false;
+        boolean aggressive = false;
+        boolean steady = false;
+        boolean cautious = false;
+
+        if (hullId.startsWith("kol_alysse")
+                || hullId.startsWith("kol_snowdrop")) {
+            reckless = true;
+        } else if (hullId.startsWith("kol_larkspur")) {
+            aggressive = true;
+        } else if (hullId.startsWith("kol_mimosa")
+                || hullId.startsWith("kol_lotus")
+                || hullId.startsWith("kol_tamarisk")
+                || hullId.startsWith("kol_sundew")
+                || hullId.startsWith("zea_edf_mizuchi")
+                || hullId.startsWith("zea_edf_kiyohime")
+                || hullId.startsWith("zea_dawn_tianma")) {
+            steady = true;
+        } else if (false) {
+            cautious = true;
         }
-        if (supportHulls.contains(hullId)) {
-            support = true;
-        }
-        if (assaultHulls.contains(hullId)) {
-            assault = true;
-        }
+
 
         //Bump toward target personality 1 step
         if (ship.getCaptain() != null) {
-            if (carrier || support) {
+            if (cautious) {
                 if (ship.getCaptain().isDefault() || ship.getCaptain().isPlayer()) config.personalityOverride = Personalities.CAUTIOUS;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.RECKLESS)) config.personalityOverride = Personalities.AGGRESSIVE;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.AGGRESSIVE)) config.personalityOverride = Personalities.STEADY;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.STEADY)) config.personalityOverride = Personalities.CAUTIOUS;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.TIMID)) config.personalityOverride = Personalities.CAUTIOUS;
-            } else if (assault) {
+
+                config.turnToFaceWithUndamagedArmor = true;
+
+            } else if (steady) {
+                if (ship.getCaptain().isDefault() || ship.getCaptain().isPlayer()) config.personalityOverride = Personalities.STEADY;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.CAUTIOUS)) config.personalityOverride = Personalities.STEADY;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.AGGRESSIVE)) config.personalityOverride = Personalities.STEADY;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.STEADY)) config.personalityOverride = Personalities.STEADY;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.TIMID)) config.personalityOverride = Personalities.CAUTIOUS;
+
+            } else if (aggressive) {
                 if (ship.getCaptain().isDefault() || ship.getCaptain().isPlayer()) config.personalityOverride = Personalities.AGGRESSIVE;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.CAUTIOUS)) config.personalityOverride = Personalities.STEADY;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.RECKLESS)) config.personalityOverride = Personalities.AGGRESSIVE;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.AGGRESSIVE)) config.personalityOverride = Personalities.AGGRESSIVE;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.STEADY)) config.personalityOverride = Personalities.AGGRESSIVE;
+                else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.TIMID)) config.personalityOverride = Personalities.CAUTIOUS;
+
+                config.turnToFaceWithUndamagedArmor = false;
+
+            } else if (reckless) {
+                if (ship.getCaptain().isDefault() || ship.getCaptain().isPlayer()) config.personalityOverride = Personalities.RECKLESS;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.CAUTIOUS)) config.personalityOverride = Personalities.STEADY;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.AGGRESSIVE)) config.personalityOverride = Personalities.RECKLESS;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.STEADY)) config.personalityOverride = Personalities.AGGRESSIVE;
                 else if (ship.getCaptain().getPersonalityAPI().getId().equals(Personalities.TIMID)) config.personalityOverride = Personalities.CAUTIOUS;
+                config.turnToFaceWithUndamagedArmor = false;
+                config.burnDriveIgnoreEnemies = true;
+            } else {
+                return null;
             }
         }
 

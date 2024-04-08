@@ -134,6 +134,11 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
     }
 
     @Override
+    public boolean canTurnImportantOff() {
+        return true;
+    }
+
+    @Override
     public boolean callEvent(String ruleId, final InteractionDialogAPI dialog, List<Misc.Token> params, Map<String, MemoryAPI> memoryMap) {
         String action = params.get(0).getString(memoryMap);
 
