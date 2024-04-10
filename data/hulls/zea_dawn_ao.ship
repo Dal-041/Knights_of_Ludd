@@ -13,11 +13,11 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
-	"solar_shielding",
+    "solar_shielding",
     "kol_ea_shields1",
     "advancedcore",
-	"kol_throttle",
-	"zea_dawn_simple_shield_drones"
+    "kol_throttle",
+    "zea_dawn_simple_shield_drones"
   ],
   "builtInWeapons": {
     "WS0013": "zea_deco_dawn_engL",
@@ -51,7 +51,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 30,
-      "locations": [85, 44]
+      "locations": [96, 57]
     },
     {
       "id": "WS0004",
@@ -60,7 +60,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -30,
-      "locations": [85, -44]
+      "locations": [96, -57]
     },
     {
       "id": "WS0005",
@@ -69,7 +69,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 60,
-      "locations": [61, 44]
+      "locations": [79, 57]
     },
     {
       "id": "WS0006",
@@ -78,7 +78,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -60,
-      "locations": [61, -44]
+      "locations": [79, -57]
     },
     {
       "id": "WS0007",
@@ -87,7 +87,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
-      "locations": [37, 44]
+      "locations": [62, 57]
     },
     {
       "id": "WS0008",
@@ -96,7 +96,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
-      "locations": [37, -44]
+      "locations": [62, -57]
     },
     {
       "id": "WS0011",

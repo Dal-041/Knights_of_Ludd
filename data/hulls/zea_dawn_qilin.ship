@@ -4,18 +4,18 @@
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dawn_qilin.png",
   "style": "ZEA_DAWN_TECH",
-  "height": 360,
-  "width": 224,
-  "center": [112, 180],
-  "collisionRadius": 222.5,
-  "shieldCenter": [0, 0],
-  "shieldRadius": 208,
+  "height": 401,
+  "width": 240,
+  "center": [120, 213],
+  "collisionRadius": 237.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 220,
   "viewOffset": 0,
   "builtInMods": [
     "automated",
     "solar_shielding",
     "kol_ea_shields1",
-	"kol_throttle",
+    "kol_throttle",
     "zea_dawn_simple_shield_drones"
   ],
   "weaponSlots": [
@@ -26,7 +26,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": 180,
-      "locations": [-103, -0]
+      "locations": [-125, 0]
     },
     {
       "id": "WS0002",
@@ -35,7 +35,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [59, -0]
+      "locations": [64, -0]
     },
     {
       "id": "WS0003",
@@ -44,7 +44,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 30,
-      "locations": [125, 37]
+      "locations": [130, 37]
     },
     {
       "id": "WS0004",
@@ -53,7 +53,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -30,
-      "locations": [125, -37]
+      "locations": [130, -37]
     },
     {
       "id": "WS0005",
@@ -62,7 +62,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 60,
-      "locations": [95, 37]
+      "locations": [100, 37]
     },
     {
       "id": "WS0006",
@@ -71,7 +71,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -60,
-      "locations": [95, -37]
+      "locations": [100, -37]
     },
     {
       "id": "WS0007",
@@ -80,7 +80,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
-      "locations": [65, 37]
+      "locations": [70, 37]
     },
     {
       "id": "WS0008",
@@ -89,7 +89,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
-      "locations": [65, -37]
+      "locations": [70, -37]
     },
     {
       "id": "WS0011",
@@ -98,7 +98,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [171, 37]
+      "locations": [176, 37]
     },
     {
       "id": "WS0012",
@@ -107,7 +107,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
-      "locations": [171, -37]
+      "locations": [176, -37]
     },
     {
       "id": "WS0009",
@@ -116,7 +116,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
-      "locations": [30, 28]
+      "locations": [39.5, 37]
     },
     {
       "id": "WS0010",
@@ -125,7 +125,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
-      "locations": [30, -28]
+      "locations": [39.5, -37]
     },
     {
       "id": "LB 1",
@@ -134,25 +134,17 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-15.5, 67.5]
-    },
-    {
-      "id": "LB 2",
-      "size": "LARGE",
-      "type": "LAUNCH_BAY",
-      "mount": "HIDDEN",
-      "arc": 360,
-      "angle": 0,
       "locations": [
-        1, 51,
-        -15, -68.5,
-        3.5, -51.5
+        -33, -65.5,
+        -21.5, -58,
+        -24.5, 54.5,
+        -32, 66
       ]
     }
   ],
   "engineSlots": [
     {
-      "location": [-131, 37],
+      "location": [-145, 37],
       "length": 94,
       "width": 30,
       "angle": 180,
@@ -160,7 +152,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-131, -37],
+      "location": [-145, -37],
       "length": 94,
       "width": 30,
       "angle": -180,
@@ -168,7 +160,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-90, 72],
+      "location": [-104, 72],
       "length": 94,
       "width": 30,
       "angle": 180,
@@ -176,7 +168,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-90, -72],
+      "location": [-104, -72],
       "length": 94,
       "width": 30,
       "angle": -180,
@@ -184,7 +176,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-98, 72],
+      "location": [-112, 72],
       "length": 99.5,
       "width": 21,
       "angle": 180,
@@ -193,7 +185,7 @@
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-98, -72],
+      "location": [-112, -72],
       "length": 99.5,
       "width": 21,
       "angle": -180,
@@ -202,7 +194,7 @@
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-140, 37],
+      "location": [-154, 37],
       "length": 99.5,
       "width": 21,
       "angle": 180,
@@ -211,7 +203,7 @@
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-140, -37],
+      "location": [-154, -37],
       "length": 99.5,
       "width": 21,
       "angle": -180,
@@ -221,49 +213,37 @@
     }
   ],
   "bounds": [
-    -177.5, -11,
-    -133.5, -28,
-    -135, -45.5,
-    -131, -51,
-    -99, -51,
-    -91.5, -64,
-    -92.5, -80,
-    -86.5, -85.5,
-    -56.5, -85,
-    -55.5, -98.5,
-    -38, -99,
-    -32, -106.5,
-    0, -105.5,
-    -0.5, -98,
-    31.5, -67.5,
-    86, -64,
-    90.5, -68,
-    155, -66.5,
-    169.5, -63,
-    169.5, -15,
-    72, -10.5,
-    72, 10.5,
-    169.5, 15,
-    169.5, 63,
-    155, 66.5,
-    90.5, 68,
-    86, 64,
-    31.5, 67.5,
-    -0.5, 98,
-    0, 105.5,
-    -32, 106.5,
-    -38, 99,
-    -55.5, 98.5,
-    -56.5, 85,
-    -86.5, 85.5,
-    -92.5, 80,
-    -91.5, 64,
-    -99, 51,
-    -131, 51,
-    -135, 45.5,
-    -133.5, 28,
-    -177.5, 11,
-    -173, 3,
-    -173, -3
+    -200, -9,
+    -153, -27,
+    -153, -48,
+    -121, -50,
+    -110, -82.5,
+    -78, -84,
+    -76, -98.5,
+    -15, -115,
+    -12.5, -84,
+    10.5, -68,
+    51.5, -81.5,
+    95.5, -67.5,
+    175, -63,
+    174, -14.5,
+    103, -7,
+    103, 7,
+    174, 14.5,
+    175, 63,
+    95.5, 67.5,
+    51.5, 81.5,
+    11.5, 70.5,
+    -12.5, 84,
+    -15, 115,
+    -76, 98.5,
+    -78, 84,
+    -110, 82.5,
+    -121, 50,
+    -153, 48,
+    -153, 27,
+    -200, 9,
+    -194, 2.5,
+    -194, -3.5
   ]
 }
