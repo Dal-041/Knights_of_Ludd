@@ -12,10 +12,10 @@
   "shieldRadius": 115,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
-	"solar_shielding",
+    "automated",
+    "solar_shielding",
     "kol_ea_shields1",
-	"kol_throttle"
+    "kol_throttle"
   ],
   "weaponSlots": [
     {
@@ -221,14 +221,12 @@
     -36, -50,
     -43.5, -34,
     -58, -34,
-    -68.5, -28,
-    -69, -17,
-    -63, -8,
+    -66.5, -27,
+    -66.5, -15.5,
     -38.5, -8,
     -38.5, 8,
-    -63, 8,
-    -69, 17,
-    -68.5, 28,
+    -66.5, 15.5,
+    -66.5, 27,
     -58, 34,
     -43.5, 34,
     -36, 50,
