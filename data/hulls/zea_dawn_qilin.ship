@@ -144,7 +144,7 @@
   ],
   "engineSlots": [
     {
-      "location": [-145, 37],
+      "location": [-153, 37],
       "length": 94,
       "width": 30,
       "angle": 180,
@@ -152,23 +152,7 @@
       "style": "KOL_ENG"
     },
     {
-      "location": [-145, -37],
-      "length": 94,
-      "width": 30,
-      "angle": -180,
-      "contrailSize": 30,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-104, 72],
-      "length": 94,
-      "width": 30,
-      "angle": 180,
-      "contrailSize": 30,
-      "style": "KOL_ENG"
-    },
-    {
-      "location": [-104, -72],
+      "location": [-153, -37],
       "length": 94,
       "width": 30,
       "angle": -180,
@@ -177,6 +161,22 @@
     },
     {
       "location": [-112, 72],
+      "length": 94,
+      "width": 30,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-112, -72],
+      "length": 94,
+      "width": 30,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-120, 72],
       "length": 99.5,
       "width": 21,
       "angle": 180,
@@ -185,7 +185,7 @@
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-112, -72],
+      "location": [-120, -72],
       "length": 99.5,
       "width": 21,
       "angle": -180,
@@ -194,7 +194,7 @@
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-154, 37],
+      "location": [-162, 37],
       "length": 99.5,
       "width": 21,
       "angle": 180,
@@ -203,7 +203,7 @@
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-154, -37],
+      "location": [-162, -37],
       "length": 99.5,
       "width": 21,
       "angle": -180,

@@ -7,9 +7,9 @@
   "height": 170,
   "width": 120,
   "center": [60, 88],
-  "collisionRadius": 101,
+  "collisionRadius": 107,
   "shieldCenter": [0, -0],
-  "shieldRadius": 91.5,
+  "shieldRadius": 97,
   "viewOffset": 0,
   "builtInMods": [
     "automated",
@@ -63,7 +63,7 @@
       "location": [-52, 26.5],
       "length": 58.400002,
       "width": 26.15,
-      "angle": 177,
+      "angle": 180,
       "contrailSize": 26.15,
       "style": "KOL_ENG"
     },
@@ -71,7 +71,7 @@
       "location": [-52, -26.5],
       "length": 58.400002,
       "width": 26.15,
-      "angle": -177,
+      "angle": -180,
       "contrailSize": 26.15,
       "style": "CUSTOM",
       "styleId": "KOL_ENG"
@@ -80,7 +80,7 @@
       "location": [-60, 26.5],
       "length": 64.176094,
       "width": 15.739004,
-      "angle": 177,
+      "angle": 180,
       "contrailSize": 15.739004,
       "style": "CUSTOM",
       "styleId": "zea_DAWN_ENG"
@@ -89,7 +89,7 @@
       "location": [-60, -26.5],
       "length": 64.176094,
       "width": 15.739004,
-      "angle": -177,
+      "angle": -180,
       "contrailSize": 15.739004,
       "style": "CUSTOM",
       "styleId": "zea_DAWN_ENG"

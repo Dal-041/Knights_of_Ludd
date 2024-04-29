@@ -7,9 +7,9 @@
   "height": 175,
   "width": 136,
   "center": [68, 87.5],
-  "collisionRadius": 118.5,
+  "collisionRadius": 134,
   "shieldCenter": [0, 0],
-  "shieldRadius": 115,
+  "shieldRadius": 128,
   "viewOffset": 0,
   "builtInMods": [
     "automated",
@@ -160,53 +160,70 @@
   "engineSlots": [
     {
       "location": [-36.5, -0],
-      "length": 91.5,
-      "width": 15,
+      "length": 90,
+      "width": 25,
       "angle": 180,
       "contrailSize": 15,
       "style": "KOL_ENG"
     },
     {
-      "location": [-41.5, 35],
-      "length": 86.5,
-      "width": 15,
+      "location": [-41.5, 36],
+      "length": 65,
+      "width": 25,
       "angle": 180,
-      "contrailSize": 15,
+      "contrailSize": 17,
       "style": "KOL_ENG"
     },
     {
-      "location": [-41.5, -35],
-      "length": 86.5,
-      "width": 15,
+      "location": [-41.5, -36],
+      "length": 65,
+      "width": 25,
       "angle": -180,
-      "contrailSize": 15,
+      "contrailSize": 17,
       "style": "KOL_ENG"
     },
     {
-      "location": [-49, 35],
-      "length": 87,
-      "width": 8,
+      "location": [-45, -0],
+      "length": 78,
+      "width": 20,
       "angle": 180,
       "contrailSize": 8,
       "style": "CUSTOM",
       "styleId": "zea_DAWN_ENG"
     },
     {
-      "location": [-49, -35],
-      "length": 87,
-      "width": 8,
+      "location": [-46.5, -36],
+      "length": 60,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "CUSTOM",
+      "styleId": "zea_DAWN_ENG"
+    },
+    {
+      "location": [-46.5, 36],
+      "length": 60,
+      "width": 12,
       "angle": -180,
-      "contrailSize": 8,
+      "contrailSize": 10,
+      "style": "CUSTOM",
+      "styleId": "zea_DAWN_ENG"
+    },
+    {
+      "location": [-30.5, 46],
+      "length": 50.292,
+      "width": 17.054592,
+      "angle": 171.5,
+      "contrailSize": 17.054592,
       "style": "KOL_ENG"
     },
     {
-      "location": [-47.5, -0],
-      "length": 87,
-      "width": 8,
-      "angle": 180,
-      "contrailSize": 8,
-      "style": "CUSTOM",
-      "styleId": "zea_DAWN_ENG"
+      "location": [-30.5, -46],
+      "length": 50.292,
+      "width": 17.054592,
+      "angle": -171.5,
+      "contrailSize": 17.054592,
+      "style": "KOL_ENG"
     }
   ],
   "bounds": [
