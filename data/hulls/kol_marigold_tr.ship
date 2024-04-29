@@ -6,9 +6,9 @@
   "style": "KOL_TECH",
   "height": 78,
   "width": 44,
-  "center": [15.5, 38],
+  "center": [22, 39],
   "collisionRadius": 45,
-  "shieldCenter": [0, 0],
+  "shieldCenter": [0, -0],
   "shieldRadius": 37,
   "viewOffset": 0,
   "builtInMods": [
@@ -29,7 +29,7 @@
       "mount": "HIDDEN",
       "arc": 0,
       "angle": -45,
-      "locations": [1, -11.5]
+      "locations": [0, -5]
     },
     {
       "id": "WS0002",
@@ -38,7 +38,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [9, -4.5]
+      "locations": [8, 2]
     },
     {
       "id": "WS0003",
@@ -47,7 +47,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [38, -0.5]
+      "locations": [37, 6]
     },
     {
       "id": "WS0004",
@@ -56,22 +56,20 @@
       "mount": "HIDDEN",
       "arc": 0,
       "angle": 0,
-      "locations": [38, -5.5]
+      "locations": [37, 1]
     }
   ],
   "engineSlots": [],
   "bounds": [
-    31, -9.5,
-    -21, -24.5,
-    -36, -25.5,
-    -36, -20.5,
-    -25, -3.5,
-    -17, -7.5,
-    -3, -7.5,
-    9, 4.5,
-    7, 9.5,
-    14, 13.5,
-    24, 13.5,
-    31, 6.5
+    30, -3,
+    -22, -18,
+    -37, -19,
+    -37, -14,
+    -26, 3,
+    -4, -1,
+    8, 11,
+    6, 16,
+    23, 20,
+    30, 13
   ]
 }
