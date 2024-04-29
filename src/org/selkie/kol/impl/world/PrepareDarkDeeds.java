@@ -216,6 +216,7 @@ public class PrepareDarkDeeds {
                     bcc.objectivesAllowed = false;
                     bcc.fightToTheLast = true;
                     bcc.enemyDeployAll = true;
+
                 }
             };
             return config;

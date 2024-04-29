@@ -280,6 +280,22 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
         return n;
     }
 
+   /* @Override
+    public float getTileSize() {
+        return TILE_SIZE * 2f;
+    }
+
+    @Override
+    public float getTileRenderSize() {
+        return getTileSize() * 2.5f;
+    }
+
+    @Override
+    public float getTileContainsSize() {
+        //return TILE_SIZE + 200f;
+        return getTileSize() * 1.5f;
+    }*/
+
     @Override
     protected float[] getThetaAndRadius(Random rand, float width, float height) {
         if (temp == null) {

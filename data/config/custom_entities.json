@@ -155,7 +155,7 @@
 		"isOrAre":"is",
 		"defaultRadius":150, # used if radius<0 in addCustomEntity()
 		"customDescriptionId":"coronal_tap",
-		"interactionImage":"graphics/illustrations/coronal_tap.jpg",
+		"interactionImage":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/illustrations/zea_edf_hypershunt.png",
 		"icon":"graphics/icons/coronal_shunt.png",
 		"iconWidth":32,
 		"iconHeight":32,
@@ -169,10 +169,10 @@
 		"showNameOnMap":false,
 		"scaleNameWithZoom":false,
 		"scaleIconWithZoom":true,
-		"tags":["neutrino_high", "coronal_tap", "protects_from_corona_in_battle", "not_random_mission_target"],
+		"tags":["has_interaction_dialog", "neutrino_high", "coronal_tap", "protects_from_corona_in_battle", "not_random_mission_target"],
 		"layers":[STATIONS], # what layer(s) to render in. See CampaignEngineLayers.java for possible values
-		"renderCircleIndicator":false,
-		"renderCircleIndicatorSelectionFlash":false,
+		"renderCircleIndicator":true,
+		"renderCircleIndicatorSelectionFlash":true,
 		#"pluginClass":"com.fs.starfarer.api.impl.campaign.BaseCustomEntityPlugin",
 	},
 	
