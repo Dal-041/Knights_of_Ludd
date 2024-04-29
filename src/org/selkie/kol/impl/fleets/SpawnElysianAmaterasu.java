@@ -104,6 +104,9 @@ public class SpawnElysianAmaterasu {
 		FID.deployallToggle = true;
 		FID.objectivesToggle = true;
 		FID.fttlToggle = true;
+
+
+
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
 		return true;

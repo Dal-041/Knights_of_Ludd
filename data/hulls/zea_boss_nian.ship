@@ -13,6 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
+    "zea_cascade_targeting",
 	"advancedcore",
 	"heavyarmor",
     "kol_ea_shields1",
