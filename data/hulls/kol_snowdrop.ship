@@ -1,353 +1,285 @@
 {
-    "hullName": "Snowdrop",
-    "hullId": "kol_snowdrop",
-    "hullSize": "DESTROYER",
-    "style": "KOL_TECH",
-    "spriteName": "graphics/ships/kol_snowdrop.png",
-    "height": 128,
-    "width": 138,
-    "center": [
-        69, 64
-    ],
-    "collisionRadius": 100,
-    "coversColor": "",
-    "shieldCenter": [
-        -11, 0
-    ],
-    "shieldRadius": 95,
-    "viewOffset": 0,
-    "builtInMods": [
-        "kol_refit",
-        "armoredweapons",
-        "rugged"
-    ],
-    "builtInWeapons": {
-        "PUSHER_PLATE": "kol_pusherplate_lt_but_cute",
-        "DECO_LEFT_COVER": "kol_deco_snowdrop_tl",
-        "DECO_RIGHT_COVER": "kol_deco_snowdrop_tr",
-        "DECO_LEFT_COVER_VULCAN": "kol_deco_snowdrop_vulcan_tl",
-        "DECO_RIGHT_COVER_VULCAN": "kol_deco_snowdrop_vulcan_tr",
-        "DECO_0001": "kol_blinker_white30",
-        "DECO_0002": "kol_blinker_white30",
-        "DECO_0003": "kol_blinker_white",
-        "DECO_0004": "kol_blinker_white"
+  "hullName": "Snowdrop",
+  "hullId": "kol_snowdrop",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/kol_snowdrop.png",
+  "style": "KOL_TECH",
+  "height": 128,
+  "width": 138,
+  "center": [69, 64],
+  "collisionRadius": 100,
+  "shieldCenter": [-11, 0],
+  "shieldRadius": 95,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_refit",
+    "armoredweapons",
+    "rugged"
+  ],
+  "builtInWeapons": {
+    "DECO_0001": "kol_blinker_white30",
+    "DECO_0002": "kol_blinker_white30",
+    "DECO_0003": "kol_blinker_white",
+    "DECO_0004": "kol_blinker_white",
+    "DECO_LEFT_COVER": "kol_deco_snowdrop_tl",
+    "DECO_LEFT_COVER_VULCAN": "kol_deco_snowdrop_vulcan_tl",
+    "DECO_RIGHT_COVER": "kol_deco_snowdrop_tr",
+    "DECO_RIGHT_COVER_VULCAN": "kol_deco_snowdrop_vulcan_tr",
+    "PUSHER_PLATE": "kol_pusherplate_lt_but_cute"
+  },
+  "weaponSlots": [
+    {
+      "id": "ARMOR_MODULE_TL",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [21, 39],
+      "renderOrderMod": 101
     },
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "ARMOR_MODULE_TL",
-            "size": "SMALL",
-            "type": "STATION_MODULE",
-            "mount": "TURRET",
-            "renderOrderMod": 101,
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                      21,       39
-            ]
-        },
-        {
-            "id": "ARMOR_MODULE_TR",
-            "size": "SMALL",
-            "type": "STATION_MODULE",
-            "mount": "TURRET",
-            "renderOrderMod": 101,
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                      21,      -39
-            ]
-        },
-        {
-            "id": "ARMOR_MODULE_LL",
-            "size": "SMALL",
-            "type": "STATION_MODULE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                     -50,       54
-            ]
-        },
-        {
-            "id": "ARMOR_MODULE_LR",
-            "size": "SMALL",
-            "type": "STATION_MODULE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                     -50,      -54
-            ]
-        },
-        {
-            "id": "PUSHER_PLATE",
-            "size": "LARGE",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 180,
-            "locations": [
-                   -47.5,        0
-            ]
-        },
-        {
-            "id": "ORION_BOMB",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 180,
-            "locations": [
-                   -68.5,        0
-            ]
-        },
-        {
-            "id": "WS0001",
-            "size": "SMALL",
-            "type": "BALLISTIC",
-            "mount": "TURRET",
-            "renderOrderMod": 200,
-            "arc": 210,
-            "angle": 30,
-            "locations": [
-                      22,       17
-            ]
-        },
-        {
-            "id": "WS0002",
-            "size": "SMALL",
-            "type": "BALLISTIC",
-            "mount": "TURRET",
-            "renderOrderMod": 200,
-            "arc": 210,
-            "angle": -30,
-            "locations": [
-                      22,      -17
-            ]
-        },
-        {
-            "id": "WS0003",
-            "size": "MEDIUM",
-            "type": "BALLISTIC",
-            "mount": "TURRET",
-            "renderOrderMod": 200,
-            "arc": 120,
-            "angle": 45,
-            "locations": [
-                     -13,       25
-            ]
-        },
-        {
-            "id": "WS0004",
-            "size": "MEDIUM",
-            "type": "BALLISTIC",
-            "mount": "TURRET",
-            "renderOrderMod": 200,
-            "arc": 120,
-            "angle": -45,
-            "locations": [
-                     -13,      -25
-            ]
-        },
-        {
-            "id": "WS0005",
-            "size": "MEDIUM",
-            "type": "COMPOSITE",
-            "mount": "HARDPOINT",
-            "arc": 7,
-            "angle": 0,
-            "locations": [
-                      23,        0
-            ]
-        },
-        {
-            "id": "WS0006",
-            "size": "MEDIUM",
-            "type": "MISSILE",
-            "mount": "HARDPOINT",
-            "arc": 7,
-            "angle": 90,
-            "locations": [
-                     -18,       55
-            ]
-        },
-        {
-            "id": "WS0007",
-            "size": "MEDIUM",
-            "type": "MISSILE",
-            "mount": "HARDPOINT",
-            "arc": 7,
-            "angle": -90,
-            "locations": [
-                     -18,      -55
-            ]
-        },
-        {
-            "id": "DECO_0001",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                     6.5,      6.5
-            ]
-        },
-        {
-            "id": "DECO_0002",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                     6.5,     -6.5
-            ]
-        },
-        {
-            "id": "DECO_0003",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                   -37.5,     34.5
-            ]
-        },
-        {
-            "id": "DECO_0004",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                   -37.5,    -34.5
-            ]
-        },
-        {
-            "id": "DECO_LEFT_COVER",
-            "size": "LARGE",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "renderOrderMod": 100,
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                       8,       48
-            ]
-        },
-        {
-            "id": "DECO_RIGHT_COVER",
-            "size": "LARGE",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "renderOrderMod": 100,
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                       8,      -48
-            ]
-        },
-        {
-            "id": "DECO_LEFT_COVER_VULCAN",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "renderOrderMod": 150,
-            "arc": 210,
-            "angle": 45,
-            "locations": [
-                      -1,       48
-            ]
-        },
-        {
-            "id": "DECO_RIGHT_COVER_VULCAN",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "renderOrderMod": 150,
-            "arc": 210,
-            "angle": -45,
-            "locations": [
-                      -1,      -48
-            ]
-        }
-    ],
-    "engineSlots": [
-        {
-            "location": [
-                -55, 22
-            ],
-            "length": 56.5,
-            "width": 15,
-            "angle": 172.5,
-            "contrailSize": 15,
-            "style": "LOW_TECH"
-        },
-        {
-            "location": [
-                -55, -22
-            ],
-            "length": 56.5,
-            "width": 15,
-            "angle": -172.5,
-            "contrailSize": 15,
-            "style": "LOW_TECH"
-        },
-        {
-            "location": [
-                -60.5, 22.5
-            ],
-            "length": 68.30555,
-            "width": 11.933418,
-            "angle": 172,
-            "contrailSize": 11,
-            "style": "KOL_ENG"
-        },
-        {
-            "location": [
-                -60.5, -22.5
-            ],
-            "length": 68.30555,
-            "width": 11.933418,
-            "angle": -172,
-            "contrailSize": 11,
-            "style": "KOL_ENG"
-        }
-    ],
-    "bounds": [
-             -47,    -13.5,
-             -55,      -20,
-             -55,      -24,
-           -48.5,      -28,
-           -61.5,      -35,
-        
-           -58.5,      -41,
-             -45,      -38,
-           -39.5,      -45,
-             -31,    -45.5,
-           -27.5,    -55.5,
-        
-            -8.5,      -55,
-              30,      -22,
-              30,       22,
-            -8.5,       55,
-           -27.5,     55.5,
-        
-             -31,     45.5,
-           -39.5,       45,
-             -45,       38,
-           -58.5,       41,
-           -61.5,       35,
-        
-           -48.5,       28,
-             -55,       24,
-             -55,       20,
-             -47,     13.5
-    # 24 points total.
-    ]
+    {
+      "id": "ARMOR_MODULE_TR",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [21, -39],
+      "renderOrderMod": 101
+    },
+    {
+      "id": "ARMOR_MODULE_LL",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-50, 54]
+    },
+    {
+      "id": "ARMOR_MODULE_LR",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-50, -54]
+    },
+    {
+      "id": "PUSHER_PLATE",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-47.5, 0]
+    },
+    {
+      "id": "ORION_BOMB",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-68.5, 0]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 30,
+      "locations": [22, 17],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -30,
+      "locations": [22, -17],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 45,
+      "locations": [-13, 25],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -45,
+      "locations": [-13, -25],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0005",
+      "size": "MEDIUM",
+      "type": "COMPOSITE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [23, 0]
+    },
+    {
+      "id": "WS0006",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 90,
+      "locations": [-18, 55]
+    },
+    {
+      "id": "WS0007",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -90,
+      "locations": [-18, -55]
+    },
+    {
+      "id": "DECO_0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [6.5, 6.5]
+    },
+    {
+      "id": "DECO_0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [6.5, -6.5]
+    },
+    {
+      "id": "DECO_0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-37.5, 34.5]
+    },
+    {
+      "id": "DECO_0004",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-37.5, -34.5]
+    },
+    {
+      "id": "DECO_LEFT_COVER",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [8, 48],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "DECO_RIGHT_COVER",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [8, -48],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "DECO_LEFT_COVER_VULCAN",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [-1, 48],
+      "renderOrderMod": 150
+    },
+    {
+      "id": "DECO_RIGHT_COVER_VULCAN",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -45,
+      "locations": [-1, -48],
+      "renderOrderMod": 150
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-55, 22],
+      "length": 56.5,
+      "width": 15,
+      "angle": 172.5,
+      "contrailSize": 15,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-55, -22],
+      "length": 56.5,
+      "width": 15,
+      "angle": -172.5,
+      "contrailSize": 15,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-60.5, 22.5],
+      "length": 68.30555,
+      "width": 11.933418,
+      "angle": 172,
+      "contrailSize": 11,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-60.5, -22.5],
+      "length": 68.30555,
+      "width": 11.933418,
+      "angle": -172,
+      "contrailSize": 11,
+      "style": "KOL_ENG"
+    }
+  ],
+  "bounds": [
+    -47, -13.5,
+    -55.5, -22.5,
+    -48.5, -28,
+    -61.5, -35,
+    -58.5, -41,
+    -45, -38,
+    -27.5, -55.5,
+    -8.5, -55,
+    30, -22,
+    30, 22,
+    -8.5, 55,
+    -27.5, 55.5,
+    -45, 38,
+    -58.5, 41,
+    -61.5, 35,
+    -48.5, 28,
+    -55.5, 22.5,
+    -47, 13.5
+  ]
 }

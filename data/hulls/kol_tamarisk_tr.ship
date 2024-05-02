@@ -1,68 +1,54 @@
 {
-    "hullName": "Armor",
-    "hullId": "kol_tamarisk_tr",
-    "hullSize": "FRIGATE",
-    "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_tamarisk_tr.png",
-    "height": 88,
-    "width": 39,
-    "center": [
-        19.5, 44
-    ],
-    "collisionRadius": 51,
-    "coversColor": "",
-    "shieldCenter": [
-        0, 0
-    ],
-    "shieldRadius": 46,
-    "viewOffset": 0,
-    "builtInMods": [
-        "kol_module",
-        "ablative_armor",
-        "reduced_explosion",
-        "always_detaches"
-    ],
-    "builtInWeapons": {
-        "WS0001": "kol_blinker_white",
-        "WS0002": "kol_blinker_green"
+  "hullName": "Armor",
+  "hullId": "kol_tamarisk_tr",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_tamarisk_tr.png",
+  "style": "KOL_TECH",
+  "height": 88,
+  "width": 39,
+  "center": [19.5, 44],
+  "collisionRadius": 51,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 46,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "ablative_armor",
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "builtInWeapons": {
+    "WS0001": "kol_blinker_white",
+    "WS0002": "kol_blinker_green"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [13, 3.5]
     },
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "WS0001",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                      13,      3.5
-            ]
-        },
-        {
-            "id": "WS0002",
-            "size": "SMALL",
-            "type": "DECORATIVE",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 0,
-            "locations": [
-                      42,      2.5
-            ]
-        }
-    ],
-    "engineSlots": [],
-    "bounds": [
-             -41,     -0.5,
-             -40,    -14.5,
-           -28.5,    -23.5,
-              12,      -20,
-            16.5,    -13.5,
-        
-            45.5,       -4,
-            37.5,       18,
-            -3.5,     12.5,
-             -10,      8.5
-    ]
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [42, 2.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -41, -0.5,
+    -40, -14.5,
+    -28.5, -23.5,
+    12, -20,
+    16.5, -13.5,
+    45.5, -4,
+    37.5, 18
+  ]
 }
