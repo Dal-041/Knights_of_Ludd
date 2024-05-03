@@ -1,57 +1,41 @@
 {
-    "hullName": "Armor",
-    "hullId": "kol_mimosa_tl",
-    "hullSize": "FRIGATE",
-    "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_mimosa_tl.png",
-    "height": 42,
-    "width": 68,
-    "center": [
-        34, 21
-    ],
-    "collisionRadius": 49,
-    "coversColor": "",
-    "shieldCenter": [
-        0, 0
-    ],
-    "shieldRadius": 41,
-    "viewOffset": 0,
-    "builtInMods": [
-        "kol_module",
-        "ablative_armor",
-        "reduced_explosion",
-        "always_detaches"
-    ],
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "WS0001",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "TURRET",
-            "arc": 0,
-            "angle": 90,
-            "locations": [
-                      -1,        0
-            ]
-        }
-    ],
-    "engineSlots": [],
-    "bounds": [
-           -18.5,      -15,
-             -20,        6,
-           -12.5,       26,
-              -7,       32,
-             9.5,     31.5,
-        
-            20.5,     -1.5,
-              16,    -10.5,
-              20,    -16.5,
-              20,      -27,
-              15,      -32,
-        
-           -13.5,      -21
-    # 11 points total.
-    ]
+  "hullName": "Armor",
+  "hullId": "kol_mimosa_tl",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_mimosa_tl.png",
+  "style": "KOL_TECH",
+  "height": 42,
+  "width": 68,
+  "center": [34, 21],
+  "collisionRadius": 49,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 41,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "ablative_armor",
+    "reduced_explosion",
+    "always_detaches"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 90,
+      "locations": [-1, 0]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -15.5, -20,
+    -20, 6,
+    -7, 32,
+    9.5, 31.5,
+    20.5, -1.5,
+    17, -28.5,
+    -0.5, -27
+  ]
 }
