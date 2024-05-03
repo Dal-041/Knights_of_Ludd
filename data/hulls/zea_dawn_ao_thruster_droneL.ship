@@ -1,0 +1,55 @@
+{
+    "hullName": "Ao Thruster Drone",
+    "hullId": "zea_dawn_ao_thruster_droneL",
+    "hullSize": "FIGHTER",
+    "style": "ZEA_DAWN_TECH",
+    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dawn_ao_engL.png",
+    "height": 66,
+    "width": 62,
+    "center": [
+        31, 33
+    ],
+    "collisionRadius": 42,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 36,
+    "viewOffset": 0,
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [],
+    "engineSlots": [
+        {
+            "location": [
+                -27, 12
+            ],
+            "length": 49,
+            "width": 17,
+            "angle": 180,
+            "contrailSize": 30,
+            "style": "zea_DAWN_ENG"
+        },
+        {
+            "location": [
+                -27, -12
+            ],
+            "length": 49,
+            "width": 17,
+            "angle": 180,
+            "contrailSize": 30,
+            "style": "zea_DAWN_ENG"
+        }
+    ],
+    "bounds": [
+           -27.5,      -21,
+             -13,    -27.5,
+              12,    -27.5,
+            29.5,       -8,
+            29.5,        8,
+        
+              12,     27.5,
+             -13,     27.5,
+           -27.5,       21
+    ]
+}

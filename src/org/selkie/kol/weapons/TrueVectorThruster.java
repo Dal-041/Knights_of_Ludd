@@ -1,19 +1,13 @@
 package org.selkie.kol.weapons;
 
-import com.fs.graphics.Sprite;
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipEngineControllerAPI.ShipEngineAPI;
-import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.plugins.MagicRenderPlugin;
-import org.magiclib.util.MagicRender;
 
-import java.awt.*;
 import java.util.HashMap;
 
 /**
@@ -282,7 +276,7 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
         //engine wobble
         float targetAim = optimalAim + ((Math.abs(aimDirection) < 10f) ? (float) (2 * FastTrig.cos(SHIP.getFullTimeDeployed() * 5 + OFFSET)) : 0f);
         aimDirection = MathUtils.getShortestRotation(weapon.getCurrAngle(), targetAim);
-        if (isAngleWithinArc(weapon.getCurrAngle(), angle + SHIP.getFacing(), weapon.getArcFacing() + SHIP.getFacing() + 180))
+        if ( isAngleWithinArc(weapon.getCurrAngle(), angle + SHIP.getFacing(), weapon.getArcFacing() + SHIP.getFacing() + 180))
             aimDirection = -aimDirection;
 
         float turnBonus = Misc.interpolate(1, 2, Math.abs(aimDirection)/180);
@@ -302,7 +296,6 @@ public class TrueVectorThruster implements EveryFrameWeaponEffectPlugin {
             ((com.fs.starfarer.loading.specs.EngineSlot) engineSlot).setGlowParams(thruster.width * glowCompensation, thruster.length + offset,1f,1f); // no clue what v2 and v3 do
             engineSlot.setAngle(weapon.getCurrAngle() - weapon.getShip().getFacing());
             engineSlot.setGlowSizeMult(0f);
-
             /*
             weapon.setForceFireOneFrame(true);
             weapon.setRenderOffsetForDecorativeBeamWeaponsOnly(new Vector2f(0f,100f));
