@@ -14,13 +14,13 @@
   "builtInMods": [
     "high_maintenance",
     "delicate",
-	"advancedshieldemitter",
-	"kol_ea_sparkle",
-	"zea_ninaya_boss"
+    "advancedshieldemitter",
+    "kol_ea_sparkle",
+    "zea_ninaya_boss"
   ],
   "builtInWeapons": {
-    "WS0003": "zea_deco_boss_ninaya_vector",
-    "WS0004": "zea_deco_boss_ninaya_vector",
+    "WS0003": "zea_deco_eng_dummy",
+    "WS0004": "zea_deco_eng_dummy",
     "WS0008": "zea_deco_boss_ninaya_front",
     "WS0009": "zea_deco_boss_ninaya_bridge"
   },
@@ -55,21 +55,21 @@
     },
     {
       "id": "WS0003",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": 135,
-      "locations": [-10, 55]
+      "angle": 150,
+      "locations": [-8.5, 52.5]
     },
     {
       "id": "WS0004",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "DECORATIVE",
       "mount": "HARDPOINT",
       "arc": 0,
-      "angle": -135,
-      "locations": [1, -54]
+      "angle": -150,
+      "locations": [4, -53]
     },
     {
       "id": "WS0001",
@@ -170,18 +170,18 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-11, 55],
-      "length": 0,
+      "location": [-8.5, 52.5],
+      "length": 50,
       "width": 13,
-      "angle": 75,
+      "angle": 155,
       "contrailSize": 0,
       "style": "OMEGA"
     },
     {
-      "location": [1, -54],
-      "length": -0,
+      "location": [4, -53],
+      "length": 50,
       "width": 13,
-      "angle": -75,
+      "angle": -155,
       "contrailSize": 0,
       "style": "OMEGA"
     }
