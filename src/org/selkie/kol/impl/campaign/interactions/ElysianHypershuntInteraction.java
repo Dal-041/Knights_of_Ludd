@@ -16,7 +16,7 @@ import org.lwjgl.input.Keyboard;
 import java.util.List;
 import java.util.Map;
 
-public class LunaHypershuntInteraction implements InteractionDialogPlugin {
+public class ElysianHypershuntInteraction implements InteractionDialogPlugin {
 
     InteractionDialogAPI dialog;
 
@@ -39,17 +39,17 @@ public class LunaHypershuntInteraction implements InteractionDialogPlugin {
             dialog.getOptionPanel().setShortcut("LEAVE", Keyboard.KEY_ESCAPE, false, false, false, false);
         }
         else if (dialog.getInteractionTarget().getMemoryWithoutUpdate().contains("$usable")){
-            dialog.getTextPanel().addPara("It is as of now in active operation and enables any colony within " + ItemEffectsRepo.CORONAL_TAP_LIGHT_YEARS + " light-years to establish an additional industry, given that it has a hypershunt tap installed.",
+            dialog.getTextPanel().addPara("This Coronal Hypershunt is operating at its full specified outpout and enables any colony within " + ItemEffectsRepo.CORONAL_TAP_LIGHT_YEARS + " light-years to establish an additional industry, so long as the colony has a hypershunt tap installed.",
                     Misc.getTextColor(), Misc.getHighlightColor(), "" + ItemEffectsRepo.CORONAL_TAP_LIGHT_YEARS, "hypershunt tap");
 
             dialog.getOptionPanel().addOption("Leave", "LEAVE");
             dialog.getOptionPanel().setShortcut("LEAVE", Keyboard.KEY_ESCAPE, false, false, false, false);
         } else {
-            dialog.getTextPanel().addPara("A quick scan indicates that, surprisingly, the structure is still functional, though at the moment shut down. " +
-                    "Turning it back on enables any colony within " + ItemEffectsRepo.CORONAL_TAP_LIGHT_YEARS + " light-years to establish an additional industry, as long as a hypershunt tap is installed within the colony.",
+            dialog.getTextPanel().addPara("The Coronal Hypershunt shows little activity, but a quick scan indicates that, remarkably, the megastructure appears to be fully functional." +
+                    "Reactivating the Hypershunt will enable any colony within " + ItemEffectsRepo.CORONAL_TAP_LIGHT_YEARS + " light-years to establish an additional industry, so long as a hypershunt tap is installed there.",
                     Misc.getTextColor(), Misc.getHighlightColor(), "" + ItemEffectsRepo.CORONAL_TAP_LIGHT_YEARS, "hypershunt tap");
 
-            dialog.getOptionPanel().addOption("Bring it online", "ONLINE");
+            dialog.getOptionPanel().addOption("Bring it online.", "ONLINE");
 
             dialog.getOptionPanel().addOption("Leave", "LEAVE");
             dialog.getOptionPanel().setShortcut("LEAVE", Keyboard.KEY_ESCAPE, false, false, false, false);
@@ -59,18 +59,17 @@ public class LunaHypershuntInteraction implements InteractionDialogPlugin {
 
     @NotNull
     private static Boolean foundAmaterasu(InteractionDialogAPI dialog) {
-        boolean foundAma = false;
 
         List<CampaignFleetAPI> fleets = dialog.getInteractionTarget().getContainingLocation().getFleets();
         for (CampaignFleetAPI fleet : fleets) {
             if (fleet == Global.getSector().getPlayerFleet()) continue;
             for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
                 if (member.getHullSpec().getBaseHullId().equals("zea_boss_amaterasu")) {
-                    foundAma = true;
+                    return true;
                 }
             }
         }
-        return foundAma;
+        return false;
     }
 
     @Override
@@ -81,7 +80,7 @@ public class LunaHypershuntInteraction implements InteractionDialogPlugin {
 
             dialog.getInteractionTarget().getMemoryWithoutUpdate().set("$usable", true);
 
-            dialog.getTextPanel().addPara("You give your crew the command to turn the megastructure back on running, and due to domain-level software optimisation, the job is done faster than one would expect.");
+            dialog.getTextPanel().addPara("You give your crew the command to reactivate the megastructure, and after giving the Domain-era protocols a short time to work, the megastructure reports its status with a pleasant chime.");
 
             dialog.getOptionPanel().addOption("Leave", "LEAVE");
             dialog.getOptionPanel().setShortcut("LEAVE", Keyboard.KEY_ESCAPE, false, false, false, false);
