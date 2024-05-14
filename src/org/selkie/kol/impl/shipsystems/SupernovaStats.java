@@ -32,7 +32,7 @@ public class SupernovaStats extends BaseShipSystemScript {
 
     //private static final float assessmentArc = 35f; //Determined by weapon mount
     //private static final float assessmentRange = 1500f;
-    private static final float assessmentThreshold = 10f;
+    private static final float assessmentThreshold = 5f;
     public static HashMap<ShipAPI.HullSize, Float> scoresHull = new HashMap<>();
     static {
         scoresHull.put(ShipAPI.HullSize.FIGHTER, 1f);

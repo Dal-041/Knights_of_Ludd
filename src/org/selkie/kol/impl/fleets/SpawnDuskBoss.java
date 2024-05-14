@@ -101,7 +101,7 @@ public class SpawnDuskBoss {
 		FID.setWithSalvage(true);
 		FID.aiRetreatToggle = false;
 		FID.deployallToggle = true;
-		FID.objectivesToggle = false;
+		FID.objectivesToggle = true;
 		FID.fttlToggle = false;
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 

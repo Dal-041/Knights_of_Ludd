@@ -240,7 +240,7 @@ public class ZeaFleetManager extends SeededFleetManager {
     @Override
     public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
         //Handle Coronal Capacitor intel
-        if (fleet.getFaction().getId().equals(PrepareAbyss.elysianID)) {
+        if (fleet.getFaction().getId().equals(PrepareAbyss.elysianID) || fleet.getFaction().getId().equals(PrepareAbyss.dawnID) || fleet.getFaction().getId().equals(PrepareAbyss.duskID)) {
             ZeaMechanicIntel mechanic = ZeaMechanicIntel.getNextMechanicIntel(fleet.getFaction().getId());
             if (mechanic != null) Global.getSector().getIntelManager().addIntel(mechanic);
         }

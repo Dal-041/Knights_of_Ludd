@@ -25,15 +25,27 @@ public class ZeaMechanicIntel extends BaseIntelPlugin {
     public String ID;
 
     private static String[] dawn = {
-            "drones!"
+            "The hulking Dawntide ships employ %s. Their armor and shield drones make them tough nuts to crack. "
+                    + "Be wary of their %s or you may find yourself crushed under the unyielding tide.",
+            "Dawntide ships possess a special %s system which increases their threat potential.\n"
+                    + "At full hull strength they receive a %s; at 0%% hull their weapons receive a %s, "
+                    + "with a %s from range to ROF as their ship takes more damage."
     };
     private static ArrayList<String[]> dawnHLs = new ArrayList<>();
-    static {};
+    static {
+        String[] hl1 = { "heavy defensive measures", "bursts of speed and many fighter drones" };
+        dawnHLs.add(hl1);
+        String[] hl2 = { "Cascade Targeting Protocol", "15% bonus to weapon range", "20% firerate boost", "smooth transition" };
+        dawnHLs.add(hl2);
+    };
     private static String[] dusk = {
-            "drones!"
+            "The Duskborne eschew direct confrontation, specializing in %s and %s. They employ many phase ships, strike weapons, and %s to attack, damage, and disable any unshielded hull their foes leave exposed. Do %s let your guard down."
     };
     private static ArrayList<String[]> duskHLs = new ArrayList<>();
-    static {};
+    static {
+        String[] hl1 = {"skirmishes", "heavy strikes", "ubiquitous motes", "NOT"};
+        duskHLs.add(hl1);
+    };
     private static String[] edf = {
             "Elysian fleets appear numerous in terms of both fleets and vessels. It's %s to %s. It's best to %s and explore without them ever noticing.\n%s",
             "The Elysian vessels appear to %s to empower their combat systems. The systems, \"%s\", as our engineers have dubbed them, recharge during combat %s. " +
