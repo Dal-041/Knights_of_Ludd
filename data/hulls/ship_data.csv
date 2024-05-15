@@ -9,7 +9,7 @@ Sundew,kol_sundew,Frigate,Knights of Ludd,kol_lunge,5,2000,250,2200,0,200,60,,10
 Protea,kol_protea,Frigate,Knights of Ludd,kol_drone_strike,8,2000,200,2500,0,220,65,2,150,170,150,135,190,220,FRONT,,135,0.2,0.8,,,25,35,20,20,2,20,10,25000,8,25,180,0.25,7,7,,,,,,,,rare_bp,0.75,0.5,2,2,,
 #DESTROYERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Marigold,kol_marigold,Destroyer,Knights of Ludd,damper,9,4000,550,3750,0,225,85,,90,80,65,35,70,325,FRONT,,100,0.3,0.8,,,30,50,50,25,1,25,10,32000,8,10,240,0.25,14,14,,,,,,,SHIP_WITH_MODULES,knights_of_selkie_bp,,0.4,2,2,,
-Mimosa,kol_mimosa,Gunship,Knights of Ludd,kol_lidar_smol,9,4750,700,4500,0,250,105,,80,70,50,35,55,400,PHASE,canister_flak,,,,,,50,80,80,50,2,25,9,45000,5,12,420,0.25,14,14,,,,,,,SHIP_WITH_MODULES,"knights_of_selkie_bp, special_allows_system_use, system_allows_special_use",0.5,0.4,2,3,,
+Mimosa,kol_mimosa,Gunship,Knights of Ludd,kol_lidar_smol,9,4750,700,4500,0,250,115,,80,70,50,35,55,400,PHASE,canister_flak,,,,,,50,80,80,50,2,25,9,45000,5,12,420,0.25,14,14,,,,,,,SHIP_WITH_MODULES,"knights_of_selkie_bp, special_allows_system_use, system_allows_special_use",0.5,0.4,2,3,,
 Snowdrop,kol_snowdrop,Heavy Destroyer,Knights of Ludd,kol_onion,14,3000,600,4500,0,350,70,,110,95,100,55,80,350,PHASE,kol_damper,,,,,,30,50,50,30,1,30,10,160000,8,10,300,0.25,16,16,,,,,,,SHIP_WITH_MODULES,"rare_bp, special_allows_system_use, system_allows_special_use",0.75,0.4,2,2,,
 #CRUISERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Tamarisk,kol_tamarisk,Cruiser,Knights of Ludd,kol_hellfire,20,8750,950,9000,0,400,150,,65,50,35,25,20,1400,FRONT,,100,0.4,0.8,,,120,170,100,120,4,30,9,100000,4,12,540,0.25,22,22,,,,,,,SHIP_WITH_MODULES,knights_of_selkie_bp,,0.5,2,4,,
