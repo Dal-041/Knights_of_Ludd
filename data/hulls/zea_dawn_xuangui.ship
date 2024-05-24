@@ -13,8 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
-    "zea_cascade_targeting",
-    "solar_shielding",
+    "zea_dawn_builtin",
     "kol_ea_shields1",
     "kol_throttle"
   ],

@@ -13,11 +13,10 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
-    "zea_cascade_targeting",
+    "zea_dawn_builtin",
 	"advancedcore",
 	"heavyarmor",
     "kol_ea_shields1",
-    "zea_dawn_smart_shield_drones",
     "zea_nian_boss"
   ],
   "builtInWeapons": {

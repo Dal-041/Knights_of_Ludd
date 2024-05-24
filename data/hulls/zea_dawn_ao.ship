@@ -13,12 +13,10 @@
   "viewOffset": 0,
   "builtInMods": [
     "automated",
-    "zea_cascade_targeting",
-    "solar_shielding",
+    "zea_dawn_builtin",
     "kol_ea_shields1",
     "advancedcore",
     "kol_throttle",
-    "zea_dawn_simple_shield_drones"
   ],
   "builtInWeapons": {
     "WS0013": "zea_deco_dawn_engL",
