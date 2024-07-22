@@ -1,0 +1,18 @@
+{
+    "displayName": "Blank",
+    "fluxCapacitors": 0,
+    "fluxVents": 0,
+    "goalVariant": false,
+    "hullId": "zea_dawn_ao",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_dawn_ao_Blank",
+    "weaponGroups": [],
+    "wings": [],
+    "modules": [
+        {"ENGINE_MODULE_L": "zea_dawn_ao_thruster_Blank"},
+        {"ENGINE_MODULE_R": "zea_dawn_ao_thruster_Blank"}
+    ],
+}

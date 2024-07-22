@@ -240,7 +240,7 @@ Libra Mid Right Flak,kol_libra_mr2,,Knights of Ludd,kol_canister_flak,5,6000,300
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 "# If you’re reading this, please don’t post spoilers.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DRONES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Ao Thruster Drone,zea_dawn_ao_thruster_droneL,,,,,10000000,0,100000,,100000,,,100,100,100,100,100,100,NONE,,,,,,,,,,,,,,,,,,,,,,,,,,,,"restricted, no_sell",,0,,,,8
+Ao Thruster Drone,zea_dawn_ao_thruster_droneL,,,,,1000,500,100000,,100000,,,100,100,100,100,100,100,NONE,,,,,,,,,,,,,,,,,,,,,,,,,,,,"restricted, no_sell",,0,,,,8
 Ion Drone,ion_drone,,Low Tech,flarelauncher_fighter,,750,100,80,,10,0,,200,400,350,150,300,30,NONE,,0,0,0,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,104
 Shield Drone,shield_drone,,High Tech,,,450,50,600,,50,0,,160,300,250,150,300,30,FRONT,,180,0,0.5,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,103
 Chiwen,zea_dawn_chiwen,,Dawntide,,,900,100,2000,,100,0,,200,400,300,150,300,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
