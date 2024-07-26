@@ -8,13 +8,16 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 
+import lunalib.lunaRefit.LunaRefitManager;
 import mmm.missions.DefenseMission;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.impl.campaign.AICoreCampaignPlugin;
 import org.selkie.kol.impl.campaign.ZeaCampaignPlugin;
+import org.selkie.kol.impl.campaign.cores.AICoreDropReplacerScript;
 import org.selkie.kol.impl.campaign.cores.AICoreReplacerScript;
+import org.selkie.kol.impl.campaign.cores.DuskCoreRefitButton;
 import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -54,6 +57,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 				if (!BL.contains(faction)) BL.add(faction);
 			}
 		}
+
+		//LunaRefitManager.addRefitButton(new DuskCoreRefitButton());
 	}
 
 	@Override
@@ -79,6 +84,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().registerPlugin(new ZeaCampaignPlugin());
 		Global.getSector().registerPlugin(new AICoreCampaignPlugin());
 		Global.getSector().addTransientScript(new AICoreReplacerScript());
+		Global.getSector().addTransientListener(new AICoreDropReplacerScript());
 
 		//Handle very silly bug duplicating listeners
 		while (Global.getSector().getListenerManager().getListeners(UpdateRelationships.class).size() > 0) {

@@ -18,7 +18,9 @@ class DuskBossCoreOfficerPlugin : AICoreOfficerPlugin {
 
     var automatedPointsMult = 4f
     var uniqueSkillID = "zea_dusk_boss_core_skill"
-    var portraitID = "zea_dusk_boss_core"
+    companion object {
+        var portraitID = "zea_dusk_boss_core"
+    }
 
     override fun createPerson(aiCoreId: String?, factionId: String?, random: Random?): PersonAPI {
         var core = AICoreUtil.createCorePerson(aiCoreId, factionId)

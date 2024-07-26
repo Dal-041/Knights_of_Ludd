@@ -94,5 +94,14 @@ class AICoreReplacerScript : EveryFrameScript {
                 cargo.removeCommodity(core, quantity)
             }
         }
+
+
+        /*//because of tranquility
+        var duskStack = cargo.stacksCopy.find { it.specialItemSpecIfSpecial?.id == "zea_boss_core_special" && it.specialDataIfSpecial.data == "zea_dusk_boss_core" }
+        if (duskStack != null) {
+            if (duskStack.size >= 2f) {
+                duskStack.subtract(1f)
+            }
+        }*/
     }
 }

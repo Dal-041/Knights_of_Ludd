@@ -26,10 +26,14 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
     lateinit var commoditySpec: CommoditySpecAPI
     lateinit var plugin: AICoreOfficerPlugin
 
-    var cores = mapOf(
-        "zea_dusk_boss_core" to "zea_dusk_boss_core_skill"
-        , "zea_dawn_boss_core" to "zea_dawn_boss_core_skill",
-        "zea_elysia_boss_core"  to "zea_elysia_boss_core_skill")
+    companion object {
+        var cores = mapOf(
+            "zea_dusk_boss_core" to "zea_dusk_boss_core_skill"
+            , "zea_dawn_boss_core" to "zea_dawn_boss_core_skill",
+            "zea_elysia_boss_core"  to "zea_elysia_boss_core_skill")
+    }
+
+
 
     override fun init(stack: CargoStackAPI) {
         super.init(stack)
@@ -77,22 +81,29 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
 
         var skillSpec = Global.getSettings().getSkillSpec(cores.get(commoditySpec.id))
 
-        tooltip!!.addTitle(name)
 
         val design = designType
         Misc.addDesignTypePara(tooltip, design, opad)
 
-        tooltip.addSpacer(10f)
-        var desc = Global.getSettings().getDescription(commoditySpec.id, Description.Type.RESOURCE)
-        tooltip.addPara(desc.text1, 0f, Misc.getTextColor(), Misc.getHighlightColor())
-
         var corePerson = plugin.createPerson(commoditySpec.id, Factions.NEUTRAL, Random())
         var pointsMult = corePerson.memoryWithoutUpdate.getFloat(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT).toInt()
 
-        tooltip.addSpacer(10f)
-        tooltip.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f, Misc.getTextColor(), Misc.getHighlightColor(),  "Automated Points Multiplier")
+        var desc = Global.getSettings().getDescription(commoditySpec.id, Description.Type.RESOURCE)
 
-        if (commoditySpec.id == "zea_dusk_boss_core") {
+        var img = tooltip!!.beginImageWithText(corePerson.portraitSprite, 96f)
+        img!!.addTitle(name)
+
+        img.addPara(desc.text1, 0f)
+
+        img.addSpacer(5f)
+
+        img.addPara("Level: ${corePerson.stats.level}", 0f, Misc.getTextColor(), Misc.getHighlightColor(), "Level")
+        img.addPara("Automated Points Multiplier: ${(corePerson.memoryWithoutUpdate.get(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT) as Float).toInt()}x", 0f,
+            Misc.getTextColor(), Misc.getHighlightColor(), "Automated Points Multiplier")
+
+        tooltip.addImageWithText(0f)
+
+        /*if (commoditySpec.id == "zea_dusk_boss_core") {
             tooltip.addSpacer(10f)
             tooltip.addSectionHeading("Transcendence", Alignment.MID, 0f)
             tooltip.addSpacer(10f)
@@ -100,22 +111,20 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
             tooltip.addPara("This core can interface with crewed and automated ships. To slot it in to crewed ships, navigate to the refit screen and select \"Additional Options\". " +
                     "Its skills can not be configured on crewed ships.", 0f,
                 Misc.getTextColor(), Misc.getHighlightColor(), "crewed and automated", "Additional Options")
-        }
-
+        }*/
 
         tooltip.addSpacer(10f)
         tooltip.addSectionHeading("Unique Skill: ${skillSpec.name}", Alignment.MID, 0f)
         tooltip.addSpacer(10f)
 
-        var skillImg = tooltip.beginImageWithText(skillSpec.spriteName, 48f)
-
         when (skillSpec.id) {
-            "zea_dawn_boss_core_skill" -> DawnBossCoreSkill().createCustomDescription(null, null, skillImg, tooltip.widthSoFar)
-            "zea_dusk_boss_core_skill" -> DuskBossCoreSkill().createCustomDescription(null, null, skillImg, tooltip.widthSoFar)
-            "zea_elysia_boss_core_skill" -> ElysiaBossCoreSkill().createCustomDescription(null, null, skillImg, tooltip.widthSoFar)
+            "zea_dawn_boss_core_skill" -> DawnBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
+            "zea_dusk_boss_core_skill" -> DuskBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
+            "zea_elysia_boss_core_skill" -> ElysiaBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
         }
 
-        tooltip.addImageWithText(0f)
+
+
 
 
         addCostLabel(tooltip, opad, transferHandler, stackSource)
