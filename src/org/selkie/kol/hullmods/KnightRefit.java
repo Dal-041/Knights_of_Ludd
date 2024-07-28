@@ -261,9 +261,8 @@ public class KnightRefit extends BaseHullMod {
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
         float HEIGHT = 64f;
         float headingPad = 20f;
-        float underHeadingPad = 5f;
+        float underHeadingPad = 10f;
         float listPad = 3f;
-
 
         Color activeTextColor = Misc.getTextColor();
         Color activePositiveColor = Misc.getPositiveHighlightColor();
@@ -276,6 +275,8 @@ public class KnightRefit extends BaseHullMod {
         Color inactiveNegativeColor = Misc.getGrayColor().darker();
         Color inactiveHeaderBannerColor = Misc.getDarkPlayerColor().darker().darker();
         Color inactiveHighlightColor = Misc.getGrayColor().darker();
+
+        HullmodBackgroundElement background = new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite("kol_ui", "kol_dawn_hmod"));
 
         boolean hasComposite = false;
         for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){
@@ -303,14 +304,8 @@ public class KnightRefit extends BaseHullMod {
         capacitorShields.addPara("Shields rely on a charge and can only stay online for a max of %s at a time.",
                 listPad, hasShield ? activeTextColor : inactiveTextColor, hasShield ? activePositiveColor: inactivePositiveColor, "10 seconds");
         capacitorShields.addPara("Shield charge regenerates while shields are offline.", hasShield ? activeTextColor : inactiveTextColor, listPad);
-        if(hasShield){
-            capacitorShields.addPara("Shield emitters undergo a forced shutdown when charge reaches %s, and can only be reactivated once recharged to %s.",
-                    listPad, new Color[] {activeNegativeColor, activePositiveColor}, "0%", "100%");
-        } else{
-            capacitorShields.addPara("Shield emitters undergo a forced shutdown when charge reaches %s, and can only be reactivated once recharged to %s.",
-                    listPad, inactiveTextColor, inactivePositiveColor, "0%", "100%");
-        }
-
+        capacitorShields.addPara("Shield emitters undergo a forced shutdown when charge reaches %s, and can only be reactivated once recharged to %s.",
+                listPad, hasShield ? activeNegativeColor : inactiveTextColor, hasShield ? activeHighlightColor : inactiveHighlightColor, "0%", "100%");
         tooltip.addImageWithText(underHeadingPad);
 
 

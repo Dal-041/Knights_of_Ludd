@@ -4,10 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.BaseCustomUIPanelPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.ui.CustomPanelAPI;
-import com.fs.starfarer.api.ui.PositionAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import org.apache.log4j.Level;
-import org.apache.log4j.Logger;
 
 public class HullmodBackgroundElement extends BaseCustomUIPanelPlugin {
 
@@ -29,6 +26,7 @@ public class HullmodBackgroundElement extends BaseCustomUIPanelPlugin {
 
         sprite.setSize( tooltip.getWidthSoFar() + 20, tooltip.getHeightSoFar() + 10);
         sprite.setAdditiveBlend();
+        sprite.setAlphaMult(0.8f);
         sprite.render(tooltip.getPosition().getX(), tooltip.getPosition().getY());
 
     }

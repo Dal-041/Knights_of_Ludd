@@ -8,7 +8,6 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType
 import com.fs.starfarer.api.impl.campaign.ids.HullMods
 import com.fs.starfarer.api.ui.Alignment
-import com.fs.starfarer.api.ui.LabelAPI
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import lunalib.lunaExtensions.addLunaElement
@@ -16,12 +15,12 @@ import org.lazywizard.lazylib.MathUtils
 import org.magiclib.subsystems.MagicSubsystemsManager.addSubsystemToShip
 import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.impl.combat.activators.SimpleShieldDronesActivator
+import org.selkie.kol.impl.combat.activators.SmartShieldDronesActivator
 import java.awt.Color
 import java.util.*
 
 
 class DawnBuiltin : BaseHullMod() {
-
     //smooth instead of flat
     //public static final float HULL_PERCENTAGE = 0.5f;
     private val ID = "CascadeTargetingProtocol"
@@ -29,6 +28,7 @@ class DawnBuiltin : BaseHullMod() {
     val RANGE_BONUS = 10f // 200su
     val ENMITY_BONUS_ROF_RELOAD = 30f
     val ENMITY_BONUS_FLUX_REDUCTION = 15f
+    val ENMITY_HP_THRESHOLD = 50f
 
     override fun advanceInCombat(ship: ShipAPI, amount: Float) {
         if (!ship.isAlive) {
@@ -93,75 +93,109 @@ class DawnBuiltin : BaseHullMod() {
         if (stats.variant.hasHullMod("zea_dawn_simple_shield_drones")) {
             stats.variant.removeMod("zea_dawn_simple_shield_drones")
         }
+        if (stats.variant.hasHullMod("zea_dawn_smart_shield_drones")) {
+            stats.variant.removeMod("zea_dawn_smart_shield_drones")
+        }
     }
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         super.applyEffectsAfterShipCreation(ship, id)
         if (ship.hullSize == HullSize.CRUISER || ship.hullSize == HullSize.CAPITAL_SHIP) {
-            addSubsystemToShip(ship, SimpleShieldDronesActivator(ship))
+            if (ship.hullSpec.baseHullId == "zea_boss_nian") {
+                addSubsystemToShip(ship, SmartShieldDronesActivator(ship))
+            }else{
+                addSubsystemToShip(ship, SimpleShieldDronesActivator(ship))
+            }
         }
     }
 
-    override fun shouldAddDescriptionToTooltip(hullSize: HullSize, ship: ShipAPI, isForModSpec: Boolean): Boolean {
-        return false
+    override fun getTooltipWidth(): Float {
+        return 410f
     }
 
     override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI, width: Float, isForModSpec: Boolean) {
-        super.addPostDescriptionSection(tooltip, hullSize, ship, width, isForModSpec)
 
-        var sprite = Global.getSettings().getSprite("kol_ui", "kol_dawn_hmod")
+        val HEIGHT = 64f
+        val headingPad = 20f
+        val underHeadingPad = 10f
+        val listPad = 3f
 
-        var initialHeight = tooltip!!.heightSoFar
-        var element = tooltip!!.addLunaElement(0f, 0f)
+        val activeTextColor = Misc.getTextColor()
+        val activePositiveColor = Misc.getPositiveHighlightColor()
+        val activeNegativeColor = Misc.getNegativeHighlightColor()
+        val activeHeaderBannerColor = Misc.getDarkPlayerColor()
+        val activeHighlightColor = Misc.getHighlightColor()
 
-        tooltip.addSpacer(10f)
-        tooltip.addPara(spec.getDescription(hullSize), 0f)
+        val inactiveTextColor = Misc.getGrayColor().darker()
+        val inactivePositiveColor = Misc.getGrayColor().darker()
+        val inactiveNegativeColor = Misc.getGrayColor().darker()
+        val inactiveHeaderBannerColor = Misc.getDarkPlayerColor().darker().darker()
+        val inactiveHighlightColor = Misc.getGrayColor().darker()
 
-        tooltip.addSpacer(10f)
-        tooltip.addSectionHeading("Cascade Protocol", Alignment.MID, 0f)
-        tooltip.addSpacer(10f)
+        //var initialHeight = tooltip!!.heightSoFar
+        val background = tooltip!!.addLunaElement(0f, 0f)
 
-        tooltip.addPara("A dynamic co-targeting unit supplements this ship by increasing range by 10%% while over 50%% hull. \n\n" +
-                "If the vessel goes below 50%% hull, power is rerouted to improve ballistic and energy weaponry, allowing them to fire 30%% faster while generating 15%% less flux.",
-            0f, Misc.getTextColor(), Misc.getHighlightColor(), "10%", "50%", "below 50%", "30%", "15%")
+        tooltip.addSectionHeading("Cascade Protocol", activeHighlightColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+        val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dawn_cascade"), HEIGHT)
+        cascadeProtocol.setBulletedListMode("•")
+        cascadeProtocol.setBulletWidth(15f)
+        val para1 = cascadeProtocol.addPara("Increases the range of ballistic and energy weapons by ${ENMITY_BONUS_ROF_RELOAD.toInt()}%% while over ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
+            listPad, activeTextColor, activePositiveColor
+        )
+        para1.setHighlight("${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%")
+        para1.setHighlightColors(activePositiveColor, activeHighlightColor)
+        val para2 = cascadeProtocol.addPara("Increases rate of fire of ballistic and energy weapons by ${ENMITY_BONUS_ROF_RELOAD.toInt()}%% with a ${ENMITY_BONUS_FLUX_REDUCTION.toInt()}%% flux cost reduction while under ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
+            listPad, activeTextColor, activePositiveColor
+        )
+        para2.setHighlight("${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_BONUS_FLUX_REDUCTION.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%")
+        para2.setHighlightColors(activePositiveColor, activePositiveColor, activeHighlightColor)
+        tooltip.addImageWithText(underHeadingPad)
 
-        tooltip.addSpacer(10f)
-        tooltip.addSectionHeading("Chiwen Shield Drones", Alignment.MID, 0f)
-        tooltip.addSpacer(10f)
 
-        var tc = Misc.getTextColor()
-        var hc = Misc.getHighlightColor()
-
-        if (hullSize !== HullSize.CAPITAL_SHIP && hullSize !== HullSize.CRUISER) {
-            tc = Misc.getGrayColor()
-            hc = Misc.getGrayColor()
-        }
-
-        val activator = SimpleShieldDronesActivator(ship)
+        val hasShieldDrones = hullSize == HullSize.CAPITAL_SHIP || hullSize == HullSize.CRUISER
+        val activator = if (ship.hullSpec.baseHullId == "zea_boss_nian") SmartShieldDronesActivator(ship) else SimpleShieldDronesActivator(ship)
         val drone = Global.getSettings().getVariant(activator.getDroneVariant()).hullSpec
-        val health =
-            Math.round(drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints)
-                .toString()
+        val health = Math.round(drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints).toString()
         val maxDrones = activator.getMaxDeployedDrones().toString()
         val recharge = Math.round(activator.baseChargeRechargeDuration).toString()
+        tooltip.addSectionHeading(
+            "Chiwen Shield Drones", if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor,
+            if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
+        )
+        val capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
+        capacitorShields.setBulletedListMode("•")
+        capacitorShields.setBulletWidth(15f)
+        capacitorShields.addPara(
+            "Deploys %s shield drones around the ship, each drone is capable of absorbing %s damage.",
+            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor, maxDrones, health
+        )
+        capacitorShields.addPara("Drones regenerate once every %s seconds.",
+            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor, recharge
+        )
+        capacitorShields.addPara("Only activates on Cruisers and Capitals.",
+            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor
+        )
+        tooltip.addImageWithText(underHeadingPad)
 
-        val label: LabelAPI = tooltip.addPara("Deploys $maxDrones shield drones that can each absorb $health damage around the ship. Drones regenerate once every $recharge seconds. " +
-                    "Only activates on Cruisers and Capitals.",
-                0f, tc, hc)
 
-        label.setHighlight(maxDrones, health, recharge, "Only activates on Cruisers and Capitals.")
-        label.setHighlightColors(hc, hc, hc, Misc.getHighlightColor())
+        tooltip.addSectionHeading("Advanced Solar Plating", activeHighlightColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+        val solarPlating = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dawn_solar"), HEIGHT)
+        solarPlating.setBulletedListMode("•")
+        solarPlating.setBulletWidth(15f)
+        solarPlating.addPara("Decreases the CR-damaging effects of operating in star corona and hyperspace storms by %s.",
+            listPad, activeTextColor, activePositiveColor, "100%"
+        )
+        solarPlating.addPara(
+            "In combat, reduces energy damage taken by %s",
+            listPad, activeTextColor, activePositiveColor, "10%"
+        )
+        tooltip.addImageWithText(underHeadingPad)
 
-        tooltip.addSpacer(10f)
-        tooltip.addSectionHeading("Advanced Solar Plating", Alignment.MID, 0f)
-        tooltip.addSpacer(10f)
-
-        tooltip.addPara("Decreases the CR-damaging effects of operating in star corona and hyperspace storms by 100%%. \n\n" +
-                "In combat, reduces energy damage taken by 10%%", 0f, Misc.getTextColor(), Misc.getHighlightColor(), "100%", "10%")
-
-        element.render {
+        var sprite = Global.getSettings().getSprite("kol_ui", "kol_dawn_hmod")
+        background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()
+            sprite.alphaMult = 0.8f
             sprite.render(tooltip.position.x, tooltip.position.y)
         }
     }
