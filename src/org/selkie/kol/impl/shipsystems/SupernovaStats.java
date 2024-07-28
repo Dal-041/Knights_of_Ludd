@@ -23,6 +23,7 @@ import java.util.List;
 import static org.lazywizard.lazylib.combat.WeaponUtils.getEnemiesInArc;
 
 public class SupernovaStats extends BaseShipSystemScript {
+    public static final float EXPLOSION_RADIUS = 1000f;
     protected static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaUtils.systemIDSupernova);
     private static final float IN_STATE_DURATION = entry.getIn(); //2f;
     private static final float ACTIVE_STATE_DURATION = entry.getActive(); //4f;
@@ -136,7 +137,7 @@ public class SupernovaStats extends BaseShipSystemScript {
 
                     DamagingExplosionSpec explosionSpec = new DamagingExplosionSpec(
                             1.66f,
-                            1000f,
+                            EXPLOSION_RADIUS,
                             500f,
                             4000f,
                             750f,

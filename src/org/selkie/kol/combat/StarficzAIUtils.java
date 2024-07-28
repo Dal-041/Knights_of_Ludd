@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.*;
 
 public class StarficzAIUtils {
-    public static final boolean DEBUG_ENABLED = false;
+    public static final boolean DEBUG_ENABLED = true;
 
     public static class FutureHit{
         public float timeToHit;
@@ -939,8 +939,17 @@ public class StarficzAIUtils {
     public static void turnToPoint(ShipAPI ship, Vector2f turnPoint){
         float turnAngle = VectorUtils.getAngle(ship.getLocation(), turnPoint);
         float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), turnAngle);
+        ship.getTurnAcceleration();
+        ship.getAngularVelocity();
 
-        if (rotAngle > 0) {
+        boolean decel = false;
+        if (ship.getAngularVelocity() * rotAngle > 0){ // make sure velocity and angle have the same sign, (only slow down if it makes sense)
+            if (Math.pow(ship.getAngularVelocity(), 2) / (2 * ship.getTurnAcceleration()) > Math.abs(rotAngle)){ // basic kinematic solution
+                decel = true;
+            }
+        }
+
+        if ((rotAngle > 0) ^ decel) {
             ship.giveCommand(ShipCommand.TURN_LEFT, null, 0);
             ship.blockCommandForOneFrame(ShipCommand.TURN_RIGHT);
         } else{
