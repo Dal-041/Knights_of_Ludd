@@ -22,9 +22,29 @@
     "engineSlots": [
         {
             "location": [
-                -27, 12
+                -28, 12
             ],
-            "length": 49,
+            "length": 60,
+            "width": 25,
+            "angle": 180,
+            "contrailSize": 30,
+            "style": "KOL_ENG"
+        },
+        {
+            "location": [
+                -28, -12
+            ],
+            "length": 60,
+            "width": 25,
+            "angle": 180,
+            "contrailSize": 30,
+            "style": "KOL_ENG"
+        },
+        {
+            "location": [
+                -34.5, 12
+            ],
+            "length": 60,
             "width": 17,
             "angle": 180,
             "contrailSize": 30,
@@ -32,9 +52,9 @@
         },
         {
             "location": [
-                -27, -12
+                -34.5, -12
             ],
-            "length": 49,
+            "length": 60,
             "width": 17,
             "angle": 180,
             "contrailSize": 30,

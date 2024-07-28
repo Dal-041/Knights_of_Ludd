@@ -41,7 +41,6 @@ class DawnBuiltin : BaseHullMod() {
 
         ship.mutableStats.ballisticWeaponRangeBonus.modifyPercent(ID, RANGE_BONUS * HPLeftRatio)
         ship.mutableStats.energyWeaponRangeBonus.modifyPercent(ID, RANGE_BONUS * HPLeftRatio)
-        ship.mutableStats.missileWeaponRangeBonus.modifyPercent(ID, RANGE_BONUS * HPLeftRatio)
         ship.mutableStats.ballisticRoFMult.modifyPercent(ID, ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio))
         ship.mutableStats.energyRoFMult.modifyPercent(ID, ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio))
         ship.mutableStats.ballisticAmmoRegenMult.modifyPercent(ID, ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio))
