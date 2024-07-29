@@ -1,7 +1,7 @@
 {
     "displayName": "Artillery",
-    "fluxCapacitors": 10,
-    "fluxVents": 20,
+    "fluxCapacitors": 20,
+    "fluxVents": 18,
     "goalVariant": true,
     "hullId": "kol_mimosa",
     "hullMods": [
@@ -16,7 +16,7 @@
     "variantId": "kol_mimosa_Artillery",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0007": "heavyac",
@@ -26,18 +26,18 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "lightac",
-                "WS0004": "kol_drian",
-                "WS0005": "lightac",
-                "WS0003": "kol_drian",
+                "WS0003": "heavymauler",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "kol_tor",
-                "WS0002": "kol_tor",
+                "WS0001": "kol_drian",
+                "WS0002": "kol_drian",
+                "WS0005": "lightac",
+                "WS0004": "lightac",
+                "WS0006": "lightac",
             }
         },
     ],

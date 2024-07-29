@@ -372,8 +372,9 @@ public class NinmahBoss extends BaseHullMod {
                 }
             } else { // otherwise, ship is attacking
                 if (MathUtils.getDistance(ship.getLocation(), target.getLocation()) < targetRange + Misc.getTargetingRadius(ship.getLocation(), target, false)) {
-                    // if ship is in weapon range decide to phase based on incoming damage, accounting for the reduction in damage if the system overloads an enemy
-                    if (AIUtils.canUseSystemThisFrame(ship) || ship.getSystem().isActive() || target.getFluxTracker().isOverloadedOrVenting()) {
+                    // if ship is in weapon range decide to phase based on incoming damage, accounting for the reduction in incoming damage if the system overloads an enemy
+                    if ((Objects.equals(ship.getSystem().getId(), "acausaldisruptor") && (AIUtils.canUseSystemThisFrame(ship) || ship.getSystem().isActive()))
+                            || target.getFluxTracker().isOverloadedOrVenting()) {
                         if ((armorDamageLevelSystem > 0.07f || hullDamageLevelSystem > 0.07f || empDamageLevelSystem > 0.7f))
                             wantToPhase = true;
                         else

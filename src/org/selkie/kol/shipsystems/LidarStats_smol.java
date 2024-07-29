@@ -195,7 +195,7 @@ public class LidarStats_smol extends BaseShipSystemScript {
 				}
 			}
 			lidarRange += 100f;
-			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange/(1+(RANGE_BONUS/100)));
+			stats.getBeamWeaponRangeBonus().modifyFlat("lidararray", lidarRange);
 		} else{
 			stats.getBeamWeaponRangeBonus().unmodify("lidararray");
 		}

@@ -1,7 +1,7 @@
 {
     "displayName": "Barrage",
-    "fluxCapacitors": 6,
-    "fluxVents": 20,
+    "fluxCapacitors": 18,
+    "fluxVents": 15,
     "goalVariant": true,
     "hullId": "kol_mimosa",
     "hullMods": [
@@ -16,19 +16,24 @@
     "variantId": "kol_mimosa_Barrage",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "heavymauler",
+                "WS0007": "kol_bricole",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0004": "kol_drian",
+                "WS0003": "kol_bricole",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0001": "kol_drian",
-                "WS0003": "kol_drian",
                 "WS0002": "kol_drian",
             }
         },
@@ -36,8 +41,15 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "vulcan",
+                "WS0004": "kol_tor",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0005": "vulcan",
+                "WS0006": "vulcan",
             }
         },
     ],

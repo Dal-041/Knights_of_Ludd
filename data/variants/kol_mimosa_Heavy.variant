@@ -1,6 +1,6 @@
 {
     "displayName": "Heavy",
-    "fluxCapacitors": 6,
+    "fluxCapacitors": 9,
     "fluxVents": 20,
     "goalVariant": true,
     "hullId": "kol_mimosa",
@@ -16,7 +16,7 @@
     "variantId": "kol_mimosa_Heavy",
     "weaponGroups": [
         {
-            "autofire": false,
+            "autofire": true,
             "mode": "LINKED",
             "weapons": {
                 "WS0001": "kol_tor",
@@ -27,23 +27,23 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
+                "WS0003": "heavyac",
                 "WS0004": "lightdualac",
-                "WS0003": "lightdualac",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0007": "heavyac",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0006": "vulcan",
                 "WS0005": "vulcan",
+                "WS0006": "vulcan",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0007": "phasecl",
             }
         },
     ],
