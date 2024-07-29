@@ -81,7 +81,7 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
                 moduleSprite.setSize(moduleSprite.width * shipScale, moduleSprite.height * shipScale)
                 moduleSprite.color = paperdollColor
                 //moduleSprite.setAdditiveBlend()
-                moduleSprite.angle = ship.facing - 90f
+                moduleSprite.angle = module.facing - 90f
                 moduleSprite.renderAtCenter(paperDollLocation.x, paperDollLocation.y)
             }
         }

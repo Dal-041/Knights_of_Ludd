@@ -18,6 +18,7 @@
     "viewOffset": 0,
     "builtInMods": [
         "kol_module",
+        "kol_module_vectoring",
         "ablative_armor",
         "no_weapon_flux",
         "reduced_explosion",

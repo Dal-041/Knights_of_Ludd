@@ -31,6 +31,7 @@ public class DroneVectorThruster implements EveryFrameWeaponEffectPlugin {
             for (ShipAPI e : parentShip.getChildModulesCopy()) {
                 if (MathUtils.isWithinRange(e.getLocation(), weapon.getLocation(), 2)) {
                     engineModule = e;
+                    e.setDrone(true);
                 }
             }
 

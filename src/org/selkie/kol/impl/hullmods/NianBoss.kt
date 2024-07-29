@@ -105,6 +105,7 @@ class NianBoss : BaseHullMod() {
             targetSearchTimer.advance(amount)
             if(targetSearchTimer.intervalElapsed()){
                 for (potentialTarget in engine.ships){
+                    if (potentialTarget.owner == 100 ||  potentialTarget.owner == ship.owner) continue
                     target = target?.let { current ->
                         when {
                             current.hullSize < potentialTarget.hullSize -> potentialTarget
