@@ -14,6 +14,7 @@ import lunalib.lunaExtensions.addLunaElement
 import org.lazywizard.lazylib.MathUtils
 import org.magiclib.subsystems.MagicSubsystemsManager.addSubsystemToShip
 import org.magiclib.util.MagicIncompatibleHullmods
+import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.activators.SimpleShieldDronesActivator
 import org.selkie.kol.impl.combat.activators.SmartShieldDronesActivator
 import java.awt.Color
@@ -123,30 +124,30 @@ class DawnBuiltin : BaseHullMod() {
         val activePositiveColor = Misc.getPositiveHighlightColor()
         val activeNegativeColor = Misc.getNegativeHighlightColor()
         val activeHeaderBannerColor = Misc.getDarkPlayerColor()
+        val activeHeaderTextColor = Utils.brighter(Misc.getButtonTextColor(), 0.8f)
         val activeHighlightColor = Misc.getHighlightColor()
 
         val inactiveTextColor = Misc.getGrayColor().darker()
         val inactivePositiveColor = Misc.getGrayColor().darker()
         val inactiveNegativeColor = Misc.getGrayColor().darker()
         val inactiveHeaderBannerColor = Misc.getDarkPlayerColor().darker().darker()
+        val inactiveHeaderTextColor = Misc.getGrayColor().darker()
         val inactiveHighlightColor = Misc.getGrayColor().darker()
 
         //var initialHeight = tooltip!!.heightSoFar
         val background = tooltip!!.addLunaElement(0f, 0f)
 
-        tooltip.addSectionHeading("Cascade Protocol", activeHighlightColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+        tooltip.addSectionHeading("Cascade Protocol", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
         val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dawn_cascade"), HEIGHT)
         cascadeProtocol.setBulletedListMode("•")
         cascadeProtocol.setBulletWidth(15f)
         val para1 = cascadeProtocol.addPara("Increases the range of ballistic and energy weapons by ${ENMITY_BONUS_ROF_RELOAD.toInt()}%% while over ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
-            listPad, activeTextColor, activePositiveColor
+            listPad, activeTextColor, activePositiveColor, "${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%"
         )
-        para1.setHighlight("${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%")
         para1.setHighlightColors(activePositiveColor, activeHighlightColor)
         val para2 = cascadeProtocol.addPara("Increases rate of fire of ballistic and energy weapons by ${ENMITY_BONUS_ROF_RELOAD.toInt()}%% with a ${ENMITY_BONUS_FLUX_REDUCTION.toInt()}%% flux cost reduction while under ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
-            listPad, activeTextColor, activePositiveColor
+            listPad, activeTextColor, activePositiveColor, "${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_BONUS_FLUX_REDUCTION.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%"
         )
-        para2.setHighlight("${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_BONUS_FLUX_REDUCTION.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%")
         para2.setHighlightColors(activePositiveColor, activePositiveColor, activeHighlightColor)
         tooltip.addImageWithText(underHeadingPad)
 
@@ -158,26 +159,27 @@ class DawnBuiltin : BaseHullMod() {
         val maxDrones = activator.getMaxDeployedDrones().toString()
         val recharge = Math.round(activator.baseChargeRechargeDuration).toString()
         tooltip.addSectionHeading(
-            "Chiwen Shield Drones", if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor,
+            "Chiwen Shield Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
             if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
         )
-        val capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
-        capacitorShields.setBulletedListMode("•")
-        capacitorShields.setBulletWidth(15f)
-        capacitorShields.addPara(
+        val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
+        shieldDrones.setBulletedListMode("•")
+        shieldDrones.setBulletWidth(15f)
+        val para3 = shieldDrones.addPara(
             "Deploys %s shield drones around the ship, each drone is capable of absorbing %s damage.",
             listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor, maxDrones, health
         )
-        capacitorShields.addPara("Drones regenerate once every %s seconds.",
-            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor, recharge
+        para3.setHighlightColors(if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor)
+        shieldDrones.addPara("Drones regenerate once every %s seconds.",
+            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, recharge
         )
-        capacitorShields.addPara("Only activates on Cruisers and Capitals.",
-            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor
+        shieldDrones.addPara("Only activates on Cruisers and Capitals.",
+            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, Color.black
         )
         tooltip.addImageWithText(underHeadingPad)
 
 
-        tooltip.addSectionHeading("Advanced Solar Plating", activeHighlightColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+        tooltip.addSectionHeading("Advanced Solar Plating", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
         val solarPlating = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dawn_solar"), HEIGHT)
         solarPlating.setBulletedListMode("•")
         solarPlating.setBulletWidth(15f)
@@ -190,11 +192,11 @@ class DawnBuiltin : BaseHullMod() {
         )
         tooltip.addImageWithText(underHeadingPad)
 
-        var sprite = Global.getSettings().getSprite("kol_ui", "kol_dawn_hmod")
+        var sprite = Global.getSettings().getSprite("kol_ui", "zea_dawn_hmod")
         background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()
-            sprite.alphaMult = 0.8f
+            sprite.alphaMult = 0.9f
             sprite.render(tooltip.position.x, tooltip.position.y)
         }
     }

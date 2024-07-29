@@ -77,7 +77,7 @@ public class PDDroneActivator extends MagicDroneSubsystem {
 
     @Override
     public String getDisplayText() {
-        return "PD Drones";
+        return "Shachi PD Drones";
     }
 
     @Override

@@ -18,6 +18,7 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
+import org.selkie.kol.Utils;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.helpers.KOLStaticStrings;
@@ -268,15 +269,17 @@ public class KnightRefit extends BaseHullMod {
         Color activePositiveColor = Misc.getPositiveHighlightColor();
         Color activeNegativeColor = Misc.getNegativeHighlightColor();
         Color activeHeaderBannerColor = Misc.getDarkPlayerColor();
+        Color activeHeaderTextColor = Utils.brighter(Misc.getButtonTextColor(), 0.8f);
         Color activeHighlightColor = Misc.getHighlightColor();
 
         Color inactiveTextColor = Misc.getGrayColor().darker();
         Color inactivePositiveColor = Misc.getGrayColor().darker();
         Color inactiveNegativeColor = Misc.getGrayColor().darker();
         Color inactiveHeaderBannerColor = Misc.getDarkPlayerColor().darker().darker();
+        Color inactiveHeaderTextColor = Misc.getGrayColor().darker();
         Color inactiveHighlightColor = Misc.getGrayColor().darker();
 
-        HullmodBackgroundElement background = new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite("kol_ui", "kol_dawn_hmod"));
+        new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite("kol_ui", "kol_refit_hmod"), 0.6f);
 
         boolean hasComposite = false;
         for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){
@@ -285,7 +288,7 @@ public class KnightRefit extends BaseHullMod {
                 break;
             }
         }
-        tooltip.addSectionHeading("Integrated Ballistics", hasComposite ? activeHighlightColor : inactiveHighlightColor,
+        tooltip.addSectionHeading("Integrated Ballistics", hasComposite ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasComposite ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
         TooltipMakerAPI integratedBallistics = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", hasComposite ? "kol_composite" : "kol_composite_grey"), HEIGHT);
         integratedBallistics.setBulletedListMode("•");
@@ -296,7 +299,7 @@ public class KnightRefit extends BaseHullMod {
 
 
         boolean hasShield = ship.getShield() != null;
-        tooltip.addSectionHeading("Primitive Capacitor Shields", hasShield ? activeHighlightColor : inactiveHighlightColor,
+        tooltip.addSectionHeading("Primitive Capacitor Shields", hasShield ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasShield ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
         TooltipMakerAPI capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", hasShield ? "kol_primshield" : "kol_primshield_grey"), HEIGHT);
         capacitorShields.setBulletedListMode("•");
@@ -311,7 +314,7 @@ public class KnightRefit extends BaseHullMod {
 
         ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
         boolean hasModules = variant != null && !variant.getStationModules().isEmpty();
-        tooltip.addSectionHeading("Modular Armor", hasModules ? activeHighlightColor : inactiveHighlightColor,
+        tooltip.addSectionHeading("Modular Armor", hasModules ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasModules ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
         TooltipMakerAPI modularArmor = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", hasModules ? "kol_modules" : "kol_modules_grey"), HEIGHT);
         modularArmor.setBulletedListMode("•");

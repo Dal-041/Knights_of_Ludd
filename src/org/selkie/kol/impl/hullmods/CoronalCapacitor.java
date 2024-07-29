@@ -13,7 +13,7 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.dark.shaders.light.StandardLight;
 import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.util.*;
+import org.magiclib.util.MagicUI;
 import org.selkie.kol.Utils;
 
 import java.awt.*;
@@ -278,16 +278,6 @@ public class CoronalCapacitor extends BaseHullMod {
     }
 
     @Override
-    public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {
-        return null;
-    }
-
-    @Override
-    public boolean shouldAddDescriptionToTooltip(ShipAPI.HullSize hullSize, ShipAPI ship, boolean isForModSpec) {
-        return false;
-    }
-
-    @Override
     public void advanceInCampaign(FleetMemberAPI member, float amount) {
         if (Global.getSector() != null && Global.getSector().getPlayerFleet() != null
                 && (!Global.getSector().getPlayerFleet().getCustomData().containsKey(CC_TIME_KEY) || Global.getSector().getClock().getTimestamp() - (long)Global.getSector().getPlayerFleet().getCustomData().get(CC_TIME_KEY) > 1024)) {
@@ -330,7 +320,7 @@ public class CoronalCapacitor extends BaseHullMod {
 
     @Override
     public float getTooltipWidth() {
-        return 349f;
+        return 400f;
     }
 
 }

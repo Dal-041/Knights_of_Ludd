@@ -12,7 +12,7 @@
   "shieldRadius": 208.5,
   "viewOffset": 0,
   "builtInMods": [
-    "zea_edf_coronal_capacitor",
+    "zea_edf_builtin",
     "zea_ama_auxilary_integration",
     "automated",
     "kol_ea_shields3",

@@ -262,7 +262,9 @@
 			"zea_shield_elysia_2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_shield_elysia_2.png"
 		},
 		"kol_ui":{
-			"kol_dawn_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/dawn_hmod.png",
+			"kol_refit_hmod":"graphics/ui/kol_hmod.png",
+			"zea_dawn_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/dawn_hmod.png",
+			"zea_edf_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/edf_hmod.png"
 		},
 		"zea_phase_glows": {
 			"zea_boss_yukionna_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_yukionna_glow1.png",
@@ -272,14 +274,14 @@
 			"zea_dusk_onryo_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_onryo_glow1.png",
 			"zea_dusk_onryo_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_onryo_glow2.png",
 			"zea_dusk_funayurei_glow1":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow1.png",
-			"zea_dusk_funayurei_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow2.png",
+			"zea_dusk_funayurei_glow2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_funayurei_glow2.png"
 		},
 		"illustrations":{
 			"kol_garden_large":"graphics/illustrations/kol_gardens_big.png",
 			"kol_forest_path_large":"graphics/illustrations/kol_forest_path_big.png",
 			"kol_tree_canaan_large":"graphics/illustrations/kol_tree_canaan_big.png",
 			"kol_citadel_large":"graphics/illustrations/kol_citadel_big.png",
-			"zea_banner":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/illustrations/zea_banner.png",
+			"zea_banner":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/illustrations/zea_banner.png"
 		},
 		"terrain":{
 			"nebula_zea_black":"graphics/terrain/nebula_kol_black_shiny.png",
@@ -299,7 +301,7 @@
 			"nebula_zea_dawntide_map":"graphics/terrain/nebula_kol_dawntide2b_map.png",
 			"rings_thicc":"graphics/terrain/rings_thicc.png",
 			"rings_thicc_darkred":"graphics/terrain/rings_thicc_darkred.png",
-			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png",
+			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png"
 		},
 		"characters":{
 			"kol_grandmaster":"graphics/portraits/kol_grandmaster.png",
@@ -323,7 +325,7 @@
 			"zea_edf_3":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_edf_3.png",
 			"zea_dawn_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_dawn_boss_core.png",
 			"zea_dusk_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_dusk_boss_core.png",
-			"zea_elysia_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_elysia_boss_core.png",
+			"zea_elysia_boss_core":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/cores/zea_elysia_boss_core.png"
 		},
 		"icons": {
 			"coronal_cap_top":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap_top.png",
@@ -335,6 +337,8 @@
 			"dawn_chiwen_grey": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/dawn_chiwen_grey.png",
 			"dawn_solar": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/dawn_solar.png",
 			"dawn_solar_grey": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/dawn_solar_grey.png",
+			"edf_coronal_cap": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap.png",
+			"edf_shachi": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/edf_shachi.png",
 			"kol_composite": "graphics/icons/hullsys/kol_composite_ico.png",
 			"kol_primshield": "graphics/icons/hullsys/kol_primshield_ico.png",
 			"kol_modules": "graphics/icons/hullsys/kol_modules_ico.png",
@@ -342,12 +346,12 @@
 			"kol_primshield_grey": "graphics/icons/hullsys/kol_primshield_grey_ico.png",
 			"kol_modules_grey": "graphics/icons/hullsys/kol_modules_grey_ico.png",
 			"kol_USC_ping":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/PING.png",
-			"game_icon":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/icon.png",
+			"game_icon":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/icon.png"
 		},
 		"lore_item": {
 			"zea_dawn":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dawn.png",
 			"zea_dusk":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_dusk.png",
-			"zea_elysians":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_edf.png",
+			"zea_elysians":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/overlays/zea_overlay_edf.png"
 		},
 		"paperdolls": {
 			"kol_lunaria_tl" : "graphics/ships/modules/paperdolls/kol_lunaria_tl_paperdoll.png",
@@ -379,24 +383,24 @@
 			"kol_mimosa_tl" : "graphics/ships/modules/paperdolls/kol_mimosa_tl_paperdoll.png",
 			"kol_mimosa_tr" : "graphics/ships/modules/paperdolls/kol_mimosa_tr_paperdoll.png",
 			"kol_marigold_tl" : "graphics/ships/modules/paperdolls/kol_marigold_tl_paperdoll.png",
-			"kol_marigold_tr" : "graphics/ships/modules/paperdolls/kol_marigold_tr_paperdoll.png",
+			"kol_marigold_tr" : "graphics/ships/modules/paperdolls/kol_marigold_tr_paperdoll.png"
 		}
 	},
 	"designTypeColors":{
 		"Knights of Ludd":[25,115,10,255],
 		"Dawntide":[0,255,100,255],
 		"Dusk":[171,95,176,255],
-		"Elysia":[255,253,222,255],
+		"Elysia":[255,253,222,255]
 	},
 	"plugins": {
 		"KOL_CombatPlugin": "org.selkie.kol.plugins.KOL_CombatPlugin",
 		"KOL_ArmorPaperdolls": "org.selkie.kol.plugins.KOL_ArmorPaperdolls"
 	},
 	"ruleCommandPackages": [
-        "org.selkie.kol.impl.rulecmd",
+        "org.selkie.kol.impl.rulecmd"
     ],
 	
 	"drop_prob_officer_zea_dusk_boss_core":0,
 	"drop_prob_officer_zea_dawn_boss_core":0,
-	"drop_prob_officer_zea_elysia_boss_core":0,
+	"drop_prob_officer_zea_elysia_boss_core":0
 }
