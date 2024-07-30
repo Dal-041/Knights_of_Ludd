@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -10,7 +10,7 @@ import org.magiclib.subsystems.MagicSubsystem;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.shipsystems.PulsarSystem;
 
-public class BlizzardActivator extends MagicSubsystem {
+public class BlizzardSubsystem extends MagicSubsystem {
     public static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaUtils.systemIDBlizzard);
     public static float tActive = entry.getActive();
     public float tCD = entry.getCooldown(stats);
@@ -21,7 +21,7 @@ public class BlizzardActivator extends MagicSubsystem {
     IntervalUtil intervalAI = new IntervalUtil(0.5f, 1f);
     IntervalUtil intervalActive = new IntervalUtil(0.5f, 1f);
 
-    public BlizzardActivator(ShipAPI ship) {
+    public BlizzardSubsystem(ShipAPI ship) {
         super(ship);
     }
 

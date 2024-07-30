@@ -1,43 +1,60 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
-import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.MagicSubsystem;
+import org.selkie.kol.impl.hullmods.CoronalCapacitor;
 
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-public class IFFOverrideActivator extends MagicSubsystem {
+public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
-    IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
+    private float chargeRechargeMult = 1f;
     private Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
-    private Set<ShipAPI> affectedFighters = new HashSet<>();
+    private CombatEntityAPI target = null;
 
-    public IFFOverrideActivator(ShipAPI ship) {
+    public PassiveIFFDisruptorSubsystem(ShipAPI ship) {
         super(ship);
     }
 
     @Override
+    public boolean canAssignKey() {
+        return false;
+    }
+
+    @Override
+    public boolean hasCharges() {
+        return true;
+    }
+
+    @Override
+    public int getMaxCharges() {
+        return 10;
+    }
+
+    @Override
     public String getDisplayText() {
-        return "IFF Override";
+        return "Passive IFF Disruptor";
     }
 
     @Override
     public float getBaseInDuration() {
-        return 0.2f;
+        return 0f;
     }
 
     @Override
     public float getBaseActiveDuration() {
-        return 1.5f;
+        return 0f;
     }
 
     @Override
@@ -47,72 +64,34 @@ public class IFFOverrideActivator extends MagicSubsystem {
 
     @Override
     public float getBaseCooldownDuration() {
-        return 20f;
+        return 0.1f;
     }
 
     @Override
-    public void onActivate() {
-        affectedFighters.clear();
+    public float getBaseChargeRechargeDuration() {
+        return 3f;
     }
 
     @Override
     public boolean shouldActivateAI(float amount) {
-        aiInterval.advance(amount);
-        if (aiInterval.intervalElapsed()) {
-            boolean wantToReflect = false;
+        return false;
+    }
 
-            float totalShieldDamage = 0f;
-            int mirvMissiles = 0;
-            for (MissileAPI missile : AIUtils.getNearbyEnemyMissiles(ship, getHackingRange())) {
-                float damage = missile.getDamageAmount();
-                if (missile.getDamageType() == DamageType.KINETIC) {
-                    damage *= 2;
-                } else if (missile.getDamageType() == DamageType.FRAGMENTATION) {
-                    damage *= 0.25f;
-                }
-                totalShieldDamage += damage;
-
-                if (missile.isMirv()) {
-                    mirvMissiles++;
-                }
-            }
-
-            if (mirvMissiles > 0) {
-                wantToReflect = true;
-            } else if (totalShieldDamage > 0) {
-                if (ship.getFluxTracker().getCurrFlux() + (totalShieldDamage * ship.getShield().getFluxPerPointOfDamage()) >= ship.getFluxTracker().getMaxFlux()) {
-                    wantToReflect = true;
-                } else if (totalShieldDamage >= 750f) {
-                    wantToReflect = true;
-                }
-            }
-
-            if (!wantToReflect) {
-                int nearbyFighters = 0;
-                for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, getHackingRange())) {
-                    if (enemy.isFighter())  {
-                        nearbyFighters++;
-                    }
-                }
-                wantToReflect = nearbyFighters >= 3;
-            }
-
-            return canActivate() && wantToReflect;
-        } else {
-            return false;
-        }
+    @Override
+    public boolean canActivate() {
+        return ship.getCustomData().containsKey(CoronalCapacitor.CAPACITY_FACTOR_KEY) && ((Float) ship.getCustomData().get(CoronalCapacitor.CAPACITY_FACTOR_KEY) > 20f);
     }
 
     private float getHackingRange() {
         return REFLECT_RANGE + ship.getCollisionRadius();
     }
 
-    private EmpArcEntityAPI shootEmpArcVisual(CombatEntityAPI ent){
+    private EmpArcEntityAPI shootEmpArcVisual(CombatEntityAPI ent) {
         Global.getSoundPlayer().playSound("shock_repeater_emp_impact", 1f, 1f, ent.getLocation(), ent.getVelocity());
         return Global.getCombatEngine().spawnEmpArcVisual(ship.getLocation(), ship, ent.getLocation(), ent, MathUtils.getRandomNumberInRange(2f, 5f), new Color(255, 0, 0), new Color(255, 200, 200));
     }
 
-    private EmpArcEntityAPI shootEmpArc(CombatEntityAPI ent){
+    private EmpArcEntityAPI shootEmpArc(CombatEntityAPI ent) {
         return Global.getCombatEngine().spawnEmpArc(
                 ship,
                 ship.getLocation(),
@@ -128,12 +107,47 @@ public class IFFOverrideActivator extends MagicSubsystem {
                 new Color(255, 200, 200));
     }
 
+    private float getThreatValue(MissileAPI missile) {
+        return missile.getDamageAmount() / 100f;
+    }
+
+    private float getThreatValue(ShipAPI fighter) {
+        return fighter.getHullSpec().getOrdnancePoints(null);
+    }
+
+    @Override
+    public void onActivate() {
+        if (target != null) {
+            if (target instanceof MissileAPI) {
+                shootEmpArcVisual(target);
+                missileMap.put((MissileAPI) target, new MissileTracker((MissileAPI) target));
+            } else if (target instanceof ShipAPI) {
+                shootEmpArc(target);
+            }
+
+            chargeRechargeMult = Math.max(1f, chargeRechargeMult * 0.5f);
+        }
+        target = null;
+    }
+
+
     @Override
     public void advance(float amount, boolean isPaused) {
         if (isPaused) return;
-        List<MissileAPI> missilesInRange = CombatUtils.getMissilesWithinRange(ship.getLocation(), getHackingRange());
+        if (ship.getFluxTracker().isOverloaded()) {
+            chargeRechargeMult = 1f;
+        } else {
+            chargeRechargeMult += amount * (0.5f + 2f * (Float) ship.getCustomData().get(CoronalCapacitor.CAPACITY_FACTOR_KEY));
+        }
 
-        if (state == State.ACTIVE) {
+        if (!chargeInterval.intervalElapsed()) {
+            chargeInterval.advance(amount * (chargeRechargeMult - 1f));
+        }
+
+        List<MissileAPI> missilesInRange = CombatUtils.getMissilesWithinRange(ship.getLocation(), getHackingRange());
+        if (state == State.READY && charges > 0 && !ship.getFluxTracker().isOverloadedOrVenting()) {
+            CombatEntityAPI entityToHack = null;
+            float biggestThreat = 0f;
             for (MissileAPI missile : missilesInRange) {
                 if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher"))
                     continue;
@@ -141,17 +155,25 @@ public class IFFOverrideActivator extends MagicSubsystem {
                     continue;
 
                 if (!missileMap.containsKey(missile) && missile.getOwner() != ship.getOwner()) {
-                    missileMap.put(missile, new MissileTracker(missile));
-                    shootEmpArcVisual(missile);
+                    float threat = getThreatValue(missile);
+                    if (threat > biggestThreat) {
+                        entityToHack = missile;
+                        biggestThreat = threat;
+                    }
                 }
             }
 
             List<ShipAPI> fightersInRange = AIUtils.getNearbyEnemies(ship, getHackingRange());
             for (ShipAPI fighter : fightersInRange) {
-                if (fighter.isFighter() && !affectedFighters.contains(fighter)) {
-                    shootEmpArc(fighter);
-                    affectedFighters.add(fighter);
+                if (fighter.isFighter() && getThreatValue(fighter) > biggestThreat) {
+                    entityToHack = fighter;
+                    biggestThreat = getThreatValue(fighter);
                 }
+            }
+
+            target = entityToHack;
+            if (entityToHack != null) {
+                activate();
             }
         }
 
@@ -240,11 +262,11 @@ public class IFFOverrideActivator extends MagicSubsystem {
         }
     }
 
-    public static class DummyMissileAI implements MissileAIPlugin, GuidedMissileAI {
+    private static class DummyMissileAI implements MissileAIPlugin, GuidedMissileAI {
         CombatEntityAPI target;
         MissileAPI missile;
 
-        public DummyMissileAI(MissileAPI missile, CombatEntityAPI target) {
+        private DummyMissileAI(MissileAPI missile, CombatEntityAPI target) {
             setTarget(target);
             this.missile = missile;
         }

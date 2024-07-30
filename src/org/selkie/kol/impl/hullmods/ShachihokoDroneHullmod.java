@@ -7,13 +7,13 @@ import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.subsystems.MagicSubsystemsManager;
-import org.selkie.kol.impl.combat.activators.ShachihokoDroneActivator;
+import org.selkie.kol.impl.combat.subsystems.ShachihokoDroneSubsystem;
 
 import java.awt.*;
 
 public class ShachihokoDroneHullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneSubsystem(ship));
     }
 
     @Override
@@ -28,7 +28,7 @@ public class ShachihokoDroneHullmod extends BaseHullMod {
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        ShachihokoDroneActivator activator = new ShachihokoDroneActivator(ship);
+        ShachihokoDroneSubsystem activator = new ShachihokoDroneSubsystem(ship);
         ShipHullSpecAPI drone = Global.getSettings().getVariant(activator.getDroneVariant()).getHullSpec();
         String health = String.valueOf(Math.round(drone.getFluxCapacity() / drone.getShieldSpec().getFluxPerDamageAbsorbed() + drone.getArmorRating() + drone.getHitpoints()));
 

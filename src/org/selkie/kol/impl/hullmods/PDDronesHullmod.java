@@ -5,13 +5,13 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.subsystems.MagicSubsystemsManager;
-import org.selkie.kol.impl.combat.activators.PDDroneActivator;
+import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem;
 
 import java.awt.*;
 
 public class PDDronesHullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        MagicSubsystemsManager.addSubsystemToShip(ship, new PDDroneActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new PDDroneSubsystem(ship));
     }
     public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {
         return null;
@@ -24,7 +24,7 @@ public class PDDronesHullmod extends BaseHullMod {
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        PDDroneActivator activator = new PDDroneActivator(ship);
+        PDDroneSubsystem activator = new PDDroneSubsystem(ship);
 
         float pad = 3f;
         float opad = 10f;

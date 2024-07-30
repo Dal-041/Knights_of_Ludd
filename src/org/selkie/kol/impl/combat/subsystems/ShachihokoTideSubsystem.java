@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShieldAPI;
@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ShachihokoTideActivator extends MagicDroneSubsystem {
+public class ShachihokoTideSubsystem extends MagicDroneSubsystem {
     private static final Color BASE_SHIELD_COLOR = new Color(220, 190, 70, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
@@ -30,7 +30,7 @@ public class ShachihokoTideActivator extends MagicDroneSubsystem {
     private final IntervalUtil intervalCheck = new IntervalUtil(0.25f, 0.5f);
     private final PIDController PID = new PIDController(6f, 4f, 8f, 3f);
 
-    public ShachihokoTideActivator(ShipAPI ship) {
+    public ShachihokoTideSubsystem(ShipAPI ship) {
         super(ship);
     }
 

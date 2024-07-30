@@ -15,8 +15,8 @@ import org.lazywizard.lazylib.MathUtils
 import org.magiclib.subsystems.MagicSubsystemsManager.addSubsystemToShip
 import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.Utils
-import org.selkie.kol.impl.combat.activators.SimpleShieldDronesActivator
-import org.selkie.kol.impl.combat.activators.SmartShieldDronesActivator
+import org.selkie.kol.impl.combat.subsystems.SimpleShieldDronesSubsystem
+import org.selkie.kol.impl.combat.subsystems.SmartShieldDronesSubsystem
 import java.awt.Color
 import java.util.*
 
@@ -102,9 +102,9 @@ class DawnBuiltin : BaseHullMod() {
         super.applyEffectsAfterShipCreation(ship, id)
         if (ship.hullSize == HullSize.CRUISER || ship.hullSize == HullSize.CAPITAL_SHIP) {
             if (ship.hullSpec.baseHullId == "zea_boss_nian") {
-                addSubsystemToShip(ship, SmartShieldDronesActivator(ship))
+                addSubsystemToShip(ship, SmartShieldDronesSubsystem(ship))
             }else{
-                addSubsystemToShip(ship, SimpleShieldDronesActivator(ship))
+                addSubsystemToShip(ship, SimpleShieldDronesSubsystem(ship))
             }
         }
     }
@@ -153,7 +153,7 @@ class DawnBuiltin : BaseHullMod() {
 
 
         val hasShieldDrones = hullSize == HullSize.CAPITAL_SHIP || hullSize == HullSize.CRUISER
-        val activator = if (ship.hullSpec.baseHullId == "zea_boss_nian") SmartShieldDronesActivator(ship) else SimpleShieldDronesActivator(ship)
+        val activator = if (ship.hullSpec.baseHullId == "zea_boss_nian") SmartShieldDronesSubsystem(ship) else SimpleShieldDronesSubsystem(ship)
         val drone = Global.getSettings().getVariant(activator.getDroneVariant()).hullSpec
         val health = Math.round(drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints).toString()
         val maxDrones = activator.getMaxDeployedDrones().toString()

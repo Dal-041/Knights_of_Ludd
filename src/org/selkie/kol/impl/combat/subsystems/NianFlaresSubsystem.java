@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MissileAPI;
@@ -14,7 +14,7 @@ import org.selkie.kol.impl.hullmods.NianBoss;
 import java.awt.*;
 import java.util.List;
 
-public class NianFlaresActivator extends MagicSubsystem {
+public class NianFlaresSubsystem extends MagicSubsystem {
     private static final int FLARES_PER_WAVE_PER_SIDE = 36;
     private static final int FLARE_WAVES_NORMAL = 1;
     private static final int FLARE_WAVES_ENRAGED = 3;
@@ -27,7 +27,7 @@ public class NianFlaresActivator extends MagicSubsystem {
     int flaresReleasedInWave = 0;
     int wavesToLaunch = 0;
 
-    public NianFlaresActivator(ShipAPI ship) {
+    public NianFlaresSubsystem(ShipAPI ship) {
         super(ship);
     }
 

@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.ShipCommand;
@@ -19,12 +19,12 @@ import java.util.Map;
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class SimpleShieldDronesActivator extends MagicDroneSubsystem {
+public class SimpleShieldDronesSubsystem extends MagicDroneSubsystem {
     private static Color BASE_SHIELD_COLOR = Color.cyan;
     private static Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static float SHIELD_ALPHA = 0.25f;
 
-    public SimpleShieldDronesActivator(ShipAPI ship) {
+    public SimpleShieldDronesSubsystem(ShipAPI ship) {
         super(ship);
     }
 

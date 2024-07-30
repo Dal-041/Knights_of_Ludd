@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -17,8 +17,8 @@ import java.util.Map;
 /**
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
-public class PDDroneActivator extends MagicDroneSubsystem {
-    public PDDroneActivator(ShipAPI ship) {
+public class PDDroneSubsystem extends MagicDroneSubsystem {
+    public PDDroneSubsystem(ShipAPI ship) {
         super(ship);
     }
 

@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
@@ -13,7 +13,7 @@ import java.awt.*;
 import java.util.*;
 import java.util.List;
 
-public class BallLightningActivator extends MagicSubsystem {
+public class BallLightningSubsystem extends MagicSubsystem {
     private static final int MAX_TARGETS = 5;
     private static final float MAX_RANGE = 500f;
     private static final float MAX_ARC = 90f;
@@ -23,7 +23,7 @@ public class BallLightningActivator extends MagicSubsystem {
     IntervalUtil lightningInterval = new IntervalUtil(0.07f, 0.15f);
     IntervalUtil lightningDamageInterval = new IntervalUtil(0.05f, 0.5f);
     IntervalUtil aiInterval = new IntervalUtil(0.5f,1f);
-    public BallLightningActivator(ShipAPI ship) {
+    public BallLightningSubsystem(ShipAPI ship) {
         super(ship);
         this.ship = ship;
     }

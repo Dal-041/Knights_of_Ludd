@@ -14,8 +14,8 @@ import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.ParticleController;
 import org.selkie.kol.combat.StarficzAIUtils;
-import org.selkie.kol.impl.combat.activators.ShachihokoDroneActivator;
-import org.selkie.kol.impl.combat.activators.ShachihokoTideActivator;
+import org.selkie.kol.impl.combat.subsystems.ShachihokoDroneSubsystem;
+import org.selkie.kol.impl.combat.subsystems.ShachihokoTideSubsystem;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.shipsystems.CorruptionJetsStats;
 
@@ -76,8 +76,8 @@ public class CorruptingHeartBoss extends BaseHullMod {
                 if (phaseTwoTimer > maxTime) {
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
                     ship.setPhased(false);
-                    MagicSubsystemsManager.removeSubsystemFromShip(ship, ShachihokoDroneActivator.class);
-                    MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoTideActivator(ship));
+                    MagicSubsystemsManager.removeSubsystemFromShip(ship, ShachihokoDroneSubsystem.class);
+                    MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoTideSubsystem(ship));
                     return;
                 }
 
@@ -168,7 +168,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
-            MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneActivator(ship));
+            MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneSubsystem(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

@@ -16,9 +16,8 @@ import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.subsystems.MagicSubsystemsManager.addSubsystemToShip
 import org.selkie.kol.combat.StarficzAIUtils
-import org.selkie.kol.impl.combat.activators.NianFlaresActivator
+import org.selkie.kol.impl.combat.subsystems.NianFlaresSubsystem
 import org.selkie.kol.impl.helpers.ZeaUtils
-import org.selkie.kol.impl.hullmods.NianBoss.NianBossEnragedScript
 import org.selkie.kol.impl.shipsystems.SupernovaStats
 import java.awt.Color
 import java.util.*
@@ -141,7 +140,7 @@ class NianBoss : BaseHullMod() {
     }
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
-        addSubsystemToShip(ship, NianFlaresActivator(ship))
+        addSubsystemToShip(ship, NianFlaresSubsystem(ship))
         val isBoss = ship.variant.hasTag(ZeaUtils.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaUtils.BOSS_TAG)
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(NianBossEnragedScript::class.java)) ship.addListener(NianBossEnragedScript(ship))

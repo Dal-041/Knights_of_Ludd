@@ -20,7 +20,7 @@ import org.magiclib.subsystems.drones.MagicDroneSubsystem
 import org.magiclib.util.MagicUI
 import org.selkie.kol.Utils
 import org.selkie.kol.hullmods.HullmodBackgroundElement
-import org.selkie.kol.impl.combat.activators.PDDroneActivator
+import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
 import java.awt.Color
 import kotlin.math.max
 import kotlin.math.min
@@ -289,7 +289,7 @@ class ElysianBuiltin : BaseHullMod() {
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String?) {
         if (!ship.hasListenerOfClass(ElysianBuiltinListener::class.java)) ship.addListener(ElysianBuiltinListener(ship))
-        if (ship.hullSize != HullSize.FIGHTER) addSubsystemToShip(ship, PDDroneActivator(ship))
+        if (ship.hullSize != HullSize.FIGHTER) addSubsystemToShip(ship, PDDroneSubsystem(ship))
     }
 
     override fun advanceInCampaign(member: FleetMemberAPI?, amount: Float) {
@@ -348,7 +348,7 @@ class ElysianBuiltin : BaseHullMod() {
         coronalCapacitor.addPara("  - Top Speed", listPad, activeHighlightColor, "Top Speed");
         coronalCapacitor.addPara("  - Acceleration", listPad, activeHighlightColor, "Acceleration");*/tooltip.addImageWithText(underHeadingPad)
         val hasShieldDrones = hullSize != HullSize.FIGHTER
-        val activator: MagicDroneSubsystem = PDDroneActivator(ship)
+        val activator: MagicDroneSubsystem = PDDroneSubsystem(ship)
         val maxDrones = activator.getMaxDeployedDrones().toString()
         val recharge = Math.round(activator.baseChargeRechargeDuration).toString()
         tooltip.addSectionHeading(

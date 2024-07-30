@@ -13,8 +13,8 @@ import org.magiclib.subsystems.MagicSubsystemsManager;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
-import org.selkie.kol.impl.combat.activators.BallLightningActivator;
-import org.selkie.kol.impl.combat.activators.BlizzardActivator;
+import org.selkie.kol.impl.combat.subsystems.BallLightningSubsystem;
+import org.selkie.kol.impl.combat.subsystems.BlizzardSubsystem;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.awt.*;
@@ -114,14 +114,14 @@ public class YukionnaBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        MagicSubsystemsManager.addSubsystemToShip(ship, new BallLightningActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new BallLightningSubsystem(ship));
         boolean isBoss = ship.getVariant().hasTag(ZeaUtils.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
                 (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaUtils.BOSS_TAG))));
 
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class))
                 ship.addListener(new YukionnaBossPhaseTwoScript(ship));
-            MagicSubsystemsManager.addSubsystemToShip(ship, new BlizzardActivator(ship));
+            MagicSubsystemsManager.addSubsystemToShip(ship, new BlizzardSubsystem(ship));
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
             //for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) { member.getVariant().addTag(ZeaUtils.BOSS_TAG); }

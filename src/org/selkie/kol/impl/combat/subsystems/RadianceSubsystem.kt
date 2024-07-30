@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators
+package org.selkie.kol.impl.combat.subsystems
 
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.CombatEntityAPI
@@ -19,7 +19,6 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
 import org.magiclib.subsystems.MagicSubsystem
 import org.magiclib.util.MagicRender
-import org.selkie.kol.combat.ParticleData
 import org.selkie.kol.impl.hullmods.CoronalCapacitor
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
@@ -263,32 +262,3 @@ class RadianceActivator(ship: ShipAPI?) : MagicSubsystem(ship) {
 }
 
 
-class FlameParticleData(
-    x: Float,
-    y: Float,
-    xVel: Float,
-    yVel: Float,
-    angle: Float,
-    aVel: Float,
-    ttl: Float,
-    startingSize: Float,
-    endSize: Float,
-    startingColor: Color,
-    endColor: Color
-) : ParticleData(
-    sprite = Global.getSettings().getSprite("graphics/fx/nebula_colorless.png"),
-    x = x,
-    y = y,
-    xVel = xVel,
-    yVel = yVel,
-    angle = angle,
-    aVel = aVel,
-    startingTime = Global.getCombatEngine().getTotalElapsedTime(false),
-    ttl = ttl,
-    startingSize = startingSize,
-    endSize = endSize,
-    startingColor = startingColor,
-    endColor = endColor,
-    spritesInRow = 4,
-    spritesInColumn = 4
-)

@@ -7,13 +7,13 @@ import com.fs.starfarer.api.combat.ShipHullSpecAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.subsystems.MagicSubsystemsManager;
-import org.selkie.kol.impl.combat.activators.SmartShieldDronesActivator;
+import org.selkie.kol.impl.combat.subsystems.SmartShieldDronesSubsystem;
 
 import java.awt.*;
 
 public class SmartShieldDronesHullmod extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        MagicSubsystemsManager.addSubsystemToShip(ship, new SmartShieldDronesActivator(ship));
+        MagicSubsystemsManager.addSubsystemToShip(ship, new SmartShieldDronesSubsystem(ship));
     }
 
     public String getDescriptionParam(int index, ShipAPI.HullSize hullSize) {
@@ -27,7 +27,7 @@ public class SmartShieldDronesHullmod extends BaseHullMod {
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
-        SmartShieldDronesActivator activator = new SmartShieldDronesActivator(ship);
+        SmartShieldDronesSubsystem activator = new SmartShieldDronesSubsystem(ship);
         ShipHullSpecAPI drone = Global.getSettings().getVariant(activator.getDroneVariant()).getHullSpec();
         String health = String.valueOf(Math.round(drone.getFluxCapacity() / drone.getShieldSpec().getFluxPerDamageAbsorbed() + drone.getArmorRating() + drone.getHitpoints()));
 

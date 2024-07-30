@@ -1,4 +1,4 @@
-package org.selkie.kol.impl.combat.activators;
+package org.selkie.kol.impl.combat.subsystems;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -18,7 +18,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.*;
 
-public class ShachihokoDroneActivator extends MagicDroneSubsystem {
+public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
     private static final Color BASE_SHIELD_COLOR = new Color(220, 190, 70, 255);
     private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
     private static final float SHIELD_ALPHA = 0.25f;
@@ -29,7 +29,7 @@ public class ShachihokoDroneActivator extends MagicDroneSubsystem {
     private ShipAPI target = null;
     private ShipAPI droneTarget = null;
 
-    public ShachihokoDroneActivator(ShipAPI ship) {
+    public ShachihokoDroneSubsystem(ShipAPI ship) {
         super(ship);
     }
 

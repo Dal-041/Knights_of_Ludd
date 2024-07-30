@@ -4,17 +4,15 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.graphics.SpriteAPI;
-import com.fs.starfarer.api.impl.campaign.terrain.RangeBlockerUtil;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.loading.Description;
 import com.fs.starfarer.api.loading.TerrainSpecAPI;
-import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.combat.activators.IFFOverrideActivator;
+import org.selkie.kol.impl.combat.subsystems.IFFOverrideSubsystem;
 import org.selkie.kol.impl.combat.madness.*;
 
 import java.awt.*;
@@ -385,7 +383,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                         if (tgt.getMissileAI() instanceof GuidedMissileAI) {
                             ((GuidedMissileAI) tgt.getMissileAI()).setTarget(tgt.getSource());
                         } else if (tgt.isGuided()) {
-                            tgt.setMissileAI(new IFFOverrideActivator.DummyMissileAI(tgt, tgt.getSource()));
+                            tgt.setMissileAI(new IFFOverrideSubsystem.DummyMissileAI(tgt, tgt.getSource()));
                         } //Salamander sourced missiles
 
                         tgt.setOwner(ship.getOwner());
