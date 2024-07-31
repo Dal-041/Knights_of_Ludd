@@ -24,7 +24,7 @@ import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
 
 
-class RadianceActivator(ship: ShipAPI?) : MagicSubsystem(ship) {
+class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
     private val PARTICLE_INTERVAL = IntervalUtil(1f, 1f)
     private var dummyMine: CombatEntityAPI? = null
 

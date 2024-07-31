@@ -2,6 +2,7 @@ package org.selkie.kol.impl.campaign;
 
 import com.fs.starfarer.api.PluginPick;
 import com.fs.starfarer.api.campaign.*;
+import org.selkie.kol.impl.campaign.interactions.DuskStationInteraction;
 import org.selkie.kol.impl.campaign.interactions.ElysianHypershuntInteraction;
 
 public class ZeaCampaignPlugin extends BaseCampaignPlugin {
@@ -13,6 +14,7 @@ public class ZeaCampaignPlugin extends BaseCampaignPlugin {
         if (interactionTarget.getCustomEntitySpec() != null) {
             CustomEntitySpecAPI spec = interactionTarget.getCustomEntitySpec();
             if (spec.getId().equals("zea_edf_coronal_tap")) return new PluginPick<InteractionDialogPlugin>(new ElysianHypershuntInteraction(), PickPriority.HIGHEST);
+            if (spec.getId().equals("zea_research_station_dusk")) return new PluginPick<InteractionDialogPlugin>(new DuskStationInteraction(), PickPriority.HIGHEST);
         }
 
        // super.pickInteractionDialogPlugin(interactionTarget)
