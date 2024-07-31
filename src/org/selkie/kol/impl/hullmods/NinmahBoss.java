@@ -428,7 +428,7 @@ public class NinmahBoss extends BaseHullMod {
                 if (shipTargetPoint != null && (assignmentType == CombatAssignmentType.SEARCH_AND_DESTROY || assignmentType == null)) {
                     Vector2f shipStrafePoint = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), shipStrafeAngle);
                     StarficzAIUtils.strafeToPoint(ship, shipStrafePoint);
-                    //turnToPoint(target.getLocation());
+                    StarficzAIUtils.turnToPoint(ship, target.getLocation());
                     ship.setShipTarget(target);
                 }
 

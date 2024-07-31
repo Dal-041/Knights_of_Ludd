@@ -41,13 +41,28 @@ public class StarficzAIUtils {
             if (!(next instanceof DamagingProjectileAPI)) continue;
             DamagingProjectileAPI threat = (DamagingProjectileAPI) next;
             if(threat.isFading()) continue;
-            if(threat.getOwner() == ship.getOwner()) continue;
+            if(threat.getOwner() == ship.getOwner() && !(threat instanceof MissileAPI && ((MissileAPI) threat).isMine())) continue;
 
             float shipRadius = Misc.getTargetingRadius(threat.getLocation(), ship, false);
-            // Guided missiles get dealt with here
+            // Guided missiles and mines get dealt with here
             if (threat instanceof MissileAPI){
                 MissileAPI missile = (MissileAPI) threat;
                 if (missile.isFlare()) continue; // ignore flares
+
+                if (missile.isMine()){
+                    if(MathUtils.isPointWithinCircle(testPoint, missile.getLocation(),shipRadius + missile.getMineExplosionRange() * 1.1f )) {
+                        futurehit.timeToHit = missile.getUntilMineExplosion() - 0.1f;
+                        futurehit.angle = VectorUtils.getAngle(testPoint, missile.getLocation());
+                        futurehit.damageType = missile.getDamageType();
+                        futurehit.softFlux = missile.getDamage().isSoftFlux();
+                        float damage = calculateTrueDamage(ship, missile.getDamageAmount(), missile.getWeapon(), missile.getSource().getMutableStats());
+                        futurehit.hitStrength = damage;
+                        futurehit.damage = damage * Math.max(missile.getMirvNumWarheads(), 1);
+                        futureHits.add(futurehit);
+                    }
+                    continue; // skip to next object if not hit, this point should be a complete filter of mines
+                }
+
                 if (missile.isGuided() && (missile.getWeapon() == null || !(missile.getWeapon().getId().equals("squall") && missile.getFlightTime() > 1f))){ // special case the squall
                     boolean hit = false;
                     float travelTime = 0f;
