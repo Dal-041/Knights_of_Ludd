@@ -14,6 +14,11 @@ public class kol_battlestar extends OrbitalStation {
     }
 
     @Override
+    public boolean showWhenUnavailable() {
+        return false;
+    }
+
+    @Override
     public boolean isAvailableToBuild() {
         return false;
     }
