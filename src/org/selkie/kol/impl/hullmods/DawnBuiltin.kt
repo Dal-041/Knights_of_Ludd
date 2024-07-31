@@ -24,12 +24,16 @@ import java.util.*
 class DawnBuiltin : BaseHullMod() {
     //smooth instead of flat
     //public static final float HULL_PERCENTAGE = 0.5f;
-    private val ID = "CascadeTargetingProtocol"
+    companion object{
+        val ID = "CascadeTargetingProtocol"
 
-    val RANGE_BONUS = 10f // 200su
-    val ENMITY_BONUS_ROF_RELOAD = 30f
-    val ENMITY_BONUS_FLUX_REDUCTION = 15f
-    val ENMITY_HP_THRESHOLD = 50f
+        val RANGE_BONUS = 10f // 200su
+        val ENMITY_BONUS_ROF_RELOAD = 30f
+        val ENMITY_BONUS_FLUX_REDUCTION = 15f
+        val ENMITY_HP_THRESHOLD = 50f
+        val DRONE_ADDED_KEY = "DawnHullmodDronesAdded"
+    }
+
 
     override fun advanceInCombat(ship: ShipAPI, amount: Float) {
         if (!ship.isAlive) {
@@ -100,6 +104,7 @@ class DawnBuiltin : BaseHullMod() {
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         super.applyEffectsAfterShipCreation(ship, id)
+        ship.setCustomData(DRONE_ADDED_KEY, true)
         if (ship.hullSize == HullSize.CRUISER || ship.hullSize == HullSize.CAPITAL_SHIP) {
             if (ship.hullSpec.baseHullId == "zea_boss_nian") {
                 addSubsystemToShip(ship, SmartShieldDronesSubsystem(ship))

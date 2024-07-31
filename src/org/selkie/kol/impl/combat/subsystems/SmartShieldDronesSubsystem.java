@@ -99,7 +99,7 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
 
     @Override
     public String getDisplayText() {
-        return "Shield Drones";
+        return "Chiwen Shield Drones";
     }
 
     @Override

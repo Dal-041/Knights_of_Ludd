@@ -363,6 +363,10 @@ class ElysianBuiltin : BaseHullMod() {
             if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, maxDrones, "Burst PD Laser"
         )
         PDDrones.addPara(
+            "PD drones launch 3 smart flares when parent vessel active vents.", listPad,
+            if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, maxDrones, "3"
+        )
+        PDDrones.addPara(
             "Drones regenerate once every %s seconds.", listPad,
             if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, recharge
         )
