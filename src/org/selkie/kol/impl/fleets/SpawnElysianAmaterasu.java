@@ -7,6 +7,7 @@ import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
@@ -67,13 +68,13 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.setDiscoverable(true);
 		elysianBossFleet.getFleetData().ensureHasFlagship();
 		elysianBossFleet.getMemoryWithoutUpdate().set("$zea_amaterasu", true);
-		elysianBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+		elysianBossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
 		elysianBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(elysianBossFleet, 440);
 
-		for(String support : ZeaUtils.elysianBossSupportingFleet) {
+		for(String support : ZeaStaticStrings.elysianBossSupportingFleet) {
 			//elysianBossFleet.getFleetData().addFleetMember(support);
 		}
 

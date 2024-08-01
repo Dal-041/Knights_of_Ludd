@@ -12,7 +12,7 @@ import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -22,7 +22,7 @@ import java.util.List;
 
 public class SupernovaStats extends BaseShipSystemScript {
     public static final float EXPLOSION_RADIUS = 1000f;
-    protected static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaUtils.systemIDSupernova);
+    protected static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDSupernova);
     private static final float IN_STATE_DURATION = entry.getIn(); //2f;
     private static final float ACTIVE_STATE_DURATION = entry.getActive(); //4f;
     private static final String SUPERNOVA = "SUPERNOVA";

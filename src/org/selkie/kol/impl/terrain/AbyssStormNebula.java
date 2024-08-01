@@ -17,8 +17,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.helpers.ZeaUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
@@ -353,7 +352,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
         }
 
         if (Global.getSector()!= null && Global.getSector().getCurrentLocation() != null
-                && !Global.getSector().getCurrentLocation().hasTag(ZeaUtils.THEME_STORM)) {
+                && !Global.getSector().getCurrentLocation().hasTag(ZeaStaticStrings.THEME_STORM)) {
             return;
         }
 

@@ -10,7 +10,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BreadcrumbSpec
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.List;
@@ -107,7 +107,7 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
 
     public Set<String> getIntelTags(SectorMapAPI map) {
         Set<String> tags = super.getIntelTags(map);
-        tags.add(ZeaUtils.IntelBreadcrumbTag);
+        tags.add(ZeaStaticStrings.IntelBreadcrumbTag);
         return tags;
     }
 

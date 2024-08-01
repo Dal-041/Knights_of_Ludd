@@ -14,9 +14,8 @@ import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
 import org.selkie.kol.impl.intel.ZeaLoreManager;
@@ -83,7 +82,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     if (!variant.hasTag(Tags.SHIP_UNIQUE_SIGNATURE)) variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    if (variant.hasTag(ZeaUtils.BOSS_TAG)) variant.removeTag(ZeaUtils.BOSS_TAG);
+                    if (variant.hasTag(ZeaStaticStrings.BOSS_TAG)) variant.removeTag(ZeaStaticStrings.BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
                     if (variant.getHullSpec().getBaseHullId().startsWith("zea_boss_ninmah")) foundNinmah = true;
@@ -145,7 +144,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 for (FleetMemberAPI member : otherFleet.getMembersWithFightersCopy()) {
                     if (member.getHullId().startsWith("zea_boss")) {
                         if (!member.getVariant().hasTag(Tags.VARIANT_UNBOARDABLE)) member.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-                        if (!member.getVariant().hasTag(ZeaUtils.BOSS_TAG))member.getVariant().addTag(ZeaUtils.BOSS_TAG);
+                        if (!member.getVariant().hasTag(ZeaStaticStrings.BOSS_TAG))member.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
                     }
                 }
             }

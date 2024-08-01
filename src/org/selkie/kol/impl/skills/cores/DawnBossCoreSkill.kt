@@ -14,9 +14,11 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.subsystems.MagicSubsystemsManager
 import org.selkie.kol.impl.combat.subsystems.SimpleShieldDronesSubsystem
 import org.selkie.kol.impl.combat.subsystems.SmartShieldDronesSubsystem
+import org.selkie.kol.impl.helpers.ZeaStaticStrings
 import org.selkie.kol.impl.hullmods.DawnBuiltin
 
 class DawnBossCoreSkill : BaseCoreOfficerSkill() {
+    override val skillID = ZeaStaticStrings.BossCore.DAWN_CORE_SKILL_ID
     class DawnBossCoreListener(var ship: ShipAPI) : HullDamageAboutToBeTakenListener, AdvanceableListener {
         var damperTriggered = false
         var damperTimer = 8f
@@ -45,8 +47,6 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
             }
         }
     }
-
-    var modID = "zea_dawn_boss_skill"
 
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP

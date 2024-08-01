@@ -15,7 +15,7 @@ import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.subsystems.BallLightningSubsystem;
 import org.selkie.kol.impl.combat.subsystems.BlizzardSubsystem;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -115,8 +115,8 @@ public class YukionnaBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         MagicSubsystemsManager.addSubsystemToShip(ship, new BallLightningSubsystem(ship));
-        boolean isBoss = ship.getVariant().hasTag(ZeaUtils.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaUtils.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.BOSS_TAG))));
 
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class))

@@ -6,6 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 
 abstract class BaseCoreOfficerSkill : ShipSkillEffect, CustomSkillDescription {
+    abstract val skillID: String
     final override fun getEffectDescription(level: Float): String {
         return ""
     }

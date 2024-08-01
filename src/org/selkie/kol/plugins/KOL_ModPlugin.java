@@ -8,7 +8,6 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 
-import lunalib.lunaRefit.LunaRefitManager;
 import mmm.missions.DefenseMission;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
@@ -17,7 +16,7 @@ import org.selkie.kol.impl.campaign.AICoreCampaignPlugin;
 import org.selkie.kol.impl.campaign.ZeaCampaignPlugin;
 import org.selkie.kol.impl.campaign.cores.AICoreDropReplacerScript;
 import org.selkie.kol.impl.campaign.cores.AICoreReplacerScript;
-import org.selkie.kol.impl.campaign.cores.DuskCoreRefitButton;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.listeners.ReportTransit;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
@@ -53,7 +52,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 		if (hasMMM) { //Remove after week 1
 			Set<String> BL = DefenseMission.FACTION_BLACKLIST;
-			for (String faction : ZeaUtils.factionIDs) {
+			for (String faction : ZeaStaticStrings.factionIDs) {
 				if (!BL.contains(faction)) BL.add(faction);
 			}
 		}

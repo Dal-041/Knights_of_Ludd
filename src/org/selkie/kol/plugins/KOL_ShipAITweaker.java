@@ -9,18 +9,16 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import org.selkie.kol.helpers.KOLStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
 
 public class KOL_ShipAITweaker {
     public static PluginPick<ShipAIPlugin> pickShipAI(FleetMemberAPI member, ShipAPI ship) {
         if (ship.isFighter()) return null;
         String hullId = ship.getHullSpec().getBaseHullId();
 
-        if (!Arrays.asList(KOLStaticStrings.knightsShips).contains(hullId) && !Arrays.asList(ZeaUtils.zeaAIOverrideShips).contains(hullId)) return null;
+        if (!Arrays.asList(KOLStaticStrings.knightsShips).contains(hullId) && !Arrays.asList(ZeaStaticStrings.zeaAIOverrideShips).contains(hullId)) return null;
 
         //HullSize size = ship.getHullSize();
 

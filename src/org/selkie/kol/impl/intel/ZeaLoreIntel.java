@@ -5,7 +5,7 @@ import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.io.IOException;
@@ -105,7 +105,7 @@ public class ZeaLoreIntel extends BaseIntelPlugin {
 
     public Set<String> getIntelTags(SectorMapAPI map) {
         Set<String> tags = super.getIntelTags(map);
-        tags.add(ZeaUtils.IntelLoreTag);
+        tags.add(ZeaStaticStrings.IntelLoreTag);
         return tags;
     }
 

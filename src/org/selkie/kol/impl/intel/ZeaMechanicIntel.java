@@ -7,7 +7,7 @@ import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
@@ -163,7 +163,7 @@ private static ArrayList<String[]> KoLHLs = new ArrayList<>();
 
     public Set<String> getIntelTags(SectorMapAPI map) {
         Set<String> tags = super.getIntelTags(map);
-        if (!name.contains("Knights")) tags.add(ZeaUtils.IntelLoreTag);
+        if (!name.contains("Knights")) tags.add(ZeaStaticStrings.IntelLoreTag);
         else tags.add("Knights of Ludd");
         return tags;
     }

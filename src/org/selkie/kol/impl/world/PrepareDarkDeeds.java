@@ -39,6 +39,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.MagneticFieldTerrainPlugin.Mag
 import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
@@ -128,8 +129,8 @@ public class PrepareDarkDeeds {
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
         TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
-        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
-        TT1BossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+        TT1BossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
         TT1BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
@@ -341,7 +342,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    copy.variant.removeTag(ZeaUtils.BOSS_TAG);
+                    copy.variant.removeTag(ZeaStaticStrings.BOSS_TAG);
                     copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
@@ -522,8 +523,8 @@ public class PrepareDarkDeeds {
                 .create();
         TT3BossFleet.setDiscoverable(true);
         TT3BossFleet.getFleetData().ensureHasFlagship();
-        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
-        TT3BossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+        TT3BossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
         TT3BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         //Support fleet stuff

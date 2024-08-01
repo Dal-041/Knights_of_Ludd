@@ -10,10 +10,10 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.magiclib.subsystems.MagicSubsystemsManager
 import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
 class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
-
-    var modID = "zea_elysia_boss_skill"
+    override val skillID = BossCore.ELYSIAN_CORE_SKILL_ID
 
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP
@@ -45,7 +45,7 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
     override fun apply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?, level: Float) {
         var variant = stats!!.variant
 
-        stats.dynamic.getStat(Stats.ALL_FIGHTER_COST_MOD).modifyMult(modID, 0.8f)
+        stats.dynamic.getStat(Stats.ALL_FIGHTER_COST_MOD).modifyMult(skillID, 0.8f)
         if (stats!!.entity is ShipAPI) {
             val ship = stats.entity as ShipAPI
             var hasDrones = false
@@ -63,6 +63,6 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
         if (stats!!.entity is ShipAPI) {
             var ship = stats.entity as ShipAPI
         }
-        stats.dynamic.getStat(Stats.ALL_FIGHTER_COST_MOD).unmodify(modID)
+        stats.dynamic.getStat(Stats.ALL_FIGHTER_COST_MOD).unmodify(skillID)
     }
 }

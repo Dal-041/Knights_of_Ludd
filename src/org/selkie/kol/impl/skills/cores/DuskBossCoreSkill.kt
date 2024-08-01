@@ -14,13 +14,12 @@ import com.fs.starfarer.api.combat.listeners.WeaponRangeModifier
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.lazywizard.lazylib.combat.CombatUtils
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.NinmahBoss.NinmahAIScript
 import org.selkie.kol.impl.skills.cores.BaseCoreOfficerSkill
 
 class DuskBossCoreSkill : BaseCoreOfficerSkill() {
-
-    var modID = "zea_dusk_boss_skill"
-
+    override val skillID = BossCore.DUSK_CORE_SKILL_ID
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP
     }
@@ -48,9 +47,9 @@ class DuskBossCoreSkill : BaseCoreOfficerSkill() {
             }
         }
 
-        stats.phaseCloakUpkeepCostBonus.modifyMult(modID, 0.75f)
+        stats.phaseCloakUpkeepCostBonus.modifyMult(skillID, 0.75f)
         //stats.phaseCloakCooldownBonus.modifyMult(modID, 0.80f)
-        stats.phaseCloakActivationCostBonus.modifyMult(modID, 0f)
+        stats.phaseCloakActivationCostBonus.modifyMult(skillID, 0f)
     }
 
     override fun unapply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?) {

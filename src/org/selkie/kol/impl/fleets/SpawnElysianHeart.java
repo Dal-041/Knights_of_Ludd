@@ -8,6 +8,7 @@ import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
@@ -74,13 +75,13 @@ public class SpawnElysianHeart {
 		elysianHeartFleet.setDiscoverable(true);
 		elysianHeartFleet.getFleetData().ensureHasFlagship();
 		elysianHeartFleet.getMemoryWithoutUpdate().set("$zea_corruptingheart", true);
-		elysianHeartFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+		elysianHeartFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
 		elysianHeartFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		elysianHeartFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 		ZeaUtils.ZeaBossGenFleetWeaver(elysianHeartFleet, 440);
 
-		for(String support : ZeaUtils.elysianBossSupportingFleet) {
+		for(String support : ZeaStaticStrings.elysianBossSupportingFleet) {
 			//elysianHeartFleet.getFleetData().addFleetMember(support);
 		}
 

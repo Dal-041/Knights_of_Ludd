@@ -4,7 +4,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
-import com.fs.starfarer.api.characters.SkillSpecAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
@@ -23,6 +22,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaMechanicIntel;
 import org.selkie.kol.impl.world.*;
@@ -32,7 +32,6 @@ import java.util.Random;
 
 import static com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent.pickSkill;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
-import static org.selkie.kol.impl.world.PrepareAbyss.log;
 
 public class ZeaFleetManager extends SeededFleetManager {
 
@@ -96,7 +95,7 @@ public class ZeaFleetManager extends SeededFleetManager {
             boolean skip = false;
             if (member.isFighterWing()) continue;
             if (pruneCaps && member.getHullSpec().getHullSize().equals(ShipAPI.HullSize.CAPITAL_SHIP)) continue;
-            for (String s : ZeaUtils.hullBlacklist) {
+            for (String s : ZeaStaticStrings.hullBlacklist) {
                 if (s.equals(member.getHullId())) {
                     skip = true;
                 }
@@ -185,7 +184,7 @@ public class ZeaFleetManager extends SeededFleetManager {
             float w = 5f; //1f
             if (entity.hasTag(Tags.NEUTRINO_HIGH)) w = 15f;
             if (entity.hasTag(Tags.NEUTRINO_LOW)) w = 1.5f;
-            if (entity.getMemoryWithoutUpdate().contains(ZeaUtils.KEY_ELYSIA_WITNESS)) w = 0f;
+            if (entity.getMemoryWithoutUpdate().contains(ZeaStaticStrings.KEY_ELYSIA_WITNESS)) w = 0f;
             picker.add(entity, w);
         }
 
@@ -335,16 +334,16 @@ public class ZeaFleetManager extends SeededFleetManager {
         skillPref = getFactionSkillPref(faction);
 
         if (faction.equals(PrepareAbyss.dawnID)) {
-            portrait = ZeaUtils.portraitsDawn[level-6];
+            portrait = ZeaStaticStrings.portraitsDawn[level-6];
             persona = Personalities.AGGRESSIVE;
         }
         else if (faction.equals(PrepareAbyss.duskID)) {
             persona = Personalities.STEADY;
-            portrait = ZeaUtils.portraitsDusk[level-6];
+            portrait = ZeaStaticStrings.portraitsDusk[level-6];
         }
         else if (faction.equals(PrepareAbyss.elysianID)) {
             persona = Personalities.STEADY;
-            portrait = ZeaUtils.portraitsElysian[level-6];
+            portrait = ZeaStaticStrings.portraitsElysian[level-6];
         }
 
         return MagicCampaign.createCaptainBuilder(faction)
@@ -367,15 +366,15 @@ public class ZeaFleetManager extends SeededFleetManager {
                 if (captain.getId().equals("tahlan_child")) return; //Special officer
                 boolean found = false;
                 String portCapt = captain.getPortraitSprite();
-                for (String port : ZeaUtils.portraitsDawn) {
+                for (String port : ZeaStaticStrings.portraitsDawn) {
                     if (portCapt.equalsIgnoreCase(port)) {
                         found = true;
                     }
                 }
-                for (String port : ZeaUtils.portraitsDusk) {
+                for (String port : ZeaStaticStrings.portraitsDusk) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
-                for (String port : ZeaUtils.portraitsElysian) {
+                for (String port : ZeaStaticStrings.portraitsElysian) {
                     if (portCapt.equalsIgnoreCase(port)) found = true;
                 }
                 if (!found) {
@@ -393,13 +392,13 @@ public class ZeaFleetManager extends SeededFleetManager {
                     else captain.setPersonality(Personalities.STEADY);
 
                     if (fac.equals(PrepareAbyss.duskID)) {
-                        captain.setPortraitSprite(ZeaUtils.portraitsDuskPaths[level-6]);
+                        captain.setPortraitSprite(ZeaStaticStrings.portraitsDuskPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.elysianID)) {
-                        captain.setPortraitSprite(ZeaUtils.portraitsElysianPaths[level-6]);
+                        captain.setPortraitSprite(ZeaStaticStrings.portraitsElysianPaths[level-6]);
                     }
                     if (fac.equals(PrepareAbyss.dawnID)) {
-                        captain.setPortraitSprite(ZeaUtils.portraitsDawnPaths[level-6]);
+                        captain.setPortraitSprite(ZeaStaticStrings.portraitsDawnPaths[level-6]);
                         captain.setPersonality(Personalities.RECKLESS);
                     }
 

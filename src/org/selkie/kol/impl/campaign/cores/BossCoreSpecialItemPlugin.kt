@@ -16,6 +16,7 @@ import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.selkie.kol.impl.campaign.AICoreCampaignPlugin
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.skills.cores.DawnBossCoreSkill
 import org.selkie.kol.impl.skills.cores.DuskBossCoreSkill
 import org.selkie.kol.impl.skills.cores.ElysiaBossCoreSkill
@@ -28,12 +29,11 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
 
     companion object {
         var cores = mapOf(
-            "zea_dusk_boss_core" to "zea_dusk_boss_core_skill"
-            , "zea_dawn_boss_core" to "zea_dawn_boss_core_skill",
-            "zea_elysia_boss_core"  to "zea_elysia_boss_core_skill")
+            BossCore.DUSK_CORE_ITEM_ID to BossCore.DUSK_CORE_SKILL_ID,
+            BossCore.DAWN_CORE_ITEM_ID to BossCore.DAWN_CORE_SKILL_ID,
+            BossCore.ELYSIAN_CORE_ITEM_ID to BossCore.ELYSIAN_CORE_SKILL_ID
+        )
     }
-
-
 
     override fun init(stack: CargoStackAPI) {
         super.init(stack)
@@ -41,7 +41,7 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         var data = stack.specialDataIfSpecial.data
 
         if (!cores.keys.contains(data)) {
-            data = "zea_dusk_boss_core"
+            data = BossCore.DUSK_CORE_ITEM_ID
             stack.specialDataIfSpecial.data = data
         }
 
@@ -73,24 +73,23 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
     }
 
     override fun getTooltipWidth(): Float {
-        return 500f
+        return 600f
     }
 
     override fun createTooltip(tooltip: TooltipMakerAPI?, expanded: Boolean, transferHandler: CargoTransferHandlerAPI?, stackSource: Any?) {
         val opad = 10f
 
-        var skillSpec = Global.getSettings().getSkillSpec(cores.get(commoditySpec.id))
-
+        val skillSpec = Global.getSettings().getSkillSpec(cores[commoditySpec.id])
 
         val design = designType
         Misc.addDesignTypePara(tooltip, design, opad)
 
-        var corePerson = plugin.createPerson(commoditySpec.id, Factions.NEUTRAL, Random())
-        var pointsMult = corePerson.memoryWithoutUpdate.getFloat(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT).toInt()
+        val corePerson = plugin.createPerson(commoditySpec.id, Factions.NEUTRAL, Random())
+        val pointsMult = corePerson.memoryWithoutUpdate.getFloat(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT)
 
-        var desc = Global.getSettings().getDescription(commoditySpec.id, Description.Type.RESOURCE)
+        val desc = Global.getSettings().getDescription(commoditySpec.id, Description.Type.RESOURCE)
 
-        var img = tooltip!!.beginImageWithText(corePerson.portraitSprite, 96f)
+        val img = tooltip!!.beginImageWithText(corePerson.portraitSprite, 96f)
         img!!.addTitle(name)
 
         img.addPara(desc.text1, 0f)
@@ -98,33 +97,20 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         img.addSpacer(5f)
 
         img.addPara("Level: ${corePerson.stats.level}", 0f, Misc.getTextColor(), Misc.getHighlightColor(), "Level")
-        img.addPara("Automated Points Multiplier: ${(corePerson.memoryWithoutUpdate.get(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT) as Float).toInt()}x", 0f,
+        img.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f,
             Misc.getTextColor(), Misc.getHighlightColor(), "Automated Points Multiplier")
 
         tooltip.addImageWithText(0f)
-
-        /*if (commoditySpec.id == "zea_dusk_boss_core") {
-            tooltip.addSpacer(10f)
-            tooltip.addSectionHeading("Transcendence", Alignment.MID, 0f)
-            tooltip.addSpacer(10f)
-
-            tooltip.addPara("This core can interface with crewed and automated ships. To slot it in to crewed ships, navigate to the refit screen and select \"Additional Options\". " +
-                    "Its skills can not be configured on crewed ships.", 0f,
-                Misc.getTextColor(), Misc.getHighlightColor(), "crewed and automated", "Additional Options")
-        }*/
 
         tooltip.addSpacer(10f)
         tooltip.addSectionHeading("Unique Skill: ${skillSpec.name}", Alignment.MID, 0f)
         tooltip.addSpacer(10f)
 
         when (skillSpec.id) {
-            "zea_dawn_boss_core_skill" -> DawnBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
-            "zea_dusk_boss_core_skill" -> DuskBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
-            "zea_elysia_boss_core_skill" -> ElysiaBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
+            BossCore.DAWN_CORE_SKILL_ID, -> DawnBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
+            BossCore.DUSK_CORE_SKILL_ID, -> DuskBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
+            BossCore.ELYSIAN_CORE_SKILL_ID, -> ElysiaBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
         }
-
-
-
 
 
         addCostLabel(tooltip, opad, transferHandler, stackSource)
@@ -134,8 +120,4 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         val base = commoditySpec.basePrice
         return base.toInt()
     }
-
-
-
-
 }

@@ -11,6 +11,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
@@ -36,10 +37,10 @@ public class ManageDuskBoss implements FleetEventListener {
 			}
 	            
 			//boss is dead,
-			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaUtils.abilityJumpDusk)) {
-				Global.getSector().getPlayerFleet().addAbility(ZeaUtils.abilityJumpDusk);
-				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpDusk, true, 0);
-				Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpDusk);
+			if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaStaticStrings.abilityJumpDusk)) {
+				Global.getSector().getPlayerFleet().addAbility(ZeaStaticStrings.abilityJumpDusk);
+				Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaStaticStrings.abilityJumpDusk, true, 0);
+				Global.getSector().getCharacterData().addAbility(ZeaStaticStrings.abilityJumpDusk);
 
 				ZeaAbilityIntel notif = new ZeaAbilityIntel(fleet.getFaction().getCrest(), "A Black Neutron Star");
 				Global.getSector().getIntelManager().addIntel(notif);
@@ -54,7 +55,7 @@ public class ManageDuskBoss implements FleetEventListener {
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DUSK_BOSS_DONE, true);
 
-					f.getVariant().removeTag(ZeaUtils.BOSS_TAG);
+					f.getVariant().removeTag(ZeaStaticStrings.BOSS_TAG);
 				}
 	        }
 	            

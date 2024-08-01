@@ -7,6 +7,7 @@ import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
@@ -68,9 +69,9 @@ public class SpawnDawnBoss {
 		        .create();
 		dawnBossFleet.setDiscoverable(true);
 		dawnBossFleet.getFleetData().ensureHasFlagship();
-		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
 		dawnBossFleet.getMemoryWithoutUpdate().set("$zea_nian", true);
-		dawnBossFleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+		dawnBossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
 		dawnBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 		dawnBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 

@@ -15,7 +15,7 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SDMParams;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SalvageDefenderModificationPlugin;
 import org.magiclib.util.MagicCampaign;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.world.PrepareDarkDeeds;
 
 import static org.selkie.kol.impl.world.PrepareDarkDeeds.DEFEATED_NINMAH_KEY;
@@ -92,11 +92,11 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
             curr.getRepairTracker().setCR(curr.getRepairTracker().getMaxCR());
         }
 
-        fleet.getFlagship().getVariant().addTag(ZeaUtils.BOSS_TAG);
+        fleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
         fleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         fleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
-        fleet.getMemoryWithoutUpdate().set(ZeaUtils.BOSS_TAG, true);
+        fleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
     }
 
 

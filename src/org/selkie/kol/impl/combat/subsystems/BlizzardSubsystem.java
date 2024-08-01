@@ -7,11 +7,11 @@ import com.fs.starfarer.api.plugins.ShipSystemStatsScript;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.magiclib.subsystems.MagicSubsystem;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.shipsystems.PulsarSystem;
 
 public class BlizzardSubsystem extends MagicSubsystem {
-    public static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaUtils.systemIDBlizzard);
+    public static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDBlizzard);
     public static float tActive = entry.getActive();
     public float tCD = entry.getCooldown(stats);
     public float tRegen = entry.getRegen(stats);

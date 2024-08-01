@@ -11,6 +11,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
@@ -32,10 +33,10 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 
 			if(Global.getSector().getMemoryWithoutUpdate().contains("$kol_elysian_boss1_done")
 					&& Global.getSector().getMemoryWithoutUpdate().getBoolean("$kol_elysian_boss1_done")) {
-				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaUtils.abilityJumpElysia)) {
-					Global.getSector().getPlayerFleet().addAbility(ZeaUtils.abilityJumpElysia);
-					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaUtils.abilityJumpElysia, true, 0);
-					Global.getSector().getCharacterData().addAbility(ZeaUtils.abilityJumpElysia);
+				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaStaticStrings.abilityJumpElysia)) {
+					Global.getSector().getPlayerFleet().addAbility(ZeaStaticStrings.abilityJumpElysia);
+					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaStaticStrings.abilityJumpElysia, true, 0);
+					Global.getSector().getCharacterData().addAbility(ZeaStaticStrings.abilityJumpElysia);
 
 					ZeaAbilityIntel notif = new ZeaAbilityIntel(fleet.getFaction().getCrest(), "Elysia");
 					Global.getSector().getIntelManager().addIntel(notif);
@@ -60,7 +61,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 					salvaged1 = true;
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
-					f.getVariant().removeTag(ZeaUtils.BOSS_TAG);
+					f.getVariant().removeTag(ZeaStaticStrings.BOSS_TAG);
 				}
 			}
 

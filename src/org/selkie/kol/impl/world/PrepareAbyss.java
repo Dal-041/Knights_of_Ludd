@@ -16,8 +16,7 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
-import org.selkie.kol.impl.helpers.ZeaUtils;
-import org.selkie.kol.impl.listeners.SpoilersNotif;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -101,7 +100,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
-		system.addTag(ZeaUtils.THEME_ZEA);
+		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
 		system.initStar("zea_elysia_abyss", "zea_red_hole", beeg, -beeg/2f);
 		PlanetAPI elysia = system.getStar();
@@ -223,7 +222,7 @@ public class PrepareAbyss {
 		wreckHeg.addDropRandom("low_weapons2", 6);
 		wreckHeg.addDropRandom("any_hullmod_high", 2);
 		//wreckHeg.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
-		wreckHeg.getMemoryWithoutUpdate().set(KEY_ELYSIA_WITNESS, true);
+		wreckHeg.getMemoryWithoutUpdate().set(ZeaStaticStrings.KEY_ELYSIA_WITNESS, true);
 
 
 		//Random loot
@@ -277,8 +276,8 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.SYSTEM_CUT_OFF_FROM_HYPER);
-		system.addTag(THEME_ZEA);
-		system.addTag(THEME_STORM);
+		system.addTag(ZeaStaticStrings.THEME_ZEA);
+		system.addTag(ZeaStaticStrings.THEME_STORM);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dusk.png");
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
@@ -318,12 +317,12 @@ public class PrepareAbyss {
 		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0), PrepareAbyss.duskID); //Highest tier
 		stationResearch.setFixedLocation(-5230, 8860);
 
-		float count = uwDerelictsNormal.length; //16
+		float count = ZeaStaticStrings.uwDerelictsNormal.length; //16
 		float odds = 0.45f;
 		count *= odds;
 		//int target = 5; //3 entries, some redundancy
 		//float oddsLore = target/count;
-		for(String variant:uwDerelictsNormal) {
+		for(String variant: ZeaStaticStrings.uwDerelictsNormal) {
 			if (MathUtils.getRandom().nextFloat() <= odds) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
 						variant,
@@ -342,7 +341,7 @@ public class PrepareAbyss {
 				//system.addEntity(wreck);
 			}
 		}
-		for(String variant:uwDerelictsPhase) {
+		for(String variant: ZeaStaticStrings.uwDerelictsPhase) {
 			if (MathUtils.getRandom().nextFloat() <= 0.66f) {
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
 						variant,
@@ -372,7 +371,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
-		system.addTag(ZeaUtils.THEME_ZEA);
+		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
 		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dawn.png");
 		new AbyssBackgroundWarper(system, 8, 0.25f);
@@ -515,7 +514,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
-		system.addTag(ZeaUtils.THEME_ZEA);
+		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
 		//fancy bg script
 
