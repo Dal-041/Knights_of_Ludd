@@ -163,7 +163,7 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
                     dialog.textPanel.addPara("Choosen ${selected!!.nameString}", Misc.getBasePlayerColor(), Misc.getBasePlayerColor())
 
-                    dialog.textPanel.addPara("You've chosen ${selected!!.nameString} as the participant of the procedure, and hours later, they awaken as something new.")
+                    dialog.textPanel.addPara("You've chosen ${selected!!.nameString} as the subject of the procedure, and hours later, they awaken as something new.")
 
                     dialog.textPanel.addPara("> ${selected!!.nameString} acquired the ${skillspec.name} skill", Misc.getPositiveHighlightColor(), Misc.getPositiveHighlightColor())
 

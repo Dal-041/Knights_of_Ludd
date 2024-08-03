@@ -56,17 +56,11 @@ public class CascadeTargetingProtocol extends BaseHullMod {
     public String getDescriptionParam(final int index, final ShipAPI.HullSize hullSize) {
         switch (index) {
             case 0:
-                return "200 su";
+                return String.valueOf(Math.round(RANGE_BONUS)) + "%";
             case 1:
-                return "50%";
+                return String.valueOf(Math.round(ENMITY_BONUS_ROF_RELOAD)) + "%";
             case 2:
-                return "below";
-            case 3:
-                return "50%";
-            case 4:
-                return "30%";
-            case 5:
-                return "15%";
+                return String.valueOf(Math.round(ENMITY_BONUS_FLUX_REDUCTION)) + "%";
             default:
                 break;
         }

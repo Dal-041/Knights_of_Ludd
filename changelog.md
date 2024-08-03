@@ -25,22 +25,36 @@ v1.1.1:
 - AI code optimizations
 - Various minor fixes and improvements
 v1.2.0:
+- Fresh sprites for some Knights armor modules and visuals touchups for Knights ships
+- Awesome sprite upgrade for all [VERY REDACTED1] ships
+- Added a new game mechanic where [VERY REDACTED1] hulls trade a range bonus for a firerate bonus as they take damage
 - Fixed an issue with extreme reputation changes
+- New [VERY REDACTED2] beam weapon visuals courtesy of Nia Tahl
+- New intel entries added when engaging [VERY REDACTED1] and [VERY REDACTED2] fleets for the first time
+- Gave Unknown Location (1) boss a smaller arena to clown on chumps in
 - Exiled Space support courtesy of Pure Tilt
 - Added smaller fleets of [VERY REDACTED3] to their home (new game required)
-- Fixed an issue that may have been limiting [EXTREMELY REDACTED MEGASTRUCTURE] spawns sector-wide (new game required)
 - Adjusted [VERY REDACTED2] spawn weights to reduce small ship spam
 - Reduced maximum recoil for the Caelia & Llyr weapons
 - Made Bricoles appear 5x more often at KOL markets
-- Mimosa : added Rugged Construction
-- Tamarisk : Hellfire buffed from 30% to 40% extra damage
-- Lunaria : LIDAR recoil buffed from -75% to -85%
-- Larkspur : Sprite adjustments
-- Marigold : Sprite adjustments
-   - module width doubled, should now be easier to block incoming fire
-- New [VERY REDACTED2] beam weapon visuals courtesy of Nia Tahl
-- Minor [VERY REDACTED1] sprite and visuals touchups
-- [VERY REDACTED3] boss flux nerf in players' hands
+- Mimosa: added Rugged Construction
+- Tamarisk: Hellfire buffed from 30% to 40% extra damage
+- Lunaria: LIDAR recoil buffed from -75% to -85%
+- Refined Knights ship and modules bounds for slightly improved performance
+- [VERY REDACTED3] boss 1 has a smaller flux pool if attained by players
+- [VERY REDACTED1] boss cannon is more lenient when targeting 
 - Two bosses have had their OP reduced
 - fixed Targeting Beam system
 - various improvements, tweaks, and polish
+v1.2.1
+- Added thrust vectoring to Lunaria's engines
+- Mimosa buff - gains a medium turret in place of one of the smalls
+- [VERY REDACTED2] boss has had its main and secondary weapons split so they can be used individually. 
+- [VERY REDACTED3] boss 1 sprite revamp
+- [VERY REDACTED2] capital has had new drone engines added
+- Custom phase AI improvements
+- Added some (yet unused) portraits
+- Fixed a bug with modular paperdolls
+- Hullmod tooltips have been upgraded! Special thanks to Lukas04
+- Battlestar Libra has been correctly hidden from the build menu finally
+- Technical updates and expansion preparation
