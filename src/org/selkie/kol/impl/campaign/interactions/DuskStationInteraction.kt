@@ -21,12 +21,12 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 class DuskStationInteraction : InteractionDialogPlugin {
     lateinit var dialog: InteractionDialogAPI
     companion object{
-        val skillspec = Global.getSettings().getSkillSpec("zea_dusk_boss_core_skill")
         val LEAVE_KEY = "LEAVE"
         val ENTER_KEY = "ENTER"
         val CORE_INTO_SKILL = "CORE_INTO_SKILL"
-        val SKILL_INTO_CORE = "SKILL_INTO_CORE"
-        val FORCE_REVOKE = "FORCE_REVOKE"
+        val REVOKE_SKILL = "REVOKE_SKILL"
+
+        val DUSK_CORE_ITEM = SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, BossCore.DUSK_CORE.itemID)
     }
     override fun init(dialog: InteractionDialogAPI?) {
         this.dialog = dialog!!
@@ -46,16 +46,17 @@ class DuskStationInteraction : InteractionDialogPlugin {
         if (optionData == LEAVE_KEY) {
             dialog.dismiss()
         }
+
         if (optionData == ENTER_KEY) {
             dialog.textPanel.addPara("Text 2")
 
-            if (Global.getSector().playerFleet.cargo.getQuantity(CargoItemType.SPECIAL, SpecialItemData(BossCore.BOSS_CORE_ID, BossCore.DUSK_CORE_SKILL_ID,)) > 0){
+            if (Global.getSector().playerFleet.cargo.getQuantity(CargoItemType.SPECIAL, DUSK_CORE_ITEM) > 0){
                 val tooltip = dialog.textPanel.beginTooltip()
 
                 tooltip.setParaFont(Fonts.ORBITRON_12)
                 tooltip.addPara("(Hover over the icon for a detailed description)", 0f, Misc.getGrayColor(), Misc.getGrayColor())
                 val fake = Global.getFactory().createPerson()
-                fake.stats.setSkillLevel(skillspec.id, 1f)
+                fake.stats.setSkillLevel(BossCore.DUSK_CORE.exclusiveSkillID, 1f)
                 tooltip.addSkillPanel(fake, 0f)
 
                 dialog.textPanel.addTooltip()
@@ -78,8 +79,9 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
 
         }
+
         if (optionData == CORE_INTO_SKILL) {
-            dialog.showCustomDialog(320f, 440f, object: BaseCustomDialogDelegate(){
+            dialog.showCustomDialog(820f, 440f, object: BaseCustomDialogDelegate(){
                 var selected: PersonAPI? = null
 
                 override fun createCustomDialog(panel: CustomPanelAPI?, callback: CustomDialogDelegate.CustomDialogCallback?) {
@@ -130,13 +132,12 @@ class DuskStationInteraction : InteractionDialogPlugin {
                             innerElement.addImageWithText(0f)
                         }
 
+
                         element.addTooltipToPrevious( object : BaseTooltipCreator() {
                             override fun createTooltip(tooltip: TooltipMakerAPI?, expanded: Boolean, tooltipParam: Any?) {
                                 tooltip!!.addSkillPanel(officer, 0f)
                             }
                         }, TooltipMakerAPI.TooltipLocation.RIGHT)
-
-
 
                         element.addSpacer(10f)
                     }
@@ -165,9 +166,10 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
                     dialog.textPanel.addPara("You've chosen ${selected!!.nameString} as the participant of the procedure, and hours later, they awaken as something new.")
 
+                    val skillspec = Global.getSettings().getSkillSpec(BossCore.DUSK_CORE.exclusiveSkillID)
                     dialog.textPanel.addPara("> ${selected!!.nameString} acquired the ${skillspec.name} skill", Misc.getPositiveHighlightColor(), Misc.getPositiveHighlightColor())
 
-                    selected!!.stats.setSkillLevel(skillspec.id, 1f)
+                    selected!!.stats.setSkillLevel(BossCore.DUSK_CORE.exclusiveSkillID, 1f)
                     Global.getSector().playerFleet.cargo.removeItems(CargoItemType.SPECIAL, SpecialItemData("zea_boss_core_special", "zea_dusk_boss_core"), 1f)
 
                     dialog.optionPanel.addOption("Leave", LEAVE_KEY)

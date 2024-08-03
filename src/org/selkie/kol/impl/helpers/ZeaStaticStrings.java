@@ -1,21 +1,56 @@
 package org.selkie.kol.impl.helpers;
 
+import org.selkie.kol.impl.skills.cores.BaseCoreOfficerSkill;
+import org.selkie.kol.impl.skills.cores.DawnBossCoreSkill;
+import org.selkie.kol.impl.skills.cores.DuskBossCoreSkill;
+import org.selkie.kol.impl.skills.cores.ElysiaBossCoreSkill;
 import org.selkie.kol.impl.world.PrepareAbyss;
+
+import java.util.Objects;
 
 public class ZeaStaticStrings {
     public static final String BOSS_TAG = "$zea_boss";
 
-    public static class BossCore{
-        public static final String BOSS_CORE_ID = "zea_dusk_boss_core";
-        public static final String DUSK_CORE_ITEM_ID = "zea_dusk_boss_core";
-        public static final String DAWN_CORE_ITEM_ID = "zea_dawn_boss_core";
-        public static final String ELYSIAN_CORE_ITEM_ID = "zea_elysia_boss_core";
-        public static final String DUSK_CORE_SKILL_ID = "zea_dusk_boss_core_skill";
-        public static final String DAWN_CORE_SKILL_ID= "zea_dawn_boss_core_skill";
-        public static final String ELYSIAN_CORE_SKILL_ID = "zea_elysia_boss_core_skill";
-        public static final String DUSK_CORE_PORTRAIT = "zea_dusk_boss_core";
-        public static final String DAWN_CORE_PORTRAIT= "zea_dawn_boss_core";
-        public static final String ELYSIAN_CORE_PORTRAIT = "zea_elysia_boss_core";
+    public static class BossCore {
+        public static final String SPECIAL_BOSS_CORE_ID = "zea_boss_core_special";
+
+        public static class CoreData {
+            public final String itemID;
+            public final Class<? extends BaseCoreOfficerSkill> exclusiveSkill;
+            public final String exclusiveSkillID;
+            public final String portraitID;
+
+            public CoreData(String itemId, Class<? extends BaseCoreOfficerSkill> exclusiveSkill, String exclusiveSkillID, String portraitId) {
+                this.itemID = itemId;
+                this.exclusiveSkill = exclusiveSkill;
+                this.exclusiveSkillID = exclusiveSkillID;
+                this.portraitID = portraitId;
+            }
+        }
+
+        public static final CoreData DUSK_CORE = new CoreData("zea_dusk_boss_core", DuskBossCoreSkill.class, "zea_dusk_boss_core_skill", "zea_dusk_boss_core");
+        public static final CoreData DAWN_CORE = new CoreData("zea_dawn_boss_core", DawnBossCoreSkill.class, "zea_dawn_boss_core_skill", "zea_dawn_boss_core");
+        public static final CoreData ELYSIAN_CORE = new CoreData("zea_elysia_boss_core", ElysiaBossCoreSkill.class, "zea_elysia_boss_core_skill","zea_elysia_boss_core");
+        public static final CoreData[] CORES = { DUSK_CORE, DAWN_CORE, ELYSIAN_CORE };
+        public static final String[] ITEM_ID_LIST = new String[CORES.length];
+        public static final String[] SKILL_ID_LIST = new String[CORES.length];
+        public static final String[] PORTRAIT_ID_LIST = new String[CORES.length];
+
+        static {
+            for (int i = 0; i < CORES.length; i++) {
+                CoreData core = CORES[i];
+                ITEM_ID_LIST[i] = core.itemID;
+                SKILL_ID_LIST[i] = core.exclusiveSkillID;
+                PORTRAIT_ID_LIST[i] = core.portraitID;
+            }
+        }
+
+        public static CoreData getCore(String itemID){
+            for(CoreData core : CORES){
+                if(Objects.equals(core.itemID, itemID)) return core;
+            }
+            throw new IllegalArgumentException("Commodity Item: "+itemID+" does not exist");
+        }
     }
     public static final String IntelBreadcrumbTag = "Dark Deeds";
     public static final String IntelLoreTag = "Elysian Lore";

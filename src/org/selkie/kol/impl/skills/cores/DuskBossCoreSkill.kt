@@ -1,25 +1,18 @@
 package org.selkie.kol.impl.skills.cores
 
-import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
 import com.fs.starfarer.api.combat.MutableShipStatsAPI
 import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipHullSpecAPI
-import com.fs.starfarer.api.combat.WeaponAPI
-import com.fs.starfarer.api.combat.listeners.AdvanceableListener
-import com.fs.starfarer.api.combat.listeners.WeaponBaseRangeModifier
-import com.fs.starfarer.api.combat.listeners.WeaponRangeModifier
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.lazywizard.lazylib.combat.CombatUtils
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.NinmahBoss.NinmahAIScript
-import org.selkie.kol.impl.skills.cores.BaseCoreOfficerSkill
 
 class DuskBossCoreSkill : BaseCoreOfficerSkill() {
-    override val skillID = BossCore.DUSK_CORE_SKILL_ID
+    override val skillID = BossCore.DUSK_CORE.exclusiveSkillID
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP
     }

@@ -11,15 +11,12 @@ import com.fs.starfarer.api.impl.campaign.ids.Strings
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
-import org.selkie.kol.impl.skills.cores.BaseCoreOfficerSkill
-import org.selkie.kol.impl.skills.cores.DawnBossCoreSkill
-import org.selkie.kol.impl.skills.cores.DuskBossCoreSkill
-import org.selkie.kol.impl.skills.cores.ElysiaBossCoreSkill
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import java.util.*
 
-abstract class BossCoreOfficerPlugin : AICoreOfficerPlugin {
-    var automatedPointsMult = 4f
+class BossAICoreOfficerPlugin : AICoreOfficerPlugin {
+    val AUTOMATED_POINTS_MULT = 4f
+
     override fun createPerson(aiCoreId: String?, factionId: String?, random: Random?): PersonAPI {
         val spec = Global.getSettings().getCommoditySpec(aiCoreId)
         val core = Global.getFactory().createPerson()
@@ -41,11 +38,11 @@ abstract class BossCoreOfficerPlugin : AICoreOfficerPlugin {
         core.stats.setSkillLevel(Skills.FIELD_MODULATION, 2F)
         core.stats.setSkillLevel(Skills.TARGET_ANALYSIS, 2F)
         core.stats.setSkillLevel(Skills.GUNNERY_IMPLANTS, 2F)
-        core.stats.setSkillLevel(exclusiveSkill.skillID, 2f)
+        core.stats.setSkillLevel(BossCore.getCore(aiCoreId).exclusiveSkillID, 2f)
 
-        core.portraitSprite = Global.getSettings().getSpriteName("characters", portraitSpriteName)
+        core.portraitSprite = Global.getSettings().getSpriteName("characters", BossCore.getCore(aiCoreId).portraitID)
 
-        core.memoryWithoutUpdate.set(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT, automatedPointsMult)
+        core.memoryWithoutUpdate.set(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT, AUTOMATED_POINTS_MULT)
         return core
     }
 
@@ -54,8 +51,9 @@ abstract class BossCoreOfficerPlugin : AICoreOfficerPlugin {
         val text = person.faction.baseUIColor
         val bg = person.faction.darkUIColor
         val spec = Global.getSettings().getCommoditySpec(person.aiCoreId)
-        val skill = Global.getSettings().getSkillSpec(exclusiveSkill.skillID)
-        val pointsMult = automatedPointsMult.toInt()
+
+        val skill = Global.getSettings().getSkillSpec(BossCore.getCore(person.aiCoreId).exclusiveSkillID)
+        val pointsMult = AUTOMATED_POINTS_MULT.toInt()
 
         tooltip.addSpacer(opad)
         tooltip.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f, Misc.getTextColor(), Misc.getHighlightColor(),  "Automated Points Multiplier")
@@ -66,7 +64,7 @@ abstract class BossCoreOfficerPlugin : AICoreOfficerPlugin {
 
         val skillImg = tooltip.beginImageWithText(skill.spriteName, 48f)
 
-        exclusiveSkill.createCustomDescription(null, null, skillImg, tooltip.widthSoFar)
+        BossCore.getCore(person.aiCoreId).exclusiveSkill.newInstance().createCustomDescription(null, null, skillImg, tooltip.widthSoFar)
 
         tooltip.addImageWithText(0f)
 
@@ -77,8 +75,4 @@ abstract class BossCoreOfficerPlugin : AICoreOfficerPlugin {
                 opad)
         }
     }
-
-    protected abstract val exclusiveSkill: BaseCoreOfficerSkill
-    protected abstract val coreItemID: String
-    protected abstract val portraitSpriteName: String
 }

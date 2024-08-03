@@ -13,7 +13,7 @@ import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
 class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
-    override val skillID = BossCore.ELYSIAN_CORE_SKILL_ID
+    override val skillID = BossCore.ELYSIAN_CORE.exclusiveSkillID
 
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP

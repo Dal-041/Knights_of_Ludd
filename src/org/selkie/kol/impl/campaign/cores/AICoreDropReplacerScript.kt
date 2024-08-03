@@ -4,6 +4,7 @@ import com.fs.starfarer.api.campaign.BaseCampaignEventListener
 import com.fs.starfarer.api.campaign.CargoAPI
 import com.fs.starfarer.api.campaign.FleetEncounterContextPlugin
 import com.fs.starfarer.api.campaign.SpecialItemData
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
 class AICoreDropReplacerScript : BaseCampaignEventListener(false) {
     override fun reportEncounterLootGenerated(plugin: FleetEncounterContextPlugin?, loot: CargoAPI?) {
@@ -14,8 +15,8 @@ class AICoreDropReplacerScript : BaseCampaignEventListener(false) {
             if (stack.isCommodityStack) {
                 var id = stack.commodityId
                 var quantity = stack.size
-                if (BossCoreSpecialItemPlugin.cores.containsKey(id)) {
-                    loot.addSpecial(SpecialItemData("zea_boss_core_special", id), quantity)
+                if (id in BossCore.ITEM_ID_LIST) {
+                    loot.addSpecial(SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, id), quantity)
                     loot.removeCommodity(id, quantity)
                 }
             }

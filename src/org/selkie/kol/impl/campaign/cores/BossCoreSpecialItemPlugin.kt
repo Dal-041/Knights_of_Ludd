@@ -27,27 +27,18 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
     lateinit var commoditySpec: CommoditySpecAPI
     lateinit var plugin: AICoreOfficerPlugin
 
-    companion object {
-        var cores = mapOf(
-            BossCore.DUSK_CORE_ITEM_ID to BossCore.DUSK_CORE_SKILL_ID,
-            BossCore.DAWN_CORE_ITEM_ID to BossCore.DAWN_CORE_SKILL_ID,
-            BossCore.ELYSIAN_CORE_ITEM_ID to BossCore.ELYSIAN_CORE_SKILL_ID
-        )
-    }
-
     override fun init(stack: CargoStackAPI) {
         super.init(stack)
 
         var data = stack.specialDataIfSpecial.data
 
-        if (!cores.keys.contains(data)) {
-            data = BossCore.DUSK_CORE_ITEM_ID
+        if (data !in BossCore.ITEM_ID_LIST) {
+            data = BossCore.DUSK_CORE.itemID
             stack.specialDataIfSpecial.data = data
         }
 
         commoditySpec = Global.getSettings().getCommoditySpec(data)
         plugin = AICoreCampaignPlugin().pickAICoreOfficerPlugin(commoditySpec.id)!!.plugin
-
     }
 
     override fun render(x: Float, y: Float, w: Float, h: Float, alphaMult: Float, glowMult: Float, renderer: SpecialItemPlugin.SpecialItemRendererAPI?) {
@@ -79,7 +70,7 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
     override fun createTooltip(tooltip: TooltipMakerAPI?, expanded: Boolean, transferHandler: CargoTransferHandlerAPI?, stackSource: Any?) {
         val opad = 10f
 
-        val skillSpec = Global.getSettings().getSkillSpec(cores[commoditySpec.id])
+        val skillSpec = Global.getSettings().getSkillSpec(BossCore.getCore(commoditySpec.id).exclusiveSkillID)
 
         val design = designType
         Misc.addDesignTypePara(tooltip, design, opad)
@@ -106,12 +97,7 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         tooltip.addSectionHeading("Unique Skill: ${skillSpec.name}", Alignment.MID, 0f)
         tooltip.addSpacer(10f)
 
-        when (skillSpec.id) {
-            BossCore.DAWN_CORE_SKILL_ID, -> DawnBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
-            BossCore.DUSK_CORE_SKILL_ID, -> DuskBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
-            BossCore.ELYSIAN_CORE_SKILL_ID, -> ElysiaBossCoreSkill().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
-        }
-
+        BossCore.getCore(commoditySpec.id).exclusiveSkill.newInstance().createCustomDescription(null, null, tooltip, tooltip.widthSoFar)
 
         addCostLabel(tooltip, opad, transferHandler, stackSource)
     }

@@ -3,11 +3,10 @@ package org.selkie.kol.impl.campaign.cores
 import com.fs.starfarer.api.EveryFrameScript
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.campaign.CargoAPI
-import com.fs.starfarer.api.campaign.CargoStackAPI
 import com.fs.starfarer.api.campaign.CoreUITabId
 import com.fs.starfarer.api.campaign.SpecialItemData
 import com.fs.starfarer.api.util.IntervalUtil
-import com.fs.starfarer.campaign.ui.trade.CargoItemStack
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
 //Loosely based on things done in Tahlans Digital Soul
 class AICoreReplacerScript : EveryFrameScript {
@@ -38,7 +37,7 @@ class AICoreReplacerScript : EveryFrameScript {
                 for (stack in cargo.stacksCopy) {
                     if (stack.isSpecialStack) {
                         var plugin = stack.plugin
-                        if (plugin is BossCoreSpecialItemPlugin) {
+                        if (plugin is BossCoreSpecialItemPlugin ) {
                             var commId = plugin.commoditySpec.id
                             var commStack = Global.getFactory().createCargoStack(CargoAPI.CargoItemType.RESOURCES, commId, cargo)
                             commStack.size = stack.size
@@ -79,8 +78,7 @@ class AICoreReplacerScript : EveryFrameScript {
 
             quantities.clear()
 
-            var cores = listOf("zea_dusk_boss_core", "zea_dawn_boss_core", "zea_elysia_boss_core")
-            for (core in cores) {
+            for (core in BossCore.ITEM_ID_LIST) {
                 var quantity = cargo.getCommodityQuantity(core)
                 if (quantity > 0) {
                     var stack = cargo.stacksCopy.find { it.isSpecialStack && it.specialDataIfSpecial.data == core }
@@ -88,7 +86,7 @@ class AICoreReplacerScript : EveryFrameScript {
                         stack.add(quantity)
                     }
                     else {
-                        cargo.addSpecial(SpecialItemData("zea_boss_core_special", core), quantity)
+                        cargo.addSpecial(SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, core), quantity)
                     }
                 }
                 cargo.removeCommodity(core, quantity)
