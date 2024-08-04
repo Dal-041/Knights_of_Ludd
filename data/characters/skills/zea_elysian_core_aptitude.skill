@@ -1,0 +1,12 @@
+{
+	"id":"zea_elysian_core_aptitude",
+	"governingAptitude":"zea_elysian_core_aptitude",
+	"effectGroups":[
+		{
+			"requiredSkillLevel":0,
+			"effects":[
+				{"type":"DESCRIPTION", "script":"org.selkie.kol.impl.skills.cores.CoresAptitudeDesc"},
+			]
+		},
+	],
+}

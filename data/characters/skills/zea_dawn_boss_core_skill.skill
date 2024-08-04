@@ -1,6 +1,6 @@
 {
 	"id":"zea_dawn_boss_core_skill",
-	"governingAptitude":"zea_boss_core_aptitude",
+	"governingAptitude":"zea_dawn_core_aptitude",
 	"elite":true,
 	"scope":"PILOTED_SHIP", 
 	"effectGroups":[
