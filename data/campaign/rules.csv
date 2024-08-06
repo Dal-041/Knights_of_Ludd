@@ -86,7 +86,7 @@ greetingDawnHostile,OpenCommLink,"$faction.id == zea_dawn score:1000
 $entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the sense of some burning menace sizing up its targets.",cutCommLink:Cut the comm link,
 greetingDawnFriendly,OpenCommLink,"$faction.id == zea_dawn score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
+FireAll PopulateOptions","No audible sound comes through the line, but intercom lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
 greetingDawnNeutral,OpenCommLink,"$faction.id == zea_dawn score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the Dawntide's menace remains shackled.",,
@@ -94,7 +94,7 @@ greetingDuskHostile,OpenCommLink,"$faction.id == zea_dusk score:1000
 $entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
 greetingDuskFriendly,OpenCommLink,"$faction.id == zea_dusk score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+FireAll PopulateOptions","No audible sound comes through the line, but intercom lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
 greetingDuskNeutral,OpenCommLink,"$faction.id == zea_dusk score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the Duskborne's weapons remain inactive.",,
@@ -102,7 +102,7 @@ greetingEDFHostile,OpenCommLink,"$faction.id == zea_elysians score:1000
 $entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
 greetingEDFFriendly,OpenCommLink,"$faction.id == zea_elysians score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+FireAll PopulateOptions","No audible sound comes through the line, but intercom lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
 greetingEDFNeutral,OpenCommLink,"$faction.id == zea_elysians score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the fleet's weapons remain inactive.",,
@@ -128,7 +128,7 @@ Your officers mournfully gawk as their treasure vanishes like swarmers meanderin
 You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.",0:zea_bossTTStationpage2:Get me a full report.,
 zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,ZeaIntelCMD addIntelTTBoss2,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments.
 
-It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinatly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
+It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinately bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
 zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
 ,,,,,,
 zea_BossTT1Encounted,BeginFleetEncounter,"$zea_ninaya score:1000
