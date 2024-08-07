@@ -1,6 +1,6 @@
 {
 	"id":"zea_elysia_boss_core_skill",
-	"governingAptitude":"zea_boss_core_aptitude",
+	"governingAptitude":"zea_elysian_core_aptitude",
 	"elite":true,
 	"scope":"PILOTED_SHIP", 
 	"effectGroups":[

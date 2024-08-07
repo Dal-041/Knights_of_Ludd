@@ -8,3 +8,6 @@ zea_elysia_boss_core_skill,Elysia,10000,1,0,,,,TRUE,FALSE,FALSE,"npc_only, ai_co
 ,,,,,,,,,,,,,
 #Apt,,,,,,,,,,,,,
 zea_boss_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
+zea_dawn_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
+zea_dusk_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
+zea_elysian_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
