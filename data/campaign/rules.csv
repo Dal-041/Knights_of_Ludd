@@ -52,7 +52,7 @@ defaultGrandmasterMeetingResponseAnswer,GrandmasterMeetingResponse,,$askedToMeet
 #END Grandmaster,,,,,,
 ,,,,,,
 # Knightmaster,,,,,,
-defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a prefunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
+defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a perfunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
 ,,,"ShowDefaultVisual
 FireAll PopulateOptions",,,
 #END Knightmaster,,,,,,
@@ -86,7 +86,7 @@ greetingDawnHostile,OpenCommLink,"$faction.id == zea_dawn score:1000
 $entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the sense of some burning menace sizing up its targets.",cutCommLink:Cut the comm link,
 greetingDawnFriendly,OpenCommLink,"$faction.id == zea_dawn score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
+FireAll PopulateOptions","No audible sound comes through the line, but intercom lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
 greetingDawnNeutral,OpenCommLink,"$faction.id == zea_dawn score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the Dawntide's menace remains shackled.",,
@@ -94,15 +94,15 @@ greetingDuskHostile,OpenCommLink,"$faction.id == zea_dusk score:1000
 $entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
 greetingDuskFriendly,OpenCommLink,"$faction.id == zea_dusk score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+FireAll PopulateOptions","No audible sound comes through the line, but intercom lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
 greetingDuskNeutral,OpenCommLink,"$faction.id == zea_dusk score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","There is no response, but the Duskbourne's weapons remain inactive.",,
+FireAll PopulateOptions","There is no response, but the Duskborne's weapons remain inactive.",,
 greetingEDFHostile,OpenCommLink,"$faction.id == zea_elysians score:1000
 $entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
 greetingEDFFriendly,OpenCommLink,"$faction.id == zea_elysians score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
-FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
+FireAll PopulateOptions","No audible sound comes through the line, but intercom lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
 greetingEDFNeutral,OpenCommLink,"$faction.id == zea_elysians score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the fleet's weapons remain inactive.",,
@@ -128,7 +128,7 @@ Your officers mournfully gawk as their treasure vanishes like swarmers meanderin
 You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.",0:zea_bossTTStationpage2:Get me a full report.,
 zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,ZeaIntelCMD addIntelTTBoss2,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments.
 
-It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
+It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinately bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
 zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
 ,,,,,,
 zea_BossTT1Encounted,BeginFleetEncounter,"$zea_ninaya score:1000
@@ -136,16 +136,16 @@ $global.gaPZ_scannedZiggurat",ZeaIntelCMD addBossTags,"The frigate before you ap
 
 ""Interloper. You have come for what is not yours. Power down and you will not be unnecessarily harmed.""
 
-The link cuts. A warning or a threat, and from a fully coherent AI core. Great. Perhaps the ship that didn't speak was preferrable. Shaking off these thoughts, you issue the orders to your bridge crew.",,
+The link cuts. A warning or a threat, and from a fully coherent AI core. Great. Perhaps the ship that didn't speak was preferable. Shaking off these thoughts, you issue the orders to your bridge crew.",,
 zea_BossTT1EncountedNoZig,BeginFleetEncounter,"$zea_ninaya score:1000
 !$global.gaPZ_scannedZiggurat",ZeaIntelCMD addBossTags,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic.
 
-There appear to be small, bright EM sources, ""-Only partially overlapping the visual spectrum,"" your sensors officer reports. They orbit with uncanny motion around the strange vessel. Your bridge crew murmurs speculation between their stations: some kind of point defense field? Microsat thruster bursts? The speculation is far from concensus. A ping from the comm panel rings out before you can ponder further.
+There appear to be small, bright EM sources, ""-Only partially overlapping the visual spectrum,"" your sensors officer reports. They orbit with uncanny motion around the strange vessel. Your bridge crew murmurs speculation between their stations: some kind of point defense field? Microsat thruster bursts? The speculation is far from consensus. A ping from the comm panel rings out before you can ponder further.
 
 ""Interloper. You have come for what is not yours. Power down and you will not be unnecessarily harmed.""
 
 The link cuts as abruptly as it began. A threat from a fully coherent AI core. Great. A moment goes by but your attention lingers on some far away sound - as if catching a melody on the wind. When you attempt to focus on the harmony the impression evaporates as quickly as it came. Gathering yourself, you issue the orders to your bridge crew.",,
-zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volumn, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.",0:zea_bossTT1defeated:Let's get what we came for.,
+zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volume, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.",0:zea_bossTT1defeated:Let's get what we came for.,
 zea_BossTT1Defeated2,DialogOptionSelected,$option == zea_bossTT1defeated,FireBest OpenInteractionDialog,,,
 zea_BossTT1Wreck1,ShowSalvageEntityDetails,"$customType == wreck
 
@@ -201,3 +201,12 @@ zea_BossHeartEnc,BeginFleetEncounter,$zea_corruptingheart score:1000,ZeaIntelCMD
 On a canvas of crimson a myriad of silhouettes fly forth like gleaming stars in a murdered sky. The commlink crackles with a noise that can't be distinguished from static or from singing. The Heart welcomes you into its scarlet grip.",,
 zea_BossNianEnc,BeginFleetEncounter,$zea_nian score:1000,ZeaIntelCMD addBossTags,"The moment the drivefields interlock, a change in movement is reported from the opposing fleet. Feedback from the comms becomes a deafening din as a torrent of positional instructions pours across every channel. Ship after ship slams into formation. The din fuses into a drone, a clarion call that shakes your bones until the communications officer manages to get the order for total system shutdown across. Sensors observe the million pinpricks of slaved salvor units lifting off, taking up position behind the fleet. Like a flock of vultures waiting to pick your bones clean. Like an army on the march, Nian hungers.",,
 zea_BossYukionnaEnc,BeginFleetEncounter,$zea_yukionna score:1000,ZeaIntelCMD addBossTags,"The opposing fleet moves in to meet yours, enveloped in dancing twinkles of volatile half-light. A sound grazes your consciousness like a bullet grazing your skin, a tune on perception's edge just failing to be heard. The dance of the light changes, matching the inaudible rhythm pace for pace. The crew surrounding you wavers, drifting in and out of focus. Sweat trickles, a nose bleeds, straining to hear the absence. Conduits pulse and readouts flicker as your ship tries to sing along. Amidst the maddening silence waits Yukionna, ready with her embrace.",,
+kol_nex_NGCPickStartingShips,ExerelinNGCStep3,"$playerFaction == knights_of_selkie
+!$kol_ChangeMind
+$corvusMode","AddText ""The military branch of the Luddic Church of Galactic Redemption, modeled on monastic warrior societies from previous millennia. Built and governed by a myriad of martial rituals that deftly reconcile Ludd's anti-militaristic revelations with the constrained bloodshed required by practical statecraft. The order's roots may be traced to the depths of Sector history, when the faithful fought alongside the founding fleets of the Hegemony to overcome the tyranny of Warlord Leonis and to shatter the technological yoke of the Tri-Tachyon Corporation.""
+$kol_ChangeMind = true 0",,,
+kol_nex_NGCPickStartingShips2,ExerelinNGCStep3,"$playerFaction == knights_of_selkie
+EIS_HasModId timid_commissioned_hull_mods
+!$kol_ChangeMind","AddText ""Commissioned Crews Bonus: Missiles have additional health and deal additional damage.""
+SetTextHighlights Commissioned Crews Bonus
+$kol_ChangeMind = true 0",,,

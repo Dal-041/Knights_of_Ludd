@@ -11,6 +11,6 @@ kol_battlestar_libra,Battlestar Libra,1000,180,0,10,kol_battlestar_libra,,"stati
 radius:75,
 variant:kol_libra_Battlestar,
 fleetName:Libra Prime
-}",graphics/icons/industry/battlestation.png,org.selkie.kol.campaign.kol_battlestar,"A glorious, restored battlestar sporting a truly intimidating level of firepowerand an extensive minefield.
+}",graphics/icons/industry/battlestation.png,org.selkie.kol.campaign.kol_battlestar,"A glorious, restored battlestar sporting a truly intimidating level of firepower and an extensive minefield.
 
 Must be reduced before a bombardment can be attempted",2111,
