@@ -1,11 +1,12 @@
 package org.selkie.kol.impl.skills.cores
 
+import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
 import com.fs.starfarer.api.combat.MutableShipStatsAPI
 import com.fs.starfarer.api.combat.ShipAPI
-import com.fs.starfarer.api.impl.campaign.ids.Stats
+import com.fs.starfarer.api.combat.listeners.AdvanceableListener
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.magiclib.subsystems.MagicSubsystemsManager
@@ -14,6 +15,55 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
 class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
     override val skillID = BossCore.ELYSIAN_CORE.exclusiveSkillID
+
+    companion object{
+        val DAMAGE_INCREASE_PERCENT = 15f
+        fun getFighters(carrier: ShipAPI): List<ShipAPI> {
+            val result: MutableList<ShipAPI> = ArrayList()
+
+//		this didn't catch fighters returning for refit
+//		for (FighterLaunchBayAPI bay : carrier.getLaunchBaysCopy()) {
+//			if (bay.getWing() == null) continue;
+//			result.addAll(bay.getWing().getWingMembers());
+//		}
+            for (ship in Global.getCombatEngine().ships) {
+                if (!ship.isFighter) continue
+                if (ship.wing == null) continue
+                if (ship.wing.sourceShip === carrier) {
+                    result.add(ship)
+                }
+            }
+            return result
+        }
+    }
+
+    class ElysiaBossCoreListener(val ship: ShipAPI) : AdvanceableListener{
+        val id = "ElysiaBossCore"
+        override fun advance(amount: Float) {
+
+            for (bay in ship.launchBaysCopy) {
+                if (bay.wing == null) continue
+                val spec = bay.wing.spec
+                val maxTotal = spec.numFighters + 1
+                val actualAdd = maxTotal - bay.wing.wingMembers.size
+
+                if (actualAdd > 0) {
+                    bay.fastReplacements += 1
+                    bay.extraDeployments = actualAdd
+                    bay.extraDeploymentLimit = maxTotal
+                    bay.extraDuration = 100000f
+                }
+            }
+
+            for (fighter in getFighters(ship)) {
+                if (fighter.isHulk) continue
+                val fStats = fighter.mutableStats
+                fStats.ballisticWeaponDamageMult.modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT)
+                fStats.energyWeaponDamageMult.modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT)
+                fStats.missileWeaponDamageMult.modifyMult(id, 1f + 0.01f * DAMAGE_INCREASE_PERCENT)
+            }
+        }
+    }
 
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP
@@ -32,9 +82,8 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
             Misc.getHighlightColor(),
             Misc.getHighlightColor()
         )
-        //info!!.addPara("Adds an additional fighter bay to the ship.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
         info!!.addPara(
-            "-20%% ordnance point cost for all fighters.",
+            "All Wings get 1 extra craft and +15%% damage.",
             0f,
             Misc.getHighlightColor(),
             Misc.getHighlightColor()
@@ -45,7 +94,6 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
     override fun apply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?, level: Float) {
         var variant = stats!!.variant
 
-        stats.dynamic.getStat(Stats.ALL_FIGHTER_COST_MOD).modifyMult(skillID, 0.8f)
         if (stats!!.entity is ShipAPI) {
             val ship = stats.entity as ShipAPI
             var hasDrones = false
@@ -56,13 +104,21 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
             if (!hasDrones) {
                 MagicSubsystemsManager.addSubsystemToShip(ship, PDDroneSubsystem(ship))
             }
+            if(!ship.hasListenerOfClass(ElysiaBossCoreListener::class.java)) ship.addListener(ElysiaBossCoreListener(ship))
         }
     }
 
     override fun unapply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?) {
         if (stats!!.entity is ShipAPI) {
-            var ship = stats.entity as ShipAPI
+            val ship = stats.entity as ShipAPI
+            for (fighter in getFighters(ship)) {
+                if (fighter.isHulk) continue
+                val fStats = fighter.mutableStats
+                fStats.ballisticWeaponDamageMult.unmodify(id)
+                fStats.energyWeaponDamageMult.unmodify(id)
+                fStats.missileWeaponDamageMult.unmodify(id)
+            }
+            if(ship.hasListenerOfClass(ElysiaBossCoreListener::class.java)) ship.removeListenerOfClass(ElysiaBossCoreListener::class.java)
         }
-        stats.dynamic.getStat(Stats.ALL_FIGHTER_COST_MOD).unmodify(skillID)
     }
 }

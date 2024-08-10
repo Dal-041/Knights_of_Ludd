@@ -19,7 +19,7 @@ public class TwinShieldAI implements ShipSystemAIScript {
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-
+        if(ship.getShield() == null) return;
 
         int enemiesInFront = 0;
         int enemiesTotal = 0;

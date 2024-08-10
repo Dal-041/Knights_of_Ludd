@@ -6,10 +6,12 @@ import com.fs.starfarer.api.combat.ShipCommand;
 import com.fs.starfarer.api.util.Misc;
 import org.jetbrains.annotations.NotNull;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.drones.DroneFormation;
 import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import org.magiclib.subsystems.drones.PIDController;
+import org.selkie.kol.combat.StarficzAIUtils;
 
 import java.util.Iterator;
 import java.util.Map;
@@ -118,10 +120,10 @@ public class PDDroneSubsystem extends MagicDroneSubsystem {
     @NotNull
     @Override
     public DroneFormation getDroneFormation() {
-        return new IonDroneFormation();
+        return new PDDroneFormation();
     }
 
-    private static class IonDroneFormation extends DroneFormation {
+    private static class PDDroneFormation extends DroneFormation {
         @Override
         public void advance(@NotNull ShipAPI ship, @NotNull Map<ShipAPI, ? extends PIDController> drones, float amount) {
             int index = 0;
@@ -130,14 +132,22 @@ public class PDDroneSubsystem extends MagicDroneSubsystem {
                 PIDController controller = entry.getValue();
                 Vector2f shipLocation = ship.getLocation();
                 float angle = ship.getFacing() + 180;
-                if (isOnLeft(drone, index))
+                float aheadAngle = angle;
+                if (isOnLeft(drone, index)){
                     angle += 30;
-                else
+                    aheadAngle += 33.13f;
+                }
+                else{
                     angle -= 30;
+                    aheadAngle -= 33.13f;
+                }
                 Vector2f desiredLocation = MathUtils.getPointOnCircumference(shipLocation, 1000f, angle);
-                desiredLocation = MathUtils.getPointOnCircumference(shipLocation, Misc.getTargetingRadius(desiredLocation, ship, false) + 50f, angle);
-                desiredLocation = MathUtils.getRandomPointInCircle(desiredLocation, 0.2f);
-                //Global.getCombatEngine().addSmoothParticle(desiredLocation, ship.getVelocity(), 40f, 50f, 0.1f, Color.blue);
+                float radius = Misc.getTargetingRadius(desiredLocation, ship, false) + 50f;
+                desiredLocation = MathUtils.getPointOnCircumference(shipLocation, radius, angle);
+
+                Vector2f facingLocation = Vector2f.add(new Vector2f(desiredLocation), VectorUtils.resize(Misc.getUnitVectorAtDegreeAngle(ship.getFacing()), 50),null);
+                StarficzAIUtils.turnToPoint(drone, facingLocation);
+
                 controller.move(desiredLocation, drone);
 
                 Iterator<Object> iter = Global.getCombatEngine().getShipGrid().getCheckIterator(drone.getLocation(), 100f, 100f);

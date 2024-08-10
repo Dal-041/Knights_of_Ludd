@@ -20,6 +20,7 @@ public class TwinShieldStats extends BaseShipSystemScript {
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         ShipAPI ship = (ShipAPI) stats.getEntity();
+        if (ship.getShield() == null) return;
         if(runOnce){
             runOnce=false;
             shieldArc=ship.getShield().getArc();
