@@ -1,6 +1,7 @@
 package org.selkie.kol.impl.skills.cores
 
 import com.fs.starfarer.api.Global
+import com.fs.starfarer.api.campaign.AICoreOfficerPlugin
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
@@ -10,6 +11,7 @@ import com.fs.starfarer.api.combat.listeners.AdvanceableListener
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.magiclib.subsystems.MagicSubsystemsManager
+import org.selkie.kol.impl.campaign.cores.BossAICoreOfficerPlugin
 import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
@@ -105,6 +107,16 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
                 MagicSubsystemsManager.addSubsystemToShip(ship, PDDroneSubsystem(ship))
             }
             if(!ship.hasListenerOfClass(ElysiaBossCoreListener::class.java)) ship.addListener(ElysiaBossCoreListener(ship))
+        }
+
+
+        stats.fleetMember?.let{ fleetMember ->
+            if(fleetMember.hullSpec.manufacturer == "Elysia"){
+                fleetMember.captain?.let{
+                    val captainMemory = it.memoryWithoutUpdate
+                    captainMemory.set(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT, BossAICoreOfficerPlugin.AUTOMATED_POINTS_MULT_SAME_FACTION)
+                }
+            }
         }
     }
 

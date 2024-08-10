@@ -156,7 +156,8 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         Misc.addDesignTypePara(tooltip, design, opad)
 
         val corePerson = plugin.createPerson(commoditySpec.id, Factions.NEUTRAL, Random())
-        val pointsMult = corePerson.memoryWithoutUpdate.getFloat(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT)
+        val pointsMult = corePerson.memoryWithoutUpdate.getFloat(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT).toInt()
+        val pointsMultSameFaction = String.format("%.1f", BossAICoreOfficerPlugin.AUTOMATED_POINTS_MULT_SAME_FACTION)
 
         val desc = Global.getSettings().getDescription(commoditySpec.id, Description.Type.RESOURCE)
 
@@ -168,8 +169,8 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         img.addSpacer(5f)
 
         img.addPara("Level: ${corePerson.stats.level}", 0f, Misc.getTextColor(), Misc.getHighlightColor(), "Level")
-        img.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f,
-            Misc.getTextColor(), Misc.getHighlightColor(), "Automated Points Multiplier")
+        img.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X} (${pointsMultSameFaction}${Strings.X} on same faction ships)", 0f,
+            Misc.getTextColor(), Misc.getHighlightColor(), "Automated Points Multiplier:")
 
         tooltip.addImageWithText(0f)
 

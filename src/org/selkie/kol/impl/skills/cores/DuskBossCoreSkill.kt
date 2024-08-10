@@ -1,5 +1,6 @@
 package org.selkie.kol.impl.skills.cores
 
+import com.fs.starfarer.api.campaign.AICoreOfficerPlugin
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
@@ -8,6 +9,7 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipHullSpecAPI
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
+import org.selkie.kol.impl.campaign.cores.BossAICoreOfficerPlugin
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.NinmahBoss.NinmahAIScript
 
@@ -43,6 +45,16 @@ class DuskBossCoreSkill : BaseCoreOfficerSkill() {
         stats.phaseCloakUpkeepCostBonus.modifyMult(skillID, 0.75f)
         //stats.phaseCloakCooldownBonus.modifyMult(modID, 0.80f)
         stats.phaseCloakActivationCostBonus.modifyMult(skillID, 0f)
+
+
+        stats.fleetMember?.let{ fleetMember ->
+            if(fleetMember.hullSpec.manufacturer == "Dusk"){
+                fleetMember.captain?.let{
+                    val captainMemory = it.memoryWithoutUpdate
+                    captainMemory.set(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT, BossAICoreOfficerPlugin.AUTOMATED_POINTS_MULT_SAME_FACTION)
+                }
+            }
+        }
     }
 
     override fun unapply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?) {

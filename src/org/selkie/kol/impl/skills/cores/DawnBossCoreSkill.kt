@@ -1,6 +1,7 @@
 package org.selkie.kol.impl.skills.cores
 
 import com.fs.starfarer.api.Global
+import com.fs.starfarer.api.campaign.AICoreOfficerPlugin
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
@@ -12,10 +13,12 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.subsystems.MagicSubsystemsManager
+import org.selkie.kol.impl.campaign.cores.BossAICoreOfficerPlugin
 import org.selkie.kol.impl.combat.subsystems.SimpleShieldDronesSubsystem
 import org.selkie.kol.impl.combat.subsystems.SmartShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.DawnBuiltin
+
 
 class DawnBossCoreSkill : BaseCoreOfficerSkill() {
     override val skillID = BossCore.DAWN_CORE.exclusiveSkillID
@@ -84,6 +87,15 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
             }
 
             if(ship.listenerManager?.hasListenerOfClass(DawnBossCoreListener::class.java) != true) ship.addListener(DawnBossCoreListener(ship))
+        }
+
+        stats.fleetMember?.let{ fleetMember ->
+            if(fleetMember.hullSpec.manufacturer == "Dawntide"){
+                fleetMember.captain?.let{
+                    val captainMemory = it.memoryWithoutUpdate
+                    captainMemory.set(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT, BossAICoreOfficerPlugin.AUTOMATED_POINTS_MULT_SAME_FACTION)
+                }
+            }
         }
     }
 

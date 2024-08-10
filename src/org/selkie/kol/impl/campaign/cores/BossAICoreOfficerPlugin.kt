@@ -15,7 +15,10 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import java.util.*
 
 class BossAICoreOfficerPlugin : AICoreOfficerPlugin {
-    val AUTOMATED_POINTS_MULT = 4f
+    companion object{
+        const val AUTOMATED_POINTS_MULT = 4f
+        const val AUTOMATED_POINTS_MULT_SAME_FACTION = 2.5f
+    }
 
     override fun createPerson(aiCoreId: String?, factionId: String?, random: Random?): PersonAPI {
         val spec = Global.getSettings().getCommoditySpec(aiCoreId)
@@ -54,9 +57,11 @@ class BossAICoreOfficerPlugin : AICoreOfficerPlugin {
 
         val skill = Global.getSettings().getSkillSpec(BossCore.getCore(person.aiCoreId).exclusiveSkillID)
         val pointsMult = AUTOMATED_POINTS_MULT.toInt()
+        val pointsMultSameFaction = String.format("%.1f",AUTOMATED_POINTS_MULT_SAME_FACTION)
 
         tooltip.addSpacer(opad)
-        tooltip.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X}", 0f, Misc.getTextColor(), Misc.getHighlightColor(),  "Automated Points Multiplier")
+        tooltip.addPara("Automated Points Multiplier: ${pointsMult}${Strings.X} (${pointsMultSameFaction}${Strings.X} on same faction ships)",
+            0f, Misc.getTextColor(), Misc.getHighlightColor(),  "Automated Points Multiplier:")
         tooltip.addSpacer(opad)
 
         tooltip.addSectionHeading("Signature Skill: ${skill.name}", Alignment.MID, 0f)
@@ -71,8 +76,8 @@ class BossAICoreOfficerPlugin : AICoreOfficerPlugin {
         if (person.personalityAPI.id == Personalities.RECKLESS)
         {
             tooltip.addSectionHeading("Personality: Fearless", text, bg, Alignment.MID, opad)
-            tooltip.addPara("In combat, the " + spec.name + " is single-minded and determined. " + "In a human captain, its traits might be considered reckless. In a machine, they're terrifying.",
-                opad)
+            tooltip.addPara("In combat, the " + spec.name + " is single-minded and determined. " +
+                    "In a human captain, its traits might be considered reckless. In a machine, they're terrifying.", opad)
         }
     }
 }
