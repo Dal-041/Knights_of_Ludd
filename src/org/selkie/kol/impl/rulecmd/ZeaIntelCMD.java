@@ -81,7 +81,6 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 if (member.getVariant().getHullSpec().getBaseHullId().startsWith("zea_boss")) {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
-                    if (!variant.hasTag(Tags.SHIP_UNIQUE_SIGNATURE)) variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
                     if (variant.hasTag(ZeaStaticStrings.BOSS_TAG)) variant.removeTag(ZeaStaticStrings.BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
@@ -107,7 +106,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 wreck.setFacing((float)Math.random()*360f);
                 wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 
-                ZeaUtils.bossWreckCleaner(wreck, true);
+                ZeaUtils.bossWreckCleaner(wreck, false);
             }
 
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
