@@ -6,7 +6,7 @@
 
 	"statsScript":"org.selkie.kol.impl.shipsystems.SmallFluxNegationStats",
 
-	"useSound":"system_ammo_feeder",
+	"useSound":"zea_dawn_ao_sys",
     "outOfUsesSound":"gun_out_of_ammo",
 
 	"aiHints":{

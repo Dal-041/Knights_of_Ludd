@@ -18,6 +18,21 @@
 	[
 		{"file":"sounds/sfx_wpn_energy/gas_burn_loop.ogg","pitch":1.6,"volume":1.4},
 	],
+	"zea_dawn_aoe_charge":[
+		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Charge.ogg","pitch":1.0,"volume":2.0},
+	],
+	"zea_dawn_aoe_boom":[
+		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Boom.ogg","pitch":1.0,"volume":2.0},
+	],
+	"zea_dawn_ao_sys":[
+		{"file":"sounds/sfx_systems/Belks_Energy_Not_AAF.ogg","pitch":0.8,"volume":1.5},
+	],
+	"zea_dawn_plasma_start":[
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.0,"volume":1.0},
+	],
+	"zea_dawn_plasma_loop":[
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Loop.ogg","pitch":1.2,"volume":1.0},
+	],
 	"zea_dusk_phasespace_lightning_impact":[
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.15,"volume":0.35},
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.20,"volume":0.35},

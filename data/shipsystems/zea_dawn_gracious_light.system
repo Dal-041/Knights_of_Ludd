@@ -6,8 +6,8 @@
 
 	"statsScript":"org.selkie.kol.impl.shipsystems.GraciousLightStats",
 
-	"useSound":"system_damper",
-	"loopSound":"system_damper_loop",
-	"deactivateSound":"system_damper_off",
+	"useSound":"zea_dawn_aoe_charge",
+	"loopSound":"zea_dawn_aoe_boom",
+	"deactivateSound":"zea_dawn_aoe_boom",
 	"outOfUsesSound":"gun_out_of_ammo"
 }
