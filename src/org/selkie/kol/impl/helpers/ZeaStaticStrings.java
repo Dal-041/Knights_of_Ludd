@@ -29,6 +29,7 @@ public class ZeaStaticStrings {
         }
 
         public static final CoreData DUSK_CORE = new CoreData("zea_dusk_boss_core", DuskBossCoreSkill.class, "zea_dusk_boss_core_skill", "zea_dusk_boss_core");
+        public static final String DORMANT_DUSK_CORE = "zea_dormant_dusk_boss_core";
         public static final CoreData DAWN_CORE = new CoreData("zea_dawn_boss_core", DawnBossCoreSkill.class, "zea_dawn_boss_core_skill", "zea_dawn_boss_core");
         public static final CoreData ELYSIAN_CORE = new CoreData("zea_elysia_boss_core", ElysiaBossCoreSkill.class, "zea_elysia_boss_core_skill","zea_elysia_boss_core");
         public static final CoreData[] CORES = { DUSK_CORE, DAWN_CORE, ELYSIAN_CORE };

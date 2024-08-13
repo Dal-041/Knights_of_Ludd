@@ -26,6 +26,7 @@ class DuskStationInteraction : InteractionDialogPlugin {
         val CORE_INTO_SKILL = "CORE_INTO_SKILL"
         val REVOKE_SKILL = "REVOKE_SKILL"
 
+
         val DUSK_CORE_ITEM = SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, BossCore.DUSK_CORE.itemID)
     }
     override fun init(dialog: InteractionDialogAPI?) {
@@ -43,14 +44,17 @@ class DuskStationInteraction : InteractionDialogPlugin {
     }
 
     override fun optionSelected(optionText: String?, optionData: Any?) {
+        val playerCargo = Global.getSector().playerFleet.cargo
+
         if (optionData == LEAVE_KEY) {
             dialog.dismiss()
         }
 
         if (optionData == ENTER_KEY) {
-            dialog.textPanel.addPara("Text 2")
-
-            if (Global.getSector().playerFleet.cargo.getQuantity(CargoItemType.SPECIAL, DUSK_CORE_ITEM) > 0){
+            dialog.optionPanel.clearOptions()
+            dialog.textPanel.clear()
+            if (playerCargo.getQuantity(CargoItemType.SPECIAL, DUSK_CORE_ITEM) > 0){
+                dialog.textPanel.addPara("Text 2")
                 val tooltip = dialog.textPanel.beginTooltip()
 
                 tooltip.setParaFont(Fonts.ORBITRON_12)
@@ -61,23 +65,17 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
                 dialog.textPanel.addTooltip()
 
-                dialog.optionPanel.clearOptions()
-
-                dialog.textPanel.addPara("Any officer can be selected for the procedure. This change is permanent and can only applied to a single person.")
+                dialog.textPanel.addPara("Any officer can be selected for the procedure.")
                 dialog.optionPanel.addOption("Select an officer", CORE_INTO_SKILL)
-
-                dialog.optionPanel.addOption("Leave", LEAVE_KEY)
-                dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
-            } else{
+            } else if(playerCargo.getCommodityQuantity(BossCore.DORMANT_DUSK_CORE) > 0){
                 dialog.textPanel.addPara("Text 3")
-
-                dialog.optionPanel.clearOptions()
-
-                dialog.optionPanel.addOption("Leave", LEAVE_KEY)
-                dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
+                dialog.optionPanel.addOption("Terminate the Quantum Neural Link", REVOKE_SKILL)
+            } else{
+                dialog.textPanel.addPara("Text 4")
             }
 
-
+            dialog.optionPanel.addOption("Leave", LEAVE_KEY)
+            dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
         }
 
         if (optionData == CORE_INTO_SKILL) {
@@ -156,11 +154,10 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
                 override fun customDialogConfirm() {
                     if (selected == null) return
+                    dialog.optionPanel.clearOptions()
+                    dialog.textPanel.clear()
 
                     Global.getSoundPlayer().playUISound(Sounds.STORY_POINT_SPEND, 1f, 1f)
-
-                    dialog.optionPanel.clearOptions()
-
 
                     dialog.textPanel.addPara("Choosen ${selected!!.nameString}", Misc.getBasePlayerColor(), Misc.getBasePlayerColor())
 
@@ -169,13 +166,34 @@ class DuskStationInteraction : InteractionDialogPlugin {
                     val skillspec = Global.getSettings().getSkillSpec(BossCore.DUSK_CORE.exclusiveSkillID)
                     dialog.textPanel.addPara("> ${selected!!.nameString} acquired the ${skillspec.name} skill", Misc.getPositiveHighlightColor(), Misc.getPositiveHighlightColor())
 
+                    Global.getSector().memoryWithoutUpdate.set("\$officer_"+BossCore.DUSK_CORE.exclusiveSkillID, selected!!.id)
                     selected!!.stats.setSkillLevel(BossCore.DUSK_CORE.exclusiveSkillID, 1f)
-                    Global.getSector().playerFleet.cargo.removeItems(CargoItemType.SPECIAL, SpecialItemData("zea_boss_core_special", "zea_dusk_boss_core"), 1f)
+
+                    playerCargo.removeItems(CargoItemType.SPECIAL, DUSK_CORE_ITEM, 1f)
+                    playerCargo.addCommodity(BossCore.DORMANT_DUSK_CORE, 1f)
+
+                    dialog.optionPanel.addOption("Return to the lab", ENTER_KEY)
 
                     dialog.optionPanel.addOption("Leave", LEAVE_KEY)
                     dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
                 }
             })
+        }
+
+        if (optionData == REVOKE_SKILL) {
+            dialog.optionPanel.clearOptions()
+            dialog.textPanel.clear()
+
+            dialog.textPanel.addPara("Text 5")
+            Global.getSoundPlayer().playUISound(Sounds.STORY_POINT_SPEND, 1f, 1f)
+            Global.getSector().memoryWithoutUpdate.set("\$officer_"+BossCore.DUSK_CORE.exclusiveSkillID, "")
+            playerCargo.removeCommodity(BossCore.DORMANT_DUSK_CORE, 1f)
+            playerCargo.addSpecial(DUSK_CORE_ITEM, 1f)
+
+            dialog.optionPanel.addOption("Enter", ENTER_KEY)
+
+            dialog.optionPanel.addOption("Leave", LEAVE_KEY)
+            dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
         }
     }
 

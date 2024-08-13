@@ -7,6 +7,7 @@ import com.fs.starfarer.api.campaign.CoreUITabId
 import com.fs.starfarer.api.campaign.SpecialItemData
 import com.fs.starfarer.api.util.IntervalUtil
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
+import org.selkie.kol.impl.skills.cores.DuskBossCoreSkill
 
 //Loosely based on things done in Tahlans Digital Soul
 class AICoreReplacerScript : EveryFrameScript {
@@ -101,5 +102,11 @@ class AICoreReplacerScript : EveryFrameScript {
                 duskStack.subtract(1f)
             }
         }*/
+
+        for(officer in Global.getSector().playerFleet.fleetData.officersCopy.map { it.person }){
+            if(officer.stats.hasSkill(BossCore.DUSK_CORE.exclusiveSkillID) && officer.id != Global.getSector().memoryWithoutUpdate.getString("\$officer_"+BossCore.DUSK_CORE.exclusiveSkillID)){
+                officer.stats.setSkillLevel(BossCore.DUSK_CORE.exclusiveSkillID, 0f)
+            }
+        }
     }
 }
