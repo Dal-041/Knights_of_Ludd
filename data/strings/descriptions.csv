@@ -245,7 +245,7 @@ nebula_zea_black,TERRAIN,"A viciously energetic nebula, or what passes for one i
 #Exploration,,,,,
 zea_boss_station_dusk_1_desc,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
 zea_boss_station_tritachyon,CUSTOM,"A remnant of Domain research into astronomical phenomonena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
-zea_research_station_dusk,CUSTOM,"A station for research into astronomical phenomonena. This one is intact, no doubt supplying its owners with knowledge and refuge.",,,
+zea_research_station_dusk,CUSTOM,"A lone research station, abandoned and the only normal object you can find here. Shockingly out of place and shielded from scans, you wonder how it got here and what it might contain.",,,
 zea_research_station_dawn,CUSTOM,"A former Explorarium Mothership, this vessel has recently been gutted and reconverted into a factory for the monstrous Dawntide.",,,
 zea_research_station_elysia,CUSTOM,A converted habitat turned factory and fleet hangar. The Elysian fleet calls these ports home and defends them vigorously.,,,
 ,,,,,

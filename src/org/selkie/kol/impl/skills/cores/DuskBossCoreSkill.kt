@@ -21,7 +21,7 @@ class DuskBossCoreSkill : BaseCoreOfficerSkill() {
 
     override fun createCustomDescription(stats: MutableCharacterStatsAPI?,  skill: SkillSpecAPI?, info: TooltipMakerAPI?,  width: Float) {
         info!!.addSpacer(2f)
-        info!!.addPara("Improves the autopilots ability to maneuver ships with phase cloaks.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
+        info!!.addPara("Improves the autopilots ability to maneuver ships with phase cloak defense systems.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
         info!!.setBulletedListMode("    - ")
         info!!.addPara("Custom Fearless AI autopilot optimized for ships with a Quantum Disruptor shipsystem.", 0f, Misc.getTextColor(), Misc.getHighlightColor())
         info!!.setBulletedListMode("")

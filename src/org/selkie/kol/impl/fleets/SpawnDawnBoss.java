@@ -2,10 +2,12 @@ package org.selkie.kol.impl.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.CargoAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpecial;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -90,6 +92,10 @@ public class SpawnDawnBoss {
 
 		ZeaFleetManager.setAICaptains(dawnBossFleet);
 		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_nian.png");
+
+		CargoAPI cargo = Global.getFactory().createCargo(true);
+		cargo.addCommodity(ZeaStaticStrings.BossCore.DAWN_CORE.itemID, 1);
+		BaseSalvageSpecial.addExtraSalvage(dawnBossFleet, cargo);
 
 		dawnBossFleet.getFleetData().sort();
 		dawnBossFleet.addTag(excludeTag);

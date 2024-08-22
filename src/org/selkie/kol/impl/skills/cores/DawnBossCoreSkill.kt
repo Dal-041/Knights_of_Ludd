@@ -57,7 +57,7 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
 
     override fun createCustomDescription(stats: MutableCharacterStatsAPI?,  skill: SkillSpecAPI?, info: TooltipMakerAPI?,  width: Float) {
         info!!.addSpacer(2f)
-        info!!.addPara("Provides the ship with the \"Chiewn\" shield drone subsystem if it does not have it.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
+        info!!.addPara("Provides the ship with the \"Chiwen\" shield drone subsystem if it does not have it.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
         info!!.setBulletedListMode("    - ")
         info!!.addPara("Upgrades existing shield drone subsystem with 2 more drones that all actively block shots.", 0f, Misc.getTextColor(), Misc.getHighlightColor())
         info!!.setBulletedListMode("")
