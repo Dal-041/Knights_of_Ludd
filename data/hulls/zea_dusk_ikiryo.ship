@@ -4,9 +4,9 @@
   "hullSize": "FRIGATE",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_ikiryo.png",
   "style": "ZEA_DUSK_TECH",
-  "height": 125,
-  "width": 126,
-  "center": [63, 72],
+  "height": 140,
+  "width": 140,
+  "center": [70, 72],
   "collisionRadius": 92,
   "shieldCenter": [0, -0],
   "shieldRadius": 89,
@@ -20,8 +20,7 @@
     "kol_throttle"
   ],
   "builtInWeapons": {
-    "WS0007": "zea_deco_dusk_ikiryo_tl",
-    "WS0008": "zea_deco_dusk_ikiryo_tr"
+    "WS0007": "zea_deco_dusk_ikiryo_tl"
   },
   "weaponSlots": [
     {
@@ -31,7 +30,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [25, 23]
+      "locations": [23, 18]
     },
     {
       "id": "WS 003",
@@ -40,7 +39,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [25, -23]
+      "locations": [23, -18]
     },
     {
       "id": "WS0003",
@@ -69,7 +68,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": 160,
-      "locations": [-8, 5]
+      "locations": [1.5, 17.5]
     },
     {
       "id": "WS0002",
@@ -78,7 +77,7 @@
       "mount": "HIDDEN",
       "arc": 5,
       "angle": -160,
-      "locations": [-8, -5]
+      "locations": [1.5, -17.5]
     },
     {
       "id": "WS0007",
@@ -87,93 +86,105 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [26, 21]
+      "locations": [31, -0]
     },
     {
-      "id": "WS0008",
-      "size": "LARGE",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -0,
-      "locations": [26, -21]
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": 119,
+      "locations": [3.5, 40]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 5,
+      "angle": -119,
+      "locations": [3.5, -40]
     }
   ],
   "engineSlots": [
     {
-      "location": [-31, 8],
-      "length": 27.5,
-      "width": 4,
-      "angle": 176.5,
-      "contrailSize": 4,
+      "location": [-27, 23],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": 145,
+      "contrailSize": 10.464434,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-31, -8],
-      "length": 27.5,
-      "width": 4,
-      "angle": -176.5,
-      "contrailSize": 4,
+      "location": [-27, -23],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": -145,
+      "contrailSize": 10.464434,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-30, 13],
-      "length": 42.294697,
-      "width": 8.404433,
-      "angle": 167,
-      "contrailSize": 8.404433,
+      "location": [-11.5, 35.5],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": 145,
+      "contrailSize": 10.464434,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-30, -13],
-      "length": 42.294697,
-      "width": 8.404433,
-      "angle": -167,
-      "contrailSize": 8.404433,
+      "location": [-11.5, -35.5],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": -145,
+      "contrailSize": 10.464434,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-30, 19],
-      "length": 42.294697,
-      "width": 8.404433,
-      "angle": 160.5,
-      "contrailSize": 8.404433,
+      "location": [-39, 8.5],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": 174,
+      "contrailSize": 10.464434,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-30, -19],
-      "length": 42.294697,
-      "width": 8.404433,
-      "angle": -160.5,
-      "contrailSize": 8.404433,
+      "location": [-39, -8.5],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": -174,
+      "contrailSize": 10.464434,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-29.5, 19],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": 145,
+      "contrailSize": 10.464434,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-29.5, -19],
+      "length": 35.410084,
+      "width": 10.464434,
+      "angle": -145,
+      "contrailSize": 10.464434,
       "style": "HIGH_TECH"
     }
   ],
   "bounds": [
-    37, -14,
-    36.5, -32,
-    30.5, -33,
-    24.5, -39.5,
-    16, -34,
-    4, -57,
-    -6, -57,
-    -26.5, -41.5,
-    -20, -23,
-    -31, -23,
-    -31, -8,
+    -1.5, -59.5,
+    -10.5, -61,
+    -5, -40,
+    -39, -6,
     -65, 0,
-    -31, 8,
-    -31, 23,
-    -20, 23,
-    -19, 36.5,
-    -26.5, 41.5,
-    -6, 57,
-    4, 57,
-    16, 34,
-    24.5, 39.5,
-    30.5, 33,
-    36.5, 32,
-    37, 14,
-    48, 0
+    -39, 6,
+    -5, 40,
+    -10.5, 61,
+    -1.5, 59.5,
+    24.5, 26,
+    59, 0,
+    24.5, -26
   ]
 }
