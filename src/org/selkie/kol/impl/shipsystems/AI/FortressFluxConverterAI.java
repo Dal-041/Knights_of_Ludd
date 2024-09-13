@@ -31,7 +31,7 @@ public class FortressFluxConverterAI implements ShipSystemAIScript {
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
 
-        if (!AIUtils.canUseSystemThisFrame(ship)) {return;}
+        if (!AIUtils.canUseSystemThisFrame(ship) || shield == null) {return;}
 
         // use system to convert softflux
         if (ship.getFluxLevel() - ship.getHardFluxLevel() > 0.25f){
@@ -70,7 +70,7 @@ public class FortressFluxConverterAI implements ShipSystemAIScript {
         float hardFluxSaved = 0;
 
         for(FutureHit hit : combinedHits){
-            float offAngle = Math.abs(MathUtils.getShortestRotation(ship.getShield().getFacing(), hit.angle)) - (shield.isOn() ? shield.getActiveArc()/2 : 0);
+            float offAngle = Math.abs(MathUtils.getShortestRotation(shield.getFacing(), hit.angle)) - (shield.isOn() ? shield.getActiveArc()/2 : 0);
             if(offAngle < 0) offAngle = 0;
             float timeToBlock = (offAngle/(shield.getArc()/2)) * unfoldTime;
             float timeToHit = (hit.timeToHit - timeElapsed);
