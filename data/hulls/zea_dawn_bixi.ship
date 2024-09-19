@@ -15,7 +15,7 @@
     "automated",
     "zea_dawn_builtin",
     "kol_ea_shields1",
-    "kol_throttle",
+    "kol_throttle"
   ],
   "weaponSlots": [
     {
@@ -187,6 +187,30 @@
       "contrailSize": 32,
       "style": "CUSTOM",
       "styleId": "zea_DAWN_ENG"
+    },
+    {
+      "location": [-84, 41],
+      "length": 60,
+      "width": 42,
+      "angle": 180,
+      "contrailSize": 128,
+      "style": "MIDLINE"
+    },
+    {
+      "location": [-84, -41],
+      "length": 60,
+      "width": 42,
+      "angle": -180,
+      "contrailSize": 128,
+      "style": "MIDLINE"
+    },
+    {
+      "location": [-72.5, -0],
+      "length": 70,
+      "width": 63,
+      "angle": 180,
+      "contrailSize": 128,
+      "style": "MIDLINE"
     }
   ],
   "bounds": [

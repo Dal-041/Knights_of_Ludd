@@ -33,6 +33,16 @@
 	"zea_dawn_plasma_loop":[
 		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Loop.ogg","pitch":1.2,"volume":1.0},
 	],
+	"dawn_charge_drive_activate":[ 
+		{"file":"sounds/sfx_systems/burn_drive_activate.ogg","pitch":1.1,"volume":0.85},
+	],
+	
+	"dawn_charge_drive_loop":[ 
+		{"file":"sounds/sfx_systems/burn_drive_loop.ogg","pitch":1.1,"volume":0.85},
+	],
+	"dawn_charge_drive_deactivate":[ 
+		{"file":"sounds/sfx_systems/burn_drive_deactivate.ogg","pitch":1.1,"volume":0.85},
+	],
 	"zea_dusk_phasespace_lightning_impact":[
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.15,"volume":0.35},
 		{"file":"sounds/phasespace_fx/kol_nullspace_lightning_1.ogg","pitch":1.20,"volume":0.35},
