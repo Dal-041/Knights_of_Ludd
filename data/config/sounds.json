@@ -19,19 +19,19 @@
 		{"file":"sounds/sfx_wpn_energy/gas_burn_loop.ogg","pitch":1.6,"volume":1.4},
 	],
 	"zea_dawn_aoe_charge":[
-		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Charge.ogg","pitch":1.0,"volume":2.0},
+		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Charge.ogg","pitch":1.0,"volume":2.5},
 	],
 	"zea_dawn_aoe_boom":[
-		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Boom.ogg","pitch":1.0,"volume":2.0},
+		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Boom.ogg","pitch":1.0,"volume":2.5},
 	],
 	"zea_dawn_ao_sys":[
 		{"file":"sounds/sfx_systems/Belks_Energy_Not_AAF.ogg","pitch":0.8,"volume":1.5},
 	],
 	"zea_dawn_plasma_start":[
-		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.0,"volume":1.0},
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.35,"volume":0.65},
 	],
 	"zea_dawn_plasma_loop":[
-		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Loop.ogg","pitch":1.2,"volume":1.0},
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Loop.ogg","pitch":1.45,"volume":0.5},
 	],
 	"dawn_charge_drive_activate":[ 
 		{"file":"sounds/sfx_systems/burn_drive_activate.ogg","pitch":1.1,"volume":0.85},
@@ -73,6 +73,74 @@
 	"zea_elysian_corr_loop":[
 		{"file":"sounds/sfx_systems/kol_corr_loop.ogg","pitch":1,"volume":0.5},
 	],
+	"kol_lunete_fire":
+	[
+		{"file":"sounds/sfx_wpn_energy/tachyon_lance_fire_01.ogg","pitch":1,"volume":1.0},
+	],
+	"zea_dawn_flux_loop":{ # played while a ship is venting flux
+		"sounds":[
+			{"file":"sounds/sfx_flux/flux_flush_loop.ogg","pitch":1.15,"volume":0.8},
+		],
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},		
+	},	
+	"zea_dawn_flux":{ # played once when a ship starts venting flux
+		"sounds":[
+			{"file":"sounds/sfx_flux/flux_vent.ogg","pitch":1.15,"volume":0.5},
+		],
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},		
+	},	
+	"zea_dawn_burnout":{
+	        "sounds":[
+                        {"file":"sounds/shields/kol_shields_burnout.ogg","pitch":1.25,"volume":1},
+                ],
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
+	"zea_dawn_emp_loop":{
+		"sounds":[
+                        {"file":"sounds/shields/kol_shields_burnout_loop.ogg","pitch":1.25,"volume":0.6},
+                ],
+		"FIGHTER":{"sounds":[0], "pitch":1, "volume":0.4},
+		"FRIGATE":{"sounds":[0], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[0], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
+	"zea_dawn_shield_lower":{
+		"sounds":[
+                        {"file":"sounds/shields/kol_shields_large_lower.ogg","pitch":1.25,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_medium_lower.ogg","pitch":1.25,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_small_lower.ogg","pitch":1.25,"volume":0.4},
+                ],
+		"FIGHTER":{"sounds":[2], "pitch":1, "volume":0.6},
+		"FRIGATE":{"sounds":[1], "pitch":1, "volume":0.7},
+		"DESTROYER":{"sounds":[1], "pitch":1, "volume":0.8},
+		"CRUISER":{"sounds":[1], "pitch":1, "volume":0.8},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
+	"zea_dawn_shield_raise":{
+		"sounds":[
+                        {"file":"sounds/shields/kol_shields_large_raise.ogg","pitch":1.25,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_medium_raise.ogg","pitch":1.25,"volume":0.4},
+                        {"file":"sounds/shields/kol_shields_small_raise.ogg","pitch":1.25,"volume":0.4},
+                ],
+		"FIGHTER":{"sounds":[2], "pitch":1, "volume":0.5},
+		"FRIGATE":{"sounds":[2], "pitch":1, "volume":0.6},
+		"DESTROYER":{"sounds":[1], "pitch":1, "volume":0.7},
+		"CRUISER":{"sounds":[1], "pitch":1, "volume":0.8},
+		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},
+	},
 	"kol_shield_burnout":{
 	        "sounds":[
                         {"file":"sounds/shields/kol_shields_burnout.ogg","pitch":1,"volume":1},
