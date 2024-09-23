@@ -48,10 +48,11 @@ v1.2.0:
 - various improvements, tweaks, and polish
 v1.3.0
 - Added thrust vectoring visuals to Lunaria's engines
-- Mimosa buff - gains a medium turret in place of one of the smalls
-- [VERY REDACTED 2] boss has had its main and secondary weapons split so they can be used individually. 
-- [VERY REDACTED 3] boss 1 sprite revamp
+- Mimosa: Upgraded a small mount to a medium mount
+- Alysse: AI improvements (Now angles ship towards its frontal plates)
+- [VERY REDACTED 2] boss has had its main and secondary weapons split so they can be used individually.
 - [VERY REDACTED 2] capital has its main vector engines be changed into drone engines
+- [VERY REDACTED 3] boss 1 sprite revamp
 - [VERY REDACTED 1/2/3] Added new special rewards for defeating the main bosses
 - Custom phase AI improvements
 - Added some (yet unused) portraits
