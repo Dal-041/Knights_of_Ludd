@@ -50,7 +50,7 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
                 val actualAdd = maxTotal - bay.wing.wingMembers.size
 
                 if (actualAdd > 0) {
-                    bay.fastReplacements += 1
+                    //bay.fastReplacements += 1
                     bay.extraDeployments = actualAdd
                     bay.extraDeploymentLimit = maxTotal
                     bay.extraDuration = 100000f
