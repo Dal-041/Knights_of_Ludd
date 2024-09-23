@@ -36,7 +36,6 @@
 	"dawn_charge_drive_activate":[ 
 		{"file":"sounds/sfx_systems/burn_drive_activate.ogg","pitch":1.1,"volume":0.85},
 	],
-	
 	"dawn_charge_drive_loop":[ 
 		{"file":"sounds/sfx_systems/burn_drive_loop.ogg","pitch":1.1,"volume":0.85},
 	],
@@ -63,9 +62,11 @@
 	"zea_dusk_phase_cloak_activate":[ 
 		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_activate_alt.ogg","pitch":1,"volume":1.0},
 	],
-
 	"zea_dusk_phase_cloak_deactivate":[ 
 		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_deactivate_alt.ogg","pitch":1,"volume":1.0},
+	],
+	"zea_dusk_skimmer":[ 
+		{"file":"sounds/phasespace_fx/Belks_Water_Cloak_deactivate_alt.ogg","pitch":1.2,"volume":1.3},
 	],
 	"zea_elysian_corr_activate":[
 		{"file":"sounds/sfx_systems/kol_corr_in.ogg","pitch":1,"volume":1.2},
