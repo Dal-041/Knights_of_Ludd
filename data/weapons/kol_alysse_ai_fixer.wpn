@@ -1,0 +1,22 @@
+{
+	"id":"kol_alysse_ai_fixer",  # this id must match what's in the spreadsheet
+	"specClass":"projectile",
+	"type":"BALLISTIC",
+	"size":"LARGE",
+	"displayArcRadius":700,
+	"turretSprite":"graphics/ships/decos/kol_deco_blank.png",
+	"turretGunSprite":"graphics/ships/decos/kol_deco_blank.png",
+	"hardpointSprite":"graphics/ships/decos/kol_deco_blank.png",
+	"hardpointGunSprite":"graphics/ships/decos/kol_deco_blank.png",
+	"visualRecoil":0,  # the gun sprites are only used if this is non-0
+	"renderHints":[RENDER_BARREL_BELOW],
+	"turretOffsets":[0, 0],
+	"turretAngleOffsets":[0],
+	"hardpointOffsets":[0, 0],
+	"hardpointAngleOffsets":[0],
+	"barrelMode":"ALTERNATING", # or LINKED.  whether barrels fire at the same time or alternate.
+	"animationType":"NONE",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
+	"projectileSpecId":"kol_bricole_shot",  # projectile that will be fired	
+	"fireSoundTwo":"autocannon_fire",
+	"everyFrameEffect":"org.selkie.kol.weapons.AlysseAIFixer",
+}
