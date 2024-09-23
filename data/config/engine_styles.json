@@ -148,4 +148,23 @@
 		"glowAlternateColor":[50,50,255,255],
 		"engineColor":[255,140,200,255], #255,127,163
 	},
+	"zea_OMEGA_TRAIL_ONLY":{
+		"mode":"QUAD_STRIP",
+		"contrailDuration":2.0,
+		"contrailWidthMult":1.0,
+		"contrailWidthAddedFractionAtEnd":-1f,
+		"contrailMinSeg":5,
+		"contrailMaxSpeedMult":1f,
+		"contrailAngularVelocityMult":0f,
+		"contrailColor":[50,50,255,75],
+		"type":"GLOW",
+						
+		"glowSprite":"graphics/fx/engineglow32b.png",
+		"glowOutline":"graphics/fx/engineflame32b.png",
+		"omegaMode":true,
+		"glowSizeMult":0,
+		"glowAlternateColor":[50,50,255,0],
+		"engineColor":[150,50,255,0],
+	
+	},	
 }

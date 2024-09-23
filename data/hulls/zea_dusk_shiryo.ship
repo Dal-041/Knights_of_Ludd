@@ -4,12 +4,12 @@
   "hullSize": "DESTROYER",
   "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_shiryo.png",
   "style": "ZEA_DUSK_TECH",
-  "height": 154,
+  "height": 169,
   "width": 128,
-  "center": [64, 72],
-  "collisionRadius": 96,
+  "center": [64, 89],
+  "collisionRadius": 105.5,
   "shieldCenter": [0, -0],
-  "shieldRadius": 90,
+  "shieldRadius": 96.5,
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
@@ -27,7 +27,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 0,
-      "locations": [43, 0]
+      "locations": [26, 0]
     },
     {
       "id": "WS0002",
@@ -36,25 +36,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [67, 0]
-    },
-    {
-      "id": "WS0003",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "HARDPOINT",
-      "arc": 7,
-      "angle": 0,
-      "locations": [63, 28]
-    },
-    {
-      "id": "WS0004",
-      "size": "SMALL",
-      "type": "ENERGY",
-      "mount": "HARDPOINT",
-      "arc": 7,
-      "angle": -0,
-      "locations": [63, -28]
+      "locations": [50, 0]
     },
     {
       "id": "WS0007",
@@ -63,7 +45,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
-      "locations": [5, 35]
+      "locations": [-12, 35]
     },
     {
       "id": "WS0008",
@@ -72,7 +54,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
-      "locations": [5, -35]
+      "locations": [-12, -35]
     },
     {
       "id": "WS0005",
@@ -81,7 +63,7 @@
       "mount": "TURRET",
       "arc": 7,
       "angle": 139,
-      "locations": [0, 47]
+      "locations": [-23, 53]
     },
     {
       "id": "WS0011",
@@ -90,126 +72,124 @@
       "mount": "TURRET",
       "arc": 7,
       "angle": -139,
-      "locations": [0, -47]
+      "locations": [-23, -53]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [6, 30]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -45,
+      "locations": [6, -30]
     }
   ],
   "engineSlots": [
     {
-      "location": [-38, 17.5],
-      "length": 68.5,
-      "width": 17,
-      "angle": 180,
-      "contrailSize": 17,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-38, -7.5],
-      "length": 68.5,
-      "width": 17,
+      "location": [-47, 10.5],
+      "length": 103,
+      "width": 24,
       "angle": -180,
-      "contrailSize": 17,
-      "style": "HIGH_TECH"
+      "contrailSize": 24,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     },
     {
-      "location": [-38, 24],
-      "length": 53.716648,
-      "width": 13.641319,
-      "angle": 177,
-      "contrailSize": 13.641319,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-38, -14],
-      "length": 53.716648,
-      "width": 13.641319,
-      "angle": -177,
-      "contrailSize": 13.641319,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-35, 33],
-      "length": 40.950127,
-      "width": 6.430336,
+      "location": [-47, -11.5],
+      "length": 103,
+      "width": 24,
       "angle": 180,
-      "contrailSize": 6.430336,
-      "style": "HIGH_TECH"
+      "contrailSize": 24,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     },
     {
-      "location": [-35, -23],
-      "length": 40.950127,
-      "width": 6.430336,
-      "angle": -180,
-      "contrailSize": 6.430336,
-      "style": "HIGH_TECH"
+      "location": [-47, 25.5],
+      "length": 45,
+      "width": 13,
+      "angle": 155.5,
+      "contrailSize": 9,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     },
     {
-      "location": [-29, 33],
-      "length": 25,
-      "width": 6,
-      "angle": 180,
-      "contrailSize": 6,
-      "style": "OMEGA"
+      "location": [-47, -26.5],
+      "length": 45,
+      "width": 13,
+      "angle": -155.5,
+      "contrailSize": 9,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     },
     {
-      "location": [-29, -23],
-      "length": 25,
-      "width": 6,
-      "angle": -180,
-      "contrailSize": 6,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-29, 24],
-      "length": 29.32288,
-      "width": 7.594403,
-      "angle": 176.5,
-      "contrailSize": 7.594403,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-29, -14],
-      "length": 29.32288,
-      "width": 7.594403,
-      "angle": -176.5,
-      "contrailSize": 7.594403,
-      "style": "OMEGA"
-    },
-    {
-      "location": [-29, 17.5],
-      "length": 35,
+      "location": [-47, 19],
+      "length": 45,
       "width": 15,
-      "angle": 180,
-      "contrailSize": 15,
-      "style": "OMEGA"
+      "angle": 162.5,
+      "contrailSize": 9,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     },
     {
-      "location": [-29, -7.5],
-      "length": 35,
+      "location": [-47, -20],
+      "length": 45,
       "width": 15,
-      "angle": -180,
-      "contrailSize": 15,
-      "style": "OMEGA"
+      "angle": -162.5,
+      "contrailSize": 9,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [-24.5, 41.5],
+      "length": 35,
+      "width": 7,
+      "angle": 155.5,
+      "contrailSize": 9,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [-24.5, -42.5],
+      "length": 35,
+      "width": 7,
+      "angle": -155.5,
+      "contrailSize": 9,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [-48.5, 20],
+      "length": 6.234719,
+      "width": 27.865986,
+      "angle": 173.5,
+      "contrailSize": 27.865986,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-48.5, -20],
+      "length": 6.234719,
+      "width": 27.865986,
+      "angle": -173.5,
+      "contrailSize": 27.865986,
+      "style": "HIGH_TECH"
     }
   ],
   "bounds": [
-    69, -11,
-    59, -25,
-    20.5, -34.5,
-    -2, -57,
-    -13, -57,
-    -25, -42.5,
-    -56, -31,
-    -34, -28,
-    -34, -7,
-    -66, 0,
-    -34, 7,
-    -34, 28,
-    -56, 31,
-    -25, 42.5,
-    -13, 57,
-    -2, 57,
-    20.5, 34.5,
-    59, 25,
-    69, 11
+    57.5, -12,
+    78, -21.5,
+    25.5, -36,
+    -9.5, -59,
+    -73, -31,
+    -51, -28,
+    -51, -7,
+    -83, 0,
+    -51, 7,
+    -51, 28,
+    -73, 31,
+    -9.5, 59,
+    25.5, 36,
+    78, 21.5,
+    57.5, 12
   ]
 }

@@ -251,7 +251,7 @@ zea_research_station_elysia,CUSTOM,A converted habitat turned factory and fleet 
 ,,,,,
 #Cores,,,,,
 zea_dusk_boss_core,RESOURCE,"The object chitters with each deep scan. Results show conflicting hyperwave distortions within; sometimes contained to the vessel, sometimes reaching into the real world, and sometimes undetectable. The Core flickers in sync to an error notification on a nearby phase detector. Cyber-integrators are nestled innocently into its surface.",,,
-zea_dawn_boss_core,RESOURCE,"Scans of the containment cylinder reveal a hardened ceramosteel box within. Thick, phlegmy tentacles erupt from it, writhing and lashing against the containment walls. Some of the tendrils are mechanical in nature, some biological, and some overlap. Alien light filters from the unit's ports, pulsing hungrily.",,,
+zea_dawn_boss_core,RESOURCE,"Scans of the core's containment cylinder reveal a hardened ceramosteel box within. Thick, phlegmy tentacles erupt from it, writhing and lashing against the containment walls with dulled biomechanical thuds. Alien light filters from the unit's ports, pulsing hungrily.",,,
 zea_elysia_boss_core,RESOURCE,A heavily modified AI core containing what claims to be the uploaded consciousness of a Hegemony Officer from 'Project Elysia'. Whether the object is a coffin of metal and wire entrapping a human soul or a copy of a human's mind stamped upon an alien construct is something best left for the academicians and Luddics to debate.,,,
 ,,,,,
 #Ship Systems,,,,,

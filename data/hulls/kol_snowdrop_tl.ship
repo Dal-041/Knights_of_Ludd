@@ -1,81 +1,67 @@
 {
-    "hullName": "Armor",
-    "hullId": "kol_snowdrop_tl",
-    "hullSize": "FRIGATE",
-    "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_snowdrop_tl.png",
-    "height": 84,
-    "width": 64,
-    "center": [
-        32, 42
-    ],
-    "collisionRadius": 55,
-    "coversColor": "",
-    "shieldCenter": [
-        0, 0
-    ],
-    "shieldRadius": 51,
-    "viewOffset": 0,
-    "builtInMods": [
-        "kol_module",
-        "ablative_armor",
-        "no_weapon_flux",
-        "reduced_explosion",
-        "always_detaches",
-        "kol_vulcan"
-    ],
-    "builtInWeapons": {
-        "WS0001": "vulcan"
+  "hullName": "Armor",
+  "hullId": "kol_snowdrop_tl",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/modules/kol_snowdrop_tl.png",
+  "style": "KOL_TECH",
+  "height": 84,
+  "width": 64,
+  "center": [32, 42],
+  "collisionRadius": 55,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 51,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "ablative_armor",
+    "no_weapon_flux",
+    "reduced_explosion",
+    "always_detaches",
+    "kol_vulcan"
+  ],
+  "builtInWeapons": {
+    "WS0001": "vulcan"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 45,
+      "locations": [-22, 9]
     },
-    "builtInWings": [],
-    "builtInModules": null,
-    "weaponSlots": [
-        {
-            "id": "WS0001",
-            "size": "SMALL",
-            "type": "BUILT_IN",
-            "mount": "TURRET",
-            "arc": 210,
-            "angle": 45,
-            "locations": [
-                     -22,        9
-            ]
-        },
-        {
-            "id": "WS0002",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "HIDDEN",
-            "arc": 0,
-            "angle": 45,
-            "locations": [
-                      14,       13
-            ]
-        },
-        {
-            "id": "WS0003",
-            "size": "SMALL",
-            "type": "SYSTEM",
-            "mount": "HIDDEN",
-            "arc": 0,
-            "angle": 15,
-            "locations": [
-                      39,    -20.5
-            ]
-        }
-    ],
-    "engineSlots": [],
-    "bounds": [
-             7.5,       24,
-              41,    -18.5,
-              41,      -27,
-            35.5,      -31,
-              16,      -31,
-        
-            -2.5,    -10.5,
-             -36,        4,
-             -36,       24,
-             -20,       31,
-           -13.5,       23
-    ]
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 45,
+      "locations": [-1.5, 16.5]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 15,
+      "locations": [39, -20.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    7.5, 24,
+    41, -18.5,
+    41, -27,
+    35.5, -31,
+    16, -31,
+    -2.5, -10.5,
+    -36, 4,
+    -36, 24,
+    -20, 31,
+    -13.5, 23
+  ]
 }
