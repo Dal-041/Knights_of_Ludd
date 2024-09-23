@@ -17,6 +17,7 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.subsystems.MagicSubsystemsManager.addSubsystemToShip
 import org.selkie.kol.combat.StarficzAIUtils
 import org.selkie.kol.impl.combat.subsystems.NianFlaresSubsystem
+import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
 import org.selkie.kol.impl.shipsystems.SupernovaStats
 import java.awt.Color
@@ -145,6 +146,7 @@ class NianBoss : BaseHullMod() {
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(NianBossEnragedScript::class.java)) ship.addListener(NianBossEnragedScript(ship))
             if (!ship.hasListenerOfClass(NianAIScript::class.java)) ship.addListener(NianAIScript(ship))
+            addSubsystemToShip(ship, ShieldDronesSubsystem(ship, 5, true))
         }
     }
 }

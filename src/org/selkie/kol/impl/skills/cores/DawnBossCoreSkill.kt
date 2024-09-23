@@ -14,8 +14,7 @@ import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.subsystems.MagicSubsystemsManager
 import org.selkie.kol.impl.campaign.cores.BossAICoreOfficerPlugin
-import org.selkie.kol.impl.combat.subsystems.SimpleShieldDronesSubsystem
-import org.selkie.kol.impl.combat.subsystems.SmartShieldDronesSubsystem
+import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.DawnBuiltin
 
@@ -59,7 +58,7 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
         info!!.addSpacer(2f)
         info!!.addPara("Provides the ship with the \"Chiwen\" shield drone subsystem if it does not have it.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
         info!!.setBulletedListMode("    - ")
-        info!!.addPara("Upgrades existing shield drone subsystem with 2 more drones that all actively block shots.", 0f, Misc.getTextColor(), Misc.getHighlightColor())
+        info!!.addPara("Upgrades existing shield drone subsystem with 1 more drone that all actively block shots.", 0f, Misc.getTextColor(), Misc.getHighlightColor())
         info!!.setBulletedListMode("")
         info!!.addPara("Once per deployment: Below 50%% hull, reduce damage taken by 80%% for 8 seconds.", 0f, Misc.getHighlightColor(), Misc.getHighlightColor())
         info.addSpacer(2f)
@@ -67,23 +66,17 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
 
     override fun apply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?, level: Float) {
         if (stats!!.entity is ShipAPI) {
+
             val ship = stats.entity as ShipAPI
-            var hasDrones = false
-            var hasSmartDrones = false
-            for(subSystem in MagicSubsystemsManager.getSubsystemsForShipCopy(ship) ?: emptyList()){
-                if(subSystem is SimpleShieldDronesSubsystem) hasDrones = true
-                if(subSystem is SmartShieldDronesSubsystem) hasSmartDrones = true
-            }
 
-            var droneLevel = 1
-            if(ship.customData.containsKey(DawnBuiltin.DRONE_ADDED_KEY)) droneLevel += 1
+            val shieldDronesSubsystem = MagicSubsystemsManager.getSubsystemsForShipCopy(ship)?.find {
+                it is ShieldDronesSubsystem } as? ShieldDronesSubsystem
 
-            if(droneLevel == 1 && !hasDrones && !hasSmartDrones){
-                MagicSubsystemsManager.addSubsystemToShip(ship, SimpleShieldDronesSubsystem(ship))
-            }
-            if(droneLevel == 2 && !hasSmartDrones){
-                MagicSubsystemsManager.removeSubsystemFromShip(ship, SimpleShieldDronesSubsystem::class.java)
-                MagicSubsystemsManager.addSubsystemToShip(ship, SmartShieldDronesSubsystem(ship))
+            val smartUpgrade = ship.customData.containsKey(DawnBuiltin.DRONE_ADDED_KEY)
+
+            if (shieldDronesSubsystem == null || shieldDronesSubsystem.isSmart != smartUpgrade) {
+                MagicSubsystemsManager.removeSubsystemFromShip(ship, ShieldDronesSubsystem::class.java)
+                MagicSubsystemsManager.addSubsystemToShip(ship, ShieldDronesSubsystem(ship, DawnBuiltin.getNumDrones(ship)+1, smartUpgrade))
             }
 
             if(ship.listenerManager?.hasListenerOfClass(DawnBossCoreListener::class.java) != true) ship.addListener(DawnBossCoreListener(ship))

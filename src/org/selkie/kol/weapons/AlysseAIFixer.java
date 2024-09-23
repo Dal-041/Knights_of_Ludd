@@ -29,7 +29,6 @@ public class AlysseAIFixer implements EveryFrameWeaponEffectPlugin {
     private void addWeaponToGroups(WeaponAPI weapon){
         Ship actualShip = (Ship) weapon.getShip();
         if(actualShip.getGroups().isEmpty()) return;
-
         if(weapon.getShip().getWeaponGroupFor(weapon) == null){
             WeaponGroupAPI group = getGroup(weapon.getShip());
             if(group != null){
@@ -37,10 +36,10 @@ public class AlysseAIFixer implements EveryFrameWeaponEffectPlugin {
             }
             else{
                 try {
+
                     Object weaponGroup = actualShip.getGroups().get(0).getClass().newInstance();
                     ((WeaponGroupAPI) weaponGroup).setType(WeaponGroupType.LINKED);
                     ((WeaponGroupAPI) weaponGroup).addWeaponAPI(weapon);
-                    //ReflectionUtils.INSTANCE.invoke("setType", weaponGroup, new Object[]{weapon.getType()}, false);
                     ReflectionUtils.INSTANCE.invoke("addGroup", actualShip, new Object[]{weaponGroup},false);
                 } catch (InstantiationException | IllegalAccessException e) {
                     throw new RuntimeException(e);

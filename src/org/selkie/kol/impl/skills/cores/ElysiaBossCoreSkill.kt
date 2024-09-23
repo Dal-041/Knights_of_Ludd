@@ -5,6 +5,7 @@ import com.fs.starfarer.api.campaign.AICoreOfficerPlugin
 import com.fs.starfarer.api.characters.LevelBasedEffect
 import com.fs.starfarer.api.characters.MutableCharacterStatsAPI
 import com.fs.starfarer.api.characters.SkillSpecAPI
+import com.fs.starfarer.api.combat.FighterLaunchBayAPI
 import com.fs.starfarer.api.combat.MutableShipStatsAPI
 import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener
@@ -41,6 +42,7 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
 
     class ElysiaBossCoreListener(val ship: ShipAPI) : AdvanceableListener{
         val id = "ElysiaBossCore"
+        var doneInitDeploy: MutableSet<FighterLaunchBayAPI> = mutableSetOf()
         override fun advance(amount: Float) {
 
             for (bay in ship.launchBaysCopy) {
@@ -50,7 +52,10 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
                 val actualAdd = maxTotal - bay.wing.wingMembers.size
 
                 if (actualAdd > 0) {
-                    //bay.fastReplacements += 1
+                    if(bay !in doneInitDeploy){
+                        doneInitDeploy.add(bay)
+                        bay.fastReplacements = actualAdd
+                    }
                     bay.extraDeployments = actualAdd
                     bay.extraDeploymentLimit = maxTotal
                     bay.extraDuration = 100000f
