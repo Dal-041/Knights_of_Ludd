@@ -16,7 +16,8 @@
     "automated",
     "kol_ea_shields3",
     "zea_edf_passive_iff_disruptor",
-    "zea_corruptingheart_boss"
+    "zea_edf_shachihoko_drone",
+    "zea_corruptingheart_boss",
   ],
   "builtInWings": [
     "zea_edf_kitsunebi",

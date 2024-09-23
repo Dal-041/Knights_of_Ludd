@@ -165,10 +165,8 @@ public class CorruptingHeartBoss extends BaseHullMod {
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
                 (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.BOSS_TAG))));
-
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
-            MagicSubsystemsManager.addSubsystemToShip(ship, new ShachihokoDroneSubsystem(ship));
 
             String key = "phaseAnchor_canDive";
             Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script

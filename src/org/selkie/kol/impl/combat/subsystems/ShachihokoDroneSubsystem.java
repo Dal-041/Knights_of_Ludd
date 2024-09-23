@@ -185,7 +185,7 @@ public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
 
     @Override
     public int getMaxCharges() {
-        return 2;
+        return 0;
     }
 
     @Override

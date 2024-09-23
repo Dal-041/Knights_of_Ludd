@@ -35,7 +35,7 @@ public class ShachihokoDroneHullmod extends BaseHullMod {
         float pad = 3f;
         float opad = 10f;
         Color h = Misc.getHighlightColor();
-        tooltip.addPara("Deploys %s shield drones that can each absorb %s damage around the ship. Drones regenerate once every %s seconds.",
+        tooltip.addPara("Deploys %s bubble shield drones that can each absorb %s damage around the ship.\nActivate subsystem after targeting ally ship to redirect drone to ally.\nDrones regenerate once every %s seconds.",
                 opad, h, String.valueOf(activator.getMaxDeployedDrones()), health, String.valueOf(Math.round(activator.getBaseChargeRechargeDuration())));
 
         tooltip.setBulletedListMode(null);
