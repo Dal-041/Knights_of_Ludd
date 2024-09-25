@@ -6,9 +6,9 @@
   "style": "ZEA_DUSK_TECH",
   "height": 108,
   "width": 118,
-  "center": [60, 40],
-  "collisionRadius": 80,
-  "shieldCenter": [0, -0],
+  "center": [60, 51],
+  "collisionRadius": 62.5,
+  "shieldCenter": [-11, -0],
   "shieldRadius": 76.5,
   "viewOffset": 0,
   "builtInMods": [
@@ -32,7 +32,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [15, 32]
+      "locations": [4, 32]
     },
     {
       "id": "WS 002",
@@ -41,7 +41,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [21, -30]
+      "locations": [10, -30]
     },
     {
       "id": "WS 003",
@@ -50,7 +50,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [9, -0],
+      "locations": [-2, -0],
       "renderOrderMod": 100
     },
     {
@@ -60,7 +60,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 150,
-      "locations": [-8.5, 52.5]
+      "locations": [-19.5, 52.5]
     },
     {
       "id": "WS0004",
@@ -69,7 +69,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": -150,
-      "locations": [4, -53]
+      "locations": [-7, -53]
     },
     {
       "id": "WS0001",
@@ -78,7 +78,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -135,
-      "locations": [-10, -25]
+      "locations": [-21, -25]
     },
     {
       "id": "WS0002",
@@ -87,7 +87,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -127,
-      "locations": [13, -41]
+      "locations": [2, -41]
     },
     {
       "id": "WS0005",
@@ -96,7 +96,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -170.5,
-      "locations": [-2.5, -12.5]
+      "locations": [-13.5, -12.5]
     },
     {
       "id": "WS0006",
@@ -105,7 +105,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": -124.5,
-      "locations": [9, -15]
+      "locations": [-2, -15]
     },
     {
       "id": "WS0007",
@@ -114,7 +114,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 135,
-      "locations": [19, 14]
+      "locations": [8, 14]
     },
     {
       "id": "WS0008",
@@ -123,7 +123,7 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [-9.5, 1]
+      "locations": [-20.5, 1]
     },
     {
       "id": "WS0009",
@@ -132,13 +132,13 @@
       "mount": "HARDPOINT",
       "arc": 5,
       "angle": 0,
-      "locations": [-10, 18],
+      "locations": [-21, 18],
       "renderOrderMod": 200
     }
   ],
   "engineSlots": [
     {
-      "location": [-36, 18],
+      "location": [-47, 18],
       "length": 33.226211,
       "width": 9.437953,
       "angle": 168.5,
@@ -146,7 +146,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-36, -18],
+      "location": [-47, -18],
       "length": 33.226211,
       "width": 9.437953,
       "angle": -168.5,
@@ -154,7 +154,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-36, 11],
+      "location": [-47, 11],
       "length": 50.764324,
       "width": 9.996663,
       "angle": 175.5,
@@ -162,7 +162,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-36, -11],
+      "location": [-47, -11],
       "length": 50.764324,
       "width": 9.996663,
       "angle": -175.5,
@@ -170,7 +170,7 @@
       "style": "HIGH_TECH"
     },
     {
-      "location": [-8.5, 52.5],
+      "location": [-19.5, 52.5],
       "length": 50,
       "width": 13,
       "angle": 155,
@@ -178,7 +178,7 @@
       "style": "OMEGA"
     },
     {
-      "location": [4, -53],
+      "location": [-7, -53],
       "length": 50,
       "width": 13,
       "angle": -155,
@@ -187,28 +187,28 @@
     }
   ],
   "bounds": [
-    -37, -22,
-    -37, 22,
-    -8.5, 57.5,
-    -2, 59,
-    8, 59,
-    24, 39.5,
-    24, 26,
-    65, 12,
-    47.5, 7,
-    18, 7.5,
-    18, -9,
-    48, -10,
-    56, -13.5,
-    29.5, -19,
-    29, -45.5,
-    11, -53,
-    5, -57.5,
-    -6, -47,
-    -3, -44,
-    -11, -36,
-    -16, -40.5,
-    -26.5, -39.5,
-    -28.5, -26.5
+    -48, -22,
+    -48, 22,
+    -19.5, 57.5,
+    -13, 59,
+    -3, 59,
+    13, 39.5,
+    13, 26,
+    54, 12,
+    36.5, 7,
+    7, 7.5,
+    7, -9,
+    37, -10,
+    45, -13.5,
+    18.5, -19,
+    18, -45.5,
+    0, -53,
+    -6, -57.5,
+    -17, -47,
+    -14, -44,
+    -22, -36,
+    -27, -40.5,
+    -37.5, -39.5,
+    -39.5, -26.5
   ]
 }
