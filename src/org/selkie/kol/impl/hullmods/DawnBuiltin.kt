@@ -119,7 +119,7 @@ class DawnBuiltin : BaseHullMod() {
         ship.setCustomData(DRONE_ADDED_KEY, true)
         val isBoss = ship.variant.hasTag(ZeaStaticStrings.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaStaticStrings.BOSS_TAG)
         if(!isBoss){
-            addSubsystemToShip(ship, ShieldDronesSubsystem(ship, Companion.getNumDrones(ship), false))
+            addSubsystemToShip(ship, ShieldDronesSubsystem(ship, getNumDrones(ship), false))
         }
     }
 

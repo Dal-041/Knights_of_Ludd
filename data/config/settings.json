@@ -264,7 +264,8 @@
 		"kol_ui":{
 			"kol_refit_hmod":"graphics/ui/kol_hmod.png",
 			"zea_dawn_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/dawn_hmod.png",
-			"zea_edf_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/edf_hmod.png"
+			"zea_edf_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/edf_hmod.png",
+			"zea_dusk_hmod":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ui/dusk_hmod.png"
 		},
 		"cores": {
 			"dusk_mask":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/cargo/zea_dusk_boss_core_glow_mask.png",
@@ -344,6 +345,8 @@
 			"dawn_solar_grey": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/dawn_solar_grey.png",
 			"edf_coronal_cap": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/coronal_cap.png",
 			"edf_shachi": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/edf_shachi.png",
+			"dusk_duskfall": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/dusk_mote_ico.png",
+			"dusk_phase_coils": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/hullsys/dusk_phase_coil_ico.png",
 			"kol_composite": "graphics/icons/hullsys/kol_composite_ico.png",
 			"kol_primshield": "graphics/icons/hullsys/kol_primshield_ico.png",
 			"kol_modules": "graphics/icons/hullsys/kol_modules_ico.png",
