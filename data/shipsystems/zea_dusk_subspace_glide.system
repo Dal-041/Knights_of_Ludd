@@ -18,9 +18,9 @@
     "soundFilterGain":0.95,
     "soundFilterGainHF":0.55,
 
-	"useSound":"system_phase_cloak_activate",
+	"useSound":"zea_dusk_phase_cloak_activate",
 	"loopSound":"zea_dusk_phase_cloak",
-	"deactivateSound":"system_phase_cloak_deactivate",
+	"deactivateSound":"zea_dusk_phase_cloak_deactivate",
 	"outOfUsesSound":"system_phase_cloak_collision",
 
 	"aiHints":{
