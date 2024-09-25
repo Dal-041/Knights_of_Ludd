@@ -7,9 +7,9 @@
   "height": 262,
   "width": 160,
   "center": [80, 126.5],
-  "collisionRadius": 133.5,
+  "collisionRadius": 147,
   "shieldCenter": [0, -0],
-  "shieldRadius": 155,
+  "shieldRadius": 144,
   "viewOffset": 0,
   "builtInMods": [
     "kol_ea_shields2",
