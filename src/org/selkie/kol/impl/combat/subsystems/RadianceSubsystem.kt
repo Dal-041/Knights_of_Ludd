@@ -89,8 +89,8 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
                     target,
                     target.location,
                     effectiveDamage,
-                    DamageType.HIGH_EXPLOSIVE,
-                    effectiveDamage,
+                    DamageType.FRAGMENTATION,
+                    effectiveDamage/4,
                     bypassShields,
                     false,
                     ship,
@@ -256,8 +256,8 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
 
     companion object {
         private const val DAMAGE_RANGE = 600f
-        private const val BASE_DAMAGE = 100f
-        private const val DAMAGE_PER_BOOST = 1f
+        private const val BASE_DAMAGE = 400f
+        private const val DAMAGE_PER_BOOST = 4f
     }
 }
 
