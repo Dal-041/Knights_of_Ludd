@@ -148,6 +148,7 @@ public class NinmahBoss extends BaseHullMod {
                         escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing, 0f, captain);
                         Utils.shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortA), assignmentInfo, false);
+                        escortA.getSystem().setCooldownRemaining(escortA.getSystem().getCooldown());
                     } else{
                         escortA.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
@@ -161,6 +162,7 @@ public class NinmahBoss extends BaseHullMod {
                         escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing + 120f, 0f, captain);
                         Utils.shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortB), assignmentInfo, false);
+                        escortB.getSystem().setCooldownRemaining(escortB.getSystem().getCooldown());
                     } else{
                         escortB.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
@@ -174,6 +176,7 @@ public class NinmahBoss extends BaseHullMod {
                         escortC = fleetManager.spawnShipOrWing(escortSpec, escortCSpawn, escortFacing + 240f, 0f, captain);
                         Utils.shipSpawnExplosion(escortC.getShieldRadiusEvenIfNoShield(), escortC.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortC), assignmentInfo, false);
+                        escortC.getSystem().setCooldownRemaining(escortC.getSystem().getCooldown());
                     } else{
                         escortC.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);

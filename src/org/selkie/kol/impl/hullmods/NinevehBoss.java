@@ -236,10 +236,12 @@ public class NinevehBoss extends BaseHullMod {
                         escortHarbingerA = fleetManager.spawnShipOrWing("zea_boss_harbinger_Strike", escortHarbingerASpawn, escortFacing + 120f, 0f, harbingerCaptain);
                         Utils.shipSpawnExplosion(escortHarbingerA.getShieldRadiusEvenIfNoShield(), escortHarbingerA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHarbingerA), assignmentInfo, false);
+                        escortHarbingerA.getSystem().setCooldownRemaining(escortHarbingerA.getSystem().getCooldown());
 
                         escortHarbingerB = fleetManager.spawnShipOrWing("zea_boss_harbinger_Strike", escortHarbingerBSpawn, escortFacing + 300f, 0f, harbingerCaptain);
                         Utils.shipSpawnExplosion(escortHarbingerB.getShieldRadiusEvenIfNoShield(), escortHarbingerB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHarbingerB), assignmentInfo, false);
+                        escortHarbingerB.getSystem().setCooldownRemaining(escortHarbingerB.getSystem().getCooldown());
                     } else{
                         escortHarbingerA.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
@@ -257,10 +259,12 @@ public class NinevehBoss extends BaseHullMod {
                         escortDoomA = fleetManager.spawnShipOrWing("zea_boss_doom_Strike", escortDoomASpawn, escortFacing, 0f, doomCaptain);
                         Utils.shipSpawnExplosion(escortDoomA.getShieldRadiusEvenIfNoShield(), escortDoomA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortDoomA), assignmentInfo, false);
+                        escortDoomA.getSystem().setAmmo(0);
 
                         escortDoomB = fleetManager.spawnShipOrWing("zea_boss_doom_Strike", escortDoomBSpawn, escortFacing + 180f, 0f, doomCaptain);
                         Utils.shipSpawnExplosion(escortDoomB.getShieldRadiusEvenIfNoShield(), escortDoomB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortDoomB), assignmentInfo, false);
+                        escortDoomB.getSystem().setAmmo(0);
                     } else{
                         escortDoomA.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
                         ship.getFluxTracker().setHardFlux(0f);
