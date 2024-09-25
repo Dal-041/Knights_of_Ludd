@@ -44,9 +44,10 @@ public class YukionnaBoss extends BaseHullMod {
                 ship.setHitpoints(1f);
                 ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0.000001f);
                 ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
+                ship.addTag(DuskBuiltin.Companion.getHF_TAG());
                 ship.setCustomData("HF_SPARKLE_BOSS", true);
-                for (ShipAPI other : AIUtils.getAlliesOnMap(ship)) {
-                    other.setCustomData("HF_SPARKLE_BOSS", true);
+                for (ShipAPI allies : AIUtils.getAlliesOnMap(ship)) {
+                    allies.addTag(DuskBuiltin.Companion.getHF_TAG());;
                 }
                 ship.setWeaponGlow(1f, Misc.setAlpha(PHASE_COLOR, 255), EnumSet.of(WeaponAPI.WeaponType.ENERGY));
                 if (!ship.isPhased()) {

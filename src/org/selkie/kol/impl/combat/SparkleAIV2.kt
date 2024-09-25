@@ -10,18 +10,24 @@ import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
 import org.selkie.kol.impl.hullmods.DuskBuiltin
 import org.selkie.kol.impl.hullmods.SparkleHullMod
-import kotlin.math.abs
-import kotlin.math.sin
+import java.awt.Color
+import kotlin.math.*
 
 class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
 
     companion object{
-        const val SOURCE_REJOIN = 200f //200f distance added to the collision radius that determines target radius for sparkles returning
+        const val SOURCE_REJOIN = 100f //200f distance added to the collision radius that determines target radius for sparkles returning
         const val SOURCE_REPEL = 50f //50f distance added to the collision radius that determines the radius below which sparkles
-        const val SOURCE_COHESION = 300f //600f stickiness
+        const val SOURCE_COHESION = 600f //600f stickiness
         const val AVOID_RANGE = 50f
-        const val COHESION_RANGE = 50f //100f Distance under which sparkles will cohere
+        const val COHESION_RANGE = 100f //100f Distance under which sparkles will cohere
+        const val COHESION_STRENGTH = 0.3f
 
+        val baseColor = Color(100, 165, 255, 175)
+        val baseEMPColor = Color(100, 165, 255, 255)
+
+        val hfColor = Color(220, 80, 100, 225)
+        val hfEMPColor = Color(255, 80, 100, 255)
 
         val DIST_MULT = mapOf(
             HullSize.FIGHTER to 0.125f,
@@ -30,14 +36,13 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
             HullSize.CRUISER to 0.4f,
             HullSize.CAPITAL_SHIP to 0.6f
         )
-
     }
 
     var elapsed = 0f
     val tracker = IntervalUtil(0.05f, 0.1f)
-    val updateListTracker = IntervalUtil(0.05f, 0.1f)
     val randomFloat = Math.random().toFloat()
     val offset = (Math.random() * 3.1415927410125732 * 2.0).toFloat()
+    var hfLevel = 0f
 
     var target: CombatEntityAPI? = null
 
@@ -47,7 +52,16 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
 
         elapsed += amount
 
-        updateListTracker.advance(amount)
+        //HF color logic
+        if (missile.source?.hasTag(DuskBuiltin.HF_TAG) == true){
+            hfLevel = min(hfLevel + elapsed, 1f)
+            missile.setJitter(this, hfColor, hfLevel, 1, missile.glowRadius)
+            missile.engineController.fadeToOtherColor(this, hfColor, hfColor, 2f, 0.75f)
+        } else{
+            hfLevel = max(hfLevel - elapsed, 0f)
+            missile.setJitter(this, baseColor, hfLevel, 1, missile.glowRadius)
+            //missile.engineController.fadeToOtherColor(this, baseColor, baseColor, 2f, 0.75f)
+        }
 
         if (elapsed >= 0.5f) {
             val wantToFlock: Boolean = !isTargetValid()
@@ -97,7 +111,10 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         //Mote-mote logic
         for (otherMissile in DuskBuiltin.allMotes) {
             if (otherMissile === missile) continue
-            val dist = Misc.getDistance(missile.location, otherMissile.location)
+            var dist = Misc.getDistanceSq(missile.location, otherMissile.location)
+            if(dist > max(avoidRange, cohesionRange).pow(2)) continue
+            dist = sqrt(dist)
+
             if (dist < avoidRange) {
                 val dir = Misc.getUnitVectorAtDegreeAngle(Misc.getAngleInDegrees(otherMissile.location, missile.location))
                 val f = 1f - dist / avoidRange
@@ -108,7 +125,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
                 val dir = Vector2f(otherMissile.velocity)
                 Misc.normalise(dir)
                 val f = 1f - dist / cohesionRange
-                dir.scale(f)
+                dir.scale(f*COHESION_STRENGTH)
                 Vector2f.add(total, dir, total)
             }
         }
@@ -136,13 +153,15 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         }
 
         // if not strongly going anywhere, circle the source ship; only kicks in for lone motes
-        if (total.length() <= 0.05f) {
+        if (true) {
             val offset = if (randomFloat > 0.5f) 90f else -90f
             val dir = Misc.getUnitVectorAtDegreeAngle(
                 Misc.getAngleInDegrees(missile.location, source.location) + offset
             )
-            val f = 1f
-            dir.scale(f * 1f)
+            val f = 0.2f
+            if (total.length() > 0.2f){
+                dir.scale(min(f * 1f/total.length(), 1f))
+            }
             Vector2f.add(total, dir, total)
         }
 

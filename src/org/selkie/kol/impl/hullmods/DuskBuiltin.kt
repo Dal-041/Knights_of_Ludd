@@ -23,6 +23,8 @@ class DuskBuiltin : BaseHullMod() {
     companion object{
         val allMotes = mutableListOf<MissileAPI>()
 
+        val HF_TAG = "HF_SPARKLES_ACTIVE"
+
         val maxMotes = mapOf(
                 HullSize.FIGHTER to 2,
                 HullSize.FRIGATE to 6,
@@ -34,6 +36,19 @@ class DuskBuiltin : BaseHullMod() {
     override fun advanceInCombat(ship: ShipAPI?, amount: Float) {
         val engine = Global.getCombatEngine()
         allMotes.retainAll { engine.isMissileAlive(it) }
+
+        if(ship?.hullSpec?.hullId == "zea_boss_ninaya"){
+            if(ship.system.isActive) ship.addTag(HF_TAG)
+            if (ship.hasTag(HF_TAG) && ship.system.cooldownRemaining /ship.system.cooldown < 0.8f){
+                ship.tags.remove(HF_TAG)
+            }
+        }
+        if(ship?.hullSpec?.hullId == "zea_boss_ninmah"){
+            if(ship.system.isActive) ship.addTag(HF_TAG)
+            if (ship.hasTag(HF_TAG) && ship.system.cooldownRemaining /ship.system.cooldown < 0.8f){
+                ship.tags.remove(HF_TAG)
+            }
+        }
     }
 
     class DuskSparkleSpawner(val ship: ShipAPI) : AdvanceableListener{
