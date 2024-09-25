@@ -376,4 +376,8 @@ class ElysianBuiltin : BaseHullMod() {
     override fun getTooltipWidth(): Float {
         return 400f
     }
+
+    override fun getDisplaySortOrder(): Int {
+        return 0
+    }
 }

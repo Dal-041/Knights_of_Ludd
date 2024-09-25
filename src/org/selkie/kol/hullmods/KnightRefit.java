@@ -515,4 +515,9 @@ public class KnightRefit extends BaseHullMod {
             armorFlat = aF; armorPercent = aP; hullFlat = hF; hullPercent = hP;
         }
     }
+
+    @Override
+    public int getDisplaySortOrder() {
+        return 0;
+    }
 }
