@@ -22,7 +22,7 @@ public class SpawnElysianHeart {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
 		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
-		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png");
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitElysianBoss));
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -88,7 +88,7 @@ public class SpawnElysianHeart {
 		}
 
 		ZeaFleetManager.setAICaptains(elysianHeartFleet);
-		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_corrupting_heart.png");
+		elysianHeartFleet.getFlagship().getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitElysianBoss));
 
 		elysianHeartFleet.getFleetData().sort();
 

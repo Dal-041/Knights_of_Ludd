@@ -26,7 +26,7 @@ public class SpawnDuskBoss {
 		//Songtress, an experitmental AI who was once human.
 		FullName name = new FullName("Songtress", "", FullName.Gender.FEMALE);
 		duskBossCaptain.setName(name);
-		duskBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
+		duskBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDuskBoss));
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -88,7 +88,7 @@ public class SpawnDuskBoss {
 		}
 
 		ZeaFleetManager.setAICaptains(duskBossFleet);
-		duskBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_alphaplus.png");
+		duskBossFleet.getFlagship().getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDuskBoss));
 
 		duskBossFleet.getFleetData().sort();
 

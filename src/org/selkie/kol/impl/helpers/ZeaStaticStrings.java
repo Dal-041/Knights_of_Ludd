@@ -180,6 +180,10 @@ public class ZeaStaticStrings {
             "zea_edf_3",
             "zea_edf_2"
     };
+    public static final String portraitDawnBoss = "zea_boss_nian";
+    public static final String portraitDuskBoss = "zea_boss_yukionna";
+    public static final String portraitElysianBoss = "zea_boss_corrupting_heart";
+    public static final String portraitAmaterasuBoss = "zea_boss_amaterasu";
     public static final String pathCrests = "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/factions/";
     public static final String crestDawn = "zea_crest_dawntide";
     public static final String crestDusk = "zea_crest_dusk";

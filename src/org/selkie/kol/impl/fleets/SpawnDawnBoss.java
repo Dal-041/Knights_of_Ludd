@@ -23,7 +23,7 @@ public class SpawnDawnBoss {
 		//A "slightly" rampant ALLMOTHER copy.
 		FullName name = new FullName("XLLM01H3R", "", FullName.Gender.ANY);
 		dawnBossCaptain.setName(name);
-		dawnBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_nian.png");
+		dawnBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDawnBoss));
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -91,7 +91,7 @@ public class SpawnDawnBoss {
 		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
 
 		ZeaFleetManager.setAICaptains(dawnBossFleet);
-		dawnBossFleet.getFleetData().getCommander().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_nian.png");
+		dawnBossFleet.getFleetData().getCommander().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDawnBoss));
 
 		CargoAPI cargo = Global.getFactory().createCargo(true);
 		cargo.addCommodity(ZeaStaticStrings.BossCore.DAWN_CORE.itemID, 1);

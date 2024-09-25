@@ -18,7 +18,7 @@ public class SpawnElysianAmaterasu {
 	public static boolean SpawnElysianAmaterasu() {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
-		elysianBossCaptain.setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png");
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
 		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
 
 		/**
@@ -79,7 +79,7 @@ public class SpawnElysianAmaterasu {
 		}
 
 		ZeaFleetManager.setAICaptains(elysianBossFleet);
-		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/portraits/zea_boss_amaterasu.png");
+		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
 		elysianBossFleet.getFleetData().sort();
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
