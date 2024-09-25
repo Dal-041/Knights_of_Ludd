@@ -5,7 +5,9 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -18,8 +20,8 @@ public class SpawnElysianAmaterasu {
 	public static boolean SpawnElysianAmaterasu() {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
-		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
 		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
 
 		/**
 		* Creates a fleet with a defined flagship and optional escort
@@ -68,34 +70,45 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.setDiscoverable(true);
 		elysianBossFleet.getFleetData().ensureHasFlagship();
 		elysianBossFleet.getMemoryWithoutUpdate().set("$zea_amaterasu", true);
-		elysianBossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
-		elysianBossFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-		elysianBossFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-
-		ZeaUtils.ZeaBossGenFleetWeaver(elysianBossFleet, 440);
-
-		for(String support : ZeaStaticStrings.elysianBossSupportingFleet) {
-			//elysianBossFleet.getFleetData().addFleetMember(support);
-		}
-
-		ZeaFleetManager.setAICaptains(elysianBossFleet);
-		elysianBossFleet.getFlagship().getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
-		elysianBossFleet.getFleetData().sort();
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);
 		elysianBossFleet.removeAbility(Abilities.GO_DARK);
+
+		// populate the fleet with escorts
+		ZeaUtils.ZeaBossGenFleetWeaver(elysianBossFleet, 440);
+		elysianBossFleet.getFleetData().sort();
+
+		// make sure the escorts have cores
+		ZeaFleetManager.setAICaptains(elysianBossFleet);
+
+		// setup and permalock the flagship variant
+		FleetMemberAPI flagship = elysianBossFleet.getFlagship();
+		flagship.setVariant(flagship.getVariant().clone(), false, false);
+		flagship.getVariant().setSource(VariantSource.REFIT);
+		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+		flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+
+		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
+
+
 		// to make sure they attack the player on sight when player's transponder is off
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_SAW_PLAYER_WITH_TRANSPONDER_ON, true);
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true);
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_ALLOW_LONG_PURSUIT, true);
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_HOLD_VS_STRONGER, true);
-		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 
+		// tag to exclude terrain effects
 		elysianBossFleet.addTag(excludeTag);
-		elysianBossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+
+		// manage the wreck
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());
+
+		// set up the initial interaction
 		ZeaUtils.ZeaBossGenFIDConfig FID = new ZeaUtils.ZeaBossGenFIDConfig();
 		FID.setAlwaysAttack(true);
 		FID.setAlwaysPursue(true);
@@ -105,9 +118,6 @@ public class SpawnElysianAmaterasu {
 		FID.deployallToggle = true;
 		FID.objectivesToggle = true;
 		FID.fttlToggle = true;
-
-
-
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
 		return true;

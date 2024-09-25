@@ -14,6 +14,7 @@ import com.fs.starfarer.api.impl.campaign.BaseGenericPlugin;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SDMParams;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SalvageDefenderModificationPlugin;
+import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.world.PrepareDarkDeeds;
@@ -92,9 +93,14 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
             curr.getRepairTracker().setCR(curr.getRepairTracker().getMaxCR());
         }
 
-        fleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
-        fleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-        fleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+        // setup and permalock the flagship variant
+        FleetMemberAPI flagship = fleet.getFlagship();
+        flagship.setVariant(flagship.getVariant().clone(), false, false);
+        flagship.getVariant().setSource(VariantSource.REFIT);
+        flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+        flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+        flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         fleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
     }

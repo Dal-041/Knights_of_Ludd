@@ -7,6 +7,7 @@ import java.util.Random;
 
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.*;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
 import com.fs.starfarer.api.impl.campaign.ids.*;
@@ -15,6 +16,7 @@ import com.fs.starfarer.api.impl.campaign.procgen.DefenderDataOverride;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.impl.campaign.world.ZigLeashAssignmentAI;
+import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.apache.log4j.Logger;
 import org.lwjgl.util.vector.Vector2f;
@@ -130,8 +132,13 @@ public class PrepareDarkDeeds {
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
         TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
         TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
-        TT1BossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
-        TT1BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+
+        // setup and permalock the flagship variant
+        FleetMemberAPI flagship = TT1BossFleet.getFlagship();
+        flagship.setVariant(flagship.getVariant().clone(), false, false);
+        flagship.getVariant().setSource(VariantSource.REFIT);
+        flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+        flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
 
@@ -524,8 +531,13 @@ public class PrepareDarkDeeds {
         TT3BossFleet.setDiscoverable(true);
         TT3BossFleet.getFleetData().ensureHasFlagship();
         TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
-        TT3BossFleet.getFlagship().getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
-        TT3BossFleet.getFlagship().getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+
+        // setup and permalock the flagship variant
+        FleetMemberAPI flagship = TT3BossFleet.getFlagship();
+        flagship.setVariant(flagship.getVariant().clone(), false, false);
+        flagship.getVariant().setSource(VariantSource.REFIT);
+        flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+        flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         //Support fleet stuff
         FleetParamsV3 params = new FleetParamsV3(
