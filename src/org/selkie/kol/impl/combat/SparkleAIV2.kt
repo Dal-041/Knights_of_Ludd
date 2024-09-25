@@ -9,7 +9,6 @@ import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
 import org.selkie.kol.impl.hullmods.DuskBuiltin
-import org.selkie.kol.impl.hullmods.SparkleHullMod
 import java.awt.Color
 import kotlin.math.*
 
@@ -22,6 +21,8 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         const val AVOID_RANGE = 50f
         const val COHESION_RANGE = 100f //100f Distance under which sparkles will cohere
         const val COHESION_STRENGTH = 0.3f
+
+        const val MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD = 400f
 
         val baseColor = Color(100, 165, 255, 175)
         val baseEMPColor = Color(100, 165, 255, 255)
@@ -187,7 +188,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         // want to: target nearest missile that is not targeted by another two motes already
         val owner = missile.owner
         val maxMotesPerMissile = 2
-        val maxDistFromSourceShip = SparkleHullMod.MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD
+        val maxDistFromSourceShip = MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD
         var minDist = Float.MAX_VALUE
         var closest: CombatEntityAPI? = null
         for (other in engine.missiles) {
@@ -242,9 +243,9 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         var count = 0
         for (mote in DuskBuiltin.allMotes) {
             if (mote === missile) continue
-            if (mote.unwrappedMissileAI is SparkleAIScript) {
-                val ai = mote.unwrappedMissileAI as SparkleAIScript
-                if (ai.getTarget() === other) {
+            if (mote.unwrappedMissileAI is SparkleAIV2) {
+                val ai = mote.unwrappedMissileAI as SparkleAIV2
+                if (ai.target === other) {
                     count++
                 }
             }
