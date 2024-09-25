@@ -2,6 +2,7 @@ package org.selkie.kol.impl.hullmods
 
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.*
+import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener
 import com.fs.starfarer.api.impl.campaign.ids.HullMods
@@ -14,12 +15,14 @@ import com.fs.starfarer.api.util.WeightedRandomPicker
 import lunalib.lunaExtensions.addLunaElement
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.util.MagicIncompatibleHullmods
+import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
-import org.selkie.kol.impl.combat.SparkleAIScript
-import com.fs.starfarer.api.combat.ShipAPI.HullSize
+import org.selkie.kol.impl.combat.SparkleAIV2
 
 class DuskBuiltin : BaseHullMod() {
     companion object{
+        val allMotes = mutableListOf<MissileAPI>()
+
         val maxMotes = mapOf(
                 HullSize.FIGHTER to 2,
                 HullSize.FRIGATE to 6,
@@ -27,6 +30,12 @@ class DuskBuiltin : BaseHullMod() {
                 HullSize.CRUISER to 12,
                 HullSize.CAPITAL_SHIP to 20)
     }
+
+    override fun advanceInCombat(ship: ShipAPI?, amount: Float) {
+        val engine = Global.getCombatEngine()
+        allMotes.retainAll { engine.isMissileAlive(it) }
+    }
+
     class DuskSparkleSpawner(val ship: ShipAPI) : AdvanceableListener{
         var activeMotes = mutableListOf<MissileAPI>()
         val launchInterval = IntervalUtil(0.25f, 0.75f)
@@ -67,10 +76,11 @@ class DuskBuiltin : BaseHullMod() {
 
                     val mote = engine.spawnProjectile(ship, null, SPARKLE_WEAPON_ID, loc, dir, null) as MissileAPI
                     mote.setWeaponSpec(SPARKLE_WEAPON_ID)
-                    mote.missileAI = SparkleAIScript(mote)
+                    mote.missileAI = SparkleAIV2(mote)
                     mote.activeLayers.remove(CombatEngineLayers.FF_INDICATORS_LAYER)
                     mote.empResistance = 10000
                     activeMotes.add(mote)
+                    allMotes.add(mote)
 
                     engine.spawnMuzzleFlashOrSmoke(ship, slot, mote.weaponSpec, 0, dir)
 
@@ -126,7 +136,7 @@ class DuskBuiltin : BaseHullMod() {
         val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dusk_phase_coils"), HEIGHT)
         phaseCoils.setBulletedListMode("•")
         phaseCoils.setBulletWidth(15f)
-        val para1 = phaseCoils.addPara("No loss of top speed as hardflux level rises.", listPad, activeTextColor, activePositiveColor,)
+        val para1 = phaseCoils.addPara("No loss of top speed as hardflux level rises.", listPad, activeTextColor, activePositiveColor)
         val para2 = phaseCoils.addPara("Maintains parity with standard domain phase coils at a 3x timeflow while phased.", listPad, activeTextColor, activePositiveColor, "3x")
         tooltip.addImageWithText(underHeadingPad)
 
@@ -134,12 +144,19 @@ class DuskBuiltin : BaseHullMod() {
         val duskfall = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dusk_duskfall"), HEIGHT)
         duskfall.setBulletedListMode("•")
         duskfall.setBulletWidth(15f)
-        val para3 = duskfall.addPara("Launches 2 motes per second around the ship, each mote deals 1500 emp damage upon impact.", listPad, activeTextColor, activeHighlightColor, "2", "1500")
-        val para4 = duskfall.addPara("A maximum of " +
-                "${maxMotes[HullSize.FRIGATE]}/${maxMotes[HullSize.DESTROYER]}/${maxMotes[HullSize.CRUISER]}/${maxMotes[HullSize.CAPITAL_SHIP]} " +
-                "motes can be maintained around the ship at any given time.", listPad, activeTextColor)
-        para4.setHighlightColors(inactiveTextColor, activeHighlightColor, inactiveTextColor)
-        para4.setHighlight("6/9/","12","/20")
+        val para3 = duskfall.addPara("Launches 2 motes per second around the ship, each mote deals 1500 EMP damage on impact.", listPad, activeTextColor, activeHighlightColor, "2", "1500")
+        val para4 = duskfall.addPara("%s %s/%s/%s/%s %s", listPad, inactiveTextColor, activeTextColor,
+            "A maximum of", "${maxMotes[HullSize.FRIGATE]}", "${maxMotes[HullSize.DESTROYER]}", "${maxMotes[HullSize.CRUISER]}", "${maxMotes[HullSize.CAPITAL_SHIP]}",
+            "motes can be maintained around the ship at any given time.")
+        ReflectionUtils.invoke("setColor", duskfall.prev, activeTextColor)
+
+        para4.setHighlightColors(activeTextColor,
+            if(ship.hullSize == HullSize.FRIGATE) activeHighlightColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.DESTROYER) activeHighlightColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.CRUISER) activeHighlightColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.CAPITAL_SHIP) activeHighlightColor else inactiveTextColor,
+            activeTextColor)
+
         tooltip.addImageWithText(underHeadingPad)
 
         var sprite = Global.getSettings().getSprite("kol_ui", "zea_dusk_hmod")
