@@ -7,7 +7,7 @@
   "height": 140,
   "width": 140,
   "center": [70, 72],
-  "collisionRadius": 92,
+  "collisionRadius": 64,
   "shieldCenter": [0, -0],
   "shieldRadius": 89,
   "viewOffset": 0,
