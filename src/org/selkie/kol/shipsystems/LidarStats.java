@@ -212,9 +212,8 @@ public class LidarStats extends BaseShipSystemScript {
 					w.setForceNoFireOneFrame(true);
 				}
 			} else {
-				if (!(!w.isDecorative() && w.getSlot().isTurret() && 
-						(w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY))) {
-					w.setForceNoFireOneFrame(true);
+				if (!(!w.isDecorative() && w.getSlot().isTurret() && (w.getType() == WeaponType.BALLISTIC || w.getType() == WeaponType.ENERGY))) {
+					if(!w.getSlot().isBuiltIn()) w.setForceNoFireOneFrame(true);
 				}
 			}
 		}
