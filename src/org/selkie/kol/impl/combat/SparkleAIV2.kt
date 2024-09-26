@@ -8,6 +8,7 @@ import com.fs.starfarer.api.util.Misc
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
+import org.selkie.kol.impl.helpers.ZeaStaticStrings
 import org.selkie.kol.impl.hullmods.DuskBuiltin
 import java.awt.Color
 import kotlin.math.*
@@ -44,7 +45,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
     val randomFloat = Math.random().toFloat()
     val offset = (Math.random() * 3.1415927410125732 * 2.0).toFloat()
     var hfLevel = 0f
-
+    var hfOverride = false
     var target: CombatEntityAPI? = null
 
     override fun advance(amount: Float) {
@@ -54,7 +55,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         elapsed += amount
 
         //HF color logic
-        if (missile.source?.hasTag(DuskBuiltin.HF_TAG) == true){
+        if (missile.source?.hasTag(DuskBuiltin.HF_TAG) == true || hfOverride){
             hfLevel = min(hfLevel + elapsed, 1f)
             missile.setJitter(this, hfColor, hfLevel, 1, missile.glowRadius)
             missile.engineController.fadeToOtherColor(this, hfColor, hfColor, 2f, 0.75f)
@@ -68,6 +69,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
             val wantToFlock: Boolean = !isTargetValid()
             if (wantToFlock) {
                 doFlocking()
+                hfOverride = false
             } else {
                 val engine = Global.getCombatEngine()
                 val targetLoc = engine.getAimPointWithLeadForAutofire(missile, 1.5f, target, 50f)
@@ -187,18 +189,20 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
 
         // want to: target nearest missile that is not targeted by another two motes already
         val owner = missile.owner
-        val maxMotesPerMissile = 2
+        var maxMotesPerMissile = 2
         val maxDistFromSourceShip = MAX_DIST_FROM_SOURCE_TO_ENGAGE_AS_PD
         var minDist = Float.MAX_VALUE
         var closest: CombatEntityAPI? = null
         for (other in engine.missiles) {
-            if (other.owner == owner) continue
+            val isNinevehMine = other.isMine && other.source?.hullSpec?.hullId?.equals("zea_boss_nineveh") == true
+            maxMotesPerMissile = if (isNinevehMine) 4 else 2
+            if (other.owner == owner && !isNinevehMine) continue
             if (other.owner == 100) continue
             val distToTarget = Misc.getDistance(missile.location, other.location)
             if (distToTarget > minDist) continue
             if (distToTarget > 3000 && !engine.isAwareOf(owner, other)) continue
             val distFromSource = Misc.getDistance(other.location, missile.source.location)
-            if (distFromSource > maxDistFromSourceShip) continue
+            if (distFromSource > maxDistFromSourceShip && !isNinevehMine) continue
             if (getNumMotesTargeting(other) >= maxMotesPerMissile) continue
             if (distToTarget < minDist) {
                 closest = other
@@ -222,6 +226,10 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
             }
         }
         target = closest
+
+        // hf nineveh boss mines
+        hfOverride = target is MissileAPI && (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals("zea_boss_nineveh") == true &&
+                ((target as MissileAPI).source?.variant?.hasTag(ZeaStaticStrings.BOSS_TAG) == true)
     }
 
     private fun isTargetValid(): Boolean {
@@ -231,12 +239,14 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         val engine = Global.getCombatEngine()
         if (target != null && target is ShipAPI && (target as ShipAPI).isHulk) return false
         var list: List<*>? = null
-        list = if (target is ShipAPI) {
-            engine.ships
+        var isNinevehMine = false
+        if (target is ShipAPI) {
+            list = engine.ships
         } else {
-            engine.missiles
+            list = engine.missiles
+            isNinevehMine = (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals("zea_boss_nineveh") == true
         }
-        return target != null && list!!.contains(target) && target!!.owner != missile.owner
+        return target != null && list!!.contains(target) && (target!!.owner != missile.owner || isNinevehMine)
     }
 
     private fun getNumMotesTargeting(other: CombatEntityAPI): Int {

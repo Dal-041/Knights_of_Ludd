@@ -11,7 +11,7 @@ import java.awt.Color
 class SparkleOnHitV2 : OnHitEffectPlugin {
     override fun onHit(projectile: DamagingProjectileAPI, target: CombatEntityAPI?, point: Vector2f?,
                        shieldHit: Boolean, damageResult: ApplyDamageResultAPI?, engine: CombatEngineAPI) {
-        val isHF = projectile.source?.hasTag(DuskBuiltin.HF_TAG) == true
+        val isHF = projectile.source?.hasTag(DuskBuiltin.HF_TAG) == true || ((projectile as? MissileAPI)?.unwrappedMissileAI as? SparkleAIV2)?.hfOverride ?: false
         val shipDamage = if(isHF) 300f else 1f
         val shipEMPDamage = 1500f
         val fighterDamage = if(isHF) 1000f else 200f
