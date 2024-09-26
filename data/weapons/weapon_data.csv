@@ -22,6 +22,7 @@ Canister Flak,kol_canister_flak,,,,200,,200,,,,,,0,,HIGH_EXPLOSIVE,0,0,0,0.1,5,0
 Hallowed Orion Device Launcher,kol_hallowedODLauncher,0,,200000,1000,,1000,,25,30,0,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,1,10000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 Pusher Plate (Low Tech But Slightly Smaller Haha Lol XDd),kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,
 Pusher Plate (Low Tech But It's Really Really Smol And Cute),kol_pusherplate_lt_but_cute,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,
+Heavy Minelayer,zea_dusk_minelayer2,0,,200000,1000,,2000,,25,30,12,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,20,500,,,SYSTEM,,,,,,,,,,,,,,,38.7
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #UTILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
