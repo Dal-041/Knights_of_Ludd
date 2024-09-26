@@ -155,8 +155,8 @@ class DawnBuiltin : BaseHullMod() {
         val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dawn_cascade"), HEIGHT)
         cascadeProtocol.setBulletedListMode("•")
         cascadeProtocol.setBulletWidth(15f)
-        val para1 = cascadeProtocol.addPara("Increases the range of ballistic and energy weapons by ${ENMITY_BONUS_ROF_RELOAD.toInt()}%% while over ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
-            listPad, activeTextColor, activePositiveColor, "${ENMITY_BONUS_ROF_RELOAD.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%"
+        val para1 = cascadeProtocol.addPara("Increases the range of ballistic and energy weapons by ${RANGE_BONUS.toInt()}%% while over ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
+            listPad, activeTextColor, activePositiveColor, "${RANGE_BONUS.toInt()}%", "${ENMITY_HP_THRESHOLD.toInt()}%"
         )
         para1.setHighlightColors(activePositiveColor, activeHighlightColor)
         val para2 = cascadeProtocol.addPara("Increases rate of fire of ballistic and energy weapons by ${ENMITY_BONUS_ROF_RELOAD.toInt()}%% with a ${ENMITY_BONUS_FLUX_REDUCTION.toInt()}%% flux cost reduction while under ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
