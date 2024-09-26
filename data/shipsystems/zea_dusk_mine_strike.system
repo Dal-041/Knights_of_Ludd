@@ -3,7 +3,7 @@
 	"type":"STAT_MOD",
 	"aiType":"MINE_STRIKE",
 	
-	"statsScript":"com.fs.starfarer.api.impl.combat.MineStrikeStats",
+	"statsScript":"org.selkie.kol.impl.shipsystems.DuskMineStrikeCloneStats",
 
 	"canUseWhileRightClickSystemOn":true,
 

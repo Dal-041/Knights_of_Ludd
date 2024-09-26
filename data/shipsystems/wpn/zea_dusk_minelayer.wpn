@@ -1,6 +1,6 @@
 {
 	# high-tech minelayer, used by high-tech star fortress system and by the Doom
-	"id":"zea_dusk_minelayer2",
+	"id":"zea_dusk_minestrike",
 	"specClass":"projectile",
 	"type":"MISSILE",
 	"size":"MEDIUM",
@@ -24,6 +24,6 @@
 				 "blowbackLength":10.0,
 				 "blowbackSpread":8.0,
 				 "particleColor":[95,70,155,110]},
-	"projectileSpecId":"zea_dusk_minelayer_mine_heavy",
+	"projectileSpecId":"zea_dusk_minestrike_mine",
 	#"fireSoundTwo":"minelayer_fire",
 }

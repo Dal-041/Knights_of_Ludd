@@ -1,8 +1,8 @@
 {
-	"id":"zea_dusk_minelayer_mine_heavy",
+	"id":"zea_dusk_minestrike_mine",
 	"specClass":"missile",	
 	"missileType":"PHASE_MINE",
-    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/missiles/zea_dusk_mine.png",
+    "sprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/missiles/zea_dusk_mine.png",
     "glowSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/missiles/zea_dusk_mine_glow.png",
 	"glowColor":[220,150,255,255],
 	"size":[96,96],	
