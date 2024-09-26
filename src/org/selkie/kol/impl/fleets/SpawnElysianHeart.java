@@ -19,7 +19,7 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnElysianHeart {
-	
+	public final static String MEMKEY_ELYSIAN_BOSS_FLEET_2 = "$zea_corruptingheart";
 	public static boolean SpawnElysianHeart() {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
@@ -78,7 +78,7 @@ public class SpawnElysianHeart {
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
 		elysianHeartFleet.getFleetData().ensureHasFlagship();
-		elysianHeartFleet.getMemoryWithoutUpdate().set("$zea_corruptingheart", true);
+		elysianHeartFleet.getMemoryWithoutUpdate().set(MEMKEY_ELYSIAN_BOSS_FLEET_2, true);
 
 		elysianHeartFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);

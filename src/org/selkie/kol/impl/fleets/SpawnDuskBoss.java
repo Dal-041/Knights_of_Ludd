@@ -21,7 +21,7 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDuskBoss {
-	
+	public final static String MEMKEY_DUSK_BOSS_FLEET = "$zea_yukionna";
 	public static boolean SpawnDuskBoss() {
 
 		PersonAPI duskBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.duskID);
@@ -75,7 +75,7 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 		duskBossFleet.getFleetData().ensureHasFlagship();
-		duskBossFleet.getMemoryWithoutUpdate().set("$zea_yukionna", true);
+		duskBossFleet.getMemoryWithoutUpdate().set(MEMKEY_DUSK_BOSS_FLEET, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
 
 		// populate the fleet with escorts

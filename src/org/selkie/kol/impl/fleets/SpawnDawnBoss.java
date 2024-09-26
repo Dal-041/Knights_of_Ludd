@@ -18,8 +18,10 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDawnBoss {
-	
+	public final static String MEMKEY_DAWN_BOSS_FLEET = "$zea_nian";
 	public static boolean SpawnDawnBoss() {
+
+
 
 		PersonAPI dawnBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.dawnID);
 		//A "slightly" rampant ALLMOTHER copy.
@@ -72,7 +74,7 @@ public class SpawnDawnBoss {
 		        .create();
 		dawnBossFleet.setDiscoverable(true);
 		dawnBossFleet.getFleetData().ensureHasFlagship();
-		dawnBossFleet.getMemoryWithoutUpdate().set("$zea_nian", true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(MEMKEY_DAWN_BOSS_FLEET, true);
 		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
 
 		//dawnBossFleet.removeAbility(Abilities.EMERGENCY_BURN);

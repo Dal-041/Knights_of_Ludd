@@ -26,6 +26,7 @@ import org.selkie.kol.world.GenerateKnights;
 
 import exerelin.campaign.SectorManager;
 
+import java.util.Objects;
 import java.util.Set;
 
 public class KOL_ModPlugin extends BaseModPlugin {
@@ -39,6 +40,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	public static final String MEMKEY_KOL_INTIALIZED = "$kol_initialized";
 	public static final String MEMKEY_ZEA_INTIALIZED = "$zea_initialized";
+	public static final String MEMKEY_CURRENT_VERSION = "$kol_version";
 
 	@Override
 	public void onApplicationLoad() {
@@ -91,6 +93,15 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
+
+		// handle version updates
+		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_CURRENT_VERSION)){
+			String saveGameVersion = (String) Global.getSector().getMemoryWithoutUpdate().get(MEMKEY_CURRENT_VERSION);
+			if (Objects.equals(saveGameVersion, "1.3")) return;
+		} else{
+			ZeaUtils.versionUpdate1_2to1_3();
+			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_CURRENT_VERSION, "1.3");
+		}
 	}
 
 	@Override
@@ -99,6 +110,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			GenerateKnights.genCorvus();
 		}
 		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
+		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_CURRENT_VERSION, "1.3");
 	}
 
 	@Override
@@ -122,6 +134,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	}
 
 	protected void addToOngoingGame() {
+		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_CURRENT_VERSION, "1.3");
+
 		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(kolID)) {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}

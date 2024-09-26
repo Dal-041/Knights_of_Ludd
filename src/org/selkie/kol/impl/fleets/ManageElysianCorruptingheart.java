@@ -16,7 +16,7 @@ import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageElysianCorruptingheart implements FleetEventListener {
-	public final String MEMKEY_KOL_ELYSIAN_BOSS2_DONE = "$kol_elysian_boss2_done";
+	public static final String MEMKEY_KOL_ELYSIAN_BOSS2_DONE = "$kol_elysian_boss2_done";
 
 	//Totally not adapted from Diable or anything :>
 	@Override

@@ -16,7 +16,7 @@ import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageDawnBoss implements FleetEventListener {
-	public final String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";
+	public final static String MEMKEY_KOL_DAWN_BOSS_DONE = "$kol_dawn_boss_done";
 
 	//Totally not adapted from Diable or anything :>
 	@Override
