@@ -43,6 +43,7 @@ public class PrepareAbyss {
 	public static final String duskID = "zea_dusk";
 	public static final String elysianID = "zea_elysians";
 	public static final String nullgateID = "zea_nullgate";
+	public static final String nullstationID = "zea_null_station_dusk";
 	public static final String elysiaSysName = "Elysia";
 	public static final String lunaSeaSysName = "The Luna Sea";
 	public static final String nullspaceSysName = "Nullspace";
@@ -314,7 +315,7 @@ public class PrepareAbyss {
 		SectorEntityToken gate = system.addCustomEntity(nullgateID, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
-		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0), PrepareAbyss.duskID); //Highest tier
+		SectorEntityToken stationResearch = system.addCustomEntity(nullstationID, "Shielded Research Station", nullstationID, Factions.DERELICT);
 		stationResearch.setFixedLocation(-5230, 8860);
 
 		float count = ZeaStaticStrings.uwDerelictsNormal.length; //16

@@ -18,7 +18,7 @@ import org.magiclib.kotlin.getPersonalityName
 import org.magiclib.util.MagicTxt
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
-class DuskStationInteraction : InteractionDialogPlugin {
+class DuskNullStationInteraction : InteractionDialogPlugin {
     lateinit var dialog: InteractionDialogAPI
 
     companion object {
@@ -154,14 +154,18 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
                 dialog.textPanel.addTooltip()
 
-                dialog.textPanel.addPara("Any officer may be selected for the procedure.")
-                dialog.optionPanel.addOption("Select an officer to Quantum Neural Link", CORE_INTO_SKILL)
+                if(Global.getSector().playerFleet.fleetData.officersCopy.isNotEmpty()){
+                    dialog.textPanel.addPara("Any officer may be selected for the procedure.")
+                    dialog.optionPanel.addOption("Select an officer to Quantum Neural Link", CORE_INTO_SKILL)
+                } else{
+                    dialog.textPanel.addPara("Unfortunately, you do not have any officers that can undergo the procedure at this moment.")
+                }
 
                 dialog.optionPanel.addOption("Leave", LEAVE_KEY)
                 dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
             }
 
-            CORE_INTO_SKILL -> dialog.showCustomDialog(820f, 440f, DuskifyAnOfficer(dialog))
+            CORE_INTO_SKILL -> dialog.showCustomDialog(420f, 440f, DuskifyAnOfficer(dialog))
 
             REVOKE_SKILL -> {
                 dialog.textPanel.addPara(
@@ -274,6 +278,13 @@ class DuskStationInteraction : InteractionDialogPlugin {
 
         override fun hasCancelButton(): Boolean {
             return true
+        }
+
+        override fun customDialogCancel() {
+            dialog.optionPanel.clearOptions()
+            dialog.optionPanel.addOption("Select an officer to Quantum Neural Link", CORE_INTO_SKILL)
+            dialog.optionPanel.addOption("Leave", LEAVE_KEY)
+            dialog.optionPanel.setShortcut(LEAVE_KEY, Keyboard.KEY_ESCAPE, false, false, false, false)
         }
 
         override fun customDialogConfirm() {
