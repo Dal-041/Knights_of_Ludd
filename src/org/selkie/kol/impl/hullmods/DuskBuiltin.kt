@@ -201,7 +201,6 @@ class DuskBuiltin : BaseHullMod() {
         background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()
-            sprite.alphaMult = 0.4f
             sprite.render(tooltip.position.x, tooltip.position.y)
         }
     }
