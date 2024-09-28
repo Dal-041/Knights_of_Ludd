@@ -145,7 +145,8 @@ class NianBoss : BaseHullMod() {
         val isBoss = ship.variant.hasTag(ZeaStaticStrings.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaStaticStrings.BOSS_TAG)
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(NianBossEnragedScript::class.java)) ship.addListener(NianBossEnragedScript(ship))
-            if (!ship.hasListenerOfClass(NianAIScript::class.java)) ship.addListener(NianAIScript(ship))
+            // Ill do this one day
+            //if (!ship.hasListenerOfClass(NianAIScript::class.java)) ship.addListener(NianAIScript(ship))
             addSubsystemToShip(ship, ShieldDronesSubsystem(ship, 5, true))
         }
     }
