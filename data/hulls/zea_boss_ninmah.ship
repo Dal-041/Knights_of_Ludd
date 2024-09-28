@@ -13,9 +13,7 @@
   "viewOffset": 0,
   "builtInMods": [
     "phasefield",
-    "delicate",
     "zea_dusk_builtin",
-    "zea_ex_phase_coils",
     "kol_ea_mist",
     "zea_ninmah_boss"
   ],

@@ -66,7 +66,7 @@
 ## v1.3.0
 Content
 - Added thrust vectoring visuals to Lunaria's engines
-- All Builtin Faction Hullmod tooltips have been overhauled upgraded. (Special thanks to Lukas04!)
+- All Builtin Faction Hullmod tooltips have been overhauled and upgraded. (Special thanks to Lukas04!)
 - [VERY REDACTED 1/2/3] Added new special rewards for defeating the main bosses
 - [VERY REDACTED 2] capital has its main vector engines be changed into destructible drone engines
 - [VERY REDACTED 3] boss 1 sprite revamp
@@ -82,6 +82,7 @@ Balance Updates
 
 Technical Changes and Bug fixes
 - Refactored all Sparkle code, old bugs fixed and new flocking behaviour introduced
+- Fixed Conformal Shields to not be inadvertently 360 shields
 - Added some (yet unused) portraits
 - Fixed a bug with modular paperdolls
 - Battlestar Libra has been correctly hidden from the build menu finally

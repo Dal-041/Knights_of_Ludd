@@ -19,11 +19,10 @@
     "builtInMods": [
         "kol_ea_shields2",
         "phasefield",
-        "delicate",
         "automated",
         "kol_ea_mist",
         "zea_dusk_builtin",
-        "kol_conformal_shieldv2",
+        "zea_conformal_shield",
         "kol_throttle"
     ],
     "builtInWeapons": {

@@ -20,7 +20,7 @@
         "zea_edf_builtin",
         "automated",
         "kol_ea_shields3",
-        "kol_conformal_shieldv2",
+        "zea_conformal_shield",
         "kol_throttle",
         "zea_edf_shachihoko_drone"
     ],
