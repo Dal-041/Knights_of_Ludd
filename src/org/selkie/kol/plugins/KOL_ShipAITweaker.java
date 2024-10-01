@@ -13,6 +13,7 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.util.Arrays;
 
+@SuppressWarnings("ConstantValue")
 public class KOL_ShipAITweaker {
     public static PluginPick<ShipAIPlugin> pickShipAI(FleetMemberAPI member, ShipAPI ship) {
         if (ship.isFighter()) return null;
@@ -92,6 +93,6 @@ public class KOL_ShipAITweaker {
             }
         }
 
-        return new PluginPick<ShipAIPlugin>(Global.getSettings().createDefaultShipAI(ship, config), CampaignPlugin.PickPriority.MOD_SPECIFIC);
+        return new PluginPick<>(Global.getSettings().createDefaultShipAI(ship, config), CampaignPlugin.PickPriority.MOD_SPECIFIC);
     }
 }

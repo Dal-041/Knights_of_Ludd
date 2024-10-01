@@ -2,7 +2,6 @@ package org.selkie.kol.impl.helpers;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
-import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
@@ -12,21 +11,17 @@ import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
-import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpecial;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
-import org.selkie.kol.impl.fleets.*;
-import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.kol.impl.fleets.ZeaFleetManager;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
 
 public class ZeaUtils {
-    public static float attainmentFactor = 0.15f;
     public static boolean useDomres = false;
     public static boolean useLostech = false;
     public static boolean useDustkeepers = false;
@@ -43,72 +38,18 @@ public class ZeaUtils {
         member.updateStats();
     }
 
-    public static void versionUpdate1_2to1_3(){
-        LocationAPI nullspace = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
-        for (SectorEntityToken entity : nullspace.getAllEntities()){
-            if (Objects.equals(entity.getId(), "zea_research_station_dusk")){
-                SectorEntityToken stationResearch = nullspace.addCustomEntity(PrepareAbyss.nullstationID, "Shielded Research Station", PrepareAbyss.nullstationID, Factions.DERELICT);
-                stationResearch.setFixedLocation(-5230, 8860);
-                nullspace.removeEntity(entity);
-                break;
-            }
-        }
-
-        // backport cores into the correct places
-        MemoryAPI mem = Global.getSector().getMemoryWithoutUpdate();
-        CargoAPI playerCargo = Global.getSector().getPlayerFleet().getCargo();
-        if (mem.contains(ManageDuskBoss.MEMKEY_KOL_DUSK_BOSS_DONE)) playerCargo.addCommodity(ZeaStaticStrings.BossCore.DUSK_CORE.itemID, 1);
-        else{
-            for (CampaignFleetAPI fleet : Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName).getFleets()){
-                if(fleet.getMemoryWithoutUpdate().contains(SpawnDuskBoss.MEMKEY_DUSK_BOSS_FLEET)){
-                    // add boss core to cargo
-                    CargoAPI cargo = Global.getFactory().createCargo(true);
-                    cargo.addCommodity(ZeaStaticStrings.BossCore.DUSK_CORE.itemID, 1);
-                    BaseSalvageSpecial.addExtraSalvage(fleet, cargo);
-                    break;
-                }
-            }
-        }
-
-        if (mem.contains(ManageDawnBoss.MEMKEY_KOL_DAWN_BOSS_DONE)) playerCargo.addCommodity(ZeaStaticStrings.BossCore.DAWN_CORE.itemID, 1);
-        else {
-            for (CampaignFleetAPI fleet : Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName).getFleets()){
-                if(fleet.getMemoryWithoutUpdate().contains(SpawnDawnBoss.MEMKEY_DAWN_BOSS_FLEET)){
-                    // add boss core to cargo
-                    CargoAPI cargo = Global.getFactory().createCargo(true);
-                    cargo.addCommodity(ZeaStaticStrings.BossCore.DAWN_CORE.itemID, 1);
-                    BaseSalvageSpecial.addExtraSalvage(fleet, cargo);
-                    break;
-                }
-            }
-        }
-
-        if (mem.contains(ManageElysianCorruptingheart.MEMKEY_KOL_ELYSIAN_BOSS2_DONE)) playerCargo.addCommodity(ZeaStaticStrings.BossCore.ELYSIAN_CORE.itemID, 1);
-        else{
-            for (CampaignFleetAPI fleet : Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getFleets()){
-                if(fleet.getMemoryWithoutUpdate().contains(SpawnElysianHeart.MEMKEY_ELYSIAN_BOSS_FLEET_2)){
-                    // add boss core to cargo
-                    CargoAPI cargo = Global.getFactory().createCargo(true);
-                    cargo.addCommodity(ZeaStaticStrings.BossCore.ELYSIAN_CORE.itemID, 1);
-                    BaseSalvageSpecial.addExtraSalvage(fleet, cargo);
-                    break;
-                }
-            }
-        }
-    }
-
     public static void checkAbyssalFleets() {
-        if(Global.getSettings().getModManager().isModEnabled("lost_sector")) {
+        if(Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.LOST_SECTOR)) {
             for (FactionAPI faction:Global.getSector().getAllFactions()) {
-                if (faction.getId().equals("enigma")) useEnigma = true;
+                if (faction.getId().equals(ZeaStaticStrings.ENIGMA)) useEnigma = true;
             }
         }
-        if(Global.getSettings().getModManager().isModEnabled("tahlan")) {
+        if(Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.TAHLAN)) {
             useLostech = true;
         }
         for (FactionAPI faction:Global.getSector().getAllFactions()) {
-            if (faction.getId().equals("domres")) useDomres = true;
-            if (faction.getId().equals("sotf_dustkeepers")) useDustkeepers = true;
+            if (faction.getId().equals(ZeaStaticStrings.DOMRES)) useDomres = true;
+            if (faction.getId().equals(ZeaStaticStrings.SOTF_DUSTKEEPERS)) useDustkeepers = true;
         }
     }
 
@@ -150,9 +91,10 @@ public class ZeaUtils {
         }
     }
 
+    public final static int FLEET_SPAWN_CHUNK = 180;
     public static CampaignFleetAPI ZeaBossGenFleetWeaver (CampaignFleetAPI fleet, int fp) {
         String fac = fleet.getFaction().getId();
-        int cut = 180;
+        int cut = FLEET_SPAWN_CHUNK;
         while (fp > 0) {
             CampaignFleetAPI support = ZeaFleetManager.spawnFleet(MathUtils.getRandom().nextLong(), 0, fleet.getStarSystem(), fac, Math.min(fp, cut), Math.min(fp, cut));
             copyFleetMembers(fac, support, fleet, false);
@@ -185,9 +127,9 @@ public class ZeaUtils {
     }
 
     public static class ZeaBossGenFIDConfig implements FleetInteractionDialogPluginImpl.FIDConfigGen {
-        FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
+        final FleetInteractionDialogPluginImpl.FIDConfig config = new FleetInteractionDialogPluginImpl.FIDConfig();
 
-        public static interface FIDConfigGen {
+        public interface FIDConfigGen {
             FleetInteractionDialogPluginImpl.FIDConfig createConfig();
         }
 

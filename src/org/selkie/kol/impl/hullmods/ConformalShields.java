@@ -13,8 +13,9 @@ import java.awt.*;
 public class ConformalShields extends BaseHullMod {
 
     public static class ConformalListener implements AdvanceableListener {
-        ShipAPI ship;
-        float shipX, shipY;
+        final ShipAPI ship;
+        final float shipX;
+        final float shipY;
         ConformalListener(ShipAPI ship) {
             this.ship = ship;
             shipY = Math.abs(Misc.getTargetingRadius(MathUtils.getPointOnCircumference(ship.getLocation(), 100f, 0f), ship, false));

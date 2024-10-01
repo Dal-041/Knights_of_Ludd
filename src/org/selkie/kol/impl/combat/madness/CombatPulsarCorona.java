@@ -25,13 +25,13 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
     public CombatEntityAPI entity;
 
     public static class CombatCoronaParams {
-        public float bandWidthInEngine;
-        public float middleRadius;
-        public CombatEntityAPI relatedEntity;
+        public final float bandWidthInEngine;
+        public final float middleRadius;
+        public final CombatEntityAPI relatedEntity;
         public String name;
         public float windBurnLevel;
-        public float flareProbability;
-        public float crLossMult;
+        public final float flareProbability;
+        public final float crLossMult;
 
         public CombatCoronaParams(float bandWidthInEngine, float middleRadius,
                                   CombatEntityAPI relatedEntity,
@@ -39,21 +39,19 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
             this.bandWidthInEngine = bandWidthInEngine;
             this.middleRadius = middleRadius;
             this.relatedEntity = relatedEntity;
-            this.name = name;
-            this.windBurnLevel = windBurnLevel;
             this.flareProbability = flareProbability;
             this.crLossMult = crLossMult;
         }
     }
 
-    protected SpriteAPI texture = null;
+    protected final SpriteAPI texture = null;
     protected Color color;
 
     protected CombatAuroraRenderer renderer;
     protected CombatFlareManager flareManager;
     protected CombatCoronaParams params;
 
-    protected CombatRangeBlockerUtil blocker = null;
+    protected final CombatRangeBlockerUtil blocker = null;
 
     public void init(String terrainId, CombatEntityAPI entity, Object param) {
         this.terrainId = terrainId;
@@ -85,7 +83,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
 
 
 
-    transient private EnumSet<CampaignEngineLayers> layers = EnumSet.of(CampaignEngineLayers.TERRAIN_7);
+    final transient private EnumSet<CampaignEngineLayers> layers = EnumSet.of(CampaignEngineLayers.TERRAIN_7);
     public EnumSet<CampaignEngineLayers> getActiveLayers() {
         return layers;
     }
@@ -133,13 +131,11 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
             float outerRadiusWithFlare = computeRadiusWithFlare(flareManager.getActiveFlare());
             float dist = Misc.getDistance(this.entity.getLocation(), point);
             if (dist > outerRadiusWithFlare + radius) return false;
-            if (dist + radius < params.middleRadius - params.bandWidthInEngine / 2f) return false;
-            return true;
+            return !(dist + radius < params.middleRadius - params.bandWidthInEngine / 2f);
         }
         float dist = Misc.getDistance(this.entity.getLocation(), point);
         if (dist > getMaxRadiusForContains() + radius) return false;
-        if (dist < getMinRadiusForContains() - radius) return false;
-        return true;
+        return !(dist < getMinRadiusForContains() - radius);
     }
 
     protected float getMinRadiusForContains() {
@@ -152,7 +148,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
 
     protected float computeRadiusWithFlare(FlareManager.Flare flare) {
         float inner = getAuroraInnerRadius();
-        float outer = params.middleRadius + params.bandWidthInEngine * 1f; //0.5
+        float outer = params.middleRadius + params.bandWidthInEngine; //0.5
         float thickness = outer - inner;
 
         thickness *= flare.extraLengthMult;
@@ -177,10 +173,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
         if (entity instanceof ShipAPI) {
             ShipAPI ship = (ShipAPI) entity;
 
-            boolean inFlare = false;
-            if (flareManager.isInActiveFlareArc(ship.getLocation())) {
-                inFlare = true;
-            }
+            boolean inFlare = flareManager.isInActiveFlareArc(ship.getLocation());
 
             float intensity = getIntensityAtPoint(ship.getLocation());
             if (intensity <= 0) return;
@@ -252,10 +245,8 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
                 accelMult /= shipAccelMult;
             }
 
-            float seconds = amount;
-
             Vector2f vel = ship.getVelocity();
-            windDir.scale(seconds * ship.getAcceleration() * accelMult);
+            windDir.scale(amount * ship.getAcceleration() * accelMult);
             ship.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
 
             Color glowColor = getAuroraColorForAngle(angle);
@@ -318,7 +309,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
         Color bad = Misc.getNegativeHighlightColor();
         Color base = Color.gray;
         //bad = Color.red;
-        return Misc.interpolateColor(base, bad, Global.getSector().getCampaignUI().getSharedFader().getBrightness() * 1f);
+        return Misc.interpolateColor(base, bad, Global.getSector().getCampaignUI().getSharedFader().getBrightness());
     }
 
     public float getAuroraAlphaMultForAngle(float angle) {
@@ -398,7 +389,7 @@ public class CombatPulsarCorona implements CombatAuroraRenderer.CombatAuroraRend
     }
 
     public java.util.List<Color> getFlareColorRange() {
-        List<Color> result = new ArrayList<Color>();
+        List<Color> result = new ArrayList<>();
 
         if (params.relatedEntity instanceof PlanetAPI) {
             Color color = ((PlanetAPI)params.relatedEntity).getSpec().getCoronaColor();

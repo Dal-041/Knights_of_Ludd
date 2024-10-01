@@ -37,7 +37,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
         String command = params.get(0).getString(memoryMap);
         if (command == null) return false;
 
-        SectorEntityToken entity = dialog.getInteractionTarget();;
+        SectorEntityToken entity = dialog.getInteractionTarget();
         CampaignFleetAPI otherFleet = null;
 
         if (dialog.getInteractionTarget() instanceof CampaignFleetAPI) {
@@ -56,8 +56,8 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #3", ZeaLoreManager.TT1Drop, ZeaLoreManager.TT1DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, true, dialog.getTextPanel());
 
-            if (Global.getSector().getEntityById("zea_boss_station_tritachyon") != null) {
-                TTStationBoss2 = Global.getSector().getEntityById("zea_boss_station_tritachyon");
+            if (Global.getSector().getEntityById(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON) != null) {
+                TTStationBoss2 = Global.getSector().getEntityById(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON);
             } else {
                 return false;
             }
@@ -78,13 +78,13 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             //Handle ninmah recovery
             boolean foundNinmah = false;
             for (FleetMemberAPI member : fleet.getMembersWithFightersCopy()) {
-                if (member.getVariant().getHullSpec().getBaseHullId().startsWith("zea_boss")) {
+                if (member.getVariant().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     if (variant.hasTag(ZeaStaticStrings.BOSS_TAG)) variant.removeTag(ZeaStaticStrings.BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
-                    if (variant.getHullSpec().getBaseHullId().startsWith("zea_boss_ninmah")) foundNinmah = true;
+                    if (variant.getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) foundNinmah = true;
                 }
             }
 
@@ -93,13 +93,13 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 Vector2f location = fleet.getLocation();
 
                 //spawn the derelict object
-                ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData("zea_boss_ninmah_Undoer", ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
+                ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData(ZeaStaticStrings.ZEA_BOSS_NINMAH_UNDOER, ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
                 ship.shipName = "TTS Ninmah";
                 DerelictShipEntityPlugin.DerelictShipData DSD = new DerelictShipEntityPlugin.DerelictShipData(ship, true);
                 CustomCampaignEntityAPI wreck = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
                         fleet.getContainingLocation(),
                         Entities.WRECK, Factions.NEUTRAL, DSD);
-                Misc.makeImportant(wreck, "zea_ninmah");
+                Misc.makeImportant(wreck, ZeaStaticStrings.ZEA_BOSS_NINMAH);
                 wreck.getMemoryWithoutUpdate().set("$zea_ninmah_wreck", true);
                 wreck.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                 wreck.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -127,7 +127,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             SectorEntityToken LunaSea = null;
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
                 if (system.getName().equals(PrepareAbyss.lunaSeaSysName)) {
-                    LunaSea = system.getEntityById("zea_lunasea_four");
+                    LunaSea = system.getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR);
                 }
             }
             if (LunaSea == null) return false;

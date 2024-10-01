@@ -13,24 +13,24 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TargetingBeamStats extends BaseShipSystemScript {
-    public static String LIDAR_WINDUP = "lidar_windup";
     public WeaponAPI lidar;
     protected boolean needsUnapply = false;
     protected boolean playedWindup = false;
     protected float lidarMaxRange = 1000f;
     protected boolean inited = false;
-    public static Object KEY_SHIP = new Object();
-    public static Object KEY_TARGET = new Object();
+    public static final Object KEY_SHIP = new Object();
+    public static final Object KEY_TARGET = new Object();
     public static float DAM_MULT = 1.5f;
-    public static Color TEXT_COLOR = new Color(255,55,55,255);
-    public static Color JITTER_COLOR = new Color(255,50,50,75);
-    public float lidarMinRange = 700f;
+    public static final Color TEXT_COLOR = new Color(255,55,55,255);
+    public static final Color JITTER_COLOR = new Color(255,50,50,75);
+    public final float lidarMinRange = 700f;
 
 
     public void init(ShipAPI ship) {
@@ -46,7 +46,8 @@ public class TargetingBeamStats extends BaseShipSystemScript {
 
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {
         ShipAPI ship = (ShipAPI)stats.getEntity();
-        if (ship == null || ship.isHulk()) {
+        if(ship == null) return;
+        if (ship.isHulk()) {
             if (needsUnapply) {
                 for (WeaponAPI w : ship.getAllWeapons()) {
                     if (!w.isDecorative() && w.getSlot().isHardpoint() && !w.isBeam() &&
@@ -105,7 +106,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
         }
 
         if (((state == State.IN && effectLevel > 0.67f) || state == State.ACTIVE) && !playedWindup) {
-            Global.getSoundPlayer().playSound(LIDAR_WINDUP, 1f, 1f, ship.getLocation(), ship.getVelocity());
+            Global.getSoundPlayer().playSound(ZeaStaticStrings.LIDAR_WINDUP, 1f, 1f, ship.getLocation(), ship.getVelocity());
             playedWindup = true;
         }
 
@@ -147,7 +148,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
                         Global.getCombatEngine().maintainStatusForPlayerShip(KEY_TARGET,
                                 targetData.ship.getSystem().getSpecAPI().getIconSpriteName(),
                                 targetData.ship.getSystem().getDisplayName(),
-                                "" + (int)((targetData.currDamMult - 1f) * 100f) + "% more damage taken", true);
+                                (int)((targetData.currDamMult - 1f) * 100f) + "% more damage taken", true);
                     }
 
                     if (targetData.currDamMult <= 1f || !targetData.ship.isAlive()) {
@@ -176,19 +177,16 @@ public class TargetingBeamStats extends BaseShipSystemScript {
                 float durOut = 0.5f;
                 shipJitterLevel = Math.max(0, durOut - targetData.elaspedAfterInState) / durOut;
             }
-            float targetJitterLevel = effectLevel;
 
             float maxRangeBonus = 50f;
             float jitterRangeBonus = shipJitterLevel * maxRangeBonus;
 
             Color color = JITTER_COLOR;
             if (shipJitterLevel > 0) {
-                ship.setJitter(KEY_SHIP, color, shipJitterLevel, 4, 0f, 0 + jitterRangeBonus * 1f);
+                ship.setJitter(KEY_SHIP, color, shipJitterLevel, 4, 0f, 0 + jitterRangeBonus);
             }
 
-            if (targetJitterLevel > 0) {
-                targetData.target.setJitter(KEY_TARGET, color, targetJitterLevel, 3, 0f, 5f);
-            }
+            targetData.target.setJitter(KEY_TARGET, color, effectLevel, 3, 0f, 5f);
         }
     }
 

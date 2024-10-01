@@ -7,7 +7,6 @@ import org.selkie.kol.impl.shipsystems.GraciousLightStats;
 
 public class GraciousLightAI implements ShipSystemAIScript {
     private ShipAPI ship;
-    private boolean wasHighFlux = false;
 
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
@@ -26,11 +25,9 @@ public class GraciousLightAI implements ShipSystemAIScript {
         }
 
         if (!ship.getSystem().isActive()) {
-            if (wasHighFlux) {
-                if (ship.getFluxLevel() <= 0.8f) {
-                    if (fighterCount >= 3) {
-                        ship.useSystem();
-                    }
+            if (ship.getFluxLevel() <= 0.8f) {
+                if (fighterCount >= 3) {
+                    ship.useSystem();
                 }
             }
         }

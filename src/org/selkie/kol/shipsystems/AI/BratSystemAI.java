@@ -6,7 +6,7 @@ import org.lwjgl.util.vector.Vector2f;
 
 public class BratSystemAI implements ShipSystemAIScript {
 
-    private static float DELAY = 0.9f; // Change this to delay you want
+    private static final float DELAY = 0.9f; // Change this to delay you want
     private ShipAPI ship;
 
     private final IntervalUtil delay = new IntervalUtil(DELAY,DELAY);

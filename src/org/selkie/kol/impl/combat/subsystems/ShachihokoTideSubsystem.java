@@ -195,7 +195,7 @@ public class ShachihokoTideSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public String getDroneVariant() {
+    public @NotNull String getDroneVariant() {
         return "zea_edf_shachihoko_wing";
     }
 
@@ -205,7 +205,7 @@ public class ShachihokoTideSubsystem extends MagicDroneSubsystem {
         return new TargetedSupportDroneFormation();
     }
 
-    private class TargetedSupportDroneFormation extends DroneFormation {
+    private static class TargetedSupportDroneFormation extends DroneFormation {
         @Override
         public void advance(@NotNull ShipAPI ship, @NotNull Map<ShipAPI, ? extends PIDController> drones, float amount) {
             List<Vector2f> untargetedDroneLocations = new ArrayList<>();
@@ -245,7 +245,7 @@ public class ShachihokoTideSubsystem extends MagicDroneSubsystem {
                 if (targetedDroneLocations.containsKey(drone)) {
                     desiredLocation = targetedDroneLocations.get(drone);
 
-                    if (StarficzAIUtils.DEBUG_ENABLED | true) {
+                    if (StarficzAIUtils.DEBUG_ENABLED) {
                         Global.getCombatEngine().addSmoothParticle(drone.getLocation(), drone.getVelocity(), 40f, 50f, 0.1f, Color.red);
                         Global.getCombatEngine().addSmoothParticle(desiredLocation, droneTarget.getVelocity(), 40f, 50f, 0.1f, Color.red);
                     }
@@ -262,7 +262,7 @@ public class ShachihokoTideSubsystem extends MagicDroneSubsystem {
 
                     assignedPoints.add(desiredLocation);
 
-                    if (StarficzAIUtils.DEBUG_ENABLED | true)
+                    if (StarficzAIUtils.DEBUG_ENABLED)
                         Global.getCombatEngine().addSmoothParticle(desiredLocation, droneTarget.getVelocity(), 40f, 50f, 0.1f, Color.blue);
                 }
 

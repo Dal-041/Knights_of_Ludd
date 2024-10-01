@@ -55,7 +55,7 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         fleet.getFleetData().setShipNameRandom(random);
 
 
-        FleetMemberAPI member = fleet.getFleetData().addFleetMember("zea_boss_ninmah_Undoer");
+        FleetMemberAPI member = fleet.getFleetData().addFleetMember(ZeaStaticStrings.ZEA_BOSS_NINMAH_UNDOER);
         member.setShipName("TTS Ninmah");
         member.setId("tt2boss_" + random.nextLong());
 
@@ -71,8 +71,8 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
 
         PersonAPI TT2BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
-                .setAICoreType("alpha_core")
-                .setPortraitId("zea_boss_alphaplus")
+                .setAICoreType(Commodities.ALPHA_CORE)
+                .setPortraitId(ZeaStaticStrings.ZEA_BOSS_ALPHAPLUS)
                 .setLevel(8)
                 .setFirstName("Alpha")
                 .setLastName("(+)")

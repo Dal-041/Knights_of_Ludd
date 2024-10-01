@@ -36,7 +36,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         }
 
         if (ship == null || !ship.isAlive() || ship.getSystem() == null) {
-            //Lazy negation, would return but cryoflux effect still needs to run.
+            assert true; //Lazy negation, would return but cryoflux effect still needs to run.
         } else {
             if (!active && ship.getSystem().getState().equals(ShipSystemAPI.SystemState.ACTIVE)) {
                 active = true;
@@ -78,7 +78,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
             if (weight > 0.1f) {
                 com.scale(1f / weight);
                 float volume = Math.min(weight, 1f);
-                if (trails.size() > 0) {
+                if (!trails.isEmpty()) {
                     totalDist /= (float) trails.size();
                     float mult = totalDist / Math.max(maxRange, 1f);
                     mult = 1f - mult;
@@ -102,7 +102,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
                 //trail.proj.setFacing(trail.proj.getFacing() + 180f * amount);
                 if (trail.prev != null && !trail.prev.isExpired() && Global.getCombatEngine().isEntityInPlay(trail.prev)) {
                     float dist1 = Misc.getDistance(trail.prev.getLocation(), trail.proj.getLocation());
-                    if (dist1 < trail.proj.getProjectileSpec().getLength() * 1f) {
+                    if (dist1 < trail.proj.getProjectileSpec().getLength()) {
                         float maxSpeed = trail.prev.getMoveSpeed() * 0.5f;// * Math.max(0.5f, 1f - trail.prev.getElapsed() * 0.5f);
                         // goal here is to prevent longer shot series (e.g. from Paragon) from moving too unnaturally
                         float e = trail.prev.getElapsed();
@@ -138,7 +138,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
             vel.set(target.getVelocity());
         }
 
-        float size = projectile.getProjectileSpec().getWidth() * 1f;
+        float size = projectile.getProjectileSpec().getWidth();
         //size = Misc.getHitGlowSize(size, projectile.getDamage().getBaseDamage(), damageResult);
         float sizeMult = Misc.getHitGlowSize(100f, projectile.getDamage().getBaseDamage(), damageResult) / 100f;
 //		sizeMult = 1.5f;
@@ -174,7 +174,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         engine.getCustomData().put(prevKey, projectile);
 
         if (trails == null) {
-            trails = new ArrayList<Brimstone>();
+            trails = new ArrayList<>();
         }
         trails.add(0, trail);
     }
@@ -182,15 +182,15 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
 
 
     public static class ParticleData {
-        public SpriteAPI sprite;
+        public final SpriteAPI sprite;
         public Vector2f offset = new Vector2f();
         public Vector2f vel = new Vector2f();
         public float scale = 1f;
-        public DamagingProjectileAPI proj;
+        public final DamagingProjectileAPI proj;
         public float scaleIncreaseRate = 1f;
         public float turnDir = 1f;
         public float angle = 1f;
-        public FaderUtil fader;
+        public final FaderUtil fader;
 
         public ParticleData(DamagingProjectileAPI proj) {
             this.proj = proj;
@@ -243,7 +243,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         }
     }
 
-    protected List<Brimstone.ParticleData> particles = new ArrayList<Brimstone.ParticleData>();
+    protected final List<Brimstone.ParticleData> particles = new ArrayList<>();
 
     protected DamagingProjectileAPI proj;
     protected DamagingProjectileAPI prev;
@@ -281,7 +281,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
     }
 
 
-    protected EnumSet<CombatEngineLayers> layers = EnumSet.of(CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER);
+    protected final EnumSet<CombatEngineLayers> layers = EnumSet.of(CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER);
     @Override
     public EnumSet<CombatEngineLayers> getActiveLayers() {
         return layers;

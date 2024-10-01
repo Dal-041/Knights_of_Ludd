@@ -7,12 +7,12 @@ import com.fs.starfarer.api.util.Misc;
 
 public class CombatRangeBlockerUtil {
 
-    private int resolution;
-    private float maxRange;
+    private final int resolution;
+    private final float maxRange;
 
-    private float degreesPerUnit;
-    private float [] limits;
-    private float [] curr;
+    private final float degreesPerUnit;
+    private final float [] limits;
+    private final float [] curr;
     //private float [] alphas;
 
     private boolean wasUpdated = false;
@@ -45,9 +45,7 @@ public class CombatRangeBlockerUtil {
     }
 
     public void sync() {
-        for (int i = 0; i < resolution; i++) {
-            curr[i] = limits[i];
-        }
+        if (resolution >= 0) System.arraycopy(limits, 0, curr, 0, resolution);
     }
 
     public float getShortenAmountAt(float angle) {
@@ -104,7 +102,7 @@ public class CombatRangeBlockerUtil {
             if (dist > maxRange) continue;
 
             float graceRadius = 25f;
-            float span = Misc.computeAngleSpan(ent.getCollisionRadius()*1.0f + graceRadius, dist);
+            float span = Misc.computeAngleSpan(ent.getCollisionRadius() + graceRadius, dist);
 
             if (!ent.isAlive()) span *= 0.35f;
 
@@ -194,7 +192,7 @@ public class CombatRangeBlockerUtil {
     public int getIndexForAngle(float angle) {
         angle = Misc.normalizeAngle(angle);
 
-        int index = (int)Math.round(angle / 360f * (float) resolution);
+        int index = Math.round(angle / 360f * (float) resolution);
         if (index < 0) index = 0;
         //if (index > resolution - 1) index = resolution - 1;
         while (index >= resolution) index -= resolution;

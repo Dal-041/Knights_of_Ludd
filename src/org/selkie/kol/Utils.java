@@ -95,6 +95,7 @@ public class Utils {
     private static long dialogTime = 0;
     private static long commandTime = 0;
     private static long hudTime = 0;
+    @SuppressWarnings("DataFlowIssue")
     public static float getUIAlpha(boolean inUIRenderMethod) {
         final float DIALOG_ALPHA = 0.33f;
         final float DIALOG_FADE_OUT_TIME = 333f;
@@ -141,7 +142,9 @@ public class Utils {
             this.G = G;
             this.B = B;
         }
-        public float R, G, B;
+        public final float R;
+        public final float G;
+        public final float B;
     }
 
     public static class OKLab {
@@ -150,7 +153,9 @@ public class Utils {
             this.a = a;
             this.b = b;
         }
-        public float L, a, b;
+        public final float L;
+        public final float a;
+        public final float b;
     }
 
     public static Color OKLabInterpolateColor(Color from, Color to, float progress){
@@ -189,7 +194,7 @@ public class Utils {
         float s = s_*s_*s_;
 
         return new LinearSRBG(
-            +4.0767416621f * l - 3.3077115913f * m + 0.2309699292f * s,
+            4.0767416621f * l - 3.3077115913f * m + 0.2309699292f * s,
             -1.2684380046f * l + 2.6097574011f * m - 0.3413193965f * s,
             -0.0041960863f * l - 0.7034186147f * m + 1.7076147010f * s
         );

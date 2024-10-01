@@ -128,9 +128,6 @@ public class DroneVectorThruster implements EveryFrameWeaponEffectPlugin {
         weapon.getArc();
         weapon.getArcFacing();
 
-        if (parentShip.getEngineController().isDecelerating()) {
-
-        }
     }
 
     public boolean isAngleWithinArc(float startAngle, float endAngle, float testAngle) {

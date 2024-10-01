@@ -4,7 +4,6 @@ import com.fs.starfarer.api.GameState
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin
 import com.fs.starfarer.api.combat.ShipAPI
-import com.fs.starfarer.api.combat.ViewportAPI
 import com.fs.starfarer.api.graphics.SpriteAPI
 import com.fs.starfarer.api.input.InputEventAPI
 import com.fs.starfarer.api.util.Misc
@@ -15,6 +14,7 @@ import org.selkie.kol.Utils
 import org.selkie.kol.combat.StarficzAIUtils
 import java.awt.Color
 import java.util.regex.Pattern
+import kotlin.math.roundToInt
 
 class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
     override fun advance(amount: Float, events: MutableList<InputEventAPI>?) {
@@ -56,8 +56,8 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
     private fun drawPaperdoll(ship: ShipAPI, location: Vector2f, scale: Float){
 
         if (PAPERDOLL_SCALE.containsKey(ship.hullSpec.baseHullId) ) {
-            val shipScale = PAPERDOLL_SCALE[ship.hullSpec.baseHullId]!! * scale;
-            val alpha = Math.round(Misc.interpolate(0f,170f, Utils.getUIAlpha(false)))
+            val shipScale = PAPERDOLL_SCALE[ship.hullSpec.baseHullId]!! * scale
+            val alpha = Misc.interpolate(0f, 170f, Utils.getUIAlpha(false)).roundToInt()
             val kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE)
             for (module in ship.childModulesCopy) {
                 if (module.hitpoints <= 0f) continue
@@ -69,7 +69,7 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
                     moduleSprite = Global.getSettings().getSprite("paperdolls", matcher.group())
                 } else{
                     // back up use the default ship sprite
-                    moduleSprite = Global.getSettings().getSprite(module.hullSpec.spriteName);
+                    moduleSprite = Global.getSettings().getSprite(module.hullSpec.spriteName)
                 }
 
                 val offset: Vector2f = Vector2f.sub(ship.location, module.location, null).scale(shipScale) as Vector2f

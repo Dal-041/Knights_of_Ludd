@@ -19,45 +19,14 @@ import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDawnBoss {
 	public final static String MEMKEY_DAWN_BOSS_FLEET = "$zea_nian";
-	public static boolean SpawnDawnBoss() {
-
-
+	public static void SpawnDawnBoss() {
 
 		PersonAPI dawnBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.dawnID);
 		//A "slightly" rampant ALLMOTHER copy.
 		dawnBossCaptain.setName(new FullName("XLLM01H3R", "", FullName.Gender.ANY));
 		dawnBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDawnBoss));
 
-		/**
-		* Creates a fleet with a defined flagship and optional escort
-		*
-		* @param fleetName
-		* @param fleetFaction
-		* @param fleetType
-		* campaign.ids.FleetTypes, default to FleetTypes.PERSON_BOUNTY_FLEET
-		* @param flagshipName
-		* Optional flagship name
-		* @param flagshipVariant
-		* @param captain
-		* PersonAPI, can be NULL for random captain, otherwise use createCaptain()
-		* @param supportFleet
-		* Optional escort ship VARIANTS and their NUMBERS
-		* @param minFP
-		* Minimal fleet size, can be used to adjust to the player's power, set to 0 to ignore
-		* @param reinforcementFaction
-		* Reinforcement faction, if the fleet faction is a "neutral" faction without ships
-		* @param qualityOverride
-		* Optional ship quality override, default to 2 (no D-mods) if null or <0
-		* @param spawnLocation
-		* Where the fleet will spawn, default to assignmentTarget if NULL
-		* @param assignment
-		* campaign.FleetAssignment, default to orbit aggressive
-		* @param assignementTarget
-		* @param isImportant
-		* @param transponderOn
-		* @return
-		*/
-		String variant = "zea_boss_nian_Salvation";
+        String variant = "zea_boss_nian_Salvation";
 		CampaignFleetAPI dawnBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("The Devourer")
 		        .setFleetFaction(PrepareAbyss.dawnID)
@@ -68,7 +37,7 @@ public class SpawnDawnBoss {
 		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName).getEntityById("zea_lunasea_four"))
+				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName).getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
@@ -128,7 +97,5 @@ public class SpawnDawnBoss {
 		FID.objectivesToggle = true;
 		FID.fttlToggle = true;
 		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
-
-		return true;
 	}
 }

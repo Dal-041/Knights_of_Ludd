@@ -13,11 +13,12 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
-import java.awt.Color;
-import java.util.List;
-import java.util.Random;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+
+import java.awt.*;
+import java.util.List;
+import java.util.Random;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
@@ -39,15 +40,13 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
             }
 
             if (!inCloud || fleet.isInHyperspaceTransition()) {
-                // open, do nothing
+                assert true; // open, do nothing
             } else {
                 // deep
                 fleet.getStats().removeTemporaryMod(getModId() + "_storm_sensor");
-                if (NULL_NEBULA_SENSOR_RANGE_MULT != 1) {
-                    fleet.getStats().addTemporaryModMult(0.1f, getModId() + "_sensor",
-                            "Inside Nullstorm", NULL_NEBULA_SENSOR_RANGE_MULT,
-                            fleet.getStats().getSensorRangeMod());
-                }
+                fleet.getStats().addTemporaryModMult(0.1f, getModId() + "_sensor",
+                        "Inside Nullstorm", NULL_NEBULA_SENSOR_RANGE_MULT,
+                        fleet.getStats().getSensorRangeMod());
 
                 float penalty = Misc.getBurnMultForTerrain(fleet);
                 fleet.getStats().removeTemporaryMod(getModId() + "_storm_speed");
@@ -212,19 +211,19 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
         tooltip.addPara("Reduces the range at which fleets inside can be detected by %s.",
                 pad,
                 highlight,
-                "" + (int) ((1f - NULL_NEBULA_SENSOR_RANGE_MULT) * 100) + "%"
+                (int) ((1f - NULL_NEBULA_SENSOR_RANGE_MULT) * 100) + "%"
         );
 
         tooltip.addPara("Reduces the speed of fleets inside by up to %s. Larger fleets are slowed down more.",
                 nextPad,
                 highlight,
-                "" + (int) ((Misc.BURN_PENALTY_MULT) * 100f) + "%"
+                (int) ((Misc.BURN_PENALTY_MULT) * 100f) + "%"
         );
 
         float penalty = Misc.getBurnMultForTerrain(Global.getSector().getPlayerFleet());
         tooltip.addPara("Your fleet's speed is reduced by %s.", pad,
                 highlight,
-                "" + (int) Math.round((1f - penalty) * 100) + "%"
+                Math.round((1f - penalty) * 100) + "%"
         );
 
         tooltip.addSectionHeading("Charged storms", Alignment.MID, pad);
@@ -250,7 +249,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 
     @Override
     public int getNumMapSamples() {
-        return 10;
+        return super.getNumMapSamples();
     }
 
     @Override
@@ -340,7 +339,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 
     @Override
     public void turnOffStorms(Vector2f loc, float radius) {
-        setTileState(loc, radius, CellState.OFF, -1f, -1f);
+        super.turnOffStorms(loc, radius);
     }
 
     @Override
@@ -362,7 +361,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
 //		for (int i = 0; i < 100; i++) {
 //			auto.advance(days * 10f);
 //		}
-        auto.advance(days * 1f);
+        auto.advance(days);
 
         int [][] cells = auto.getCells();
 

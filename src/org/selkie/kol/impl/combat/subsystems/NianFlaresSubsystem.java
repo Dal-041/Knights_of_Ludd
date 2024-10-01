@@ -21,9 +21,9 @@ public class NianFlaresSubsystem extends MagicSubsystem {
     private static final float FLARE_WAVE_DELAY = 0.75f;
     private static final float MISSILE_SEARCH_RANGE = 800f;
 
-    IntervalUtil flaresInterval = new IntervalUtil(0.03f, 0.09f);
-    IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
-    IntervalUtil nextWaveInterval = new IntervalUtil(FLARE_WAVE_DELAY, FLARE_WAVE_DELAY);
+    final IntervalUtil flaresInterval = new IntervalUtil(0.03f, 0.09f);
+    final IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
+    final IntervalUtil nextWaveInterval = new IntervalUtil(FLARE_WAVE_DELAY, FLARE_WAVE_DELAY);
     int flaresReleasedInWave = 0;
     int wavesToLaunch = 0;
 
@@ -38,7 +38,7 @@ public class NianFlaresSubsystem extends MagicSubsystem {
 
     @Override
     public float getBaseInDuration() {
-        return 0f;
+        return super.getBaseInDuration();
     }
 
     @Override
@@ -48,7 +48,7 @@ public class NianFlaresSubsystem extends MagicSubsystem {
 
     @Override
     public float getBaseOutDuration() {
-        return 0f;
+        return super.getBaseOutDuration();
     }
 
     @Override

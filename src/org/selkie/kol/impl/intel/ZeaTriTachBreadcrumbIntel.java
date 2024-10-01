@@ -19,12 +19,12 @@ import java.util.Set;
 
 public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
 
-    protected SectorEntityToken entity;
+    protected final SectorEntityToken entity;
     protected String rewardID;
-    protected String name;
-    public String desc;
-    public String descShort;
-    protected String icon = Global.getSector().getFaction(Factions.TRITACHYON).getLogo();
+    protected final String name;
+    public final String desc;
+    public final String descShort;
+    protected final String icon = Global.getSector().getFaction(Factions.TRITACHYON).getLogo();
 
     public ZeaTriTachBreadcrumbIntel(String name, String desc, SectorEntityToken target) {
         this.entity = target;
@@ -135,7 +135,7 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
 
     @Override
     public boolean canTurnImportantOff() {
-        return true;
+        return super.canTurnImportantOff();
     }
 
     @Override
@@ -146,7 +146,7 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
         CargoAPI cargo = playerFleet.getCargo();
         SpecialItemData item = new SpecialItemData(rewardID, "Recovered a Tri-Tachyon data recorder");
 
-        if (action.equals("zea_BossStationTT_Salvage2")) {
+        if (action.equals(ZeaStaticStrings.ZEA_BOSS_STATION_TT_SALVAGE_2)) {
             Global.getSector().getPlayerStats().addXP(200000, dialog.getTextPanel());
             ReputationActionResponsePlugin.ReputationAdjustmentResult result = Global.getSector().adjustPlayerReputation(
                     new CoreReputationPlugin.RepActionEnvelope(CoreReputationPlugin.RepActions.MISSION_SUCCESS, -5,
@@ -155,7 +155,7 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
             endAfterDelay();
         }
 
-        if (action.equals("zea_AfterNinevehDefeat")) {
+        if (action.equals(ZeaStaticStrings.ZEA_AFTER_NINEVEH_DEFEAT)) {
 
             Global.getSector().getPlayerStats().addXP(250000, dialog.getTextPanel());
 

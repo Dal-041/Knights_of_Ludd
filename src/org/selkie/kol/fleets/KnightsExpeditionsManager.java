@@ -9,7 +9,6 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.selkie.kol.fleets.KnightsExpeditionAssignmentAI;
-import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 import org.selkie.kol.world.GenerateKnights;
 
@@ -72,7 +71,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
     }
 
     public String pickFleetType(Random random) {
-        WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(random);
+        WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(random);
         picker.add(GenerateKnights.KnightsFleetTypes.WARRIORS, 20f);
         picker.add(GenerateKnights.KnightsFleetTypes.SCOUT, 5f);
         picker.add(GenerateKnights.KnightsFleetTypes.PATROL, 10f);
@@ -192,8 +191,8 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
     }
 
     public SectorEntityToken getTargetToken(Random random) {
-        WeightedRandomPicker<SectorEntityToken> pickerTo = new WeightedRandomPicker<SectorEntityToken>(random);
-        WeightedRandomPicker<String> pickerS = new WeightedRandomPicker<String>(random);
+        WeightedRandomPicker<SectorEntityToken> pickerTo = new WeightedRandomPicker<>(random);
+        WeightedRandomPicker<String> pickerS = new WeightedRandomPicker<>(random);
 
         pickerS.add(getTargetRemnant(random), 2);
         pickerS.add(getTargetBH(random), 3);
@@ -238,9 +237,8 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         if (marketEnt == null) return false;
         if (marketEnt.getMarket() == null) return false;
         MarketAPI market = marketEnt.getMarket();
-        boolean valid = true;
+        boolean valid = !market.isHidden();
 
-        if (market.isHidden()) valid = false;
         if (!market.hasSpaceport()) valid = false; // markets w/o spaceports don't launch fleets
         if (market.getContainingLocation().hasTag(Tags.SYSTEM_CUT_OFF_FROM_HYPER)) valid = false;
 
@@ -268,7 +266,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
 
     public static String getTargetRemnant(Random random) {
         String result = null;
-        WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(random);
+        WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(random);
 
         for(StarSystemAPI system : Global.getSector().getStarSystems()) {
             if (system.hasTag(Tags.THEME_REMNANT)) {
@@ -300,7 +298,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
 
     public static String getTargetBH(Random random) {
         String result = null;
-        WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(random);
+        WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(random);
 
         for(StarSystemAPI system : Global.getSector().getStarSystems()) {
             if (system.getStar() != null

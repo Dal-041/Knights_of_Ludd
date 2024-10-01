@@ -1,28 +1,21 @@
 package org.selkie.kol.impl.shipsystems;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.combat.MutableShipStatsAPI;
+import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.ShipSystemSpecAPI;
+import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import com.fs.starfarer.api.loading.DamagingExplosionSpec;
-import org.dark.shaders.distortion.DistortionShader;
-import org.dark.shaders.distortion.RippleDistortion;
-import org.dark.shaders.light.LightShader;
-import org.dark.shaders.light.StandardLight;
-import org.lazywizard.lazylib.MathUtils;
-import org.lwjgl.util.vector.Vector2f;
-import org.magiclib.util.MagicRender;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.plugins.KOL_ModPlugin;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class SupernovaStats extends BaseShipSystemScript {
     public static final float EXPLOSION_RADIUS = 1000f;
-    protected static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDSupernova);
+    protected static final ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDSupernova);
     private static final float IN_STATE_DURATION = entry.getIn(); //2f;
     private static final float ACTIVE_STATE_DURATION = entry.getActive(); //4f;
     private static final String SUPERNOVA = "SUPERNOVA";
@@ -31,7 +24,7 @@ public class SupernovaStats extends BaseShipSystemScript {
     //private static final float assessmentArc = 35f; //Determined by weapon mount
     //private static final float assessmentRange = 1500f;
     private static final float assessmentThreshold = 5f;
-    public static HashMap<ShipAPI.HullSize, Float> scoresHull = new HashMap<>();
+    public static final HashMap<ShipAPI.HullSize, Float> scoresHull = new HashMap<>();
     static {
         scoresHull.put(ShipAPI.HullSize.FIGHTER, 1f);
         scoresHull.put(ShipAPI.HullSize.FRIGATE, 3f);
@@ -49,6 +42,7 @@ public class SupernovaStats extends BaseShipSystemScript {
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {
     }
 
+    /*
     public void tempHolding(){
         ShipAPI ship = null;
         String id = "temp";
@@ -128,7 +122,7 @@ public class SupernovaStats extends BaseShipSystemScript {
             LightShader.addLight(light);
         }
     }
-
+    */
 
     @Override
     public void unapply(MutableShipStatsAPI stats, String id) {
@@ -173,12 +167,12 @@ public class SupernovaStats extends BaseShipSystemScript {
         return null;
     }
 
-    public class SupernovaData {
+    public static class SupernovaData {
         private boolean finished = false;
         private boolean superNova = false;
         private float targetingAngle = 0f;
         private float supernovaInActiveTime = 0f;
-        private List<WeaponAPI> firedWeapons = new ArrayList<>();
+        private final List<WeaponAPI> firedWeapons = new ArrayList<>();
 
         private SupernovaData() {
         }

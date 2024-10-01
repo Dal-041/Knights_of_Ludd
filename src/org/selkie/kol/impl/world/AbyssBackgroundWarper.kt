@@ -10,8 +10,10 @@ import org.lwjgl.opengl.GL11
 import java.awt.Color
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
+import kotlin.math.cos
+import kotlin.math.sin
 
-class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedMod: Float) : WarpingSpriteRenderer(chunks, chunks) {
+class AbyssBackgroundWarper(var system: LocationAPI, chunks: Int, var speedMod: Float) : WarpingSpriteRenderer(chunks, chunks) {
 
     private val verticesWide = chunks
     private val verticesTall = chunks
@@ -105,8 +107,8 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
                     var24 = Math.toRadians(this.vertices[var14.toInt()][var15.toInt()]!!.theta.value.toDouble())
                         .toFloat()
                     var25 = this.vertices[var14.toInt()][var15.toInt()]!!.radius.value
-                    var26 = Math.sin(var24.toDouble()).toFloat()
-                    var27 = Math.cos(var24.toDouble()).toFloat()
+                    var26 = sin(var24.toDouble()).toFloat()
+                    var27 = cos(var24.toDouble()).toFloat()
                     var16 += var27 * var25
                     var17 += var26 * var25
                 }
@@ -114,8 +116,8 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
                     var24 = Math.toRadians(this.vertices[var14.toInt() + 1][var15.toInt()]!!.theta.value.toDouble())
                         .toFloat()
                     var25 = this.vertices[var14.toInt() + 1][var15.toInt()]!!.radius.value
-                    var26 = Math.sin(var24.toDouble()).toFloat()
-                    var27 = Math.cos(var24.toDouble()).toFloat()
+                    var26 = sin(var24.toDouble()).toFloat()
+                    var27 = cos(var24.toDouble()).toFloat()
                     var18 += var27 * var25
                     var19 += var26 * var25
                 }
@@ -161,11 +163,10 @@ class AbyssBackgroundWarper(var system: LocationAPI, var chunks: Int, var speedM
         val methodType = MethodType.methodType(Void.TYPE, args)
 
 
-        if (!declared) {
-            method = clazz.getMethod(methodName, *methodType.parameterArray())
-        }
-        else  {
-            method = clazz.getDeclaredMethod(methodName, *methodType.parameterArray())
+        method = if (!declared) {
+            clazz.getMethod(methodName, *methodType.parameterArray())
+        } else  {
+            clazz.getDeclaredMethod(methodName, *methodType.parameterArray())
         }
 
         return invokeMethodHandle.invoke(method, instance, arguments)

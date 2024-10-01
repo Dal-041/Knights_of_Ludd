@@ -2,21 +2,11 @@ package org.selkie.kol.impl.listeners;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
-import com.fs.starfarer.api.campaign.comm.IntelInfoPlugin;
-import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.campaign.listeners.GateTransitListener;
 import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
-import com.fs.starfarer.api.impl.campaign.ids.Entities;
-import com.fs.starfarer.api.impl.campaign.intel.BaseMissionIntel.MissionResult;
-import com.fs.starfarer.api.impl.campaign.intel.BaseMissionIntel.MissionState;
-import com.fs.starfarer.api.impl.campaign.intel.FactionCommissionIntel;
-import com.fs.starfarer.api.impl.campaign.missions.DelayedFleetEncounter;
 import com.fs.starfarer.api.impl.campaign.rulecmd.missions.GateCMD;
 import com.fs.starfarer.api.util.Misc;
-import com.fs.starfarer.campaign.CampaignEntity;
 import org.selkie.kol.impl.world.PrepareAbyss;
-
-import java.util.List;
 
 public class ReportTransit implements GateTransitListener {
 

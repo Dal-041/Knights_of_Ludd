@@ -20,42 +20,13 @@ import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnElysianHeart {
 	public final static String MEMKEY_ELYSIAN_BOSS_FLEET_2 = "$zea_corruptingheart";
-	public static boolean SpawnElysianHeart() {
+	public static void SpawnElysianHeart() {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
 		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
 		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitElysianBoss));
 
-		/**
-		* Creates a fleet with a defined flagship and optional escort
-		*
-		* @param fleetName
-		* @param fleetFaction
-		* @param fleetType
-		* campaign.ids.FleetTypes, default to FleetTypes.PERSON_BOUNTY_FLEET
-		* @param flagshipName
-		* Optional flagship name
-		* @param flagshipVariant
-		* @param captain
-		* PersonAPI, can be NULL for random captain, otherwise use createCaptain()
-		* @param supportFleet
-		* Optional escort ship VARIANTS and their NUMBERS
-		* @param minFP
-		* Minimal fleet size, can be used to adjust to the player's power, set to 0 to ignore
-		* @param reinforcementFaction
-		* Reinforcement faction, if the fleet faction is a "neutral" faction without ships
-		* @param qualityOverride
-		* Optional ship quality override, default to 2 (no D-mods) if null or <0
-		* @param spawnLocation
-		* Where the fleet will spawn, default to assignmentTarget if NULL
-		* @param assignment
-		* campaign.FleetAssignment, default to orbit aggressive
-		* @param assignementTarget
-		* @param isImportant
-		* @param transponderOn
-		* @return
-		*/
-		String variant = "zea_boss_corruptingheart_Unholy";
+        String variant = "zea_boss_corruptingheart_Unholy";
 		SectorEntityToken token;
 		if (Math.random() > 0.7f) {
 			token = Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_abyss");
@@ -133,7 +104,5 @@ public class SpawnElysianHeart {
 		FID.objectivesToggle = true;
 		FID.fttlToggle = true;
 		elysianHeartFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
-
-		return true;
 	}
 }

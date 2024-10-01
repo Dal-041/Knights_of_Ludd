@@ -1,17 +1,10 @@
 package org.selkie.kol.campaign;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
-import com.fs.starfarer.api.campaign.econ.MarketConditionAPI;
 import com.fs.starfarer.api.campaign.econ.MarketImmigrationModifier;
-import com.fs.starfarer.api.impl.campaign.econ.ResourceDepositsCondition;
 import com.fs.starfarer.api.impl.campaign.econ.impl.BaseIndustry;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.population.PopulationComposition;
-import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.MarketCMD.RaidDangerLevel;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Pair;
 
@@ -39,26 +32,13 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
         }
     }
 
-    @Override
-    public boolean isFunctional() {
-        return super.isFunctional();
-    }
-
-    @Override
-    public void unapply() {
-        super.unapply();
-    }
 
 
     @Override
     public boolean isAvailableToBuild() {
         if (!super.isAvailableToBuild()) return false;
 
-        if (market.getFactionId() == "knights_of_selkie" && market.hasCondition(Conditions.OUTPOST)) {
-            return true;
-        }
-
-        return false;
+        return market.getFactionId().equals("knights_of_selkie") && market.hasCondition(Conditions.OUTPOST);
     }
 
 
@@ -87,13 +67,8 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
 
 
     @Override
-    public String getCurrentImage() {
-        return super.getCurrentImage();
-    }
-
-    @Override
     protected boolean canImproveToIncreaseProduction() {
-        return false;
+        return super.canImproveToIncreaseProduction();
     }
 
     @Override

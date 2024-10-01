@@ -33,7 +33,7 @@ public class LungeHEFStats extends BaseShipSystemScript {
     public static final float DAMAGE_BONUS_PERCENT = 50f;
     public static final float HEF_BUFF_DURATION = 5f;
 
-    private static Color HEF_COLOR = new Color(255, 0, 191);
+    private static final Color HEF_COLOR = new Color(255, 0, 191);
     private static final float MAX_GLOW_PERCENT = 0.8f;
     private static final float FADE_IN_OUT_TIME = 0.2f;
     private float HEFTimer = 0f;
@@ -58,7 +58,7 @@ public class LungeHEFStats extends BaseShipSystemScript {
             amount = 0f;
         }
 
-        ship.getEngineController().extendFlame(ENGINEKEY2, 0f, 1f * effectLevel, 3f * effectLevel);
+        ship.getEngineController().extendFlame(ENGINEKEY2, 0f, effectLevel, 3f * effectLevel);
 
         if (!ended) {
             /* Unweighted direction calculation for visual purposes - 0 degrees is forward */

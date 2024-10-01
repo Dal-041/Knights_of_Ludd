@@ -15,12 +15,12 @@ import java.awt.*;
 
 public class SlipDrive extends BaseShipSystemScript {
 
-    public static Color AFTERIMAGE_COLOR = new Color(0.25f, 0.05f, 0.40f, 0.3f);
-    public static float SHADOW_DELAY = 0.05f;
-    public static float SHADOW_ANGLE_DIFFERENCE = 8f;
-    public static float SHADOW_DISTANCE_DIFFERENCE = 45f;
-    public static float SHADOW_FLICKER_DIFFERENCE = 8f;
-    public static int SHADOW_FLICKER_CLONES = 4;
+    public static final Color AFTERIMAGE_COLOR = new Color(0.25f, 0.05f, 0.40f, 0.3f);
+    public static final float SHADOW_DELAY = 0.05f;
+    public static final float SHADOW_ANGLE_DIFFERENCE = 8f;
+    public static final float SHADOW_DISTANCE_DIFFERENCE = 45f;
+    public static final float SHADOW_FLICKER_DIFFERENCE = 8f;
+    public static final int SHADOW_FLICKER_CLONES = 4;
 
     private Vector2f shadowPos = new Vector2f(0f, 0f);
     private Vector2f startPos = new Vector2f(0f, 0f);
@@ -98,7 +98,7 @@ public class SlipDrive extends BaseShipSystemScript {
                 Vector2f modifiedShadowPos = new Vector2f(MathUtils.getRandomNumberInRange(-SHADOW_FLICKER_DIFFERENCE, SHADOW_FLICKER_DIFFERENCE), MathUtils.getRandomNumberInRange(-SHADOW_FLICKER_DIFFERENCE, SHADOW_FLICKER_DIFFERENCE));
                 modifiedShadowPos.x += shadowPos.x;
                 modifiedShadowPos.y += shadowPos.y;
-                MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", "" + ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedShadowPos, new Vector2f(0f, 0f),
+                MagicRender.battlespace(Global.getSettings().getSprite("kol_fx", ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedShadowPos, new Vector2f(0f, 0f),
                         new Vector2f(168f, 229f),
                         new Vector2f(0f, 0f), ship.getFacing() + angleDifference,
                         0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.3f);

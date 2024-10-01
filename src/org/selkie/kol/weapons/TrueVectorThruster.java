@@ -17,7 +17,6 @@ import java.util.HashMap;
  * <p>
  * Just needs to be assigned to a deco weapon with a "flame" animation or a "cover" sprite in their weapon file. Supports both moving vectoring-style thrusters and fixed vernier-style ones.
  * WARNING, this script may have a negative performance impact, use it sparingly.
- *
  * <img src="https://static.wikia.nocookie.net/starfarergame/images/4/44/MagicVectorThruster_fixedVernierExample.gif/revision/latest?cb=20181024100639" />
  *
  * @author Tartiflette

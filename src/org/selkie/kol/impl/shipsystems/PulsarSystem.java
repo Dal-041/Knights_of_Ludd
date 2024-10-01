@@ -34,7 +34,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     //Terrain plugin
     public float PULSAR_ARC = 90f; //1 / ((float) Math.PI * 2f) * 360f;
-    public float PULSAR_LENGTH = 3000f; //1 / ((float) Math.PI * 2f) * 360f;
+    public final float PULSAR_LENGTH = 3000f; //1 / ((float) Math.PI * 2f) * 360f;
     public float fxMult = 1f;
     public boolean single = false;
     public String nameTooltip = "Pulsar Wave";
@@ -43,7 +43,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     public String spriteKey = "pulsar";
 
     protected SpriteAPI flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
-    protected SpriteAPI auroraTexture = null;
+    protected final SpriteAPI auroraTexture = null;
     protected BaseCombatLayeredRenderingPlugin CombatLayer;
     Color color = null;
 
@@ -54,7 +54,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     protected CombatRangeBlockerUtil blocker = null; //new CombatRangeBlockerUtil(1400, PULSAR_LENGTH);
 
     protected float pulsarAngle = 60f;
-    protected float pulsarRotation = -1f * (20f);
+    protected final float pulsarRotation = -1f * (20f);
 
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -246,8 +246,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         if (dist < getPulsarInnerRadius()) return false;
 
         if (dist > getMaxRadiusForContains() + radius) return false;
-        if (dist < getMinRadiusForContains() - radius) return false;
-        return true;
+        return !(dist < getMinRadiusForContains() - radius);
     }
 
     public void applyEffect(CombatEntityAPI entity, float amount) {
@@ -259,19 +258,18 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             String buffId = getModId();
             float buffDur = 0.1f;
 
-            for (CombatEntityAPI enemy : AIUtils.getNearbyEnemies(ship, params.bandWidthInEngine/2)) {
-                if (enemy instanceof ShipAPI) {
-                    ShipAPI tgtShip = (ShipAPI) enemy;
-                    if (tgtShip.isPhased()) continue;
-                    float intensity = getIntensityAtPoint(tgtShip.getLocation());
+            for (ShipAPI enemy : AIUtils.getNearbyEnemies(ship, params.bandWidthInEngine/2)) {
+                if (enemy != null) {
+                    if (enemy.isPhased()) continue;
+                    float intensity = getIntensityAtPoint(enemy.getLocation());
                     if (intensity <= 0) return;
-                    if (tgtShip.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) intensity = intensity / 2f;
-                    tgtShip.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 3f, "Blizzard");
-                    tgtShip.getFluxTracker().increaseFlux(amount*200f*intensity, false);
-                    tgtShip.getFluxTracker().increaseFlux(amount, true);
+                    if (enemy.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) intensity = intensity / 2f;
+                    enemy.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 3f, "Blizzard");
+                    enemy.getFluxTracker().increaseFlux(amount*200f*intensity, false);
+                    enemy.getFluxTracker().increaseFlux(amount, true);
                     // "wind" effect - adjust velocity
-                    float maxSpeed = tgtShip.getMaxSpeed();
-                    float currSpeed = tgtShip.getVelocity().length();
+                    float maxSpeed = enemy.getMaxSpeed();
+                    float currSpeed = enemy.getVelocity().length();
 
                     float maxWindBurn = params.windBurnLevel;
 
@@ -279,13 +277,13 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                     float currWindBurn = intensity * maxWindBurn;
                     float maxFleetBurnIntoWind = maxSpeed - Math.abs(currWindBurn);
 
-                    float angle = Misc.getAngleInDegreesStrict(this.entity.getLocation(), tgtShip.getLocation());
+                    float angle = Misc.getAngleInDegreesStrict(this.entity.getLocation(), enemy.getLocation());
                     Vector2f windDir = Misc.getUnitVectorAtDegreeAngle(angle);
                     if (currWindBurn < 0) {
                         windDir.negate();
                     }
 
-                    Vector2f velDir = Misc.normalise(new Vector2f(tgtShip.getVelocity()));
+                    Vector2f velDir = Misc.normalise(new Vector2f(enemy.getVelocity()));
                     velDir.scale(currSpeed);
 
                     float fleetBurnAgainstWind = -1f * Vector2f.dot(windDir, velDir);
@@ -295,11 +293,9 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                         accelMult += 0.75f + 0.25f * (fleetBurnAgainstWind - maxFleetBurnIntoWind);
                     }
 
-                    float seconds = amount;
-
-                    Vector2f vel = tgtShip.getVelocity();
-                    windDir.scale(seconds * tgtShip.getAcceleration() * accelMult);
-                    tgtShip.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
+                    Vector2f vel = enemy.getVelocity();
+                    windDir.scale(amount * enemy.getAcceleration() * accelMult);
+                    enemy.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
 
                     Color glowColor = getPulsarColorForAngle(angle);
                     int alpha = glowColor.getAlpha();
@@ -315,21 +311,20 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                 }
             }
 
-            for (CombatEntityAPI ally : AIUtils.getNearbyAllies(ship, params.bandWidthInEngine/2)) {
-                if (ally instanceof ShipAPI) {
-                    ShipAPI tgtShip = (ShipAPI) ally;
-                    if (tgtShip.isPhased()) continue;
-                    float intensity = getIntensityAtPoint(tgtShip.getLocation());
+            for (ShipAPI ally : AIUtils.getNearbyAllies(ship, params.bandWidthInEngine/2)) {
+                if (ally != null) {
+                    if (ally.isPhased()) continue;
+                    float intensity = getIntensityAtPoint(ally.getLocation());
                     if (intensity <= 0) return;
-                    if (tgtShip.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) {
+                    if (ally.getHullSize().equals(ShipAPI.HullSize.FIGHTER)) {
                         intensity = intensity / 2f;
                     }
-                    tgtShip.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 2f, "Blizzard");
-                    tgtShip.getFluxTracker().increaseFlux(amount*150f*intensity, false);
-                    tgtShip.getFluxTracker().increaseFlux(amount, true);
+                    ally.getMutableStats().getCRLossPerSecondPercent().modifyMult(getModId(), 2f, "Blizzard");
+                    ally.getFluxTracker().increaseFlux(amount*150f*intensity, false);
+                    ally.getFluxTracker().increaseFlux(amount, true);
                     // "wind" effect - adjust velocity
-                    float maxSpeed = tgtShip.getMaxSpeed();
-                    float currSpeed = tgtShip.getVelocity().length();
+                    float maxSpeed = ally.getMaxSpeed();
+                    float currSpeed = ally.getVelocity().length();
 
                     float maxWindBurn = params.windBurnLevel;
 
@@ -337,13 +332,13 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                     float currWindBurn = intensity * maxWindBurn;
                     float maxFleetBurnIntoWind = maxSpeed - Math.abs(currWindBurn);
 
-                    float angle = Misc.getAngleInDegreesStrict(this.entity.getLocation(), tgtShip.getLocation());
+                    float angle = Misc.getAngleInDegreesStrict(this.entity.getLocation(), ally.getLocation());
                     Vector2f windDir = Misc.getUnitVectorAtDegreeAngle(angle);
                     if (currWindBurn < 0) {
                         windDir.negate();
                     }
 
-                    Vector2f velDir = Misc.normalise(new Vector2f(tgtShip.getVelocity()));
+                    Vector2f velDir = Misc.normalise(new Vector2f(ally.getVelocity()));
                     velDir.scale(currSpeed);
 
                     float fleetBurnAgainstWind = -1f * Vector2f.dot(windDir, velDir);
@@ -353,11 +348,9 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                         accelMult += 0.75f + 0.25f * (fleetBurnAgainstWind - maxFleetBurnIntoWind);
                     }
 
-                    float seconds = amount;
-
-                    Vector2f vel = tgtShip.getVelocity();
-                    windDir.scale(seconds * tgtShip.getAcceleration() * accelMult);
-                    tgtShip.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
+                    Vector2f vel = ally.getVelocity();
+                    windDir.scale(amount * ally.getAcceleration() * accelMult);
+                    ally.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
 
                     Color glowColor = getPulsarColorForAngle(angle);
                     int alpha = glowColor.getAlpha();
@@ -373,39 +366,38 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                 }
             }
 
-            for (CombatEntityAPI missile : AIUtils.getNearbyEnemyMissiles(ship, params.bandWidthInEngine/2)) {
+            for (MissileAPI missile : AIUtils.getNearbyEnemyMissiles(ship, params.bandWidthInEngine/2)) {
                 if (missile instanceof MissileAPI) {
-                    MissileAPI tgt = (MissileAPI) missile;
-                    float intensity = getIntensityAtPoint(tgt.getLocation()) / 2f;
+                    float intensity = getIntensityAtPoint(missile.getLocation()) / 2f;
                     if (intensity <= 0) return;
 
-                    if (tgt.getOwner() != ship.getOwner()) {
-                        if (tgt.getMissileAI() instanceof GuidedMissileAI) {
-                            ((GuidedMissileAI) tgt.getMissileAI()).setTarget(tgt.getSource());
-                        } else if (tgt.isGuided()) {
-                            tgt.setMissileAI(new IFFOverrideSubsystem.DummyMissileAI(tgt, tgt.getSource()));
+                    if (missile.getOwner() != ship.getOwner()) {
+                        if (missile.getMissileAI() instanceof GuidedMissileAI) {
+                            ((GuidedMissileAI) missile.getMissileAI()).setTarget(missile.getSource());
+                        } else if (missile.isGuided()) {
+                            missile.setMissileAI(new IFFOverrideSubsystem.DummyMissileAI(missile, missile.getSource()));
                         } //Salamander sourced missiles
 
-                        tgt.setOwner(ship.getOwner());
-                        tgt.setSource(ship);
+                        missile.setOwner(ship.getOwner());
+                        missile.setSource(ship);
                     }
 
                     // "wind" effect - adjust velocity
-                    float maxSpeed = tgt.getMaxSpeed();
-                    float currSpeed = tgt.getVelocity().length();
+                    float maxSpeed = missile.getMaxSpeed();
+                    float currSpeed = missile.getVelocity().length();
 
                     float maxWindBurn = params.windBurnLevel;
 
                     float currWindBurn = intensity * maxWindBurn;
                     float maxFleetBurnIntoWind = maxSpeed - Math.abs(currWindBurn);
 
-                    float angle = Misc.getAngleInDegreesStrict(this.entity.getLocation(), tgt.getLocation());
+                    float angle = Misc.getAngleInDegreesStrict(this.entity.getLocation(), missile.getLocation());
                     Vector2f windDir = Misc.getUnitVectorAtDegreeAngle(angle);
                     if (currWindBurn < 0) {
                         windDir.negate();
                     }
 
-                    Vector2f velDir = Misc.normalise(new Vector2f(tgt.getVelocity()));
+                    Vector2f velDir = Misc.normalise(new Vector2f(missile.getVelocity()));
                     velDir.scale(currSpeed);
 
                     float fleetBurnAgainstWind = -1f * Vector2f.dot(windDir, velDir);
@@ -415,11 +407,9 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                         accelMult += 0.75f + 0.25f * (fleetBurnAgainstWind - maxFleetBurnIntoWind);
                     }
 
-                    float seconds = amount;
-
-                    Vector2f vel = tgt.getVelocity();
-                    windDir.scale(seconds * tgt.getAcceleration() * accelMult);
-                    tgt.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
+                    Vector2f vel = missile.getVelocity();
+                    windDir.scale(amount * missile.getAcceleration() * accelMult);
+                    missile.getVelocity().set(vel.x + windDir.x, vel.y + windDir.y);
 
                     Color glowColor = getPulsarColorForAngle(angle);
                     int alpha = glowColor.getAlpha();
@@ -467,7 +457,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
         Color bad = Misc.getNegativeHighlightColor();
         Color base = Color.gray;
         //bad = Color.red;
-        return Misc.interpolateColor(base, bad, Global.getSector().getCampaignUI().getSharedFader().getBrightness() * 1f);
+        return Misc.interpolateColor(base, bad, Global.getSector().getCampaignUI().getSharedFader().getBrightness());
     }
 
     public boolean hasTooltip() {
@@ -516,8 +506,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
 
     public float getMaxEffectRadius(Vector2f locFrom) {
         //float angle = Misc.getAngleInDegrees(params.relatedEntity.getLocation(), locFrom);
-        float maxDist = params.bandWidthInEngine;
-        return maxDist;
+        return params.bandWidthInEngine;
     }
     public float getMinEffectRadius(Vector2f locFrom) {
         return 0f;
@@ -546,7 +535,6 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             if (params.relatedEntity instanceof PlanetAPI) {
                 c = ((PlanetAPI)params.relatedEntity).getSpec().getCoronaColor();
             } else {
-                c = Color.white;
             }
             float alpha = 1f;
             color = Misc.setAlpha(c, (int) (200 * alpha));
@@ -664,7 +652,7 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     }
 
     public java.util.List<Color> getFlareColorRange() {
-        List<Color> result = new ArrayList<Color>();
+        List<Color> result = new ArrayList<>();
 
         result.add(Color.RED);
         result.add(Color.YELLOW);

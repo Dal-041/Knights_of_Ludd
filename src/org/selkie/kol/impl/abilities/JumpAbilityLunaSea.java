@@ -125,12 +125,6 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 		}
 	}
 
-	@Override
-	protected String getActivationText() {
-		return super.getActivationText();
-		//return "Initiating jump";
-	}
-
 
 	@Override
 	protected void deactivateImpl() {
@@ -153,12 +147,8 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 
 		if (TutorialMissionIntel.isTutorialInProgress()) return false;
 
-		if (canUseToJumpToSystem() && fleet.isInHyperspace()) {
-			return true;
-		}
-
-		return false;
-	}
+        return canUseToJumpToSystem() && fleet.isInHyperspace();
+    }
 
 
 	@Override
@@ -240,8 +230,8 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 	}
 
 	public boolean hasTooltip() {
-		return true;
-	}
+        return super.hasTooltip();
+    }
 	
 	@Override
 	public void fleetLeftBattle(BattleAPI battle, boolean engagedInHostilities) {
@@ -257,7 +247,7 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 	
 	
 	protected List<FleetMemberAPI> getNonReadyShips() {
-		List<FleetMemberAPI> result = new ArrayList<FleetMemberAPI>();
+		List<FleetMemberAPI> result = new ArrayList<>();
 		CampaignFleetAPI fleet = getFleet();
 		if (fleet == null) return result;
 		
@@ -276,9 +266,8 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 	protected float computeFuelCost() {
 		CampaignFleetAPI fleet = getFleet();
 		if (fleet == null) return 0f;
-		
-		float cost = fleet.getLogistics().getFuelCostPerLightYear() * FUEL_USE_MULT;
-		return cost;
+
+        return fleet.getLogistics().getFuelCostPerLightYear() * FUEL_USE_MULT;
 	}
 	
 	protected float computeSupplyCost() {
@@ -317,10 +306,7 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 		}
 		return super.getCooldownFraction();
 	}
-	@Override
-	public boolean showCooldownIndicator() {
-		return super.showCooldownIndicator();
-	}
+
 	@Override
 	public boolean isOnCooldown() {
 		return super.getCooldownFraction() < 1f;
@@ -337,11 +323,8 @@ public class JumpAbilityLunaSea extends BaseDurationAbility {
 
 	@Override
 	public boolean isCooldownRenderingAdditive() {
-		if (showAlarm()) {
-			return true;
-		}
-		return false;
-	}
+        return showAlarm();
+    }
 }
 
 

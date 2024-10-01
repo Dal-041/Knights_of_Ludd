@@ -11,8 +11,8 @@ import java.awt.Color;
 
 public class Blinker2 implements EveryFrameWeaponEffectPlugin {
     private Color base = null;
-    private FaderUtil Fader = new FaderUtil(1f, 1f, 1f);
-    private FaderUtil Pulser = new FaderUtil(1f, 2f, 2f, true, true);
+    private final FaderUtil Fader = new FaderUtil(1f, 1f, 1f);
+    private final FaderUtil Pulser = new FaderUtil(1f, 2f, 2f, true, true);
     
     public Blinker2() {
         Fader.fadeIn();

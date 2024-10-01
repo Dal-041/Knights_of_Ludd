@@ -133,7 +133,7 @@ public class GraciousLightStats extends BaseShipSystemScript {
         return null;
     }
 
-    public class GraciousLightData {
+    public static class GraciousLightData {
         public IntervalUtil auraInterval = new IntervalUtil(1f, 1f);
 
         private GraciousLightData() {

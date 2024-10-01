@@ -1,11 +1,8 @@
 package org.selkie.kol.impl.hullmods
 
-import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.MutableShipStatsAPI
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
-import com.fs.starfarer.api.impl.campaign.ids.Tags
-import org.selkie.kol.impl.helpers.ZeaUtils
 
 class AttainmentManager : BaseHullMod() {
     //private val checkKey = "EDF_UB"

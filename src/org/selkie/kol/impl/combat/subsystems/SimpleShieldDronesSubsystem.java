@@ -20,9 +20,9 @@ import java.util.Map;
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
 public class SimpleShieldDronesSubsystem extends MagicDroneSubsystem {
-    private static Color BASE_SHIELD_COLOR = Color.cyan;
-    private static Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
-    private static float SHIELD_ALPHA = 0.25f;
+    private static final Color BASE_SHIELD_COLOR = Color.cyan;
+    private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
+    private static final float SHIELD_ALPHA = 0.25f;
 
     public SimpleShieldDronesSubsystem(ShipAPI ship) {
         super(ship);
@@ -73,7 +73,7 @@ public class SimpleShieldDronesSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public PIDController getPIDController() {
+    public @NotNull PIDController getPIDController() {
         return new PIDController(15f, 4f, 10f, 2f);
     }
 
@@ -121,7 +121,7 @@ public class SimpleShieldDronesSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public String getDroneVariant() {
+    public @NotNull String getDroneVariant() {
         return "zea_dawn_chiwen_wing";
     }
 
@@ -131,7 +131,7 @@ public class SimpleShieldDronesSubsystem extends MagicDroneSubsystem {
         return new SpinningCircleFormation();
     }
 
-    private class SpinningCircleFormation extends DroneFormation {
+    private static class SpinningCircleFormation extends DroneFormation {
         private final static float ROTATION_SPEED = 20;
         private float currentRotation = 0f;
 

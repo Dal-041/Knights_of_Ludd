@@ -20,10 +20,7 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.shipsystems.CorruptionJetsStats;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CorruptingHeartBoss extends BaseHullMod {
     private static final float BALLISTIC_DAMAGE_BUFF = 25f;
@@ -34,10 +31,10 @@ public class CorruptingHeartBoss extends BaseHullMod {
         public boolean phaseTwo = false;
         public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
-        public ShipAPI ship;
-        public String id = "boss_phase_two_modifier";
-        public String corruptionBuffId = "corrupting_heart_buff";
-        public Map<ShipAPI, ShipAPI> droneTargetMap = new HashMap<>();
+        public final ShipAPI ship;
+        public final String id = ZeaStaticStrings.BOSS_PHASE_TWO_MODIFIER;
+        public final String corruptionBuffId = "corrupting_heart_buff";
+        public final Map<ShipAPI, ShipAPI> droneTargetMap = new HashMap<>();
 
         public CorruptingHeartPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
@@ -103,7 +100,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
             }
 
             List<ShipAPI> validDrones = new ArrayList<>();
-            for (MagicSubsystem activator : MagicSubsystemsManager.getSubsystemsForShipCopy(ship)) {
+            for (MagicSubsystem activator : Objects.requireNonNull(MagicSubsystemsManager.getSubsystemsForShipCopy(ship))) {
                 if (activator instanceof MagicDroneSubsystem) {
                     List<ShipAPI> wings = new ArrayList<>(((MagicDroneSubsystem) activator).getActiveWings().keySet());
                     for (ShipAPI fighter : wings) {
@@ -168,8 +165,7 @@ public class CorruptingHeartBoss extends BaseHullMod {
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
 
-            String key = "phaseAnchor_canDive";
-            Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+            Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
 
             ship.getMutableStats().getShieldDamageTakenMult().modifyMult("kol_boss_buff", 0.8f);
             ship.getMutableStats().getFluxCapacity().modifyMult("kol_boss_buff", 1.5f);

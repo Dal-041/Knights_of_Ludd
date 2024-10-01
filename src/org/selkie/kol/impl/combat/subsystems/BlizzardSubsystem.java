@@ -11,14 +11,14 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.shipsystems.PulsarSystem;
 
 public class BlizzardSubsystem extends MagicSubsystem {
-    public static ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDBlizzard);
-    public static float tActive = entry.getActive();
-    public float tCD = entry.getCooldown(stats);
-    public float tRegen = entry.getRegen(stats);
-    public PulsarSystem pulsar = new PulsarSystem();
-    public float beamRange = pulsar.PULSAR_LENGTH;
+    public static final ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDBlizzard);
+    public static final float tActive = entry.getActive();
+    public final float tCD = entry.getCooldown(stats);
+    public final float tRegen = entry.getRegen(stats);
+    public final PulsarSystem pulsar = new PulsarSystem();
+    public final float beamRange = pulsar.PULSAR_LENGTH;
 
-    IntervalUtil intervalAI = new IntervalUtil(0.5f, 1f);
+    final IntervalUtil intervalAI = new IntervalUtil(0.5f, 1f);
     IntervalUtil intervalActive = new IntervalUtil(0.5f, 1f);
 
     public BlizzardSubsystem(ShipAPI ship) {
@@ -71,11 +71,6 @@ public class BlizzardSubsystem extends MagicSubsystem {
         return entry.getName();
     }
 
-    @Override
-    public void activate() {
-        super.activate();
-    }
-
     private static ShipSystemStatsScript.State translateState(State CAstate) {
         if (CAstate == State.ACTIVE) return ShipSystemStatsScript.State.ACTIVE;
         if (CAstate == State.IN) return ShipSystemStatsScript.State.IN;
@@ -89,11 +84,5 @@ public class BlizzardSubsystem extends MagicSubsystem {
     public void advance(float amount, boolean isPaused) {
         if (isPaused) return;
         pulsar.apply(ship.getMutableStats(), entry.getName(), translateState(getState()), 1f);
-
-        if (isOn()) {
-
-        } else if (isOff()) {
-
-        }
     }
 }

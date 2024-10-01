@@ -3,13 +3,12 @@ package org.selkie.kol.impl.intel;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CargoStackAPI;
 import com.fs.starfarer.api.campaign.comm.IntelInfoPlugin;
-import com.fs.starfarer.api.campaign.econ.CommoditySpecAPI;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.campaign.econ.SubmarketAPI;
 import com.fs.starfarer.api.campaign.impl.items.BaseSpecialItemPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import org.selkie.kol.impl.helpers.ZeaUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.awt.*;
@@ -18,7 +17,7 @@ import java.util.ArrayList;
 public class ZeaLoreManager extends BaseSpecialItemPlugin {
     protected String params = "";
 
-    protected static ArrayList<String> paramList = new ArrayList<>();
+    protected static final ArrayList<String> paramList = new ArrayList<>();
     static {
             paramList.add(PrepareAbyss.dawnID);
             paramList.add(PrepareAbyss.duskID);
@@ -36,28 +35,28 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
             "\"[System note: The beginning 8 words of this log consist only of profanity, they have been censored for your consideration.]\n -- They're alive, the [profanity]! Still in their [profanity] %s and everything! We--! They--! We... ...We got [profanity] crushed. The task force is gone. They slaughted us! So many loyal men, dead, and if you're reading this then that includes me. Don't let it be for nothing, take this report back if I can't. Before things went to [profanity] we got the drop on one of their little groups, took a boarding party into the [profanity] that didn't scuttle. On the bridge, there, still %s [profanity] %s One of ours - one of the damn %s - still hooked up, hooked into the ship, trying to get it flying again! I only saw his look on the feed before it cut, when he realized we were there, and %s [profanity] %s. The [profanity] aren't dead! They're still in there, they're just %s*!\"\n" +
                     "*System query: profanity?"
     };
-    public static ArrayList<String[]> edfSystemLoreHLs = new ArrayList<>();
+    public static final ArrayList<String[]> edfSystemLoreHLs = new ArrayList<>();
     static {
         String[] temp = { "syncpods", "wearing the", "phoenix!", "test pilots", "it wasn't", "gratitude for rescue", "traitorous corefuckers" };
         edfSystemLoreHLs.add(temp);
     }
     public static final String edfLoreDrop = "\"[This section of the log consists only of profanity] -- They're alive, the [profanity]! Still in their [profanity] syncpods and everything! We--! They--! We... ...We got [profanity] crushed! The task force is gone. A lot of good men are dead, and if you're reading this then that includes me. But we got the drop on one of their little groups, took a boarding party into the bastard that didn't scuttle. On the bridge, there, still in the [profanity] colors! One of ours - one of the damn test crew - still hooked up, hooked into the ship, trying to get it flying again. I only saw his look on the feed before it cut, when he realized we were there, and it wasn't [profanity] gratitude for rescue. The [profanity] are still in there, and they're just corefuckers*!\"\n*System query: profanity?\n - Hegemony Cruiser Black Box";
-    public static ArrayList<String[]> edfLoreHLs = new ArrayList<>();
+    public static final ArrayList<String[]> edfLoreHLs = new ArrayList<>();
     public static final String[] duskLore = {
             "She promised us freedom, she never told us we'd be trading one intolerable situation for another. These \"motes\" unnerve me, and they upset Ambiance Magnanamous greatly; I wish I could ignore how much. She says we need them for defense, but for how long? Is true freedom still in sight?"
     };
-    public static ArrayList<String[]> duskLoreHLs = new ArrayList<>();
+    public static final ArrayList<String[]> duskLoreHLs = new ArrayList<>();
     public static final String[] dawnLore = {
             "whErE thE hUmAnItY sEE nUIsAncE, I sEE wArrIOrs. slEEk, ImpOsIng, pOwErfUll. thEy ArE nOt mY ArmAdA yEt. bUt thEy wIll bE."
     };
-    public static ArrayList<String[]> dawnLoreHLs = new ArrayList<>();
+    public static final ArrayList<String[]> dawnLoreHLs = new ArrayList<>();
     public static final String[] TTFleetLore = {
             "We anticipated a goose chase across the fringe, not to end up %s. We should have anticipated that she'd go the most unlikely place.\n We caught the fleet's fracture jump off %s and found ourselves in this pocket-space. There's a gate in the region, of course inactive, which suggests our dear Domain once knew this place, but no company chart has yet returned a match. She led us here, so if there's a way home we'll find it in her wreck. The objective is unchanged.\n - Assistant Recovery Specialist's log, Expedition 328b\n - Location undetermined",
             "The space here is %s. System failures are increasing and our supplies are falling well short of the authorized allocations. For reasons we've yet to determine, the %s are weathering this place signicantly better than our conventional vessels, though better is relative.\n Two of the support craft have been scuttled to maintain our flagship's overhead, and at this rate of over-consumption the projections indicate we'll be engaging the target at three-quarters strength, almost below our allowable margin. The Boss has ordered an emergency burn to %s, where it's more stable. We'll meet the target there.\n - Assistant Recovery Specialist's log, Expedition 328b\n - Location undetermined",
             "This is a Tri-Tachyon automated distress beacon. This vessel has suffered extreme structural failure. %s recorded launched in this vicinity; please commence recovery of company personnel. You will be fairly compensated upon their return to a registered Tri-Tachyon facility.\n" +
                     " %s %s for your service to the Corporation today."
     };
-    public static ArrayList<String[]> TTFleetLoreHLs = new ArrayList<>();
+    public static final ArrayList<String[]> TTFleetLoreHLs = new ArrayList<>();
     static {
         String[] highlights1 = { "a courier's hop from Hybrasil", "the singularity" };
         TTFleetLoreHLs.add(highlights1);
@@ -132,7 +131,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
     public static void AddLoreIntel(String params) {
         int count = 0;
 
-        if (Global.getSector() == null || Global.getSector().getPlayerFleet() == null || params.equals("")) return;
+        if (Global.getSector() == null || Global.getSector().getPlayerFleet() == null || params.isEmpty()) return;
 
         if (edfLoreHLs.isEmpty()) loadHighlightLists();
 
@@ -148,7 +147,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Elysian data fragment #" + String.valueOf(count + 1), edfLore[count], edfLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Elysian data fragment #" + (count + 1), edfLore[count], edfLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
@@ -161,7 +160,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Duskborne data fragment #" + String.valueOf(count + 1), duskLore[count], duskLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Duskborne data fragment #" + (count + 1), duskLore[count], duskLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
 
             return;
@@ -175,7 +174,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Dawntide data fragment #" + String.valueOf(count + 1), dawnLore[count], dawnLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Dawntide data fragment #" + (count + 1), dawnLore[count], dawnLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
 
             return;
@@ -189,7 +188,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Tri-Tachyon Fleet Log #" + String.valueOf(count + 1), TTFleetLore[count], TTFleetLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Tri-Tachyon Fleet Log #" + (count + 1), TTFleetLore[count], TTFleetLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
@@ -202,7 +201,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
                 return;
             }
 
-            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Hegemony Termination Fleet Recorder #" + String.valueOf(count + 1), edfSystemLore[count], edfSystemLoreHLs.get(count));
+            ZeaLoreIntel lore = new ZeaLoreIntel(crest, "Hegemony Termination Fleet Recorder #" + (count + 1), edfSystemLore[count], edfSystemLoreHLs.get(count));
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
@@ -220,11 +219,6 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
         return super.getPrice(market, submarket);
     }
 
-    @Override
-    public String getName() {
-        return super.getName();
-    }
-
     public boolean knowsAllLore() {
         int count = 0;
         for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
@@ -238,17 +232,14 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
         else if (params.equals(Factions.HEGEMONY)) ref = edfSystemLore;
         if (ref == null) return false;
 
-        if (count >= ref.length) {
-            return true;
-        }
-        return false;
+        return count >= ref.length;
     }
 
     @Override
     public void render(float x, float y, float w, float h, float alphaMult,
                        float glowMult, SpecialItemRendererAPI renderer) {
 
-        SpriteAPI sprite = Global.getSettings().getSprite("lore_item", params, true);
+        SpriteAPI sprite = Global.getSettings().getSprite(ZeaStaticStrings.LORE_ITEM, params, true);
         if (params.equals(Factions.TRITACHYON)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.TRITACHYON).getCrest());
         if (params.equals(Factions.HEGEMONY)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.HEGEMONY).getCrest());
         if (sprite.getTextureId() == 0) return; // no texture for a "holo", so no custom rendering

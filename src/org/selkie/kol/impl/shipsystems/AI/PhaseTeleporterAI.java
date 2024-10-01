@@ -22,8 +22,8 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
     public CombatEngineAPI engine;
     public float targetRange;
     Vector2f systemTargetPoint;
-    public Map<ShipAPI, Map<String, Float>> nearbyEnemies = new HashMap<>();
-    IntervalUtil enemyInterval = new IntervalUtil(0.2f, 0.3f);
+    public final Map<ShipAPI, Map<String, Float>> nearbyEnemies = new HashMap<>();
+    final IntervalUtil enemyInterval = new IntervalUtil(0.2f, 0.3f);
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;

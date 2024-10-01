@@ -52,12 +52,13 @@ import java.util.regex.Pattern;
  - When a module is destroyed, the corresponding deco cover on the main hull is hidden
     */
 
+@SuppressWarnings("ConstantValue")
 public class KnightRefit extends BaseHullMod {
 
     public static final int FLUX_CAP_PER_OP = 25;
     public static final int FLUX_DISS_PER_OP = 5;
     public static final float SPEED_BONUS = 0.25f;
-    protected Object SPEED_STATUS_KEY = new Object();
+    protected final Object SPEED_STATUS_KEY = new Object();
     public static final String KNIGHT_REFIT_STATMOD_ID = "knightRefit";
 
     @Override
@@ -445,6 +446,7 @@ public class KnightRefit extends BaseHullMod {
         }
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public float getTotalArmorMult(ShipVariantAPI variant, float baseArmor){
         if(variant == null) return 1f;
         Map<String, ArmorEffect> effects = HULLMOD_EFFECTS.get(variant.getHullSize());
@@ -510,7 +512,10 @@ public class KnightRefit extends BaseHullMod {
     }
 
     public static class ArmorEffect {
-        public float armorFlat, armorPercent, hullFlat, hullPercent;
+        public final float armorFlat;
+        public final float armorPercent;
+        public final float hullFlat;
+        public final float hullPercent;
         ArmorEffect(float aF, float aP, float hF, float hP){
             armorFlat = aF; armorPercent = aP; hullFlat = hF; hullPercent = hP;
         }

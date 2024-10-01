@@ -9,9 +9,9 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 public class HullmodBackgroundElement extends BaseCustomUIPanelPlugin {
 
     public float alphaMult = 1f;
-    public SpriteAPI sprite;
+    public final SpriteAPI sprite;
 
-    public TooltipMakerAPI tooltip;
+    public final TooltipMakerAPI tooltip;
 
     public HullmodBackgroundElement(TooltipMakerAPI tooltip, SpriteAPI sprite, float alphaMult) {
         CustomPanelAPI panel = Global.getSettings().createCustom(0f, 0f, this);

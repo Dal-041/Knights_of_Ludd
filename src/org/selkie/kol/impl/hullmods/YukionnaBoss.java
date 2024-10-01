@@ -26,11 +26,11 @@ public class YukionnaBoss extends BaseHullMod {
         public static final float DAMAGE_BONUS_PERCENT = 50f;
         public boolean phaseTwo = false;
         public CombatEngineAPI engine;
-        public String id = "boss_phase_two_modifier";
-        public static float SHIP_ALPHA_MULT = 0.25f;
+        public final String id = ZeaStaticStrings.BOSS_PHASE_TWO_MODIFIER;
+        public static final float SHIP_ALPHA_MULT = 0.25f;
         public float phaseTwoTimer = 0f;
         public static final float MAX_TIME = 8f;
-        public ShipAPI ship;
+        public final ShipAPI ship;
 
         public YukionnaBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
@@ -44,22 +44,18 @@ public class YukionnaBoss extends BaseHullMod {
                 ship.setHitpoints(1f);
                 ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0.000001f);
                 ship.getMutableStats().getEnergyWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
-                ship.addTag(DuskBuiltin.Companion.getHF_TAG());
-                ship.setCustomData("HF_SPARKLE_BOSS", true);
+                ship.addTag(DuskBuiltin.HF_TAG);
                 for (ShipAPI allies : AIUtils.getAlliesOnMap(ship)) {
-                    allies.addTag(DuskBuiltin.Companion.getHF_TAG());;
+                    allies.addTag(DuskBuiltin.HF_TAG);
                 }
                 ship.setWeaponGlow(1f, Misc.setAlpha(PHASE_COLOR, 255), EnumSet.of(WeaponAPI.WeaponType.ENERGY));
                 if (!ship.isPhased()) {
-                    Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
+                    Global.getSoundPlayer().playSound(ZeaStaticStrings.SYSTEM_PHASE_CLOAK_ACTIVATE, 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
                 Utils.shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
                 return true;
-            } else if (phaseTwo && phaseTwoTimer < MAX_TIME) {
-                return true;
-            }
-            return false;
+            } else return phaseTwo && phaseTwoTimer < MAX_TIME;
         }
 
         @Override
@@ -91,8 +87,8 @@ public class YukionnaBoss extends BaseHullMod {
 
                 Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
                 Vector2f jitterLocation = MathUtils.getRandomPointInCircle(ship.getLocation(), 2f + (1 - effectLevel) * 5f);
-                SpriteAPI glow1 = Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1");
-                SpriteAPI glow2 = Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow2");
+                SpriteAPI glow1 = Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1");
+                SpriteAPI glow2 = Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2");
                 MagicRender.singleframe(glow1, ship.getLocation(), new Vector2f(glow1.getWidth(), glow1.getHeight()), ship.getFacing() - 90f, colorToUse, true);
                 MagicRender.singleframe(glow2, jitterLocation, new Vector2f(glow2.getWidth(), glow2.getHeight()), ship.getFacing() - 90f, colorToUse, true);
 
@@ -123,8 +119,7 @@ public class YukionnaBoss extends BaseHullMod {
             if (!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class))
                 ship.addListener(new YukionnaBossPhaseTwoScript(ship));
             MagicSubsystemsManager.addSubsystemToShip(ship, new BlizzardSubsystem(ship));
-            String key = "phaseAnchor_canDive";
-            Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+            Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
             //for (FleetMemberAPI member : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) { member.getVariant().addTag(ZeaUtils.BOSS_TAG); }
         }
     }

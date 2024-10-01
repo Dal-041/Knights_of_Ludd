@@ -47,20 +47,20 @@ public class CascadeTargetingProtocol extends BaseHullMod {
             return;
         }
 
-        engine.maintainStatusForPlayerShip((Object)(String.valueOf(this.ID) + "_TOOLTIP_SNEEDS"), "graphics/icons/campaign/sensor_strength.png", "Cascade Targeting Protocol", "+" + Math.round(RANGE_BONUS * HPLeftRatio) + "% weapon range", false);
-        engine.maintainStatusForPlayerShip((Object)(String.valueOf(this.ID) + "_TOOLTIP_FEED"), "graphics/icons/campaign/sensor_strength.png", "Cascade Targeting Protocol", "+" + Math.round(ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio)) + "% weapon ROF and recharge rate", false);
-        engine.maintainStatusForPlayerShip((Object)(String.valueOf(this.ID) + "_TOOLTIP_SEED"), "graphics/icons/campaign/sensor_strength.png", "Cascade Targeting Protocol", "-" + Math.round(ENMITY_BONUS_FLUX_REDUCTION * (1 - HPLeftRatio)) + "% weapon flux cost", false);
+        engine.maintainStatusForPlayerShip(this.ID + "_TOOLTIP_SNEEDS", "graphics/icons/campaign/sensor_strength.png", "Cascade Targeting Protocol", "+" + Math.round(RANGE_BONUS * HPLeftRatio) + "% weapon range", false);
+        engine.maintainStatusForPlayerShip(this.ID + "_TOOLTIP_FEED", "graphics/icons/campaign/sensor_strength.png", "Cascade Targeting Protocol", "+" + Math.round(ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio)) + "% weapon ROF and recharge rate", false);
+        engine.maintainStatusForPlayerShip(this.ID + "_TOOLTIP_SEED", "graphics/icons/campaign/sensor_strength.png", "Cascade Targeting Protocol", "-" + Math.round(ENMITY_BONUS_FLUX_REDUCTION * (1 - HPLeftRatio)) + "% weapon flux cost", false);
     }
 
     @Override
     public String getDescriptionParam(final int index, final ShipAPI.HullSize hullSize) {
         switch (index) {
             case 0:
-                return String.valueOf(Math.round(RANGE_BONUS)) + "%";
+                return Math.round(RANGE_BONUS) + "%";
             case 1:
-                return String.valueOf(Math.round(ENMITY_BONUS_ROF_RELOAD)) + "%";
+                return Math.round(ENMITY_BONUS_ROF_RELOAD) + "%";
             case 2:
-                return String.valueOf(Math.round(ENMITY_BONUS_FLUX_REDUCTION)) + "%";
+                return Math.round(ENMITY_BONUS_FLUX_REDUCTION) + "%";
             default:
                 break;
         }

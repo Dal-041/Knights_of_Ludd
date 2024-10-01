@@ -17,6 +17,7 @@ import org.selkie.kol.impl.campaign.cores.BossAICoreOfficerPlugin
 import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.DawnBuiltin
+import kotlin.math.roundToInt
 
 
 class DawnBossCoreSkill : BaseCoreOfficerSkill() {
@@ -42,7 +43,7 @@ class DawnBossCoreSkill : BaseCoreOfficerSkill() {
 
                 if (ship == Global.getCombatEngine().playerShip) {
                     Global.getCombatEngine().maintainStatusForPlayerShip(STATUSKEY1, "graphics/icons/hullsys/damper_field.png", "Emergency Damper Field - %.2f second remaining".format(damperTimer),
-                        Math.round((1-DAMAGE_MULT)*100).toString() + "% less damage taken", false)
+                        ((1 - DAMAGE_MULT) * 100).roundToInt().toString() + "% less damage taken", false)
                 }
 
                 damperTimer -= Global.getCombatEngine().elapsedInLastFrame

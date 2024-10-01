@@ -20,7 +20,7 @@ class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
     override val skillID = BossCore.ELYSIAN_CORE.exclusiveSkillID
 
     companion object{
-        val DAMAGE_INCREASE_PERCENT = 15f
+        const val DAMAGE_INCREASE_PERCENT = 15f
         fun getFighters(carrier: ShipAPI): List<ShipAPI> {
             val result: MutableList<ShipAPI> = ArrayList()
 

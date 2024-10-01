@@ -9,10 +9,10 @@ import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.campaign.terrain.CRLossPerSecondBuff;
 import com.fs.starfarer.api.impl.campaign.terrain.PeakPerformanceBuff;
-import com.fs.starfarer.api.impl.campaign.terrain.PulsarBeamTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 
@@ -58,7 +58,7 @@ public class AbyssPulsarBeam extends AbyssPulsarBeamTerrainPlugin {
                 if (loss > curr) loss = curr;
 
                 if (resistance > 0) {
-                    member.getRepairTracker().applyCREvent(loss, "corona", "Pulsar beam effect");
+                    member.getRepairTracker().applyCREvent(loss, ZeaStaticStrings.CORONA, "Pulsar beam effect");
                 }
 
                 float peakFraction = 1f / Math.max(1.3333f, 1f + params.crLossMult * intensity);

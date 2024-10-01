@@ -10,7 +10,7 @@ import org.lwjgl.util.vector.Vector2f;
 public class LidarAI implements ShipSystemAIScript {
     ShipAPI ship;
     CombatEngineAPI engine;
-    IntervalUtil interval = new IntervalUtil(0.5f,1);
+    final IntervalUtil interval = new IntervalUtil(0.5f,1);
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
         this.ship = ship;

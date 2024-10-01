@@ -24,6 +24,7 @@ import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
 import java.awt.Color
 import kotlin.math.max
 import kotlin.math.min
+import kotlin.math.roundToInt
 
 class ElysianBuiltin : BaseHullMod() {
     companion object {
@@ -160,10 +161,10 @@ class ElysianBuiltin : BaseHullMod() {
         private var capacitorFactor = 1f // 0-1
         private var capacitorAmount = 0f // Gets verified
 
-        protected var STATUSKEY1 = Any()
-        protected var STATUSKEY2 = Any()
-        protected var STATUSKEY3 = Any()
-        protected var STATUSKEY4 = Any()
+        private var STATUSKEY1 = Any()
+        private var STATUSKEY2 = Any()
+        private var STATUSKEY3 = Any()
+        private var STATUSKEY4 = Any()
         var lightInterval = IntervalUtil(1.5f, 1.5f)
         var glow: StandardLight? = null
 
@@ -184,7 +185,7 @@ class ElysianBuiltin : BaseHullMod() {
             var flatFlux = 0f
             var charging = true
 
-            if (engines.size == 0) {
+            if (engines.isEmpty()) {
                 for (engine in ship.engineController.shipEngines) {
                     if (engine.engineSlot.color.alpha > 10) engines.add(Pair(engine.engineSlot, Pair(engine.engineSlot.color, engine.engineSlot.glowAlternateColor)))
                 }
@@ -209,7 +210,7 @@ class ElysianBuiltin : BaseHullMod() {
                 }
             }
 
-            var effectiveChargeRate: Float = ElysianBuiltin.getRechargeRate()
+            var effectiveChargeRate: Float = getRechargeRate()
             if (ship.fluxTracker.isVenting) {
                 effectiveChargeRate *= ship.mutableStats.ventRateMult.getModifiedValue() * 2
             }
@@ -221,7 +222,7 @@ class ElysianBuiltin : BaseHullMod() {
                 capacitorAmount += fluxUsed * -1 + fluxPool * effectiveChargeRate * amount
                 capacitorAmount = max(0.0, min(capacitorAmount.toDouble(), fluxPool.toDouble())).toFloat()
                 capacitorFactor = capacitorAmount / fluxPool
-                MagicUI.drawInterfaceStatusBar(ship, capacitorFactor, Misc.getPositiveHighlightColor(), null, 0f, "BOOST", Math.round(capacitorFactor * 100))
+                MagicUI.drawInterfaceStatusBar(ship, capacitorFactor, Misc.getPositiveHighlightColor(), null, 0f, "BOOST", (capacitorFactor * 100).roundToInt())
             } else {
                 //MagicUI.drawInterfaceStatusBar(ship, capacitorFactor, Misc.getPositiveHighlightColor(), null, 0, "BOOST", Math.round(capacitorFactor*MAX_CHARGETIME));
                 //if(charging) {
@@ -259,16 +260,16 @@ class ElysianBuiltin : BaseHullMod() {
             if (engine.playerShip === ship) {
                 engine.maintainStatusForPlayerShip(
                     STATUSKEY1, Global.getSettings().getSpriteName("icons", "coronal_cap_bottom"),
-                    "+" + Math.round(100 * SPEED_BOOST * capacitorFactor) + "% top speed", "improved maneuverability", false
+                    "+" + (100 * SPEED_BOOST * capacitorFactor).roundToInt() + "% top speed", "improved maneuverability", false
                 )
                 engine.maintainStatusForPlayerShip(
                     STATUSKEY2, Global.getSettings().getSpriteName("icons", "coronal_cap_middle"),
-                    "+" + Math.round(100 * (ROF_BOOST * capacitorFactor)) + "% ballistic rate of fire",
-                    "-" + Math.round(100 * (1 - 1 / (1 + ROF_BOOST * capacitorFactor))) + "% ballistic flux use", false
+                    "+" + (100 * (ROF_BOOST * capacitorFactor)).roundToInt() + "% ballistic rate of fire",
+                    "-" + (100 * (1 - 1 / (1 + ROF_BOOST * capacitorFactor))).roundToInt() + "% ballistic flux use", false
                 )
                 engine.maintainStatusForPlayerShip(
                     STATUSKEY3, Global.getSettings().getSpriteName("icons", "coronal_cap_top"), "Coronal Capacitor",
-                    "+" + Math.round(100 * (DAMAGE_BOOST * capacitorFactor)) + "% energy weapon damage", false
+                    "+" + (100 * (DAMAGE_BOOST * capacitorFactor)).roundToInt() + "% energy weapon damage", false
                 )
                 //engine.maintainStatusForPlayerShip(STATUSKEY4, Global.getSettings().getSpriteName("icons", "coronal_cap_top"),
                 //        "", "Local stellar recharge rate: " + effectiveChargeRate*100, false);
@@ -350,7 +351,7 @@ class ElysianBuiltin : BaseHullMod() {
         val hasShieldDrones = hullSize != HullSize.FIGHTER
         val activator: MagicDroneSubsystem = PDDroneSubsystem(ship)
         val maxDrones = activator.getMaxDeployedDrones().toString()
-        val recharge = Math.round(activator.baseChargeRechargeDuration).toString()
+        val recharge = activator.baseChargeRechargeDuration.roundToInt().toString()
         tooltip.addSectionHeading(
             "Shachi PD Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
             if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad

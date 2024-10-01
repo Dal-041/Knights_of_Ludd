@@ -2,8 +2,6 @@ package org.selkie.kol.impl.combat.madness;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.graphics.SpriteAPI;
-import com.fs.starfarer.api.impl.campaign.terrain.AuroraRenderer;
-import com.fs.starfarer.api.impl.campaign.terrain.RangeBlockerUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -11,7 +9,7 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 
 public class CombatAuroraRenderer {
-    public static interface CombatAuroraRendererDelegate {
+    public interface CombatAuroraRendererDelegate {
         float getAuroraInnerRadius();
         float getAuroraOuterRadius();
         Vector2f getAuroraCenterLoc();
@@ -33,7 +31,7 @@ public class CombatAuroraRenderer {
         CombatRangeBlockerUtil getAuroraBlocker();
     }
 
-    private CombatAuroraRendererDelegate delegate;
+    private final CombatAuroraRendererDelegate delegate;
     private float phaseAngle;
     public CombatAuroraRenderer(CombatAuroraRendererDelegate delegate) {
         this.delegate = delegate;
@@ -54,7 +52,7 @@ public class CombatAuroraRenderer {
         float bandIndex;
 
         float radStart = delegate.getAuroraInnerRadius();
-        float radEnd = delegate.getAuroraOuterRadius();;
+        float radEnd = delegate.getAuroraOuterRadius();
 
         if (radEnd < radStart + 10f) radEnd = radStart + 10f;
 
@@ -83,8 +81,7 @@ public class CombatAuroraRenderer {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE);
 
-        float thickness = (radEnd - radStart) * 1f;
-        float radius = radStart;
+        float thickness = (radEnd - radStart);
 
         float texProgress = 0f;
         float texHeight = delegate.getAuroraTexture().getTextureHeight();
@@ -119,8 +116,8 @@ public class CombatAuroraRenderer {
                 bandIndex = 0;
             }
 
-            float leftTX = (float) bandIndex * texWidth * bandWidthInTexture / imageWidth;
-            float rightTX = (float) (bandIndex + 1f) * texWidth * bandWidthInTexture / imageWidth - 0.001f;
+            float leftTX = bandIndex * texWidth * bandWidthInTexture / imageWidth;
+            float rightTX = (bandIndex + 1f) * texWidth * bandWidthInTexture / imageWidth - 0.001f;
 
             GL11.glBegin(GL11.GL_QUAD_STRIP);
             for (float i = 0; i < segments + 1; i++) {
@@ -166,19 +163,17 @@ public class CombatAuroraRenderer {
                 //pulseInner *= Math.max(0, pulseSin - 0.5f);
                 //pulseInner *= 0f;
 
-                float r = radius;
-
                 float thicknessMult = delegate.getAuroraThicknessMult(angle);
                 float thicknessFlat = delegate.getAuroraThicknessFlat(angle);
 
-                float theta = anglePerSegment * segIndex;;
+                float theta = anglePerSegment * segIndex;
                 float cos = (float) Math.cos(theta);
                 float sin = (float) Math.sin(theta);
 
-                float rInner = r - pulseInner;
-                if (rInner < r * 0.9f) rInner = r * 0.9f;
+                float rInner = radStart - pulseInner;
+                if (rInner < radStart * 0.9f) rInner = radStart * 0.9f;
 
-                float rOuter = (r + thickness * thicknessMult - pulseAmount + thicknessFlat);
+                float rOuter = (radStart + thickness * thicknessMult - pulseAmount + thicknessFlat);
 
                 if (blocker != null) {
                     if (rOuter > blockerMax - pulseAmount) {
@@ -186,7 +181,7 @@ public class CombatAuroraRenderer {
 //						rOuter = blockerMax * fraction;
                         rOuter = blockerMax - pulseAmount;
                         //rOuter = blockerMax;
-                        if (rOuter < r) rOuter = r;
+                        if (rOuter < radStart) rOuter = radStart;
                     }
                     if (rInner > rOuter) {
                         rInner = rOuter;
@@ -218,7 +213,7 @@ public class CombatAuroraRenderer {
                 GL11.glTexCoord2f(rightTX, texProgress);
                 GL11.glVertex2f(x2, y2);
 
-                texProgress += texPerSegment * 1f;
+                texProgress += texPerSegment;
             }
             GL11.glEnd();
 
@@ -239,8 +234,7 @@ public class CombatAuroraRenderer {
 
         float angleRad = (float) Math.toRadians(angle);
 
-        float thickness = (radEnd - radStart) * 1f;
-        float radius = radStart;
+        float thickness = (radEnd - radStart);
         CombatRangeBlockerUtil blocker = delegate.getAuroraBlocker();
 
         float max = 0;
@@ -272,12 +266,12 @@ public class CombatAuroraRenderer {
             float thicknessMult = delegate.getAuroraThicknessMult(angle);
             float thicknessFlat = delegate.getAuroraThicknessFlat(angle);
 
-            float rOuter = (radius + thickness * thicknessMult - pulseAmount + thicknessFlat);
+            float rOuter = (radStart + thickness * thicknessMult - pulseAmount + thicknessFlat);
 
             if (blocker != null) {
                 if (rOuter > blockerMax - pulseAmount) {
                     rOuter = blockerMax - pulseAmount;
-                    if (rOuter < radius) rOuter = radius;
+                    if (rOuter < radStart) rOuter = radStart;
                 }
             }
             if (rOuter > max) max = rOuter;

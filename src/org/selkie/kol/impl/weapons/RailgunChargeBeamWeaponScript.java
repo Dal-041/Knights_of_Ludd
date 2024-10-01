@@ -19,7 +19,7 @@ import com.fs.starfarer.api.loading.WeaponGroupType;
 
 public class RailgunChargeBeamWeaponScript implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin  {
 
-	private String TagWeapon = "targetinglaser2"; // the id of the weapon to use for the targeting laser beam.
+	private final String TagWeapon = "targetinglaser2"; // the id of the weapon to use for the targeting laser beam.
 	
 	private boolean init = false;
 	private boolean fired = true;

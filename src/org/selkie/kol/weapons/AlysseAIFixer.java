@@ -8,6 +8,7 @@ import org.selkie.kol.ReflectionUtils;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("CastCanBeRemovedNarrowingVariableType")
 public class AlysseAIFixer implements EveryFrameWeaponEffectPlugin {
     boolean inited = false;
     boolean isLeft = false;

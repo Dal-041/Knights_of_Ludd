@@ -4,7 +4,6 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.CombatEngineLayers;
-import com.fs.starfarer.api.combat.CombatLayeredRenderingPlugin;
 import com.fs.starfarer.api.combat.ViewportAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import java.awt.Color;
@@ -17,9 +16,9 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
 public class FakeSmokePlugin extends BaseEveryFrameCombatPlugin {
-  static CombatEngineLayers SMOKE_RENDER_LAYER = CombatEngineLayers.CONTRAILS_LAYER;
+  static final CombatEngineLayers SMOKE_RENDER_LAYER = CombatEngineLayers.CONTRAILS_LAYER;
   
-  public static List<Map<String, Float>> SMOKE = new ArrayList<>();
+  public static final List<Map<String, Float>> SMOKE = new ArrayList<>();
   
   public static void addMemberDirectly(Map<String, Float> data) {
     SMOKE.add(data);
@@ -27,20 +26,20 @@ public class FakeSmokePlugin extends BaseEveryFrameCombatPlugin {
   
   public static void addFakeSmoke(float time, float size, Vector2f position, Vector2f velocity, float angularVelocity, float opacity, Color renderColor) {
     Map<String, Float> data = new HashMap<>();
-    data.put("t", Float.valueOf(time));
-    data.put("st", Float.valueOf(time));
-    data.put("s", Float.valueOf(size));
-    data.put("x", Float.valueOf(position.x));
-    data.put("y", Float.valueOf(position.y));
-    data.put("vx", Float.valueOf(velocity.x));
-    data.put("vy", Float.valueOf(velocity.y));
-    data.put("a", Float.valueOf(MathUtils.getRandomNumberInRange(0.0F, 360.0F)));
-    data.put("va", Float.valueOf(angularVelocity));
-    data.put("o", Float.valueOf(opacity));
-    data.put("g", Float.valueOf(MathUtils.getRandomNumberInRange(1, 5)));
-    data.put("cr", Float.valueOf(renderColor.getRed() / 255.0F));
-    data.put("cg", Float.valueOf(renderColor.getGreen() / 255.0F));
-    data.put("cb", Float.valueOf(renderColor.getBlue() / 255.0F));
+    data.put("t", time);
+    data.put("st", time);
+    data.put("s", size);
+    data.put("x", position.x);
+    data.put("y", position.y);
+    data.put("vx", velocity.x);
+    data.put("vy", velocity.y);
+    data.put("a", MathUtils.getRandomNumberInRange(0.0F, 360.0F));
+    data.put("va", angularVelocity);
+    data.put("o", opacity);
+    data.put("g", (float) MathUtils.getRandomNumberInRange(1, 5));
+    data.put("cr", renderColor.getRed() / 255.0F);
+    data.put("cg", renderColor.getGreen() / 255.0F);
+    data.put("cb", renderColor.getBlue() / 255.0F);
     SMOKE.add(data);
   }
   
@@ -59,7 +58,7 @@ public class FakeSmokePlugin extends BaseEveryFrameCombatPlugin {
   public void init(CombatEngineAPI engine) {
     SMOKE.clear();
     FakeSmokeRenderer renderer = new FakeSmokeRenderer(this);
-    engine.addLayeredRenderingPlugin((CombatLayeredRenderingPlugin)renderer);
+    engine.addLayeredRenderingPlugin(renderer);
   }
   
   public void renderAllSmoke(ViewportAPI view) {
@@ -69,34 +68,34 @@ public class FakeSmokePlugin extends BaseEveryFrameCombatPlugin {
     if (!SMOKE.isEmpty()) {
       float amount = engine.isPaused() ? 0.0F : engine.getElapsedInLastFrame();
       for (Map<String, Float> entry : SMOKE) {
-        float time = ((Float)entry.get("t")).floatValue();
+        float time = entry.get("t");
         time -= amount;
-        float angleChange = ((Float)entry.get("va")).floatValue() * amount;
-        entry.put("a", Float.valueOf(((Float)entry.get("a")).floatValue() + angleChange));
-        float xChange = ((Float)entry.get("vx")).floatValue() * amount;
-        entry.put("x", Float.valueOf(((Float)entry.get("x")).floatValue() + xChange));
-        float yChange = ((Float)entry.get("vy")).floatValue() * amount;
-        entry.put("y", Float.valueOf(((Float)entry.get("y")).floatValue() + yChange));
+        float angleChange = entry.get("va") * amount;
+        entry.put("a", entry.get("a") + angleChange);
+        float xChange = entry.get("vx") * amount;
+        entry.put("x", entry.get("x") + xChange);
+        float yChange = entry.get("vy") * amount;
+        entry.put("y", entry.get("y") + yChange);
         if (time <= 0.0F) {
           this.toRemove.add(entry);
           continue;
         } 
-        if (view.isNearViewport(new Vector2f(((Float)entry.get("x")).floatValue(), ((Float)entry.get("y")).floatValue()), ((Float)entry.get("s")).floatValue())) {
-          float opacity = ((Float)entry.get("o")).floatValue() * ((Float)entry.get("t")).floatValue() / ((Float)entry.get("st")).floatValue();
-          float sizeMod = 1.0F + 2.0F * (((Float)entry.get("st")).floatValue() - ((Float)entry.get("t")).floatValue()) / ((Float)entry.get("st")).floatValue();
+        if (view.isNearViewport(new Vector2f(entry.get("x"), entry.get("y")), entry.get("s"))) {
+          float opacity = entry.get("o") * entry.get("t") / entry.get("st");
+          float sizeMod = 1.0F + 2.0F * (entry.get("st") - entry.get("t")) / entry.get("st");
           SpriteAPI sprite = this.smoke1;
-          if (((Float)entry.get("g")).floatValue() == 2.0F) {
+          if (entry.get("g") == 2.0F) {
             sprite = this.smoke2;
-          } else if (((Float)entry.get("g")).floatValue() == 3.0F) {
+          } else if (entry.get("g") == 3.0F) {
             sprite = this.smoke3;
-          } else if (((Float)entry.get("g")).floatValue() == 4.0F) {
+          } else if (entry.get("g") == 4.0F) {
             sprite = this.smoke4;
-          } else if (((Float)entry.get("g")).floatValue() == 5.0F) {
+          } else if (entry.get("g") == 5.0F) {
             sprite = this.smoke5;
           } 
-          render(sprite, ((Float)entry.get("s")).floatValue() * sizeMod, ((Float)entry.get("a")).floatValue(), opacity, ((Float)entry.get("x")).floatValue(), ((Float)entry.get("y")).floatValue(), new Color(((Float)entry.get("cr")).floatValue(), ((Float)entry.get("cg")).floatValue(), ((Float)entry.get("cb")).floatValue()));
+          render(sprite, entry.get("s") * sizeMod, entry.get("a"), opacity, entry.get("x"), entry.get("y"), new Color(entry.get("cr"), entry.get("cg"), entry.get("cb")));
         } 
-        entry.put("t", Float.valueOf(time));
+        entry.put("t", time);
       } 
       if (!this.toRemove.isEmpty()) {
         for (Map<String, Float> w : this.toRemove)

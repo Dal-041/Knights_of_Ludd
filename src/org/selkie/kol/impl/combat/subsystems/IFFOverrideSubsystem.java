@@ -17,9 +17,9 @@ import java.util.List;
 public class IFFOverrideSubsystem extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
-    IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
-    private Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
-    private Set<ShipAPI> affectedFighters = new HashSet<>();
+    final IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
+    private final Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
+    private final Set<ShipAPI> affectedFighters = new HashSet<>();
 
     public IFFOverrideSubsystem(ShipAPI ship) {
         super(ship);
@@ -42,7 +42,7 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
 
     @Override
     public float getBaseOutDuration() {
-        return 0f;
+        return super.getBaseOutDuration();
     }
 
     @Override
@@ -173,7 +173,7 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
                     toRemove.add(missile);
                     continue;
                 }
-            } catch (Exception ex) {
+            } catch (Exception ignored) {
             }
 
             MissileTracker tracker = missileMap.get(missile);
@@ -242,7 +242,7 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
 
     public static class DummyMissileAI implements MissileAIPlugin, GuidedMissileAI {
         CombatEntityAPI target;
-        MissileAPI missile;
+        final MissileAPI missile;
 
         public DummyMissileAI(MissileAPI missile, CombatEntityAPI target) {
             setTarget(target);

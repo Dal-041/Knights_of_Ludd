@@ -6,6 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -36,9 +37,8 @@ public class SynchronizedAmmoFeedStats extends BaseShipSystemScript {
 		stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
 
 		if (effectLevel > 0) {
-			float jitterLevel = effectLevel;
-			float maxRangeBonus = 5f;
-			float jitterRangeBonus = jitterLevel * maxRangeBonus;
+            float maxRangeBonus = 5f;
+			float jitterRangeBonus = effectLevel * maxRangeBonus;
 			for (ShipAPI fighter : getFighters(ship)) {
 				if (fighter.isHulk()) continue;
 				MutableShipStatsAPI fStats = fighter.getMutableStats();
@@ -48,20 +48,18 @@ public class SynchronizedAmmoFeedStats extends BaseShipSystemScript {
 				fStats.getBallisticWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
 				fStats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f - (FLUX_REDUCTION * 0.01f));
 
-				if (jitterLevel > 0) {
-					//fighter.setWeaponGlow(effectLevel, new Color(255,50,0,125), EnumSet.allOf(WeaponType.class));
-					fighter.setWeaponGlow(effectLevel, Misc.setAlpha(JITTER_UNDER_COLOR, 255), EnumSet.allOf(WeaponAPI.WeaponType.class));
+                //fighter.setWeaponGlow(effectLevel, new Color(255,50,0,125), EnumSet.allOf(WeaponType.class));
+                fighter.setWeaponGlow(effectLevel, Misc.setAlpha(JITTER_UNDER_COLOR, 255), EnumSet.allOf(WeaponAPI.WeaponType.class));
 
-					fighter.setJitterUnder(KEY_JITTER, JITTER_COLOR, jitterLevel, 5, 0f, jitterRangeBonus);
-					fighter.setJitter(KEY_JITTER, JITTER_UNDER_COLOR, jitterLevel, 2, 0f, 0 + jitterRangeBonus * 1f);
-					Global.getSoundPlayer().playLoop("system_targeting_feed_loop", ship, 1f, 1f, fighter.getLocation(), fighter.getVelocity());
-				}
-			}
+                fighter.setJitterUnder(KEY_JITTER, JITTER_COLOR, effectLevel, 5, 0f, jitterRangeBonus);
+                fighter.setJitter(KEY_JITTER, JITTER_UNDER_COLOR, effectLevel, 2, 0f, 0 + jitterRangeBonus);
+                Global.getSoundPlayer().playLoop(ZeaStaticStrings.SYSTEM_TARGETING_FEED_LOOP, ship, 1f, 1f, fighter.getLocation(), fighter.getVelocity());
+            }
 		}
 	}
 
 	private java.util.List<ShipAPI> getFighters(ShipAPI carrier) {
-		List<ShipAPI> result = new ArrayList<ShipAPI>();
+		List<ShipAPI> result = new ArrayList<>();
 
 //		this didn't catch fighters returning for refit
 //		for (FighterLaunchBayAPI bay : carrier.getLaunchBaysCopy()) {

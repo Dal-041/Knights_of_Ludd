@@ -19,19 +19,20 @@ import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
 import java.awt.Color
 import java.util.*
+import kotlin.math.roundToInt
 
 
 class DawnBuiltin : BaseHullMod() {
     //smooth instead of flat
     //public static final float HULL_PERCENTAGE = 0.5f;
     companion object{
-        val ID = "CascadeTargetingProtocol"
+        const val ID = "CascadeTargetingProtocol"
 
-        val RANGE_BONUS = 10f // 200su
-        val ENMITY_BONUS_ROF_RELOAD = 30f
-        val ENMITY_BONUS_FLUX_REDUCTION = 15f
-        val ENMITY_HP_THRESHOLD = 50f
-        val DRONE_ADDED_KEY = "DawnHullmodDronesAdded"
+        const val RANGE_BONUS = 10f // 200su
+        const val ENMITY_BONUS_ROF_RELOAD = 30f
+        const val ENMITY_BONUS_FLUX_REDUCTION = 15f
+        const val ENMITY_HP_THRESHOLD = 50f
+        const val DRONE_ADDED_KEY = "DawnHullmodDronesAdded"
         fun getNumDrones(ship: ShipAPI): Int {
             if((ship.hullSpec.baseHullId == "zea_boss_nian")){
                 return 5
@@ -75,17 +76,17 @@ class DawnBuiltin : BaseHullMod() {
         engine.maintainStatusForPlayerShip((ID + "_TOOLTIP_SNEEDS") as Any,
             "graphics/icons/campaign/sensor_strength.png",
             "Cascade Targeting Protocol",
-            "+" + Math.round(RANGE_BONUS * HPLeftRatio) + "% weapon range",
+            "+" + (RANGE_BONUS * HPLeftRatio).roundToInt() + "% weapon range",
             false)
         engine.maintainStatusForPlayerShip((ID + "_TOOLTIP_FEED") as Any,
             "graphics/icons/campaign/sensor_strength.png",
             "Cascade Targeting Protocol",
-            "+" + Math.round(ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio)) + "% weapon ROF and recharge rate",
+            "+" + (ENMITY_BONUS_ROF_RELOAD * (1 - HPLeftRatio)).roundToInt() + "% weapon ROF and recharge rate",
             false)
         engine.maintainStatusForPlayerShip((ID + "_TOOLTIP_SEED") as Any,
             "graphics/icons/campaign/sensor_strength.png",
             "Cascade Targeting Protocol",
-            "-" + Math.round(ENMITY_BONUS_FLUX_REDUCTION * (1 - HPLeftRatio)) + "% weapon flux cost",
+            "-" + (ENMITY_BONUS_FLUX_REDUCTION * (1 - HPLeftRatio)).roundToInt() + "% weapon flux cost",
             false)
     }
 
@@ -167,11 +168,11 @@ class DawnBuiltin : BaseHullMod() {
 
 
         val hasShieldDrones = hullSize == HullSize.CAPITAL_SHIP || hullSize == HullSize.CRUISER
-        val activator = ShieldDronesSubsystem(ship, Companion.getNumDrones(ship), false)
+        val activator = ShieldDronesSubsystem(ship, getNumDrones(ship), false)
         val drone = Global.getSettings().getVariant(activator.getDroneVariant()).hullSpec
-        val health = Math.round(drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints).toString()
+        val health = (drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints).roundToInt().toString()
         val maxDrones = activator.getMaxDeployedDrones().toString()
-        val recharge = Math.round(activator.baseChargeRechargeDuration).toString()
+        val recharge = activator.baseChargeRechargeDuration.roundToInt().toString()
         tooltip.addSectionHeading(
             "Chiwen Shield Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
             if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad

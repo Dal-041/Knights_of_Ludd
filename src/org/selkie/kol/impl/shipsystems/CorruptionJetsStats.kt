@@ -17,7 +17,6 @@ import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.opengl.GL14
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.modify
-import org.magiclib.kotlin.scaleColor
 import org.magiclib.kotlin.setAlpha
 import org.magiclib.subsystems.MagicSubsystemsManager
 import org.magiclib.subsystems.drones.MagicDroneSubsystem

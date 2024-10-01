@@ -154,9 +154,6 @@ public class PrepareDarkDeeds {
 
     }
 
-    public static void spawnNinmahWreck() {
-
-    }
 
     public static class TT1FIDConfig implements FleetInteractionDialogPluginImpl.FIDConfigGen {
         public FleetInteractionDialogPluginImpl.FIDConfig createConfig() {
@@ -236,7 +233,7 @@ public class PrepareDarkDeeds {
     public static void generateTT2Station() {
         //Get valid Remnant systems, pick a nexus
         // spawn station around Nexus
-        WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<StarSystemAPI>();
+        WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>();
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
             if (system.hasTag(Tags.THEME_REMNANT_RESURGENT) && system.hasTag(Tags.THEME_REMNANT_MAIN)) {
                 picker.add(system);
@@ -273,7 +270,7 @@ public class PrepareDarkDeeds {
         }
          */
 
-        CustomCampaignEntityAPI stationBoss = system.addCustomEntity("zea_boss_station_tritachyon", "Suspicious Research Station", "zea_boss_station_tritachyon", Factions.NEUTRAL);
+        CustomCampaignEntityAPI stationBoss = system.addCustomEntity(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, "Suspicious Research Station", ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, Factions.NEUTRAL);
         stationBoss.getMemoryWithoutUpdate().set(TTBOSS2_STATION_KEY, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
         stationBoss.setSensorProfile(1f);
@@ -344,7 +341,7 @@ public class PrepareDarkDeeds {
                     data.notNowOptionExits = true;
                     data.noDescriptionText = true;
                     DerelictShipEntityPlugin dsep = (DerelictShipEntityPlugin) entity.getCustomPlugin();
-                    PerShipData copy = (PerShipData) dsep.getData().ship.clone();
+                    PerShipData copy = dsep.getData().ship.clone();
                     copy.variant = Global.getSettings().getVariant(copy.variantId).clone();
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);

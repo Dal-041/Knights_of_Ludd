@@ -6,8 +6,6 @@ import com.fs.starfarer.api.combat.CombatEngineLayers;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.combat.ViewportAPI;
 import com.fs.starfarer.api.graphics.SpriteAPI;
-import com.fs.starfarer.api.impl.campaign.terrain.PulsarRenderer;
-import com.fs.starfarer.api.impl.campaign.terrain.RangeBlockerUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
@@ -18,8 +16,9 @@ import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.EnumSet;
 
+@SuppressWarnings("ConstantValue")
 public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
-    public static interface CombatPulsarRendererDelegate {
+    public interface CombatPulsarRendererDelegate {
         float getPulsarInnerRadius();
         float getPulsarOuterRadius();
         Vector2f getPulsarCenterLoc();
@@ -44,7 +43,7 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
 
     protected float alphaMult = 0.4f;
 
-    private CombatPulsarRendererDelegate delegate;
+    private final CombatPulsarRendererDelegate delegate;
     private float texOffset = 0f;
     public CombatPulsarRenderer(CombatPulsarRendererDelegate delegate) {
         this.delegate = delegate;
@@ -60,7 +59,7 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
         this.currAngle = currAngle;
     }
 
-    protected EnumSet<CombatEngineLayers> layers = EnumSet.of(CombatEngineLayers.BELOW_SHIPS_LAYER);
+    protected final EnumSet<CombatEngineLayers> layers = EnumSet.of(CombatEngineLayers.BELOW_SHIPS_LAYER);
     @Override
     public EnumSet<CombatEngineLayers> getActiveLayers() {
         return layers;
@@ -94,6 +93,7 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
     transient private ByteBuffer colorBuffer;
     transient private boolean rendered = false;
 
+    @SuppressWarnings("DataFlowIssue")
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
         this.alphaMult = viewport.getAlphaMult() * delegate.getFXMult();
         if (viewport.getAlphaMult() <= 0) return;
@@ -398,7 +398,7 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
                     //count += 2;
                 }
 
-                texProgress += texPerSegment * 1f;
+                texProgress += texPerSegment;
                 currCloseAngle += closeAnglePerSegment;
                 currFarAngle += farAnglePerSegment;
             }

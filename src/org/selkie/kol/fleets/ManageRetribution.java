@@ -42,15 +42,15 @@ public class ManageRetribution implements FleetEventListener {
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
 				if(f.getHullId().startsWith("kol_boss_ret_lp")) salvaged=true;
 	                
-	                //set memkey that the wreck must never spawn
-	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_LP_RETRIBUTION_DROPPED,true); 
+                //set memkey that the wreck must never spawn
+                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_LP_RETRIBUTION_DROPPED,true);
 	        }
 	            
 	            //spawn a derelict if it wasn't salvaged
 			if(!salvaged){
 	                //make sure there is a valid location to avoid spawning in the sun
 	                Vector2f location = fleet.getLocation();
-	            if(location==new Vector2f()){
+	            if(location.equals(new Vector2f())){
 	                location = primaryWinner.getLocation();
 	            }
 	                

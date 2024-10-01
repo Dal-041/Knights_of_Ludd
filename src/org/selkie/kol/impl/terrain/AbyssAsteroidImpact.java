@@ -1,34 +1,35 @@
 package org.selkie.kol.impl.terrain;
 
-import java.awt.Color;
-
-import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
-import org.lwjgl.util.vector.Vector2f;
-
 import com.fs.starfarer.api.EveryFrameScript;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.AsteroidAPI;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+
+import java.awt.*;
 
 public class AbyssAsteroidImpact implements EveryFrameScript {
 
     //public static float SAFE_BURN_LEVEL = 5.01f;
 //	public static float IMPACT_SPEED_DELTA = Global.getSettings().getSpeedPerBurnLevel();
-    public static float DURATION_SECONDS = 0.2f;
+    public static final float DURATION_SECONDS = 0.2f;
 
-    protected CampaignFleetAPI fleet;
+    protected final CampaignFleetAPI fleet;
     protected float elapsed;
     //	protected float angle;
 //	protected float impact = IMPACT_SPEED_DELTA;
     protected Vector2f dV;
 
+    @SuppressWarnings("DataFlowIssue")
     public AbyssAsteroidImpact(CampaignFleetAPI fleet, boolean dealDamage) {
         this.fleet = fleet;
 
-        if (fleet.hasTag("zea_rulesfortheebutnotforme")) {
+        if (fleet.hasTag(ZeaStaticStrings.ZEA_RULESFORTHEEBUTNOTFORME)) {
             dV = new Vector2f();
             dV.x = 0;
             dV.y = 0;
@@ -56,7 +57,7 @@ public class AbyssAsteroidImpact implements EveryFrameScript {
             dV = new Vector2f();
         } else if (fleet.isInCurrentLocation()) {
             if (dealDamage) {
-                WeightedRandomPicker<FleetMemberAPI> targets = new WeightedRandomPicker<FleetMemberAPI>();
+                WeightedRandomPicker<FleetMemberAPI> targets = new WeightedRandomPicker<>();
                 for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
                     float w = 1f;
                     switch (member.getHullSpec().getHullSize()) {
@@ -93,9 +94,9 @@ public class AbyssAsteroidImpact implements EveryFrameScript {
                 volumeMult *= 0.5f + 0.5f * mult;
                 if (volumeMult > 0) {
                     if (dealDamage) {
-                        Global.getSoundPlayer().playSound("hit_heavy", 1f, 1f * volumeMult, fleet.getLocation(), Misc.ZERO);
+                        Global.getSoundPlayer().playSound(ZeaStaticStrings.HIT_HEAVY, 1f, volumeMult, fleet.getLocation(), Misc.ZERO);
                     } else {
-                        Global.getSoundPlayer().playSound("hit_shield_heavy_gun", 1f, 1f * volumeMult, fleet.getLocation(), Misc.ZERO);
+                        Global.getSoundPlayer().playSound(ZeaStaticStrings.HIT_SHIELD_HEAVY_GUN, 1f, volumeMult, fleet.getLocation(), Misc.ZERO);
                     }
                 }
             }
@@ -148,7 +149,7 @@ public class AbyssAsteroidImpact implements EveryFrameScript {
             float sign = Math.signum(asteroid.getRotation());
             asteroid.setRotation(sign * (50f + 50f * (float) Math.random()));
 
-            Misc.fadeInOutAndExpire(asteroid, 0.2f, 1f + 1f * (float) Math.random(), 1f);
+            Misc.fadeInOutAndExpire(asteroid, 0.2f, 1f + (float) Math.random(), 1f);
 
             //mult = 1f;
             Vector2f iv = fleet.getVelocity();

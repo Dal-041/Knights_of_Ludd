@@ -12,10 +12,10 @@ import java.util.Iterator;
 
 public class PhaseCloakStats extends BaseShipSystemScript {
 
-    public static float SHIP_ALPHA_MULT = 0.25f;
-    public static float VULNERABLE_FRACTION = 0f;
-    public static float MAX_TIME_MULT = 3f;
-    protected Object STATUSKEY = new Object();
+    public static final float SHIP_ALPHA_MULT = 0.25f;
+    public static final float VULNERABLE_FRACTION = 0f;
+    public static final float MAX_TIME_MULT = 3f;
+    protected final Object STATUSKEY = new Object();
 
 
     protected void maintainStatus(ShipAPI playerShip, float effectLevel) {
@@ -85,11 +85,7 @@ public class PhaseCloakStats extends BaseShipSystemScript {
                 ship.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
             }
 
-            if (effectLevel > 0.5f) {
-                ship.setPhased(true);
-            } else {
-                ship.setPhased(false);
-            }
+            ship.setPhased(effectLevel > 0.5f);
             levelForAlpha = effectLevel;
         }
 

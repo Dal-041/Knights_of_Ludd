@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 
 public class FortressFluxConverterStats extends BaseShipSystemScript {
-    public static float DAMAGE_MULT = 0.9f;
+    public static final float DAMAGE_MULT = 0.9f;
     public boolean converted = false;
     public float fluxToConvert = 0f;
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {

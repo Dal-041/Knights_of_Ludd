@@ -8,11 +8,12 @@ import com.fs.starfarer.api.util.IntervalUtil
 import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.plugins.MagicTrailPlugin
+import org.selkie.kol.impl.helpers.ZeaStaticStrings
 
 class WingTrailScript : EveryFrameWeaponEffectPlugin {
     private val effectInterval = IntervalUtil(0.05f, 0.05f)
     private var trailID: Float? = null
-    private val trailSprite = Global.getSettings().getSprite("fx", "zea_elysia_vortice")
+    private val trailSprite = Global.getSettings().getSprite(ZeaStaticStrings.FX, ZeaStaticStrings.ZEA_ELYSIA_VORTICE)
     override fun advance(amount: Float, engine: CombatEngineAPI, weapon: WeaponAPI) {
         if (engine.isPaused) {
             return

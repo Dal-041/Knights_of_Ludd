@@ -6,8 +6,6 @@ import com.fs.starfarer.api.loading.ProjectileSpawnType;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 
-import java.util.HashMap;
-
 public class ShipExplosionListener implements DamageTakenModifier {
 
     //Inherited from Iron Shell, HMI, Rubi, and many who've come before.

@@ -21,44 +21,15 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDuskBoss {
-	public final static String MEMKEY_DUSK_BOSS_FLEET = "$zea_yukionna";
-	public static boolean SpawnDuskBoss() {
+
+	public static void SpawnDuskBoss() {
 
 		PersonAPI duskBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.duskID);
 		//Songtress, an experitmental AI who was once human.
 		duskBossCaptain.setName(new FullName("Songtress", "", FullName.Gender.FEMALE));
 		duskBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDuskBoss));
 
-		/**
-		* Creates a fleet with a defined flagship and optional escort
-		*
-		* @param fleetName
-		* @param fleetFaction
-		* @param fleetType
-		* campaign.ids.FleetTypes, default to FleetTypes.PERSON_BOUNTY_FLEET
-		* @param flagshipName
-		* Optional flagship name
-		* @param flagshipVariant
-		* @param captain
-		* PersonAPI, can be NULL for random captain, otherwise use createCaptain()
-		* @param supportFleet
-		* Optional escort ship VARIANTS and their NUMBERS
-		* @param minFP
-		* Minimal fleet size, can be used to adjust to the player's power, set to 0 to ignore
-		* @param reinforcementFaction
-		* Reinforcement faction, if the fleet faction is a "neutral" faction without ships
-		* @param qualityOverride
-		* Optional ship quality override, default to 2 (no D-mods) if null or <0
-		* @param spawnLocation
-		* Where the fleet will spawn, default to assignmentTarget if NULL
-		* @param assignment
-		* campaign.FleetAssignment, default to orbit aggressive
-		* @param assignementTarget
-		* @param isImportant
-		* @param transponderOn
-		* @return
-		*/
-		String variant = "zea_boss_yukionna_Ultimate";
+        String variant = "zea_boss_yukionna_Ultimate";
 		CampaignFleetAPI duskBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Yukionna")
 		        .setFleetFaction(PrepareAbyss.duskID)
@@ -75,7 +46,7 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 		duskBossFleet.getFleetData().ensureHasFlagship();
-		duskBossFleet.getMemoryWithoutUpdate().set(MEMKEY_DUSK_BOSS_FLEET, true);
+		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MEMKEY_DUSK_BOSS_FLEET, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
 
 		// populate the fleet with escorts
@@ -128,6 +99,5 @@ public class SpawnDuskBoss {
 		FID.fttlToggle = false;
 		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN, FID);
 
-		return true;
 	}
 }

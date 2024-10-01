@@ -11,10 +11,11 @@ import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.List;
+import java.util.Objects;
 
 public class DuskMineStrikeCloneStats extends BaseShipSystemScript implements MineStrikeStatsAIInfoProvider {
 
-    protected static float MINE_RANGE = 1000f;
+    protected static final float MINE_RANGE = 1000f;
 
     public static final float MIN_SPAWN_DIST = 75f;
     public static final float MIN_SPAWN_DIST_FRIGATE = 110f;
@@ -46,14 +47,11 @@ public class DuskMineStrikeCloneStats extends BaseShipSystemScript implements Mi
         }
         float maxRangeBonus = 25f;
         float jitterRangeBonus = jitterLevel * maxRangeBonus;
-        if (state == State.OUT) {
-        }
 
         ship.setJitterUnder(this, JITTER_UNDER_COLOR, jitterLevel, 11, 0f, 3f + jitterRangeBonus);
         ship.setJitter(this, JITTER_COLOR, jitterLevel, 4, 0f, 0 + jitterRangeBonus);
 
-        if (state == State.IN) {
-        } else if (effectLevel >= 1) {
+        if (effectLevel >= 1 && state != State.IN) {
             Vector2f target = ship.getMouseTarget();
             if (ship.getShipAI() != null && ship.getAIFlags().hasFlag(ShipwideAIFlags.AIFlags.SYSTEM_TARGET_COORDS)){
                 target = (Vector2f) ship.getAIFlags().getCustom(ShipwideAIFlags.AIFlags.SYSTEM_TARGET_COORDS);
@@ -75,7 +73,6 @@ public class DuskMineStrikeCloneStats extends BaseShipSystemScript implements Mi
                 }
             }
 
-        } else if (state == State.OUT ) {
         }
     }
 
@@ -97,7 +94,7 @@ public class DuskMineStrikeCloneStats extends BaseShipSystemScript implements Mi
             for (MissileAPI other : Global.getCombatEngine().getMissiles()) {
                 if (!other.isMine()) continue;
 
-                float dist = Misc.getDistance(currLoc, other.getLocation());
+                float dist = Misc.getDistance(Objects.requireNonNull(currLoc), other.getLocation());
                 if (dist < other.getCollisionRadius() + 40f) {
                     currLoc = null;
                     break;
@@ -133,9 +130,8 @@ public class DuskMineStrikeCloneStats extends BaseShipSystemScript implements Mi
         Global.getCombatEngine().addPlugin(createMissileJitterPlugin(mine, fadeInTime));
 
         //mine.setFlightTime((float) Math.random());
-        float liveTime = LIVE_TIME;
         //liveTime = 0.01f;
-        mine.setFlightTime(mine.getMaxFlightTime() - liveTime);
+        mine.setFlightTime(mine.getMaxFlightTime() - LIVE_TIME);
 
         Global.getSoundPlayer().playSound("mine_teleport", 1f, 1f, mine.getLocation(), mine.getVelocity());
     }
@@ -208,7 +204,7 @@ public class DuskMineStrikeCloneStats extends BaseShipSystemScript implements Mi
 
         float incr = 50f;
 
-        WeightedRandomPicker<Vector2f> tested = new WeightedRandomPicker<Vector2f>();
+        WeightedRandomPicker<Vector2f> tested = new WeightedRandomPicker<>();
         for (float distIndex = 1; distIndex <= 32f; distIndex *= 2f) {
             float start = (float) Math.random() * 360f;
             for (float angle = start; angle < start + 360; angle += 60f) {

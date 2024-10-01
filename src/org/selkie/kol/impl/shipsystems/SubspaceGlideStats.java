@@ -11,17 +11,18 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 
 public class SubspaceGlideStats extends BaseShipSystemScript {
     private static final Color PHASE_COLOR = new Color(70, 90, 240, 230);
     private static final float SHIP_ALPHA_MULT = 0.50f;
-    public static float SPEED_BONUS = 100f;
-    public static float TURN_BONUS = 20f;
+    public static final float SPEED_BONUS = 100f;
+    public static final float TURN_BONUS = 20f;
     public float lastHardflux = 0f;
-    protected Object STATUSKEY1 = new Object();
-    protected Object STATUSKEY2 = new Object();
+    protected final Object STATUSKEY1 = new Object();
+    protected final Object STATUSKEY2 = new Object();
     protected Object STATUSKEY3 = new Object();
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         if (state == ShipSystemStatsScript.State.OUT) {
@@ -59,8 +60,8 @@ public class SubspaceGlideStats extends BaseShipSystemScript {
 
             Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
             Vector2f jitterLocation = MathUtils.getRandomPointInCircle(ship.getLocation(), 2f+(1-effectLevel)*5f);
-            SpriteAPI glow1 = Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow1");
-            SpriteAPI glow2 = Global.getSettings().getSprite("zea_phase_glows", "" + ship.getHullSpec().getBaseHullId() + "_glow2");
+            SpriteAPI glow1 = Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1");
+            SpriteAPI glow2 = Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2");
             MagicRender.singleframe(glow1, ship.getLocation(), new Vector2f(glow1.getWidth(), glow1.getHeight()), ship.getFacing() - 90f, colorToUse, true);
             MagicRender.singleframe(glow2, jitterLocation, new Vector2f(glow2.getWidth(), glow2.getHeight()), ship.getFacing() - 90f, colorToUse, true);
 

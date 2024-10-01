@@ -22,12 +22,12 @@ class DuskNullStationInteraction : InteractionDialogPlugin {
     lateinit var dialog: InteractionDialogAPI
 
     companion object {
-        val LEAVE_KEY = "LEAVE"
-        val ENTER_KEY = "ENTER"
-        val ENTER2_KEY = "ENTER2"
-        val ENTER3_KEY = "ENTER3"
-        val CORE_INTO_SKILL = "CORE_INTO_SKILL"
-        val REVOKE_SKILL = "REVOKE_SKILL"
+        const val LEAVE_KEY = "LEAVE"
+        const val ENTER_KEY = "ENTER"
+        const val ENTER2_KEY = "ENTER2"
+        const val ENTER3_KEY = "ENTER3"
+        const val CORE_INTO_SKILL = "CORE_INTO_SKILL"
+        const val REVOKE_SKILL = "REVOKE_SKILL"
 
 
         val DUSK_CORE_ITEM = SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, BossCore.DUSK_CORE.itemID)
@@ -219,10 +219,10 @@ class DuskNullStationInteraction : InteractionDialogPlugin {
                     }
 
                     advance {
-                        if (officer == selected) {
-                            backgroundAlpha = 0.7f
+                        backgroundAlpha = if (officer == selected) {
+                            0.7f
                         } else {
-                            backgroundAlpha = 0.4f
+                            0.4f
                         }
                     }
 

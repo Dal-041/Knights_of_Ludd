@@ -12,6 +12,7 @@ import org.dark.shaders.light.LightShader;
 import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -74,7 +75,7 @@ public class SupernovaSubmunitionScript extends BaseEveryFrameCombatPlugin {
                     2.3f
             );
 
-            Global.getSoundPlayer().playSound("system_canister_flak_explosion", 1f, 1f, infernoCanister.getLocation(), new Vector2f());
+            Global.getSoundPlayer().playSound(ZeaStaticStrings.SYSTEM_CANISTER_FLAK_EXPLOSION, 1f, 1f, infernoCanister.getLocation(), new Vector2f());
 
             if (KOL_ModPlugin.hasGraphicsLib) {
                 RippleDistortion ripple = new RippleDistortion(infernoCanister.getLocation(), new Vector2f());

@@ -15,11 +15,11 @@ import java.io.IOException;
 public class SpoilersNotif implements EveryFrameScript {
 
     private final String filename = "kolSpoilersSeen";
-    public IntervalUtil check = new IntervalUtil(8,11);
-    public IntervalUtil delay = new IntervalUtil(15,15);
+    public final IntervalUtil check = new IntervalUtil(8,11);
+    public final IntervalUtil delay = new IntervalUtil(15,15);
     public boolean fire = false;
 
-    public static final String icon = Global.getSettings().getSpriteName("icons", "game_icon");
+    public static final String icon = Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, ZeaStaticStrings.GAME_ICON);
     public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a lot of hidden content. " +
             "In truth, it's the vast majority of the mod. We worked very hard on every piece and hope you enjoy it very much.\n\n" +
             "We ask that you %s for the first week or so after release. Its our hope that players can organically discover all that the mod contains.\n\n" +
@@ -79,7 +79,7 @@ public class SpoilersNotif implements EveryFrameScript {
 
     protected void doSpoilersTalk() {
         //SectorEntityToken dummy = Global.getSector().getPlayerFleet().getContainingLocation().addCustomEntity("zea_spoiler_entity", "dummy", Entities.WARNING_BEACON, Factions.NEUTRAL);
-        RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_spoilers_popup");
+        RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ZEA_SPOILERS_POPUP);
         boolean gotDialog = Global.getSector().getCampaignUI().showInteractionDialog(plugin, Global.getSector().getPlayerFleet());
         ZeaLoreIntel intel = new ZeaLoreIntel(icon, "A quick message from the KOL team", desc, descHLs);
         InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
@@ -88,7 +88,7 @@ public class SpoilersNotif implements EveryFrameScript {
         textpanel.setOrbitronMode(true);
         textpanel.addPara("Thank you for playing the Knights of Ludd!");
         textpanel.setOrbitronMode(false);
-        textpanel.addImage("illustrations", "zea_banner");
+        textpanel.addImage(ZeaStaticStrings.ILLUSTRATIONS, ZeaStaticStrings.ZEA_BANNER);
         textpanel.addPara(desc, Misc.getTextColor(), Misc.getHighlightColor(), descHLs);
         Global.getSector().getIntelManager().addIntel(intel, false, textpanel);
     }
@@ -109,9 +109,6 @@ public class SpoilersNotif implements EveryFrameScript {
         } catch (IOException e) {
             return false;
         }
-        if (text.isEmpty()) {
-            return false;
-        }
-        return true;
+        return !text.isEmpty();
     }
 }

@@ -30,7 +30,7 @@ public class MagicVectorThrusterSelkie implements EveryFrameWeaponEffectPlugin {
     private final float FREQ=0.03f, SMOOTH_THRUSTING=0.25f;        
     private float TURN_RIGHT_ANGLE=0, THRUST_TO_TURN=0, NEUTRAL_ANGLE=0, FRAMES=0, OFFSET=0;
     //sprite size, could be scaled with the engine width to allow variable engine length
-    private Vector2f size= new Vector2f(Global.getSettings().getFloat("MagicVectorThrusterSelkieX"),Global.getSettings().getFloat("MagicVectorThrusterSelkieY"));
+    private final Vector2f size= new Vector2f(Global.getSettings().getFloat("MagicVectorThrusterSelkieX"),Global.getSettings().getFloat("MagicVectorThrusterSelkieY"));
     
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
@@ -274,7 +274,7 @@ public class MagicVectorThrusterSelkie implements EveryFrameWeaponEffectPlugin {
         aim=MathUtils.getShortestRotation(weapon.getCurrAngle(), aim);
         
         //engine wooble
-        aim+=5*FastTrig.cos(SHIP.getFullTimeDeployed()*5*thrust+OFFSET);
+        aim+= (float) (5*FastTrig.cos(SHIP.getFullTimeDeployed()*5*thrust+OFFSET));
         aim*=smooth;        
         weapon.setCurrAngle(MathUtils.clampAngle(weapon.getCurrAngle()+aim));
     }
@@ -305,7 +305,7 @@ public class MagicVectorThrusterSelkie implements EveryFrameWeaponEffectPlugin {
         previousThrust=length;
         
         //engine wooble
-        aim+=5*FastTrig.cos(SHIP.getFullTimeDeployed()*5*thrust+OFFSET);
+        aim+= (float) (5*FastTrig.cos(SHIP.getFullTimeDeployed()*5*thrust+OFFSET));
         aim*=smooth;        
         weapon.setCurrAngle(MathUtils.clampAngle(weapon.getCurrAngle()+aim));
         

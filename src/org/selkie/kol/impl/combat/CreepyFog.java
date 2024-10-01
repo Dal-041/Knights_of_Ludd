@@ -5,7 +5,6 @@ import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
-import org.lazywizard.lazylib.CollectionUtils;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -13,7 +12,6 @@ import org.lwjgl.util.vector.Vector2f;
 import java.awt.*;
 
 import static com.fs.starfarer.api.util.Misc.ZERO;
-import static com.fs.starfarer.api.util.Misc.isPointInBounds;
 
 public class CreepyFog extends BaseHullMod {
 

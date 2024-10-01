@@ -26,6 +26,7 @@ public class BulletTimeField extends BaseShipSystemScript {
         float adjustedElapsedTime;
         float initialSpeed;
 
+        @SuppressWarnings("DataFlowIssue")
         DamagingProjectileInfo(DamagingProjectileAPI threat) {
             float amount = Global.getCombatEngine().getElapsedInLastFrame();
             adjustedElapsedTime = threat.getElapsed() + (MAX_SLOWDOWN * amount);
@@ -60,7 +61,7 @@ public class BulletTimeField extends BaseShipSystemScript {
     public float collisionRadius;
     public float shieldRadius;
     public float shieldArc;
-    Map<DamagingProjectileAPI, DamagingProjectileInfo> slowedProjectiles = new HashMap<>();
+    final Map<DamagingProjectileAPI, DamagingProjectileInfo> slowedProjectiles = new HashMap<>();
 
     public void init(ShipAPI ship){
         if (!init) {
@@ -71,6 +72,7 @@ public class BulletTimeField extends BaseShipSystemScript {
         }
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         float amount = Global.getCombatEngine().getElapsedInLastFrame();
         ShipAPI ship = (ShipAPI) stats.getEntity();
@@ -185,6 +187,7 @@ public class BulletTimeField extends BaseShipSystemScript {
         }
     }
 
+    @SuppressWarnings("DataFlowIssue")
     public void resetDamagingProjectile(DamagingProjectileAPI threat){
         // reset velocities if possible
         if (threat instanceof BallisticProjectile || threat instanceof MissileAPI || threat instanceof PlasmaShot) {

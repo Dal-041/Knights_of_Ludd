@@ -19,14 +19,14 @@ public class KOL_FlareBeamEffect implements BeamEffectPlugin {
     private final IntervalUtil interval1 = new IntervalUtil(0.1f,0.2f);
     private final IntervalUtil interval2 = new IntervalUtil(0.25f,0.5f);
     
-    private static Map<WeaponSize, Float> wepFlareAlphaMult = new HashMap<WeaponSize, Float>();
+    private static final Map<WeaponSize, Float> wepFlareAlphaMult = new HashMap<>();
 	static {
 		wepFlareAlphaMult.put(WeaponSize.SMALL, 0.15f);
 		wepFlareAlphaMult.put(WeaponSize.MEDIUM, 0.25f);
 		wepFlareAlphaMult.put(WeaponSize.LARGE, 0.35f);
 	}
 	
-	private static Map<WeaponSize, Float> wepFlareSizeMult = new HashMap<WeaponSize, Float>();
+	private static final Map<WeaponSize, Float> wepFlareSizeMult = new HashMap<>();
 	static {
 		wepFlareSizeMult.put(WeaponSize.SMALL, 0.29f);
 		wepFlareSizeMult.put(WeaponSize.MEDIUM, 0.37f);

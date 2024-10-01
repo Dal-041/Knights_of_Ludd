@@ -1,9 +1,5 @@
 package org.selkie.kol.weapons;
 
-import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.MathUtils;
-import org.selkie.kol.shipsystems.LidarStats;
-
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
@@ -17,7 +13,7 @@ public class Caelia implements EveryFrameWeaponEffectPlugin {
 	private boolean runOnce = false;
 	private float baseRD = 20f;
 	private float rampUpTime = 0f;
-	public float timeFull = 2f;
+	public final float timeFull = 2f;
 	
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {

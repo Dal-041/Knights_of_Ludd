@@ -23,7 +23,7 @@ class DuskBuiltin : BaseHullMod() {
     companion object{
         val allMotes = mutableListOf<MissileAPI>()
 
-        val HF_TAG = "HF_SPARKLES_ACTIVE"
+        const val HF_TAG = "HF_SPARKLES_ACTIVE"
 
         val maxMotes = mapOf(
                 HullSize.FIGHTER to 2,
@@ -59,7 +59,7 @@ class DuskBuiltin : BaseHullMod() {
         var activeMotes = mutableListOf<MissileAPI>()
         val launchInterval = IntervalUtil(0.25f, 0.75f)
         val launchSlots : WeightedRandomPicker<WeaponSlotAPI> = WeightedRandomPicker<WeaponSlotAPI>()
-        val SPARKLE_WEAPON_ID = "zea_dusk_sparkler_wpn";
+        val SPARKLE_WEAPON_ID = "zea_dusk_sparkler_wpn"
 
         init{
             for (slot in ship.hullSpec.allWeaponSlotsCopy) {
@@ -109,7 +109,7 @@ class DuskBuiltin : BaseHullMod() {
         }
     }
 
-    override fun applyEffectsBeforeShipCreation(hullSize: ShipAPI.HullSize, stats: MutableShipStatsAPI, id: String) {
+    override fun applyEffectsBeforeShipCreation(hullSize: HullSize, stats: MutableShipStatsAPI, id: String) {
         val shipVariant = stats.variant
 
         if(shipVariant.hullSpec.isPhase) {

@@ -12,7 +12,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.impl.fx.FakeSmokePlugin;
@@ -29,10 +28,9 @@ public class LungeStats extends BaseShipSystemScript {
     private static final Color FLICKER_COLOR = new Color(113, 129, 97, 131);
     private static final Color AFTERIMAGE_COLOR = new Color(129, 112, 98, 61);
     private static final Color SMOKE_COLOR = new Color(199, 188, 111, 175);
-    private Color color = new Color(100,255,100,255);
+    private final Color color = new Color(100,255,100,255);
     public static final float MAX_TIME_MULT = 2f;
 
-    private SpriteAPI sprite;
     private float offsetX;
     private float offsetY;
 
@@ -41,6 +39,16 @@ public class LungeStats extends BaseShipSystemScript {
     private final IntervalUtil intervalDecel = new IntervalUtil(0.5f, 0.5f);
 
     boolean decel = true;
+
+    private void init(ShipAPI ship) {
+        if (!init) {
+            SpriteAPI sprite = ship.getSpriteAPI();
+            offsetX = sprite.getWidth() / 2 - sprite.getCenterX();
+            offsetY = sprite.getHeight() / 2 - sprite.getCenterY();
+
+            init = true;
+        }
+    }
 
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         ShipAPI ship;
@@ -51,13 +59,7 @@ public class LungeStats extends BaseShipSystemScript {
         } else {
             return;
         }
-        if (init == false) {
-            sprite = ship.getSpriteAPI();
-            offsetX = sprite.getWidth() / 2 - sprite.getCenterX();
-            offsetY = sprite.getHeight() / 2 - sprite.getCenterY();
-
-            init = true;
-        }
+        init(ship);
 
         float TimeMult = 1f + effectLevel;
         stats.getTimeMult().modifyMult(id, TimeMult);

@@ -7,7 +7,6 @@ import com.fs.starfarer.api.campaign.CoreUITabId
 import com.fs.starfarer.api.campaign.SpecialItemData
 import com.fs.starfarer.api.util.IntervalUtil
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
-import org.selkie.kol.impl.skills.cores.DuskBossCoreSkill
 
 //Loosely based on things done in Tahlans Digital Soul
 class AICoreReplacerScript : EveryFrameScript {
@@ -44,8 +43,8 @@ class AICoreReplacerScript : EveryFrameScript {
                             commStack.size = stack.size
                             cargo.addFromStack(commStack)
 
-                            var current = quantities.get(commStack.commodityId) ?: 0f
-                            quantities.set(commStack.commodityId, current + commStack.size)
+                            var current = quantities[commStack.commodityId] ?: 0f
+                            quantities[commStack.commodityId] = current + commStack.size
                         }
                     }
                 }

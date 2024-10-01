@@ -14,7 +14,6 @@ import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.impl.campaign.tutorial.TutorialMissionIntel;
 import com.fs.starfarer.api.ui.LabelAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Misc.FleetMemberDamageLevel;
 import org.lwjgl.util.vector.Vector2f;
@@ -125,12 +124,7 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 			well = null;
 		}
 	}
-	
-	@Override
-	protected String getActivationText() {
-		return super.getActivationText();
-		//return "Initiating jump";
-	}
+
 
 
 	@Override
@@ -153,13 +147,9 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 		if (fleet.isInHyperspaceTransition()) return false;
 		
 		if (TutorialMissionIntel.isTutorialInProgress()) return false;
-		
-		if (canUseToJumpToSystem() && fleet.isInHyperspace()) {
-			return true;
-		}
-		
-		return false;
-	}
+
+        return canUseToJumpToSystem() && fleet.isInHyperspace();
+    }
 
 	
 	@Override
@@ -241,8 +231,8 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 	}
 
 	public boolean hasTooltip() {
-		return true;
-	}
+        return super.hasTooltip();
+    }
 	
 	@Override
 	public void fleetLeftBattle(BattleAPI battle, boolean engagedInHostilities) {
@@ -258,7 +248,7 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 	
 	
 	protected List<FleetMemberAPI> getNonReadyShips() {
-		List<FleetMemberAPI> result = new ArrayList<FleetMemberAPI>();
+		List<FleetMemberAPI> result = new ArrayList<>();
 		CampaignFleetAPI fleet = getFleet();
 		if (fleet == null) return result;
 		
@@ -277,9 +267,8 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 	protected float computeFuelCost() {
 		CampaignFleetAPI fleet = getFleet();
 		if (fleet == null) return 0f;
-		
-		float cost = fleet.getLogistics().getFuelCostPerLightYear() * FUEL_USE_MULT;
-		return cost;
+
+        return fleet.getLogistics().getFuelCostPerLightYear() * FUEL_USE_MULT;
 	}
 	
 	protected float computeSupplyCost() {
@@ -319,10 +308,6 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 		return super.getCooldownFraction();
 	}
 	@Override
-	public boolean showCooldownIndicator() {
-		return super.showCooldownIndicator();
-	}
-	@Override
 	public boolean isOnCooldown() {
 		return super.getCooldownFraction() < 1f;
 	}
@@ -338,11 +323,8 @@ public class JumpAbilityElysia extends BaseDurationAbility {
 
 	@Override
 	public boolean isCooldownRenderingAdditive() {
-		if (showAlarm()) {
-			return true;
-		}
-		return false;
-	}
+        return showAlarm();
+    }
 }
 
 

@@ -1,7 +1,6 @@
 package org.selkie.kol.impl.combat.madness;
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.combat.CombatEntityAPI;
 import com.fs.starfarer.api.impl.campaign.terrain.FlareManager;
 import com.fs.starfarer.api.util.FaderUtil;
@@ -16,7 +15,7 @@ import java.util.Random;
 
 public class CombatFlareManager {
 
-    public static interface CombatFlareManagerDelegate {
+    public interface CombatFlareManagerDelegate {
         CombatEntityAPI getFlareCenterEntity();
 
         java.util.List<Color> getFlareColorRange();
@@ -62,7 +61,7 @@ public class CombatFlareManager {
         public float extraLengthMult;
         public float extraLengthFlat;
         public float shortenFlatMod;
-        transient public java.util.List<Color> colors = new ArrayList<Color>();
+        transient public java.util.List<Color> colors = new ArrayList<>();
         public String c = null;
         public FaderUtil fader;
 
@@ -70,7 +69,7 @@ public class CombatFlareManager {
             if (c != null) {
                 colors = Misc.colorsFromString(c);
             } else {
-                colors = new ArrayList<Color>();
+                colors = new ArrayList<>();
             }
             return this;
         }
@@ -81,9 +80,9 @@ public class CombatFlareManager {
         }
     }
 
-    private IntervalUtil flareTracker = new IntervalUtil(0.5f, 1.5f);
-    private java.util.List<FlareManager.Flare> flares = new ArrayList<FlareManager.Flare>();
-    private CombatFlareManagerDelegate delegate;
+    private final IntervalUtil flareTracker = new IntervalUtil(0.5f, 1.5f);
+    private java.util.List<FlareManager.Flare> flares = new ArrayList<>();
+    private final CombatFlareManagerDelegate delegate;
 
 
     public CombatFlareManager(CombatFlareManagerDelegate delegate) {
@@ -101,7 +100,7 @@ public class CombatFlareManager {
 
     public List<FlareManager.Flare> getFlares() {
         if (flares == null) {
-            flares = new ArrayList<FlareManager.Flare>();
+            flares = new ArrayList<>();
         }
         return flares;
     }

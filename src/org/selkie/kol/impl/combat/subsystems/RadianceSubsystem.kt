@@ -101,7 +101,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
 
     override fun advance(amount: Float, isPaused: Boolean) {
         if (isPaused) return
-        if (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] == null) return; //Hopefully just one frame
+        if (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] == null) return //Hopefully just one frame
 
         val glowColorNow = Misc.interpolateColor(
             glowColorEmpty,
@@ -109,7 +109,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
             ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float
         )
         if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
-            return;
+            return
         } else {
             if (!ship.isHulk && !ship.isPiece && ship.isAlive) {
                 MagicRender.singleframe(spriteRing, ship.location, effectSize, 0f, glowColorNow, true)

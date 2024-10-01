@@ -10,13 +10,13 @@ import java.io.IOException;
 
 public class ZeaAbilityIntel extends BaseIntelPlugin {
 
-    private String name;
-    private String icon;
+    private final String name;
+    private final String icon;
 
     public ZeaAbilityIntel(String icon, String name) {
         try {
             Global.getSettings().loadTexture(icon);
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         }
         this.name = name;
@@ -63,6 +63,6 @@ public class ZeaAbilityIntel extends BaseIntelPlugin {
 
     @Override
     public boolean canTurnImportantOff() {
-        return true;
+        return super.canTurnImportantOff();
     }
 }

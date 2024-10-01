@@ -15,18 +15,14 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Industries;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
 import com.fs.starfarer.api.impl.campaign.ids.Ranks;
-import com.fs.starfarer.api.impl.campaign.intel.bases.PirateBaseIntel;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
-import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.Nex_MarketCMD;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
-import com.fs.starfarer.campaign.econ.Market;
-import exerelin.campaign.SectorManager;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 
 public class MarketHelpers {
     // Copied from Nexerelin / Histidine
@@ -197,7 +193,6 @@ public class MarketHelpers {
         for (Industry curr : market.getIndustries()) {
             if (curr.getSpec().hasTag(Industries.TAG_STATION)) {
                 hasStation = true;
-                continue;
             }
         }
         if (hasStation) {
@@ -225,7 +220,6 @@ public class MarketHelpers {
 
         if (addedPerson) {
             addPerson(ip, market, Ranks.SPACE_COMMANDER, Ranks.POST_SUPPLY_OFFICER, true);
-            addedPerson = true;
         }
 
         if (!addedPerson) {
@@ -298,7 +292,7 @@ public class MarketHelpers {
     public static void updateStationIfNeeded(MarketAPI market, Industry curr, String goalIndID) {
         if (curr == null) return;
 
-        String currIndId = (getStationIndustry(market).getId());
+        String currIndId = (Objects.requireNonNull(getStationIndustry(market)).getId());
 
         if (currIndId.equals(goalIndID)) return;
 
@@ -315,13 +309,13 @@ public class MarketHelpers {
         if (fleet == null) return;
 
         List<FleetMemberAPI> members = fleet.getFleetData().getMembersListCopy();
-        if (members.size() < 1) return;
+        if (members.isEmpty()) return;
 
         fleet.inflateIfNeeded();
 
         FleetMemberAPI station = members.get(0);
 
-        WeightedRandomPicker<Integer> picker = new WeightedRandomPicker<Integer>();
+        WeightedRandomPicker<Integer> picker = new WeightedRandomPicker<>();
         int index = 1; // index 0 is station body
         for (String slotId : station.getVariant().getModuleSlots()) {
             ShipVariantAPI mv = station.getVariant().getModuleVariant(slotId);

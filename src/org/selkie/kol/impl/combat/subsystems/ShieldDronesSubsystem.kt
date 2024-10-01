@@ -159,7 +159,7 @@ class ShieldDronesSubsystem(ship: ShipAPI?, val numDrones: Int, val isSmart: Boo
                         // skip damage already blocked by other drones
                         var alreadyBlocked = false
                         for (block in blockedDirections) {
-                            if (Misc.isInArc(block, Companion.DRONE_ARC, hit.angle)) {
+                            if (Misc.isInArc(block, DRONE_ARC, hit.angle)) {
                                 alreadyBlocked = true
                                 break
                             }
@@ -167,7 +167,7 @@ class ShieldDronesSubsystem(ship: ShipAPI?, val numDrones: Int, val isSmart: Boo
                         if (alreadyBlocked) continue
 
                         // if the drone can block it, note down that stats
-                        if (Misc.isInArc(droneAngle, Companion.DRONE_ARC, hit.angle) && hit.timeToHit > timeElapsed + 0.15f) {
+                        if (Misc.isInArc(droneAngle, DRONE_ARC, hit.angle) && hit.timeToHit > timeElapsed + 0.15f) {
                             val trueDamage = StarficzAIUtils.damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armor, ship)
                             damageBlocked += trueDamage.one + trueDamage.two
                             lowestTime = min(lowestTime.toDouble(), (hit.timeToHit - timeElapsed).toDouble()).toFloat()
@@ -192,14 +192,13 @@ class ShieldDronesSubsystem(ship: ShipAPI?, val numDrones: Int, val isSmart: Boo
             }
 
             // rotate idle
-            currentRotation += Companion.ROTATION_SPEED * amount
+            currentRotation += ROTATION_SPEED * amount
             if (!activeDrones.isEmpty()) {
                 // generate all locations by doubling up on locations if too many drones
                 val droneLocations: MutableList<Vector2f> = ArrayList()
                 var droneDistance = ship.shieldRadiusEvenIfNoShield * 0.95f
                 for (i in activeDrones.indices) {
-                    var droneAngle: Float
-                    droneAngle = if (blockedDirections.isEmpty()) {
+                    var droneAngle: Float = if (blockedDirections.isEmpty()) {
                         currentRotation + 360f / activeDrones.size * i
                     } else {
                         blockedDirections[i % blockedDirections.size]

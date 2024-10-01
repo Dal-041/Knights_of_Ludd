@@ -1,4 +1,4 @@
-package org.selkie.kol;
+package org.selkie.kol
 
 import java.lang.invoke.MethodHandles
 import java.lang.invoke.MethodType
@@ -106,7 +106,7 @@ object ReflectionUtils {
         return invokeMethodHandle.invoke(method, instance, arguments)
     }
 
-    fun invoke_static(methodName: String, clazz: Class<*>, vararg arguments: Any?, declared: Boolean = false): Any? {
+    fun invokeStatic(methodName: String, clazz: Class<*>, vararg arguments: Any?, declared: Boolean = false): Any? {
         val method: Any?
         val args = arguments.map { it!!::class.javaPrimitiveType ?: it::class.java }
         val methodType = MethodType.methodType(Void.TYPE, args)
@@ -149,10 +149,10 @@ object ReflectionUtils {
     fun hasMethodOfNameInClass(name: String, instance: Class<Any>, contains: Boolean = false): Boolean {
         val instancesOfMethods: Array<out Any> = instance.getDeclaredMethods()
 
-        if (!contains) {
-            return instancesOfMethods.any { getMethodNameHandle.invoke(it) == name }
+        return if (!contains) {
+            instancesOfMethods.any { getMethodNameHandle.invoke(it) == name }
         } else {
-            return instancesOfMethods.any { (getMethodNameHandle.invoke(it) as String).contains(name) }
+            instancesOfMethods.any { (getMethodNameHandle.invoke(it) as String).contains(name) }
         }
     }
 

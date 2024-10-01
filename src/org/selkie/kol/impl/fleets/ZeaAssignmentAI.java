@@ -13,9 +13,9 @@ import java.util.Random;
 
 public class ZeaAssignmentAI implements EveryFrameScript {
 
-	protected StarSystemAPI homeSystem;
-	protected CampaignFleetAPI fleet;
-	protected SectorEntityToken source;
+	protected final StarSystemAPI homeSystem;
+	protected final CampaignFleetAPI fleet;
+	protected final SectorEntityToken source;
 
 
 	public ZeaAssignmentAI(CampaignFleetAPI fleet, StarSystemAPI homeSystem, SectorEntityToken source) {

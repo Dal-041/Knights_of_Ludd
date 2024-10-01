@@ -62,6 +62,6 @@ public class HallowedStats extends BaseShipSystemScript {
 
         stats.getAcceleration().unmodify(id);
         stats.getMaxSpeed().unmodify(id);
-        ;
+
     }
 }

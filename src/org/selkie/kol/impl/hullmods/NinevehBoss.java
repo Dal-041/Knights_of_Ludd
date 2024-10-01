@@ -25,9 +25,9 @@ public class NinevehBoss extends BaseHullMod {
         public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
         public static final float MAX_TIME = 8f;
-        public ShipAPI ship;
+        public final ShipAPI ship;
         public ShipAPI escortHyperionA = null, escortHyperionB = null, escortHarbingerA = null, escortHarbingerB = null, escortDoomA = null, escortDoomB = null;
-        public String id = "boss_phase_two_modifier";
+        public final String id = ZeaStaticStrings.BOSS_PHASE_TWO_MODIFIER;
         public Utils.FogSpawner escortHyperionAFog, escortHyperionBFog, escortHarbingerAFog, escortHarbingerBFog, escortDoomAFog, escortDoomBFog;
         public NinevehBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
@@ -55,10 +55,7 @@ public class NinevehBoss extends BaseHullMod {
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
                 return true;
-            } else if(phaseTwo && phaseTwoTimer < MAX_TIME){
-                return true;
-            }
-            return false;
+            } else return phaseTwo && phaseTwoTimer < MAX_TIME;
         }
 
 
@@ -289,8 +286,7 @@ public class NinevehBoss extends BaseHullMod {
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinevehBossPhaseTwoScript.class)) ship.addListener(new NinevehBossPhaseTwoScript(ship));
 
-            String key = "phaseAnchor_canDive";
-            Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+            Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
         }
     }
 }

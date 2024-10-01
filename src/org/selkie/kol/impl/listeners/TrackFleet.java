@@ -6,14 +6,15 @@ import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import com.fs.starfarer.campaign.CampaignEngine;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.util.Random;
 
 public class TrackFleet implements EveryFrameScript {
 
-    protected IntervalUtil iMain = new IntervalUtil(2, 2); //Seconds
-    protected IntervalUtil iSecond = new IntervalUtil(3, 3); //multiplied by iMain
+    protected final IntervalUtil iMain = new IntervalUtil(2, 2); //Seconds
+    protected final IntervalUtil iSecond = new IntervalUtil(3, 3); //multiplied by iMain
     protected StarSystemAPI under = null;
     protected SectorEntityToken targ = null;
     public static boolean zEAVisit = false;
@@ -50,7 +51,7 @@ public class TrackFleet implements EveryFrameScript {
                     }
                 } else if (fleet.getContainingLocation() instanceof StarSystemAPI
                         && ((StarSystemAPI)fleet.getContainingLocation()).getStar() != null
-                        && ((StarSystemAPI)fleet.getContainingLocation()).getStar().getTypeId().equalsIgnoreCase("zea_star_black_neutron")) {
+                        && ((StarSystemAPI)fleet.getContainingLocation()).getStar().getTypeId().equalsIgnoreCase(ZeaStaticStrings.ZEA_STAR_BLACK_NEUTRON)) {
                     StarSystemAPI system = (StarSystemAPI) fleet.getContainingLocation();
                     CampaignFleetAPI victim = null;
                     for (CampaignFleetAPI sysFleet : system.getFleets()) {
@@ -62,7 +63,7 @@ public class TrackFleet implements EveryFrameScript {
                         WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>(new Random());
                         for (StarSystemAPI sys : Global.getSector().getStarSystems()) {
                             if (sys.isCurrentLocation()) continue;
-                            if (sys.getStar() != null && sys.getStar().getTypeId().equalsIgnoreCase("zea_star_black_neutron")) picker.add(sys);
+                            if (sys.getStar() != null && sys.getStar().getTypeId().equalsIgnoreCase(ZeaStaticStrings.ZEA_STAR_BLACK_NEUTRON)) picker.add(sys);
                         }
                         if (!picker.isEmpty()) {
                             StarSystemAPI dest = picker.pick();

@@ -132,7 +132,7 @@ class NianBoss : BaseHullMod() {
                 if(angleToTarget < 1f){
                     //TODO: Fire Main Gun
                     readyToFire = false
-                } else if(AIUtils.getNearbyEnemies(ship, SupernovaStats.EXPLOSION_RADIUS).size >= 1){
+                } else if(AIUtils.getNearbyEnemies(ship, SupernovaStats.EXPLOSION_RADIUS).isNotEmpty()){
                     //TODO: Supernova Explosion
                     readyToFire = false
                 }

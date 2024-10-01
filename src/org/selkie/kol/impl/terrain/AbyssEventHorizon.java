@@ -10,6 +10,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.EventHorizonPlugin;
 import com.fs.starfarer.api.loading.Description;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
@@ -51,7 +52,7 @@ public class AbyssEventHorizon extends EventHorizonPlugin {
     @Override
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
-            if (entity.hasTag("zea_rulesfortheebutnotforme")) return;
+            if (entity.hasTag(ZeaStaticStrings.ZEA_RULESFORTHEEBUTNOTFORME)) return;
         }
         super.applyEffect(entity, days);
     }

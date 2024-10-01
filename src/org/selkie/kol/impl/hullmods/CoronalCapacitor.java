@@ -36,7 +36,7 @@ public class CoronalCapacitor extends BaseHullMod {
     public static final float DAMAGE_BOOST = 0.3f;
     public static final float ROF_BOOST = 0.3f;
 
-    public static HashMap<String,Float> starLux;
+    public static final HashMap<String,Float> starLux;
     static {
         starLux = new HashMap<>();
         starLux.put("star_orange_giant", 3f);
@@ -71,13 +71,10 @@ public class CoronalCapacitor extends BaseHullMod {
 
     public static class CoronalCapacitorListener implements AdvanceableListener {
 
-        private ShipAPI ship;
-        private CombatEngineAPI engine;
-        private HashMap<WeaponAPI, Boolean> fluxCounted = new HashMap<>();
-        private List<WeaponAPI> beams = new ArrayList<>();
-
-        // flux or charge based
-        private static final boolean USING_FLUX = true;
+        private final ShipAPI ship;
+        private final CombatEngineAPI engine;
+        private final HashMap<WeaponAPI, Boolean> fluxCounted = new HashMap<>();
+        private final List<WeaponAPI> beams = new ArrayList<>();
 
         //Time based
         public static final float MAX_CHARGETIME = 10f; // in seconds
@@ -88,13 +85,12 @@ public class CoronalCapacitor extends BaseHullMod {
         public static final float MAX_CHARGEFLUX = 1.0f; // multiplier on ships max flux
         public static final float FLUX_CHARGERATE = 0.05f; // base percentage of bar gained per second
 
-        private float capacitorFactor = 1f; // 0-1
         private float capacitorAmount = 0f; // Gets verified
 
         private List<Pair<EngineSlotAPI, Pair<Color, Color>>> engines;
-        protected Object STATUSKEY1 = new Object();
-        protected Object STATUSKEY2 = new Object();
-        protected Object STATUSKEY3 = new Object();
+        protected final Object STATUSKEY1 = new Object();
+        protected final Object STATUSKEY2 = new Object();
+        protected final Object STATUSKEY3 = new Object();
         protected Object STATUSKEY4 = new Object();
         IntervalUtil lightInterval = new IntervalUtil(1.5f, 1.5f);
         StandardLight glow = null;
@@ -154,24 +150,15 @@ public class CoronalCapacitor extends BaseHullMod {
             }
             if(!charging) effectiveChargeRate = 0f;
 
-            if(USING_FLUX) {
-                float fluxPool = MAX_CHARGEFLUX*ship.getMaxFlux();
-                float fluxUsed = flatFlux + (fluxPerSecond*amount);
-                capacitorAmount += (fluxUsed*-1) + (fluxPool*effectiveChargeRate*amount);
-                capacitorAmount = Math.max(0, (Math.min(capacitorAmount, fluxPool)));
-                capacitorFactor = capacitorAmount/fluxPool;
-                MagicUI.drawInterfaceStatusBar(ship, capacitorFactor, Misc.getPositiveHighlightColor(), null, 0, "BOOST", Math.round(capacitorFactor*100));
-            } else {
-                //MagicUI.drawInterfaceStatusBar(ship, capacitorFactor, Misc.getPositiveHighlightColor(), null, 0, "BOOST", Math.round(capacitorFactor*MAX_CHARGETIME));
-                //if(charging) {
-                //    chargeTime += amount;
-                //    if(chargeTime >= CHARGE_DELAY)
-                //        capacitorFactor += amount/MAX_CHARGETIME*TIME_CHARGERATE;
-                //} else {
-                //    chargeTime = 0;
-                //    capacitorFactor -= amount/MAX_CHARGETIME;
-                //}
-            }
+
+            float fluxPool = MAX_CHARGEFLUX*ship.getMaxFlux();
+            float fluxUsed = flatFlux + (fluxPerSecond*amount);
+            capacitorAmount += (fluxUsed*-1) + (fluxPool*effectiveChargeRate*amount);
+            capacitorAmount = Math.max(0, (Math.min(capacitorAmount, fluxPool)));
+            // 0-1
+            float capacitorFactor = capacitorAmount / fluxPool;
+            MagicUI.drawInterfaceStatusBar(ship, capacitorFactor, Misc.getPositiveHighlightColor(), null, 0, "BOOST", Math.round(capacitorFactor *100));
+
 
             capacitorFactor = Math.max(0, Math.min(1, capacitorFactor));
             for(Pair<EngineSlotAPI, Pair<Color, Color>> engineData : engines){
@@ -184,24 +171,24 @@ public class CoronalCapacitor extends BaseHullMod {
 
             ship.setCustomData(CAPACITY_FACTOR_KEY, capacitorFactor);
             MutableShipStatsAPI stats = ship.getMutableStats();
-            stats.getMaxSpeed().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
-            stats.getAcceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
-            stats.getDeceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
-            stats.getMaxTurnRate().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
-            stats.getTurnAcceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST*capacitorFactor);
+            stats.getMaxSpeed().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST* capacitorFactor);
+            stats.getAcceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST* capacitorFactor);
+            stats.getDeceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST* capacitorFactor);
+            stats.getMaxTurnRate().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST* capacitorFactor);
+            stats.getTurnAcceleration().modifyPercent(CAPACITY_FACTOR_KEY, 100*SPEED_BOOST* capacitorFactor);
 
-            stats.getEnergyWeaponDamageMult().modifyMult(CAPACITY_FACTOR_KEY, 1+DAMAGE_BOOST*capacitorFactor);
-            stats.getBallisticRoFMult().modifyMult(CAPACITY_FACTOR_KEY, 1+ROF_BOOST*capacitorFactor);
-            stats.getBallisticWeaponFluxCostMod().modifyMult(CAPACITY_FACTOR_KEY, 1/(1+ROF_BOOST*capacitorFactor));
+            stats.getEnergyWeaponDamageMult().modifyMult(CAPACITY_FACTOR_KEY, 1+DAMAGE_BOOST* capacitorFactor);
+            stats.getBallisticRoFMult().modifyMult(CAPACITY_FACTOR_KEY, 1+ROF_BOOST* capacitorFactor);
+            stats.getBallisticWeaponFluxCostMod().modifyMult(CAPACITY_FACTOR_KEY, 1/(1+ROF_BOOST* capacitorFactor));
 
             if(engine.getPlayerShip() == ship) {
                 engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName("icons", "coronal_cap_bottom"),
-                        "+" + Math.round(100*SPEED_BOOST*capacitorFactor) + "% top speed", "improved maneuverability", false);
+                        "+" + Math.round(100*SPEED_BOOST* capacitorFactor) + "% top speed", "improved maneuverability", false);
                 engine.maintainStatusForPlayerShip(STATUSKEY2,Global.getSettings().getSpriteName("icons", "coronal_cap_middle"),
-                        "+" + Math.round(100*(ROF_BOOST*capacitorFactor)) + "% ballistic rate of fire",
-                        "-" + Math.round(100*(1-1/(1+ROF_BOOST*capacitorFactor))) + "% ballistic flux use", false);
+                        "+" + Math.round(100*(ROF_BOOST* capacitorFactor)) + "% ballistic rate of fire",
+                        "-" + Math.round(100*(1-1/(1+ROF_BOOST* capacitorFactor))) + "% ballistic flux use", false);
                 engine.maintainStatusForPlayerShip(STATUSKEY3,Global.getSettings().getSpriteName("icons", "coronal_cap_top"),"Coronal Capacitor",
-                        "+" + Math.round(100*(DAMAGE_BOOST*capacitorFactor)) + "% energy weapon damage" , false);
+                        "+" + Math.round(100*(DAMAGE_BOOST* capacitorFactor)) + "% energy weapon damage" , false);
                 //engine.maintainStatusForPlayerShip(STATUSKEY4, Global.getSettings().getSpriteName("icons", "coronal_cap_top"),
                 //        "", "Local stellar recharge rate: " + effectiveChargeRate*100, false);
             }
@@ -256,7 +243,7 @@ public class CoronalCapacitor extends BaseHullMod {
     }
 
     public static float getStarIntensity(PlanetAPI star, Vector2f fleetLoc) {
-        float baseDistance = star.getRadius() * 1f; //Intensity values are fairly high, so tweaking this down
+        float baseDistance = star.getRadius(); //Intensity values are fairly high, so tweaking this down
         float lux = 0f;
         for (Map.Entry entry : starLux.entrySet()) {
             if (entry.getKey().equals(star.getTypeId())) {

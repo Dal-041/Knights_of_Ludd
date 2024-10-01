@@ -6,7 +6,7 @@ import java.awt.Color
 
 class CoresAptitudeDesc : DescriptionSkillEffect {
     override fun getTextColor(): Color {
-        return Misc.getTextColor();
+        return Misc.getTextColor()
 
     }
 

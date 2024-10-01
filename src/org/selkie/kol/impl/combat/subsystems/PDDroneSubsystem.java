@@ -113,7 +113,7 @@ public class PDDroneSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public String getDroneVariant() {
+    public @NotNull String getDroneVariant() {
         return "zea_edf_shachi_wing";
     }
 

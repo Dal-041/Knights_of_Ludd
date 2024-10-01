@@ -31,9 +31,9 @@ public class NinayaBoss extends BaseHullMod {
         public float phaseTwoTimer = 0f;
 
         public static final float MAX_TIME = 8f;
-        public ShipAPI ship;
+        public final ShipAPI ship;
         public ShipAPI escortA = null, escortB = null;
-        public String id = "boss_phase_two_modifier";
+        public final String id = ZeaStaticStrings.BOSS_PHASE_TWO_MODIFIER;
         public Utils.FogSpawner escortAFog, escortBFog;
         public NinayaBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
@@ -54,11 +54,7 @@ public class NinayaBoss extends BaseHullMod {
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
                 return true;
-            } else if(phaseTwo && phaseTwoTimer < MAX_TIME){
-                return true;
-            }
-
-            return false;
+            } else return phaseTwo && phaseTwoTimer < MAX_TIME;
         }
 
         @Override
@@ -202,7 +198,7 @@ public class NinayaBoss extends BaseHullMod {
         public final static float STARTING_YESSYS_HARDFLUX_LEVEL = 0.75f;
         public final static float MAX_HARDFLUX_LEVEL = 0.9f;
         public final static float RAMP_FACTOR = 0.1f;
-        ShipAPI ship;
+        final ShipAPI ship;
         CombatEngineAPI engine;
         float cycleStartArmorHp = 0;
         boolean ventingHardflux = false;
@@ -328,9 +324,7 @@ public class NinayaBoss extends BaseHullMod {
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinayaBossPhaseTwoScript.class)) ship.addListener(new NinayaBossPhaseTwoScript(ship));
             if(!ship.hasListenerOfClass(NinayaAIScript.class)) ship.addListener(new NinayaAIScript(ship));
-
-            String key = "phaseAnchor_canDive";
-            Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+            Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
         }
     }
 }

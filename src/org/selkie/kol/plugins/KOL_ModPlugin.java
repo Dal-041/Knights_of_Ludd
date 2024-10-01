@@ -26,17 +26,17 @@ import org.selkie.kol.world.GenerateKnights;
 
 import exerelin.campaign.SectorManager;
 
-import java.util.Objects;
+import java.util.Arrays;
 import java.util.Set;
 
 public class KOL_ModPlugin extends BaseModPlugin {
 	public static final String ModID = "Knights of Ludd";
 	public static final String kolID = "knights_of_selkie";
 
-	public static boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
-	public static boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
-	public static boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
-	public static boolean hasMMM = Global.getSettings().getModManager().isModEnabled("MoreMilitaryMissions");
+	public static final boolean haveNex = Global.getSettings().getModManager().isModEnabled("nexerelin");
+	public static final boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled("shaderLib");
+	public static final boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled("knights_of_ludd_maps");
+	public static final boolean hasMMM = Global.getSettings().getModManager().isModEnabled("MoreMilitaryMissions");
 
 	public static final String MEMKEY_KOL_INTIALIZED = "$kol_initialized";
 	public static final String MEMKEY_ZEA_INTIALIZED = "$zea_initialized";
@@ -54,9 +54,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 		if (hasMMM) { //Remove after week 1
 			Set<String> BL = DefenseMission.FACTION_BLACKLIST;
-			for (String faction : ZeaStaticStrings.factionIDs) {
-				if (!BL.contains(faction)) BL.add(faction);
-			}
+            BL.addAll(Arrays.asList(ZeaStaticStrings.factionIDs));
 		}
 
 		//LunaRefitManager.addRefitButton(new DuskCoreRefitButton());
@@ -64,7 +62,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	@Override
 	public void onGameLoad(boolean newGame) {
-		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
+		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			if(!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_INTIALIZED)) {
 				addToOngoingGame();
 				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
@@ -88,25 +86,16 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().addTransientListener(new AICoreDropReplacerScript());
 
 		//Handle very silly bug duplicating listeners
-		while (Global.getSector().getListenerManager().getListeners(UpdateRelationships.class).size() > 0) {
+		while (!Global.getSector().getListenerManager().getListeners(UpdateRelationships.class).isEmpty()) {
 			Global.getSector().getListenerManager().removeListenerOfClass(UpdateRelationships.class);
 		}
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
-
-		// handle version updates
-		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_CURRENT_VERSION)){
-			String saveGameVersion = (String) Global.getSector().getMemoryWithoutUpdate().get(MEMKEY_CURRENT_VERSION);
-			if (Objects.equals(saveGameVersion, "1.3")) return;
-		} else{
-			ZeaUtils.versionUpdate1_2to1_3();
-			Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_CURRENT_VERSION, "1.3");
-		}
 	}
 
 	@Override
 	public void onNewGame() {
-		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
+		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
 		}
 		Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_INTIALIZED, true);
@@ -116,7 +105,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	@Override
 	public void onNewGameAfterProcGen() {
 		PrepareAbyss.generate();
-		if (!haveNex || (haveNex && SectorManager.getManager().isCorvusMode())) {
+		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			PrepareDarkDeeds.andBegin();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 		}
@@ -140,7 +129,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(kolID);
 		}
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
-		if (!haveNex || haveNex && SectorManager.getManager().isCorvusMode()) {
+		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
 			PrepareAbyss.generate();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);

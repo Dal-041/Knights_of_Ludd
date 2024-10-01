@@ -13,6 +13,7 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -24,8 +25,8 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
     public boolean single = false;
     public String nameTooltip = "Pulsar Beam";
 
-    public String spriteCat = "terrain";
-    public String spriteKey = "pulsar";
+    public String spriteCat = ZeaStaticStrings.TERRAIN;
+    public String spriteKey = ZeaStaticStrings.PULSAR;
     //public static float PULSAR_ARC = 0.25f / ((float) Math.PI * 2f) * 360f;
 
     transient protected SpriteAPI flareTexture = null;
@@ -74,7 +75,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
         //flareTexture = Global.getSettings().getSprite("graphics/planets/aurorae2.png");
         if (spriteCat == null) {
             spriteCat = "terrain";
-            spriteKey = "pulsar";
+            spriteKey = ZeaStaticStrings.PULSAR;
         }
         flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
 
@@ -100,8 +101,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
 
     @Override
     protected float getLoopOneVolume() {
-        float intensity = getIntensityAtPoint(Global.getSector().getPlayerFleet().getLocation());
-        return intensity;
+        return getIntensityAtPoint(Global.getSector().getPlayerFleet().getLocation());
     }
 
     @Override
@@ -362,7 +362,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
         Color bad = Misc.getNegativeHighlightColor();
         Color base = super.getNameColor();
         //bad = Color.red;
-        return Misc.interpolateColor(base, bad, Global.getSector().getCampaignUI().getSharedFader().getBrightness() * 1f);
+        return Misc.interpolateColor(base, bad, Global.getSector().getCampaignUI().getSharedFader().getBrightness());
     }
 
     public boolean hasTooltip() {
@@ -398,15 +398,11 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
     }
 
     public boolean isTooltipExpandable() {
-        return true;
+        return super.isTooltipExpandable();
     }
 
     public float getTooltipWidth() {
-        return 350f;
-    }
-
-    public String getTerrainName() {
-        return super.getTerrainName();
+        return super.getTooltipWidth();
     }
 
     public String getEffectCategory() {
@@ -429,8 +425,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
 
     public float getMaxEffectRadius(Vector2f locFrom) {
         //float angle = Misc.getAngleInDegrees(params.relatedEntity.getLocation(), locFrom);
-        float maxDist = params.bandWidthInEngine;
-        return maxDist;
+        return params.bandWidthInEngine;
     }
     public float getMinEffectRadius(Vector2f locFrom) {
         return 0f;
@@ -459,8 +454,6 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
             Color c = Color.white;
             if (params.relatedEntity instanceof PlanetAPI) {
                 c = ((PlanetAPI)params.relatedEntity).getSpec().getCoronaColor();
-            } else {
-                c = Color.white;
             }
             float alpha = 1f;
             color = Misc.setAlpha(c, (int) (200 * alpha));

@@ -32,9 +32,9 @@ public class NinmahBoss extends BaseHullMod {
         public CombatEngineAPI engine;
         public float phaseTwoTimer = 0f;
         public static final float MAX_TIME = 8f;
-        public ShipAPI ship;
+        public final ShipAPI ship;
         public ShipAPI escortA = null, escortB = null, escortC = null;
-        public String id = "boss_phase_two_modifier";
+        public final String id = ZeaStaticStrings.BOSS_PHASE_TWO_MODIFIER;
         public Utils.FogSpawner escortAFog, escortBFog, escortCFog;
         public NinmahBossPhaseTwoScript(ShipAPI ship) {
             this.ship = ship;
@@ -59,10 +59,7 @@ public class NinmahBoss extends BaseHullMod {
                 Global.getCombatEngine().addFloatingTextAlways(ship.getLocation(),"<REQUESTING REINFORCEMENTS>", NeuralLinkScript.getFloatySize(ship), Color.magenta,
                         ship, 16f * timeMult, 3.2f/timeMult, 4f/timeMult, 0f, 0f,1f);
                 return true;
-            } else if(phaseTwo && phaseTwoTimer < MAX_TIME){
-                return true;
-            }
-            return false;
+            } else return phaseTwo && phaseTwoTimer < MAX_TIME;
         }
 
 
@@ -189,12 +186,12 @@ public class NinmahBoss extends BaseHullMod {
     }
 
     public static class NinmahAIScript implements AdvanceableListener {
-        public IntervalUtil enemyTracker = new IntervalUtil(0.8F, 1F);
-        public IntervalUtil damageTracker = new IntervalUtil(0.2F, 0.3F);
+        public final IntervalUtil enemyTracker = new IntervalUtil(0.8F, 1F);
+        public final IntervalUtil damageTracker = new IntervalUtil(0.2F, 0.3F);
         public CombatEngineAPI engine;
-        public ShipAPI ship;
+        public final ShipAPI ship;
         public ShipAPI target;
-        public Map<ShipAPI, Map<String, Float>> nearbyEnemies = new HashMap<>();
+        public final Map<ShipAPI, Map<String, Float>> nearbyEnemies = new HashMap<>();
         public float targetRange;
         public Vector2f shipTargetPoint;
         public float shipStrafeAngle;
@@ -498,8 +495,7 @@ public class NinmahBoss extends BaseHullMod {
             if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));
             if(!ship.hasListenerOfClass(NinmahAIScript.class)) ship.addListener(new NinmahAIScript(ship));
 
-            String key = "phaseAnchor_canDive";
-            Global.getCombatEngine().getCustomData().put(key, true); // disable phase dive, as listener conflicts with phase two script
+            Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
         }
     }
 }

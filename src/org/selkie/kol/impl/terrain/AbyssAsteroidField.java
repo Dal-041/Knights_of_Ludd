@@ -45,9 +45,9 @@ public class AbyssAsteroidField extends AsteroidFieldTerrainPlugin {
                     float expire = mem.getExpire(sKey);
                     if (expire < 0) expire = 0;
 
-                    float hitProb = Misc.getFleetRadiusTerrainEffectMult(fleet) * 0.5f;
+                    Misc.getFleetRadiusTerrainEffectMult(fleet);
+                    float hitProb;
                     //hitProb = 0.33f;
-                    hitProb = 0.5f;
                     //hitProb = 1f;
                     hitProb = expire / durPerSkip * probPerSkip;
                     if (hitProb > maxProb) hitProb = maxProb;
@@ -56,7 +56,7 @@ public class AbyssAsteroidField extends AsteroidFieldTerrainPlugin {
                         hadRecent &= (float) Math.random() > 0.5f;
                         fleet.addScript(new AbyssAsteroidImpact(fleet, hadRecent));
                         mem.set(sKey, true, 0);
-                        mem.set(recentKey, true, 0.5f + 1f * (float) Math.random());
+                        mem.set(recentKey, true, 0.5f + (float) Math.random());
                     } else {
                         mem.set(sKey, true, Math.min(expire + durPerSkip, maxSkipsToTrack * durPerSkip));
                     }

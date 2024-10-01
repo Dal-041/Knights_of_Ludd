@@ -28,6 +28,7 @@ import java.awt.image.Raster;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
@@ -36,7 +37,7 @@ import static org.selkie.kol.impl.helpers.ZeaUtils.*;
 
 public class PrepareAbyss {
 
-	public static Logger log = Global.getLogger(PrepareAbyss.class);
+	public static final Logger log = Global.getLogger(PrepareAbyss.class);
 
 	public static final String excludeTag = "zea_rulesfortheebutnotforme";
 	public static final String dawnID = "zea_dawn";
@@ -430,12 +431,12 @@ public class PrepareAbyss {
 		jumpPoint.setStandardWormholeToHyperspaceVisual();
 		system.addEntity(jumpPoint);
 
-		PlanetAPI first = system.addPlanet("zea_lunasea_one", luna, "Id", "barren-bombarded", 50, 150, 10900, 3000000);
-		PlanetAPI second = system.addPlanet("zea_lunasea_two", luna, "Doubt", "desert", 29, 170, 6100, 3000000);
-		PlanetAPI third = system.addPlanet("zea_lunasea_three", luna, "Wild", "jungle", 12, 70, 15800, 3000000);
-		PlanetAPI fourth = system.addPlanet("zea_lunasea_four", jumpPoint, "Ego", "frozen", 190, 250, 500, 3000000);
-		PlanetAPI fifth = system.addPlanet("zea_lunasea_five", luna, "Savage", "barren", 336, 145, 12300, 3000000);
-		PlanetAPI sixth = system.addPlanet("zea_lunasea_six", luna, "Feral", "toxic", 306, 165, 8100, 3000000);
+		PlanetAPI first = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_ONE, luna, "Id", "barren-bombarded", 50, 150, 10900, 3000000);
+		PlanetAPI second = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_TWO, luna, "Doubt", "desert", 29, 170, 6100, 3000000);
+		PlanetAPI third = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_THREE, luna, "Wild", "jungle", 12, 70, 15800, 3000000);
+		PlanetAPI fourth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR, jumpPoint, "Ego", "frozen", 190, 250, 500, 3000000);
+		PlanetAPI fifth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FIVE, luna, "Savage", "barren", 336, 145, 12300, 3000000);
+		PlanetAPI sixth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_SIX, luna, "Feral", "toxic", 306, 165, 8100, 3000000);
 
 		first.getMarket().addCondition(Conditions.TECTONIC_ACTIVITY);
 		first.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
@@ -468,7 +469,7 @@ public class PrepareAbyss {
 		system.autogenerateHyperspaceJumpPoints(false, false); //begone evil clouds
 		HyperspaceTerrainPlugin plugin = (HyperspaceTerrainPlugin) Misc.getHyperspaceTerrain().getPlugin();
 		NebulaEditor editor = new NebulaEditor(plugin);
-		float minRadius = plugin.getTileSize() * 1f;
+		float minRadius = plugin.getTileSize();
 
 		float radius = system.getMaxRadiusInHyperspace();
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
@@ -496,7 +497,7 @@ public class PrepareAbyss {
 
 	public static void generateDynamicDuskHole() {
 		//Variable location
-		Vector2f pos = getRandomHyperspaceCoordForSystem();
+		Vector2f pos = Objects.requireNonNull(getRandomHyperspaceCoordForSystem());
 
 		StarSystemAPI system = Global.getSector().createStarSystem(ProcgenUsedNames.pickName(NameGenData.TAG_STAR, null, null).nameWithRomanSuffixIfAny);
 		try {
@@ -689,7 +690,8 @@ public class PrepareAbyss {
 		return null;
 	}
 
-	public static boolean isWithinCoreSpace(float x, float y) {
+	@SuppressWarnings("DataFlowIssue")
+    public static boolean isWithinCoreSpace(float x, float y) {
 		float coreW = 20000;
 		float coreH = 20000;
 		Vector2f center = new Vector2f(0,0);
@@ -720,10 +722,8 @@ public class PrepareAbyss {
 
 		if (x < w+8000 && y < h+18500) return true;
 		if (x < w+8000+15000 && y < h+16000) return true;
-		if (x < w+8000+15000+10000 && y < h+7500) return true;
-
-		return false;
-	}
+        return x < w + 8000 + 15000 + 10000 && y < h + 7500;
+    }
 
 	public static StarSystemGenerator.GenResult generateBlackholeSpiral(StarSystemAPI system, SectorEntityToken parent, Float orbitRadius, Color minColor, Color maxColor) {
 
@@ -763,7 +763,7 @@ public class PrepareAbyss {
 		}
 
 
-		List<SectorEntityToken> rings = new ArrayList<SectorEntityToken>();
+		List<SectorEntityToken> rings = new ArrayList<>();
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(orbitRadius, orbitRadius / 2f, parent, null));
 		ring.addTag(Tags.ACCRETION_DISK);
 		if (((CampaignTerrainAPI)ring).getPlugin() instanceof RingSystemTerrainPlugin) {
@@ -783,9 +783,9 @@ public class PrepareAbyss {
 
 	protected static AccretionDiskGenPlugin.TexAndIndex getTexAndIndex() {
 		AccretionDiskGenPlugin.TexAndIndex result = new AccretionDiskGenPlugin.TexAndIndex();
-		WeightedRandomPicker<Integer> indexPicker = new WeightedRandomPicker<Integer>(StarSystemGenerator.random);
+		WeightedRandomPicker<Integer> indexPicker = new WeightedRandomPicker<>(StarSystemGenerator.random);
 
-		WeightedRandomPicker<String> ringSet = new WeightedRandomPicker<String>(StarSystemGenerator.random);
+		WeightedRandomPicker<String> ringSet = new WeightedRandomPicker<>(StarSystemGenerator.random);
 		ringSet.add("ring_ice", 10f);
 		ringSet.add("ring_dust", 10f);
 		//ringSet.add("ring_special", 1f);

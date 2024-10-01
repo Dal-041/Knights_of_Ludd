@@ -23,9 +23,9 @@ import java.util.List;
  * Spawns a drone with an Ion Beam. Has no usable key and doesn't take a key index. Blocks wing system, activating it if the ship is venting.
  */
 public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
-    private static Color BASE_SHIELD_COLOR = Color.cyan;
-    private static Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
-    private static float SHIELD_ALPHA = 0.25f;
+    private static final Color BASE_SHIELD_COLOR = Color.cyan;
+    private static final Color HIGHEST_FLUX_SHIELD_COLOR = Color.red;
+    private static final float SHIELD_ALPHA = 0.25f;
 
     public SmartShieldDronesSubsystem(ShipAPI ship) {
         super(ship);
@@ -70,7 +70,7 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public PIDController getPIDController() {
+    public @NotNull PIDController getPIDController() {
         return new PIDController(15f,3.5f,10f,2f);
     }
 
@@ -111,7 +111,7 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public String getDroneVariant() {
+    public @NotNull String getDroneVariant() {
         return "zea_dawn_chiwen_wing";
     }
 
@@ -121,7 +121,8 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
         return new FacingSpinningCircleFormation();
     }
 
-    private class FacingSpinningCircleFormation extends DroneFormation {
+    @SuppressWarnings("ComparatorMethodParameterNotUsed")
+    private static class FacingSpinningCircleFormation extends DroneFormation {
         private final static float DRONE_ARC = 30f;
         private final static float ROTATION_SPEED = 20;
         private float currentRotation = 0f;
@@ -170,8 +171,7 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
             float timeElapsed = currentTime - lastUpdatedTime;
             float armor = StarficzAIUtils.getCurrentArmorRating(ship);
 
-            List<Float> droneAngles = new ArrayList<>();
-            droneAngles.addAll(omniShieldDirections);
+            List<Float> droneAngles = new ArrayList<>(omniShieldDirections);
 
             float bestLowestTime = Float.POSITIVE_INFINITY;
             List<Float> blockedDirections = new ArrayList<>();
@@ -203,7 +203,7 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
                         }
                     }
                     // add the potential angles to a list
-                    if (damageBlocked > 0) potentialAngles.add(new Triple<Float, Float, Float>(droneAngle, lowestTime, damageBlocked));
+                    if (damageBlocked > 0) potentialAngles.add(new Triple<>(droneAngle, lowestTime, damageBlocked));
                 }
 
                 // find the best direction and add it to blocked directions

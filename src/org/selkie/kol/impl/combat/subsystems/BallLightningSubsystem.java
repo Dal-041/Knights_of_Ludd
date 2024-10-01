@@ -19,10 +19,10 @@ public class BallLightningSubsystem extends MagicSubsystem {
     private static final float MAX_ARC = 90f;
     private static final float DAMAGE = 50f;
     private static final float EMP_DAMAGE = 300f;
-    ShipAPI ship;
-    IntervalUtil lightningInterval = new IntervalUtil(0.07f, 0.15f);
-    IntervalUtil lightningDamageInterval = new IntervalUtil(0.05f, 0.5f);
-    IntervalUtil aiInterval = new IntervalUtil(0.5f,1f);
+    final ShipAPI ship;
+    final IntervalUtil lightningInterval = new IntervalUtil(0.07f, 0.15f);
+    final IntervalUtil lightningDamageInterval = new IntervalUtil(0.05f, 0.5f);
+    final IntervalUtil aiInterval = new IntervalUtil(0.5f,1f);
     public BallLightningSubsystem(ShipAPI ship) {
         super(ship);
         this.ship = ship;
@@ -51,8 +51,8 @@ public class BallLightningSubsystem extends MagicSubsystem {
     public boolean shouldActivateAI(float amount) {
         aiInterval.advance(amount);
         if(aiInterval.intervalElapsed() && canActivate()) {
-            List missiles = AIUtils.getNearbyEnemyMissiles(ship, MAX_RANGE + 100f);
-            List enemies = AIUtils.getNearbyEnemies(ship, MAX_RANGE + 100f);
+            List<MissileAPI> missiles = AIUtils.getNearbyEnemyMissiles(ship, MAX_RANGE + 100f);
+            List<ShipAPI> enemies = AIUtils.getNearbyEnemies(ship, MAX_RANGE + 100f);
             if (missiles.size() + enemies.size() >= 5) {
                 Vector2f center = MathUtils.getPointOnCircumference(ship.getLocation(), 85, ship.getFacing());
                 List<CombatEntityAPI> targets = findTargets(center, MAX_TARGETS);
@@ -158,5 +158,6 @@ public class BallLightningSubsystem extends MagicSubsystem {
     }
 
     public void onActivate() {
+        super.onActivate();
     }
 }

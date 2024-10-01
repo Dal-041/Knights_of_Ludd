@@ -14,8 +14,8 @@ import org.lazywizard.lazylib.MathUtils;
 public class TwinShieldStats extends BaseShipSystemScript {
     public boolean runOnce = true;
     public float shieldArc;
-    protected Object STATUSKEY1 = new Object();
-    protected Object STATUSKEY2 = new Object();
+    protected final Object STATUSKEY1 = new Object();
+    protected final Object STATUSKEY2 = new Object();
     public float lastActiveLevel = 0f;
     @Override
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
@@ -53,7 +53,7 @@ public class TwinShieldStats extends BaseShipSystemScript {
         CombatEngineAPI engine = Global.getCombatEngine();
         if(engine.getPlayerShip() == ship && effectLevel > 0){
             engine.maintainStatusForPlayerShip(STATUSKEY1, ship.getSystem().getSpecAPI().getIconSpriteName(),
-                    "-" + (int) Math.round(50 * effectLevel) + "% Shield Damage", "-" + (int) Math.round(50 * effectLevel) + "% Shield Arc", false);
+                    "-" + Math.round(50 * effectLevel) + "% Shield Damage", "-" + Math.round(50 * effectLevel) + "% Shield Arc", false);
             engine.maintainStatusForPlayerShip(STATUSKEY2, ship.getSystem().getSpecAPI().getIconSpriteName(),  ship.getSystem().getSpecAPI().getName(), "Unlocked Omni Shield" , false);
         }
     }

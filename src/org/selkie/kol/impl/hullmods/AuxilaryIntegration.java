@@ -7,7 +7,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Stats;
 
 public class AuxilaryIntegration extends BaseHullMod {
 
-    private float OP_COST_REDUCTION = 5f;
+    private static final float OP_COST_REDUCTION = 5f;
 
     @Override
     public void applyEffectsBeforeShipCreation(final ShipAPI.HullSize hullSize, final MutableShipStatsAPI stats, final String id) {
@@ -32,11 +32,8 @@ public class AuxilaryIntegration extends BaseHullMod {
 
     @Override
     public String getDescriptionParam(final int index, final ShipAPI.HullSize hullSize) {
-        switch (index) {
-            case 0:
-                return "5";
-            default:
-                break;
+        if (index == 0) {
+            return "5";
         }
         return null;
     }

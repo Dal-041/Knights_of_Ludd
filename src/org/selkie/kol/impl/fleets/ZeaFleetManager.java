@@ -49,12 +49,12 @@ public class ZeaFleetManager extends SeededFleetManager {
         }
     }
 
-    protected int minPts;
-    protected int maxPts;
-    protected int maxFleets;
-    protected StarSystemAPI system;
-    String fac;
-    protected IntervalUtil interval = new IntervalUtil(3, 5);
+    protected final int minPts;
+    protected final int maxPts;
+    protected final int maxFleets;
+    protected final StarSystemAPI system;
+    final String fac;
+    protected final IntervalUtil interval = new IntervalUtil(3, 5);
 
     public ZeaFleetManager(StarSystemAPI system, String factionID, int maxFleets, int minPts, int maxPts) {
         super(system, 1f);
@@ -72,21 +72,21 @@ public class ZeaFleetManager extends SeededFleetManager {
     }
 
     public static String getSecondFaction(long seed, String primary) {
-        WeightedRandomPicker<String> picker = new WeightedRandomPicker<String>(new Random(seed));
+        WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(new Random(seed));
 
-        picker.add("derelict",1f);
-        picker.add("remnant", 1f);
+        picker.add(Factions.DERELICT,1f);
+        picker.add(Factions.REMNANTS, 1f);
         float w = primary.equals(PrepareAbyss.dawnID) ? 0f : 1f;
         picker.add(PrepareAbyss.dawnID, w);
         w = primary.equals(PrepareAbyss.duskID) ? 0f : 1f;
         picker.add(PrepareAbyss.duskID, w);
         w = primary.equals(PrepareAbyss.elysianID) ? 0f : 1f;
         picker.add(PrepareAbyss.elysianID, w);
-        if (ZeaUtils.useDomres) picker.add("domres", 1f);
-        if (ZeaUtils.useDustkeepers) picker.add("sotf_dustkeepers", 0.8f);
+        if (ZeaUtils.useDomres) picker.add(ZeaStaticStrings.DOMRES, 1f);
+        if (ZeaUtils.useDustkeepers) picker.add(ZeaStaticStrings.SOTF_DUSTKEEPERS, 0.8f);
         w = primary.equals(PrepareAbyss.dawnID) ? 0.75f : 0f;
-        if (ZeaUtils.useEnigma) picker.add("enigma", w);
-        if (ZeaUtils.useLostech) picker.add("tahlan_allmother", 0.6f);
+        if (ZeaUtils.useEnigma) picker.add(ZeaStaticStrings.ENIGMA, w);
+        if (ZeaUtils.useLostech) picker.add(ZeaStaticStrings.TAHLAN_ALLMOTHER, 0.6f);
         return picker.pick();
     }
 
@@ -178,7 +178,7 @@ public class ZeaFleetManager extends SeededFleetManager {
     }
 
     public static SectorEntityToken pickEntityToGuard(Random random, StarSystemAPI system, CampaignFleetAPI fleet) {
-        WeightedRandomPicker<SectorEntityToken> picker = new WeightedRandomPicker<SectorEntityToken>(random);
+        WeightedRandomPicker<SectorEntityToken> picker = new WeightedRandomPicker<>(random);
 
         for (SectorEntityToken entity : system.getEntitiesWithTag(Tags.SALVAGEABLE)) {
             float w = 5f; //1f
@@ -318,32 +318,34 @@ public class ZeaFleetManager extends SeededFleetManager {
         String portrait = Global.getSector().getFaction(faction).getPortraits(FullName.Gender.ANY).pick();
 
         int level = 8;
-        String core = "alpha_core";
+        String core = Commodities.ALPHA_CORE;
         if (randCore) {
             float rand = MathUtils.getRandom().nextFloat();
             if (rand < 0.35f) {
                 level = 7;
-                core = "beta_core";
+                core = Commodities.BETA_CORE;
             } else if (rand < 0.70f) {
                 level = 6;
-                core = "gamma_core";
+                core = Commodities.GAMMA_CORE;
             }
         }
         //TODO handle modified AI core levels, portrait pools
         //Vanilla levels (integrated): G4, B6, A8, O9
         skillPref = getFactionSkillPref(faction);
 
-        if (faction.equals(PrepareAbyss.dawnID)) {
-            portrait = ZeaStaticStrings.portraitsDawn[level-6];
-            persona = Personalities.AGGRESSIVE;
-        }
-        else if (faction.equals(PrepareAbyss.duskID)) {
-            persona = Personalities.STEADY;
-            portrait = ZeaStaticStrings.portraitsDusk[level-6];
-        }
-        else if (faction.equals(PrepareAbyss.elysianID)) {
-            persona = Personalities.STEADY;
-            portrait = ZeaStaticStrings.portraitsElysian[level-6];
+        switch (faction) {
+            case PrepareAbyss.dawnID:
+                portrait = ZeaStaticStrings.portraitsDawn[level - 6];
+                persona = Personalities.AGGRESSIVE;
+                break;
+            case PrepareAbyss.duskID:
+                persona = Personalities.STEADY;
+                portrait = ZeaStaticStrings.portraitsDusk[level - 6];
+                break;
+            case PrepareAbyss.elysianID:
+                persona = Personalities.STEADY;
+                portrait = ZeaStaticStrings.portraitsElysian[level - 6];
+                break;
         }
 
         return MagicCampaign.createCaptainBuilder(faction)
@@ -363,19 +365,26 @@ public class ZeaFleetManager extends SeededFleetManager {
             if (captain == null) {
                 member.setCaptain(createAICaptain(fac, true));
             } else {
-                if (captain.getId().equals("tahlan_child")) return; //Special officer
+                if (captain.getId().equals(ZeaStaticStrings.TAHLAN_CHILD)) return; //Special officer
                 boolean found = false;
                 String portCapt = captain.getPortraitSprite();
                 for (String port : ZeaStaticStrings.portraitsDawn) {
                     if (portCapt.equalsIgnoreCase(port)) {
                         found = true;
+                        break;
                     }
                 }
                 for (String port : ZeaStaticStrings.portraitsDusk) {
-                    if (portCapt.equalsIgnoreCase(port)) found = true;
+                    if (portCapt.equalsIgnoreCase(port)) {
+                        found = true;
+                        break;
+                    }
                 }
                 for (String port : ZeaStaticStrings.portraitsElysian) {
-                    if (portCapt.equalsIgnoreCase(port)) found = true;
+                    if (portCapt.equalsIgnoreCase(port)) {
+                        found = true;
+                        break;
+                    }
                 }
                 if (!found) {
 

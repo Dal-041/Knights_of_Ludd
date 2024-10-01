@@ -28,7 +28,7 @@ public class SmallFluxNegationAI implements ShipSystemAIScript {
                         Vector2f endPoint = MathUtils.getPointOnCircumference(weapon.getLocation(), weapon.getRange(), weapon.getCurrAngle());
                         Vector2f closestPoint = MathUtils.getNearestPointOnLine(targetLocation, weapon.getLocation(), endPoint);
 
-                        if (MathUtils.getDistance(closestPoint, targetLocation) < Misc.getTargetingRadius(closestPoint, targetShip, targetShip.getShield() == null ? false : targetShip.getShield().isOn())) {
+                        if (MathUtils.getDistance(closestPoint, targetLocation) < Misc.getTargetingRadius(closestPoint, targetShip, targetShip.getShield() != null && targetShip.getShield().isOn())) {
                             if(ship.getSystem().isActive()) weapon.setForceFireOneFrame(true);
                             inRange++;
                         }

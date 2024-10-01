@@ -17,15 +17,15 @@ import org.selkie.kol.impl.world.PrepareAbyss;
 
 public class AbyssChargedStorm implements EveryFrameScript {
 
-    public static float MAX_BURN = Global.getSettings().getFloat("maxStormStrikeBurn");
+    public static final float MAX_BURN = Global.getSettings().getFloat("maxStormStrikeBurn");
     public static float STORM_SPEED_BURST = Global.getSettings().getSpeedPerBurnLevel() * 50f;
     public static float DURATION_SECONDS = 1f;
 
-    protected static StarSystemAPI system = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
-    protected CampaignFleetAPI fleet;
+    protected static final StarSystemAPI system = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
+    protected final CampaignFleetAPI fleet;
     protected float elapsed;
     protected float angle;
-    protected CellStateTracker cell;
+    protected final CellStateTracker cell;
 
     public AbyssChargedStorm(CellStateTracker cell, CampaignFleetAPI fleet) {
         this.cell = cell;
@@ -92,7 +92,7 @@ public class AbyssChargedStorm implements EveryFrameScript {
         Vector2f boost = Misc.getUnitVectorAtDegreeAngle(angle);
 
         float mult = 1f - elapsed / DURATION_SECONDS;
-        mult *= Math.pow(Math.min(1f, elapsed / 0.25f), 2f);
+        mult *= (float) Math.pow(Math.min(1f, elapsed / 0.25f), 2f);
         if (mult < 0) {
             mult = 0;
         }

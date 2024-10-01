@@ -14,14 +14,14 @@ import java.util.Set;
 public class ZeaLoreIntel extends BaseIntelPlugin {
 
     private String name;
-    private String icon;
+    private final String icon;
     private String desc;
     private String[] descHighlights;
 
     public ZeaLoreIntel(String icon, String name) {
         try {
             Global.getSettings().loadTexture(icon);
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         }
         this.name = name;
@@ -31,7 +31,7 @@ public class ZeaLoreIntel extends BaseIntelPlugin {
     public ZeaLoreIntel(String icon, String name, String desc, String[] descHighlights) {
         try {
             Global.getSettings().loadTexture(icon);
-        } catch (IOException e) {
+        } catch (IOException ignored) {
 
         }
         this.name = name;
@@ -116,6 +116,6 @@ public class ZeaLoreIntel extends BaseIntelPlugin {
 
     @Override
     public boolean canTurnImportantOff() {
-        return true;
+        return super.canTurnImportantOff();
     }
 }

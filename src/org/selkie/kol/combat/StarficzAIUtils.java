@@ -230,7 +230,7 @@ public class StarficzAIUtils {
                 if (occlusion == enemy) continue;
                 if (occlusion.getParentStation() == enemy) continue;
                 Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), enemy.getLocation());
-                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() == null ? false : occlusion.getShield().isOn())){
+                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() != null && occlusion.getShield().isOn())){
                     occluded = true;
                 }
             }
@@ -532,6 +532,7 @@ public class StarficzAIUtils {
         return futureHits;
     }
 
+    @SuppressWarnings("ForLoopReplaceableByForEach")
     public static float getCurrentArmorRating(ShipAPI ship){
         if (ship == null || !Global.getCombatEngine().isEntityInPlay(ship)) {
             return 0f;
@@ -735,10 +736,7 @@ public class StarficzAIUtils {
             public boolean accept(Vector2f point) {
                 if(point.getX() > (Global.getCombatEngine().getMapWidth()/2 - 200f) || point.getX() < (200f - Global.getCombatEngine().getMapWidth()/2))
                     return false;
-                else if(point.getY() > (Global.getCombatEngine().getMapHeight()/2 - 200f) || point.getY() < (200f - Global.getCombatEngine().getMapHeight()/2))
-                    return false;
-                else
-                    return true;
+                else return !(point.getY() > (Global.getCombatEngine().getMapHeight() / 2 - 200f)) && !(point.getY() < (200f - Global.getCombatEngine().getMapHeight() / 2));
             }
         };
 

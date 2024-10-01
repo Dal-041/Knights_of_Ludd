@@ -13,7 +13,7 @@ public class kol_battlestar extends OrbitalStation {
     @Override
     public boolean canUpgrade() {
         if (Global.getSector() != null && Global.getSector().getPlayerFaction() != null) {
-            if (Global.getSector().getPlayerFaction().getId().equals(KOL_ModPlugin.kolID)) return true;
+            return Global.getSector().getPlayerFaction().getId().equals(KOL_ModPlugin.kolID);
         }
         return false;
     }

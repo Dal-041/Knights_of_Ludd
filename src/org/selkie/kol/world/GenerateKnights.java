@@ -15,7 +15,6 @@ import com.fs.starfarer.api.impl.campaign.intel.deciv.DecivTracker;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
-import com.fs.starfarer.campaign.econ.Market;
 import exerelin.campaign.AllianceManager;
 import exerelin.campaign.DiplomacyManager;
 import exerelin.campaign.PlayerFactionStore;
@@ -24,22 +23,20 @@ import exerelin.campaign.alliances.Alliance;
 import exerelin.utilities.NexConfig;
 import exerelin.utilities.NexFactionConfig;
 import org.apache.log4j.Logger;
-import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.fleets.SpawnInvictus;
 import org.selkie.kol.fleets.SpawnRetribution;
 import org.selkie.kol.helpers.MarketHelpers;
-import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaMechanicIntel;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 public class GenerateKnights {
 
-	public static Logger log = Global.getLogger(GenerateKnights.class);
+	public static final Logger log = Global.getLogger(GenerateKnights.class);
 
-	public static int baseKnightExpeditions = 2;
+	public static final int baseKnightExpeditions = 2;
 	
 	public static void genCorvus() {
 		Global.getSector().getStarSystem("Eos Exodus").setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");
@@ -115,18 +112,18 @@ public class GenerateKnights {
 		//cygnus.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         
         MarketHelpers.addMarketplace("knights_of_selkie", cygnus, null, "Battlestation Cygnus", 4,
-        		new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
+                new ArrayList<>(Arrays.asList(Conditions.OUTPOST,
                         Conditions.POPULATION_4)),
-        		new ArrayList<String>(Arrays.asList(
+                new ArrayList<>(Arrays.asList(
                         Industries.POPULATION,
                         Industries.SPACEPORT,
-						"kol_garden",
-						Industries.PATROLHQ,
+                        "kol_garden",
+                        Industries.PATROLHQ,
                         Industries.LIGHTINDUSTRY,
                         Industries.GROUNDDEFENSES,
                         Industries.BATTLESTATION)),
-        		new ArrayList<String>(Arrays.asList(
-        				Submarkets.SUBMARKET_STORAGE,
+                new ArrayList<>(Arrays.asList(
+                        Submarkets.SUBMARKET_STORAGE,
                         Submarkets.GENERIC_MILITARY,
                         Submarkets.SUBMARKET_BLACK,
                         Submarkets.SUBMARKET_OPEN)),
@@ -167,20 +164,20 @@ public class GenerateKnights {
 		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
 
 		MarketHelpers.addMarketplace("knights_of_selkie", lyra, null, "Star Keep Lyra", 5,
-        		new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
+                new ArrayList<>(Arrays.asList(Conditions.OUTPOST,
                         Conditions.POPULATION_5)),
-        		new ArrayList<String>(Arrays.asList(
+                new ArrayList<>(Arrays.asList(
                         Industries.POPULATION,
                         Industries.SPACEPORT,
-						"kol_garden",
+                        "kol_garden",
                         Industries.MILITARYBASE,
                         Industries.ORBITALWORKS,
                         Industries.FUELPROD,
                         Industries.HEAVYBATTERIES,
                         Industries.STARFORTRESS,
                         Industries.WAYSTATION)),
-        		new ArrayList<String>(Arrays.asList(
-        				Submarkets.SUBMARKET_STORAGE,
+                new ArrayList<>(Arrays.asList(
+                        Submarkets.SUBMARKET_STORAGE,
                         Submarkets.GENERIC_MILITARY,
                         Submarkets.SUBMARKET_BLACK,
                         Submarkets.SUBMARKET_OPEN)),
@@ -215,14 +212,14 @@ public class GenerateKnights {
 	public static void genBattlestarLibra() {
 		String entID = "kol_libra";
 		StarSystemAPI home = getLibraHome(Long.parseLong(Global.getSector().getSeedString().substring(3)));
-		if (home == null) {;
-			log.error(String.format("KOL: Could not find a system for Libra"));
+		if (home == null) {
+			log.error("KOL: Could not find a system for Libra");
 			return;
 		}
 		//SectorEntityToken libra = home.addCustomEntity(entID, "Battlestar Libra", "kol_battlestar_libra_entity", "knights_of_selkie");
 		//libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
 
-		LinkedHashMap<BaseThemeGenerator.LocationType, Float> weights = new LinkedHashMap<BaseThemeGenerator.LocationType, Float>();
+		LinkedHashMap<BaseThemeGenerator.LocationType, Float> weights = new LinkedHashMap<>();
 		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_BELT, 2f);
 		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_FIELD, 10f);
 		weights.put(BaseThemeGenerator.LocationType.IN_RING, 5f);
@@ -234,7 +231,7 @@ public class GenerateKnights {
 		WeightedRandomPicker<BaseThemeGenerator.EntityLocation> locs = BaseThemeGenerator.getLocations(null, home, null, 100f, weights);
 		BaseThemeGenerator.EntityLocation loc = locs.pick();
 
-		if (loc == null) {;
+		if (loc == null) {
 			log.error(String.format("KOL: Could not find a location for Libra in %s", home.getId()));
 			return;
 		}
@@ -256,20 +253,20 @@ public class GenerateKnights {
 		SectorEntityToken libra = added.entity;
 
 		MarketAPI market = MarketHelpers.addMarketplace("knights_of_selkie", libra, null, name, 3,
-				new ArrayList<String>(Arrays.asList(Conditions.OUTPOST,
-						Conditions.POPULATION_3)),
-				new ArrayList<String>(Arrays.asList(
-						Industries.POPULATION,
-						Industries.SPACEPORT,
-						"kol_garden",
-						Industries.HIGHCOMMAND,
-						Industries.HEAVYBATTERIES,
-						"kol_battlestation_libra",
-						Industries.WAYSTATION)),
-				new ArrayList<String>(Arrays.asList(
-						Submarkets.SUBMARKET_STORAGE,
-						Submarkets.GENERIC_MILITARY,
-						Submarkets.SUBMARKET_BLACK)),
+                new ArrayList<>(Arrays.asList(Conditions.OUTPOST,
+                        Conditions.POPULATION_3)),
+                new ArrayList<>(Arrays.asList(
+                        Industries.POPULATION,
+                        Industries.SPACEPORT,
+                        "kol_garden",
+                        Industries.HIGHCOMMAND,
+                        Industries.HEAVYBATTERIES,
+                        "kol_battlestation_libra",
+                        Industries.WAYSTATION)),
+                new ArrayList<>(Arrays.asList(
+                        Submarkets.SUBMARKET_STORAGE,
+                        Submarkets.GENERIC_MILITARY,
+                        Submarkets.SUBMARKET_BLACK)),
 				1f
 		);
 
@@ -357,8 +354,8 @@ public class GenerateKnights {
 			if (system.getLocation().getX() <= width/-2 + 20000) w *= 5f; //West bias
 			if (system.getLocation().getX() <= width/-2 + 35000) w *= 5f; //West bias
 			if (system.hasSystemwideNebula()) w *= 2f;
-			if (Misc.getNumStableLocations(system) < 1) w *= 0.1;
-			if (Misc.getNumStableLocations(system) < 2) w *= 0.5;
+			if (Misc.getNumStableLocations(system) < 1) w *= 0.1F;
+			if (Misc.getNumStableLocations(system) < 2) w *= 0.5F;
 
 			picker.add(system, w);
 		}

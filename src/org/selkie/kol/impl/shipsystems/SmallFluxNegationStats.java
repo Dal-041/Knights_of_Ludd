@@ -1,22 +1,18 @@
 package org.selkie.kol.impl.shipsystems;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import com.fs.starfarer.api.util.Misc;
-import org.lazywizard.lazylib.MathUtils;
-import org.lwjgl.util.vector.Vector2f;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 public class SmallFluxNegationStats extends BaseShipSystemScript {
-    public static Color WEAPON_GLOW = new Color(255,50,50,155);
-    private HashMap<WeaponAPI, Boolean> fluxRefunded = new HashMap<>();
-    private List<WeaponAPI> beams = new ArrayList<>();
+    public static final Color WEAPON_GLOW = new Color(255,50,50,155);
+    private final HashMap<WeaponAPI, Boolean> fluxRefunded = new HashMap<>();
+    private final List<WeaponAPI> beams = new ArrayList<>();
     private boolean inited = false;
     private ShipAPI ship;
     public void apply(MutableShipStatsAPI stats, final String id, State state, float effectLevel) {

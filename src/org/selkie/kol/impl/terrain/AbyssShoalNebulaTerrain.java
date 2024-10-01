@@ -1,17 +1,9 @@
 package org.selkie.kol.impl.terrain;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.TerrainAIFlags;
-import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
-import com.fs.starfarer.api.loading.Description;
-import com.fs.starfarer.api.ui.Alignment;
-import com.fs.starfarer.api.ui.TooltipMakerAPI;
-import com.fs.starfarer.api.util.Misc;
-
-import java.awt.*;
 
 import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 

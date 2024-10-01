@@ -53,10 +53,6 @@ public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
         return 25f;
     }
 
-    @Override
-    public boolean canActivate() {
-        return super.canActivate();
-    }
 
     @Override
     public boolean shouldActivateAI(float amount) {
@@ -68,9 +64,7 @@ public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
         if (droneTarget.isPhased()) return true;
         if (AIUtils.getNearbyEnemies(droneTarget, nearbyRange).isEmpty()) return true;
         if (ship.getShipTarget()!= null && ship.getShipTarget().getOwner() == ship.getOwner() && ship.getShipTarget() != droneTarget) return true;
-        if (intervalCheck.intervalElapsed()) return true;
-
-        return false;
+        return intervalCheck.intervalElapsed();
     }
 
     @Override
@@ -97,7 +91,7 @@ public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public PIDController getPIDController() {
+    public @NotNull PIDController getPIDController() {
         return PID.copy();
     }
 
@@ -194,7 +188,7 @@ public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
     }
 
     @Override
-    public String getDroneVariant() {
+    public @NotNull String getDroneVariant() {
         return "zea_edf_shachihoko_wing";
     }
 

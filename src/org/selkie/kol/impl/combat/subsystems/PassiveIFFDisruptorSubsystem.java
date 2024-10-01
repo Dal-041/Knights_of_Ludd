@@ -20,7 +20,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
     private float chargeRechargeMult = 1f;
-    private Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
+    private final Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
     private CombatEntityAPI target = null;
 
     public PassiveIFFDisruptorSubsystem(ShipAPI ship) {
@@ -49,7 +49,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
 
     @Override
     public float getBaseInDuration() {
-        return 0f;
+        return super.getBaseInDuration();
     }
 
     @Override
@@ -59,7 +59,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
 
     @Override
     public float getBaseOutDuration() {
-        return 0f;
+        return super.getBaseOutDuration();
     }
 
     @Override
@@ -195,7 +195,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
                     toRemove.add(missile);
                     continue;
                 }
-            } catch (Exception ex) {
+            } catch (Exception ignored) {
             }
 
             MissileTracker tracker = missileMap.get(missile);
@@ -264,7 +264,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
 
     private static class DummyMissileAI implements MissileAIPlugin, GuidedMissileAI {
         CombatEntityAPI target;
-        MissileAPI missile;
+        final MissileAPI missile;
 
         private DummyMissileAI(MissileAPI missile, CombatEntityAPI target) {
             setTarget(target);

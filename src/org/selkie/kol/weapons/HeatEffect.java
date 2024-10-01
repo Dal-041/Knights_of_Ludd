@@ -17,7 +17,7 @@ public class HeatEffect implements EveryFrameWeaponEffectPlugin {
     private int range = 0;
     private ShipAPI ship;
     
-    private IntervalUtil timer = new IntervalUtil(0.05f,0.15f);
+    private final IntervalUtil timer = new IntervalUtil(0.05f,0.15f);
     
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {

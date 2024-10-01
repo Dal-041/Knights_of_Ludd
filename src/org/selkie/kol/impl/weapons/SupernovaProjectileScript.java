@@ -34,7 +34,7 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
     private State state = State.INITIALIZE;
     private float elapsedStageTime = 0f;
     private final IntervalUtil blink = new IntervalUtil(0.4f, 0.4f);
-    private IntervalUtil canisterReleaseInterval = new IntervalUtil(0.075f, 0.12f);
+    private final IntervalUtil canisterReleaseInterval = new IntervalUtil(0.075f, 0.12f);
     private int canisterTier = 1;
     private int canistersReleased = 0;
     private float canisterExplosionTime = 0f;
@@ -55,6 +55,7 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
         desiredAngularVelocity = angularVelocity;
     }
 
+    @SuppressWarnings("DataFlowIssue")
     @Override
     public void advance(float amount, List<InputEventAPI> events) {
         if (Global.getCombatEngine().isPaused()) {

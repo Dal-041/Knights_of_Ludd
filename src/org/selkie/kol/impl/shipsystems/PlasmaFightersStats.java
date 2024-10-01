@@ -13,8 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlasmaFightersStats extends BaseShipSystemScript {
-    private static float SPEED_BONUS = 125f;
-    private static float TURN_BONUS = 20f;
+    private static final float SPEED_BONUS = 125f;
+    private static final float TURN_BONUS = 20f;
     private static final Color color = new Color(100, 255, 100, 255);
 
     @Override

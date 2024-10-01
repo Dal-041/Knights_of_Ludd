@@ -41,12 +41,12 @@ public class NinayaBattleCreationPlugin extends BattleCreationPluginImpl {
         int fpTwo = 0;
         for (FleetMemberAPI member : playerFleet.getFleetData().getMembersListCopy()) {
             if (member.canBeDeployedForCombat() || playerGoal == FleetGoal.ESCAPE) {
-                fpOne += member.getUnmodifiedDeploymentPointsCost();
+                fpOne += (int) member.getUnmodifiedDeploymentPointsCost();
             }
         }
         for (FleetMemberAPI member : otherFleet.getFleetData().getMembersListCopy()) {
             if (member.canBeDeployedForCombat() || playerGoal == FleetGoal.ESCAPE) {
-                fpTwo += member.getUnmodifiedDeploymentPointsCost();
+                fpTwo += (int) member.getUnmodifiedDeploymentPointsCost();
             }
         }
 
@@ -72,11 +72,6 @@ public class NinayaBattleCreationPlugin extends BattleCreationPluginImpl {
                 numObjectives = 3 + random.nextInt(2);
                 //numObjectives = 2 + (int)(Math.random() * 2.0);
             }
-        }
-
-        // shouldn't be possible, but..
-        if (numObjectives > 4) {
-            numObjectives = 4;
         }
 
         int baseCommandPoints = (int) Global.getSettings().getFloat("startingCommandPoints");
