@@ -194,7 +194,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         var minDist = Float.MAX_VALUE
         var closest: CombatEntityAPI? = null
         for (other in engine.missiles) {
-            val isNinevehMine = other.isMine && other.source?.hullSpec?.hullId?.equals("zea_boss_nineveh") == true
+            val isNinevehMine = other.isMine && other.source?.hullSpec?.hullId?.equals(ZeaStaticStrings.ZEA_BOSS_NINEVENH) == true
             maxMotesPerMissile = if (isNinevehMine) 4 else 2
             if (other.owner == owner && !isNinevehMine) continue
             if (other.owner == 100) continue
@@ -228,7 +228,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         target = closest
 
         // hf nineveh boss mines
-        hfOverride = target is MissileAPI && (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals("zea_boss_nineveh") == true &&
+        hfOverride = target is MissileAPI && (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals(ZeaStaticStrings.ZEA_BOSS_NINEVENH) == true &&
                 ((target as MissileAPI).source?.variant?.hasTag(ZeaStaticStrings.BOSS_TAG) == true || Global.getSettings().isDevMode)
     }
 
@@ -244,7 +244,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
             list = engine.ships
         } else {
             list = engine.missiles
-            isNinevehMine = (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals("zea_boss_nineveh") == true
+            isNinevehMine = (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals(ZeaStaticStrings.ZEA_BOSS_NINEVENH) == true
         }
         return target != null && list!!.contains(target) && (target!!.owner != missile.owner || isNinevehMine)
     }

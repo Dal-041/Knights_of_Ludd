@@ -206,9 +206,9 @@ public class CombatPulsarRenderer extends BaseCombatLayeredRenderingPlugin {
 
 //		for (int t = 0; t < 2; t++) {
 //
-//			SpriteAPI tex = Global.getSettings().getSprite("terrain", "pulsar");
+//			SpriteAPI tex = Global.getSettings().getSprite(ZeaStaticStrings.TERRAIN, "pulsar");
 //			if (t == 1) {
-//				tex = Global.getSettings().getSprite("terrain", "pulsar2");
+//				tex = Global.getSettings().getSprite(ZeaStaticStrings.TERRAIN, "pulsar2");
 //			}
         delegate.getPulsarTexture().bindTexture();
         //int count = 0;

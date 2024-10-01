@@ -71,7 +71,7 @@ public class YukionnaBoss extends BaseHullMod {
                 if (phaseTwoTimer > MAX_TIME) {
                     ship.setPhased(false);
                     ship.getMutableStats().getHullDamageTakenMult().unmodify(id);
-                    Global.getSoundPlayer().playSound("system_phase_cloak_deactivate", 1f, 1f, ship.getLocation(), ship.getVelocity());
+                    Global.getSoundPlayer().playSound(ZeaStaticStrings.SYSTEM_PHASE_CLOAK_DEACTIVATE, 1f, 1f, ship.getLocation(), ship.getVelocity());
                     return;
                 }
 
@@ -112,8 +112,8 @@ public class YukionnaBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         MagicSubsystemsManager.addSubsystemToShip(ship, new BallLightningSubsystem(ship));
-        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.BOSS_TAG))));
 
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class))

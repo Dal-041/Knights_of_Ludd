@@ -18,6 +18,7 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Misc.FleetMemberDamageLevel;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -171,7 +172,7 @@ public class JumpAbilityPullsar extends BaseDurationAbility {
 		
 		Color gray = Misc.getGrayColor();
 		Color highlight = Misc.getHighlightColor();
-		Color fuel = Global.getSettings().getColor("progressBarFuelColor");
+		Color fuel = Global.getSettings().getColor(ZeaStaticStrings.PROGRESS_BAR_FUEL_COLOR);
 		Color bad = Misc.getNegativeHighlightColor();
 		
 		LabelAPI title = tooltip.addTitle("Fracture Jump to a Black Pullsar");

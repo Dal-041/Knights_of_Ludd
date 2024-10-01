@@ -18,6 +18,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.SparkleAIV2
+import org.selkie.kol.impl.helpers.ZeaStaticStrings
 
 class DuskBuiltin : BaseHullMod() {
     companion object{
@@ -165,7 +166,7 @@ class DuskBuiltin : BaseHullMod() {
 
         if (ship.hullSpec.isPhase){
             tooltip.addSectionHeading("${if(ship.hullSpec.baseHullId.contains("boss")) 5 else 4}th-Generation Phase Coils", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-            val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dusk_phase_coils"), HEIGHT)
+            val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "dusk_phase_coils"), HEIGHT)
             phaseCoils.setBulletedListMode("•")
             phaseCoils.setBulletWidth(15f)
             val para1 = phaseCoils.addPara("No loss of top speed as hardflux level rises.", listPad, activeTextColor, activeHighlightColor)
@@ -179,7 +180,7 @@ class DuskBuiltin : BaseHullMod() {
 
 
         tooltip.addSectionHeading("Duskfall", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val duskfall = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", "dusk_duskfall"), HEIGHT)
+        val duskfall = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "dusk_duskfall"), HEIGHT)
         duskfall.setBulletedListMode("•")
         duskfall.setBulletWidth(15f)
         val para4 = duskfall.addPara("Launches 2 motes per second around the ship, each mote deals 1500 EMP damage on impact.", listPad, activeTextColor, activeHighlightColor, "2", "1500")

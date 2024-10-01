@@ -13,6 +13,7 @@ import org.magiclib.subsystems.drones.PIDController
 import org.selkie.kol.combat.StarficzAIUtils
 import org.selkie.kol.combat.StarficzAIUtils.FutureHit
 import org.selkie.kol.combat.StarficzAIUtils.HungarianAlgorithm
+import org.selkie.kol.impl.helpers.ZeaStaticStrings
 import java.awt.Color
 import java.util.*
 import kotlin.math.abs
@@ -91,7 +92,7 @@ class ShieldDronesSubsystem(ship: ShipAPI?, val numDrones: Int, val isSmart: Boo
     }
 
     override fun getDroneVariant(): String {
-        return "zea_dawn_chiwen_wing"
+        return ZeaStaticStrings.ZEA_DAWN_CHIWEN_WING;
     }
 
     override fun getDroneFormation(): DroneFormation {

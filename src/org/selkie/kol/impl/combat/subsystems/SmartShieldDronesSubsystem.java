@@ -14,6 +14,7 @@ import org.magiclib.subsystems.drones.DroneFormation;
 import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import org.magiclib.subsystems.drones.PIDController;
 import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.*;
@@ -112,7 +113,7 @@ public class SmartShieldDronesSubsystem extends MagicDroneSubsystem {
 
     @Override
     public @NotNull String getDroneVariant() {
-        return "zea_dawn_chiwen_wing";
+        return ZeaStaticStrings.ZEA_DAWN_CHIWEN_WING;
     }
 
     @NotNull

@@ -12,6 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 
@@ -228,23 +229,23 @@ public class Utils {
         return minOut + (input - minIn) * (maxOut - minOut) / (maxIn - minIn);
     }
 
-    private static final String DRONE_SHIELD_TARGET_KEY = "droneShieldTargetKey";
+
 
     public static ShipAPI getDroneShieldTarget(ShipAPI drone) {
-        return drone.getCustomData().containsKey(DRONE_SHIELD_TARGET_KEY) ? (ShipAPI) drone.getCustomData().get(DRONE_SHIELD_TARGET_KEY) : null;
+        return drone.getCustomData().containsKey(ZeaStaticStrings.DRONE_SHIELD_TARGET_KEY) ? (ShipAPI) drone.getCustomData().get(ZeaStaticStrings.DRONE_SHIELD_TARGET_KEY) : null;
     }
 
     public static void setDroneShieldTarget(ShipAPI drone, ShipAPI target) {
         if (target == null) {
-            drone.getCustomData().remove(DRONE_SHIELD_TARGET_KEY);
+            drone.getCustomData().remove(ZeaStaticStrings.DRONE_SHIELD_TARGET_KEY);
         } else {
-            drone.setCustomData(DRONE_SHIELD_TARGET_KEY, target);
+            drone.setCustomData(ZeaStaticStrings.DRONE_SHIELD_TARGET_KEY, target);
         }
     }
 
     public static boolean anyDronesShieldingShip(ShipAPI target) {
         for (ShipAPI drone : AIUtils.getAlliesOnMap(target)) {
-            if (drone.getCustomData().containsKey(DRONE_SHIELD_TARGET_KEY) && drone.getCustomData().get(DRONE_SHIELD_TARGET_KEY) == target) {
+            if (drone.getCustomData().containsKey(ZeaStaticStrings.DRONE_SHIELD_TARGET_KEY) && drone.getCustomData().get(ZeaStaticStrings.DRONE_SHIELD_TARGET_KEY) == target) {
                 return true;
             }
         }

@@ -15,6 +15,7 @@ import org.dark.shaders.light.StandardLight;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicUI;
 import org.selkie.kol.Utils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -182,14 +183,14 @@ public class CoronalCapacitor extends BaseHullMod {
             stats.getBallisticWeaponFluxCostMod().modifyMult(CAPACITY_FACTOR_KEY, 1/(1+ROF_BOOST* capacitorFactor));
 
             if(engine.getPlayerShip() == ship) {
-                engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName("icons", "coronal_cap_bottom"),
+                engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_bottom"),
                         "+" + Math.round(100*SPEED_BOOST* capacitorFactor) + "% top speed", "improved maneuverability", false);
-                engine.maintainStatusForPlayerShip(STATUSKEY2,Global.getSettings().getSpriteName("icons", "coronal_cap_middle"),
+                engine.maintainStatusForPlayerShip(STATUSKEY2,Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_middle"),
                         "+" + Math.round(100*(ROF_BOOST* capacitorFactor)) + "% ballistic rate of fire",
                         "-" + Math.round(100*(1-1/(1+ROF_BOOST* capacitorFactor))) + "% ballistic flux use", false);
-                engine.maintainStatusForPlayerShip(STATUSKEY3,Global.getSettings().getSpriteName("icons", "coronal_cap_top"),"Coronal Capacitor",
+                engine.maintainStatusForPlayerShip(STATUSKEY3,Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_top"),"Coronal Capacitor",
                         "+" + Math.round(100*(DAMAGE_BOOST* capacitorFactor)) + "% energy weapon damage" , false);
-                //engine.maintainStatusForPlayerShip(STATUSKEY4, Global.getSettings().getSpriteName("icons", "coronal_cap_top"),
+                //engine.maintainStatusForPlayerShip(STATUSKEY4, Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_top"),
                 //        "", "Local stellar recharge rate: " + effectiveChargeRate*100, false);
             }
         }

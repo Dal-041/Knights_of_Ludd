@@ -16,12 +16,11 @@ import com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponGroupSpec;
 import com.fs.starfarer.api.loading.WeaponGroupType;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 public class RailgunChargeBeamWeaponScript implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin  {
 
-	private final String TagWeapon = "targetinglaser2"; // the id of the weapon to use for the targeting laser beam.
-	
-	private boolean init = false;
+    private boolean init = false;
 	private boolean fired = true;
 	
     protected ShipAPI demDrone;
@@ -45,9 +44,11 @@ public class RailgunChargeBeamWeaponScript implements EveryFrameWeaponEffectPlug
 		}
 		
 		if (!init) {
-			ShipHullSpecAPI spec = Global.getSettings().getHullSpec("dem_drone");
-			ShipVariantAPI v = Global.getSettings().createEmptyVariant("dem_drone", spec);
-			v.addWeapon("WS 000", TagWeapon);
+			ShipHullSpecAPI spec = Global.getSettings().getHullSpec(ZeaStaticStrings.DEM_DRONE);
+			ShipVariantAPI v = Global.getSettings().createEmptyVariant(ZeaStaticStrings.DEM_DRONE, spec);
+            // the id of the weapon to use for the targeting laser beam.
+            String tagWeapon = ZeaStaticStrings.TARGETINGLASER_2;
+            v.addWeapon("WS 000", tagWeapon);
 			WeaponGroupSpec g = new WeaponGroupSpec(WeaponGroupType.LINKED);
 			g.addSlot("WS 000");
 			v.addWeaponGroup(g);

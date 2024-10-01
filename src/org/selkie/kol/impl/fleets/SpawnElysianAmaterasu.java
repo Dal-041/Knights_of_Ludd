@@ -11,36 +11,33 @@ import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnElysianAmaterasu {
 	
 	public static void SpawnElysianAmaterasu() {
 
-		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
+		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.elysianID);
 		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
-		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitAmaterasuBoss));
 
-        String variant = "zea_boss_amaterasu_Blinding";
 		CampaignFleetAPI elysianBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Amaterasu")
-		        .setFleetFaction(PrepareAbyss.elysianID)
+		        .setFleetFaction(ZeaStaticStrings.elysianID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("Amaterasu")
-		        .setFlagshipVariant(variant)
+		        .setFlagshipVariant(ZeaStaticStrings.ZEA_BOSS_AMATERASU_BLINDING)
 		        .setCaptain(elysianBossCaptain)
 		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getCustomEntitiesWithTag("edf_Hypershunt").get(0))
+				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaStaticStrings.ZEA_EDF_CORONAL_TAP))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
 		elysianBossFleet.setDiscoverable(true);
 		elysianBossFleet.getFleetData().ensureHasFlagship();
-		elysianBossFleet.getMemoryWithoutUpdate().set("$zea_amaterasu", true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_AMATERASU_BOSS_FLEET, true);
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);
@@ -58,11 +55,11 @@ public class SpawnElysianAmaterasu {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+		flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitAmaterasuBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitAmaterasuBoss));
 
 
 		// to make sure they attack the player on sight when player's transponder is off
@@ -74,7 +71,7 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 
 		// tag to exclude terrain effects
-		elysianBossFleet.addTag(excludeTag);
+		elysianBossFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
 
 		// manage the wreck
 		elysianBossFleet.addEventListener(new ManageElysianAmaterasu());

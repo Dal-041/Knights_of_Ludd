@@ -55,7 +55,7 @@ public class ManageDawnBoss implements FleetEventListener {
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_DAWN_BOSS_DONE,true);
 
-					f.getVariant().removeTag(ZeaStaticStrings.BOSS_TAG);
+					f.getVariant().removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
 				}
 	        }
 	            

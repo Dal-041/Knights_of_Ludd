@@ -7,7 +7,6 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import com.fs.starfarer.campaign.CampaignEngine;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.util.Random;
 
@@ -36,12 +35,12 @@ public class TrackFleet implements EveryFrameScript {
             if (Global.getSector().getPlayerFleet() != null) {
                 CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
                 if (fleet.isInHyperspaceTransition()) return;
-                if (fleet.getContainingLocation().getId().equalsIgnoreCase(PrepareAbyss.elysiaSysName)) {
-                    under = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
-                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 150 && Math.abs(fleet.getLocation().getY()) <= 150 && under.getEntityById(PrepareAbyss.nullgateID) != null) {
+                if (fleet.getContainingLocation().getId().equalsIgnoreCase(ZeaStaticStrings.elysiaSysName)) {
+                    under = Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName);
+                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 150 && Math.abs(fleet.getLocation().getY()) <= 150 && under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE) != null) {
                         iSecond.advance(1);
                         if (iSecond.intervalElapsed()) {
-                            targ = under.getEntityById(PrepareAbyss.nullgateID);
+                            targ = under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE);
                             JumpPointAPI.JumpDestination dest = new JumpPointAPI.JumpDestination(targ, null);
                             Global.getSector().doHyperspaceTransition(fleet, fleet, dest);
                             fleet.setNoEngaging(1.0f);

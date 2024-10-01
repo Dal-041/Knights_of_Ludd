@@ -28,7 +28,7 @@ public class ZeaCampaignPlugin extends BaseCampaignPlugin {
 
         if (opponent instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) opponent;
-            if (fleet.getMemoryWithoutUpdate().contains("$zea_ninaya")) {
+            if (fleet.getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINAYA_BOSS_FLEET)) {
                 return new PluginPick<BattleCreationPlugin>(new NinayaBattleCreationPlugin(), PickPriority.HIGHEST);
             }
         }

@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI
 import com.fs.starfarer.api.impl.campaign.ids.Stats
 import org.lwjgl.util.vector.Vector2f
+import org.selkie.kol.impl.helpers.ZeaStaticStrings
 import org.selkie.kol.impl.hullmods.DuskBuiltin
 import java.awt.Color
 
@@ -16,7 +17,7 @@ class SparkleOnHitV2 : OnHitEffectPlugin {
         val shipEMPDamage = 1500f
         val fighterDamage = if(isHF) 1000f else 200f
         val empColor = if(isHF) SparkleAIV2.hfEMPColor else SparkleAIV2.baseEMPColor
-        val impactSoundId = if(isHF) "mote_attractor_impact_damage" else "mote_attractor_impact_normal"
+        val impactSoundId = if(isHF) ZeaStaticStrings.MOTE_ATTRACTOR_IMPACT_DAMAGE else ZeaStaticStrings.MOTE_ATTRACTOR_IMPACT_NORMAL
 
         if (target is ShipAPI) {
             if(!target.isFighter){
@@ -24,14 +25,14 @@ class SparkleOnHitV2 : OnHitEffectPlugin {
                 val piercedShield = shieldHit && Math.random().toFloat() < pierceChance
                 if (!shieldHit || piercedShield) {
                     engine.spawnEmpArcPierceShields(projectile.source, point, target, target,
-                            projectile.damageType,
-                            shipDamage,
-                            shipEMPDamage,
-                            100000f,  // max range
-                            "mote_attractor_impact_emp_arc",
-                            20f,
-                            empColor,
-                            Color(255, 255, 255, 255)
+                        projectile.damageType,
+                        shipDamage,
+                        shipEMPDamage,
+                        100000f,  // max range
+                        ZeaStaticStrings.MOTE_ATTRACTOR_IMPACT_EMP_ARC,
+                        20f,
+                        empColor,
+                        Color(255, 255, 255, 255)
                     )
                 }
             } else{

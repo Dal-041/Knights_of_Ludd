@@ -29,7 +29,7 @@ public class AbyssAsteroidImpact implements EveryFrameScript {
     public AbyssAsteroidImpact(CampaignFleetAPI fleet, boolean dealDamage) {
         this.fleet = fleet;
 
-        if (fleet.hasTag(ZeaStaticStrings.ZEA_RULESFORTHEEBUTNOTFORME)) {
+        if (fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
             dV = new Vector2f();
             dV.x = 0;
             dV.y = 0;

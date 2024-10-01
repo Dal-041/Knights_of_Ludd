@@ -39,18 +39,7 @@ public class PrepareAbyss {
 
 	public static final Logger log = Global.getLogger(PrepareAbyss.class);
 
-	public static final String excludeTag = "zea_rulesfortheebutnotforme";
-	public static final String dawnID = "zea_dawn";
-	public static final String duskID = "zea_dusk";
-	public static final String elysianID = "zea_elysians";
-	public static final String nullgateID = "zea_nullgate";
-	public static final String nullstationID = "zea_null_station_dusk";
-	public static final String elysiaSysName = "Elysia";
-	public static final String lunaSeaSysName = "The Luna Sea";
-	public static final String nullspaceSysName = "Nullspace";
-	public static final String nbsSysPrefix = "zea_nbs_"; //Neutron black star
-
-    public static void generate() {
+	public static void generate() {
 		checkAbyssalFleets();
 		copyHighgradeEquipment();
     	GenerateElysia();
@@ -64,14 +53,14 @@ public class PrepareAbyss {
 			if (faction.getId().equals(Factions.NEUTRAL)
 					|| faction.getId().equals(Factions.OMEGA)
 					|| faction.getId().equals("famous_bounty")) continue;
-			if (!faction.getId().equals(dawnID)) {
-				faction.setRelationship(dawnID, -100);
+			if (!faction.getId().equals(ZeaStaticStrings.dawnID)) {
+				faction.setRelationship(ZeaStaticStrings.dawnID, -100);
 			}
-			if (!faction.getId().equals(duskID)) {
-				faction.setRelationship(duskID, -100);
+			if (!faction.getId().equals(ZeaStaticStrings.duskID)) {
+				faction.setRelationship(ZeaStaticStrings.duskID, -100);
 			}
-			if (!faction.getId().equals(elysianID)) {
-				faction.setRelationship(elysianID, -100);
+			if (!faction.getId().equals(ZeaStaticStrings.elysianID)) {
+				faction.setRelationship(ZeaStaticStrings.elysianID, -100);
 			}
 		}
 		// TODO: Split boss fleet spawns so they don't all get combined into capital ships
@@ -93,9 +82,9 @@ public class PrepareAbyss {
     	//posX = Math.random()%(Global.getSettings().getFloat("sectorWidth")-10000);
     	//posY = Math.random()%(Global.getSettings().getFloat("sectorHeight")-8000);
         
-    	StarSystemAPI system = Global.getSector().createStarSystem(elysiaSysName);
+    	StarSystemAPI system = Global.getSector().createStarSystem(ZeaStaticStrings.elysiaSysName);
     	system.getLocation().set((int)posX, (int)posY);
-    	system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_elysia.png");
+    	system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaStaticStrings.BACKGROUNDS, "zea_bg_elysia"));
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_system");
 
 		system.addTag(Tags.THEME_HIDDEN);
@@ -104,13 +93,13 @@ public class PrepareAbyss {
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
-		system.initStar("zea_elysia_abyss", "zea_red_hole", beeg, -beeg/2f);
+		system.initStar(ZeaStaticStrings.ZEA_ELYSIA_ABYSS, "zea_red_hole", beeg, -beeg/2f);
 		PlanetAPI elysia = system.getStar();
 		elysia.setName("Elysian Abyss");
     	elysia.getSpec().setBlackHole(false); //Minimize fleet mishandling
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 		elysia.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
-    	system.setName(elysiaSysName);
+    	system.setName(ZeaStaticStrings.elysiaSysName);
     	elysia.applySpecChanges();
 		elysia.addTag(Tags.NON_CLICKABLE);
 		//system.addTerrain(Terrain.EVENT_HORIZON, new EventHorizonPlugin.CoronaParams(2300, 1500, elysia, -5, 0, 1));
@@ -126,7 +115,7 @@ public class PrepareAbyss {
     	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
                                                                     0, 0, // center of nebula
                                                                     system, // location to add to
-                                                                    "terrain", "nebula_zea_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
+				ZeaStaticStrings.TERRAIN, "nebula_zea_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
                                                                     4, 4, StarAge.AVERAGE); // number of cells in texture
 
     	system.setType(StarSystemType.TRINARY_1CLOSE_1FAR);
@@ -190,7 +179,7 @@ public class PrepareAbyss {
     	third.getMarket().addCondition(Conditions.EXTREME_TECTONIC_ACTIVITY);
     	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
 
-		system.addRingBand(elysia, "terrain", "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
+		system.addRingBand(elysia, ZeaStaticStrings.TERRAIN, "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
 
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);
@@ -210,10 +199,10 @@ public class PrepareAbyss {
 
 
 		//Placed entities
-		SectorEntityToken hypershunt = system.addCustomEntity("zea_edf_silence_tap", "Coronal Hypershunt", "zea_edf_coronal_tap", Factions.NEUTRAL);
+		SectorEntityToken hypershunt = system.addCustomEntity(ZeaStaticStrings.ZEA_EDF_CORONAL_TAP, "Coronal Hypershunt", ZeaStaticStrings.ZEA_EDF_CORONAL_TAP, Factions.NEUTRAL);
 		hypershunt.setCircularOrbitPointingDown(silence, (float)Math.random() * 360f, silence.getRadius() + 500f, 1111);
 		hypershunt.addTag("edf_Hypershunt");
-		SectorEntityToken edfResearchStation = addSalvageEntity(system, "zea_research_station_elysia", PrepareAbyss.elysianID);
+		SectorEntityToken edfResearchStation = addSalvageEntity(system, "zea_research_station_elysia", ZeaStaticStrings.elysianID);
 		edfResearchStation.setCircularOrbitPointingDown(gaze, (float)Math.random() * 360f, gaze.getRadius() + 100f, 51);
 		edfResearchStation.addTag("edf_Headquarters");
 
@@ -228,15 +217,15 @@ public class PrepareAbyss {
 
 
 		//Random loot
-        SectorEntityToken derelict1 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
+        SectorEntityToken derelict1 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict1.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3100, 20);
-        SectorEntityToken derelict2 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
+        SectorEntityToken derelict2 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict2.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3350, 25);
-        SectorEntityToken derelict3 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
+        SectorEntityToken derelict3 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict3.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3600, 30);
-        SectorEntityToken derelict4 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
+        SectorEntityToken derelict4 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict4.setCircularOrbit(elysia, (float)(Math.random() * 360f), 3900, 35);
-        SectorEntityToken derelict5 = addSalvageEntity(system, getAbyssLootID(elysianID, 1f), PrepareAbyss.elysianID);
+        SectorEntityToken derelict5 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict5.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4250, 40);
     	
         JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("zea_elysia_jp", "First Trial");
@@ -256,8 +245,8 @@ public class PrepareAbyss {
         editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
 		//FP bumped to account for backup capital ships getting pruned
-		ZeaFleetManager fleets = new ZeaFleetManager(system, elysianID, 6, 60, 180);
-		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, elysianID, 12, 180, 340);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, ZeaStaticStrings.elysianID, 6, 60, 180);
+		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, ZeaStaticStrings.elysianID, 12, 180, 340);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 
@@ -270,8 +259,8 @@ public class PrepareAbyss {
 
 		// No direct access, see ReportTransit and TrackFleet listeners
 
-		StarSystemAPI system = Global.getSector().createStarSystem(nullspaceSysName);
-		system.setName(nullspaceSysName);
+		StarSystemAPI system = Global.getSector().createStarSystem(ZeaStaticStrings.nullspaceSysName);
+		system.setName(ZeaStaticStrings.nullspaceSysName);
 
 		LocationAPI hyper = Global.getSector().getHyperspace();
 		system.addTag(Tags.THEME_HIDDEN);
@@ -289,7 +278,7 @@ public class PrepareAbyss {
 		SectorEntityToken nullspace_nebula = addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula_big.png",
 				0, 0, // center of nebula
 				system, // location to add to
-				"terrain", "nebula_zea_black_shiny", // texture to use, uses xxx_map for map
+				ZeaStaticStrings.TERRAIN, "nebula_zea_black_shiny", // texture to use, uses xxx_map for map
 				4, 4, // number of cells in texture
 				"nebula_zea_storm", StarAge.AVERAGE, 10000, 2); //terrain plugin, age, nebula resolution, tile size
 
@@ -313,10 +302,10 @@ public class PrepareAbyss {
 
 		//system.generateAnchorIfNeeded();
 
-		SectorEntityToken gate = system.addCustomEntity(nullgateID, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
+		SectorEntityToken gate = system.addCustomEntity(ZeaStaticStrings.ZEA_NULLGATE, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
-		SectorEntityToken stationResearch = system.addCustomEntity(nullstationID, "Shielded Research Station", nullstationID, Factions.DERELICT);
+		SectorEntityToken stationResearch = system.addCustomEntity(ZeaStaticStrings.ZEA_NULL_STATION, "Shielded Research Station", ZeaStaticStrings.ZEA_NULL_STATION, Factions.DERELICT);
 		stationResearch.setFixedLocation(-5230, 8860);
 
 		float count = ZeaStaticStrings.uwDerelictsNormal.length; //16
@@ -364,8 +353,8 @@ public class PrepareAbyss {
 
 	public static void GenerateLunaSea() {
 
-		StarSystemAPI system = Global.getSector().createStarSystem(lunaSeaSysName);
-		system.setName(lunaSeaSysName); //No "-Star System"
+		StarSystemAPI system = Global.getSector().createStarSystem(ZeaStaticStrings.lunaSeaSysName);
+		system.setName(ZeaStaticStrings.lunaSeaSysName); //No "-Star System"
 
 		LocationAPI hyper = Global.getSector().getHyperspace();
 
@@ -382,19 +371,19 @@ public class PrepareAbyss {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_cut.png",
 					0, 0, // center of nebula
 					system, // location to add to
-					"terrain", "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
+					ZeaStaticStrings.TERRAIN, "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					8, 8, StarAge.AVERAGE); // number of cells in texture
 		/*} else {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/luwunasea_nebula2.png",
 					0, 0, // center of nebula
 					system, // location to add to
-					"terrain", "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
+					ZeaStaticStrings.TERRAIN, "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					4, 4, StarAge.AVERAGE); // number of cells in texture
 		}*/
 
 		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_layer2.png",
 					0, 0, system,
-					"terrain", "nebula_zea_dawntide",
+				ZeaStaticStrings.TERRAIN, "nebula_zea_dawntide",
 					4, 4, "nebula_zea_shoal", StarAge.AVERAGE);
 
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
@@ -475,22 +464,22 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f);
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
-		SectorEntityToken loot1 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		SectorEntityToken loot1 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.dawnID, 0.66f), ZeaStaticStrings.dawnID);
 		loot1.setCircularOrbitPointingDown(luna, (float)Math.random()*60+47, (float)Math.random()*2240+3000, 100000);
-		SectorEntityToken loot2 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		SectorEntityToken loot2 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.dawnID, 0.66f), ZeaStaticStrings.dawnID);
 		loot2.setCircularOrbitPointingDown(luna, (float)Math.random()*20+28, (float)Math.random()*3330+18330, 100000);
-		SectorEntityToken loot3 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		SectorEntityToken loot3 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.dawnID, 0.66f), ZeaStaticStrings.dawnID);
 		loot3.setCircularOrbitPointingDown(third, (float)Math.random()*50+71, (float)Math.random()*2155+3500, 100000);
-		SectorEntityToken loot4 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		SectorEntityToken loot4 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.dawnID, 0.66f), ZeaStaticStrings.dawnID);
 		loot4.setCircularOrbitPointingDown(fourth, 171, (float)Math.random()*1500+1000, 100000);
-		SectorEntityToken loot5 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		SectorEntityToken loot5 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.dawnID, 0.66f), ZeaStaticStrings.dawnID);
 		loot5.setCircularOrbitPointingDown(fifth, (float)Math.random()*65+245, (float)Math.random()*2000+5353, 100000);
-		SectorEntityToken loot6 = addSalvageEntity(system, getAbyssLootID(dawnID, 0.66f), PrepareAbyss.dawnID);
+		SectorEntityToken loot6 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.dawnID, 0.66f), ZeaStaticStrings.dawnID);
 		loot6.setCircularOrbitPointingDown(sixth, (float)Math.random()*60+177, (float)Math.random()*2770+3000, 100000);
 
 		//FP bumped to account for backup capital ships getting pruned
-		ZeaFleetManager fleets = new ZeaFleetManager(system, dawnID, 16, 60, 180);
-		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, dawnID, 4, 300, 425);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, ZeaStaticStrings.dawnID, 16, 60, 180);
+		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, ZeaStaticStrings.dawnID, 4, 300, 425);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}
@@ -520,7 +509,7 @@ public class PrepareAbyss {
 
 		//fancy bg script
 
-		PlanetAPI sing = system.initStar(nbsSysPrefix + Misc.genUID(), "zea_star_black_neutron", 200, -200f);
+		PlanetAPI sing = system.initStar(ZeaStaticStrings.nbsSysPrefix + Misc.genUID(), "zea_star_black_neutron", 200, -200f);
 		String tempName = system.getBaseName();
 		system.setName(tempName);
 		sing.setName(tempName);
@@ -551,15 +540,15 @@ public class PrepareAbyss {
 
 		//sophistimacated
 		float orbRadius1 = 1000 + (float)(Math.random() * 8500f);
-		SectorEntityToken cacheRem = addSalvageEntity(system, getAbyssLootID(duskID, 1f), PrepareAbyss.duskID);
+		SectorEntityToken cacheRem = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.duskID, 1f), ZeaStaticStrings.duskID);
 		cacheRem.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius1, orbRadius1/10f);
 
 		float orbRadius2 = 1500 + (float)(Math.random()*10500f);
-		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(duskID, 0.5f), PrepareAbyss.duskID);
+		SectorEntityToken stationResearch = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.duskID, 0.5f), ZeaStaticStrings.duskID);
 		stationResearch.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius2, orbRadius2/10f);
 
 		float orbRadius3 = 2000 + (float)(Math.random()*12500f);
-		SectorEntityToken cacheRemSmall = addSalvageEntity(system, getAbyssLootID(duskID, 1.5f), PrepareAbyss.duskID);
+		SectorEntityToken cacheRemSmall = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.duskID, 1.5f), ZeaStaticStrings.duskID);
 		cacheRemSmall.setCircularOrbit(sing, (float)(Math.random() * 360f), orbRadius3, orbRadius3/10f);
 
 		system.autogenerateHyperspaceJumpPoints(true, true); //begone evil clouds
@@ -572,8 +561,8 @@ public class PrepareAbyss {
 		editor.clearArc(system.getLocation().x, system.getLocation().y, 0, radius + minRadius, 0, 360f, 0.25f);
 
 		//FP bumped to account for backup capital ships getting pruned
-		ZeaFleetManager fleets = new ZeaFleetManager(system, duskID, 6, 70, 175);
-		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, duskID, 3, 300, 425);
+		ZeaFleetManager fleets = new ZeaFleetManager(system, ZeaStaticStrings.duskID, 6, 70, 175);
+		ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, ZeaStaticStrings.duskID, 3, 300, 425);
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}
@@ -592,11 +581,11 @@ public class PrepareAbyss {
 		picker.add("zea_cache_low", w);
 		picker.add("zea_cache_med", w);
 		picker.add("zea_cache_high", w);
-		w = faction.equals(dawnID)? 1f : 0f;
+		w = faction.equals(ZeaStaticStrings.dawnID)? 1f : 0f;
 		picker.add("zea_research_station_dawn", w);
-		w = faction.equals(duskID)? 1f : 0f;
+		w = faction.equals(ZeaStaticStrings.duskID)? 1f : 0f;
 		picker.add("zea_research_station_dusk", w);
-		w = faction.equals(elysianID)? 1f : 0f;
+		w = faction.equals(ZeaStaticStrings.elysianID)? 1f : 0f;
 		picker.add("zea_research_station_elysia", w);
 
 		return picker.pick();

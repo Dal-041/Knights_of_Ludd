@@ -54,7 +54,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
 
     public void multiplyArc(float mult) {
         PULSAR_ARC = mult / ((float) Math.PI * 2f) * 360f;
-        //if (mult >= 2f) flareTexture = Global.getSettings().getSprite("terrain", "wavefront");
+        //if (mult >= 2f) flareTexture = Global.getSettings().getSprite(ZeaStaticStrings.TERRAIN, "wavefront");
     }
 
     public String getNameForTooltip() {
@@ -74,7 +74,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
         */
         //flareTexture = Global.getSettings().getSprite("graphics/planets/aurorae2.png");
         if (spriteCat == null) {
-            spriteCat = "terrain";
+            spriteCat = ZeaStaticStrings.TERRAIN;
             spriteKey = ZeaStaticStrings.PULSAR;
         }
         flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
@@ -374,7 +374,7 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
         float small = 5f;
         Color gray = Misc.getGrayColor();
         Color highlight = Misc.getHighlightColor();
-        Color fuel = Global.getSettings().getColor("progressBarFuelColor");
+        Color fuel = Global.getSettings().getColor(ZeaStaticStrings.PROGRESS_BAR_FUEL_COLOR);
         Color bad = Misc.getNegativeHighlightColor();
 
         tooltip.addTitle(getNameForTooltip());

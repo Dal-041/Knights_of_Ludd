@@ -20,8 +20,6 @@ import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
 import org.selkie.kol.impl.intel.ZeaLoreManager;
 import org.selkie.kol.impl.intel.ZeaTriTachBreadcrumbIntel;
-import org.selkie.kol.impl.world.PrepareAbyss;
-import org.selkie.kol.impl.world.PrepareDarkDeeds;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +49,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             }
         }
 
-        if ("addIntelTTBoss1".equals(command)) {
+        if (ZeaStaticStrings.ADD_INTEL_TTBOSS_1.equals(command)) {
 
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #3", ZeaLoreManager.TT1Drop, ZeaLoreManager.TT1DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, true, dialog.getTextPanel());
@@ -66,7 +64,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             Global.getSector().getIntelManager().addIntel(intel, false, dialog.getTextPanel());
             return true;
 
-        } else if ("addIntelTTBoss2".equals(command)) {
+        } else if (ZeaStaticStrings.ADD_INTEL_TTBOSS_2.equals(command)) {
 
             CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
 
@@ -81,7 +79,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 if (member.getVariant().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
-                    if (variant.hasTag(ZeaStaticStrings.BOSS_TAG)) variant.removeTag(ZeaStaticStrings.BOSS_TAG);
+                    if (variant.hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG)) variant.removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
                     if (variant.getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) foundNinmah = true;
@@ -100,7 +98,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                         fleet.getContainingLocation(),
                         Entities.WRECK, Factions.NEUTRAL, DSD);
                 Misc.makeImportant(wreck, ZeaStaticStrings.ZEA_BOSS_NINMAH);
-                wreck.getMemoryWithoutUpdate().set("$zea_ninmah_wreck", true);
+                wreck.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINMAH_WRECK, true);
                 wreck.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                 wreck.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
                 wreck.setFacing((float)Math.random()*360f);
@@ -110,7 +108,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             }
 
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-                if (system.getMemoryWithoutUpdate().contains(PrepareDarkDeeds.TTBOSS3_SYSTEM_KEY)) {
+                if (system.getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_SYSTEM)) {
                     TTBoss3System = system.getCenter();
                 }
             }
@@ -120,13 +118,13 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             Global.getSector().getIntelManager().addIntel(intelBC, false, dialog.getTextPanel());
             return true;
 
-        } else if ("addIntelTTBoss3".equals(command)) {
+        } else if (ZeaStaticStrings.ADD_INTEL_TTBOSS_3.equals(command)) {
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #2", ZeaLoreManager.TT3Drop, ZeaLoreManager.TT3DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, false, dialog.getTextPanel());
 
             SectorEntityToken LunaSea = null;
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-                if (system.getName().equals(PrepareAbyss.lunaSeaSysName)) {
+                if (system.getName().equals(ZeaStaticStrings.lunaSeaSysName)) {
                     LunaSea = system.getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR);
                 }
             }
@@ -135,15 +133,15 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             ZeaTriTachBreadcrumbIntel intelBC = new ZeaTriTachBreadcrumbIntel("Project Dawn Hyperspatial Tracking Link", "A tracking link from the doomed Tri-Tachyon \"Operation Dawn\" to... something. Whatever they produced, the link is still sending telemetry, but the readings are nonsensical. If you want answers, there's nothing to do but seek out the location for yourself", LunaSea);
             Global.getSector().getIntelManager().addIntel(intelBC, false, dialog.getTextPanel());
 
-        } else if ("endMusic".equals(command)) {
+        } else if (ZeaStaticStrings.END_MUSIC.equals(command)) {
             Global.getSoundPlayer().restartCurrentMusic();
             return true;
-        } else if ("addBossTags".equals(command)) {
+        } else if (ZeaStaticStrings.ADD_BOSS_TAGS.equals(command)) {
             if (otherFleet != null) {
                 for (FleetMemberAPI member : otherFleet.getMembersWithFightersCopy()) {
                     if (member.getHullId().startsWith("zea_boss")) {
                         if (!member.getVariant().hasTag(Tags.VARIANT_UNBOARDABLE)) member.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-                        if (!member.getVariant().hasTag(ZeaStaticStrings.BOSS_TAG))member.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+                        if (!member.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG))member.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
                     }
                 }
             }

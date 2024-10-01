@@ -7,8 +7,8 @@ import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.impl.campaign.terrain.AsteroidFieldTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.RingSystemTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssAsteroidField extends AsteroidFieldTerrainPlugin {
 
@@ -17,7 +17,7 @@ public class AbyssAsteroidField extends AsteroidFieldTerrainPlugin {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
-            if (fleet.hasTag(excludeTag)) return;
+            if (fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) return;
 
 //			float penalty = getBurnPenalty(fleet);
 //			fleet.getStats().addTemporaryModMult(0.1f, getModId() + "_1",
@@ -69,7 +69,7 @@ public class AbyssAsteroidField extends AsteroidFieldTerrainPlugin {
 
     @Override
     public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
-        if (!fleet.hasTag(excludeTag)) return flag == TerrainAIFlags.REDUCES_SPEED_LARGE || flag == TerrainAIFlags.DANGEROUS_UNLESS_GO_SLOW;
+        if (!fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) return flag == TerrainAIFlags.REDUCES_SPEED_LARGE || flag == TerrainAIFlags.DANGEROUS_UNLESS_GO_SLOW;
         return flag == TerrainAIFlags.REDUCES_DETECTABILITY;
     }
 

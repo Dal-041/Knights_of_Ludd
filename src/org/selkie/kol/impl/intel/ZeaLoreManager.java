@@ -9,7 +9,6 @@ import com.fs.starfarer.api.campaign.impl.items.BaseSpecialItemPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -19,9 +18,9 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
 
     protected static final ArrayList<String> paramList = new ArrayList<>();
     static {
-            paramList.add(PrepareAbyss.dawnID);
-            paramList.add(PrepareAbyss.duskID);
-            paramList.add(PrepareAbyss.elysianID);
+            paramList.add(ZeaStaticStrings.dawnID);
+            paramList.add(ZeaStaticStrings.duskID);
+            paramList.add(ZeaStaticStrings.elysianID);
             paramList.add(Factions.TRITACHYON);
             paramList.add(Factions.HEGEMONY);
     }
@@ -124,7 +123,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
 
     @Override
     public void performRightClickAction() {
-        Global.getSoundPlayer().playUISound("ui_acquired_blueprint", 1, 1);
+        Global.getSoundPlayer().playUISound(ZeaStaticStrings.UI_ACQUIRED_BLUEPRINT, 1, 1);
         AddLoreIntel(params);
     }
 
@@ -137,7 +136,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
 
         String crest = Global.getSector().getFaction(params).getCrest();
 
-        if (params.equals(PrepareAbyss.elysianID)) {
+        if (params.equals(ZeaStaticStrings.elysianID)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -151,7 +150,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
             Global.getSector().getIntelManager().addIntel(lore);
             return;
         }
-        if (params.equals(PrepareAbyss.duskID)) {
+        if (params.equals(ZeaStaticStrings.duskID)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -165,7 +164,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
 
             return;
         }
-        if (params.equals(PrepareAbyss.dawnID)) {
+        if (params.equals(ZeaStaticStrings.dawnID)) {
             for (IntelInfoPlugin intel : Global.getSector().getIntelManager().getIntel(ZeaLoreIntel.class)) {
                 if (intel.getIcon().equals(crest)) count++;
             }
@@ -225,9 +224,9 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
             if (intel.getIcon().equals(Global.getSector().getFaction(params).getCrest())) count++;
         }
         String[] ref = null;
-        if (params.equals(PrepareAbyss.duskID)) ref = duskLore;
-        else if (params.equals(PrepareAbyss.dawnID)) ref = dawnLore;
-        else if (params.equals(PrepareAbyss.elysianID)) ref = edfLore;
+        if (params.equals(ZeaStaticStrings.duskID)) ref = duskLore;
+        else if (params.equals(ZeaStaticStrings.dawnID)) ref = dawnLore;
+        else if (params.equals(ZeaStaticStrings.elysianID)) ref = edfLore;
         else if (params.equals(Factions.TRITACHYON)) ref = TTFleetLore;
         else if (params.equals(Factions.HEGEMONY)) ref = edfSystemLore;
         if (ref == null) return false;

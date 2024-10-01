@@ -13,6 +13,7 @@ import org.magiclib.subsystems.drones.DroneFormation;
 import org.magiclib.subsystems.drones.MagicDroneSubsystem;
 import org.magiclib.subsystems.drones.PIDController;
 import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.List;
@@ -189,7 +190,7 @@ public class ShachihokoDroneSubsystem extends MagicDroneSubsystem {
 
     @Override
     public @NotNull String getDroneVariant() {
-        return "zea_edf_shachihoko_wing";
+        return ZeaStaticStrings.ZEA_EDF_SHACHIHOKO_WING;
     }
 
     @NotNull

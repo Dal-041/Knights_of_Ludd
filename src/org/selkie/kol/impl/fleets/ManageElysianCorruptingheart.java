@@ -61,7 +61,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 					salvaged1 = true;
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
-					f.getVariant().removeTag(ZeaStaticStrings.BOSS_TAG);
+					f.getVariant().removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
 				}
 			}
 

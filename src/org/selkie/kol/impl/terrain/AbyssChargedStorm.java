@@ -12,8 +12,7 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin.CellStateTracker;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.terrain.AbyssStormNebula;
-import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 public class AbyssChargedStorm implements EveryFrameScript {
 
@@ -21,7 +20,7 @@ public class AbyssChargedStorm implements EveryFrameScript {
     public static float STORM_SPEED_BURST = Global.getSettings().getSpeedPerBurnLevel() * 50f;
     public static float DURATION_SECONDS = 1f;
 
-    protected static final StarSystemAPI system = Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName);
+    protected static final StarSystemAPI system = Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName);
     protected final CampaignFleetAPI fleet;
     protected float elapsed;
     protected float angle;

@@ -20,7 +20,6 @@ import java.awt.*;
 import java.util.List;
 import java.util.Random;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaTextureProvider {
     public static final float NULL_NEBULA_SENSOR_RANGE_MULT = 0.5f;
@@ -78,7 +77,7 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
             cell.flicker.newBurst();
         }
 
-        if (cell.flicker == null || !cell.flicker.isPeakFrame() || fleet.hasTag(excludeTag)) {
+        if (cell.flicker == null || !cell.flicker.isPeakFrame() || fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
             return;
         }
 

@@ -13,38 +13,35 @@ import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDawnBoss {
-	public final static String MEMKEY_DAWN_BOSS_FLEET = "$zea_nian";
+
 	public static void SpawnDawnBoss() {
 
-		PersonAPI dawnBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.dawnID);
+		PersonAPI dawnBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.dawnID);
 		//A "slightly" rampant ALLMOTHER copy.
 		dawnBossCaptain.setName(new FullName("XLLM01H3R", "", FullName.Gender.ANY));
-		dawnBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDawnBoss));
+		dawnBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));
 
-        String variant = "zea_boss_nian_Salvation";
 		CampaignFleetAPI dawnBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("The Devourer")
-		        .setFleetFaction(PrepareAbyss.dawnID)
+		        .setFleetFaction(ZeaStaticStrings.dawnID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("Nian")
-		        .setFlagshipVariant(variant)
+		        .setFlagshipVariant(ZeaStaticStrings.ZEA_BOSS_NIAN_SALVATION)
 		        .setCaptain(dawnBossCaptain)
 		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.lunaSeaSysName).getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR))
+				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.lunaSeaSysName).getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();
 		dawnBossFleet.setDiscoverable(true);
 		dawnBossFleet.getFleetData().ensureHasFlagship();
-		dawnBossFleet.getMemoryWithoutUpdate().set(MEMKEY_DAWN_BOSS_FLEET, true);
-		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DAWN_BOSS_FLEET, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
 
 		//dawnBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);
@@ -62,11 +59,11 @@ public class SpawnDawnBoss {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+		flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDawnBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));
 
 
 		// to make sure they attack the player on sight when player's transponder is off
@@ -83,7 +80,7 @@ public class SpawnDawnBoss {
 		BaseSalvageSpecial.addExtraSalvage(dawnBossFleet, cargo);
 
 		// tag to exclude terrain effects
-		dawnBossFleet.addTag(excludeTag);
+		dawnBossFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
 
 		// set up the initial interaction
 		dawnBossFleet.addEventListener(new ManageDawnBoss());

@@ -17,14 +17,13 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssCorona extends StarCoronaTerrainPlugin {
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
-            if (fleet.hasTag(excludeTag)) return;
+            if (fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) return;
 
             boolean inFlare = flareManager.isInActiveFlareArc(fleet);
 
@@ -151,7 +150,7 @@ public class AbyssCorona extends StarCoronaTerrainPlugin {
 
     @Override
     public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
-        if (!fleet.hasTag(excludeTag)) {
+        if (!fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
             return flag == TerrainAIFlags.CR_DRAIN ||
                     flag == TerrainAIFlags.BREAK_OTHER_ORBITS ||
                     flag == TerrainAIFlags.EFFECT_DIMINISHED_WITH_RANGE;

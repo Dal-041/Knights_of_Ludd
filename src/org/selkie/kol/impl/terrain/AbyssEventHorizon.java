@@ -12,7 +12,6 @@ import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssEventHorizon extends EventHorizonPlugin {
 
@@ -52,7 +51,7 @@ public class AbyssEventHorizon extends EventHorizonPlugin {
     @Override
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
-            if (entity.hasTag(ZeaStaticStrings.ZEA_RULESFORTHEEBUTNOTFORME)) return;
+            if (entity.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) return;
         }
         super.applyEffect(entity, days);
     }
@@ -67,7 +66,7 @@ public class AbyssEventHorizon extends EventHorizonPlugin {
 
     @Override
     public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
-        if (!fleet.hasTag(excludeTag)) {
+        if (!fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
             return flag == TerrainAIFlags.CR_DRAIN ||
                     flag == TerrainAIFlags.BREAK_OTHER_ORBITS ||
                     flag == TerrainAIFlags.EFFECT_DIMINISHED_WITH_RANGE;

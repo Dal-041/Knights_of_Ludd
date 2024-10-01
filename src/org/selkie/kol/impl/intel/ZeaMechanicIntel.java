@@ -8,7 +8,6 @@ import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -192,13 +191,13 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
         }
 
         switch (id) {
-            case PrepareAbyss.duskID:
+            case ZeaStaticStrings.duskID:
                 total = dusk.length;
                 break;
-            case PrepareAbyss.dawnID:
+            case ZeaStaticStrings.dawnID:
                 total = dawn.length;
                 break;
-            case PrepareAbyss.elysianID:
+            case ZeaStaticStrings.elysianID:
                 total = edf.length;
                 break;
             case Factions.TRITACHYON:
@@ -219,15 +218,15 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
         String[] desc;
         ArrayList<String[]> hl;
         switch (id) {
-            case PrepareAbyss.duskID:
+            case ZeaStaticStrings.duskID:
                 desc = dusk;
                 hl = duskHLs;
                 break;
-            case PrepareAbyss.dawnID:
+            case ZeaStaticStrings.dawnID:
                 desc = dawn;
                 hl = dawnHLs;
                 break;
-            case PrepareAbyss.elysianID:
+            case ZeaStaticStrings.elysianID:
                 desc = edf;
                 hl = edfHLs;
                 break;

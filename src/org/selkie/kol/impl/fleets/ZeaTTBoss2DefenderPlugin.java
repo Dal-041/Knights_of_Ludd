@@ -1,9 +1,5 @@
 package org.selkie.kol.impl.fleets;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
@@ -17,9 +13,10 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.Sal
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.world.PrepareDarkDeeds;
 
-import static org.selkie.kol.impl.world.PrepareDarkDeeds.DEFEATED_NINMAH_KEY;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
 
 public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageDefenderModificationPlugin {
 
@@ -41,7 +38,7 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
     }
 
     public void reportDefeated(SDMParams p, SectorEntityToken entity, CampaignFleetAPI fleet) {
-        Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINMAH_KEY, true);
+        Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_NINMAH_DONE, true);
     }
 
     public void modifyFleet(SDMParams p, CampaignFleetAPI fleet, Random random, boolean withOverride) {
@@ -97,12 +94,12 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         FleetMemberAPI flagship = fleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
         flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
-        fleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+        fleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
     }
 
 
@@ -112,7 +109,7 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         SDMParams p = (SDMParams) params;
 
         if (p.entity != null && p.entity.getMemoryWithoutUpdate().contains(
-                PrepareDarkDeeds.TTBOSS2_STATION_KEY)) {
+                ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_2_STATION)) {
             return 2;
         }
         return -1;

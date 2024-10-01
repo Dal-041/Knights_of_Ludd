@@ -4,8 +4,8 @@ import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssShoalNebulaTerrain extends NebulaTerrainPlugin {
 
@@ -29,7 +29,7 @@ public class AbyssShoalNebulaTerrain extends NebulaTerrainPlugin {
                     desc, VISIBLITY_MULT,
                     fleet.getStats().getDetectedRangeMod());
 
-            if (fleet.hasTag(excludeTag)) {
+            if (fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
                 return;
             }
             float penalty = 0.2f;
@@ -41,7 +41,7 @@ public class AbyssShoalNebulaTerrain extends NebulaTerrainPlugin {
 
     @Override
     public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
-        if (fleet.hasTag(excludeTag)) {
+        if (fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
             return flag == TerrainAIFlags.REDUCES_DETECTABILITY;
         }
         return flag == TerrainAIFlags.REDUCES_DETECTABILITY ||

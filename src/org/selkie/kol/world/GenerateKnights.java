@@ -28,6 +28,7 @@ import org.selkie.kol.fleets.KnightsExpeditionsManager;
 import org.selkie.kol.fleets.SpawnInvictus;
 import org.selkie.kol.fleets.SpawnRetribution;
 import org.selkie.kol.helpers.MarketHelpers;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.intel.ZeaMechanicIntel;
 import org.selkie.kol.impl.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
@@ -133,7 +134,7 @@ public class GenerateKnights {
 		cygnus.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(cygnus.getMarket().getId());
 
-		cygnus.setInteractionImage("illustrations", "kol_tree_canaan_large");
+		cygnus.setInteractionImage(ZeaStaticStrings.ILLUSTRATIONS, "kol_tree_canaan_large");
 
 		MarketHelpers.addMarketPeople(cygnus.getMarket());
 
@@ -184,7 +185,7 @@ public class GenerateKnights {
         		0.3f
         );
 
-		lyra.setInteractionImage("illustrations", "kol_citadel_large");
+		lyra.setInteractionImage(ZeaStaticStrings.ILLUSTRATIONS, "kol_citadel_large");
 
 		lyra.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
 		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
@@ -272,7 +273,7 @@ public class GenerateKnights {
 
 		libra.setName(name);
 		libra.setCustomDescriptionId("kol_libra_port_desc");
-		libra.setInteractionImage("illustrations", "kol_garden_large");
+		libra.setInteractionImage(ZeaStaticStrings.ILLUSTRATIONS, "kol_garden_large");
 		libra.setDiscoverable(true);
 		libra.setSensorProfile(1f);
 		libra.getDetectedRangeMod().modifyFlat("gen", 5000f);

@@ -1,61 +1,53 @@
 package org.selkie.kol.impl.world;
 
-import java.awt.Color;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
-
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.characters.FullName;
-import com.fs.starfarer.api.fleet.FleetMemberAPI;
-import com.fs.starfarer.api.impl.campaign.*;
-import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
-import com.fs.starfarer.api.impl.campaign.ids.*;
-import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
-import com.fs.starfarer.api.impl.campaign.procgen.DefenderDataOverride;
-import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
-import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
-import com.fs.starfarer.api.impl.campaign.world.ZigLeashAssignmentAI;
-import com.fs.starfarer.api.loading.VariantSource;
-import com.fs.starfarer.api.util.WeightedRandomPicker;
-import org.apache.log4j.Logger;
-import org.lwjgl.util.vector.Vector2f;
-
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.combat.BattleCreationContext;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.MusicPlayerPluginImpl;
+import com.fs.starfarer.api.impl.campaign.*;
 import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin.DerelictShipData;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.BaseFIDDelegate;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfig;
 import com.fs.starfarer.api.impl.campaign.FleetInteractionDialogPluginImpl.FIDConfigGen;
 import com.fs.starfarer.api.impl.campaign.fleets.FleetFactoryV3;
+import com.fs.starfarer.api.impl.campaign.fleets.FleetParamsV3;
+import com.fs.starfarer.api.impl.campaign.ids.*;
+import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithTriggers;
+import com.fs.starfarer.api.impl.campaign.procgen.DefenderDataOverride;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator;
+import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager;
 import com.fs.starfarer.api.impl.campaign.procgen.themes.RemnantSeededFleetManager.RemnantFleetInteractionConfigGen;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial.PerShipData;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial.ShipCondition;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial.ShipRecoverySpecialData;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.MagneticFieldTerrainPlugin.MagneticFieldParams;
+import com.fs.starfarer.api.impl.campaign.world.ZigLeashAssignmentAI;
+import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
+import com.fs.starfarer.api.util.WeightedRandomPicker;
+import org.apache.log4j.Logger;
+import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
+import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import static org.selkie.kol.impl.fleets.ZeaFleetManager.copyFleetMembers;
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class PrepareDarkDeeds {
 
-    public static final String NASCENT_WELL_KEY = "$zea_TT3BlackSite_well";
-    public static final String DEFEATED_NINAYA_KEY = "$zea_defeatedNinaya";
-    public static final String DEFEATED_NINMAH_KEY = "$zea_defeatedNinmah";
-    public static final String DEFEATED_NINEVEH_KEY = "$zea_defeatedNineveh";
-    public static final String TTBOSS2_SYSTEM_KEY = "$zea_tt_boss2_system";
-    public static final String TTBOSS3_SYSTEM_KEY = "$zea_tt_boss3_system";
-    public static final String TTBOSS2_STATION_KEY = "$zea_boss_station_tritachyon"; //Sync with rules.csv
+
     private static final Logger log = Logger.getLogger(PrepareDarkDeeds.class);
 
     public static void andBegin() {
@@ -85,8 +77,8 @@ public class PrepareDarkDeeds {
 
         PersonAPI TT1BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
-                .setAICoreType("alpha_core")
-                .setPortraitId("zea_boss_alphaplus")
+                .setAICoreType(Commodities.ALPHA_CORE)
+                .setPortraitId(ZeaStaticStrings.ZEA_BOSS_ALPHAPLUS)
                 .setLevel(8)
                 .setFirstName("Alpha")
                 .setLastName("(+)")
@@ -99,14 +91,13 @@ public class PrepareDarkDeeds {
         TT1BossCaptain.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
         TT1BossCaptain.getStats().setSkipRefresh(false);
 
-        String variant = "zea_boss_ninaya_Nightdemon";
         SectorEntityToken token = Global.getSector().getStarSystem("Unknown Location").createToken(11111,11111); //cache loc
         CampaignFleetAPI TT1BossFleet = MagicCampaign.createFleetBuilder()
                 .setFleetName("Unidentified Vessel")
                 .setFleetFaction(Factions.TRITACHYON)
                 .setFleetType(FleetTypes.TASK_FORCE)
                 .setFlagshipName("TTS Ninaya")
-                .setFlagshipVariant(variant)
+                .setFlagshipVariant(ZeaStaticStrings.ZEA_BOSS_NINAYA_NIGHTDEMON)
                 .setCaptain(TT1BossCaptain)
                 .setMinFP(0) //support fleet
                 .setQualityOverride(5f)
@@ -130,21 +121,21 @@ public class PrepareDarkDeeds {
         //fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true); // so it keeps transponder on
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
-        TT1BossFleet.getMemoryWithoutUpdate().set("$zea_ninaya", true);
-        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINAYA_BOSS_FLEET, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
 
         // setup and permalock the flagship variant
         FleetMemberAPI flagship = TT1BossFleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
 
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
-        TT1BossFleet.addTag(excludeTag);
+        TT1BossFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
 
         //Using FID config instead
         //TT1BossFleet.addEventListener(new ManageBossTag());
@@ -194,16 +185,16 @@ public class PrepareDarkDeeds {
                         return;
                     }
 
-                    Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINAYA_KEY, true);
+                    Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_NINAYA_DONE, true);
 
-                    ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData("zea_boss_ninaya_Nightdemon", ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
+                    ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData(ZeaStaticStrings.ZEA_BOSS_NINAYA_NIGHTDEMON, ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
                     ship.shipName = "TTS Ninaya";
                     DerelictShipEntityPlugin.DerelictShipData params = new DerelictShipEntityPlugin.DerelictShipData(ship, false);
                     CustomCampaignEntityAPI entity = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
-                    Misc.makeImportant(entity, "zea_ninaya");
-                    entity.getMemoryWithoutUpdate().set("$zea_ninaya_wreck", true);
+                    Misc.makeImportant(entity, ZeaStaticStrings.ZEA_BOSS_NINAYA);
+                    entity.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINAYA_WRECK, true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -211,7 +202,7 @@ public class PrepareDarkDeeds {
                     ZeaUtils.bossWreckCleaner(entity, false);
 
                     dialog.setInteractionTarget(entity);
-                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_AfterNinayaDefeat");
+                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ZEA_AFTER_NINAYA_DEFEAT);
                     dialog.setPlugin(plugin);
                     plugin.init(dialog);
                 }
@@ -254,7 +245,7 @@ public class PrepareDarkDeeds {
             }
         }
 
-        system.getMemoryWithoutUpdate().set(TTBOSS2_SYSTEM_KEY, true);
+        system.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_2_SYSTEM, true);
 
         /* Runcode
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
@@ -271,7 +262,7 @@ public class PrepareDarkDeeds {
          */
 
         CustomCampaignEntityAPI stationBoss = system.addCustomEntity(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, "Suspicious Research Station", ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, Factions.NEUTRAL);
-        stationBoss.getMemoryWithoutUpdate().set(TTBOSS2_STATION_KEY, true);
+        stationBoss.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_2_STATION, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
         stationBoss.setSensorProfile(1f);
         stationBoss.getDetectedRangeMod().modifyFlat("gen", 5000f);
@@ -323,16 +314,16 @@ public class PrepareDarkDeeds {
                         return;
                     }
 
-                    Global.getSector().getMemoryWithoutUpdate().set(DEFEATED_NINEVEH_KEY, true);
+                    Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_NINEVEH_DONE, true);
 
-                    PerShipData ship = new PerShipData("zea_boss_nineveh_Souleater", ShipCondition.WRECKED, 0f);
+                    PerShipData ship = new PerShipData(ZeaStaticStrings.ZEA_BOSS_NINEVEH_SOULEATER, ShipCondition.WRECKED, 0f);
                     ship.shipName = "TTS Nineveh";
                     DerelictShipData params = new DerelictShipData(ship, true);
                     CustomCampaignEntityAPI entity = (CustomCampaignEntityAPI) BaseThemeGenerator.addSalvageEntity(
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
-                    Misc.makeImportant(entity, "zea_nineveh");
-                    entity.getMemoryWithoutUpdate().set("$zea_nineveh_wreck", true);
+                    Misc.makeImportant(entity, ZeaStaticStrings.ZEA_BOSS_NINEVENH);
+                    entity.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINEVEH_WRECK, true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -346,7 +337,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    copy.variant.removeTag(ZeaStaticStrings.BOSS_TAG);
+                    copy.variant.removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
                     copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
@@ -355,7 +346,7 @@ public class PrepareDarkDeeds {
                             Entities.EQUIPMENT_CACHE_SMALL, Factions.TRITACHYON);
                     lootbox.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     lootbox.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
-                    Misc.makeImportant(lootbox, "zea_nineveh");
+                    Misc.makeImportant(lootbox, ZeaStaticStrings.ZEA_BOSS_NINEVENH);
                     lootbox.addDropValue("basic", 40000);
                     lootbox.addDropRandom("omega_weapons_small", 1);
                     lootbox.addDropRandom("zea_omega_small_low", 7);
@@ -367,7 +358,7 @@ public class PrepareDarkDeeds {
                     Misc.setSalvageSpecial(entity, data);
 
                     dialog.setInteractionTarget(entity);
-                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl("zea_AfterNinevehDefeat");
+                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ZEA_AFTER_NINEVEH_DEFEAT);
                     dialog.setPlugin(plugin);
                     plugin.init(dialog);
                 }
@@ -387,8 +378,8 @@ public class PrepareDarkDeeds {
         float sectorWidthR = Global.getSettings().getFloat("sectorWidth")/2f;
         float sectorHeightR = Global.getSettings().getFloat("sectorHeight")/2f;
 
-        StarSystemAPI system = Global.getSector().createStarSystem("zea_SiteDelta");
-        system.getMemoryWithoutUpdate().set(TTBOSS3_SYSTEM_KEY, true);
+        StarSystemAPI system = Global.getSector().createStarSystem("Delta Site");
+        system.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_SYSTEM, true);
         system.setBaseName("Delta Site");
         //system.setType(StarSystemType.NEBULA);
         system.setName("Unknown Location"); // to get rid of "Star System" at the end of the name
@@ -398,7 +389,7 @@ public class PrepareDarkDeeds {
 
         system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
-        system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_delta_site.png");
+        system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaStaticStrings.BACKGROUNDS, "zea_bg_delta_site"));
         //system.getLocation().set(2500, 3000);
         system.getLocation().set(-sectorWidthR + 30000f, -sectorHeightR + 15000f);
 
@@ -413,16 +404,16 @@ public class PrepareDarkDeeds {
 
         system.setLightColor(new Color(255,140,185,255)); // light color in entire system, affects all entities
 
-        PlanetAPI rock = system.addPlanet("zea_site_three", center, "Delta Site", "frozen", 0, 166, 1200, 40);
+        PlanetAPI rock = system.addPlanet(ZeaStaticStrings.ZEA_TT_3_SITE_PLANET, center, "Delta Site", "frozen", 0, 166, 1200, 40);
         //rock.setCustomDescriptionId("???");
-        rock.getMemoryWithoutUpdate().set("$zea_TT3BlackSite", true);
+        rock.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_BLACK_SITE, true);
 
         rock.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
         rock.getMarket().addCondition(Conditions.VERY_COLD);
         rock.getMarket().addCondition(Conditions.DARK);
         rock.getMarket().addCondition(Conditions.RUINS_SCATTERED);
 
-        rock.getMarket().getMemoryWithoutUpdate().set("$ruinsExplored", true);
+        rock.getMarket().getMemoryWithoutUpdate().set(ZeaStaticStrings.RUINS_EXPLORED, true);
         //If this is done, shows up in intel planet list; doesn't matter either way
         //Misc.setFullySurveyed(rock.getMarket(), null, false);
 
@@ -452,14 +443,14 @@ public class PrepareDarkDeeds {
         CustomCampaignEntityAPI beacon = system.addCustomEntity(null, null, Entities.WARNING_BEACON, Factions.NEUTRAL);
         beacon.setCircularOrbitPointingDown(rock, 0, 2500, 60);
 
-        beacon.getMemoryWithoutUpdate().set("$zea_TT3BlackSite", true);
+        beacon.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_BLACK_SITE, true);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_ID_KEY, Pings.WARNING_BEACON3);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_FREQ_KEY, 1.5f);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_COLOR_KEY, new Color(250,125,0,255));
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.GLOW_COLOR_KEY, new Color(250,55,0,255));
 
         SectorEntityToken cache = BaseThemeGenerator.addSalvageEntity(system, Entities.ALPHA_SITE_WEAPONS_CACHE, Factions.NEUTRAL);
-        cache.getMemoryWithoutUpdate().set("$zea_TT3WeaponsCache", true);
+        cache.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_WEAPONS_CACHE, true);
         cache.getLocation().set(11111, -11111);
 
         system.generateAnchorIfNeeded();
@@ -472,11 +463,11 @@ public class PrepareDarkDeeds {
 
         addTT3Fleet(rock, system);
 
-        Global.getSector().getMemoryWithoutUpdate().set(NASCENT_WELL_KEY, well);
+        Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_NASCENT_WELL, well);
     }
 
     public static NascentGravityWellAPI getWell() {
-        return (NascentGravityWellAPI) Global.getSector().getMemoryWithoutUpdate().get(NASCENT_WELL_KEY);
+        return (NascentGravityWellAPI) Global.getSector().getMemoryWithoutUpdate().get(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_NASCENT_WELL);
     }
 
     public static void addTT3Fleet(SectorEntityToken rock, StarSystemAPI system) {
@@ -492,8 +483,8 @@ public class PrepareDarkDeeds {
 
         PersonAPI TT3BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
-                .setAICoreType("alpha_core")
-                .setPortraitId("zea_boss_alphaplus")
+                .setAICoreType(Commodities.ALPHA_CORE)
+                .setPortraitId(ZeaStaticStrings.ZEA_BOSS_ALPHAPLUS)
                 .setLevel(8)
                 .setFirstName("Alpha")
                 .setLastName("(+)")
@@ -509,14 +500,13 @@ public class PrepareDarkDeeds {
         TT3BossCaptain.getStats().setSkillLevel(Skills.CREW_TRAINING, 1);
         TT3BossCaptain.getStats().setSkipRefresh(false);
 
-        String variant = "zea_boss_nineveh_Souleater";
 
         CampaignFleetAPI TT3BossFleet = MagicCampaign.createFleetBuilder()
                 .setFleetName("Black Site Fleet")
                 .setFleetFaction(Factions.TRITACHYON)
                 .setFleetType(FleetTypes.TASK_FORCE)
                 .setFlagshipName("TTS Nineveh")
-                .setFlagshipVariant(variant)
+                .setFlagshipVariant(ZeaStaticStrings.ZEA_BOSS_NINEVEH_SOULEATER)
                 .setCaptain(TT3BossCaptain)
                 .setMinFP(175) //Tritach fleet
                 .setQualityOverride(5f)
@@ -527,13 +517,13 @@ public class PrepareDarkDeeds {
                 .create();
         TT3BossFleet.setDiscoverable(true);
         TT3BossFleet.getFleetData().ensureHasFlagship();
-        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
 
         // setup and permalock the flagship variant
         FleetMemberAPI flagship = TT3BossFleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         //Support fleet stuff
@@ -569,12 +559,12 @@ public class PrepareDarkDeeds {
         //fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true); // so it keeps transponder on
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
-        TT3BossFleet.getMemoryWithoutUpdate().set("$zea_nineveh", true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINEVEH_BOSS_FLEET, true);
 
         TT3BossFleet.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
-        TT3BossFleet.addTag(excludeTag);
+        TT3BossFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
 
 //      TT3BossFleet.clearAbilities();
 //		TT3BossFleet.addAbility(Abilities.TRANSPONDER);

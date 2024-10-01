@@ -5,13 +5,11 @@ import org.selkie.kol.impl.skills.cores.BaseCoreOfficerSkill;
 import org.selkie.kol.impl.skills.cores.DawnBossCoreSkill;
 import org.selkie.kol.impl.skills.cores.DuskBossCoreSkill;
 import org.selkie.kol.impl.skills.cores.ElysiaBossCoreSkill;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
 import java.util.Objects;
 
 @NonNls
 public class ZeaStaticStrings {
-    public static final String BOSS_TAG = "$zea_boss";
 
     // mod id's
     public static final String LOST_SECTOR = "lost_sector";
@@ -25,23 +23,32 @@ public class ZeaStaticStrings {
     public static final String TAHLAN_CHILD = "tahlan_child";
 
     //tags
-    public static final String ZEA_RULESFORTHEEBUTNOTFORME = "zea_rulesfortheebutnotforme";
+    public static final String ZEA_EXCLUDE_TAG = "zea_rulesfortheebutnotforme";
+    public static final String DRONE_SHIELD_TARGET_KEY = "droneShieldTargetKey";
 
     //sounds
     public static final String HIT_HEAVY = "hit_heavy";
     public static final String HIT_SHIELD_HEAVY_GUN = "hit_shield_heavy_gun";
     public static final String SYSTEM_PHASE_CLOAK_ACTIVATE = "system_phase_cloak_activate";
+    public static final String SYSTEM_PHASE_CLOAK_DEACTIVATE = "system_phase_cloak_deactivate";
     public static final String LIDAR_WINDUP = "lidar_windup";
     public static final String SYSTEM_TARGETING_FEED_LOOP = "system_targeting_feed_loop";
     public static final String SYSTEM_CANISTER_FLAK_EXPLOSION = "system_canister_flak_explosion";
+    public static final String UI_ACQUIRED_BLUEPRINT = "ui_acquired_blueprint";
+    public static final String MOTE_ATTRACTOR_IMPACT_EMP_ARC = "mote_attractor_impact_emp_arc";
+    public static final String MOTE_ATTRACTOR_IMPACT_DAMAGE = "mote_attractor_impact_damage";
+    public static final String MOTE_ATTRACTOR_IMPACT_NORMAL = "mote_attractor_impact_normal";
 
     //sprite category
+    public static final String BACKGROUNDS = "backgrounds";
     public static final String TERRAIN = "terrain";
     public static final String LORE_ITEM = "lore_item";
     public static final String ZEA_PHASE_GLOWS = "zea_phase_glows";
     public static final String FX = "fx";
     public static final String ILLUSTRATIONS = "illustrations";
     public static final String ICONS = "icons";
+    public static final String CHARACTERS = "characters";
+    public static final String KOL_FX = "kol_fx";
 
     //sprite id
     public static final String AURORA = "aurora";
@@ -49,16 +56,38 @@ public class ZeaStaticStrings {
     public static final String ZEA_ELYSIA_VORTICE = "zea_elysia_vortice";
     public static final String ZEA_BANNER = "zea_banner";
     public static final String GAME_ICON = "game_icon";
+    public static final String ZEA_RING_TARGETING = "zea_ring_targeting";
+    public static final String ZEA_TT_DELTA_SITE = "zea_tt_delta_site";
 
     // CR id
     public static final String CORONA = "corona";
     public static final String FLARE = "flare";
 
     //hulls
+    public static final String ZEA_BOSS_NINAYA = "zea_boss_ninaya";
     public static final String ZEA_BOSS_NINMAH = "zea_boss_ninmah";
+    public static final String ZEA_BOSS_NINEVENH = "zea_boss_nineveh";
+    public static final String DEM_DRONE = "dem_drone";
 
     //variants
+    public static final String ZEA_BOSS_NINAYA_NIGHTDEMON = "zea_boss_ninaya_Nightdemon";
     public static final String ZEA_BOSS_NINMAH_UNDOER = "zea_boss_ninmah_Undoer";
+    public static final String ZEA_BOSS_NINEVEH_SOULEATER = "zea_boss_nineveh_Souleater";
+
+    public static final String KOL_BOSS_RET_LP_OVERDRIVEN = "kol_boss_ret_lp_Overdriven";
+    public static final String KOL_INVICTUS_LP_HALLOWED = "kol_invictus_lp_Hallowed";
+
+    public static final String ZEA_BOSS_CORRUPTINGHEART_UNHOLY = "zea_boss_corruptingheart_Unholy";
+    public static final String ZEA_BOSS_AMATERASU_BLINDING = "zea_boss_amaterasu_Blinding";
+    public static final String ZEA_BOSS_YUKIONNA_ULTIMATE = "zea_boss_yukionna_Ultimate";
+    public static final String ZEA_BOSS_NIAN_SALVATION = "zea_boss_nian_Salvation";
+
+    public static final String ZEA_DAWN_CHIWEN_WING = "zea_dawn_chiwen_wing";
+    public static final String ZEA_EDF_SHACHIHOKO_WING = "zea_edf_shachihoko_wing";
+
+    //weapons
+    public static final String TARGETINGLASER_2 = "targetinglaser2";
+    public static final String ZEA_RADIANCE_DUMMY_WPN = "zea_radiance_dummy_wpn";
 
     //portrait id
     public static final String ZEA_BOSS_ALPHAPLUS = "zea_boss_alphaplus";
@@ -66,13 +95,22 @@ public class ZeaStaticStrings {
     //rules event hooks
     public static final String ZEA_BOSS_STATION_TT_SALVAGE_2 = "zea_BossStationTT_Salvage2";
     public static final String ZEA_AFTER_NINEVEH_DEFEAT = "zea_AfterNinevehDefeat";
+    public static final String ZEA_AFTER_NINAYA_DEFEAT = "zea_AfterNinayaDefeat";
     public static final String ZEA_SPOILERS_POPUP = "zea_spoilers_popup";
+
+    public static final String ADD_INTEL_TTBOSS_1 = "addIntelTTBoss1";
+    public static final String ADD_INTEL_TTBOSS_2 = "addIntelTTBoss2";
+    public static final String ADD_INTEL_TTBOSS_3 = "addIntelTTBoss3";
+    public static final String END_MUSIC = "endMusic";
+    public static final String ADD_BOSS_TAGS = "addBossTags";
 
     //intel tag
     public static final String KNIGHTS_OF_LUDD = "Knights of Ludd";
 
-    //stars and planets
+    //campaign entity
     public static final String ZEA_STAR_BLACK_NEUTRON = "zea_star_black_neutron";
+    public static final String ZEA_NULLGATE = "zea_nullgate";
+    public static final String ZEA_NULL_STATION = "zea_null_station_dusk";
 
     public static final String ZEA_LUNASEA_PLANET_ONE = "zea_lunasea_one";
     public static final String ZEA_LUNASEA_PLANET_TWO = "zea_lunasea_two";
@@ -81,7 +119,10 @@ public class ZeaStaticStrings {
     public static final String ZEA_LUNASEA_PLANET_FIVE = "zea_lunasea_five";
     public static final String ZEA_LUNASEA_PLANET_SIX = "zea_lunasea_six";
 
-    //campaign entities id
+    public static final String ZEA_ELYSIA_ABYSS = "zea_elysia_abyss";
+    public static final String ZEA_ELYSIA_GAZE = "zea_elysia_gaze";
+    public static final String ZEA_TT_3_SITE_PLANET = "zea_site_three";
+
     public static final String ZEA_EDF_CORONAL_TAP = "zea_edf_coronal_tap";
     public static final String ZEA_NULL_STATION_DUSK = "zea_null_station_dusk";
     public static final String ZEA_BOSS_STATION_TRITACHYON = "zea_boss_station_tritachyon";
@@ -92,6 +133,11 @@ public class ZeaStaticStrings {
 
     // vanilla missing statics
     public static final String PHASE_ANCHOR_CAN_DIVE = "phaseAnchor_canDive";
+    public static final String EPIPHANY = "epiphany";
+    public static final String CHALCEDON = "chalcedon";
+    public static final String OFFICER_LEVEL_UP = "officerLevelUp";
+    public static final String PROGRESS_BAR_FUEL_COLOR = "progressBarFuelColor";
+    public static final String RUINS_EXPLORED = "$ruinsExplored";
 
     //stat mod id
     public static final String BOSS_PHASE_TWO_MODIFIER = "boss_phase_two_modifier";
@@ -150,16 +196,23 @@ public class ZeaStaticStrings {
         "mercenary"
     };
 
+    public static final String elysianID = "zea_elysians";
+    public static final String duskID = "zea_dusk";
+    public static final String dawnID = "zea_dawn";
     public static final String[] factionIDs = {
-        PrepareAbyss.dawnID,
-        PrepareAbyss.duskID,
-        PrepareAbyss.elysianID
+        dawnID,
+        duskID,
+        elysianID
     };
+    public static final String nbsSysPrefix = "zea_nbs_"; //Neutron black star
+    public static final String nullspaceSysName = "Nullspace";
+    public static final String lunaSeaSysName = "The Luna Sea";
+    public static final String elysiaSysName = "Elysia";
     public static final String[] systemNames = {
-        PrepareAbyss.elysiaSysName,
-        PrepareAbyss.nullspaceSysName,
-        PrepareAbyss.lunaSeaSysName,
-        PrepareAbyss.nbsSysPrefix,
+        elysiaSysName,
+        nullspaceSysName,
+        lunaSeaSysName,
+        nbsSysPrefix,
     };
 
     public static final String[] hullBlacklist = {
@@ -276,5 +329,35 @@ public class ZeaStaticStrings {
     public static final String crestEDF = "zea_crest_edf";
     public static final String crestTT = "graphics/factions/crest_tritachyon";
 
-    public final static String MEMKEY_DUSK_BOSS_FLEET = "$zea_yukionna";
+
+
+    public static class MemKeys {
+        public static final String BOSS_TAG = "$zea_boss";
+        public static final String MEMKEY_ZEA_NINMAH_WRECK = "$zea_ninmah_wreck";
+        public static final String MEMKEY_ZEA_NINAYA_WRECK = "$zea_ninmaya_wreck";
+        public static final String MEMKEY_ZEA_NINEVEH_WRECK = "$zea_nineveh_wreck";
+
+        public static final String MEMKEY_ZEA_ELYSIAN_BOSS_1_DONE = "$zea_elysian_boss1_done";
+        public static final String MEMKEY_ZEA_ELYSIAN_BOSS_2_DONE = "$zea_elysian_boss2_done";
+        public static final String MEMKEY_ZEA_DAWN_BOSS_DONE = "$zea_dawn_boss_done";
+        public static final String MEMKEY_ZEA_DUSK_BOSS_DONE = "$zea_dusk_boss_done";
+        public static final String MEMKEY_ZEA_TT_NINAYA_DONE = "$zea_defeatedNinaya";
+        public static final String MEMKEY_ZEA_TT_NINMAH_DONE = "$zea_defeatedNinmah";
+        public static final String MEMKEY_ZEA_TT_NINEVEH_DONE = "$zea_defeatedNineveh";
+
+        public static final String MEMKEY_ZEA_NINAYA_BOSS_FLEET = "$zea_ninaya";
+        public static final String MEMKEY_ZEA_NINEVEH_BOSS_FLEET = "$zea_nineveh";
+        public final static String MEMKEY_ZEA_CORRUPTING_HEART_BOSS_FLEET = "$zea_corruptingheart";
+        public static final String MEMKEY_ZEA_AMATERASU_BOSS_FLEET = "$zea_amaterasu";
+        public final static String MEMKEY_ZEA_DAWN_BOSS_FLEET = "$zea_nian";
+        public final static String MEMKEY_ZEA_DUSK_BOSS_FLEET = "$zea_yukionna";
+
+        public static final String MEMKEY_ZEA_TT_3_BLACK_SITE = "$zea_TT3BlackSite";
+        public static final String MEMKEY_ZEA_TT_3_NASCENT_WELL = "$zea_TT3BlackSite_well";
+        public static final String MEMKEY_ZEA_TT_3_WEAPONS_CACHE = "$zea_TT3WeaponsCache";
+
+        public static final String MEMKEY_ZEA_TT_2_STATION = "$zea_boss_station_tritachyon"; //Sync with rules.csv
+        public static final String MEMKEY_ZEA_TT_2_SYSTEM = "$zea_tt_boss2_system";
+        public static final String MEMKEY_ZEA_TT_3_SYSTEM = "$zea_tt_boss3_system";
+    }
 }

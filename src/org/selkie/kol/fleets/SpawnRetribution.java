@@ -10,14 +10,15 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
 import org.selkie.kol.helpers.KOLStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 public class SpawnRetribution {
 	
 	public static boolean spawnRetribution() {
 	        
 		SectorEntityToken target=null;
-		if(Global.getSector().getEntityById("epiphany")!=null && Global.getSector().getEntityById("epiphany").getFaction() == Global.getSector().getFaction(Factions.LUDDIC_PATH)){
-	            target = Global.getSector().getEntityById("epiphany");
+		if(Global.getSector().getEntityById(ZeaStaticStrings.EPIPHANY)!=null && Global.getSector().getEntityById(ZeaStaticStrings.EPIPHANY).getFaction() == Global.getSector().getFaction(Factions.LUDDIC_PATH)){
+	            target = Global.getSector().getEntityById(ZeaStaticStrings.EPIPHANY);
 	        } else {
 	            for(MarketAPI markets : Global.getSector().getEconomy().getMarketsCopy()){
 	                if(markets.getFaction().getId().equals(Factions.LUDDIC_PATH)){
@@ -34,13 +35,12 @@ public class SpawnRetribution {
 
 	            PersonAPI RetributionCaptain = MagicCampaign.createCaptainBuilder(Factions.LUDDIC_PATH).create();
 
-                String variant = "kol_boss_ret_lp_Overdriven";
 	            CampaignFleetAPI RetributionFleet = MagicCampaign.createFleetBuilder()
 	                    .setFleetName("Ludd's Embrace")
 	                    .setFleetFaction(Factions.LUDDIC_PATH)
 	                    .setFleetType(FleetTypes.TASK_FORCE)
 	                    .setFlagshipName("To Them Eternal Rest")
-	                    .setFlagshipVariant(variant)
+	                    .setFlagshipVariant(ZeaStaticStrings.KOL_BOSS_RET_LP_OVERDRIVEN)
 	                    .setCaptain(RetributionCaptain)
 	                    .setMinFP(275) //support fleet
 	                    .setQualityOverride(2f)

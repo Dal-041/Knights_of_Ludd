@@ -14,31 +14,28 @@ import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnElysianHeart {
-	public final static String MEMKEY_ELYSIAN_BOSS_FLEET_2 = "$zea_corruptingheart";
+
 	public static void SpawnElysianHeart() {
 
-		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.elysianID);
+		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.elysianID);
 		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
-		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitElysianBoss));
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitElysianBoss));
 
-        String variant = "zea_boss_corruptingheart_Unholy";
 		SectorEntityToken token;
 		if (Math.random() > 0.7f) {
-			token = Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_abyss");
+			token = Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaStaticStrings.ZEA_ELYSIA_ABYSS);
 		} else {
-			token = Global.getSector().getStarSystem(PrepareAbyss.elysiaSysName).getEntityById("zea_elysia_gaze");
+			token = Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaStaticStrings.ZEA_ELYSIA_GAZE);
 		}
 		CampaignFleetAPI elysianHeartFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Corrupting Heart")
-		        .setFleetFaction(PrepareAbyss.elysianID)
+		        .setFleetFaction(ZeaStaticStrings.elysianID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("Corrupting Heart")
-		        .setFlagshipVariant(variant)
+		        .setFlagshipVariant(ZeaStaticStrings.ZEA_BOSS_CORRUPTINGHEART_UNHOLY)
 		        .setCaptain(elysianBossCaptain)
 		        .setMinFP(440) //support fleet
 		        .setQualityOverride(2f)
@@ -49,7 +46,7 @@ public class SpawnElysianHeart {
 		        .create();
 		elysianHeartFleet.setDiscoverable(true);
 		elysianHeartFleet.getFleetData().ensureHasFlagship();
-		elysianHeartFleet.getMemoryWithoutUpdate().set(MEMKEY_ELYSIAN_BOSS_FLEET_2, true);
+		elysianHeartFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_CORRUPTING_HEART_BOSS_FLEET, true);
 
 		elysianHeartFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);
@@ -67,11 +64,11 @@ public class SpawnElysianHeart {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG);
+		flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitElysianBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitElysianBoss));
 
 
 		// to make sure they attack the player on sight when player's transponder is off
@@ -88,7 +85,7 @@ public class SpawnElysianHeart {
 		BaseSalvageSpecial.addExtraSalvage(elysianHeartFleet, cargo);
 
 		// tag to exclude terrain effects
-		elysianHeartFleet.addTag(excludeTag);
+		elysianHeartFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
 
 		// manage the wreck
 		elysianHeartFleet.addEventListener(new ManageElysianCorruptingheart());

@@ -16,38 +16,35 @@ import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaUtils;
-import org.selkie.kol.impl.world.PrepareAbyss;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class SpawnDuskBoss {
 
 	public static void SpawnDuskBoss() {
 
-		PersonAPI duskBossCaptain = ZeaFleetManager.createAICaptain(PrepareAbyss.duskID);
+		PersonAPI duskBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.duskID);
 		//Songtress, an experitmental AI who was once human.
 		duskBossCaptain.setName(new FullName("Songtress", "", FullName.Gender.FEMALE));
-		duskBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDuskBoss));
+		duskBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDuskBoss));
 
-        String variant = "zea_boss_yukionna_Ultimate";
 		CampaignFleetAPI duskBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Yukionna")
-		        .setFleetFaction(PrepareAbyss.duskID)
+		        .setFleetFaction(ZeaStaticStrings.duskID)
 		        .setFleetType(FleetTypes.TASK_FORCE)
 		        .setFlagshipName("Yukionna")
-		        .setFlagshipVariant(variant)
+		        .setFlagshipVariant(ZeaStaticStrings.ZEA_BOSS_YUKIONNA_ULTIMATE)
 		        .setCaptain(duskBossCaptain)
 		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.DEFEND_LOCATION)
-				.setSpawnLocation(Global.getSector().getStarSystem(PrepareAbyss.nullspaceSysName).getCenter())
+				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName).getCenter())
 		        .setIsImportant(true)
 		        .setTransponderOn(false)
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 		duskBossFleet.getFleetData().ensureHasFlagship();
-		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MEMKEY_DUSK_BOSS_FLEET, true);
-		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.BOSS_TAG, true);
+		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DUSK_BOSS_FLEET, true);
+		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
 
 		// populate the fleet with escorts
 		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
@@ -64,11 +61,11 @@ public class SpawnDuskBoss {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaStaticStrings.BOSS_TAG); //Now confirmed by fleet rule.
+		flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG); //Now confirmed by fleet rule.
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE); //Now confirmed by fleet rule.
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName("characters", ZeaStaticStrings.portraitDuskBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDuskBoss));
 
 		// to make sure they attack the player on sight when player's transponder is off
 		//duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_SAW_PLAYER_WITH_TRANSPONDER_ON, true);
@@ -84,7 +81,7 @@ public class SpawnDuskBoss {
 		BaseSalvageSpecial.addExtraSalvage(duskBossFleet, cargo);
 
 		// tag to exclude terrain effects
-		duskBossFleet.addTag(excludeTag);
+		duskBossFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
 
 		// set up the initial interaction
 		duskBossFleet.addEventListener(new ManageDuskBoss());

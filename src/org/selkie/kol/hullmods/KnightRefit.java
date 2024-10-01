@@ -22,6 +22,7 @@ import org.selkie.kol.Utils;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.helpers.KOLStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.List;
@@ -291,7 +292,7 @@ public class KnightRefit extends BaseHullMod {
         }
         tooltip.addSectionHeading("Integrated Ballistics", hasComposite ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasComposite ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
-        TooltipMakerAPI integratedBallistics = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", hasComposite ? "kol_composite" : "kol_composite_grey"), HEIGHT);
+        TooltipMakerAPI integratedBallistics = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, hasComposite ? "kol_composite" : "kol_composite_grey"), HEIGHT);
         integratedBallistics.setBulletedListMode("•");
         integratedBallistics.setBulletWidth(15f);
         integratedBallistics.addPara("Every ordnance point spent on ballistic weapons installed into composite slots increases Flux Capacity by %s, and Flux Dissipation by %s.",
@@ -302,7 +303,7 @@ public class KnightRefit extends BaseHullMod {
         boolean hasShield = ship.getShield() != null;
         tooltip.addSectionHeading("Primitive Capacitor Shields", hasShield ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasShield ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
-        TooltipMakerAPI capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", hasShield ? "kol_primshield" : "kol_primshield_grey"), HEIGHT);
+        TooltipMakerAPI capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, hasShield ? "kol_primshield" : "kol_primshield_grey"), HEIGHT);
         capacitorShields.setBulletedListMode("•");
         capacitorShields.setBulletWidth(15f);
         capacitorShields.addPara("Shields rely on a charge and can only stay online for a max of %s at a time.",
@@ -317,7 +318,7 @@ public class KnightRefit extends BaseHullMod {
         boolean hasModules = variant != null && !variant.getStationModules().isEmpty();
         tooltip.addSectionHeading("Modular Armor", hasModules ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasModules ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
-        TooltipMakerAPI modularArmor = tooltip.beginImageWithText(Global.getSettings().getSpriteName("icons", hasModules ? "kol_modules" : "kol_modules_grey"), HEIGHT);
+        TooltipMakerAPI modularArmor = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, hasModules ? "kol_modules" : "kol_modules_grey"), HEIGHT);
         modularArmor.setBulletedListMode("•");
         modularArmor.setBulletWidth(15f);
         modularArmor.addPara("Increases top speed and maneuverability by up to %s as armor panels are destroyed.",
@@ -441,7 +442,7 @@ public class KnightRefit extends BaseHullMod {
 
         CombatEngineAPI engine = Global.getCombatEngine();
         if(engine.getPlayerShip() == ship && speedRatio > 0.01f){
-            String modularIcon = Global.getSettings().getSpriteName("icons", "kol_modules");
+            String modularIcon = Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "kol_modules");
             engine.maintainStatusForPlayerShip(SPEED_STATUS_KEY, modularIcon, "Damaged Modular Armor", "+" + Math.round((speedRatio * SPEED_BONUS * 100)) + " top speed" , false);
         }
     }

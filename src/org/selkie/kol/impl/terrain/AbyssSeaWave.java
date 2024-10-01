@@ -11,10 +11,10 @@ import com.fs.starfarer.api.impl.campaign.terrain.PeakPerformanceBuff;
 import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 
-import static org.selkie.kol.impl.world.PrepareAbyss.excludeTag;
 
 public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
 
@@ -28,7 +28,7 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
             params.name = "Dawntide";
             nameTooltip = "Dawntide";
             multiplyArc(2.5f);
-            spriteCat = "terrain";
+            spriteCat = ZeaStaticStrings.TERRAIN;
             spriteKey = "zea_wavefront";
             flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes ...but the code doesn't call the color
@@ -37,7 +37,7 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;
 
-            if (fleet.hasTag(excludeTag)) return;
+            if (fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) return;
             if (fleet.getStats().hasMod("LunaSea_2")) return;
             float intensity = getIntensityAtPoint(fleet.getLocation());
             if (intensity <= 0) return;
