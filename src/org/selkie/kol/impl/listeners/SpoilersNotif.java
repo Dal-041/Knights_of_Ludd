@@ -43,7 +43,7 @@ public class SpoilersNotif implements EveryFrameScript {
 
     @Override
     public boolean isDone() {
-        return Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.KEY_ZEA_SPOILERS) && (boolean)Global.getSector().getMemoryWithoutUpdate().get(ZeaStaticStrings.KEY_ZEA_SPOILERS);
+        return Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.ZeaMemKeys.ZEA_SPOILERS) && (boolean)Global.getSector().getMemoryWithoutUpdate().get(ZeaStaticStrings.ZeaMemKeys.ZEA_SPOILERS);
     }
 
     @Override
@@ -63,17 +63,17 @@ public class SpoilersNotif implements EveryFrameScript {
         if (fire) {
             long march = 1709280000000L;
             if (checkFile() || System.currentTimeMillis() > march) {
-                Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.KEY_ZEA_SPOILERS, true);
+                Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.ZeaMemKeys.ZEA_SPOILERS, true);
                 return;
             }
             delay.advance(amount);
-            if (delay.intervalElapsed() && !Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.KEY_ZEA_SPOILERS)) {
+            if (delay.intervalElapsed() && !Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.ZeaMemKeys.ZEA_SPOILERS)) {
                 if(Global.getSector().getCampaignUI().getCurrentInteractionDialog() == null){
                     return; //check again after 15 sec, player is in area without the ability to have interaction
                 }
                 doSpoilersTalk();
                 writeFile();
-                Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.KEY_ZEA_SPOILERS, true);
+                Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.ZeaMemKeys.ZEA_SPOILERS, true);
             }
         }
     }

@@ -21,7 +21,7 @@ import kotlin.math.roundToInt
 
 
 class DawnBossCoreSkill : BaseCoreOfficerSkill() {
-    override val skillID = BossCore.DAWN_CORE.exclusiveSkillID
+    override val skillID: String = BossCore.DAWN_CORE.exclusiveSkillID
     class DawnBossCoreListener(var ship: ShipAPI) : HullDamageAboutToBeTakenListener, AdvanceableListener {
         var damperTriggered = false
         var damperTimer = 8f

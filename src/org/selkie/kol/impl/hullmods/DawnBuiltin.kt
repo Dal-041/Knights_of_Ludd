@@ -106,15 +106,6 @@ class DawnBuiltin : BaseHullMod() {
         if (stats.variant.hasHullMod(HullMods.SOLAR_SHIELDING)) {
             stats.variant.removeMod(HullMods.SOLAR_SHIELDING)
         }
-        if (stats.variant.hasHullMod("zea_cascade_targeting")) {
-            stats.variant.removeMod("zea_cascade_targeting")
-        }
-        if (stats.variant.hasHullMod("zea_dawn_simple_shield_drones")) {
-            stats.variant.removeMod("zea_dawn_simple_shield_drones")
-        }
-        if (stats.variant.hasHullMod("zea_dawn_smart_shield_drones")) {
-            stats.variant.removeMod("zea_dawn_smart_shield_drones")
-        }
     }
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
@@ -209,7 +200,7 @@ class DawnBuiltin : BaseHullMod() {
         )
         tooltip.addImageWithText(underHeadingPad)
 
-        var sprite = Global.getSettings().getSprite(GfxCat.KOL_UI, "zea_dawn_hmod")
+        var sprite = Global.getSettings().getSprite(GfxCat.UI, "zea_dawn_hmod")
         background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()

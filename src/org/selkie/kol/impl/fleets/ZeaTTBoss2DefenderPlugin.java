@@ -70,7 +70,7 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         PersonAPI TT2BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
                 .setAICoreType(Commodities.ALPHA_CORE)
-                .setPortraitId(ZeaStaticStrings.ZEA_BOSS_ALPHAPLUS)
+                .setPortraitId(ZeaStaticStrings.portraitAlphaPlus)
                 .setLevel(8)
                 .setFirstName("Alpha")
                 .setLastName("(+)")

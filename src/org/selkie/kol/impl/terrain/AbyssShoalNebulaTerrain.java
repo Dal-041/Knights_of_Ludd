@@ -5,7 +5,6 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 
 public class AbyssShoalNebulaTerrain extends NebulaTerrainPlugin {

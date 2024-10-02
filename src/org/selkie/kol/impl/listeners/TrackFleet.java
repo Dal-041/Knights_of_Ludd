@@ -7,7 +7,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import com.fs.starfarer.campaign.CampaignEngine;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 
 import java.util.Random;
@@ -39,10 +39,10 @@ public class TrackFleet implements EveryFrameScript {
                 if (fleet.isInHyperspaceTransition()) return;
                 if (fleet.getContainingLocation().getId().equalsIgnoreCase(ZeaStaticStrings.elysiaSysName)) {
                     under = Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName);
-                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 150 && Math.abs(fleet.getLocation().getY()) <= 150 && under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE_DUSK) != null) {
+                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 150 && Math.abs(fleet.getLocation().getY()) <= 150 && under.getEntityById(ZeaEntities.ZEA_NULLGATE_DUSK) != null) {
                         iSecond.advance(1);
                         if (iSecond.intervalElapsed()) {
-                            targ = under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE_DUSK);
+                            targ = under.getEntityById(ZeaEntities.ZEA_NULLGATE_DUSK);
                             JumpPointAPI.JumpDestination dest = new JumpPointAPI.JumpDestination(targ, null);
                             Global.getSector().doHyperspaceTransition(fleet, fleet, dest);
                             fleet.setNoEngaging(1.0f);

@@ -18,7 +18,8 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.SparkleAIV2
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
+
 class DuskBuiltin : BaseHullMod() {
     companion object{
         val allMotes = mutableListOf<MissileAPI>()
@@ -124,12 +125,6 @@ class DuskBuiltin : BaseHullMod() {
         }
 
         //For save compatibility with old version
-        if (stats.variant.hasHullMod("kol_ea_sparkle")) {
-            stats.variant.removeMod("kol_ea_sparkle")
-        }
-        if (stats.variant.hasHullMod("zea_ex_phase_coils")) {
-            stats.variant.removeMod("zea_ex_phase_coils")
-        }
         if (stats.variant.hasHullMod("delicate")) {
             stats.variant.removeMod("delicate")
         }
@@ -199,7 +194,7 @@ class DuskBuiltin : BaseHullMod() {
 
         tooltip.addImageWithText(underHeadingPad)
 
-        var sprite = Global.getSettings().getSprite(GfxCat.KOL_UI, "zea_dusk_hmod")
+        var sprite = Global.getSettings().getSprite(GfxCat.UI, "zea_dusk_hmod")
         background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()

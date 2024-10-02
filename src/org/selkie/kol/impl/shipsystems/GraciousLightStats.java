@@ -140,7 +140,7 @@ public class GraciousLightStats extends BaseShipSystemScript {
         }
     }
 
-    private class GraciousLightExplosionOnHitEffect implements OnHitEffectPlugin {
+    private static class GraciousLightExplosionOnHitEffect implements OnHitEffectPlugin {
         @Override
         public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
             if (target != null && (target instanceof MissileAPI || (target instanceof ShipAPI && ((ShipAPI) target).isFighter()))) {

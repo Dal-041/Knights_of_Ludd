@@ -19,8 +19,8 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
 import org.magiclib.subsystems.MagicSubsystem
 import org.magiclib.util.MagicRender
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
-import org.selkie.kol.impl.hullmods.CoronalCapacitor
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
+import org.selkie.kol.impl.hullmods.ElysianBuiltin
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
 
@@ -67,13 +67,13 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
     }
 
     override fun canActivate(): Boolean {
-        return if (ship.customData.containsKey(CoronalCapacitor.CAPACITY_FACTOR_KEY)) {
-            ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float > 0.5f
+        return if (ship.customData.containsKey(ElysianBuiltin.CAPACITY_FACTOR_KEY)) {
+            ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float > 0.5f
         } else false
     }
 
     private fun getDamage(): Float {
-        return (BASE_DAMAGE + (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float) * DAMAGE_PER_BOOST) * baseCooldownDuration
+        return (BASE_DAMAGE + (ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float) * DAMAGE_PER_BOOST) * baseCooldownDuration
     }
 
     override fun onActivate() {
@@ -102,12 +102,12 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
 
     override fun advance(amount: Float, isPaused: Boolean) {
         if (isPaused) return
-        if (ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] == null) return //Hopefully just one frame
+        if (ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] == null) return //Hopefully just one frame
 
         val glowColorNow = Misc.interpolateColor(
             glowColorEmpty,
             glowColorFull,
-            ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float
+            ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float
         )
         if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
             return
@@ -252,7 +252,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
     }
 
     override fun getBarFill(): Float {
-        return ((ship.customData[CoronalCapacitor.CAPACITY_FACTOR_KEY] as Float? ?: 0f) / 0.5f).coerceIn(0f..1f)
+        return ((ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float? ?: 0f) / 0.5f).coerceIn(0f..1f)
     }
 
     companion object {

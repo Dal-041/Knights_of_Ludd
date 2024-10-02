@@ -20,7 +20,7 @@
         "zea_edf_builtin",
         "zea_ama_auxilary_integration",
         "automated",
-        "kol_ea_shields3",
+        "zea_edf_shield_style",
         "zea_boss_radiance",
         "zea_amaterasu_boss"
     ],

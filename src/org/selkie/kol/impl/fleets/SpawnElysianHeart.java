@@ -13,6 +13,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpe
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -28,9 +29,9 @@ public class SpawnElysianHeart {
 
 		SectorEntityToken token;
 		if (Math.random() > 0.7f) {
-			token = Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaStaticStrings.ZEA_ELYSIA_ABYSS);
+			token = Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaEntities.ZEA_ELYSIA_ABYSS);
 		} else {
-			token = Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaStaticStrings.ZEA_ELYSIA_GAZE);
+			token = Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaEntities.ZEA_ELYSIA_GAZE);
 		}
 		CampaignFleetAPI elysianHeartFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Corrupting Heart")

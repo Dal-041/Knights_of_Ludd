@@ -19,9 +19,9 @@
     "builtInMods": [
         "zea_edf_builtin",
         "automated",
-        "kol_ea_shields3",
+        "zea_edf_shield_style",
         "zea_conformal_shield",
-        "kol_throttle",
+        "zea_recovery_limiter",
         "zea_edf_shachihoko_drone"
     ],
     "builtInWeapons": {

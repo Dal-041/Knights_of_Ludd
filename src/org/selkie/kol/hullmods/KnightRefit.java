@@ -22,7 +22,6 @@ import org.selkie.kol.Utils;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.helpers.KolStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 
 import java.awt.*;
@@ -281,7 +280,7 @@ public class KnightRefit extends BaseHullMod {
         Color inactiveHeaderTextColor = Misc.getGrayColor().darker();
         Color inactiveHighlightColor = Misc.getGrayColor().darker();
 
-        new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite(GfxCat.KOL_FX, "kol_refit_hmod"), 0.6f);
+        new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite(GfxCat.FX, "kol_refit_hmod"), 0.6f);
 
         boolean hasComposite = false;
         for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){
@@ -426,19 +425,19 @@ public class KnightRefit extends BaseHullMod {
     }
 
     private void removeStats(ShipAPI ship) {
-        ship.getMutableStats().getMaxSpeed().unmodify(ZeaStaticStrings.KNIGHT_REFIT);
-        ship.getMutableStats().getAcceleration().unmodify(ZeaStaticStrings.KNIGHT_REFIT);
-        ship.getMutableStats().getDeceleration().unmodify(ZeaStaticStrings.KNIGHT_REFIT);
-        ship.getMutableStats().getMaxTurnRate().unmodify(ZeaStaticStrings.KNIGHT_REFIT);
-        ship.getMutableStats().getTurnAcceleration().unmodify(ZeaStaticStrings.KNIGHT_REFIT);
+        ship.getMutableStats().getMaxSpeed().unmodify(KolStaticStrings.KNIGHT_REFIT_MODIFIER);
+        ship.getMutableStats().getAcceleration().unmodify(KolStaticStrings.KNIGHT_REFIT_MODIFIER);
+        ship.getMutableStats().getDeceleration().unmodify(KolStaticStrings.KNIGHT_REFIT_MODIFIER);
+        ship.getMutableStats().getMaxTurnRate().unmodify(KolStaticStrings.KNIGHT_REFIT_MODIFIER);
+        ship.getMutableStats().getTurnAcceleration().unmodify(KolStaticStrings.KNIGHT_REFIT_MODIFIER);
     }
 
     private void applyStats(float speedRatio, ShipAPI ship) {
-        ship.getMutableStats().getMaxSpeed().modifyMult(ZeaStaticStrings.KNIGHT_REFIT, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getAcceleration().modifyMult(ZeaStaticStrings.KNIGHT_REFIT, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getDeceleration().modifyMult(ZeaStaticStrings.KNIGHT_REFIT, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getMaxTurnRate().modifyMult(ZeaStaticStrings.KNIGHT_REFIT, (1 + (speedRatio * SPEED_BONUS)));
-        ship.getMutableStats().getTurnAcceleration().modifyMult(ZeaStaticStrings.KNIGHT_REFIT, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getMaxSpeed().modifyMult(KolStaticStrings.KNIGHT_REFIT_MODIFIER, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getAcceleration().modifyMult(KolStaticStrings.KNIGHT_REFIT_MODIFIER, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getDeceleration().modifyMult(KolStaticStrings.KNIGHT_REFIT_MODIFIER, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getMaxTurnRate().modifyMult(KolStaticStrings.KNIGHT_REFIT_MODIFIER, (1 + (speedRatio * SPEED_BONUS)));
+        ship.getMutableStats().getTurnAcceleration().modifyMult(KolStaticStrings.KNIGHT_REFIT_MODIFIER, (1 + (speedRatio * SPEED_BONUS)));
 
         CombatEngineAPI engine = Global.getCombatEngine();
         if(engine.getPlayerShip() == ship && speedRatio > 0.01f){

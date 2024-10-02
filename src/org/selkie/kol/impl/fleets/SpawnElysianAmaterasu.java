@@ -10,6 +10,7 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -33,7 +34,7 @@ public class SpawnElysianAmaterasu {
 		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.ORBIT_AGGRESSIVE)
-				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaStaticStrings.ZEA_EDF_CORONAL_TAP))
+				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.elysiaSysName).getEntityById(ZeaEntities.ZEA_EDF_CORONAL_TAP))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();

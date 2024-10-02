@@ -5,6 +5,7 @@ import com.fs.starfarer.api.campaign.*;
 import org.selkie.kol.impl.campaign.interactions.DuskNullStationInteraction;
 import org.selkie.kol.impl.campaign.interactions.ElysianHypershuntInteraction;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 public class ZeaCampaignPlugin extends BaseCampaignPlugin {
@@ -15,8 +16,8 @@ public class ZeaCampaignPlugin extends BaseCampaignPlugin {
 
         if (interactionTarget.getCustomEntitySpec() != null) {
             CustomEntitySpecAPI spec = interactionTarget.getCustomEntitySpec();
-            if (spec.getId().equals(ZeaStaticStrings.ZEA_EDF_CORONAL_TAP)) return new PluginPick<InteractionDialogPlugin>(new ElysianHypershuntInteraction(), PickPriority.HIGHEST);
-            if (spec.getId().equals(ZeaStaticStrings.ZEA_NULL_STATION_DUSK)) return new PluginPick<InteractionDialogPlugin>(new DuskNullStationInteraction(), PickPriority.HIGHEST);
+            if (spec.getId().equals(ZeaEntities.ZEA_EDF_CORONAL_TAP)) return new PluginPick<InteractionDialogPlugin>(new ElysianHypershuntInteraction(), PickPriority.HIGHEST);
+            if (spec.getId().equals(ZeaEntities.ZEA_NULL_STATION_DUSK)) return new PluginPick<InteractionDialogPlugin>(new DuskNullStationInteraction(), PickPriority.HIGHEST);
         }
 
        // super.pickInteractionDialogPlugin(interactionTarget)

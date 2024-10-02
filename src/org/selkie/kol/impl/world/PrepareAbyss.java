@@ -20,6 +20,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
@@ -102,7 +103,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
-		system.initStar(ZeaStaticStrings.ZEA_ELYSIA_ABYSS, ZeaStarTypes.ZEA_RED_HOLE, beeg, -beeg/2f);
+		system.initStar(ZeaEntities.ZEA_ELYSIA_ABYSS, ZeaStarTypes.ZEA_RED_HOLE, beeg, -beeg/2f);
 		PlanetAPI elysia = system.getStar();
 		elysia.setName("Elysian Abyss");
     	elysia.getSpec().setBlackHole(false); //Minimize fleet mishandling
@@ -129,7 +130,7 @@ public class PrepareAbyss {
 
     	system.setType(StarSystemType.TRINARY_1CLOSE_1FAR);
     	
-    	PlanetAPI gaze = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_GAZE, elysia, "Watcher", StarTypes.NEUTRON_STAR, 125, 50, 9400, 60);
+    	PlanetAPI gaze = system.addPlanet(ZeaEntities.ZEA_ELYSIA_GAZE, elysia, "Watcher", StarTypes.NEUTRON_STAR, 125, 50, 9400, 60);
     	gaze.getSpec().setPulsar(true);
     	gaze.applySpecChanges();
     	system.setSecondary(gaze);
@@ -154,7 +155,7 @@ public class PrepareAbyss {
 		);
 		gazeBeam2.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 16);
     	
-    	PlanetAPI silence = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_SILENCE, elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 1666, 18500, 0);
+    	PlanetAPI silence = system.addPlanet(ZeaEntities.ZEA_ELYSIA_SILENCE, elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 1666, 18500, 0);
     	system.setTertiary(silence);
     	silence.setFixedLocation(-14000, -16500);
     	
@@ -168,9 +169,9 @@ public class PrepareAbyss {
 		);
 		silence_corona.setCircularOrbit(silence, 0, 0, 15);
 
-		PlanetAPI first = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_PLANET_ONE, elysia, "Asclepius", Planets.BARREN_BOMBARDED, (float)(Math.random() * 360), 100, 4200, 40);
-    	PlanetAPI second = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_PLANET_TWO, elysia, "Appia", ZeaStaticStrings.TOXIC, (float)(Math.random() * 360), 100, 3750, 30);
-    	PlanetAPI third = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_PLANET_THREE, elysia, "Orpheus", Planets.IRRADIATED, (float)(Math.random() * 360), 100, 3300, 24);
+		PlanetAPI first = system.addPlanet(ZeaEntities.ZEA_ELYSIA_PLANET_ONE, elysia, "Asclepius", Planets.BARREN_BOMBARDED, (float)(Math.random() * 360), 100, 4200, 40);
+    	PlanetAPI second = system.addPlanet(ZeaEntities.ZEA_ELYSIA_PLANET_TWO, elysia, "Appia", ZeaStaticStrings.TOXIC, (float)(Math.random() * 360), 100, 3750, 30);
+    	PlanetAPI third = system.addPlanet(ZeaEntities.ZEA_ELYSIA_PLANET_THREE, elysia, "Orpheus", Planets.IRRADIATED, (float)(Math.random() * 360), 100, 3300, 24);
 
     	first.getMarket().addCondition(Conditions.IRRADIATED);
     	first.getMarket().addCondition(Conditions.METEOR_IMPACTS);
@@ -208,10 +209,10 @@ public class PrepareAbyss {
 
 
 		//Placed entities
-		SectorEntityToken hypershunt = system.addCustomEntity(ZeaStaticStrings.ZEA_EDF_CORONAL_TAP, "Coronal Hypershunt", ZeaStaticStrings.ZEA_EDF_CORONAL_TAP, Factions.NEUTRAL);
+		SectorEntityToken hypershunt = system.addCustomEntity(ZeaEntities.ZEA_EDF_CORONAL_TAP, "Coronal Hypershunt", ZeaEntities.ZEA_EDF_CORONAL_TAP, Factions.NEUTRAL);
 		hypershunt.setCircularOrbitPointingDown(silence, (float)Math.random() * 360f, silence.getRadius() + 500f, 1111);
 		hypershunt.addTag(ZeaStaticStrings.EDF_HYPERSHUNT);
-		SectorEntityToken edfResearchStation = addSalvageEntity(system, ZeaStaticStrings.ZEA_RESEARCH_STATION_ELYSIA, ZeaStaticStrings.elysianID);
+		SectorEntityToken edfResearchStation = addSalvageEntity(system, ZeaEntities.ZEA_RESEARCH_STATION_ELYSIA, ZeaStaticStrings.elysianID);
 		edfResearchStation.setCircularOrbitPointingDown(gaze, (float)Math.random() * 360f, gaze.getRadius() + 100f, 51);
 		edfResearchStation.addTag(ZeaStaticStrings.EDF_HEADQUARTERS);
 
@@ -222,7 +223,7 @@ public class PrepareAbyss {
 		wreckHeg.addDropRandom(Drops.LOW_WEAPONS2, 6);
 		wreckHeg.addDropRandom(Drops.ANY_HULLMOD_HIGH, 2);
 		//wreckHeg.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
-		wreckHeg.getMemoryWithoutUpdate().set(ZeaStaticStrings.KEY_ELYSIA_WITNESS, true);
+		wreckHeg.getMemoryWithoutUpdate().set(ZeaStaticStrings.ZeaMemKeys.ZEA_ELYSIAN_WITNESS, true);
 
 
 		//Random loot
@@ -237,7 +238,7 @@ public class PrepareAbyss {
         SectorEntityToken derelict5 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict5.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4250, 40);
     	
-        JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaStaticStrings.ZEA_ELYSIA_JP, "First Trial");
+        JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaEntities.ZEA_ELYSIA_JP, "First Trial");
         OrbitAPI orbit = Global.getFactory().createCircularOrbit(first, 90, 100, 25);
         jumpPoint.setOrbit(orbit);
         jumpPoint.setRelatedPlanet(first);
@@ -295,7 +296,7 @@ public class PrepareAbyss {
 		system.setLightColor(new Color(225,170,255,255)); // light color in entire system, affects all entities
 		new AbyssBackgroundWarper(system, 8, 0.125f);
 
-		PlanetAPI starVoid = system.addPlanet(ZeaStaticStrings.ZEA_NULLSPACE_VOID, system.getCenter(), "Void", ZeaStarTypes.ZEA_WHITE_HOLE, 135, 166, 12500, 0);
+		PlanetAPI starVoid = system.addPlanet(ZeaEntities.ZEA_NULLSPACE_VOID, system.getCenter(), "Void", ZeaStarTypes.ZEA_WHITE_HOLE, 135, 166, 12500, 0);
 		//system.setStar(starVoid);
 
 		starVoid.setFixedLocation(-5512, 9420);
@@ -312,10 +313,10 @@ public class PrepareAbyss {
 
 		//system.generateAnchorIfNeeded();
 
-		SectorEntityToken gate = system.addCustomEntity(ZeaStaticStrings.ZEA_NULLGATE_DUSK, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
+		SectorEntityToken gate = system.addCustomEntity(ZeaEntities.ZEA_NULLGATE_DUSK, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
-		SectorEntityToken stationResearch = system.addCustomEntity(ZeaStaticStrings.ZEA_NULL_STATION_DUSK, "Shielded Research Station", ZeaStaticStrings.ZEA_NULL_STATION_DUSK, Factions.DERELICT);
+		SectorEntityToken stationResearch = system.addCustomEntity(ZeaEntities.ZEA_NULL_STATION_DUSK, "Shielded Research Station", ZeaEntities.ZEA_NULL_STATION_DUSK, Factions.DERELICT);
 		stationResearch.setFixedLocation(-5230, 8860);
 
 		float count = ZeaStaticStrings.uwDerelictsNormal.length; //16
@@ -398,7 +399,7 @@ public class PrepareAbyss {
 
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
 
-		PlanetAPI luna = system.initStar(ZeaStaticStrings.ZEA_LUNASEA_STAR, StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
+		PlanetAPI luna = system.initStar(ZeaEntities.ZEA_LUNASEA_STAR, StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
 		if (Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
 			luna.setName("The Luwuna Sea");
 		}
@@ -425,18 +426,18 @@ public class PrepareAbyss {
 		lunaBeam1.setCircularOrbit(luna, (float)Math.random()*360, 0, 19);
 
 		//system.generateAnchorIfNeeded();
-		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaStaticStrings.ZEA_LUNASEA_JP, "Second Trial");
+		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaEntities.ZEA_LUNASEA_JP, "Second Trial");
 		//OrbitAPI orbit = Global.getFactory().createCircularOrbit(luna, 90, 10000, 25);
 		jumpPoint.setFixedLocation(6500,-1500);
 		jumpPoint.setStandardWormholeToHyperspaceVisual();
 		system.addEntity(jumpPoint);
 
-		PlanetAPI first = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_ONE, luna, "Id", Planets.BARREN_BOMBARDED, 50, 150, 10900, 3000000);
-		PlanetAPI second = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_TWO, luna, "Doubt", Planets.DESERT, 29, 170, 6100, 3000000);
-		PlanetAPI third = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_THREE, luna, "Wild",  ZeaStaticStrings.JUNGLE, 12, 70, 15800, 3000000);
-		PlanetAPI fourth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR, jumpPoint, "Ego", Planets.FROZEN, 190, 250, 500, 3000000);
-		PlanetAPI fifth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FIVE, luna, "Savage", Planets.BARREN, 336, 145, 12300, 3000000);
-		PlanetAPI sixth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_SIX, luna, "Feral", ZeaStaticStrings.TOXIC, 306, 165, 8100, 3000000);
+		PlanetAPI first = system.addPlanet(ZeaEntities.ZEA_LUNASEA_PLANET_ONE, luna, "Id", Planets.BARREN_BOMBARDED, 50, 150, 10900, 3000000);
+		PlanetAPI second = system.addPlanet(ZeaEntities.ZEA_LUNASEA_PLANET_TWO, luna, "Doubt", Planets.DESERT, 29, 170, 6100, 3000000);
+		PlanetAPI third = system.addPlanet(ZeaEntities.ZEA_LUNASEA_PLANET_THREE, luna, "Wild",  ZeaStaticStrings.JUNGLE, 12, 70, 15800, 3000000);
+		PlanetAPI fourth = system.addPlanet(ZeaEntities.ZEA_LUNASEA_PLANET_FOUR, jumpPoint, "Ego", Planets.FROZEN, 190, 250, 500, 3000000);
+		PlanetAPI fifth = system.addPlanet(ZeaEntities.ZEA_LUNASEA_PLANET_FIVE, luna, "Savage", Planets.BARREN, 336, 145, 12300, 3000000);
+		PlanetAPI sixth = system.addPlanet(ZeaEntities.ZEA_LUNASEA_PLANET_SIX, luna, "Feral", ZeaStaticStrings.TOXIC, 306, 165, 8100, 3000000);
 
 		first.getMarket().addCondition(Conditions.TECTONIC_ACTIVITY);
 		first.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
@@ -589,15 +590,15 @@ public class PrepareAbyss {
 	public static String getAbyssLootID(String faction, float tier, Random random) {
 		WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(random);
 		float w = tier; //Tier 1 has best loot odds, values < 1 even better.
-		picker.add(ZeaStaticStrings.ZEA_CACHE_LOW, w);
-		picker.add(ZeaStaticStrings.ZEA_CACHE_MED, w);
-		picker.add(ZeaStaticStrings.ZEA_CACHE_HIGH, w);
+		picker.add(ZeaEntities.ZEA_CACHE_LOW, w);
+		picker.add(ZeaEntities.ZEA_CACHE_MED, w);
+		picker.add(ZeaEntities.ZEA_CACHE_HIGH, w);
 		w = faction.equals(ZeaStaticStrings.dawnID)? 1f : 0f;
-		picker.add(ZeaStaticStrings.ZEA_RESEARCH_STATION_DAWN, w);
+		picker.add(ZeaEntities.ZEA_RESEARCH_STATION_DAWN, w);
 		w = faction.equals(ZeaStaticStrings.duskID)? 1f : 0f;
-		picker.add(ZeaStaticStrings.ZEA_RESEARCH_STATION_DUSK, w);
+		picker.add(ZeaEntities.ZEA_RESEARCH_STATION_DUSK, w);
 		w = faction.equals(ZeaStaticStrings.elysianID)? 1f : 0f;
-		picker.add(ZeaStaticStrings.ZEA_RESEARCH_STATION_ELYSIA, w);
+		picker.add(ZeaEntities.ZEA_RESEARCH_STATION_ELYSIA, w);
 
 		return picker.pick();
 	}

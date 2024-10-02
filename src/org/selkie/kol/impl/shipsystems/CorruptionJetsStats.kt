@@ -23,7 +23,7 @@ import org.magiclib.subsystems.drones.MagicDroneSubsystem
 import org.selkie.kol.combat.GL14ParticleData
 import org.selkie.kol.combat.ParticleController
 import org.selkie.kol.combat.ParticleData
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 import java.awt.Color
 import java.util.*
 

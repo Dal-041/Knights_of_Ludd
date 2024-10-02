@@ -12,12 +12,12 @@
   "shieldRadius": 160,
   "viewOffset": 0,
   "builtInMods": [
-    "kol_ea_shields2",
+    "zea_dusk_shield_style",
     "phasefield",
     "automated",
-    "kol_ea_mist",
+    "zea_dusk_mist",
     "zea_dusk_builtin",
-    "kol_throttle"
+    "zea_recovery_limiter"
   ],
   "weaponSlots": [
     {

@@ -16,6 +16,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
@@ -55,8 +56,8 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #3", ZeaLoreManager.TT1Drop, ZeaLoreManager.TT1DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, true, dialog.getTextPanel());
 
-            if (Global.getSector().getEntityById(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON) != null) {
-                TTStationBoss2 = Global.getSector().getEntityById(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON);
+            if (Global.getSector().getEntityById(ZeaEntities.ZEA_BOSS_STATION_TRITACHYON) != null) {
+                TTStationBoss2 = Global.getSector().getEntityById(ZeaEntities.ZEA_BOSS_STATION_TRITACHYON);
             } else {
                 return false;
             }
@@ -126,7 +127,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             SectorEntityToken LunaSea = null;
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
                 if (system.getName().equals(ZeaStaticStrings.lunaSeaSysName)) {
-                    LunaSea = system.getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR);
+                    LunaSea = system.getEntityById(ZeaEntities.ZEA_LUNASEA_PLANET_FOUR);
                 }
             }
             if (LunaSea == null) return false;

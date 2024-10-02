@@ -8,7 +8,6 @@ import com.fs.starfarer.api.impl.campaign.terrain.AsteroidFieldTerrainPlugin;
 import com.fs.starfarer.api.impl.campaign.terrain.RingSystemTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 
 public class AbyssAsteroidField extends AsteroidFieldTerrainPlugin {

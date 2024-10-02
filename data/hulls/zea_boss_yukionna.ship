@@ -12,12 +12,12 @@
   "shieldRadius": 320.5,
   "viewOffset": 0,
   "builtInMods": [
-    "kol_ea_shields2",
+    "zea_dusk_shield_style",
     "phasefield",
     "delicate",
     "automated",
     "advancedshieldemitter",
-    "kol_ea_mist",
+    "zea_dusk_mist",
     "zea_dusk_builtin",
     "zea_dusk_yukionna_boss"
   ],

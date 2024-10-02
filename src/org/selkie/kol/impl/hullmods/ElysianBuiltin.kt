@@ -282,14 +282,6 @@ class ElysianBuiltin : BaseHullMod() {
     }
 
     override fun applyEffectsBeforeShipCreation(hullSize: HullSize, stats: MutableShipStatsAPI, id: String) {
-
-        //For save compatibility with old version
-        if (stats.variant.hasHullMod("zea_edf_coronal_capacitor")) {
-            stats.variant.removeMod("zea_edf_coronal_capacitor")
-        }
-        if (stats.variant.hasHullMod("zea_edf_pd_drones")) {
-            stats.variant.removeMod("zea_edf_pd_drones")
-        }
     }
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String?) {
@@ -328,7 +320,7 @@ class ElysianBuiltin : BaseHullMod() {
 
 
         val rate = getRechargeRate()
-        HullmodBackgroundElement(tooltip, Global.getSettings().getSprite(GfxCat.KOL_UI, "zea_edf_hmod"), 0.6f)
+        HullmodBackgroundElement(tooltip, Global.getSettings().getSprite(GfxCat.UI, "zea_edf_hmod"), 0.6f)
         tooltip.addSectionHeading("Coronal Capacitor", activeHeaderTextColor, activeHeaderBannerColor, Alignment.MID, headingPad)
         val coronalCapacitor = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "edf_coronal_cap"), HEIGHT)
         coronalCapacitor.setBulletedListMode("•")

@@ -14,7 +14,7 @@
   "builtInMods": [
     "zea_edf_builtin",
     "automated",
-    "kol_ea_shields3",
+    "zea_edf_shield_style",
     "zea_edf_passive_iff_disruptor",
     "zea_edf_shachihoko_drone",
     "zea_corruptingheart_boss",

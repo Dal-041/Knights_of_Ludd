@@ -14,7 +14,7 @@ import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import org.selkie.kol.impl.hullmods.NinmahBoss.NinmahAIScript
 
 class DuskBossCoreSkill : BaseCoreOfficerSkill() {
-    override val skillID = BossCore.DUSK_CORE.exclusiveSkillID
+    override val skillID: String = BossCore.DUSK_CORE.exclusiveSkillID
     override fun getScopeDescription(): LevelBasedEffect.ScopeDescription {
         return LevelBasedEffect.ScopeDescription.PILOTED_SHIP
     }

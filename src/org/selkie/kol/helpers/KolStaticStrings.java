@@ -21,9 +21,12 @@ public class KolStaticStrings {
             "kol_tamarisk"
     };
 
-    // Hullmods
+    // hullmod
     public static final String KNIGHT_REFIT = "kol_refit";
-    
+
+    // stat mod
+    public static final String KNIGHT_REFIT_MODIFIER = "knightRefit";
+
     // mod id's
     public static final String LOST_SECTOR = "lost_sector";
     public static final String TAHLAN = "tahlan";
@@ -52,6 +55,8 @@ public class KolStaticStrings {
     public static final String KOL_CYGNUS = "kol_cygnus";
     public static final String KOL_LYRA = "kol_lyra";
     public static final String MEMKEY_KOL_SCHISMED = "$kol_knights_schism";
+
+
 
     public static class KnightsFleetTypes {
 

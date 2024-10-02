@@ -1,14 +1,13 @@
 package org.selkie.kol.fleets;
 
-import com.fs.starfarer.api.impl.campaign.ids.*;
-import org.magiclib.util.MagicCampaign;
-
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
+import com.fs.starfarer.api.impl.campaign.ids.*;
+import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 

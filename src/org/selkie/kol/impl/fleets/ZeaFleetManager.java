@@ -184,7 +184,7 @@ public class ZeaFleetManager extends SeededFleetManager {
             float w = 5f; //1f
             if (entity.hasTag(Tags.NEUTRINO_HIGH)) w = 15f;
             if (entity.hasTag(Tags.NEUTRINO_LOW)) w = 1.5f;
-            if (entity.getMemoryWithoutUpdate().contains(ZeaStaticStrings.KEY_ELYSIA_WITNESS)) w = 0f;
+            if (entity.getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_ELYSIAN_WITNESS)) w = 0f;
             picker.add(entity, w);
         }
 

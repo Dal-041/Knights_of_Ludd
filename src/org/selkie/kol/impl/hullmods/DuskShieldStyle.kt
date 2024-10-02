@@ -5,10 +5,10 @@ import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.ShipAPI
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 
-class DuskyShields1 : BaseHullMod() {
+class DuskShieldStyle : BaseHullMod() {
 
-    private val INNERLARGE = Global.getSettings().getSpriteName(GfxCat.KOL_FX, "zea_shield_dawn")
-    private val OUTERLARGE = Global.getSettings().getSpriteName(GfxCat.KOL_FX, "zea_shield_dawn")
+    private val INNERLARGE = Global.getSettings().getSpriteName(GfxCat.FX, "zea_shield_dusk")
+    private val OUTERLARGE = Global.getSettings().getSpriteName(GfxCat.FX, "zea_shield_dusk")
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         if (ship.shield != null) {

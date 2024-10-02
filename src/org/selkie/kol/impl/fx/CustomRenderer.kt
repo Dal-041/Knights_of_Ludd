@@ -15,7 +15,7 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.interpolateColor
 import org.magiclib.kotlin.modify
 import org.magiclib.kotlin.random
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 //import wisp.questgiver.wispLib.modify
 //import wisp.questgiver.wispLib.random
 import java.awt.Color

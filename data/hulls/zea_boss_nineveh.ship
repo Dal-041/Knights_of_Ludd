@@ -14,7 +14,7 @@
   "builtInMods": [
     "phasefield",
     "zea_dusk_builtin",
-    "kol_ea_mist",
+    "zea_dusk_mist",
     "zea_nineveh_boss"
   ],
   "weaponSlots": [

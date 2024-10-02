@@ -14,9 +14,9 @@
   "builtInMods": [
     "phasefield",
     "automated",
-    "kol_ea_mist",
+    "zea_dusk_mist",
     "zea_dusk_builtin",
-    "kol_throttle"
+    "zea_recovery_limiter"
   ],
   "builtInWeapons": {
     "WS0005": "zea_dusk_lrsr",

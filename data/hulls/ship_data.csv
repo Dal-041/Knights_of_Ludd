@@ -242,8 +242,6 @@ Libra Mid Right Flak,kol_libra_mr2,,Knights of Ludd,kol_canister_flak,5,6000,300
 "# If you’re reading this, please don’t post spoilers.",,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #DRONES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ao Thruster Drone,zea_dawn_ao_thruster_droneL,,,,,1000,500,100000,,100000,,,100,100,100,100,100,100,NONE,,,,,,,,,,,,,,,,,,,,,,,,,,,,"restricted, no_sell",,0,,,,8
-Ion Drone,ion_drone,,Low Tech,flarelauncher_fighter,,750,100,80,,10,0,,200,400,350,150,300,30,NONE,,0,0,0,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,104
-Shield Drone,shield_drone,,High Tech,,,450,50,600,,50,0,,160,300,250,150,300,30,FRONT,,180,0,0.5,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,103
 Chiwen,zea_dawn_chiwen,,Dawntide,,,900,100,2000,,100,0,,200,400,300,150,300,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 Shachi,zea_edf_shachi,,Elysia,zea_edf_smartflare,,750,100,2000,,100,0,,200,400,300,150,300,30,FRONT,,90,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
 Shachihoko,zea_edf_shachihoko,,Elysia,zea_edf_smartflare,,750,100,4000,,300,0,,400,400,300,150,300,30,FRONT,,360,0,1,,,0,0,,,,,,,,,,,,,,,,,,,,,,0,,,,
@@ -290,4 +288,4 @@ Nineveh,zea_boss_nineveh,Prototype,High Tech,zea_dusk_mine_strike,45,12000,1300,
 Yukionna,zea_boss_yukionna,A Thousand Voices Sing in Silence,Dusk,zea_dusk_phase_skip,75,24000,1500,25000,,1350,350,,40,15,15,12,12,3500,FRONT,,270,0.5,0.5,,,300,750,300,300,10,30,7,1999999,4,20,1200,0.25,60,60,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.6,2,4,,
 Nian,zea_boss_nian,A Light Shining in Darkness,Dawntide,zea_boss_supernova,75,40000,2250,30000,,3250,415,3,20,8,8,12,8,6000,FRONT,,120,0.666,2,,,0,0,500,400,20,10,5,2999999,2,12,1200,0.25,65,65,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,,,,,
 The Corrupting Heart,zea_boss_corruptingheart,Sublime Empyrean,Elysia,zea_boss_corruptionjets,60,16000,1150,25000,,1300,340,7,50,30,25,20,18,3000,OMNI,,120,0.4,0.6,,,0,0,250,400,10,40,8,500000,3,15,1200,0.25,60,60,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, HIDE_IN_CODEX","no_autofit, restricted",,0.4,4,7,,
-Amaterasu,zea_boss_amaterasu,Radiant Empyrean,Elysia,zea_edf_relativisticdrift,60,12000,1150,20000,,1500,340,2,55,30,25,16,18,3000,OMNI,,120,0.4,0.6,,,0,0,250,400,10,40,8,500000,3,15,1200,0.25,60,60,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, HIDE_IN_CODEX","no_autofit, restricted",,0.4,4,7,,
+Amaterasu,zea_boss_amaterasu,Radiant Empyrean,Elysia,zea_boss_relativisticdrift,60,12000,1150,20000,,1500,340,2,55,30,25,16,18,3000,OMNI,,120,0.4,0.6,,,0,0,250,400,10,40,8,500000,3,15,1200,0.25,60,60,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, HIDE_IN_CODEX","no_autofit, restricted",,0.4,4,7,,

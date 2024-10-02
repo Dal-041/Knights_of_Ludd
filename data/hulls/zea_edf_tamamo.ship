@@ -14,9 +14,9 @@
   "viewOffset": 0,
   "builtInMods": [
     "zea_edf_builtin",
-    "kol_ea_shields3",
+    "zea_edf_shield_style",
     "automated",
-	"kol_throttle"
+	"zea_recovery_limiter"
   ],
   "builtInWings": [
   ],

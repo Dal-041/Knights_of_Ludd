@@ -14,8 +14,8 @@
   "builtInMods": [
     "zea_edf_builtin",
     "automated",
-    "kol_ea_shields3",
-    "kol_throttle",
+    "zea_edf_shield_style",
+    "zea_recovery_limiter",
     "zea_edf_iff_override"
   ],
   "builtInWeapons": {

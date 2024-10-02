@@ -19,9 +19,9 @@
     "builtInMods": [
         "automated",
         "zea_dawn_builtin",
-        "kol_ea_shields1",
+        "zea_dawn_shield_style",
         "advancedcore",
-        "kol_throttle"
+        "zea_recovery_limiter"
     ],
     "builtInWeapons": {
         "WS0014": "zea_deco_dawn_engM",

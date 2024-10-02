@@ -14,8 +14,8 @@
   "builtInMods": [
     "zea_edf_builtin",
     "automated",
-    "kol_ea_shields3",
-    "kol_throttle"
+    "zea_edf_shield_style",
+    "zea_recovery_limiter"
   ],
   "builtInWeapons": {
     "WS0003": "zea_deco_edf_wani_ml",

@@ -14,8 +14,8 @@
   "builtInMods": [
 	"automated",
     "zea_dawn_builtin",
-    "kol_ea_shields1",
-	"kol_throttle",
+    "zea_dawn_shield_style",
+	"zea_recovery_limiter",
   ],
   "weaponSlots": [
     {

@@ -11,7 +11,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Strings
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import java.util.*
 

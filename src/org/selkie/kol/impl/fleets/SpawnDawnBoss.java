@@ -12,6 +12,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpe
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -36,7 +37,7 @@ public class SpawnDawnBoss {
 		        .setMinFP(0) //support fleet
 		        .setQualityOverride(2f)
 		        .setAssignment(FleetAssignment.PATROL_SYSTEM)
-				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.lunaSeaSysName).getEntityById(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR))
+				.setSpawnLocation(Global.getSector().getStarSystem(ZeaStaticStrings.lunaSeaSysName).getEntityById(ZeaEntities.ZEA_LUNASEA_PLANET_FOUR))
 		        .setIsImportant(true)
 		        .setTransponderOn(true)
 		        .create();

@@ -36,6 +36,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
@@ -81,7 +82,7 @@ public class PrepareDarkDeeds {
         PersonAPI TT1BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
                 .setAICoreType(Commodities.ALPHA_CORE)
-                .setPortraitId(ZeaStaticStrings.ZEA_BOSS_ALPHAPLUS)
+                .setPortraitId(ZeaStaticStrings.portraitAlphaPlus)
                 .setLevel(8)
                 .setFirstName("Alpha")
                 .setLastName("(+)")
@@ -264,7 +265,7 @@ public class PrepareDarkDeeds {
         }
          */
 
-        CustomCampaignEntityAPI stationBoss = system.addCustomEntity(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, "Suspicious Research Station", ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, Factions.NEUTRAL);
+        CustomCampaignEntityAPI stationBoss = system.addCustomEntity(ZeaEntities.ZEA_BOSS_STATION_TRITACHYON, "Suspicious Research Station", ZeaEntities.ZEA_BOSS_STATION_TRITACHYON, Factions.NEUTRAL);
         stationBoss.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_2_STATION, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
         stationBoss.setSensorProfile(1f);
@@ -407,7 +408,7 @@ public class PrepareDarkDeeds {
 
         system.setLightColor(new Color(255,140,185,255)); // light color in entire system, affects all entities
 
-        PlanetAPI rock = system.addPlanet(ZeaStaticStrings.ZEA_TT_3_SITE_PLANET, center, "Delta Site", Planets.FROZEN, 0, 166, 1200, 40);
+        PlanetAPI rock = system.addPlanet(ZeaEntities.ZEA_TT_3_SITE_PLANET, center, "Delta Site", Planets.FROZEN, 0, 166, 1200, 40);
         //rock.setCustomDescriptionId("???");
         rock.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_3_BLACK_SITE, true);
 
@@ -487,7 +488,7 @@ public class PrepareDarkDeeds {
         PersonAPI TT3BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
                 .setAICoreType(Commodities.ALPHA_CORE)
-                .setPortraitId(ZeaStaticStrings.ZEA_BOSS_ALPHAPLUS)
+                .setPortraitId(ZeaStaticStrings.portraitAlphaPlus)
                 .setLevel(8)
                 .setFirstName("Alpha")
                 .setLastName("(+)")

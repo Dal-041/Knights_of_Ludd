@@ -8,8 +8,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.MagicSubsystem;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.hullmods.CoronalCapacitor;
+import org.selkie.kol.impl.hullmods.ElysianBuiltin;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -80,7 +79,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
 
     @Override
     public boolean canActivate() {
-        return ship.getCustomData().containsKey(CoronalCapacitor.CAPACITY_FACTOR_KEY) && ((Float) ship.getCustomData().get(CoronalCapacitor.CAPACITY_FACTOR_KEY) > 20f);
+        return ship.getCustomData().containsKey(ElysianBuiltin.CAPACITY_FACTOR_KEY) && ((Float) ship.getCustomData().get(ElysianBuiltin.CAPACITY_FACTOR_KEY) > 20f);
     }
 
     private float getHackingRange() {
@@ -138,7 +137,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
         if (ship.getFluxTracker().isOverloaded()) {
             chargeRechargeMult = 1f;
         } else {
-            chargeRechargeMult += amount * (0.5f + 2f * (Float) ship.getCustomData().get(CoronalCapacitor.CAPACITY_FACTOR_KEY));
+            chargeRechargeMult += amount * (0.5f + 2f * (Float) ship.getCustomData().get(ElysianBuiltin.CAPACITY_FACTOR_KEY));
         }
 
         if (!chargeInterval.intervalElapsed()) {

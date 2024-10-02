@@ -17,7 +17,7 @@ import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 
 class ElysiaBossCoreSkill : BaseCoreOfficerSkill() {
-    override val skillID = BossCore.ELYSIAN_CORE.exclusiveSkillID
+    override val skillID: String = BossCore.ELYSIAN_CORE.exclusiveSkillID
 
     companion object{
         const val DAMAGE_INCREASE_PERCENT = 15f

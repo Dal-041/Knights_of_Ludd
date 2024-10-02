@@ -19,9 +19,9 @@
     "builtInMods": [
         "zea_edf_builtin",
         "automated",
-        "kol_ea_shields3",
+        "zea_edf_shield_style",
         "zea_conformal_shield",
-        "kol_throttle"
+        "zea_recovery_limiter"
     ],
     "builtInWeapons": {
         "WS0006": "zea_deco_edf_ryujin_lights",

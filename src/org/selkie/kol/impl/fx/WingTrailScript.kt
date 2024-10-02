@@ -8,7 +8,7 @@ import com.fs.starfarer.api.util.IntervalUtil
 import com.fs.starfarer.api.util.Misc
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.plugins.MagicTrailPlugin
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 
 class WingTrailScript : EveryFrameWeaponEffectPlugin {
     private val effectInterval = IntervalUtil(0.05f, 0.05f)
