@@ -12,6 +12,7 @@ import mmm.missions.DefenseMission;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.campaign.AICoreCampaignPlugin;
 import org.selkie.kol.impl.campaign.ZeaCampaignPlugin;
 import org.selkie.kol.impl.campaign.cores.AICoreDropReplacerScript;
@@ -33,10 +34,10 @@ import java.util.Set;
 public class KOL_ModPlugin extends BaseModPlugin {
 
 
-	public static final boolean haveNex = Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.NEXERELIN);
-	public static final boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.SHADER_LIB);
-	public static final boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.KNIGHTS_OF_LUDD_MAPS);
-	public static final boolean hasMMM = Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.MORE_MILITARY_MISSIONS);
+	public static final boolean haveNex = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.NEXERELIN);
+	public static final boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.SHADER_LIB);
+	public static final boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.KNIGHTS_OF_LUDD_MAPS);
+	public static final boolean hasMMM = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.MORE_MILITARY_MISSIONS);
 
 
 
@@ -61,13 +62,13 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	@Override
 	public void onGameLoad(boolean newGame) {
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
-			if(!Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.MEMKEY_KOL_INTIALIZED)) {
+			if(!Global.getSector().getMemoryWithoutUpdate().contains(KolStaticStrings.KolMemKeys.KOL_INTIALIZED)) {
 				addToOngoingGame();
-				Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_KOL_INTIALIZED, true);
+				Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_INTIALIZED, true);
 			}
 		}
-		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(ZeaStaticStrings.kolFactionID)) {
-			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(ZeaStaticStrings.kolFactionID);
+		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(KolStaticStrings.kolFactionID)) {
+			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(KolStaticStrings.kolFactionID);
 		}
 		GenerateKnights.copyChurchEquipment();
 		GenerateKnights.addKoLIntel();
@@ -96,7 +97,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
 		}
-		Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_KOL_INTIALIZED, true);
+		Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_INTIALIZED, true);
 	}
 
 	@Override
@@ -106,10 +107,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			PrepareDarkDeeds.andBegin();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 		}
-		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(ZeaStaticStrings.kolFactionID)) {
-			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(ZeaStaticStrings.kolFactionID);
+		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(KolStaticStrings.kolFactionID)) {
+			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(KolStaticStrings.kolFactionID);
 		}
-		Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_INTIALIZED, true);
+		Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_INTIALIZED, true);
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		//Global.getSector().addTransientScript(new SpoilersNotif());
 	}
@@ -121,8 +122,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 	protected void addToOngoingGame() {
 
-		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(ZeaStaticStrings.kolFactionID)) {
-			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(ZeaStaticStrings.kolFactionID);
+		if (!SharedData.getData().getPersonBountyEventData().getParticipatingFactions().contains(KolStaticStrings.kolFactionID)) {
+			SharedData.getData().getPersonBountyEventData().addParticipatingFaction(KolStaticStrings.kolFactionID);
 		}
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {

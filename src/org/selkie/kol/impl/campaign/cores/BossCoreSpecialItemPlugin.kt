@@ -20,6 +20,7 @@ import org.lazywizard.lazylib.MathUtils
 import org.lwjgl.opengl.GL11
 import org.selkie.kol.impl.campaign.AICoreCampaignPlugin
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 import java.util.*
 import kotlin.math.exp
 import kotlin.math.pow
@@ -66,8 +67,8 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         }
 
         if(commoditySpec.id == BossCore.DUSK_CORE.itemID){
-            val glow: SpriteAPI = Global.getSettings().getSprite("cores", "dusk_glow")
-            val mask: SpriteAPI = Global.getSettings().getSprite("cores", "dusk_mask")
+            val glow: SpriteAPI = Global.getSettings().getSprite(GfxCat.CORES, "dusk_glow")
+            val mask: SpriteAPI = Global.getSettings().getSprite(GfxCat.CORES, "dusk_mask")
 
             val secondFraction = (System.currentTimeMillis() % DUSK_GLOW_LOOP_MS) / DUSK_GLOW_LOOP_MS.toFloat()
 
@@ -97,7 +98,7 @@ class BossCoreSpecialItemPlugin : BaseSpecialItemPlugin() {
         }
 
         if(commoditySpec.id == BossCore.DAWN_CORE.itemID){
-            val glow: SpriteAPI = Global.getSettings().getSprite("cores", "dawn_glow")
+            val glow: SpriteAPI = Global.getSettings().getSprite(GfxCat.CORES, "dawn_glow")
 
             // Yes I know this is tied to framerate, but eh too lazy and its random flicker effect in the first place
             dawnGlowActive = if (dawnGlowActive && Math.random().toFloat() > 0.995) false else if (!dawnGlowActive && Math.random().toFloat() > 0.9f) true else dawnGlowActive

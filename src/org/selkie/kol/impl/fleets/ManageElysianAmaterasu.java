@@ -66,7 +66,7 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_ELYSIAN_BOSS_1_DONE, true);
 
-					f.getVariant().removeTag(ZeaMemKeys.BOSS_TAG);
+					f.getVariant().removeTag(ZeaMemKeys.ZEA_BOSS_TAG);
 				}
 			}
 

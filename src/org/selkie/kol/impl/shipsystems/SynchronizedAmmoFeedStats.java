@@ -54,7 +54,7 @@ public class SynchronizedAmmoFeedStats extends BaseShipSystemScript {
 
                 fighter.setJitterUnder(KEY_JITTER, JITTER_COLOR, effectLevel, 5, 0f, jitterRangeBonus);
                 fighter.setJitter(KEY_JITTER, JITTER_UNDER_COLOR, effectLevel, 2, 0f, 0 + jitterRangeBonus);
-                Global.getSoundPlayer().playLoop(ZeaStaticStrings.SYSTEM_TARGETING_FEED_LOOP, ship, 1f, 1f, fighter.getLocation(), fighter.getVelocity());
+                Global.getSoundPlayer().playLoop("system_targeting_feed_loop", ship, 1f, 1f, fighter.getLocation(), fighter.getVelocity());
             }
 		}
 	}

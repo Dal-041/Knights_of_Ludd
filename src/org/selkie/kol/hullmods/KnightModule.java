@@ -14,15 +14,14 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
+import org.selkie.kol.helpers.KolStaticStrings;
 
 import java.util.Iterator;
 
 public class KnightModule extends BaseHullMod {
-    public static final String KOL_MODULE_HULKED = "kol_module_hulked";
-    public static final String KOL_MODULE_DEAD = "kol_module_dead";
     @Override
     public void advanceInCombat(ShipAPI module, float amount) {
-        if(module.getParentStation() == null || !module.getParentStation().isAlive() || module.getHitpoints() <= 0.0f || module.hasTag(KOL_MODULE_DEAD) ||
+        if(module.getParentStation() == null || !module.getParentStation().isAlive() || module.getHitpoints() <= 0.0f || module.hasTag(KolStaticStrings.KOL_MODULE_DEAD) ||
                 Global.getCurrentState() != GameState.COMBAT || !Global.getCombatEngine().isEntityInPlay(module) ) return;
 
         CombatEngineAPI engine = Global.getCombatEngine();
@@ -34,7 +33,7 @@ public class KnightModule extends BaseHullMod {
         My solution is to teleport the module offscreen (currently, a map corner) before marking it as a hulk.
         This must be done after the ship is loaded into the map and within its borders to prevent the game from despawning it.
         */
-        if (!module.hasTag(KOL_MODULE_HULKED) && module.getLocation().getY() > -engine.getMapHeight()/2 && module.getLocation().getY() < engine.getMapHeight()/2 &&
+        if (!module.hasTag(KolStaticStrings.KOL_MODULE_HULKED) && module.getLocation().getY() > -engine.getMapHeight()/2 && module.getLocation().getY() < engine.getMapHeight()/2 &&
                 module.getLocation().getX() > -engine.getMapWidth()/2 && module.getLocation().getX() < engine.getMapWidth()/2){
 
             // only teleport to inside the map border
@@ -49,10 +48,10 @@ public class KnightModule extends BaseHullMod {
             This can also be avoided by setting the hullsize to be a fighter, but that has other rendering issues. (fighters always render over everything else)
             */
             module.setDrone(true);
-            module.addTag(KOL_MODULE_HULKED);
+            module.addTag(KolStaticStrings.KOL_MODULE_HULKED);
         }
         // re-set the module to be a hulk if it's not, this happens after hulk is unset for vanilla damage fx's
-        else if(!module.isHulk() && module.hasTag(KOL_MODULE_HULKED)){
+        else if(!module.isHulk() && module.hasTag(KolStaticStrings.KOL_MODULE_HULKED)){
             module.setHulk(true);
         }
 
@@ -82,14 +81,14 @@ public class KnightModule extends BaseHullMod {
         @Override // unset hulk for right before any damage gets dealt to the module, this allows for normal processing of hit explosions
         public void reportDamageApplied(Object source, CombatEntityAPI target, ApplyDamageResultAPI result) {
             ShipAPI module = (ShipAPI) target;
-            if(module.isHulk() && module.getHitpoints() > 0 && !module.hasTag(KOL_MODULE_DEAD)) module.setHulk(false);
+            if(module.isHulk() && module.getHitpoints() > 0 && !module.hasTag(KolStaticStrings.KOL_MODULE_DEAD)) module.setHulk(false);
         }
 
         @Override // for some reason the above listener doesn't catch when the module is actually going to be dead.
         public boolean notifyAboutToTakeHullDamage(Object param, ShipAPI module, Vector2f point, float damageAmount) {
-            if(module.getHitpoints() <= damageAmount && !module.hasTag(KOL_MODULE_DEAD)){
+            if(module.getHitpoints() <= damageAmount && !module.hasTag(KolStaticStrings.KOL_MODULE_DEAD)){
                 module.setHulk(false);
-                module.addTag(KOL_MODULE_DEAD);
+                module.addTag(KolStaticStrings.KOL_MODULE_DEAD);
             }
             return false;
         }
@@ -108,7 +107,7 @@ public class KnightModule extends BaseHullMod {
         }
         @Override
         public void advance(float amount) {
-            if(module.getParentStation() == null || !module.getParentStation().isAlive() || module.getHitpoints() <= 0.0f || module.hasTag(KOL_MODULE_DEAD)) return;
+            if(module.getParentStation() == null || !module.getParentStation().isAlive() || module.getHitpoints() <= 0.0f || module.hasTag(KolStaticStrings.KOL_MODULE_DEAD)) return;
 
             // note down if the parent has used system, this accounts for if parent system is shorter then delay
             if(module.getParentStation().getSystem().isActive()){

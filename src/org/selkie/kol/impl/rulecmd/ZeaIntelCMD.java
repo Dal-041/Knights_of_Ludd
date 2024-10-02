@@ -80,7 +80,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 if (member.getVariant().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
-                    if (variant.hasTag(ZeaMemKeys.BOSS_TAG)) variant.removeTag(ZeaMemKeys.BOSS_TAG);
+                    if (variant.hasTag(ZeaMemKeys.ZEA_BOSS_TAG)) variant.removeTag(ZeaMemKeys.ZEA_BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
                     if (variant.getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) foundNinmah = true;
@@ -99,7 +99,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                         fleet.getContainingLocation(),
                         Entities.WRECK, Factions.NEUTRAL, DSD);
                 Misc.makeImportant(wreck, ZeaStaticStrings.ZEA_BOSS_NINMAH);
-                wreck.getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_NINMAH_WRECK, true);
+                wreck.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_NINMAH_WRECK, true);
                 wreck.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                 wreck.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
                 wreck.setFacing((float)Math.random()*360f);
@@ -142,7 +142,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 for (FleetMemberAPI member : otherFleet.getMembersWithFightersCopy()) {
                     if (member.getHullId().startsWith("zea_boss")) {
                         if (!member.getVariant().hasTag(Tags.VARIANT_UNBOARDABLE)) member.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-                        if (!member.getVariant().hasTag(ZeaMemKeys.BOSS_TAG))member.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
+                        if (!member.getVariant().hasTag(ZeaMemKeys.ZEA_BOSS_TAG))member.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
                     }
                 }
             }

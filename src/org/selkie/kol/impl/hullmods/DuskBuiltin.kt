@@ -18,7 +18,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.SparkleAIV2
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 class DuskBuiltin : BaseHullMod() {
     companion object{
         val allMotes = mutableListOf<MissileAPI>()
@@ -167,7 +167,7 @@ class DuskBuiltin : BaseHullMod() {
 
         if (ship.hullSpec.isPhase){
             tooltip.addSectionHeading("${if(ship.hullSpec.baseHullId.contains("boss")) 5 else 4}th-Generation Phase Coils", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-            val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "dusk_phase_coils"), HEIGHT)
+            val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dusk_phase_coils"), HEIGHT)
             phaseCoils.setBulletedListMode("•")
             phaseCoils.setBulletWidth(15f)
             val para1 = phaseCoils.addPara("No loss of top speed as hardflux level rises.", listPad, activeTextColor, activeHighlightColor)
@@ -181,7 +181,7 @@ class DuskBuiltin : BaseHullMod() {
 
 
         tooltip.addSectionHeading("Duskfall", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val duskfall = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "dusk_duskfall"), HEIGHT)
+        val duskfall = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dusk_duskfall"), HEIGHT)
         duskfall.setBulletedListMode("•")
         duskfall.setBulletWidth(15f)
         val para4 = duskfall.addPara("Launches 2 motes per second around the ship, each mote deals 1500 EMP damage on impact.", listPad, activeTextColor, activeHighlightColor, "2", "1500")
@@ -199,7 +199,7 @@ class DuskBuiltin : BaseHullMod() {
 
         tooltip.addImageWithText(underHeadingPad)
 
-        var sprite = Global.getSettings().getSprite("kol_ui", "zea_dusk_hmod")
+        var sprite = Global.getSettings().getSprite(GfxCat.KOL_UI, "zea_dusk_hmod")
         background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()

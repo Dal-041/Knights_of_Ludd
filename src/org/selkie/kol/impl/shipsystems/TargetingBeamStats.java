@@ -13,8 +13,6 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -107,7 +105,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
         }
 
         if (((state == State.IN && effectLevel > 0.67f) || state == State.ACTIVE) && !playedWindup) {
-            Global.getSoundPlayer().playSound(ZeaStaticStrings.LIDAR_WINDUP, 1f, 1f, ship.getLocation(), ship.getVelocity());
+            Global.getSoundPlayer().playSound("lidar_windup", 1f, 1f, ship.getLocation(), ship.getVelocity());
             playedWindup = true;
         }
 

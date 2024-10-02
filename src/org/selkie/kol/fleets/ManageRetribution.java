@@ -13,8 +13,7 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
+import org.selkie.kol.helpers.KolStaticStrings;
 
 public class ManageRetribution implements FleetEventListener {
 
@@ -24,12 +23,12 @@ public class ManageRetribution implements FleetEventListener {
 	public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
 	        
 		// ignore that whole ordeal if the Retribution already dropped
-		if(Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.KOL_LP_RETRIBUTION_DONE)
-	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.KOL_LP_RETRIBUTION_DONE)){
+		if(Global.getSector().getMemoryWithoutUpdate().contains(KolStaticStrings.KolMemKeys.KOL_LP_RETRIBUTION_DONE)
+	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(KolStaticStrings.KolMemKeys.KOL_LP_RETRIBUTION_DONE)){
 	            return;
 		}
 	        
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.KOL_BOSS_RET_LP)){
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith(KolStaticStrings.KOL_BOSS_RET_LP)){
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -41,10 +40,10 @@ public class ManageRetribution implements FleetEventListener {
 	            //boss is dead, 
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
-				if(f.getHullId().startsWith(ZeaStaticStrings.KOL_BOSS_RET_LP)) salvaged=true;
+				if(f.getHullId().startsWith(KolStaticStrings.KOL_BOSS_RET_LP)) salvaged=true;
 	                
                 //set memkey that the wreck must never spawn
-                Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.KOL_LP_RETRIBUTION_DONE,true);
+                Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_LP_RETRIBUTION_DONE,true);
 	        }
 	            
 	            //spawn a derelict if it wasn't salvaged
@@ -57,7 +56,7 @@ public class ManageRetribution implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-							ZeaStaticStrings.KOL_BOSS_RET_LP_OVERDRIVEN,
+							KolStaticStrings.KOL_BOSS_RET_LP_OVERDRIVEN,
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
@@ -69,7 +68,7 @@ public class ManageRetribution implements FleetEventListener {
 	                wreck.setFacing((float)Math.random()*360f);
 	                
 	                //set memkey that the wreck exist
-	                Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.KOL_LP_RETRIBUTION_DONE,true);
+	                Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_LP_RETRIBUTION_DONE,true);
 	        }
 	    }
 	}

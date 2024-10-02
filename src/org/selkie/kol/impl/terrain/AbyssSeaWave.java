@@ -12,7 +12,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 
 import java.awt.*;
 
@@ -29,7 +29,7 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
             params.name = "Dawntide";
             nameTooltip = "Dawntide";
             multiplyArc(2.5f);
-            spriteCat = ZeaGfxCat.TERRAIN;
+            spriteCat = GfxCat.TERRAIN;
             spriteKey = "zea_wavefront";
             flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes ...but the code doesn't call the color

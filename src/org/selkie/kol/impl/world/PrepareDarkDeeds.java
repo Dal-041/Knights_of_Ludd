@@ -36,7 +36,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -125,13 +125,13 @@ public class PrepareDarkDeeds {
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_NINAYA_BOSS_FLEET, true);
-        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_BOSS_TAG, true);
 
         // setup and permalock the flagship variant
         FleetMemberAPI flagship = TT1BossFleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
@@ -197,7 +197,7 @@ public class PrepareDarkDeeds {
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
                     Misc.makeImportant(entity, ZeaStaticStrings.ZEA_BOSS_NINAYA);
-                    entity.getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_NINAYA_WRECK, true);
+                    entity.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_NINAYA_WRECK, true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -326,7 +326,7 @@ public class PrepareDarkDeeds {
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
                     Misc.makeImportant(entity, ZeaStaticStrings.ZEA_BOSS_NINEVENH);
-                    entity.getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_NINEVEH_WRECK, true);
+                    entity.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_NINEVEH_WRECK, true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -340,7 +340,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    copy.variant.removeTag(ZeaMemKeys.BOSS_TAG);
+                    copy.variant.removeTag(ZeaMemKeys.ZEA_BOSS_TAG);
                     copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
@@ -392,7 +392,7 @@ public class PrepareDarkDeeds {
 
         system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
-        system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_delta_site"));
+        system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(GfxCat.BACKGROUNDS, "zea_bg_delta_site"));
         //system.getLocation().set(2500, 3000);
         system.getLocation().set(-sectorWidthR + 30000f, -sectorHeightR + 15000f);
 
@@ -520,13 +520,13 @@ public class PrepareDarkDeeds {
                 .create();
         TT3BossFleet.setDiscoverable(true);
         TT3BossFleet.getFleetData().ensureHasFlagship();
-        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_BOSS_TAG, true);
 
         // setup and permalock the flagship variant
         FleetMemberAPI flagship = TT3BossFleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         //Support fleet stuff

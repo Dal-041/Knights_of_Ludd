@@ -9,10 +9,8 @@ import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
-import org.selkie.kol.helpers.KOLStaticStrings;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 public class SpawnInvictus {
 
@@ -42,7 +40,7 @@ public class SpawnInvictus {
 	                    .setFleetFaction(Factions.LUDDIC_PATH)
 	                    .setFleetType(FleetTypes.TASK_FORCE)
 	                    .setFlagshipName("In the Glory of the Blessed")
-	                    .setFlagshipVariant(ZeaStaticStrings.KOL_INVICTUS_LP_HALLOWED)
+	                    .setFlagshipVariant(KolStaticStrings.KOL_INVICTUS_LP_HALLOWED)
 	                    .setCaptain(invictusCaptain)
 	                    .setMinFP(400) //support fleet
 	                    .setQualityOverride(2f)
@@ -53,7 +51,7 @@ public class SpawnInvictus {
 	                    .create();
 	            invictusFleet.setDiscoverable(true);
 				invictusFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-				invictusFleet.getMemoryWithoutUpdate().set(KOLStaticStrings.BOSS_INVICTUS_KEY, true);
+				invictusFleet.getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_BOSS_LP_INVICTUS_FLEET, true);
 
 				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 				invictusFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);

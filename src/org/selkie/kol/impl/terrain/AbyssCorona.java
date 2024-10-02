@@ -14,7 +14,6 @@ import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 import java.awt.*;
 
@@ -63,9 +62,9 @@ public class AbyssCorona extends StarCoronaTerrainPlugin {
                 if (loss > curr) loss = curr;
                 if (resistance > 0) { // not actually resistance, the opposite
                     if (inFlare) {
-                        member.getRepairTracker().applyCREvent(loss, ZeaStaticStrings.FLARE, "Solar flare effect");
+                        member.getRepairTracker().applyCREvent(loss, "flare", "Solar flare effect");
                     } else {
-                        member.getRepairTracker().applyCREvent(loss, ZeaStaticStrings.CORONA, "Star corona effect");
+                        member.getRepairTracker().applyCREvent(loss, "corona", "Star corona effect");
                     }
                 }
 

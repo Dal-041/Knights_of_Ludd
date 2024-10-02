@@ -10,7 +10,7 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
@@ -21,7 +21,7 @@ public class SpawnElysianAmaterasu {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.elysianID);
 		elysianBossCaptain.setName(new FullName("Amaterasu", "", FullName.Gender.ANY));
-		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitAmaterasuBoss));
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(GfxCat.CHARACTERS, ZeaStaticStrings.portraitAmaterasuBoss));
 
 		CampaignFleetAPI elysianBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Amaterasu")
@@ -57,11 +57,11 @@ public class SpawnElysianAmaterasu {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
+		flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitAmaterasuBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(GfxCat.CHARACTERS, ZeaStaticStrings.portraitAmaterasuBoss));
 
 
 		// to make sure they attack the player on sight when player's transponder is off

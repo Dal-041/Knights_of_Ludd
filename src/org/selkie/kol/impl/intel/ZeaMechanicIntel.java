@@ -7,6 +7,7 @@ import com.fs.starfarer.api.impl.campaign.intel.BaseIntelPlugin;
 import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
@@ -161,7 +162,7 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
     public Set<String> getIntelTags(SectorMapAPI map) {
         Set<String> tags = super.getIntelTags(map);
         if (!name.contains("Knights")) tags.add(ZeaStaticStrings.IntelLoreTag);
-        else tags.add(ZeaStaticStrings.KNIGHTS_OF_LUDD);
+        else tags.add(KolStaticStrings.KNIGHTS_OF_LUDD);
         return tags;
     }
 
@@ -202,7 +203,7 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
             case Factions.TRITACHYON:
                 total = TT.length;
                 break;
-            case ZeaStaticStrings.kolFactionID:
+            case KolStaticStrings.kolFactionID:
                 total = KoL.length;
                 break;
         }
@@ -233,7 +234,7 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
                 desc = TT;
                 hl = TTHLs;
                 break;
-            case ZeaStaticStrings.kolFactionID:
+            case KolStaticStrings.kolFactionID:
                 desc = KoL;
                 hl = KoLHLs;
                 break;

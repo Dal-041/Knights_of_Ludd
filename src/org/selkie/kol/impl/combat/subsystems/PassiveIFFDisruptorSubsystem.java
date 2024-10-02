@@ -88,7 +88,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     }
 
     private EmpArcEntityAPI shootEmpArcVisual(CombatEntityAPI ent) {
-        Global.getSoundPlayer().playSound(ZeaStaticStrings.SHOCK_REPEATER_EMP_IMPACT, 1f, 1f, ent.getLocation(), ent.getVelocity());
+        Global.getSoundPlayer().playSound("shock_repeater_emp_impact", 1f, 1f, ent.getLocation(), ent.getVelocity());
         return Global.getCombatEngine().spawnEmpArcVisual(ship.getLocation(), ship, ent.getLocation(), ent, MathUtils.getRandomNumberInRange(2f, 5f), new Color(255, 0, 0), new Color(255, 200, 200));
     }
 
@@ -102,7 +102,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
                 0f,
                 250f,
                 getHackingRange(),
-                ZeaStaticStrings.SHOCK_REPEATER_EMP_IMPACT,
+                "shock_repeater_emp_impact",
                 MathUtils.getRandomNumberInRange(2f, 5f),
                 new Color(255, 0, 0),
                 new Color(255, 200, 200));
@@ -150,9 +150,9 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
             CombatEntityAPI entityToHack = null;
             float biggestThreat = 0f;
             for (MissileAPI missile : missilesInRange) {
-                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals(ZeaStaticStrings.MOTELAUNCHER))
+                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher"))
                     continue;
-                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals(ZeaStaticStrings.MOTELAUNCHER_HF))
+                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher_hf"))
                     continue;
 
                 if (!missileMap.containsKey(missile) && missile.getOwner() != ship.getOwner()) {

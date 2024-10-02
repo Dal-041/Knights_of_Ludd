@@ -4,12 +4,11 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.campaign.RepLevel;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.helpers.KolStaticStrings;
 
 public class Crusaders {
-    public static final String MEMKEY_KOL_SCHISMED = "$kol_knights_schism";
     public static final String nameCrusaders = "Luddic Crusade";
-    protected static final FactionAPI crusaders = Global.getSector().getFaction(ZeaStaticStrings.kolFactionID);
+    protected static final FactionAPI crusaders = Global.getSector().getFaction(KolStaticStrings.kolFactionID);
     protected static final String[] priorityShips = {
             "kol_alysse",
             "kol_lunaria",
@@ -26,15 +25,15 @@ public class Crusaders {
 
     public static void startSchism() {
         //TODO break the COGR alliance
-        Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_SCHISMED, true);
+        Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.MEMKEY_KOL_SCHISMED, true);
         setCrusadeNames();
         setCrusadeDoctrine();
         setCrusadeRelationships();
     }
 
     public static void setCrusadeNames() {
-        if (!Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_SCHISMED)
-                || !Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_SCHISMED)) {
+        if (!Global.getSector().getMemoryWithoutUpdate().contains(KolStaticStrings.MEMKEY_KOL_SCHISMED)
+                || !Global.getSector().getMemoryWithoutUpdate().getBoolean(KolStaticStrings.MEMKEY_KOL_SCHISMED)) {
             return;
         }
         crusaders.setDisplayNameOverride(nameCrusaders);

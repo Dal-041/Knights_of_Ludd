@@ -23,8 +23,7 @@ import org.magiclib.subsystems.drones.MagicDroneSubsystem
 import org.selkie.kol.combat.GL14ParticleData
 import org.selkie.kol.combat.ParticleController
 import org.selkie.kol.combat.ParticleData
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import java.awt.Color
 import java.util.*
 
@@ -252,7 +251,7 @@ class CorruptionJetsStats : BaseShipSystemScript() {
             startingColor: Color,
             endColor: Color
         ) : GL14ParticleData(
-            sprite = Global.getSettings().getSprite(ZeaGfxCat.MISC, "nebula_particles"),
+            sprite = Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles"),
             x = x,
             y = y,
             xVel = xVel,
@@ -309,7 +308,7 @@ class CorruptionJetsStats : BaseShipSystemScript() {
             startingColor: Color,
             endColor: Color
         ) : GL14ParticleData(
-            sprite = Global.getSettings().getSprite(ZeaGfxCat.MISC, "nebula_particles"),
+            sprite = Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles"),
             x = x,
             y = y,
             xVel = xVel,
@@ -348,7 +347,7 @@ class CorruptionJetsStats : BaseShipSystemScript() {
             startingColor: Color,
             endColor: Color
         ) : ParticleData(
-            sprite = Global.getSettings().getSprite(ZeaGfxCat.MISC, "nebula_particles"),
+            sprite = Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles"),
             x = x,
             y = y,
             xVel = xVel,
@@ -379,7 +378,7 @@ class CorruptionJetsStats : BaseShipSystemScript() {
             startingColor: Color,
             endColor: Color
         ) : ParticleData(
-            sprite = Global.getSettings().getSprite(ZeaGfxCat.MISC, "nebula_particles"),
+            sprite = Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles"),
             x = x,
             y = y,
             xVel = xVel,

@@ -23,8 +23,7 @@ import org.magiclib.util.MagicUI
 import org.selkie.kol.Utils
 import org.selkie.kol.hullmods.HullmodBackgroundElement
 import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes
 import java.awt.Color
 import kotlin.math.max
@@ -264,16 +263,16 @@ class ElysianBuiltin : BaseHullMod() {
 
             if (engine.playerShip === ship) {
                 engine.maintainStatusForPlayerShip(
-                    STATUSKEY1, Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "coronal_cap_bottom"),
+                    STATUSKEY1, Global.getSettings().getSpriteName(GfxCat.ICONS, "coronal_cap_bottom"),
                     "+" + (100 * SPEED_BOOST * capacitorFactor).roundToInt() + "% top speed", "improved maneuverability", false
                 )
                 engine.maintainStatusForPlayerShip(
-                    STATUSKEY2, Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "coronal_cap_middle"),
+                    STATUSKEY2, Global.getSettings().getSpriteName(GfxCat.ICONS, "coronal_cap_middle"),
                     "+" + (100 * (ROF_BOOST * capacitorFactor)).roundToInt() + "% ballistic rate of fire",
                     "-" + (100 * (1 - 1 / (1 + ROF_BOOST * capacitorFactor))).roundToInt() + "% ballistic flux use", false
                 )
                 engine.maintainStatusForPlayerShip(
-                    STATUSKEY3, Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "coronal_cap_top"), "Coronal Capacitor",
+                    STATUSKEY3, Global.getSettings().getSpriteName(GfxCat.ICONS, "coronal_cap_top"), "Coronal Capacitor",
                     "+" + (100 * (DAMAGE_BOOST * capacitorFactor)).roundToInt() + "% energy weapon damage", false
                 )
                 //engine.maintainStatusForPlayerShip(STATUSKEY4, Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_top"),
@@ -329,9 +328,9 @@ class ElysianBuiltin : BaseHullMod() {
 
 
         val rate = getRechargeRate()
-        HullmodBackgroundElement(tooltip, Global.getSettings().getSprite("kol_ui", "zea_edf_hmod"), 0.6f)
+        HullmodBackgroundElement(tooltip, Global.getSettings().getSprite(GfxCat.KOL_UI, "zea_edf_hmod"), 0.6f)
         tooltip.addSectionHeading("Coronal Capacitor", activeHeaderTextColor, activeHeaderBannerColor, Alignment.MID, headingPad)
-        val coronalCapacitor = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "edf_coronal_cap"), HEIGHT)
+        val coronalCapacitor = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "edf_coronal_cap"), HEIGHT)
         coronalCapacitor.setBulletedListMode("•")
         coronalCapacitor.setBulletWidth(15f)
         //coronalCapacitor.addPara("Utilizes energy from local stars to \nsupercharge weapons and engines.", listPad, activeTextColor, activePositiveColor, "supercharge weapons and engines");
@@ -361,7 +360,7 @@ class ElysianBuiltin : BaseHullMod() {
             "Shachi PD Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
             if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
         )
-        val PDDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, if (hasShieldDrones) "edf_shachi" else "edf_shachi"), HEIGHT)
+        val PDDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, if (hasShieldDrones) "edf_shachi" else "edf_shachi"), HEIGHT)
         PDDrones.setBulletedListMode("•")
         PDDrones.setBulletWidth(15f)
         PDDrones.addPara(

@@ -95,12 +95,12 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         FleetMemberAPI flagship = fleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
         flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
-        fleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
+        fleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_BOSS_TAG, true);
     }
 
 

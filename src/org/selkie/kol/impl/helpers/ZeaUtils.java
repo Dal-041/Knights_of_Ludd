@@ -15,6 +15,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.fleets.ZeaFleetManager;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
@@ -40,17 +41,17 @@ public class ZeaUtils {
     }
 
     public static void checkAbyssalFleets() {
-        if(Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.LOST_SECTOR)) {
+        if(Global.getSettings().getModManager().isModEnabled(KolStaticStrings.LOST_SECTOR)) {
             for (FactionAPI faction:Global.getSector().getAllFactions()) {
-                if (faction.getId().equals(ZeaStaticStrings.ENIGMA)) useEnigma = true;
+                if (faction.getId().equals(KolStaticStrings.ENIGMA)) useEnigma = true;
             }
         }
-        if(Global.getSettings().getModManager().isModEnabled(ZeaStaticStrings.TAHLAN)) {
+        if(Global.getSettings().getModManager().isModEnabled(KolStaticStrings.TAHLAN)) {
             useLostech = true;
         }
         for (FactionAPI faction:Global.getSector().getAllFactions()) {
-            if (faction.getId().equals(ZeaStaticStrings.DOMRES)) useDomres = true;
-            if (faction.getId().equals(ZeaStaticStrings.SOTF_DUSTKEEPERS)) useDustkeepers = true;
+            if (faction.getId().equals(KolStaticStrings.DOMRES)) useDomres = true;
+            if (faction.getId().equals(KolStaticStrings.SOTF_DUSTKEEPERS)) useDustkeepers = true;
         }
     }
 
@@ -118,7 +119,7 @@ public class ZeaUtils {
         copy.variantId = null;
         copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
         if (uniqueSig) copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-        copy.variant.removeTag(ZeaMemKeys.BOSS_TAG);
+        copy.variant.removeTag(ZeaMemKeys.ZEA_BOSS_TAG);
         copy.variant.removeTag(Tags.VARIANT_UNBOARDABLE);
         //TODO: Special desciption updating logic
         //copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);

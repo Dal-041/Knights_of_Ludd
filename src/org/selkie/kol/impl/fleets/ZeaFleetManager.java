@@ -22,6 +22,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
@@ -81,11 +82,11 @@ public class ZeaFleetManager extends SeededFleetManager {
         picker.add(ZeaStaticStrings.duskID, w);
         w = primary.equals(ZeaStaticStrings.elysianID) ? 0f : 1f;
         picker.add(ZeaStaticStrings.elysianID, w);
-        if (ZeaUtils.useDomres) picker.add(ZeaStaticStrings.DOMRES, 1f);
-        if (ZeaUtils.useDustkeepers) picker.add(ZeaStaticStrings.SOTF_DUSTKEEPERS, 0.8f);
+        if (ZeaUtils.useDomres) picker.add(KolStaticStrings.DOMRES, 1f);
+        if (ZeaUtils.useDustkeepers) picker.add(KolStaticStrings.SOTF_DUSTKEEPERS, 0.8f);
         w = primary.equals(ZeaStaticStrings.dawnID) ? 0.75f : 0f;
-        if (ZeaUtils.useEnigma) picker.add(ZeaStaticStrings.ENIGMA, w);
-        if (ZeaUtils.useLostech) picker.add(ZeaStaticStrings.TAHLAN_ALLMOTHER, 0.6f);
+        if (ZeaUtils.useEnigma) picker.add(KolStaticStrings.ENIGMA, w);
+        if (ZeaUtils.useLostech) picker.add(KolStaticStrings.TAHLAN_ALLMOTHER, 0.6f);
         return picker.pick();
     }
 
@@ -360,7 +361,7 @@ public class ZeaFleetManager extends SeededFleetManager {
             if (captain == null) {
                 member.setCaptain(createAICaptain(fac, true));
             } else {
-                if (captain.getId().equals(ZeaStaticStrings.TAHLAN_CHILD)) return; //Special officer
+                if (captain.getId().equals(KolStaticStrings.TAHLAN_CHILD)) return; //Special officer
                 boolean found = false;
                 String portCapt = captain.getPortraitSprite();
                 for (String port : ZeaStaticStrings.portraitsDawn) {

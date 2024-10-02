@@ -9,10 +9,8 @@ import com.fs.starfarer.api.campaign.FleetAssignment;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.econ.MarketAPI;
 import com.fs.starfarer.api.characters.PersonAPI;
-import org.selkie.kol.helpers.KOLStaticStrings;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops; import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 public class SpawnRetribution {
 	
@@ -42,7 +40,7 @@ public class SpawnRetribution {
 	                    .setFleetFaction(Factions.LUDDIC_PATH)
 	                    .setFleetType(FleetTypes.TASK_FORCE)
 	                    .setFlagshipName("To Them Eternal Rest")
-	                    .setFlagshipVariant(ZeaStaticStrings.KOL_BOSS_RET_LP_OVERDRIVEN)
+	                    .setFlagshipVariant(KolStaticStrings.KOL_BOSS_RET_LP_OVERDRIVEN)
 	                    .setCaptain(RetributionCaptain)
 	                    .setMinFP(275) //support fleet
 	                    .setQualityOverride(2f)
@@ -53,7 +51,7 @@ public class SpawnRetribution {
 	                    .create();
 	            RetributionFleet.setDiscoverable(true);
 				RetributionFleet.getFlagship().getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-				RetributionFleet.getMemoryWithoutUpdate().set(KOLStaticStrings.BOSS_RETRIBTUION_KEY, true);
+				RetributionFleet.getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_BOSS_LP_RETRIBUTION_FLEET, true);
 				RetributionFleet.getFlagship().getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 
 				RetributionFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);

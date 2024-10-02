@@ -12,6 +12,7 @@ import com.fs.starfarer.api.loading.Description;
 import com.fs.starfarer.api.util.Misc;
 import org.jetbrains.annotations.NotNull;
 import org.lwjgl.input.Keyboard;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.util.List;
 import java.util.Map;
@@ -64,7 +65,7 @@ public class ElysianHypershuntInteraction implements InteractionDialogPlugin {
         for (CampaignFleetAPI fleet : fleets) {
             if (fleet == Global.getSector().getPlayerFleet()) continue;
             for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
-                if (member.getHullSpec().getBaseHullId().equals("zea_boss_amaterasu")) {
+                if (member.getHullSpec().getBaseHullId().equals(ZeaStaticStrings.ZEA_BOSS_AMATERASU)) {
                     return true;
                 }
             }

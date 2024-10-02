@@ -7,7 +7,7 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.population.PopulationComposition;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Pair;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.helpers.KolStaticStrings;
 
 
 public class kol_garden extends BaseIndustry implements MarketImmigrationModifier {
@@ -39,7 +39,7 @@ public class kol_garden extends BaseIndustry implements MarketImmigrationModifie
     public boolean isAvailableToBuild() {
         if (!super.isAvailableToBuild()) return false;
 
-        return market.getFactionId().equals(ZeaStaticStrings.kolFactionID) && market.hasCondition(Conditions.OUTPOST);
+        return market.getFactionId().equals(KolStaticStrings.kolFactionID) && market.hasCondition(Conditions.OUTPOST);
     }
 
 

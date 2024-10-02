@@ -11,8 +11,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 
 import java.awt.*;
 
@@ -61,8 +60,8 @@ public class SubspaceGlideStats extends BaseShipSystemScript {
 
             Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
             Vector2f jitterLocation = MathUtils.getRandomPointInCircle(ship.getLocation(), 2f+(1-effectLevel)*5f);
-            SpriteAPI glow1 = Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1");
-            SpriteAPI glow2 = Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2");
+            SpriteAPI glow1 = Global.getSettings().getSprite(GfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1");
+            SpriteAPI glow2 = Global.getSettings().getSprite(GfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2");
             MagicRender.singleframe(glow1, ship.getLocation(), new Vector2f(glow1.getWidth(), glow1.getHeight()), ship.getFacing() - 90f, colorToUse, true);
             MagicRender.singleframe(glow2, jitterLocation, new Vector2f(glow2.getWidth(), glow2.getHeight()), ship.getFacing() - 90f, colorToUse, true);
 

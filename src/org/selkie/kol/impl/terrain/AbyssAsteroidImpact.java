@@ -10,7 +10,6 @@ import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 import java.awt.*;
 
@@ -95,9 +94,9 @@ public class AbyssAsteroidImpact implements EveryFrameScript {
                 volumeMult *= 0.5f + 0.5f * mult;
                 if (volumeMult > 0) {
                     if (dealDamage) {
-                        Global.getSoundPlayer().playSound(ZeaStaticStrings.HIT_HEAVY, 1f, volumeMult, fleet.getLocation(), Misc.ZERO);
+                        Global.getSoundPlayer().playSound("hit_heavy", 1f, volumeMult, fleet.getLocation(), Misc.ZERO);
                     } else {
-                        Global.getSoundPlayer().playSound(ZeaStaticStrings.HIT_SHIELD_HEAVY_GUN, 1f, volumeMult, fleet.getLocation(), Misc.ZERO);
+                        Global.getSoundPlayer().playSound("hit_shield_heavy_gun", 1f, volumeMult, fleet.getLocation(), Misc.ZERO);
                     }
                 }
             }

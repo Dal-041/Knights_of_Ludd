@@ -20,7 +20,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaTerrain;
@@ -93,7 +93,7 @@ public class PrepareAbyss {
         
     	StarSystemAPI system = Global.getSector().createStarSystem(ZeaStaticStrings.elysiaSysName);
     	system.getLocation().set((int)posX, (int)posY);
-    	system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_elysia"));
+    	system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(GfxCat.BACKGROUNDS, "zea_bg_elysia"));
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_system");
 
 		system.addTag(Tags.THEME_HIDDEN);
@@ -121,10 +121,10 @@ public class PrepareAbyss {
 				0f,
 				4f));
 
-    	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN, "zea_pinwheel_nebula"),
+    	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(GfxCat.TERRAIN, "zea_pinwheel_nebula"),
                                                                     0, 0, // center of nebula
                                                                     system, // location to add to
-				ZeaGfxCat.TERRAIN, "nebula_zea_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
+				GfxCat.TERRAIN, "nebula_zea_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
                                                                     4, 4, StarAge.AVERAGE); // number of cells in texture
 
     	system.setType(StarSystemType.TRINARY_1CLOSE_1FAR);
@@ -188,7 +188,7 @@ public class PrepareAbyss {
     	third.getMarket().addCondition(Conditions.EXTREME_TECTONIC_ACTIVITY);
     	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
 
-		system.addRingBand(elysia, ZeaGfxCat.TERRAIN, ZeaTerrain.RINGS_THICC_DARKRED, 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
+		system.addRingBand(elysia, GfxCat.TERRAIN, ZeaTerrain.RINGS_THICC_DARKRED, 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
 
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);
@@ -216,7 +216,7 @@ public class PrepareAbyss {
 		edfResearchStation.addTag(ZeaStaticStrings.EDF_HEADQUARTERS);
 
 		//Hegemony witness
-		SectorEntityToken wreckHeg = MagicCampaign.createDerelict(ZeaStaticStrings.DOMINATOR_XIV_ELITE, ShipRecoverySpecial.ShipCondition.WRECKED, true, 5000, false, silence, (float) Math.random() * 360f, 3333f + (float)Math.random()*4777f, 200);
+		SectorEntityToken wreckHeg = MagicCampaign.createDerelict("dominator_XIV_Elite", ShipRecoverySpecial.ShipCondition.WRECKED, true, 5000, false, silence, (float) Math.random() * 360f, 3333f + (float)Math.random()*4777f, 200);
 		wreckHeg.addTag(Tags.UNRECOVERABLE);
 		wreckHeg.addDropRandom(ZeaDrops.ZEA_HEGFLEET_LORE, 1);
 		wreckHeg.addDropRandom(Drops.LOW_WEAPONS2, 6);
@@ -279,16 +279,16 @@ public class PrepareAbyss {
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 		system.addTag(ZeaStaticStrings.THEME_STORM);
 
-		system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS,"zea_bg_dusk"));
+		system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(GfxCat.BACKGROUNDS,"zea_bg_dusk"));
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
 		system.getLocation().set(2100, -5200);
 		SectorEntityToken center = system.initNonStarCenter();
 		SectorEntityToken nullspace_nebula = addNebulaFromPNG(
-				Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN,"zea_pinwheel_nebula_big"),
+				Global.getSettings().getSpriteName(GfxCat.TERRAIN,"zea_pinwheel_nebula_big"),
 				0, 0, // center of nebula
 				system, // location to add to
-				ZeaGfxCat.TERRAIN, ZeaTerrain.NEBULA_ZEA_BLACK_SHINY, // texture to use, uses xxx_map for map
+				GfxCat.TERRAIN, ZeaTerrain.NEBULA_ZEA_BLACK_SHINY, // texture to use, uses xxx_map for map
 				4, 4, // number of cells in texture
 				ZeaTerrain.NEBULA_ZEA_STORM, StarAge.AVERAGE, 10000, 2); //terrain plugin, age, nebula resolution, tile size
 
@@ -374,14 +374,14 @@ public class PrepareAbyss {
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
-		system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS,"zea_bg_dawn"));
+		system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(GfxCat.BACKGROUNDS,"zea_bg_dawn"));
 		new AbyssBackgroundWarper(system, 8, 0.25f);
 
 		//if (!Global.getSector().getDifficulty().equals(Difficulties.EASY)) { // Disabled
-			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN,"zea_flower_nebula_cut"),
+			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(GfxCat.TERRAIN,"zea_flower_nebula_cut"),
 					0, 0, // center of nebula
 					system, // location to add to
-					ZeaGfxCat.TERRAIN, "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
+					GfxCat.TERRAIN, "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					8, 8, StarAge.AVERAGE); // number of cells in texture
 		/*} else {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/luwunasea_nebula2.png",
@@ -391,9 +391,9 @@ public class PrepareAbyss {
 					4, 4, StarAge.AVERAGE); // number of cells in texture
 		}*/
 
-		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN,"zea_flower_nebula_layer2"),
+		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(GfxCat.TERRAIN,"zea_flower_nebula_layer2"),
 					0, 0, system,
-				ZeaGfxCat.TERRAIN, "nebula_zea_dawntide",
+				GfxCat.TERRAIN, "nebula_zea_dawntide",
 					4, 4, ZeaTerrain.NEBULA_ZEA_SHOAL, StarAge.AVERAGE);
 
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
@@ -507,9 +507,9 @@ public class PrepareAbyss {
 			return;
 		}
 		if (Math.random() < 0.5f) {
-			system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_duskbh1"));
+			system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(GfxCat.BACKGROUNDS, "zea_bg_duskbh1"));
 		} else {
-			system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_duskbh2"));
+			system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(GfxCat.BACKGROUNDS, "zea_bg_duskbh2"));
 		}
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
@@ -753,7 +753,7 @@ public class PrepareAbyss {
 			float orbitDays = radius / (30f + 10f * StarSystemGenerator.random.nextFloat());
 			Color color = StarSystemGenerator.getColor(minColor, maxColor);
 			//color = Color.white;
-			RingBandAPI visual = system.addRingBand(parent, ZeaGfxCat.MISC, tex.tex, 256f, tex.index, color, bandWidth,
+			RingBandAPI visual = system.addRingBand(parent, GfxCat.MISC, tex.tex, 256f, tex.index, color, bandWidth,
 					radius + bandWidth / 2f, -orbitDays);
 
 			spiralFactor = 2f + StarSystemGenerator.random.nextFloat() * 5f;

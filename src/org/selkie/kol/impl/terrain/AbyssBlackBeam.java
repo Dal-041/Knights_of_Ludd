@@ -13,7 +13,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 
 import java.awt.*;
 
@@ -30,7 +30,7 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
             name = "Lure of the Abyss";
             nameTooltip = "Lure of the Abyss";
             multiplyArc(0.65f);
-            flareTexture = Global.getSettings().getSprite(ZeaGfxCat.TERRAIN, "aurora");
+            flareTexture = Global.getSettings().getSprite(GfxCat.TERRAIN, "aurora");
             //pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
             pulsarRotation *= 8f;
             inited = true;
@@ -60,7 +60,7 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
                 if (loss > curr) loss = curr;
 
                 if (resistance > 0) {
-                    member.getRepairTracker().applyCREvent(loss, ZeaStaticStrings.CORONA, "Pullsar beam effect");
+                    member.getRepairTracker().applyCREvent(loss, "corona", "Pullsar beam effect");
                 }
 
                 float peakFraction = 1f / Math.max(1.3333f, 1f + params.crLossMult * intensity);

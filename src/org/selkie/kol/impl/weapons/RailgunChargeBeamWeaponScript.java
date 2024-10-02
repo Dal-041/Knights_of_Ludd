@@ -1,23 +1,12 @@
 package org.selkie.kol.impl.weapons;
 
-import org.lazywizard.lazylib.MathUtils;
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.CollisionClass;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.CombatEngineLayers;
-import com.fs.starfarer.api.combat.DamagingProjectileAPI;
-import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;
-import com.fs.starfarer.api.combat.OnFireEffectPlugin;
-import com.fs.starfarer.api.combat.ShipAPI;
-import com.fs.starfarer.api.combat.ShipCommand;
-import com.fs.starfarer.api.combat.ShipHullSpecAPI;
-import com.fs.starfarer.api.combat.ShipVariantAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags;
-import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponGroupSpec;
 import com.fs.starfarer.api.loading.WeaponGroupType;
+import org.lazywizard.lazylib.MathUtils;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 public class RailgunChargeBeamWeaponScript implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin  {
 
@@ -48,7 +37,7 @@ public class RailgunChargeBeamWeaponScript implements EveryFrameWeaponEffectPlug
 			ShipHullSpecAPI spec = Global.getSettings().getHullSpec(ZeaStaticStrings.DEM_DRONE);
 			ShipVariantAPI v = Global.getSettings().createEmptyVariant(ZeaStaticStrings.DEM_DRONE, spec);
             // the id of the weapon to use for the targeting laser beam.
-            String tagWeapon = ZeaStaticStrings.TARGETINGLASER_2;
+            String tagWeapon =  "targetinglaser2";
             v.addWeapon("WS 000", tagWeapon);
 			WeaponGroupSpec g = new WeaponGroupSpec(WeaponGroupType.LINKED);
 			g.addSlot("WS 000");

@@ -9,8 +9,6 @@ import com.fs.starfarer.api.combat.WeaponAPI.WeaponType;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -241,7 +239,7 @@ public class LidarStats extends BaseShipSystemScript {
 		}
 		
 		if (((state == State.IN && effectLevel > 0.67f) || state == State.ACTIVE) && !playedWindup) {
-			Global.getSoundPlayer().playSound(ZeaStaticStrings.LIDAR_WINDUP, 1f, 1f, ship.getLocation(), ship.getVelocity());
+			Global.getSoundPlayer().playSound("lidar_windup", 1f, 1f, ship.getLocation(), ship.getVelocity());
 			playedWindup = true;
 		}
 	}

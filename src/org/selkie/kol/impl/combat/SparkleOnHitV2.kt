@@ -18,7 +18,7 @@ class SparkleOnHitV2 : OnHitEffectPlugin {
         val shipEMPDamage = 1500f
         val fighterDamage = if(isHF) 1000f else 200f
         val empColor = if(isHF) SparkleAIV2.hfEMPColor else SparkleAIV2.baseEMPColor
-        val impactSoundId = if(isHF) ZeaStaticStrings.MOTE_ATTRACTOR_IMPACT_DAMAGE else ZeaStaticStrings.MOTE_ATTRACTOR_IMPACT_NORMAL
+        val impactSoundId = if(isHF) "mote_attractor_impact_damage" else "mote_attractor_impact_normal"
 
         if (target is ShipAPI) {
             if(!target.isFighter){
@@ -30,7 +30,7 @@ class SparkleOnHitV2 : OnHitEffectPlugin {
                         shipDamage,
                         shipEMPDamage,
                         100000f,  // max range
-                        ZeaStaticStrings.MOTE_ATTRACTOR_IMPACT_EMP_ARC,
+                        "mote_attractor_impact_emp_arc",
                         20f,
                         empColor,
                         Color(255, 255, 255, 255)

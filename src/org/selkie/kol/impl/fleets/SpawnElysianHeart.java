@@ -13,7 +13,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpe
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
@@ -24,7 +24,7 @@ public class SpawnElysianHeart {
 
 		PersonAPI elysianBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.elysianID);
 		elysianBossCaptain.setName(new FullName("Corrupting", "Heart", FullName.Gender.ANY));
-		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitElysianBoss));
+		elysianBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(GfxCat.CHARACTERS, ZeaStaticStrings.portraitElysianBoss));
 
 		SectorEntityToken token;
 		if (Math.random() > 0.7f) {
@@ -66,11 +66,11 @@ public class SpawnElysianHeart {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
+		flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitElysianBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(GfxCat.CHARACTERS, ZeaStaticStrings.portraitElysianBoss));
 
 
 		// to make sure they attack the player on sight when player's transponder is off

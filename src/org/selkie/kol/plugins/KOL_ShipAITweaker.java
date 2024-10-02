@@ -8,9 +8,8 @@ import com.fs.starfarer.api.combat.ShipAIPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
-import org.selkie.kol.helpers.KOLStaticStrings;
+import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 import java.util.Arrays;
 
@@ -20,7 +19,7 @@ public class KOL_ShipAITweaker {
         if (ship.isFighter()) return null;
         String hullId = ship.getHullSpec().getBaseHullId();
 
-        if (!Arrays.asList(KOLStaticStrings.knightsShips).contains(hullId) && !Arrays.asList(ZeaStaticStrings.zeaAIOverrideShips).contains(hullId)) return null;
+        if (!Arrays.asList(KolStaticStrings.KNIGHT_HULLS).contains(hullId) && !Arrays.asList(ZeaStaticStrings.zeaAIOverrideShips).contains(hullId)) return null;
 
         //HullSize size = ship.getHullSize();
 

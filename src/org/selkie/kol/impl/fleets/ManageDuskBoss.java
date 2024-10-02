@@ -57,7 +57,7 @@ public class ManageDuskBoss implements FleetEventListener {
 					//set memkey that the wreck must never spawn
 					Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_DUSK_BOSS_DONE, true);
 
-					f.getVariant().removeTag(ZeaMemKeys.BOSS_TAG);
+					f.getVariant().removeTag(ZeaMemKeys.ZEA_BOSS_TAG);
 				}
 	        }
 	            

@@ -15,8 +15,7 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.interpolateColor
 import org.magiclib.kotlin.modify
 import org.magiclib.kotlin.random
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
 //import wisp.questgiver.wispLib.modify
 //import wisp.questgiver.wispLib.random
 import java.awt.Color
@@ -60,10 +59,10 @@ interface CustomRenderer {
 //        if (!view.isNearViewport(nebula.location, 500f)) return
 
         val cloudSprite = when (particle.type) {
-            NebulaType.NORMAL -> Global.getSettings().getSprite(ZeaGfxCat.MISC, "nebula_particles")
-            NebulaType.SWIRLY -> Global.getSettings().getSprite(ZeaGfxCat.MISC, "fx_particles2")
-            NebulaType.SPLINTER -> Global.getSettings().getSprite(ZeaGfxCat.MISC, "fx_particles1")
-            NebulaType.DUST -> Global.getSettings().getSprite(ZeaGfxCat.MISC, "dust_particles")
+            NebulaType.NORMAL -> Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles")
+            NebulaType.SWIRLY -> Global.getSettings().getSprite(GfxCat.MISC, "fx_particles2")
+            NebulaType.SPLINTER -> Global.getSettings().getSprite(GfxCat.MISC, "fx_particles1")
+            NebulaType.DUST -> Global.getSettings().getSprite(GfxCat.MISC, "dust_particles")
         } ?: return
 
         var alpha = particle.color.alpha

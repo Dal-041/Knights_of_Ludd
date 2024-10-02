@@ -230,7 +230,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
 
         // hf nineveh boss mines
         hfOverride = target is MissileAPI && (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals(ZeaStaticStrings.ZEA_BOSS_NINEVENH) == true &&
-                ((target as MissileAPI).source?.variant?.hasTag(ZeaMemKeys.BOSS_TAG) == true || Global.getSettings().isDevMode)
+                ((target as MissileAPI).source?.variant?.hasTag(ZeaMemKeys.ZEA_BOSS_TAG) == true || Global.getSettings().isDevMode)
     }
 
     private fun isTargetValid(): Boolean {

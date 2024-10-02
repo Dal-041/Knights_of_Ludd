@@ -17,7 +17,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys
 import java.awt.Color
 import java.util.*
@@ -36,7 +36,7 @@ class DawnBuiltin : BaseHullMod() {
         const val ENMITY_HP_THRESHOLD = 50f
         const val DRONE_ADDED_KEY = "DawnHullmodDronesAdded"
         fun getNumDrones(ship: ShipAPI): Int {
-            if((ship.hullSpec.baseHullId == "zea_boss_nian")){
+            if((ship.hullSpec.baseHullId == ZeaStaticStrings.ZEA_BOSS_NIAN)){
                 return 5
             }
             else if(ship.hullSize == HullSize.CRUISER){
@@ -120,7 +120,7 @@ class DawnBuiltin : BaseHullMod() {
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         super.applyEffectsAfterShipCreation(ship, id)
         ship.setCustomData(DRONE_ADDED_KEY, true)
-        val isBoss = ship.variant.hasTag(ZeaMemKeys.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaMemKeys.BOSS_TAG)
+        val isBoss = ship.variant.hasTag(ZeaMemKeys.ZEA_BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaMemKeys.ZEA_BOSS_TAG)
         if(!isBoss){
             addSubsystemToShip(ship, ShieldDronesSubsystem(ship, getNumDrones(ship), false))
         }
@@ -155,7 +155,7 @@ class DawnBuiltin : BaseHullMod() {
         val background = tooltip!!.addLunaElement(0f, 0f)
 
         tooltip.addSectionHeading("Cascade Protocol", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "dawn_cascade"), HEIGHT)
+        val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dawn_cascade"), HEIGHT)
         cascadeProtocol.setBulletedListMode("•")
         cascadeProtocol.setBulletWidth(15f)
         val para1 = cascadeProtocol.addPara("Increases the range of ballistic and energy weapons by ${RANGE_BONUS.toInt()}%% while over ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
@@ -179,7 +179,7 @@ class DawnBuiltin : BaseHullMod() {
             "Chiwen Shield Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
             if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
         )
-        val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
+        val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
         shieldDrones.setBulletedListMode("•")
         shieldDrones.setBulletWidth(15f)
         val para3 = shieldDrones.addPara(
@@ -197,7 +197,7 @@ class DawnBuiltin : BaseHullMod() {
 
 
         tooltip.addSectionHeading("Advanced Solar Plating", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val solarPlating = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "dawn_solar"), HEIGHT)
+        val solarPlating = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dawn_solar"), HEIGHT)
         solarPlating.setBulletedListMode("•")
         solarPlating.setBulletWidth(15f)
         solarPlating.addPara("Decreases the CR-damaging effects of operating in star corona and hyperspace storms by %s.",
@@ -209,7 +209,7 @@ class DawnBuiltin : BaseHullMod() {
         )
         tooltip.addImageWithText(underHeadingPad)
 
-        var sprite = Global.getSettings().getSprite("kol_ui", "zea_dawn_hmod")
+        var sprite = Global.getSettings().getSprite(GfxCat.KOL_UI, "zea_dawn_hmod")
         background.render {
             sprite.setSize(tooltip.widthSoFar + 20, tooltip.heightSoFar + 10)
             sprite.setAdditiveBlend()
