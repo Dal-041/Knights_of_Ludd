@@ -16,6 +16,8 @@ import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.subsystems.BallLightningSubsystem;
 import org.selkie.kol.impl.combat.subsystems.BlizzardSubsystem;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -87,8 +89,8 @@ public class YukionnaBoss extends BaseHullMod {
 
                 Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
                 Vector2f jitterLocation = MathUtils.getRandomPointInCircle(ship.getLocation(), 2f + (1 - effectLevel) * 5f);
-                SpriteAPI glow1 = Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1");
-                SpriteAPI glow2 = Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2");
+                SpriteAPI glow1 = Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1");
+                SpriteAPI glow2 = Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2");
                 MagicRender.singleframe(glow1, ship.getLocation(), new Vector2f(glow1.getWidth(), glow1.getHeight()), ship.getFacing() - 90f, colorToUse, true);
                 MagicRender.singleframe(glow2, jitterLocation, new Vector2f(glow2.getWidth(), glow2.getHeight()), ship.getFacing() - 90f, colorToUse, true);
 
@@ -112,8 +114,8 @@ public class YukionnaBoss extends BaseHullMod {
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
         MagicSubsystemsManager.addSubsystemToShip(ship, new BallLightningSubsystem(ship));
-        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaMemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaMemKeys.BOSS_TAG))));
 
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(YukionnaBossPhaseTwoScript.class))

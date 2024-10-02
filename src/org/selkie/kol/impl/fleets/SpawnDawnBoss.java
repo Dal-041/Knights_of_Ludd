@@ -12,6 +12,8 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpe
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 
@@ -22,7 +24,7 @@ public class SpawnDawnBoss {
 		PersonAPI dawnBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.dawnID);
 		//A "slightly" rampant ALLMOTHER copy.
 		dawnBossCaptain.setName(new FullName("XLLM01H3R", "", FullName.Gender.ANY));
-		dawnBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));
+		dawnBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));
 
 		CampaignFleetAPI dawnBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("The Devourer")
@@ -40,8 +42,8 @@ public class SpawnDawnBoss {
 		        .create();
 		dawnBossFleet.setDiscoverable(true);
 		dawnBossFleet.getFleetData().ensureHasFlagship();
-		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DAWN_BOSS_FLEET, true);
-		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_DAWN_BOSS_FLEET, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
 
 		//dawnBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);
@@ -59,11 +61,11 @@ public class SpawnDawnBoss {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+		flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));
 
 
 		// to make sure they attack the player on sight when player's transponder is off

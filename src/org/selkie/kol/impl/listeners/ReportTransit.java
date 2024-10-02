@@ -7,6 +7,7 @@ import com.fs.starfarer.api.impl.campaign.GateEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.rulecmd.missions.GateCMD;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 public class ReportTransit implements GateTransitListener {
 
@@ -17,7 +18,7 @@ public class ReportTransit implements GateTransitListener {
 		if (Math.random() <= 0.05f) { //0.05f
 			StarSystemAPI destSys = Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName);
 			if (destSys == null) return;
-			SectorEntityToken dest = destSys.getEntityById(ZeaStaticStrings.ZEA_NULLGATE);
+			SectorEntityToken dest = destSys.getEntityById(ZeaStaticStrings.ZEA_NULLGATE_DUSK);
 			float dist = Misc.getDistanceLY(dest, gateTo);
 
 			if (dist < 12f) {

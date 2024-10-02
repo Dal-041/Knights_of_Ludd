@@ -5,8 +5,9 @@ import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI
 import com.fs.starfarer.api.impl.campaign.ids.Stats
 import org.lwjgl.util.vector.Vector2f
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
-import org.selkie.kol.impl.hullmods.DuskBuiltin
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;import org.selkie.kol.impl.hullmods.DuskBuiltin
 import java.awt.Color
 
 class SparkleOnHitV2 : OnHitEffectPlugin {

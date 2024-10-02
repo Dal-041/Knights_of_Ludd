@@ -316,7 +316,11 @@
 			"nebula_zea_dawntide_map":"graphics/terrain/nebula_kol_dawntide2b_map.png",
 			"rings_thicc":"graphics/terrain/rings_thicc.png",
 			"rings_thicc_darkred":"graphics/terrain/rings_thicc_darkred.png",
-			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png"
+			"zea_wavefront":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/zea_dawn_wavefront.png",
+			"zea_pinwheel_nebula":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
+			"zea_pinwheel_nebula_big":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula_big.png",
+			"zea_flower_nebula_cut":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_cut.png",
+			"zea_flower_nebula_layer2":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_layer2.png"
 		},
 		"characters":{
 			"kol_grandmaster":"graphics/portraits/kol_grandmaster.png",

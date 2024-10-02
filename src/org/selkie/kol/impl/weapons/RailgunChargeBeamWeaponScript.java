@@ -17,6 +17,7 @@ import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.loading.WeaponGroupSpec;
 import com.fs.starfarer.api.loading.WeaponGroupType;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 
 public class RailgunChargeBeamWeaponScript implements EveryFrameWeaponEffectPlugin, OnFireEffectPlugin  {
 

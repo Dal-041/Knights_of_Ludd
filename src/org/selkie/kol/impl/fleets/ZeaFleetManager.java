@@ -23,6 +23,7 @@ import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaMechanicIntel;
 
@@ -216,16 +217,16 @@ public class ZeaFleetManager extends SeededFleetManager {
 
         switch (fac) {
             case ZeaStaticStrings.dawnID:
-                if (Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DAWN_BOSS_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DAWN_BOSS_DONE)) return true;
+                if (Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_DAWN_BOSS_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_DAWN_BOSS_DONE)) return true;
             case ZeaStaticStrings.duskID:
-                if (Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DUSK_BOSS_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DUSK_BOSS_DONE)) return true;
+                if (Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_DUSK_BOSS_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_DUSK_BOSS_DONE)) return true;
             case ZeaStaticStrings.elysianID:
-                if (Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_ELYSIAN_BOSS_1_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_ELYSIAN_BOSS_1_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_ELYSIAN_BOSS_2_DONE)
-                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_ELYSIAN_BOSS_2_DONE)) return true;
+                if (Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_ELYSIAN_BOSS_1_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_ELYSIAN_BOSS_1_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE)
+                        && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE)) return true;
             default: return false;
         }
     }

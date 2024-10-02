@@ -14,7 +14,7 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
@@ -83,7 +83,7 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
         float velDecrease = 0.4f;
         targetingAngle += amount * 5f;
         MagicRender.singleframe(
-                Global.getSettings().getSprite(ZeaStaticStrings.FX, "zea_nian_targetingRing"),
+                Global.getSettings().getSprite(ZeaGfxCat.FX, "zea_nian_targetingRing"),
                 MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
                 new Vector2f(1200, 1200), //size
                 targetingAngle, //angle

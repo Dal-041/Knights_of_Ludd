@@ -3,6 +3,7 @@ package org.selkie.kol.hullmods
 import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.ShipAPI
 import org.magiclib.util.MagicIncompatibleHullmods
+import org.selkie.kol.helpers.KOLStaticStrings
 
 class KnightShields : BaseHullMod() {
 
@@ -23,9 +24,9 @@ class KnightShields : BaseHullMod() {
         if (ship.shield != null) {
             ship.shield.setRadius(ship.shieldRadiusEvenIfNoShield, INNERLARGE, OUTERLARGE)
         }
-        if (ship.variant.hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "advancedshieldemitter", "kol_refit")
-        if (ship.variant.hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "adaptiveshields", "kol_refit")
-        if (ship.variant.hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "frontemitter", "kol_refit")
-        if (ship.variant.hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "extendedshieldemitter", "kol_refit")
+        if (ship.variant.hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "advancedshieldemitter", KOLStaticStrings.KNIGHT_REFIT)
+        if (ship.variant.hasHullMod("adaptiveshields")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "adaptiveshields", KOLStaticStrings.KNIGHT_REFIT)
+        if (ship.variant.hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "frontemitter", KOLStaticStrings.KNIGHT_REFIT)
+        if (ship.variant.hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, "extendedshieldemitter", KOLStaticStrings.KNIGHT_REFIT)
     }
 }

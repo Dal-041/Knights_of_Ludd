@@ -15,6 +15,8 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpe
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 
@@ -25,7 +27,7 @@ public class SpawnDuskBoss {
 		PersonAPI duskBossCaptain = ZeaFleetManager.createAICaptain(ZeaStaticStrings.duskID);
 		//Songtress, an experitmental AI who was once human.
 		duskBossCaptain.setName(new FullName("Songtress", "", FullName.Gender.FEMALE));
-		duskBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDuskBoss));
+		duskBossCaptain.setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitDuskBoss));
 
 		CampaignFleetAPI duskBossFleet = MagicCampaign.createFleetBuilder()
 		        .setFleetName("Yukionna")
@@ -43,8 +45,8 @@ public class SpawnDuskBoss {
 		        .create();
 		duskBossFleet.setDiscoverable(true);
 		duskBossFleet.getFleetData().ensureHasFlagship();
-		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_DUSK_BOSS_FLEET, true);
-		duskBossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
+		duskBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_DUSK_BOSS_FLEET, true);
+		duskBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
 
 		// populate the fleet with escorts
 		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);
@@ -61,11 +63,11 @@ public class SpawnDuskBoss {
 		flagship.setVariant(flagship.getVariant().clone(), false, false);
 		flagship.getVariant().setSource(VariantSource.REFIT);
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
-		flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG); //Now confirmed by fleet rule.
+		flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG); //Now confirmed by fleet rule.
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE); //Now confirmed by fleet rule.
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
-		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, ZeaStaticStrings.portraitDuskBoss));
+		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, ZeaStaticStrings.portraitDuskBoss));
 
 		// to make sure they attack the player on sight when player's transponder is off
 		//duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_SAW_PLAYER_WITH_TRANSPONDER_ON, true);

@@ -8,6 +8,8 @@ import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener
 import com.fs.starfarer.api.fleet.FleetMemberAPI
+import com.fs.starfarer.api.impl.campaign.ids.Planets
+import com.fs.starfarer.api.impl.campaign.ids.StarTypes
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.IntervalUtil
@@ -22,6 +24,7 @@ import org.selkie.kol.Utils
 import org.selkie.kol.hullmods.HullmodBackgroundElement
 import org.selkie.kol.impl.combat.subsystems.PDDroneSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes
 import java.awt.Color
 import kotlin.math.max
 import kotlin.math.min
@@ -53,34 +56,34 @@ class ElysianBuiltin : BaseHullMod() {
         internal const val FLUX_CHARGERATE = 0.05f // base percentage of bar gained per second
 
         internal val STAR_LUX: Map<String, Float> = mapOf(
-            "star_orange_giant" to 3f,
-            "star_red_giant" to 2.5f,
-            "star_red_supergiant" to 2.5f,
-            "star_red_dwarf" to 2.5f,
-            "star_browndwarf" to 0.25f,
-            "star_orange" to 3f,
-            "star_yellow" to 3f,
-            "star_white" to 2f,
-            "star_blue_giant" to 10f,
-            "star_blue_supergiant" to 10f,
-            "black_hole" to 0.1f,
-            "star_neutron" to 25f,
-            "nebula_center_old" to 0f,
-            "nebula_center_average" to 0f,
-            "nebula_center_young" to 0f,
-            "zea_star_black_neutron" to 0f,
-            "zea_white_hole" to 100f,
-            "zea_red_hole" to 3f,
-            "US_star_blue_giant" to 10f,
-            "US_star_yellow" to 3f,
-            "US_star_orange_giant" to 3f,
-            "US_star_red_giant" to 2.5f,
-            "US_star_white" to 2f,
-            "US_star_browndwarf" to 0.25f,
-            "tiandong_shaanxi" to 2f,
-            "star_brstar" to 3f,
-            "star_yellow_supergiant" to 3f,
-            "quasar" to 8f
+            StarTypes.ORANGE_GIANT to 3f,
+            StarTypes.RED_GIANT to 2.5f,
+            StarTypes.RED_SUPERGIANT to 2.5f,
+            StarTypes.RED_DWARF to 2.5f,
+            StarTypes.BROWN_DWARF to 0.25f,
+            StarTypes.ORANGE to 3f,
+            StarTypes.YELLOW to 3f,
+            StarTypes.WHITE_DWARF to 2f,
+            StarTypes.BLUE_GIANT to 10f,
+            StarTypes.BLUE_SUPERGIANT to 10f,
+            StarTypes.BLACK_HOLE to 0.1f,
+            StarTypes.NEUTRON_STAR to 25f,
+            Planets.NEBULA_CENTER_OLD to 0f,
+            Planets.NEBULA_CENTER_AVERAGE to 0f,
+            Planets.NEBULA_CENTER_YOUNG to 0f,
+            ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON to 0f,
+            ZeaStarTypes.ZEA_WHITE_HOLE to 100f,
+            ZeaStarTypes.ZEA_RED_HOLE to 3f,
+            ZeaStarTypes.US_STAR_BLUE_GIANT to 10f,
+            ZeaStarTypes.US_STAR_YELLOW to 3f,
+            ZeaStarTypes.US_STAR_ORANGE_GIANT to 3f,
+            ZeaStarTypes.US_STAR_RED_GIANT to 2.5f,
+            ZeaStarTypes.US_STAR_WHITE to 2f,
+            ZeaStarTypes.US_STAR_BROWNDWARF to 0.25f,
+            ZeaStarTypes.TIANDONG_SHAANXI to 2f,
+            ZeaStarTypes.STAR_BRSTAR to 3f,
+            ZeaStarTypes.STAR_YELLOW_SUPERGIANT to 3f,
+            ZeaStarTypes.QUASAR to 8f
         )
 
         internal fun getSystemStellarIntensity(ship: ShipAPI): Float {

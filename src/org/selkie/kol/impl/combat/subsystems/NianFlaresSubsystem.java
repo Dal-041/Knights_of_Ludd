@@ -9,6 +9,7 @@ import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.MagicSubsystem;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.hullmods.NianBoss;
 
 import java.awt.*;
@@ -78,13 +79,13 @@ public class NianFlaresSubsystem extends MagicSubsystem {
                     ship.getExactBounds().update(ship.getLocation(), ship.getFacing()); // fixes lazylib bug
                     float leftLaunchAngle = ship.getFacing() + 90f + MathUtils.getRandomNumberInRange(-30f, 30f);
                     Vector2f leftLaunchPos = CollisionUtils.getNearestPointOnBounds(MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), leftLaunchAngle), ship);
-                    Global.getCombatEngine().spawnProjectile(ship, null, "flarelauncher3", leftLaunchPos, leftLaunchAngle, launchVelocity);
+                    Global.getCombatEngine().spawnProjectile(ship, null, ZeaStaticStrings.FLARELAUNCHER_3, leftLaunchPos, leftLaunchAngle, launchVelocity);
 
                     float rightLaunchAngle = ship.getFacing() - 90f + MathUtils.getRandomNumberInRange(-30f, 30f);
                     Vector2f rightLaunchPos = CollisionUtils.getNearestPointOnBounds(MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), rightLaunchAngle), ship);
-                    Global.getCombatEngine().spawnProjectile(ship, null, "flarelauncher3", rightLaunchPos, rightLaunchAngle, launchVelocity);
+                    Global.getCombatEngine().spawnProjectile(ship, null, ZeaStaticStrings.FLARELAUNCHER_3, rightLaunchPos, rightLaunchAngle, launchVelocity);
 
-                    Global.getSoundPlayer().playSound("launch_flare_1", 1f, 1f, leftLaunchPos, launchVelocity);
+                    Global.getSoundPlayer().playSound(ZeaStaticStrings.LAUNCH_FLARE_1, 1f, 1f, leftLaunchPos, launchVelocity);
                     Global.getCombatEngine().spawnExplosion(
                             leftLaunchPos,
                             MathUtils.getPoint(
@@ -97,7 +98,7 @@ public class NianFlaresSubsystem extends MagicSubsystem {
                             0.45f
                     );
 
-                    Global.getSoundPlayer().playSound("launch_flare_1", 1f, 1f, rightLaunchPos, launchVelocity);
+                    Global.getSoundPlayer().playSound(ZeaStaticStrings.LAUNCH_FLARE_1, 1f, 1f, rightLaunchPos, launchVelocity);
                     Global.getCombatEngine().spawnExplosion(
                             rightLaunchPos,
                             MathUtils.getPoint(

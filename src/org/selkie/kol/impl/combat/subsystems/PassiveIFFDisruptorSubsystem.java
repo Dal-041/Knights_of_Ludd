@@ -8,6 +8,7 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.MagicSubsystem;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 import org.selkie.kol.impl.hullmods.CoronalCapacitor;
 
 import java.awt.*;
@@ -87,7 +88,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     }
 
     private EmpArcEntityAPI shootEmpArcVisual(CombatEntityAPI ent) {
-        Global.getSoundPlayer().playSound("shock_repeater_emp_impact", 1f, 1f, ent.getLocation(), ent.getVelocity());
+        Global.getSoundPlayer().playSound(ZeaStaticStrings.SHOCK_REPEATER_EMP_IMPACT, 1f, 1f, ent.getLocation(), ent.getVelocity());
         return Global.getCombatEngine().spawnEmpArcVisual(ship.getLocation(), ship, ent.getLocation(), ent, MathUtils.getRandomNumberInRange(2f, 5f), new Color(255, 0, 0), new Color(255, 200, 200));
     }
 
@@ -101,7 +102,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
                 0f,
                 250f,
                 getHackingRange(),
-                "shock_repeater_emp_impact",
+                ZeaStaticStrings.SHOCK_REPEATER_EMP_IMPACT,
                 MathUtils.getRandomNumberInRange(2f, 5f),
                 new Color(255, 0, 0),
                 new Color(255, 200, 200));
@@ -149,9 +150,9 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
             CombatEntityAPI entityToHack = null;
             float biggestThreat = 0f;
             for (MissileAPI missile : missilesInRange) {
-                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher"))
+                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals(ZeaStaticStrings.MOTELAUNCHER))
                     continue;
-                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher_hf"))
+                if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals(ZeaStaticStrings.MOTELAUNCHER_HF))
                     continue;
 
                 if (!missileMap.containsKey(missile) && missile.getOwner() != ship.getOwner()) {

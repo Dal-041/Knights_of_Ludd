@@ -19,6 +19,7 @@ import org.selkie.kol.combat.StarficzAIUtils
 import org.selkie.kol.impl.combat.subsystems.NianFlaresSubsystem
 import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys
 import org.selkie.kol.impl.shipsystems.SupernovaStats
 import java.awt.Color
 import java.util.*
@@ -142,7 +143,7 @@ class NianBoss : BaseHullMod() {
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         addSubsystemToShip(ship, NianFlaresSubsystem(ship))
-        val isBoss = ship.variant.hasTag(ZeaStaticStrings.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaStaticStrings.BOSS_TAG)
+        val isBoss = ship.variant.hasTag(ZeaMemKeys.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaMemKeys.BOSS_TAG)
         if (isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if (!ship.hasListenerOfClass(NianBossEnragedScript::class.java)) ship.addListener(NianBossEnragedScript(ship))
             // Ill do this one day

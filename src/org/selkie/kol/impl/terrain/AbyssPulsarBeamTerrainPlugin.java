@@ -14,6 +14,7 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -25,8 +26,8 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
     public boolean single = false;
     public String nameTooltip = "Pulsar Beam";
 
-    public String spriteCat = ZeaStaticStrings.TERRAIN;
-    public String spriteKey = ZeaStaticStrings.PULSAR;
+    public String spriteCat = ZeaGfxCat.TERRAIN;
+    public String spriteKey = "pulsar";
     //public static float PULSAR_ARC = 0.25f / ((float) Math.PI * 2f) * 360f;
 
     transient protected SpriteAPI flareTexture = null;
@@ -74,8 +75,8 @@ public class AbyssPulsarBeamTerrainPlugin extends BaseRingTerrain implements Pul
         */
         //flareTexture = Global.getSettings().getSprite("graphics/planets/aurorae2.png");
         if (spriteCat == null) {
-            spriteCat = ZeaStaticStrings.TERRAIN;
-            spriteKey = ZeaStaticStrings.PULSAR;
+            spriteCat = ZeaGfxCat.TERRAIN;
+            spriteKey = "pulsar";
         }
         flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
 

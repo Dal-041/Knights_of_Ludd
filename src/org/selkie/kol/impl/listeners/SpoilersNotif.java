@@ -8,6 +8,7 @@ import com.fs.starfarer.api.impl.campaign.RuleBasedInteractionDialogPluginImpl;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
 
 import java.io.IOException;
@@ -19,7 +20,7 @@ public class SpoilersNotif implements EveryFrameScript {
     public final IntervalUtil delay = new IntervalUtil(15,15);
     public boolean fire = false;
 
-    public static final String icon = Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, ZeaStaticStrings.GAME_ICON);
+    public static final String icon = Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "game_icon");
     public static final String desc = "%s\nYou may have already realized that Knights of Ludd contains a lot of hidden content. " +
             "In truth, it's the vast majority of the mod. We worked very hard on every piece and hope you enjoy it very much.\n\n" +
             "We ask that you %s for the first week or so after release. Its our hope that players can organically discover all that the mod contains.\n\n" +
@@ -88,7 +89,7 @@ public class SpoilersNotif implements EveryFrameScript {
         textpanel.setOrbitronMode(true);
         textpanel.addPara("Thank you for playing the Knights of Ludd!");
         textpanel.setOrbitronMode(false);
-        textpanel.addImage(ZeaStaticStrings.ILLUSTRATIONS, ZeaStaticStrings.ZEA_BANNER);
+        textpanel.addImage(ZeaGfxCat.ILLUSTRATIONS, "zea_banner");
         textpanel.addPara(desc, Misc.getTextColor(), Misc.getHighlightColor(), descHLs);
         Global.getSector().getIntelManager().addIntel(intel, false, textpanel);
     }

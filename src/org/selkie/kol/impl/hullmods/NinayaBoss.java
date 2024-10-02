@@ -19,6 +19,8 @@ import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -120,9 +122,6 @@ public class NinayaBoss extends BaseHullMod {
 
                 if (fleetManager == null) return;
 
-
-                String escortSpec = "zea_boss_hyperion_Strike";
-
                 CombatFleetManagerAPI.AssignmentInfo assignmentInfo = taskManager.createAssignment(CombatAssignmentType.DEFEND, fleetManager.getDeployedFleetMemberEvenIfDisabled(ship), false);
 
                 float escortFacing = ship.getFacing();
@@ -134,7 +133,7 @@ public class NinayaBoss extends BaseHullMod {
 
                 if(phaseTwoTimer > MAX_TIME*2/3){
                     if (escortA == null) {
-                        escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing + 90f, 0f, captain);
+                        escortA = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HYPERION_STRIKE, escortASpawn, escortFacing + 90f, 0f, captain);
                         escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
                         shipSpawnExplosion(escortA, escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortA), assignmentInfo, false);
@@ -149,7 +148,7 @@ public class NinayaBoss extends BaseHullMod {
 
                 if(phaseTwoTimer > MAX_TIME*5/6){
                     if (escortB == null) {
-                        escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing - 90f, 0f, captain);
+                        escortB = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HYPERION_STRIKE, escortBSpawn, escortFacing - 90f, 0f, captain);
                         escortA.getMutableStats().getPeakCRDuration().modifyMult("phase_boss_cr", 3);
                         shipSpawnExplosion(escortB, escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortB), assignmentInfo, false);
@@ -318,8 +317,8 @@ public class NinayaBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaMemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaMemKeys.BOSS_TAG))));
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinayaBossPhaseTwoScript.class)) ship.addListener(new NinayaBossPhaseTwoScript(ship));

@@ -11,7 +11,10 @@ import com.fs.starfarer.api.impl.campaign.ids.Strings
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.BossCore
 import java.util.*
 
@@ -44,7 +47,7 @@ class BossAICoreOfficerPlugin : AICoreOfficerPlugin {
         core.stats.setSkillLevel(Skills.GUNNERY_IMPLANTS, 2F)
         core.stats.setSkillLevel(BossCore.getCore(aiCoreId).exclusiveSkillID, 2f)
 
-        core.portraitSprite = Global.getSettings().getSpriteName(ZeaStaticStrings.CHARACTERS, BossCore.getCore(aiCoreId).portraitID)
+        core.portraitSprite = Global.getSettings().getSpriteName(ZeaGfxCat.CHARACTERS, BossCore.getCore(aiCoreId).portraitID)
 
         core.memoryWithoutUpdate.set(AICoreOfficerPlugin.AUTOMATED_POINTS_MULT, AUTOMATED_POINTS_MULT)
         return core

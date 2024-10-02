@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.impl.campaign.ids.Drops;
 import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
@@ -12,27 +13,28 @@ import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.intel.ZeaAbilityIntel;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 public class ManageElysianCorruptingheart implements FleetEventListener {
-	public static final String MEMKEY_KOL_ELYSIAN_BOSS2_DONE = "$kol_elysian_boss2_done";
 
 	//Totally not adapted from Diable or anything :>
 	@Override
 	public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
 
-		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_ELYSIAN_BOSS2_DONE)
-	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_ELYSIAN_BOSS2_DONE)) {
+		if(Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE)
+	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE)) {
 	            return;
 		}
 
 		boolean salvaged1 = false;
 		boolean killed1 = false;
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("zea_boss_corruptingheart")) {
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_CORRUPTINGHEART)) {
 
-			if(Global.getSector().getMemoryWithoutUpdate().contains("$kol_elysian_boss1_done")
-					&& Global.getSector().getMemoryWithoutUpdate().getBoolean("$kol_elysian_boss1_done")) {
+			if(Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_ELYSIAN_BOSS_1_DONE)
+					&& Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_ELYSIAN_BOSS_1_DONE)) {
 				if (!Global.getSector().getPlayerStats().getGrantedAbilityIds().contains(ZeaStaticStrings.abilityJumpElysia)) {
 					Global.getSector().getPlayerFleet().addAbility(ZeaStaticStrings.abilityJumpElysia);
 					Global.getSector().getCharacterData().getMemoryWithoutUpdate().set("$ability:" + ZeaStaticStrings.abilityJumpElysia, true, 0);
@@ -57,11 +59,11 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 
 		if (killed1) {
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()) {
-				if (f.getHullId().startsWith("zea_boss_corruptingheart")) {
+				if (f.getHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_CORRUPTINGHEART)) {
 					salvaged1 = true;
 					//set memkey that the wreck must never spawn
-					Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
-					f.getVariant().removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+					Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE, true);
+					f.getVariant().removeTag(ZeaMemKeys.BOSS_TAG);
 				}
 			}
 
@@ -74,7 +76,7 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 				}
 				//spawn the derelict object
 				SectorEntityToken wreck = MagicCampaign.createDerelict(
-						"zea_boss_corruptingheart_Unholy",
+						ZeaStaticStrings.ZEA_BOSS_CORRUPTINGHEART_UNHOLY,
 						ShipRecoverySpecial.ShipCondition.WRECKED,
 						false,
 						-1,
@@ -89,20 +91,20 @@ public class ManageElysianCorruptingheart implements FleetEventListener {
 				ZeaUtils.bossWreckCleaner(wreck, true);
 
 				//set memkey that the wreck exist
-				Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_ELYSIAN_BOSS2_DONE, true);
+				Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE, true);
 			}
 
 			//Replacement cache
 			LocationAPI system = primaryWinner.getContainingLocation();
 			SectorEntityToken wreck = system.addCustomEntity(null, "Ejected Cache", Entities.EQUIPMENT_CACHE_SMALL, Factions.NEUTRAL);
 			wreck.setFacing((float)Math.random()*360f);
-			wreck.addDropRandom("guaranteed_alpha", 1);
-			wreck.addDropRandom("zea_weapons_high", 6);
-			wreck.addDropRandom("zea_weapons_high", 6);
-			wreck.addDropRandom("techmining_first_find", 6);
-			wreck.addDropRandom("omega_weapons_small", 3);
-			wreck.addDropRandom("omega_weapons_medium", 2);
-			wreck.addDropRandom("omega_weapons_large", 1);
+			wreck.addDropRandom(Drops.GUARANTEED_ALPHA, 1);
+			wreck.addDropRandom(ZeaDrops.ZEA_WEAPONS_HIGH, 6);
+			wreck.addDropRandom(ZeaDrops.ZEA_WEAPONS_HIGH, 6);
+			wreck.addDropRandom(ZeaDrops.TECHMINING_FIRST_FIND, 6);
+			wreck.addDropRandom(ZeaDrops.OMEGA_WEAPONS_SMALL, 3);
+			wreck.addDropRandom(ZeaDrops.OMEGA_WEAPONS_MEDIUM, 2);
+			wreck.addDropRandom(ZeaDrops.OMEGA_WEAPONS_LARGE, 1);
 			wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 			wreck.setLocation(primaryWinner.getLocation().getX(), primaryWinner.getLocation().getY());
 		}

@@ -16,6 +16,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySp
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 import org.selkie.kol.impl.intel.ZeaLoreIntel;
 import org.selkie.kol.impl.intel.ZeaLoreManager;
@@ -79,7 +80,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 if (member.getVariant().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) {
                     ShipVariantAPI variant = member.getVariant();
                     if (!variant.hasTag(Tags.SHIP_CAN_NOT_SCUTTLE)) variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
-                    if (variant.hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG)) variant.removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+                    if (variant.hasTag(ZeaMemKeys.BOSS_TAG)) variant.removeTag(ZeaMemKeys.BOSS_TAG);
                     if (variant.hasTag(Tags.SHIP_LIMITED_TOOLTIP)) variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     if (variant.hasTag(Tags.VARIANT_UNBOARDABLE)) variant.removeTag(Tags.VARIANT_UNBOARDABLE);
                     if (variant.getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.ZEA_BOSS_NINMAH)) foundNinmah = true;
@@ -98,7 +99,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                         fleet.getContainingLocation(),
                         Entities.WRECK, Factions.NEUTRAL, DSD);
                 Misc.makeImportant(wreck, ZeaStaticStrings.ZEA_BOSS_NINMAH);
-                wreck.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINMAH_WRECK, true);
+                wreck.getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_NINMAH_WRECK, true);
                 wreck.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                 wreck.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
                 wreck.setFacing((float)Math.random()*360f);
@@ -108,7 +109,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             }
 
             for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-                if (system.getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_SYSTEM)) {
+                if (system.getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_TT_3_SYSTEM)) {
                     TTBoss3System = system.getCenter();
                 }
             }
@@ -141,7 +142,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 for (FleetMemberAPI member : otherFleet.getMembersWithFightersCopy()) {
                     if (member.getHullId().startsWith("zea_boss")) {
                         if (!member.getVariant().hasTag(Tags.VARIANT_UNBOARDABLE)) member.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
-                        if (!member.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG))member.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+                        if (!member.getVariant().hasTag(ZeaMemKeys.BOSS_TAG))member.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
                     }
                 }
             }

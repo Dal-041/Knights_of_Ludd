@@ -7,8 +7,11 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.*;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator.StarSystemType;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
-import com.fs.starfarer.api.impl.campaign.terrain.*;
 import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain.RingParams;
+import com.fs.starfarer.api.impl.campaign.terrain.BaseTiledTerrain;
+import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
+import com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin;
+import com.fs.starfarer.api.impl.campaign.terrain.RingSystemTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.apache.log4j.Logger;
@@ -17,6 +20,10 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.*;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaTerrain;
 import org.selkie.kol.impl.listeners.TrackFleet;
 import org.selkie.kol.impl.terrain.AbyssCorona;
 import org.selkie.kol.impl.terrain.AbyssEventHorizon;
@@ -33,7 +40,9 @@ import java.util.Random;
 
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
-import static org.selkie.kol.impl.helpers.ZeaUtils.*;
+import static org.selkie.kol.impl.helpers.ZeaStaticStrings.lunaSeaSysName;
+import static org.selkie.kol.impl.helpers.ZeaUtils.checkAbyssalFleets;
+import static org.selkie.kol.impl.helpers.ZeaUtils.copyHighgradeEquipment;
 
 public class PrepareAbyss {
 
@@ -84,7 +93,7 @@ public class PrepareAbyss {
         
     	StarSystemAPI system = Global.getSector().createStarSystem(ZeaStaticStrings.elysiaSysName);
     	system.getLocation().set((int)posX, (int)posY);
-    	system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaStaticStrings.BACKGROUNDS, "zea_bg_elysia"));
+    	system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_elysia"));
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_elysia_system");
 
 		system.addTag(Tags.THEME_HIDDEN);
@@ -93,7 +102,7 @@ public class PrepareAbyss {
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
-		system.initStar(ZeaStaticStrings.ZEA_ELYSIA_ABYSS, "zea_red_hole", beeg, -beeg/2f);
+		system.initStar(ZeaStaticStrings.ZEA_ELYSIA_ABYSS, ZeaStarTypes.ZEA_RED_HOLE, beeg, -beeg/2f);
 		PlanetAPI elysia = system.getStar();
 		elysia.setName("Elysian Abyss");
     	elysia.getSpec().setBlackHole(false); //Minimize fleet mishandling
@@ -104,7 +113,7 @@ public class PrepareAbyss {
 		elysia.addTag(Tags.NON_CLICKABLE);
 		//system.addTerrain(Terrain.EVENT_HORIZON, new EventHorizonPlugin.CoronaParams(2300, 1500, elysia, -5, 0, 1));
 
-		SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
+		SectorEntityToken horizon1 = system.addTerrain(ZeaTerrain.ZEA_EVENT_HORIZON, new AbyssEventHorizon.CoronaParams(
     			5200,
 				150,
 				elysia,
@@ -112,20 +121,20 @@ public class PrepareAbyss {
 				0f,
 				4f));
 
-    	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula.png",
+    	SectorEntityToken elysian_nebula = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN, "zea_pinwheel_nebula"),
                                                                     0, 0, // center of nebula
                                                                     system, // location to add to
-				ZeaStaticStrings.TERRAIN, "nebula_zea_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
+				ZeaGfxCat.TERRAIN, "nebula_zea_redgrey", // "nebula_blue", // texture to use, uses xxx_map for map
                                                                     4, 4, StarAge.AVERAGE); // number of cells in texture
 
     	system.setType(StarSystemType.TRINARY_1CLOSE_1FAR);
     	
-    	PlanetAPI gaze = system.addPlanet("zea_elysia_gaze", elysia, "Watcher", StarTypes.NEUTRON_STAR, 125, 50, 9400, 60);
+    	PlanetAPI gaze = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_GAZE, elysia, "Watcher", StarTypes.NEUTRON_STAR, 125, 50, 9400, 60);
     	gaze.getSpec().setPulsar(true);
     	gaze.applySpecChanges();
     	system.setSecondary(gaze);
     	
-		SectorEntityToken gazeBeam1 = system.addTerrain("zea_pulsarBeam",
+		SectorEntityToken gazeBeam1 = system.addTerrain(ZeaTerrain.ZEA_PULSAR_BEAM,
 				new AbyssCorona.CoronaParams(25000,
 						3250,
 						gaze,
@@ -135,7 +144,7 @@ public class PrepareAbyss {
 		);
 		gazeBeam1.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 15);
 
-		SectorEntityToken gazeBeam2 = system.addTerrain("zea_pulsarBeam",
+		SectorEntityToken gazeBeam2 = system.addTerrain(ZeaTerrain.ZEA_PULSAR_BEAM,
 				new AbyssCorona.CoronaParams(25000,
 						3250,
 						gaze,
@@ -145,11 +154,11 @@ public class PrepareAbyss {
 		);
 		gazeBeam2.setCircularOrbit(gaze, (float)(Math.random() * 360), 0, 16);
     	
-    	PlanetAPI silence = system.addPlanet("zea_elysia_silence", elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 1666, 18500, 0);
+    	PlanetAPI silence = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_SILENCE, elysia, "Silence", StarTypes.BLUE_SUPERGIANT, 255, 1666, 18500, 0);
     	system.setTertiary(silence);
     	silence.setFixedLocation(-14000, -16500);
     	
-		SectorEntityToken silence_corona = system.addTerrain("zea_corona",
+		SectorEntityToken silence_corona = system.addTerrain(ZeaTerrain.ZEA_CORONA,
 				new AbyssCorona.CoronaParams(7000,
 						0,
 						silence,
@@ -159,9 +168,9 @@ public class PrepareAbyss {
 		);
 		silence_corona.setCircularOrbit(silence, 0, 0, 15);
 
-		PlanetAPI first = system.addPlanet("zea_elysia_asclepius", elysia, "Asclepius", "barren-bombarded", (float)(Math.random() * 360), 100, 4200, 40);
-    	PlanetAPI second = system.addPlanet("zea_elysia_appia", elysia, "Appia", "toxic", (float)(Math.random() * 360), 100, 3750, 30);
-    	PlanetAPI third = system.addPlanet("zea_elysia_orpheus", elysia, "Orpheus", "irradiated", (float)(Math.random() * 360), 100, 3300, 24);
+		PlanetAPI first = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_PLANET_ONE, elysia, "Asclepius", Planets.BARREN_BOMBARDED, (float)(Math.random() * 360), 100, 4200, 40);
+    	PlanetAPI second = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_PLANET_TWO, elysia, "Appia", ZeaStaticStrings.TOXIC, (float)(Math.random() * 360), 100, 3750, 30);
+    	PlanetAPI third = system.addPlanet(ZeaStaticStrings.ZEA_ELYSIA_PLANET_THREE, elysia, "Orpheus", Planets.IRRADIATED, (float)(Math.random() * 360), 100, 3300, 24);
 
     	first.getMarket().addCondition(Conditions.IRRADIATED);
     	first.getMarket().addCondition(Conditions.METEOR_IMPACTS);
@@ -179,7 +188,7 @@ public class PrepareAbyss {
     	third.getMarket().addCondition(Conditions.EXTREME_TECTONIC_ACTIVITY);
     	third.getMarket().addCondition(Conditions.DENSE_ATMOSPHERE);
 
-		system.addRingBand(elysia, ZeaStaticStrings.TERRAIN, "rings_thicc_darkred", 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
+		system.addRingBand(elysia, ZeaGfxCat.TERRAIN, ZeaTerrain.RINGS_THICC_DARKRED, 1000, 0, Color.gray, 2300, 3884, 27, Terrain.RING, "Accretion Disk");
 
 		SectorEntityToken ring = system.addTerrain(Terrain.RING, new RingParams(456, 3200, null, "Call of the Void"));
 		ring.setCircularOrbit(elysia, 0, 0, 100);
@@ -190,10 +199,10 @@ public class PrepareAbyss {
 		SectorEntityToken ring4 = system.addTerrain(Terrain.RING, new RingParams(456, 4678, null, "Call of the Void"));
 		ring4.setCircularOrbit(elysia, 0, 0, 100);
 		
-		system.addAsteroidBelt(elysia, 200, 3128, 256, 20, 15, "zea_asteroidBelt", null);
-		system.addAsteroidBelt(elysia, 200, 3516, 512, 30, 22, "zea_asteroidBelt", null);
-		system.addAsteroidBelt(elysia, 200, 4024, 1024, 40, 30, "zea_asteroidBelt", null);
-		system.addAsteroidBelt(elysia, 200, 4536, 1024, 40, 40, "zea_asteroidBelt", null);
+		system.addAsteroidBelt(elysia, 200, 3128, 256, 20, 15, ZeaTerrain.ZEA_ASTEROID_BELT, null);
+		system.addAsteroidBelt(elysia, 200, 3516, 512, 30, 22, ZeaTerrain.ZEA_ASTEROID_BELT, null);
+		system.addAsteroidBelt(elysia, 200, 4024, 1024, 40, 30, ZeaTerrain.ZEA_ASTEROID_BELT, null);
+		system.addAsteroidBelt(elysia, 200, 4536, 1024, 40, 40, ZeaTerrain.ZEA_ASTEROID_BELT, null);
 
 		//generateBlackholeSpiral(elysia.getStarSystem(), elysia, 8000f, Color.red, Color.red);
 
@@ -201,17 +210,17 @@ public class PrepareAbyss {
 		//Placed entities
 		SectorEntityToken hypershunt = system.addCustomEntity(ZeaStaticStrings.ZEA_EDF_CORONAL_TAP, "Coronal Hypershunt", ZeaStaticStrings.ZEA_EDF_CORONAL_TAP, Factions.NEUTRAL);
 		hypershunt.setCircularOrbitPointingDown(silence, (float)Math.random() * 360f, silence.getRadius() + 500f, 1111);
-		hypershunt.addTag("edf_Hypershunt");
-		SectorEntityToken edfResearchStation = addSalvageEntity(system, "zea_research_station_elysia", ZeaStaticStrings.elysianID);
+		hypershunt.addTag(ZeaStaticStrings.EDF_HYPERSHUNT);
+		SectorEntityToken edfResearchStation = addSalvageEntity(system, ZeaStaticStrings.ZEA_RESEARCH_STATION_ELYSIA, ZeaStaticStrings.elysianID);
 		edfResearchStation.setCircularOrbitPointingDown(gaze, (float)Math.random() * 360f, gaze.getRadius() + 100f, 51);
-		edfResearchStation.addTag("edf_Headquarters");
+		edfResearchStation.addTag(ZeaStaticStrings.EDF_HEADQUARTERS);
 
 		//Hegemony witness
-		SectorEntityToken wreckHeg = MagicCampaign.createDerelict("dominator_XIV_Elite", ShipRecoverySpecial.ShipCondition.WRECKED, true, 5000, false, silence, (float) Math.random() * 360f, 3333f + (float)Math.random()*4777f, 200);
+		SectorEntityToken wreckHeg = MagicCampaign.createDerelict(ZeaStaticStrings.DOMINATOR_XIV_ELITE, ShipRecoverySpecial.ShipCondition.WRECKED, true, 5000, false, silence, (float) Math.random() * 360f, 3333f + (float)Math.random()*4777f, 200);
 		wreckHeg.addTag(Tags.UNRECOVERABLE);
-		wreckHeg.addDropRandom("zea_hegfleet_lore", 1);
-		wreckHeg.addDropRandom("low_weapons2", 6);
-		wreckHeg.addDropRandom("any_hullmod_high", 2);
+		wreckHeg.addDropRandom(ZeaDrops.ZEA_HEGFLEET_LORE, 1);
+		wreckHeg.addDropRandom(Drops.LOW_WEAPONS2, 6);
+		wreckHeg.addDropRandom(Drops.ANY_HULLMOD_HIGH, 2);
 		//wreckHeg.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
 		wreckHeg.getMemoryWithoutUpdate().set(ZeaStaticStrings.KEY_ELYSIA_WITNESS, true);
 
@@ -228,7 +237,7 @@ public class PrepareAbyss {
         SectorEntityToken derelict5 = addSalvageEntity(system, getAbyssLootID(ZeaStaticStrings.elysianID, 1f), ZeaStaticStrings.elysianID);
         derelict5.setCircularOrbit(elysia, (float)(Math.random() * 360f), 4250, 40);
     	
-        JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("zea_elysia_jp", "First Trial");
+        JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaStaticStrings.ZEA_ELYSIA_JP, "First Trial");
         OrbitAPI orbit = Global.getFactory().createCircularOrbit(first, 90, 100, 25);
         jumpPoint.setOrbit(orbit);
         jumpPoint.setRelatedPlanet(first);
@@ -270,27 +279,28 @@ public class PrepareAbyss {
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 		system.addTag(ZeaStaticStrings.THEME_STORM);
 
-		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dusk.png");
+		system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS,"zea_bg_dusk"));
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
 		system.getLocation().set(2100, -5200);
 		SectorEntityToken center = system.initNonStarCenter();
-		SectorEntityToken nullspace_nebula = addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/pinwheel_nebula_big.png",
+		SectorEntityToken nullspace_nebula = addNebulaFromPNG(
+				Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN,"zea_pinwheel_nebula_big"),
 				0, 0, // center of nebula
 				system, // location to add to
-				ZeaStaticStrings.TERRAIN, "nebula_zea_black_shiny", // texture to use, uses xxx_map for map
+				ZeaGfxCat.TERRAIN, ZeaTerrain.NEBULA_ZEA_BLACK_SHINY, // texture to use, uses xxx_map for map
 				4, 4, // number of cells in texture
-				"nebula_zea_storm", StarAge.AVERAGE, 10000, 2); //terrain plugin, age, nebula resolution, tile size
+				ZeaTerrain.NEBULA_ZEA_STORM, StarAge.AVERAGE, 10000, 2); //terrain plugin, age, nebula resolution, tile size
 
 		system.setLightColor(new Color(225,170,255,255)); // light color in entire system, affects all entities
 		new AbyssBackgroundWarper(system, 8, 0.125f);
 
-		PlanetAPI starVoid = system.addPlanet("zea_nullspace_void", system.getCenter(), "Void", "zea_white_hole", 135, 166, 12500, 0);
+		PlanetAPI starVoid = system.addPlanet(ZeaStaticStrings.ZEA_NULLSPACE_VOID, system.getCenter(), "Void", ZeaStarTypes.ZEA_WHITE_HOLE, 135, 166, 12500, 0);
 		//system.setStar(starVoid);
 
 		starVoid.setFixedLocation(-5512, 9420);
 
-		SectorEntityToken void_corona = system.addTerrain("zea_corona",
+		SectorEntityToken void_corona = system.addTerrain(ZeaTerrain.ZEA_CORONA,
 				new AbyssCorona.CoronaParams(1200,
 						0,
 						starVoid,
@@ -302,10 +312,10 @@ public class PrepareAbyss {
 
 		//system.generateAnchorIfNeeded();
 
-		SectorEntityToken gate = system.addCustomEntity(ZeaStaticStrings.ZEA_NULLGATE, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
+		SectorEntityToken gate = system.addCustomEntity(ZeaStaticStrings.ZEA_NULLGATE_DUSK, "Nullgate", Entities.INACTIVE_GATE, Factions.DERELICT);
 		gate.setCircularOrbit(center, (float)(Math.random() * 360f), 15000, 1000);
 
-		SectorEntityToken stationResearch = system.addCustomEntity(ZeaStaticStrings.ZEA_NULL_STATION, "Shielded Research Station", ZeaStaticStrings.ZEA_NULL_STATION, Factions.DERELICT);
+		SectorEntityToken stationResearch = system.addCustomEntity(ZeaStaticStrings.ZEA_NULL_STATION_DUSK, "Shielded Research Station", ZeaStaticStrings.ZEA_NULL_STATION_DUSK, Factions.DERELICT);
 		stationResearch.setFixedLocation(-5230, 8860);
 
 		float count = ZeaStaticStrings.uwDerelictsNormal.length; //16
@@ -328,7 +338,7 @@ public class PrepareAbyss {
 				);
 				wreck.setFacing((float)Math.random()*360f);
 				if (MathUtils.getRandom().nextFloat() > 0.33f || variant.contains("paragon") || variant.contains("astral")) wreck.addTag(Tags.UNRECOVERABLE);
-				if (MathUtils.getRandom().nextFloat() < 0.5f) wreck.addDropRandom("zea_ttfleet_lore", 1);
+				if (MathUtils.getRandom().nextFloat() < 0.5f) wreck.addDropRandom(ZeaDrops.ZEA_TTFLEET_LORE, 1);
 				//system.addEntity(wreck);
 			}
 		}
@@ -353,8 +363,8 @@ public class PrepareAbyss {
 
 	public static void GenerateLunaSea() {
 
-		StarSystemAPI system = Global.getSector().createStarSystem(ZeaStaticStrings.lunaSeaSysName);
-		system.setName(ZeaStaticStrings.lunaSeaSysName); //No "-Star System"
+		StarSystemAPI system = Global.getSector().createStarSystem(lunaSeaSysName);
+		system.setName(lunaSeaSysName); //No "-Star System"
 
 		LocationAPI hyper = Global.getSector().getHyperspace();
 
@@ -364,14 +374,14 @@ public class PrepareAbyss {
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
 		system.addTag(ZeaStaticStrings.THEME_ZEA);
 
-		system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_dawn.png");
+		system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS,"zea_bg_dawn"));
 		new AbyssBackgroundWarper(system, 8, 0.25f);
 
 		//if (!Global.getSector().getDifficulty().equals(Difficulties.EASY)) { // Disabled
-			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_cut.png",
+			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN,"zea_flower_nebula_cut"),
 					0, 0, // center of nebula
 					system, // location to add to
-					ZeaStaticStrings.TERRAIN, "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
+					ZeaGfxCat.TERRAIN, "nebula_zea_purpleblue", // "nebula_blue", // texture to use, uses xxx_map for map
 					8, 8, StarAge.AVERAGE); // number of cells in texture
 		/*} else {
 			SectorEntityToken lunasea_nebula = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/luwunasea_nebula2.png",
@@ -381,20 +391,21 @@ public class PrepareAbyss {
 					4, 4, StarAge.AVERAGE); // number of cells in texture
 		}*/
 
-		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/terrain/flower_nebula_layer2.png",
+		SectorEntityToken lunasea_nebula2 = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(ZeaGfxCat.TERRAIN,"zea_flower_nebula_layer2"),
 					0, 0, system,
-				ZeaStaticStrings.TERRAIN, "nebula_zea_dawntide",
-					4, 4, "nebula_zea_shoal", StarAge.AVERAGE);
+				ZeaGfxCat.TERRAIN, "nebula_zea_dawntide",
+					4, 4, ZeaTerrain.NEBULA_ZEA_SHOAL, StarAge.AVERAGE);
 
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
 
-		PlanetAPI luna = system.initStar("lunasea_star", StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
+		PlanetAPI luna = system.initStar(ZeaStaticStrings.ZEA_LUNASEA_STAR, StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
 		if (Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
 			luna.setName("The Luwuna Sea");
 		}
+		else {luna.setName(lunaSeaSysName);}
 		system.setDoNotShowIntelFromThisLocationOnMap(true);
 
-		SectorEntityToken star_corona = system.addTerrain("zea_corona",
+		SectorEntityToken star_corona = system.addTerrain(ZeaTerrain.ZEA_CORONA,
 				new AbyssCorona.CoronaParams(11000,
 						0,
 						luna,
@@ -403,7 +414,7 @@ public class PrepareAbyss {
 						1f)
 		);
 
-		SectorEntityToken lunaBeam1 = system.addTerrain("zea_seaWave",
+		SectorEntityToken lunaBeam1 = system.addTerrain(ZeaTerrain.ZEA_SEA_WAVE,
 				new AbyssCorona.CoronaParams(50000,
 						2500,
 						luna,
@@ -414,18 +425,18 @@ public class PrepareAbyss {
 		lunaBeam1.setCircularOrbit(luna, (float)Math.random()*360, 0, 19);
 
 		//system.generateAnchorIfNeeded();
-		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint("zea_lunasea_jp", "Second Trial");
+		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaStaticStrings.ZEA_LUNASEA_JP, "Second Trial");
 		//OrbitAPI orbit = Global.getFactory().createCircularOrbit(luna, 90, 10000, 25);
 		jumpPoint.setFixedLocation(6500,-1500);
 		jumpPoint.setStandardWormholeToHyperspaceVisual();
 		system.addEntity(jumpPoint);
 
-		PlanetAPI first = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_ONE, luna, "Id", "barren-bombarded", 50, 150, 10900, 3000000);
-		PlanetAPI second = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_TWO, luna, "Doubt", "desert", 29, 170, 6100, 3000000);
-		PlanetAPI third = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_THREE, luna, "Wild", "jungle", 12, 70, 15800, 3000000);
-		PlanetAPI fourth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR, jumpPoint, "Ego", "frozen", 190, 250, 500, 3000000);
-		PlanetAPI fifth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FIVE, luna, "Savage", "barren", 336, 145, 12300, 3000000);
-		PlanetAPI sixth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_SIX, luna, "Feral", "toxic", 306, 165, 8100, 3000000);
+		PlanetAPI first = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_ONE, luna, "Id", Planets.BARREN_BOMBARDED, 50, 150, 10900, 3000000);
+		PlanetAPI second = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_TWO, luna, "Doubt", Planets.DESERT, 29, 170, 6100, 3000000);
+		PlanetAPI third = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_THREE, luna, "Wild",  ZeaStaticStrings.JUNGLE, 12, 70, 15800, 3000000);
+		PlanetAPI fourth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FOUR, jumpPoint, "Ego", Planets.FROZEN, 190, 250, 500, 3000000);
+		PlanetAPI fifth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_FIVE, luna, "Savage", Planets.BARREN, 336, 145, 12300, 3000000);
+		PlanetAPI sixth = system.addPlanet(ZeaStaticStrings.ZEA_LUNASEA_PLANET_SIX, luna, "Feral", ZeaStaticStrings.TOXIC, 306, 165, 8100, 3000000);
 
 		first.getMarket().addCondition(Conditions.TECTONIC_ACTIVITY);
 		first.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
@@ -496,9 +507,9 @@ public class PrepareAbyss {
 			return;
 		}
 		if (Math.random() < 0.5f) {
-			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_duskbh1.png");
+			system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_duskbh1"));
 		} else {
-			system.setBackgroundTextureFilename("data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/backgrounds/zea_bg_duskbh2.png");
+			system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_duskbh2"));
 		}
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
@@ -509,7 +520,7 @@ public class PrepareAbyss {
 
 		//fancy bg script
 
-		PlanetAPI sing = system.initStar(ZeaStaticStrings.nbsSysPrefix + Misc.genUID(), "zea_star_black_neutron", 200, -200f);
+		PlanetAPI sing = system.initStar(ZeaStaticStrings.nbsSysPrefix + Misc.genUID(), ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON, 200, -200f);
 		String tempName = system.getBaseName();
 		system.setName(tempName);
 		sing.setName(tempName);
@@ -517,7 +528,7 @@ public class PrepareAbyss {
 		sing.getSpec().setBlackHole(false); //Avoid fleet weirdness
 		sing.applySpecChanges();
 
-		SectorEntityToken horizon1 = system.addTerrain("zea_eventHorizon", new AbyssEventHorizon.CoronaParams(
+		SectorEntityToken horizon1 = system.addTerrain(ZeaTerrain.ZEA_EVENT_HORIZON, new AbyssEventHorizon.CoronaParams(
 				1000,
 				20,
 				sing,
@@ -526,7 +537,7 @@ public class PrepareAbyss {
 				5f)
 		);
 
-		SectorEntityToken dbhBeam1 = system.addTerrain("zea_blackBeam",
+		SectorEntityToken dbhBeam1 = system.addTerrain(ZeaTerrain.ZEA_BLACK_BEAM,
 				new AbyssCorona.CoronaParams(25000,
 						50,
 						sing,
@@ -578,15 +589,15 @@ public class PrepareAbyss {
 	public static String getAbyssLootID(String faction, float tier, Random random) {
 		WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(random);
 		float w = tier; //Tier 1 has best loot odds, values < 1 even better.
-		picker.add("zea_cache_low", w);
-		picker.add("zea_cache_med", w);
-		picker.add("zea_cache_high", w);
+		picker.add(ZeaStaticStrings.ZEA_CACHE_LOW, w);
+		picker.add(ZeaStaticStrings.ZEA_CACHE_MED, w);
+		picker.add(ZeaStaticStrings.ZEA_CACHE_HIGH, w);
 		w = faction.equals(ZeaStaticStrings.dawnID)? 1f : 0f;
-		picker.add("zea_research_station_dawn", w);
+		picker.add(ZeaStaticStrings.ZEA_RESEARCH_STATION_DAWN, w);
 		w = faction.equals(ZeaStaticStrings.duskID)? 1f : 0f;
-		picker.add("zea_research_station_dusk", w);
+		picker.add(ZeaStaticStrings.ZEA_RESEARCH_STATION_DUSK, w);
 		w = faction.equals(ZeaStaticStrings.elysianID)? 1f : 0f;
-		picker.add("zea_research_station_elysia", w);
+		picker.add(ZeaStaticStrings.ZEA_RESEARCH_STATION_ELYSIA, w);
 
 		return picker.pick();
 	}
@@ -742,7 +753,7 @@ public class PrepareAbyss {
 			float orbitDays = radius / (30f + 10f * StarSystemGenerator.random.nextFloat());
 			Color color = StarSystemGenerator.getColor(minColor, maxColor);
 			//color = Color.white;
-			RingBandAPI visual = system.addRingBand(parent, "misc", tex.tex, 256f, tex.index, color, bandWidth,
+			RingBandAPI visual = system.addRingBand(parent, ZeaGfxCat.MISC, tex.tex, 256f, tex.index, color, bandWidth,
 					radius + bandWidth / 2f, -orbitDays);
 
 			spiralFactor = 2f + StarSystemGenerator.random.nextFloat() * 5f;

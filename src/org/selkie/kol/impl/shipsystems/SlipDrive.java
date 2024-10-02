@@ -5,12 +5,12 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import org.magiclib.plugins.MagicTrailPlugin;
-import org.magiclib.util.MagicRender;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.magiclib.plugins.MagicTrailPlugin;
+import org.magiclib.util.MagicRender;
 import org.selkie.kol.impl.fx.FakeSmokePlugin;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 
@@ -99,7 +99,7 @@ public class SlipDrive extends BaseShipSystemScript {
                 Vector2f modifiedShadowPos = new Vector2f(MathUtils.getRandomNumberInRange(-SHADOW_FLICKER_DIFFERENCE, SHADOW_FLICKER_DIFFERENCE), MathUtils.getRandomNumberInRange(-SHADOW_FLICKER_DIFFERENCE, SHADOW_FLICKER_DIFFERENCE));
                 modifiedShadowPos.x += shadowPos.x;
                 modifiedShadowPos.y += shadowPos.y;
-                MagicRender.battlespace(Global.getSettings().getSprite(ZeaStaticStrings.KOL_FX, ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedShadowPos, new Vector2f(0f, 0f),
+                MagicRender.battlespace(Global.getSettings().getSprite(ZeaGfxCat.KOL_FX, ship.getHullSpec().getBaseHullId() + "_phantom"), modifiedShadowPos, new Vector2f(0f, 0f),
                         new Vector2f(168f, 229f),
                         new Vector2f(0f, 0f), ship.getFacing() + angleDifference,
                         0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.3f);

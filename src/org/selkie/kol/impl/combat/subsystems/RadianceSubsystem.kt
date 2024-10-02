@@ -19,7 +19,10 @@ import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.setAlpha
 import org.magiclib.subsystems.MagicSubsystem
 import org.magiclib.util.MagicRender
-import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 import org.selkie.kol.impl.hullmods.CoronalCapacitor
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
@@ -29,7 +32,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
     private val PARTICLE_INTERVAL = IntervalUtil(1f, 1f)
     private var dummyMine: CombatEntityAPI? = null
 
-    private val spriteRing = Global.getSettings().getSprite(ZeaStaticStrings.FX, ZeaStaticStrings.ZEA_RING_TARGETING)
+    private val spriteRing = Global.getSettings().getSprite(ZeaGfxCat.FX, "zea_ring_targeting")
 
     private val glowColorFull = Color(200, 150, 50, 200)
     private val glowColorEmpty = Color(255, 100, 25, 0)

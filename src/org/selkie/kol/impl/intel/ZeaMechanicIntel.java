@@ -8,7 +8,6 @@ import com.fs.starfarer.api.ui.SectorMapAPI;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;
 import java.io.IOException;
@@ -203,7 +202,7 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
             case Factions.TRITACHYON:
                 total = TT.length;
                 break;
-            case KOL_ModPlugin.kolID:
+            case ZeaStaticStrings.kolFactionID:
                 total = KoL.length;
                 break;
         }
@@ -234,7 +233,7 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
                 desc = TT;
                 hl = TTHLs;
                 break;
-            case KOL_ModPlugin.kolID:
+            case ZeaStaticStrings.kolFactionID:
                 desc = KoL;
                 hl = KoLHLs;
                 break;

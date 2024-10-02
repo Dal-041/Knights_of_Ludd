@@ -4,12 +4,12 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.FactionAPI;
 import com.fs.starfarer.api.campaign.RepLevel;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
-import org.selkie.kol.plugins.KOL_ModPlugin;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 public class Crusaders {
     public static final String MEMKEY_KOL_SCHISMED = "$kol_knights_schism";
     public static final String nameCrusaders = "Luddic Crusade";
-    protected static final FactionAPI crusaders = Global.getSector().getFaction(KOL_ModPlugin.kolID);
+    protected static final FactionAPI crusaders = Global.getSector().getFaction(ZeaStaticStrings.kolFactionID);
     protected static final String[] priorityShips = {
             "kol_alysse",
             "kol_lunaria",

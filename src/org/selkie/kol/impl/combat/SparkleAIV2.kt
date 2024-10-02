@@ -9,6 +9,7 @@ import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys
 import org.selkie.kol.impl.hullmods.DuskBuiltin
 import java.awt.Color
 import kotlin.math.*
@@ -229,7 +230,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
 
         // hf nineveh boss mines
         hfOverride = target is MissileAPI && (target as MissileAPI).isMine && (target as MissileAPI).source?.hullSpec?.hullId?.equals(ZeaStaticStrings.ZEA_BOSS_NINEVENH) == true &&
-                ((target as MissileAPI).source?.variant?.hasTag(ZeaStaticStrings.BOSS_TAG) == true || Global.getSettings().isDevMode)
+                ((target as MissileAPI).source?.variant?.hasTag(ZeaMemKeys.BOSS_TAG) == true || Global.getSettings().isDevMode)
     }
 
     private fun isTargetValid(): Boolean {

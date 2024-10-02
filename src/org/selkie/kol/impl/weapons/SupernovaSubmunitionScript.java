@@ -13,6 +13,7 @@ import org.dark.shaders.light.StandardLight;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.awt.*;

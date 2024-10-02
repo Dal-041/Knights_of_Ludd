@@ -18,12 +18,13 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
-import org.selkie.kol.combat.StarficzAIUtils.*;
+import org.selkie.kol.combat.StarficzAIUtils.FutureHit;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 import java.awt.*;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 public class NinmahBoss extends BaseHullMod {
 
@@ -126,9 +127,6 @@ public class NinmahBoss extends BaseHullMod {
 
                 if (fleetManager == null) return;
 
-
-                String escortSpec = "zea_boss_harbinger_Strike";
-
                 CombatFleetManagerAPI.AssignmentInfo assignmentInfo = taskManager.createAssignment(CombatAssignmentType.DEFEND, fleetManager.getDeployedFleetMemberEvenIfDisabled(ship), false);
 
                 float escortFacing = ship.getFacing();
@@ -142,7 +140,7 @@ public class NinmahBoss extends BaseHullMod {
 
                 if(phaseTwoTimer > MAX_TIME*4/7){
                     if (escortA == null) {
-                        escortA = fleetManager.spawnShipOrWing(escortSpec, escortASpawn, escortFacing, 0f, captain);
+                        escortA = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HARBINGER_STRIKE, escortASpawn, escortFacing, 0f, captain);
                         Utils.shipSpawnExplosion(escortA.getShieldRadiusEvenIfNoShield(), escortA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortA), assignmentInfo, false);
                         escortA.getSystem().setCooldownRemaining(escortA.getSystem().getCooldown());
@@ -156,7 +154,7 @@ public class NinmahBoss extends BaseHullMod {
 
                 if(phaseTwoTimer > MAX_TIME*5/7){
                     if (escortB == null) {
-                        escortB = fleetManager.spawnShipOrWing(escortSpec, escortBSpawn, escortFacing + 120f, 0f, captain);
+                        escortB = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HARBINGER_STRIKE, escortBSpawn, escortFacing + 120f, 0f, captain);
                         Utils.shipSpawnExplosion(escortB.getShieldRadiusEvenIfNoShield(), escortB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortB), assignmentInfo, false);
                         escortB.getSystem().setCooldownRemaining(escortB.getSystem().getCooldown());
@@ -170,7 +168,7 @@ public class NinmahBoss extends BaseHullMod {
 
                 if(phaseTwoTimer > MAX_TIME*6/7){
                     if (escortC == null) {
-                        escortC = fleetManager.spawnShipOrWing(escortSpec, escortCSpawn, escortFacing + 240f, 0f, captain);
+                        escortC = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HARBINGER_STRIKE, escortCSpawn, escortFacing + 240f, 0f, captain);
                         Utils.shipSpawnExplosion(escortC.getShieldRadiusEvenIfNoShield(), escortC.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortC), assignmentInfo, false);
                         escortC.getSystem().setCooldownRemaining(escortC.getSystem().getCooldown());
@@ -488,8 +486,8 @@ public class NinmahBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains(ZeaStaticStrings.MemKeys.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaMemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains(ZeaMemKeys.BOSS_TAG))));
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));

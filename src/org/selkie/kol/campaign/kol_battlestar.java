@@ -2,7 +2,7 @@ package org.selkie.kol.campaign;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.impl.campaign.econ.impl.OrbitalStation;
-import org.selkie.kol.plugins.KOL_ModPlugin;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 public class kol_battlestar extends OrbitalStation {
     @Override
@@ -13,7 +13,7 @@ public class kol_battlestar extends OrbitalStation {
     @Override
     public boolean canUpgrade() {
         if (Global.getSector() != null && Global.getSector().getPlayerFaction() != null) {
-            return Global.getSector().getPlayerFaction().getId().equals(KOL_ModPlugin.kolID);
+            return Global.getSector().getPlayerFaction().getId().equals(ZeaStaticStrings.kolFactionID);
         }
         return false;
     }

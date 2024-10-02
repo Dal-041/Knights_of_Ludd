@@ -7,6 +7,8 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import com.fs.starfarer.campaign.CampaignEngine;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 
 import java.util.Random;
 
@@ -37,10 +39,10 @@ public class TrackFleet implements EveryFrameScript {
                 if (fleet.isInHyperspaceTransition()) return;
                 if (fleet.getContainingLocation().getId().equalsIgnoreCase(ZeaStaticStrings.elysiaSysName)) {
                     under = Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName);
-                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 150 && Math.abs(fleet.getLocation().getY()) <= 150 && under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE) != null) {
+                    if (under!= null && Math.abs(fleet.getLocation().getX()) <= 150 && Math.abs(fleet.getLocation().getY()) <= 150 && under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE_DUSK) != null) {
                         iSecond.advance(1);
                         if (iSecond.intervalElapsed()) {
-                            targ = under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE);
+                            targ = under.getEntityById(ZeaStaticStrings.ZEA_NULLGATE_DUSK);
                             JumpPointAPI.JumpDestination dest = new JumpPointAPI.JumpDestination(targ, null);
                             Global.getSector().doHyperspaceTransition(fleet, fleet, dest);
                             fleet.setNoEngaging(1.0f);
@@ -50,7 +52,7 @@ public class TrackFleet implements EveryFrameScript {
                     }
                 } else if (fleet.getContainingLocation() instanceof StarSystemAPI
                         && ((StarSystemAPI)fleet.getContainingLocation()).getStar() != null
-                        && ((StarSystemAPI)fleet.getContainingLocation()).getStar().getTypeId().equalsIgnoreCase(ZeaStaticStrings.ZEA_STAR_BLACK_NEUTRON)) {
+                        && ((StarSystemAPI)fleet.getContainingLocation()).getStar().getTypeId().equalsIgnoreCase(ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON)) {
                     StarSystemAPI system = (StarSystemAPI) fleet.getContainingLocation();
                     CampaignFleetAPI victim = null;
                     for (CampaignFleetAPI sysFleet : system.getFleets()) {
@@ -62,7 +64,7 @@ public class TrackFleet implements EveryFrameScript {
                         WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>(new Random());
                         for (StarSystemAPI sys : Global.getSector().getStarSystems()) {
                             if (sys.isCurrentLocation()) continue;
-                            if (sys.getStar() != null && sys.getStar().getTypeId().equalsIgnoreCase(ZeaStaticStrings.ZEA_STAR_BLACK_NEUTRON)) picker.add(sys);
+                            if (sys.getStar() != null && sys.getStar().getTypeId().equalsIgnoreCase(ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON)) picker.add(sys);
                         }
                         if (!picker.isEmpty()) {
                             StarSystemAPI dest = picker.pick();

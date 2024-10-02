@@ -8,8 +8,8 @@ import com.fs.starfarer.api.impl.campaign.fleets.misc.MiscFleetRouteManager;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
-import org.selkie.kol.fleets.KnightsExpeditionAssignmentAI;
-import org.selkie.kol.plugins.KOL_ModPlugin;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 import org.selkie.kol.world.GenerateKnights;
 
 import java.util.Random;
@@ -112,7 +112,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         FleetParamsV3 params = new FleetParamsV3(
                 route.getMarket(),
                 null,
-                KOL_ModPlugin.kolID,
+                ZeaStaticStrings.kolFactionID,
                 route.getQualityOverride() + 0.2f,
                 type,
                 combat, // combatPts
@@ -145,7 +145,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
     protected int getMaxFleets() {
         int count = baseKnightExpeditions;
         for(MarketAPI m : Global.getSector().getEconomy().getMarketsCopy()) {
-            if (m.getFactionId().equals(KOL_ModPlugin.kolID)) count += 1;
+            if (m.getFactionId().equals(ZeaStaticStrings.kolFactionID)) count += 1;
             if (m.getFactionId().equals("kol")) count += 1;
         }
         return count;
@@ -170,13 +170,13 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
 
     public static MarketAPI getSourceMarket() {
         MarketAPI startMarket = null;
-        if(goodSourceMarket(Global.getSector().getEntityById("kol_lyra")) && Global.getSector().getEntityById("kol_lyra").getFaction() == Global.getSector().getFaction(KOL_ModPlugin.kolID)) {
+        if(goodSourceMarket(Global.getSector().getEntityById("kol_lyra")) && Global.getSector().getEntityById("kol_lyra").getFaction() == Global.getSector().getFaction(ZeaStaticStrings.kolFactionID)) {
             startMarket = Global.getSector().getEntityById("kol_lyra").getMarket();
-        } else if (Math.random() < 0.33f && goodSourceMarket(Global.getSector().getEntityById("kol_cygnus")) && Global.getSector().getEntityById("kol_cygnus").getFaction() == Global.getSector().getFaction(KOL_ModPlugin.kolID)) {
+        } else if (Math.random() < 0.33f && goodSourceMarket(Global.getSector().getEntityById("kol_cygnus")) && Global.getSector().getEntityById("kol_cygnus").getFaction() == Global.getSector().getFaction(ZeaStaticStrings.kolFactionID)) {
             startMarket = Global.getSector().getEntityById("kol_cygnus").getMarket();
         } else {
             for(MarketAPI markets : Global.getSector().getEconomy().getMarketsCopy()) {
-                if(markets.getFaction().getId().equals(KOL_ModPlugin.kolID)) {
+                if(markets.getFaction().getId().equals(ZeaStaticStrings.kolFactionID)) {
                     if(startMarket==null ||
                             (markets.hasSubmarket(Submarkets.GENERIC_MILITARY)
                                     && goodSourceMarket(markets.getPrimaryEntity())
@@ -303,8 +303,8 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
         for(StarSystemAPI system : Global.getSector().getStarSystems()) {
             if (system.getStar() != null
                     && (system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE)
-                    || system.getStar().getTypeId().equals("zea_white_hole")
-                    || system.getStar().getTypeId().equals("zea_star_black_neutron"))) {
+                    || system.getStar().getTypeId().equals(ZeaStarTypes.ZEA_WHITE_HOLE)
+                    || system.getStar().getTypeId().equals(ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON))) {
                 if (!system.hasTag(Tags.THEME_HIDDEN) && !system.hasTag(Tags.THEME_SPECIAL)) {
                     if (system.hasTag(Tags.THEME_UNSAFE)) {
                         picker.add(system.getId(), 5);
@@ -312,7 +312,7 @@ public class KnightsExpeditionsManager extends BaseRouteFleetManager {
                         picker.add(system.getId(), 2);
                     }
                 }
-                if (system.getStar().getTypeId().equals("zea_star_black_neutron")) {
+                if (system.getStar().getTypeId().equals(ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON)) {
                     picker.add(system.getId(), 14);
                 }
             }

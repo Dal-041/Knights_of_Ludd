@@ -8,6 +8,7 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.magiclib.subsystems.MagicSubsystem;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
 import org.selkie.kol.impl.shipsystems.PulsarSystem;
 
 public class BlizzardSubsystem extends MagicSubsystem {

@@ -13,21 +13,22 @@ import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 public class ManageInvictus implements FleetEventListener {
-	private final String MEMKEY_KOL_LP_INVICTUS_DROPPED = "$kol_lp_invictus_dropped";
 
 	//Totally not adapted from Diable or anything :>
 	@Override
 	public void reportBattleOccurred(CampaignFleetAPI fleet, CampaignFleetAPI primaryWinner, BattleAPI battle) {
 	        
 		// ignore that whole ordeal if the Invictus already dropped
-		if(Global.getSector().getMemoryWithoutUpdate().contains(MEMKEY_KOL_LP_INVICTUS_DROPPED) 
-	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(MEMKEY_KOL_LP_INVICTUS_DROPPED)){
+		if(Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.KOL_LP_INVICTUS_DONE)
+	                && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.KOL_LP_INVICTUS_DONE)){
 	            return;
 		}
 	        
-		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith("kol_invictus_lp")){
+		if(fleet.getFlagship()==null || !fleet.getFlagship().getHullSpec().getBaseHullId().startsWith(ZeaStaticStrings.KOL_INVICTUS_LP)){
 	            
 			//remove the fleet if flag is dead
 			if(!fleet.getMembersWithFightersCopy().isEmpty()){
@@ -39,10 +40,10 @@ public class ManageInvictus implements FleetEventListener {
 	            //boss is dead, 
 			boolean salvaged=false;
 			for (FleetMemberAPI f : Global.getSector().getPlayerFleet().getFleetData().getMembersListCopy()){
-				if(f.getHullId().startsWith("kol_invictus_lp")) salvaged=true;
+				if(f.getHullId().startsWith(ZeaStaticStrings.KOL_INVICTUS_LP)) salvaged=true;
 	                
                 //set memkey that the wreck must never spawn
-                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_LP_INVICTUS_DROPPED,true);
+                Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.KOL_LP_INVICTUS_DONE,true);
 	        }
 	            
 	            //spawn a derelict if it wasn't salvaged
@@ -55,7 +56,7 @@ public class ManageInvictus implements FleetEventListener {
 	                
 	                //spawn the derelict object
 	                SectorEntityToken wreck = MagicCampaign.createDerelict(
-	                        "kol_invictus_lp_Hallowed",
+	                        ZeaStaticStrings.KOL_INVICTUS_LP_HALLOWED,
 	                        ShipRecoverySpecial.ShipCondition.WRECKED,
 	                        false,
 	                        -1,
@@ -67,7 +68,7 @@ public class ManageInvictus implements FleetEventListener {
 	                wreck.setFacing((float)Math.random()*360f);
 	                
 	                //set memkey that the wreck exist
-	                Global.getSector().getMemoryWithoutUpdate().set(MEMKEY_KOL_LP_INVICTUS_DROPPED,true); 
+	                Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.KOL_LP_INVICTUS_DONE,true);
 	        }
 	    }
 	}

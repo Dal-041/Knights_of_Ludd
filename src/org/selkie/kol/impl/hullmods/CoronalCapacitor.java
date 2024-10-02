@@ -15,7 +15,8 @@ import org.dark.shaders.light.StandardLight;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicUI;
 import org.selkie.kol.Utils;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -55,19 +56,19 @@ public class CoronalCapacitor extends BaseHullMod {
         starLux.put("nebula_center_old", 0f);
         starLux.put("nebula_center_average", 0f);
         starLux.put("nebula_center_young", 0f);
-        starLux.put("zea_star_black_neutron", 0f);
+        starLux.put(ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON, 0f);
         starLux.put("zea_white_hole", 100f);
-        starLux.put("zea_red_hole", 3f);
-        starLux.put("US_star_blue_giant", 10f);
-        starLux.put("US_star_yellow", 3f);
-        starLux.put("US_star_orange_giant", 3f);
-        starLux.put("US_star_red_giant", 2.5f);
-        starLux.put("US_star_white", 2f);
-        starLux.put("US_star_browndwarf", 0.25f);
-        starLux.put("tiandong_shaanxi", 2f);
-        starLux.put("star_brstar", 3f);
-        starLux.put("star_yellow_supergiant", 3f);
-        starLux.put("quasar", 8f);
+        starLux.put(ZeaStarTypes.ZEA_RED_HOLE, 3f);
+        starLux.put(ZeaStarTypes.US_STAR_BLUE_GIANT, 10f);
+        starLux.put(ZeaStarTypes.US_STAR_YELLOW, 3f);
+        starLux.put(ZeaStarTypes.US_STAR_ORANGE_GIANT, 3f);
+        starLux.put(ZeaStarTypes.US_STAR_RED_GIANT, 2.5f);
+        starLux.put(ZeaStarTypes.US_STAR_WHITE, 2f);
+        starLux.put(ZeaStarTypes.US_STAR_BROWNDWARF, 0.25f);
+        starLux.put(ZeaStarTypes.TIANDONG_SHAANXI, 2f);
+        starLux.put(ZeaStarTypes.STAR_BRSTAR, 3f);
+        starLux.put(ZeaStarTypes.STAR_YELLOW_SUPERGIANT, 3f);
+        starLux.put(ZeaStarTypes.QUASAR, 8f);
     }
 
     public static class CoronalCapacitorListener implements AdvanceableListener {
@@ -183,12 +184,12 @@ public class CoronalCapacitor extends BaseHullMod {
             stats.getBallisticWeaponFluxCostMod().modifyMult(CAPACITY_FACTOR_KEY, 1/(1+ROF_BOOST* capacitorFactor));
 
             if(engine.getPlayerShip() == ship) {
-                engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_bottom"),
+                engine.maintainStatusForPlayerShip(STATUSKEY1, Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "coronal_cap_bottom"),
                         "+" + Math.round(100*SPEED_BOOST* capacitorFactor) + "% top speed", "improved maneuverability", false);
-                engine.maintainStatusForPlayerShip(STATUSKEY2,Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_middle"),
+                engine.maintainStatusForPlayerShip(STATUSKEY2,Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "coronal_cap_middle"),
                         "+" + Math.round(100*(ROF_BOOST* capacitorFactor)) + "% ballistic rate of fire",
                         "-" + Math.round(100*(1-1/(1+ROF_BOOST* capacitorFactor))) + "% ballistic flux use", false);
-                engine.maintainStatusForPlayerShip(STATUSKEY3,Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_top"),"Coronal Capacitor",
+                engine.maintainStatusForPlayerShip(STATUSKEY3,Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "coronal_cap_top"),"Coronal Capacitor",
                         "+" + Math.round(100*(DAMAGE_BOOST* capacitorFactor)) + "% energy weapon damage" , false);
                 //engine.maintainStatusForPlayerShip(STATUSKEY4, Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "coronal_cap_top"),
                 //        "", "Local stellar recharge rate: " + effectiveChargeRate*100, false);

@@ -15,6 +15,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
 import org.selkie.kol.impl.fx.FakeSmokePlugin;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 import java.util.Iterator;
@@ -101,9 +102,9 @@ public class PhasespaceSkip extends BaseShipSystemScript {
 
         //Special, "Semi-Fixed" phantom
         Color colorToUse = new Color(((float) PHASE_COLOR.getRed() / 255f), ((float) PHASE_COLOR.getGreen() / 255f), ((float) PHASE_COLOR.getBlue() / 255f), ((float) PHASE_COLOR.getAlpha() / 255f) * effectLevel);
-        MagicRender.singleframe(Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1"), spriteCenter,
+        MagicRender.singleframe(Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1"), spriteCenter,
                 new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
-        MagicRender.singleframe(Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2"), spriteCenter,
+        MagicRender.singleframe(Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow2"), spriteCenter,
                 new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()), ship.getFacing() - 90f, colorToUse, true);
 
         //If enough time has passed, render a new phantom
@@ -115,7 +116,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
                 Vector2f modifiedPhantomPos = new Vector2f(MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE), MathUtils.getRandomNumberInRange(-PHANTOM_FLICKER_DIFFERENCE, PHANTOM_FLICKER_DIFFERENCE));
                 modifiedPhantomPos.x += phantomPos.x;
                 modifiedPhantomPos.y += phantomPos.y;
-                MagicRender.battlespace(Global.getSettings().getSprite(ZeaStaticStrings.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1"), modifiedPhantomPos, new Vector2f(0f, 0f),
+                MagicRender.battlespace(Global.getSettings().getSprite(ZeaGfxCat.ZEA_PHASE_GLOWS, ship.getHullSpec().getBaseHullId() + "_glow1"), modifiedPhantomPos, new Vector2f(0f, 0f),
                         new Vector2f(ship.getSpriteAPI().getWidth(), ship.getSpriteAPI().getHeight()),
                         new Vector2f(0f, 0f), ship.getFacing() + angleDifference,
                         0f, AFTERIMAGE_COLOR, true, 0.1f, 0f, 0.5f);

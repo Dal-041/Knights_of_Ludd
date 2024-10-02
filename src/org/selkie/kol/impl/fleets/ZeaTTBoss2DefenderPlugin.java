@@ -13,6 +13,7 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.Sal
 import com.fs.starfarer.api.loading.VariantSource;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -38,7 +39,7 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
     }
 
     public void reportDefeated(SDMParams p, SectorEntityToken entity, CampaignFleetAPI fleet) {
-        Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_NINMAH_DONE, true);
+        Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_NINMAH_DONE, true);
     }
 
     public void modifyFleet(SDMParams p, CampaignFleetAPI fleet, Random random, boolean withOverride) {
@@ -94,12 +95,12 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         FleetMemberAPI flagship = fleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
         flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
-        fleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
+        fleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
     }
 
 
@@ -109,7 +110,7 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
         SDMParams p = (SDMParams) params;
 
         if (p.entity != null && p.entity.getMemoryWithoutUpdate().contains(
-                ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_2_STATION)) {
+                ZeaMemKeys.ZEA_TT_2_STATION)) {
             return 2;
         }
         return -1;

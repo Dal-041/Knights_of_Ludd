@@ -36,6 +36,9 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.impl.fleets.ZeaTTBoss2DefenderPlugin;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.helpers.ZeaUtils;
 
 import java.awt.*;
@@ -121,14 +124,14 @@ public class PrepareDarkDeeds {
         //fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true); // so it keeps transponder on
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT1BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
-        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINAYA_BOSS_FLEET, true);
-        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_NINAYA_BOSS_FLEET, true);
+        TT1BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
 
         // setup and permalock the flagship variant
         FleetMemberAPI flagship = TT1BossFleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         TT1BossFleet.getFleetData().sort();
@@ -185,7 +188,7 @@ public class PrepareDarkDeeds {
                         return;
                     }
 
-                    Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_NINAYA_DONE, true);
+                    Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_NINAYA_DONE, true);
 
                     ShipRecoverySpecial.PerShipData ship = new ShipRecoverySpecial.PerShipData(ZeaStaticStrings.ZEA_BOSS_NINAYA_NIGHTDEMON, ShipRecoverySpecial.ShipCondition.WRECKED, 0f);
                     ship.shipName = "TTS Ninaya";
@@ -194,7 +197,7 @@ public class PrepareDarkDeeds {
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
                     Misc.makeImportant(entity, ZeaStaticStrings.ZEA_BOSS_NINAYA);
-                    entity.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINAYA_WRECK, true);
+                    entity.getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_NINAYA_WRECK, true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -245,7 +248,7 @@ public class PrepareDarkDeeds {
             }
         }
 
-        system.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_2_SYSTEM, true);
+        system.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_2_SYSTEM, true);
 
         /* Runcode
         for (StarSystemAPI system : Global.getSector().getStarSystems()) {
@@ -262,7 +265,7 @@ public class PrepareDarkDeeds {
          */
 
         CustomCampaignEntityAPI stationBoss = system.addCustomEntity(ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, "Suspicious Research Station", ZeaStaticStrings.ZEA_BOSS_STATION_TRITACHYON, Factions.NEUTRAL);
-        stationBoss.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_2_STATION, true);
+        stationBoss.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_2_STATION, true);
         stationBoss.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
         stationBoss.setSensorProfile(1f);
         stationBoss.getDetectedRangeMod().modifyFlat("gen", 5000f);
@@ -314,7 +317,7 @@ public class PrepareDarkDeeds {
                         return;
                     }
 
-                    Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_NINEVEH_DONE, true);
+                    Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_NINEVEH_DONE, true);
 
                     PerShipData ship = new PerShipData(ZeaStaticStrings.ZEA_BOSS_NINEVEH_SOULEATER, ShipCondition.WRECKED, 0f);
                     ship.shipName = "TTS Nineveh";
@@ -323,7 +326,7 @@ public class PrepareDarkDeeds {
                             fleet.getContainingLocation(),
                             Entities.WRECK, Factions.NEUTRAL, params);
                     Misc.makeImportant(entity, ZeaStaticStrings.ZEA_BOSS_NINEVENH);
-                    entity.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINEVEH_WRECK, true);
+                    entity.getMemoryWithoutUpdate().set(ZeaMemKeys.MEMKEY_ZEA_NINEVEH_WRECK, true);
 
                     entity.getLocation().x = fleet.getLocation().x + (50f - (float) Math.random() * 100f);
                     entity.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
@@ -337,7 +340,7 @@ public class PrepareDarkDeeds {
                     copy.variantId = null;
                     copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
                     copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-                    copy.variant.removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+                    copy.variant.removeTag(ZeaMemKeys.BOSS_TAG);
                     copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);
                     data.addShip(copy);
 
@@ -348,11 +351,11 @@ public class PrepareDarkDeeds {
                     lootbox.getLocation().y = fleet.getLocation().y + (50f - (float) Math.random() * 100f);
                     Misc.makeImportant(lootbox, ZeaStaticStrings.ZEA_BOSS_NINEVENH);
                     lootbox.addDropValue("basic", 40000);
-                    lootbox.addDropRandom("omega_weapons_small", 1);
-                    lootbox.addDropRandom("zea_omega_small_low", 7);
-                    lootbox.addDropRandom("omega_weapons_medium", 1);
-                    lootbox.addDropRandom("zea_omega_medium_low", 3); //avg: +0.6
-                    lootbox.addDropRandom("zea_omega_large_low", 2); //0.4
+                    lootbox.addDropRandom(ZeaDrops.OMEGA_WEAPONS_SMALL, 1);
+                    lootbox.addDropRandom(ZeaDrops.ZEA_OMEGA_SMALL_LOW, 7);
+                    lootbox.addDropRandom(ZeaDrops.OMEGA_WEAPONS_MEDIUM, 1);
+                    lootbox.addDropRandom(ZeaDrops.ZEA_OMEGA_MEDIUM_LOW, 3); //avg: +0.6
+                    lootbox.addDropRandom(ZeaDrops.ZEA_OMEGA_LARGE_LOW, 2); //0.4
                     //lootbox.addDropRandom("zea_tritach_delta_site_log", 1); //handled by intel
 
                     Misc.setSalvageSpecial(entity, data);
@@ -379,7 +382,7 @@ public class PrepareDarkDeeds {
         float sectorHeightR = Global.getSettings().getFloat("sectorHeight")/2f;
 
         StarSystemAPI system = Global.getSector().createStarSystem("Delta Site");
-        system.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_SYSTEM, true);
+        system.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_3_SYSTEM, true);
         system.setBaseName("Delta Site");
         //system.setType(StarSystemType.NEBULA);
         system.setName("Unknown Location"); // to get rid of "Star System" at the end of the name
@@ -389,7 +392,7 @@ public class PrepareDarkDeeds {
 
         system.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY, "music_campaign_alpha_site");
 
-        system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaStaticStrings.BACKGROUNDS, "zea_bg_delta_site"));
+        system.setBackgroundTextureFilename(Global.getSettings().getSpriteName(ZeaGfxCat.BACKGROUNDS, "zea_bg_delta_site"));
         //system.getLocation().set(2500, 3000);
         system.getLocation().set(-sectorWidthR + 30000f, -sectorHeightR + 15000f);
 
@@ -404,9 +407,9 @@ public class PrepareDarkDeeds {
 
         system.setLightColor(new Color(255,140,185,255)); // light color in entire system, affects all entities
 
-        PlanetAPI rock = system.addPlanet(ZeaStaticStrings.ZEA_TT_3_SITE_PLANET, center, "Delta Site", "frozen", 0, 166, 1200, 40);
+        PlanetAPI rock = system.addPlanet(ZeaStaticStrings.ZEA_TT_3_SITE_PLANET, center, "Delta Site", Planets.FROZEN, 0, 166, 1200, 40);
         //rock.setCustomDescriptionId("???");
-        rock.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_BLACK_SITE, true);
+        rock.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_3_BLACK_SITE, true);
 
         rock.getMarket().addCondition(Conditions.NO_ATMOSPHERE);
         rock.getMarket().addCondition(Conditions.VERY_COLD);
@@ -443,14 +446,14 @@ public class PrepareDarkDeeds {
         CustomCampaignEntityAPI beacon = system.addCustomEntity(null, null, Entities.WARNING_BEACON, Factions.NEUTRAL);
         beacon.setCircularOrbitPointingDown(rock, 0, 2500, 60);
 
-        beacon.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_BLACK_SITE, true);
+        beacon.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_3_BLACK_SITE, true);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_ID_KEY, Pings.WARNING_BEACON3);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_FREQ_KEY, 1.5f);
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.PING_COLOR_KEY, new Color(250,125,0,255));
         beacon.getMemoryWithoutUpdate().set(WarningBeaconEntityPlugin.GLOW_COLOR_KEY, new Color(250,55,0,255));
 
         SectorEntityToken cache = BaseThemeGenerator.addSalvageEntity(system, Entities.ALPHA_SITE_WEAPONS_CACHE, Factions.NEUTRAL);
-        cache.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_WEAPONS_CACHE, true);
+        cache.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_3_WEAPONS_CACHE, true);
         cache.getLocation().set(11111, -11111);
 
         system.generateAnchorIfNeeded();
@@ -463,11 +466,11 @@ public class PrepareDarkDeeds {
 
         addTT3Fleet(rock, system);
 
-        Global.getSector().getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_NASCENT_WELL, well);
+        Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_TT_3_NASCENT_WELL, well);
     }
 
     public static NascentGravityWellAPI getWell() {
-        return (NascentGravityWellAPI) Global.getSector().getMemoryWithoutUpdate().get(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_TT_3_NASCENT_WELL);
+        return (NascentGravityWellAPI) Global.getSector().getMemoryWithoutUpdate().get(ZeaMemKeys.ZEA_TT_3_NASCENT_WELL);
     }
 
     public static void addTT3Fleet(SectorEntityToken rock, StarSystemAPI system) {
@@ -517,13 +520,13 @@ public class PrepareDarkDeeds {
                 .create();
         TT3BossFleet.setDiscoverable(true);
         TT3BossFleet.getFleetData().ensureHasFlagship();
-        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.BOSS_TAG, true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.BOSS_TAG, true);
 
         // setup and permalock the flagship variant
         FleetMemberAPI flagship = TT3BossFleet.getFlagship();
         flagship.setVariant(flagship.getVariant().clone(), false, false);
         flagship.getVariant().setSource(VariantSource.REFIT);
-        flagship.getVariant().addTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+        flagship.getVariant().addTag(ZeaMemKeys.BOSS_TAG);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 
         //Support fleet stuff
@@ -559,7 +562,7 @@ public class PrepareDarkDeeds {
         //fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true); // so it keeps transponder on
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_ALWAYS_PURSUE, true);
-        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINEVEH_BOSS_FLEET, true);
+        TT3BossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_NINEVEH_BOSS_FLEET, true);
 
         TT3BossFleet.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
         TT3BossFleet.getMemoryWithoutUpdate().set(MemFlags.CAN_ONLY_BE_ENGAGED_WHEN_VISIBLE_TO_PLAYER, true);

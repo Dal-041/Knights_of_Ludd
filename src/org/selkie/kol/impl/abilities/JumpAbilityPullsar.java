@@ -19,6 +19,8 @@ import com.fs.starfarer.api.util.Misc.FleetMemberDamageLevel;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -105,7 +107,7 @@ public class JumpAbilityPullsar extends BaseDurationAbility {
 
 				WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>(new Random());
 				for (StarSystemAPI sys : Global.getSector().getStarSystems()) {
-					if (sys.getStar() != null && sys.getStar().getTypeId().equals("zea_star_black_neutron")) picker.add(sys);
+					if (sys.getStar() != null && sys.getStar().getTypeId().equals(ZeaStarTypes.ZEA_STAR_BLACK_NEUTRON)) picker.add(sys);
 				}
 
 				if (picker.isEmpty()) {

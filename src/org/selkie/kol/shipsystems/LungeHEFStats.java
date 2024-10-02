@@ -7,6 +7,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 import java.util.EnumSet;
@@ -233,7 +234,7 @@ public class LungeHEFStats extends BaseShipSystemScript {
                         , false);
             }
             HEFTimer -= amount;
-            Global.getSoundPlayer().playLoop("system_high_energy_focus_loop", ship, 1f, 0.6f, ship.getLocation(), ship.getVelocity());
+            Global.getSoundPlayer().playLoop(ZeaStaticStrings.SYSTEM_HIGH_ENERGY_FOCUS_LOOP, ship, 1f, 0.6f, ship.getLocation(), ship.getVelocity());
 
             // COLOR / GLOW STUFF
             // aaaaaaaaaaaaaa Selkie why did you make me do this

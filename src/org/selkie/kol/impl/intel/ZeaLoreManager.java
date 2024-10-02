@@ -9,6 +9,7 @@ import com.fs.starfarer.api.campaign.impl.items.BaseSpecialItemPlugin;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -238,7 +239,7 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
     public void render(float x, float y, float w, float h, float alphaMult,
                        float glowMult, SpecialItemRendererAPI renderer) {
 
-        SpriteAPI sprite = Global.getSettings().getSprite(ZeaStaticStrings.LORE_ITEM, params, true);
+        SpriteAPI sprite = Global.getSettings().getSprite(ZeaGfxCat.LORE_ITEM, params, true);
         if (params.equals(Factions.TRITACHYON)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.TRITACHYON).getCrest());
         if (params.equals(Factions.HEGEMONY)) sprite = Global.getSettings().getSprite(Global.getSector().getFaction(Factions.HEGEMONY).getCrest());
         if (sprite.getTextureId() == 0) return; // no texture for a "holo", so no custom rendering

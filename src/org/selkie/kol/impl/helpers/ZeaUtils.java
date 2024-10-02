@@ -16,6 +16,7 @@ import com.fs.starfarer.api.loading.VariantSource;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.selkie.kol.impl.fleets.ZeaFleetManager;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 import java.util.ArrayList;
 
@@ -117,7 +118,7 @@ public class ZeaUtils {
         copy.variantId = null;
         copy.variant.addTag(Tags.SHIP_CAN_NOT_SCUTTLE);
         if (uniqueSig) copy.variant.addTag(Tags.SHIP_UNIQUE_SIGNATURE);
-        copy.variant.removeTag(ZeaStaticStrings.MemKeys.BOSS_TAG);
+        copy.variant.removeTag(ZeaMemKeys.BOSS_TAG);
         copy.variant.removeTag(Tags.VARIANT_UNBOARDABLE);
         //TODO: Special desciption updating logic
         //copy.variant.removeTag(Tags.SHIP_LIMITED_TOOLTIP);

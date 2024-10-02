@@ -15,6 +15,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.combat.subsystems.IFFOverrideSubsystem;
 import org.selkie.kol.impl.combat.madness.*;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -40,8 +41,8 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
     public boolean single = false;
     public String nameTooltip = "Pulsar Wave";
 
-    public String spriteCat = ZeaStaticStrings.TERRAIN;
-    public String spriteKey = ZeaStaticStrings.PULSAR;
+    public String spriteCat = ZeaGfxCat.TERRAIN;
+    public String spriteKey = "pulsar";
 
     protected SpriteAPI flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
     protected final SpriteAPI auroraTexture = null;
@@ -99,8 +100,8 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
             name = "The Blizzard";
             params.name = "The Blizzard";
             nameTooltip = "The Blizzard";
-            spriteCat = ZeaStaticStrings.TERRAIN;
-            spriteKey = ZeaStaticStrings.PULSAR;
+            spriteCat = ZeaGfxCat.TERRAIN;
+            spriteKey = "pulsar";
             flareTexture = Global.getSettings().getSprite(spriteCat, spriteKey);
             //flareTexture.setAlphaMult(0.1f); //after any sprite changes
             flare1 = new CombatPulsarRenderer(this);

@@ -7,6 +7,7 @@ import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.FaderUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -194,8 +195,8 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
 
         public ParticleData(DamagingProjectileAPI proj) {
             this.proj = proj;
-            sprite = Global.getSettings().getSprite("misc", "nebula_particles");
-            //sprite = Global.getSettings().getSprite("misc", "dust_particles");
+            sprite = Global.getSettings().getSprite(ZeaGfxCat.MISC, "nebula_particles");
+            //sprite = Global.getSettings().getSprite(ZeaStaticStrings.MISC, "dust_particles");
             float i = Misc.random.nextInt(4);
             float j = Misc.random.nextInt(4);
             sprite.setTexWidth(0.25f);

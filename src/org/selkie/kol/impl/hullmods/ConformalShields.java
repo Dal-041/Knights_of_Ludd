@@ -70,8 +70,8 @@ public class ConformalShields extends BaseHullMod {
         }
         if(!ship.hasListenerOfClass(ConformalListener.class)) ship.addListener(new ConformalListener(ship));
         //if (Global.getSettings().isDevMode()) return;
-        //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", "kol_refit");
-        //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", "kol_refit");
+        //if (ship.getVariant().hasHullMod("advancedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "advancedshieldemitter", KOLStaticStrings.KNIGHT_REFIT);
+        //if (ship.getVariant().hasHullMod("frontemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "frontemitter", KOLStaticStrings.KNIGHT_REFIT);
         if (ship.getVariant().hasHullMod("extendedshieldemitter")) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), "extendedshieldemitter", "kol_conformal_shield");
         if (ship.getShield().getArc() >= maxArc) ship.getShield().setArc(maxArc);
      }

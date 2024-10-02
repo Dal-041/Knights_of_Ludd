@@ -5,6 +5,7 @@ import com.fs.starfarer.api.campaign.*;
 import org.selkie.kol.impl.campaign.interactions.DuskNullStationInteraction;
 import org.selkie.kol.impl.campaign.interactions.ElysianHypershuntInteraction;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 public class ZeaCampaignPlugin extends BaseCampaignPlugin {
 
@@ -28,7 +29,7 @@ public class ZeaCampaignPlugin extends BaseCampaignPlugin {
 
         if (opponent instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) opponent;
-            if (fleet.getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.MEMKEY_ZEA_NINAYA_BOSS_FLEET)) {
+            if (fleet.getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_NINAYA_BOSS_FLEET)) {
                 return new PluginPick<BattleCreationPlugin>(new NinayaBattleCreationPlugin(), PickPriority.HIGHEST);
             }
         }

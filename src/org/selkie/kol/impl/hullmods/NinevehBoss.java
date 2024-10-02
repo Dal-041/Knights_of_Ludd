@@ -16,6 +16,7 @@ import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 
 import java.awt.*;
 
@@ -47,7 +48,7 @@ public class NinevehBoss extends BaseHullMod {
                 ship.setHitpoints(1f);
                 ship.getMutableStats().getHullDamageTakenMult().modifyMult(id, 0.000001f);
                 if (!ship.isPhased()) {
-                    Global.getSoundPlayer().playSound("system_phase_cloak_activate", 1f, 1f, ship.getLocation(), ship.getVelocity());
+                    Global.getSoundPlayer().playSound(ZeaStaticStrings.SYSTEM_PHASE_CLOAK_ACTIVATE, 1f, 1f, ship.getLocation(), ship.getVelocity());
                 }
                 ship.getMutableStats().getPeakCRDuration().modifyFlat(id, ship.getHullSpec().getNoCRLossSeconds());
                 Utils.shipSpawnExplosion(ship.getShieldRadiusEvenIfNoShield(), ship.getLocation());
@@ -207,11 +208,11 @@ public class NinevehBoss extends BaseHullMod {
 
                 if(phaseTwoTimer > MAX_TIME*4/7){
                     if (escortHyperionA == null) {
-                        escortHyperionA = fleetManager.spawnShipOrWing("zea_boss_hyperion_Strike", escortHyperionASpawn, escortFacing + 60f, 0f, hyperionCaptain);
+                        escortHyperionA = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HYPERION_STRIKE, escortHyperionASpawn, escortFacing + 60f, 0f, hyperionCaptain);
                         Utils.shipSpawnExplosion(escortHyperionA.getShieldRadiusEvenIfNoShield(), escortHyperionA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHyperionA), assignmentInfo, false);
 
-                        escortHyperionB = fleetManager.spawnShipOrWing("zea_boss_hyperion_Strike", escortHyperionBSpawn, escortFacing + 240f, 0f, hyperionCaptain);
+                        escortHyperionB = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HYPERION_STRIKE, escortHyperionBSpawn, escortFacing + 240f, 0f, hyperionCaptain);
                         Utils.shipSpawnExplosion(escortHyperionB.getShieldRadiusEvenIfNoShield(), escortHyperionB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHyperionB), assignmentInfo, false);
                     } else{
@@ -230,12 +231,12 @@ public class NinevehBoss extends BaseHullMod {
                 }
                 if(phaseTwoTimer > MAX_TIME*5/7){
                     if (escortHarbingerA == null || escortHarbingerB == null) {
-                        escortHarbingerA = fleetManager.spawnShipOrWing("zea_boss_harbinger_Strike", escortHarbingerASpawn, escortFacing + 120f, 0f, harbingerCaptain);
+                        escortHarbingerA = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HARBINGER_STRIKE, escortHarbingerASpawn, escortFacing + 120f, 0f, harbingerCaptain);
                         Utils.shipSpawnExplosion(escortHarbingerA.getShieldRadiusEvenIfNoShield(), escortHarbingerA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHarbingerA), assignmentInfo, false);
                         escortHarbingerA.getSystem().setCooldownRemaining(escortHarbingerA.getSystem().getCooldown());
 
-                        escortHarbingerB = fleetManager.spawnShipOrWing("zea_boss_harbinger_Strike", escortHarbingerBSpawn, escortFacing + 300f, 0f, harbingerCaptain);
+                        escortHarbingerB = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_HARBINGER_STRIKE, escortHarbingerBSpawn, escortFacing + 300f, 0f, harbingerCaptain);
                         Utils.shipSpawnExplosion(escortHarbingerB.getShieldRadiusEvenIfNoShield(), escortHarbingerB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortHarbingerB), assignmentInfo, false);
                         escortHarbingerB.getSystem().setCooldownRemaining(escortHarbingerB.getSystem().getCooldown());
@@ -253,12 +254,12 @@ public class NinevehBoss extends BaseHullMod {
                 }
                 if(phaseTwoTimer > MAX_TIME*6/7){
                     if (escortDoomA == null || escortDoomB == null) {
-                        escortDoomA = fleetManager.spawnShipOrWing("zea_boss_doom_Strike", escortDoomASpawn, escortFacing, 0f, doomCaptain);
+                        escortDoomA = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_DOOM_STRIKE, escortDoomASpawn, escortFacing, 0f, doomCaptain);
                         Utils.shipSpawnExplosion(escortDoomA.getShieldRadiusEvenIfNoShield(), escortDoomA.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortDoomA), assignmentInfo, false);
                         escortDoomA.getSystem().setAmmo(0);
 
-                        escortDoomB = fleetManager.spawnShipOrWing("zea_boss_doom_Strike", escortDoomBSpawn, escortFacing + 180f, 0f, doomCaptain);
+                        escortDoomB = fleetManager.spawnShipOrWing(ZeaStaticStrings.ZEA_BOSS_DOOM_STRIKE, escortDoomBSpawn, escortFacing + 180f, 0f, doomCaptain);
                         Utils.shipSpawnExplosion(escortDoomB.getShieldRadiusEvenIfNoShield(), escortDoomB.getLocation());
                         taskManager.giveAssignment(fleetManager.getDeployedFleetMemberEvenIfDisabled(escortDoomB), assignmentInfo, false);
                         escortDoomB.getSystem().setAmmo(0);
@@ -280,8 +281,8 @@ public class NinevehBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains(ZeaStaticStrings.MemKeys.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaMemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains(ZeaMemKeys.BOSS_TAG))));
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             if(!ship.hasListenerOfClass(NinevehBossPhaseTwoScript.class)) ship.addListener(new NinevehBossPhaseTwoScript(ship));

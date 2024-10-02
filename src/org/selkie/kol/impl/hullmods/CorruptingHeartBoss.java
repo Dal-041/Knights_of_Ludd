@@ -17,6 +17,8 @@ import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.impl.combat.subsystems.ShachihokoDroneSubsystem;
 import org.selkie.kol.impl.combat.subsystems.ShachihokoTideSubsystem;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaDrops;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.kol.impl.shipsystems.CorruptionJetsStats;
 
 import java.awt.Color;
@@ -160,8 +162,8 @@ public class CorruptingHeartBoss extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        boolean isBoss = ship.getVariant().hasTag(ZeaStaticStrings.MemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
-                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaStaticStrings.MemKeys.BOSS_TAG))));
+        boolean isBoss = ship.getVariant().hasTag(ZeaMemKeys.BOSS_TAG) || (ship.getFleetMember() != null && (ship.getFleetMember().getFleetData() != null &&
+                (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().contains(ZeaMemKeys.BOSS_TAG))));
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
             ship.addListener(new CorruptingHeartPhaseTwoScript(ship));
 

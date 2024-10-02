@@ -17,6 +17,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys
 import java.awt.Color
 import java.util.*
 import kotlin.math.roundToInt
@@ -118,7 +119,7 @@ class DawnBuiltin : BaseHullMod() {
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         super.applyEffectsAfterShipCreation(ship, id)
         ship.setCustomData(DRONE_ADDED_KEY, true)
-        val isBoss = ship.variant.hasTag(ZeaStaticStrings.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaStaticStrings.BOSS_TAG)
+        val isBoss = ship.variant.hasTag(ZeaMemKeys.BOSS_TAG) || ship.fleetMember != null && ship.fleetMember.fleetData != null && ship.fleetMember.fleetData.fleet != null && ship.fleetMember.fleetData.fleet.memoryWithoutUpdate.contains(ZeaMemKeys.BOSS_TAG)
         if(!isBoss){
             addSubsystemToShip(ship, ShieldDronesSubsystem(ship, getNumDrones(ship), false))
         }

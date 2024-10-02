@@ -13,6 +13,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat;
 
 import java.awt.*;
 
@@ -29,7 +30,7 @@ public class AbyssBlackBeam extends AbyssPulsarBeamTerrainPlugin {
             name = "Lure of the Abyss";
             nameTooltip = "Lure of the Abyss";
             multiplyArc(0.65f);
-            flareTexture = Global.getSettings().getSprite(ZeaStaticStrings.TERRAIN, ZeaStaticStrings.AURORA);
+            flareTexture = Global.getSettings().getSprite(ZeaGfxCat.TERRAIN, "aurora");
             //pulsarRotation = -1f * (10f + (float) Math.random() * 10f);
             pulsarRotation *= 8f;
             inited = true;
