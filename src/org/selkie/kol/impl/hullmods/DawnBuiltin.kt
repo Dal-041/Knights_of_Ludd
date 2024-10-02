@@ -17,6 +17,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.combat.subsystems.ShieldDronesSubsystem
 import org.selkie.kol.impl.helpers.ZeaStaticStrings
+import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaGfxCat
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaMemKeys
 import java.awt.Color
 import java.util.*
@@ -154,7 +155,7 @@ class DawnBuiltin : BaseHullMod() {
         val background = tooltip!!.addLunaElement(0f, 0f)
 
         tooltip.addSectionHeading("Cascade Protocol", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "dawn_cascade"), HEIGHT)
+        val cascadeProtocol = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "dawn_cascade"), HEIGHT)
         cascadeProtocol.setBulletedListMode("•")
         cascadeProtocol.setBulletWidth(15f)
         val para1 = cascadeProtocol.addPara("Increases the range of ballistic and energy weapons by ${RANGE_BONUS.toInt()}%% while over ${ENMITY_HP_THRESHOLD.toInt()}%% hull.",
@@ -178,7 +179,7 @@ class DawnBuiltin : BaseHullMod() {
             "Chiwen Shield Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
             if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
         )
-        val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
+        val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
         shieldDrones.setBulletedListMode("•")
         shieldDrones.setBulletWidth(15f)
         val para3 = shieldDrones.addPara(
@@ -196,7 +197,7 @@ class DawnBuiltin : BaseHullMod() {
 
 
         tooltip.addSectionHeading("Advanced Solar Plating", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val solarPlating = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaStaticStrings.ICONS, "dawn_solar"), HEIGHT)
+        val solarPlating = tooltip.beginImageWithText(Global.getSettings().getSpriteName(ZeaGfxCat.ICONS, "dawn_solar"), HEIGHT)
         solarPlating.setBulletedListMode("•")
         solarPlating.setBulletWidth(15f)
         solarPlating.addPara("Decreases the CR-damaging effects of operating in star corona and hyperspace storms by %s.",

@@ -7,6 +7,8 @@ import com.fs.starfarer.api.impl.campaign.ids.Stats;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
+import org.lazywizard.lazylib.VectorUtils;
+import org.lwjgl.util.vector.Vector2f;
 
 import java.util.Iterator;
 
@@ -71,7 +73,7 @@ public class PhaseCloakStats extends BaseShipSystemScript {
             ship.setPhased(true);
             levelForAlpha = effectLevel;
         } else if (state == State.OUT) {
-            // make sure to force the system back on if overlapping
+            // dynamically repulse when in phase out
             Iterator<Object> iterator = Global.getCombatEngine().getAllObjectGrid().getCheckIterator(ship.getLocation(), ship.getCollisionRadius()*2 + 500f, ship.getCollisionRadius()*2 + 500f);
             while (iterator.hasNext() ) {
                 Object next = iterator.next();
@@ -80,9 +82,14 @@ public class PhaseCloakStats extends BaseShipSystemScript {
                 if(ship == entity) continue;
                 if(entity.getCollisionClass() != CollisionClass.SHIP) continue;
                 float distance = Misc.getTargetingRadius(ship.getLocation(), entity, false) + Misc.getTargetingRadius(entity.getLocation(), ship, false);
-                if (MathUtils.getDistanceSquared(ship.getLocation(), entity.getLocation()) > distance*distance) continue;
+                float actualDistance = MathUtils.getDistanceSquared(ship.getLocation(), entity.getLocation());
+                if (actualDistance < distance*distance) {
 
-                ship.getPhaseCloak().forceState(ShipSystemAPI.SystemState.ACTIVE, 1f);
+                    float shipMoveRatio = Misc.interpolate(0, 1f, entity.getMass() / (entity.getMass() + ship.getMass()));
+                    float shipMoveStrength = 0.1f * Global.getCombatEngine().getElapsedInLastFrame();
+                    Vector2f.add(ship.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(entity.getLocation(), ship.getLocation()).scale((distance*distance - actualDistance) * shipMoveRatio *shipMoveStrength), ship.getVelocity());
+                    Vector2f.add(entity.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(ship.getLocation(), entity.getLocation()).scale((distance*distance - actualDistance) * (1f-shipMoveRatio)*shipMoveStrength), entity.getVelocity());
+                }
             }
 
             ship.setPhased(effectLevel > 0.5f);
