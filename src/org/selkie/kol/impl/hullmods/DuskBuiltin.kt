@@ -39,6 +39,9 @@ class DuskBuiltin : BaseHullMod() {
 
     override fun advanceInCombat(ship: ShipAPI?, amount: Float) {
         val engine = Global.getCombatEngine()
+
+        if (ship?.isHulk == true) return
+
         allMotes.retainAll { engine.isMissileAlive(it) }
 
         if(ship?.hullSpec?.hullId == "zea_boss_ninaya"){
@@ -75,8 +78,7 @@ class DuskBuiltin : BaseHullMod() {
             val engine = Global.getCombatEngine()
             if(!ship.isAlive){
                 for(mote in activeMotes){
-                    mote.explode()
-                    engine.removeEntity(mote)
+                    mote.flameOut()
                 }
                 return
             }
