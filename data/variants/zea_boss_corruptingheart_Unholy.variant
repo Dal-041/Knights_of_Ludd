@@ -1,15 +1,18 @@
 {
     "displayName": "Unholy",
-    "fluxCapacitors": 0,
+    "fluxCapacitors": 20,
     "fluxVents": 40,
     "goalVariant": true,
     "hullId": "zea_boss_corruptingheart",
-    "hullMods": [
-        "stabilizedshieldemitter",
+    "hullMods": [],
+    "permaMods": [
+        "hardenedshieldemitter",
         "targetingunit",
     ],
-    "permaMods": [],
-    "sMods": [],
+    "sMods": [
+        "hardenedshieldemitter",
+        "targetingunit",
+    ],
     "suppressedMods": [],
     "variantId": "zea_boss_corruptingheart_Unholy",
     "weaponGroups": [
@@ -25,34 +28,26 @@
             "autofire": false,
             "mode": "ALTERNATING",
             "weapons": {
-                "WS0009": "amsrm",
                 "WS0010": "amsrm",
+                "WS0009": "amsrm",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "heavyneedler",
-                "WS0005": "heavyneedler",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0004": "ionbeam",
                 "WS0001": "ionbeam",
+                "WS0004": "ionbeam",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0008": "vulcan",
-                "WS0007": "vulcan",
-                "WS0014": "vulcan",
-                "WS0013": "vulcan",
+                "WS0038": "zea_styrax_driver",
+                "WS0015": "zea_styrax_driver",
+                "WS0005": "zea_styrax_driver",
+                "WS0006": "zea_styrax_driver",
             }
         },
         {
@@ -67,7 +62,10 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0015": "pdburst",
+                "WS0014": "vulcan",
+                "WS0013": "vulcan",
+                "WS0008": "vulcan",
+                "WS0007": "vulcan",
             }
         },
     ],

@@ -1,7 +1,7 @@
 {
     "displayName": "Wrath",
     "fluxCapacitors": 0,
-    "fluxVents": 18,
+    "fluxVents": 48,
     "goalVariant": true,
     "hullId": "kol_invictus",
     "hullMods": [

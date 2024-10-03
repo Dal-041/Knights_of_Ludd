@@ -1,22 +1,20 @@
 {
     "displayName": "Penultimate",
-    "fluxCapacitors": 28,
+    "fluxCapacitors": 33,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_boss_yukionna",
     "hullMods": [
         "fluxbreakers",
-        "fluxdistributor",
+        "stabilizedshieldemitter",
+    ],
+    "permaMods": [
         "hardenedshieldemitter",
         "targetingunit",
     ],
-    "permaMods": [
-        "auxiliarythrusters",
-        "stabilizedshieldemitter",
-    ],
     "sMods": [
-        "auxiliarythrusters",
-        "stabilizedshieldemitter",
+        "hardenedshieldemitter",
+        "targetingunit",
     ],
     "suppressedMods": [],
     "variantId": "zea_boss_yukionna_Penultimate",

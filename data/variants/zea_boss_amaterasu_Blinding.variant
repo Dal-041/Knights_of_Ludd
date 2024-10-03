@@ -1,6 +1,6 @@
 {
     "displayName": "Blinding",
-    "fluxCapacitors": 7,
+    "fluxCapacitors": 29,
     "fluxVents": 50,
     "goalVariant": true,
     "hullId": "zea_boss_amaterasu",
@@ -72,8 +72,8 @@
         },
     ],
     "wings": [
-        "lux_wing",
-        "lux_wing",
+        "zea_edf_itsumade_wing",
+        "zea_edf_onmoraki_wing",
     ],
     "modules": [],
 }
