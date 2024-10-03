@@ -1,0 +1,137 @@
+{
+    "hullName": "Stormbreaker",
+    "hullId": "logi_stormbreaker",
+    "hullSize": "DESTROYER",
+    "style": "HIGH_TECH",
+    "spriteName": "graphics/ships/logi_stormbreaker.png",
+    "height": 240,
+    "width": 119,
+    "center": [
+        59, 120
+    ],
+    "collisionRadius": 138,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 129,
+    "viewOffset": 0,
+    "builtInMods": [
+        "logi_stormrider"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [],
+    "engineSlots": [
+        {
+            "location": [
+                -64, 19.5
+            ],
+            "length": 58,
+            "width": 14,
+            "angle": 180,
+            "contrailSize": 12,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -64, -19.5
+            ],
+            "length": 58,
+            "width": 14,
+            "angle": 180,
+            "contrailSize": 12,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -63, 19.5
+            ],
+            "length": 40,
+            "width": 8,
+            "angle": 180,
+            "contrailSize": 12,
+            "style": "MIDLINE"
+        },
+        {
+            "location": [
+                -63, -19.5
+            ],
+            "length": 40,
+            "width": 8,
+            "angle": 180,
+            "contrailSize": 12,
+            "style": "MIDLINE"
+        }
+    ],
+    "bounds": [
+             112,       -5,
+           106.5,      -11,
+            99.5,      -11,
+              95,      -20,
+              93,    -15.5,
+        
+            85.5,      -15,
+            81.5,    -45.5,
+            65.5,    -45.5,
+              61,      -23,
+              57,      -27,
+        
+            40.5,    -26.5,
+            36.5,      -20,
+              32,      -38,
+              23,      -38,
+              18,    -34.5,
+        
+            12.5,    -34.5,
+              14,    -42.5,
+            -7.5,    -49.5,
+             -48,      -42,
+           -52.5,      -38,
+        
+             -76,      -35,
+           -71.5,    -29.5,
+             -55,      -27,
+           -64.5,      -23,
+           -64.5,      -13,
+        
+           -80.5,      -13,
+             -82,       -6,
+            -113,       -5,
+          -117.5,        0,
+            -113,        5,
+        
+             -82,        6,
+           -80.5,       13,
+           -64.5,       13,
+           -64.5,       23,
+             -55,       27,
+        
+           -71.5,     29.5,
+             -76,       35,
+           -52.5,       38,
+             -48,       42,
+            -7.5,     49.5,
+        
+              14,     42.5,
+            12.5,     34.5,
+              18,     34.5,
+              23,       38,
+              32,       38,
+        
+            36.5,       20,
+            40.5,     26.5,
+              57,       27,
+              61,       23,
+            65.5,     45.5,
+        
+            81.5,     45.5,
+            85.5,       15,
+              95,       20,
+            99.5,       11,
+           106.5,       11,
+        
+             112,        5
+    # 56 points total.
+    ]
+}
