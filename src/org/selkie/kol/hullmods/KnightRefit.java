@@ -280,7 +280,7 @@ public class KnightRefit extends BaseHullMod {
         Color inactiveHeaderTextColor = Misc.getGrayColor().darker();
         Color inactiveHighlightColor = Misc.getGrayColor().darker();
 
-        new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite(GfxCat.FX, "kol_refit_hmod"), 0.6f);
+        new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite(GfxCat.UI, "kol_refit_hmod"), 0.6f);
 
         boolean hasComposite = false;
         for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){

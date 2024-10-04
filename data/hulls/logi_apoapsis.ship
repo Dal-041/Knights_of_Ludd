@@ -27,8 +27,8 @@
             "size": "MEDIUM",
             "type": "ENERGY",
             "mount": "TURRET",
-            "arc": 270,
-            "angle": 190,
+            "arc": 325,
+            "angle": 162.5,
             "locations": [
                      -28,      -16
             ]
@@ -38,7 +38,7 @@
             "size": "MEDIUM",
             "type": "ENERGY",
             "mount": "TURRET",
-            "arc": 250,
+            "arc": 240,
             "angle": 55,
             "locations": [
                       68,        2
@@ -82,7 +82,7 @@
             "size": "SMALL",
             "type": "SYNERGY",
             "mount": "TURRET",
-            "arc": 130,
+            "arc": 110,
             "angle": 85,
             "locations": [
                       27,       18

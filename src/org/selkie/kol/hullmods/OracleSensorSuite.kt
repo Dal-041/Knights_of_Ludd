@@ -15,7 +15,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.Utils
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 
-class Oracle : BaseHullMod() {
+class OracleSensorSuite : BaseHullMod() {
     val COMMAND_POINT_RATE_FLAT_BONUS = 250f // +250%
     val COORDINATED_MANEUVERS_FLAT_BONUS = 5f // +5%
     val ELECTRONIC_WARFARE_FLAT_BONUS = 5f // +5%
@@ -70,20 +70,24 @@ class Oracle : BaseHullMod() {
         val activeHeaderTextColor = Utils.brighter(Misc.getButtonTextColor(), 0.8f)
         val activeHighlightColor = Misc.getHighlightColor()
 
-        tooltip.addSectionHeading("Oracle Sensor Suite", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
-        val oracle = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "logi_oracle"), HEIGHT)
+        tooltip.addSectionHeading("Oracle Survey Systems", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+        val oracleSurvey = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "logi_oracle_survey"), HEIGHT)
+        oracleSurvey.setBulletWidth(15f)
+        oracleSurvey.setBulletedListMode("•")
+        oracleSurvey.addPara("Reduces the heavy machinery and supplies required to perform surveys by %s",listPad, activeTextColor, activeHighlightColor, SURVEY_SUPPLY_REDUCTION.toInt().toString())
+        oracleSurvey.addPara("Increases the fleets's sensor range by %s",listPad, activeTextColor, activeHighlightColor, HRS_SENSOR_RANGE_MOD_BONUS.toInt().toString())
+        oracleSurvey.addPara("Grants the Oracle Neutrino Filter ability, augementing the Neutrino Detector to only detect artifical sources.",listPad, activeTextColor, activeHighlightColor, "Oracle Neutrino Filter")
+        tooltip.addImageWithText(underHeadingPad)
 
-        oracle.setBulletWidth(15f)
-        oracle.setBulletedListMode("•")
-        oracle.addPara("Reduces the heavy machinery and supplies required to perform surveys by %s",listPad, activeTextColor, activeHighlightColor, SURVEY_SUPPLY_REDUCTION.toInt().toString())
-        oracle.addPara("Increases the fleets's sensor range by %s",listPad, activeTextColor, activeHighlightColor, HRS_SENSOR_RANGE_MOD_BONUS.toInt().toString())
-        oracle.setBulletedListMode(null)
-        oracle.addPara("When deployed in combat:", underHeadingPad)
-        oracle.setBulletedListMode("•")
-        oracle.addPara("Increases nav rating of your fleet by %s",listPad, activeTextColor, activeHighlightColor, COORDINATED_MANEUVERS_FLAT_BONUS.toInt().toString()+"%")
-        oracle.addPara("Increases ECM rating of your fleet by %s",listPad, activeTextColor, activeHighlightColor, ELECTRONIC_WARFARE_FLAT_BONUS.toInt().toString()+"%")
-        oracle.addPara("Increases vision range by %s",listPad, activeTextColor, activeHighlightColor, SIGHT_RANGE_BONUS.toInt().toString())
-        oracle.addPara("If this is the flagship, increases command point recovery rate by %s",listPad, activeTextColor, activeHighlightColor, COMMAND_POINT_RATE_FLAT_BONUS.toInt().toString()+"%")
+        tooltip.addSectionHeading("Oracle Command-and-Control", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+        val oracleCommandAndControl = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "logi_oracle_commandcontrol"), HEIGHT)
+        oracleCommandAndControl.addPara("When deployed in combat:", listPad)
+        oracleCommandAndControl.setBulletWidth(15f)
+        oracleCommandAndControl.setBulletedListMode("•")
+        oracleCommandAndControl.addPara("Increases nav rating of your fleet by %s",listPad, activeTextColor, activeHighlightColor, COORDINATED_MANEUVERS_FLAT_BONUS.toInt().toString()+"%")
+        oracleCommandAndControl.addPara("Increases ECM rating of your fleet by %s",listPad, activeTextColor, activeHighlightColor, ELECTRONIC_WARFARE_FLAT_BONUS.toInt().toString()+"%")
+        oracleCommandAndControl.addPara("Increases vision range by %s",listPad, activeTextColor, activeHighlightColor, SIGHT_RANGE_BONUS.toInt().toString())
+        oracleCommandAndControl.addPara("If this is the flagship, increases command point recovery rate by %s",listPad, activeTextColor, activeHighlightColor, COMMAND_POINT_RATE_FLAT_BONUS.toInt().toString()+"%")
         tooltip.addImageWithText(underHeadingPad)
     }
 }
