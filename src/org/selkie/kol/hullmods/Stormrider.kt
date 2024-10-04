@@ -12,30 +12,27 @@ import java.util.Random
 class Stormrider : BaseHullMod()  {
 
     val boostScriptNeedsAdjusting = mutableSetOf<String>()
-    var fleetHasScripts = false
     val rand = Random()
 
     override fun advanceInCampaign(member: FleetMemberAPI?, amount: Float) {
-        val fleet = member?.fleetData?.fleet
-        if (fleet == null) return
+        val fleet = member?.fleetData?.fleet ?: return
 
         for(script in fleet.scripts){
             if(script is HyperStormBoost){
-                fleetHasScripts = true
-                if (script.toString() !in boostScriptNeedsAdjusting){
+                if (script.toString() !in boostScriptNeedsAdjusting && !script.isDone){
                     boostScriptNeedsAdjusting.add(script.toString())
                     ReflectionUtils.set("angle", script, (VectorUtils.getFacing(fleet.velocity) + rand.nextGaussian()*30f).toFloat())
+                }
+                if (script.isDone){
+                    boostScriptNeedsAdjusting.remove(script.toString())
                 }
             }
         }
 
-        for(member in fleet.fleetData.membersListCopy){
-            member.stats.dynamic.getStat(Stats.CORONA_EFFECT_MULT).modifyMult("Stormrider_fleet", 0.1f);
+        val resistance = if(fleet.isInHyperspace) 0.9f else 0.45f
+        for(otherMember in fleet.fleetData.membersListCopy){
+            otherMember.stats.dynamic.getStat(Stats.CORONA_EFFECT_MULT).modifyMult("Stormrider_fleet", 1f-resistance);
         }
-    }
-
-    override fun advanceInCombat(ship: ShipAPI?, amount: Float) {
-        boostScriptNeedsAdjusting.clear() // lazy way to prevent a memory leak
     }
 
     override fun getDescriptionParam(index: Int, hullSize: ShipAPI.HullSize?): String? {

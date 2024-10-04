@@ -16,6 +16,9 @@
     ],
     "shieldRadius": 186,
     "viewOffset": 0,
+    "builtInMods": [
+        "logi_oracle"
+    ],
     "builtInWings": [],
     "builtInModules": null,
     "weaponSlots": [

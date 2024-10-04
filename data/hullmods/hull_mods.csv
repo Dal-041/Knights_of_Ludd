@@ -6,7 +6,8 @@ Knight Module,kol_module,,0,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.KnightMod
 Lunaria Thrust Vectoring,kol_module_vectoring,,0,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.kol.hullmods.LunariaArmorModuleVectoring,Armor module vectoring,Armor module vectoring,,graphics/icons/skills/polarized_armor.png,
 Stormrider,logi_stormrider,,0,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.Stormrider,"Built into the central hull of every Stormbreak class ship lies a massive toroidal magnetic hyperstorm shield.
  
-Redirects hyperstorm strikes to generally align with your current fleets heading. Decreases the effect operating in a solar corona has on combat readiness by %s for the entire fleet; also has the same effect against storms in deep hyperspace.",Stormrider,,graphics/icons/abilities/slipsurge.png,
+Redirects hyperstorm strikes to generally align with your current fleets heading. Decreases the effect hyperstorm strikes has on combat readiness by %s for the entire fleet; also has half the effect for operations in a solar corona .",Stormrider,,graphics/icons/abilities/slipsurge.png,
+Oracle,logi_oracle,,0,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.Oracle,"Covered from stem to stern with every type of scanner known to exist, the Oracle Sensor Suite provides unmatched early warning, navigation charting, and command-and-control capabilities.",Oracle,,,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,

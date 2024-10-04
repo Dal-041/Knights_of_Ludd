@@ -365,6 +365,7 @@
 			"kol_composite_grey": "graphics/icons/hullsys/kol_composite_grey_ico.png",
 			"kol_primshield_grey": "graphics/icons/hullsys/kol_primshield_grey_ico.png",
 			"kol_modules_grey": "graphics/icons/hullsys/kol_modules_grey_ico.png",
+			"logi_oracle": "graphics/icons/hullsys/logi_oracle_ico.png",
 			"kol_USC_ping":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/PING.png",
 			"game_icon":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/icons/icon.png"
 		},

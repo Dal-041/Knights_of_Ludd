@@ -17,7 +17,9 @@
     "shieldRadius": 129,
     "viewOffset": 0,
     "builtInMods": [
-        "logi_stormrider"
+        "civgrade",
+        "high_maintenance",
+        "logi_stormrider",
     ],
     "builtInWings": [],
     "builtInModules": null,
