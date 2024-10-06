@@ -49,6 +49,21 @@ object ReflectionUtils {
         setFieldAccessibleHandle.invoke(field, true)
         return getFieldHandle.invoke(field, instanceToGetFrom)
     }
+    @JvmStatic
+    fun getFromSuper(fieldName: String, instanceToGetFrom: Any): Any? {
+        var field: Any? = null
+
+        try {
+            field = instanceToGetFrom.javaClass.superclass.getField(fieldName)
+        } catch (_: Exception) {
+        }
+        if (field == null) {
+            field = instanceToGetFrom.javaClass.superclass.getDeclaredField(fieldName)
+        }
+
+        setFieldAccessibleHandle.invoke(field, true)
+        return getFieldHandle.invoke(field, instanceToGetFrom)
+    }
 
     fun hasMethodOfName(name: String, instance: Any, contains: Boolean = false): Boolean {
         val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredMethods()

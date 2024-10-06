@@ -5,6 +5,9 @@ import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.MutableShipStatsAPI
 import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
+import com.fs.starfarer.api.fleet.FleetMemberAPI
+import com.fs.starfarer.api.impl.campaign.abilities.GraviticScanAbility
+import com.fs.starfarer.api.impl.campaign.ids.Abilities
 import com.fs.starfarer.api.impl.campaign.ids.Commodities
 import com.fs.starfarer.api.impl.campaign.ids.HullMods
 import com.fs.starfarer.api.impl.campaign.ids.Stats
@@ -12,7 +15,9 @@ import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.magiclib.util.MagicIncompatibleHullmods
+import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
+import org.selkie.kol.abilities.OracleScanData
 import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
 
 class OracleSensorSuite : BaseHullMod() {
@@ -37,6 +42,17 @@ class OracleSensorSuite : BaseHullMod() {
             ship.mutableStats.dynamic.getMod(Stats.COMMAND_POINT_RATE_FLAT).modifyFlat(MOD_ID, COMMAND_POINT_RATE_FLAT_BONUS*0.01f)
         } else {
             ship.mutableStats.dynamic.getMod(Stats.COMMAND_POINT_RATE_FLAT).unmodify(MOD_ID)
+        }
+    }
+
+    override fun advanceInCampaign(member: FleetMemberAPI?, amount: Float) {
+        val playerFleet = Global.getSector().playerFleet
+        if(!playerFleet.fleetData.membersListCopy.contains(member)) return
+        playerFleet.abilities[Abilities.GRAVITIC_SCAN]?.let { it ->
+            val data = ReflectionUtils.get("data", it)
+            if (data != null && data !is OracleScanData){
+                ReflectionUtils.set("data", it, OracleScanData(it as GraviticScanAbility))
+            }
         }
     }
 
@@ -76,7 +92,7 @@ class OracleSensorSuite : BaseHullMod() {
         oracleSurvey.setBulletedListMode("•")
         oracleSurvey.addPara("Reduces the heavy machinery and supplies required to perform surveys by %s",listPad, activeTextColor, activeHighlightColor, SURVEY_SUPPLY_REDUCTION.toInt().toString())
         oracleSurvey.addPara("Increases the fleets's sensor range by %s",listPad, activeTextColor, activeHighlightColor, HRS_SENSOR_RANGE_MOD_BONUS.toInt().toString())
-        oracleSurvey.addPara("Grants the Oracle Neutrino Filter ability, augementing the Neutrino Detector to only detect artifical sources.",listPad, activeTextColor, activeHighlightColor, "Oracle Neutrino Filter")
+        oracleSurvey.addPara("Augments the Neutrino Detector ability to only detect artifical objects with no false readings.",listPad, activeTextColor, activeHighlightColor, "Neutrino Detector")
         tooltip.addImageWithText(underHeadingPad)
 
         tooltip.addSectionHeading("Oracle Command-and-Control", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
