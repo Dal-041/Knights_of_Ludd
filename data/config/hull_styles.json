@@ -12,7 +12,7 @@
 		"fluxVentCoreColor":[15,150,255,255],
 		"fluxVentFringeColor":[30,70,255,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png",
-		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_kol_radial_fx.png",
+		"fluxVentRadialTexture":"graphics/zea/fx/zea_kol_radial_fx.png",
 		"engineLoopSet":"engine_loop",
 		"engineAccelerateSet":"engine_accelerate",
 		"empLoopSet":"kol_emp_loop",
@@ -53,7 +53,7 @@
 		"shieldInnerColor":[235,125,255,75],
 		"fluxVentCoreColor":[125,0,155,255],
 		"fluxVentFringeColor":[15,150,255,255],
-		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dusk_radial_fx.png",
+		"fluxVentRadialTexture":"graphics/zea/fx/zea_dusk_radial_fx.png",
 		"engineLoopSet":"engine_loop", 					# id of entry in sounds.json
 		"engineAccelerateSet":"engine_accelerate",		# id of entry in sounds.json
 		"empLoopSet":"emp_loop",						# id of entry in sounds.json
@@ -92,7 +92,7 @@
 		"fluxVentCoreColor":[30,70,255,255],
 		"fluxVentFringeColor":[150,255,50,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png", # optional, this is the default value
-		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_dawn_radial_fx.png",
+		"fluxVentRadialTexture":"graphics/zea/fx/zea_dawn_radial_fx.png",
 		"engineLoopSet":"engine_loop",
 		"engineAccelerateSet":"engine_accelerate",
 		"empLoopSet":"zea_dawn_emp_loop",
@@ -132,7 +132,7 @@
 		"fluxVentCoreColor":[255,255,255,255],
 		"fluxVentFringeColor":[255,0,0,255],
 		"fluxVentTextureSheet":"graphics/fx/nebula_colorless.png", # optional, this is the default value
-		"fluxVentRadialTexture":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_elysia_radial_fx.png",
+		"fluxVentRadialTexture":"graphics/zea/fx/zea_elysia_radial_fx.png",
 		"engineLoopSet":"engine_loop", 					# id of entry in sounds.json
 		"engineAccelerateSet":"engine_accelerate",		# id of entry in sounds.json
 		"empLoopSet":"emp_loop",						# id of entry in sounds.json

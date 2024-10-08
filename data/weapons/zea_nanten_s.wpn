@@ -6,10 +6,10 @@
 
   "beamEffect":"org.selkie.kol.weapons.KOL_FlareBeamEffect",
 
-  "turretSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_nanten_s_base.png",
-  "turretGlowSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_nanten_s_glow.png",
-  "hardpointSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_nanten_s_hardpoint.png",
-  "hardpointGlowSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_nanten_s_hardpoint_glow.png",
+  "turretSprite": "graphics/zea/weapons/kol_nanten_s_base.png",
+  "turretGlowSprite": "graphics/zea/weapons/kol_nanten_s_glow.png",
+  "hardpointSprite": "graphics/zea/weapons/kol_nanten_s_hardpoint.png",
+  "hardpointGlowSprite": "graphics/zea/weapons/kol_nanten_s_hardpoint_glow.png",
   "fringeColor":[255,120,170,155],
   "coreColor":[255,190,255,255],
   "glowColor": [180,150,220,255],
@@ -26,8 +26,8 @@
   "animationType": "GLOW",
   #"textureType": ROUGH,
   "textureType": [
-    "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_beam_fringe.png",
-    "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_hosta_beam_core.png"
+    "graphics/zea/fx/zea_beam_fringe.png",
+    "graphics/zea/fx/zea_hosta_beam_core.png"
   ],
   "fireSoundTwo": "tachyon_lance_fire"
 }

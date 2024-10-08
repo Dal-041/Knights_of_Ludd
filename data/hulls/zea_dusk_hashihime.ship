@@ -2,7 +2,7 @@
   "hullName": "Hashihime",
   "hullId": "zea_dusk_hashihime",
   "hullSize": "CRUISER",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_hashihime.png",
+  "spriteName": "graphics/zea/ships/zea_dusk_hashihime.png",
   "style": "ZEA_DUSK_TECH",
   "height": 310,
   "width": 246,

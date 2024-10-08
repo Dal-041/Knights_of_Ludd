@@ -2,7 +2,7 @@
   "hullName": "Libra",
   "hullId": "kol_libra",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/libra/kol_libra.png",
+  "spriteName": "graphics/kol/ships/libra/kol_libra.png",
   "style": "KOL_TECH",
   "height": 202,
   "width": 194,

@@ -9,7 +9,7 @@ import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.kol.helpers.KolStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.zea.helpers.ZeaStaticStrings;
 
 public class SpawnRetribution {
 	

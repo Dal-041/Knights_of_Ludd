@@ -2,7 +2,7 @@
 	"id":"zea_mazuma_torp",
 	"specClass":"missile",
 	"missileType":"ROCKET",
-	"sprite":"graphics/missiles/kol_lunete_msl.png",
+	"sprite":"graphics/kol/missiles/kol_lunete_msl.png",
 	"size":[14,23],	
 	"center":[7,11],
 	"collisionRadius":20,

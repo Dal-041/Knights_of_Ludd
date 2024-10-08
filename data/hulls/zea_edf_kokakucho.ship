@@ -3,7 +3,7 @@
   "hullId": "zea_edf_kokakucho",
   "hullSize": "FIGHTER",
   "style": "ZEA_ELYSIAN_TECH",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_kokakucho.png",
+  "spriteName": "graphics/zea/ships/fighters/zea_edf_kokakucho.png",
   "height": 68,
   "width": 60,
   "center": [

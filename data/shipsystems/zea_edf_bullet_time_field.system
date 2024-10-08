@@ -3,7 +3,7 @@
     "type":"ENGINE_MOD",
     "aiType":"MANEUVERING_JETS",
 
-	"statsScript":"org.selkie.kol.impl.shipsystems.BulletTimeField",
+	"statsScript":"org.selkie.zea.shipsystems.BulletTimeField",
 
     "engineGlowLengthMult":1.5,
 

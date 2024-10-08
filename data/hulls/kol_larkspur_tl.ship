@@ -2,7 +2,7 @@
   "hullName": "Armor",
   "hullId": "kol_larkspur_tl",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_larkspur_tl.png",
+  "spriteName": "graphics/kol/ships/modules/kol_larkspur_tl.png",
   "style": "KOL_TECH",
   "height": 108,
   "width": 48,

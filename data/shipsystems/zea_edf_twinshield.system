@@ -2,9 +2,9 @@
 	"id":"zea_edf_twinshield",
 	"type":"SHIELD_MOD",
 	"aiType":"CUSTOM",
-    "aiScript":"org.selkie.kol.impl.shipsystems.AI.TwinShieldAI",
+    "aiScript":"org.selkie.zea.shipsystems.AI.TwinShieldAI",
 
-	"statsScript":"org.selkie.kol.impl.shipsystems.TwinShieldStats",
+	"statsScript":"org.selkie.zea.shipsystems.TwinShieldStats",
 	"runScriptWhilePaused":true, # only for the player's ship
 	"runScriptWhileIdle":true,  # this means unapply() never gets called
 

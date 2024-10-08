@@ -2,7 +2,7 @@
   "hullName": "Ludd's Blood",
   "hullId": "kol_boss_luddsbloat",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/kol_boss_luddsblood.png",
+  "spriteName": "graphics/kol/ships/kol_boss_luddsblood.png",
   "style": "LOW_TECH",
   "height": 112,
   "width": 188,

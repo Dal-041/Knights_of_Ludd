@@ -2,7 +2,7 @@
   "hullName": "Hex USV",
   "hullId": "kol_hex",
   "hullSize": "FIGHTER",
-  "spriteName": "graphics/ships/fighters/kol_hex.png",
+  "spriteName": "graphics/kol/ships/fighters/kol_hex.png",
   "style": "KOL_TECH",
   "height": 43,
   "width": 38,

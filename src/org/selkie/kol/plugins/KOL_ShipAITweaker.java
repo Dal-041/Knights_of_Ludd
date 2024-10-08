@@ -9,7 +9,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import org.selkie.kol.helpers.KolStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.zea.helpers.ZeaStaticStrings;
 
 import java.util.Arrays;
 

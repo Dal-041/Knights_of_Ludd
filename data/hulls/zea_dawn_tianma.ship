@@ -2,7 +2,7 @@
   "hullName": "Tianma",
   "hullId": "zea_dawn_tianma",
   "hullSize": "CRUISER",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dawn_tianma.png",
+  "spriteName": "graphics/zea/ships/zea_dawn_tianma.png",
   "style": "ZEA_DAWN_TECH",
   "height": 226,
   "width": 158,

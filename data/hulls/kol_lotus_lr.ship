@@ -3,7 +3,7 @@
     "hullId": "kol_lotus_lr",
     "hullSize": "FRIGATE",
     "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_lotus_lr.png",
+    "spriteName": "graphics/kol/ships/modules/kol_lotus_lr.png",
     "height": 61,
     "width": 30,
     "center": [

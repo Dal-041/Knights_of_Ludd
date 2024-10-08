@@ -1,0 +1,220 @@
+{
+	"id":"zea_dusk",
+    "color":[171,95,176,255],
+    "secondaryUIColor":[25,25,25,255],
+	"secondarySegments":3,
+	
+	"baseUIColor":[171,95,176,255],
+	"darkUIColor":[32,0,32,175],
+	"gridUIColor":[50,0,50,75],
+	
+	"displayName":"Duskborne",
+	"displayNameWithArticle":"the Duskborne",
+	"displayNameLong":"the Duskborne",
+	"displayNameLongWithArticle":"the Duskborne",
+	"logo":"graphics/zea/factions/zea_flag_dusk.png",
+	"crest":"graphics/zea/factions/zea_crest_dusk.png",
+	"showInIntelTab":false,
+	"shipNamePrefix":"",
+	"shipNameSources":{
+		"LUDDIC_CHURCH":1,
+		"ABRAHAMIC":2,
+		"DERELICT_DRONE":4,
+	},
+	"names":{
+		"ai":20,
+		#"fringe":2,
+		#"modern":2,
+		#"future":1,
+	},
+	"hullFrequency":{
+		"tags":{
+			#"remnant":0.1,
+			#"derelict":0.1,
+		},
+		"hulls":{
+			"zea_dusk_ikiryo":0.5,
+			"zea_dusk_shiryo":0.5,
+		},
+	},
+	"shipsWhenImporting":{
+		"tags":[
+			#"remnant",
+			#"derelict",
+		],
+		"hulls":[
+			"zea_dusk_ayakashi",
+			"zea_dusk_funayurei",
+			"zea_dusk_hashihime",
+			"zea_dusk_ikiryo",
+			"zea_dusk_onryo",
+			"zea_dusk_shiryo",
+			"zea_dusk_onibi",
+			"zea_dusk_furaribi",
+		],
+	},
+	"knownShips":{
+		"tags":[
+			#"remnant",
+			#"derelict",
+		],
+		"hulls":[
+			"zea_dusk_ayakashi",
+			"zea_dusk_funayurei",
+			"zea_dusk_hashihime",
+			"zea_dusk_ikiryo",
+			"zea_dusk_onryo",
+			"zea_dusk_shiryo",
+			"zea_dusk_onibi",
+			"zea_dusk_furaribi",
+		],
+	},
+	"priorityShips":{
+		"tags":[],
+		"hulls":[
+			"zea_dusk_ayakashi",
+			"zea_dusk_funayurei",
+			"zea_dusk_hashihime",
+			"zea_dusk_ikiryo",
+			"zea_dusk_onryo",
+			"zea_dusk_shiryo",
+			"zea_dusk_onibi",
+			"zea_dusk_furaribi",
+		],
+	},
+	"knownFighters":{
+		"tags":["remnant", "zea_common_bp"],
+		"fighters":[
+		],
+	},
+	"priorityFighters":{
+		"tags":[],
+		"fighters":[],
+	},
+	"knownWeapons":{
+		"tags":["base_bp", "lowtech_bp", "midline_bp", "hightech_bp", "missile_bp", "zea_common_bp", "remnant"],
+		"weapons":[
+			"lightneedler",
+			"railgun",
+			"dualflak",
+			"heavymauler",
+			"hveldriver",
+			"heavyneedler",
+			"gauss",
+			"mjolnir",
+			"multineedler",
+			"breachpod",
+			"sabotpod",
+			"phasecl",
+			"cyclone",
+			"hurricane",
+			"squall",
+			"locust",
+			"pdburst",
+			"amblaster",
+			"phasebeam",
+			"heavyblaster",
+			"heavyburst",
+			"ionpulser",
+			"ionbeam",
+			"plasma",
+			"guardian",
+			"tachyonlance",
+		],
+	},
+	"priorityWeapons":{
+		"tags":[],
+		"weapons":[
+		],
+	},
+	"knownHullMods":{
+		"tags":["base_bp", "standard", "remnant"],
+		"hullMods":[
+			"advancedshieldemitter", # accelerated
+			"advancedoptics",
+			"turretgyros",
+			"armoredweapons",
+			"augmentedengines",
+			"autorepair",
+			"converted_hangar",
+			"eccm",
+			"ecm",
+			"expanded_deck_crew",
+			"magazines",
+			"missleracks",
+			"extendedshieldemitter",
+			"frontemitter",
+			"frontshield",  # makeshift
+			"hardenedshieldemitter",
+			"heavyarmor",
+			"insulatedengine",
+			"pointdefenseai",
+			"targetingunit",
+			"nav_relay",
+			"adaptiveshields", # omni
+			"operations_center",
+			"recovery_shuttles",
+			"fluxbreakers",
+			"solar_shielding",
+			"stabilizedshieldemitter",
+			"surveying_equipment",
+		],
+	},
+	"factionDoctrine":{
+		"warships":4,
+		"carriers":1,
+		"phaseShips":5,
+		
+		"officerQuality":5,
+		"shipQuality":5,
+		"numShips":2,
+		
+		"shipSize":4,
+		
+		"aggression":3,
+		
+		"combatFreighterProbability":0,     				# instead of some portion of the freighters in a fleet
+		"combatFreighterCombatUseFraction":1,				# as part of the normal combat lineup
+		"combatFreighterCombatUseFractionWhenPriority":1,   # as part of normal combat lineup, when marked as priority ship
+		"autofitRandomizeProbability":0.05,
+
+		"commanderSkillsShuffleProbability":1,
+		"commanderSkills":[ # unlike other factions, can get up to 3 skills depending
+			"electronic_warfare",
+			"flux_regulation",
+			"coordinated_maneuvers",
+		],
+	},
+	"illegalCommodities":[
+		"ai_cores",
+	],
+	"music":{
+		"theme":"music_kol_underworld_system",
+		"encounter_neutral":"music_zea_underworld_encounter",
+		"encounter_hostile":"music_zea_underworld_encounter",
+		"encounter_friendly":"music_zea_underworld_encounter",
+	},
+	"portraits":{
+		"standard_male":[
+			"graphics/portraits/portrait_ai1b.png",
+			"graphics/portraits/portrait_ai2b.png",
+			"graphics/portraits/portrait_ai3b.png",
+		],
+		"standard_female":[
+			"graphics/portraits/portrait_ai1b.png",
+			"graphics/portraits/portrait_ai2b.png",
+			"graphics/portraits/portrait_ai3b.png",
+		],
+	},
+	"custom":{
+		"engageWhenEvenStrength":true,
+		"allowsTransponderOffTrade":true, # to prevent cargoscan dialog from "patrols"
+		"postsNoBounties":true,
+		"fightToTheLast":true, # order a full assault instead of retreating, in most cases
+	},	
+	"fleetTypeNames":{
+		"patrolSmall":"Figment",
+		"patrolMedium":"Mirage",
+		"patrolLarge":"Nightmare",
+	},	
+},

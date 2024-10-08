@@ -2,7 +2,7 @@
   "hullName": "Marigold",
   "hullId": "kol_marigold",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/kol_marigold.png",
+  "spriteName": "graphics/kol/ships/kol_marigold.png",
   "style": "KOL_TECH",
   "height": 131,
   "width": 166,

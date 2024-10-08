@@ -2,7 +2,7 @@
   "hullName": "kol_tamarisk",
   "hullId": "kol_tamarisk",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/kol_tamarisk.png",
+  "spriteName": "graphics/kol/ships/kol_tamarisk.png",
   "style": "KOL_TECH",
   "height": 260,
   "width": 136,

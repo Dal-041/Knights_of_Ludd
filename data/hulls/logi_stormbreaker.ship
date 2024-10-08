@@ -3,7 +3,7 @@
     "hullId": "logi_stormbreaker",
     "hullSize": "DESTROYER",
     "style": "HIGH_TECH",
-    "spriteName": "graphics/ships/logi_stormbreaker.png",
+    "spriteName": "graphics/kol/ships/logi_stormbreaker.png",
     "height": 240,
     "width": 119,
     "center": [

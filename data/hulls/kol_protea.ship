@@ -2,7 +2,7 @@
   "hullName": "Protea",
   "hullId": "kol_protea",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/kol_protea.png",
+  "spriteName": "graphics/kol/ships/kol_protea.png",
   "style": "KOL_TECH",
   "height": 114,
   "width": 160,

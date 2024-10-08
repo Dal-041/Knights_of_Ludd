@@ -3,7 +3,7 @@
     "hullId": "zea_dusk_ayakashi",
     "hullSize": "CAPITAL_SHIP",
     "style": "ZEA_DUSK_TECH",
-    "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_ayakashi.png",
+    "spriteName": "graphics/zea/ships/zea_dusk_ayakashi.png",
     "height": 272,
     "width": 474,
     "center": [

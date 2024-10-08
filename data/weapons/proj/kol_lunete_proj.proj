@@ -34,7 +34,7 @@
 			"shapedExplosionEndSizeMax":1.5,
 			"shapedExplosionScatter":100,
 	},
-	"sprite":"graphics/missiles/kol_lunete_msl.png",
+	"sprite":"graphics/kol/missiles/kol_lunete_msl.png",
 	"size":[15,20],	
 	"center":[7.5,10],
 	"collisionRadius":10,

@@ -2,7 +2,7 @@
   "hullName": "Mimosa (LP)",
   "hullId": "kol_mimosa_lp",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/kol_mimosa_lp.png",
+  "spriteName": "graphics/kol/ships/kol_mimosa_lp.png",
   "style": "LOW_TECH",
   "height": 112,
   "width": 188,

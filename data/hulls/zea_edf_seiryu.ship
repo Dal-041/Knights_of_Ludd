@@ -2,7 +2,7 @@
   "hullName": "Seiryu",
   "hullId": "zea_edf_seiryu",
   "hullSize": "CRUISER",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_seiryu.png",
+  "spriteName": "graphics/zea/ships/zea_edf_seiryu.png",
   "style": "ZEA_ELYSIAN_TECH",
   "height": 269,
   "width": 296,

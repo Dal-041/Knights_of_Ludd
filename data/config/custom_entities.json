@@ -11,7 +11,7 @@
 		"icon":"graphics/icons/abyssal_light.png",
 		"iconWidth":20,
 		"iconHeight":20,
-		"sprite":"graphics/battlestars/kol_battlestar_libra.png",
+		"sprite":"graphics/kol/battlestars/kol_battlestar_libra.png",
 		"spriteWidth":75,
 		"spriteHeight":100,
 		"renderShadow":true,
@@ -155,7 +155,7 @@
 		"isOrAre":"is",
 		"defaultRadius":150, # used if radius<0 in addCustomEntity()
 		"customDescriptionId":"coronal_tap",
-		"interactionImage":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/illustrations/zea_edf_hypershunt.png",
+		"interactionImage":"graphics/zea/illustrations/zea_edf_hypershunt.png",
 		"icon":"graphics/icons/coronal_shunt.png",
 		"iconWidth":32,
 		"iconHeight":32,

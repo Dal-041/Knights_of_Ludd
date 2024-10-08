@@ -2,7 +2,7 @@
 	"id":"zea_dusk_phaseteleporter",
 	"type":"TELEPORTER",
 	"aiType":"CUSTOM",
-    "aiScript":"org.selkie.kol.impl.shipsystems.AI.PhaseTeleporterAI",
+    "aiScript":"org.selkie.zea.shipsystems.AI.PhaseTeleporterAI",
 
 
 	"jitterColor":[100,165,255,150],

@@ -2,7 +2,7 @@
   "hullName": "Kitesunebi",
   "hullId": "zea_edf_kitsunebi",
   "hullSize": "FIGHTER",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/fighters/zea_edf_kitsunebi.png",
+  "spriteName": "graphics/zea/ships/fighters/zea_edf_kitsunebi.png",
   "style": "ZEA_ELYSIAN_TECH",
   "height": 26,
   "width": 32,

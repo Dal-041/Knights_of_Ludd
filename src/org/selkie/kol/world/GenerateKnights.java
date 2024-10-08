@@ -24,10 +24,10 @@ import org.selkie.kol.fleets.SpawnInvictus;
 import org.selkie.kol.fleets.SpawnRetribution;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.helpers.MarketHelpers;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
-import org.selkie.kol.impl.intel.ZeaMechanicIntel;
-import org.selkie.kol.impl.world.PrepareAbyss;
+import org.selkie.zea.helpers.ZeaStaticStrings;
+import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.zea.intel.ZeaMechanicIntel;
+import org.selkie.zea.world.PrepareAbyss;
 import org.selkie.kol.plugins.KOL_ModPlugin;
 
 import java.util.ArrayList;
@@ -42,10 +42,10 @@ public class GenerateKnights {
 	public static final int baseKnightExpeditions = 2;
 	
 	public static void genCorvus() {
-		Global.getSector().getStarSystem(ZeaStaticStrings.EOS_EXODUS).setBackgroundTextureFilename("graphics/backgrounds/kol_bg_1.jpg");
-		Global.getSector().getStarSystem(ZeaStaticStrings.KUMARI_KANDAM).setBackgroundTextureFilename("graphics/backgrounds/kol_bg_2.jpg");
-		Global.getSector().getStarSystem(ZeaStaticStrings.CANAAN).setBackgroundTextureFilename("graphics/backgrounds/kol_bg_3.jpg");
-		Global.getSector().getStarSystem(ZeaStaticStrings.AL_GEBBAR).setBackgroundTextureFilename("graphics/backgrounds/kol_bg_4.jpg");
+		Global.getSector().getStarSystem(ZeaStaticStrings.EOS_EXODUS).setBackgroundTextureFilename("graphics/kol/backgrounds/kol_bg_1.jpg");
+		Global.getSector().getStarSystem(ZeaStaticStrings.KUMARI_KANDAM).setBackgroundTextureFilename("graphics/kol/backgrounds/kol_bg_2.jpg");
+		Global.getSector().getStarSystem(ZeaStaticStrings.CANAAN).setBackgroundTextureFilename("graphics/kol/backgrounds/kol_bg_3.jpg");
+		Global.getSector().getStarSystem(ZeaStaticStrings.AL_GEBBAR).setBackgroundTextureFilename("graphics/kol/backgrounds/kol_bg_4.jpg");
 		genKnightsBattlestation();
 		genKnightsStarfortress();
 	}

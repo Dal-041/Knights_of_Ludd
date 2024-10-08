@@ -2,7 +2,7 @@
   "hullName": "Lotus",
   "hullId": "kol_lotus",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/kol_lotus.png",
+  "spriteName": "graphics/kol/ships/kol_lotus.png",
   "style": "KOL_TECH",
   "height": 221,
   "width": 150,

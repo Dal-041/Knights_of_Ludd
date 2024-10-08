@@ -2,7 +2,7 @@
   "hullName": "Snowdrop",
   "hullId": "kol_snowdrop",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/kol_snowdrop.png",
+  "spriteName": "graphics/kol/ships/kol_snowdrop.png",
   "style": "KOL_TECH",
   "height": 128,
   "width": 138,

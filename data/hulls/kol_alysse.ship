@@ -3,7 +3,7 @@
     "hullId": "kol_alysse",
     "hullSize": "CAPITAL_SHIP",
     "style": "KOL_TECH",
-    "spriteName": "graphics/ships/kol_alysse.png",
+    "spriteName": "graphics/kol/ships/kol_alysse.png",
     "height": 220,
     "width": 282,
     "center": [

@@ -14,7 +14,7 @@ import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicRender;
-import org.selkie.kol.impl.fx.FakeSmokePlugin;
+import org.selkie.zea.fx.FakeSmokePlugin;
 
 import java.awt.*;
 

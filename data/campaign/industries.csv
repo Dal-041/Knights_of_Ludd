@@ -1,5 +1,5 @@
 id,name,cost mult,build time,income,upkeep,downgrade,upgrade,tags,data,image,plugin,desc,order,disruptDanger
-kol_garden,Sanctuary of Repose,10,90,0,3,,,"unraidable, structure",,graphics/illustrations/kol_gardens_smol.png,org.selkie.kol.campaign.kol_garden,This retreat offers a much needed respite from the stresses of interstellar chivalry.,205,
+kol_garden,Sanctuary of Repose,10,90,0,3,,,"unraidable, structure",,graphics/kol/illustrations/kol_gardens_smol.png,org.selkie.kol.campaign.kol_garden,This retreat offers a much needed respite from the stresses of interstellar chivalry.,205,
 kol_battlestation_libra,Battlestation Libra,200,180,0,6,,kol_battlestar_libra,"station, battlestation, unraidable, structure","{
 radius:60,
 variant:kol_libra_Battlestation,

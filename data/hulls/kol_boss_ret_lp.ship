@@ -2,7 +2,7 @@
   "hullName": "Redemptor",
   "hullId": "kol_boss_ret_lp",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/kol_boss_retribution_path.png",
+  "spriteName": "graphics/kol/ships/kol_boss_retribution_path.png",
   "style": "LOW_TECH",
   "height": 332,
   "width": 222,

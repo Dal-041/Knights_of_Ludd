@@ -4,8 +4,8 @@
   "projectileSpecId": "zea_dusk_resonator2_shot",
   "type": "MISSILE",
   "size": "MEDIUM",
-  "turretSprite":"graphics/ships/decos/kol_deco_blank.png",
-  "hardpointSprite":"graphics/ships/decos/kol_deco_blank.png",
+  "turretSprite":"graphics/kol/ships/decos/kol_deco_blank.png",
+  "hardpointSprite":"graphics/kol/ships/decos/kol_deco_blank.png",
   "turretOffsets": [
     3.5,
     -4,

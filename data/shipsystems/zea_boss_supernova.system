@@ -2,7 +2,7 @@
 	"id":"zea_boss_supernova",
 	"type":"STAT_MOD",
 	"aiType":"LIDAR_ARRAY",
-	"statsScript":"org.selkie.kol.impl.shipsystems.SupernovaStats",
+	"statsScript":"org.selkie.zea.shipsystems.SupernovaStats",
 
 	"useSound":"system_targeting_feed",
 	#"loopSound":"system_targeting_feed_loop",

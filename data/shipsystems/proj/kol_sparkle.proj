@@ -2,7 +2,7 @@
 	"id":"kol_sparkle",
 	"specClass":"missile",	
 	"missileType":"MOTE",
-	"onHitEffect":"org.selkie.kol.impl.combat.SparkleOnHitV2",
+	"onHitEffect":"org.selkie.zea.combat.SparkleOnHitV2",
 	"sprite":"graphics/missiles/bomblet0.png",
 	"size":[4,4],	
 	"center":[2,2],

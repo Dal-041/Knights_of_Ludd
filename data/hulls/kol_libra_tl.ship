@@ -2,7 +2,7 @@
   "hullName": "Gunnery Module",
   "hullId": "kol_libra_tl",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/libra/kol_libra_tl.png",
+  "spriteName": "graphics/kol/ships/libra/kol_libra_tl.png",
   "style": "KOL_TECH",
   "height": 444,
   "width": 168,

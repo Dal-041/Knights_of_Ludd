@@ -2,7 +2,7 @@
   "hullName": "Malleus",
   "hullId": "kol_invictus_lp",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "graphics/ships/kol_invictus_lp.png",
+  "spriteName": "graphics/kol/ships/kol_invictus_lp.png",
   "style": "LOW_TECH",
   "height": 420,
   "width": 364,

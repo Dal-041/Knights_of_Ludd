@@ -2,7 +2,7 @@
   "hullName": "Armor",
   "hullId": "kol_alysse_tr",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_alysse_tr.png",
+  "spriteName": "graphics/kol/ships/modules/kol_alysse_tr.png",
   "style": "KOL_TECH",
   "height": 106,
   "width": 108,

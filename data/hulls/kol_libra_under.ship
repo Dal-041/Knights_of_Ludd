@@ -2,7 +2,7 @@
   "hullName": "Base Structure",
   "hullId": "kol_libra_under",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/libra/kol_libra_under.png",
+  "spriteName": "graphics/kol/ships/libra/kol_libra_under.png",
   "style": "LOW_TECH",
   "height": 464,
   "width": 412,

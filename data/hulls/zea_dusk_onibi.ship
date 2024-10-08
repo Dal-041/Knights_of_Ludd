@@ -2,7 +2,7 @@
   "hullName": "Onibi",
   "hullId": "zea_dusk_onibi",
   "hullSize": "FRIGATE",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dusk_onibi.png",
+  "spriteName": "graphics/zea/ships/zea_dusk_onibi.png",
   "style": "ZEA_DUSK_TECH",
   "height": 84,
   "width": 100,

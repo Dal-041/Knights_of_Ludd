@@ -2,7 +2,7 @@
   "hullName": "Larkspur",
   "hullId": "kol_larkspur",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/kol_larkspur.png",
+  "spriteName": "graphics/kol/ships/kol_larkspur.png",
   "style": "KOL_TECH",
   "height": 216,
   "width": 206,

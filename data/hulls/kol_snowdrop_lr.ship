@@ -3,7 +3,7 @@
     "hullId": "kol_snowdrop_lr",
     "hullSize": "FRIGATE",
     "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_snowdrop_lr.png",
+    "spriteName": "graphics/kol/ships/modules/kol_snowdrop_lr.png",
     "height": 56,
     "width": 58,
     "center": [

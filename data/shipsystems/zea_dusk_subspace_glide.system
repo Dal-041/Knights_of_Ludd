@@ -3,7 +3,7 @@
 	"type":"ENGINE_MOD",
 	"aiType":"MANEUVERING_JETS",
 
-	"statsScript":"org.selkie.kol.impl.shipsystems.SubspaceGlideStats",
+	"statsScript":"org.selkie.zea.shipsystems.SubspaceGlideStats",
 
 	"engineGlowLengthMult":1,
 	"engineGlowWidthMult":1,

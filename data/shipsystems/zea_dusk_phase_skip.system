@@ -2,9 +2,9 @@
 	"id":"zea_dusk_phase_skip",
 	"type":"ENGINE_MOD",
 	"aiType":"CUSTOM",
-    "aiScript":"org.selkie.kol.impl.shipsystems.AI.PhasespaceSkipAI",
+    "aiScript":"org.selkie.zea.shipsystems.AI.PhasespaceSkipAI",
 	
-	"statsScript":"org.selkie.kol.impl.shipsystems.PhasespaceSkip",
+	"statsScript":"org.selkie.zea.shipsystems.PhasespaceSkip",
 
 	
 	"clampTurnRateAfter":true,

@@ -5,7 +5,7 @@
 		{
 			"requiredSkillLevel":0,
 			"effects":[
-				{"type":"DESCRIPTION", "script":"org.selkie.kol.impl.skills.cores.CoresAptitudeDesc"},
+				{"type":"DESCRIPTION", "script":"org.selkie.zea.cores.CoresAptitudeDesc"},
 			]
 		},
 	],

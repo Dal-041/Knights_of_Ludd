@@ -3,7 +3,7 @@
 	"type":"STAT_MOD",
 	"aiType":"CUSTOM",
 
-	"aiScript":"org.selkie.kol.impl.shipsystems.AI.DamperAI",
+	"aiScript":"org.selkie.zea.shipsystems.AI.DamperAI",
 	"statsScript":"com.fs.starfarer.api.impl.combat.DamperFieldStats",
 	
 	"jitterUnderColor":[255,165,90,155],

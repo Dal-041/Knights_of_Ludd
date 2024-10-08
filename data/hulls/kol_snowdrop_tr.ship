@@ -2,7 +2,7 @@
   "hullName": "Armor",
   "hullId": "kol_snowdrop_tr",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_snowdrop_tr.png",
+  "spriteName": "graphics/kol/ships/modules/kol_snowdrop_tr.png",
   "style": "KOL_TECH",
   "height": 84,
   "width": 64,

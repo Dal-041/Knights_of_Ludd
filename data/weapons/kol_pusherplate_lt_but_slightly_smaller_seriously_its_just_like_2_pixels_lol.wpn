@@ -6,7 +6,7 @@
 	"showDamageWhenDecorative":true,
 	"renderBelowAllWeapons":true,
 	
-	"turretSprite":"graphics/weapons/decorative/kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol.png",
+	"turretSprite":"graphics/kol/weapons/decorative/kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol.png",
 	"turretGlowSprite":"graphics/weapons/hil_turret_glow.png",
 	"hardpointSprite":"graphics/weapons/hil_hardpoint_base.png",
 	"hardpointGlowSprite":"graphics/weapons/hil_hardpoint_glow.png",

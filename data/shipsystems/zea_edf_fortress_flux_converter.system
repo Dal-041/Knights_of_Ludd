@@ -2,8 +2,8 @@
 	"id":"zea_edf_fortress_flux_converter",
 	"type":"SHIELD_MOD",
 	"aiType":"CUSTOM",
-	"aiScript":"org.selkie.kol.impl.shipsystems.AI.FortressFluxConverterAI",
-	"statsScript":"org.selkie.kol.impl.shipsystems.FortressFluxConverterStats",
+	"aiScript":"org.selkie.zea.shipsystems.AI.FortressFluxConverterAI",
+	"statsScript":"org.selkie.zea.shipsystems.FortressFluxConverterStats",
 
 	"shieldRingColor":[255,255,255,255],
 	"shieldInnerColor":[255,100,255,75],

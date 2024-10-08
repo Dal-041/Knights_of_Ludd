@@ -2,7 +2,7 @@
   "hullName": "Bixi",
   "hullId": "zea_dawn_bixi",
   "hullSize": "CRUISER",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_dawn_bixi.png",
+  "spriteName": "graphics/zea/ships/zea_dawn_bixi.png",
   "style": "ZEA_DAWN_TECH",
   "height": 224,
   "width": 184,

@@ -18,7 +18,7 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.abilities.OracleScanData
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat
+import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat
 
 class OracleSensorSuite : BaseHullMod() {
     val COMMAND_POINT_RATE_FLAT_BONUS = 250f // +250%

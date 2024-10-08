@@ -10,7 +10,7 @@
 	"fleetPoints":35,
 	"ordnancePoints":240,
 	"baseValueMult":1.1,
-	"spriteName":"graphics/ships/kol_invictus.png",
+	"spriteName":"graphics/kol/ships/kol_invictus.png",
 	"removeWeaponSlots":[], 		# ids
 	"removeEngineSlots":[], 		# indices, as engine slots have no id in the .ship file
 	"removeBuiltInMods":[], 		# hullmod ids

@@ -2,7 +2,7 @@
 	"id":"zea_edf_harpoon_mrm",
 	"specClass":"missile",	
 	"missileType":"MISSILE",
-	"sprite":"graphics/missiles/kol_harpoon_but_its_long.png",
+	"sprite":"graphics/kol/missiles/kol_harpoon_but_its_long.png",
 	"size":[10,22],	
 	"center":[5,12],
 	"collisionRadius":16,

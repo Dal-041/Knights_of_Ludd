@@ -2,7 +2,7 @@
   "hullName": "Armor",
   "hullId": "kol_libra_mr2",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/libra/kol_libra_mr2.png",
+  "spriteName": "graphics/kol/ships/libra/kol_libra_mr2.png",
   "style": "LOW_TECH",
   "height": 90,
   "width": 88,

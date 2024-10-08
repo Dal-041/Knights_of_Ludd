@@ -2,7 +2,7 @@
   "hullName": "Mimosa",
   "hullId": "kol_mimosa",
   "hullSize": "DESTROYER",
-  "spriteName": "graphics/ships/kol_mimosa.png",
+  "spriteName": "graphics/kol/ships/kol_mimosa.png",
   "style": "KOL_TECH",
   "height": 111,
   "width": 188,

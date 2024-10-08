@@ -18,8 +18,8 @@ class KnightShields : BaseHullMod() {
     [orange text] Shield arc cannot be extended by any means.
      */
 
-    private val INNERLARGE = "graphics/fx/kol_shield_fx.png"
-    private val OUTERLARGE = "graphics/fx/kol_shield_fx.png"
+    private val INNERLARGE = "graphics/kol/fx/kol_shield_fx.png"
+    private val OUTERLARGE = "graphics/kol/fx/kol_shield_fx.png"
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         if (ship.shield != null) {

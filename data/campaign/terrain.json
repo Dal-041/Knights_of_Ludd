@@ -3,19 +3,19 @@
 	# terrain with gameplay effects
 	#
 	"zea_asteroidBelt":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssAsteroidBelt",
+		"plugin":"org.selkie.zea.terrain.AbyssAsteroidBelt",
 		"loopOne":"terrain_asteroid_field",
 	},
 
 
 	"zea_asteroidField":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssAsteroidField",
+		"plugin":"org.selkie.zea.terrain.AbyssAsteroidField",
 		"musicSuppression":0.25,
 		"loopOne":"terrain_asteroid_field",
 	},
 
 	"zea_corona":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssCorona",
+		"plugin":"org.selkie.zea.terrain.AbyssCorona",
 		"musicSuppression":1,
 		# inside corona but not inside flare
 		"loopOne":"terrain_corona",
@@ -24,25 +24,25 @@
 	},
 
 	"zea_eventHorizon":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssEventHorizon",
+		"plugin":"org.selkie.zea.terrain.AbyssEventHorizon",
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
 
 	"zea_pulsarBeam":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssPulsarBeam",
+		"plugin":"org.selkie.zea.terrain.AbyssPulsarBeam",
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
 	
 	"zea_blackBeam":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssBlackBeam",
+		"plugin":"org.selkie.zea.terrain.AbyssBlackBeam",
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
 	
 	"zea_seaWave":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssSeaWave",
+		"plugin":"org.selkie.zea.terrain.AbyssSeaWave",
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
@@ -55,7 +55,7 @@
 		"loopOne":"terrain_nebula",
 	},
 	"nebula_zea_storm":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssStormNebula",
+		"plugin":"org.selkie.zea.terrain.AbyssStormNebula",
 		
 		"musicSuppression":1,
 		# inside nebula
@@ -63,7 +63,7 @@
 	},
 	
 	"nebula_zea_shoal":{
-		"plugin":"org.selkie.kol.impl.terrain.AbyssShoalNebulaTerrain",
+		"plugin":"org.selkie.zea.terrain.AbyssShoalNebulaTerrain",
 		
 		"musicSuppression":1,
 		# inside nebula

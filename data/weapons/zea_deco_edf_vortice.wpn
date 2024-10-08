@@ -1,7 +1,7 @@
 {
   "animationType": "NONE",
   "barrelMode": "ALTERNATING",
-  "everyFrameEffect":"org.selkie.kol.impl.fx.WingTrailScript",
+  "everyFrameEffect":"org.selkie.zea.fx.WingTrailScript",
   #startSize, endSize, duration, opacityMult
   "hardpointAngleOffsets": [5,1,2,0.3],
   #used for trail color

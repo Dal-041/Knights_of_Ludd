@@ -2,9 +2,9 @@
 	"id":"zea_dawn_gracious_light",
 	"type":"STAT_MOD",
 	"aiType":"CUSTOM",
-	"aiScript":"org.selkie.kol.impl.shipsystems.AI.GraciousLightAI",
+	"aiScript":"org.selkie.zea.shipsystems.AI.GraciousLightAI",
 
-	"statsScript":"org.selkie.kol.impl.shipsystems.GraciousLightStats",
+	"statsScript":"org.selkie.zea.shipsystems.GraciousLightStats",
 
 	"useSound":"zea_dawn_aoe_charge",
 	"loopSound":"zea_dawn_aoe_boom",

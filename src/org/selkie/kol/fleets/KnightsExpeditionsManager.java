@@ -9,7 +9,7 @@ import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import org.lazywizard.lazylib.MathUtils;
 import org.selkie.kol.helpers.KolStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.ZeaStarTypes;
+import org.selkie.zea.helpers.ZeaStaticStrings.ZeaStarTypes;
 
 import java.util.Random;
 

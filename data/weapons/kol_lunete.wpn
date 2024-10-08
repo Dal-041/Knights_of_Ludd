@@ -6,9 +6,9 @@
 
 	"beamEffect":"org.selkie.kol.weapons.KOL_SmokeBeamEffect",
 
-	"turretSprite":"graphics/weapons/kol_lunete_hardpoint.png",
-	"hardpointSprite":"graphics/weapons/kol_lunete_hardpoint.png",	
-	"hardpointGlowSprite":"graphics/weapons/kol_lunete_hardpoint_glow.png",
+	"turretSprite":"graphics/kol/weapons/kol_lunete_hardpoint.png",
+	"hardpointSprite":"graphics/kol/weapons/kol_lunete_hardpoint.png",
+	"hardpointGlowSprite":"graphics/kol/weapons/kol_lunete_hardpoint_glow.png",
 	"hardpointOffsets":[8, -4, 8, 4],
 	"turretOffsets":[3, -4, 3, 4],
 	"hardpointAngleOffsets":[0, 0],

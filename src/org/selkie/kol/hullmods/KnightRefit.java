@@ -22,7 +22,7 @@ import org.selkie.kol.Utils;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.helpers.KolStaticStrings;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings.GfxCat;
+import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat;
 
 import java.awt.*;
 import java.util.List;

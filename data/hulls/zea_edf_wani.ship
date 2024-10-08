@@ -2,7 +2,7 @@
   "hullName": "Wani",
   "hullId": "zea_edf_wani",
   "hullSize": "FRIGATE",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_edf_wani.png",
+  "spriteName": "graphics/zea/ships/zea_edf_wani.png",
   "style": "ZEA_ELYSIAN_TECH",
   "height": 144,
   "width": 120,

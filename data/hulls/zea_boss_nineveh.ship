@@ -2,7 +2,7 @@
   "hullName": "Nineveh",
   "hullId": "zea_boss_nineveh",
   "hullSize": "CAPITAL_SHIP",
-  "spriteName": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/ships/zea_boss_nineveh.png",
+  "spriteName": "graphics/zea/ships/zea_boss_nineveh.png",
   "style": "ZEA_DUSK_TECH",
   "height": 382,
   "width": 360,

@@ -2,7 +2,7 @@
   "hullName": "Gunnery Module",
   "hullId": "kol_libra_mr",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/libra/kol_libra_mr.png",
+  "spriteName": "graphics/kol/ships/libra/kol_libra_mr.png",
   "style": "KOL_TECH",
   "height": 138,
   "width": 146,

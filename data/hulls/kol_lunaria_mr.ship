@@ -3,7 +3,7 @@
     "hullId": "kol_lunaria_mr",
     "hullSize": "FRIGATE",
     "style": "KOL_TECH",
-    "spriteName": "graphics/ships/modules/kol_lunaria_mr.png",
+    "spriteName": "graphics/kol/ships/modules/kol_lunaria_mr.png",
     "height": 80,
     "width": 61,
     "center": [

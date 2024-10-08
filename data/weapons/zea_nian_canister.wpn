@@ -5,10 +5,10 @@
   "type": "BALLISTIC",
   "size": "LARGE",
   "displayArcRadius": 25,
-  "turretSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_niangun_hardpoint_base.png",
-  "turretGunSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_niangun_hardpoint_recoil.png",
-  "hardpointSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_niangun_hardpoint_base.png",
-  "hardpointGunSprite": "data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/kol_niangun_hardpoint_recoil.png",
+  "turretSprite": "graphics/zea/weapons/kol_niangun_hardpoint_base.png",
+  "turretGunSprite": "graphics/zea/weapons/kol_niangun_hardpoint_recoil.png",
+  "hardpointSprite": "graphics/zea/weapons/kol_niangun_hardpoint_base.png",
+  "hardpointGunSprite": "graphics/zea/weapons/kol_niangun_hardpoint_recoil.png",
   "renderAboveAllWeapons": 1,
   "visualRecoil": 9,
   "turretOffsets": [
@@ -50,5 +50,5 @@
   "textureType": ROUGH,
   "fireSoundTwo": "hellbore_fire",
   "unaffectedByProjectileSpeedBonuses": true,
-  "everyFrameEffect":"org.selkie.kol.impl.weapons.SupernovaWeaponScript"
+  "everyFrameEffect":"org.selkie.zea.weapons.SupernovaWeaponScript"
 }

@@ -3,7 +3,7 @@
     "hullId": "logi_apoapsis",
     "hullSize": "CRUISER",
     "style": "HIGH_TECH",
-    "spriteName": "graphics/ships/logi_apoapsis.png",
+    "spriteName": "graphics/kol/ships/logi_apoapsis.png",
     "height": 320,
     "width": 160,
     "center": [

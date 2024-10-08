@@ -2,7 +2,7 @@
   "hullName": "Armor",
   "hullId": "kol_mimosa_tl",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_mimosa_tl.png",
+  "spriteName": "graphics/kol/ships/modules/kol_mimosa_tl.png",
   "style": "KOL_TECH",
   "height": 42,
   "width": 68,

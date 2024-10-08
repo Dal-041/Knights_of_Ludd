@@ -2,7 +2,7 @@
   "hullName": "Blaze",
   "hullId": "kol_blaze",
   "hullSize": "CRUISER",
-  "spriteName": "graphics/ships/kol_blaze.png",
+  "spriteName": "graphics/kol/ships/kol_blaze.png",
   "style": "LOW_TECH",
   "height": 184,
   "width": 194,

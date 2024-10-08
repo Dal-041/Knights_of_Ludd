@@ -12,7 +12,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
-import org.selkie.kol.impl.helpers.ZeaStaticStrings;
+import org.selkie.zea.helpers.ZeaStaticStrings;
 
 import java.awt.*;
 

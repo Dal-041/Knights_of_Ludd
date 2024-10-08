@@ -2,7 +2,7 @@
   "hullName": "Armor",
   "hullId": "kol_marigold_tl",
   "hullSize": "FRIGATE",
-  "spriteName": "graphics/ships/modules/kol_marigold_tl.png",
+  "spriteName": "graphics/kol/ships/modules/kol_marigold_tl.png",
   "style": "KOL_TECH",
   "height": 78,
   "width": 44,

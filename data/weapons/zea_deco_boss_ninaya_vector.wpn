@@ -3,8 +3,8 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"turretSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/killme/edf_ethrust_00.png",
-	"hardpointSprite":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/weapons/killme/edf_ethrust_00.png",
+	"turretSprite":"graphics/zea/weapons/killme/edf_ethrust_00.png",
+	"hardpointSprite":"graphics/zea/weapons/killme/edf_ethrust_00.png",
 	"numFrames":4,
 	"frameRate":10,
 	"alwaysAnimate":"false",
@@ -21,5 +21,5 @@
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,
 	"pixelsPerTexel":5.0,	
-	"everyFrameEffect":"org.selkie.kol.impl.weapons.MagicVectorThrusterSelkie",
+	"everyFrameEffect":"org.selkie.zea.weapons.MagicVectorThrusterSelkie",
 }
