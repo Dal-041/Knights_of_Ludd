@@ -24,6 +24,7 @@ class AICoreReplacerScript : EveryFrameScript {
     var quantities = mutableMapOf<String, Float>()
 
     var interval = IntervalUtil(0.25f, 0.25f)
+    var conversionCheckInterval = IntervalUtil(0.010f, 0.11f)
 
     override fun advance(amount: Float) {
 
@@ -58,6 +59,9 @@ class AICoreReplacerScript : EveryFrameScript {
             addedCommodities = false
             interval = IntervalUtil(0.25f, 0.25f)
 
+            //Trying to avoid performance issues of checking every frame, getCommodityQuantity appears to be rather performance intensive
+            var changedSomething = false
+
             for ((commodity, quantity) in quantities)  {
                 var newQuantity = cargo.getCommodityQuantity(commodity)
                 var diff = quantity - newQuantity
@@ -74,22 +78,30 @@ class AICoreReplacerScript : EveryFrameScript {
                 }
 
                 cargo.removeCommodity(commodity, quantity)
+                changedSomething = true
             }
 
             quantities.clear()
 
-            for (core in BossCore.ITEM_ID_LIST) {
-                var quantity = cargo.getCommodityQuantity(core)
-                if (quantity > 0) {
-                    var stack = cargo.stacksCopy.find { it.isSpecialStack && it.specialDataIfSpecial.data == core }
-                    if (stack != null) {
-                        stack.add(quantity)
+            conversionCheckInterval.advance(amount)
+            if (changedSomething || conversionCheckInterval.intervalElapsed()) {
+
+                var quantities = getCargoQuantities(cargo)
+
+                for (core in BossCore.ITEM_ID_LIST) {
+                    //var quantity = cargo.getCommodityQuantity(core)
+                    var quantity = quantities[core]!!
+                    if (quantity > 0) {
+                        var stack = cargo.stacksCopy.find { it.isSpecialStack && it.specialDataIfSpecial.data == core }
+                        if (stack != null) {
+                            stack.add(quantity)
+                        }
+                        else {
+                            cargo.addSpecial(SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, core), quantity)
+                        }
                     }
-                    else {
-                        cargo.addSpecial(SpecialItemData(BossCore.SPECIAL_BOSS_CORE_ID, core), quantity)
-                    }
+                    cargo.removeCommodity(core, quantity)
                 }
-                cargo.removeCommodity(core, quantity)
             }
         }
 
@@ -107,5 +119,22 @@ class AICoreReplacerScript : EveryFrameScript {
                 officer.stats.setSkillLevel(BossCore.DUSK_CORE.exclusiveSkillID, 0f)
             }
         }
+    }
+
+    //Custom method because iterating over the cargo for each core is inefficient
+    fun getCargoQuantities(cargo: CargoAPI) : Map<String, Float> {
+
+        var quantities = HashMap<String, Float>()
+        quantities.put(BossCore.DUSK_CORE.itemID, 0f)
+        quantities.put(BossCore.DAWN_CORE.itemID, 0f)
+        quantities.put(BossCore.ELYSIAN_CORE.itemID, 0f)
+
+        for (stack in cargo.stacksCopy) {
+            if (stack.isCommodityStack && quantities.keys.contains(stack.commodityId)) {
+                quantities.set(stack.commodityId, quantities.get(stack.commodityId)!! + stack.size)
+            }
+        }
+
+        return quantities
     }
 }

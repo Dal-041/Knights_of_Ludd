@@ -249,6 +249,7 @@
 			"knights_of_selkie_pack":"graphics/icons/cargo/knights_of_selkie_pack.png"
 		},
 		"fx":{
+			"kol_vignette":"graphics/fx/kol_darkness_vignette.png",
 			"kol_shield":"graphics/fx/kol_shield_fx.png",
 			"fake_vulcan":"graphics/weapons/vulcan_cannon_turret.png",
 			"zea_elysia_vortice":"data/strings/com/fs/starfarer/api/impl/campaign/you can hear it cant you/our whispers through the void/our song/graphics/fx/zea_elysia_vortice.png",
