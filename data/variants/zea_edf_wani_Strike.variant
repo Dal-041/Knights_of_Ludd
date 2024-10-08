@@ -2,7 +2,7 @@
     "displayName": "Strike",
     "fluxCapacitors": 4,
     "fluxVents": 10,
-    "goalVariant": ture,
+    "goalVariant": true,
     "hullId": "zea_edf_wani",
     "hullMods": [
         "eccm",
