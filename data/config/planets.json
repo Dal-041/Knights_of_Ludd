@@ -9,7 +9,7 @@
 		"atmosphereThicknessMin":10, #  minimum thickness in pixels
 		"atmosphereColor":[5,10,15,255],
 		"texture":"graphics/kol/planets/star_full_white.jpg",
-		"icon":"graphics/icons/neutron.png",
+		"icon":"graphics/kol/icons/neutron.png",
 		"iconColor":[42,32,58,255],
 		"starCoronaSprite":"graphics/fx/star_halo.png", # optional, defaults to really bright particle
 		"starCoronaColor":[85,95,125,60], # optional, defaults to white

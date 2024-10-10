@@ -40,7 +40,7 @@ public class PhasespaceSkip extends BaseShipSystemScript {
     public static final float TIME_MULT = 3f;
     private int lastMessage = 0;
     private float phantomDelayCounter = 0f;
-    private boolean runOnce = false;
+    private boolean shieldActive = false;
 
     public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
         ShipAPI ship;
@@ -57,8 +57,9 @@ public class PhasespaceSkip extends BaseShipSystemScript {
         if (Global.getCombatEngine().isPaused()) {
             amount = 0;
         }
-        runOnce = true;
         //Checks if we should be phased or not, and applies the related mobility bonuses
+
+        if(ship.getShield() != null && ship.getShield().isOn()) shieldActive = true;
 
         ship.setPhased(true);
         float speedBonus = SPEED_BONUS_FLAT * effectLevel;
@@ -202,9 +203,10 @@ public class PhasespaceSkip extends BaseShipSystemScript {
             ship.getVelocity().set((ship.getVelocity().x / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue(), (ship.getVelocity().y / ship.getVelocity().length()) * stats.getMaxSpeed().getModifiedValue());
         }
 
-        if(ship.getShield() != null && runOnce){
+        if(ship.getShield() != null && shieldActive){
             ship.getShield().toggleOn();
             ship.getShield().setActiveArc(ship.getShield().getArc());
+            shieldActive = false;
         }
 
         ship.setPhased(false);
