@@ -25,7 +25,7 @@
 		{"file":"sounds/sfx_systems/Belks_AOE_Boom_System_Boom.ogg","pitch":1.0,"volume":2.5},
 	],
 	"zea_dawn_ao_sys":[
-		{"file":"sounds/sfx_systems/Belks_Energy_Not_AAF.ogg","pitch":0.8,"volume":1.5},
+		{"file":"sounds/sfx_systems/Belks_Energy_Not_AAF.ogg","pitch":1.0,"volume":2.2},
 	],
 	"zea_dawn_plasma_start":[
 		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.35,"volume":0.65},
@@ -98,7 +98,7 @@
 		"CRUISER":{"sounds":[0], "pitch":1, "volume":0.9},
 		"CAPITAL_SHIP":{"sounds":[0], "pitch":1, "volume":1},		
 	},	
-	"zea_dawn_burnout":{
+	"zea_dawn_shield_burnout":{
 	        "sounds":[
                         {"file":"sounds/shields/kol_shields_burnout.ogg","pitch":1.25,"volume":1},
                 ],
