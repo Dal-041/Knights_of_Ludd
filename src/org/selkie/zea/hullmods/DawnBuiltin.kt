@@ -94,7 +94,7 @@ class DawnBuiltin : BaseHullMod() {
 
     override fun applyEffectsBeforeShipCreation(hullSize: HullSize, stats: MutableShipStatsAPI, id: String) {
         super.applyEffectsBeforeShipCreation(hullSize, stats, id)
-        stats.energyShieldDamageTakenMult.modifyMult(id, 0f)
+        stats.energyShieldDamageTakenMult.modifyMult(id, 0.9f)
         stats.energyDamageTakenMult.modifyMult(ID, 0.9f)
         if (stats.variant.hullMods.contains(HullMods.SOLAR_SHIELDING)) {
             MagicIncompatibleHullmods.removeHullmodWithWarning(stats.variant,
