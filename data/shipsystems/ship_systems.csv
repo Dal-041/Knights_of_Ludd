@@ -9,6 +9,7 @@ His Loving Embrace,kol_lidar,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hu
 His Gentle Embrace,kol_lidar_smol,1,,,,,,,,,3.25,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/lidar_barrage.png
 Leap of Faith,kol_lunge,,,,,,,,2,0.12,0.1,0.3,0.7,,,,,,,,,,,,TRUE,,graphics/icons/hullsys/maneuvering_jets.png
 Condemn,kol_drone_strike,,,,600,,,,,,0,0.05,0.2,0,,,,,,,,,,,,,graphics/icons/hullsys/drone_pd_high.png
+Deflector,deflector,,,,,,,,,,1,20,1,10,,,,,,,,,,,,,graphics/icons/hullsys/ammo_feeder.png
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #MODULE SYS,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Canister Flak,kol_canister_flak,,,,,,,,69,1,,,,0.2,,,,,,,,,,,,restricted,
