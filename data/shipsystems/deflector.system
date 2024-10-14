@@ -1,0 +1,11 @@
+{
+	"id":"deflector",
+	"type":"STAT_MOD",
+	"aiType":"WEAPON_BOOST",
+
+	
+	"statsScript":"org.selkie.kol.shipsystems.Deflector",
+	
+	"useSound":"system_ammo_feeder",
+	"outOfUsesSound":"gun_out_of_ammo",
+}
