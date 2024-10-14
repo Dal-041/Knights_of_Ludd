@@ -14,8 +14,8 @@
 	"clampTurnRateAfter":true,
 	"clampMaxSpeedAfter":true,
 
-	"useSound":"system_maneuvering_jets",
-	"loopSound":"system_maneuvering_jets_loop",
+	"useSound":"zea_dawn_plasma_start",
+	"loopSound":"zea_dawn_plasma_loop",
 	"outOfUsesSound":"engine_disabled",
 	
 	"aiHints":{

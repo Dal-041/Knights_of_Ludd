@@ -28,10 +28,10 @@
 		{"file":"sounds/sfx_systems/Belks_Energy_Not_AAF.ogg","pitch":1.0,"volume":2.2},
 	],
 	"zea_dawn_plasma_start":[
-		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.35,"volume":0.65},
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.35,"volume":0.75},
 	],
 	"zea_dawn_plasma_loop":[
-		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Loop.ogg","pitch":1.45,"volume":0.5},
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Loop.ogg","pitch":1.45,"volume":0.65},
 	],
 	"dawn_charge_drive_activate":[ 
 		{"file":"sounds/sfx_systems/burn_drive_activate.ogg","pitch":1.1,"volume":0.85},
