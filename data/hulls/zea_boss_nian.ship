@@ -20,9 +20,9 @@
     "zea_nian_boss"
   ],
   "builtInWeapons": {
-	"WS0014":"zea_nian_maingun_l",
+	  "WS0014":"zea_nian_maingun_l",
     "WS0015":"zea_dawn_targeting_beam_wpn",
-	"WS0016":"zea_nian_maingun_r"
+	  "WS0016":"zea_nian_maingun_r"
   },
   "weaponSlots": [
     {

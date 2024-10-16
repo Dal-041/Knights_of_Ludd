@@ -1,5 +1,6 @@
 package org.selkie.zea.weapons;
 
+import com.fs.starfarer.api.GameState;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
@@ -82,15 +83,20 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
 
         float velDecrease = 0.4f;
         targetingAngle += amount * 5f;
-        MagicRender.singleframe(
-                Global.getSettings().getSprite(GfxCat.FX, "zea_nian_targetingRing"),
-                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
-                new Vector2f(1200, 1200), //size
-                targetingAngle, //angle
-                new Color(255, 100, 0, 128),
-                true, //additive
-                CombatEngineLayers.UNDER_SHIPS_LAYER
-        );
+
+        if (Global.getCurrentState() == GameState.CAMPAIGN && !infernoShot.getWeapon().getShip().getFleetMember().getFleetData().getFleet().isPlayerFleet()) {
+            MagicRender.singleframe(
+                    Global.getSettings().getSprite(GfxCat.FX, "zea_nian_targetingRing"),
+                    MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
+                    new Vector2f(1200, 1200), //size
+                    targetingAngle, //angle
+                    new Color(255, 100, 0, 128),
+                    true, //additive
+                    CombatEngineLayers.UNDER_SHIPS_LAYER
+            );
+        }
+
+
         infernoShot.getVelocity().scale(1f - velDecrease * amount);
 
         if (state == State.RELEASING) {
@@ -123,7 +129,7 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
                         DamagingProjectileAPI proj = (DamagingProjectileAPI) Global.getCombatEngine().spawnProjectile(infernoShot.getSource(), infernoShot.getWeapon(), "zea_nian_canister", infernoShot.getLocation(), facing,
                                 canisterVelocity);
 
-                        Global.getCombatEngine().addPlugin(new SupernovaSubmunitionScript(proj, canisterExplosionTime, explosionColor));
+                        Global.getCombatEngine().addPlugin(new SupernovaSubmunitionScript(proj, canisterExplosionTime, explosionColor, infernoShot));
                         Global.getSoundPlayer().playSound("system_canister_flak_fire", 1f, 1f, infernoShot.getLocation(), canisterVelocity);
 
                         Global.getCombatEngine().spawnExplosion(
@@ -169,12 +175,17 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
                     2.5f
             );
 
+            float canisterDamage = infernoShot.getDamageAmount();
+            float maxDamage = canisterDamage;
+            float minDamage = maxDamage * 0.33f;
+            DamageType damageType = infernoShot.getDamageType();
+
             DamagingExplosionSpec explosionSpec = new DamagingExplosionSpec(
                     1f,
                     400f,
                     200f,
-                    7500f,
-                    2500f,
+                    /*7500f*/maxDamage,
+                    /*2500f*/minDamage,
                     CollisionClass.PROJECTILE_FF,
                     CollisionClass.PROJECTILE_FIGHTER,
                     3f,
@@ -184,6 +195,7 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
                     new Color(255, 200, 30, 100),
                     new Color(255, 30, 30, 180)
             );
+            explosionSpec.setDamageType(damageType);
             Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, infernoShot.getSource(), infernoShot.getLocation(), false);
             Global.getSoundPlayer().playSound("system_orion_device_explosion", 1f, 1f, infernoShot.getLocation(), new Vector2f());
 

@@ -3,6 +3,7 @@ package org.selkie.zea.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseEveryFrameCombatPlugin;
 import com.fs.starfarer.api.combat.CollisionClass;
+import com.fs.starfarer.api.combat.DamageType;
 import com.fs.starfarer.api.combat.DamagingProjectileAPI;
 import com.fs.starfarer.api.input.InputEventAPI;
 import com.fs.starfarer.api.loading.DamagingExplosionSpec;
@@ -19,14 +20,16 @@ import java.util.List;
 
 public class SupernovaSubmunitionScript extends BaseEveryFrameCombatPlugin {
     private final DamagingProjectileAPI infernoCanister;
+    private final DamagingProjectileAPI infernoShot;
     private final float explosionTime;
     private final Color explosionColor;
 
     /**
      * @param proj           inferno cannon shot
      */
-    public SupernovaSubmunitionScript(DamagingProjectileAPI proj, float explosionTime, Color explosionColor) {
+    public SupernovaSubmunitionScript(DamagingProjectileAPI proj, float explosionTime, Color explosionColor, DamagingProjectileAPI infernoShot) {
         this.infernoCanister = proj;
+        this.infernoShot = infernoShot;
         this.explosionTime = explosionTime;
         this.explosionColor = explosionColor;
     }
@@ -45,12 +48,19 @@ public class SupernovaSubmunitionScript extends BaseEveryFrameCombatPlugin {
         infernoCanister.getVelocity().scale(0.993f);
 
         if (explosionTime - Global.getCombatEngine().getTotalElapsedTime(false) <= 0) {
+
+            float canisterDamage = infernoShot.getDamageAmount();
+            float maxDamage = canisterDamage * 0.2f;
+            float minDamage = maxDamage * 0.5f;
+            DamageType damageType = infernoShot.getDamageType();
+
+
             DamagingExplosionSpec explosionSpec = new DamagingExplosionSpec(
                     0.25f,
                     100f,
                     30f,
-                    1500f,
-                    750f,
+                    /*1500f*/maxDamage,
+                    /*750f*/minDamage,
                     CollisionClass.PROJECTILE_FF,
                     CollisionClass.PROJECTILE_FIGHTER,
                     3f,
@@ -60,6 +70,7 @@ public class SupernovaSubmunitionScript extends BaseEveryFrameCombatPlugin {
                     new Color(255, 200, 30, 100),
                     explosionColor
             );
+            explosionSpec.setDamageType(damageType);
             Global.getCombatEngine().spawnDamagingExplosion(explosionSpec, infernoCanister.getSource(), infernoCanister.getLocation(), false);
 
             Global.getCombatEngine().spawnExplosion(

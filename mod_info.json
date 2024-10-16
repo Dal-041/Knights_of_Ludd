@@ -1,6 +1,6 @@
 {
 	"id":"knights_of_ludd", # internal id
-	"name":"Knights of Ludd, The", # displayed to the player
+	"name":"Knights of Ludd", # displayed to the player
 	"author":"Selkie, Dal, Starficz",
 	"version":"1.3.0",
 	"description":"Adds the Knights of Ludd faction and content!",

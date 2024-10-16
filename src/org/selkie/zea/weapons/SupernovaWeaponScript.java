@@ -29,11 +29,11 @@ public class SupernovaWeaponScript implements EveryFrameWeaponEffectPlugin, OnFi
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        weapon.setForceNoFireOneFrame(true);
+       /* weapon.setForceNoFireOneFrame(true);
         weapon.setCurrHealth(weapon.getMaxHealth());
         if (weapon.isDisabled()) {
             weapon.repair();
-        }
+        }*/
     }
 
     private void superMuzzle(WeaponAPI weapon, Vector2f loc) {
