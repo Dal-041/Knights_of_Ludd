@@ -78,6 +78,19 @@
 	[
 		{"file":"sounds/sfx_wpn_energy/tachyon_lance_fire_01.ogg","pitch":1,"volume":1.0},
 	],
+	"zea_dawn_inferno":
+	[
+		{"file":"sounds/sfx_wpn_guns/hellbore_fire_01.ogg","pitch":0.65,"volume":2.0},
+	],
+    "zea_dawn_inferno_sm":{
+            "sounds":[
+                    {"file":"sounds/sfx_systems/canister_flak_explosion_01.ogg","pitch":0.75,"volume":0.8},
+                    {"file":"sounds/sfx_systems/canister_flak_explosion_02.ogg","pitch":0.75,"volume":0.8},
+                    {"file":"sounds/sfx_systems/canister_flak_explosion_03.ogg","pitch":0.75,"volume":0.8},
+                    {"file":"sounds/sfx_systems/canister_flak_explosion_04.ogg","pitch":0.75,"volume":0.8},
+                    {"file":"sounds/sfx_systems/canister_flak_explosion_05.ogg","pitch":0.75,"volume":0.8},
+            ],
+	},
 	"zea_dawn_flux_loop":{ # played while a ship is venting flux
 		"sounds":[
 			{"file":"sounds/sfx_flux/flux_flush_loop.ogg","pitch":1.15,"volume":0.8},

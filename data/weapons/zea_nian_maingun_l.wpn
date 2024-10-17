@@ -34,13 +34,13 @@
     "particleCount": 52,
     "particleColor": [
       255,
-      150,
-      120,
+      15,
+      15,
       245
     ]
   },
   "textureType": ROUGH,
-  "fireSoundTwo": "hellbore_fire",
+  "fireSoundTwo": "zea_dawn_inferno",
   "unaffectedByProjectileSpeedBonuses": true,
   "everyFrameEffect":"org.selkie.zea.weapons.SupernovaWeaponScript"
 }
