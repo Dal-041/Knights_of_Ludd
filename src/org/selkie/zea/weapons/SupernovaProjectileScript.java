@@ -84,17 +84,15 @@ public class SupernovaProjectileScript extends BaseEveryFrameCombatPlugin {
         float velDecrease = 0.4f;
         targetingAngle += amount * 5f;
 
-        if (Global.getCurrentState() == GameState.CAMPAIGN && !infernoShot.getWeapon().getShip().getFleetMember().getFleetData().getFleet().isPlayerFleet()) {
-            MagicRender.singleframe(
-                    Global.getSettings().getSprite(GfxCat.FX, "zea_nian_targetingRing"),
-                    MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
-                    new Vector2f(1200, 1200), //size
-                    targetingAngle, //angle
-                    new Color(255, 100, 0, 128),
-                    true, //additive
-                    CombatEngineLayers.UNDER_SHIPS_LAYER
-            );
-        }
+        MagicRender.singleframe(
+                Global.getSettings().getSprite(GfxCat.FX, "zea_nian_targetingRing"),
+                MathUtils.getPoint(infernoShot.getLocation(), calculateTotalDistance(infernoShot.getVelocity().length(), velDecrease, state.timeToExplode(elapsedStageTime)), VectorUtils.getFacing(infernoShot.getVelocity())), //location
+                new Vector2f(1200, 1200), //size
+                targetingAngle, //angle
+                new Color(255, 100, 0, 128),
+                true, //additive
+                CombatEngineLayers.UNDER_SHIPS_LAYER
+        );
 
 
         infernoShot.getVelocity().scale(1f - velDecrease * amount);

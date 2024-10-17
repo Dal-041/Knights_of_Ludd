@@ -20,9 +20,8 @@
     "zea_nian_boss"
   ],
   "builtInWeapons": {
-	  "WS0014":"zea_nian_maingun_l",
-    "WS0015":"zea_dawn_targeting_beam_wpn",
-	  "WS0016":"zea_nian_maingun_r"
+	  "WS0014":"zea_nian_maingun",
+      "WS0015":"zea_dawn_targeting_beam_wpn",
   },
   "weaponSlots": [
     {
@@ -162,7 +161,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [139, 60] #Left
+      "locations": [139, 39] #Recentered
     },
     {
       "id": "WS0015",
@@ -172,15 +171,6 @@
       "arc": 60,
       "angle": 0,
       "locations": [139, 39]
-    },
-	{
-      "id": "WS0016", 
-      "size": "LARGE",
-      "type": "BUILT_IN",
-      "mount": "HARDPOINT",
-      "arc": 0,
-      "angle": 0,
-      "locations": [139, 18] #Right
     },
   ],
   "engineSlots": [

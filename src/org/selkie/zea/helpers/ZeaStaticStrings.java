@@ -349,12 +349,18 @@ public class ZeaStaticStrings {
         "zea_edf_mizuchi",
         "zea_dawn_tianma",
     };
+
+    //campaign abilities
     public static final String abilityJumpElysia = "fracture_jump_elysia";
     public static final String abilityJumpDawn = "fracture_jump_luna_sea";
     public static final String abilityJumpDusk = "fracture_jump_pullsar";
+
+    //Shipsystems
     public static final String systemIDBlizzard = "zea_boss_blizzard";
     public static final String systemIDSupernova = "zea_boss_supernova";
     public static final String systemIDCorruption = "zea_boss_corruptionjets";
+    public static final String systemIDFlareWave = "zea_dawn_flare_wave";
+
     public static final String pathPortraits = "graphics/zea/portraits/";
     public static final String[] portraitsDawnPaths = {
             pathPortraits.concat("zea_dawn_1.png"),

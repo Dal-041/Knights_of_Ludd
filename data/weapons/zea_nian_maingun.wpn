@@ -1,24 +1,26 @@
 {
-  "id": "zea_nian_maingun_l",
+  "id": "zea_nian_maingun",
   "specClass": "projectile",
   "projectileSpecId": "zea_inferno_shot",
   "type": "BALLISTIC",
   "size": "LARGE",
   "displayArcRadius": 25,
-  "turretSprite": "graphics/zea/weapons/kol_niangun_hardpoint_l_base.png",
-  "turretGunSprite": "graphics/zea/weapons/kol_niangun_hardpoint_l_recoil.png",
-  "hardpointSprite": "graphics/zea/weapons/kol_niangun_hardpoint_l_base.png",
-  "hardpointGunSprite": "graphics/zea/weapons/kol_niangun_hardpoint_l_recoil.png",
+  "turretSprite": "graphics/zea/weapons/kol_niangun_hardpoint_base.png",
+  "turretGunSprite": "graphics/zea/weapons/kol_niangun_hardpoint_recoil.png",
+  "hardpointSprite": "graphics/zea/weapons/kol_niangun_hardpoint_base.png",
+  "hardpointGunSprite": "graphics/zea/weapons/kol_niangun_hardpoint_recoil.png",
   "renderAboveAllWeapons": 1,
   "visualRecoil": 9,
   "turretOffsets": [
-    5,0
+    55,-24,
+	55,24
   ],
   "turretAngleOffsets": [
     0
   ],
   "hardpointOffsets": [
-    5,0
+    55,-24,
+	55,24
   ],
   "hardpointAngleOffsets": [
     0

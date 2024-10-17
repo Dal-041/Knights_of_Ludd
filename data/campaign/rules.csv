@@ -141,8 +141,8 @@ There appear to be small, bright EM sources, ""-Only partially overlapping the v
 ""Interloper. You have come for what is not yours. Power down and you will not be unnecessarily harmed.""
 
 The link cuts as abruptly as it began. A threat from a fully coherent AI core. Great. A moment goes by but your attention lingers on some far away sound - as if catching a melody on the wind. When you attempt to focus on the harmony the impression evaporates as quickly as it came. Gathering yourself, you issue the orders to your bridge crew.",,
-zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volumn, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.","0:zea_bossTT1defeated:Let's get what we came for.",
-zea_BossTT1Defeated2,DialogOptionSelected,"$option == zea_bossTT1defeated","FireBest OpenInteractionDialog",,,
+zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volume, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.",0:zea_bossTT1defeated:Let's get what we came for.,
+zea_BossTT1Defeated2,DialogOptionSelected,$option == zea_bossTT1defeated,FireBest OpenInteractionDialog,,,
 zea_BossTT1Wreck1,ShowSalvageEntityDetails,"$customType == wreck
 
 $zea_ninaya_wreck score:1000

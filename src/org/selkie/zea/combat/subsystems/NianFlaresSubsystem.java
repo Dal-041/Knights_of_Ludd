@@ -3,12 +3,14 @@ package org.selkie.zea.combat.subsystems;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.MissileAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.ShipSystemSpecAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.MagicSubsystem;
+import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.hullmods.NianBoss;
 
 import java.awt.*;
@@ -18,14 +20,16 @@ public class NianFlaresSubsystem extends MagicSubsystem {
     private static final int FLARES_PER_WAVE_PER_SIDE = 36;
     private static final int FLARE_WAVES_NORMAL = 1;
     private static final int FLARE_WAVES_ENRAGED = 3;
-    private static final float FLARE_WAVE_DELAY = 0.75f;
-    private static final float MISSILE_SEARCH_RANGE = 800f;
+    protected static final ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDFlareWave);
+    private static float FLARE_WAVE_DELAY = 0.75F;
+    private static final float MISSILE_SEARCH_RANGE = 1000f;
 
     final IntervalUtil flaresInterval = new IntervalUtil(0.03f, 0.09f);
     final IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
     final IntervalUtil nextWaveInterval = new IntervalUtil(FLARE_WAVE_DELAY, FLARE_WAVE_DELAY);
     int flaresReleasedInWave = 0;
     int wavesToLaunch = 0;
+    boolean checkedEntry = false;
 
     public NianFlaresSubsystem(ShipAPI ship) {
         super(ship);
@@ -38,22 +42,20 @@ public class NianFlaresSubsystem extends MagicSubsystem {
 
     @Override
     public float getBaseInDuration() {
-        return super.getBaseInDuration();
+        return entry.getIn();
     }
 
     @Override
-    public float getBaseActiveDuration() {
-        return 0.1f;
-    }
+    public float getBaseActiveDuration() { return entry.getActive(); }
 
     @Override
     public float getBaseOutDuration() {
-        return super.getBaseOutDuration();
+        return entry.getOut();
     }
 
     @Override
     public float getBaseCooldownDuration() {
-        return 10f;
+        return entry.getCooldown(stats);
     }
 
     @Override
