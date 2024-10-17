@@ -56,7 +56,7 @@ public class KolStaticStrings {
     public static final String KOL_LYRA = "kol_lyra";
     public static final String MEMKEY_KOL_SCHISMED = "$kol_knights_schism";
 
-
+    public static final String MGA_DIRECTOR = "AmadouSembene";
 
     public static class KnightsFleetTypes {
 

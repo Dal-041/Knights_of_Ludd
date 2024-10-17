@@ -205,6 +205,7 @@ public class ZeaStaticStrings {
     public static final String EOS_EXODUS = "Eos Exodus";
     public static final String KUMARI_KANDAM = "Kumari Kandam";
     public static final String CANAAN = "Canaan";
+    public static final String ARCADIA = "Arcadia";
     public static final String AL_GEBBAR = "Al Gebbar";
     public static final String OFFICER_LEVEL_UP = "officerLevelUp";
     public static final String PROGRESS_BAR_FUEL_COLOR = "progressBarFuelColor";

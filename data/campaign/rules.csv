@@ -1,89 +1,85 @@
 id,trigger,conditions,script,text,options,notes
-#RULESET_NAME KOL,,,,,,
+"#RULESET_NAME KOL",,,,,,
 flavorTextMarketKoL,TradePanelFlavorText,"$global.tradePanelMode == MARKET
 $faction.id == knights_of_selkie","AddText ""The port concourse is sparsely attended to by the handful of traders who serve the Order. Luddic merchants in muted dress await meetings with offloading ship captains. There are few pilgrims here, scribes conduct the business with the airs of duty and strict convention. While the Knights have lesser need for outsiders, they maintain the tolerance shown in all Luddic markets if for no other reason than to keep the peace. Their handspun robes of Luddic green grace every berth of the trading district."" marketFlavorTextColor",,,
-bar_descKoL,BarPrintDesc,$faction.id == knights_of_selkie,ShowImageVisual teahouse,You duck past notices encouraging temperance and restraint as you enter the bar. Someone is playing a stringed instrument in an alcove. A row of handworked samovars suggests that tea is served as often as the weak grain-brew favored by the local spacer crews at the bar. Many of the patrons at tables or booths seem to be long-haulers or the few stationed nonbelievers huddling in the closest analog to a den of sin that can be found.,,
-,,,,,,
+bar_descKoL,BarPrintDesc,"$faction.id == knights_of_selkie","ShowImageVisual teahouse","You duck past notices encouraging temperance and restraint as you enter the bar. Someone is playing a stringed instrument in an alcove. A row of handworked samovars suggests that tea is served as often as the weak grain-brew favored by the local spacer crews at the bar. Many of the patrons at tables or booths seem to be long-haulers or the few stationed nonbelievers huddling in the closest analog to a den of sin that can be found.",,
 ,,,,,,
 # relationship level descriptions,,,,,,
 ,,,,,,
 # good,,,,,,
 relLevelNeutralKol,RelationshipLevelDesc,"$faction.rel == NEUTRAL
-$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"You stay clear of the Knights of Ludd and they do not hinder your passage. Though you are ever watched by their patrols, comms are crisp and polite.",,
+$faction.id == knights_of_selkie score:1000","FireAll RelLevelMoreDescription","You stay clear of the Knights of Ludd and they do not hinder your passage. Though you are ever watched by their patrols, comms are crisp and polite.",,
 relLevelFavorableKol,RelationshipLevelDesc,"$faction.rel == FAVORABLE
-$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"Requests for your destination and purpose are notably lessened, if not absent. You respect their sometimes archaic protocols and they occasionally fail to scowl at your lifestyle.",,
+$faction.id == knights_of_selkie score:1000","FireAll RelLevelMoreDescription","Requests for your destination and purpose are notably lessened, if not absent. You respect their sometimes archaic protocols and they occasionally fail to scowl at your lifestyle.",,
 relLevelWelcomingKol,RelationshipLevelDesc,"$faction.rel == WELCOMING
-$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,"The Knights of Ludd watch you with less suspicion than most spacers, and the Church welcomes you to the volumes they control. You are an old hand at navigating their ways of operating and leave behind those technologies which cause alarm to the most wary Knights.",,
+$faction.id == knights_of_selkie score:1000","FireAll RelLevelMoreDescription","The Knights of Ludd watch you with less suspicion than most spacers, and the Church welcomes you to the volumes they control. You are an old hand at navigating their ways of operating and leave behind those technologies which cause alarm to the most wary Knights.",,
 relLevelFriendlyKol,RelationshipLevelDesc,"$faction.rel == FRIENDLY
-$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,You are given preferential treatment over other spacers during security checks and are allowed to self-moderate unsubtle use of technologies without need for the heavy hand of the Knights of Ludd to guide you toward righteousness.,,
+$faction.id == knights_of_selkie score:1000","FireAll RelLevelMoreDescription","You are given preferential treatment over other spacers during security checks and are allowed to self-moderate unsubtle use of technologies without need for the heavy hand of the Knights of Ludd to guide you toward righteousness.",,
 relLevelCooperativeKol,RelationshipLevelDesc,"$faction.rel == COOPERATIVE
-$faction.id == knights_of_selkie score:1000",FireAll RelLevelMoreDescription,The Knights of Ludd put great trust in your handling of technology for righteous cause. Your presence is seen as a boon to security and your sensor data packages are integrated into sector models. Even the most radical of Knights acknowledge your contribution.,,
-#END good,,,,,,
+$faction.id == knights_of_selkie score:1000","FireAll RelLevelMoreDescription","The Knights of Ludd put great trust in your handling of technology for righteous cause. Your presence is seen as a boon to security and your sensor data packages are integrated into sector models. Even the most radical of Knights acknowledge your contribution.",,
+"#END good",,,,,,
 ,,,,,,
 # bad,,,,,,
 relLevelSuspiciousKol,RelationshipLevelDesc,"$faction.rel == SUSPICIOUS
-$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,You are seen as a typical spacer; dismissive of Ludd's revelation and scornful of the Church. The Knights of Ludd remind you of the moral importance of Technological Correctness during every tense interaction.,,
+$faction.id == knights_of_selkie score:2000","FireAll RelLevelMoreDescription","You are seen as a typical spacer; dismissive of Ludd's revelation and scornful of the Church. The Knights of Ludd remind you of the moral importance of Technological Correctness during every tense interaction.",,
 relLevelInhospitableKol,RelationshipLevelDesc,"$faction.rel == INHOSPITABLE
-$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"The Knights look warily upon you, and subject you to unnecessary delays and investigation. Curates of the Church of Galactic Redemption offer you as example of one led far astray from Ludd's revelation; one lost in the machine; perhaps not yet lost to Moloch, but an unwitting servant to evil.",,
+$faction.id == knights_of_selkie score:2000","FireAll RelLevelMoreDescription","The Knights look warily upon you, and subject you to unnecessary delays and investigation. Curates of the Church of Galactic Redemption offer you as example of one led far astray from Ludd's revelation; one lost in the machine; perhaps not yet lost to Moloch, but an unwitting servant to evil.",,
 relLevelHostileKol,RelationshipLevelDesc,"$faction.rel == HOSTILE
-$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"The Church considers you a minion of Moloch, a slave to demonic technology. You are a witless ally of Mammon, and the Knights treat you as an agent of evil. Begone, or be subject to the wrath of the righteous.",,
+$faction.id == knights_of_selkie score:2000","FireAll RelLevelMoreDescription","The Church considers you a minion of Moloch, a slave to demonic technology. You are a witless ally of Mammon, and the Knights treat you as an agent of evil. Begone, or be subject to the wrath of the righteous.",,
 relLevelVengefulKol,RelationshipLevelDesc,"$faction.rel == VENGEFUL
-$faction.id == knights_of_selkie score:2000",FireAll RelLevelMoreDescription,"You have been deemed an unholy foe. An Inquisitor has been assigned to carry out your termination, which they will name a righteous deed, just and honorable. The Knights' indoctrinal school for squires identifies you as the slavering dretch of every known demon, from Mammon, Moloch, and Belial all the way down to some possibly created just for you.",,
-#END bad,,,,,,
+$faction.id == knights_of_selkie score:2000","FireAll RelLevelMoreDescription","You have been deemed an unholy foe. An Inquisitor has been assigned to carry out your termination, which they will name a righteous deed, just and honorable. The Knights' indoctrinal school for squires identifies you as the slavering dretch of every known demon, from Mammon, Moloch, and Belial all the way down to some possibly created just for you.",,
+"#END bad",,,,,,
 ,,,,,,
 # character interactions (VNSectorlol),,,,,,
 ,,,,,,
 # Grandmaster,,,,,,
 ,,,,,,
 # attempt to talk,,,,,,
-defaultGrandmasterGreeting,PickGreeting,$id == kol_grandmaster score:100,FireAll PopulateOptions,"After an indeterminate time waiting for a response, the comm-link connects you with what appears to be one of the Grandmaster's squires. Though clearly not a knight, they nonetheless manage to carry enough authority to keep you paying attention.",,
+defaultGrandmasterGreeting,PickGreeting,"$id == kol_grandmaster score:100","FireAll PopulateOptions","After an indeterminate time waiting for a response, the comm-link connects you with what appears to be one of the Grandmaster's squires. Though clearly not a knight, they nonetheless manage to carry enough authority to keep you paying attention.",,
 ,,,,,,
 ,,,,"""Greetings,"" the squire says. ""The Grandmaster is currently not receiving any visitors at this time. If this is an urgent matter, please speak with one of the Knights.""",,
-defaultGrandmasterRequest,PopulateOptions,$id == kol_grandmaster,,,defaultGrandmaster_Request:Request to meet with the Grandmaster,
-,,!$askedToMeet,,,,
-defaultGrandmasterDemand,PopulateOptions,$id == kol_grandmaster,FireAll PopulateOptions,,defaultGrandmaster_Demand:Demand to meet with the Grandmaster,
-,,!$askedToMeet,,,,
-defaultGrandmasterMeetingResponseA,DialogOptionSelected,$option == defaultGrandmaster_Request,FireBest GrandmasterMeetingResponse,,,
-defaultGrandmasterMeetingResponseB,DialogOptionSelected,$option == defaultGrandmaster_Demand,FireBest GrandmasterMeetingResponse,,,
-defaultGrandmasterMeetingResponseAnswer,GrandmasterMeetingResponse,,$askedToMeet = true 0,Your attempt to secure an audience with the Grandmaster falls on deaf ears as the squire bluntly turns you down.,,
-,,,FireAll PopulateOptions,,,
+defaultGrandmasterRequest,PopulateOptions,"$id == kol_grandmaster",,,"defaultGrandmaster_Request:Request to meet with the Grandmaster",
+,,"!$askedToMeet",,,,
+defaultGrandmasterDemand,PopulateOptions,"$id == kol_grandmaster","FireAll PopulateOptions",,"defaultGrandmaster_Demand:Demand to meet with the Grandmaster",
+,,"!$askedToMeet",,,,
+defaultGrandmasterMeetingResponseA,DialogOptionSelected,"$option == defaultGrandmaster_Request","FireBest GrandmasterMeetingResponse",,,
+defaultGrandmasterMeetingResponseB,DialogOptionSelected,"$option == defaultGrandmaster_Demand","FireBest GrandmasterMeetingResponse",,,
+defaultGrandmasterMeetingResponseAnswer,GrandmasterMeetingResponse,,"$askedToMeet = true 0","Your attempt to secure an audience with the Grandmaster falls on deaf ears as the squire bluntly turns you down.",,
+,,,"FireAll PopulateOptions",,,
 ,,,,"""The Grandmaster wishes not to be disturbed. Only those who have an standing invitation to meet with the Grandmaster may do so at this time.""",,
-#END attempt to talk,,,,,,
-#END Grandmaster,,,,,,
+"#END attempt to talk",,,,,,
+"#END Grandmaster",,,,,,
 ,,,,,,
 # Knightmaster,,,,,,
-defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a prefunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
+defaultKnightmasterGreeting,PickGreeting,"$id == kol_chaptermaster score:100","ShowPersonVisual","After some time waiting, you reach the office of the Chaptermaster. There's a prefunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
 ,,,"ShowDefaultVisual
 FireAll PopulateOptions",,,
-#END Knightmaster,,,,,,
+"#END Knightmaster",,,,,,
 ,,,,,,
 # Grandmaster Lackey,,,,,,
-defaultGrandmasterLackeyGreeting,PickGreeting,$id == kol_intel_director score:100,ShowPersonVisual,"""Many blessings, Captain. Though you may not know me, my office certainly knows of you. I can see your questions forming. Yes, I work for the Order; no, I can't get you an audience with the Grandmaster. No, they haven't assigned me an initiate to handle this. And no, I don't take inquiries. Please find me should you have intelligence that would concern the faith. 
+defaultGrandmasterLackeyGreeting,PickGreeting,"$id == kol_intel_director score:100","ShowPersonVisual","""Many blessings, Captain. Though you may not know me, my office certainly knows of you. I can see your questions forming. Yes, I work for the Order; no, I can't get you an audience with the Grandmaster. No, they haven't assigned me an initiate to handle this. And no, I don't take inquiries. Please find me should you have intelligence that would concern the faith. 
 
 Regrettably, I have a lot of work on my plate, so providence sees that I can’t employ you today, no matter the asset that you so assuredly would be. If you wish to serve the Order, no doubt there are Tri-Tachyon servants to root out or hidden caches yet to be claimed - you might start there. Burn bright, Starfarer. Grace be with you.""
 
-The line closes without further ceremony. Well, you did get a suggestion.",0:kol_gm_lackey_greetingContinue:Continue,
-defaultGrandmasterLackeyGreeting2,DialogOptionSelected,$option == kol_gm_lackey_greetingContinue,"ShowDefaultVisual
+The line closes without further ceremony. Well, you did get a suggestion.","0:kol_gm_lackey_greetingContinue:Continue",
+defaultGrandmasterLackeyGreeting2,DialogOptionSelected,"$option == kol_gm_lackey_greetingContinue","ShowDefaultVisual
 FireAll PopulateOptions",,,
-,,,,,,
-#END Grandmaster Lackey,,,,,,
+"#END Grandmaster Lackey",,,,,,
 ,,,,,,
 # Knightmaster Lackey,,,,,,
-defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. 
+defaultKnightmasterLackeyGreeting,PickGreeting,"$id == kol_knightcaptain score:100","ShowPersonVisual","""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. 
 
 Our Master of Agents on our sister-station Lyra may also need a lead investigated. 
 
-Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""soon,"" but for some reason the comm transcriber says ""in later patches."" How strange. - ""Till next we meet, Captain!""",0:kol_km_lackey_expeditions:Continue,
-defaultKnightmasterLackeyExpeditionsBlurb,DialogOptionSelected,$option == kol_km_lackey_expeditions,"ShowDefaultVisual
+Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""soon,"" but for some reason the comm transcriber says ""in later patches."" How strange. - ""Till next we meet, Captain!""","0:kol_km_lackey_expeditions:Continue",
+defaultKnightmasterLackeyExpeditionsBlurb,DialogOptionSelected,"$option == kol_km_lackey_expeditions","ShowDefaultVisual
 FireAll PopulateOptions","Ah, another thing, Captain. Perhaps if you're the valiant type, you can find our expeditions gather about twice a month, as soon as one returns, or... if we lose contact. Please, if you provide them escort they're sure to go somewhere interesting. You'd be doing us a great favor. Blessings upon you, Captain.",,
+"#END Knightmaster Lackey",,,,,,
+"#END character interactions (VNSectorlol)",,,,,,
 ,,,,,,
-,,,,,,
-#END Knightmaster Lackey,,,,,,
-#END character interactions (VNSectorlol),,,,,,
-,,,,,,
-#BEGIN relationship level descriptions,,,,,,
+# BEGIN relationship level descriptions,,,,,,
 greetingDawnHostile,OpenCommLink,"$faction.id == zea_dawn score:1000
-$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the sense of some burning menace sizing up its targets.",cutCommLink:Cut the comm link,
+$entity.isHostile","$ignorePlayerCommRequests = true 1","There is no response, only the sense of some burning menace sizing up its targets.","cutCommLink:Cut the comm link",
 greetingDawnFriendly,OpenCommLink,"$faction.id == zea_dawn score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI profiles your systems. This was a bad idea.",,
@@ -91,7 +87,7 @@ greetingDawnNeutral,OpenCommLink,"$faction.id == zea_dawn score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the Dawntide's menace remains shackled.",,
 greetingDuskHostile,OpenCommLink,"$faction.id == zea_dusk score:1000
-$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
+$entity.isHostile","$ignorePlayerCommRequests = true 1","There is no response, only the eerie silence of the open line.","cutCommLink:Cut the comm link",
 greetingDuskFriendly,OpenCommLink,"$faction.id == zea_dusk score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
@@ -99,14 +95,14 @@ greetingDuskNeutral,OpenCommLink,"$faction.id == zea_dusk score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the Duskbourne's weapons remain inactive.",,
 greetingEDFHostile,OpenCommLink,"$faction.id == zea_elysians score:1000
-$entity.isHostile",$ignorePlayerCommRequests = true 1,"There is no response, only the eerie silence of the open line.",cutCommLink:Cut the comm link,
+$entity.isHostile","$ignorePlayerCommRequests = true 1","There is no response, only the eerie silence of the open line.","cutCommLink:Cut the comm link",
 greetingEDFFriendly,OpenCommLink,"$faction.id == zea_elysians score:1000
 $faction.friendlyToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","No audible sound comes through the line, but intercomm lights flicker across the panel as the AI interfaces with your systems. You're not sure if voicing objection would go over well.",,
 greetingEDFNeutral,OpenCommLink,"$faction.id == zea_elysians score:1000
 $faction.neutralToPlayer","$menuState = fleetConvMain 0
 FireAll PopulateOptions","There is no response, but the fleet's weapons remain inactive.",,
-#END relationship level descriptions,,,,,,
+"#END BEGIN relationship level descriptions",,,,,,
 ,,,,,,
 # boss interactions,,,,,,
 zea_BossStationTT_stationOpenDialog,OpenInteractionDialog,"$tag:zea_boss_station_tritachyontag score:1000
@@ -115,43 +111,43 @@ ShowDefaultVisual
 FireBest SalvageCheckHostile","As your $shipOrFleet moves into a close holding orbit, your comms officer murmurs, ""Hardly any bleed at all coming from that station, Captain. If it didn't have mass, we'd never..."" They trail off, squinting at their console.
 ",,
 zea_BossStationTT_defender_Desc,TriggerAutomatedDefenses,"$tag:zea_boss_station_tritachyontag score:1000
-$zea_boss_station_tritachyon score:1000",SalvageDefenderInteraction,"The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
+$zea_boss_station_tritachyon score:1000","SalvageDefenderInteraction","The bridge sounds an alert as a single ship detaches from the station hull and accelerates towards your fleet. A comms notification chimes, moments later. Without waiting, your officer scans and plays the message; a man's voice, reedy and distracted, talks over the alarms.
 
 ""You have violated an information blackout area. Don't try to run. It'll interfere with the data collection.""",,
-zea_BossStationTT_PostDefenders,BeatDefendersContinue,$tag:zea_boss_station_tritachyontag score:1000,,"You seize the initiative and order an approach vector before the station's defenders have a chance to throw any more surprises your way.
+zea_BossStationTT_PostDefenders,BeatDefendersContinue,"$tag:zea_boss_station_tritachyontag score:1000",,"You seize the initiative and order an approach vector before the station's defenders have a chance to throw any more surprises your way.
 
-It's when you've closed half the distance to the station that your sensor officer yells out in alarm - a spike in subspace tearing through the display. A moment later the station lights up on your monitor like the Rings of Maxios as whatever technology that was cloaking its signal dispels from your feeds. Your salvor crew chirps in excitement - not only is the station clearly loaded with technology, it's all active. Your crew chief and science officer cry out in exultation of the record haul.",0:salBeatDefendersContinue:Move in!,
-zea_BossStationTT_Salvage,BeginSalvage,$tag:zea_boss_station_tritachyontag score:1000,,"You watch as the station glows and glitters before you with untapped promise - and then one by one each glowing node on the sensor disappears, alarms appearing as energy surges flare throughout the station, culminating in a single massive eruption along the station's main axis that shatters it utterly.
+It's when you've closed half the distance to the station that your sensor officer yells out in alarm - a spike in subspace tearing through the display. A moment later the station lights up on your monitor like the Rings of Maxios as whatever technology that was cloaking its signal dispels from your feeds. Your salvor crew chirps in excitement - not only is the station clearly loaded with technology, it's all active. Your crew chief and science officer cry out in exultation of the record haul.","0:salBeatDefendersContinue:Move in!",
+zea_BossStationTT_Salvage,BeginSalvage,"$tag:zea_boss_station_tritachyontag score:1000",,"You watch as the station glows and glitters before you with untapped promise - and then one by one each glowing node on the sensor disappears, alarms appearing as energy surges flare throughout the station, culminating in a single massive eruption along the station's main axis that shatters it utterly.
 
 Your officers mournfully gawk as their treasure vanishes like swarmers meandering into a flak field. The secrecy of whatever was being researched here was clearly worth the entire station's sacrifice, and an educated guess tells you the strange ship you fought had a lot to do with it. 
 
-You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.",0:zea_bossTTStationpage2:Get me a full report.,
-zea_BossStationTT_Salvage2,DialogOptionSelected,$option == zea_bossTTStationpage2,ZeaIntelCMD addIntelTTBoss2,"The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments.
+You restrain your salvors until you're sure your $shipOrFleet has a clean approach path into the wreckage, then set to the furious recovery work.","0:zea_bossTTStationpage2:Get me a full report.",
+zea_BossStationTT_Salvage2,DialogOptionSelected,"$option == zea_bossTTStationpage2","ZeaIntelCMD addIntelTTBoss2","The post-mortem reveals that the spike in the subspace readings was due to a small phase shuttle leaping out of the system, and the drop in sensor cloaking was due to the internal systems surging and breaking. Frustratingly, the occupants were professional - everything that might contain any information on them was wiped clean from the lowest memory key to the vitally important delta-AI managing the station life support systems. However, what's clear is that this was a Tri-Tachyon operation, and Tri-Tachyon executives always have some dirt on the others, hiding them off the main systems and hidden away in shielded compartments.
 
-It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""",0:zea_bossTTStationpage3:Set a course away from this wretched place.,
-zea_BossStationTT_Salvage3,DialogOptionSelected,$option == zea_bossTTStationpage3,SalvageEntity performSalvage,,,
+It doesn't take your crew long to locate a mag-safe box underneath the paneling in an engineering section, containing a memory key wrapped in organic-derived insulation. The Cache is obstinantly bio-locked, and only select sections of the key can be scraped off. Apart from some scandalous corporate gossip and contextless financial records, you locate only a few intact records, about one ""Project Dusk.""","0:zea_bossTTStationpage3:Set a course away from this wretched place.",
+zea_BossStationTT_Salvage3,DialogOptionSelected,"$option == zea_bossTTStationpage3","SalvageEntity performSalvage",,,
 ,,,,,,
 zea_BossTT1Encounted,BeginFleetEncounter,"$zea_ninaya score:1000
-$global.gaPZ_scannedZiggurat",ZeaIntelCMD addBossTags,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic. A comm request comes through from the strange vessel and your comms officer brings it to your display. 
+$global.gaPZ_scannedZiggurat","ZeaIntelCMD addBossTags","The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic. A comm request comes through from the strange vessel and your comms officer brings it to your display. 
 
 ""Interloper. You have come for what is not yours. Power down and you will not be unnecessarily harmed.""
 
 The link cuts. A warning or a threat, and from a fully coherent AI core. Great. Perhaps the ship that didn't speak was preferrable. Shaking off these thoughts, you issue the orders to your bridge crew.",,
 zea_BossTT1EncountedNoZig,BeginFleetEncounter,"$zea_ninaya score:1000
-!$global.gaPZ_scannedZiggurat",ZeaIntelCMD addBossTags,"The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic.
+!$global.gaPZ_scannedZiggurat","ZeaIntelCMD addBossTags","The frigate before you appears to be some variant of the Tri-Tachyon Hyperion, though its design is otherwise exotic. Well, even more exotic.
 
 There appear to be small, bright EM sources, ""-Only partially overlapping the visual spectrum,"" your sensors officer reports. They orbit with uncanny motion around the strange vessel. Your bridge crew murmurs speculation between their stations: some kind of point defense field? Microsat thruster bursts? The speculation is far from concensus. A ping from the comm panel rings out before you can ponder further.
 
 ""Interloper. You have come for what is not yours. Power down and you will not be unnecessarily harmed.""
 
 The link cuts as abruptly as it began. A threat from a fully coherent AI core. Great. A moment goes by but your attention lingers on some far away sound - as if catching a melody on the wind. When you attempt to focus on the harmony the impression evaporates as quickly as it came. Gathering yourself, you issue the orders to your bridge crew.",,
-zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volumn, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.",0:zea_bossTT1defeated:Let's get what we came for.,
-zea_BossTT1Defeated2,DialogOptionSelected,$option == zea_bossTT1defeated,FireBest OpenInteractionDialog,,,
+zea_BossTT1Defeated,zea_AfterNinayaDefeat,,,"The vicious frigate finally ignites in a superheated conflagration, much to your relief. There are no further signals from the local volumn, you hear only the hasty chatter of damage assessments and status reports from your bridge crew. Whatever the hell that was, it's over.","0:zea_bossTT1defeated:Let's get what we came for.",
+zea_BossTT1Defeated2,DialogOptionSelected,"$option == zea_bossTT1defeated","FireBest OpenInteractionDialog",,,
 zea_BossTT1Wreck1,ShowSalvageEntityDetails,"$customType == wreck
 
 $zea_ninaya_wreck score:1000
 
-!$first_ninaya_visit",ShowDefaultVisual,"The broken frigate, now quite lifeless, is drifting through space.",,
+!$first_ninaya_visit","ShowDefaultVisual","The broken frigate, now quite lifeless, is drifting through space.",,
 zea_BossTT1Wreck2,CheckSalvageSpecial,"$salvageSpecialData != null
 
 $customType == wreck
@@ -167,8 +163,8 @@ ZeaIntelCMD addIntelTTBoss1","Salvage teams hook their tethers into the fragment
 
 He continues quickly. ""Together we've recovered an entry in the systems from the ship's last refit - it was recent. The location's out in the fringes, nothing on record, but this would indicate there's some kind of facility out there. There could be more of this tech! Here, I'm sending what we've got.""
 
-",0:zea_bossTT1wreck3:Continue,
-zea_BossTT1Wreck3,DialogOptionSelected,$option == zea_bossTT1wreck3,"$first_ninaya_visit = true
+","0:zea_bossTT1wreck3:Continue",
+zea_BossTT1Wreck3,DialogOptionSelected,"$option == zea_bossTT1wreck3","$first_ninaya_visit = true
 
 SalvageSpecialInteraction","It seems someone's excited by the find, and you can't deny its magnitude, but there's no doubt in your mind that wherever this instrument came from will be yet more fiercely guarded than this cache. Is it really worth provoking the worst of the corporation to delve its darkest secrets? It's not too late to forget this ship and move on...
 
@@ -180,24 +176,40 @@ Your crew lead resumes before you can get overwhelmed in your thoughts.
 ,,,,,,
 ,,,,,,
 zea_BossTT3Encounted,BeginFleetEncounter,"$zea_nineveh score:1000
-",ZeaIntelCMD addBossTags,"The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
+","ZeaIntelCMD addBossTags","The Flagship of the Tri-Tachyon fleet superficially resembles the hull of a Doom cruiser, but what heritage this monstrosity shares with that hull is most certainly long diverged. Dooms are bad enough, this thing can only mean trouble.
 
 The small, bright motes orbiting the vessel are but an afterthought before the Tri-Tachyon defense fleet. Your tactical thought processes are interrupted by your comm panel lighting up.
 
 ""Power down and you will not be unnecessarily harmed,"" the voice intones before the signal cuts.
 
 Short, to the point, and backed up by an armada's firepower - if you weren't on the receiving end you might like their style. Wasting no time, you begin issuing tactical orders to your bridge crew.",,
-zea_BossTT3Defeated,zea_AfterNinevehDefeat,,ZeaIntelCMD addIntelTTBoss3,"The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and fresh wreckage for light years in any direction.
+zea_BossTT3Defeated,zea_AfterNinevehDefeat,,"ZeaIntelCMD addIntelTTBoss3","The burning wreckage of the Tri-Tachyon black fleet litters the local volume, each of the defenders painstakingly reduced to inert jumbles of alloys and slag. Whatever treasure awaits you here, there is only it, your fleet, and fresh wreckage for light years in any direction.
 
-Your eye catches on a datacore glinting in the debris that must have broken free during the fight. Perhaps they didn't have time to fully scrub it. You give a nod to your salvors and in short order it's brought on board.",0:zea_bossTT3defeated:What was theirs is now ours.,
-zea_BossTT3Defeated2,DialogOptionSelected,$option == zea_bossTT3defeated,DismissDialog,,,
+Your eye catches on a datacore glinting in the debris that must have broken free during the fight. Perhaps they didn't have time to fully scrub it. You give a nod to your salvors and in short order it's brought on board.","0:zea_bossTT3defeated:What was theirs is now ours.",
+zea_BossTT3Defeated2,DialogOptionSelected,"$option == zea_bossTT3defeated","DismissDialog",,,
 ,,,,,,
 zea_SpoilersDialog,zea_spoilers_popup,,,,"0:zea_spoilers_close:Now, good luck with those fleets!",
-zea_SpoilersDialog2,DialogOptionSelected,$option == zea_spoilers_close,DismissDialog,,,
+zea_SpoilersDialog2,DialogOptionSelected,"$option == zea_spoilers_close","DismissDialog",,,
 ,,,,,,
-zea_BossEnc,BeginFleetEncounter,$zea_boss score:1000,ZeaIntelCMD addBossTags,"Prepare yourself, this foe will be unlike any you have faced before.",,
-zea_BossAmaterasuEnc,BeginFleetEncounter,$zea_amaterasu score:1000,ZeaIntelCMD addBossTags,"On approach one of your officers notes a distant glow, a surge of energy originating from the opposing fleet. The bridge crew immediately springs to action, manning consoles and barking orders, only to falter as the view from the bridge slowly turns into a cascade of blinding white. Hull-mounted sensor equipment declares incandescence across the entire electromagnetic spectrum before the readings distort into incomprehension. Amidst a song of light and fire, Amaterasu beckons.",,
-zea_BossHeartEnc,BeginFleetEncounter,$zea_corruptingheart score:1000,ZeaIntelCMD addBossTags,"The looming Elysian fleet closes in. At its head is a carrier unlike any you have yet seen, leading a flock of white wings. Without warning a red haze spills over the Elysian vessels as if springing forth from the Abyssal singularity itself. 
+zea_BossEnc,BeginFleetEncounter,"$zea_boss score:1000","ZeaIntelCMD addBossTags","Prepare yourself, this foe will be unlike any you have faced before.",,
+zea_BossAmaterasuEnc,BeginFleetEncounter,"$zea_amaterasu score:1000","ZeaIntelCMD addBossTags","On approach one of your officers notes a distant glow, a surge of energy originating from the opposing fleet. The bridge crew immediately springs to action, manning consoles and barking orders, only to falter as the view from the bridge slowly turns into a cascade of blinding white. Hull-mounted sensor equipment declares incandescence across the entire electromagnetic spectrum before the readings distort into incomprehension. Amidst a song of light and fire, Amaterasu beckons.",,
+zea_BossHeartEnc,BeginFleetEncounter,"$zea_corruptingheart score:1000","ZeaIntelCMD addBossTags","The looming Elysian fleet closes in. At its head is a carrier unlike any you have yet seen, leading a flock of white wings. Without warning a red haze spills over the Elysian vessels as if springing forth from the Abyssal singularity itself. 
 On a canvas of crimson a myriad of silhouettes fly forth like gleaming stars in a murdered sky. The commlink crackles with a noise that can't be distinguished from static or from singing. The Heart welcomes you into its scarlet grip.",,
-zea_BossNianEnc,BeginFleetEncounter,$zea_nian score:1000,ZeaIntelCMD addBossTags,"The moment the drivefields interlock, a change in movement is reported from the opposing fleet. Feedback from the comms becomes a deafening din as a torrent of positional instructions pours across every channel. Ship after ship slams into formation. The din fuses into a drone, a clarion call that shakes your bones until the communications officer manages to get the order for total system shutdown across. Sensors observe the million pinpricks of slaved salvor units lifting off, taking up position behind the fleet. Like a flock of vultures waiting to pick your bones clean. Like an army on the march, Nian hungers.",,
-zea_BossYukionnaEnc,BeginFleetEncounter,$zea_yukionna score:1000,ZeaIntelCMD addBossTags,"The opposing fleet moves in to meet yours, enveloped in dancing twinkles of volatile half-light. A sound grazes your consciousness like a bullet grazing your skin, a tune on perception's edge just failing to be heard. The dance of the light changes, matching the inaudible rhythm pace for pace. The crew surrounding you wavers, drifting in and out of focus. Sweat trickles, a nose bleeds, straining to hear the absence. Conduits pulse and readouts flicker as your ship tries to sing along. Amidst the maddening silence waits Yukionna, ready with her embrace.",,
+zea_BossNianEnc,BeginFleetEncounter,"$zea_nian score:1000","ZeaIntelCMD addBossTags","The moment the drivefields interlock, a change in movement is reported from the opposing fleet. Feedback from the comms becomes a deafening din as a torrent of positional instructions pours across every channel. Ship after ship slams into formation. The din fuses into a drone, a clarion call that shakes your bones until the communications officer manages to get the order for total system shutdown across. Sensors observe the million pinpricks of slaved salvor units lifting off, taking up position behind the fleet. Like a flock of vultures waiting to pick your bones clean. Like an army on the march, Nian hungers.",,
+zea_BossYukionnaEnc,BeginFleetEncounter,"$zea_yukionna score:1000","ZeaIntelCMD addBossTags","The opposing fleet moves in to meet yours, enveloped in dancing twinkles of volatile half-light. A sound grazes your consciousness like a bullet grazing your skin, a tune on perception's edge just failing to be heard. The dance of the light changes, matching the inaudible rhythm pace for pace. The crew surrounding you wavers, drifting in and out of focus. Sweat trickles, a nose bleeds, straining to hear the absence. Conduits pulse and readouts flicker as your ship tries to sing along. Amidst the maddening silence waits Yukionna, ready with her embrace.",,
+"#END boss interactions",,,,,,
+"#END relationship level descriptions",,,,,,
+,,,,,,
+# Mbaye Gogol Autofab,,,,,,
+nraOpenDialog,OpenInteractionDialog,"$id == mga_station_nomios_rapid_autofab score:1000","ShowDefaultVisual
+FireAll PopulateOptions",,,
+gaRH_yes,DialogOptionSelected,"$option == gaRH_yes","#AdjustRepActivePerson COOPERATIVE 25
+Highlight ""Mbaye-Gogol"" ""Nomios""","Ibrahim beams. ""Thank you, captain. Now if you don't mind, I have a lot of work to do.""
+
+She reaches for the disconnect button, then pauses, ""If you ever need some work, give me a call. New jobs come up all the time and a capable captain is worth their weight in credits. In fact, I just had to turn down a contract from Mbaye-Gogol on Nomios. Tell them I sent you.""","gaRH_yes2:Continue",
+gaRH_yes2,DialogOptionSelected,"$option == gaRH_yes2","Call $global.gaRH_ref transferHamatsu
+$global.gaRH_completed = true
+Call $global.gaRH_ref updateStage
+BeginMission MGAIntro",,"cutCommLink:Cut the comm link",
+"#END Mbaye Gogol Autofab",,,,,,
+

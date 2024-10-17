@@ -7,13 +7,16 @@ import com.fs.starfarer.api.combat.ShipAIPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
-
+import exerelin.campaign.SectorManager;
 import lunalib.lunaUtil.campaign.LunaCampaignRenderer;
 import mmm.missions.DefenseMission;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.helpers.KolStaticStrings;
+import org.selkie.kol.listeners.UpdateRelationships;
+import org.selkie.kol.world.GenerateKnights;
+import org.selkie.kol.world.GenerateMGA;
 import org.selkie.zea.campaign.AICoreCampaignPlugin;
 import org.selkie.zea.campaign.NullspaceVFXRenderer;
 import org.selkie.zea.campaign.ZeaCampaignPlugin;
@@ -21,14 +24,10 @@ import org.selkie.zea.campaign.cores.AICoreDropReplacerScript;
 import org.selkie.zea.campaign.cores.AICoreReplacerScript;
 import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys;
-import org.selkie.zea.listeners.ReportTransit;
 import org.selkie.zea.helpers.ZeaUtils;
+import org.selkie.zea.listeners.ReportTransit;
 import org.selkie.zea.world.PrepareAbyss;
 import org.selkie.zea.world.PrepareDarkDeeds;
-import org.selkie.kol.listeners.UpdateRelationships;
-import org.selkie.kol.world.GenerateKnights;
-
-import exerelin.campaign.SectorManager;
 
 import java.util.Arrays;
 import java.util.Set;
@@ -100,9 +99,11 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public void onNewGame() {
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
+			GenerateMGA.genCorvus();
 		}
 		Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_INTIALIZED, true);
 	}
+	
 
 	@Override
 	public void onNewGameAfterProcGen() {
@@ -132,6 +133,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
+			GenerateMGA.genCorvus();
 			PrepareAbyss.generate();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 			PrepareDarkDeeds.andBegin();
