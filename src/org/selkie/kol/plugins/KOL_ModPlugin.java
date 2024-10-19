@@ -99,7 +99,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public void onNewGame() {
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
-			GenerateMGA.genCorvus();
 		}
 		Global.getSector().getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_INTIALIZED, true);
 	}
@@ -133,7 +132,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!haveNex || SectorManager.getManager().isCorvusMode()) {
 			GenerateKnights.genCorvus();
-			GenerateMGA.genCorvus();
 			PrepareAbyss.generate();
 			if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 			PrepareDarkDeeds.andBegin();

@@ -200,16 +200,4 @@ zea_BossYukionnaEnc,BeginFleetEncounter,"$zea_yukionna score:1000","ZeaIntelCMD 
 "#END boss interactions",,,,,,
 "#END relationship level descriptions",,,,,,
 ,,,,,,
-# Mbaye Gogol Autofab,,,,,,
-nraOpenDialog,OpenInteractionDialog,"$id == mga_station_nomios_rapid_autofab score:1000","ShowDefaultVisual
-FireAll PopulateOptions",,,
-gaRH_yes,DialogOptionSelected,"$option == gaRH_yes","#AdjustRepActivePerson COOPERATIVE 25
-Highlight ""Mbaye-Gogol"" ""Nomios""","Ibrahim beams. ""Thank you, captain. Now if you don't mind, I have a lot of work to do.""
-
-She reaches for the disconnect button, then pauses, ""If you ever need some work, give me a call. New jobs come up all the time and a capable captain is worth their weight in credits. In fact, I just had to turn down a contract from Mbaye-Gogol on Nomios. Tell them I sent you.""","gaRH_yes2:Continue",
-gaRH_yes2,DialogOptionSelected,"$option == gaRH_yes2","Call $global.gaRH_ref transferHamatsu
-$global.gaRH_completed = true
-Call $global.gaRH_ref updateStage
-BeginMission MGAIntro",,"cutCommLink:Cut the comm link",
-"#END Mbaye Gogol Autofab",,,,,,
 
