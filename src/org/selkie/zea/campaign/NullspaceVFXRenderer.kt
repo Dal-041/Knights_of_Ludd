@@ -27,6 +27,8 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
 
     var shader = 0
 
+    var layers = EnumSet.of(CampaignEngineLayers.ABOVE)
+
     init {
         shader = ShaderLib.loadShader(
             Global.getSettings().loadText("data/shaders/kolBaseVertex.shader"),
@@ -62,7 +64,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
     }
 
     override fun getActiveLayers(): EnumSet<CampaignEngineLayers> {
-        return EnumSet.of(CampaignEngineLayers.ABOVE)
+        return layers
     }
 
     override fun render(layer: CampaignEngineLayers?, viewport: ViewportAPI?) {

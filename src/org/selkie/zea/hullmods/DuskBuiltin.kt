@@ -21,8 +21,23 @@ import org.selkie.zea.combat.SparkleAIV2
 import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat
 
 class DuskBuiltin : BaseHullMod() {
+
     companion object{
-        val allMotes = mutableListOf<MissileAPI>()
+        //Always Caused a memory leak
+        //val allMotes = mutableListOf<MissileAPI>()
+
+        fun getAllMotes() : MutableList<MissileAPI> {
+            var key = "kol_dusk_motes"
+            var engine = Global.getCombatEngine()
+
+            var motes = engine.customData.get(key) as MutableList<MissileAPI>?
+            if (motes == null) {
+                motes = mutableListOf()
+                engine.customData.set(key, motes)
+            }
+
+            return motes
+        }
 
         const val HF_TAG = "HF_SPARKLES_ACTIVE"
 
@@ -43,7 +58,7 @@ class DuskBuiltin : BaseHullMod() {
 
         if (ship?.isHulk == true) return
 
-        allMotes.retainAll { engine.isMissileAlive(it) }
+        getAllMotes().retainAll { engine.isMissileAlive(it) }
 
         if(ship?.hullSpec?.hullId == "zea_boss_ninaya"){
             if(ship.system.isActive) ship.addTag(HF_TAG)
@@ -102,7 +117,7 @@ class DuskBuiltin : BaseHullMod() {
                     mote.activeLayers.remove(CombatEngineLayers.FF_INDICATORS_LAYER)
                     mote.empResistance = 10000
                     activeMotes.add(mote)
-                    allMotes.add(mote)
+                    getAllMotes().add(mote)
 
                     engine.spawnMuzzleFlashOrSmoke(ship, slot, mote.weaponSpec, 0, dir)
 

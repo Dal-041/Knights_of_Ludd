@@ -344,6 +344,8 @@ public class AbyssStormNebula extends HyperspaceTerrainPlugin implements NebulaT
     @Override
     public void advance(float amount) {
 
+        if (!entity.getContainingLocation().isCurrentLocation()) return; //Dont waste time calculating all the cells if the player is not around
+
         if (!clearedCellsPostLoad && Global.getSector().getPlayerFleet() != null) {
             clearCellsNotNearPlayer(this);
             clearedCellsPostLoad = true;

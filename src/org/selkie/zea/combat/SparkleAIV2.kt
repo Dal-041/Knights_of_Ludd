@@ -113,7 +113,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
         val total = Vector2f()
 
         //Mote-mote logic
-        for (otherMissile in DuskBuiltin.allMotes) {
+        for (otherMissile in DuskBuiltin.getAllMotes()) {
             if (otherMissile === missile) continue
             var dist = Misc.getDistanceSq(missile.location, otherMissile.location)
             if(dist > max(avoidRange, cohesionRange).pow(2)) continue
@@ -252,7 +252,7 @@ class SparkleAIV2(val missile: MissileAPI) : MissileAIPlugin {
 
     private fun getNumMotesTargeting(other: CombatEntityAPI): Int {
         var count = 0
-        for (mote in DuskBuiltin.allMotes) {
+        for (mote in DuskBuiltin.getAllMotes()) {
             if (mote === missile) continue
             if (mote.unwrappedMissileAI is SparkleAIV2) {
                 val ai = mote.unwrappedMissileAI as SparkleAIV2
