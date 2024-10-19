@@ -64,27 +64,112 @@
 - fixed Targeting Beam system
 - various improvements, tweaks, and polish
 ## v1.3.0
-Content
-- Added thrust vectoring visuals to Lunaria's engines
-- All Builtin Faction Hullmod tooltips have been overhauled and upgraded. (Special thanks to Lukas04!)
-- [VERY REDACTED 1/2/3] Added new special rewards for defeating the main bosses
-- [VERY REDACTED 2] capital has its main vector engines be changed into destructible drone engines
-- [VERY REDACTED 3] boss 1 sprite revamp
 
-Balance Updates
-- Mimosa: Upgraded a small mount to a medium mount
-- Alysse: AI improvements (Now angles ship towards its frontal plates)
-- Lunaria: Lunete Thermal Lances now available to fire along with its Large turrets
-- [VERY REDACTED 2] Boss has had its main and secondary weapons split so they can be used individually.
-- [VERY REDACTED 3] The Sun now deals 4x Frag instead of HE damage
-- [VERY REDACTED TT 2/3] Slightly less of a painful surprise after a certain threshold
-- [VERY REDACTED TT 2] Custom phase AI improvements to facilitate new rewards
+### Knights of Ludd
+- New custom KOL hullmod icon
+- Fixed Libra being buildable by the player
+- Several misc bugfixes, code refactor & optimization pass
 
-Technical Changes and Bug fixes
-- Refactored all Sparkle code, old bugs fixed and new flocking behaviour introduced
-- Fixed Conformal Shields to not be inadvertently 360 shields
-- Added some (yet unused) portraits
-- Fixed a bug with modular paperdolls
-- Battlestar Libra has been correctly hidden from the build menu finally
-- [VERY REDACTED] Ships are now correctly hidden from Tripad when appropriate, double recovery should be fixed 
-- Expansion preparation
+Ships
+- Mimosa:
+    - Partially resprited
+    - [Buff] Upgraded a small mount to a medium mount
+    - [Buff] Ordnance Points 105 -> 115
+- Alysse:
+    - [Buff] Augumented combat AI will now attempt to angle itself to keep armor modules between the Alysse and its target
+    - [Nerf] Hull 18000 -> 13000
+    - [Nerf] Armor 1150 -> 1000
+        - Originaly set higher than typical KOL hull/armor values due to how awful vanilla AI was at piloting the ship
+- Lunaria:
+    - Lunete SFX adjustments
+    - Rear modules now visualy react to control inputs
+    - [Buff] Lunete can now be fired while ship system is in use
+- Blaze: Fully resprited
+
+### Exploration Content [Spoilers ahead!]
+- New portraits added to Yukionna, Nian, Amaterasu
+- New unique rewards added to Yukionna, Nian, Corrupting Heart
+- New AI faction and TT boss ship hullmods/tooltips
+- Custom Ninmah phase AI improvements to facilitate new rewards
+- Fixed ships not correctly hidden from Tripad when appropriate
+- Fixed double recovery of limited ships
+- Fixed Conformal Shields jank
+- Fixed Delta Site not being cutoff from hyperspace
+
+### Tri-Tachyon Bosses
+- Improved uncloak behavior on all phase vessels to improve responsiveness when overlapping
+- Reinforcements during boss fights now spawn with their systems on cooldown
+
+Ships
+- Nineveh:
+    - Fully resprited
+    - New custom minestrike visuals
+    - New fancy phase glows
+    - [Buff] Motes now actively seek to system mines
+    - [Nerf] Armor 1300 -> 900
+    - [Nerf] Hull 12000 -> 9000
+    - [Nerf] Max Flux 14000 -> 12000
+    - [Nerf] Flux Diss 1100 -> 1000
+    - [Nerf] Ordnance Points 245 -> 220
+    - [Nerf] Top Speed 50 -> 40
+- Ninmah:
+    - UNIQUE tag removed
+    - [Buff] Motes become red (HF) when using system
+    - [Nerf] Armor 1250 -> 900
+
+### Dawn
+- New shield SFX
+- New vent SFX
+
+Ships
+- Tianma: [Nerf] removed B-Deck hullmod
+- Bixi: System changed to Charge Drive, a short-duration burn drive that allows turning
+- Ao:
+    - New system SFX
+    - Main rotational engines are now separate destructable modules. Destruction reduces mobility and top speed.
+    - [Nerf] Omni shield emitter replaced with a front shield emitter
+- Linggui: New system SFX
+- Qilin: New system SFX
+- Nian:
+    - Main cannons are now player-controllable!
+    - AI update
+
+### Dusk
+- New visuals added to Nullspace
+- New custom minestrike variant with new sound & visuals
+- Reduced Center radius of all phase ships to improve uncloak responsiveness
+- Mote logic overhauled for better performance and more fluid behaviour
+- Fixed Ninaya & Ninmah turning all dusk motes on-screen red (HF)
+- Fixed motes keeping their red-state (HF) damage after turning blue again
+
+Ships
+- Ikiryo: Fully resprited
+- Onibi: [Nerf] Shield efficiency 0.5 -> 0.6
+- Shiryo: Fully resprited
+- Furaribi:
+    - Fully resprited
+    - New system SFX
+    - [Buff] Shields now stay up after system usage
+    - [Buff] Armor 300 -> 400
+    - [Buff] Hull 3000 -> 3500
+    - [Buff] Max Flux 6000 -> 6500
+    - [Buff] Top Speed 100 -> 120
+- Onryo/Ayakashi/Yukionna: Phase Skip system now returns to initial shield state, instead of forcing shield online after usage
+
+### Elysia
+- New custom Hypershunt art
+- The Hypershunt in the Elysian Abyss can now be brought online by the player
+- Fixed rare Twin-Layer Shielding crash
+
+Ships
+- Wani/Suzaku: [Buff] System now reduces energy weapon flux
+- Amaterasu:
+    - Fully resprited
+    - Fixed mount locations not being symmetrical
+    - [Buff] Sun AOE damage increased by 400% and switched to FRAG damage type
+    - [Nerf] System can no longer store charges
+    - [Nerf] System cooldown increased from 4 to 8 seconds
+- Corrupting Heart:
+    - Fully resprited
+    - [Buff] Bubble shield drone added to player version of the ship.
+    - [Nerf] System is no longer charge-based
