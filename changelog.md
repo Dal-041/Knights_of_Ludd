@@ -95,6 +95,7 @@ Ships
 - Fixed double recovery of limited ships
 - Fixed Conformal Shields jank
 - Fixed Delta Site not being cutoff from hyperspace
+- Fixed some encounters trying to talk to you
 
 ### Tri-Tachyon Bosses
 - Improved uncloak behavior on all phase vessels to improve responsiveness when overlapping
