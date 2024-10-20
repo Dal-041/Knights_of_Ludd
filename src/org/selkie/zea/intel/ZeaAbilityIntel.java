@@ -21,7 +21,7 @@ public class ZeaAbilityIntel extends BaseIntelPlugin {
         }
         this.name = name;
         this.icon = icon;
-        important = true;
+        setImportant(true);
     }
 
     @Override
