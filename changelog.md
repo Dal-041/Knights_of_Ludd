@@ -138,6 +138,7 @@ Ships
 ### Dusk
 - New visuals added to Nullspace
 - New custom minestrike variant with new sound & visuals
+- Yomogi Plasma Autogun: [Buff] Damage 60 -> 75, Flux/Shot 60 -> 70
 - Reduced Center radius of all phase ships to improve uncloak responsiveness
 - Mote logic overhauled for better performance and more fluid behaviour
 - Fixed Ninaya & Ninmah turning all dusk motes on-screen red (HF)
