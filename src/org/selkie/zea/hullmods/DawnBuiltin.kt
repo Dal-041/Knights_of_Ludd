@@ -37,10 +37,7 @@ class DawnBuiltin : BaseHullMod() {
         const val ENMITY_HP_THRESHOLD = 50f
         const val DRONE_ADDED_KEY = "DawnHullmodDronesAdded"
         fun getNumDrones(ship: ShipAPI): Int {
-            if((ship.hullSpec.baseHullId == ZeaStaticStrings.ZEA_BOSS_NIAN)){
-                return 5
-            }
-            else if(ship.hullSize == HullSize.CRUISER){
+            if(ship.hullSize == HullSize.CRUISER){
                 return 3
             }
             else if(ship.hullSize == HullSize.CAPITAL_SHIP) {
