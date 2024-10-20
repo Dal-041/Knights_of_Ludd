@@ -49,8 +49,6 @@ class DuskBuiltin : BaseHullMod() {
                 HullSize.CAPITAL_SHIP to 20)
     }
 
-
-    val PHASE_COOLDOWN_REDUCTION = 50f
     val DEGRADE_INCREASE_PERCENT = 50f
 
     override fun advanceInCombat(ship: ShipAPI?, amount: Float) {
@@ -132,16 +130,10 @@ class DuskBuiltin : BaseHullMod() {
 
         if(shipVariant.hullSpec.isPhase) {
             stats.crLossPerSecondPercent.modifyPercent(id, DEGRADE_INCREASE_PERCENT)
-            if(shipVariant.hullSpec.baseHullId.contains("boss")) stats.phaseCloakCooldownBonus.modifyMult(id, 1f - PHASE_COOLDOWN_REDUCTION / 100f)
         }
 
         if (shipVariant.hullMods.contains(HullMods.ADAPTIVE_COILS)) {
             MagicIncompatibleHullmods.removeHullmodWithWarning(stats.variant, HullMods.ADAPTIVE_COILS,"zea_dusk_builtin")
-        }
-
-        //For save compatibility with old version
-        if (stats.variant.hasHullMod("delicate")) {
-            stats.variant.removeMod("delicate")
         }
     }
 
@@ -176,16 +168,13 @@ class DuskBuiltin : BaseHullMod() {
         val background = tooltip!!.addLunaElement(0f, 0f)
 
         if (ship.hullSpec.isPhase){
-            tooltip.addSectionHeading("${if(ship.hullSpec.baseHullId.contains("boss")) 5 else 4}th-Generation Phase Coils", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
+            tooltip.addSectionHeading("4th-Generation Phase Coils", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
             val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dusk_phase_coils"), HEIGHT)
             phaseCoils.setBulletedListMode("•")
             phaseCoils.setBulletWidth(15f)
             val para1 = phaseCoils.addPara("No loss of top speed as hardflux level rises.", listPad, activeTextColor, activeHighlightColor)
             val para2 = phaseCoils.addPara("Maintains parity with standard domain phase coils at a 3x timeflow while phased.", listPad, activeTextColor, activeHighlightColor, "3x")
             val para3 = phaseCoils.addPara("Increases the rate of in-combat CR decay after peak performance time runs out by %s.", listPad, activeTextColor, activeNegativeColor, "50%")
-            if(ship.hullSpec.baseHullId.contains("boss")){
-                phaseCoils.addPara("Reduces phase cloak cooldown by %s.", listPad, activeTextColor, activeHighlightColor, "50%")
-            }
             tooltip.addImageWithText(underHeadingPad)
         }
 
@@ -196,8 +185,13 @@ class DuskBuiltin : BaseHullMod() {
         duskfall.setBulletWidth(15f)
         val para4 = duskfall.addPara("Launches 2 motes per second around the ship, each mote deals 1500 EMP damage on impact.", listPad, activeTextColor, activeHighlightColor, "2", "1500")
         val para5 = duskfall.addPara("%s %s/%s/%s/%s %s", listPad, inactiveTextColor, activeTextColor,
-            "A maximum of", "${maxMotes[HullSize.FRIGATE]}", "${maxMotes[HullSize.DESTROYER]}", "${maxMotes[HullSize.CRUISER]}", "${maxMotes[HullSize.CAPITAL_SHIP]}",
+            "A maximum of",
+            "${maxMotes[HullSize.FRIGATE]}",
+            "${maxMotes[HullSize.DESTROYER]}",
+            "${maxMotes[HullSize.CRUISER]}",
+            "${maxMotes[HullSize.CAPITAL_SHIP]}",
             "motes can be maintained around the ship at any given time.")
+
         ReflectionUtils.invoke("setColor", duskfall.prev, activeTextColor)
 
         para5.setHighlightColors(activeTextColor,

@@ -214,6 +214,7 @@ Nian Boss,zea_nian_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.NianBos
 Ninaya Boss,zea_ninaya_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.NinayaBoss,,,,,
 Ninmah Boss,zea_ninmah_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.NinmahBoss,,,,,
 Nineveh Boss,zea_nineveh_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.NinevehBoss,,,,,
+Reverse Engineered Phase Coils,zea_re_phase_coils,,,,,,,,TRUE,,0,0,0,0,org.selkie.zea.hullmods.ReverseEngineeredPhaseCoils,Reduces phase cloak cooldown by %s.,Significantly reduces phase cloak cooldown.,,graphics/hullmods/phase_coils_experimental.png
 Yukionna Boss,zea_dusk_yukionna_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.YukionnaBoss,,,,,
 Corrupting Heart Boss,zea_corruptingheart_boss,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.CorruptingHeartBoss,,,,,
 Passive IFF Disruptor,zea_edf_passive_iff_disruptor,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.PassiveIFFDisruptorHullmod,,,,,

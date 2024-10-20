@@ -12,10 +12,11 @@
   "shieldRadius": 146,
   "viewOffset": 0,
   "builtInMods": [
-    "phasefield",
     "zea_dusk_builtin",
     "zea_dusk_mist",
-    "zea_ninmah_boss"
+    "zea_ninmah_boss",
+    "zea_re_phase_coils",
+    "phasefield",
   ],
   "builtInWeapons": {
     "WS0016": "zea_boss_resonator2",
