@@ -45,6 +45,7 @@ public class SpawnDawnBoss {
 		dawnBossFleet.getFleetData().ensureHasFlagship();
 		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_DAWN_BOSS_FLEET, true);
 		dawnBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_BOSS_TAG, true);
+		dawnBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_IGNORE_PLAYER_COMMS, true);
 
 		//dawnBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);

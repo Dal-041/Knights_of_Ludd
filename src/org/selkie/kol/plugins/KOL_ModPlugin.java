@@ -16,7 +16,6 @@ import org.dark.shaders.util.TextureData;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
-import org.selkie.kol.world.GenerateMGA;
 import org.selkie.zea.campaign.AICoreCampaignPlugin;
 import org.selkie.zea.campaign.NullspaceVFXRenderer;
 import org.selkie.zea.campaign.ZeaCampaignPlugin;
