@@ -16,7 +16,7 @@ public class ZeaStaticStrings {
 
         public static final String ZEA_BOSS_TAG = "$zea_boss";
         public static final String ZEA_NINMAH_WRECK = "$zea_ninmah_wreck";
-        public static final String ZEA_NINAYA_WRECK = "$zea_ninmaya_wreck";
+        public static final String ZEA_NINAYA_WRECK = "$zea_ninaya_wreck";
         public static final String ZEA_NINEVEH_WRECK = "$zea_nineveh_wreck";
 
         public static final String ZEA_ELYSIAN_BOSS_1_DONE = "$zea_elysian_boss1_done";
