@@ -107,6 +107,13 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
                 GL13.glActiveTexture(GL13.GL_TEXTURE0 + 0);
                 GL11.glBindTexture(GL11.GL_TEXTURE_2D, ShaderLib.getScreenTexture());
 
+                //Might Fix Incompatibilities with odd drivers
+                GL20.glValidateProgram(shader)
+                if (GL20.glGetProgrami(shader, GL20.GL_VALIDATE_STATUS) == GL11.GL_FALSE) {
+                    ShaderLib.exitDraw()
+                    return
+                }
+
                 GL11.glDisable(GL11.GL_BLEND);
                 ShaderLib.screenDraw(ShaderLib.getScreenTexture(), GL13.GL_TEXTURE0 + 0)
                 ShaderLib.exitDraw()
