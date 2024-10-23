@@ -30,7 +30,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
     var layers = EnumSet.of(CampaignEngineLayers.ABOVE)
 
     init {
-        shader = ShaderLib.loadShader(
+        /*shader = ShaderLib.loadShader(
             Global.getSettings().loadText("data/shaders/kolBaseVertex.shader"),
             Global.getSettings().loadText("data/shaders/kolNullspaceFragment.shader"))
         if (shader != 0) {
@@ -41,7 +41,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
             GL20.glUseProgram(0)
         } else {
             var test = ""
-        }
+        }*/
     }
 
     override fun isExpired(): Boolean {
@@ -50,7 +50,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
 
     override fun advance(amount: Float) {
 
-        interval.advance(amount)
+        /*interval.advance(amount)
         if (interval.intervalElapsed()) {
             glitchDuration = MathUtils.getRandomNumberInRange(0.3f, 1.3f)
             noiseMult = MathUtils.getRandomNumberInRange(0.9f, 1.4f)
@@ -59,7 +59,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
 
         if (glitchDuration >= 0 && !Global.getSector().isPaused) {
             glitchDuration -= 1 * amount
-        }
+        }*/
 
     }
 
@@ -81,7 +81,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
 
 
                 //Shader
-                var clock = Global.getSector().clock
+               /* var clock = Global.getSector().clock
                 var t = clock.convertToSeconds(clock.elapsedDaysSinceGameStart()) / 1000f
 
 
@@ -116,7 +116,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
 
                 GL11.glDisable(GL11.GL_BLEND);
                 ShaderLib.screenDraw(ShaderLib.getScreenTexture(), GL13.GL_TEXTURE0 + 0)
-                ShaderLib.exitDraw()
+                ShaderLib.exitDraw()*/
 
 
 

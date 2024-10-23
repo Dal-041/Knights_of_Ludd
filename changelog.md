@@ -1,3 +1,7 @@
+## v1.3.2
+- Removed some VFX that due to an issue caused peoples screen to turn mostly black in a certain location
+- Fixed the Nians Built-in weapon being able to spawn independently of the ship
+
 ## v1.3.1
 -Fixes linking intel location not showing up after fighting Ninaya
 ## v1.3.0
