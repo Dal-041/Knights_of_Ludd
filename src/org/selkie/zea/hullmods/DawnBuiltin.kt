@@ -7,6 +7,7 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType
 import com.fs.starfarer.api.impl.campaign.ids.HullMods
+import com.fs.starfarer.api.impl.campaign.ids.Stats
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
@@ -17,7 +18,6 @@ import org.magiclib.util.MagicIncompatibleHullmods
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.zea.combat.subsystems.ShieldDronesSubsystem
-import org.selkie.zea.helpers.ZeaStaticStrings
 import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys
 import java.awt.Color
@@ -103,6 +103,8 @@ class DawnBuiltin : BaseHullMod() {
         super.applyEffectsBeforeShipCreation(hullSize, stats, id)
         stats.energyShieldDamageTakenMult.modifyMult(id, 0.9f)
         stats.energyDamageTakenMult.modifyMult(ID, 0.9f)
+        stats.dynamic.getStat(Stats.CORONA_EFFECT_MULT).modifyMult(id, 0f)
+
         if (stats.variant.hullMods.contains(HullMods.SOLAR_SHIELDING)) {
             MagicIncompatibleHullmods.removeHullmodWithWarning(stats.variant,
                 HullMods.SOLAR_SHIELDING,
