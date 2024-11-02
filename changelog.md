@@ -1,3 +1,8 @@
+## v1.3.3
+- Re-Added the VFX Shader to the location it was removed from, will only be in affect if you have GraphicsLib shaders enabled now.
+- Fixed the Dawntide Builtin not applying the solar shielding effect.
+- Fixed a crash that can occur when a Nian-Class ship takes damage.
+
 ## v1.3.2
 - Removed some VFX that due to an issue caused some peoples screen to turn mostly black in a certain location
 - Fixed the Nians Built-in weapon being able to spawn independently of the ship
