@@ -29,7 +29,7 @@ class NianBoss : BaseHullMod() {
         private var enraged = false
         private var enragedTransitionTime = 0f
         var engine: CombatEngineAPI = Global.getCombatEngine()
-        override fun notifyAboutToTakeHullDamage(param: Any, ship: ShipAPI, point: Vector2f, damageAmount: Float): Boolean {
+        override fun notifyAboutToTakeHullDamage(param: Any?, ship: ShipAPI, point: Vector2f, damageAmount: Float): Boolean {
             if (ship.hitpoints - damageAmount <= ship.maxHitpoints * 0.5f && !enraged) {
                 enraged = true
                 ship.mutableStats.ballisticRoFMult.modifyMult(ENRAGED_ID, ENRAGED_FIRERATE_MULT)
