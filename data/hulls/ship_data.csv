@@ -18,9 +18,6 @@ Lotus,kol_lotus,Missile Cruiser,Knights of Ludd,forgevats,16,8000,950,8500,0,250
 #CAPITALS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Lunaria,kol_lunaria,Battleship,Knights of Ludd,kol_lidar,40,18000,1300,18000,0,750,275,,36,18,16,10,6,2500,FRONT,,100,0.4,0.8,,,600,1100,300,360,12,30,7,400000,4,12,660,0.25,50,50,,,,,,,SHIP_WITH_MODULES,rare_bp,,0.4,2,3,,608
 Alysse,kol_alysse,Fast Battleship,Knights of Ludd,kol_onion,34,13000,1000,12000,0,650,255,,42,21,20,15,12,2000,PHASE,kol_damper,,0.4,,,,475,800,250,360,12,30,7,400000,3,12,600,0.25,50,50,,,,,,,SHIP_WITH_MODULES,"rare_bp, special_allows_system_use, system_allows_special_use",,0.4,2,4,,609
-#LOGI ADDON,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Apoapsis,logi_apoapsis,Cruiser,High Tech,,18,10000,800,13000,0,750,140,,55,35,30,20,20,2200,FRONT,,360,0.6,0.7,,,180,400,300,150,2,75,8,160000,3,15,420,0.25,25,25,,,,,,,,"rare_bp, merc, ind",,0.6,2,3,,403.1
-Stormbreaker,logi_stormbreaker,Exploration Vanguard,High Tech,,3,2000,200,10000,0,500,30,,90,50,30,35,35,300,NONE,,0,0,0,,,20,30,30,100,10,10,10,150000,5,20,360,0.25,10,10,,,,,,,CIVILIAN,"rare_bp, merc, ind",,0.75,2,3,,312.1
 #MODULES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,PROTEA,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -280,7 +277,7 @@ Ryujin,zea_edf_ryujin,Empyrean Battleship,Elysia,zea_edf_fortress_flux_converter
 #UNIQUE BOSS SHIPS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ninaya,zea_boss_ninaya,Prototype,High Tech,zea_dusk_phaseteleporter,15,2500,250,8000,,500,70,,130,190,165,60,120,325,FRONT,,360,0.6,0.55,,,1,1,7,10,1,15,11,150000,8,50,300,0.25,22,22,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",0.5,0.75,2,2,,1000
-Ninmah,zea_boss_ninmah,Prototype,High Tech,acausaldisruptor,30,5500,900,1000,,900,160,,75,55,40,20,25,1200,PHASE,zea_dusk_phasecloak,,,,0.03,0.04,75,125,100,125,2,50,9,350000,6,50,500,0.25,40,40,,,,,,,"HIDE_IN_CODEX, PHASE","no_autofit, restricted",,0.5,2,3,,
+Ninmah,zea_boss_ninmah,Prototype,High Tech,acausaldisruptor,30,5500,900,11000,,900,160,,75,55,40,20,25,1200,PHASE,zea_dusk_phasecloak,,,,0.03,0.04,75,125,100,125,2,50,9,350000,6,50,500,0.25,40,40,,,,,,,"HIDE_IN_CODEX, PHASE","no_autofit, restricted",,0.5,2,3,,
 Nineveh,zea_boss_nineveh,Prototype,High Tech,zea_dusk_mine_strike,45,9000,900,12000,,1000,220,,40,60,60,20,40,2000,PHASE,zea_dusk_phasecloak,,,,0.03,0.04,175,350,175,400,8,50,8,850000,5,50,800,0.25,55,55,,,,,,,"HIDE_IN_CODEX, PHASE","no_autofit, restricted",,0.4,2,3,,
 Yukionna,zea_boss_yukionna,A Thousand Voices Sing in Silence,Dusk,zea_dusk_phase_skip,75,24000,1500,25000,,1350,350,,40,15,15,12,12,3500,FRONT,,270,0.5,0.5,,,300,750,300,300,10,30,7,1999999,4,20,1200,0.25,60,60,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.6,2,4,,1003
 The Corrupting Heart,zea_boss_corruptingheart,Sublime Empyrean,Elysia,zea_boss_corruptionjets,60,16000,1150,25000,,1300,340,7,50,30,25,20,18,3000,OMNI,,120,0.4,0.6,,,0,0,250,400,10,40,8,500000,3,15,1200,0.25,60,60,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, HIDE_IN_CODEX","no_autofit, restricted",,0.4,4,7,,1004

@@ -12,10 +12,11 @@
   "shieldRadius": 198,
   "viewOffset": 0,
   "builtInMods": [
-    "phasefield",
     "zea_dusk_builtin",
     "zea_dusk_mist",
-    "zea_nineveh_boss"
+    "zea_nineveh_boss",
+    "zea_re_phase_coils",
+    "phasefield"
   ],
   "weaponSlots": [
     {

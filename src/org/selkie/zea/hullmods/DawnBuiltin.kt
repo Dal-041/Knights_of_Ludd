@@ -7,6 +7,7 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType
 import com.fs.starfarer.api.impl.campaign.ids.HullMods
+import com.fs.starfarer.api.impl.campaign.ids.Stats
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
@@ -14,9 +15,9 @@ import lunalib.lunaExtensions.addLunaElement
 import org.lazywizard.lazylib.MathUtils
 import org.magiclib.subsystems.MagicSubsystemsManager.addSubsystemToShip
 import org.magiclib.util.MagicIncompatibleHullmods
+import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.zea.combat.subsystems.ShieldDronesSubsystem
-import org.selkie.zea.helpers.ZeaStaticStrings
 import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys
 import java.awt.Color
@@ -36,13 +37,19 @@ class DawnBuiltin : BaseHullMod() {
         const val ENMITY_HP_THRESHOLD = 50f
         const val DRONE_ADDED_KEY = "DawnHullmodDronesAdded"
         fun getNumDrones(ship: ShipAPI): Int {
-            if((ship.hullSpec.baseHullId == ZeaStaticStrings.ZEA_BOSS_NIAN)){
-                return 5
-            }
-            else if(ship.hullSize == HullSize.CRUISER){
+            if(ship.hullSize == HullSize.CRUISER){
                 return 3
             }
             else if(ship.hullSize == HullSize.CAPITAL_SHIP) {
+                return 4
+            }
+            return 0
+        }
+        fun getNumDrones(hullsize: HullSize): Int {
+            if(hullsize == HullSize.CRUISER){
+                return 3
+            }
+            else if(hullsize == HullSize.CAPITAL_SHIP) {
                 return 4
             }
             return 0
@@ -96,6 +103,8 @@ class DawnBuiltin : BaseHullMod() {
         super.applyEffectsBeforeShipCreation(hullSize, stats, id)
         stats.energyShieldDamageTakenMult.modifyMult(id, 0.9f)
         stats.energyDamageTakenMult.modifyMult(ID, 0.9f)
+        stats.dynamic.getStat(Stats.CORONA_EFFECT_MULT).modifyMult(id, 0f)
+
         if (stats.variant.hullMods.contains(HullMods.SOLAR_SHIELDING)) {
             MagicIncompatibleHullmods.removeHullmodWithWarning(stats.variant,
                 HullMods.SOLAR_SHIELDING,
@@ -173,16 +182,30 @@ class DawnBuiltin : BaseHullMod() {
         val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
         shieldDrones.setBulletedListMode("•")
         shieldDrones.setBulletWidth(15f)
-        val para3 = shieldDrones.addPara(
-            "Deploys %s shield drones around the ship, each drone is capable of absorbing %s damage.",
-            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor, maxDrones, health
-        )
-        para3.setHighlightColors(if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, if (hasShieldDrones) activePositiveColor else inactivePositiveColor)
+
+        val para3 = shieldDrones.addPara("%s %s/%s/%s/%s %s %s %s", listPad, inactiveTextColor, activeTextColor,
+            "Deploys",
+            "${getNumDrones(HullSize.FRIGATE)}",
+            "${getNumDrones(HullSize.DESTROYER)}",
+            "${getNumDrones(HullSize.CRUISER)}",
+            "${getNumDrones(HullSize.CAPITAL_SHIP)}",
+            "shield drones around the ship, each drone is capable of absorbing",
+            health,
+            "damage.")
+
+        ReflectionUtils.invoke("setColor", shieldDrones.prev, if (hasShieldDrones) activeTextColor else inactiveTextColor)
+
+        para3.setHighlightColors(if (hasShieldDrones) activeTextColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.FRIGATE && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.DESTROYER && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.CRUISER && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+            if(ship.hullSize == HullSize.CAPITAL_SHIP && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+            if (hasShieldDrones) activeTextColor else inactiveTextColor,
+            if (hasShieldDrones) activePositiveColor else inactivePositiveColor,
+            if (hasShieldDrones) activeTextColor else inactiveTextColor)
+
         shieldDrones.addPara("Drones regenerate once every %s seconds.",
             listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, recharge
-        )
-        shieldDrones.addPara("Only activates on Cruisers and Capitals.",
-            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, Color.black
         )
         tooltip.addImageWithText(underHeadingPad)
 

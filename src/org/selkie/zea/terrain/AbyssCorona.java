@@ -19,6 +19,7 @@ import java.awt.*;
 
 
 public class AbyssCorona extends StarCoronaTerrainPlugin {
+    @Override
     public void applyEffect(SectorEntityToken entity, float days) {
         if (entity instanceof CampaignFleetAPI) {
             CampaignFleetAPI fleet = (CampaignFleetAPI) entity;

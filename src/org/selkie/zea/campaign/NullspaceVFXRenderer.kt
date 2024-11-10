@@ -80,37 +80,44 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
             if (playerfleet.containingLocation.name == "Nullspace") {
 
 
-                //Shader
-                var clock = Global.getSector().clock
-                var t = clock.convertToSeconds(clock.elapsedDaysSinceGameStart()) / 1000f
+                //Screen texture can be unloaded if graphicslib shaders are disabled, causing a blackscreen
+                if (ShaderLib.getScreenTexture() != 0) {
+                    //Shader
+                    var clock = Global.getSector().clock
+                    var t = clock.convertToSeconds(clock.elapsedDaysSinceGameStart()) / 1000f
 
+                    var noise = MathUtils.getRandomNumberInRange(0.3f, 1f)
+                    if (Global.getSector().isPaused) {
+                        noise = lastNoise
+                    }
 
+                    if (glitchDuration <= 0) {
+                        noise = 0f
+                    }
 
+                    lastNoise = noise
 
-                var noise = MathUtils.getRandomNumberInRange(0.3f, 1f)
-                if (Global.getSector().isPaused) {
-                    noise = lastNoise
+                    noise *= noiseMult
+
+                    ShaderLib.beginDraw(shader);
+                    GL20.glUniform1f(GL20.glGetUniformLocation(shader, "iTime"), t / 8f)
+                    GL20.glUniform1f(GL20.glGetUniformLocation(shader, "noise"), noise)
+
+                    GL13.glActiveTexture(GL13.GL_TEXTURE0 + 0);
+                    GL11.glBindTexture(GL11.GL_TEXTURE_2D, ShaderLib.getScreenTexture());
+
+                    //Might Fix Incompatibilities with odd drivers
+                    GL20.glValidateProgram(shader)
+                    if (GL20.glGetProgrami(shader, GL20.GL_VALIDATE_STATUS) == GL11.GL_FALSE) {
+                        ShaderLib.exitDraw()
+                        return
+                    }
+
+                    GL11.glDisable(GL11.GL_BLEND);
+                    ShaderLib.screenDraw(ShaderLib.getScreenTexture(), GL13.GL_TEXTURE0 + 0)
+                    ShaderLib.exitDraw()
+
                 }
-
-                if (glitchDuration <= 0) {
-                    noise = 0f
-                }
-
-                lastNoise = noise
-
-                noise *= noiseMult
-
-                ShaderLib.beginDraw(shader);
-                GL20.glUniform1f(GL20.glGetUniformLocation(shader, "iTime"), t / 8f)
-                GL20.glUniform1f(GL20.glGetUniformLocation(shader, "noise"), noise)
-
-                GL13.glActiveTexture(GL13.GL_TEXTURE0 + 0);
-                GL11.glBindTexture(GL11.GL_TEXTURE_2D, ShaderLib.getScreenTexture());
-
-                GL11.glDisable(GL11.GL_BLEND);
-                ShaderLib.screenDraw(ShaderLib.getScreenTexture(), GL13.GL_TEXTURE0 + 0)
-                ShaderLib.exitDraw()
-
 
 
                 //Vignette

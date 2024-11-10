@@ -47,6 +47,7 @@ public class SpawnDuskBoss {
 		duskBossFleet.getFleetData().ensureHasFlagship();
 		duskBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_DUSK_BOSS_FLEET, true);
 		duskBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_BOSS_TAG, true);
+		duskBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_IGNORE_PLAYER_COMMS, true);
 
 		// populate the fleet with escorts
 		ZeaUtils.ZeaBossGenFleetWeaver(duskBossFleet, 360);

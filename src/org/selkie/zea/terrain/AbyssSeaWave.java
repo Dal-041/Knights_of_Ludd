@@ -3,6 +3,7 @@ package org.selkie.zea.terrain;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
+import com.fs.starfarer.api.campaign.TerrainAIFlags;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.fleet.FleetMemberViewAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Stats;
@@ -127,5 +128,15 @@ public class AbyssSeaWave extends AbyssPulsarBeamTerrainPlugin {
                 view.getWindEffectColor().shift(getModId(), glowColor, durIn, durOut, intensity);
             }
         }
+    }
+
+    @Override
+    public boolean hasAIFlag(Object flag, CampaignFleetAPI fleet) {
+        if (!fleet.hasTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG)) {
+            return flag == TerrainAIFlags.CR_DRAIN ||
+                    flag == TerrainAIFlags.BREAK_OTHER_ORBITS ||
+                    flag == TerrainAIFlags.EFFECT_DIMINISHED_WITH_RANGE;
+        }
+        return flag == TerrainAIFlags.HIDING_STATIONARY;
     }
 }

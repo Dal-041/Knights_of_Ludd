@@ -215,6 +215,7 @@ public class MiniJump extends BaseShipSystemScript {
 				// HEF BUFF STUFF
 				HEFTimer = HEF_BUFF_DURATION;
 				stats.getEnergyRoFMult().modifyPercent(id, FIRERATE_BONUS_PERCENT);
+				stats.getEnergyWeaponFluxCostMod().modifyMult(id, 0.75f);
 				stats.getBallisticWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
 			}
 		}
@@ -228,7 +229,7 @@ public class MiniJump extends BaseShipSystemScript {
 		if(HEFTimer > 0){
 			if (ship == Global.getCombatEngine().getPlayerShip()) {
 				Global.getCombatEngine().maintainStatusForPlayerShip(HEFBuffId, "graphics/icons/hullsys/high_energy_focus.png", "Temporal Energy Shell"
-						, "+" + (int) FIRERATE_BONUS_PERCENT + "% energy weapon firerate. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
+						, "+" + (int) FIRERATE_BONUS_PERCENT + "% energy weapon firerate with reduced flux. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
 						, false);
 				Global.getCombatEngine().maintainStatusForPlayerShip(AAFBuffId, "graphics/icons/hullsys/ammo_feeder.png", "Entropy Loaded Ballistics"
 						, "+" + (int) DAMAGE_BONUS_PERCENT + "% ballistic damage. Remaining duration: " + Misc.getRoundedValueMaxOneAfterDecimal(HEFTimer)
@@ -253,6 +254,7 @@ public class MiniJump extends BaseShipSystemScript {
 		if (HEFTimer <= 0f) {
 			ship.setWeaponGlow(0f, HEF_COLOR, WEAPON_TYPES);
 			stats.getEnergyRoFMult().unmodify(id);
+			stats.getEnergyWeaponFluxCostMod().unmodify(id);
 			stats.getBallisticWeaponDamageMult().unmodify(id);
 		}
 	}

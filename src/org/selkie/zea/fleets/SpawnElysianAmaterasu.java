@@ -41,6 +41,7 @@ public class SpawnElysianAmaterasu {
 		elysianBossFleet.setDiscoverable(true);
 		elysianBossFleet.getFleetData().ensureHasFlagship();
 		elysianBossFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_AMATERASU_BOSS_FLEET, true);
+		elysianBossFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_IGNORE_PLAYER_COMMS, true);
 
 		elysianBossFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);

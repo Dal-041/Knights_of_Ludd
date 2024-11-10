@@ -50,6 +50,7 @@ public class SpawnElysianHeart {
 		elysianHeartFleet.setDiscoverable(true);
 		elysianHeartFleet.getFleetData().ensureHasFlagship();
 		elysianHeartFleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_CORRUPTING_HEART_BOSS_FLEET, true);
+		elysianHeartFleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_IGNORE_PLAYER_COMMS, true);
 
 		elysianHeartFleet.removeAbility(Abilities.EMERGENCY_BURN);
 		//fleet.removeAbility(Abilities.SENSOR_BURST);

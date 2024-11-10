@@ -21,6 +21,7 @@ public class ZeaAbilityIntel extends BaseIntelPlugin {
         }
         this.name = name;
         this.icon = icon;
+        setImportant(true);
     }
 
     @Override
@@ -56,10 +57,6 @@ public class ZeaAbilityIntel extends BaseIntelPlugin {
         return icon;
     }
 
-    @Override
-    public boolean isImportant() {
-        return true;
-    }
 
     @Override
     public boolean canTurnImportantOff() {
