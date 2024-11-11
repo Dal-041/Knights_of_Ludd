@@ -12,10 +12,10 @@
   "shieldRadius": 203.5,
   "viewOffset": 0,
   "builtInMods": [
-	"automated",
+    "automated",
     "zea_dawn_builtin",
     "zea_dawn_shield_style",
-	"zea_recovery_limiter",
+    "zea_recovery_limiter"
   ],
   "weaponSlots": [
     {
@@ -52,7 +52,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 75,
-      "locations": [71, 29]
+      "locations": [-18, 51]
     },
     {
       "id": "WS0007",
@@ -61,7 +61,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -75,
-      "locations": [71, -29]
+      "locations": [-18, -51]
     },
     {
       "id": "WS0008",
@@ -107,6 +107,24 @@
       "arc": 210,
       "angle": 180,
       "locations": [0, -0]
+    },
+    {
+      "id": "WS0013",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": 30,
+      "locations": [71, 29]
+    },
+    {
+      "id": "WS0014",
+      "size": "MEDIUM",
+      "type": "MISSILE",
+      "mount": "TURRET",
+      "arc": 90,
+      "angle": -30,
+      "locations": [71, -29]
     }
   ],
   "engineSlots": [
