@@ -200,4 +200,28 @@ zea_BossYukionnaEnc,BeginFleetEncounter,"$zea_yukionna score:1000","ZeaIntelCMD 
 "#END boss interactions",,,,,,
 "#END relationship level descriptions",,,,,,
 ,,,,,,
+# Mbaye Gogol Autofab,,,,,,
+gaRH_yes,DialogOptionSelected,"$option == gaRH_yes","#AdjustRepActivePerson COOPERATIVE 25
+Highlight ""Mbaye-Gogol"" ""Nomios""","Ibrahim beams. ""Thank you, captain. Now if you don't mind, I have a lot of work to do.""
+
+She reaches for the disconnect button, then pauses, ""If you ever need some work, give me a call. New jobs come up all the time and a capable captain is worth their weight in credits. In fact, I just had to turn down a contract from Mbaye-Gogol on Nomios. Tell them I sent you.""","gaRH_yes2:Continue",
+gaRH_yes2,DialogOptionSelected,"$option == gaRH_yes2","Call $global.gaRH_ref transferHamatsu
+$global.gaRH_completed = true
+Call $global.gaRH_ref updateStage
+BeginMission MGAIntro
+$global.nraRH_completed = true",,"cutCommLink:Cut the comm link",
+nraOpenDialog,OpenInteractionDialog,"$id == mga_station_nomios_rapid_autofab score:1000
+","ShowDefaultVisual
+FireBest NRAPostOpen","The angular, utilitarian structure of Nomios Rapid Autofab stands ahead, its industrial modules buzzing with the constant activity of projects that need to be turned around quickly. This station thrives on efficiency, handling smaller, high-priority tasks for the sector’s major factions—aside from one notable exception. Here, prototypes and specialized components are built at speed, driven by the need to meet tight deadlines. A few engineering vessels and freighters shuttle between bays, ensuring that every project keeps moving toward completion, no matter how tight the schedule.
+",,
+nraDefaultDocking,NRAPostOpen,"!$global.nraRH_completed
+!$market.mgaIntro_completed",,"As your ship nears, you transmit a docking request, but the response is quick and professional. ""Captain, this facility is restricted to authorized personnel and faction contracts. Without a direct referral or specific business with Mbaye-Gogol, we cannot grant docking clearance."" The voice remains polite, but firm. ""For general work or services, I'd recommend heading down to the planet Nomios itself. Safe travels."" The channel cuts off, and your ship’s course shifts away, the station receding into the backdrop of Arcadia.","defaultLeave:Leave",
+nraActiveQuestDocking,NRAPostOpen,"$global.nraRH_completed
+$market.mgaIntro_completed","FireAll NRAPopulateOptions","The docking procedure is swift, almost routine now. ""Welcome back, Captain $playerName,"" the voice over the comms greets you, professional but with a hint of recognition. Your ship is guided smoothly into a private berth. While the station continues its business as usual, there’s a subtle sense that the relic recovery represents something special—an opportunity that might grow in importance, depending on what the station’s engineers can eventually unlock from these ancient ships. A polite message from the liaison invites you to use the station's facilities before heading out again.",,
+nraAddOptionTrade,NRAPopulateOptions,,"MakeOptionOpenCore marketOpenCoreUI CARGO $tradeMode",,"10:marketOpenCoreUI:Transfer goods or ships",
+nraIntroDocking,NRAPostOpen,"$global.nraRH_completed
+!$market.mgaIntro_completed","$market.mgaIntro_completed = true","As you send your docking request, a quick response follows. ""Captain $playerName, welcome. We’ve received word from Callisto Ibrahim about your arrival. Director Amadou Sembene is expecting you."" The mention of the director himself catches you slightly off guard—this isn’t the kind of place where top leadership meets with just anyone. The docking queue opens, and your ship is smoothly guided to a private berth. Once docked, the subtle hum of the station's machinery fades, replaced by a message from a station liaison, inviting you to meet Sembene personally. It’s clear you’ve caught their interest—rarely does someone meet with the head of such a facility directly.","nraDirectorMeeting:Contiune",
+nraDirectorMeeting,DialogOptionSelected,"$option == nraDirectorMeeting
+","FireAll PopulateOptions","Start DIrector Logi Relic Ship Mission","defaultLeave:Leave",
+"#END Mbaye Gogol Autofab",,,,,,
 

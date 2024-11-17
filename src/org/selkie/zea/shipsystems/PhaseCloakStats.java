@@ -87,8 +87,8 @@ public class PhaseCloakStats extends BaseShipSystemScript {
 
                     float shipMoveRatio = Misc.interpolate(0, 1f, entity.getMass() / (entity.getMass() + ship.getMass()));
                     float shipMoveStrength = 0.1f * Global.getCombatEngine().getElapsedInLastFrame();
-                    Vector2f.add(ship.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(entity.getLocation(), ship.getLocation()).scale((distance*distance - actualDistance) * shipMoveRatio *shipMoveStrength), ship.getVelocity());
-                    Vector2f.add(entity.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(ship.getLocation(), entity.getLocation()).scale((distance*distance - actualDistance) * (1f-shipMoveRatio)*shipMoveStrength), entity.getVelocity());
+                    Vector2f.add(ship.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(entity.getLocation(), ship.getLocation()).scale((distance*distance - actualDistance) * shipMoveRatio * shipMoveStrength), ship.getVelocity());
+                    Vector2f.add(entity.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(ship.getLocation(), entity.getLocation()).scale((distance*distance - actualDistance) * (1f-shipMoveRatio) * shipMoveStrength), entity.getVelocity());
                 }
             }
 

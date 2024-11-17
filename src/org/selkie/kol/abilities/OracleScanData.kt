@@ -8,6 +8,7 @@ import com.fs.starfarer.api.campaign.SectorEntityToken
 import com.fs.starfarer.api.impl.campaign.abilities.GraviticScanAbility
 import com.fs.starfarer.api.impl.campaign.abilities.GraviticScanData
 import com.fs.starfarer.api.impl.campaign.ids.Conditions
+import com.fs.starfarer.api.impl.campaign.ids.Tags
 import com.fs.starfarer.api.util.Misc
 import org.selkie.kol.ReflectionUtils
 
@@ -60,6 +61,9 @@ class OracleScanData(val ability: GraviticScanAbility) : GraviticScanData(abilit
             }
 
             if (entity.radius <= 0) continue
+
+            if (Tags.NEUTRINO !in entity.tags && Tags.NEUTRINO_LOW !in entity.tags ) continue
+
 
             val dist = Misc.getDistance(loc, entity.location)
 

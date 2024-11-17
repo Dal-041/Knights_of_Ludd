@@ -140,9 +140,10 @@ public class PhasespaceSkip extends BaseShipSystemScript {
                 float actualDistance = MathUtils.getDistanceSquared(ship.getLocation(), entity.getLocation());
                 if (actualDistance < distance*distance) {
 
-                     float shipMoveFactor = Misc.interpolate(0, 0.005f, entity.getMass() / (entity.getMass() + ship.getMass()*0.002f));
-                    Vector2f.add(ship.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(entity.getLocation(), ship.getLocation()).scale((distance*distance - actualDistance) * shipMoveFactor), ship.getVelocity());
-                    Vector2f.add(entity.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(ship.getLocation(), entity.getLocation()).scale((distance*distance - actualDistance) * (0.005f-shipMoveFactor)), entity.getVelocity());
+                    float shipMoveFactor = Misc.interpolate(0, 1f, entity.getMass() / (entity.getMass() + ship.getMass()));
+                    float shipMoveStrength = 0.1f * Global.getCombatEngine().getElapsedInLastFrame();
+                    Vector2f.add(ship.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(entity.getLocation(), ship.getLocation()).scale((distance*distance - actualDistance) * shipMoveFactor * shipMoveStrength), ship.getVelocity());
+                    Vector2f.add(entity.getVelocity(), (Vector2f) VectorUtils.getDirectionalVector(ship.getLocation(), entity.getLocation()).scale((distance*distance - actualDistance) * (1f-shipMoveFactor) * shipMoveStrength), entity.getVelocity());
                 }
             }
         }
