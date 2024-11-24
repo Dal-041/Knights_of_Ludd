@@ -69,7 +69,7 @@ public class AlysseAIFixer implements EveryFrameWeaponEffectPlugin {
             }
         }
 
-        private void setSlots(WeaponAPI weapon, WeaponAPI.WeaponType type){
+        public static void setSlots(WeaponAPI weapon, WeaponAPI.WeaponType type){
             if(weapon.getSlot().getWeaponType() != type) {
                 List<String> weaponTypeField = ReflectionUtils.INSTANCE.getFieldsOfType(weapon.getSlot(), WeaponAPI.WeaponType.class);
                 ReflectionUtils.set(weaponTypeField.get(0), weapon.getSlot(), type);
@@ -115,9 +115,14 @@ public class AlysseAIFixer implements EveryFrameWeaponEffectPlugin {
 
     @Override
     public void advance(float amount, CombatEngineAPI engine, WeaponAPI weapon) {
-        weapon.setForceNoFireOneFrame(true);
-        if(inited) return;
-        inited = true;
-        weapon.getShip().addListener(new AlysseAIFixerWeaponSetter(weapon));
+        if(weapon.getShip().getOriginalOwner() == -1){
+            AlysseAIFixerWeaponSetter.setSlots(weapon, WeaponAPI.WeaponType.DECORATIVE);
+            weapon.getShip().removeWeaponFromGroups(weapon);
+        } else{
+            weapon.setForceNoFireOneFrame(true);
+            if(inited) return;
+            inited = true;
+            weapon.getShip().addListener(new AlysseAIFixerWeaponSetter(weapon));
+        }
     }
 }

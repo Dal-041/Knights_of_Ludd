@@ -20,11 +20,6 @@ import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.zea.fleets.*;
 import org.selkie.zea.helpers.ZeaStaticStrings;
-import org.selkie.zea.helpers.ZeaStaticStrings.ZeaEntities;
-import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat;
-import org.selkie.zea.helpers.ZeaStaticStrings.ZeaStarTypes;
-import org.selkie.zea.helpers.ZeaStaticStrings.ZeaDrops;
-import org.selkie.zea.helpers.ZeaStaticStrings.ZeaTerrain;
 import org.selkie.zea.listeners.TrackFleet;
 import org.selkie.zea.terrain.AbyssCorona;
 import org.selkie.zea.terrain.AbyssEventHorizon;
@@ -41,7 +36,7 @@ import java.util.Random;
 
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
-import static org.selkie.zea.helpers.ZeaStaticStrings.lunaSeaSysName;
+import static org.selkie.zea.helpers.ZeaStaticStrings.*;
 import static org.selkie.zea.helpers.ZeaUtils.checkAbyssalFleets;
 import static org.selkie.zea.helpers.ZeaUtils.copyHighgradeEquipment;
 
