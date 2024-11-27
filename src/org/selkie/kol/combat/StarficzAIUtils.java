@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.*;
 
 public class StarficzAIUtils {
-    public static final boolean DEBUG_ENABLED = true;
+    public static final boolean DEBUG_ENABLED = false;
 
     public static class FutureHit{
         public float timeToHit;
