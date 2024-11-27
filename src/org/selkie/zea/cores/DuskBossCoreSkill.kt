@@ -9,6 +9,7 @@ import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipHullSpecAPI
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
+import org.selkie.kol.combat.ShipExplosionListener
 import org.selkie.zea.campaign.cores.BossAICoreOfficerPlugin
 import org.selkie.zea.helpers.ZeaStaticStrings.BossCore
 import org.selkie.zea.hullmods.NinmahBoss.NinmahAIScript
@@ -36,9 +37,8 @@ class DuskBossCoreSkill : BaseCoreOfficerSkill() {
             var ship = stats.entity as ShipAPI
 
             if (ship.hullSpec.hints.contains(ShipHullSpecAPI.ShipTypeHints.PHASE) || ship.hullSpec.shipDefenseId == "phasecloak") {
-                if (!ship.hasListenerOfClass(NinmahAIScript::class.java)) {
-                    ship.addListener(NinmahAIScript(ship))
-                }
+                if (!ship.hasListenerOfClass(NinmahAIScript::class.java)) ship.addListener(NinmahAIScript(ship))
+                if (!ship.hasListenerOfClass(ShipExplosionListener::class.java)) ship.addListener(ShipExplosionListener()) // plz don't make me do enemy death prediction, just checking hull hp isnt good enough :(
             }
         }
 

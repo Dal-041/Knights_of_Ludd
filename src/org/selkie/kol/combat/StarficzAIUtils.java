@@ -6,6 +6,7 @@ import com.fs.starfarer.api.loading.MissileSpecAPI;
 import com.fs.starfarer.api.loading.ProjectileWeaponSpecAPI;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
+import kotlin.Triple;
 import org.lazywizard.lazylib.*;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.DefenseUtils;
@@ -16,7 +17,7 @@ import java.util.List;
 import java.util.*;
 
 public class StarficzAIUtils {
-    public static final boolean DEBUG_ENABLED = false;
+    public static final boolean DEBUG_ENABLED = true;
 
     public static class FutureHit{
         public float timeToHit;
@@ -41,7 +42,8 @@ public class StarficzAIUtils {
             if (!(next instanceof DamagingProjectileAPI)) continue;
             DamagingProjectileAPI threat = (DamagingProjectileAPI) next;
             if(threat.isFading()) continue;
-            if(threat.getOwner() == ship.getOwner() && !(threat instanceof MissileAPI && ((MissileAPI) threat).isMine())) continue;
+            if(threat.getSource() == ship && !(threat instanceof MissileAPI && ((MissileAPI) threat).isMine())) continue;
+            if(threat.getOwner() == ship.getOwner() && EnumSet.of(CollisionClass.PROJECTILE_NO_FF, CollisionClass.MISSILE_NO_FF, CollisionClass.HITS_SHIPS_ONLY_NO_FF).contains(threat.getCollisionClass())) continue;
 
             float shipRadius = Misc.getTargetingRadius(threat.getLocation(), ship, false);
             // Guided missiles and mines get dealt with here
@@ -290,7 +292,7 @@ public class StarficzAIUtils {
                     AmmoTrackerAPI ammoTracker = weapon.getAmmoTracker();
                     if (ammoTracker.getAmmo() == 0) continue;
                 }
-                float beamDelay = 0.1f; //TODO: get real beam speed
+                float beamDelay = 0f; //TODO: get real beam speed
                 // normal beams
                 if(weapon.isBeam() && !weapon.isBurstBeam()){
                     float currentTime = preAimedTime;
@@ -659,7 +661,8 @@ public class StarficzAIUtils {
                 return 0;
         }
     }
-    public static Pair<Vector2f, ShipAPI> getLowestDangerTargetInRange(ShipAPI ship, Map<ShipAPI, Map<String, Float>> nearbyEnemies, float maxAngle, float targetRange, boolean los){
+    public static Pair<Vector2f, ShipAPI> getLowestDangerTargetInRange(ShipAPI ship, Map<ShipAPI, Map<String, Float>> nearbyEnemies, float maxAngle,
+                                                                       float targetRange, boolean los, ShipAPI currentTarget, float currentTargetBias){
         float degreeDelta = 10f;
 
         //get the all the "outside" ships
@@ -670,7 +673,8 @@ public class StarficzAIUtils {
         // add all the target points from enemies on the "outside edges"
         for(ShipAPI enemy : enemyShipsOnConvexHull){
             float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
-
+            if(enemy.getHullLevel() < 0.4f)
+                optimalRange = Math.max(optimalRange, enemy.getShipExplosionRadius() + Misc.getTargetingRadius(enemy.getLocation(), ship, false) + 100f);
             List<Vector2f> potentialPoints = new ArrayList<>();
             float enemyAngle = VectorUtils.getAngle(enemy.getLocation(), ship.getLocation());
             float currentAngle = enemyAngle - maxAngle;
@@ -683,16 +687,15 @@ public class StarficzAIUtils {
 
         // remove the points that requires ship to fly through other ships
         for(ShipAPI enemy : Global.getCombatEngine().getShips()){
-            // Ignore fighters, yourself, your own modules, dead ships, and ships that are too far away
-            if (enemy.isFighter() || enemy == ship || enemy.getParentStation() == ship || !enemy.isAlive() || !MathUtils.isWithinRange(enemy, ship, 3000f))
+            // Ignore fighters, yourself, your own modules, dead ships, ally ships, and ships that are too far away
+            if (enemy.isFighter() || enemy == ship || enemy.getParentStation() == ship || !enemy.isAlive() || enemy.getOwner() == ship.getOwner() || !MathUtils.isWithinRange(enemy, ship, 3000f))
                 continue;
             for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()){
                 List<Vector2f> pointsToRemove = new ArrayList<>();
                 for(Vector2f potentialPoint : targetEnemy.getValue()){
                     if(!los && targetEnemy.getKey() == enemy) continue;
                     float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
-                    float minKeepoutRadius = (enemy.getHullLevel() < 0.20f ? enemy.getShipExplosionRadius() + 25f : enemy.getCollisionRadius()) + ship.getCollisionRadius() + 25f;
-                    float keepoutRadius = MathUtils.getDistance(ship.getLocation(), enemy.getLocation()) > optimalRange ? (float) (optimalRange * 0.8) : minKeepoutRadius;
+                    float keepoutRadius = optimalRange * 0.8f;
                     if(CollisionUtils.getCollides(potentialPoint, ship.getLocation(), enemy.getLocation(), keepoutRadius)){
                         pointsToRemove.add(potentialPoint);
                     }
@@ -701,24 +704,53 @@ public class StarficzAIUtils {
             }
         }
 
-        // from the points left, find the safest target to attack and where to strafe to
-        Vector2f optimalStrafePoint = null;
-        ShipAPI target = null;
-        float currentDanger = Float.POSITIVE_INFINITY;
+
+        Map<Vector2f, Triple<Float, Float, ShipAPI>> pointData = new HashMap<>();
+        float highestDanger = Float.NEGATIVE_INFINITY;
+        float lowestDanger = Float.POSITIVE_INFINITY;
+        float highestHardfluxLevel = Float.NEGATIVE_INFINITY;
+        float lowestHardfluxLevel = Float.POSITIVE_INFINITY;
 
         for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()) {
             for (Vector2f potentialPoint : targetEnemy.getValue()) {
                 float pointDanger = getPointDanger(nearbyEnemies, potentialPoint);
 
-                if(DEBUG_ENABLED){
-                    Global.getCombatEngine().addFloatingText(potentialPoint, String.valueOf(pointDanger), 10, Color.white, null, 0, 0);
-                }
+                if (pointDanger < lowestDanger) lowestDanger = pointDanger;
+                if (pointDanger > highestDanger) highestDanger = pointDanger;
 
-                if (pointDanger < currentDanger) {
-                    optimalStrafePoint = potentialPoint;
-                    target = targetEnemy.getKey();
-                    currentDanger = pointDanger;
-                }
+                float hardfluxPerDistance = ship.getPhaseCloak().getFluxPerSecond()/(ship.getMaxSpeed()*3);
+                float hardfluxAtPoint = MathUtils.getDistance(ship.getLocation(), potentialPoint)*hardfluxPerDistance + ship.getFluxTracker().getHardFlux();
+                float hardfluxLevelAtPoint = hardfluxAtPoint/ship.getMaxFlux();
+
+                if (hardfluxLevelAtPoint < lowestHardfluxLevel) lowestHardfluxLevel = hardfluxLevelAtPoint;
+                if (hardfluxLevelAtPoint > highestHardfluxLevel) highestHardfluxLevel = hardfluxLevelAtPoint;
+
+                pointData.put(potentialPoint, new Triple<>(pointDanger, hardfluxLevelAtPoint, targetEnemy.getKey()));
+            }
+        }
+
+        Vector2f optimalStrafePoint = null;
+        ShipAPI target = null;
+        float lowestCombinedFactor = Float.POSITIVE_INFINITY;
+        for(Vector2f potentialPoint : pointData.keySet()) {
+
+            float pointDanger = pointData.get(potentialPoint).getFirst();
+            float pointHardfluxLevel = pointData.get(potentialPoint).getSecond();
+
+            float dangerFactor = (pointDanger - lowestDanger)/(highestDanger - lowestDanger);
+            dangerFactor = Float.isNaN(dangerFactor) ? 0f : dangerFactor;
+
+            float hardfluxFactor = (pointHardfluxLevel - lowestHardfluxLevel)/(highestHardfluxLevel - lowestHardfluxLevel);
+            hardfluxFactor = Float.isNaN(hardfluxFactor) ? 0f : hardfluxFactor;
+
+            if (dangerFactor + hardfluxFactor < lowestCombinedFactor){
+                lowestCombinedFactor = dangerFactor + hardfluxFactor;
+                optimalStrafePoint = potentialPoint;
+                target = pointData.get(potentialPoint).getThird();
+            }
+
+            if(DEBUG_ENABLED){
+                Global.getCombatEngine().addFloatingText(potentialPoint, String.valueOf(pointDanger), 10, Color.white, null, 0, 0);
             }
         }
         return new Pair<>(optimalStrafePoint, target);
@@ -894,6 +926,182 @@ public class StarficzAIUtils {
             }
         }
         return currentPointDanger;
+    }
+
+    public static void strafeToPointV2(ShipAPI ship, Vector2f strafePoint){
+        // Calculate the unit vector toward the target
+        Vector2f uTarget = VectorUtils.getDirectionalVector(ship.getLocation(), strafePoint);
+
+        // Calculate the forward unit vector based on current facing
+        Vector2f uFwd = MathUtils.getPoint(new Vector2f(0f,0f),1f, ship.getFacing());
+
+        // Calculate unit vectors for right and left directions
+        Vector2f uRight = VectorUtils.rotate(new Vector2f(uFwd), -90f);
+        Vector2f uLeft = VectorUtils.rotate(new Vector2f(uFwd), 90f);
+
+        // Boolean flags for each command
+        boolean[][] commandFlags = {
+                // Format: {ACCELERATE, ACCELERATE_BACKWARDS, STRAFE_LEFT, STRAFE_RIGHT}
+                {false, false, false, false},
+                {true, false, false, false},   // ACCELERATE
+                {false, true, false, false},   // ACCELERATE_BACKWARDS
+                {false, false, true, false},   // STRAFE_LEFT
+                {false, false, false, true},   // STRAFE_RIGHT
+                {true, false, true, false},    // ACCELERATE + STRAFE_LEFT
+                {true, false, false, true},    // ACCELERATE + STRAFE_RIGHT
+                {false, true, true, false},    // ACCELERATE_BACKWARDS + STRAFE_LEFT
+                {false, true, false, true}     // ACCELERATE_BACKWARDS + STRAFE_RIGHT
+        };
+
+        // Variables to track the best command combination
+        float maxProjection = Float.NEGATIVE_INFINITY;
+        java.util.List<ShipCommand> bestCommands = new java.util.ArrayList<>();
+
+        // strafing uses forwards accel, but with a penalty
+        HashMap<ShipAPI.HullSize, Float> strafeAccelFactor = new HashMap<ShipAPI.HullSize, Float>();
+        strafeAccelFactor.put(ShipAPI.HullSize.FIGHTER, 1f);
+        strafeAccelFactor.put(ShipAPI.HullSize.FRIGATE, 1f);
+        strafeAccelFactor.put(ShipAPI.HullSize.DESTROYER, 0.75f);
+        strafeAccelFactor.put(ShipAPI.HullSize.CRUISER, 0.5f);
+        strafeAccelFactor.put(ShipAPI.HullSize.CAPITAL_SHIP, 0.25f);
+
+        // Iterate over all valid combinations of commands
+        for (boolean[] flags : commandFlags) {
+            boolean accelerate = flags[0];
+            boolean accelerateBackwards = flags[1];
+            boolean strafeLeft = flags[2];
+            boolean strafeRight = flags[3];
+
+            // Skip invalid combinations
+            if (accelerate && accelerateBackwards) continue;
+            if (strafeLeft && strafeRight) continue;
+
+            java.util.List<ShipCommand> commands = new java.util.ArrayList<>();
+            Vector2f accelVector = new Vector2f(0f, 0f);
+            ship.getAcceleration();
+
+            // Handle ACCELERATE
+            if (accelerate) {
+                commands.add(ShipCommand.ACCELERATE);
+                Vector2f temp = new Vector2f(uFwd);
+                temp.scale(ship.getAcceleration());
+                Vector2f.add(accelVector, temp, accelVector);
+            }
+
+            // Handle ACCELERATE_BACKWARDS
+            if (accelerateBackwards) {
+                commands.add(ShipCommand.ACCELERATE_BACKWARDS);
+                Vector2f temp = new Vector2f(uFwd);
+                temp.negate();
+                temp.scale(ship.getDeceleration());
+                Vector2f.add(accelVector, temp, accelVector);
+            }
+
+            // Handle STRAFE_LEFT
+            if (strafeLeft) {
+                commands.add(ShipCommand.STRAFE_LEFT);
+                Vector2f temp = new Vector2f(uLeft);
+                temp.scale(ship.getAcceleration() * strafeAccelFactor.get(ship.getHullSize()));
+                Vector2f.add(accelVector, temp, accelVector);
+            }
+
+            // Handle STRAFE_RIGHT
+            if (strafeRight) {
+                commands.add(ShipCommand.STRAFE_RIGHT);
+                Vector2f temp = new Vector2f(uRight);
+                temp.scale(ship.getAcceleration() * strafeAccelFactor.get(ship.getHullSize()));
+                Vector2f.add(accelVector, temp, accelVector);
+            }
+
+
+            // Apply acceleration to current speed to get new speed
+            Vector2f newSpeed = new Vector2f();
+            Vector2f.add(ship.getVelocity(), accelVector, newSpeed);
+
+            // Check if new speed exceeds top speed
+            if (newSpeed.length() > ship.getMaxSpeed()) {
+                // Adjust the speed components to bring the speed back to topSpeed
+                adjustSpeedToMax(newSpeed, ship.getMaxSpeed(), accelVector);
+            }
+
+            // Compute the projection of the new speed onto the target direction
+            float projection = Vector2f.dot(newSpeed, uTarget);
+
+            if (projection > maxProjection) {
+                maxProjection = projection;
+                bestCommands = commands;
+            }
+        }
+
+        // Issue the best commands to the ship and block the others
+        EnumSet<ShipCommand> movementCommands = java.util.EnumSet.of(
+            ShipCommand.ACCELERATE,
+            ShipCommand.ACCELERATE_BACKWARDS,
+            ShipCommand.STRAFE_LEFT,
+            ShipCommand.STRAFE_RIGHT,
+            ShipCommand.DECELERATE
+        );
+
+        for (ShipCommand command : movementCommands) {
+            if (bestCommands.contains(command)) {
+                // Issue the command
+                ship.giveCommand(command, null, 0);
+            } else {
+                // Block the command for one frame
+                ship.blockCommandForOneFrame(command);
+            }
+        }
+    }
+
+    // Adjusts the speed vector to ensure it does not exceed the max speed
+    // by reducing components starting from the ones that deviate most from the desired speed ratio
+    public static void adjustSpeedToMax(Vector2f speed, float maxSpeed, Vector2f accelVector) {
+        // Calculate the excess speed
+        float speedMagnitude = speed.length();
+        float excessSpeed = speedMagnitude - maxSpeed;
+
+        // Desired speed direction based on acceleration
+        Vector2f desiredDirection = new Vector2f(accelVector);
+        if (desiredDirection.lengthSquared() != 0f) {
+            desiredDirection.normalise();
+        } else {
+            // If no acceleration, desired direction is current speed direction
+            desiredDirection.set(speed);
+            desiredDirection.normalise();
+        }
+
+        // Compute the desired speed components
+        float desiredSpeedX = desiredDirection.x * maxSpeed;
+        float desiredSpeedY = desiredDirection.y * maxSpeed;
+
+        // Compute deviations for each component
+        float deviationX = Math.abs(speed.x - desiredSpeedX);
+        float deviationY = Math.abs(speed.y - desiredSpeedY);
+
+        // Total deviation
+        float totalDeviation = deviationX + deviationY;
+
+        // If total deviation is zero, scale down the speed vector proportionally
+        if (totalDeviation == 0f) {
+            speed.normalise();
+            speed.scale(maxSpeed);
+            return;
+        }
+
+        // Calculate the proportion of excess speed to reduce from each component
+        float reductionX = (deviationX / totalDeviation) * excessSpeed * (speed.x > desiredSpeedX ? 1 : -1);
+        float reductionY = (deviationY / totalDeviation) * excessSpeed * (speed.y > desiredSpeedY ? 1 : -1);
+
+        // Adjust the speed components
+        speed.x -= reductionX;
+        speed.y -= reductionY;
+
+        // Ensure the adjusted speed magnitude does not exceed maxSpeed due to rounding errors
+        speedMagnitude = speed.length();
+        if (speedMagnitude > maxSpeed) {
+            speed.normalise();
+            speed.scale(maxSpeed);
+        }
     }
 
     public static void strafeToPoint(ShipAPI ship, Vector2f strafePoint){

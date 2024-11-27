@@ -65,7 +65,7 @@ public class PhaseTeleporterAI implements ShipSystemAIScript {
             nearbyEnemies.keySet().removeAll(deadEnemies);
 
             if (!nearbyEnemies.isEmpty()) {
-                Pair<Vector2f, ShipAPI> targetReturn = StarficzAIUtils.getLowestDangerTargetInRange(ship, nearbyEnemies, 180f, targetRange-150f, false);
+                Pair<Vector2f, ShipAPI> targetReturn = StarficzAIUtils.getLowestDangerTargetInRange(ship, nearbyEnemies, 180f, targetRange-150f, false, target, 1f);
                 systemTargetPoint = targetReturn.one;
                 target = targetReturn.two;
             }

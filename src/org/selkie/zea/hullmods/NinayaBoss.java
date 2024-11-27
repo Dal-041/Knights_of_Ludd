@@ -255,7 +255,7 @@ public class NinayaBoss extends BaseHullMod {
                 if(ventingHardflux){
                     Vector2f point = StarficzAIUtils.getBackingOffStrafePoint(ship);
                     if(point != null)
-                        StarficzAIUtils.strafeToPoint(ship, point);
+                        StarficzAIUtils.strafeToPointV2(ship, point);
                 }
             }
 

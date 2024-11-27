@@ -13,10 +13,10 @@ import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import com.fs.starfarer.api.util.Pair;
 import org.lazywizard.lazylib.MathUtils;
-import org.lazywizard.lazylib.VectorUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.selkie.kol.Utils;
+import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.combat.StarficzAIUtils.FutureHit;
 import org.selkie.zea.helpers.ZeaStaticStrings;
@@ -192,8 +192,7 @@ public class NinmahBoss extends BaseHullMod {
         public final Map<ShipAPI, Map<String, Float>> nearbyEnemies = new HashMap<>();
         public float targetRange;
         public Vector2f shipTargetPoint;
-        public float shipStrafeAngle;
-        public boolean ventingHardFlux, ventingSoftFlux, rechargeCharges;
+        public boolean ventingHardFlux, ventingSoftFlux, rechargeCharges, usingSystem;
         public float lastUpdatedTime = 0f;
         public List<FutureHit> incomingProjectiles = new ArrayList<>();
         public List<FutureHit> predictedWeaponHits = new ArrayList<>();
@@ -218,7 +217,33 @@ public class NinmahBoss extends BaseHullMod {
             enemyTracker.advance(amount);
             if (enemyTracker.intervalElapsed() || target == null || !target.isAlive()) {
                 getOptimalTarget();
-                if (target == null || !target.isAlive()) return;
+
+                // mini tree just for fast traveling when there is no target
+                if (target == null || !target.isAlive()) {
+                    if (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship) {
+                        boolean wantToPhase = false;
+
+                        if(!ship.isPhased() && ship.getHardFluxLevel() < 0.01f)
+                            wantToPhase = true;
+                        else if(ship.isPhased() && ship.getHardFluxLevel() < 0.15f)
+                            wantToPhase = true;
+                        else
+                            ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
+
+                        // phase control
+                        if (ship.isPhased() ^ wantToPhase)
+                            ship.giveCommand(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK, null, 0);
+                        else
+                            ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
+                    }
+
+                    return;
+                }
+            }
+
+            ship.setShipTarget(target);
+            if(Objects.equals(ship.getSystem().getId(), "acausaldisruptor") && ship.getAIFlags() != null){
+                ship.getAIFlags().setFlag(ShipwideAIFlags.AIFlags.TARGET_FOR_SHIP_SYSTEM, 1f, target);
             }
 
             damageTracker.advance(amount);
@@ -231,28 +256,29 @@ public class NinmahBoss extends BaseHullMod {
                 combinedHits.addAll(incomingProjectiles);
                 combinedHits.addAll(predictedWeaponHits);
             }
-            if (StarficzAIUtils.DEBUG_ENABLED) {
-                // specially tuned for phase ships
-                PersonAPI captain = Global.getSettings().createPerson();
-                captain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
-                captain.setFaction(Factions.REMNANTS);
-                captain.setAICoreId(Commodities.ALPHA_CORE);
-                captain.getStats().setLevel(7);
-                //captain.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
-                //captain.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
-                captain.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 2);
-                captain.getStats().setSkillLevel(Skills.DAMAGE_CONTROL, 2);
-                captain.getStats().setSkillLevel(Skills.FIELD_MODULATION, 2);
-                //captain.getStats().setSkillLevel(Skills.POINT_DEFENSE, 2);
-                captain.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
-                //captain.getStats().setSkillLevel(Skills.BALLISTIC_MASTERY, 2);
-                captain.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 2);
-                //captain.getStats().setSkillLevel(Skills.MISSILE_SPECIALIZATION, 2);
-                //captain.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
-                captain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
-                captain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
-                ship.setCaptain(captain);
-            }
+
+//            if (StarficzAIUtils.DEBUG_ENABLED) {
+//                // specially tuned for phase ships
+//                PersonAPI captain = Global.getSettings().createPerson();
+//                captain.setPortraitSprite("graphics/portraits/portrait_ai2b.png");
+//                captain.setFaction(Factions.REMNANTS);
+//                captain.setAICoreId(Commodities.ALPHA_CORE);
+//                captain.getStats().setLevel(7);
+//                //captain.getStats().setSkillLevel(Skills.HELMSMANSHIP, 2);
+//                //captain.getStats().setSkillLevel(Skills.COMBAT_ENDURANCE, 2);
+//                captain.getStats().setSkillLevel(Skills.IMPACT_MITIGATION, 2);
+//                captain.getStats().setSkillLevel(Skills.DAMAGE_CONTROL, 2);
+//                captain.getStats().setSkillLevel(Skills.FIELD_MODULATION, 2);
+//                //captain.getStats().setSkillLevel(Skills.POINT_DEFENSE, 2);
+//                captain.getStats().setSkillLevel(Skills.TARGET_ANALYSIS, 2);
+//                //captain.getStats().setSkillLevel(Skills.BALLISTIC_MASTERY, 2);
+//                captain.getStats().setSkillLevel(Skills.SYSTEMS_EXPERTISE, 2);
+//                //captain.getStats().setSkillLevel(Skills.MISSILE_SPECIALIZATION, 2);
+//                //captain.getStats().setSkillLevel(Skills.GUNNERY_IMPLANTS, 2);
+//                captain.getStats().setSkillLevel(Skills.ENERGY_WEAPON_MASTERY, 2);
+//                captain.getStats().setSkillLevel(Skills.POLARIZED_ARMOR, 2);
+//                ship.setCaptain(captain);
+//            }
 
             // update ranges and block firing if system is active
             float minRange = Float.POSITIVE_INFINITY;
@@ -261,12 +287,12 @@ public class NinmahBoss extends BaseHullMod {
                 if (!weapon.isDecorative() && !weapon.hasAIHint(WeaponAPI.AIHints.PD) && weapon.getType() != WeaponAPI.WeaponType.MISSILE) {
                     float currentRange = weapon.getRange();
                     minRange = Math.min(currentRange, minRange);
-                    if (ship.getSystem().isChargeup()) {
+                    if (ship.getSystem().isChargeup() || usingSystem) {
                         weapon.setForceNoFireOneFrame(true);
                     }
                 }
             }
-            targetRange = minRange;
+            targetRange = minRange - 50f;
 
             // calculate how much damage the ship would take if unphased/vent/used system
             float currentTime = Global.getCombatEngine().getTotalElapsedTime(false);
@@ -298,7 +324,7 @@ public class NinmahBoss extends BaseHullMod {
                     empDamageIfUnphased += hit.empDamage;
                     armorUnphase = Math.max(armorUnphase - trueDamage.one, armorMinLevel * armorMax);
                 }
-                if (timeToHit < phaseTime + bufferTime && !Objects.equals(hit.enemyId, target.getId())) {
+                if ((timeToHit < phaseTime + bufferTime && !Objects.equals(hit.enemyId, target.getId())) || timeToHit < 0.1f) {
                     Pair<Float, Float> trueDamage = StarficzAIUtils.damageAfterArmor(hit.damageType, hit.damage, hit.hitStrength, armorSystem, ship);
                     hullDamageIfSystem += trueDamage.two;
                     empDamageIfSystem += hit.empDamage;
@@ -314,11 +340,11 @@ public class NinmahBoss extends BaseHullMod {
 
 
             float armorDamageLevel = (armorBase - armorUnphase) / armorMax;
-            float hullDamageLevel = hullDamageIfUnphased / (ship.getHitpoints() * ship.getHullLevel());
+            float hullDamageLevel = hullDamageIfUnphased / ship.getHitpoints();
             float armorDamageLevelSystem = (armorBase - armorSystem) / armorMax;
-            float hullDamageLevelSystem = hullDamageIfSystem / (ship.getHitpoints() * ship.getHullLevel());
+            float hullDamageLevelSystem = hullDamageIfSystem / ship.getHitpoints();
             float armorDamageLevelVent = (armorBase - armorVent) / armorMax;
-            float hullDamageLevelVent = hullDamageIfVent / (ship.getHitpoints() * ship.getHullLevel());
+            float hullDamageLevelVent = hullDamageIfVent / ship.getHitpoints();
 
             float mountHP = 0f;
             for (WeaponAPI weapon : ship.getAllWeapons()) {
@@ -336,7 +362,6 @@ public class NinmahBoss extends BaseHullMod {
                 test = (armorDamageLevel > 0.07f || hullDamageLevel > 0.07f || empDamageLevel > 0.7f) ? Color.red : test;
                 engine.addSmoothParticle(ship.getLocation(), ship.getVelocity(), 200f, 100f, 0.1f, test);
             }
-
             // Set decision flags
             float totalFlux = ship.getCurrFlux();
             float hardFlux = ship.getFluxTracker().getHardFlux();
@@ -369,16 +394,23 @@ public class NinmahBoss extends BaseHullMod {
                     wantToPhase = true;
                 }
             } else { // otherwise, ship is attacking
-                if (MathUtils.getDistance(ship.getLocation(), target.getLocation()) < targetRange + Misc.getTargetingRadius(ship.getLocation(), target, false)) {
+                if (MathUtils.getDistance(ship.getLocation(), target.getLocation()) < targetRange + Misc.getTargetingRadius(ship.getLocation(), target, false) + 50f) {
                     // if ship is in weapon range decide to phase based on incoming damage, accounting for the reduction in incoming damage if the system overloads an enemy
-                    if ((Objects.equals(ship.getSystem().getId(), "acausaldisruptor") && (AIUtils.canUseSystemThisFrame(ship) || ship.getSystem().isActive()))
-                            || target.getFluxTracker().isOverloadedOrVenting()) {
-                        if ((armorDamageLevelSystem > 0.07f || hullDamageLevelSystem > 0.07f || empDamageLevelSystem > 0.7f))
+                    if ((Objects.equals(ship.getSystem().getId(), "acausaldisruptor") && (AIUtils.canUseSystemThisFrame(ship) || ship.getSystem().isActive())) || target.getFluxTracker().isOverloadedOrVenting()) {
+                        if ((armorDamageLevelSystem > 0.05f || hullDamageLevelSystem > 0.02f || empDamageLevelSystem > 0.7f)) {
                             wantToPhase = true;
-                        else
-                            ship.useSystem();
+                        } else{
+                            if(AIUtils.canUseSystemThisFrame(ship) && !target.getFluxTracker().isOverloadedOrVenting()){
+                                ship.useSystem();
+                                usingSystem = true;
+                            } else{
+                                usingSystem = false;
+                            }
+                        }
+
                     } else {
-                        if ((armorDamageLevel > 0.07f || hullDamageLevel > 0.07f || empDamageLevel > 0.7f))
+                        usingSystem = false;
+                        if ((armorDamageLevel > 0.05f || hullDamageLevel > 0.02f || empDamageLevel > 0.5f))
                             wantToPhase = true;
                     }
 
@@ -387,12 +419,8 @@ public class NinmahBoss extends BaseHullMod {
                     if ((ventingSoftFlux || rechargeCharges) && !maximiseDPS)
                         wantToPhase = true;
 
-                    // phase to avoid getting nuked by enemy ship explosion
-                    if(target.getHullLevel() < 0.15f && MathUtils.getDistanceSquared(ship.getLocation(), target.getLocation()) < Math.pow(target.getShipExplosionRadius() + ship.getCollisionRadius() + 50f,2))
-                        wantToPhase = true;
-
                 } else { // if the ship is not in range, the acceptable damage threshold is much lower,
-                    if ((armorDamageLevel > 0.03f || hullDamageLevel > 0.03f || empDamageLevel > 0.3f) || ventingSoftFlux || rechargeCharges || ship.getEngineController().isFlamedOut())
+                    if ((armorDamageLevel > 0.02f || hullDamageLevel > 0.005f || empDamageLevel > 0.2f) || ventingSoftFlux || rechargeCharges || ship.getEngineController().isFlamedOut())
                         wantToPhase = true;
                     if(ship.isPhased() && ship.getHardFluxLevel() < 0.1f)
                         wantToPhase = true;
@@ -401,6 +429,12 @@ public class NinmahBoss extends BaseHullMod {
                 }
             }
 
+            // phase to avoid getting nuked by enemy ship explosion
+            for(ShipAPI enemy : AIUtils.getNearbyEnemies(ship, 1000f)){
+                if(enemy.getHullLevel() < 0.40f && MathUtils.getDistanceSquared(ship.getLocation(), enemy.getLocation()) <
+                                Math.pow(enemy.getShipExplosionRadius() + Misc.getTargetingRadius(enemy.getLocation(), ship, false) + 75f, 2))
+                    wantToPhase = true;
+            }
 
             // only implement AI if not under player control
             if (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship) {
@@ -411,7 +445,7 @@ public class NinmahBoss extends BaseHullMod {
                     ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK);
 
                 // vent control
-                if (ventingHardFlux && armorDamageLevelVent < 0.03f && hullDamageLevelVent < 0.03f && empDamageLevelVent < 0.5f) {
+                if ((ventingHardFlux && armorDamageLevelVent < 0.03f && hullDamageLevelVent < 0.03f && empDamageLevelVent < 0.5f)) {
                     ship.giveCommand(ShipCommand.VENT_FLUX, null, 0);
                 } else {
                     ship.blockCommandForOneFrame(ShipCommand.VENT_FLUX);
@@ -424,8 +458,7 @@ public class NinmahBoss extends BaseHullMod {
                 CombatAssignmentType assignmentType = (assignmentInfo != null) ? assignmentInfo.getType() : null;
 
                 if (shipTargetPoint != null && (assignmentType == CombatAssignmentType.SEARCH_AND_DESTROY || assignmentType == null)) {
-                    Vector2f shipStrafePoint = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), shipStrafeAngle);
-                    StarficzAIUtils.strafeToPoint(ship, shipStrafePoint);
+                    StarficzAIUtils.strafeToPointV2(ship, shipTargetPoint);
                     StarficzAIUtils.turnToPoint(ship, target.getLocation());
                     ship.setShipTarget(target);
                 }
@@ -433,8 +466,6 @@ public class NinmahBoss extends BaseHullMod {
                 if (StarficzAIUtils.DEBUG_ENABLED) {
                     if (shipTargetPoint != null) {
                         engine.addSmoothParticle(shipTargetPoint, ship.getVelocity(), 50f, 5f, 0.1f, Color.blue);
-                        Vector2f shipStrafePoint = MathUtils.getPointOnCircumference(ship.getLocation(), ship.getCollisionRadius(), shipStrafeAngle);
-                        engine.addSmoothParticle(shipStrafePoint, ship.getVelocity(), 50f, 5f, 0.1f, Color.blue);
                     }
                 }
             }
@@ -442,7 +473,7 @@ public class NinmahBoss extends BaseHullMod {
 
         private void getOptimalTarget() {
             // Cache any newly detected enemies, getShipStats is expensive
-            List<ShipAPI> foundEnemies = AIUtils.getNearbyEnemies(ship, 5000f);
+            List<ShipAPI> foundEnemies = AIUtils.getNearbyEnemies(ship, 3000f);
             for (ShipAPI foundEnemy : foundEnemies) {
                 if(foundEnemy.getHullSize() != ShipAPI.HullSize.FIGHTER) {
                     if (!nearbyEnemies.containsKey(foundEnemy) && foundEnemy.isAlive() && !foundEnemy.isFighter()) {
@@ -456,7 +487,7 @@ public class NinmahBoss extends BaseHullMod {
             for (ShipAPI enemy : nearbyEnemies.keySet()) {
                 if (!enemy.isAlive())
                     deadEnemies.add(enemy);
-                if (!MathUtils.isWithinRange(enemy, ship, 3500f))
+                if (!MathUtils.isWithinRange(enemy, ship, 2500f))
                     deadEnemies.add(enemy);
             }
             nearbyEnemies.keySet().removeAll(deadEnemies);
@@ -468,17 +499,13 @@ public class NinmahBoss extends BaseHullMod {
                         target = AIUtils.getNearestEnemy(ship);
                     shipTargetPoint = StarficzAIUtils.getBackingOffStrafePoint(ship);
                 } else {
-                    Pair<Vector2f, ShipAPI> targetReturn = StarficzAIUtils.getLowestDangerTargetInRange(ship, nearbyEnemies, 120f, targetRange, true);
+                    Pair<Vector2f, ShipAPI> targetReturn = StarficzAIUtils.getLowestDangerTargetInRange(ship, nearbyEnemies, 120f, targetRange, true, target, 2f);
                     Vector2f targetAttackPoint = targetReturn.one;
                     target = targetReturn.two;
 
                     shipTargetPoint = targetAttackPoint != null ? targetAttackPoint : StarficzAIUtils.getBackingOffStrafePoint(ship);
                     if (target == null || !target.isAlive())
                         target = AIUtils.getNearestEnemy(ship);
-                }
-                if (shipTargetPoint != null) {
-
-                    shipStrafeAngle = VectorUtils.getAngle(ship.getLocation(), shipTargetPoint);
                 }
             }
         }
@@ -490,10 +517,10 @@ public class NinmahBoss extends BaseHullMod {
                 (ship.getFleetMember().getFleetData().getFleet() != null && ship.getFleetMember().getFleetData().getFleet().getMemoryWithoutUpdate().getKeys().contains(ZeaMemKeys.ZEA_BOSS_TAG))));
 
         if(isBoss || StarficzAIUtils.DEBUG_ENABLED) {
-            if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));
+            //if(!ship.hasListenerOfClass(NinmahBossPhaseTwoScript.class)) ship.addListener(new NinmahBossPhaseTwoScript(ship));
             if(!ship.hasListenerOfClass(NinmahAIScript.class)) ship.addListener(new NinmahAIScript(ship));
-
-            Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
+            if(!ship.hasListenerOfClass(ShipExplosionListener.class)) ship.addListener(new ShipExplosionListener()); // plz don't make me do enemy death prediction, just checking hull hp isnt good enough :(
+            //Global.getCombatEngine().getCustomData().put(ZeaStaticStrings.PHASE_ANCHOR_CAN_DIVE, true); // disable phase dive, as listener conflicts with phase two script
         }
     }
 }
