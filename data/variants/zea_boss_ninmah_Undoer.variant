@@ -1,7 +1,7 @@
 {
     "displayName": "Undoer",
-    "fluxCapacitors": 22,
-    "fluxVents": 22,
+    "fluxCapacitors": 28,
+    "fluxVents": 20,
     "goalVariant": true,
     "hullId": "zea_boss_ninmah",
     "hullMods": [
@@ -9,13 +9,13 @@
     ],
     "permaMods": [
         "heavyarmor",
-        "magazines",
         "unstable_injector",
+        "fluxcoil"
     ],
     "sMods": [
         "heavyarmor",
-        "magazines",
         "unstable_injector",
+        "fluxcoil"
     ],
     "suppressedMods": [],
     "variantId": "zea_boss_ninmah_Undoer",
@@ -28,8 +28,8 @@
             }
         },
         {
-            "autofire": false,
-            "mode": "ALTERNATING",
+            "autofire": true,
+            "mode": "LINKED",
             "weapons": {
                 "WS0016": "zea_boss_resonator2",
                 "WS0017": "zea_boss_resonator2",
@@ -39,18 +39,12 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0003": "minipulser",
-                "WS0002": "minipulser",
-                "WS0009": "riftlance",
-                "WS0008": "riftlance",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0007": "ionpulser",
-                "WS0006": "ionpulser",
+                "WS0003": "zea_nanten_s",
+                "WS0002": "zea_nanten_s",
+                "WS0009": "zea_nanten_s",
+                "WS0008": "zea_nanten_s",
+                "WS0007": "phasebeam",
+                "WS0006": "phasebeam",
             }
         },
     ],

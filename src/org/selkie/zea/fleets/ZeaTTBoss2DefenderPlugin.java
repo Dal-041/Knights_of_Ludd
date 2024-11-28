@@ -2,22 +2,23 @@ package org.selkie.zea.fleets;
 
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.campaign.FleetInflater;
 import com.fs.starfarer.api.campaign.SectorEntityToken;
 import com.fs.starfarer.api.characters.FullName;
 import com.fs.starfarer.api.characters.PersonAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.BaseGenericPlugin;
+import com.fs.starfarer.api.impl.campaign.fleets.DefaultFleetInflaterParams;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SDMParams;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.SalvageGenFromSeed.SalvageDefenderModificationPlugin;
 import com.fs.starfarer.api.loading.VariantSource;
+import com.fs.starfarer.api.util.Misc;
 import org.magiclib.util.MagicCampaign;
 import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements SalvageDefenderModificationPlugin {
 
@@ -44,28 +45,25 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
 
     public void modifyFleet(SDMParams p, CampaignFleetAPI fleet, Random random, boolean withOverride) {
 
-        //Misc.addDefeatTrigger(fleet, "PK14thDefeated");
-
         fleet.setNoFactionInName(true);
-        fleet.setName("Unidentified Vessel");
+        fleet.setName("Unidentified Fleet");
 
         fleet.getFleetData().clear();
         fleet.getFleetData().setShipNameRandom(random);
 
-
-        FleetMemberAPI member = fleet.getFleetData().addFleetMember(ZeaStaticStrings.ZEA_BOSS_NINMAH_UNDOER);
-        member.setShipName("TTS Ninmah");
-        member.setId("tt2boss_" + random.nextLong());
+        FleetMemberAPI flagship = fleet.getFleetData().addFleetMember(ZeaStaticStrings.ZEA_BOSS_NINMAH_UNDOER);
+        flagship.setShipName("TTS Ninmah");
+        flagship.setId("tt2boss_" + random.nextLong());
 
         Map<String, Integer> skills = new HashMap<>();
         skills.put(Skills.HELMSMANSHIP, 2);
-        skills.put(Skills.COMBAT_ENDURANCE, 2);
         skills.put(Skills.IMPACT_MITIGATION, 2);
         skills.put(Skills.DAMAGE_CONTROL, 2);
         skills.put(Skills.FIELD_MODULATION, 2);
         skills.put(Skills.TARGET_ANALYSIS, 2);
         skills.put(Skills.SYSTEMS_EXPERTISE, 2);
         skills.put(Skills.ENERGY_WEAPON_MASTERY, 2);
+        skills.put(Skills.POLARIZED_ARMOR, 2);
 
         PersonAPI TT2BossCaptain = MagicCampaign.createCaptainBuilder(Factions.TRITACHYON)
                 .setIsAI(true)
@@ -80,24 +78,50 @@ public class ZeaTTBoss2DefenderPlugin extends BaseGenericPlugin implements Salva
                 .create();
 
         TT2BossCaptain.getStats().setSkipRefresh(true);
-        TT2BossCaptain.getStats().setSkillLevel(Skills.WOLFPACK_TACTICS, 1);
         TT2BossCaptain.getStats().setSkillLevel(Skills.PHASE_CORPS, 1);
+        TT2BossCaptain.getStats().setSkillLevel(Skills.FLUX_REGULATION, 1);
         TT2BossCaptain.getStats().setSkipRefresh(false);
 
-        member.setCaptain(TT2BossCaptain);
+        flagship.setCaptain(TT2BossCaptain);
+
+
+        DefaultFleetInflaterParams inflaterParams = new DefaultFleetInflaterParams();
+        inflaterParams.factionId = Factions.TRITACHYON;
+        inflaterParams.averageSMods = 1;
+        inflaterParams.quality = 5f;
+        inflaterParams.persistent = false;
+        inflaterParams.seed = random.nextLong();
+        inflaterParams.timestamp = null;
+
+        FleetInflater inflater = Misc.getInflater(fleet, inflaterParams);
+        fleet.setInflater(inflater);
+
+        List<String> variantList = Arrays.asList("aurora_Balanced", "medusa_Attack", "medusa_CS", "tempest_Attack", "tempest_Attack");
+        for(String variantID : variantList){
+            FleetMemberAPI member = fleet.getFleetData().addFleetMember(variantID);
+            member.getVariant().setSource(VariantSource.REFIT);
+            if (member.getShipName() == null) member.setShipName(Global.getSector().getFaction(Factions.TRITACHYON).pickRandomShipName());
+        }
+
+        fleet.inflateIfNeeded();
+
         fleet.setCommander(TT2BossCaptain);
 
         for (FleetMemberAPI curr : fleet.getFleetData().getMembersListCopy()) {
             curr.getRepairTracker().setCR(curr.getRepairTracker().getMaxCR());
         }
 
-        // setup and permalock the flagship variant
-        FleetMemberAPI flagship = fleet.getFlagship();
-        flagship.setVariant(flagship.getVariant().clone(), false, false);
-        flagship.getVariant().setSource(VariantSource.REFIT);
+        // setup the flagship variant
+        flagship = fleet.getFlagship();
         flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
         flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
         flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
+
+        // lock the variants
+        for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()){
+            member.setVariant(member.getVariant().clone(), false, false);
+            member.getVariant().setSource(VariantSource.REFIT);
+        }
 
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_SHIP_RECOVERY, true);
         fleet.getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_BOSS_TAG, true);

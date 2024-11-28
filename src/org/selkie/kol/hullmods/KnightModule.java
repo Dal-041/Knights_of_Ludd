@@ -33,8 +33,7 @@ public class KnightModule extends BaseHullMod {
         My solution is to teleport the module offscreen (currently, a map corner) before marking it as a hulk.
         This must be done after the ship is loaded into the map and within its borders to prevent the game from despawning it.
         */
-        if (!module.hasTag(KolStaticStrings.KOL_MODULE_HULKED) && module.getLocation().getY() > -engine.getMapHeight()/2 && module.getLocation().getY() < engine.getMapHeight()/2 &&
-                module.getLocation().getX() > -engine.getMapWidth()/2 && module.getLocation().getX() < engine.getMapWidth()/2){
+        if (!module.hasTag(KolStaticStrings.KOL_MODULE_HULKED) && StarficzAIUtils.isPointWithinMap(module.getLocation(), 50f)){
 
             // only teleport to inside the map border
             float borderEdgeX = module.getLocation().getX() > 0 ? engine.getMapWidth()/2 : -engine.getMapWidth()/2;

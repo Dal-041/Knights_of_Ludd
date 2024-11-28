@@ -68,7 +68,7 @@ public class StarficzAIUtils {
                 if (missile.isGuided() && (missile.getWeapon() == null || !(missile.getWeapon().getId().equals("squall") && missile.getFlightTime() > 1f))){ // special case the squall
                     boolean hit = false;
                     float travelTime = 0f;
-                    if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius)) hit = true;
+                    if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius + missile.getSpec().getExplosionRadius())) hit = true;
                     else {
                         // I hate mirvs
                         float missileMaxSpeed = missile.isMirv() ? missile.getMaxSpeed()*4 :  missile.getMaxSpeed();
@@ -232,7 +232,8 @@ public class StarficzAIUtils {
                 if (occlusion == enemy) continue;
                 if (occlusion.getParentStation() == enemy) continue;
                 Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), enemy.getLocation());
-                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() != null && occlusion.getShield().isOn())){
+                // bias the size down 50 units, hack to compensate for the fact that this assumes everything is static
+                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() != null && occlusion.getShield().isOn()) - 50f){
                     occluded = true;
                 }
             }
@@ -534,11 +535,10 @@ public class StarficzAIUtils {
         return futureHits;
     }
 
-    @SuppressWarnings("ForLoopReplaceableByForEach")
     public static float getCurrentArmorRating(ShipAPI ship){
-        if (ship == null || !Global.getCombatEngine().isEntityInPlay(ship)) {
-            return 0f;
-        }
+
+        if (ship == null || !Global.getCombatEngine().isEntityInPlay(ship)) return 0f;
+
         ArmorGridAPI armorGrid = ship.getArmorGrid();
         float[][] armorGridGrid = armorGrid.getGrid();
         List<Float> armorList = new ArrayList<>();
@@ -560,6 +560,7 @@ public class StarficzAIUtils {
             return armorGrid.getMaxArmorInCell() * 15f;
         }
     }
+
     public static Pair<Float, Float> damageAfterArmor(DamageType damageType, float damage, float hitStrength, float armorValue, ShipAPI ship){
         MutableShipStatsAPI stats = ship.getMutableStats();
 
@@ -569,7 +570,6 @@ public class StarficzAIUtils {
         float minArmor = stats.getMinArmorFraction().getModifiedValue();
         float maxDR = stats.getMaxArmorDamageReduction().getModifiedValue();
 
-        armorValue = Math.max(minArmor * ship.getArmorGrid().getArmorRating(), armorValue);
         switch (damageType) {
             case FRAGMENTATION:
                 armorMultiplier *= (0.25f * stats.getFragmentationDamageTakenMult().getModifiedValue());
@@ -589,7 +589,7 @@ public class StarficzAIUtils {
                 break;
         }
 
-        damage *= Math.max((1f - maxDR), ((hitStrength * armorMultiplier) / (armorValue * effectiveArmorMult + hitStrength * armorMultiplier)));
+        damage *= Math.max((1f - maxDR), ((hitStrength * armorMultiplier) / (Math.max(minArmor * ship.getArmorGrid().getArmorRating(), armorValue) * effectiveArmorMult + hitStrength * armorMultiplier)));
 
         float armorDamage = damage * armorMultiplier;
         float hullDamage = 0;
@@ -599,6 +599,7 @@ public class StarficzAIUtils {
 
         return new Pair<>(armorDamage, hullDamage);
     }
+
     public static float fluxToShield(DamageType damageType, float damage, ShipAPI ship){
         MutableShipStatsAPI stats = ship.getMutableStats();
 
@@ -621,6 +622,7 @@ public class StarficzAIUtils {
 
         return (damage * ship.getShield().getFluxPerPointOfDamage() * shieldMultiplier);
     }
+
     public static float missileTravelTime(float startingSpeed, float maxSpeed, float acceleration, float maxTurnRate,
                                           float missileStartingAngle, Vector2f missileStartingLocation, Vector2f targetLocation, float targetRadius){
         // for guided, do some complex math to figure out the time it takes to hit
@@ -661,8 +663,9 @@ public class StarficzAIUtils {
                 return 0;
         }
     }
+
     public static Pair<Vector2f, ShipAPI> getLowestDangerTargetInRange(ShipAPI ship, Map<ShipAPI, Map<String, Float>> nearbyEnemies, float maxAngle,
-                                                                       float targetRange, boolean los, ShipAPI currentTarget, float currentTargetBias){
+                                                                       float weaponRange, boolean respectLOS, float hullLevelLimitForShipExplosion){
         float degreeDelta = 10f;
 
         //get the all the "outside" ships
@@ -672,8 +675,9 @@ public class StarficzAIUtils {
 
         // add all the target points from enemies on the "outside edges"
         for(ShipAPI enemy : enemyShipsOnConvexHull){
-            float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
-            if(enemy.getHullLevel() < 0.4f)
+            if (!isPointWithinMap(enemy.getLocation(), 200)) continue; // skip enemies out of the map
+            float optimalRange = weaponRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
+            if(enemy.getHullLevel() < hullLevelLimitForShipExplosion)
                 optimalRange = Math.max(optimalRange, enemy.getShipExplosionRadius() + Misc.getTargetingRadius(enemy.getLocation(), ship, false) + 100f);
             List<Vector2f> potentialPoints = new ArrayList<>();
             float enemyAngle = VectorUtils.getAngle(enemy.getLocation(), ship.getLocation());
@@ -693,9 +697,8 @@ public class StarficzAIUtils {
             for(Map.Entry<ShipAPI, List<Vector2f>> targetEnemy : targetEnemys.entrySet()){
                 List<Vector2f> pointsToRemove = new ArrayList<>();
                 for(Vector2f potentialPoint : targetEnemy.getValue()){
-                    if(!los && targetEnemy.getKey() == enemy) continue;
-                    float optimalRange = targetRange + Misc.getTargetingRadius(ship.getLocation(), enemy, false);
-                    float keepoutRadius = optimalRange * 0.8f;
+                    if(!respectLOS && targetEnemy.getKey() == enemy) continue;
+                    float keepoutRadius = enemy.getCollisionRadius() + 300f;
                     if(CollisionUtils.getCollides(potentialPoint, ship.getLocation(), enemy.getLocation(), keepoutRadius)){
                         pointsToRemove.add(potentialPoint);
                     }
@@ -756,6 +759,14 @@ public class StarficzAIUtils {
         return new Pair<>(optimalStrafePoint, target);
     }
 
+    public static boolean isPointWithinMap(Vector2f point, float pad){
+        CombatEngineAPI engine = Global.getCombatEngine();
+        return (point.getX() < (engine.getMapWidth() / 2 - pad)) &&
+                (point.getX() > (pad - engine.getMapWidth() / 2)) &&
+                (point.getY() < (engine.getMapHeight() / 2 - pad)) &&
+                (point.getY() > (pad - engine.getMapHeight() / 2));
+    }
+
     public static Vector2f getBackingOffStrafePoint(ShipAPI ship){
         float secondsInFuture = 1f;
         float degreeDelta = 5f;
@@ -766,9 +777,7 @@ public class StarficzAIUtils {
         CollectionUtils.CollectionFilter<Vector2f> filterBorder = new CollectionUtils.CollectionFilter<Vector2f>() {
             @Override
             public boolean accept(Vector2f point) {
-                if(point.getX() > (Global.getCombatEngine().getMapWidth()/2 - 200f) || point.getX() < (200f - Global.getCombatEngine().getMapWidth()/2))
-                    return false;
-                else return !(point.getY() > (Global.getCombatEngine().getMapHeight() / 2 - 200f)) && !(point.getY() < (200f - Global.getCombatEngine().getMapHeight() / 2));
+                return isPointWithinMap(point, 200);
             }
         };
 
@@ -860,7 +869,6 @@ public class StarficzAIUtils {
         highLowDPS.put("MinRange", minRange);
         return highLowDPS;
     }
-
 
     public static int orientation(Vector2f p, Vector2f q, Vector2f r) {
         float val = (q.y - p.y) * (r.x - q.x) - (q.x - p.x) * (r.y - q.y);
@@ -1053,8 +1061,6 @@ public class StarficzAIUtils {
         }
     }
 
-    // Adjusts the speed vector to ensure it does not exceed the max speed
-    // by reducing components starting from the ones that deviate most from the desired speed ratio
     public static void adjustSpeedToMax(Vector2f speed, float maxSpeed, Vector2f accelVector) {
         // Calculate the excess speed
         float speedMagnitude = speed.length();
@@ -1104,57 +1110,8 @@ public class StarficzAIUtils {
         }
     }
 
-    public static void strafeToPoint(ShipAPI ship, Vector2f strafePoint){
-
-        Vector2f headingVec = Vector2f.sub(VectorUtils.resize(VectorUtils.getDirectionalVector(ship.getLocation(), strafePoint), ship.getMaxSpeed()*1.2f), ship.getVelocity(), null);
-
-        float strafeAngle = VectorUtils.getFacing(headingVec);
-        float rotAngle = MathUtils.getShortestRotation(ship.getFacing(), strafeAngle);
-
-        if(DEBUG_ENABLED) {
-            Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, strafeAngle);
-            Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.yellow);
-        }
-
-        if (rotAngle < 67.5f && rotAngle > -67.5f) {
-            ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
-            if(DEBUG_ENABLED) {
-                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing());
-                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
-            }
-        } else{
-            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
-        }
-
-        if (rotAngle > 112.5f || rotAngle < -112.5f){
-            ship.giveCommand(ShipCommand.ACCELERATE_BACKWARDS, null,0);
-            if(DEBUG_ENABLED) {
-                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()+180f);
-                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
-            }
-        }else{
-            ship.blockCommandForOneFrame(ShipCommand.ACCELERATE_BACKWARDS);
-        }
-
-        if (rotAngle > 22.5f && rotAngle < 157.5f){
-            ship.giveCommand(ShipCommand.STRAFE_LEFT, null,0);
-            if(DEBUG_ENABLED) {
-                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()+90f);
-                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
-            }
-        }else{
-            ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT);
-        }
-
-        if (rotAngle < -22.5f && rotAngle > -157.5f){
-            ship.giveCommand(ShipCommand.STRAFE_RIGHT, null,0);
-            if(DEBUG_ENABLED) {
-                Vector2f point = MathUtils.getPointOnCircumference(ship.getLocation(), 100f, ship.getFacing()-90f);
-                Global.getCombatEngine().addSmoothParticle(point, ship.getVelocity(), 30f, 1f, 0.1f, Color.green);
-            }
-        }else{
-            ship.blockCommandForOneFrame(ShipCommand.STRAFE_RIGHT);
-        }
+    public static boolean isWithinFiringRange(ShipAPI ship, ShipAPI target, float range){
+        return MathUtils.getDistanceSquared(ship.getLocation(), target.getLocation()) < Math.pow(Misc.getTargetingRadius(ship.getLocation(), target, false) + range, 2);
     }
 
     public static void turnToPoint(ShipAPI ship, Vector2f turnPoint){
@@ -1179,7 +1136,6 @@ public class StarficzAIUtils {
         }
     }
 
-
     public static void stayStill(ShipAPI ship){
         ship.giveCommand(ShipCommand.DECELERATE, null, 0);
         ship.blockCommandForOneFrame(ShipCommand.ACCELERATE);
@@ -1198,7 +1154,6 @@ public class StarficzAIUtils {
             }
         }
     }
-
 
     public static void applyDamper(ShipAPI ship, String id, float level){
         MutableShipStatsAPI stats = ship.getMutableStats();
@@ -1240,6 +1195,31 @@ public class StarficzAIUtils {
             }
         }
         return lowestAmmoLevel;
+    }
+
+    public static float DPSPercentageOfWeaponsOnCooldown(ShipAPI ship) {
+        float totalDPS = 0f;
+        float totalDPSOnCooldown = 0f;
+
+        for (WeaponAPI weapon : ship.getAllWeapons()) {
+            if (weapon.isDecorative() || weapon.hasAIHint(WeaponAPI.AIHints.PD)) continue;
+
+            float weaponDPS = weapon.getDerivedStats().getSustainedDps();
+            totalDPS += weaponDPS;
+
+            if (weapon.isBeam() && !weapon.isBurstBeam()) {
+                // Continuous beams are never on cooldown
+                continue;
+            } else if ((weapon.isBeam() && weapon.isBurstBeam()) || weapon.getSpec().getBurstSize() == 1) {
+                // Burst beams/Single-shot projectiles are on cooldown if getCooldownRemaining() > 0
+                if (weapon.getCooldownRemaining() > 0) totalDPSOnCooldown += weaponDPS;
+            } else if (weapon.getSpec().getBurstSize() > 1) {
+                // Burst projectiles: Only count cooldown if between bursts (not in burst)
+                if (weapon.getCooldownRemaining() > 0 && !weapon.isInBurst()) totalDPSOnCooldown += weaponDPS;
+            }
+        }
+
+        return (totalDPS == 0f) ? 0f : totalDPSOnCooldown / totalDPS;
     }
 
 
