@@ -412,6 +412,8 @@ public class NinmahBoss extends BaseHullMod {
             if (rechargeCharges && StarficzAIUtils.lowestWeaponAmmoLevel(ship) > 0.5f || StarficzAIUtils.DPSPercentageOfWeaponsOnCooldown(ship) < 0.4f)
                 rechargeCharges = false;
 
+            boolean withinFiringRange = StarficzAIUtils.isWithinFiringRange(ship, target, weaponRange + 50f) ||
+                    (target.getHullLevel() < hullLevelLimitForShipExplosion && StarficzAIUtils.isWithinFiringRange(target, ship, target.getShipExplosionRadius() + 100f));
 
             // Phase Decision Tree starts here:
             boolean wantToPhase = false;
@@ -426,7 +428,7 @@ public class NinmahBoss extends BaseHullMod {
             // otherwise, ship is attacking
             else {
                 // if the ship is not in range
-                if (!StarficzAIUtils.isWithinFiringRange(ship, target, weaponRange + 50f)) {
+                if (!withinFiringRange) {
                     // phase if ship will take more than the not in-range damage limit
                     if (armorDamageLevel > armorDamageLimitNotInRange) wantToPhase = true;
                     if (hullDamageLevel > hullDamageLimitNotInRange) wantToPhase = true;
@@ -480,7 +482,7 @@ public class NinmahBoss extends BaseHullMod {
 
             // always phase to avoid getting nuked by enemy ship explosion
             for(ShipAPI enemy : AIUtils.getNearbyEnemies(ship, 1000f)){
-                if(enemy.getHullLevel() < hullLevelLimitForShipExplosion && StarficzAIUtils.isWithinFiringRange(enemy, ship, enemy.getShipExplosionRadius() + 75f)){
+                if(enemy.getHullLevel() < hullLevelLimitForShipExplosion && StarficzAIUtils.isWithinFiringRange(enemy, ship, enemy.getShipExplosionRadius() + 50f)){
                     wantToPhase = true;
                     break;
                 }

@@ -65,17 +65,18 @@ public class StarficzAIUtils {
                     continue; // skip to next object if not hit, this point should be a complete filter of mines
                 }
 
-                if (missile.isGuided() && (missile.getWeapon() == null || !(missile.getWeapon().getId().equals("squall") && missile.getFlightTime() > 1f))){ // special case the squall
+                if (missile.isGuided() && missile.getFlightTime() < missile.getMaxFlightTime() && (missile.getWeapon() == null || !(missile.getWeapon().getId().equals("squall") && missile.getFlightTime() > 1f))){ // special case the squall
                     boolean hit = false;
                     float travelTime = 0f;
-                    if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius + missile.getSpec().getExplosionRadius())) hit = true;
+                    float collisionSize = missile.getSpec().getExplosionSpec() == null ? missile.getCollisionRadius() : missile.getSpec().getExplosionSpec().getRadius();
+                    if(MathUtils.isPointWithinCircle(missile.getLocation(), testPoint, shipRadius + collisionSize)) hit = true;
                     else {
                         // I hate mirvs
                         float missileMaxSpeed = missile.isMirv() ? missile.getMaxSpeed()*4 :  missile.getMaxSpeed();
                         float missileAccel = missile.isMirv() ? missile.getAcceleration()*4 :  missile.getAcceleration();
                         travelTime = missileTravelTime(missile.getMoveSpeed(), missileMaxSpeed, missileAccel, missile.getMaxTurnRate(),
-                                VectorUtils.getFacing(missile.getVelocity()), missile.getLocation(), testPoint, shipRadius);
-                        if (travelTime < (missile.getMaxFlightTime() - missile.getFlightTime())) hit = true;
+                                VectorUtils.getFacing(missile.getVelocity()), missile.getLocation(), testPoint, shipRadius + collisionSize);
+                        if (travelTime < (missile.getMaxFlightTime() + (missile.isArmedWhileFizzling() ? missile.getSpec().getFlameoutTime() : 0f) - missile.getFlightTime())) hit = true;
                     }
                     if(hit) {
                         futurehit.timeToHit = travelTime;
@@ -698,7 +699,7 @@ public class StarficzAIUtils {
                 List<Vector2f> pointsToRemove = new ArrayList<>();
                 for(Vector2f potentialPoint : targetEnemy.getValue()){
                     if(!respectLOS && targetEnemy.getKey() == enemy) continue;
-                    float keepoutRadius = enemy.getCollisionRadius() + 300f;
+                    float keepoutRadius = enemy.getCollisionRadius() + 100f;
                     if(CollisionUtils.getCollides(potentialPoint, ship.getLocation(), enemy.getLocation(), keepoutRadius)){
                         pointsToRemove.add(potentialPoint);
                     }
@@ -1046,8 +1047,7 @@ public class StarficzAIUtils {
             ShipCommand.ACCELERATE,
             ShipCommand.ACCELERATE_BACKWARDS,
             ShipCommand.STRAFE_LEFT,
-            ShipCommand.STRAFE_RIGHT,
-            ShipCommand.DECELERATE
+            ShipCommand.STRAFE_RIGHT
         );
 
         for (ShipCommand command : movementCommands) {
