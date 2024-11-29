@@ -19,6 +19,13 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
+                "WS0002": "hurricane",
+            }
+        },
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
                 "WS0004": "zea_nanten_l",
             }
         },
@@ -26,7 +33,8 @@
             "autofire": false,
             "mode": "LINKED",
             "weapons": {
-                "WS0002": "hurricane",
+                "WS0013": "sabotpod",
+                "WS0014": "sabotpod",
             }
         },
         {
@@ -40,25 +48,25 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0010": "guardian",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0008": "lrpdlaser",
-                "WS0009": "lrpdlaser",
-                "WS0005": "lrpdlaser",
                 "WS0003": "lrpdlaser",
+                "WS0009": "lrpdlaser",
+                "WS0008": "lrpdlaser",
+                "WS0005": "lrpdlaser",
             }
         },
         {
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0006": "dualflak",
                 "WS0007": "dualflak",
+                "WS0006": "dualflak",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0010": "guardian",
             }
         },
     ],
