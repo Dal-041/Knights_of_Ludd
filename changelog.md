@@ -3,7 +3,8 @@
   - Fully Resprited
   - [Buff] +2 Medium missile turrets
   - [Buff] Ordnance Points 310 -> 330
-- Rebalanced and upgraded the custom phase AI powering the Ninmah Fight and Dusk Core skill (should be much more effective and the boss specifically, more reckless)
+- Drastically improved Ninmah boss fight AI
+- Drastically improved Dusk Core AI 
 - Defeating both Elysian Boss's no longer shuts down all the Dawn and Dusk fleets
 - Defeating the Dusk Boss no longer shuts down all the Dawn fleets
 - Dawntide fleets no longer effected by its system's star terrain effect
