@@ -23,7 +23,8 @@ public class LidarAI implements ShipSystemAIScript {
         float range = 0;
         int numWeps = 0;
         for(WeaponAPI weapon : ship.getAllWeapons()){
-            if (weapon.getSlot().getSlotSize() == WeaponAPI.WeaponSize.LARGE && weapon.getSlot().isTurret()){
+            if(weapon.isDecorative() || weapon.hasAIHint(WeaponAPI.AIHints.PD) || weapon.hasAIHint(WeaponAPI.AIHints.SYSTEM)) continue;
+            if (!(ship.getHullSpec().getHullId().contains("lunaria") ^ (weapon.getSlot().getSlotSize() == WeaponAPI.WeaponSize.LARGE)) && weapon.getSlot().isTurret()){
                 range += weapon.getRange();
                 numWeps += 1;
                 if(ship.getSystem().isActive() && ship.getFluxLevel() < 0.9f && (!engine.isUIAutopilotOn() || engine.getPlayerShip() != ship)){
@@ -41,9 +42,9 @@ public class LidarAI implements ShipSystemAIScript {
         }
         range = range/numWeps;
         interval.advance(amount);
-        if(interval.intervalElapsed() && AIUtils.canUseSystemThisFrame(ship) && !AIUtils.getNearbyEnemies(ship, range*1.4f).isEmpty()){
+        if(interval.intervalElapsed() && AIUtils.canUseSystemThisFrame(ship) && !AIUtils.getNearbyEnemies(ship, range*1.5f).isEmpty()){
             boolean occluded = false;
-            for(ShipAPI ally : AIUtils.getNearbyAllies(ship, range*1.4f)){
+            for(ShipAPI ally : AIUtils.getNearbyAllies(ship, range*1.5f)){
                 if(CollisionUtils.getCollides(ship.getLocation(), MathUtils.getPointOnCircumference(ship.getLocation(), 2000, ship.getFacing()), ally.getLocation(), ally.getCollisionRadius())){
                     occluded = true;
                     break;
