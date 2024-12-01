@@ -295,7 +295,9 @@
 			"kol_forest_path_large":"graphics/kol/illustrations/kol_forest_path_big.png",
 			"kol_tree_canaan_large":"graphics/kol/illustrations/kol_tree_canaan_big.png",
 			"kol_citadel_large":"graphics/kol/illustrations/kol_citadel_big.png",
-			"zea_banner":"graphics/zea/illustrations/zea_banner.png"
+			"zea_banner":"graphics/zea/illustrations/zea_banner.png",
+			"zea_dusk_yuki1":"graphics/zea/illustrations/zea_dusk_yuki1.png",
+			"zea_dusk_yuki2":"graphics/zea/illustrations/zea_dusk_yuki2.png"
 		},
 		"terrain":{
 			"nebula_zea_black":"graphics/kol/terrain/nebula_kol_black_shiny.png",

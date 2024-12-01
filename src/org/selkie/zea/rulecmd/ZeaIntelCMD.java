@@ -147,6 +147,8 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                     }
                 }
             }
+        } else if ("addYukiImage".equals(command)){
+            dialog.getTextPanel().addImage(ZeaStaticStrings.GfxCat.ILLUSTRATIONS,"zea_dusk_yuki2");
         }
 
         return false;
