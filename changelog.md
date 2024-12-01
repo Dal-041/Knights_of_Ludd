@@ -1,3 +1,7 @@
+## v1.3.5
+- Fixed Mimosa Lidar AI for real this time
+- Fixed Crash on Ninaya Boss fight
+
 ## v1.3.4
 - Linggui:
   - Fully Resprited
