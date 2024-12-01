@@ -1,6 +1,7 @@
 package org.selkie.zea.rulecmd;
 
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.InteractionDialogImageVisual;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
@@ -51,7 +52,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             }
         }
 
-        if (ZeaStaticStrings.ADD_INTEL_TTBOSS_1.equals(command)) {
+        if (ZeaStaticStrings.ruleCMD.ADD_INTEL_TTBOSS_1.equals(command)) {
 
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #3", ZeaLoreManager.TT1Drop, ZeaLoreManager.TT1DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, true, dialog.getTextPanel());
@@ -66,7 +67,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             Global.getSector().getIntelManager().addIntel(intel, false, dialog.getTextPanel());
             return true;
 
-        } else if (ZeaStaticStrings.ADD_INTEL_TTBOSS_2.equals(command)) {
+        } else if (ZeaStaticStrings.ruleCMD.ADD_INTEL_TTBOSS_2.equals(command)) {
 
             CampaignFleetAPI fleet = Global.getSector().getPlayerFleet();
 
@@ -120,7 +121,7 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             Global.getSector().getIntelManager().addIntel(intelBC, false, dialog.getTextPanel());
             return true;
 
-        } else if (ZeaStaticStrings.ADD_INTEL_TTBOSS_3.equals(command)) {
+        } else if (ZeaStaticStrings.ruleCMD.ADD_INTEL_TTBOSS_3.equals(command)) {
             ZeaLoreIntel intelLore = new ZeaLoreIntel(Global.getSector().getFaction(Factions.TRITACHYON).getCrest(), "Project Dusk Datacore #2", ZeaLoreManager.TT3Drop, ZeaLoreManager.TT3DropHLs);
             Global.getSector().getIntelManager().addIntel(intelLore, false, dialog.getTextPanel());
 
@@ -135,10 +136,10 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
             ZeaTriTachBreadcrumbIntel intelBC = new ZeaTriTachBreadcrumbIntel("Project Dawn Hyperspatial Tracking Link", "A tracking link from the doomed Tri-Tachyon \"Operation Dawn\" to... something. Whatever they produced, the link is still sending telemetry, but the readings are nonsensical. If you want answers, there's nothing to do but seek out the location for yourself", LunaSea);
             Global.getSector().getIntelManager().addIntel(intelBC, false, dialog.getTextPanel());
 
-        } else if (ZeaStaticStrings.END_MUSIC.equals(command)) {
+        } else if (ZeaStaticStrings.ruleCMD.END_MUSIC.equals(command)) {
             Global.getSoundPlayer().restartCurrentMusic();
             return true;
-        } else if (ZeaStaticStrings.ADD_BOSS_TAGS.equals(command)) {
+        } else if (ZeaStaticStrings.ruleCMD.ADD_BOSS_TAGS.equals(command)) {
             if (otherFleet != null) {
                 for (FleetMemberAPI member : otherFleet.getMembersWithFightersCopy()) {
                     if (member.getHullId().startsWith("zea_boss")) {
@@ -147,8 +148,10 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                     }
                 }
             }
-        } else if ("addYukiImage".equals(command)){
-            dialog.getTextPanel().addImage(ZeaStaticStrings.GfxCat.ILLUSTRATIONS,"zea_dusk_yuki2");
+        } else if (ZeaStaticStrings.ruleCMD.ADD_YUKI_IMAGE.equals(command)){
+            dialog.getVisualPanel().showImageVisual(new InteractionDialogImageVisual(ZeaStaticStrings.GfxCat.ILLUSTRATIONS,"zea_dusk_yuki2", 640, 400));
+        }  else if (ZeaStaticStrings.ruleCMD.SHOW_FLEET_INFO.equals(command)){
+            dialog.getVisualPanel().showFleetInfo("Your Forces", Global.getSector().getPlayerFleet(), otherFleet.getName(), otherFleet);
         }
 
         return false;

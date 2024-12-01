@@ -85,6 +85,7 @@ public class SpawnDuskBoss {
 
 		// tag to exclude terrain effects
 		duskBossFleet.addTag(ZeaStaticStrings.ZEA_EXCLUDE_TAG);
+		duskBossFleet.addTag(ZeaStaticStrings.SIC_DELAY_XO);
 
 		// set up the initial interaction
 		duskBossFleet.addEventListener(new ManageDuskBoss());

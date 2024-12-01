@@ -146,7 +146,7 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
         CargoAPI cargo = playerFleet.getCargo();
         SpecialItemData item = new SpecialItemData(rewardID, "Recovered a Tri-Tachyon data recorder");
 
-        if (action.equals(ZeaStaticStrings.ZEA_BOSS_STATION_TT_SALVAGE_2)) {
+        if (action.equals(ZeaStaticStrings.ruleCMD.ZEA_BOSS_STATION_TT_SALVAGE_2)) {
             Global.getSector().getPlayerStats().addXP(200000, dialog.getTextPanel());
             ReputationActionResponsePlugin.ReputationAdjustmentResult result = Global.getSector().adjustPlayerReputation(
                     new CoreReputationPlugin.RepActionEnvelope(CoreReputationPlugin.RepActions.MISSION_SUCCESS, -5,
@@ -155,7 +155,7 @@ public class ZeaTriTachBreadcrumbIntel extends BaseIntelPlugin {
             endAfterDelay();
         }
 
-        if (action.equals(ZeaStaticStrings.ZEA_AFTER_NINEVEH_DEFEAT)) {
+        if (action.equals(ZeaStaticStrings.ruleCMD.ZEA_AFTER_NINEVEH_DEFEAT)) {
 
             Global.getSector().getPlayerStats().addXP(250000, dialog.getTextPanel());
 

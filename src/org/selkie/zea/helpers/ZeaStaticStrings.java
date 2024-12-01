@@ -148,6 +148,7 @@ public class ZeaStaticStrings {
 
     //tags
     public static final String ZEA_EXCLUDE_TAG = "zea_rulesfortheebutnotforme";
+    public static final String SIC_DELAY_XO = "sic_fleet_encounter2";
     public static final String DRONE_SHIELD_TARGET_KEY = "droneShieldTargetKey";
     public static final String EDF_HYPERSHUNT = "edf_Hypershunt";
     public static final String EDF_HEADQUARTERS = "edf_Headquarters";
@@ -183,16 +184,21 @@ public class ZeaStaticStrings {
     public static final String ZEA_EDF_SHACHI_WING = "zea_edf_shachi_wing";
 
     // rules event hooks
-    public static final String ZEA_BOSS_STATION_TT_SALVAGE_2 = "zea_BossStationTT_Salvage2";
-    public static final String ZEA_AFTER_NINEVEH_DEFEAT = "zea_AfterNinevehDefeat";
-    public static final String ZEA_AFTER_NINAYA_DEFEAT = "zea_AfterNinayaDefeat";
-    public static final String ZEA_SPOILERS_POPUP = "zea_spoilers_popup";
+    public static class ruleCMD {
+        public static final String ZEA_BOSS_STATION_TT_SALVAGE_2 = "zea_BossStationTT_Salvage2";
+        public static final String ZEA_AFTER_NINEVEH_DEFEAT = "zea_AfterNinevehDefeat";
+        public static final String ZEA_AFTER_NINAYA_DEFEAT = "zea_AfterNinayaDefeat";
+        public static final String ZEA_SPOILERS_POPUP = "zea_spoilers_popup";
 
-    public static final String ADD_INTEL_TTBOSS_1 = "addIntelTTBoss1";
-    public static final String ADD_INTEL_TTBOSS_2 = "addIntelTTBoss2";
-    public static final String ADD_INTEL_TTBOSS_3 = "addIntelTTBoss3";
-    public static final String END_MUSIC = "endMusic";
-    public static final String ADD_BOSS_TAGS = "addBossTags";
+        public static final String ADD_INTEL_TTBOSS_1 = "addIntelTTBoss1";
+        public static final String ADD_INTEL_TTBOSS_2 = "addIntelTTBoss2";
+        public static final String ADD_INTEL_TTBOSS_3 = "addIntelTTBoss3";
+
+        public static final String END_MUSIC = "endMusic";
+        public static final String ADD_BOSS_TAGS = "addBossTags";
+        public static final String ADD_YUKI_IMAGE = "addYukiImage";
+        public static final String SHOW_FLEET_INFO = "showFleetInfo";
+    }
 
     // planets
     public static final String TOXIC = "toxic";

@@ -198,10 +198,10 @@ On a canvas of crimson a myriad of silhouettes fly forth like gleaming stars in 
 zea_BossNianEnc,BeginFleetEncounter,"$zea_nian score:1000","ZeaIntelCMD addBossTags","The moment the drivefields interlock, a change in movement is reported from the opposing fleet. Feedback from the comms becomes a deafening din as a torrent of positional instructions pours across every channel. Ship after ship slams into formation. The din fuses into a drone, a clarion call that shakes your bones until the communications officer manages to get the order for total system shutdown across. Sensors observe the million pinpricks of slaved salvor units lifting off, taking up position behind the fleet. Like a flock of vultures waiting to pick your bones clean. Like an army on the march, Nian hungers.",,
 zea_BossYukionnaEnc,BeginFleetEncounter,"$zea_yukionna score:1000
 !$printedDesc","ZeaIntelCMD addBossTags
+ZeaIntelCMD addYukiImage
 $printedDesc = true 0
 $fidpi_addContinue = true 0","The opposing fleet moves in to meet yours, enveloped in dancing twinkles of volatile half-light. A sound grazes your consciousness like a bullet grazing your skin, a tune on perception's edge just failing to be heard. The dance of the light changes, matching the inaudible rhythm pace for pace. The crew surrounding you wavers, drifting in and out of focus. Sweat trickles, a nose bleeds, straining to hear the absence. Conduits pulse and readouts flicker as your ship tries to sing along. Amidst the maddening silence waits Yukionna, ready with her embrace.",,
-zea_BossYukionnaEnc2,BeginFleetEncounter2,"$zea_yukionna score:1000","ZeaIntelCMD addYukiImage
-$showAfterScanIntro = true","",,
+zea_BossYukionnaEnc2,BeginFleetEncounter2,"$zea_yukionna score:1000","ZeaIntelCMD showFleetInfo",,,
 "#END boss interactions",,,,,,
 "#END relationship level descriptions",,,,,,
 ,,,,,,

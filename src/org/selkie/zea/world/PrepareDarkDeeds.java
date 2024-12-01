@@ -206,7 +206,7 @@ public class PrepareDarkDeeds {
                     ZeaUtils.bossWreckCleaner(entity, false);
 
                     dialog.setInteractionTarget(entity);
-                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ZEA_AFTER_NINAYA_DEFEAT);
+                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ruleCMD.ZEA_AFTER_NINAYA_DEFEAT);
                     dialog.setPlugin(plugin);
                     plugin.init(dialog);
                 }

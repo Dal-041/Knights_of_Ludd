@@ -80,7 +80,7 @@ public class SpoilersNotif implements EveryFrameScript {
 
     protected void doSpoilersTalk() {
         //SectorEntityToken dummy = Global.getSector().getPlayerFleet().getContainingLocation().addCustomEntity("zea_spoiler_entity", "dummy", Entities.WARNING_BEACON, Factions.NEUTRAL);
-        RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ZEA_SPOILERS_POPUP);
+        RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ruleCMD.ZEA_SPOILERS_POPUP);
         boolean gotDialog = Global.getSector().getCampaignUI().showInteractionDialog(plugin, Global.getSector().getPlayerFleet());
         ZeaLoreIntel intel = new ZeaLoreIntel(icon, "A quick message from the KOL team", desc, descHLs);
         InteractionDialogAPI dialog = Global.getSector().getCampaignUI().getCurrentInteractionDialog();
