@@ -722,9 +722,11 @@ public class StarficzAIUtils {
                 if (pointDanger < lowestDanger) lowestDanger = pointDanger;
                 if (pointDanger > highestDanger) highestDanger = pointDanger;
 
-                float hardfluxPerDistance = ship.getPhaseCloak().getFluxPerSecond()/(ship.getMaxSpeed()*3);
-                float hardfluxAtPoint = MathUtils.getDistance(ship.getLocation(), potentialPoint)*hardfluxPerDistance + ship.getFluxTracker().getHardFlux();
+
+                float hardfluxPerDistance = ship.getPhaseCloak() != null ? ship.getPhaseCloak().getFluxPerSecond()/(ship.getMaxSpeed()*3) : ship.getShield().getUpkeep()/ship.getMaxSpeed();
+                float hardfluxAtPoint = MathUtils.getDistance(ship.getLocation(), potentialPoint) * hardfluxPerDistance + ship.getFluxTracker().getHardFlux();
                 float hardfluxLevelAtPoint = hardfluxAtPoint/ship.getMaxFlux();
+
 
                 if (hardfluxLevelAtPoint < lowestHardfluxLevel) lowestHardfluxLevel = hardfluxLevelAtPoint;
                 if (hardfluxLevelAtPoint > highestHardfluxLevel) highestHardfluxLevel = hardfluxLevelAtPoint;
