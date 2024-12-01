@@ -21,12 +21,22 @@
   "builtInWings": [
   ],
   "builtInWeapons": {
+    "TRUE_TEMPORAL_FIELD": "zea_true_temporal_field",
     "WS0004": "zea_deco_edf_vortice",
     "WS0005": "zea_deco_edf_tamamo_ml",
     "WS0006": "zea_deco_edf_tamamo_mr",
     "WS0007": "zea_deco_edf_vortice"
   },
   "weaponSlots": [
+      {
+        "id": "TRUE_TEMPORAL_FIELD",
+        "size": "SMALL",
+        "type": "DECORATIVE",
+        "mount": "TURRET",
+        "arc": 0,
+        "angle": 0,
+        "locations": [0, 0]
+      },
     {
       "id": "WS 001",
       "size": "SMALL",
