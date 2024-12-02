@@ -362,7 +362,7 @@ public class PrepareDarkDeeds {
                     Misc.setSalvageSpecial(entity, data);
 
                     dialog.setInteractionTarget(entity);
-                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ZEA_AFTER_NINEVEH_DEFEAT);
+                    RuleBasedInteractionDialogPluginImpl plugin = new RuleBasedInteractionDialogPluginImpl(ZeaStaticStrings.ruleCMD.ZEA_AFTER_NINEVEH_DEFEAT);
                     dialog.setPlugin(plugin);
                     plugin.init(dialog);
                 }
