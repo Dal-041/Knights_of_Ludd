@@ -35,8 +35,10 @@ public class LidarAI implements ShipSystemAIScript {
                             break;
                         }
                     }
-                    if(!occluded)
-                        weapon.setForceFireOneFrame(true);
+                    if(!occluded){
+                        // TODO: not sure why I added this before, do some more checks if people start saying lidar doesn't work well or something
+                        //weapon.setForceFireOneFrame(true);
+                    }
                 }
             }
         }

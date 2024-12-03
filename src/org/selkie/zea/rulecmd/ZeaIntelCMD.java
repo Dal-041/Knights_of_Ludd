@@ -6,6 +6,7 @@ import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.combat.ShipVariantAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
+import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.campaign.DerelictShipEntityPlugin;
 import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
@@ -149,7 +150,8 @@ public class ZeaIntelCMD extends BaseCommandPlugin {
                 }
             }
         } else if (ZeaStaticStrings.ruleCMD.ADD_YUKI_IMAGE.equals(command)){
-            dialog.getVisualPanel().showImageVisual(new InteractionDialogImageVisual(ZeaStaticStrings.GfxCat.ILLUSTRATIONS,"zea_dusk_yuki2", 640, 400));
+            SpriteAPI sprite = Global.getSettings().getSprite(ZeaStaticStrings.GfxCat.ILLUSTRATIONS,"zea_dusk_yuki2");
+            dialog.getVisualPanel().showImageVisual(new InteractionDialogImageVisual(ZeaStaticStrings.GfxCat.ILLUSTRATIONS,"zea_dusk_yuki2", sprite.getWidth(), sprite.getHeight()));
         }  else if (ZeaStaticStrings.ruleCMD.SHOW_FLEET_INFO.equals(command)){
             dialog.getVisualPanel().showFleetInfo("Your Forces", Global.getSector().getPlayerFleet(), otherFleet.getName(), otherFleet);
         }
