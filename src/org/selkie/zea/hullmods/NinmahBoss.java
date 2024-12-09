@@ -70,6 +70,8 @@ public class NinmahBoss extends BaseHullMod {
             float armorRegen = 0.8f;
             float hpRegen = 0.6f;
 
+            ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 100000);
+            if(ship.getCurrentCR() < 0.4f) ship.setCurrentCR(0.4f);
 
             if(phaseTwo && phaseTwoTimer < MAX_TIME){
 
@@ -249,9 +251,6 @@ public class NinmahBoss extends BaseHullMod {
             init();
             if (!ship.isAlive() || ship.getParentStation() != null || engine == null || !engine.isEntityInPlay(ship)) return;
 
-            if (ship.getOwner() != 0 || StarficzAIUtils.DEBUG_ENABLED) {
-                ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 100000);
-            }
 
             // only update optimal target sparingly, very expensive if many enemies are in range.
             enemyTracker.advance(amount);

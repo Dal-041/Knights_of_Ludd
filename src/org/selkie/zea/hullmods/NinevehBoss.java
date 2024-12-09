@@ -66,6 +66,8 @@ public class NinevehBoss extends BaseHullMod {
             float armorRegen = 0.8f;
             float hpRegen = 0.6f;
 
+            ship.getMutableStats().getPeakCRDuration().modifyFlat("phase_boss_cr", 100000);
+            if(ship.getCurrentCR() < 0.4f) ship.setCurrentCR(0.4f);
 
             if(phaseTwo && phaseTwoTimer < MAX_TIME){
 
