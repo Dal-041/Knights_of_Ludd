@@ -20,7 +20,7 @@ import org.selkie.kol.ReflectionUtils
 import java.awt.Color
 import java.util.*
 
-class NullspaceGateTransferVFXRenderer(var gate: SectorEntityToken) : LunaCampaignRenderingPlugin {
+class NullspaceGateTransferVFXRenderer(var gate: SectorEntityToken, var first: Boolean) : LunaCampaignRenderingPlugin {
 
 
 
@@ -64,11 +64,14 @@ class NullspaceGateTransferVFXRenderer(var gate: SectorEntityToken) : LunaCampai
 
     override fun advance(amount: Float) {
 
-        //Global.getSector().isFastForwardIteration = false //Disable speedup during the effect
-        var state = AppDriver.getInstance().currentState
-        if (state is CampaignState) {
-            ReflectionUtils.set("fastForward", state, false)
+        //Disable Speedup if this is the first ever jump to nullspace, i.e Triggered by the Gate-Glitch
+        if (first) {
+            var state = AppDriver.getInstance().currentState
+            if (state is CampaignState) {
+                ReflectionUtils.set("fastForward", state, false)
+            }
         }
+
 
         startDelay -= 1f * amount
         if (startDelay >= 0) return

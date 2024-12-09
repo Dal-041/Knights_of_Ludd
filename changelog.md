@@ -1,3 +1,9 @@
+## v1.3.6
+- The Null Gate can now be selected as a travel option when interacting with a gate
+- The Null Gate now has custom travel VFX
+- The Null Gate should now be fully scanned when traveled to, it was only partialy scanned before.
+- The Null Gate glitch can now only happen once per save, and only after the main story has been completed.
+
 ## v1.3.5
 - Fixed Mimosa Lidar AI for real this time
 - Fixed Crash on Ninaya Boss fight

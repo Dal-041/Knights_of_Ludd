@@ -26,11 +26,12 @@ public class ReportTransit implements GateTransitListener {
 	@Override
 	public void reportFleetTransitingGate(CampaignFleetAPI fleet, SectorEntityToken gateFrom, SectorEntityToken gateTo) {
 		StarSystemAPI destSys = Global.getSector().getStarSystem(ZeaStaticStrings.nullspaceSysName);
-		if (Global.getSector().getMemoryWithoutUpdate().getKeys().contains(memoryKey)) return;
+		if (Global.getSector().getMemoryWithoutUpdate().getKeys().contains(memoryKey)) return; //Dont trigger multiple times.
+		if (!Global.getSector().getMemoryWithoutUpdate().getBoolean("$gaATG_missionCompleted")) return; //Prevent it from happening during the story-jump
 
 		if (!fleet.isPlayerFleet() || gateFrom == null || Global.getSector().getClock().getCycle() <= 206 || gateFrom.getContainingLocation() == destSys) return;
 
-		if (/*true*/ Math.random() <= 0.05f) { //0.05f
+		if (/*true*/ Math.random() <= 0.065f) { //0.05f, (Lukas) Increased it to 0.065 since it can no longer happen multiple times per save
 			if (destSys == null) return;
 			SectorEntityToken dest = destSys.getEntityById(ZeaEntities.ZEA_NULLGATE_DUSK);
 			float dist = Misc.getDistanceLY(dest, gateTo);
@@ -64,7 +65,7 @@ public class ReportTransit implements GateTransitListener {
 				Global.getSector().doHyperspaceTransition(fleet, gateFrom, new JumpPointAPI.JumpDestination(dest, ""), 7.5f);
 
 				//Add the VFX Renderer, will be removed after the jump.
-				LunaCampaignRenderer.addRenderer(new NullspaceGateTransferVFXRenderer(gateFrom));
+				LunaCampaignRenderer.addRenderer(new NullspaceGateTransferVFXRenderer(gateFrom, true));
 
 				//Disable VFX on the Gate Itself
 				GateEntityPlugin plugin = (GateEntityPlugin) gateFrom.getCustomPlugin();
@@ -74,7 +75,8 @@ public class ReportTransit implements GateTransitListener {
 
 
 				GateCMD.notifyScanned(dest);
-				GateEntityPlugin.getGateData().scanned.add(dest);
+				dest.getMemoryWithoutUpdate().set(GateEntityPlugin.GATE_SCANNED, true);
+
 				Global.getSector().getMemoryWithoutUpdate().set(memoryKey, true);
 			}
 		}
