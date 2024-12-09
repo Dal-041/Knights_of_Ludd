@@ -258,7 +258,8 @@
 			"zea_shield_dawn":"graphics/zea/fx/zea_shield_dawn.png",
 			"zea_shield_dusk":"graphics/zea/fx/zea_shield_dusk.png",
 			"zea_shield_elysia":"graphics/zea/fx/zea_shield_elysia.png",
-			"zea_shield_elysia_2":"graphics/zea/fx/zea_shield_elysia_2.png"
+			"zea_shield_elysia_2":"graphics/zea/fx/zea_shield_elysia_2.png",
+			"nullspace_gate_glow_overwrite":"graphics/zea/fx/nullspace_gate_glow_overwrite.png"
 		},
 		"ui":{
 			"kol_refit_hmod":"graphics/kol/ui/kol_hmod.png",

@@ -19,12 +19,9 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
     var vignette = Global.getSettings().getSprite("graphics/kol/fx/kol_darkness_vignette.png")
 
     var interval = IntervalUtil(0.5f, 12f)
-
     var glitchDuration = 0f
     var noiseMult = 1f
-
     var lastNoise = 0f
-
     var shader = 0
 
     var layers = EnumSet.of(CampaignEngineLayers.ABOVE)
@@ -102,6 +99,7 @@ class NullspaceVFXRenderer : LunaCampaignRenderingPlugin {
                     ShaderLib.beginDraw(shader);
                     GL20.glUniform1f(GL20.glGetUniformLocation(shader, "iTime"), t / 8f)
                     GL20.glUniform1f(GL20.glGetUniformLocation(shader, "noise"), noise)
+                    GL20.glUniform3f(GL20.glGetUniformLocation(shader, "colorMult"), 1.2f, 1.1f, 1.2f)
 
                     GL13.glActiveTexture(GL13.GL_TEXTURE0 + 0);
                     GL11.glBindTexture(GL11.GL_TEXTURE_2D, ShaderLib.getScreenTexture());

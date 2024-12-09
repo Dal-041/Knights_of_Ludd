@@ -5,6 +5,7 @@ vec2 texCoord = gl_TexCoord[0].xy;
 
 uniform float iTime;
 uniform float noise;
+uniform vec3 colorMult;
 
 void main() {
 	vec4 col = texture2D(tex, texCoord);
@@ -20,9 +21,9 @@ void main() {
 	col.b = texture2D(tex, texCoord - offset).b;
 
 
-	col.r *= 1.2;
-	col.g *= 1.1;
-	col.b *= 1.2; 
+	col.r *= colorMult.r;
+	col.g *= colorMult.g;
+	col.b *= colorMult.b; 
 
 	gl_FragColor = col;
 
