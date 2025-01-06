@@ -1,0 +1,117 @@
+{
+  "hullName": "Zhi Nu",
+  "hullId": "zea_boss_zhi_nu",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/zea/ships/zea_boss_zhi_nu.png",
+  "style": "ZEA_DAWN_TECH",
+  "height": 132,
+  "width": 148,
+  "center": [74, 66],
+  "collisionRadius": 106,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 96.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [28, 29.5]
+    },
+    {
+      "id": "WS0005",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [28, -29.5]
+    },
+    {
+      "id": "WS0002",
+      "size": "LARGE",
+      "type": "HYBRID",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [33, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-50, -0],
+      "length": 50.5,
+      "width": 25,
+      "angle": 180,
+      "contrailSize": 25,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-36, 16],
+      "length": 37,
+      "width": 18,
+      "angle": 176,
+      "contrailSize": 18,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-36, -16],
+      "length": 37,
+      "width": 18,
+      "angle": -176,
+      "contrailSize": 18,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-43, 16.5],
+      "length": 41.189999,
+      "width": 11.78,
+      "angle": 176,
+      "contrailSize": 11.78,
+      "style": "zea_DAWN_ENG"
+    },
+    {
+      "location": [-43, -16.5],
+      "length": 41.189999,
+      "width": 11.78,
+      "angle": -176,
+      "contrailSize": 11.78,
+      "style": "zea_DAWN_ENG"
+    },
+    {
+      "location": [-54.5, -0],
+      "length": 66.5,
+      "width": 16,
+      "angle": 180,
+      "contrailSize": 16,
+      "style": "zea_DAWN_ENG"
+    }
+  ],
+  "bounds": [
+    46, -6,
+    63, -6,
+    64.5, -16,
+    36, -17,
+    36, -35.5,
+    9, -42.5,
+    10, -54.5,
+    -52, -25.5,
+    -37, -23.5,
+    -37, -8,
+    -52, -8,
+    -52, 8,
+    -37, 8,
+    -37, 23.5,
+    -52, 25.5,
+    10, 54.5,
+    9, 42.5,
+    36, 35.5,
+    36, 17,
+    64.5, 16,
+    63, 6,
+    46, 6
+  ]
+}
