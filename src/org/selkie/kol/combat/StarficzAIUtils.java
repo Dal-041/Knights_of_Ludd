@@ -939,6 +939,101 @@ public class StarficzAIUtils {
         return currentPointDanger;
     }
 
+    public static void strafeToPointV3(ShipAPI ship, Vector2f targetPoint, Vector2f targetVelocity){
+        Vector2f relVelocity = Vector2f.sub(ship.getVelocity(), targetVelocity, null);
+        Vector2f position = new Vector2f(ship.getLocation());
+
+        float bufferRange = 50f;
+
+        // strafing uses forwards accel, but with a penalty
+        float strafeAccelFactor =
+            ship.getHullSize() == ShipAPI.HullSize.FIGHTER ? 1f :
+            ship.getHullSize() == ShipAPI.HullSize.FRIGATE ? 1f :
+            ship.getHullSize() == ShipAPI.HullSize.DESTROYER ? 0.75f :
+            ship.getHullSize() == ShipAPI.HullSize.CRUISER ? 0.5f :
+            ship.getHullSize() == ShipAPI.HullSize.CAPITAL_SHIP ? 0.25f : 0;
+
+        Vector2f forwardsAccel = (Vector2f) Misc.getUnitVectorAtDegreeAngle(ship.getFacing()).scale(ship.getAcceleration());
+        Vector2f backwardsAccel = (Vector2f) Misc.getUnitVectorAtDegreeAngle(ship.getFacing()+180f).scale(ship.getDeceleration());
+        Vector2f leftAccel = (Vector2f) Misc.getUnitVectorAtDegreeAngle(ship.getFacing()+90).scale(ship.getAcceleration() * strafeAccelFactor);
+        Vector2f rightAccel = leftAccel.negate(null);
+        Vector2f decel = ship.getVelocity().lengthSquared() > 0 ? (Vector2f) ship.getVelocity().negate().normalise().scale(ship.getDeceleration()) : new Vector2f();
+
+        // 8 directions to accelerate in
+        List<Triple<Vector2f, List<ShipCommand>, Pair<Float, Float>>> accelOptions = new ArrayList<>();
+        accelOptions.add(new Triple<>(forwardsAccel, Collections.singletonList(ShipCommand.ACCELERATE), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(backwardsAccel, Collections.singletonList(ShipCommand.ACCELERATE_BACKWARDS), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(leftAccel, Collections.singletonList(ShipCommand.STRAFE_LEFT), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(rightAccel, Collections.singletonList(ShipCommand.STRAFE_RIGHT), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(decel, Collections.singletonList(ShipCommand.DECELERATE), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(Vector2f.add(forwardsAccel, leftAccel, null),
+                Arrays.asList(ShipCommand.ACCELERATE, ShipCommand.STRAFE_LEFT), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(Vector2f.add(forwardsAccel, rightAccel, null),
+                Arrays.asList(ShipCommand.ACCELERATE, ShipCommand.STRAFE_RIGHT), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(Vector2f.add(backwardsAccel, leftAccel, null),
+                Arrays.asList(ShipCommand.ACCELERATE_BACKWARDS, ShipCommand.STRAFE_LEFT), new Pair<>(0f,0f)));
+        accelOptions.add(new Triple<>(Vector2f.add(backwardsAccel, rightAccel, null),
+                Arrays.asList(ShipCommand.ACCELERATE_BACKWARDS, ShipCommand.STRAFE_RIGHT), new Pair<>(0f,0f)));
+
+        // find the overall closest when accelerating in any direction, and closest for each direction
+        float overallClosestSquared = Float.POSITIVE_INFINITY;
+        for(Triple<Vector2f, List<ShipCommand>, Pair<Float, Float>> direction : accelOptions){
+            Vector2f accel = direction.getFirst();
+            float closestDistanceSquared = Float.POSITIVE_INFINITY;
+            float speedAtClosestDistanceSquared = 0f;
+
+            for(float t = 0; t < 3f; t += 0.1f){
+                Vector2f futurePos = new Vector2f(position);
+                Vector2f.add(futurePos, (Vector2f) new Vector2f(relVelocity).scale(t), futurePos);
+                Vector2f.add(futurePos, (Vector2f) new Vector2f(accel).scale(0.5f * t * t), futurePos);
+
+                float distanceSquared = MathUtils.getDistanceSquared(futurePos, targetPoint);
+                if(distanceSquared > closestDistanceSquared) continue;
+
+                closestDistanceSquared = distanceSquared;
+                Vector2f futureVel = new Vector2f(relVelocity);
+                Vector2f.add(futureVel, (Vector2f) new Vector2f(accel).scale(t), futureVel);
+                speedAtClosestDistanceSquared = futureVel.lengthSquared();
+            }
+            direction.getThird().one = closestDistanceSquared;
+            direction.getThird().two = speedAtClosestDistanceSquared;
+
+            if(closestDistanceSquared < overallClosestSquared) overallClosestSquared = closestDistanceSquared;
+        }
+
+        // within some buffer target, find the option that minimises speed
+        float lowestSpeedSquared = Float.POSITIVE_INFINITY;
+        float overallClosest = (float) Math.sqrt(overallClosestSquared);
+        List<ShipCommand> bestCommands = new ArrayList<>();
+        for(Triple<Vector2f, List<ShipCommand>, Pair<Float, Float>> direction : accelOptions){
+
+            if(lowestSpeedSquared < direction.getThird().two) continue;
+            float distanceSquared = (float) Math.sqrt(direction.getThird().one);
+            if(distanceSquared < overallClosest + bufferRange){ // d1 < d2 + bufferRange
+                lowestSpeedSquared = direction.getThird().two;
+                bestCommands = direction.getSecond();
+            }
+        }
+
+        // Issue the best commands to the ship and block the others
+        EnumSet<ShipCommand> movementCommands = java.util.EnumSet.of(
+                ShipCommand.ACCELERATE,
+                ShipCommand.ACCELERATE_BACKWARDS,
+                ShipCommand.STRAFE_LEFT,
+                ShipCommand.STRAFE_RIGHT
+        );
+
+        for (ShipCommand command : movementCommands) {
+            if (bestCommands.contains(command)) {
+                // Issue the command
+                ship.giveCommand(command, null, 0);
+            } else {
+                // Block the command for one frame
+                ship.blockCommandForOneFrame(command);
+            }
+        }
+    }
+
     public static void strafeToPointV2(ShipAPI ship, Vector2f strafePoint){
         // Calculate the unit vector toward the target
         Vector2f uTarget = VectorUtils.getDirectionalVector(ship.getLocation(), strafePoint);

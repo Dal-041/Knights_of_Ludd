@@ -105,6 +105,23 @@ object ReflectionUtils {
         return constructorHandle.invokeWithArguments(arguments.toList())
     }
 
+    fun createNewInstanceFromExisting(existingObject: Any, vararg arguments: Any?): Any {
+        // Get the class of the existing object
+        val clazz = existingObject.javaClass
+
+        // Extract argument types for the constructor
+        val argumentClasses = arguments.map { it!!::class.javaPrimitiveType ?: it::class.java }.toTypedArray()
+
+        // Find and invoke the constructor
+        return try {
+            val constructorHandle = getConstructor(clazz, *argumentClasses)
+            constructorHandle.invokeWithArguments(arguments.toList())
+        } catch (e: Exception) {
+            throw IllegalArgumentException("Unable to create a new instance for class ${clazz.name}: ${e.message}", e)
+        }
+    }
+
+
     fun invoke(methodName: String, instance: Any, vararg arguments: Any?, declared: Boolean = false): Any? {
         val method: Any?
 
@@ -175,6 +192,16 @@ object ReflectionUtils {
         val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods
         instancesOfMethods.firstOrNull { getMethodNameHandle.invoke(it) == method }?.let {
             return getMethodParametersHandle.invoke(it) as Array<Class<*>>
+        }
+        return null
+    }
+
+    fun getMethodWithArguments(instance: Any, argumentsClass: Array<Class<*>>): String? {
+        val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods
+        for(method in instancesOfMethods){
+            if (argumentsClass.contentEquals(invoke("getParameterTypes", method) as Array<Class<*>>)){
+                return getMethodNameHandle.invoke(method) as String
+            }
         }
         return null
     }
