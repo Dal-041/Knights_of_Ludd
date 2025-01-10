@@ -4,18 +4,24 @@ import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript
+import com.fs.starfarer.api.plugins.ShipSystemStatsScript.StatusData
+import com.fs.starfarer.api.util.Misc
 import com.fs.starfarer.combat.entities.BallisticProjectile
 import com.fs.starfarer.combat.entities.DamagingExplosion
 import com.fs.starfarer.combat.entities.MovingRay
 import com.fs.starfarer.combat.entities.PlasmaShot
+import org.dark.shaders.distortion.DistortionShader
+import org.dark.shaders.distortion.RippleDistortion
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.plugins.MagicRenderPlugin
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
+import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
 import java.util.*
+import kotlin.properties.Delegates
 
 class BulletTimeField : BaseShipSystemScript() {
     companion object {
@@ -124,10 +130,11 @@ class BulletTimeField : BaseShipSystemScript() {
 
 
     var init: Boolean = false
-    var collisionRadius: Float = 0f
-    var shieldRadius: Float = 0f
-    var shieldArc: Float = 0f
+    var collisionRadius by Delegates.notNull<Float>()
+    var shieldRadius by Delegates.notNull<Float>()
+    var shieldArc by Delegates.notNull<Float>()
     val slowedProjectiles: MutableMap<DamagingProjectileAPI, DamagingProjectileInfo> = HashMap()
+    var distortion: RippleDistortion? = null
 
     fun init(ship: ShipAPI) {
         if (!init) {
@@ -143,18 +150,32 @@ class BulletTimeField : BaseShipSystemScript() {
         val ship = stats.entity as ShipAPI
         init(ship)
 
-        applyStatChanges(stats, id)
+        applyStatChanges(stats, id, effectLevel)
 
         // make ship translucent and force shields off
-        ship.alphaMult = 0.2f
-        ship.blockCommandForOneFrame(ShipCommand.TOGGLE_SHIELD_OR_PHASE_CLOAK)
+        ship.alphaMult = Misc.interpolate(1f, 0.2f, effectLevel)
 
         // render the ship hitbox with a dot
         val shipCollisionCircle = Global.getSettings().getSprite("graphics/fx/circle64.png")
         shipCollisionCircle.color = Color.GREEN
-        shipCollisionCircle.alphaMult = 0.8f
-        shipCollisionCircle.setSize(ACTIVE_COLLISION_RADIUS, ACTIVE_COLLISION_RADIUS)
+        shipCollisionCircle.alphaMult = Misc.interpolate(0f, 0.8f, effectLevel)
+        val hitboxSize = Misc.interpolate(collisionRadius, ACTIVE_COLLISION_RADIUS, effectLevel)
+        shipCollisionCircle.setSize(hitboxSize, hitboxSize)
         MagicRenderPlugin.addSingleframe(shipCollisionCircle, ship.location, CombatEngineLayers.BELOW_INDICATORS_LAYER)
+
+        if (KOL_ModPlugin.hasGraphicsLib) {
+            if(distortion != null){
+                DistortionShader.removeDistortion(distortion)
+            }
+            distortion = RippleDistortion(ship.location, Vector2f())
+            distortion!!.size = Misc.interpolate(10f, SLOWDOWN_RADIUS, effectLevel)
+            distortion!!.intensity = 50f
+            distortion!!.currentFrame = 50f
+            distortion!!.frameRate = 0f
+            DistortionShader.addDistortion(distortion)
+        }
+
+
 
         // check for all new threats around the ship, and give them some initial deflection
         val iterator = Global.getCombatEngine().allObjectGrid.getCheckIterator(
@@ -165,7 +186,7 @@ class BulletTimeField : BaseShipSystemScript() {
             if (threat.source === stats.entity) continue
             // Add threats in range to be slowed
             val threatDistance = MathUtils.getDistance(threat.location, stats.entity.location)
-            if (threatDistance < SLOWDOWN_RADIUS) {
+            if (threatDistance < Misc.interpolate(10f, SLOWDOWN_RADIUS, effectLevel)) {
                 if (!slowedProjectiles.containsKey(threat) && threat !is DamagingExplosion) {
                     val threatInfo = DamagingProjectileInfo(threat)
                     slowedProjectiles[threat] = threatInfo
@@ -267,20 +288,25 @@ class BulletTimeField : BaseShipSystemScript() {
         // reset the slowed projectiles
         for (threat in slowedProjectiles.keys){ resetDamagingProjectile(threat) }
         slowedProjectiles.clear()
+
+        // remove distortion
+        if(distortion != null){
+            DistortionShader.removeDistortion(distortion)
+        }
     }
 
-    fun applyStatChanges(stats: MutableShipStatsAPI, id: String){
-        stats.maxSpeed.modifyMult(id, 0.5f)
-        stats.acceleration.modifyMult(id, 10f)
-        stats.deceleration.modifyMult(id, 10f)
-        stats.beamDamageTakenMult.modifyMult(id, 0f)
+    fun applyStatChanges(stats: MutableShipStatsAPI, id: String, effectLevel: Float){
+        stats.maxSpeed.modifyMult(id, Misc.interpolate(1f, 0.5f, effectLevel))
+        stats.acceleration.modifyMult(id, Misc.interpolate(1f, 10f, effectLevel))
+        stats.deceleration.modifyMult(id, Misc.interpolate(1f, 10f, effectLevel))
+        stats.beamDamageTakenMult.modifyMult(id, Misc.interpolate(1f, 0f, effectLevel))
 
-        stats.entity.shield.arc = 360f
+        //stats.entity.shield.arc = 360f
         //ship.getShield().setRadius(10f);
         stats.entity.shield.toggleOff()
-        stats.entity.shield.innerColor = Color(100, 255, 100)
-        stats.entity.shield.ringColor = Color(100, 255, 100)
-        stats.entity.collisionRadius = ACTIVE_COLLISION_RADIUS
+        //stats.entity.shield.innerColor = Color(100, 255, 100)
+        //stats.entity.shield.ringColor = Color(100, 255, 100)
+        stats.entity.collisionRadius = Misc.interpolate(collisionRadius, ACTIVE_COLLISION_RADIUS, effectLevel)
     }
 
     fun revertStatChanges(stats: MutableShipStatsAPI, id: String){
@@ -289,8 +315,16 @@ class BulletTimeField : BaseShipSystemScript() {
         stats.deceleration.unmodify(id)
         stats.beamDamageTakenMult.unmodify(id)
 
-        stats.entity.shield.arc = shieldArc
-        stats.entity.shield.radius = shieldRadius
+        //stats.entity.shield.arc = shieldArc
+        //stats.entity.shield.radius = shieldRadius
         stats.entity.collisionRadius = collisionRadius
+    }
+
+    override fun getStatusData(index: Int, state: ShipSystemStatsScript.State?, effectLevel: Float): StatusData? {
+        return when(index){
+            0 -> StatusData("top speed halved", true)
+            1 -> StatusData("improved maneuverability", false)
+            else -> null
+        }
     }
 }

@@ -1,0 +1,14 @@
+{
+	"id":"zea_bullet_time_field",
+    "type":"STAT_MOD",
+    "aiType":"NONE",
+
+	"statsScript":"org.selkie.zea.shipsystems.BulletTimeField",
+
+    "soundFilterType":"LOWPASS",
+    "soundFilterGain":0.75,
+    "soundFilterGainHF":0.0,
+
+    "outOfUsesSound":"gun_out_of_ammo",
+    "loopSound":"system_fortress_shield_loop",
+}
