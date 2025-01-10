@@ -1,7 +1,7 @@
 {
   "hullName": "Zhi Nu",
   "hullId": "zea_boss_zhi_nu",
-  "hullSize": "FIGHTER",
+  "hullSize": "DESTROYER",
   "spriteName": "graphics/zea/ships/zea_boss_zhi_nu.png",
   "style": "ZEA_DAWN_TECH",
   "height": 132,
