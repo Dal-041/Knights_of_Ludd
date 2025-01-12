@@ -36,8 +36,7 @@ class DuskBossCoreSkill : BaseCoreOfficerSkill() {
     override fun apply(stats: MutableShipStatsAPI?, hullSize: ShipAPI.HullSize?, id: String?, level: Float) {
         if (stats!!.entity is ShipAPI) {
             var ship = stats.entity as ShipAPI
-
-            if (ship.hullSpec.hints.contains(ShipHullSpecAPI.ShipTypeHints.PHASE) || ship.hullSpec.shipDefenseId == "phasecloak") {
+            if (ship.phaseCloak != null) {
                 if (!ship.hasListenerOfClass(PhaseAIScript::class.java)) ship.addListener(PhaseAIScript(ship))
                 if (!ship.hasListenerOfClass(ShipExplosionListener::class.java)) ship.addListener(ShipExplosionListener()) // plz don't make me do enemy death prediction, just checking hull hp isnt good enough :(
             }

@@ -9,7 +9,6 @@ import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.shared.SharedData;
 import exerelin.campaign.SectorManager;
 import lunalib.lunaUtil.campaign.LunaCampaignRenderer;
-import mmm.missions.DefenseMission;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
@@ -50,10 +49,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			if (hasKOLGraphics) {
 				TextureData.readTextureDataCSV("data/lights/kol_glib_extended.csv");
 			}
-		}
-		if (hasMMM) { //Remove after week 1
-			Set<String> BL = DefenseMission.FACTION_BLACKLIST;
-            BL.addAll(Arrays.asList(ZeaStaticStrings.factionIDs));
 		}
 
 		//LunaRefitManager.addRefitButton(new DuskCoreRefitButton());

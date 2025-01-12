@@ -232,7 +232,7 @@ class BulletTimeField : BaseShipSystemScript() {
                 MagicRenderPlugin.addSingleframe(threatCollisionCircle, threat.location, CombatEngineLayers.BELOW_INDICATORS_LAYER)
             }
 
-            // draw the threat colosion path as a line
+            // draw the threat collision path as a line
             /*
             val threatHitLine = Global.getSettings().getSprite("graphics/fx/beam_laser_core.png")
             threatHitLine.color = Color.red.darker()
