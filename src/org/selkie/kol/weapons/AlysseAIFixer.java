@@ -91,7 +91,7 @@ public class AlysseAIFixer implements EveryFrameWeaponEffectPlugin {
                         ((WeaponGroupAPI) weaponGroup).setType(WeaponGroupType.LINKED);
                         ((WeaponGroupAPI) weaponGroup).addWeaponAPI(weapon);
                         ReflectionUtils.INSTANCE.invoke("addGroup", actualShip, new Object[]{weaponGroup},false);
-                    } catch (Exception e) {
+                    } catch (InstantiationException | IllegalAccessException e) {
                         throw new RuntimeException(e);
                     }
                 }
