@@ -32,8 +32,6 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
     private Color depletedColorInner;
     private final IntervalUtil tracker = new IntervalUtil(0.2f, 0.3f); //Seconds
     public float lastUpdatedTime = 0f;
-    public List<FutureHit> incomingProjectiles = new ArrayList<>();
-    public List<FutureHit> predictedWeaponHits = new ArrayList<>();
     public List<FutureHit> combinedHits = new ArrayList<>();
     public List<Float> omniShieldDirections = new ArrayList<>();
     public float lastShieldOnTime = 0f;
@@ -121,8 +119,8 @@ public class ShieldEffect implements EveryFrameWeaponEffectPlugin {
         tracker.advance(amount);
         if (tracker.intervalElapsed()) {
             lastUpdatedTime = Global.getCombatEngine().getTotalElapsedTime(false);
-            incomingProjectiles = incomingProjectileHits(ship, ship.getLocation());
-            predictedWeaponHits = generatePredictedWeaponHits(ship, ship.getLocation(), shield.getUnfoldTime()*2);
+            List<FutureHit> incomingProjectiles = incomingProjectileHits(ship, ship.getLocation());
+            List<FutureHit> predictedWeaponHits = generatePredictedWeaponHits(ship, ship.getLocation(), shield.getUnfoldTime()*2);
             combinedHits = new ArrayList<>();
             combinedHits.addAll(incomingProjectiles);
             combinedHits.addAll(predictedWeaponHits);

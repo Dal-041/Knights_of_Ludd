@@ -133,40 +133,40 @@ public class StarficzAIUtils {
         return futureHits;
     }
 
-    //ChatGPT generated function
-    public static Pair<Float, Float> intersectCircle(Vector2f a, Vector2f b, Vector2f c, float r) {
+    //ChatGPT generated function, returns angle of the intersection and length: from to intersection
+    public static Pair<Float, Float> intersectCircle(Vector2f from, Vector2f to, Vector2f circleLoc, float radius) {
         // Calculate the vector from A to B and from A to C
-        Vector2f ab = Vector2f.sub(b, a, null);
-        Vector2f ac = Vector2f.sub(c, a, null);
+        Vector2f ab = Vector2f.sub(to, from, null);
+        Vector2f ac = Vector2f.sub(circleLoc, from, null);
 
         // Calculate the projection of C onto the line AB
         Vector2f projection = (Vector2f) new Vector2f(ab).scale(Vector2f.dot(ac, ab) / Vector2f.dot(ab, ab));
-        Vector2f.add(a, projection, projection);
+        Vector2f.add(from, projection, projection);
 
         // Calculate the distance from C to the line AB
-        float distance = Vector2f.sub(projection, c, null).length();
+        float distance = Vector2f.sub(projection, circleLoc, null).length();
 
         // If the distance is greater than the radius, there's no intersection
-        if (distance > r) {
+        if (distance > radius) {
             return null;
         }
 
         // Calculate the distance from A to the projection
-        float h = Vector2f.sub(projection, a, null).length();
+        float h = Vector2f.sub(projection, from, null).length();
 
         // Calculate the distance from the projection to the intersection points
-        float d = (float) Math.sqrt(r*r - distance*distance);
+        float d = (float) Math.sqrt(radius*radius - distance*distance);
 
         // The intersection points are then A + t * AB, where t is h - d or h + d
         Vector2f intersection1 = (Vector2f) new Vector2f(ab).scale((h - d) / ab.length());
-        Vector2f.add(a, intersection1, intersection1);
+        Vector2f.add(from, intersection1, intersection1);
         Vector2f intersection2 = (Vector2f) new Vector2f(ab).scale((h + d) / ab.length());
-        Vector2f.add(a, intersection2, intersection2);
+        Vector2f.add(from, intersection2, intersection2);
 
         // Choose the intersection point closer to A
         Vector2f intersection;
-        float intersection1Length = Vector2f.sub(intersection1, a, null).length();
-        float intersection2Length =  Vector2f.sub(intersection2, a, null).length();
+        float intersection1Length = Vector2f.sub(intersection1, from, null).length();
+        float intersection2Length =  Vector2f.sub(intersection2, from, null).length();
         float length;
         if (intersection1Length < intersection2Length) {
             intersection = intersection1;
@@ -177,7 +177,7 @@ public class StarficzAIUtils {
         }
 
         // Calculate the angle from C to the intersection
-        Vector2f vector = Vector2f.sub(intersection, c, null);
+        Vector2f vector = Vector2f.sub(intersection, circleLoc, null);
 
         return new Pair<>((float) Math.toDegrees(FastTrig.atan2(vector.y, vector.x)), length);
     }
@@ -219,7 +219,7 @@ public class StarficzAIUtils {
     }
 
     public static List<FutureHit> generatePredictedWeaponHits(ShipAPI ship, Vector2f testPoint, float maxTime){
-        maxTime = Math.min(maxTime, 30); // limit to 30 seconds in the future
+        maxTime = Math.min(maxTime, 20); // limit to 20 seconds in the future
         ArrayList<FutureHit> futureHits = new ArrayList<>();
         float MAX_RANGE = 3000f;
         List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,MAX_RANGE);

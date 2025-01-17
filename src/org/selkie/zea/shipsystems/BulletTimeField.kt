@@ -12,13 +12,19 @@ import com.fs.starfarer.combat.entities.MovingRay
 import com.fs.starfarer.combat.entities.PlasmaShot
 import org.dark.shaders.distortion.DistortionShader
 import org.dark.shaders.distortion.RippleDistortion
+import org.lazywizard.lazylib.CollisionUtils
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.plugins.MagicRenderPlugin
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
+import org.selkie.kol.combat.StarficzAIUtils
+import org.selkie.kol.hullmods.LunariaArmorModuleVectoring.LunariaArmorModuleVectoringListener
 import org.selkie.kol.plugins.KOL_ModPlugin
+import org.selkie.zea.combat.WeaponRangeSetter
+import org.selkie.zea.combat.WeaponRangeSetter.Companion.MAP_KEY
+import org.selkie.zea.combat.WeaponRangeSetter.WeaponRangeModData
 import java.awt.Color
 import java.util.*
 import kotlin.properties.Delegates
@@ -163,6 +169,7 @@ class BulletTimeField : BaseShipSystemScript() {
         shipCollisionCircle.setSize(hitboxSize, hitboxSize)
         MagicRenderPlugin.addSingleframe(shipCollisionCircle, ship.location, CombatEngineLayers.BELOW_INDICATORS_LAYER)
 
+        // render fixed distortion
         if (KOL_ModPlugin.hasGraphicsLib) {
             if(distortion != null){
                 DistortionShader.removeDistortion(distortion)
@@ -260,6 +267,38 @@ class BulletTimeField : BaseShipSystemScript() {
             } else if (threat is PlasmaShot) {
                 ReflectionUtils.set("flightTime", threat, threatInfo!!.adjustedElapsedTime)
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * slowdownMult)
+            }
+        }
+        for(otherShip in Global.getCombatEngine().ships){
+            if(!otherShip.hasListenerOfClass(WeaponRangeSetter::class.java)) otherShip.addListener(WeaponRangeSetter())
+            for(weapon in otherShip.usableWeapons){
+                if(!weapon.isBeam) continue
+                WeaponRangeSetter.initMap(otherShip)
+                val weaponRangeMap: HashMap<WeaponAPI, WeaponRangeModData> = otherShip.customData[MAP_KEY] as HashMap<WeaponAPI, WeaponRangeModData>
+                val weaponRangeModData = weaponRangeMap[weapon]
+                var baseRange: Float
+                if (weaponRangeModData != null) {
+                    weaponRangeModData.ModEnabled = false
+                    baseRange = weapon.range
+                    weaponRangeModData.ModEnabled = true
+                } else{
+                    baseRange = weapon.range
+                }
+                val fromPoint = weapon.getFirePoint(0)
+                val toPoint = MathUtils.getPointOnCircumference(fromPoint, baseRange, weapon.currAngle)
+                val intersect = StarficzAIUtils.intersectCircle(fromPoint, toPoint, ship.location, Misc.interpolate(10f, SLOWDOWN_RADIUS-20f, effectLevel))
+                if (intersect == null) {
+                    weaponRangeMap.remove(weapon)
+                } else {
+                    weapon.setForceFireOneFrame(true)
+                    val intersectRange = intersect.two
+                    if (weaponRangeModData != null) {
+                        weaponRangeModData.BaseRange = baseRange
+                        weaponRangeModData.TargetRange = intersectRange
+                    } else {
+                        weaponRangeMap[weapon] = WeaponRangeModData(weapon.range, 1f, true)
+                    }
+                }
             }
         }
     }
