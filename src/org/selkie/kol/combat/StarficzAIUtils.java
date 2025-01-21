@@ -112,10 +112,10 @@ public class StarficzAIUtils {
                 hit = true;
             }
             else {
-                Pair<Float, Float> collision = intersectCircle(threat.getLocation(), futureProjectileLocation, testPoint, ship.getShieldRadiusEvenIfNoShield());
+                Triple<Vector2f, Float, Float> collision = intersectCircle(threat.getLocation(), futureProjectileLocation, testPoint, ship.getShieldRadiusEvenIfNoShield());
                 if(collision != null){
-                    intersectAngle = collision.one;
-                    travelTime = collision.two/relativeVelocity.length();
+                    intersectAngle = collision.getSecond();
+                    travelTime = collision.getThird()/relativeVelocity.length();
                     hit = true;
                 }
             }
@@ -133,8 +133,8 @@ public class StarficzAIUtils {
         return futureHits;
     }
 
-    //ChatGPT generated function, returns angle of the intersection and length: from to intersection
-    public static Pair<Float, Float> intersectCircle(Vector2f from, Vector2f to, Vector2f circleLoc, float radius) {
+    /**ChatGPT generated function, returns the intersection point, angle of the intersection, and length: from to intersection**/
+    public static Triple<Vector2f, Float, Float> intersectCircle(Vector2f from, Vector2f to, Vector2f circleLoc, float radius) {
         // Calculate the vector from A to B and from A to C
         Vector2f ab = Vector2f.sub(to, from, null);
         Vector2f ac = Vector2f.sub(circleLoc, from, null);
@@ -179,7 +179,7 @@ public class StarficzAIUtils {
         // Calculate the angle from C to the intersection
         Vector2f vector = Vector2f.sub(intersection, circleLoc, null);
 
-        return new Pair<>((float) Math.toDegrees(FastTrig.atan2(vector.y, vector.x)), length);
+        return new Triple<>(intersection, (float) Math.toDegrees(FastTrig.atan2(vector.y, vector.x)), length);
     }
 
     public static float calculateTrueDamage(ShipAPI ship, float baseDamage, WeaponAPI weapon, MutableShipStatsAPI stats){

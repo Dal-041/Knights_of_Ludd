@@ -16,6 +16,7 @@ import org.lazywizard.lazylib.CollisionUtils
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.logOfBase
 import org.magiclib.plugins.MagicRenderPlugin
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
@@ -269,6 +270,12 @@ class BulletTimeField : BaseShipSystemScript() {
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * slowdownMult)
             }
         }
+
+        //limitBeamRanges(ship, effectLevel)
+        cutBeamsShort(ship, effectLevel)
+    }
+
+    fun limitBeamRanges(ship: ShipAPI, effectLevel: Float){
         for(otherShip in Global.getCombatEngine().ships){
             if(!otherShip.hasListenerOfClass(WeaponRangeSetter::class.java)) otherShip.addListener(WeaponRangeSetter())
             for(weapon in otherShip.usableWeapons){
@@ -291,12 +298,30 @@ class BulletTimeField : BaseShipSystemScript() {
                     weaponRangeMap.remove(weapon)
                 } else {
                     weapon.setForceFireOneFrame(true)
-                    val intersectRange = intersect.two
+                    val intersectRange = intersect.third
                     if (weaponRangeModData != null) {
                         weaponRangeModData.BaseRange = baseRange
                         weaponRangeModData.TargetRange = intersectRange
                     } else {
                         weaponRangeMap[weapon] = WeaponRangeModData(weapon.range, 1f, true)
+                    }
+                }
+            }
+        }
+    }
+
+
+    fun cutBeamsShort(ship: ShipAPI, effectLevel: Float){
+        for(otherShip in Global.getCombatEngine().ships){
+            for(weapon in otherShip.usableWeapons){
+                if(!weapon.isBeam) continue
+                for(beam in weapon.beams){
+                    val slowdownRadius = Misc.interpolate(10f, SLOWDOWN_RADIUS, effectLevel)
+                    val intersect = StarficzAIUtils.intersectCircle(beam.from, beam.to, ship.location, slowdownRadius)
+                    intersect?.let {
+                        val incrementedToPos = Vector2f(it.first)
+                        Vector2f.add(incrementedToPos, VectorUtils.getDirectionalVector(beam.from, beam.to).scale(10f) as Vector2f?, incrementedToPos)
+                        beam.to.set(incrementedToPos)
                     }
                 }
             }
