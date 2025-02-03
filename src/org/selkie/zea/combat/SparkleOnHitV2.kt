@@ -20,7 +20,7 @@ class SparkleOnHitV2 : OnHitEffectPlugin {
 
         if (target is ShipAPI) {
             if(!target.isFighter){
-                val pierceChance = 1f * (projectile.source?.mutableStats?.dynamic?.getValue(Stats.SHIELD_PIERCED_MULT) ?: 0f)
+                val pierceChance = (target.hardFluxLevel - 0.1f) * (projectile.source?.mutableStats?.dynamic?.getValue(Stats.SHIELD_PIERCED_MULT) ?: 0f)
                 val piercedShield = shieldHit && Math.random().toFloat() < pierceChance
                 if (!shieldHit || piercedShield) {
                     engine.spawnEmpArcPierceShields(projectile.source, point, target, target,
