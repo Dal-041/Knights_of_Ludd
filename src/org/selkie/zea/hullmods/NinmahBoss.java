@@ -232,7 +232,7 @@ public class NinmahBoss extends BaseHullMod {
             if(inited || engine == null) return;
             inited = true;
 
-            systemIsQD = Objects.equals(ship.getSystem().getId(), "acausaldisruptor");
+            systemIsQD = ship.getSystem() != null && "acausaldisruptor".equals(ship.getSystem().getId());
 
             // get min weapon range
             float minWeaponRange = Float.POSITIVE_INFINITY;
