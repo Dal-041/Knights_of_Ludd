@@ -4,9 +4,9 @@ import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript
+import com.fs.starfarer.api.loading.BeamWeaponSpecAPI
 import com.fs.starfarer.api.loading.WeaponGroupSpec
 import com.fs.starfarer.api.loading.WeaponGroupType
-import com.fs.starfarer.api.loading.WeaponSlotAPI
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript.StatusData
 import com.fs.starfarer.api.util.Misc
@@ -21,9 +21,6 @@ import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.kol.combat.StarficzAIUtils
 import org.selkie.kol.plugins.KOL_ModPlugin
-import org.selkie.zea.combat.WeaponRangeSetter
-import org.selkie.zea.combat.WeaponRangeSetter.Companion.MAP_KEY
-import org.selkie.zea.combat.WeaponRangeSetter.WeaponRangeModData
 import java.awt.Color
 import java.awt.geom.Line2D
 import java.util.*
@@ -134,7 +131,7 @@ class BulletTimeField : BaseShipSystemScript() {
         }
     }
 
-
+    val rand = Random()
     var init: Boolean = false
     var collisionRadius by Delegates.notNull<Float>()
     var shieldRadius by Delegates.notNull<Float>()
@@ -153,7 +150,7 @@ class BulletTimeField : BaseShipSystemScript() {
     }
 
     override fun apply(stats: MutableShipStatsAPI, id: String, state: ShipSystemStatsScript.State, effectLevel: Float) {
-        val amount = Global.getCombatEngine().elapsedInLastFrame
+
         val ship = stats.entity as ShipAPI
         init(ship)
 
@@ -183,17 +180,20 @@ class BulletTimeField : BaseShipSystemScript() {
             DistortionShader.addDistortion(distortion)
         }
 
+        slowdownProjectiles(ship, effectLevel)
+        cutBeamsShort(ship, effectLevel)
+    }
 
-
+    fun slowdownProjectiles(ship: ShipAPI, effectLevel: Float){
         // check for all new threats around the ship, and give them some initial deflection
         val iterator = Global.getCombatEngine().allObjectGrid.getCheckIterator(
-            stats.entity.location, (SLOWDOWN_RADIUS * 2.2f), (SLOWDOWN_RADIUS * 2.2f))
-        val rand = Random()
+                ship.location, (SLOWDOWN_RADIUS * 2.2f), (SLOWDOWN_RADIUS * 2.2f))
+
         while (iterator.hasNext()) {
             val threat = iterator.next() as? DamagingProjectileAPI ?: continue
-            if (threat.source === stats.entity) continue
+            if (threat.source === ship) continue
             // Add threats in range to be slowed
-            val threatDistance = MathUtils.getDistance(threat.location, stats.entity.location)
+            val threatDistance = MathUtils.getDistance(threat.location, ship.location)
             if (threatDistance < Misc.interpolate(10f, SLOWDOWN_RADIUS, effectLevel)) {
                 if (!slowedProjectiles.containsKey(threat) && threat !is DamagingExplosion) {
                     val threatInfo = DamagingProjectileInfo(threat)
@@ -227,8 +227,8 @@ class BulletTimeField : BaseShipSystemScript() {
         // update everything currently being slowed
         for (threat in slowedProjectiles.keys) {
             val threatInfo = slowedProjectiles[threat]
-            threatInfo!!.adjustedElapsedTime += amount * MAX_SLOWDOWN
-            val threatDistance = MathUtils.getDistance(threat.location, stats.entity.location)
+            threatInfo!!.adjustedElapsedTime += Global.getCombatEngine().elapsedInLastFrame * MAX_SLOWDOWN
+            val threatDistance = MathUtils.getDistance(threat.location, ship.location)
             val slowdownMult = Utils.linMap(MAX_SLOWDOWN, 1f, CORE_RADIUS, SLOWDOWN_RADIUS, threatDistance)
 
             // draw a red collision circle for all the projectiles
@@ -270,46 +270,7 @@ class BulletTimeField : BaseShipSystemScript() {
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * slowdownMult)
             }
         }
-
-        //limitBeamRanges(ship, effectLevel)
-        cutBeamsShort(ship, effectLevel)
     }
-
-    fun limitBeamRanges(ship: ShipAPI, effectLevel: Float){
-        for(otherShip in Global.getCombatEngine().ships){
-            if(!otherShip.hasListenerOfClass(WeaponRangeSetter::class.java)) otherShip.addListener(WeaponRangeSetter())
-            for(weapon in otherShip.usableWeapons){
-                if(!weapon.isBeam) continue
-                WeaponRangeSetter.initMap(otherShip)
-                val weaponRangeMap: HashMap<WeaponAPI, WeaponRangeModData> = otherShip.customData[MAP_KEY] as HashMap<WeaponAPI, WeaponRangeModData>
-                val weaponRangeModData = weaponRangeMap[weapon]
-                var baseRange: Float
-                if (weaponRangeModData != null) {
-                    weaponRangeModData.ModEnabled = false
-                    baseRange = weapon.range
-                    weaponRangeModData.ModEnabled = true
-                } else{
-                    baseRange = weapon.range
-                }
-                val fromPoint = weapon.getFirePoint(0)
-                val toPoint = MathUtils.getPointOnCircumference(fromPoint, baseRange, weapon.currAngle)
-                val intersect = StarficzAIUtils.intersectCircle(fromPoint, toPoint, ship.location, Misc.interpolate(10f, SLOWDOWN_RADIUS-20f, effectLevel))
-                if (intersect == null) {
-                    weaponRangeMap.remove(weapon)
-                } else {
-                    weapon.setForceFireOneFrame(true)
-                    val intersectRange = intersect.third
-                    if (weaponRangeModData != null) {
-                        weaponRangeModData.BaseRange = baseRange
-                        weaponRangeModData.TargetRange = intersectRange
-                    } else {
-                        weaponRangeMap[weapon] = WeaponRangeModData(weapon.range, 1f, true)
-                    }
-                }
-            }
-        }
-    }
-
 
     fun cutBeamsShort(ship: ShipAPI, effectLevel: Float){
         val currentActiveBeams: MutableList<BeamAPI> = mutableListOf()
@@ -324,71 +285,80 @@ class BulletTimeField : BaseShipSystemScript() {
             }
         }
         activeBeams.keys.retainAll {
-            if(it in currentActiveBeams) Global.getCombatEngine().removeEntity(activeBeams[it])
+            if(it !in currentActiveBeams) {
+                Global.getCombatEngine().removeEntity(activeBeams[it]!!)
+            }
             it in currentActiveBeams
         }
     }
 
     fun interceptBeam(ship: ShipAPI, beamShipAPI: ShipAPI, effectLevel: Float, beam: BeamAPI){
         val slowdownRadius = Misc.interpolate(10f, SLOWDOWN_RADIUS, effectLevel)
+        val travelDistance = VectorUtils.getDirectionalVector(beam.from, beam.to)
+        travelDistance.scale(Global.getCombatEngine().elapsedInLastFrame * (beam.weapon.spec as BeamWeaponSpecAPI).beamSpeed)
+        val futureBeamTo = Vector2f.add(beam.to, travelDistance, null)
         // return if beam starts from inside the field
         if(MathUtils.getDistanceSquared(ship.location, beam.from) < slowdownRadius*slowdownRadius) return
         val closestDistanceSq = Line2D.Float.ptSegDistSq(beam.from.x.toDouble(), beam.from.y.toDouble(),
-                beam.to.x.toDouble(), beam.to.y.toDouble(), ship.location.x.toDouble(), ship.location.y.toDouble())
+                futureBeamTo.x.toDouble(), futureBeamTo.y.toDouble(), ship.location.x.toDouble(), ship.location.y.toDouble())
 
         // return if beam never crosses the field
         if(closestDistanceSq > slowdownRadius*slowdownRadius) return
 
-        val intersect = StarficzAIUtils.intersectCircle(beam.from, beam.to, ship.location, slowdownRadius)
+        val intersect = StarficzAIUtils.intersectCircle(beam.from, futureBeamTo, ship.location, slowdownRadius)
 
         if(intersect != null){
-            beam.to.set(intersect.first)
+
+            val beamSetPoint = Vector2f.sub(intersect.first, travelDistance, null)
+
+            beam.to.set(beamSetPoint)
+
             if(beam is BeamWeaponRay) beam.forceShowGlow()
 
-            val demDrone = if(beam in activeBeams) {
-                activeBeams[beam]!!
-            } else {
-                makeNewDEMDrone(beamShipAPI, beam.weapon)
+            val redirectionDrone = activeBeams.getOrPut(beam){
+                makeNewRedirectionDrone(beamShipAPI, beam.weapon)
             }
-            activeBeams[beam] = demDrone
-            demDrone.location.set(intersect.first)
-            demDrone.facing = 0f
 
-            val rangeMod = 1f-(MathUtils.getDistance(beam.from, beam.to)/beam.weapon.range)
-            demDrone.mutableStats.beamWeaponRangeBonus.modifyMult("dem", rangeMod)
-            for(weapon in demDrone.allWeapons){
-                weapon.setForceFireOneFrame(true);
-                weapon.setFacing(demDrone.facing);
-                weapon.setKeepBeamTargetWhileChargingDown(true);
-                weapon.updateBeamFromPoints();
+            redirectionDrone.owner = beamShipAPI.owner
+            redirectionDrone.facing = VectorUtils.getAngle(intersect.first, MathUtils.getPointOnCircumference(ship.location, 200f, ship.facing))
+
+            val weaponFirePointToBeamIntersect = Vector2f.sub(intersect.first, redirectionDrone.allWeapons[0].getFirePoint(0), null)
+            redirectionDrone.location.set(Vector2f.add(redirectionDrone.location, weaponFirePointToBeamIntersect, null))
+
+            redirectionDrone.velocity.set(ship.velocity)
+
+            val rangeMod = 1f-(MathUtils.getDistance(beam.from, intersect.first)/beam.weapon.range)
+            redirectionDrone.mutableStats.beamWeaponRangeBonus.modifyMult("dem", rangeMod)
+            for(weapon in redirectionDrone.allWeapons){
+                weapon.setForceFireOneFrame(true)
+                weapon.setFacing(redirectionDrone.facing)
+                weapon.updateBeamFromPoints()
             }
-            //demDrone.giveCommand(ShipCommand.FIRE, MathUtils.getPointOnCircumference(demDrone.location, 100f, 0f), 0)
         }else{
             if(beam in activeBeams){
-                Global.getCombatEngine().removeEntity(activeBeams[beam])
+                Global.getCombatEngine().removeEntity(activeBeams[beam]!!)
             }
         }
     }
 
 
-    fun makeNewDEMDrone(ship: ShipAPI, weapon: WeaponAPI): ShipAPI{
-        val spec = Global.getSettings().getHullSpec("dem_drone")
-        val v = Global.getSettings().createEmptyVariant("dem_drone", spec)
-        val slot = v.getSlot("WS 000")
-        (slot as com.fs.starfarer.loading.specs.Y).slotSize = WeaponAPI.WeaponSize.MEDIUM
+    fun makeNewRedirectionDrone(ship: ShipAPI, weapon: WeaponAPI): ShipAPI{
+        val spec = Global.getSettings().getHullSpec("beam_redirection_drone")
+        val v = Global.getSettings().createEmptyVariant("beam_redirection_drone", spec)
         v.addWeapon("WS 000", weapon.spec.weaponId)
         val g = WeaponGroupSpec(WeaponGroupType.LINKED)
         g.addSlot("WS 000")
         v.addWeaponGroup(g)
-        val demDrone = Global.getCombatEngine().createFXDrone(v)
-        val stats = demDrone.mutableStats
-        demDrone.layer = CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER
-        demDrone.owner = ship.originalOwner
 
-        demDrone.isDrone = true
-        demDrone.aiFlags.setFlag(AIFlags.DRONE_MOTHERSHIP, 100000.0f, ship)
-        demDrone.collisionClass = CollisionClass.NONE
-        demDrone.giveCommand(ShipCommand.SELECT_GROUP, null as Any?, 0)
+        val redirectionDrone = Global.getCombatEngine().createFXDrone(v)
+        val stats = redirectionDrone.mutableStats
+        redirectionDrone.layer = CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER
+        redirectionDrone.owner = ship.originalOwner
+
+        redirectionDrone.isDrone = true
+        redirectionDrone.aiFlags.setFlag(AIFlags.DRONE_MOTHERSHIP, 100000.0f, ship)
+        redirectionDrone.collisionClass = CollisionClass.NONE
+        redirectionDrone.giveCommand(ShipCommand.SELECT_GROUP, null as Any?, 0)
 
         stats.hullDamageTakenMult.modifyMult("dem", 0.0f)
         stats.energyWeaponDamageMult.applyMods(ship.mutableStats.energyWeaponDamageMult)
@@ -397,7 +367,9 @@ class BulletTimeField : BaseShipSystemScript() {
         stats.beamWeaponDamageMult.applyMods(ship.mutableStats.beamWeaponDamageMult)
         stats.beamWeaponRangeBonus.applyMods(ship.mutableStats.beamWeaponRangeBonus)
 
-        return demDrone
+        Global.getCombatEngine().addEntity(redirectionDrone)
+
+        return redirectionDrone
     }
 
     fun resetDamagingProjectile(threat: DamagingProjectileAPI) {
@@ -408,8 +380,6 @@ class BulletTimeField : BaseShipSystemScript() {
             val rayExtender = ReflectionUtils.get("rayExtender", threat)
             ReflectionUtils.set(RayExtenderFields.PROJ_SPEED!!, rayExtender!!, slowedProjectiles[threat]!!.initialSpeed)
         }
-
-
 
         VectorUtils.resize(threat.velocity, slowedProjectiles[threat]!!.initialSpeed)
     }
