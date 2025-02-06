@@ -5,6 +5,7 @@ import com.fs.starfarer.api.combat.BaseHullMod
 import com.fs.starfarer.api.combat.CombatEngineAPI
 import com.fs.starfarer.api.combat.ShipAPI
 import com.fs.starfarer.api.combat.ShipCommand
+import com.fs.starfarer.api.combat.ShipwideAIFlags
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponType
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener
@@ -53,6 +54,8 @@ class NianBoss : BaseHullMod() {
         }
 
         override fun advance(amount: Float) {
+            ship.aiFlags.setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF, 1f)
+            ship.aiFlags.setFlag(ShipwideAIFlags.AIFlags.DO_NOT_BACK_OFF_EVEN_WHILE_VENTING, 1f)
             if (enraged) {
                 if (enragedTransitionTime <= ENRAGED_TRANSITION_TIME) {
                     enragedTransitionTime += amount
