@@ -18,5 +18,5 @@
 	"animationType":"NONE",  # NONE, GLOW, MUZZLE_FLASH, SMOKE
 	"projectileSpecId":"kol_bricole_shot",  # projectile that will be fired	
 	"fireSoundTwo":"autocannon_fire",
-	"everyFrameEffect":"org.selkie.kol.weapons.AlysseAIFixer",
+	"everyFrameEffect":"org.selkie.kol.weapons.util.AlysseAIFixer",
 }

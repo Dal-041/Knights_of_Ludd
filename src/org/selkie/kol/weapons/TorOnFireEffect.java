@@ -11,7 +11,7 @@ import com.fs.starfarer.api.combat.OnFireEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 
-public class KOL_TorOnFireEffect implements OnFireEffectPlugin {
+public class TorOnFireEffect implements OnFireEffectPlugin {
     
     private static final Color FLASH_COLOR = new Color(255,100,70,100);
     

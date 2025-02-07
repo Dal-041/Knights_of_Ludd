@@ -1,4 +1,4 @@
-package org.selkie.kol.weapons;
+package org.selkie.zea.weapons;
 
 import java.awt.Color;
 
@@ -11,7 +11,7 @@ import com.fs.starfarer.api.combat.OnFireEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 
-public class KOL_MyogaOnFireEffect implements OnFireEffectPlugin {
+public class MyogaOnFireEffect implements OnFireEffectPlugin {
     
     private static final Color FLASH_COLOR = new Color(160,40,225,100);
     

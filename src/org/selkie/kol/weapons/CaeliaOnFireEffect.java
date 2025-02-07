@@ -11,7 +11,7 @@ import com.fs.starfarer.api.combat.OnFireEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 
-public class KOL_CaeliaOnFireEffect implements OnFireEffectPlugin {
+public class CaeliaOnFireEffect implements OnFireEffectPlugin {
     
     private static final Color FLASH_COLOR = new Color(255,160,40,100);
     

@@ -3,7 +3,7 @@
 	"specClass":"beam",
 	"type":"DECORATIVE",
 	"size":"LARGE",
-	"everyFrameEffect": "org.selkie.kol.weapons.hideDeco",
+	"everyFrameEffect": "org.selkie.kol.weapons.util.hideDeco",
 	"showDamageWhenDecorative":true,
 	"renderBelowAllWeapons":false,
 	#"renderHints":["RENDER_ADDITIVE"],	

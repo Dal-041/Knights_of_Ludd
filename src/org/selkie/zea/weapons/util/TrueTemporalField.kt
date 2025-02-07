@@ -1,10 +1,8 @@
-package org.selkie.zea.weapons
+package org.selkie.zea.weapons.util
 
-import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.CombatEngineAPI
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin
 import com.fs.starfarer.api.combat.ShipAPI.HullSize
-import com.fs.starfarer.api.combat.ShipCommand
 import com.fs.starfarer.api.combat.WeaponAPI
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
@@ -12,7 +10,6 @@ import org.lwjgl.input.Keyboard
 import org.lwjgl.util.vector.Vector2f
 import org.selkie.kol.combat.StarficzAIUtils
 import kotlin.math.abs
-import kotlin.math.max
 import kotlin.math.pow
 
 class TrueTemporalField : EveryFrameWeaponEffectPlugin {

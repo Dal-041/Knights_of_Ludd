@@ -2,7 +2,7 @@
 	"id":"zea_styrax_driver_shot",
 	"specClass":"projectile",
 
-	"onFireEffect":"org.selkie.kol.weapons.KOL_StyraxOnFireEffect",
+	"onFireEffect":"org.selkie.zea.weapons.StyraxOnFireEffect",
 
 	"spawnType":"BALLISTIC_AS_BEAM",
 	"collisionClass":"RAY",

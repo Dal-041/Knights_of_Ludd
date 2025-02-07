@@ -11,7 +11,7 @@ import com.fs.starfarer.api.combat.OnFireEffectPlugin;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 
-public class KOL_LlyrOnFireEffect implements OnFireEffectPlugin {
+public class LlyrOnFireEffect implements OnFireEffectPlugin {
     
     private static final Color FLASH_COLOR = new Color(235,255,215,100);
     

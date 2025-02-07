@@ -4,12 +4,12 @@
   "type": "ENERGY",
   "size": "MEDIUM",
 
-  "beamEffect":"org.selkie.kol.weapons.KOL_SparkleBeamEffect",
+  "beamEffect":"org.selkie.zea.weapons.SparkleBeamEffect",
 
-  "turretSprite": "graphics/zea/weapons/kol_hosta_m_base.png",
-  "turretGlowSprite": "graphics/zea/weapons/kol_hosta_m_glow.png",
-  "hardpointSprite": "graphics/zea/weapons/kol_hosta_m_hardpoint_base.png",
-  "hardpointGlowSprite": "graphics/zea/weapons/kol_hosta_m_hardpoint_glow.png",
+  "turretSprite": "graphics/zea/weapons/zea_hosta_m_base.png",
+  "turretGlowSprite": "graphics/zea/weapons/zea_hosta_m_glow.png",
+  "hardpointSprite": "graphics/zea/weapons/zea_hosta_m_hardpoint_base.png",
+  "hardpointGlowSprite": "graphics/zea/weapons/zea_hosta_m_hardpoint_glow.png",
   "fringeColor":[40,80,215,255],
   "coreColor":[230,170,255,220],
   "glowColor": [100,150,240,255],

@@ -6,7 +6,7 @@ import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.util.Misc;
 
-public class Caelia implements EveryFrameWeaponEffectPlugin {
+public class ROFRampUpEffect implements EveryFrameWeaponEffectPlugin {
 
 
 	private ShipAPI ship;

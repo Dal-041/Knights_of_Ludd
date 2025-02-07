@@ -2,7 +2,7 @@
 	"id":"kol_tor_shot",
 	"specClass":"projectile",
 
-	"onFireEffect":"org.selkie.kol.weapons.KOL_TorOnFireEffect",
+	"onFireEffect":"org.selkie.kol.weapons.TorOnFireEffect",
 
 	"spawnType":"BALLISTIC",
 	"collisionClass":"PROJECTILE_FF",

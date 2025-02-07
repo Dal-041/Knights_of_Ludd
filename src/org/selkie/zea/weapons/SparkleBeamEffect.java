@@ -1,4 +1,4 @@
-package org.selkie.kol.weapons;
+package org.selkie.zea.weapons;
 
 import java.awt.Color;
 
@@ -10,7 +10,7 @@ import com.fs.starfarer.api.combat.BeamEffectPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 
-public class KOL_SparkleBeamEffect implements BeamEffectPlugin {
+public class SparkleBeamEffect implements BeamEffectPlugin {
 
     private final IntervalUtil interval1 = new IntervalUtil(0.1f,0.2f);
 	

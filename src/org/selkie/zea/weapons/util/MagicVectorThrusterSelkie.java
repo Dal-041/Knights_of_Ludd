@@ -1,7 +1,7 @@
 /*
     By Tartiflette
  */
-package org.selkie.zea.weapons;
+package org.selkie.zea.weapons.util;
 
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.EveryFrameWeaponEffectPlugin;

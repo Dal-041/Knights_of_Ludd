@@ -16,5 +16,5 @@
 	"textureType":ROUGH,
 	"textureScrollSpeed":1.0,
 	"pixelsPerTexel":5.0,
-	"everyFrameEffect":"org.selkie.zea.weapons.TrueTemporalField",
+	"everyFrameEffect":"org.selkie.zea.weapons.util.TrueTemporalField",
 }

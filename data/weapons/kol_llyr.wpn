@@ -4,7 +4,7 @@
   "projectileSpecId": "kol_llyr_shot",
   "type": "BALLISTIC",
   "size": "LARGE",
-  "everyFrameEffect": "org.selkie.kol.weapons.Caelia",
+  "everyFrameEffect": "org.selkie.kol.weapons.ROFRampUpEffect",
   "turretSprite": "graphics/kol/weapons/kol_llyr_turret_base.png",
   "turretGunSprite": "graphics/kol/weapons/kol_llyr_turret_recoil.png",
   "hardpointSprite": "graphics/kol/weapons/kol_llyr_hardpoint_base.png",

@@ -1,4 +1,4 @@
-package org.selkie.kol.weapons;
+package org.selkie.kol.weapons.util;
 
 import com.fs.starfarer.api.AnimationAPI;
 import com.fs.starfarer.api.combat.CombatEngineAPI;

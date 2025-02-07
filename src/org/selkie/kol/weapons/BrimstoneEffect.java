@@ -15,14 +15,14 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
-public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFireEffectPlugin, OnHitEffectPlugin, EveryFrameWeaponEffectPlugin {
+public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements OnFireEffectPlugin, OnHitEffectPlugin, EveryFrameWeaponEffectPlugin {
     private boolean init = false;
     private boolean active = false;
     private ShipAPI ship;
 
-    protected List<Brimstone> trails;
+    protected List<BrimstoneEffect> trails;
 
-    public Brimstone() {
+    public BrimstoneEffect() {
     }
 
     @Override
@@ -56,7 +56,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         //Cryoflux stuff follows
         if (trails == null) return;
 
-        Iterator<Brimstone> iter = trails.iterator();
+        Iterator<BrimstoneEffect> iter = trails.iterator();
         while (iter.hasNext()) {
             if (iter.next().isExpired()) iter.remove();
         }
@@ -69,7 +69,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
             float weight = 0f;
             float totalDist = 0f;
             Vector2f source = weapon.getLocation();
-            for (Brimstone curr : trails) {
+            for (BrimstoneEffect curr : trails) {
                 if (curr.proj != null) {
                     Vector2f.add(com, curr.proj.getLocation(), com);
                     weight += curr.proj.getBrightness();
@@ -99,7 +99,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         // drag along the previous projectile, starting with the most recently launched; new ones are added at the start
         // note: prev is fired before and so is in front of proj
         for (int i = 0; i < numIter; i++) {
-            for (Brimstone trail : trails) {
+            for (BrimstoneEffect trail : trails) {
                 //trail.proj.setFacing(trail.proj.getFacing() + 180f * amount);
                 if (trail.prev != null && !trail.prev.isExpired() && Global.getCombatEngine().isEntityInPlay(trail.prev)) {
                     float dist1 = Misc.getDistance(trail.prev.getLocation(), trail.proj.getLocation());
@@ -168,7 +168,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         String prevKey = "cryo_prev_" + weapon.getShip().getId() + "_" + weapon.getSlot().getId();
         DamagingProjectileAPI prev = (DamagingProjectileAPI) engine.getCustomData().get(prevKey);
 
-        Brimstone trail = new Brimstone(projectile, prev);
+        BrimstoneEffect trail = new BrimstoneEffect(projectile, prev);
         CombatEntityAPI e = engine.addLayeredRenderingPlugin(trail);
         e.getLocation().set(projectile.getLocation());
 
@@ -244,12 +244,12 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         }
     }
 
-    protected final List<Brimstone.ParticleData> particles = new ArrayList<>();
+    protected final List<BrimstoneEffect.ParticleData> particles = new ArrayList<>();
 
     protected DamagingProjectileAPI proj;
     protected DamagingProjectileAPI prev;
     protected float baseFacing = 0f;
-    public Brimstone(DamagingProjectileAPI proj, DamagingProjectileAPI prev) {
+    public BrimstoneEffect(DamagingProjectileAPI proj, DamagingProjectileAPI prev) {
         this.proj = proj;
         this.prev = prev;
 
@@ -257,14 +257,14 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
 
         int num = 7;
         for (int i = 0; i < num; i++) {
-            particles.add(new Brimstone.ParticleData(proj));
+            particles.add(new BrimstoneEffect.ParticleData(proj));
         }
 
         float length = proj.getProjectileSpec().getLength();
         float width = proj.getProjectileSpec().getWidth();
 
         float index = 0;
-        for (Brimstone.ParticleData p : particles) {
+        for (BrimstoneEffect.ParticleData p : particles) {
             float f = index / (particles.size() - 1);
             Vector2f dir = Misc.getUnitVectorAtDegreeAngle(proj.getFacing() + 180f);
             dir.scale(length * f);
@@ -298,7 +298,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
 
         entity.getLocation().set(proj.getLocation());
 
-        for (Brimstone.ParticleData p : particles) {
+        for (BrimstoneEffect.ParticleData p : particles) {
             p.advance(amount);
         }
     }
@@ -318,7 +318,7 @@ public class Brimstone extends BaseCombatLayeredRenderingPlugin implements OnFir
         float b = proj.getBrightness();
         b *= viewport.getAlphaMult();
 
-        for (Brimstone.ParticleData p : particles) {
+        for (BrimstoneEffect.ParticleData p : particles) {
             float size = proj.getProjectileSpec().getWidth() * 0.6f;
             size *= p.scale;
 

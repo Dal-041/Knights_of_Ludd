@@ -4,7 +4,7 @@
 	"type":"ENERGY",
 	"size":"LARGE",
 
-	"beamEffect":"org.selkie.kol.weapons.KOL_SmokeBeamEffect",
+	"beamEffect":"org.selkie.kol.weapons.SmokeBeamEffect",
 
 	"turretSprite":"graphics/kol/weapons/kol_lunete_hardpoint.png",
 	"hardpointSprite":"graphics/kol/weapons/kol_lunete_hardpoint.png",

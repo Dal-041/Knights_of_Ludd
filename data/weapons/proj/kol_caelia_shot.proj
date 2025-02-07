@@ -2,7 +2,7 @@
 	"id":"kol_caelia_shot",
 	"specClass":"projectile",
 
-	"onFireEffect":"org.selkie.kol.weapons.KOL_CaeliaOnFireEffect",
+	"onFireEffect":"org.selkie.kol.weapons.CaeliaOnFireEffect",
 
 	"spawnType":"BALLISTIC",
 	"collisionClass":"PROJECTILE_FF",

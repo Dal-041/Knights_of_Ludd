@@ -5,7 +5,7 @@
   "type": "ENERGY",
   "mountTypeOverride": "HYBRID",
   "size": "LARGE",
-  "everyFrameEffect": "org.selkie.kol.weapons.Brimstone",
+  "everyFrameEffect": "org.selkie.kol.weapons.BrimstoneEffect",
   "turretSprite": "graphics/kol/ships/decos/kol_deco_blank.png",
   "turretGlowSprite": "graphics/kol/ships/decos/kol_deco_blank.png",
   "hardpointSprite": "graphics/kol/ships/decos/kol_deco_blank.png",

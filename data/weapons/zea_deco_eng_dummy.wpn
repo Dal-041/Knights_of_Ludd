@@ -4,7 +4,7 @@
 	"type":"DECORATIVE",
 	"size":"SMALL",
 	"showDamageWhenDecorative":false,
-	"everyFrameEffect":"org.selkie.kol.weapons.TrueVectorThruster",
+	"everyFrameEffect":"org.selkie.kol.weapons.util.TrueVectorThruster",
 	"turretSprite":"graphics/kol/ships/decos/kol_deco_blank.png",
 	"turretGunSprite":"graphics/kol/ships/decos/kol_deco_blank.png",
 	"hardpointSprite":"graphics/kol/ships/decos/kol_deco_blank.png",

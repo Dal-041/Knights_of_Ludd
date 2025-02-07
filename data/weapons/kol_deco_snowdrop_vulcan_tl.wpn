@@ -3,7 +3,7 @@
 	"specClass":"projectile",
 	"type":"DECORATIVE",
 	"size":"SMALL",
-	"everyFrameEffect": "org.selkie.kol.weapons.hideDeco",
+	"everyFrameEffect": "org.selkie.kol.weapons.util.hideDeco",
 	"displayArcRadius":250,
 	"turretSprite":"graphics/weapons/vulcan_cannon_turret_base.png",
 	"turretGunSprite":"graphics/weapons/vulcan_cannon_turret_recoil.png",

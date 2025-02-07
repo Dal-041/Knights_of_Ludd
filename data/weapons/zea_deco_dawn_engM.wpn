@@ -4,7 +4,7 @@
 	"type":"DECORATIVE",
 	"size":"SMALL",
 	"showDamageWhenDecorative":false,
-	"everyFrameEffect":"org.selkie.kol.weapons.TrueVectorThruster",
+	"everyFrameEffect":"org.selkie.kol.weapons.util.TrueVectorThruster",
 	"turretSprite":"graphics/zea/ships/zea_dawn_ao_engM.png",
 	"turretGunSprite":"graphics/zea/ships/zea_dawn_ao_engM.png",
 	"hardpointSprite":"graphics/zea/ships/zea_dawn_ao_engM.png",

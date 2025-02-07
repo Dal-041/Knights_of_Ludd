@@ -10,7 +10,7 @@ import com.fs.starfarer.api.combat.BeamEffectPlugin;
 import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 
-public class KOL_SmokeBeamEffect implements BeamEffectPlugin {
+public class SmokeBeamEffect implements BeamEffectPlugin {
 
     private final IntervalUtil interval1 = new IntervalUtil(0.1f,0.2f);
     private final IntervalUtil interval2 = new IntervalUtil(0.2f,0.3f);

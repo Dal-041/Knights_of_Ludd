@@ -1,4 +1,4 @@
-package org.selkie.kol.weapons;
+package org.selkie.zea.weapons;
 
 import java.awt.Color;
 import java.util.HashMap;
@@ -14,7 +14,7 @@ import com.fs.starfarer.api.combat.CombatEngineAPI;
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize;
 import com.fs.starfarer.api.util.IntervalUtil;
 
-public class KOL_FlareBeamEffect implements BeamEffectPlugin {
+public class FlareBeamEffect implements BeamEffectPlugin {
 
     private final IntervalUtil interval1 = new IntervalUtil(0.1f,0.2f);
     private final IntervalUtil interval2 = new IntervalUtil(0.25f,0.5f);
