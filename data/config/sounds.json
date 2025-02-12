@@ -74,6 +74,9 @@
 	"zea_elysian_corr_loop":[
 		{"file":"sounds/sfx_systems/kol_corr_loop.ogg","pitch":1,"volume":0.5},
 	],
+	"zea_elysian_minijump_deactivate":[ 
+		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.05,"volume":0.55},
+	],
 	"kol_lunete_fire":
 	[
 		{"file":"sounds/sfx_wpn_energy/tachyon_lance_fire_01.ogg","pitch":1,"volume":1.0},

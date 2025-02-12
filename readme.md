@@ -15,7 +15,7 @@ Featuring:
 - Code: Dal, Starficz, President Matt Damon, Lukas04, NiaTahl, CeruleanPancake
 
 - Weapons: SkylordZero, SnazzyPantsMcGee
-- VFX: NiaTahl, President Matt Damon, Starfics, Dal, Himemi, Wisp
+- VFX: NiaTahl, President Matt Damon, Starficz, Dal, Himemi, Wisp
 - Portraits (Human): Stable Diffusion using GhostMix checkpoint and Severian-Void's Starsector checkpoint.
 - Portraits (AI): Selkie (ironic, right?)
 - Art contributions: SnazzyPantsMcGee, Nes, Quacken, Pyrophage, Sleepyfish, Sirhartley, Alfonzo, NiaTahl, Dal

@@ -3,8 +3,8 @@
 	"specClass":"missile",	
 	"missileType":"MISSILE",
 	"sprite":"graphics/kol/missiles/kol_harpoon_but_its_long.png",
-	"size":[10,22],	
-	"center":[5,12],
+	"size":[10,37],	
+	"center":[5,18],
 	"collisionRadius":16,
 	"collisionClass":"MISSILE_NO_FF",
 	"explosionColor":[255,45,45,255],  # purely visual, will get a white additively blended core on top of this color
