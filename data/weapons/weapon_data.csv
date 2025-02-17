@@ -267,6 +267,8 @@ Hosta Graviton Pulser,zea_hosta_m,3,0.2,15000,800,750,,,12,22,14,,,,KINETIC,,875
 Hosta Graviton Lance,zea_hosta_l,3,0.2,25000,1000,1750,,,25,12,28,,,,KINETIC,,1750,0.5,0.5,1,5,,,,,15000,,,,,,,,"kinetic18, beam16, LR, restricted, zea_common_bp",,Dusk,,Anti Shield,,,,,,,,,,57.1
 Nanten Slicer,zea_nanten_s,3,0.7,8000,500,600,,250,0,30,8,,,,HIGH_EXPLOSIVE,,800,0.5,0.5,0.5,4.5,,,,,10000,,,,,,,USE_LESS_VS_SHIELDS,"he7, beam8, restricted, zea_common_bp",,Dusk,,Abuse,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.2
 Nanten Disassembler,zea_nanten_l,3,0.25,20000,1000,1600,,1000,0,12,25,,,,HIGH_EXPLOSIVE,,2400,0.5,1,1,8,,,,,10000,,,,,,,"USE_LESS_VS_SHIELDS, FIRE_WHEN_INEFFICIENT","he23, beam15, LR, restricted",,Dusk,,Cruelty,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.1
+Refraction Scatter Ray,zea_refraction,3,0.2,20000,1000,400,,500,0,12,25,,,,ENERGY,,600,0,0,,,,,,,2400,,,,,,,"FIRE_WHEN_INEFFICIENT","beam17, LR, restricted",,Dusk,,Advantage Neutralization,,,,,"Hits on shields reflect off a myriad of secondary beams, dealing damage to surrounding enemies.",,,,,47.3
+Refraction Overfire,zea_refraction_overfire,3,0.2,20000,1000,400,,500,0,12,25,,,,ENERGY,,0,0,0,,,,,,,2400,,,,,,,"FIRE_WHEN_INEFFICIENT","beam17, LR, restricted",,Dusk,,Advantage Neutralization,,,,,"Hits on shields reflect off a myriad of secondary beams, dealing damage to surrounding enemies.",,,,,47.3
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #BUILT_IN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

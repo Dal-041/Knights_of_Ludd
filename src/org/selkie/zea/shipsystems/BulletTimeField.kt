@@ -2,11 +2,8 @@ package org.selkie.zea.shipsystems
 
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.*
-import com.fs.starfarer.api.combat.ShipwideAIFlags.AIFlags
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript
 import com.fs.starfarer.api.loading.BeamWeaponSpecAPI
-import com.fs.starfarer.api.loading.WeaponGroupSpec
-import com.fs.starfarer.api.loading.WeaponGroupType
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript.StatusData
 import com.fs.starfarer.api.util.Misc
@@ -316,7 +313,7 @@ class BulletTimeField : BaseShipSystemScript() {
             if(beam is BeamWeaponRay) beam.forceShowGlow()
 
             val redirectionDrone = activeBeams.getOrPut(beam){
-                makeNewRedirectionDrone(beamShipAPI, beam.weapon)
+                org.selkie.zea.combat.utils.makeNewRedirectionDrone(beamShipAPI, beam.weapon)
             }
 
             redirectionDrone.owner = beamShipAPI.owner
@@ -339,37 +336,6 @@ class BulletTimeField : BaseShipSystemScript() {
                 Global.getCombatEngine().removeEntity(activeBeams[beam]!!)
             }
         }
-    }
-
-
-    fun makeNewRedirectionDrone(ship: ShipAPI, weapon: WeaponAPI): ShipAPI{
-        val spec = Global.getSettings().getHullSpec("beam_redirection_drone")
-        val v = Global.getSettings().createEmptyVariant("beam_redirection_drone", spec)
-        v.addWeapon("WS 000", weapon.spec.weaponId)
-        val g = WeaponGroupSpec(WeaponGroupType.LINKED)
-        g.addSlot("WS 000")
-        v.addWeaponGroup(g)
-
-        val redirectionDrone = Global.getCombatEngine().createFXDrone(v)
-        val stats = redirectionDrone.mutableStats
-        redirectionDrone.layer = CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER
-        redirectionDrone.owner = ship.originalOwner
-
-        redirectionDrone.isDrone = true
-        redirectionDrone.aiFlags.setFlag(AIFlags.DRONE_MOTHERSHIP, 100000.0f, ship)
-        redirectionDrone.collisionClass = CollisionClass.NONE
-        redirectionDrone.giveCommand(ShipCommand.SELECT_GROUP, null as Any?, 0)
-
-        stats.hullDamageTakenMult.modifyMult("dem", 0.0f)
-        stats.energyWeaponDamageMult.applyMods(ship.mutableStats.energyWeaponDamageMult)
-        stats.missileWeaponDamageMult.applyMods(ship.mutableStats.missileWeaponDamageMult)
-        stats.ballisticWeaponDamageMult.applyMods(ship.mutableStats.ballisticWeaponDamageMult)
-        stats.beamWeaponDamageMult.applyMods(ship.mutableStats.beamWeaponDamageMult)
-        stats.beamWeaponRangeBonus.applyMods(ship.mutableStats.beamWeaponRangeBonus)
-
-        Global.getCombatEngine().addEntity(redirectionDrone)
-
-        return redirectionDrone
     }
 
     fun resetDamagingProjectile(threat: DamagingProjectileAPI) {

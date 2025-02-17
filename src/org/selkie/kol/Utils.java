@@ -252,6 +252,7 @@ public class Utils {
         return false;
     }
 
+
     private static final double FACTOR = 0.7;
 
     /**
