@@ -18,8 +18,8 @@
 	"jitterRangeRadiusFraction":1,
 
     "aiHints":{
-		"activeSpeedIncrease":200,
-		"burstMovementPotential":50,
-		"averageSpeedIncrease":100,
+		"activeSpeedIncrease":0,
+        "burstMovementPotential":1000,
+        "averageSpeedIncrease":10,
     }
 }
