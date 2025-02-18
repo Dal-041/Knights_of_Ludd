@@ -17,7 +17,7 @@ import java.util.Map;
 public class MiniJump extends BaseShipSystemScript {
 	public static final float MAX_TURN_BONUS = 50f;
 	public static final float TURN_ACCEL_BONUS = 50f;
-	public static final float INSTANT_BOOST_FLAT = 400f;
+	public static final float INSTANT_BOOST_FLAT = 500f;
 	public static final float INSTANT_BOOST_MULT = 3f;
 
 	private static final Color ENGINE_COLOR = new Color(255, 10, 10);
@@ -32,11 +32,11 @@ public class MiniJump extends BaseShipSystemScript {
 	private boolean boostForward = false;
 
 	private float HEFTimer = 0f;
-	private float PHASE_DURATION = 1.5f;
+	private float PHASE_DURATION = 1.0f;
 	private float phaseTimer = 0f;
 
-	public static final float DAMAGE_BONUS_PERCENT = 50f;
-	public static final float  FIRERATE_BONUS_PERCENT = 50f;
+	public static final float DAMAGE_BONUS_PERCENT = 35f;
+	public static final float  FIRERATE_BONUS_PERCENT = 65f;
 	public static final float HEF_BUFF_DURATION = 3f;
 
 	private static final Color HEF_COLOR = new Color(255, 0, 191);
@@ -44,11 +44,14 @@ public class MiniJump extends BaseShipSystemScript {
 	private static final float FADE_IN_OUT_TIME = 0.2f;
 	private final EnumSet<WeaponAPI.WeaponType> WEAPON_TYPES = EnumSet.of(WeaponAPI.WeaponType.ENERGY, WeaponAPI.WeaponType.BALLISTIC);
 
+	private  CollisionClass INIT_COLLISION = null;
+
 
 	@Override
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 		ShipAPI ship = (ShipAPI) stats.getEntity();
 		if (ship == null) {return;}
+		if(INIT_COLLISION == null) INIT_COLLISION = ship.getCollisionClass();
 		float shipRadius = ship.getCollisionRadius();
 		float amount = Global.getCombatEngine().getElapsedInLastFrame();
 		if (Global.getCombatEngine().isPaused()) {amount = 0f;}
@@ -74,7 +77,7 @@ public class MiniJump extends BaseShipSystemScript {
 			boostVisualDir = MathUtils.clampAngle(VectorUtils.getFacing(direction) - 90f);
 		}
 
-		// visuals
+		// visuals and turn rate
 		if (state == State.IN) {
 			List<ShipEngineControllerAPI.ShipEngineAPI> engList = ship.getEngineController().getShipEngines();
 			for (int i = 0; i < engList.size(); i++) {
@@ -122,6 +125,8 @@ public class MiniJump extends BaseShipSystemScript {
 			}
 		}
 		else if (state == State.OUT) {
+			stats.getMaxTurnRate().unmodify(id);
+			stats.getTurnAcceleration().modifyPercent(id, TURN_ACCEL_BONUS * effectLevel);
 			List<ShipEngineControllerAPI.ShipEngineAPI> engList = ship.getEngineController().getShipEngines();
 			for (int i = 0; i < engList.size(); i++) {
 				ShipEngineControllerAPI.ShipEngineAPI eng = engList.get(i);
@@ -199,7 +204,7 @@ public class MiniJump extends BaseShipSystemScript {
 				HEFTimer = HEF_BUFF_DURATION;
 				phaseTimer = PHASE_DURATION;
 				stats.getEnergyRoFMult().modifyPercent(id, FIRERATE_BONUS_PERCENT);
-				stats.getEnergyWeaponFluxCostMod().modifyMult(id, 0.75f);
+				stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f/FIRERATE_BONUS_PERCENT);
 				stats.getBallisticWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
 			}
 
@@ -208,9 +213,7 @@ public class MiniJump extends BaseShipSystemScript {
 			float adjFalloffPerSec = 0.25f * (float) Math.pow(decelMult, 0.5);
 			float maxDecelPenalty = 1f / decelMult;
 
-			stats.getMaxTurnRate().unmodify(id);
 			stats.getDeceleration().modifyMult(id, (1f - effectLevel) * 1f * maxDecelPenalty);
-			stats.getTurnAcceleration().modifyPercent(id, TURN_ACCEL_BONUS * effectLevel);
 
 			if (boostForward) {
 				ship.giveCommand(ShipCommand.ACCELERATE, null, 0);
@@ -265,10 +268,11 @@ public class MiniJump extends BaseShipSystemScript {
 
 		if(phaseTimer > 0){
 			phaseTimer -= amount;
-			ship.setPhased(true);
+			stats.getPhaseCloakCooldownBonus().modifyMult("minijump_system", 0f);
+			ship.setCollisionClass(CollisionClass.NONE);
 		}
 		else{
-			ship.setPhased(false);
+			ship.setCollisionClass(INIT_COLLISION);
 		}
 	}
 
