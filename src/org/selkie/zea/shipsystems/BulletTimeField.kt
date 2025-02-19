@@ -12,7 +12,9 @@ import org.dark.shaders.distortion.DistortionShader
 import org.dark.shaders.distortion.RippleDistortion
 import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
+import org.lazywizard.lazylib.ext.getCrossProduct
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.getUnitVectorAtDegreeAngle
 import org.magiclib.plugins.MagicRenderPlugin
 import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
@@ -21,15 +23,22 @@ import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
 import java.awt.geom.Line2D
 import java.util.*
+import kotlin.math.abs
+import kotlin.math.min
 import kotlin.properties.Delegates
 
 class BulletTimeField : BaseShipSystemScript() {
     companion object {
-        const val MAX_SLOWDOWN: Float = 0.15f
-        const val SLOWDOWN_RADIUS: Float = 400f
-        const val CORE_RADIUS: Float = 100f
-        const val MAX_DEFLECTION_ANGLE: Float = 70f
-        const val ACTIVE_COLLISION_RADIUS: Float = 20f
+        const val MAX_SLOWDOWN = 0.15f
+        const val SLOWDOWN_RADIUS = 400f
+        const val BEAM_FOCUS_RADIUS = 200f
+        const val CORE_RADIUS = 100f
+        const val MAX_DEFLECTION_ANGLE = 70f
+        const val MAX_ACCEL_MULT = 10f
+        const val ACTIVE_COLLISION_RADIUS = 20f
+        const val ACTIVE_COLLISION_RADIUS_ALPHA_MULT = 0.8f // dot alpha
+        const val ACTIVE_SHIP_ALPHA_MULT = 0.2f // ship alpha
+        const val ACTIVE_STRAFE_SPEED_MULT = 0.5f // 50% speed when strafing
     }
 
     object RayExtenderFields {
@@ -136,6 +145,8 @@ class BulletTimeField : BaseShipSystemScript() {
     val slowedProjectiles: MutableMap<DamagingProjectileAPI, DamagingProjectileInfo> = HashMap()
     var distortion: RippleDistortion? = null
     val activeBeams: MutableMap<BeamAPI, ShipAPI> = mutableMapOf()
+    var shieldOnBeforeSystem = false
+    var currentSpeedMult = 1f;
 
     fun init(ship: ShipAPI) {
         if (!init) {
@@ -150,16 +161,19 @@ class BulletTimeField : BaseShipSystemScript() {
 
         val ship = stats.entity as ShipAPI
         init(ship)
+        shieldOnBeforeSystem = shieldOnBeforeSystem || ship.shield?.isOn == true
 
+        val strafeSpeed = abs(ship.velocity.getCrossProduct(ship.facing.getUnitVectorAtDegreeAngle()))
+        currentSpeedMult = min((ship.maxSpeed*ACTIVE_STRAFE_SPEED_MULT) / strafeSpeed, 1f)
         applyStatChanges(stats, id, effectLevel)
 
         // make ship translucent and force shields off
-        ship.alphaMult = Misc.interpolate(1f, 0.2f, effectLevel)
+        ship.alphaMult = Misc.interpolate(1f, ACTIVE_SHIP_ALPHA_MULT, effectLevel)
 
         // render the ship hitbox with a dot
         val shipCollisionCircle = Global.getSettings().getSprite("graphics/fx/circle64.png")
         shipCollisionCircle.color = Color.GREEN
-        shipCollisionCircle.alphaMult = Misc.interpolate(0f, 0.8f, effectLevel)
+        shipCollisionCircle.alphaMult = Misc.interpolate(0f, ACTIVE_COLLISION_RADIUS_ALPHA_MULT, effectLevel)
         val hitboxSize = Misc.interpolate(collisionRadius, ACTIVE_COLLISION_RADIUS, effectLevel)
         shipCollisionCircle.setSize(hitboxSize, hitboxSize)
         MagicRenderPlugin.addSingleframe(shipCollisionCircle, ship.location, CombatEngineLayers.BELOW_INDICATORS_LAYER)
@@ -219,7 +233,7 @@ class BulletTimeField : BaseShipSystemScript() {
         }
 
         // Stop tracking expired threats
-        slowedProjectiles.entries.removeAll{ it.key.isExpired }
+        slowedProjectiles.entries.removeAll{ it.key.isExpired || (it.key as? BaseEntity)?.wasRemoved() ?: false }
 
         // update everything currently being slowed
         for (threat in slowedProjectiles.keys) {
@@ -270,72 +284,70 @@ class BulletTimeField : BaseShipSystemScript() {
     }
 
     fun cutBeamsShort(ship: ShipAPI, effectLevel: Float){
-        val currentActiveBeams: MutableList<BeamAPI> = mutableListOf()
+        val currentReflectedBeams: MutableList<BeamAPI> = mutableListOf()
         for(otherShip in Global.getCombatEngine().ships){
             if(otherShip.collisionClass == CollisionClass.NONE) continue
             for(weapon in otherShip.usableWeapons){
                 if(!weapon.isBeam) continue
                 for(beam in weapon.beams){
-                    currentActiveBeams.add(beam)
-                    interceptBeam(ship, otherShip, effectLevel, beam)
+                    val reflected = interceptBeam(ship, otherShip, effectLevel, beam)
+                    if (reflected) currentReflectedBeams.add(beam)
                 }
             }
         }
         activeBeams.keys.retainAll {
-            if(it !in currentActiveBeams) {
+            if(it !in currentReflectedBeams) {
                 Global.getCombatEngine().removeEntity(activeBeams[it]!!)
             }
-            it in currentActiveBeams
+            it in currentReflectedBeams
         }
     }
 
-    fun interceptBeam(ship: ShipAPI, beamShipAPI: ShipAPI, effectLevel: Float, beam: BeamAPI){
+    fun interceptBeam(ship: ShipAPI, beamShipAPI: ShipAPI, effectLevel: Float, beam: BeamAPI): Boolean {
         val slowdownRadius = Misc.interpolate(10f, SLOWDOWN_RADIUS, effectLevel)
         val travelDistance = VectorUtils.getDirectionalVector(beam.from, beam.to)
         travelDistance.scale(Global.getCombatEngine().elapsedInLastFrame * (beam.weapon.spec as BeamWeaponSpecAPI).beamSpeed)
         val futureBeamTo = Vector2f.add(beam.to, travelDistance, null)
         // return if beam starts from inside the field
-        if(MathUtils.getDistanceSquared(ship.location, beam.from) < slowdownRadius*slowdownRadius) return
+        if(MathUtils.getDistanceSquared(ship.location, beam.from) < slowdownRadius*slowdownRadius) return false
         val closestDistanceSq = Line2D.Float.ptSegDistSq(beam.from.x.toDouble(), beam.from.y.toDouble(),
                 futureBeamTo.x.toDouble(), futureBeamTo.y.toDouble(), ship.location.x.toDouble(), ship.location.y.toDouble())
 
         // return if beam never crosses the field
-        if(closestDistanceSq > slowdownRadius*slowdownRadius) return
+        if(closestDistanceSq > slowdownRadius*slowdownRadius) return false
 
         val intersect = StarficzAIUtils.intersectCircle(beam.from, futureBeamTo, ship.location, slowdownRadius)
+        if(intersect == null) return false
 
-        if(intersect != null){
+        val beamSetPoint = Vector2f.sub(intersect.first, travelDistance, null)
 
-            val beamSetPoint = Vector2f.sub(intersect.first, travelDistance, null)
+        beam.to.set(beamSetPoint)
 
-            beam.to.set(beamSetPoint)
+        if(beam is BeamWeaponRay) beam.forceShowGlow()
 
-            if(beam is BeamWeaponRay) beam.forceShowGlow()
+        val redirectionDrone = activeBeams.getOrPut(beam){
+            org.selkie.zea.combat.utils.makeNewRedirectionDrone(beamShipAPI, beam.weapon)
+        }
 
-            val redirectionDrone = activeBeams.getOrPut(beam){
-                org.selkie.zea.combat.utils.makeNewRedirectionDrone(beamShipAPI, beam.weapon)
-            }
+        redirectionDrone.owner = beamShipAPI.owner
+        redirectionDrone.facing = VectorUtils.getAngle(intersect.first, MathUtils.getPointOnCircumference(ship.location, BEAM_FOCUS_RADIUS, ship.facing))
 
-            redirectionDrone.owner = beamShipAPI.owner
-            redirectionDrone.facing = VectorUtils.getAngle(intersect.first, MathUtils.getPointOnCircumference(ship.location, 200f, ship.facing))
+        val weaponFirePointToBeamIntersect = Vector2f.sub(intersect.first, redirectionDrone.allWeapons[0].getFirePoint(0), null)
+        redirectionDrone.location.set(Vector2f.add(redirectionDrone.location, weaponFirePointToBeamIntersect, null))
 
-            val weaponFirePointToBeamIntersect = Vector2f.sub(intersect.first, redirectionDrone.allWeapons[0].getFirePoint(0), null)
-            redirectionDrone.location.set(Vector2f.add(redirectionDrone.location, weaponFirePointToBeamIntersect, null))
+        redirectionDrone.velocity.set(ship.velocity)
 
-            redirectionDrone.velocity.set(ship.velocity)
-
-            val rangeMod = 1f-(MathUtils.getDistance(beam.from, intersect.first)/beam.weapon.range)
-            redirectionDrone.mutableStats.beamWeaponRangeBonus.modifyMult("dem", rangeMod)
-            for(weapon in redirectionDrone.allWeapons){
-                weapon.setForceFireOneFrame(true)
-                weapon.setFacing(redirectionDrone.facing)
-                weapon.updateBeamFromPoints()
-            }
-        }else{
-            if(beam in activeBeams){
-                Global.getCombatEngine().removeEntity(activeBeams[beam]!!)
+        val rangeMod = 1f-(MathUtils.getDistance(beam.from, intersect.first)/beam.weapon.range)
+        redirectionDrone.mutableStats.beamWeaponRangeBonus.modifyMult("dem", rangeMod)
+        for(weapon in redirectionDrone.allWeapons){
+            weapon.setForceFireOneFrame(true)
+            weapon.setFacing(redirectionDrone.facing)
+            weapon.updateBeamFromPoints()
+            for(droneBeam in weapon.beams){
+                if(droneBeam is CombatEntityAPI) droneBeam.collisionClass = CollisionClass.RAY_FIGHTER
             }
         }
+        return true
     }
 
     fun resetDamagingProjectile(threat: DamagingProjectileAPI) {
@@ -367,20 +379,26 @@ class BulletTimeField : BaseShipSystemScript() {
         if(distortion != null){
             DistortionShader.removeDistortion(distortion)
         }
+
+        if(shieldOnBeforeSystem){
+            stats.entity.shield.toggleOn()
+            shieldOnBeforeSystem = false
+        }
     }
 
     fun applyStatChanges(stats: MutableShipStatsAPI, id: String, effectLevel: Float){
-        stats.maxSpeed.modifyMult(id, Misc.interpolate(1f, 0.5f, effectLevel))
-        stats.acceleration.modifyMult(id, Misc.interpolate(1f, 10f, effectLevel))
-        stats.deceleration.modifyMult(id, Misc.interpolate(1f, 10f, effectLevel))
-        stats.beamDamageTakenMult.modifyMult(id, Misc.interpolate(1f, 0f, effectLevel))
 
+        stats.maxSpeed.modifyMult(id, Misc.interpolate(1f, currentSpeedMult, effectLevel))
+        stats.acceleration.modifyMult(id, Misc.interpolate(1f, MAX_ACCEL_MULT, effectLevel))
+        stats.deceleration.modifyMult(id, Misc.interpolate(1f, MAX_ACCEL_MULT, effectLevel))
+        stats.engineDamageTakenMult.modifyMult(id, 0f)
         //stats.entity.shield.arc = 360f
         //ship.getShield().setRadius(10f);
         stats.entity.shield.toggleOff()
         //stats.entity.shield.innerColor = Color(100, 255, 100)
         //stats.entity.shield.ringColor = Color(100, 255, 100)
         stats.entity.collisionRadius = Misc.interpolate(collisionRadius, ACTIVE_COLLISION_RADIUS, effectLevel)
+        stats.entity.exactBounds
     }
 
     fun revertStatChanges(stats: MutableShipStatsAPI, id: String){
@@ -388,6 +406,7 @@ class BulletTimeField : BaseShipSystemScript() {
         stats.acceleration.unmodify(id)
         stats.deceleration.unmodify(id)
         stats.beamDamageTakenMult.unmodify(id)
+        stats.engineDamageTakenMult.unmodify(id)
 
         //stats.entity.shield.arc = shieldArc
         //stats.entity.shield.radius = shieldRadius
@@ -396,8 +415,8 @@ class BulletTimeField : BaseShipSystemScript() {
 
     override fun getStatusData(index: Int, state: ShipSystemStatsScript.State?, effectLevel: Float): StatusData? {
         return when(index){
-            0 -> StatusData("top speed halved", true)
-            1 -> StatusData("improved maneuverability", false)
+            0 -> StatusData("strafe speed halved", true)
+            1 -> StatusData("instant maneuverability", false)
             else -> null
         }
     }

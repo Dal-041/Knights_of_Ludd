@@ -223,6 +223,9 @@ public class Utils {
             return x / 12.92f;
     }
 
+
+    // Maps an input value from one range to another using linear interpolation, with clamping.
+    // If the input is below the specified input range, it returns the minimum output; if it's above, it returns the maximum output.
     public static float linMap(float minOut, float maxOut, float minIn, float maxIn, float input){
         if(input > maxIn) return maxOut;
         if(input < minIn) return minOut;
