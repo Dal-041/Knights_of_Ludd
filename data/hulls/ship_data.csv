@@ -254,14 +254,15 @@ Beam Redirection Drone,beam_redirection_drone,,,,,10000000,0,100000,,100000,,,10
 #FRIGATES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Ikiryo,zea_dusk_ikiryo,Living Soul,Dusk,entropyamplifier,9,1500,400,3000,,325,50,,100,100,100,65,120,280,PHASE,zea_dusk_phasecloak,90,,,0.04,0.05,5,10,25,50,1,50,10,42000,8,30,200,0.25,10,10,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,2,,800
 Onibi,zea_dusk_onibi,Verse,Dusk,emp,7,1100,250,3000,,260,50,,140,220,175,120,360,100,OMNI,,360,0.3,0.6,,,10,20,30,20,1,20,10,33000,10,20,200,0.25,6,6,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,2,,801
-Wani,zea_edf_wani,Empyrean Frigate,Elysia,zea_edf_minijump,8,1750,250,2500,,180,50,,140,120,100,45,90,200,FRONT,,120,0.4,0.8,,,1,1,40,25,1,25,10,10000,8,10,220,0.25,7,7,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,2,,900
+Wani,zea_edf_wani,Empyrean Frigate,Elysia,zea_edf_minijump,8,1750,250,2500,,180,55,,140,120,100,45,90,200,FRONT,,150,0.4,0.8,,,1,1,40,25,1,25,10,10000,8,10,220,0.25,7,7,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,2,,900
 Tamamo,zea_edf_tamamo,Empyrean Superfrigate,Elysia,zea_bullet_time_field,12,1600,450,1600,,210,65,1,190,200,175,125,350,200,FRONT,,120,0.22,0.8,,,1,1,25,20,1,20,12,250000,8,20,240,0.25,15,15,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, no_autofit, restricted",0,0.7,3,4,,901
 #DESTROYERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Lushu,zea_dawn_lushu,Glare,Dawntide,zea_dawn_flare_wave,14,5500,700,4500,,300,120,1,85,75,50,40,50,500,OMNI,,150,0.4,0.9,,,0,0,80,60,2,30,10,50000,5,15,420,0.25,16,16,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,700
 Xuangui,zea_dawn_xuangui,Aglow,Dawntide,zea_dawn_targeting_beam,12,4000,400,4000,,200,75,,60,50,25,35,20,500,OMNI,,270,0.4,0.9,,,0,0,40,60,2,30,10,50000,5,15,420,0.25,16,16,,,,,,,"CARRIER, COMBAT, NO_AUTO_ESCORT, UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,701
+Zhi Nu,zea_boss_zhi_nu,Cloudweaver,Dawntide,zea_bullet_time_field,15,5500,700,6000,,400,100,,120,175,150,50,100,400,FRONT,,150,0.6,0.6,,,5,15,30,30,2,15,10,95000,8,30,300,0.25,15,15,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.75,2,2,,701.1
 Shiryo,zea_dusk_shiryo,Melody,Dusk,acausaldisruptor,14,4000,450,5000,,500,80,,90,75,40,40,30,450,PHASE,zea_dusk_phasecloak,90,,,0.05,0.05,25,50,60,100,2,50,9,120000,5,30,300,0.25,18,18,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX, PHASE","auto_rec, restricted",,0.5,2,3,,802
 Furaribi,zea_dusk_furaribi,Aria,Dusk,zea_dusk_displacer,14,3500,400,6500,,400,100,,120,100,75,45,110,300,OMNI,,120,0.3,0.55,,,35,50,50,40,2,20,9,80000,5,20,300,0.25,12,12,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.7,2,3,,803
-Suzaku,zea_edf_suzaku,Empyrean Destroyer,Elysia,zea_edf_minijump,16,4000,400,5500,,400,105,,115,80,60,30,30,400,FRONT,,120,0.4,0.8,,,1,15,80,50,2,25,9,45000,6,15,300,0.25,12,12,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,902
+Suzaku,zea_edf_suzaku,Empyrean Destroyer,Elysia,zea_edf_minijump,16,4000,400,5500,,400,105,,115,80,60,30,30,400,FRONT,,150,0.4,0.8,,,1,15,80,50,2,25,9,45000,6,15,300,0.25,12,12,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,902
 #CRUISERS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Tianma,zea_dawn_tianma,Vestige,Dawntide,reservewing,22,11000,1100,8000,,400,150,3,60,35,30,25,20,2100,OMNI,,120,0.4,0.9,,,0,0,120,90,3,30,9,170000,4,15,540,0.25,24,24,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,702
 Bixi,zea_dawn_bixi,Tide,Dawntide,zea_dawn_charge_drive,18,12000,1300,10000,,600,160,,60,35,30,30,25,1600,FRONT,,180,0.4,0.9,,,0,0,120,90,3,30,9,140000,4,15,540,0.25,25,25,,,,,,,"UNBOARDABLE, HIDE_IN_CODEX","auto_rec, restricted",,0.5,2,3,,703
@@ -280,7 +281,6 @@ Ryujin,zea_edf_ryujin,Empyrean Battleship,Elysia,zea_edf_fortress_flux_converter
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #UNIQUE BOSS SHIPS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Zhi Nu,zea_boss_zhi_nu,Cloudweaver,Dawntide,zea_bullet_time_field,15,5500,700,6000,,400,65,,120,175,150,50,100,200,FRONT,,300,0.6,0.6,,,5,15,10,15,1,15,10,95000,8,40,120,0.25,15,15,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",,0.75,2,2,,202
 Ninaya,zea_boss_ninaya,Prototype,High Tech,zea_dusk_phaseteleporter,15,2500,250,8000,,500,70,,130,190,165,60,120,325,FRONT,,360,0.6,0.55,,,1,1,7,10,1,15,11,150000,8,50,300,0.25,22,22,,,,,,,HIDE_IN_CODEX,"no_autofit, restricted",0.5,0.75,2,2,,1000
 Ninmah,zea_boss_ninmah,Prototype,High Tech,acausaldisruptor,30,5500,900,11000,,900,160,,75,55,40,20,25,1200,PHASE,zea_dusk_phasecloak,,,,0.03,0.04,75,125,100,125,2,50,9,350000,6,50,500,0.25,40,40,,,,,,,"HIDE_IN_CODEX, PHASE","no_autofit, restricted",,0.5,2,3,,
 Nineveh,zea_boss_nineveh,Prototype,High Tech,zea_dusk_mine_strike,45,9000,900,12000,,1000,220,,40,60,60,20,40,2000,PHASE,zea_dusk_phasecloak,,,,0.03,0.04,175,350,175,400,8,50,8,850000,5,50,800,0.25,55,55,,,,,,,"HIDE_IN_CODEX, PHASE","no_autofit, restricted",,0.4,2,3,,

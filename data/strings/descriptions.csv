@@ -270,7 +270,7 @@ zea_edf_twinshield,SHIP_SYSTEM,Activates a secondary shield system with a smalle
 zea_dawn_targeting_beam,SHIP_SYSTEM,"Fires a lidar beam forward. If it hits, the target will be marked for increased damage.",Offensive,,,
 zea_dawn_damper,SHIP_SYSTEM,Dampens incoming damage.,Defensive,,,
 zea_edf_plasmafighters,SHIP_SYSTEM,Thrusts the ship and the ship's fighters forward with a burst of speed.,Movement,,,
-zea_edf_minijump,SHIP_SYSTEM,"Quickly jumps the ship in a chosen direction, followed by short firepower boost.",Movement,,,
+zea_edf_minijump,SHIP_SYSTEM,"Quickly jumps the ship above the battlefield in a chosen direction, followed by short firepower boost. Most effective when strafing, least effective when retreating.",Movement,,,
 zea_boss_relativisticdrift,SHIP_SYSTEM,Massively increases the time flow of the ship for a moment while moving in a specific direction.,Movement,,,
 zea_edf_synchronized_ammo_feed,SHIP_SYSTEM,The vessel and its launched craft receive a 50% increase in weapon ROF and a corresponding flux cost reduction.,Offensive,,,
 zea_dawn_flare_burn,SHIP_SYSTEM,Thrusts the ship forward and launches a large wave of smart flares.,Defensive,,,
@@ -283,6 +283,7 @@ zea_dusk_phase_skip,SHIP_SYSTEM,"Activates the onboard phase coils to shunt the 
 zea_dusk_mine_strike,SHIP_SYSTEM,Teleports a heavy phase mine to the target area. The mine will slowly track nearby enemy ships and explodes a few seconds after its proximity trigger is activated. Can be used while phased.,Offensive,Teleports a heavy proximity mine to the target area. Can be used while phased.,,
 zea_dusk_displacer,SHIP_SYSTEM,Teleports the ship forward in the direction it's traveling. The system slowly builds up to three charges which can then be expended in short order.,Movement,Teleports the ship forward in the direction it's traveling. The system can store up to three charges at once.,,
 zea_dawn_charge_drive,SHIP_SYSTEM,Temporarily engages a primary burn on the system travel drive of the ship. Provides a massive speed boost for a fixed time at the expense of being able to use shields.,Movement,Provides a massive speed boost at the expense of being unable to use shields.,,
+zea_bullet_time_field,SHIP_SYSTEM,"Toggles a diffuse but wide advanced temporal field, reducing the timeflow of anything light enough. Microscopic ripples on the boundry of the field results in the apparent bending of straight line paths which cross into the field. Generates hard flux at a steady rate, and reduces strafing speed by half while active.",Movement,"Toggles a diffuse but wide advanced temporal field, reducing the timeflow of anything light enough. Microscopic ripples on the boundry of the field results in the apparent bending of straight line paths which cross into the field. Generates hard flux at a steady rate, and reduces strafing speed by half while active.",,
 #,,,,,,
 #Ships,,,,,,
 zea_dusk_ikiryo,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
