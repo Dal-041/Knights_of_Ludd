@@ -1,0 +1,6 @@
+id,weight,pluginPath
+,#Highter Weight = Higher chance to appear. Should generaly be far lower than vanillas titlescreen.,"#Class that inherits from ""BaseLunaTitleScreenPlugin"""
+#vanilla,1000,
+kol_nullspace,200000,org.selkie.zea.combat.titles.NullspaceTitleScreen
+kol_elysia,2,org.selkie.zea.combat.titles.ElysiaTitleScreen
+kol_luna,2,org.selkie.zea.combat.titles.LunaSeaTitleScreen
