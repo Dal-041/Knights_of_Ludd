@@ -69,7 +69,8 @@ public class ZeaLoreManager extends BaseSpecialItemPlugin {
     public static final String[] TT1DropHLs = { "remaining samples", "our situation", "the command core" };
     public static final String TT2Drop = "We're able to consistently attract -- but stabilizing spacetime around --ergetic instances has proven dif-- every caution on this, there's no telling what -- the %s manifested in stable form. The flocks don't -- only when the engineering personnel and artifi-- --ectively manage the swarms. Did Projec-- same problem? We never got a reason why their briefin-- their loss will be our opportunity, as our team is back on schedule. The %s will go into production any day now, and the bonus I'm due is going set me up for life.\n Might even -- those private chateaus the execs seem to love so much.\n - Engineer's log, C204, Project Dusk";
     public static final String[] TT2DropHLs = { "high voli--", "new prototypes" };
-    public static final String TT3Drop = "204-4: %s proceeding on schedule, rejection rates within expected parameters. 7 rejected within one minute. 2 within ten minutes, 1 candidate achieved a full hour before expiry.\n" +
+    public static final String TT3Drop = "204-4: %s proceeding on schedule, rejection rates within expected parameters. " +
+            "Seven rejected within one minute. Two within ten minutes, One candidate achieved a full hour before expiry.\n" +
             "...\n" +
             "205-1: The first Project Dusk expedition has returned successfully. Eight days out and back; recovery, fabrication, and defense trials have all passed. %s were synchronized within tolerance for almost the entire duration.\n" +
             "...\n" +

@@ -367,6 +367,7 @@ public class ZeaStaticStrings {
     public static final String systemIDCorruption = "zea_boss_corruptionjets";
     public static final String systemIDFlareWave = "zea_dawn_flare_wave";
 
+    //Portraits
     public static final String pathPortraits = "graphics/zea/portraits/";
     public static final String[] portraitsDawnPaths = {
             pathPortraits.concat("zea_dawn_1.png"),

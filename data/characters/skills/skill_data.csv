@@ -1,13 +1,13 @@
-id,name,order,tier,reqPoints,reqPointsPerExtraSkill,description,author,combat officer,admiral,admin,tags,icon,
-,,,,,,,,,,,,,
-#Boss Core Skills,,,,,,,,,,,,,
-zea_dawn_boss_core_skill,Dawn,10000,1,0,,"Please, you must rethink this, this.. 'Dawn Core' failure we've recovered from Nian's work. I don't know what memo you've read that's got you sold on this, but listen to me - what you think it MIGHT do, it WILL do so much WORSE!","Recovered comms, Dr. Miriam Kawn (with 86% certainty)",TRUE,FALSE,FALSE,"npc_only, ai_core_only",graphics/zea/icons/skills/dawn_boss_core_skill.png,
-zea_dusk_boss_core_skill,Dusk,10000,1,0,,"Integrating a human with Project Dusk was a stroke of genius. The human mind stabilizes the AI in phase space. It's not insanity; it's evolution.","Project Lead Dr. Octavia Yang, in a Tri-Tachyon strategy meeting",TRUE,FALSE,FALSE,"npc_only, ai_core_only",graphics/zea/icons/skills/dusk_boss_core_skill.png,
-zea_elysia_boss_core_skill,Elysia,10000,1,0,,"I'm all for pushing boundaries against rampant misused of Tri-tachyon AI - but fighting fire with fire using the so-called 'Celestial Prison' just seems to me to be making things worse.","Major General Elias Rhodes, classified communication",TRUE,FALSE,FALSE,"npc_only, ai_core_only",graphics/zea/icons/skills/elysia_boss_core_skill.png,
-,,,,,,,,,,,,,
-,,,,,,,,,,,,,
-#Apt,,,,,,,,,,,,,
-zea_boss_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
-zea_dawn_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
-zea_dusk_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
-zea_elysian_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png,
+id,name,order,tier,reqPoints,reqPointsPerExtraSkill,description,author,combat officer,admiral,admin,tags,icon
+,,,,,,,,,,,,
+#Boss Core Skills,,,,,,,,,,,,
+zea_dawn_boss_core_skill,Dawn,10000,1,0,,"Please, you must rethink this! Nian’s construct, this, this 'Dawn Core' is an abomination! I don't know what memo you've read that's got you sold on this, but listen to me - what you think it MIGHT be capable of, it WILL do so much worse!","Recovered log, the late Dr. Miriam Kawn",TRUE,FALSE,FALSE,"npc_only, ai_core_only",graphics/zea/icons/skills/dawn_boss_core_skill.png
+zea_dusk_boss_core_skill,Dusk,10000,1,0,,"Integrating a human into the Project was a stroke of genius. The agents can spur the cores through phase, the core can motivate the agent when they surface. - It's not insanity, it's evolution!","Project Lead Dr. Octavia Yang, in a denied Tri-Tachyon strategy meeting",TRUE,FALSE,FALSE,"npc_only, ai_core_only",graphics/zea/icons/skills/dusk_boss_core_skill.png
+zea_elysia_boss_core_skill,Elysia,10000,1,0,,"I'll do whatever it takes to stop the scourge of Tri-tachyon AI - but fighting fire with fire, this so-called 'Celestial Prison' just seems to be asking for trouble.","Vice Admiral Elias Rhodes, classified communication",TRUE,FALSE,FALSE,"npc_only, ai_core_only",graphics/zea/icons/skills/elysia_boss_core_skill.png
+,,,,,,,,,,,,
+,,,,,,,,,,,,
+#Apt,,,,,,,,,,,,
+zea_boss_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
+zea_dawn_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
+zea_dusk_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
+zea_elysian_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
