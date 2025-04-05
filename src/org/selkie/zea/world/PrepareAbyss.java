@@ -68,7 +68,6 @@ public class PrepareAbyss {
 				faction.setRelationship(ZeaStaticStrings.elysianID, -100);
 			}
 		}
-		// TODO: Split boss fleet spawns so they don't all get combined into capital ships
 		SpawnDuskBoss.SpawnDuskBoss();
 		SpawnElysianAmaterasu.SpawnElysianAmaterasu();
 		SpawnElysianHeart.SpawnElysianHeart();

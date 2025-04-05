@@ -37,9 +37,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 	public static final boolean haveNex = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.NEXERELIN);
 	public static final boolean hasGraphicsLib = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.SHADER_LIB);
 	public static final boolean hasKOLGraphics = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.KNIGHTS_OF_LUDD_MAPS);
-	public static final boolean hasMMM = Global.getSettings().getModManager().isModEnabled(KolStaticStrings.MORE_MILITARY_MISSIONS);
-
-
 
 	@Override
 	public void onApplicationLoad() {
@@ -50,10 +47,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 			if (hasKOLGraphics) {
 				TextureData.readTextureDataCSV("data/lights/kol_glib_extended.csv");
 			}
-		}
-		if (hasMMM) { //Remove after week 1
-			Set<String> BL = DefenseMission.FACTION_BLACKLIST;
-            BL.addAll(Arrays.asList(ZeaStaticStrings.factionIDs));
 		}
 
 		//LunaRefitManager.addRefitButton(new DuskCoreRefitButton());
@@ -77,7 +70,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		PrepareDarkDeeds.andContinue();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
-		//Global.getSector().addTransientScript(new SpoilersNotif());
 
 		Global.getSector().registerPlugin(new ZeaCampaignPlugin());
 		Global.getSector().registerPlugin(new AICoreCampaignPlugin());

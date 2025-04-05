@@ -21,7 +21,7 @@ public class NianFlaresSubsystem extends MagicSubsystem {
     private static final int FLARE_WAVES_NORMAL = 1;
     private static final int FLARE_WAVES_ENRAGED = 3;
     protected static final ShipSystemSpecAPI entry = Global.getSettings().getShipSystemSpec(ZeaStaticStrings.systemIDFlareWave);
-    private static float FLARE_WAVE_DELAY = 0.75F;
+    private static final float FLARE_WAVE_DELAY = 0.75F;
     private static final float MISSILE_SEARCH_RANGE = 1000f;
 
     final IntervalUtil flaresInterval = new IntervalUtil(0.03f, 0.09f);
@@ -29,7 +29,6 @@ public class NianFlaresSubsystem extends MagicSubsystem {
     final IntervalUtil nextWaveInterval = new IntervalUtil(FLARE_WAVE_DELAY, FLARE_WAVE_DELAY);
     int flaresReleasedInWave = 0;
     int wavesToLaunch = 0;
-    boolean checkedEntry = false;
 
     public NianFlaresSubsystem(ShipAPI ship) {
         super(ship);
