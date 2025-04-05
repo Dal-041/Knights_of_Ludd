@@ -1,3 +1,19 @@
+## v1.4.0
+- Updated for Starsector 0.98
+- Added rare main menu setpieces courtesy of Lukas04
+- Dusk EM anomalies nerfed: unlike vanilla, these will now respect hardflux levels when determining shield penetration
+- Improved some [VERY REDACTED] flavor descriptions.
+- Kiyohime sprite reworked
+- Seiryu sprite touchups
+- Nian is now much more aggressive as an enemy.
+- Improved Linggui's normal maps
+- Wani - improved slot types to encourage build freedom
+- Wani, Suzaku System:
+  - Its system is now much more responsive.
+  - Its system can now be used to dodge through attacks.
+- Added some visual effects
+- Fixed a few crash that could occur while using the special Dusk AI.
+
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.
 - The Null Gate now has custom travel VFX.

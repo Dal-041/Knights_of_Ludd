@@ -149,9 +149,9 @@ object ReflectionUtils {
         val methodType = MethodType.methodType(Void.TYPE, args)
 
         method = if (!declared) {
-            clazz.getMethod(methodName, *methodType.parameterArray())
+            clazz.getMethod(methodName, *methodType.parameterArray()) as Any?
         } else {
-            clazz.getDeclaredMethod(methodName, *methodType.parameterArray())
+            clazz.getDeclaredMethod(methodName, *methodType.parameterArray()) as Any?
         }
 
         return invokeMethodHandle.invoke(method, instance, arguments)
