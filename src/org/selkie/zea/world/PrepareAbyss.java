@@ -508,6 +508,7 @@ public class PrepareAbyss {
 		}
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_underworld_theme");
 
+		system.addTag(Tags.THEME_HIDDEN);
 		system.addTag(Tags.THEME_UNSAFE);
 		system.addTag(Tags.THEME_SPECIAL);
 		system.addTag(Tags.NOT_RANDOM_MISSION_TARGET);
