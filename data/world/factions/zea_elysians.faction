@@ -4,7 +4,7 @@
     "secondaryUIColor":[255,253,222,255],
 	"secondarySegments":18,
 	
-	"baseUIColor":[125,125,125,255],
+	"baseUIColor":[255,253,222,255],
 	"darkUIColor":[32,0,32,175],
 	"gridUIColor":[50,0,50,75],
 	
@@ -207,6 +207,10 @@
 		"allowsTransponderOffTrade":true, # to prevent cargoscan dialog from "patrols"
 		"postsNoBounties":true,
 		"fightToTheLast":true, # order a full assault instead of retreating, in most cases
+		"simulatorData":{
+			"showInSimulator":true,
+			"standardAICores":true,
+		},
 	},	
 	"fleetTypeNames":{
 		"patrolSmall":"Security Detachment",

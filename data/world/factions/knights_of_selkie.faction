@@ -336,6 +336,9 @@
 			"canBombard":false,
 			"territorial":false,
 		},
+		"simulatorData":{
+			"showInSimulator":true,
+		},
 	},
 	"fleetTypeNames":{
 		"trade":"Convoy",
