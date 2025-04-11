@@ -17,6 +17,7 @@
 		"isStar":true,
 		"isPulsar":true,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
+		"tags":["codex_unlockable"],
 	},
 	"zea_red_hole":{
 		"name":"Red Singularity",
@@ -40,6 +41,7 @@
 		"scaleMultMapIcon":1.0,
 		"scaleMultStarscapeIcon":1.0,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
+		"tags":["codex_unlockable"],
 	},
 	"zea_white_hole":{
 		"name":"White Hole",
@@ -63,6 +65,7 @@
 		"scaleMultMapIcon":1.0,
 		"scaleMultStarscapeIcon":1.0,
 		"lightPosition":[0,0,10], # in planet radii.  Not used for stars.  z > 0 is above the playing field.
+		"tags":["codex_unlockable"],
 	},
 }
 

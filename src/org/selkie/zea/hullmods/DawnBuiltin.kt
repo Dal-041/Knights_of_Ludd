@@ -130,7 +130,7 @@ class DawnBuiltin : BaseHullMod() {
         return 410f
     }
 
-    override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI, width: Float, isForModSpec: Boolean) {
+    override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI?, width: Float, isForModSpec: Boolean) {
 
         val HEIGHT = 64f
         val headingPad = 20f
@@ -169,45 +169,54 @@ class DawnBuiltin : BaseHullMod() {
         tooltip.addImageWithText(underHeadingPad)
 
 
-        val hasShieldDrones = hullSize == HullSize.CAPITAL_SHIP || hullSize == HullSize.CRUISER
-        val activator = ShieldDronesSubsystem(ship, getNumDrones(ship), false)
-        val drone = Global.getSettings().getVariant(activator.getDroneVariant()).hullSpec
-        val health = (drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints).roundToInt().toString()
-        val maxDrones = activator.getMaxDeployedDrones().toString()
-        val recharge = activator.baseChargeRechargeDuration.roundToInt().toString()
-        tooltip.addSectionHeading(
-            "Chiwen Shield Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
-            if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
-        )
-        val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
-        shieldDrones.setBulletedListMode("•")
-        shieldDrones.setBulletWidth(15f)
+        if (ship != null) {
+            val hasShieldDrones = hullSize == HullSize.CAPITAL_SHIP || hullSize == HullSize.CRUISER
+            val activator = ShieldDronesSubsystem(ship, getNumDrones(ship), false)
+            val drone = Global.getSettings().getVariant(activator.getDroneVariant()).hullSpec
+            val health = (drone.fluxCapacity / drone.shieldSpec.fluxPerDamageAbsorbed + drone.armorRating + drone.hitpoints).roundToInt().toString()
+            val maxDrones = activator.getMaxDeployedDrones().toString()
+            val recharge = activator.baseChargeRechargeDuration.roundToInt().toString()
+            tooltip.addSectionHeading(
+                "Chiwen Shield Drones", if (hasShieldDrones) activeHeaderTextColor else inactiveHeaderTextColor,
+                if (hasShieldDrones) activeHeaderBannerColor else inactiveHeaderBannerColor, Alignment.MID, headingPad
+            )
+            val shieldDrones = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, if (hasShieldDrones) "dawn_chiwen" else "dawn_chiwen_grey"), HEIGHT)
+            shieldDrones.setBulletedListMode("•")
+            shieldDrones.setBulletWidth(15f)
 
-        val para3 = shieldDrones.addPara("%s %s/%s/%s/%s %s %s %s", listPad, inactiveTextColor, activeTextColor,
-            "Deploys",
-            "${getNumDrones(HullSize.FRIGATE)}",
-            "${getNumDrones(HullSize.DESTROYER)}",
-            "${getNumDrones(HullSize.CRUISER)}",
-            "${getNumDrones(HullSize.CAPITAL_SHIP)}",
-            "shield drones around the ship, each drone is capable of absorbing",
-            health,
-            "damage.")
+            val para3 = shieldDrones.addPara("%s %s/%s/%s/%s %s %s %s", listPad, inactiveTextColor, activeTextColor,
+                "Deploys",
+                "${getNumDrones(HullSize.FRIGATE)}",
+                "${getNumDrones(HullSize.DESTROYER)}",
+                "${getNumDrones(HullSize.CRUISER)}",
+                "${getNumDrones(HullSize.CAPITAL_SHIP)}",
+                "shield drones around the ship, each drone is capable of absorbing",
+                health,
+                "damage.")
 
-        ReflectionUtils.invoke("setColor", shieldDrones.prev, if (hasShieldDrones) activeTextColor else inactiveTextColor)
+            ReflectionUtils.invoke("setColor", shieldDrones.prev, if (hasShieldDrones) activeTextColor else inactiveTextColor)
 
-        para3.setHighlightColors(if (hasShieldDrones) activeTextColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.FRIGATE && hasShieldDrones) activeHighlightColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.DESTROYER && hasShieldDrones) activeHighlightColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.CRUISER && hasShieldDrones) activeHighlightColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.CAPITAL_SHIP && hasShieldDrones) activeHighlightColor else inactiveTextColor,
-            if (hasShieldDrones) activeTextColor else inactiveTextColor,
-            if (hasShieldDrones) activePositiveColor else inactivePositiveColor,
-            if (hasShieldDrones) activeTextColor else inactiveTextColor)
+            para3.setHighlightColors(if (hasShieldDrones) activeTextColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.FRIGATE && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.DESTROYER && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.CRUISER && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.CAPITAL_SHIP && hasShieldDrones) activeHighlightColor else inactiveTextColor,
+                if (hasShieldDrones) activeTextColor else inactiveTextColor,
+                if (hasShieldDrones) activePositiveColor else inactivePositiveColor,
+                if (hasShieldDrones) activeTextColor else inactiveTextColor)
 
-        shieldDrones.addPara("Drones regenerate once every %s seconds.",
-            listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, recharge
-        )
-        tooltip.addImageWithText(underHeadingPad)
+
+
+            shieldDrones.addPara("Drones regenerate once every %s seconds.",
+                listPad, if (hasShieldDrones) activeTextColor else inactiveTextColor, if (hasShieldDrones) activeHighlightColor else inactiveHighlightColor, recharge
+            )
+            tooltip.addImageWithText(underHeadingPad)
+        } else {
+            tooltip.addSectionHeading("Chiwen Shield Drones", activeHeaderTextColor , activeHeaderBannerColor , Alignment.MID, headingPad)
+            tooltip.addPara("Deploys shield drones around the ship, each drone is capable of absorbing damage", 0f)
+        }
+
+
 
 
         tooltip.addSectionHeading("Advanced Solar Plating", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)

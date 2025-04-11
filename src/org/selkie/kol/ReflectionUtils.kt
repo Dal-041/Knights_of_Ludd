@@ -40,8 +40,12 @@ object ReflectionUtils {
     @JvmStatic
     fun setFieldOfType(type: Class<*>, instanceToModify: Any, newValue: Any?)
     {
-        var fields: MutableList<Any> = instanceToModify.javaClass.declaredFields.toMutableList() as MutableList<Any>
-        fields.addAll(instanceToModify.javaClass.fields.toMutableList())
+        var decFieldsA: Array<Any> = instanceToModify.javaClass.declaredFields as Array<Any>
+        var fields: MutableList<Any> = decFieldsA.toMutableList()
+        var nonDecFieldsA: Array<Any> = instanceToModify.javaClass.fields as Array<Any>
+        var nonDecFields: MutableList<Any> = nonDecFieldsA.toMutableList()
+
+        fields.addAll(nonDecFields)
 
         for (field: Any in fields)
         {
@@ -85,7 +89,7 @@ object ReflectionUtils {
     }
 
     fun hasMethodOfName(name: String, instance: Any, contains: Boolean = false): Boolean {
-        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredMethods()
+        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredMethods() as Array<out Any>
 
         return if (!contains) {
             instancesOfMethods.any { getMethodNameHandle.invoke(it) == name }
@@ -95,19 +99,19 @@ object ReflectionUtils {
     }
 
     fun getMethodOfReturnType(instance: Any, clazz: Class<*>): String? {
-        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredMethods()
+        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredMethods() as Array<out Any>
 
         return instancesOfMethods.firstOrNull { getMethodReturnHandle.invoke(it) == clazz }
                 ?.let { getMethodNameHandle.invoke(it) as String }
     }
 
     fun hasVariableOfName(name: String, instance: Any): Boolean {
-        val instancesOfFields: Array<out Any> = instance.javaClass.getDeclaredFields()
+        val instancesOfFields: Array<out Any> = instance.javaClass.getDeclaredFields() as Array<out Any>
         return instancesOfFields.any { getFieldNameHandle.invoke(it) == name }
     }
 
     fun getFieldsOfType(instance: Any, clazz: Class<*>): List<String> {
-        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredFields()
+        val instancesOfMethods: Array<out Any> = instance.javaClass.getDeclaredFields() as Array<out Any>
 
         return instancesOfMethods.filter { getFieldTypeHandle.invoke(it) == clazz }
                 .map { getFieldNameHandle.invoke(it) as String }
@@ -172,7 +176,7 @@ object ReflectionUtils {
     }
 
     fun findFieldWithMethodReturnType(instance: Any, clazz: Class<*>): ReflectedField? {
-        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields
+        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields as Array<out Any>
 
         return instancesOfFields.map { fieldObj -> fieldObj to getFieldTypeHandle.invoke(fieldObj) }
                 .firstOrNull { (fieldObj, fieldClass) ->
@@ -187,7 +191,7 @@ object ReflectionUtils {
     }
 
     fun findFieldWithMethodName(instance: Any, methodName: String): ReflectedField? {
-        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields
+        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields as Array<out Any>
 
         return instancesOfFields.map { fieldObj -> fieldObj to getFieldTypeHandle.invoke(fieldObj) }
                 .firstOrNull { (fieldObj, fieldClass) ->
@@ -198,7 +202,7 @@ object ReflectionUtils {
     }
 
     fun hasMethodOfNameInClass(name: String, instance: Class<Any>, contains: Boolean = false): Boolean {
-        val instancesOfMethods: Array<out Any> = instance.getDeclaredMethods()
+        val instancesOfMethods: Array<out Any> = instance.getDeclaredMethods() as Array<out Any>
 
         return if (!contains) {
             instancesOfMethods.any { getMethodNameHandle.invoke(it) == name }
@@ -208,7 +212,7 @@ object ReflectionUtils {
     }
 
     fun getMethodArguments(method: String, instance: Any): Array<Class<*>>? {
-        val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods
+        val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods as Array<out Any>
         instancesOfMethods.firstOrNull { getMethodNameHandle.invoke(it) == method }?.let {
             return getMethodParametersHandle.invoke(it) as Array<Class<*>>
         }
@@ -216,7 +220,7 @@ object ReflectionUtils {
     }
 
     fun getMethodWithArguments(instance: Any, argumentsClass: Array<Class<*>>): String? {
-        val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods
+        val instancesOfMethods: Array<out Any> = instance.javaClass.declaredMethods as Array<out Any>
         for(method in instancesOfMethods){
             if (argumentsClass.contentEquals(invoke("getParameterTypes", method) as Array<Class<*>>)){
                 return getMethodNameHandle.invoke(method) as String
@@ -226,7 +230,7 @@ object ReflectionUtils {
     }
 
     fun findFieldsOfType(instance: Any, clazz: Class<*>): List<ReflectedField> {
-        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields
+        val instancesOfFields: Array<out Any> = instance.javaClass.declaredFields as Array<out Any>
 
         return instancesOfFields.map { fieldObj -> fieldObj to getFieldTypeHandle.invoke(fieldObj) }
                 .filter { (fieldObj, fieldClass) ->

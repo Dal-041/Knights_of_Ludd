@@ -298,7 +298,7 @@ class ElysianBuiltin : BaseHullMod() {
     }
 
 
-    override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI, width: Float, isForModSpec: Boolean) {
+    override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI?, width: Float, isForModSpec: Boolean) {
         val HEIGHT = 64f
         val headingPad = 20f
         val underHeadingPad = 10f
@@ -328,7 +328,7 @@ class ElysianBuiltin : BaseHullMod() {
         //coronalCapacitor.addPara("Utilizes energy from local stars to \nsupercharge weapons and engines.", listPad, activeTextColor, activePositiveColor, "supercharge weapons and engines");
         val para1 = coronalCapacitor.addPara(
             "Stellar energy charges at a rate equal to \n%s in this location. \nActive venting increases this rate by %s.",
-            listPad, activeHighlightColor, String.format("%.2f", rate * 100) + "% per second", String.format("%.2f", ship.mutableStats.ventRateMult.getModifiedValue() * 2) + "x"
+            listPad, activeHighlightColor, String.format("%.2f", rate * 100) + "% per second", String.format("%.2f", (ship?.mutableStats?.ventRateMult?.getModifiedValue() ?: 0f) * 2) + "x"
         )
         para1.setHighlightColors(activeHighlightColor, activePositiveColor)
         coronalCapacitor.addPara("Firing weapons deletes energy at a rate proportional to their flux cost.", listPad)
@@ -337,6 +337,8 @@ class ElysianBuiltin : BaseHullMod() {
             "30% increase", "ballistic rate of fire", "energy weapon damage", "top speed", "acceleration"
         )
         para2.setHighlightColors(activePositiveColor, activeTextColor, activeTextColor, activeTextColor, activeTextColor)
+
+
         /*
         coronalCapacitor.addPara("The boost from a full charge results in a \n%s to:", 3f, activePositiveColor, "30% increase");
         coronalCapacitor.setBulletedListMode("");
@@ -344,6 +346,10 @@ class ElysianBuiltin : BaseHullMod() {
         coronalCapacitor.addPara("  - Ballistic Rate of Fire", listPad, activeHighlightColor, "Ballistic Rate of Fire");
         coronalCapacitor.addPara("  - Top Speed", listPad, activeHighlightColor, "Top Speed");
         coronalCapacitor.addPara("  - Acceleration", listPad, activeHighlightColor, "Acceleration");*/tooltip.addImageWithText(underHeadingPad)
+
+        if (ship == null) return
+
+
         val hasShieldDrones = hullSize != HullSize.FIGHTER
         val activator: MagicDroneSubsystem = PDDroneSubsystem(ship)
         val maxDrones = activator.getMaxDeployedDrones().toString()

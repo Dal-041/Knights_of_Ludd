@@ -1,6 +1,9 @@
 ## v1.4.0
 - Updated for Starsector 0.98
-- Added rare main menu setpieces courtesy of Lukas04
+- Compiled for Java17 and Kotlin 2.0
+- Made KOL and [REDACTED] fleets unlockable for the simulator.
+- Added rare main menu setpieces.
+- Fixed a crash on Mac & Linux with the Alysse AI.
 - Dusk EM anomalies nerfed: unlike vanilla, these will now respect hardflux levels when determining shield penetration
 - Improved some [VERY REDACTED] flavor descriptions.
 - Kiyohime sprite reworked

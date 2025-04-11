@@ -283,12 +283,15 @@ public class KnightRefit extends BaseHullMod {
         new HullmodBackgroundElement(tooltip,  Global.getSettings().getSprite(GfxCat.UI, "kol_refit_hmod"), 0.6f);
 
         boolean hasComposite = false;
-        for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){
-            if (slot.getWeaponType() == WeaponAPI.WeaponType.COMPOSITE){
-                hasComposite = true;
-                break;
+        if (ship != null) {
+            for(WeaponSlotAPI slot : ship.getVariant().getHullSpec().getAllWeaponSlotsCopy()){
+                if (slot.getWeaponType() == WeaponAPI.WeaponType.COMPOSITE){
+                    hasComposite = true;
+                    break;
+                }
             }
         }
+
         tooltip.addSectionHeading("Integrated Ballistics", hasComposite ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasComposite ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
         TooltipMakerAPI integratedBallistics = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, hasComposite ? "kol_composite" : "kol_composite_grey"), HEIGHT);
@@ -299,7 +302,7 @@ public class KnightRefit extends BaseHullMod {
         tooltip.addImageWithText(underHeadingPad);
 
 
-        boolean hasShield = ship.getShield() != null;
+        boolean hasShield = ship != null && ship.getShield() != null;
         tooltip.addSectionHeading("Primitive Capacitor Shields", hasShield ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasShield ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
         TooltipMakerAPI capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, hasShield ? "kol_primshield" : "kol_primshield_grey"), HEIGHT);
@@ -313,76 +316,81 @@ public class KnightRefit extends BaseHullMod {
         tooltip.addImageWithText(underHeadingPad);
 
 
-        ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
-        boolean hasModules = variant != null && !variant.getStationModules().isEmpty();
-        tooltip.addSectionHeading("Modular Armor", hasModules ? activeHeaderTextColor : inactiveHeaderTextColor,
-                hasModules ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
-        TooltipMakerAPI modularArmor = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, hasModules ? "kol_modules" : "kol_modules_grey"), HEIGHT);
-        modularArmor.setBulletedListMode("•");
-        modularArmor.setBulletWidth(15f);
-        modularArmor.addPara("Increases top speed and maneuverability by up to %s as armor panels are destroyed.",
-                listPad, hasModules ? activeTextColor : inactiveTextColor, hasModules ? activePositiveColor: inactivePositiveColor, "25%");
-        modularArmor.addPara("Armor panels have ablative armor, reducing the effective armor strength for damage reduction calculations to %s of its actual value.",
-                listPad, hasModules ? activeTextColor : inactiveTextColor, hasModules ? activeNegativeColor: inactiveNegativeColor, "10%");
+        if (ship != null) {
+            ShipVariantAPI variant = Global.getSettings().getVariant(ship.getHullSpec().getBaseHullId() + "_Blank");
+            boolean hasModules = variant != null && !variant.getStationModules().isEmpty();
+            tooltip.addSectionHeading("Modular Armor", hasModules ? activeHeaderTextColor : inactiveHeaderTextColor,
+                    hasModules ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
+            TooltipMakerAPI modularArmor = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, hasModules ? "kol_modules" : "kol_modules_grey"), HEIGHT);
+            modularArmor.setBulletedListMode("•");
+            modularArmor.setBulletWidth(15f);
+            modularArmor.addPara("Increases top speed and maneuverability by up to %s as armor panels are destroyed.",
+                    listPad, hasModules ? activeTextColor : inactiveTextColor, hasModules ? activePositiveColor: inactivePositiveColor, "25%");
+            modularArmor.addPara("Armor panels have ablative armor, reducing the effective armor strength for damage reduction calculations to %s of its actual value.",
+                    listPad, hasModules ? activeTextColor : inactiveTextColor, hasModules ? activeNegativeColor: inactiveNegativeColor, "10%");
 
-        if(hasModules){
-            modularArmor.beginTable(
-                    Misc.getBasePlayerColor(),
-                    Misc.getDarkPlayerColor(),
-                    Misc.getBrightPlayerColor(),
-                    20f,
-                    true,
-                    true,
-                    new Object[]{"Armor Location", width - 80f * 2 - HEIGHT - 25f, "Hull", 80f, "Armor", 80f});
+            if(hasModules){
+                modularArmor.beginTable(
+                        Misc.getBasePlayerColor(),
+                        Misc.getDarkPlayerColor(),
+                        Misc.getBrightPlayerColor(),
+                        20f,
+                        true,
+                        true,
+                        new Object[]{"Armor Location", width - 80f * 2 - HEIGHT - 25f, "Hull", 80f, "Armor", 80f});
 
-            // getting the stats of child modules in refit shouldn't have to be this hard
-            Pattern kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE);
+                // getting the stats of child modules in refit shouldn't have to be this hard
+                Pattern kolPattern = Pattern.compile("kol_.+?_[tml][lr]", Pattern.CASE_INSENSITIVE);
 
-            for (String module : variant.getStationModules().values()) {
-                Matcher matcher = kolPattern.matcher(module);
+                for (String module : variant.getStationModules().values()) {
+                    Matcher matcher = kolPattern.matcher(module);
 
-                if(matcher.find()){
-                    ShipHullSpecAPI hull = Global.getSettings().getHullSpec(matcher.group());
-                    float hullMult = getTotalHullMult(ship.getVariant(), hull.getHitpoints());
-                    float armorMult = getTotalArmorMult(ship.getVariant(), hull.getArmorRating());
+                    if(matcher.find()){
+                        ShipHullSpecAPI hull = Global.getSettings().getHullSpec(matcher.group());
+                        float hullMult = getTotalHullMult(ship.getVariant(), hull.getHitpoints());
+                        float armorMult = getTotalArmorMult(ship.getVariant(), hull.getArmorRating());
 
-                    Color hullTextColor = hullMult < 0.99f ? Misc.getPositiveHighlightColor() : (hullMult > 1.01f ? Misc.getNegativeHighlightColor() : Misc.getTextColor());
-                    Color armorTextColor = armorMult < 0.99f ? Misc.getPositiveHighlightColor() : (armorMult > 1.01f ? Misc.getNegativeHighlightColor() : Misc.getTextColor());
+                        Color hullTextColor = hullMult < 0.99f ? Misc.getPositiveHighlightColor() : (hullMult > 1.01f ? Misc.getNegativeHighlightColor() : Misc.getTextColor());
+                        Color armorTextColor = armorMult < 0.99f ? Misc.getPositiveHighlightColor() : (armorMult > 1.01f ? Misc.getNegativeHighlightColor() : Misc.getTextColor());
 
-                    modularArmor.addRow(Alignment.MID, Misc.getTextColor(), hull.getHullName(),
-                            Alignment.MID, hullTextColor, String.valueOf(Math.round(hull.getHitpoints() / hullMult)),
-                            Alignment.MID, armorTextColor, String.valueOf(Math.round(hull.getArmorRating() / armorMult)));
+                        modularArmor.addRow(Alignment.MID, Misc.getTextColor(), hull.getHullName(),
+                                Alignment.MID, hullTextColor, String.valueOf(Math.round(hull.getHitpoints() / hullMult)),
+                                Alignment.MID, armorTextColor, String.valueOf(Math.round(hull.getArmorRating() / armorMult)));
+                    }
+                }
+                modularArmor.addTable("-", 0, 4f);
+
+                modularArmor.setBulletedListMode("");
+                modularArmor.setBulletWidth(0f);
+
+                modularArmor.addPara("Hold 1 to highlight armor locations, 2 to revert.", Misc.getGrayColor(), 10);
+                Color fadeAwayColor = Keyboard.isKeyDown(2) ? new Color(200,200,255, 80) : Color.white;
+                if (Keyboard.isKeyDown(2) || Keyboard.isKeyDown(3)) {
+                    ship.getSpriteAPI().setColor(fadeAwayColor);
+                    for(ShipEngineControllerAPI.ShipEngineAPI engine : ship.getEngineController().getShipEngines()){
+                        EngineSlotAPI engineSlot = engine.getEngineSlot();
+                        engineSlot.setColor(Misc.setAlpha(engineSlot.getColor(), Keyboard.isKeyDown(2) ? 20 : 255));
+                    }
+                    for(WeaponAPI weapon : ship.getAllWeapons()){
+                        if(Objects.equals(weapon.getSlot().getId(), "PUSHER_PLATE")){
+                            weapon.getSprite().setColor(fadeAwayColor);
+                        }
+                        else if(weapon.getSprite() != null && weapon.isDecorative()){
+                            weapon.getSprite().setColor(Keyboard.isKeyDown(2) ? new Color(255,255,255, 0) : Color.white);
+                        }
+                        else if(weapon.getSprite() != null){
+                            weapon.getSprite().setColor(fadeAwayColor);
+                            if(weapon.getBarrelSpriteAPI() != null)
+                                weapon.getBarrelSpriteAPI().setColor(fadeAwayColor);
+                        }
+                    }
                 }
             }
-            modularArmor.addTable("-", 0, 4f);
 
-            modularArmor.setBulletedListMode("");
-            modularArmor.setBulletWidth(0f);
+            tooltip.addImageWithText(underHeadingPad);
 
-            modularArmor.addPara("Hold 1 to highlight armor locations, 2 to revert.", Misc.getGrayColor(), 10);
-            Color fadeAwayColor = Keyboard.isKeyDown(2) ? new Color(200,200,255, 80) : Color.white;
-            if (Keyboard.isKeyDown(2) || Keyboard.isKeyDown(3)) {
-                ship.getSpriteAPI().setColor(fadeAwayColor);
-                for(ShipEngineControllerAPI.ShipEngineAPI engine : ship.getEngineController().getShipEngines()){
-                    EngineSlotAPI engineSlot = engine.getEngineSlot();
-                    engineSlot.setColor(Misc.setAlpha(engineSlot.getColor(), Keyboard.isKeyDown(2) ? 20 : 255));
-                }
-                for(WeaponAPI weapon : ship.getAllWeapons()){
-                    if(Objects.equals(weapon.getSlot().getId(), "PUSHER_PLATE")){
-                        weapon.getSprite().setColor(fadeAwayColor);
-                    }
-                    else if(weapon.getSprite() != null && weapon.isDecorative()){
-                        weapon.getSprite().setColor(Keyboard.isKeyDown(2) ? new Color(255,255,255, 0) : Color.white);
-                    }
-                    else if(weapon.getSprite() != null){
-                        weapon.getSprite().setColor(fadeAwayColor);
-                        if(weapon.getBarrelSpriteAPI() != null)
-                            weapon.getBarrelSpriteAPI().setColor(fadeAwayColor);
-                    }
-                }
-            }
         }
-        tooltip.addImageWithText(underHeadingPad);
+
     }
 
     @Override

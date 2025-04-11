@@ -28,6 +28,12 @@ public class ShachihokoDroneHullmod extends BaseHullMod {
 
     @Override
     public void addPostDescriptionSection(TooltipMakerAPI tooltip, ShipAPI.HullSize hullSize, ShipAPI ship, float width, boolean isForModSpec) {
+
+        if (Global.CODEX_TOOLTIP_MODE) {
+            tooltip.addPara("Deploys bubble shield drones that can each absorb damage around the ship. Activate subsystem after targeting ally ship to redirect drone to ally.", 0f);
+            return;
+        }
+
         ShachihokoDroneSubsystem activator = new ShachihokoDroneSubsystem(ship);
         ShipHullSpecAPI drone = Global.getSettings().getVariant(activator.getDroneVariant()).getHullSpec();
         String health = String.valueOf(Math.round(drone.getFluxCapacity() / drone.getShieldSpec().getFluxPerDamageAbsorbed() + drone.getArmorRating() + drone.getHitpoints()));

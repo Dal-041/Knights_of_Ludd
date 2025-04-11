@@ -144,7 +144,7 @@ class DuskBuiltin : BaseHullMod() {
     override fun getTooltipWidth(): Float {
         return 400f
     }
-    override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI, width: Float, isForModSpec: Boolean){
+    override fun addPostDescriptionSection(tooltip: TooltipMakerAPI, hullSize: HullSize, ship: ShipAPI?, width: Float, isForModSpec: Boolean){
         val HEIGHT = 64f
         val headingPad = 20f
         val underHeadingPad = 10f
@@ -167,7 +167,7 @@ class DuskBuiltin : BaseHullMod() {
 
         val background = tooltip!!.addLunaElement(0f, 0f)
 
-        if (ship.hullSpec.isPhase){
+        if (ship?.hullSpec?.isPhase == true){
             tooltip.addSectionHeading("4th-Generation Phase Coils", activeHeaderTextColor, activeHeaderBannerColor , Alignment.MID, headingPad)
             val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dusk_phase_coils"), HEIGHT)
             phaseCoils.setBulletedListMode("•")
@@ -194,12 +194,16 @@ class DuskBuiltin : BaseHullMod() {
 
         ReflectionUtils.invoke("setColor", duskfall.prev, activeTextColor)
 
-        para5.setHighlightColors(activeTextColor,
-            if(ship.hullSize == HullSize.FRIGATE) activeHighlightColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.DESTROYER) activeHighlightColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.CRUISER) activeHighlightColor else inactiveTextColor,
-            if(ship.hullSize == HullSize.CAPITAL_SHIP) activeHighlightColor else inactiveTextColor,
-            activeTextColor)
+        if (ship != null) {
+            para5.setHighlightColors(activeTextColor,
+                if(ship.hullSize == HullSize.FRIGATE) activeHighlightColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.DESTROYER) activeHighlightColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.CRUISER) activeHighlightColor else inactiveTextColor,
+                if(ship.hullSize == HullSize.CAPITAL_SHIP) activeHighlightColor else inactiveTextColor,
+                activeTextColor)
+        }
+
+
 
         tooltip.addImageWithText(underHeadingPad)
 
