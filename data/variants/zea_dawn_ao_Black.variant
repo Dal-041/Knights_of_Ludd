@@ -76,5 +76,8 @@
         "spark_wing",
         "spark_wing",
     ],
-    "modules": [],
+    "modules": [
+        {"ENGINE_MODULE_L": "zea_dawn_ao_thruster_Blank"},
+        {"ENGINE_MODULE_R": "zea_dawn_ao_thruster_Blank"}
+    ],
 }
