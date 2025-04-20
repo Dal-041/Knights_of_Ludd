@@ -81,7 +81,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
         val explosionDamage = getDamage()
 
         CombatUtils.getEntitiesWithinRange(ship.location, DAMAGE_RANGE)
-            .filterNot { it.owner == ship.owner || it is BallisticProjectile || it is PlasmaShot }
+            .filterNot { it.owner == ship.owner || it is BallisticProjectile || it is PlasmaShot || (it is ShipAPI && it.isPhased) }
             .map { it to 1f - MathUtils.getDistance(ship, it).coerceAtLeast(ship.collisionRadius) / DAMAGE_RANGE }
             .forEach { (target, rangeRatio) ->
                 val effectiveDamage = rangeRatio * explosionDamage
