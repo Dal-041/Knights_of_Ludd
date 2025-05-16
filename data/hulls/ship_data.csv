@@ -75,7 +75,7 @@ Blaze,kol_blaze,Fast Cruiser,Luddic Path,ammofeed,18,8000,1200,9000,,400,125,2,9
 #BOSSES,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Malleus,kol_invictus_lp,Dreadnought,Luddic Path,burndrive,40,40000,4000,40000,,600,250,,35,15,15,7,7,10000,PHASE,canister_flak,0,0,0,,,2500,3500,1000,800,23,40,7,900000,3,12,1200,0.25,60,60,,,,,,,NEVER_DODGE_MISSILES,"no_autofit, restricted, codex_unlockable",,0.2,2,2,,614
 #Azalea,kol_azalea,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-Redemptor,kol_boss_ret_lp,Battlecruiser,Luddic Path,ammofeed,30,15000,1650,16500,,700,300,2,60,40,30,15,8,2500,FRONT,,120,0.2,1.1,,,300,400,200,300,10,30,8,400000,3,12,800,0.25,45,45,,,,,,,UNBOARDABLE,"no_autofit, restricted, codex_unlockable",,0.5,2,4,,613
+Redemptor,kol_boss_ret_lp,Battlecruiser,Luddic Path,ammofeed,30,15000,1650,16500,,700,300,2,60,40,30,15,8,2500,FRONT,,120,0.2,1.1,,,300,400,200,300,10,30,8,400000,3,12,800,0.25,45,45,,,,,,,,"no_autofit, restricted, codex_unlockable",,0.5,2,4,,613
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #STATIONS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Battlestar Libra,kol_libra,Mobile Fortress,Knights of Ludd,mine_strike_station,300,10000,1000,15000,,400,250,,20,4,3,10,3,2000,OMNI,,360,0.5,1,,,3000,10000,2500,3000,20,50,6,5000000,2.5,15,1600,0.25,200,200,,,,,,,"SHIP_WITH_MODULES, NEVER_DODGE_MISSILES, UNBOARDABLE,","no_autofit, restricted, codex_unlockable",,0.4,2,3,,
