@@ -72,7 +72,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
-      "locations": [-49.5, 35]
+      "locations": [-49.5, 32]
     },
     {
       "id": "WS0008",
@@ -81,7 +81,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
-      "locations": [-49.5, -35]
+      "locations": [-49.5, -32]
     },
     {
       "id": "WS0009",
@@ -89,8 +89,8 @@
       "type": "SYSTEM",
       "mount": "TURRET",
       "arc": 7,
-      "angle": 132,
-      "locations": [-54.5, 47]
+      "angle": 98,
+      "locations": [92.5, 26.5]
     },
     {
       "id": "WS0010",
@@ -98,8 +98,8 @@
       "type": "SYSTEM",
       "mount": "TURRET",
       "arc": 7,
-      "angle": -132,
-      "locations": [-54.5, -47]
+      "angle": -98,
+      "locations": [92.5, -26.5]
     }
   ],
   "engineSlots": [
@@ -123,7 +123,7 @@
       "location": [-87.5, 19.5],
       "length": 109,
       "width": 14,
-      "angle": 175.5,
+      "angle": 176,
       "contrailSize": 14,
       "style": "HIGH_TECH"
     },
@@ -131,23 +131,23 @@
       "location": [-87.5, -19.5],
       "length": 109,
       "width": 14,
-      "angle": -175.5,
+      "angle": -176,
       "contrailSize": 14,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-85.5, 29],
+      "location": [-86, 26],
       "length": 43.720314,
       "width": 8.193692,
-      "angle": 177.5,
+      "angle": -179,
       "contrailSize": 8,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-85.5, -29],
+      "location": [-86, -26],
       "length": 43.720314,
       "width": 8.193692,
-      "angle": -177.5,
+      "angle": 179,
       "contrailSize": 8,
       "style": "HIGH_TECH"
     }
@@ -165,25 +165,17 @@
     -6.5, -46.5,
     -10, -35.5,
     -4, -34,
-    -8.5, -26.5,
-    -31.5, -38.5,
-    -37, -36.5,
-    -57.5, -57,
-    -66.5, -57.5,
-    -77.5, -42.5,
-    -110.5, -31.5,
+    -6.5, -25,
+    -67, -61.5,
+    -114, -28,
     -88.5, -27,
     -88.5, -8,
     -120.5, 0,
     -88.5, 8,
     -88.5, 27,
-    -110.5, 31.5,
-    -77.5, 42.5,
-    -66.5, 57.5,
-    -57.5, 57,
-    -37, 36.5,
-    -31.5, 38.5,
-    -8.5, 26.5,
+    -114, 28,
+    -67, 61.5,
+    -6.5, 25,
     -4, 34,
     -10, 35.5,
     -6.5, 46.5,
