@@ -23,6 +23,7 @@ Hallowed Orion Device Launcher,kol_hallowedODLauncher,0,,200000,1000,,1000,,25,3
 Pusher Plate (Low Tech But Slightly Smaller Haha Lol XDd),kol_pusherplate_lt_but_slightly_smaller_seriously_its_just_like_2_pixels_lol,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,
 Pusher Plate (Low Tech But It's Really Really Smol And Cute),kol_pusherplate_lt_but_cute,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,pusherplate,,,,,,,,,,,,,,
 Dusk Minestrike,zea_dusk_minestrike,0,,200000,1000,,2000,,25,30,12,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,20,500,,,SYSTEM,,,,,,,,,,,,,,,
+Terminator EMP Missile Conversion,kol_terminator_emp_missile,3,,0,1500,,0,1800,200,0,0,1,,,ENERGY,0,,0,1,1,,0,0,0,0,,400,0,10,100000,,,"DIRECT_AIM, SYSTEM",restricted,,,,Missile,Fast,Medium,,,,,,,TRUE,41
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #UTILITY,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -339,4 +340,3 @@ r,zea_deco_edf_amaterasu_front,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_dr
 ,zea_deco_edf_amaterasu_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
 ,zea_deco_edf_vortice,,,,1,1,,,,,,,,,,,,,10,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,zea_radiance_dummy_wpn,0,,200000,0,,250,,25,30,0,30,,,HIGH_EXPLOSIVE,0,,0,3,1,,0,0,0,0,,50,50,1,10000,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
