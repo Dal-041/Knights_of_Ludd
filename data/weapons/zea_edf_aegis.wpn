@@ -1,0 +1,32 @@
+{
+  "id": "zea_edf_aegis",
+  "specClass": "beam",
+  "type": "ENERGY",
+  "size": "LARGE",
+  "beamEffect": "com.fs.starfarer.api.impl.combat.PaladinEffect",
+  "collisionClass": "RAY_FIGHTER",
+  "collisionClassByFighter": "RAY_FIGHTER",
+  "turretSprite": "graphics/zea/weapons/zea_edf_aegis.png",
+  "turretGlowSprite": "graphics/zea/weapons/zea_edf_aegis_glow.png",
+  "hardpointSprite": "graphics/zea/weapons/zea_edf_aegis.png",
+  "hardpointGlowSprite": "graphics/zea/weapons/zea_edf_aegis_glow.png",
+  "glowColor": [55,155,255,255],
+  "hitGlowRadius": 0,
+  "turretOffsets": [15,0],
+  "turretAngleOffsets": [0],
+  "hardpointOffsets": [25.5,0],
+  "hardpointAngleOffsets": [0],
+  "fringeColor": [50,150,255,255],
+  "coreColor": [255,255,255,255],
+  "convergeOnPoint": true,
+  "width": 8,
+  "textureType": SMOOTH,
+  "textureScrollSpeed": 64,
+  "pixelsPerTexel": 1,
+  "pierceSet": [
+    PROJECTILE_FF,
+    PROJECTILE_NO_FF,
+    PROJECTILE_FIGHTER
+  ],
+  "fireSoundOne": "guardian_pd_fire"
+}
