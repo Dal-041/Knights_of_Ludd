@@ -347,4 +347,3 @@ r,zea_deco_edf_amaterasu_front,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_dr
 ,zea_deco_edf_hoyau_ll,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,zea_deco_edf_hoyau_lr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,zea_deco_edf_toyotama_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
-Aegis PD System,zea_edf_aegis,2,0,5000,750,1000,,,0,75,,10,.75,,ENERGY,,350,0,0,0.2,0.1,,,,,1000000,,,,,,,"PD, ANTI_FTR, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,,,Point Defense,,,,,"When all sub-beams impact a target in close proximity to each other, the spalling effect produces an explosion that deals up to 100 points of fragmentation damage to other nearby targets.",100 | fragmentation,,,,

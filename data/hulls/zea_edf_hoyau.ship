@@ -21,8 +21,8 @@
     "zea_edf_kitsunebi"
   ],
   "builtInWeapons": {
-    "WS0004": "kol_blinker_white",
-    "WS0009": "kol_blinker_white",
+    "WS0004": "kol_blinker_white30",
+    "WS0007": "kol_blinker_white30",
     "WS0010": "kol_blinker_white",
     "WS0011": "kol_blinker_white",
     "WS0012": "kol_blinker_white",
@@ -76,24 +76,6 @@
       "arc": 0,
       "angle": -0,
       "locations": [47, -14.5]
-    },
-    {
-      "id": "WS0004",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 0,
-      "locations": [31.5, 37.5]
-    },
-    {
-      "id": "WS0009",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -0,
-      "locations": [31.5, -37.5]
     },
     {
       "id": "WS0012",
@@ -236,6 +218,24 @@
       "arc": 25,
       "angle": -148,
       "locations": [10.5, -22.5]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-54.5, 15.5]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-54.5, -15.5]
     }
   ],
   "engineSlots": [

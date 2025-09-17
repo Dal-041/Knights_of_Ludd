@@ -37,7 +37,9 @@
     "WS0018": "zea_deco_edf_toyotama_lr",
     "WS0019": "zea_deco_edf_toyotama_ll",
     "WS0020": "kol_blinker_red",
-    "WS0021": "eis_blinker_green"
+    "WS0021": "eis_blinker_green",
+    "WS0024": "kol_blinker_white30",
+    "WS0025": "kol_blinker_white30"
   },
   "weaponSlots": [
     {
@@ -184,7 +186,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [7.5, 22.5]
+      "locations": [-13.5, 12.5]
     },
     {
       "id": "WS0017",
@@ -193,7 +195,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [7.5, -22.5]
+      "locations": [-13.5, -12.5]
     },
     {
       "id": "WS0018",
@@ -250,6 +252,24 @@
       "arc": 7,
       "angle": 0,
       "locations": [45.5, 33]
+    },
+    {
+      "id": "WS0024",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-46, 31]
+    },
+    {
+      "id": "WS0025",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-46, -31]
     }
   ],
   "engineSlots": [
