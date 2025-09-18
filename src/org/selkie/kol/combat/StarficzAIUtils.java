@@ -224,17 +224,16 @@ public class StarficzAIUtils {
         float MAX_RANGE = 3000f;
         List<ShipAPI> nearbyEnemies = AIUtils.getNearbyEnemies(ship,MAX_RANGE);
         for (ShipAPI enemy: nearbyEnemies) {
-            enemy.getFluxTracker().getOverloadTimeRemaining();
-            enemy.getFluxTracker().isVenting(); enemy.getFluxTracker().getTimeToVent();
-
+            float ventOverloadTime = Math.max(enemy.getFluxTracker().getOverloadTimeRemaining(),
+                    enemy.getFluxTracker().isVenting() ? enemy.getFluxTracker().getTimeToVent() : 0f);
             // ignore ship if shooting through other ship
             boolean occluded = false;
             for(ShipAPI occlusion : nearbyEnemies){
                 if (occlusion == enemy) continue;
                 if (occlusion.getParentStation() == enemy) continue;
                 Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), enemy.getLocation());
-                // bias the size down 50 units, hack to compensate for the fact that this assumes everything is static
-                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() != null && occlusion.getShield().isOn()) - 50f){
+                // bias the size down 75 units, hack to compensate for the fact that this assumes everything is static
+                if (MathUtils.getDistance(closestPoint, occlusion.getLocation()) < Misc.getTargetingRadius(closestPoint, occlusion, occlusion.getShield() != null && occlusion.getShield().isOn()) - 75f){
                     occluded = true;
                 }
             }
@@ -247,7 +246,7 @@ public class StarficzAIUtils {
                 // if weapon out of range, add time for ship to reach you
                 float distanceFromWeapon = MathUtils.getDistance(weapon.getLocation(), testPoint);
                 float targetingRadius = Misc.getTargetingRadius(enemy.getLocation(), ship, false);
-                float outOfRangeTime = 0;
+                float outOfRangeTime = ventOverloadTime;
                 if(distanceFromWeapon > (weapon.getRange() + targetingRadius) ){
                     outOfRangeTime = (distanceFromWeapon - weapon.getRange()+targetingRadius)/ship.getMaxSpeed();
                     distanceFromWeapon = weapon.getRange();

@@ -46,8 +46,8 @@ class OracleSensorSuite : BaseHullMod() {
     }
 
     override fun advanceInCampaign(member: FleetMemberAPI?, amount: Float) {
-        val playerFleet = Global.getSector().playerFleet
-        if(!playerFleet.fleetData.membersListCopy.contains(member)) return
+        val playerFleet = Global.getSector()?.playerFleet
+        if(!(playerFleet?.fleetData?.membersListCopy?.contains(member) ?: return)) return
         playerFleet.abilities[Abilities.GRAVITIC_SCAN]?.let { it ->
             val data = ReflectionUtils.get("data", it)
             if (data != null && data !is OracleScanData){
