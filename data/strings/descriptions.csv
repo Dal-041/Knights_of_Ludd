@@ -1,3 +1,384 @@
 id,type,text1,text2,text3,notes
-zea_edf_toyotama,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY",
-zea_edf_raiju,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY",
+,,,,,
+# STATIONS,,,,,
+# Removed from Lyra for brevity #  The advanced technologies involved are the source of great grievance among Luddic theologians, but, in practice, it means that the presence of independent traders and visitors is only barely tolerated.,,
+kol_lyra_desc,CUSTOM,"The stronghold and command center of the Luddic Knights is the embodiment of their beliefs and their compromises. Heavy batteries and plentiful garden chambers keep the many faithful safe, living and practicing in lush open spaces, even in cold vacuum of space. Military centers coordinate system-wide fleets, which are sourced from the proscribed acts of shipbuilding and fuel production carried out here as an open secret.",,"Lyra station's gardens are green pockmarks below your parking orbit, each growing between metroplex fora, comm-array towers, solar collecters, and batteries. Beneath them lie the shipbuilding forges and antimatter condensers that power the Knight's Armada, invisible to the naked eye but detectable by the telltale emission patterns of neutrinos and other charged particles. The tactical overlay of your Tri-pad helpfully marks many decorative steeples as likely weapon emplacements.",
+# Removed from Cygnus: Etchings of swans, with wings stylized to resemble ancient kite shields, are visible across the outer plating.,,,
+kol_cygnus_desc,CUSTOM,"The highest calling of the Luddic Knights is the protection of the Church, and Battlestation Cygnus was constructed as the first line of system defense. Logisticians, technicians, and other staff make up a martial civilian populace embracing the station mantra: 'One faith, lasting aegis.'",,"Battlestation Cygnus is a constant buzz of activity. Personnel part to allow smartly adorned crew to rush about, giving anybody with visible cybernetics hard stares before muttering darkly into their headpieces.",
+kol_libra_port_desc,CUSTOM,"The Battlestar Libra. A station, turned colony ship, turned warship, turned station again. Now a mere port in the wild fringes of the sector, Libra yearns in her every bolt to return to the stars, a dream now painfully far from reach. The years and the battles have greatly decayed this once-proud ship, but some would still call it their home.",,,
+mga_station_nomios,CUSTOM,"Once a vital node in the Domain's industrial network, Nomios Rapid Autofab was constructed by the Mbaye-Gogol Corporation for rapid prototyping and advanced manufacturing. Designed to meet the demand for fast turnaround on cutting-edge technological developments, it was a marvel of automation and efficiency before the Collapse. The station's sprawling production bays were once filled with countless experimental projects—everything from new luxury liner parts to experimental domain exploration drones.
+
+In the cycles following the Collapse, the station has adapted to the new reality of the Persean Sector. Rather than sinking into decay, the NRA found a stable niche, now partnering closely with Galatia Academy. While the Academy handles research and theoretical breakthroughs, NRA transforms those ideas into functional prototypes, breathing life into otherwise theoretical innovations. The Autofab is known for its ability to produce working models of even the most esoteric technologies within short timeframes, keeping it as an essential part of the post-collapse technological ecosystem.",,,
+,,,,,
+# WEAPONS,,,,,
+# Large,,,,,
+kol_caelia,WEAPON,"A variant of the Hephaestus assault gun given a larger bore size by luddic engineers and loaded with explosive shells. While undoubtedly effective, the incredible heat generated during fire easily deforms the cannon's more delicate components, and sustained salvoes readily devolve into undirected fire.",,,
+kol_llyr,WEAPON,"A variant of the Caelia assault gun modified to fire depleted uranium kinetic penetrators. Excellent at bringing down enemy shields and causing an overload. While undoubtedly effective, the incredible heat generated during fire easily deforms the cannon's more delicate components, and sustained salvoes readily devolve into undirected fire.",,,
+kol_lunete,WEAPON,"A large, powerful emitter that generates a lance of plasma though the controlled detonation of a neon medium.  First designed for Onslaught battleships operating far from core Domain space where the complex parts required to maintain Thermal Pulse Cannons could not be readily supplied.",,,
+# Medium,,,,,
+kol_bricole,WEAPON,"An unassuming up-rated variant of the Arbalest, the Bricole Cannon delivers respectable damage at above-average ranges, but wins no awards for assault potential. The Bricole tends to find a home on skirmishers with a need to outrange the classic Heavy Autocannon without paying a premium.",,,
+# Small,,,,,
+kol_tor,WEAPON,"A lower caliber and less demanding version of the Mauler cannon, firing antimatter charged munitions that are highly effective at destroying enemy armor. Manufacturing such an advanced weapon system is beyond the normal means of the Church, and most of these are traded by the Hegemony as part armament transfer treaties that date back to the First AI War.",,,
+kol_drian,WEAPON,"A nearly forgotten predecessor of the modern railgun, the Drian fires magnetized slugs at modest range and for modest damage. Its prime claim to fame is its highly efficient firing cycle, and that it can be manufactured without cutting-edge facilities. This weapon provides the assurance that no matter what else may happen, the bearer will be delivering rounds downrange",,,
+# Built-in,,,,,
+kol_brimstone,WEAPON,"""Point towards heathen.""",- Unknown pather,,
+,,,,,
+# SHIPS,,,,,
+# Frigates,,,,,
+kol_sundew,SHIP,"To confuse a Mudskipper and a Sundew is to confuse a Luddic with a Pather - or, indeed, a Knight. Though there are similarities, the Sundew is a fierce, shielded, armored, and highly mobile ship capable of quickly dusting any captains not taking it seriously.
+
+According to Knight legend, the Sundew was designed after the defeat of Deacon-Captain John Grayne's Eos Exodus patrol by a substantially weaker pirate fleet. As the patrol navigated The Pilgrims belt, they were ambushed by armored frigates of unknown design. Deacon-Captain Grayne panicked, and his patrol was shredded. Combat logs revealed the pirate ships to be nothing more than Mudskippers, their profiles enlarged by cold-welded scrap to defeat the Knights' basic threat calculators. Not ones to be held back from a good idea by pride, the Knights quickly adopted a similar configuration into their own fleets - and to great effect.",,,
+kol_protea,SHIP,"In a marked departure from standard doctrine, the Protea-class frigate eschews attached armor modules in favor of armored drones, giving it the freedom to choose when and where to thrust its oversize ballistic weaponry.",,,
+# Destroyers,,,,,
+kol_marigold,SHIP,"The Marigold is the Knights of Ludd's tempered answer to the Manticore. Cheaper to field and more flexible to outfit, it nonetheless lacks the firepower afforded by large ballistic weaponry. When faced with detractors, most Knights are quick to point out that the original Manticore is merely a Domain tool of war, and not a design worthy of the faithful's respect.",,,
+kol_mimosa,SHIP,"A Mimosa provides effective support for a balanced fleet by painting opportune enemies with its LIDAR Array, shredding fighters with canister flak, and, if needed, absorbing stray fire with its armor modules. Never the hero of a battle, the Mimosa-class is nevertheless sorely missed by Knights forced to go without.",,,
+kol_snowdrop,SHIP,"The Snowdrop is an experimental destroyer built over a radically altered and up-armed Vanguard-class hull. Evaluated as a whole, the modifications recall the technology systems utilized by Alysse class battleships:  removable ferro-ceramic armor modules replace the integral armor but remain linked to the ship’s dampening field; engine mass is downsized to permit the installation of a small Orion push plate; any and all saved space is crammed full of autoloaders and magazines to support a destroyer-level weaponry suite within the frigate-sized profile.  The deep alterations and cramped nature of the interior makes the class difficult to maintain and expensive to operate when compared with vessels of similar age and tonnage.",,,
+# Cruisers,,,,,
+kol_tamarisk,SHIP,"A prototypal light cruiser from the unification era of the Domain, the Tamarisk class was first designed as a convoy leader to defend logistic lines outside of established gate space. Unusual for its age, the class favors strike tactics, with most of its internal volume being split between oversized engine conduits and the munition citadels necessary to support a large complement of ballistic batteries.
+
+Despite a successful service record, the class met an unceremonious end when the maturity of the gate system greatly simplified Domain military logistics. Many a Tamarisk was sold to frontier prospecting and defense outfits, but subsequent advancements in targeting technology and the later development of strike craft made the warship’s lack of integral armor an unsustainable vulnerability.",,,
+kol_larkspur,SHIP,"Marveling at the cleanly-engineered systems and the surprising agility of the Larkspur-class cruiser is looked upon with studied disapproval, but, in private, even Knights are said to revel in the ""high-end"" tech it carries. As with most of the hulls birthed by Ceyx, its fury is directed forward, but flanking frigates would do well to tread carefully. The Omni-Lunge Canister Flak system has chastened many would-be opportunists.",,,
+kol_lotus,SHIP,"The Knights' heavy support cruiser lurks behind the front lines, waiting for a target. Once a suitable foe wanders within range, it paints them with its laser array and pounds them with a rain of missiles.",,,
+kol_blaze,SHIP,"Every Blaze is slightly different, as each is hacked together around the largest ship engine available, which is then turned around and tinkered with to jet plasma in a forward-facing stream. The rest of the ship exists only to feed the ravenous hunger of this monster, and deliver its wrath upon the enemies of Ludd.",,,
+# Capital Ships,,,,,
+kol_lunaria,SHIP,"Hulls are rarely ever truly lost in the sector. ""Today's wreck is tomorrow's Hound"" is an old mechanic saying, and the Lunaria-class artillery capital ship is the concept taken to its conclusion; a ship designed from the start to be built from the salvage of unfortunate Onslaughts. The iconic forward prongs chew through targets after being softened by heavy long-range batteries boosted by the terrifying LIDAR Array. Six slabs of armor protect it in close combat, but, like its progenitors, a meager two aft weapons leave it vulnerable to attack from behind.",,,
+kol_alysse,SHIP,"A treasured battleship often found as the leading element within knight armadas, the Alysse achieves a seldomly seen combination of firepower, speed, and resilience through the implementation of novel if somewhat antiquated technologies. Four heavy ablative armor plates with independent flux grids and dampening field generators mount Vulcan and Flak point defense grids, with additional cannons keyed to fire following the activation of the Orion Drive. Defense is simply unparalleled so long as the modular plates hold. 
+
+The Alysse once represented an evolutionary step for the militarization of the Orion Drive technology first implemented by the Retribution. The inclusion of robust modular plating serving a dual purpose, augmenting both survivability and relieving strain on the ship's inertial compensators. Strategic command likely remained unconvinced, and no combat or procurement records exist for the ship within known Domain Battlegroups.
+
+Every Alysse-class vessel that exists today is a painstaking reconstruction of the forgotten prototypes, artisanally assembled and sanctified for their sacred duty to the Church.",,,
+kol_hex,SHIP,"These crudely-slaved point defense drones serve the double duty of defending the vulnerable protea and embodying its fury. Though not high tech, they are potent at both screening light threats and at striking them down.",,,
+,,,,,
+# SHIP SYSTEMS,,,,,
+kol_lunge,SHIP_SYSTEM,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,Movement,Launches the ship in the desired direction by dumping travel-drive fuel directly into maneuvering thrusters. Stores up to three charges at a time.,three
+kol_onion,SHIP_SYSTEM,"Deploys a shaped antimatter charge behind the ship. The explosion applies force to a massive push-plate, which absorbs the shock and spreads the resulting acceleration over a timeframe where it can be handled by the ship's inertial compensators. The ship is briefly propelled forward at a rate very few more ""advanced"" technologies can hope to match.",Movement,"Explodes a shaped antimatter charge behind the ship, propelling it forward at extreme speed.",
+kol_damper,SHIP_SYSTEM,Briefly activates an energy field that mitigates incoming damage to armor modules at the cost of disabling weapons and shields.,Defensive,Briefly activates an energy field that mitigates incoming damage to armor modules at the cost of disabling weapons and shields.,
+kol_lidar,SHIP_SYSTEM,"Greatly increases the range, rate of fire, and accuracy of large turrets while temporarily standing down all other weapons except the Lunaria's signature Thermal Lances. Reduces ship speed and turret turn rate when active.",Offensive,"Greatly increases the range, rate of fire, and accuracy of large turrets while temporarily standing down all other weapons. Reduces ship speed and turret turn rate when active.",
+kol_lidar_smol,SHIP_SYSTEM,"Greatly increases the range, rate of fire, and accuracy of turrets while temporarily standing down all other weapons. Reduces ship speed and turret turn rate when active.",Offensive,"Greatly increases the range, rate of fire, and accuracy of turrets while temporarily standing down all other weapons. Reduces ship speed and turret turn rate when active.",
+kol_hellfire,SHIP_SYSTEM,Briefly increases the damage of ballistic weapons. Causes intense heat buildup and must be cooled before reuse.,Offensive,Briefly increases the damage of ballistic weapons. Causes intense heat buildup and must be cooled before reuse.,
+kol_drone_strike,SHIP_SYSTEM,"Supercharges one of the Hex drones with a brief energy transfer. The drone tracks a nearby target like a missile, dealing massive area damage on impact.",Offensive,"Supercharges one of the Hex drones and sends it after a target. The drone deals 1200 Energy damage and 600 EMP damage on impact, and charging it generates 600 flux.",1200 Energy | 600 EMP | 600
+,,,,,
+# FACTIONS,,,,,
+knights_of_selkie,FACTION,"The military branch of the Luddic Church of Galactic Redemption, modeled on monastic warrior societies from previous millennia. Built and governed by a myriad of martial rituals that deftly reconcile Ludd's anti-militaristic revelations with the constrained bloodshed required by practical statecraft. The order's roots may be traced to the depths of Sector history, when the faithful fought alongside the founding fleets of the Hegemony to overcome the tyranny of Warlord Leonis and to shatter the technological yoke of the Tri-Tachyon Corporation.",,,
+,,,,,
+,,,,,
+kol_snowdrop_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_snowdrop_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_snowdrop_ll,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_snowdrop_lr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_sundew_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_sundew_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_marigold_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_marigold_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_mimosa_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_mimosa_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_larkspur_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_larkspur_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_lotus_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lotus_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lotus_ll,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lotus_lr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_tamarisk_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_tamarisk_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_tamarisk_lr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_tamarisk_ll,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+kol_alysse_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_alysse_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_alysse_lr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_alysse_ll,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lunaria_tl,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lunaria_tr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lunaria_ml,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lunaria_mr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lunaria_ll,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+kol_lunaria_lr,SHIP,A defensive piece of tough to break hull meant to defend the more frail parts of Knight ships.,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+,,,,,
+# If you’re reading this, please don’t post spoilers.,,,,
+#ProcGen,,,,,
+zea_white_hole,PLANET,"A singularity that cannot be entered from the outside, but rather energy, matter, light, and information are emitted from it. This stellar phenomenon was once considered a theoretical curiousity – yet now you find one yourself. The question is only whether anyone at the bar will believe you when you tell the story.",,,
+zea_red_hole,PLANET,"A enormous, unbelievably deep gravity well, so potent that the light from its ergosphere barely shines beyond the infrared. It calls to you, begging you to submit to its pull.",,,
+zea_star_black_neutron,PLANET,"A rapidly spinning singularity, anomalous in the unceasing gravitational waves your sensors are reading. Its gravitational grip seems so great as to drag spacetime itself along in a twist. Tread with extreme caution. ",,,
+,,,,,
+zea_edf_kitsunebi,SHIP,A set of point defense drones that excel at crushing targets under heavy frag damage. Lightly armored targets that find themselves in range and lacking evasion are not long for this world.,,,
+#,,,,,
+#Weapons2,,,,,
+zea_plasma_chaingun,WEAPON,"The Plasma Autogun is a potent general-purpose weapon, known for shattering stalwart shields and ruining the armor underneath. For a ship with the flux to burn this weapon will bring ruin to its enemies.",,,
+zea_thermal_cannon,WEAPON,"Rare for its mount in both its range and its damage profile, the Thermal Sniper ensures no enemy will be able to retreat from combat with or skirmish the bearer without retribution.",Reach out and touch someone.,,
+zea_styrax_driver,WEAPON,"The Styrax is a premium double-tap shield-breaker that delivers consistent pressure across any combat volume. Its lack of EMP charge and pure strike damage make it strictly a high-tech weapon for high-tech enemies, but in that role it excels.",,,
+zea_mazuma_m,WEAPON,A potent torpedo launcher that draws from the ship's flux grid to chain-fire two heavy explosive torpedoes. The munition's similarities to the ubiquitous Hammer torpedo leave one to wonder if the characteristics and multiplied strike potential are but some malevolent intelligence's idea of a joke.,,,
+zea_mazuma_s,WEAPON,A potent torpedo launcher that draws from the ship's flux grid to chain-fire two heavy explosive torpedoes. The munition's similarities to the ubiquitous Hammer torpedo leave one to wonder if the characteristics and multiplied strike potential are but some malevolent intelligence's idea of a joke.,,,
+zea_hosta_s,WEAPON,The Hosta line of weapons does one thing and it does it well: deliver assault-level kinetic damage on an energy weapon platform. If it weren't for the demanding power requirement - and lack of hard flux generation - these potent weapons would sit aside the best of the ballistic weapon catalog.,,,
+zea_hosta_m,WEAPON,The Hosta line of weapons does one thing and it does it well: deliver assault-level kinetic damage on an energy weapon platform. If it weren't for the demanding power requirement - and lack of hard flux generation - these potent weapons would sit aside the best of the ballistic weapon catalog.,,,
+zea_hosta_l,WEAPON,The Hosta line of weapons does one thing and it does it well: deliver assault-level kinetic damage on an energy weapon platform. If it weren't for the demanding power requirement - and lack of hard flux generation - these potent weapons would sit aside the best of the ballistic weapon catalog.,,,
+zea_nanten_s,WEAPON,"A potent strike beam. Don't let its modest damage per second fool you, this weapon is for punishing shieldless ships and it guarantees to deliver.",,,
+zea_nanten_l,WEAPON,"Where the Nanten 'Slicer' walks, the Disassembler sprints. Strikes from this devastating weapon can often turn a battle all on their own.",,,
+zea_myoga_driver,WEAPON,"The Myoga Ultradriver is a sniper's dream. Extreme range, good damage, and best-in-class projectile velocity mean no opponent is beyond the reach of this weapon. Poor flux performance is the notable drawback, and foes that close the gap will find themselves at a good advantage against the wielder.",,,
+zea_nian_maingun_l,WEAPON,Fires off a charged explosive that slowly coasts towards its destination. On arrival it deploys dozens of submunitions that spread in a circular pattern around it and detonate after a small delay.,,,
+zea_nian_maingun_r,WEAPON,Fires off a charged explosive that slowly coasts towards its destination. On arrival it deploys dozens of submunitions that spread in a circular pattern around it and detonate after a small delay.,,,
+zea_boss_resonator,WEAPON,"A missile potent in both damage and tracking that reliably punishes targets. Combined with an autoloader, their only weakness is that there is but a single set of them.",,,
+zea_boss_resonator2,WEAPON,"A missile potent in both damage and tracking that reliably punishes targets. Combined with an autoloader, their only weakness is that there is but a single set of them.",,,
+zea_dusk_lrsr,WEAPON,"A reproduction of an even more awesome weapon, the emplaced long range shock repeater projects withering EMP bolts at targets.",,,
+zea_edf_locust_medium,WEAPON,A cut-down and integrated launcher for the classic locust. Together they are no less effective than the genuine article at fully saturating the battlefield with missiles.,,,
+zea_edf_harpoon_single,WEAPON,An emplaced harpoon missile launcher with autoloader.,,,
+#,,,,,
+#Terrain,,,,,
+zea_asteroidBelt,TERRAIN,An orbital ring abundant with asteroids and dangers.,,,
+zea_asteroidField,TERRAIN,A volume of space abundant with asteroids and dangers.,,,
+zea_corona,TERRAIN,A halo of high temperature plasma which surrounds a star; most ships are not built to withstand prolonged exposure to the extreme radiation bombardment from the corona and will take damage if they remain within it.,,,
+zea_eventHorizon,TERRAIN,The gravitational flux near the event horizon of a black hole is extreme. The gravitational flux near the event horizon of THIS singularity is unquantifiable.,,,
+zea_pulsarBeam,TERRAIN,"A relativistic, magnetized jet combined with intense radiation. Commonly emitted by neutron stars.",,,
+zea_blackBeam,TERRAIN,"Did I say 'pulsar'? Well, I may have meant 'pullsar.'",,,
+zea_seaWave,TERRAIN,"An enormous pulse wave, buffeting everything caught in its energies with hazardous radiation. Combat readiness suffers, but a stalwart fleet can move against the tide if they're careful - or desperate.",,,
+nebula_zea_shoal,TERRAIN,"A refuge from the tide, though not from the warfleets bearing the same name. Fleets hiding among the dense 'shoals' are immune from damage during the tide, but their burn speed is greatly reduced.",,,
+nebula_zea_storm_normal,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,
+nebula_zea_storm_storm,TERRAIN,"The choatic energies of the storm tear at passing ships, regularly dealing damage to fleet members. For whatever reason phase ships seem less affected.",,,
+nebula_zea_black,TERRAIN,"A viciously energetic nebula, or what passes for one in this strange space. Avoid the storms, of suffer like those who didn't.",,,
+#Exploration,,,,,
+zea_null_station_dusk,CUSTOM,This station is the only stable object in an otherwise barren system. Heavy shielding frustrates any attempts to scan it for clues.,,,
+zea_boss_station_tritachyon,CUSTOM,"A remnant of Domain research into astronomical phenomena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
+zea_research_station_dusk,CUSTOM,"A remnant of Domain research into astronomical phenomena. This one is abnormally dull on the sensors, which makes it even more desirable; if the station had been stripped previously, it'd be drifting in it's own debris. This one is intact, suggesting active sensor dampening technology, and that means untouched loot.",,,
+zea_research_station_dawn,CUSTOM,"A former Explorarium Mothership, this vessel has recently been gutted and reconverted into a factory for the monstrous Dawntide.",,,
+zea_research_station_elysia,CUSTOM,A converted habitat turned factory and fleet hangar. The Elysian fleet calls these ports home and defends them vigorously.,,,
+,,,,,
+#Cores,,,,,
+zea_dusk_boss_core,RESOURCE,"The object chitters with each deep scan. Results show conflicting hyperwave distortions within; sometimes contained to the vessel, sometimes reaching into the real world, and sometimes just a conspicuous void where the distortions should be. The Core flickers in sync to an error notification on a nearby phase detector. Cyber-integrators are nestled innocently into its surface.",,,
+zea_dawn_boss_core,RESOURCE,"Scans of the core's containment cylinder reveal a hardened ceramosteel box within. Thick, phlegmy tentacles erupt from it, writhing and lashing against the containment walls with dulled biomechanical thuds. Alien energy filters from the unit's ports, pulsing hungrily.",,,
+zea_elysia_boss_core,RESOURCE,A heavily modified AI core containing what claims to be the uploaded imprint of a Hegemony Officer from 'Project Elysia'. Whether the object is a coffin of metal and wire entrapping a human soul or a facsimile of a human's mind carved into alien circuitry is something best left for the academicians and Luddics to debate.,,,
+zea_dormant_dusk_boss_core,RESOURCE,"The object chitters with each deep scan. Results show conflicting hyperwave distortions within; sometimes contained to the vessel, sometimes reaching into the real world, and sometimes just a conspicuous void where the distortions should be. The Core flickers in sync to an error notification on a nearby phase detector. Cyber-integrators are nestled innocently into its surface.
+
+The core seems the dormant at the moment, focusing all its tactical prowess over a quantum neural link towards one of your officers.",,,
+,,,,,
+#Ship Systems,,,,,
+zea_boss_blizzard,SHIP_SYSTEM,"""HOW IS THIS POSSIBLE?!"" - Crew member simultaneously frozen, burned, irradiated, and quite surprised.",Annihilation,,
+zea_boss_supernova,SHIP_SYSTEM,"""What the hell is that?"" - Last recording from a now-unrecognizable capital hull shattered into endless pieces.",Annihilation,,
+zea_boss_corruptionjets,SHIP_SYSTEM,"""THEY'RE ALL OVER US! DAMAGE IS FAR OVER ESTIMATES!! WHY WON’T THEY GO DOWN?!"" - Voice log recovered from a Tri-Pad in a chewed-up derelict.",Corruption,,
+zea_dawn_small_flux_negation,SHIP_SYSTEM,A dedicated flux dissipation system negates the flux use of all weapons in small mounts for a time.,Offensive,,
+zea_edf_fortress_flux_converter,SHIP_SYSTEM,Reduces incoming damage to the shield to a minimum and converts hard flux to soft.,Defensive,,
+zea_edf_twinshield,SHIP_SYSTEM,Activates a secondary shield system with a smaller arc but greater efficiency and ability to rotate around the ship. ,Defensive,,
+zea_dawn_targeting_beam,SHIP_SYSTEM,"Fires a lidar beam forward. If it hits, the target will be marked for increased damage.",Offensive,,
+zea_dawn_damper,SHIP_SYSTEM,Dampens incoming damage.,Defensive,,
+zea_edf_plasmafighters,SHIP_SYSTEM,Thrusts the ship and the ship's fighters forward with a burst of speed.,Movement,,
+zea_edf_minijump,SHIP_SYSTEM,"Quickly jumps the ship above the battlefield in a chosen direction, followed by short firepower boost. Most effective when strafing, least effective when retreating.",Movement,,
+zea_boss_relativisticdrift,SHIP_SYSTEM,Massively increases the time flow of the ship for a moment while moving in a specific direction.,Movement,,
+zea_edf_synchronized_ammo_feed,SHIP_SYSTEM,The vessel and its launched craft receive a 50% increase in weapon ROF and a corresponding flux cost reduction.,Offensive,,
+zea_dawn_flare_burn,SHIP_SYSTEM,Thrusts the ship forward and launches a large wave of smart flares.,Defensive,,
+zea_dawn_flare_wave,SHIP_SYSTEM,Launches a wave of smart flares that screen out nearby hostile ordnance. ,Defensive,,
+zea_dawn_gracious_light,SHIP_SYSTEM,Generates a massive aura of damaging light that also heals fighters and reduces their flux.,Special,,
+zea_dusk_subspace_glide,SHIP_SYSTEM,"Skims the membrane between normal and phase space, moving swiftly and venting more flux for the duration.",Movement,,
+zea_dusk_phasecloak,SHIP_SYSTEM,Shifts the craft into phase space at great efficiency.,Movement,,
+zea_dusk_phaseteleporter,SHIP_SYSTEM,Instantly relocates the ship to a chosen nearby location and charges deployed motes. Motes travel to the in location via normal space.,Special,,
+zea_dusk_phase_skip,SHIP_SYSTEM,"Activates the onboard phase coils to shunt the ship into phase for a brief period. Mobility is greatly enhanced, weapon cooldowns pass twice as fast, ammo recharge rate is doubled and shields are restored after use.",Special,,
+zea_dusk_mine_strike,SHIP_SYSTEM,Teleports a heavy phase mine to the target area. The mine will slowly track nearby enemy ships and explodes a few seconds after its proximity trigger is activated. Can be used while phased.,Offensive,Teleports a heavy proximity mine to the target area. Can be used while phased.,
+zea_dusk_displacer,SHIP_SYSTEM,Teleports the ship forward in the direction it's traveling. The system slowly builds up to three charges which can then be expended in short order.,Movement,Teleports the ship forward in the direction it's traveling. The system can store up to three charges at once.,
+zea_dawn_charge_drive,SHIP_SYSTEM,Temporarily engages a primary burn on the system travel drive of the ship. Provides a massive speed boost for a fixed time at the expense of being able to use shields.,Movement,Provides a massive speed boost at the expense of being unable to use shields.,
+zea_bullet_time_field,SHIP_SYSTEM,"Toggles a diffuse but wide advanced temporal field, reducing the timeflow of anything light enough. Microscopic ripples on the boundry of the field results in the apparent bending of straight line paths which cross into the field. Generates hard flux at a steady rate, and reduces strafing speed by half while active.",Movement,"Toggles a diffuse but wide advanced temporal field, reducing the timeflow of anything light enough. Microscopic ripples on the boundry of the field results in the apparent bending of straight line paths which cross into the field. Generates hard flux at a steady rate, and reduces strafing speed by half while active.",
+#,,,,,
+#Ships,,,,,
+zea_dusk_ikiryo,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_onibi,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_shiryo,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_furaribi,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_lushu,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_xuangui,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_funayurei,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_onryo,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_hashihime,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_bixi,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_tianma,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dusk_ayakashi,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_linggui,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_ao,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_dawn_qilin,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_wani,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_suzaku,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_mizuchi,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_seiryu,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_kiyohime,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_ryujin,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_tamamo,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_ninaya,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_ninmah,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_nineveh,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_yukionna,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_nian,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_corruptingheart,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_boss_amaterasu,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_kokakucho,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_onmoraki,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
+zea_edf_itsumade,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY
+
+Please register your Tri-Tachyon datapad to receive the latest news and updates.",
