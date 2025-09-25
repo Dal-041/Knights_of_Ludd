@@ -33,11 +33,11 @@ class BulletTimeField : BaseShipSystemScript() {
         const val SLOWDOWN_RADIUS = 400f
         const val BEAM_FOCUS_RADIUS = 200f
         const val CORE_RADIUS = 100f
-        const val MAX_DEFLECTION_ANGLE = 70f
+        const val MAX_DEFLECTION_ANGLE = 60f
         const val MAX_ACCEL_MULT = 10f
         const val ACTIVE_COLLISION_RADIUS = 20f
-        const val ACTIVE_COLLISION_RADIUS_ALPHA_MULT = 0.8f // dot alpha
-        const val ACTIVE_SHIP_ALPHA_MULT = 0.2f // ship alpha
+        const val ACTIVE_COLLISION_RADIUS_ALPHA_MULT = 0.6f // dot alpha
+        const val ACTIVE_SHIP_ALPHA_MULT = 0.6f // ship alpha
         const val ACTIVE_STRAFE_SPEED_MULT = 0.5f // 50% speed when strafing
     }
 
@@ -211,9 +211,10 @@ class BulletTimeField : BaseShipSystemScript() {
                     slowedProjectiles[threat] = threatInfo
 
                     // spread bullets around
-                    val angle = (rand.nextGaussian() * MAX_DEFLECTION_ANGLE / 3).toFloat() // not technically max, but eh good enough
+                    //val angle = (rand.nextGaussian() * MAX_DEFLECTION_ANGLE / 3).toFloat() // not technically max, but eh good enough
+                    val angle = (rand.nextFloat()-0.5f) * MAX_DEFLECTION_ANGLE * 2f
                     // slowdown more as things get closer
-                    val slowdownMult = Utils.linMap(MAX_SLOWDOWN, 1f, CORE_RADIUS, SLOWDOWN_RADIUS, threatDistance)
+                    val slowdownMult = Utils.linMap(threatDistance, CORE_RADIUS, SLOWDOWN_RADIUS, MAX_SLOWDOWN, 1f)
                     // anything that's an entity that follows velocity can be directly changed
                     if (threat is BallisticProjectile || threat is MissileAPI || threat is PlasmaShot) {
                         VectorUtils.rotate(threat.velocity, angle)
@@ -235,20 +236,32 @@ class BulletTimeField : BaseShipSystemScript() {
         // Stop tracking expired threats
         slowedProjectiles.entries.removeAll{ it.key.isExpired || (it.key as? BaseEntity)?.wasRemoved() ?: false }
 
+        var grazing = false
         // update everything currently being slowed
         for (threat in slowedProjectiles.keys) {
             val threatInfo = slowedProjectiles[threat]
             threatInfo!!.adjustedElapsedTime += Global.getCombatEngine().elapsedInLastFrame * MAX_SLOWDOWN
             val threatDistance = MathUtils.getDistance(threat.location, ship.location)
-            val slowdownMult = Utils.linMap(MAX_SLOWDOWN, 1f, CORE_RADIUS, SLOWDOWN_RADIUS, threatDistance)
+            val slowdownMult = Utils.linMap(threatDistance, CORE_RADIUS, SLOWDOWN_RADIUS, MAX_SLOWDOWN, 1f)
 
             // draw a red collision circle for all the projectiles
             if (threat !is MovingRay) {
+
+                val threatGrazeCircle = Global.getSettings().getSprite("graphics/fx/circle64.png")
+                threatGrazeCircle.color = Color.green
+                threatGrazeCircle.alphaMult = 0.2f
+                threatGrazeCircle.setSize(threat.collisionRadius + 50f, threat.collisionRadius + 50f)
+                MagicRenderPlugin.addSingleframe(threatGrazeCircle, threat.location, CombatEngineLayers.BELOW_INDICATORS_LAYER)
+                if(MathUtils.getDistance(ship.location, threat.location) < threat.collisionRadius + 20f + ship.collisionRadius){
+                    grazing = true
+                }
+
                 val threatCollisionCircle = Global.getSettings().getSprite("graphics/fx/circle64.png")
                 threatCollisionCircle.color = Color.red
-                threatCollisionCircle.alphaMult = 0.7f
-                threatCollisionCircle.setSize(threat.collisionRadius, threat.collisionRadius)
+                threatCollisionCircle.alphaMult = 0.2f
+                threatCollisionCircle.setSize(threat.collisionRadius + 20f, threat.collisionRadius + 20f)
                 MagicRenderPlugin.addSingleframe(threatCollisionCircle, threat.location, CombatEngineLayers.BELOW_INDICATORS_LAYER)
+
             }
 
             // draw the threat collision path as a line
@@ -279,6 +292,17 @@ class BulletTimeField : BaseShipSystemScript() {
             } else if (threat is PlasmaShot) {
                 ReflectionUtils.set("flightTime", threat, threatInfo!!.adjustedElapsedTime)
                 VectorUtils.resize(threat.getVelocity(), threatInfo.initialSpeed * slowdownMult)
+            }
+        }
+
+        if (grazing) {
+            ship.armorGrid.grid.forEachIndexed { xIndex, row  ->
+                // Iterate over the inner array (elements in each row)
+                row.forEachIndexed { yIndex, armor ->
+                    val newArmor = min(armor + Global.getCombatEngine().elapsedInLastFrame *
+                            ship.armorGrid.maxArmorInCell * 0.1f, ship.armorGrid.maxArmorInCell)
+                    ship.armorGrid.setArmorValue(xIndex, yIndex, newArmor)
+                }
             }
         }
     }
@@ -417,6 +441,8 @@ class BulletTimeField : BaseShipSystemScript() {
         return when(index){
             0 -> StatusData("strafe speed halved", true)
             1 -> StatusData("instant maneuverability", false)
+            2 -> StatusData("hitbox minimized", false)
+
             else -> null
         }
     }

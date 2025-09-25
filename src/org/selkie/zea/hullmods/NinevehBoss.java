@@ -220,13 +220,13 @@ public class NinevehBoss extends BaseHullMod {
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortHyperionA.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        StarficzAIUtils.applyDamper(escortHyperionA, id, Utils.linMap(1,0, MAX_TIME*2/3, MAX_TIME, phaseTwoTimer));
+                        StarficzAIUtils.applyDamper(escortHyperionA, id, Utils.linMap(phaseTwoTimer, MAX_TIME*2/3, MAX_TIME, 1,0));
                         StarficzAIUtils.stayStill(escortHyperionA);
                         StarficzAIUtils.holdFire(escortHyperionA);
 
                         ship.getFluxTracker().setHardFlux(0f);
                         escortHyperionB.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        StarficzAIUtils.applyDamper(escortHyperionB, id, Utils.linMap(1,0, MAX_TIME*2/3, MAX_TIME, phaseTwoTimer));
+                        StarficzAIUtils.applyDamper(escortHyperionB, id, Utils.linMap(phaseTwoTimer, MAX_TIME*2/3, MAX_TIME, 1,0));
                         StarficzAIUtils.stayStill(escortHyperionB);
                         StarficzAIUtils.holdFire(escortHyperionB);
                     }

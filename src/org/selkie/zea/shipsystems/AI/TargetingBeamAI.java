@@ -1,7 +1,9 @@
 package org.selkie.zea.shipsystems.AI;
 
 import com.fs.starfarer.api.combat.*;
+import com.fs.starfarer.api.impl.campaign.ids.Personalities;
 import com.fs.starfarer.api.impl.campaign.ids.Tags;
+import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.VectorUtils;
@@ -13,11 +15,20 @@ public class TargetingBeamAI implements ShipSystemAIScript {
 
     private ShipAPI ship;
     private float lidarRange = 1500f;
+    private final IntervalUtil tracker = new IntervalUtil(0.5f, 1f); //Seconds
 
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
+    }
 
-        this.ship = ship;
+    @Override
+    public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
+        ShipAPI bestTarget = null;
+        if(ship.getShipAI() != null)
+            ship.getShipAI().getConfig().personalityOverride = Personalities.CAUTIOUS; // force AI to be CAUTIOUS
+
+        tracker.advance(amount);
+        if(!ship.isAlive() || !AIUtils.canUseSystemThisFrame(ship) || !tracker.intervalElapsed()) return;
 
         for (WeaponAPI w : ship.getAllWeapons()) {
             if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
@@ -26,13 +37,7 @@ public class TargetingBeamAI implements ShipSystemAIScript {
             }
         }
 
-    }
-
-    @Override
-    public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-        ShipAPI bestTarget = null;
         float bestScore = 0f;
-        if(!ship.isAlive() || !AIUtils.canUseSystemThisFrame(ship)) return;
         for(ShipAPI other : CombatUtils.getShipsWithinRange(ship.getLocation(), lidarRange)){
             float currentScore = 0f;
             if (other.getOwner() == ship.getOwner() || other.getHullSize() == ShipAPI.HullSize.FIGHTER) continue;
@@ -53,7 +58,7 @@ public class TargetingBeamAI implements ShipSystemAIScript {
 
             boolean occluded = false;
             for(CombatEntityAPI occlusion : CombatUtils.getEntitiesWithinRange(ship.getLocation(), lidarRange)){
-                if (occlusion == other || occlusion == ship || occlusion instanceof DamagingProjectileAPI) continue;
+                if (occlusion == other || occlusion.getOwner() == ship.getOwner() || occlusion instanceof DamagingProjectileAPI) continue;
                 Vector2f closestPoint = MathUtils.getNearestPointOnLine(occlusion.getLocation(), ship.getLocation(), other.getLocation());
                 float occlusionDistance = Misc.getTargetingRadius(closestPoint, occlusion, other.getShield() != null && other.getShield().isOn());
                 if (MathUtils.getDistanceSquared(closestPoint, occlusion.getLocation()) < occlusionDistance*occlusionDistance){

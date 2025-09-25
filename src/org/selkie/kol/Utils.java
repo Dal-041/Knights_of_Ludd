@@ -224,12 +224,26 @@ public class Utils {
     }
 
 
-    // Maps an input value from one range to another using linear interpolation, with clamping.
-    // If the input is below the specified input range, it returns the minimum output; if it's above, it returns the maximum output.
-    public static float linMap(float minOut, float maxOut, float minIn, float maxIn, float input){
-        if(input > maxIn) return maxOut;
-        if(input < minIn) return minOut;
-        return minOut + (input - minIn) * (maxOut - minOut) / (maxIn - minIn);
+    /**
+     * Maps a value from a source range to a target range linearly
+     * <p>
+     * The output is clamped to the Target range's Start/End values if the
+     * input is outside the Source range's Start/End values.
+     *
+     * @param sourceValue The value to be mapped.
+     * @param sourceStart The starting value of the input (source) range.
+     * @param sourceEnd   The ending value of the input (source) range.
+     * @param targetStart The value in the target range corresponding to [sourceStart].
+     * @param targetEnd   The value in the target range corresponding to [sourceEnd].
+     * @return The mapped value in the target range.
+     */
+    public static float linMap(float sourceValue, float sourceStart, float sourceEnd, float targetStart, float targetEnd){
+        // Clamping: If value is outside the source range, return the corresponding target value.
+        if(sourceValue > sourceEnd) return targetEnd;
+        if(sourceValue < sourceStart) return targetStart;
+
+        // Linear mapping formula: targetStart + (normalized_source_value) * (targetRange)
+        return targetStart + (sourceValue - sourceStart) * (targetEnd - targetStart) / (sourceEnd - sourceStart);
     }
 
 

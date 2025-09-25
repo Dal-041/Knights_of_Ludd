@@ -1,0 +1,15 @@
+{
+	"id":"zea_edf_solar_tunnel",
+	"type":"ENGINE_MOD",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.zea.shipsystems.AI.SolarFlareAI",
+
+	"statsScript":"org.selkie.zea.shipsystems.SolarFlareSystem",
+	"runScriptWhilePaused":true, # only for the player's ship
+	"runScriptWhileIdle":true,  # this means unapply() never gets called
+
+	"useSound":"shield_raise",
+	"deactivateSound":"shield_lower",
+	"loopSound":"system_fortress_shield_loop",
+    "outOfUsesSound":"gun_out_of_ammo",
+}

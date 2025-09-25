@@ -163,7 +163,7 @@ class ElysianBuiltin : BaseHullMod() {
         private var engines: MutableList<Pair<EngineSlotAPI, Pair<Color, Color>>> = java.util.ArrayList()
 
         private var capacitorFactor = 1f // 0-1
-        private var capacitorAmount = 0f // Gets verified
+        var capacitorAmount = 0f // Gets verified
 
         private var STATUSKEY1 = Any()
         private var STATUSKEY2 = Any()
@@ -247,7 +247,7 @@ class ElysianBuiltin : BaseHullMod() {
 
             ship.setJitterUnder(
                 "coronal_cap" + ship.id, Color(235, 165, 20, 100),
-                Utils.linMap(0f, 0.6f, 0.5f, 1f, capacitorFactor), 3, 0f, 15f
+                Utils.linMap(capacitorFactor, 0.5f, 1f, 0f, 0.6f), 3, 0f, 15f
             )
 
             ship.setCustomData(CAPACITY_FACTOR_KEY, capacitorFactor)

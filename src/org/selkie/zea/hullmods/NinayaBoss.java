@@ -92,7 +92,7 @@ public class NinayaBoss extends BaseHullMod {
                     }
                 }
 
-                StarficzAIUtils.applyDamper(ship, id, Utils.linMap(1,0, MAX_TIME*5/6, MAX_TIME, phaseTwoTimer));
+                StarficzAIUtils.applyDamper(ship, id, Utils.linMap(phaseTwoTimer, MAX_TIME*5/6, MAX_TIME, 1,0));
                 StarficzAIUtils.stayStill(ship);
                 StarficzAIUtils.holdFire(ship);
 
@@ -140,7 +140,7 @@ public class NinayaBoss extends BaseHullMod {
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortA.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        StarficzAIUtils.applyDamper(escortA, id, Utils.linMap(1,0, MAX_TIME*2/3, MAX_TIME, phaseTwoTimer));
+                        StarficzAIUtils.applyDamper(escortA, id, Utils.linMap(phaseTwoTimer, MAX_TIME*2/3, MAX_TIME, 1,0));
                         StarficzAIUtils.stayStill(escortA);
                         StarficzAIUtils.holdFire(escortA);
                     }
@@ -155,7 +155,7 @@ public class NinayaBoss extends BaseHullMod {
                     } else{
                         ship.getFluxTracker().setHardFlux(0f);
                         escortB.giveCommand(ShipCommand.DECELERATE, null, 0);
-                        StarficzAIUtils.applyDamper(escortB, id, Utils.linMap(1,0, MAX_TIME*2/3, MAX_TIME, phaseTwoTimer));
+                        StarficzAIUtils.applyDamper(escortB, id, Utils.linMap(phaseTwoTimer, MAX_TIME*2/3, MAX_TIME, 1,0));
                         StarficzAIUtils.stayStill(escortB);
                         StarficzAIUtils.holdFire(escortB);
                     }

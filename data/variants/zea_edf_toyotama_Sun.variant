@@ -1,0 +1,39 @@
+{
+    "displayName": "Sun",
+    "fluxCapacitors": 7,
+    "fluxVents": 20,
+    "goalVariant": false,
+    "hullId": "zea_edf_toyotama",
+    "hullMods": [],
+    "permaMods": [],
+    "sMods": [],
+    "suppressedMods": [],
+    "variantId": "zea_edf_toyotama_Sun",
+    "weaponGroups": [
+        {
+            "autofire": false,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0023": "lightac",
+                "WS0022": "lightac",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0001": "lightag",
+                "WS0002": "lightag",
+            }
+        },
+        {
+            "autofire": true,
+            "mode": "LINKED",
+            "weapons": {
+                "WS0003": "zea_edf_aegis",
+            }
+        },
+    ],
+    "wings": [],
+    "modules": [],
+}

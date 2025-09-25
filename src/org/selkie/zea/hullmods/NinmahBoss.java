@@ -419,9 +419,9 @@ public class NinmahBoss extends BaseHullMod {
 
             // if venting hardflux, try to avoid damage, but allow some tanking as hardflux levels rise.
             if (ventingHardFlux) {
-                if (ship.getFluxLevel() < Utils.linMap(0.4f, 1f, 0f, 0.07f, armorDamageLevel)) wantToPhase = true;
-                if (ship.getFluxLevel() < Utils.linMap(0.4f, 1f, 0f, 0.07f, hullDamageLevel)) wantToPhase = true;
-                if (ship.getFluxLevel() < Utils.linMap(0.4f, 1f, 0.5f, 0.9f, empDamageLevel)) wantToPhase = true;
+                if (ship.getFluxLevel() < Utils.linMap(armorDamageLevel, 0f, 0.07f, 0.4f, 1f)) wantToPhase = true;
+                if (ship.getFluxLevel() < Utils.linMap(hullDamageLevel, 0f, 0.07f, 0.4f, 1f)) wantToPhase = true;
+                if (ship.getFluxLevel() < Utils.linMap(empDamageLevel, 0.5f, 0.9f, 0.4f, 1f)) wantToPhase = true;
             }
 
             // otherwise, ship is attacking

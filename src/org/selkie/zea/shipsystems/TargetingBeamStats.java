@@ -13,6 +13,7 @@ import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.MathUtils;
 import org.lazywizard.lazylib.combat.AIUtils;
 import org.lwjgl.util.vector.Vector2f;
+import org.selkie.kol.Utils;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,14 +23,14 @@ public class TargetingBeamStats extends BaseShipSystemScript {
     public WeaponAPI lidar;
     protected boolean needsUnapply = false;
     protected boolean playedWindup = false;
-    protected float lidarMaxRange = 1000f;
+    protected float lidarMaxRange = 2100f;
     protected boolean inited = false;
     public static final Object KEY_SHIP = new Object();
     public static final Object KEY_TARGET = new Object();
     public static float DAM_MULT = 1.5f;
     public static final Color TEXT_COLOR = new Color(255,55,55,255);
     public static final Color JITTER_COLOR = new Color(255,50,50,75);
-    public final float lidarMinRange = 700f;
+    public float lidarMinRange = lidarMaxRange * 0.7f;
 
 
     public void init(ShipAPI ship) {
@@ -39,6 +40,7 @@ public class TargetingBeamStats extends BaseShipSystemScript {
             if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
                 lidar = w;
                 lidarMaxRange = w.getRange();
+                lidarMinRange = lidarMaxRange * 0.6f;
             }
         }
     }
@@ -118,11 +120,8 @@ public class TargetingBeamStats extends BaseShipSystemScript {
             Global.getCombatEngine().getCustomData().put(targetDataKey, new EntropyAmplifierStats.TargetData(ship, target));
             if (target != null) {
                 float targetRange = MathUtils.getDistance(ship, target);
-                if (targetRange < lidarMinRange){
-                    DAM_MULT = 2f;
-                } else {
-                    DAM_MULT = Misc.interpolate(2f,1f, (targetRange - lidarMinRange)/(lidarMaxRange - lidarMinRange));
-                }
+
+                DAM_MULT = Utils.linMap(targetRange, lidarMinRange, lidarMaxRange, 2f, 1f);
 
                 if (target.getFluxTracker().showFloaty() ||
                         ship == Global.getCombatEngine().getPlayerShip() ||
