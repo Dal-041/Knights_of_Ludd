@@ -1,0 +1,15 @@
+{
+	"id":"zea_dusk_phase_transporter",
+	"type":"ENGINE_MOD",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.zea.shipsystems.AI.PhaseTransporterAI",
+
+	"statsScript":"org.selkie.zea.shipsystems.PhaseTransporter",
+	"runScriptWhilePaused":false, # only for the player's ship
+	"runScriptWhileIdle":true,  # this means unapply() never gets called
+
+	"useSound":"zea_dusk_phase_cloak_activate",
+	"deactivateSound":"zea_dusk_phase_cloak_deactivate",
+	"loopSound":"zea_dusk_phase_cloak",
+    "outOfUsesSound":"system_phase_cloak_collision",
+}

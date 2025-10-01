@@ -280,7 +280,8 @@
 			"zea_dusk_onryo_glow1":"graphics/zea/fx/zea_dusk_onryo_glow1.png",
 			"zea_dusk_onryo_glow2":"graphics/zea/fx/zea_dusk_onryo_glow2.png",
 			"zea_dusk_funayurei_glow1":"graphics/zea/ships/zea_dusk_funayurei_glow1.png",
-			"zea_dusk_funayurei_glow2":"graphics/zea/ships/zea_dusk_funayurei_glow2.png"
+			"zea_dusk_funayurei_glow2":"graphics/zea/ships/zea_dusk_funayurei_glow2.png",
+			"zea_boss_iaya_glow1":"graphics/zea/ships/zea_boss_iaya_glow1.png"
 		},
 		"backgrounds": {
 			"zea_bg_delta_site":"graphics/zea/backgrounds/zea_bg_delta_site.png",

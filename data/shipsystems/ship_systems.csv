@@ -208,6 +208,7 @@ Small Flux Negation,zea_dawn_small_flux_negation,,,,,,,,,,1,10,1,10,,,,,,,,,,,,,
 # Dusk,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Phase Cloak,zea_dusk_phasecloak,,,,,,,,,,0.5,,0.5,2,TRUE,,TRUE,TRUE,TRUE,,,,TRUE,,TRUE,,graphics/icons/hullsys/phase_cloak.png
 Phase Teleporter,zea_dusk_phaseteleporter,,,,,,,,,,0.5,0,0.5,15,,,,TRUE,,,,,,,,,graphics/icons/hullsys/displacer.png
+Phase Transporter,zea_dusk_phase_transporter,,,,,,,,,,1,0,0,15,,,,TRUE,,,,,,,,,graphics/icons/hullsys/phase_cloak.png
 Subphase Glide,zea_dusk_subspace_glide,,,,,,,,,,1,3,2,5,,,,,,,,,,,,,graphics/icons/hullsys/phase_cloak.png
 Phase Skimmer,zea_dusk_displacer,,,,,,,,3,0.1,0.25,,0.25,0,,TRUE,,TRUE,,,,,,,,,graphics/icons/hullsys/displacer.png
 Phase Skip,zea_dusk_phase_skip,1,,,,,0.1,,,,0.5,1.5,0.5,9,,,TRUE,,TRUE,,,,TRUE,TRUE,,,graphics/icons/hullsys/displacer.png
