@@ -1,0 +1,55 @@
+{
+  "hullName": "Ameonna",
+  "hullId": "zea_boss_ameonna_9",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/zea/ships/ameonna/zea_boss_ameonna_9.png",
+  "style": "ZEA_DUSK_TECH",
+  "height": 112,
+  "width": 46,
+  "center": [23, 59.5],
+  "collisionRadius": 65.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 62.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "automated",
+    "zea_dusk_mist",
+    "zea_dusk_builtin",
+    "zea_recovery_limiter"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 135,
+      "locations": [34, 23]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -135,
+      "locations": [34, -23]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    44.5, -4.5,
+    51.5, -11,
+    51, -17,
+    44, -20.5,
+    -52, -11.5,
+    -58.5, -0,
+    -52, 11.5,
+    44, 20.5,
+    51, 17,
+    51.5, 11,
+    44.5, 4.5
+  ]
+}

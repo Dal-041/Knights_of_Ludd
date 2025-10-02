@@ -1,0 +1,112 @@
+{
+  "hullName": "Ameonna",
+  "hullId": "zea_boss_ameonna_8",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/zea/ships/ameonna/zea_boss_ameonna_8.png",
+  "style": "ZEA_DUSK_TECH",
+  "height": 76,
+  "width": 66,
+  "center": [33, 39],
+  "collisionRadius": 64.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 55,
+  "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "automated",
+    "zea_dusk_mist",
+    "zea_dusk_builtin",
+    "zea_recovery_limiter"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 0,
+      "locations": [10, -0]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 135,
+      "locations": [11, 28]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -135,
+      "locations": [11, -28]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [4, 20.5],
+      "length": 30,
+      "width": 10,
+      "angle": 140,
+      "contrailSize": 30,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [4, -20.5],
+      "length": 30,
+      "width": 10,
+      "angle": -140,
+      "contrailSize": 30,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [7.5, 22.5],
+      "length": 39.324039,
+      "width": 9.720045,
+      "angle": 140,
+      "contrailSize": 9.720045,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [7.5, -22.5],
+      "length": 39.324039,
+      "width": 9.720045,
+      "angle": -140,
+      "contrailSize": 9.720045,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [10.5, 24],
+      "length": 49.28262,
+      "width": 6.992434,
+      "angle": 137.5,
+      "contrailSize": 6.992434,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [10.5, -24],
+      "length": 49.28262,
+      "width": 6.992434,
+      "angle": -137.5,
+      "contrailSize": 6.992434,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    34.5, -22.5,
+    20.5, -32.5,
+    4.5, -20.5,
+    -21, -17,
+    -37.5, -4.5,
+    -37.5, 4.5,
+    -21, 17,
+    4.5, 20.5,
+    20.5, 32.5,
+    34.5, 22.5
+  ]
+}

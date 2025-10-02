@@ -1,0 +1,14 @@
+{
+  "variantId": "zea_boss_ameonna_6_Standard",
+  "hullId": "zea_boss_ameonna_6",
+  "displayName": "Standard",
+  "goalVariant": false,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+  "modules": [],
+  "wings": []
+}

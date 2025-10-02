@@ -1,0 +1,23 @@
+{
+  "variantId": "zea_boss_ameonna_Standard",
+  "hullId": "zea_boss_ameonna",
+  "displayName": "Standard",
+  "goalVariant": false,
+  "fluxCapacitors": 1,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+  "modules": [
+    {"SEGMENT_2": "zea_boss_ameonna_2_Standard"},
+    {"SEGMENT_3": "zea_boss_ameonna_3_Standard"},
+    {"SEGMENT_4": "zea_boss_ameonna_4_5_Standard"},
+    {"SEGMENT_5": "zea_boss_ameonna_4_5_Standard"},
+    {"SEGMENT_6": "zea_boss_ameonna_6_Standard"},
+    {"SEGMENT_7": "zea_boss_ameonna_7_Standard"},
+    {"SEGMENT_8": "zea_boss_ameonna_8_Standard"},
+    {"SEGMENT_9": "zea_boss_ameonna_9_Standard"}
+  ],
+  "wings": []
+}
