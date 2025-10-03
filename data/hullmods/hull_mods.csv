@@ -231,3 +231,4 @@ Elysian Engineering,zea_edf_builtin,,,,codex_require_related,,,,TRUE,,0,0,0,0,or
 Conformal Shield,zea_conformal_shield,3,0,,"no_drop, no_drop_salvage, no_dealer, restricted, codex_require_related","Defenses, Shields",,,,,0,0,0,0,org.selkie.zea.hullmods.HardcodedOffsetShields,"This ship is equipped with a custom shield emitter that keeps its front shield close to the hull. The shield arc is fixed and cannot exceed %s degrees, while the emitter is locked to face directly forward, regardless of the shield type installed.",Conformal shield,,graphics/hullmods/front_shield_emitter.png,
 Resilient Shield Emitter,zea_edf_resilientshieldemitter,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.ResilientShieldEmitter,,,,,
 IFF Override,zea_edf_iff_override,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.IFFOverrideHullmod,,,,,
+Dusk Worm Manager,dusk_worm_controller,,,,,,,,TRUE,TRUE,0,0,0,0,org.selkie.zea.hullmods.DuskWormController,,,,,

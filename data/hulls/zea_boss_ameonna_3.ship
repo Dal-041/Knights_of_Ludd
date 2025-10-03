@@ -1,83 +1,125 @@
 {
-  "hullName": "Ameonna",
-  "hullId": "zea_boss_ameonna_3",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/zea/ships/ameonna/zea_boss_ameonna_3.png",
-  "style": "ZEA_DUSK_TECH",
-  "height": 115,
-  "width": 152,
-  "center": [76, 57],
-  "collisionRadius": 93.5,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 85.5,
-  "viewOffset": 0,
-  "builtInMods": [
-    "phasefield",
-    "automated",
-    "zea_dusk_mist",
-    "zea_dusk_builtin",
-    "zea_recovery_limiter"
-  ],
-  "weaponSlots": [
-    {
-      "id": "WS0005",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -135,
-      "locations": [-34, -37]
-    },
-    {
-      "id": "WS0007",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 135,
-      "locations": [-34, 37]
-    }
-  ],
-  "engineSlots": [
-    {
-      "location": [-32.5, 37.5],
-      "length": 0,
-      "width": 0,
-      "angle": 180,
-      "contrailSize": 0,
-      "style": "LOW_TECH"
-    },
-    {
-      "location": [-32.5, -37.5],
-      "length": 0,
-      "width": 0,
-      "angle": -180,
-      "contrailSize": 0,
-      "style": "LOW_TECH"
-    }
-  ],
-  "bounds": [
-    -34, -8,
-    1.5, -11.5,
-    25, -33,
-    24.5, -71,
-    -4, -50,
-    -1, -60.5,
-    -5.5, -64,
-    -7.5, -76,
-    -32, -36,
-    -40.5, -33,
-    -56, -10.5,
-    -56, 10.5,
-    -40.5, 33,
-    -32, 36,
-    -7.5, 76,
-    -5.5, 64,
-    -1, 60.5,
-    -4, 50,
-    24.5, 71,
-    25, 33,
-    1.5, 11.5,
-    -34, 8
-  ]
+    "hullName": "Ameonna",
+    "hullId": "zea_boss_ameonna_3",
+    "hullSize": "FRIGATE",
+    "style": "ZEA_DUSK_TECH",
+    "spriteName": "graphics/zea/ships/ameonna/zea_boss_ameonna_3.png",
+    "height": 115,
+    "width": 152,
+    "center": [
+        76, 57
+    ],
+    "collisionRadius": 93.5,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 85.5,
+    "viewOffset": 0,
+    "builtInMods": [
+        "phasefield",
+        "automated",
+        "zea_dusk_mist",
+        "zea_dusk_builtin",
+        "zea_recovery_limiter"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0005",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": -135,
+            "locations": [
+                     -34,      -37
+            ]
+        },
+        {
+            "id": "WS0007",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 135,
+            "locations": [
+                     -34,       37
+            ]
+        },
+        {
+            "id": "JOINT_AHEAD",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     5.5,        0
+            ]
+        },
+        {
+            "id": "JOINT_BEHIND",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                   -51.5,        0
+            ]
+        }
+    ],
+    "engineSlots": [
+        {
+            "location": [
+                -32.5, 37.5
+            ],
+            "length": 0,
+            "width": 0,
+            "angle": 180,
+            "contrailSize": 0,
+            "style": "LOW_TECH"
+        },
+        {
+            "location": [
+                -32.5, -37.5
+            ],
+            "length": 0,
+            "width": 0,
+            "angle": -180,
+            "contrailSize": 0,
+            "style": "LOW_TECH"
+        }
+    ],
+    "bounds": [
+             -34,       -8,
+             1.5,    -11.5,
+              25,      -33,
+            24.5,      -71,
+              -4,      -50,
+        
+              -1,    -60.5,
+            -5.5,      -64,
+            -7.5,      -76,
+             -32,      -36,
+           -40.5,      -33,
+        
+             -56,    -10.5,
+             -56,     10.5,
+           -40.5,       33,
+             -32,       36,
+            -7.5,       76,
+        
+            -5.5,       64,
+              -1,     60.5,
+              -4,       50,
+            24.5,       71,
+              25,       33,
+        
+             1.5,     11.5,
+             -34,        8
+    # 22 points total.
+    ]
 }

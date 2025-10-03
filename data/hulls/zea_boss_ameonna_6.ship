@@ -1,140 +1,195 @@
 {
-  "hullName": "Ameonna",
-  "hullId": "zea_boss_ameonna_6",
-  "hullSize": "FRIGATE",
-  "spriteName": "graphics/zea/ships/ameonna/zea_boss_ameonna_6.png",
-  "style": "ZEA_DUSK_TECH",
-  "height": 131,
-  "width": 242,
-  "center": [121, 68],
-  "collisionRadius": 142,
-  "shieldCenter": [0, -0],
-  "shieldRadius": 132.5,
-  "viewOffset": 0,
-  "builtInMods": [
-    "phasefield",
-    "automated",
-    "zea_dusk_mist",
-    "zea_dusk_builtin",
-    "zea_recovery_limiter"
-  ],
-  "weaponSlots": [
-    {
-      "id": "WS0001",
-      "size": "LARGE",
-      "type": "ENERGY",
-      "mount": "TURRET",
-      "arc": 210,
-      "angle": 0,
-      "locations": [44, 0]
-    },
-    {
-      "id": "WS0004",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": 135,
-      "locations": [-27.5, 36.5]
-    },
-    {
-      "id": "WS0005",
-      "size": "SMALL",
-      "type": "SYSTEM",
-      "mount": "TURRET",
-      "arc": 0,
-      "angle": -135,
-      "locations": [-27.5, -36.5]
-    }
-  ],
-  "engineSlots": [
-    {
-      "location": [-29, 35],
-      "length": 46.707302,
-      "width": 9.935358,
-      "angle": 145,
-      "contrailSize": 9.935358,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-29, -35],
-      "length": 46.707302,
-      "width": 9.935358,
-      "angle": -145,
-      "contrailSize": 9.935358,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-25, 38.5],
-      "length": 46.707302,
-      "width": 9.935358,
-      "angle": 139,
-      "contrailSize": 9.935358,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-25, -38.5],
-      "length": 46.707302,
-      "width": 9.935358,
-      "angle": -139,
-      "contrailSize": 9.935358,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-34.5, 33.5],
-      "length": 36.440247,
-      "width": 11.76576,
-      "angle": 158.5,
-      "contrailSize": 11.76576,
-      "style": "HIGH_TECH"
-    },
-    {
-      "location": [-34.5, -33.5],
-      "length": 36.440247,
-      "width": 11.76576,
-      "angle": -158.5,
-      "contrailSize": 11.76576,
-      "style": "HIGH_TECH"
-    }
-  ],
-  "bounds": [
-    62.5, -8.5,
-    54, -19.5,
-    57, -25,
-    39.5, -57.5,
-    41, -89,
-    36.5, -91.5,
-    46, -113.5,
-    42.5, -118,
-    17.5, -79,
-    0.5, -74,
-    -17, -75,
-    -19, -67,
-    -49.5, -75.5,
-    -50.5, -72,
-    -19, -52.5,
-    -17, -48,
-    -43, -47,
-    -48, -27.5,
-    -66, -11,
-    -66, 11,
-    -48, 27.5,
-    -43, 47,
-    -17, 48,
-    -19, 52.5,
-    -50.5, 72,
-    -49.5, 75.5,
-    -19, 67,
-    -17, 75,
-    0.5, 74,
-    17.5, 79,
-    42.5, 118,
-    46, 113.5,
-    36.5, 91.5,
-    41, 89,
-    39.5, 57.5,
-    57, 25,
-    54, 19.5,
-    62.5, 8.5
-  ]
+    "hullName": "Ameonna",
+    "hullId": "zea_boss_ameonna_6",
+    "hullSize": "FRIGATE",
+    "style": "ZEA_DUSK_TECH",
+    "spriteName": "graphics/zea/ships/ameonna/zea_boss_ameonna_6.png",
+    "height": 131,
+    "width": 242,
+    "center": [
+        121, 68
+    ],
+    "collisionRadius": 142,
+    "coversColor": "",
+    "shieldCenter": [
+        0, 0
+    ],
+    "shieldRadius": 132.5,
+    "viewOffset": 0,
+    "builtInMods": [
+        "phasefield",
+        "automated",
+        "zea_dusk_mist",
+        "zea_dusk_builtin",
+        "zea_recovery_limiter"
+    ],
+    "builtInWings": [],
+    "builtInModules": null,
+    "weaponSlots": [
+        {
+            "id": "WS0001",
+            "size": "LARGE",
+            "type": "ENERGY",
+            "mount": "TURRET",
+            "arc": 210,
+            "angle": 0,
+            "locations": [
+                      44,        0
+            ]
+        },
+        {
+            "id": "WS0004",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 135,
+            "locations": [
+                   -27.5,     36.5
+            ]
+        },
+        {
+            "id": "WS0005",
+            "size": "SMALL",
+            "type": "SYSTEM",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": -135,
+            "locations": [
+                   -27.5,    -36.5
+            ]
+        },
+        {
+            "id": "JOINT_AHEAD",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                      46,        0
+            ]
+        },
+        {
+            "id": "JOINT_BEHIND",
+            "size": "SMALL",
+            "type": "DECORATIVE",
+            "mount": "TURRET",
+            "arc": 0,
+            "angle": 0,
+            "locations": [
+                     -59,        0
+            ]
+        }
+    ],
+    "engineSlots": [
+        {
+            "location": [
+                -29, 35
+            ],
+            "length": 46.707302,
+            "width": 9.935358,
+            "angle": 145,
+            "contrailSize": 9,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -29, -35
+            ],
+            "length": 46.707302,
+            "width": 9.935358,
+            "angle": -145,
+            "contrailSize": 9,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -25, 38.5
+            ],
+            "length": 46.707302,
+            "width": 9.935358,
+            "angle": 139,
+            "contrailSize": 9,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -25, -38.5
+            ],
+            "length": 46.707302,
+            "width": 9.935358,
+            "angle": -139,
+            "contrailSize": 9,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -34.5, 33.5
+            ],
+            "length": 36.440247,
+            "width": 11.76576,
+            "angle": 158.5,
+            "contrailSize": 11,
+            "style": "HIGH_TECH"
+        },
+        {
+            "location": [
+                -34.5, -33.5
+            ],
+            "length": 36.440247,
+            "width": 11.76576,
+            "angle": -158.5,
+            "contrailSize": 11,
+            "style": "HIGH_TECH"
+        }
+    ],
+    "bounds": [
+            62.5,     -8.5,
+              54,    -19.5,
+              57,      -25,
+            39.5,    -57.5,
+              41,      -89,
+        
+            36.5,    -91.5,
+              46,   -113.5,
+            42.5,     -118,
+            17.5,      -79,
+             0.5,      -74,
+        
+             -17,      -75,
+             -19,      -67,
+           -49.5,    -75.5,
+           -50.5,      -72,
+             -19,    -52.5,
+        
+             -17,      -48,
+             -43,      -47,
+             -48,    -27.5,
+             -66,      -11,
+             -66,       11,
+        
+             -48,     27.5,
+             -43,       47,
+             -17,       48,
+             -19,     52.5,
+           -50.5,       72,
+        
+           -49.5,     75.5,
+             -19,       67,
+             -17,       75,
+             0.5,       74,
+            17.5,       79,
+        
+            42.5,      118,
+              46,    113.5,
+            36.5,     91.5,
+              41,       89,
+            39.5,     57.5,
+        
+              57,       25,
+              54,     19.5,
+            62.5,      8.5
+    # 38 points total.
+    ]
 }
