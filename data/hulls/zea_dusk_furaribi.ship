@@ -4,7 +4,7 @@
   "hullSize": "DESTROYER",
   "spriteName": "graphics/zea/ships/zea_dusk_furaribi.png",
   "style": "ZEA_DUSK_TECH",
-  "height": 137,
+  "height": 142,
   "width": 138,
   "center": [69, 68.5],
   "collisionRadius": 87,
@@ -27,7 +27,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 45,
-      "locations": [26.5, 23]
+      "locations": [27.5, 23]
     },
     {
       "id": "WS0004",
@@ -36,7 +36,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -45,
-      "locations": [26.5, -23]
+      "locations": [27.5, -23]
     },
     {
       "id": "WS0001",
@@ -45,7 +45,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 45,
-      "locations": [12.5, 35]
+      "locations": [13.5, 35]
     },
     {
       "id": "WS0002",
@@ -54,7 +54,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -45,
-      "locations": [12.5, -35]
+      "locations": [13.5, -35]
     },
     {
       "id": "WS0005",
@@ -63,7 +63,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [30.5, -0]
+      "locations": [31.5, 0]
     },
     {
       "id": "WS0007",
@@ -72,7 +72,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 140.5,
-      "locations": [-28.5, 48.5]
+      "locations": [-27.5, 48.5]
     },
     {
       "id": "WS0008",
@@ -81,39 +81,55 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -140.5,
-      "locations": [-28.5, -48.5]
+      "locations": [-27.5, -48.5]
     }
   ],
   "engineSlots": [
     {
-      "location": [-52.5, 26],
+      "location": [-53.5, 22.5],
       "length": 41,
       "width": 11,
-      "angle": 174,
+      "angle": 180,
       "contrailSize": 11,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-52.5, -26],
+      "location": [-53.5, -22.5],
       "length": 41,
       "width": 11,
-      "angle": -174,
+      "angle": -180,
       "contrailSize": 11,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-50.5, 36],
+      "location": [-52.5, 30],
       "length": 41,
       "width": 11,
-      "angle": 176.5,
+      "angle": 172,
       "contrailSize": 11,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-50.5, -36],
+      "location": [-52.5, -30],
       "length": 41,
       "width": 11,
-      "angle": -176.5,
+      "angle": -172,
+      "contrailSize": 11,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-50, 37.5],
+      "length": 41,
+      "width": 11,
+      "angle": 164,
+      "contrailSize": 11,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-50, -37.5],
+      "length": 41,
+      "width": 11,
+      "angle": -164,
       "contrailSize": 11,
       "style": "HIGH_TECH"
     }
@@ -121,12 +137,12 @@
   "bounds": [
     46.5, -13,
     68.5, -20.5,
-    22, -32.5,
-    2.5, -56.5,
+    23, -36,
+    0, -54,
     -7, -49.5,
     -17.5, -49.5,
-    -12.5, -69.5,
-    -31.5, -50,
+    -14, -65,
+    -41.5, -42,
     -51, -40.5,
     -54, -20.5,
     -68, -17,
@@ -136,12 +152,12 @@
     -68, 17,
     -54, 20.5,
     -51, 40.5,
-    -31.5, 50,
-    -12.5, 69.5,
+    -41.5, 42,
+    -14, 65,
     -17.5, 49.5,
     -7, 49.5,
-    2.5, 56.5,
-    22, 32.5,
+    0, 54,
+    23, 36,
     68.5, 20.5,
     46.5, 13
   ]
