@@ -13,7 +13,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
     var init = false
     var activated = false
-    lateinit var renderer: AmeonnaPhaseRenderer
+    //lateinit var renderer: AmeonnaPhaseRenderer
 
     override fun apply(stats: MutableShipStatsAPI, id: String, state: ShipSystemStatsScript.State, effectLevel: Float) {
 
@@ -21,8 +21,18 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
         if (!init) {
             init = true
-            renderer = AmeonnaPhaseRenderer(ship, ship.system)
-            Global.getCombatEngine().addLayeredRenderingPlugin(renderer)
+            //renderer = AmeonnaPhaseRenderer(ship, ship.system)
+
+            var modules = ArrayList<ShipAPI>()
+            modules.add(ship)
+            modules.addAll(ship.childModulesCopy)
+
+            for (module in modules) {
+                var renderer = AmeonnaPhaseRenderer(module, ship.system)
+                Global.getCombatEngine().addLayeredRenderingPlugin(renderer)
+            }
+
+
         }
 
         if (!activated) {
@@ -39,47 +49,54 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
     class AmeonnaPhaseRenderer(var ship: ShipAPI, var system: ShipSystemAPI) : BaseCombatLayeredRenderingPlugin() {
 
+        var glow1 = Global.getSettings().getSprite(ship.hullSpec.spriteName.replace(".png", "_glow1.png"))
+        var glow2 = Global.getSettings().getSprite(ship.hullSpec.spriteName.replace(".png", "_glow2.png"))
+
         override fun getRenderRadius(): Float {
             return 1000000f
         }
 
-        var layers = ReflectionUtilsV2.get("layers", ship) as EnumSet<CombatEngineLayers>
+        var layers = (ReflectionUtilsV2.get("layers", ship) as EnumSet<CombatEngineLayers>).apply {
+            add(CombatEngineLayers.ABOVE_SHIPS_LAYER)
+        }
         override fun getActiveLayers(): EnumSet<CombatEngineLayers> {
             return layers
         }
 
         override fun render(layer: CombatEngineLayers?, viewport: ViewportAPI?) {
 
-            //if (layer == CombatEngineLayers.STATION_WEAPONS_LAYER) return
+            //Render phase glows
+            if (layer == CombatEngineLayers.ABOVE_SHIPS_LAYER) {
 
+                startDepthMask(ship, false)
 
-           /* ship.alphaMult = 1f
-            ship.extraAlphaMult = 1f
-            ship.extraAlphaMult2 = 0.5f
+                glow1.angle = ship.facing-90
+                glow1.renderAtCenter(ship.location.x, ship.location.y)
 
-            startStencil(ship, true)
-            ReflectionUtilsV2.invoke("render", ship, layer, viewport)
-            endStencil()*/
+                glow2.setAdditiveBlend()
+                glow2.alphaMult = 0.3f
+                glow2.angle = ship.facing-90
+                glow2.renderAtCenter(ship.location.x, ship.location.y)
 
-            var modules = ArrayList<ShipAPI>()
-            modules.add(ship)
-            modules.addAll(ship.childModulesCopy)
-
-            for (module in modules) {
-               module.extraAlphaMult = 1f
+                endDepthMask()
             }
+            //Split the ship in to a phased and non phased part
+            else {
+                //Set alpha to the normal amount
+                ship.extraAlphaMult = 1f
 
-            val x = ship.location.x
-            val y = ship.location.y
-            startDepthMask(ship)
-            ReflectionUtilsV2.invoke("render", ship, layer, viewport)
-            endDepthMask()
-            for (module in modules) {
-                module.extraAlphaMult = 0.25f
+                val x = ship.location.x
+                val y = ship.location.y
+                startDepthMask(ship, true)
+                ReflectionUtilsV2.invoke("render", ship, layer, viewport)
+                endDepthMask()
+
+                //Set alpha to 0.25, so that the base game render renders this half, instead of having to render it an additional time
+                ship.extraAlphaMult = 0.25f
             }
         }
 
-        fun startDepthMask(ship: ShipAPI) {
+        fun startDepthMask(ship: ShipAPI, renderInside: Boolean) {
             // Enable depth testing and writing
             GL11.glEnable(GL11.GL_DEPTH_TEST)
             GL11.glDepthMask(true)
@@ -103,7 +120,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             GL11.glColorMask(true, true, true, true)
 
             // Now restrict rendering to only where depth == 0.5
-            GL11.glDepthFunc(GL11.GL_NOTEQUAL)
+            GL11.glDepthFunc(if (renderInside) GL11.GL_EQUAL else GL11.GL_NOTEQUAL)
             GL11.glDepthMask(false) // Prevent further depth writes
         }
 
