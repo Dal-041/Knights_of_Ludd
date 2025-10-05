@@ -4,7 +4,10 @@ import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript
+import org.lazywizard.lazylib.MathUtils
+import org.lazywizard.lazylib.ext.rotate
 import org.lwjgl.opengl.GL11
+import org.lwjgl.util.vector.Vector2f
 import org.selkie.kol.ReflectionUtilsV2
 import java.util.*
 import kotlin.collections.ArrayList
@@ -14,40 +17,59 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
     var init = false
     var activated = false
     //lateinit var renderer: AmeonnaPhaseRenderer
+    lateinit var ship: ShipAPI
+    lateinit var segmentsToPhase: ArrayList<ShipAPI>
 
     override fun apply(stats: MutableShipStatsAPI, id: String, state: ShipSystemStatsScript.State, effectLevel: Float) {
 
-        val ship = stats.entity as ShipAPI ?: return
+        ship = stats.entity as ShipAPI ?: return
+        segmentsToPhase = getAllSegments()
+
+        var system = ship.phaseCloak
+
+        var modules = ArrayList<ShipAPI>()
+        modules.add(ship)
+        modules.addAll(ship.childModulesCopy)
 
         if (!init) {
             init = true
             //renderer = AmeonnaPhaseRenderer(ship, ship.system)
 
-            var modules = ArrayList<ShipAPI>()
-            modules.add(ship)
-            modules.addAll(ship.childModulesCopy)
-
             for (module in modules) {
-                var renderer = AmeonnaPhaseRenderer(module, ship.system)
+                var renderer = AmeonnaPhaseRenderer(this, module, getAllSegments(), ship.system)
                 Global.getCombatEngine().addLayeredRenderingPlugin(renderer)
             }
 
 
         }
 
-        if (!activated) {
+        if (system.isActive && !activated) {
             activated = true
         }
 
+        if (!system.isActive && activated) {
+            activated = false
+        }
 
+        if (system.isActive && !Global.getCombatEngine().isPaused) {
 
+        }
+
+    }
+
+    fun getAllSegments() : ArrayList<ShipAPI> {
+        var modules = ArrayList<ShipAPI>()
+        modules.add(ship)
+        modules.addAll(ship.childModulesCopy.reversed())
+        return modules
     }
 
     override fun unapply(stats: MutableShipStatsAPI?, id: String?) {
 
     }
 
-    class AmeonnaPhaseRenderer(var ship: ShipAPI, var system: ShipSystemAPI) : BaseCombatLayeredRenderingPlugin() {
+
+    class AmeonnaPhaseRenderer(var systemScript: AmeonnaPhaseSystem, var ship: ShipAPI, var segments: List<ShipAPI>, var system: ShipSystemAPI) : BaseCombatLayeredRenderingPlugin() {
 
         var glow1 = Global.getSettings().getSprite(ship.hullSpec.spriteName.replace(".png", "_glow1.png"))
         var glow2 = Global.getSettings().getSprite(ship.hullSpec.spriteName.replace(".png", "_glow2.png"))
@@ -68,7 +90,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             //Render phase glows
             if (layer == CombatEngineLayers.ABOVE_SHIPS_LAYER) {
 
-                startDepthMask(ship, false)
+                startDepthMask(true)
 
                 glow1.angle = ship.facing-90
                 glow1.renderAtCenter(ship.location.x, ship.location.y)
@@ -84,19 +106,26 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             else {
                 //Set alpha to the normal amount
                 ship.extraAlphaMult = 1f
+                ship.setApplyExtraAlphaToEngines(true)
 
                 val x = ship.location.x
                 val y = ship.location.y
-                startDepthMask(ship, true)
+                startDepthMask(false)
+                ReflectionUtilsV2.invoke("render", ship, layer, viewport)
+                endDepthMask()
+
+                ship.extraAlphaMult = 0.25f
+                startDepthMask(true)
                 ReflectionUtilsV2.invoke("render", ship, layer, viewport)
                 endDepthMask()
 
                 //Set alpha to 0.25, so that the base game render renders this half, instead of having to render it an additional time
-                ship.extraAlphaMult = 0.25f
+
+                ship.extraAlphaMult = 0.0f
             }
         }
 
-        fun startDepthMask(ship: ShipAPI, renderInside: Boolean) {
+        fun startDepthMask(renderInside: Boolean) {
             // Enable depth testing and writing
             GL11.glEnable(GL11.GL_DEPTH_TEST)
             GL11.glDepthMask(true)
@@ -111,10 +140,19 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
             // Draw your mask quad with depth value 0.5
             GL11.glDepthRange(0.5, 0.5) // Set depth range to a fixed value
-            val x = ship.location.x
-            val y = ship.location.y
 
-            GL11.glRectf(x, y-500, x +500, y+500)
+
+
+
+            //Everything inside the polygon will be rendered/not rendered, depending on the renderInside variable
+            GL11.glBegin(GL11.GL_POLYGON)
+            //Draw vertices
+            //GL11.glVertex2f()
+            GL11.glEnd()
+
+
+
+
 
             // Restore color drawing
             GL11.glColorMask(true, true, true, true)
