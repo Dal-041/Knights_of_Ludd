@@ -23,10 +23,11 @@ import kotlin.math.cos
 import kotlin.math.max
 import kotlin.math.roundToInt
 import kotlin.math.sin
+import kotlin.random.Random
 
 class SolarFlareSystem: BaseShipSystemScript() {
 
-    var renderingPlugin: Aurora? = null
+    var renderingPlugins: MutableList<Aurora> = mutableListOf()
     val allyCheckInterval = IntervalUtil(0.7f, 1.3f)
     var allies: List<ShipAPI> = listOf()
 
@@ -45,9 +46,14 @@ class SolarFlareSystem: BaseShipSystemScript() {
     ) {
         val ship = stats!!.entity as ShipAPI
         val engine = Global.getCombatEngine()
-        if (renderingPlugin == null){
-            renderingPlugin = Aurora(ship)
-            engine.addLayeredRenderingPlugin(renderingPlugin)
+        if (renderingPlugins.isEmpty()){
+            renderingPlugins.add(Aurora(ship))
+            renderingPlugins.add(Aurora(ship))
+            engine.addLayeredRenderingPlugin(renderingPlugins[0])
+            engine.addLayeredRenderingPlugin(renderingPlugins[1])
+
+            renderingPlugins[1].radiusInner = ship.collisionRadius / 1.5f
+            renderingPlugins[1].radiusOuter = ship.collisionRadius * 1.5f
         }
 
         val speedDebuff = SpeedDebuff * effectLevel
@@ -63,8 +69,11 @@ class SolarFlareSystem: BaseShipSystemScript() {
             )
         }
 
-        renderingPlugin!!.alphaMult = effectLevel
-        renderingPlugin!!.thicknessMult = effectLevel
+        renderingPlugins[0].alphaMult = effectLevel
+        renderingPlugins[0].thicknessMult = effectLevel
+
+        renderingPlugins[1].alphaMult = effectLevel/3f
+        renderingPlugins[1].thicknessMult = effectLevel*2f
 
         val amount = engine.elapsedInLastFrame
         allyCheckInterval.advance(amount)
@@ -117,6 +126,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
         // --- Public properties with defaults from StarCoronaTerrainPlugin.java ---
         val sprite: SpriteAPI = Global.getSettings().getSprite("terrain", "aurora")
         var outerRadius = ship.collisionRadius
+        var radiusInner: Float = ship.collisionRadius/3f
+        var radiusOuter: Float = ship.collisionRadius
 
         /** The list of flares to render. You can add or remove from this list directly. */
         val flares = mutableListOf<Flare>()
@@ -127,7 +138,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
 
 
         // --- Internal animation state ---
-        private var phaseAngle: Float = 0f
+        private var phaseAngle: Float = Random.nextFloat() * 360f // random initial angle
 
         private val PARTICLE_INTERVAL = IntervalUtil(1f, 1f)
 
@@ -176,8 +187,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
             val bandWidthInTexture: Float = 256f
             var bandIndex: Float
 
-            val radStart: Float = ship.collisionRadius - 100f
-            var radEnd: Float = ship.collisionRadius
+            val radStart: Float = radiusInner
+            var radEnd: Float = radiusOuter
 
             if (radEnd < radStart + 10f) radEnd = radStart + 10f
 
