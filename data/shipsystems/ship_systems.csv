@@ -220,7 +220,8 @@ Twin-Layer Shielding,zea_edf_twinshield,,,,,,0.05,,,,0.25,,1,3,TRUE,,,TRUE,,,,,,
 Linked Plasma Burn,zea_edf_plasmafighters,1,,,,,,,2,0.1,0.5,4,1,,,,,,,,,,,,,,graphics/icons/hullsys/burn_drive.png
 MiniJump,zea_edf_minijump,,,,,,,,2,0.1,0,0.25,1,,,,,,,,,,,,,,graphics/icons/hullsys/infernium_injector.png
 Synchronized Ammo Feeder,zea_edf_synchronized_ammo_feed,,,,,,,,,,1,5,1,10,,,,,,,,,,,,,graphics/icons/hullsys/ammo_feeder.png
-Solar Tunnel,zea_edf_solar_tunnel,,,,,,0.05,,,,5,,5,0,TRUE,,,TRUE,,,,,,,,,graphics/zea/icons/hullsys/twin_shield.png
+Photosphere,zea_edf_solar_tunnel,,,,,,0.05,,,,5,,5,0,TRUE,,,TRUE,,,,,,,,,graphics/zea/icons/hullsys/twin_shield.png
+Boltcaster,zea_edf_drone_strike,,,,600,,,,,,0,0.05,0.2,0,,,,,,,,,,,,offensive,graphics/icons/hullsys/termination_sequence.png
 # Drone,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Smart Flare Launcher,zea_edf_smartflare,,,,,,,,1,1,,,,5,,,,,,,,,,,,restricted,graphics/icons/hullsys/active_flare_launcher.png
 # Boss,,,,,,,,,,,,,,,,,,,,,,,,,,,

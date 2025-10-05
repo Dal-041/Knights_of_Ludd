@@ -7,7 +7,7 @@
 	"center":[9,8],
 	"collisionRadius":10,
 	"collisionClass":"MISSILE_NO_FF",
-	"explosionColor":[0,0,255,255],  # purely visual, will get a white additively blended core on top of this color
+	"explosionColor":[70,165,255,255],  # purely visual, will get a white additively blended core on top of this color
 	"explosionRadius":1, # purely visual
 	"fizzleOnReachingWeaponRange":true,
 	"dudProbabilityOnFlameout":0,
@@ -26,7 +26,7 @@
 					 "particleSizeMin":5.0,
 					 "particleSizeRange":3.0,
 					 "particleDuration":1,
-					 "particleColor":[255,100,100,255],
+					 "particleColor":[100,175,255,255],
 					 },
 	"engineSpec":{"turnAcc":400,
 				  "turnRate":200,
@@ -39,9 +39,9 @@
 						"mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
 						"engineColor":[100,100,255,255],
 						"glowSizeMult":1.5,
-						"glowAlternateColor":[0,0,255,255],
+						"glowAlternateColor":[70,165,255,255],
 						"contrailDuration":2,
-						"contrailWidthMult":1.5,
+						"contrailWidthMult":1.0,
 						"contrailWidthAddedFractionAtEnd":2,  # can be negative. makes trail spread out/narrow at the end
 						"contrailMinSeg":5, # min segment length, in pixels
 						"contrailMaxSpeedMult":0f,
