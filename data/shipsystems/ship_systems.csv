@@ -212,6 +212,7 @@ Phase Transporter,zea_dusk_phase_transporter,,,,,,,,,,1,0,0,15,,,,TRUE,,,,,,,,,g
 Subphase Glide,zea_dusk_subspace_glide,,,,,,,,,,1,3,2,5,,,,,,,,,,,,,graphics/icons/hullsys/phase_cloak.png
 Phase Skimmer,zea_dusk_displacer,,,,,,,,3,0.1,0.25,,0.25,0,,TRUE,,TRUE,,,,,,,,,graphics/icons/hullsys/displacer.png
 Phase Skip,zea_dusk_phase_skip,1,,,,,0.1,,,,0.5,1.5,0.5,9,,,TRUE,,TRUE,,,,TRUE,TRUE,,,graphics/icons/hullsys/displacer.png
+"The Past, Lingering",zea_dusk_phase_skip2,1,,,,,0.1,,1,.07,0.5,1.5,0.5,2,,,TRUE,,TRUE,,,,TRUE,TRUE,,,graphics/icons/hullsys/displacer.png
 Mine Strike,zea_dusk_mine_strike,,,,,,0.1,,5,0.2,0.25,,0.25,0,,,,,,,,,,,,,graphics/icons/hullsys/interdictor_array.png
 # Elysia,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Fortress Flux Converter,zea_edf_fortress_flux_converter,,,,,,,,2,0.1,0.25,2.5,0.25,,,,,,TRUE,,,,,,,,graphics/icons/hullsys/fortress_shield.png

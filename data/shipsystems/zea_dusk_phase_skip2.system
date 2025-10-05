@@ -1,0 +1,26 @@
+{
+	"id":"zea_dusk_phase_skip2",
+	"type":"ENGINE_MOD",
+	"aiType":"CUSTOM",
+    "aiScript":"org.selkie.zea.shipsystems.AI.PhasespaceSkipAI",
+	
+	"statsScript":"org.selkie.zea.shipsystems.PhasespaceSkip",
+
+	
+	"clampTurnRateAfter":true,
+	"clampMaxSpeedAfter":true,
+
+	
+	"soundFilterType":"LOWPASS",
+	"soundFilterGain":0.8,
+	"soundFilterGainHF":0.25,
+
+	"useSound":"zea_dusk_skimmer",
+	"loopSound":"zea_dusk_phase_cloak",
+	"outOfUsesSound":"system_phase_cloak_collision",
+	"aiHints":{
+		"activeSpeedIncrease":200,
+		"burstMovementPotential":500,
+		"averageSpeedIncrease":200,
+	}
+}
