@@ -5,13 +5,13 @@ import com.fs.starfarer.api.combat.*
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript
 import com.fs.starfarer.api.plugins.ShipSystemStatsScript
 import org.lazywizard.lazylib.MathUtils
-import org.lazywizard.lazylib.ext.rotate
 import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.setAlpha
 import org.selkie.kol.ReflectionUtilsV2
 import org.selkie.zea.hullmods.DuskWormController.DuskWormSegment
+import java.awt.Color
 import java.util.*
-import kotlin.collections.ArrayList
 
 class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
@@ -22,26 +22,29 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
     lateinit var headSegment: DuskWormSegment
     lateinit var segmentsToPhase: ArrayList<ShipAPI>
 
+    var TIME_MULT = 2f
+
     override fun apply(stats: MutableShipStatsAPI, id: String, state: ShipSystemStatsScript.State, effectLevel: Float) {
 
         ship = stats.entity as ShipAPI ?: return
         headSegment = ship.getListeners(DuskWormSegment::class.java).firstOrNull() ?: return
         ship.phaseCloak ?: return
+        var player = ship === Global.getCombatEngine().playerShip
 
         segmentsToPhase = getAllSegments()
 
         var system = ship.phaseCloak
 
-        var modules = ArrayList<ShipAPI>()
-        modules.add(ship)
-        modules.addAll(ship.childModulesCopy)
+        var segments = ArrayList<ShipAPI>()
+        segments.add(ship)
+        segments.addAll(ship.childModulesCopy)
 
         if (!init) {
             init = true
             //renderer = AmeonnaPhaseRenderer(ship, ship.system)
 
-            for (module in modules) {
-                var renderer = AmeonnaPhaseRenderer(this, module, headSegment, ship.system)
+            for (segment in segments) {
+                var renderer = AmeonnaPhaseRenderer(this, segment, headSegment, ship.system)
                 Global.getCombatEngine().addLayeredRenderingPlugin(renderer)
             }
 
@@ -56,11 +59,35 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             activated = false
         }
 
+        for (segment in segments) {
+            var color = Color(80, 50, 255, 255)
+            segment.engineController.extendFlame(this, -0.3f*effectLevel, -0.3f*effectLevel, -0.3f*effectLevel)
+            segment.engineController.fadeToOtherColor(this, color, color.setAlpha(5), effectLevel, 0.5f)
+        }
+
+        val shipTimeMult = 1f + (TIME_MULT - 1f) * effectLevel
+        stats.timeMult.modifyMult(id, shipTimeMult)
+        if (player) {
+            Global.getCombatEngine().timeMult.modifyMult(id, 1f / shipTimeMult)
+        } else {
+            Global.getCombatEngine().timeMult.unmodify(id)
+        }
+
+        val allSegments = generateSequence(headSegment) { it.segmentBehind }.toList()
+        for (segment in allSegments) {
+            segment.ship.isPhased = segment.isPhased
+        }
+
         if (system.isActive && !Global.getCombatEngine().isPaused) {
+
+
+
 
         }
 
     }
+
+
 
     fun getAllSegments() : ArrayList<ShipAPI> {
         var modules = ArrayList<ShipAPI>()
@@ -73,6 +100,10 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
     }
 
+
+    override fun isUsable(system: ShipSystemAPI, ship: ShipAPI?): Boolean {
+        return super.isUsable(system, ship) && !system.isChargeup
+    }
 
     class AmeonnaPhaseRenderer(var systemScript: AmeonnaPhaseSystem, var ship: ShipAPI, var headSegment: DuskWormSegment, var system: ShipSystemAPI) : BaseCombatLayeredRenderingPlugin() {
 
@@ -116,7 +147,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             else {
                 //Set alpha to the normal amount
                 ship.extraAlphaMult = 1f
-                ship.setApplyExtraAlphaToEngines(true)
+                ship.setApplyExtraAlphaToEngines(false)
 
                 val x = ship.location.x
                 val y = ship.location.y
@@ -130,7 +161,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 endDepthMask()
 
                 //Set alpha to 0.25, so that the base game render renders this half, instead of having to render it an additional time
-
+                ship.setApplyExtraAlphaToEngines(true)
                 ship.extraAlphaMult = 0.0f
             }
         }
@@ -181,7 +212,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                         allSegments.last().ship.collisionRadius * 1.5f +
                         allSegments.sumOf { (it.segmentLength ?: 0f).toDouble() }
 
-            var phasedLength = headSegment.ship.phaseCloak!!.effectLevel * totalLength
+            var phasedLength = (headSegment.ship.phaseCloak!!.effectLevel) * totalLength
             val fromHeadToTail = headSegment.ship.phaseCloak!!.isChargeup
 
             // === 2. Configure direction-dependent variables ===
@@ -232,7 +263,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 val nextTopRight = if (inBetweenAngle != null && jointLocation != null) {
                     MathUtils.getPointOnCircumference(
                         jointLocation,
-                        nextSegment.ship.collisionRadius * 1.5f,
+                        nextSegment!!.ship.collisionRadius * 1.5f,
                         inBetweenAngle + 90f
                     )
                 } else { // Draw the end tip
@@ -246,7 +277,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 val nextTopLeft = if (inBetweenAngle != null && jointLocation != null) {
                     MathUtils.getPointOnCircumference(
                         jointLocation,
-                        nextSegment.ship.collisionRadius * 1.5f,
+                        nextSegment!!.ship.collisionRadius * 1.5f,
                         inBetweenAngle - 90f
                     )
                 } else { // Draw the end tip
@@ -278,6 +309,10 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                     )
                     GL11.glVertex2f(middleRight.x, middleRight.y)
                     GL11.glVertex2f(middleLeft.x, middleLeft.y)
+
+                    updateSegment(currentSegment, phasedProgress)
+
+                    //println(currentSegment.ship.hullSpec.hullId + ": $phasedProgress")
                 }
 
                 // Advance to the next segment. Exit if we've reached the end.
@@ -289,6 +324,11 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             }
 
             GL11.glEnd()
+        }
+
+        fun updateSegment(segment: DuskWormSegment, segmentLevel: Float) {
+            //segment.isPhased = level >= 0.5 //Caused a ConcurrentModificationException
+            segment.isPhased = segmentLevel >= 0.5f
         }
     }
 }

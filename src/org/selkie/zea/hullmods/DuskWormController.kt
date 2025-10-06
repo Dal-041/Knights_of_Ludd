@@ -11,6 +11,7 @@ import org.lazywizard.lazylib.ext.rotate
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.getAngleInDegrees
 import org.magiclib.kotlin.getAngleInDegreesStrict
+import org.selkie.kol.ReflectionUtilsV2
 
 
 class DuskWormController: BaseHullMod() {
@@ -38,6 +39,8 @@ class DuskWormController: BaseHullMod() {
         var jointBehindLocation: Vector2f? = null
         var jointAheadOffset: Vector2f? = null
         var segmentLength: Float? = null
+
+        var isPhased = false
     }
 
     class DuskWormHead(ship: ShipAPI) : DuskWormSegment(ship), AdvanceableListener{
@@ -76,6 +79,13 @@ class DuskWormController: BaseHullMod() {
             ship.blockCommandForOneFrame(ShipCommand.STRAFE_LEFT)
             ship.giveCommand(ShipCommand.ACCELERATE, null, 0)
 
+            //ReflectionUtilsV2.invoke("forceOffEngineBoost", ship.fluxTracker)
+
+            for (segment in ship.childModulesCopy) {
+                updateEngines(segment, ship)
+
+                ReflectionUtilsV2.invoke("forceOffEngineBoost", segment.fluxTracker)
+            }
 
             // make sure to go towards facing
             ship.velocity.rotate(
@@ -109,6 +119,41 @@ class DuskWormController: BaseHullMod() {
                 val currentJointBehindSlot = currentSegment.ship.hullSpec.allWeaponSlotsCopy.firstOrNull { it.id == "JOINT_BEHIND" }
                 currentSegment.jointBehindLocation  = currentJointBehindSlot?.computePosition(currentSegment.ship) ?: currentSegment.ship.location
 
+            }
+        }
+
+        fun updateEngines(child: ShipAPI, parent: ShipAPI) {
+            val ec = parent.engineController
+            if (ec != null) {
+                if (parent.isAlive) {
+                    if (ec.isAccelerating) {
+                        child.giveCommand(ShipCommand.ACCELERATE, null, 0)
+                    }
+                    if (ec.isAcceleratingBackwards) {
+                        child.giveCommand(ShipCommand.ACCELERATE_BACKWARDS, null, 0)
+                    }
+                    if (ec.isDecelerating) {
+                        child.giveCommand(ShipCommand.DECELERATE, null, 0)
+                    }
+                    if (ec.isStrafingLeft) {
+                        child.giveCommand(ShipCommand.STRAFE_LEFT, null, 0)
+                    }
+                    if (ec.isStrafingRight) {
+                        child.giveCommand(ShipCommand.STRAFE_RIGHT, null, 0)
+                    }
+                    if (ec.isTurningLeft) {
+                        child.giveCommand(ShipCommand.TURN_LEFT, null, 0)
+                    }
+                    if (ec.isTurningRight) {
+                        child.giveCommand(ShipCommand.TURN_RIGHT, null, 0)
+                    }
+                }
+                val cec = child.engineController
+                if (cec != null) {
+                    if ((ec.isFlamingOut || ec.isFlamedOut) && !cec.isFlamingOut && !cec.isFlamedOut) {
+                        child.engineController.forceFlameout(true)
+                    }
+                }
             }
         }
     }

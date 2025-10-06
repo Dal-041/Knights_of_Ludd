@@ -20,7 +20,7 @@
         "dusk_worm_controller",
         "phasefield",
         "automated",
-        "zea_dusk_mist",
+        #"zea_dusk_mist",
         "zea_dusk_builtin",
         "zea_recovery_limiter"
     ],
