@@ -228,5 +228,5 @@ Supernova,zea_boss_supernova,1,,,,,,,,,2,4,0.1,27.9,,,,,,,,,,TRUE,,restricted,gr
 Corrupting Heart,zea_boss_corruptionjets,1,,,,,,,,0.05,0.5,8,1,,,,,,,,,,,,,,graphics/icons/hullsys/burn_drive.png
 Relativistic Drift,zea_boss_relativisticdrift,,,,,,,,,0.3,0.05,2,0.1,8,,,,,,,,,,,,,graphics/icons/hullsys/infernium_injector.png
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
-P-Space Descend,zea_ameonna_phase,,,,,,,,,,2,0,2,2,TRUE,,TRUE,TRUE,TRUE,,,,TRUE,,TRUE,,graphics/icons/hullsys/phase_cloak.png
+P-Space Descend,zea_ameonna_phase,,,,,,,,,,5,0,5,1,TRUE,,TRUE,TRUE,TRUE,,,,TRUE,,TRUE,,graphics/icons/hullsys/phase_cloak.png
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,
