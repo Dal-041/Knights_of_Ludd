@@ -168,101 +168,124 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             GL11.glDisable(GL11.GL_DEPTH_TEST)
         }
 
-        fun drawMask(){
+        fun drawMask() {
+            val allSegments = generateSequence(headSegment) { it.segmentBehind }.toList()
+            if (allSegments.isEmpty()) return
+
             GL11.glBegin(GL11.GL_QUAD_STRIP)
 
-            var currentSegment: DuskWormSegment = headSegment
-            var nextSegment: DuskWormSegment? = headSegment.segmentBehind
-            val allSegments = generateSequence(headSegment) { it.segmentBehind }.toList()
-            // * 1.5 as estimate of how long head/tail is
+            // === 1. Pre-calculate shared values ===
+            // * 1.5 as an estimate of how long the head/tail tip is
             val totalLength =
                 allSegments.first().ship.collisionRadius * 1.5f +
-                allSegments.last().ship.collisionRadius * 1.5f +
-                allSegments.sumOf { (it.segmentLength ?: 0f).toDouble() }
+                        allSegments.last().ship.collisionRadius * 1.5f +
+                        allSegments.sumOf { (it.segmentLength ?: 0f).toDouble() }
 
             var phasedLength = headSegment.ship.phaseCloak!!.effectLevel * totalLength
+            val fromHeadToTail = headSegment.ship.phaseCloak!!.isChargeup
 
-            // start strip with 2 fixed points
+            // === 2. Configure direction-dependent variables ===
+            val segmentsToProcess = if (fromHeadToTail) allSegments else allSegments.reversed()
+            val getNextSegment: (DuskWormSegment) -> DuskWormSegment? =
+                if (fromHeadToTail) { segment -> segment.segmentBehind }
+                else { segment -> segment.segmentAhead }
+
+            // Define the angles for the start and end "caps" of the worm.
+            val startTipAngles = if (fromHeadToTail) Pair(45f, -45f) else Pair(135f, -135f)
+            val endTipAngles = if (fromHeadToTail) Pair(135f, -135f) else Pair(45f, -45f)
+
+            // === 3. Unified Drawing Logic ===
+            var currentSegment = segmentsToProcess.first()
+            var nextSegment = getNextSegment(currentSegment)
+
+            // Start the strip with the initial tip (either head or tail)
             var currentTopRight = MathUtils.getPointOnCircumference(
                 currentSegment.ship.location,
                 currentSegment.ship.collisionRadius * 2f,
-                currentSegment.ship.facing+45f
+                currentSegment.ship.facing + startTipAngles.first
             )
             var currentTopLeft = MathUtils.getPointOnCircumference(
                 currentSegment.ship.location,
                 currentSegment.ship.collisionRadius * 2f,
-                currentSegment.ship.facing-45f
+                currentSegment.ship.facing + startTipAngles.second
             )
             GL11.glVertex2f(currentTopRight.x, currentTopRight.y)
             GL11.glVertex2f(currentTopLeft.x, currentTopLeft.y)
 
-            // while we still have phase length left,
-            while(phasedLength > 0) {
-                // find the inbetween angle of the ships if possible
+            // Main loop to draw the body and the final tip
+            while (phasedLength > 0) {
                 val inBetweenAngle = nextSegment?.let {
                     MathUtils.getShortestRotation(
                         currentSegment.ship.facing,
                         it.ship.facing
-                    )/2 + currentSegment.ship.facing
+                    ) / 2 + currentSegment.ship.facing
                 }
 
-                // if found, next segment exists thus we should use those points
-                val nextTopRight = if (inBetweenAngle != null) {
+                // Determine the location of the joint between the current and next segment.
+                // The joint's location is stored on the segment that is closer to the tail.
+                val jointLocation = if (nextSegment != null) {
+                    if (fromHeadToTail) nextSegment.jointAheadLocation else currentSegment.jointAheadLocation
+                } else null
+
+                // Calculate the next pair of vertices. If a next segment exists, use the joint.
+                // Otherwise, create the final "tip" of the worm.
+                val nextTopRight = if (inBetweenAngle != null && jointLocation != null) {
                     MathUtils.getPointOnCircumference(
-                        nextSegment.jointAheadLocation,
+                        jointLocation,
                         nextSegment.ship.collisionRadius * 1.5f,
-                        inBetweenAngle+90f
+                        inBetweenAngle + 90f
                     )
-                } else { // otherwise, do fixed points behind the ship as the tail
+                } else { // Draw the end tip
                     MathUtils.getPointOnCircumference(
                         currentSegment.ship.location,
                         currentSegment.ship.collisionRadius * 2f,
-                        currentSegment.ship.facing+135f
+                        currentSegment.ship.facing + endTipAngles.first
                     )
                 }
 
-                val nextTopLeft = if (inBetweenAngle != null) {
+                val nextTopLeft = if (inBetweenAngle != null && jointLocation != null) {
                     MathUtils.getPointOnCircumference(
-                        nextSegment.jointAheadLocation,
+                        jointLocation,
                         nextSegment.ship.collisionRadius * 1.5f,
-                        inBetweenAngle-90f
+                        inBetweenAngle - 90f
                     )
-                } else{
+                } else { // Draw the end tip
                     MathUtils.getPointOnCircumference(
                         currentSegment.ship.location,
                         currentSegment.ship.collisionRadius * 2f,
-                        currentSegment.ship.facing-135f
+                        currentSegment.ship.facing + endTipAngles.second
                     )
                 }
 
-                // figure out if we need to draw the entire segment or need to do interpolation depending on phase length left
-                val currentSegmentLength = (currentSegment.segmentLength ?: (currentSegment.ship.collisionRadius * 1.5f))
-                if(phasedLength > currentSegmentLength){
+                // The length of the current piece. The fallback is for the final tip.
+                val currentPieceLength = (currentSegment.segmentLength ?: (currentSegment.ship.collisionRadius * 1.5f))
+
+                // Draw either the full piece or an interpolated partial piece.
+                if (phasedLength > currentPieceLength) {
                     GL11.glVertex2f(nextTopRight.x, nextTopRight.y)
                     GL11.glVertex2f(nextTopLeft.x, nextTopLeft.y)
                     currentTopRight = nextTopRight
                     currentTopLeft = nextTopLeft
-                }
-                else {
-                    val phasedProgress = (phasedLength/currentSegmentLength).toFloat()
+                } else {
+                    val phasedProgress = (phasedLength / currentPieceLength).toFloat()
                     val middleRight = Vector2f(
                         currentTopRight.x + (nextTopRight.x - currentTopRight.x) * phasedProgress,
                         currentTopRight.y + (nextTopRight.y - currentTopRight.y) * phasedProgress
                     )
-
                     val middleLeft = Vector2f(
                         currentTopLeft.x + (nextTopLeft.x - currentTopLeft.x) * phasedProgress,
                         currentTopLeft.y + (nextTopLeft.y - currentTopLeft.y) * phasedProgress
                     )
-
                     GL11.glVertex2f(middleRight.x, middleRight.y)
                     GL11.glVertex2f(middleLeft.x, middleLeft.y)
                 }
 
-                // move on to next segment, kinda hacky, but we never do another loop when next segment is null anyways
-                phasedLength -= currentSegmentLength
-                currentSegment = nextSegment ?: currentSegment
-                nextSegment = nextSegment?.segmentBehind
+                // Advance to the next segment. Exit if we've reached the end.
+                phasedLength -= currentPieceLength
+                if (nextSegment == null) break
+
+                currentSegment = nextSegment
+                nextSegment = getNextSegment(currentSegment)
             }
 
             GL11.glEnd()
