@@ -37,6 +37,7 @@ class DuskWormController: BaseHullMod() {
         var jointAheadLocation: Vector2f? = null
         var jointBehindLocation: Vector2f? = null
         var jointAheadOffset: Vector2f? = null
+        var segmentLength: Float? = null
     }
 
     class DuskWormHead(ship: ShipAPI) : DuskWormSegment(ship), AdvanceableListener{
@@ -44,16 +45,24 @@ class DuskWormController: BaseHullMod() {
             var currentSegment: DuskWormSegment? = this
 
             while (currentSegment != null){
-                val currentJointAheadSlot = currentSegment.ship.hullSpec.allWeaponSlotsCopy.firstOrNull { it.id == "JOINT_AHEAD" }
-                currentSegment.jointAheadLocation = currentJointAheadSlot?.computePosition(currentSegment.ship) ?: currentSegment.ship.location
+                with(currentSegment){
+                    val currentJointAheadSlot = ship.hullSpec.allWeaponSlotsCopy.firstOrNull { it.id == "JOINT_AHEAD" }
+                    jointAheadLocation = currentJointAheadSlot?.computePosition(ship)
 
-                val currentJointBehindSlot = currentSegment.ship.hullSpec.allWeaponSlotsCopy.firstOrNull { it.id == "JOINT_BEHIND" }
-                currentSegment.jointBehindLocation  = currentJointBehindSlot?.computePosition(currentSegment.ship) ?: currentSegment.ship.location
+                    val currentJointBehindSlot = ship.hullSpec.allWeaponSlotsCopy.firstOrNull { it.id == "JOINT_BEHIND" }
+                    jointBehindLocation  = currentJointBehindSlot?.computePosition(ship)
 
-                currentSegment.jointAheadOffset = (currentSegment.ship.location - currentSegment.jointAheadLocation!!)
-                    .rotate(-currentSegment.ship.facing)
+                    if (jointAheadLocation != null){
+                        jointAheadOffset = (ship.location - jointAheadLocation!!)
+                            .rotate(-ship.facing)
 
-                currentSegment = currentSegment.segmentBehind
+                        if(jointBehindLocation != null){
+                            segmentLength = MathUtils.getDistance(jointBehindLocation, jointAheadLocation)
+                        }
+                    }
+
+                    currentSegment = segmentBehind
+                }
             }
         }
 

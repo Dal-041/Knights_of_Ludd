@@ -9,6 +9,7 @@ import org.lazywizard.lazylib.ext.rotate
 import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
 import org.selkie.kol.ReflectionUtilsV2
+import org.selkie.zea.hullmods.DuskWormController.DuskWormSegment
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -18,11 +19,15 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
     var activated = false
     //lateinit var renderer: AmeonnaPhaseRenderer
     lateinit var ship: ShipAPI
+    lateinit var headSegment: DuskWormSegment
     lateinit var segmentsToPhase: ArrayList<ShipAPI>
 
     override fun apply(stats: MutableShipStatsAPI, id: String, state: ShipSystemStatsScript.State, effectLevel: Float) {
 
         ship = stats.entity as ShipAPI ?: return
+        headSegment = ship.getListeners(DuskWormSegment::class.java).firstOrNull() ?: return
+        ship.phaseCloak ?: return
+
         segmentsToPhase = getAllSegments()
 
         var system = ship.phaseCloak
@@ -36,7 +41,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             //renderer = AmeonnaPhaseRenderer(ship, ship.system)
 
             for (module in modules) {
-                var renderer = AmeonnaPhaseRenderer(this, module, getAllSegments(), ship.system)
+                var renderer = AmeonnaPhaseRenderer(this, module, headSegment, ship.system)
                 Global.getCombatEngine().addLayeredRenderingPlugin(renderer)
             }
 
@@ -69,7 +74,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
     }
 
 
-    class AmeonnaPhaseRenderer(var systemScript: AmeonnaPhaseSystem, var ship: ShipAPI, var segments: List<ShipAPI>, var system: ShipSystemAPI) : BaseCombatLayeredRenderingPlugin() {
+    class AmeonnaPhaseRenderer(var systemScript: AmeonnaPhaseSystem, var ship: ShipAPI, var headSegment: DuskWormSegment, var system: ShipSystemAPI) : BaseCombatLayeredRenderingPlugin() {
 
         var glow1 = Global.getSettings().getSprite(ship.hullSpec.spriteName.replace(".png", "_glow1.png"))
         var glow2 = Global.getSettings().getSprite(ship.hullSpec.spriteName.replace(".png", "_glow2.png"))
@@ -101,6 +106,11 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 glow2.renderAtCenter(ship.location.x, ship.location.y)
 
                 endDepthMask()
+
+                //debug
+//                GL11.glPolygonMode( GL11.GL_FRONT_AND_BACK, GL11.GL_LINE );
+//                drawMask()
+//                GL11.glPolygonMode( GL11.GL_FRONT_AND_BACK, GL11.GL_FILL );
             }
             //Split the ship in to a phased and non phased part
             else {
@@ -141,18 +151,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             // Draw your mask quad with depth value 0.5
             GL11.glDepthRange(0.5, 0.5) // Set depth range to a fixed value
 
-
-
-
-            //Everything inside the polygon will be rendered/not rendered, depending on the renderInside variable
-            GL11.glBegin(GL11.GL_POLYGON)
-            //Draw vertices
-            //GL11.glVertex2f()
-            GL11.glEnd()
-
-
-
-
+            drawMask()
 
             // Restore color drawing
             GL11.glColorMask(true, true, true, true)
@@ -169,6 +168,104 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             GL11.glDisable(GL11.GL_DEPTH_TEST)
         }
 
+        fun drawMask(){
+            GL11.glBegin(GL11.GL_QUAD_STRIP)
 
+            var currentSegment: DuskWormSegment = headSegment
+            var nextSegment: DuskWormSegment? = headSegment.segmentBehind
+            val allSegments = generateSequence(headSegment) { it.segmentBehind }.toList()
+            // * 1.5 as estimate of how long head/tail is
+            val totalLength =
+                allSegments.first().ship.collisionRadius * 1.5f +
+                allSegments.last().ship.collisionRadius * 1.5f +
+                allSegments.sumOf { (it.segmentLength ?: 0f).toDouble() }
+
+            var phasedLength = headSegment.ship.phaseCloak!!.effectLevel * totalLength
+
+            // start strip with 2 fixed points
+            var currentTopRight = MathUtils.getPointOnCircumference(
+                currentSegment.ship.location,
+                currentSegment.ship.collisionRadius * 2f,
+                currentSegment.ship.facing+45f
+            )
+            var currentTopLeft = MathUtils.getPointOnCircumference(
+                currentSegment.ship.location,
+                currentSegment.ship.collisionRadius * 2f,
+                currentSegment.ship.facing-45f
+            )
+            GL11.glVertex2f(currentTopRight.x, currentTopRight.y)
+            GL11.glVertex2f(currentTopLeft.x, currentTopLeft.y)
+
+            // while we still have phase length left,
+            while(phasedLength > 0) {
+                // find the inbetween angle of the ships if possible
+                val inBetweenAngle = nextSegment?.let {
+                    MathUtils.getShortestRotation(
+                        currentSegment.ship.facing,
+                        it.ship.facing
+                    )/2 + currentSegment.ship.facing
+                }
+
+                // if found, next segment exists thus we should use those points
+                val nextTopRight = if (inBetweenAngle != null) {
+                    MathUtils.getPointOnCircumference(
+                        nextSegment.jointAheadLocation,
+                        nextSegment.ship.collisionRadius * 1.5f,
+                        inBetweenAngle+90f
+                    )
+                } else { // otherwise, do fixed points behind the ship as the tail
+                    MathUtils.getPointOnCircumference(
+                        currentSegment.ship.location,
+                        currentSegment.ship.collisionRadius * 2f,
+                        currentSegment.ship.facing+135f
+                    )
+                }
+
+                val nextTopLeft = if (inBetweenAngle != null) {
+                    MathUtils.getPointOnCircumference(
+                        nextSegment.jointAheadLocation,
+                        nextSegment.ship.collisionRadius * 1.5f,
+                        inBetweenAngle-90f
+                    )
+                } else{
+                    MathUtils.getPointOnCircumference(
+                        currentSegment.ship.location,
+                        currentSegment.ship.collisionRadius * 2f,
+                        currentSegment.ship.facing-135f
+                    )
+                }
+
+                // figure out if we need to draw the entire segment or need to do interpolation depending on phase length left
+                val currentSegmentLength = (currentSegment.segmentLength ?: (currentSegment.ship.collisionRadius * 1.5f))
+                if(phasedLength > currentSegmentLength){
+                    GL11.glVertex2f(nextTopRight.x, nextTopRight.y)
+                    GL11.glVertex2f(nextTopLeft.x, nextTopLeft.y)
+                    currentTopRight = nextTopRight
+                    currentTopLeft = nextTopLeft
+                }
+                else {
+                    val phasedProgress = (phasedLength/currentSegmentLength).toFloat()
+                    val middleRight = Vector2f(
+                        currentTopRight.x + (nextTopRight.x - currentTopRight.x) * phasedProgress,
+                        currentTopRight.y + (nextTopRight.y - currentTopRight.y) * phasedProgress
+                    )
+
+                    val middleLeft = Vector2f(
+                        currentTopLeft.x + (nextTopLeft.x - currentTopLeft.x) * phasedProgress,
+                        currentTopLeft.y + (nextTopLeft.y - currentTopLeft.y) * phasedProgress
+                    )
+
+                    GL11.glVertex2f(middleRight.x, middleRight.y)
+                    GL11.glVertex2f(middleLeft.x, middleLeft.y)
+                }
+
+                // move on to next segment, kinda hacky, but we never do another loop when next segment is null anyways
+                phasedLength -= currentSegmentLength
+                currentSegment = nextSegment ?: currentSegment
+                nextSegment = nextSegment?.segmentBehind
+            }
+
+            GL11.glEnd()
+        }
     }
 }
