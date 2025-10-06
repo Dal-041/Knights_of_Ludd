@@ -14,6 +14,7 @@ import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.combat.AIUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.optColor
 import org.selkie.kol.Utils
 import org.selkie.zea.hullmods.ElysianBuiltin
 import org.selkie.kol.plugins.KOL_ModPlugin
@@ -32,8 +33,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
     var allies: List<ShipAPI> = listOf()
 
     companion object{
-        val Range = 2000f
-        val DropoffRange = 500f
+        val Range = 1000f
+        val DropoffRange = 200f
         val SpeedDebuff = -70f // in percentage
     }
 
@@ -44,8 +45,14 @@ class SolarFlareSystem: BaseShipSystemScript() {
         state: ShipSystemStatsScript.State?,
         effectLevel: Float
     ) {
+
         val ship = stats!!.entity as ShipAPI
         val engine = Global.getCombatEngine()
+
+
+        //ship.system.specAPI.specJson.optColor("auroraInnerColor", Color(235, 165, 20, 150))
+        //ship.system.specAPI.specJson.optColor("auroraOuterColor", Color(235, 165, 20, 150))
+
         if (renderingPlugins.isEmpty()){
             renderingPlugins.add(Aurora(ship))
             renderingPlugins.add(Aurora(ship))
@@ -129,11 +136,9 @@ class SolarFlareSystem: BaseShipSystemScript() {
         var radiusInner: Float = ship.collisionRadius/3f
         var radiusOuter: Float = ship.collisionRadius
 
-        /** The list of flares to render. You can add or remove from this list directly. */
         val flares = mutableListOf<Flare>()
 
         var thicknessMult: Float = 1f
-        /** Overall transparency multiplier. */
         var alphaMult: Float = 1.0f
 
 
