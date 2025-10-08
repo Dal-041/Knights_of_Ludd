@@ -70,7 +70,7 @@
       "location": [-37, 9],
       "length": 30,
       "width": 10,
-      "angle": 174,
+      "angle": 166.5,
       "contrailSize": 30,
       "style": "HIGH_TECH"
     },
@@ -78,23 +78,23 @@
       "location": [-37, -9],
       "length": 30,
       "width": 10,
-      "angle": -174,
+      "angle": -166.5,
       "contrailSize": 30,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-39, 16],
+      "location": [-34, 17],
       "length": 30,
       "width": 10,
-      "angle": 170,
+      "angle": 159,
       "contrailSize": 30,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-39, -16],
+      "location": [-34, -17],
       "length": 30,
       "width": 10,
-      "angle": -170,
+      "angle": -159,
       "contrailSize": 30,
       "style": "HIGH_TECH"
     },
@@ -108,19 +108,21 @@
     }
   ],
   "bounds": [
-    6, -5,
+    11.5, -5,
     32.5, -6.5,
     36, -29.5,
     12, -40.5,
     12, -46.5,
     3, -51,
-    -40, -19.5,
-    -40, 19.5,
+    -31, -26,
+    -37, -16,
+    -37, 16,
+    -31, 26,
     3, 51,
     12, 46.5,
     12, 40.5,
     36, 29.5,
     32.5, 6.5,
-    6, 5
+    11.5, 5
   ]
 }
