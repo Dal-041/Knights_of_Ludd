@@ -115,9 +115,7 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 if (system.isChargedown) ship.mutableStats.maxTurnRate.modifyMult("phase_turn_decrease", 1-(effectLevel))
                 particleInterval.advance(amount)
 
-                if (maskEndPosition != null) {
-                    portalFade += 0.5f * amount
-                }
+
 
                /* if (particleInterval.intervalElapsed()) {
                     if (maskEndPosition != null && maskEndAngle != null) {
@@ -137,8 +135,12 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 ship.mutableStats.maxTurnRate.unmodify("phase_turn_decrease")
             }
 
-            if (maskEndPosition == null) {
-                portalFade -= 2 * amount
+
+            if (maskEndPosition != null && ((system.isChargeup && effectLevel <= 0.3f) || (system.isChargedown && effectLevel >= 0.7))) {
+                portalFade += 1f * amount
+            }
+            else {
+                portalFade -= 0.14f * amount
             }
 
             portalFade = MathUtils.clamp(portalFade, 0f, 1f)
@@ -285,23 +287,12 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             // Advance to the next segment. Exit if we've reached the end.
             phasedLength -= currentPieceLength
             if (nextSegment == null) {
-               /* maskEndPosition = Vector2f(
-                    (nextTopRight.x + nextTopLeft.x) / 2f,
-                    (nextTopRight.y + nextTopLeft.y) / 2f
-                )
-                maskEndAngle = currentSegment.ship.facing*/
                 break
             }
 
             currentSegment = nextSegment
             nextSegment = getNextSegment(currentSegment)
         }
-
-      /*  if (maskEndPosition == null || maskEndAngle == null) {
-            val lastSegment = segmentsToProcess.last()
-            maskEndPosition = Vector2f(lastSegment.ship.location.x, lastSegment.ship.location.y)
-            maskEndAngle = lastSegment.ship.facing
-        }*/
     }
 
     fun updateSegment(segment: DuskWormSegment, segmentLevel: Float) {
@@ -329,11 +320,13 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
     class AmeonnaPortalRenderer(var systemScript: AmeonnaPhaseSystem, var ship: ShipAPI) : BaseCombatLayeredRenderingPlugin() {
 
         lateinit var portal: SpriteAPI
-
+        var portalSize = Vector2f()
         init {
             var path = "graphics/zea/ships/ameonna/zea_ameonna_portal.png"
             Global.getSettings().loadTexture(path)
             portal = Global.getSettings().getSprite(path)
+
+            portalSize = Vector2f(portal.width, portal.height)
         }
 
         override fun getRenderRadius(): Float {
@@ -353,13 +346,19 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
             var loc = Vector2f(lastPortalLoc.x, lastPortalLoc.y)
 
+            var sizeMult = easeInOutSine(systemScript.portalFade)
             portal.setNormalBlend()
-            portal.alphaMult = systemScript.portalFade
+            portal.alphaMult = sizeMult
+            portal.setSize(portalSize.x * sizeMult , portalSize.y * sizeMult)
             portal.angle = systemScript.portalAngle
             portal.renderAtCenter(loc.x, loc.y)
 
             doJitter(loc, portal, portal.alphaMult * 0.3f, jitterLocs, 15, 20f)
 
+        }
+
+        fun easeInOutSine(x: Float): Float {
+            return (-(Math.cos(Math.PI * x) - 1) / 2).toFloat();
         }
 
         var jitterLocs = ArrayList<Vector2f>()
@@ -446,9 +445,6 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
                 startDepthMask(false)
                 ReflectionUtilsV2.invoke("render", ship, layer, viewport)
                 endDepthMask()
-
-                //Dont render engines twice as they are additive
-                ship.isRenderEngines = true
 
                 ship.extraAlphaMult = 0.25f
                 startDepthMask(true)
