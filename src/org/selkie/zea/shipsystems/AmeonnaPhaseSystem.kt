@@ -87,9 +87,19 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
 
         val allSegments = generateSequence(headSegment) { it.segmentBehind }.toList()
         for (segment in allSegments) {
-            segment.ship.isPhased = segment.isPhased
+            var module = segment.ship
+            module.isPhased = segment.isPhased
+            if (module.isPhased) {
+                for (weapon in module.allWeapons) {
+                    weapon.stopFiring()
+                    weapon.setRemainingCooldownTo(Math.max(weapon.cooldownRemaining, 0.5f))
+                }
+            }
         }
 
+        if (system.isActive) {
+            ship.blockCommandForOneFrame(ShipCommand.VENT_FLUX)
+        }
 
         var amount = Global.getCombatEngine().elapsedInLastFrame
 
@@ -100,12 +110,13 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
             }
 
             if (system.isChargeup || system.isChargedown) {
+
                 ship.mutableStats.maxTurnRate.modifyMult("phase_turn_decrease", effectLevel)
                 if (system.isChargedown) ship.mutableStats.maxTurnRate.modifyMult("phase_turn_decrease", 1-(effectLevel))
                 particleInterval.advance(amount)
 
                 if (maskEndPosition != null) {
-                    portalFade += 0.75f * amount
+                    portalFade += 0.5f * amount
                 }
 
                /* if (particleInterval.intervalElapsed()) {
@@ -294,8 +305,6 @@ class AmeonnaPhaseSystem : BaseShipSystemScript() {
     }
 
     fun updateSegment(segment: DuskWormSegment, segmentLevel: Float) {
-        //segment.isPhased = level >= 0.5 //Caused a ConcurrentModificationException
-        //TODO Logic for stopping weapon fire, etc.
         var isPhased = segmentLevel >= 0.5f
         segment.isPhased = isPhased
     }
