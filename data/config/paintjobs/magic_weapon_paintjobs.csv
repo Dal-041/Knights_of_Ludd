@@ -1,0 +1,5 @@
+id,paintjobFamilies,weaponIds,spriteMap
+kol_deco_snowdrop_tl_pirate,Pirate,kol_deco_snowdrop_tl,graphics/kol/ships/decos/kol_deco_snowdrop_tl.png -> graphics/kol/paintjobs/decos/kol_deco_snowdrop_tl_pirate.png
+kol_deco_snowdrop_tr_pirate,Pirate,kol_deco_snowdrop_tr,graphics/kol/ships/decos/kol_deco_snowdrop_tr.png -> graphics/kol/paintjobs/decos/kol_deco_snowdrop_tr_pirate.png
+kol_deco_alysse_ll_pirate,Pirate,kol_deco_alysse_ll,graphics/kol/ships/decos/kol_deco_alysse_ll.png -> graphics/kol/paintjobs/decos/kol_deco_alysse_ll_pirate.png
+kol_deco_alysse_lr_pirate,Pirate,kol_deco_alysse_lr,graphics/kol/ships/decos/kol_deco_alysse_lr.png -> graphics/kol/paintjobs/decos/kol_deco_alysse_lr_pirate.png

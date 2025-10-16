@@ -1,2 +1,12 @@
-id,hullIds,name,spriteId,unlockedAutomatically,tags,unlockConditions,description,Column 09
-kol_blaze_pirate,kol_blaze,Pirate,graphics/kol/ships/kol_blaze_pirate.png,true,,,,
+id,hullIds,name,paintjobFamily,spriteId,unlockedAutomatically,tags,unlockConditions,description
+kol_blaze_pirate,kol_blaze,Pirate,Pirate,graphics/kol/ships/kol_blaze_pirate.png,true,,,
+kol_snowdrop_pirate,kol_snowdrop,Pirate,Pirate,graphics/kol/paintjobs/kol_snowdrop_pirate.png,true,,,
+kol_snowdrop_ll_pirate,kol_snowdrop_ll,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_snowdrop_ll_pirate.png,true,,,
+kol_snowdrop_lr_pirate,kol_snowdrop_lr,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_snowdrop_lr_pirate.png,true,,,
+kol_snowdrop_tl_pirate,kol_snowdrop_tl,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_snowdrop_tl_pirate.png,true,,,
+kol_snowdrop_tr_pirate,kol_snowdrop_tr,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_snowdrop_tr_pirate.png,true,,,
+kol_alysse_pirate,kol_alysse,Pirate,Pirate,graphics/kol/paintjobs/kol_alysse_pirate.png,true,,,
+kol_alysse_ll_pirate,kol_alysse_ll,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_alysse_ll_pirate.png,true,,,
+kol_alysse_lr_pirate,kol_alysse_lr,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_alysse_lr_pirate.png,true,,,
+kol_alysse_tl_pirate,kol_alysse_tl,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_alysse_tl_pirate.png,true,,,
+kol_alysse_tr_pirate,kol_alysse_tr,Pirate,Pirate,graphics/kol/paintjobs/modules/kol_alysse_tr_pirate.png,true,,,
