@@ -4,12 +4,12 @@
   "hullSize": "CAPITAL_SHIP",
   "spriteName": "graphics/zea/ships/zea_boss_amaterasu.png",
   "style": "ZEA_ELYSIAN_TECH",
-  "height": 387,
-  "width": 266,
-  "center": [133, 188],
-  "collisionRadius": 217,
+  "height": 450,
+  "width": 300,
+  "center": [150, 226],
+  "collisionRadius": 249.5,
   "shieldCenter": [0, -0],
-  "shieldRadius": 208.5,
+  "shieldRadius": 218,
   "viewOffset": 0,
   "builtInMods": [
     "zea_edf_builtin",
@@ -51,7 +51,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": 85,
-      "locations": [12, 82]
+      "locations": [-12.5, 80.5]
     },
     {
       "id": "WS0004",
@@ -60,7 +60,7 @@
       "mount": "TURRET",
       "arc": 120,
       "angle": -85,
-      "locations": [12, -82]
+      "locations": [-12.5, -80.5]
     },
     {
       "id": "WS0001",
@@ -69,7 +69,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [11, 68]
+      "locations": [-17, 72]
     },
     {
       "id": "WS0002",
@@ -78,7 +78,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [11, -68]
+      "locations": [-17, -72]
     },
     {
       "id": "WS0005",
@@ -87,7 +87,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-52, 0],
+      "locations": [-80, 0],
       "renderOrderMod": 2
     },
     {
@@ -97,7 +97,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
-      "locations": [21, 47],
+      "locations": [-7, 47],
       "renderOrderMod": 101
     },
     {
@@ -107,7 +107,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
-      "locations": [21, -47],
+      "locations": [-7, -47],
       "renderOrderMod": 101
     },
     {
@@ -117,7 +117,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 60,
-      "locations": [74, 50],
+      "locations": [46, 50],
       "renderOrderMod": 100
     },
     {
@@ -127,7 +127,7 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -60,
-      "locations": [74, -50],
+      "locations": [46, -50],
       "renderOrderMod": 100
     },
     {
@@ -137,7 +137,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": 180,
-      "locations": [-47, 0]
+      "locations": [-75, 0]
     },
     {
       "id": "WS0013",
@@ -146,7 +146,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": 0,
-      "locations": [124, 43]
+      "locations": [96, 43]
     },
     {
       "id": "WS0014",
@@ -155,7 +155,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": 0,
-      "locations": [124, -43]
+      "locations": [96, -43]
     },
     {
       "id": "WS0011",
@@ -164,7 +164,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": 135,
-      "locations": [-36, 69]
+      "locations": [-64, 69]
     },
     {
       "id": "WS0012",
@@ -173,7 +173,7 @@
       "mount": "TURRET",
       "arc": 270,
       "angle": -135,
-      "locations": [-36, -69]
+      "locations": [-64, -69]
     },
     {
       "id": "WS0015",
@@ -182,7 +182,7 @@
       "mount": "TURRET",
       "arc": 90,
       "angle": 165,
-      "locations": [-84, 42]
+      "locations": [-112, 42]
     },
     {
       "id": "WS0016",
@@ -191,7 +191,7 @@
       "mount": "TURRET",
       "arc": 90,
       "angle": -165,
-      "locations": [-84, -42]
+      "locations": [-112, -42]
     },
     {
       "id": "WS0017",
@@ -200,7 +200,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [96.5, 70.5]
+      "locations": [63.5, 75.5]
     },
     {
       "id": "WS0018",
@@ -209,7 +209,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [96.5, -70.5]
+      "locations": [63.5, -75.5]
     },
     {
       "id": "WS0019",
@@ -218,7 +218,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [47, 23]
+      "locations": [19, 23]
     },
     {
       "id": "WS0020",
@@ -227,7 +227,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [47, -23]
+      "locations": [19, -23]
     },
     {
       "id": "WS0021",
@@ -236,7 +236,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-9, 37]
+      "locations": [-49.5, 38.5]
     },
     {
       "id": "WS0022",
@@ -245,7 +245,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-9, -37]
+      "locations": [-49.5, -38.5]
     },
     {
       "id": "WS0023",
@@ -254,7 +254,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [11, 118]
+      "locations": [-3.5, 140]
     },
     {
       "id": "WS0024",
@@ -263,7 +263,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [11, -118]
+      "locations": [-3.5, -140]
     },
     {
       "id": "WS0025",
@@ -272,7 +272,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-116.5, 87.5]
+      "locations": [-149, 87]
     },
     {
       "id": "WS0026",
@@ -281,7 +281,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-116.5, -87.5]
+      "locations": [-149, -87]
     },
     {
       "id": "WS0027",
@@ -290,7 +290,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 90,
-      "locations": [-123.5, 20.5]
+      "locations": [-151.5, 20.5]
     },
     {
       "id": "WS0028",
@@ -299,7 +299,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -90,
-      "locations": [-123.5, -20.5]
+      "locations": [-151.5, -20.5]
     },
     {
       "id": "WS0029",
@@ -308,7 +308,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [72, 0],
+      "locations": [44, -0],
       "renderOrderMod": 1
     },
     {
@@ -318,7 +318,7 @@
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [72, 0]
+      "locations": [44, 0]
     },
     {
       "id": "WS0033",
@@ -327,7 +327,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [8, 123]
+      "locations": [2, 141]
     },
     {
       "id": "WS0034",
@@ -336,7 +336,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [8, -123]
+      "locations": [2, -141]
     },
     {
       "id": "LB 1",
@@ -345,7 +345,7 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-7, 0.5]
+      "locations": [-45, 17.5]
     },
     {
       "id": "LB 2",
@@ -354,7 +354,7 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-102, 0]
+      "locations": [-140, 17]
     },
     {
       "id": "LB 3",
@@ -363,12 +363,12 @@
       "mount": "HIDDEN",
       "arc": 360,
       "angle": 0,
-      "locations": [-17, 0]
+      "locations": [-55, 17]
     }
   ],
   "engineSlots": [
     {
-      "location": [12, 82],
+      "location": [-12.5, 80.5],
       "length": 70,
       "width": 15,
       "angle": 80,
@@ -376,7 +376,7 @@
       "style": "zea_EDF_OMEGA"
     },
     {
-      "location": [12, -82],
+      "location": [-12.5, -80.5],
       "length": 70,
       "width": 15,
       "angle": -80,
@@ -384,7 +384,7 @@
       "style": "zea_EDF_OMEGA"
     },
     {
-      "location": [-84, 42],
+      "location": [-112, 42],
       "length": 45,
       "width": 8.27,
       "angle": 165,
@@ -392,7 +392,7 @@
       "style": "zea_EDF_OMEGA"
     },
     {
-      "location": [-84, -42],
+      "location": [-112, -42],
       "length": 45,
       "width": 8.27,
       "angle": -165,
@@ -401,41 +401,60 @@
     }
   ],
   "bounds": [
-    197, -28,
-    194, -34.5,
-    146.5, -48,
-    62, -93,
-    48.5, -77.5,
-    26.5, -79,
-    26, -94,
-    4, -99,
-    -6.5, -89,
-    -93.5, -86.5,
-    -107, -71.5,
-    -63.5, -58,
-    -65, -41.5,
-    -81, -50,
-    -87, -29.5,
-    -180.5, -5.5,
-    -185, 0,
-    -180.5, 5.5,
-    -87, 29.5,
-    -81, 50,
-    -65, 41.5,
-    -63.5, 58,
-    -107, 71.5,
-    -93.5, 86.5,
-    -6.5, 89,
-    4, 99,
-    26, 94,
-    26.5, 79,
-    48.5, 77.5,
-    62, 93,
-    146.5, 48,
-    194, 34.5,
-    197, 28,
-    79, 20,
-    92, 0,
-    79, -20
+    64, -21,
+    110, -14,
+    124, -24,
+    198.5, -27,
+    194.5, -33,
+    45.5, -83.5,
+    49.5, -102,
+    46, -106,
+    30.5, -84,
+    15.5, -91.5,
+    7.5, -129.5,
+    0.5, -133,
+    1, -141,
+    -3.5, -141.5,
+    -20, -116,
+    -53, -96,
+    -108, -86.5,
+    -150, -88.5,
+    -134, -80,
+    -133, -72,
+    -108.5, -61.5,
+    -112, -54,
+    -141.5, -48.5,
+    -129, -46.5,
+    -126, -38.5,
+    -135, -38,
+    -113.5, -30.5,
+    -213, -0,
+    -113.5, 30.5,
+    -135, 38,
+    -126, 38.5,
+    -129, 46.5,
+    -141.5, 48.5,
+    -112, 54,
+    -108.5, 61.5,
+    -133, 72,
+    -134, 80,
+    -150, 88.5,
+    -108, 86.5,
+    -53, 96,
+    -20, 116,
+    -3.5, 141.5,
+    1, 141,
+    0.5, 133,
+    7.5, 129.5,
+    15.5, 91.5,
+    30.5, 84,
+    46, 106,
+    49.5, 102,
+    45.5, 83.5,
+    194.5, 33,
+    198.5, 27,
+    124, 24,
+    110, 14,
+    64, 21
   ]
 }
