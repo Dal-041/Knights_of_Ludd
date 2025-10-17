@@ -1,0 +1,56 @@
+{
+  "hullName": "Amaterasu Thruster",
+  "hullId": "zea_boss_amaterasu_thruster_droneL",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/zea/weapons/decos/zea_deco_edf_engL.png",
+  "style": "ZEA_ELYSIAN_TECH",
+  "height": 60,
+  "width": 40,
+  "center": [20, 25],
+  "collisionRadius": 33.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 36,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0001": "zea_deco_edf_amaterasu_engL"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 180,
+      "locations": [5, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [5, -0],
+      "length": 91,
+      "width": 18,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "zea_EDF_OMEGA"
+    },
+    {
+      "location": [5, -0],
+      "length": 77.5,
+      "width": 26,
+      "angle": -180,
+      "contrailSize": 26,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    13, -16,
+    -3.5, -16,
+    -12, -9.5,
+    -15, -0,
+    -12, 9.5,
+    -3.5, 16,
+    13, 16,
+    32, -0
+  ]
+}

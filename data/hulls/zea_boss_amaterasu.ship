@@ -22,8 +22,7 @@
   "builtInWeapons": {
     "WS0001": "zea_deco_edf_amaterasu_l",
     "WS0002": "zea_deco_edf_amaterasu_r",
-    "WS0003": "zea_deco_edf_engL",
-    "WS0004": "zea_deco_edf_engL",
+    "WS0003": "zea_deco_dawn_engL",
     "WS0005": "zea_deco_edf_amaterasu_lights",
     "WS0015": "zea_deco_edf_engS",
     "WS0016": "zea_deco_edf_engS",
@@ -40,28 +39,11 @@
     "WS0027": "kol_blinker_white30",
     "WS0028": "kol_blinker_white30",
     "WS0029": "zea_deco_edf_amaterasu_front",
+    "WS0032": "zea_deco_dawn_engL",
     "WS0033": "zea_deco_edf_vortice",
     "WS0034": "zea_deco_edf_vortice"
   },
   "weaponSlots": [
-    {
-      "id": "WS0003",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 120,
-      "angle": 85,
-      "locations": [-12.5, 80.5]
-    },
-    {
-      "id": "WS0004",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 120,
-      "angle": -85,
-      "locations": [-12.5, -80.5]
-    },
     {
       "id": "WS0001",
       "size": "LARGE",
@@ -69,7 +51,8 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-17, 72]
+      "locations": [-107.5, 246],
+      "renderOrderMod": 101
     },
     {
       "id": "WS0002",
@@ -78,7 +61,8 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-17, -72]
+      "locations": [-107.5, -246],
+      "renderOrderMod": 101
     },
     {
       "id": "WS0005",
@@ -98,7 +82,7 @@
       "arc": 210,
       "angle": 90,
       "locations": [-7, 47],
-      "renderOrderMod": 101
+      "renderOrderMod": 201
     },
     {
       "id": "WS0009",
@@ -108,7 +92,7 @@
       "arc": 210,
       "angle": -90,
       "locations": [-7, -47],
-      "renderOrderMod": 101
+      "renderOrderMod": 201
     },
     {
       "id": "WS0006",
@@ -364,6 +348,42 @@
       "arc": 360,
       "angle": 0,
       "locations": [-55, 17]
+    },
+    {
+      "id": "ENGINE_MODULE_L",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -100,
+      "locations": [-12.5, 80.5]
+    },
+    {
+      "id": "ENGINE_MODULE_R",
+      "size": "SMALL",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 100,
+      "locations": [-12.5, -80.5]
+    },
+    {
+      "id": "WS0032",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 80,
+      "locations": [-12.5, 80.5]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -80,
+      "locations": [-12.5, -80.5]
     }
   ],
   "engineSlots": [

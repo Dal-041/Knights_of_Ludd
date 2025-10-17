@@ -75,5 +75,8 @@
         "zea_edf_itsumade_wing",
         "zea_edf_onmoraki_wing",
     ],
-    "modules": [],
+    "modules": [
+        {"ENGINE_MODULE_L": "zea_boss_amaterasu_thruster_droneL_Blank"},
+        {"ENGINE_MODULE_R": "zea_boss_amaterasu_thruster_droneL_Blank"}
+    ],
 }
