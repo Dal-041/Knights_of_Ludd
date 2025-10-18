@@ -22,8 +22,6 @@
     "WS0010": "zea_deco_edf_mizuchi_ml",
     "WS0013": "zea_edf_locust_medium",
     "WS0014": "zea_deco_edf_mizuchi_mr",
-    "WS0015": "zea_deco_edf_engL2",
-    "WS0016": "zea_deco_edf_engL2",
     "WS0017": "zea_deco_edf_vortice",
     "WS0018": "zea_deco_edf_vortice",
     "WS0019": "kol_blinker_red",
@@ -34,7 +32,9 @@
     "WS0024": "kol_blinker_white30",
     "WS0025": "zea_deco_edf_mizuchi_lights",
     "WS0026": "zea_deco_edf_mizuchi_tl",
-    "WS0027": "zea_deco_edf_mizuchi_tr"
+    "WS0027": "zea_deco_edf_mizuchi_tr",
+    "WS0028": "zea_deco_edf_engL2",
+    "WS0029": "zea_deco_edf_engL2"
   },
   "weaponSlots": [
     {
@@ -134,24 +134,6 @@
       "arc": 7,
       "angle": -129,
       "locations": [-7, -155.5]
-    },
-    {
-      "id": "WS0015",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 25,
-      "angle": 167.5,
-      "locations": [31, 28]
-    },
-    {
-      "id": "WS0016",
-      "size": "SMALL",
-      "type": "DECORATIVE",
-      "mount": "TURRET",
-      "arc": 25,
-      "angle": -167.5,
-      "locations": [31, -30]
     },
     {
       "id": "WS0017",
@@ -311,11 +293,29 @@
       "angle": -0,
       "locations": [39, -102],
       "renderOrderMod": 100
+    },
+    {
+      "id": "WS0028",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 25,
+      "angle": 180,
+      "locations": [26, 29]
+    },
+    {
+      "id": "WS0029",
+      "size": "SMALL",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 25,
+      "angle": -180,
+      "locations": [26, -29]
     }
   ],
   "engineSlots": [
     {
-      "location": [31, 28],
+      "location": [26, 29],
       "length": 75,
       "width": 25,
       "angle": 165,
@@ -323,7 +323,7 @@
       "style": "zea_EDF_ENG"
     },
     {
-      "location": [31, -30],
+      "location": [26, -29],
       "length": 75,
       "width": 25,
       "angle": -165,

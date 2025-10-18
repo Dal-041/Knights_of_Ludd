@@ -27,20 +27,36 @@
   ],
   "engineSlots": [
     {
-      "location": [5, -0],
-      "length": 91,
-      "width": 18,
+      "location": [-2.5, -0],
+      "length": 45,
+      "width": 16,
       "angle": 180,
       "contrailSize": 18,
       "style": "zea_EDF_OMEGA"
     },
     {
-      "location": [5, -0],
-      "length": 77.5,
-      "width": 26,
-      "angle": -180,
-      "contrailSize": 26,
+      "location": [7, -0],
+      "length": 42.5,
+      "width": 33,
+      "angle": 180,
+      "contrailSize": 33,
       "style": "HIGH_TECH"
+    },
+    {
+      "location": [-2.5, 7.5],
+      "length": 45,
+      "width": 16,
+      "angle": 180,
+      "contrailSize": 18,
+      "style": "zea_EDF_OMEGA"
+    },
+    {
+      "location": [-2.5, -7.5],
+      "length": 45,
+      "width": 16,
+      "angle": -180,
+      "contrailSize": 18,
+      "style": "zea_EDF_OMEGA"
     }
   ],
   "bounds": [
