@@ -15,8 +15,7 @@
     "zea_edf_builtin",
     "automated",
     "zea_edf_shield_style",
-    "zea_recovery_limiter",
-    "fluxshunt"
+    "zea_recovery_limiter"
   ],
   "builtInWeapons": {
     "WS0003": "zea_edf_aegis",
