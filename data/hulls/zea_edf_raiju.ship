@@ -1,7 +1,7 @@
 {
   "hullName": "Raiju",
   "hullId": "zea_edf_raiju",
-  "hullSize": "FRIGATE",
+  "hullSize": "DESTROYER",
   "spriteName": "graphics/zea/ships/zea_edf_raiju.png",
   "style": "ZEA_ELYSIAN_TECH",
   "height": 125,
@@ -35,8 +35,8 @@
     "WS0019": "zea_deco_edf_raiju_ll",
     "WS0020": "kol_blinker_red",
     "WS0021": "kol_blinker_green",
-    "WS0022": "zea_deco_edf_engL",
-    "WS0023": "zea_deco_edf_engL"
+    "WS0022": "zea_deco_edf_engL2",
+    "WS0023": "zea_deco_edf_engL2"
   },
   "weaponSlots": [
     {
@@ -197,7 +197,7 @@
       "type": "HYBRID",
       "mount": "TURRET",
       "arc": 270,
-      "angle": 180,
+      "angle": 0,
       "locations": [-17, -0],
       "renderOrderMod": 201
     },
