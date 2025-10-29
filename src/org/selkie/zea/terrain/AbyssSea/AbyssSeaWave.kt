@@ -23,6 +23,7 @@ import com.fs.starfarer.api.impl.campaign.terrain.BaseRingTerrain
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin
 import com.fs.starfarer.api.impl.campaign.terrain.RingRenderer
 import com.fs.starfarer.api.impl.campaign.terrain.ShoveFleetScript
+import com.fs.starfarer.api.impl.campaign.terrain.StarCoronaTerrainPlugin
 import com.fs.starfarer.api.loading.Description
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.IntervalUtil
@@ -130,6 +131,10 @@ class AbyssSeaWave(): BaseRingTerrain() {
     }
 
     override fun advance(amount: Float) {
+        if (params !is AbyssSeaWaveParams) {
+            return // wait for compatibility utils to clean us up
+        }
+
         super.advance(amount)
 
         val mult = getEffectMult(null)
@@ -171,7 +176,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
             params.middleRadius,
             params.bandWidthInEngine,
             380, // polygons of the circle
-            85, // segments of the ring
+            25, // segments of the ring
             500f,
             sprite,
             90f,

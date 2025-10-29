@@ -40,7 +40,7 @@
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
-	
+
 	"zea_seaWave":{
 		"plugin":"org.selkie.zea.terrain.AbyssSea.AbyssSeaWave",
 		"musicSuppression":1,
