@@ -48,6 +48,7 @@ import kotlin.ranges.coerceAtLeast
 import kotlin.ranges.coerceAtMost
 import kotlin.ranges.until
 
+/** The wave itself */
 class AbyssSeaWave(): BaseRingTerrain() {
 
     companion object {
@@ -80,6 +81,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
         relatedEntity: SectorEntityToken? = null,
         startingRange: Float = 0f,
         name: String = "Dawntide",
+        /** Will ALWAYS play, even if the player is too far away. If the player IS far away, plays a lot more quietely.*/
         val spawnSounds: List<String> = listOf("mote_attractor_targeted_ship", "gate_explosion"),
         /** In SU/s. Does not increase the distance of the wave. */
         val speed: Float = BASE_SHOCKWAVE_SPEED,
@@ -99,7 +101,9 @@ class AbyssSeaWave(): BaseRingTerrain() {
             return field
         }
 
+    /** A list of fleets we've already hit. Used to avoid spamming hits over and over. */
     val alreadyHit = kotlin.collections.HashSet<CampaignFleetAPI>()
+    /** The bandwidth we started with. Our bandwith can change based on the position of our ring, and if its too small. */
     var idealBandwidth: Float = 0f
 
     override fun init(terrainId: String?, entity: SectorEntityToken?, param: Any?) {
@@ -194,7 +198,8 @@ class AbyssSeaWave(): BaseRingTerrain() {
             rr = RingRenderer("systemMap", "map_asteroid_belt")
         }
         val playerFleet = Global.getSector().playerFleet
-        var adjustedAlpha = if (shouldHitFleet(playerFleet, false)) alphaMult else alphaMult * 0.5f
+        // make it a bit transparent if the wave isnt a current threat
+        var adjustedAlpha = if (shouldHitFleet(playerFleet)) alphaMult else alphaMult * 0.5f
         val mult = getEffectMult(null)
         adjustedAlpha *= mult
         val max = castedParams.middleRadius + (castedParams.bandWidthInEngine / 2f)
@@ -234,22 +239,16 @@ class AbyssSeaWave(): BaseRingTerrain() {
 
         if (entity !is CampaignFleetAPI) return
 
-        if (!shouldAffectFleet(entity)) return
         // place behavior that also affects the dawntide fleets here
         if (!shouldHitFleet(entity)) return
         hitFleet(entity)
     }
 
-    fun shouldAffectFleet(fleet: CampaignFleetAPI): Boolean {
-        return true
-    }
-
-    fun shouldHitFleet(fleet: CampaignFleetAPI, useShouldAffect: Boolean = true): Boolean {
+    fun shouldHitFleet(fleet: CampaignFleetAPI): Boolean {
         if (fleetIsImmune(fleet)) return false
         if (fleet in alreadyHit) return false
         if (fleetIsBlocked(fleet)) return false
 
-        if (useShouldAffect && !shouldAffectFleet(fleet)) return false
         return true
     }
 
@@ -313,7 +312,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
             //if (crPerDep <= 0) continue;
             val suppliesPerDep = member.stats.suppliesToRecover.modifiedValue
             if (suppliesPerDep <= 0 || crPerDep <= 0) return
-            val suppliesPer100CR = suppliesPerDep * 1f / Math.max(0.01f, crPerDep)
+            val suppliesPer100CR = suppliesPerDep * 1f / 0.01f.coerceAtLeast(crPerDep)
 
             // half flat damage, half scaled based on ship supply cost cost
             var strikeSupplies = ((BASE_STRIKE_DAMAGE) + suppliesPer100CR) * 0.5f * damageFraction
@@ -380,6 +379,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
         }
     }
 
+    // corresponds with the opacity of the wave
     private fun getEffectMult(fleet: CampaignFleetAPI?): Float {
         val progress = getProgress()
         val casted = getCastedParams()

@@ -12,6 +12,7 @@ import org.lwjgl.util.vector.Vector2f
 import org.selkie.zea.helpers.ZeaStaticStrings
 import java.awt.Color
 
+// a simple script that spawns waves on an interval
 class AbyssSeaWaveManager(
     val host: SectorEntityToken,
     val params: AbyssSeaWaveManagerParams

@@ -9,6 +9,8 @@ import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
 import org.selkie.zea.terrain.AbyssSea.AbyssSeaWaveManager.Companion.DEFAULT_MIN_DAYS
 
+/** Dummy terrain used to inject important info into the terrain bar. Tells the player how to avoid
+ * the dawntide, warns them of the next dawntide, and more */
 class AbyssSeaWarnTerrain: BaseRingTerrain() {
 
     lateinit var manager: AbyssSeaWaveManager
@@ -34,7 +36,7 @@ class AbyssSeaWarnTerrain: BaseRingTerrain() {
         return nameForTooltip
     }
 
-    override fun getNameForTooltip(): String? {
+    override fun getNameForTooltip(): String {
         val baseName = name
         val daysLeft = getDaysLeft()
         val sOrNone = if (daysLeft == 1f) "" else "s"

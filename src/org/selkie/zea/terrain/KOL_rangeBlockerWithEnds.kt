@@ -11,6 +11,7 @@ import kotlin.math.*
 import kotlin.math.roundToInt
 import kotlin.ranges.coerceAtLeast
 
+/** A rangeBlockerUtil that stops considering something "blocked" if a the blocker is a certain distance away. */
 class KOL_rangeBlockerWithEnds(val resolution: Int, val maxRange: Float, val tag: String) {
 
     //	private LocationAPI location;
@@ -46,10 +47,12 @@ class KOL_rangeBlockerWithEnds(val resolution: Int, val maxRange: Float, val tag
         }
     }
 
-    /*fun getShortenAmountAt(angle: Float): Float {
-        return maxRange - getCurrMaxAt(angle)
-    }*/
-
+    /** Gets the span of distance where something is blocking us, to where it isnt anymore.
+     *
+     * @param angle The angle to consider.
+     *
+     * @return A pair of distances - where the blockage starts, and where it stops.
+     * */
     fun getBlockedRangeAt(angle: Float): Pair<Float, Float> {
         var angle = angle
         angle = Misc.normalizeAngle(angle)
@@ -142,29 +145,6 @@ class KOL_rangeBlockerWithEnds(val resolution: Int, val maxRange: Float, val tag
 
         wasUpdated = true
     }
-
-    /*fun block(angle: Float, arc: Float, limit: Float) {
-        //float radius = Misc.computeAngleRadius(angle, limit);
-        val offsetSize = max(limit.toDouble(), (maxRange * 0.1f).toDouble()).toFloat()
-
-        var f = angle - arc / 2f
-        while (f <= angle + arc / 2f) {
-            var offset: Float = abs((f - angle).toFloat()) / (arc / 2f)
-            if (offset > 1) offset = 1f
-            offset = (1f - cos((offset * 3.1416f / 2f).toDouble()).toFloat())
-            offset += 1f
-            offset *= offset
-            offset -= 1f
-            offset *= offsetSize
-            //offset = 0f;
-            offset = abs(offset.toDouble()).toFloat()
-
-            val index = getIndexForAngle(f)
-            limits[index] = min((limit + offset).toDouble(), limits[index].toDouble()).toFloat()
-            isAnythingShortened = true
-            f += degreesPerUnit
-        }
-    }*/
 
     fun getIndexForAngle(angle: Float): Int {
         var angle = angle
