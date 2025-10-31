@@ -58,6 +58,7 @@ public class ZeaStaticStrings {
         public static final String ZEA_LUNASEA_PLANET_FOUR = "zea_lunasea_four";
         public static final String ZEA_LUNASEA_PLANET_FIVE = "zea_lunasea_five";
         public static final String ZEA_LUNASEA_PLANET_SIX = "zea_lunasea_six";
+        public static final String ZEA_SEA_WAVE_EXPLOSION = "zea_wave_explosion";
 
         public static final String ZEA_ELYSIA_PLANET_ONE = "zea_elysia_asclepius";
         public static final String ZEA_ELYSIA_PLANET_TWO = "zea_elysia_appia";
@@ -118,6 +119,7 @@ public class ZeaStaticStrings {
     }
 
     public static class ZeaTerrain {
+        public static final String ZEA_SEA_WAVE_WARNING = "zea_sea_WaveWarning";
         public static final String ZEA_EVENT_HORIZON = "zea_eventHorizon";
         public static final String ZEA_PULSAR_BEAM = "zea_pulsarBeam";
         public static final String ZEA_CORONA = "zea_corona";

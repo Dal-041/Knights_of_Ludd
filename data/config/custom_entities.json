@@ -221,6 +221,11 @@
 		"tags":["has_interaction_dialog", "salvageable", "zea_boss_station_tritachyontag"],
 		"layers":[STATIONS], # what layer(s) to render in. See CampaignEngineLayers.java for possible values
 	},
+
+    "zea_wave_explosion":{
+        "baseId":"explosion",
+        "pluginClass":"org.selkie.zea.terrain.AbyssSea.AbyssSeaWaveExplosion"
+    },
 	
 }
 
