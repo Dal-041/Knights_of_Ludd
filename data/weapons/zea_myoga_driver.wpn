@@ -25,5 +25,6 @@
 					   "particleCount":33,
 					   "particleColor":[160,40,220,160]},	
 	"projectileSpecId":"zea_myoga_driver_shot",  # projectile that will be fired
+	"pierceSet":[PROJECTILE_FF,PROJECTILE_NO_FF,PROJECTILE_FIGHTER,MISSILE_FF,MISSILE_NO_FF],
 	"fireSoundTwo":"hypervel_driver_fire",	
 }
