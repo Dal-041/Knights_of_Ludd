@@ -167,7 +167,7 @@
       "angle": 180,
       "contrailSize": 10,
       "style": "CUSTOM",
-      "styleId": "zea_EDF_TRAIL"
+      "styleId": "zea_EDF_ENG"
     },
     {
       "location": [-39.5, 22.5],
@@ -176,7 +176,7 @@
       "angle": 180,
       "contrailSize": 10,
       "style": "CUSTOM",
-      "styleId": "zea_EDF_TRAIL"
+      "styleId": "zea_EDF_ENG"
     },
     {
       "location": [-39.5, -22.5],
@@ -185,7 +185,7 @@
       "angle": -180,
       "contrailSize": 10,
       "style": "CUSTOM",
-      "styleId": "zea_EDF_TRAIL"
+      "styleId": "zea_EDF_ENG"
     }
   ],
   "bounds": [

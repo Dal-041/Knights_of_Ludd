@@ -19,7 +19,6 @@
   ],
   "builtInWeapons": {
     "WS0003": "zea_deco_edf_wani_ml",
-    "WS0004": "zea_deco_edf_wani_mr",
     "WS0007": "zea_deco_edf_vortice",
     "WS0008": "zea_deco_edf_vortice"
   },
@@ -87,36 +86,51 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [-4.5, 19],
+      "locations": [0, -0],
       "renderOrderMod": 100
     },
     {
       "id": "WS0004",
       "size": "SMALL",
       "type": "DECORATIVE",
-      "mount": "TURRET",
+      "mount": "HIDDEN",
       "arc": 0,
-      "angle": -0,
-      "locations": [-4.5, -19],
-      "renderOrderMod": 100
+      "angle": 0,
+      "locations": [-9, -0]
     }
   ],
   "engineSlots": [
     {
       "location": [-58, 9],
-      "length": 58,
-      "width": 15,
+      "length": 40,
+      "width": 16,
       "angle": 180,
-      "contrailSize": 15,
+      "contrailSize": 16,
       "style": "zea_EDF_ENG"
     },
     {
       "location": [-58, -9],
-      "length": 58,
-      "width": 15,
+      "length": 40,
+      "width": 16,
       "angle": -180,
-      "contrailSize": 15,
+      "contrailSize": 16,
       "style": "zea_EDF_ENG"
+    },
+    {
+      "location": [-62.5, 9],
+      "length": 46,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "ZEA_EDF_HTNT"
+    },
+    {
+      "location": [-62.5, -9],
+      "length": 46,
+      "width": 9,
+      "angle": -180,
+      "contrailSize": 9,
+      "style": "ZEA_EDF_HTNT"
     }
   ],
   "bounds": [
