@@ -1,7 +1,7 @@
 {
     "hullName": "Ao Thruster Drone",
     "hullId": "zea_dawn_ao_thruster_droneL",
-    "hullSize": "FIGHTER",
+    "hullSize": "FRIGATE",
     "style": "ZEA_DAWN_TECH",
     "spriteName": "graphics/zea/ships/zea_dawn_ao_engL.png",
     "height": 66,
@@ -28,7 +28,7 @@
             "width": 25,
             "angle": 180,
             "contrailSize": 30,
-            "style": "KOL_ENG"
+            "style": "ZEA_DAWN_ENG_B"
         },
         {
             "location": [
@@ -38,7 +38,7 @@
             "width": 25,
             "angle": 180,
             "contrailSize": 30,
-            "style": "KOL_ENG"
+            "style": "ZEA_DAWN_ENG_B"
         },
         {
             "location": [
