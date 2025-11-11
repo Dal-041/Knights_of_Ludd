@@ -34,9 +34,9 @@
 		#	but only at markets owned by your faction
 		"exclusiveDerelictFrequency":{
 			# This ship will only be available at your faction's markets
-			"kol_alysee_Standard":0.4,
-			"kol_snowdrop_Standard":0.4,
-			"kol_larkspur_Standard":0.5,
+			"kol_alysse_Blank":0.4,
+			"kol_snowdrop_Blank":0.4,
+			"kol_larkspur_Blank":0.5,
 		},
 		
 		# Edit the values in the lists below to change the probability of fleets from
