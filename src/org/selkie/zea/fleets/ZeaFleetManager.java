@@ -27,6 +27,7 @@ import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.zea.helpers.ZeaUtils;
 import org.selkie.zea.intel.ZeaMechanicIntel;
+import org.selkie.zea.terrain.AbyssSea.AbyssSeaWave;
 
 import java.util.List;
 import java.util.Random;
@@ -262,6 +263,7 @@ public class ZeaFleetManager extends SeededFleetManager {
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_PATROL_FLEET, true);
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_ALLOW_LONG_PURSUIT, true);
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_MAKE_HOLD_VS_STRONGER, true);
+        fleet.getMemoryWithoutUpdate().set(AbyssSeaWave.IGNORES_MEMORY_FLAG, true);
 
         fleet.getMemoryWithoutUpdate().set(MemFlags.MEMORY_KEY_NO_JUMP, true);
 
