@@ -1,0 +1,29 @@
+{
+  "variantId": "zea_edf_raiju_Shieldbreaker",
+  "hullId": "zea_edf_raiju",
+  "displayName": "Standoff",
+  "goalVariant": false,
+  "fluxCapacitors": 8,
+  "fluxVents": 5,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "missleracks",
+    "targetingunit"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0001": "sabot",
+        "WS0002": "sabot",
+        "WS0003": "kol_drian",
+        "WS0005": "kol_drian",
+        "WS0006": "heavymauler"
+      }
+    }
+  ],
+  "modules": [],
+  "wings": []
+}

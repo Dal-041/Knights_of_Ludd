@@ -259,7 +259,7 @@ AI Fixer,kol_alysse_ai_fixer,,,,800,,1000,,0,100,0,,,,KINETIC,0,,0,1,1,,0,0,0,0,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Styrax Driver,zea_styrax_driver,3,0.5,7500,950,,160,,24,18,14,,,,KINETIC,145,,0,1.3,2,0.2,0,10,1.6,1,,900,,,30,,,,"kinetic16, restricted, zea_common_bp, codex_unlockable",,Elysia,,Anti Shield,,,,,,,,,,57.5
 Yomogi Plasma Autogun,zea_plasma_chaingun,2,0.5,1000,550,,75,,3,30,12,,,,ENERGY,70,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR, restricted, zea_common_bp, codex_unlockable",,Dusk,,General,,,,,,,,,,56
-Myoga Ultradriver,zea_myoga_driver,3,0.2,15000,1150,,240,240,50,8,18,,,,KINETIC,360,,0,2,1,,0,1,0.3,0.1,,2500,,,300,,,,"kinetic16, LR, restricted, zea_common_bp, codex_unlockable",,Dusk,,Sniper,,,,,,,,,,57.4
+Myoga Ultradriver,zea_myoga_driver,3,0.2,15000,1150,,240,240,50,8,17,,,,KINETIC,360,,0,2,1,,0,1,0.3,0.1,,2500,,,300,,,,"kinetic16, LR, restricted, zea_common_bp, codex_unlockable",,Dusk,,Sniper,,,,,,,,,,57.4
 Konara Thermal Sniper,zea_thermal_cannon,3,0.25,20000,1100,,150,,7,18,28,,,,ENERGY,250,,0.166,1.01,4,0.166,0,3,0.3,0.1,,820,,,150,,,,"energy20, LR, restricted, zea_common_bp, codex_unlockable",,Dusk,,Attrition,,,,,,,,,,55
 Mazuma Torpedo Launcher,zea_mazuma_m,3,0.2,15000,1200,,3000,,75,6,16,16,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike28, rocket6, restricted, zea_common_bp, codex_unlockable",,Dusk,,Torpedo,Fast,None,,,,,,,TRUE,58.2
 Mazuma Torpedo Rack,zea_mazuma_s,3,0.2,8000,1200,,3000,,75,10,8,4,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike18, rocket3, restricted, zea_common_bp, codex_unlockable",,Dusk,,Torpedo,Fast,None,,,,,,,TRUE,58.1
@@ -270,6 +270,7 @@ Nanten Slicer,zea_nanten_s,3,0.7,8000,500,600,,250,0,30,8,,,,HIGH_EXPLOSIVE,,800
 Nanten Disassembler,zea_nanten_l,3,0.25,20000,1000,1600,,1000,0,12,25,,,,HIGH_EXPLOSIVE,,2400,0.5,1,1,8,,,,,10000,,,,,,,"USE_LESS_VS_SHIELDS, FIRE_WHEN_INEFFICIENT","he23, beam15, LR, restricted, codex_unlockable",,Dusk,,Cruelty,,,,,"Hits on hull or armor frequently arc to weapons and engines, dealing extra EMP and energy damage.",,,,,47.1
 Refraction Scatter Ray,zea_refraction,3,0.2,20000,1000,400,,500,0,12,25,,,,ENERGY,,600,0,0,,,,,,,2400,,,,,,,FIRE_WHEN_INEFFICIENT,"beam17, LR, restricted, codex_unlockable",,Dusk,,Advantage Neutralization,,,,,"Hits on shields reflect off a myriad of secondary beams, dealing damage to surrounding enemies.",,,,,47.3
 Refraction Overfire,zea_refraction_overfire,3,0.2,20000,1000,400,,500,0,12,25,,,,ENERGY,,0,0,0,,,,,,,2400,,,,,,,FIRE_WHEN_INEFFICIENT,"beam17, LR, restricted, codex_unlockable",,Dusk,,Advantage Neutralization,,,,,"Hits on shields reflect off a myriad of secondary beams, dealing damage to surrounding enemies.",,,,,47.3
+Hellfire Beam,zea_edf_hellfire_m,2,,15000,800,,4000,,15,12,18,,,,ENERGY,0,,0,15,1,,0,0,0,0,,150,0,12.5,600,,,USE_LESS_VS_SHIELDS,"he7, beam8, restricted, zea_common_bp, codex_unlockable",,Elysia,,Annihilation,,,,,"Fires a high-powered laser, dealing approximately %s energy damage in a short burst. This damage is affected by missile damage modifiers and not energy weapon ones.",4000,,,TRUE,16.01
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #BUILT_IN,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -282,7 +283,7 @@ Breach SRM,zea_edf_breach_salvo,1,,,800,,150,,15,10,,10,,,HIGH_EXPLOSIVE,0,,0,6,
 Harpoon MRM,zea_edf_harpoon_single,0,,100,2500,,1500,,15,30,0,1,0.0333,1,HIGH_EXPLOSIVE,0,,0,10,1,,0,0,0,,,300,100,12.5,150,,,"DO_NOT_AIM, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,Elysia,,Finisher,Fast,Poor,,,,,,,TRUE,
 Inago SRM Launcher,zea_edf_locust_medium,1,,4000,1400,,200,,5,30,0,150,1,30,FRAGMENTATION,0,,0,5,15,0.1,0,0,0,0,,400,100,6,60,,,"ANTI_FTR, DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,Elysia,,Anti Small Craft,Fast,Excellent,,,,,,,,
 Infernobore,zea_nian_maingun,3,0,100000,1500,,3600,,600,0,0,2,0.0667,2,HIGH_EXPLOSIVE,4000,,0,5,1,5,5,60,30,10,,800,800,15,100000,,,"FIRE_WHEN_INEFFICIENT, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,Dawntide,,Pulverizer,Slow,None,,,The main charge deals %s of the weapons damage upon exploding. The submunitions only deal %s of the weapons total damage and explode over three seperate timed waves.,100% | 20%,,,TRUE,
-Aegis PD System,zea_edf_aegis,2,0,5000,750,1000,,,0,75,,10,.75,,ENERGY,,350,0,0,0.2,0.1,,,,,1000000,,,,,,,"PD, ANTI_FTR, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,,,Point Defense,,,,,"When all sub-beams impact a target in close proximity to each other, the spalling effect produces an explosion that deals up to 100 points of fragmentation damage to other nearby targets.",100 | fragmentation,,,,
+Aegis PD System,zea_edf_aegis,2,0,5000,750,1000,,,0,75,,10,.75,,ENERGY,,350,0,0,0.2,0.1,,,,,1000000,,,,,,,"PD, ANTI_FTR, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,,,Point Defense,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #SYSTEM,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
@@ -317,7 +318,7 @@ mdCap,zea_deco_dawn_engM,0,,,1,110,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, 
 ,zea_deco_boss_yukionna_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
 lgCap,zea_deco_edf_engL,0,,,1,120,,,,45,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 lgCap,zea_deco_edf_engL2,0,,,1,120,,,,45,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-sCap,zea_deco_edf_engS,0,,,1,120,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+sCap,zea_deco_edf_engS,0,,,1,120,,,,55,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 l,zea_deco_edf_corruptingheart_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 r,zea_deco_edf_corruptingheart_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 l,zea_deco_edf_corruptingheart_ll,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,

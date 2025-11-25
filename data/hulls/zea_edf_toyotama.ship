@@ -304,7 +304,7 @@
     },
     {
       "location": [-17, 43],
-      "length": 60,
+      "length": 50,
       "width": 12,
       "angle": -180,
       "contrailSize": 15,
@@ -312,7 +312,7 @@
     },
     {
       "location": [-17, -43],
-      "length": 60,
+      "length": 50,
       "width": 12,
       "angle": 180,
       "contrailSize": 15,

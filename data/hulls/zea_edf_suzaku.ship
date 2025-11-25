@@ -155,19 +155,35 @@
   "engineSlots": [
     {
       "location": [-73, 12],
-      "length": 57,
-      "width": 18,
+      "length": 56.5,
+      "width": 21,
       "angle": 180,
-      "contrailSize": 18,
+      "contrailSize": 21,
       "style": "zea_EDF_ENG"
     },
     {
       "location": [-73, -12],
-      "length": 57,
-      "width": 18,
+      "length": 56.5,
+      "width": 21,
       "angle": -180,
-      "contrailSize": 18,
+      "contrailSize": 21,
       "style": "zea_EDF_ENG"
+    },
+    {
+      "location": [-76.5, 12],
+      "length": 63.5,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "ZEA_EDF_HTNT"
+    },
+    {
+      "location": [-76.5, -12],
+      "length": 63.5,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 10,
+      "style": "ZEA_EDF_HTNT"
     }
   ],
   "bounds": [
