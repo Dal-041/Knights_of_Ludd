@@ -40,12 +40,17 @@
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
-	
+
 	"zea_seaWave":{
-		"plugin":"org.selkie.zea.terrain.AbyssSeaWave",
+		"plugin":"org.selkie.zea.terrain.AbyssSea.AbyssSeaWave",
 		"musicSuppression":1,
 		"loopOne":"terrain_corona_am",
 	},
+
+    "zea_sea_WaveWarning":{
+        "plugin":"org.selkie.zea.terrain.AbyssSea.AbyssSeaWarnTerrain",
+        "musicSuppression":0,
+    },
 	
 	"nebula_zea_black":{
 		"plugin":"com.fs.starfarer.api.impl.campaign.terrain.NebulaTerrainPlugin",

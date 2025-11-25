@@ -12,7 +12,7 @@ Featuring:
 
 ## Credits
 - Ships: Selkie
-- Code: Dal, Starficz, President Matt Damon, Lukas04, NiaTahl, CeruleanPancake
+- Code: Dal, Starficz, President Matt Damon, Lukas04, NiaTahl, CeruleanPancake, Niko
 
 - Weapons: SkylordZero, SnazzyPantsMcGee
 - VFX: NiaTahl, President Matt Damon, Starficz, Dal, Himemi, Wisp
@@ -27,3 +27,4 @@ Featuring:
 - Special Thanks : Amazigh, Timid, Avanitia, Pogre, and our valued beta testers
 - Tartiflette : Stellar backgrounds, Seeker & Torchship art, shield and boss code reference
 - Dark.Revenant : Terrain code reference
+- Ruddygreat - OpenGlUtils.java

@@ -12,6 +12,7 @@ import lunalib.lunaUtil.campaign.LunaCampaignRenderer;
 import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
+import org.selkie.kol.CompatabilityUtils;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
@@ -66,6 +67,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		GenerateKnights.addKoLIntel();
 		ZeaUtils.checkAbyssalFleets();
 		ZeaUtils.copyHighgradeEquipment();
+        CompatabilityUtils.INSTANCE.run(getVersion());
 		PrepareDarkDeeds.andContinue();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
@@ -84,6 +86,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 	}
+
+    public String getVersion() {
+        return Global.getSettings().getModManager().getModSpec("knights_of_ludd").getVersion();
+    }
 
 	@Override
 	public void onNewGame() {

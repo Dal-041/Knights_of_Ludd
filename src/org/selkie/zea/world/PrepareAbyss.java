@@ -23,6 +23,9 @@ import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.listeners.TrackFleet;
 import org.selkie.zea.terrain.AbyssCorona;
 import org.selkie.zea.terrain.AbyssEventHorizon;
+import org.selkie.zea.terrain.AbyssSea.AbyssSeaWarnTerrain;
+import org.selkie.zea.terrain.AbyssSea.AbyssSeaWave;
+import org.selkie.zea.terrain.AbyssSea.AbyssSeaWaveManager;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
@@ -409,15 +412,7 @@ public class PrepareAbyss {
 						1f)
 		);
 
-		SectorEntityToken lunaBeam1 = system.addTerrain(ZeaTerrain.ZEA_SEA_WAVE,
-				new AbyssCorona.CoronaParams(50000,
-						2500,
-						luna,
-						25f,
-						1f,
-						10f)
-		);
-		lunaBeam1.setCircularOrbit(luna, (float)Math.random()*360, 0, 19);
+        addLunaSeaWaves(luna, system);
 
 		//system.generateAnchorIfNeeded();
 		JumpPointAPI jumpPoint = Global.getFactory().createJumpPoint(ZeaEntities.ZEA_LUNASEA_JP, "Second Trial");
@@ -489,6 +484,26 @@ public class PrepareAbyss {
 		system.addScript(fleets);
 		system.addScript(fleetsMiniboss);
 	}
+
+    public static void addLunaSeaWaves(PlanetAPI luna, StarSystemAPI system) {
+        AbyssSeaWaveManager.AbyssSeaWaveManagerParams params = new AbyssSeaWaveManager.AbyssSeaWaveManagerParams();
+        AbyssSeaWaveManager manager = AbyssSeaWaveManager.Companion.addToObject(luna, params);
+
+        RingParams warnParams = new RingParams(
+                AbyssSeaWaveManager.MAX_RANGE,
+                0f,
+                luna,
+                system.getName()
+        );
+        CampaignTerrainAPI warnTerrain = (CampaignTerrainAPI) system.addTerrain(
+                ZeaTerrain.ZEA_SEA_WAVE_WARNING,
+                warnParams
+        );
+        AbyssSeaWarnTerrain warnTerrainPlugin = (AbyssSeaWarnTerrain) warnTerrain.getPlugin();
+        warnTerrainPlugin.manager = manager;
+
+        Global.getSector().getMemoryWithoutUpdate().set("$KOL_didLunaSeaWaveGen", true);
+    }
 
 	public static void generateDynamicDuskHole() {
 		//Variable location
