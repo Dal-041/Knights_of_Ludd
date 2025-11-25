@@ -448,7 +448,7 @@ public class NinmahBoss extends BaseHullMod {
                 // Ship is both in range, and has enough free flux to attack
                 else {
                     // phase if soft-venting or recharging, but only if not trying to maximize dps right this second
-                    boolean maximiseDPS = ((target.getFluxTracker().isOverloaded() && target.getFluxTracker().getOverloadTimeRemaining() < 0.5f) || ship.getSystem().isActive()) && softFluxLevel < 0.99f;
+                    boolean maximiseDPS = ((target.getFluxTracker().isOverloaded() && target.getFluxTracker().getOverloadTimeRemaining() < 0.5f) || ((ship.getSystem()!=null)&&ship.getSystem().isActive())) && softFluxLevel < 0.99f;
                     if ((ventingSoftFlux || rechargeCharges) && !maximiseDPS) wantToPhase = true;
 
                     // if target is not overloaded, and the ship does not have a Quantum Disruptor that it can use, use normal in-range damage limits and calcs
