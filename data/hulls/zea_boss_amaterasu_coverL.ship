@@ -1,0 +1,33 @@
+{
+  "hullName": "Amaterasu Cover",
+  "hullId": "zea_boss_amaterasu_coverL",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/zea/ships/decos/zea_deco_edf_amaterasu_l.png",
+  "style": "ZEA_ELYSIAN_TECH",
+  "height": 104,
+  "width": 75,
+  "center": [56, 44],
+  "collisionRadius": 21.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 14.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "vastbulk",
+  ],
+  "weaponSlots": [],
+  "engineSlots": [
+    {
+      "location": [0, 0],
+      "length": 0,
+      "width": 0,
+      "angle": 180,
+      "contrailSize": 0,
+      "style": "zea_EDF_LT_NOGLOW"
+    }
+  ],
+  "bounds": [
+    9, -101.5,
+    21.5, -97.5,
+    16, -101
+  ]
+}

@@ -232,6 +232,7 @@ zea_boss_resonator2,WEAPON,"A missile potent in both damage and tracking that re
 zea_dusk_lrsr,WEAPON,"A reproduction of an even more awesome weapon, the emplaced long range shock repeater projects withering EMP bolts at targets.",,,
 zea_edf_locust_medium,WEAPON,A cut-down and integrated launcher for the classic locust. Together they are no less effective than the genuine article at fully saturating the battlefield with missiles.,,,
 zea_edf_harpoon_single,WEAPON,An emplaced harpoon missile launcher with autoloader.,,,
+zea_edf_aegis,WEAPON,"As a precursor to the Paladin point-defense system, AEGIS sports a reduced magazine size and capacitor regeneration, as well as drastically higher space requirements that prevent the systems use in conventional vessels. Despite these shortcomings, the weapon system remains a deadly threat to fighter pilots and missiles alike.",,,
 #,,,,,
 #Terrain,,,,,
 zea_asteroidBelt,TERRAIN,An orbital ring abundant with asteroids and dangers.,,,
@@ -285,6 +286,7 @@ zea_dusk_mine_strike,SHIP_SYSTEM,Teleports a heavy phase mine to the target area
 zea_dusk_displacer,SHIP_SYSTEM,Teleports the ship forward in the direction it's traveling. The system slowly builds up to three charges which can then be expended in short order.,Movement,Teleports the ship forward in the direction it's traveling. The system can store up to three charges at once.,
 zea_dawn_charge_drive,SHIP_SYSTEM,Temporarily engages a primary burn on the system travel drive of the ship. Provides a massive speed boost for a fixed time at the expense of being able to use shields.,Movement,Provides a massive speed boost at the expense of being unable to use shields.,
 zea_bullet_time_field,SHIP_SYSTEM,"Toggles a diffuse but wide advanced temporal field, reducing the timeflow of anything light enough. Microscopic ripples on the boundry of the field results in the apparent bending of straight line paths which cross into the field. Generates hard flux at a steady rate, and reduces strafing speed by half while active.",Movement,"Toggles a diffuse but wide advanced temporal field, reducing the timeflow of anything light enough. Microscopic ripples on the boundry of the field results in the apparent bending of straight line paths which cross into the field. Generates hard flux at a steady rate, and reduces strafing speed by half while active.",
+zea_edf_solar_tunnel,SHIP_SYSTEM,"Generates a stellar field around the ship, rapidly charging the coronal capacitors of nearby allies.",Special,"Generates a coronal field around the ship, rapidly charging the coronal capacitors of nearby allies.",
 #,,,,,
 #Ships,,,,,
 zea_dusk_ikiryo,SHIP,UNKNOWN ENTRY: Please register your Tri-Tachyon datapad to receive the latest news and updates.,Unidentified Vessel,"UNKNOWN ENTRY

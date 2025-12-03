@@ -6,7 +6,7 @@
   "style": "ZEA_ELYSIAN_TECH",
   "height": 60,
   "width": 40,
-  "center": [20, 25],
+  "center": [20, 35],
   "collisionRadius": 33.5,
   "shieldCenter": [0, -0],
   "shieldRadius": 36,
@@ -22,12 +22,12 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 180,
-      "locations": [5, -0]
+      "locations": [-5, -0]
     }
   ],
   "engineSlots": [
     {
-      "location": [-2.5, -0],
+      "location": [-12.5, -0],
       "length": 45,
       "width": 16,
       "angle": 180,
@@ -35,15 +35,15 @@
       "style": "zea_EDF_OMEGA"
     },
     {
-      "location": [7, -0],
+      "location": [-3, -0],
       "length": 42.5,
       "width": 33,
       "angle": 180,
       "contrailSize": 33,
-      "style": "HIGH_TECH"
+      "style": "ZEA_EDF_HTNG"
     },
     {
-      "location": [-2.5, 7.5],
+      "location": [-12.5, 7.5],
       "length": 45,
       "width": 16,
       "angle": 180,
@@ -51,7 +51,7 @@
       "style": "zea_EDF_OMEGA"
     },
     {
-      "location": [-2.5, -7.5],
+      "location": [-12.5, -7.5],
       "length": 45,
       "width": 16,
       "angle": -180,
@@ -60,13 +60,13 @@
     }
   ],
   "bounds": [
-    13, -16,
-    -3.5, -16,
-    -12, -9.5,
-    -15, -0,
-    -12, 9.5,
-    -3.5, 16,
-    13, 16,
-    32, -0
+    4.5, -17.5,
+    -14.5, -20.5,
+    -26.5, -13.5,
+    -38, 0,
+    -26.5, 13.5,
+    -14.5, 20.5,
+    4.5, 17.5,
+    15.5, 0
   ]
 }

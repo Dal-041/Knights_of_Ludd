@@ -119,7 +119,7 @@
 		"type":"GLOW",
 						
 		"glowSprite":"graphics/fx/engineglow32b.png",
-		"glowOutline":"graphics/fx/engineflame32b.png",
+		"glowOutline":"graphics/zea/fx/zea_edf_engineflame.png",
 		"omegaMode":true,
 		"glowSizeMult":1,
 		"glowAlternateColor":[50,50,255,255],
@@ -142,5 +142,18 @@
 		"glowSizeMult":0,
 		"glowAlternateColor":[50,50,255,0],
 		"engineColor":[150,50,255,0]
+	},
+	"ZEA_EDF_HTNG":{
+		"engineColor":[100,165,255,255],
+		"contrailParticleSizeMult":4,
+		"contrailParticleDuration":1,
+		"contrailParticleFinalSizeMult":2.5,
+		"contrailMaxSpeedMult":0.5f,
+		"contrailAngularVelocityMult":0f,
+		"contrailColor":[100,165,255,25],
+		"contrailCampaignColor":[100,165,255,75],
+		"type":"GLOW",
+		"glowSizeMult":0,
+		"glowAlternateColor":[69,69,69,0],
 	},
 }

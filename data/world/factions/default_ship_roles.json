@@ -85,6 +85,9 @@
 		"zea_dusk_furaribi_Discordant":50,
 		"zea_edf_suzaku_Attack_Bomber":40,
 		"zea_edf_suzaku_Lancer":40,
+		"zea_edf_toyotama_Sun":20,
+		"zea_edf_toyotama_Star":20,
+		"zea_edf_toyotama_Support":15,
 	},
 	"combatSmall":{
 		"kol_protea_Brawler":0.5,
@@ -100,7 +103,8 @@
 		"zea_dusk_onibi_Wild":5,
 		"zea_edf_wani_Attack":10,
 		"zea_edf_wani_Harasser":10,
-		"zea_edf_toyotama_Sun":10,
+		"zea_edf_raiju_Shieldbreaker":6,
+		"zea_edf_raiju_Standoff":6,
 	},
 	"combatSmallForSmallFleet":{
 		"kol_protea_Squire":1,
@@ -117,5 +121,7 @@
 		"zea_dusk_onibi_Wild":20,
 		"zea_edf_wani_Attack":10,
 		"zea_edf_wani_Harasser":10,
+		"zea_edf_raiju_Shieldbreaker":6,
+		"zea_edf_raiju_Standoff":6,
 	},
 }
