@@ -9,8 +9,18 @@
 
     "flameoutOnImpactChance":0,
 
-	"useSound":"system_burn_drive_deactivate",
+	"useSound":"zea_elysian_amasys_sfx",
     "outOfUsesSound":"engine_disabled",
+	
+	#"jitterUnderColor":[255,255,255,55],
+	#"jitterUnderCopies":20,
+	"jitterUnderRange":0.1,
+	"jitterUnderRangeRadiusFraction":.15,
+	
+	"jitterColor":[255,0,0,75],
+	"jitterCopies":2,
+	"jitterRange":0,
+	"jitterRangeRadiusFraction":0.1,
 
     "aiHints":{
 		"activeSpeedIncrease":200,

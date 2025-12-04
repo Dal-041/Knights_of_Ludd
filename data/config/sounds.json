@@ -77,6 +77,9 @@
 	"zea_elysian_minijump_deactivate":[ 
 		{"file":"sounds/sfx_systems/Belks_Plasma_Flare_Drive_Start.ogg","pitch":1.05,"volume":0.55},
 	],
+	"zea_elysian_amasys_sfx":[ 
+		{"file":"sounds/sfx_systems/burn_drive_deactivate.ogg","pitch":1.35,"volume":0.6},
+	],
 	"kol_lunete_fire":
 	[
 		{"file":"sounds/sfx_wpn_energy/tachyon_lance_fire_01.ogg","pitch":1,"volume":1.0},
