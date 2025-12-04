@@ -2,7 +2,7 @@
 	"id":"zea_elysians",
     "color":[208,0,0,255],
     "secondaryUIColor":[255,253,222,255],
-	"secondarySegments":8,
+	"secondarySegments":7,
 	
 	"baseUIColor":[255,253,222,255],
 	"darkUIColor":[32,0,32,175],

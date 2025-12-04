@@ -158,8 +158,6 @@ zea_deco_dawn_engM,hardpoint,,0.5,normal,graphics/kol/maps/weapon_normals/decos/
 zea_deco_dawn_engM,turret,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_dawn_engM_normal.png
 zea_deco_edf_engL,hardpoint,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_deco_edf_engL_normal.png
 zea_deco_edf_engL,turret,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_deco_edf_engL_normal.png
-zea_deco_edf_engL2,hardpoint,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_deco_edf_engL2_normal.png
-zea_deco_edf_engL2,turret,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_deco_edf_engL2_normal.png
 zea_deco_edf_engS,hardpoint,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_deco_edf_engS_normal.png
 zea_deco_edf_engS,turret,,0.5,normal,graphics/kol/maps/weapon_normals/decos/zea_deco_edf_engS_normal.png
 zea_deco_edf_wani_ml,hardpoint,,0.5,normal,graphics/kol/maps/ship_normals/decos/zea_deco_edf_wani_ml_normal.png

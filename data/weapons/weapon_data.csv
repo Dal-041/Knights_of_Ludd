@@ -318,7 +318,6 @@ mdCap,zea_deco_dawn_engM,0,,,1,110,,,,70,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, 
 ,zea_deco_boss_yukionna_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
 lgCapAma,zea_deco_edf_amaterasu_dummy_eng,0,,,100,85,,,,55,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 lgCap,zea_deco_edf_engL,0,,,1,120,,,,45,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
-lgCap,zea_deco_edf_engL2,0,,,1,120,,,,45,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 sCap,zea_deco_edf_engS,0,,,1,120,,,,55,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 l,zea_deco_edf_corruptingheart_l,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 r,zea_deco_edf_corruptingheart_r,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,

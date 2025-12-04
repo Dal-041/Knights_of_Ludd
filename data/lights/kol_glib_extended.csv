@@ -163,8 +163,6 @@ zea_deco_dawn_engM,hardpoint,,,material,graphics/maps/weapon_glib/decos/zea_dawn
 zea_deco_dawn_engM,turret,,,material,graphics/maps/weapon_glib/decos/zea_dawn_engM_material.png
 zea_deco_edf_engL,hardpoint,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engL_material.png
 zea_deco_edf_engL,turret,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engL_material.png
-zea_deco_edf_engL2,hardpoint,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engL2_material.png
-zea_deco_edf_engL2,turret,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engL2_material.png
 zea_deco_edf_engS,hardpoint,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_material.png
 zea_deco_edf_engS,turret,,,material,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_material.png
 zea_deco_edf_wani_ml,hardpoint,,,material,graphics/maps/ship_glib/decos/zea_deco_edf_wani_ml_material.png
@@ -320,8 +318,6 @@ zea_deco_dawn_engM,hardpoint,,,surface,graphics/maps/weapon_glib/decos/zea_dawn_
 zea_deco_dawn_engM,turret,,,surface,graphics/maps/weapon_glib/decos/zea_dawn_engM_surface.png
 zea_deco_edf_engL,hardpoint,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engL_surface.png
 zea_deco_edf_engL,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engL_surface.png
-zea_deco_edf_engL2,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engL2_surface.png
-zea_deco_edf_engL2,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engL2_surface.png
 zea_deco_edf_engS,hardpoint,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_surface.png
 zea_deco_edf_engS,turret,,,surface,graphics/maps/weapon_glib/decos/zea_deco_edf_engS_surface.png
 zea_deco_edf_wani_ml,hardpoint,,,surface,graphics/maps/ship_glib/decos/zea_deco_edf_wani_ml_surface.png

@@ -33,8 +33,8 @@
     "WS0025": "zea_deco_edf_mizuchi_lights",
     "WS0026": "zea_deco_edf_mizuchi_tl",
     "WS0027": "zea_deco_edf_mizuchi_tr",
-    "WS0028": "zea_deco_edf_engL2",
-    "WS0029": "zea_deco_edf_engL2"
+    "WS0028": "zea_deco_edf_engL",
+    "WS0029": "zea_deco_edf_engL"
   },
   "weaponSlots": [
     {

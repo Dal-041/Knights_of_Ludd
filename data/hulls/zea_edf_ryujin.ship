@@ -24,8 +24,8 @@
   ],
   "builtInWeapons": {
     "WS0006": "zea_deco_edf_ryujin_lights",
-    "WS0012": "zea_deco_edf_engL2",
-    "WS0013": "zea_deco_edf_engL2",
+    "WS0012": "zea_deco_edf_engL",
+    "WS0013": "zea_deco_edf_engL",
     "WS0014": "kol_blinker_red",
     "WS0015": "kol_blinker_green",
     "WS0017": "kol_blinker_white30",

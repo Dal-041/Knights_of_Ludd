@@ -35,8 +35,8 @@
     "WS0019": "zea_deco_edf_raiju_ll",
     "WS0020": "kol_blinker_red",
     "WS0021": "kol_blinker_green",
-    "WS0022": "zea_deco_edf_engL2",
-    "WS0023": "zea_deco_edf_engL2"
+    "WS0022": "zea_deco_edf_engL",
+    "WS0023": "zea_deco_edf_engL"
   },
   "weaponSlots": [
     {
