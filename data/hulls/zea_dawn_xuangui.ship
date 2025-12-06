@@ -65,7 +65,7 @@
       "width": 26.15,
       "angle": 180,
       "contrailSize": 26.15,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-52, -26.5],
@@ -74,7 +74,7 @@
       "angle": -180,
       "contrailSize": 26.15,
       "style": "CUSTOM",
-      "styleId": "KOL_ENG"
+      "styleId": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-60, 26.5],
@@ -101,7 +101,7 @@
       "angle": 180,
       "contrailSize": 26.15,
       "style": "CUSTOM",
-      "styleId": "KOL_ENG"
+      "styleId": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-67.5, 0],

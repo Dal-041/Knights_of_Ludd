@@ -439,7 +439,15 @@
 			"zea_boss_amaterasu_thruster_droneL" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_thruster_droneL_paperdoll.png",
 			"zea_boss_amaterasu_coverL" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_coverL_paperdoll.png",
 			"zea_boss_amaterasu_coverR" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_coverR_paperdoll.png"
-		}
+		},
+		"fighterSkinsPlayerAndNPC":{
+			"spark_ZEA_ELYSIAN_TECH":"graphics/zea/ships/fighters/zea_spark_elysia.png",
+			"lux_ZEA_ELYSIAN_TECH":"graphics/zea/ships/fighters/zea_lux_elysia.png",
+			"flash_ZEA_ELYSIAN_TECH":"graphics/zea/ships/fighters/zea_flare_elysia.png",
+			"spark_ZEA_DAWN_TECH":"graphics/zea/ships/fighters/zea_spark_dawn.png",
+			"lux_ZEA_DAWN_TECH":"graphics/zea/ships/fighters/zea_lux_dawn.png",
+			"flash_ZEA_DAWN_TECH":"graphics/zea/ships/fighters/zea_flare_dawn.png",
+		},
 	},
 	"designTypeColors":{
 		"Knights of Ludd":[25,115,10,255],

@@ -10,7 +10,9 @@
 	"loopSound":"zea_elysian_corr_loop",
 	"deactivateSound":"",
 	"outOfUsesSound":"gun_out_of_ammo",
-	
+
+	"engineGlowLengthMult":0.35,
+
 	"aiHints":{
 	}
 }

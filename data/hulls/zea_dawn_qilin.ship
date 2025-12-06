@@ -148,7 +148,7 @@
       "width": 30,
       "angle": 180,
       "contrailSize": 30,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-153, -37],
@@ -156,7 +156,7 @@
       "width": 30,
       "angle": -180,
       "contrailSize": 30,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-112, 72],
@@ -164,7 +164,7 @@
       "width": 30,
       "angle": 180,
       "contrailSize": 30,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-112, -72],
@@ -172,7 +172,7 @@
       "width": 30,
       "angle": -180,
       "contrailSize": 30,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-120, 72],

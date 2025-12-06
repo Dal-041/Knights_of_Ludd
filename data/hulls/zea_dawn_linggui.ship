@@ -134,7 +134,7 @@
       "width": 23,
       "angle": 180,
       "contrailSize": 23,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-80, -36],
@@ -142,7 +142,7 @@
       "width": 23,
       "angle": -180,
       "contrailSize": 23,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-98, 54],
@@ -150,7 +150,7 @@
       "width": 15,
       "angle": 170,
       "contrailSize": 15,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-98, -54],
@@ -158,7 +158,7 @@
       "width": 15,
       "angle": -170,
       "contrailSize": 15,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-55, 81],
@@ -166,7 +166,7 @@
       "width": 15,
       "angle": 138,
       "contrailSize": 15,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-55, -81],
@@ -174,7 +174,7 @@
       "width": 15,
       "angle": -138,
       "contrailSize": 15,
-      "style": "KOL_ENG"
+      "style": "ZEA_DAWN_ENG_B"
     },
     {
       "location": [-59.5, 85],
