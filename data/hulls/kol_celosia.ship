@@ -1,0 +1,287 @@
+{
+  "hullName": "Celosia",
+  "hullId": "kol_celosia",
+  "hullSize": "CRUISER",
+  "spriteName": "graphics/kol/ships/kol_celosia.png",
+  "style": "KOL_TECH",
+  "height": 200,
+  "width": 230,
+  "center": [115, 109],
+  "collisionRadius": 146,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 126.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "kol_refit",
+    "armoredweapons",
+    "rugged"
+  ],
+  "builtInWeapons": {
+    "AI_FIXER_LEFT_0": "kol_alysse_ai_fixer",
+    "AI_FIXER_LEFT_1": "kol_alysse_ai_fixer",
+    "AI_FIXER_LEFT_2": "kol_alysse_ai_fixer",
+    "AI_FIXER_RIGHT_0": "kol_alysse_ai_fixer",
+    "AI_FIXER_RIGHT_1": "kol_alysse_ai_fixer",
+    "AI_FIXER_RIGHT_2": "kol_alysse_ai_fixer",
+    "PUSHER_PLATE": "kol_pusherplate_lt_but_cute"
+  },
+  "weaponSlots": [
+    {
+      "id": "PUSHER_PLATE",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-128, 41]
+    },
+    {
+      "id": "ORION_BOMB",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-74.5, 44.5]
+    },
+    {
+      "id": "AI_FIXER_LEFT_0",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": 75,
+      "locations": [0, -0]
+    },
+    {
+      "id": "AI_FIXER_LEFT_1",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": 75,
+      "locations": [0, 0]
+    },
+    {
+      "id": "AI_FIXER_LEFT_2",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": 75,
+      "locations": [0, -0]
+    },
+    {
+      "id": "AI_FIXER_RIGHT_0",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": -75,
+      "locations": [0, 0]
+    },
+    {
+      "id": "AI_FIXER_RIGHT_1",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": -75,
+      "locations": [0, -0]
+    },
+    {
+      "id": "AI_FIXER_RIGHT_2",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 90,
+      "angle": -75,
+      "locations": [0, -0]
+    },
+    {
+      "id": "WS0012",
+      "size": "LARGE",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [117.5, 88]
+    },
+    {
+      "id": "WS0013",
+      "size": "LARGE",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [117.5, -88]
+    },
+    {
+      "id": "WS0014",
+      "size": "LARGE",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-146, 98.5]
+    },
+    {
+      "id": "WS0015",
+      "size": "LARGE",
+      "type": "STATION_MODULE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-146, -98.5]
+    },
+    {
+      "id": "WS0005",
+      "size": "LARGE",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 45,
+      "locations": [15, 60]
+    },
+    {
+      "id": "WS0006",
+      "size": "LARGE",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -45,
+      "locations": [15, -60]
+    },
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 30,
+      "locations": [51, 24]
+    },
+    {
+      "id": "WS0002",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -30,
+      "locations": [51, -24]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "BALLISTIC",
+      "mount": "TURRET",
+      "arc": 235,
+      "angle": 0,
+      "locations": [17, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-75, -0],
+      "length": 72,
+      "width": 26,
+      "angle": 180,
+      "contrailSize": 26,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-80.5, -0],
+      "length": 84,
+      "width": 20,
+      "angle": 180,
+      "contrailSize": 20,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-80.5, 25],
+      "length": 45,
+      "width": 16,
+      "angle": 172.5,
+      "contrailSize": 16,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-80.5, -25],
+      "length": 45,
+      "width": 16,
+      "angle": -172.5,
+      "contrailSize": 16,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-85, 26],
+      "length": 59.747746,
+      "width": 11.697363,
+      "angle": 172.5,
+      "contrailSize": 11.697363,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-85, -26],
+      "length": 59.747746,
+      "width": 11.697363,
+      "angle": -172.5,
+      "contrailSize": 11.697363,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-55, 71.5],
+      "length": 45,
+      "width": 16,
+      "angle": 172.5,
+      "contrailSize": 16,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-55, -71.5],
+      "length": 45,
+      "width": 16,
+      "angle": -172.5,
+      "contrailSize": 16,
+      "style": "LOW_TECH"
+    },
+    {
+      "location": [-61, 72.5],
+      "length": 59.747746,
+      "width": 11.697363,
+      "angle": 172.5,
+      "contrailSize": 11.697363,
+      "style": "KOL_ENG"
+    },
+    {
+      "location": [-61, -72.5],
+      "length": 59.747746,
+      "width": 11.697363,
+      "angle": -172.5,
+      "contrailSize": 11.697363,
+      "style": "KOL_ENG"
+    }
+  ],
+  "bounds": [
+    82, -13,
+    46, -42.5,
+    15.5, -103.5,
+    -56, -75,
+    -56, -65,
+    -50, -56,
+    -50.5, -35.5,
+    -80, -28,
+    -81.5, -22,
+    -97, -10.5,
+    -97, 10.5,
+    -81.5, 22,
+    -80, 28,
+    -50.5, 35.5,
+    -50, 56,
+    -56, 65,
+    -56, 75,
+    15.5, 103.5,
+    46, 42.5,
+    82, 13
+  ]
+}

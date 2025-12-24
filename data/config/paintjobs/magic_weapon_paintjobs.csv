@@ -3,3 +3,12 @@ kol_deco_snowdrop_tl_pirate,Pirate,kol_deco_snowdrop_tl,graphics/kol/ships/decos
 kol_deco_snowdrop_tr_pirate,Pirate,kol_deco_snowdrop_tr,graphics/kol/ships/decos/kol_deco_snowdrop_tr.png -> graphics/kol/paintjobs/decos/kol_deco_snowdrop_tr_pirate.png
 kol_deco_alysse_ll_pirate,Pirate,kol_deco_alysse_ll,graphics/kol/ships/decos/kol_deco_alysse_ll.png -> graphics/kol/paintjobs/decos/kol_deco_alysse_ll_pirate.png
 kol_deco_alysse_lr_pirate,Pirate,kol_deco_alysse_lr,graphics/kol/ships/decos/kol_deco_alysse_lr.png -> graphics/kol/paintjobs/decos/kol_deco_alysse_lr_pirate.png
+zea_deco_indomitable_ml,Elysia,eis_deco_indomitable_ml,graphics/ships/decos/eis_deco_indomitable_ml.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_ml.png
+zea_deco_indomitable_mr,Elysia,eis_deco_indomitable_mr,graphics/ships/decos/eis_deco_indomitable_mr.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_mr.png
+zea_deco_indomitable_mls,Elysia,eis_deco_indomitable_mls,graphics/ships/decos/eis_deco_indomitable_mls.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_mls.png
+zea_deco_indomitable_mrs,Elysia,eis_deco_indomitable_mrs,graphics/ships/decos/eis_deco_indomitable_mrs.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_mrs.png
+zea_deco_indomitable_tl,Elysia,eis_deco_indomitable_tl,graphics/ships/decos/eis_deco_indomitable_tl.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_tl.png
+zea_deco_indomitable_tr,Elysia,eis_deco_indomitable_tr,graphics/ships/decos/eis_deco_indomitable_tr.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_tr.png
+zea_deco_vengeance_front,Elysia,eis_deco_vengeance_front,graphics/ships/decos/eis_vengeance_front.png -> graphics/zea/paintjobs/decos/zea_deco_vengeance_front.png
+zea_deco_audacious_front,Elysia,eis_deco_audacious_front,graphics/ships/decos/eis_audacious_front.png -> graphics/zea/paintjobs/decos/zea_deco_audacious_front.png
+zea_courageous_front,Elysia,eis_deco_courageous_front,graphics/ships/decos/eis_courageous_front.png -> graphics/zea/paintjobs/decos/zea_courageous_front.png
