@@ -1,0 +1,19 @@
+{
+  "variantId": "kol_celosia_Knight",
+  "hullId": "kol_celosia",
+  "displayName": "Knight",
+  "goalVariant": true,
+  "fluxCapacitors": 0,
+  "fluxVents": 0,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [],
+  "weaponGroups": [],
+    "modules": [
+        {"ARMOR_MODULE_TL": "kol_celosia_tl_Standard"},
+        {"ARMOR_MODULE_TR": "kol_celosia_tr_Standard"},
+        {"ARMOR_MODULE_LL": "kol_celosia_ll_Standard"},
+        {"ARMOR_MODULE_LR": "kol_celosia_lr_Standard"},
+    ],
+  "wings": []
+}

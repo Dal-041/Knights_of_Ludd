@@ -1,0 +1,33 @@
+{
+  "hullName": "Armo",
+  "hullId": "kol_celosia_ll",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/kol/ships/modules/kol_celosia_ll.png",
+  "style": "KOL_TECH",
+  "height": 108,
+  "width": 44,
+  "center": [22, 54],
+  "collisionRadius": 64,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 60.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 90,
+      "locations": [27.5, 3.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -54, 12,
+    -39, 21.5,
+    53, -2.5,
+    49.5, -17,
+    -12, -15
+  ]
+}

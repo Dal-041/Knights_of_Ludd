@@ -1,0 +1,39 @@
+{
+  "hullName": "Armor",
+  "hullId": "kol_celosia_tr",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/kol/ships/modules/kol_celosia_tr.png",
+  "style": "KOL_TECH",
+  "height": 86,
+  "width": 94,
+  "center": [47, 43],
+  "collisionRadius": 64,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 62,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -15,
+      "locations": [40.5, 35.5]
+    }
+  ],
+  "engineSlots": [],
+  "bounds": [
+    -41, -26,
+    -11, 6,
+    -11.5, 14.5,
+    -1, 25.5,
+    6.5, 26,
+    16.5, 42.5,
+    34.5, 46,
+    43, 38,
+    3, -30,
+    -16.5, -46,
+    -36, -46.5
+  ]
+}
