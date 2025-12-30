@@ -11,6 +11,13 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 60.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "kol_module",
+    "ablative_armor",
+    "no_weapon_flux",
+    "reduced_explosion",
+    "always_detaches"
+  ],
   "weaponSlots": [
     {
       "id": "WS0001",
