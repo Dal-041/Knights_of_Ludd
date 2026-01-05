@@ -23,8 +23,8 @@
     "AI_FIXER_RIGHT_0": "kol_alysse_ai_fixer",
     "AI_FIXER_RIGHT_1": "kol_alysse_ai_fixer",
     "AI_FIXER_RIGHT_2": "kol_alysse_ai_fixer",
-    "WS0008": "kol_pusherplate_lt_but_cute",
-    "WS0009": "kol_pusherplate_lt_but_cute",
+    "WS0008": "kol_pusherplate_lt_but_cuter",
+    "WS0009": "kol_pusherplate_lt_but_cuter",
     "WS0013": "kol_blinker_white30",
     "WS0014": "kol_blinker_white30",
     "WS0015": "kol_blinker_white",
@@ -32,7 +32,11 @@
     "WS0017": "kol_blinker_white",
     "WS0018": "kol_blinker_white",
     "WS0019": "kol_blinker_white30",
-    "WS0020": "kol_blinker_white30"
+    "WS0020": "kol_blinker_white30",
+    "WS0021": "kol_deco_celosia_ll",
+    "WS0022": "kol_deco_celosia_lr",
+    "WS0023": "kol_deco_celosia_ll2",
+    "WS0024": "kol_deco_celosia_lr2"
   },
   "weaponSlots": [
     {
@@ -159,7 +163,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 180,
-      "locations": [-54, 44.5]
+      "locations": [-58.5, 45]
     },
     {
       "id": "WS0007",
@@ -168,7 +172,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -180,
-      "locations": [-54, -44.5]
+      "locations": [-58.5, -45]
     },
     {
       "id": "WS0008",
@@ -177,7 +181,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 180,
-      "locations": [-54, -45]
+      "locations": [-51, -45]
     },
     {
       "id": "WS0009",
@@ -186,7 +190,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -180,
-      "locations": [-54, 45]
+      "locations": [-51, 45]
     },
     {
       "id": "WS0005",
@@ -231,7 +235,7 @@
       "mount": "TURRET",
       "arc": 7,
       "angle": 0,
-      "locations": [68, -0]
+      "locations": [70, -0]
     },
     {
       "id": "WS0013",
@@ -304,6 +308,42 @@
       "arc": 0,
       "angle": -0,
       "locations": [4.5, -33.5]
+    },
+    {
+      "id": "WS0021",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-55, 23]
+    },
+    {
+      "id": "WS0022",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-55, -23]
+    },
+    {
+      "id": "WS0023",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-35, 62]
+    },
+    {
+      "id": "WS0024",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-35, -62]
     }
   ],
   "engineSlots": [

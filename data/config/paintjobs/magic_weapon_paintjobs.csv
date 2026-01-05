@@ -1,6 +1,10 @@
 id,paintjobFamilies,weaponIds,spriteMap
 kol_deco_snowdrop_tl_pirate,Pirate,kol_deco_snowdrop_tl,graphics/kol/ships/decos/kol_deco_snowdrop_tl.png -> graphics/kol/paintjobs/decos/kol_deco_snowdrop_tl_pirate.png
 kol_deco_snowdrop_tr_pirate,Pirate,kol_deco_snowdrop_tr,graphics/kol/ships/decos/kol_deco_snowdrop_tr.png -> graphics/kol/paintjobs/decos/kol_deco_snowdrop_tr_pirate.png
+kol_deco_celosia_ll_pirate,Pirate,kol_deco_celosia_ll,graphics/kol/ships/decos/kol_deco_celosia_ll.png -> graphics/kol/paintjobs/decos/kol_deco_celosia_ll_pirate.png
+kol_deco_celosia_ll2_pirate,Pirate,kol_deco_celosia_ll2,graphics/kol/ships/decos/kol_deco_celosia_ll2.png -> graphics/kol/paintjobs/decos/kol_deco_celosia_ll2_pirate.png
+kol_deco_celosia_lr_pirate,Pirate,kol_deco_celosia_lr,graphics/kol/ships/decos/kol_deco_celosia_lr.png -> graphics/kol/paintjobs/decos/kol_deco_celosia_lr_pirate.png
+kol_deco_celosia_lr2_pirate,Pirate,kol_deco_celosia_lr2,graphics/kol/ships/decos/kol_deco_celosia_lr2.png -> graphics/kol/paintjobs/decos/kol_deco_celosia_lr2_pirate.png
 kol_deco_alysse_ll_pirate,Pirate,kol_deco_alysse_ll,graphics/kol/ships/decos/kol_deco_alysse_ll.png -> graphics/kol/paintjobs/decos/kol_deco_alysse_ll_pirate.png
 kol_deco_alysse_lr_pirate,Pirate,kol_deco_alysse_lr,graphics/kol/ships/decos/kol_deco_alysse_lr.png -> graphics/kol/paintjobs/decos/kol_deco_alysse_lr_pirate.png
 zea_deco_indomitable_ml,Elysia,eis_deco_indomitable_ml,graphics/ships/decos/eis_deco_indomitable_ml.png -> graphics/zea/paintjobs/decos/zea_deco_indomitable_ml.png
