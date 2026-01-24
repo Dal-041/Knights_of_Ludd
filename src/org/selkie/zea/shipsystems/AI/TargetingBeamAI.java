@@ -19,10 +19,12 @@ public class TargetingBeamAI implements ShipSystemAIScript {
 
     @Override
     public void init(ShipAPI ship, ShipSystemAPI system, ShipwideAIFlags flags, CombatEngineAPI engine) {
+        this.ship = ship;
     }
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
+        if (ship == null) return;
         ShipAPI bestTarget = null;
         if(ship.getShipAI() != null)
             ship.getShipAI().getConfig().personalityOverride = Personalities.CAUTIOUS; // force AI to be CAUTIOUS
