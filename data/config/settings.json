@@ -348,7 +348,8 @@
 			"zea_pinwheel_nebula":"graphics/zea/terrain/pinwheel_nebula.png",
 			"zea_pinwheel_nebula_big":"graphics/zea/terrain/pinwheel_nebula_big.png",
 			"zea_flower_nebula_cut":"graphics/zea/terrain/flower_nebula_cut.png",
-			"zea_flower_nebula_layer2":"graphics/zea/terrain/flower_nebula_layer2.png"
+			"zea_flower_nebula_layer2":"graphics/zea/terrain/flower_nebula_layer2.png",
+			"zea_nebula_fingers":"graphics/zea/terrain/zea_nebula_fingers.png",
 		},
 		"characters":{
 			"kol_grandmaster":"graphics/kol/portraits/kol_grandmaster.png",

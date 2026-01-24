@@ -42,6 +42,7 @@ import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerat
 import static org.selkie.zea.helpers.ZeaStaticStrings.*;
 import static org.selkie.zea.helpers.ZeaUtils.checkAbyssalFleets;
 import static org.selkie.zea.helpers.ZeaUtils.copyHighgradeEquipment;
+import static org.selkie.zea.world.PrepareShadows.GenerateOzymandias;
 
 public class PrepareAbyss {
 
@@ -53,6 +54,7 @@ public class PrepareAbyss {
     	GenerateElysia();
     	GenerateUnderworld();
     	GenerateLunaSea();
+		GenerateOzymandias();
 		generateDynamicDuskHole();
 		generateDynamicDuskHole();
 		generateDynamicDuskHole();
@@ -397,6 +399,8 @@ public class PrepareAbyss {
 		system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
 
 		PlanetAPI luna = system.initStar(ZeaEntities.ZEA_LUNASEA_STAR, StarTypes.BLUE_SUPERGIANT, 2500, 54500, -42100, 0);
+		system.setType(StarSystemType.SINGLE);
+
 		if (Global.getSector().getDifficulty().equals(Difficulties.EASY)) {
 			luna.setName("The Luwuna Sea");
 		}
@@ -538,6 +542,7 @@ public class PrepareAbyss {
 		ProcgenUsedNames.notifyUsed(system.getBaseName());
 		sing.getSpec().setBlackHole(false); //Avoid fleet weirdness
 		sing.applySpecChanges();
+		system.setType(StarSystemType.SINGLE); //Does nothing? Does something? The obf can decide.
 
 		SectorEntityToken horizon1 = system.addTerrain(ZeaTerrain.ZEA_EVENT_HORIZON, new AbyssEventHorizon.CoronaParams(
 				1000,

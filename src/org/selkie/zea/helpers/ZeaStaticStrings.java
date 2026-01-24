@@ -51,6 +51,7 @@ public class ZeaStaticStrings {
         public static final String ZEA_ELYSIA_SILENCE = "zea_elysia_silence";
         public static final String ZEA_NULLSPACE_VOID = "zea_nullspace_void";
         public static final String ZEA_LUNASEA_STAR = "zea_lunasea_star";
+        public static final String ZEA_OZYMANDIAS_STAR = "zea_ozymandias_star";
 
         public static final String ZEA_LUNASEA_PLANET_ONE = "zea_lunasea_one";
         public static final String ZEA_LUNASEA_PLANET_TWO = "zea_lunasea_two";
@@ -60,12 +61,18 @@ public class ZeaStaticStrings {
         public static final String ZEA_LUNASEA_PLANET_SIX = "zea_lunasea_six";
         public static final String ZEA_SEA_WAVE_EXPLOSION = "zea_wave_explosion";
 
+        public static final String ZEA_OZYMANDIAS_PLANET_ONE = "zea_ozy_one";
+        public static final String ZEA_OZYMANDIAS_PLANET_TWO = "zea_ozy_two";
+        public static final String ZEA_OZYMANDIAS_PLANET_THREE = "zea_ozy_three";
+        public static final String ZEA_OZYMANDIAS_PLANET_FOUR = "zea_ozy_four";
+
         public static final String ZEA_ELYSIA_PLANET_ONE = "zea_elysia_asclepius";
         public static final String ZEA_ELYSIA_PLANET_TWO = "zea_elysia_appia";
         public static final String ZEA_ELYSIA_PLANET_THREE = "zea_elysia_orpheus";
 
         public static final String ZEA_ELYSIA_ABYSS = "zea_elysia_abyss";
         public static final String ZEA_ELYSIA_GAZE = "zea_elysia_gaze";
+
         public static final String ZEA_TT_3_SITE_PLANET = "zea_site_three";
 
         public static final String ZEA_EDF_CORONAL_TAP = "zea_edf_coronal_tap";
@@ -202,7 +209,7 @@ public class ZeaStaticStrings {
         public static final String SHOW_FLEET_INFO = "showFleetInfo";
     }
 
-    // planets
+    // Missing vanilla planet IDs
     public static final String TOXIC = "toxic";
     public static final String JUNGLE = "jungle";
 
@@ -224,6 +231,7 @@ public class ZeaStaticStrings {
 
     // theme
     public static final String THEME_ZEA = "theme_zea";
+    public static final String THEME_ZEA_MINOR = "theme_zea_minor";
     public static final String THEME_STORM = "theme_zea_storm";
 
     // all boss core strings
@@ -287,10 +295,12 @@ public class ZeaStaticStrings {
     public static final String nullspaceSysName = "Nullspace";
     public static final String lunaSeaSysName = "The Luna Sea";
     public static final String elysiaSysName = "Elysia";
+    public static final String ozymandiasSysName = "Ozymandias";
     public static final String[] systemNames = {
         elysiaSysName,
         nullspaceSysName,
         lunaSeaSysName,
+            ozymandiasSysName,
         nbsSysPrefix,
     };
 
