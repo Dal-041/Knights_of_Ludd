@@ -216,6 +216,9 @@ public class ZeaFleetManager extends SeededFleetManager {
 
     @Override
     public boolean isDone() {
+        //if (ZeaSettings.BossTakesFactionWithThem == false) return false;
+        return false;
+        /*
         switch (fac) {
             case ZeaStaticStrings.dawnID:
                 return Global.getSector().getMemoryWithoutUpdate().contains(ZeaMemKeys.ZEA_DAWN_BOSS_DONE)
@@ -230,6 +233,7 @@ public class ZeaFleetManager extends SeededFleetManager {
                         && Global.getSector().getMemoryWithoutUpdate().getBoolean(ZeaMemKeys.ZEA_ELYSIAN_BOSS_2_DONE);
             default: return false;
         }
+         */
     }
 
     @Override

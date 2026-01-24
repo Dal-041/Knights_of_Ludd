@@ -3,7 +3,6 @@ package org.selkie.zea.terrain
 import com.fs.starfarer.api.campaign.SectorEntityToken
 import com.fs.starfarer.api.impl.campaign.terrain.RangeBlockerUtil
 import com.fs.starfarer.api.util.Misc
-import data.utilities.niko_MPC_ids
 import org.lazywizard.lazylib.MathUtils
 import kotlin.arrayOf
 import kotlin.collections.plus
