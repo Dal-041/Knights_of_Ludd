@@ -32,39 +32,39 @@
   "weaponSlots": [
     {
       "id": "WS0001",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "BALLISTIC",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [13.5, 25.5]
+      "locations": [10, 32]
     },
     {
       "id": "WS0002",
-      "size": "MEDIUM",
+      "size": "SMALL",
       "type": "BALLISTIC",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
-      "locations": [13.5, -25.5]
+      "locations": [10, -32]
     },
     {
       "id": "WS0003",
       "size": "SMALL",
-      "type": "COMPOSITE",
+      "type": "BALLISTIC",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [16, 46]
+      "locations": [10, 46]
     },
     {
       "id": "WS0004",
       "size": "SMALL",
-      "type": "COMPOSITE",
+      "type": "BALLISTIC",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": -0,
-      "locations": [16, -46]
+      "locations": [10, -46]
     },
     {
       "id": "WS0005",
@@ -97,7 +97,7 @@
       "id": "WS0008",
       "size": "LARGE",
       "type": "DECORATIVE",
-      "mount": "HARDPOINT",
+      "mount": "HIDDEN",
       "arc": 0,
       "angle": 0,
       "locations": [-2.5, -0]
@@ -154,7 +154,7 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": 0,
-      "locations": [1, 69]
+      "locations": [2.5, 49.5]
     },
     {
       "id": "WS0015",
@@ -163,7 +163,25 @@
       "mount": "TURRET",
       "arc": 0,
       "angle": -0,
-      "locations": [1, -69]
+      "locations": [2.5, -49.5]
+    },
+    {
+      "id": "WS0016",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [10, 19]
+    },
+    {
+      "id": "WS0017",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": -0,
+      "locations": [10, -19]
     }
   ],
   "engineSlots": [
