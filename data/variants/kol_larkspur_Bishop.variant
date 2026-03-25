@@ -1,55 +1,58 @@
 {
-    "displayName": "Bishop",
-    "fluxCapacitors": 5,
-    "fluxVents": 30,
-    "goalVariant": true,
-    "hullId": "kol_larkspur",
-    "hullMods": [
-        "fluxbreakers",
-        "heavyarmor",
-        "targetingunit",
-    ],
-    "permaMods": [],
-    "sMods": [],
-    "suppressedMods": [],
-    "variantId": "kol_larkspur_Bishop",
-    "weaponGroups": [
-        {
-            "autofire": false,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0001": "kol_llyr",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0007": "pilum",
-                "WS0008": "pilum",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0005": "heavyac",
-                "WS0004": "heavyac",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
-                "WS0003": "vulcan",
-                "WS0002": "flak",
-                "WS0006": "vulcan",
-            }
-        },
-    ],
-    "wings": [],
-    "modules": [
-        {"ARMOR_MODULE_TL": "kol_larkspur_tl_Bishop"},
-        {"ARMOR_MODULE_TR": "kol_larkspur_tr_Bishop"},
-    ],
+  "variantId": "kol_larkspur_Bishop",
+  "hullId": "kol_larkspur",
+  "displayName": "Bishop",
+  "goalVariant": true,
+  "fluxCapacitors": 5,
+  "fluxVents": 30,
+  "quality": 1,
+  "permaMods": [],
+  "hullMods": [
+    "fluxbreakers",
+    "heavyarmor",
+    "targetingunit"
+  ],
+  "weaponGroups": [
+    {
+      "autofire": false,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0001": "kol_llyr"
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0007": "pilum",
+        "WS0008": "pilum"
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0004": "heavyac",
+        "WS0005": "heavyac"
+      }
+    },
+    {
+      "autofire": true,
+      "mode": "LINKED",
+      "weapons": {
+        "WS0002": "flak",
+        "WS0003": "vulcan",
+        "WS0006": "vulcan"
+      }
+    }
+  ],
+  "modules": [
+    {
+      "ARMOR_MODULE_TL": "kol_larkspur_tl_Bishop"
+    },
+    {
+      "ARMOR_MODULE_TR": "kol_larkspur_tr_Bishop"
+    }
+  ],
+  "wings": []
 }
