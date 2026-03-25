@@ -4,11 +4,13 @@ import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.campaign.*;
 import com.fs.starfarer.api.impl.campaign.ids.*;
 import com.fs.starfarer.api.impl.campaign.procgen.NebulaEditor;
+import com.fs.starfarer.api.impl.campaign.procgen.SalvageEntityGenDataSpec;
 import com.fs.starfarer.api.impl.campaign.procgen.StarAge;
 import com.fs.starfarer.api.impl.campaign.procgen.StarSystemGenerator;
 import com.fs.starfarer.api.impl.campaign.terrain.HyperspaceTerrainPlugin;
 import com.fs.starfarer.api.util.Misc;
 import org.selkie.zea.fleets.ZeaFleetManager;
+import org.selkie.zea.fleets.ZeaFleetSoloManager;
 import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.terrain.AbyssCorona;
 import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat;
@@ -23,6 +25,7 @@ import java.util.Random;
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
 import static org.selkie.zea.helpers.ZeaStaticStrings.TOXIC;
+import static org.selkie.zea.helpers.ZeaStaticStrings.ZeaTitles.ZEA_TITLE_CRYOSLEEPER_DAWN;
 import static org.selkie.zea.helpers.ZeaStaticStrings.dawnID;
 import static org.selkie.zea.world.PrepareAbyss.getAbyssLootID;
 
@@ -55,7 +58,7 @@ public class PrepareShadows {
         PlanetAPI ozy = system.initStar(ZeaEntities.ZEA_OZYMANDIAS_STAR, StarTypes.BLUE_SUPERGIANT, 600, 50750, -38500, 0);
         system.setType(StarSystemGenerator.StarSystemType.SINGLE);
 
-        system.setDoNotShowIntelFromThisLocationOnMap(true);
+        //system.setDoNotShowIntelFromThisLocationOnMap(true);
 
         SectorEntityToken star_corona = system.addTerrain(ZeaTerrain.ZEA_CORONA,
                 new AbyssCorona.CoronaParams(432,
@@ -73,10 +76,10 @@ public class PrepareShadows {
         jumpPoint.setStandardWormholeToHyperspaceVisual();
         system.addEntity(jumpPoint);
 
-        PlanetAPI first = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_ONE, ozy, "Mourn", TOXIC, 291, 250, 2900, 3000000);
-        PlanetAPI second = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_TWO, ozy, "Abandon", TOXIC, 291, 108, 4700, 3000000);
-        PlanetAPI third = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_THREE, ozy, "Forget",  TOXIC, 291, 97, 6500, 3000000);
-        PlanetAPI fourth = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_FOUR, ozy, "Rest", TOXIC, 291, 80, 8300, 3000000);
+        PlanetAPI first = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_ONE, ozy, "Mourn", TOXIC, 311, 250, 2900, 3000000);
+        PlanetAPI second = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_TWO, ozy, "Abandon", TOXIC, 311, 108, 6700, 3000000);
+        PlanetAPI third = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_THREE, ozy, "Forget",  TOXIC, 311, 97, 12500, 3000000);
+        PlanetAPI fourth = system.addPlanet(ZeaEntities.ZEA_OZYMANDIAS_PLANET_FOUR, ozy, "Rest", TOXIC, 311, 80, 18300, 3000000);
 
         first.getMarket().addCondition(Conditions.VERY_HOT);
         first.getMarket().addCondition(Conditions.TOXIC_ATMOSPHERE);
@@ -84,20 +87,18 @@ public class PrepareShadows {
         first.getMarket().addCondition(Conditions.HIGH_GRAVITY);
         first.getMarket().addCondition(Conditions.EXTREME_WEATHER);
 
-        second.getMarket().addCondition(Conditions.HIGH_GRAVITY);
         second.getMarket().addCondition(Conditions.TOXIC_ATMOSPHERE);
         second.getMarket().addCondition(Conditions.HOT);
         second.getMarket().addCondition(Conditions.EXTREME_WEATHER);
         second.getMarket().addCondition(Conditions.IRRADIATED);
 
-        third.getMarket().addCondition(Conditions.HIGH_GRAVITY);
         third.getMarket().addCondition(Conditions.TOXIC_ATMOSPHERE);
         third.getMarket().addCondition(Conditions.EXTREME_WEATHER);
+        third.getMarket().addCondition(Conditions.HIGH_GRAVITY);
         third.getMarket().addCondition(Conditions.IRRADIATED);
 
         fourth.getMarket().addCondition(Conditions.COLD);
         fourth.getMarket().addCondition(Conditions.IRRADIATED);
-        fourth.getMarket().addCondition(Conditions.HIGH_GRAVITY);
         fourth.getMarket().addCondition(Conditions.EXTREME_WEATHER);
         fourth.getMarket().addCondition(Conditions.TOXIC_ATMOSPHERE);
 
@@ -120,14 +121,17 @@ public class PrepareShadows {
         loot4.setCircularOrbitPointingDown(fourth, 171, (float)Math.random()*1500+1000, 100000);
 
         SectorEntityToken sleeper = addSalvageEntity(new Random(), system, Entities.DERELICT_CRYOSLEEPER, dawnID);
-        sleeper.setFixedLocation(2000, -6000);
-        SectorEntityToken hab = addSalvageEntity(new Random(), system, Entities.ORBITAL_HABITAT, Factions.DERELICT);
-        hab.setFixedLocation(1500, -4000);
-        SectorEntityToken mining = addSalvageEntity(new Random(), system, Entities.STATION_MINING, Factions.DERELICT);
-        mining.setFixedLocation(2500, -7500);
+        sleeper.setCircularOrbitPointingDown(third, (float)Math.random()*360, 555, 700);
+        sleeper.setName(ZEA_TITLE_CRYOSLEEPER_DAWN);
+        SectorEntityToken hab = addSalvageEntity(new Random(), system, Entities.ORBITAL_HABITAT, dawnID);
+        hab.setCircularOrbitPointingDown(second, (float)Math.random()*360, 200, 200);
+        hab.addDropRandom("zea_organs", (int)(40 + (Math.random() * 200)));
+        SectorEntityToken mining = addSalvageEntity(new Random(), system, Entities.STATION_MINING, dawnID);
+        mining.setCircularOrbitPointingDown(fourth, (float)Math.random()*360, 200, 200);
+        mining.addDropRandom("zea_organs", (int)(1 + (Math.random() * 79)));
 
         //FP bumped to account for backup capital ships getting pruned
-        ZeaFleetManager fleets = new ZeaFleetManager(system, dawnID, 7, 40, 180);
+        ZeaFleetSoloManager fleets = new ZeaFleetSoloManager(system, dawnID, 7, 40, 80);
         ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, dawnID, 1, 240, 425);
         system.addScript(fleets);
         system.addScript(fleetsMiniboss);

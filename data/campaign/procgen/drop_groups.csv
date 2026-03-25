@@ -27,3 +27,5 @@ item_zea_recorder:zea_elysians,zea_elysians_lore,100
 item_zea_recorder:tritachyon,zea_ttfleet_lore,100
 ,,
 item_zea_recorder:hegemony,zea_hegfleet_lore,100
+,,
+organs,zea_organs,100

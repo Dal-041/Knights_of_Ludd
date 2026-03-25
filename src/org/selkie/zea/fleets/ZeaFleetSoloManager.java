@@ -36,7 +36,7 @@ import static com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent.pick
 import static org.selkie.zea.helpers.ZeaSettings.ZEA_BOSS_TAKES_FLEETS_WITH;
 import static org.selkie.zea.helpers.ZeaSettings.ZEA_FACTOR_OTHER_FACTIONS;
 
-public class ZeaFleetManager extends SeededFleetManager {
+public class ZeaFleetSoloManager extends SeededFleetManager {
 
     public static class AbyssalFleetInteractionConfigGen implements FIDConfigGen {
         public FIDConfig createConfig() {
@@ -59,7 +59,7 @@ public class ZeaFleetManager extends SeededFleetManager {
     public final String fac;
     protected final IntervalUtil interval = new IntervalUtil(3, 5);
 
-    public ZeaFleetManager(StarSystemAPI system, String factionID, int maxFleets, int minPts, int maxPts) {
+    public ZeaFleetSoloManager(StarSystemAPI system, String factionID, int maxFleets, int minPts, int maxPts) {
         super(system, 1f);
 
         this.minPts = minPts;
@@ -74,48 +74,8 @@ public class ZeaFleetManager extends SeededFleetManager {
         }
     }
 
-    public static String getSecondFaction(long seed, String primary) {
-        WeightedRandomPicker<String> picker = new WeightedRandomPicker<>(new Random(seed));
-
-        picker.add(Factions.DERELICT,1f);
-        picker.add(Factions.REMNANTS, 1f);
-        float w = primary.equals(ZeaStaticStrings.dawnID) ? 0f : 1f;
-        picker.add(ZeaStaticStrings.dawnID, w);
-        w = primary.equals(ZeaStaticStrings.duskID) ? 0f : 1f;
-        picker.add(ZeaStaticStrings.duskID, w);
-        w = primary.equals(ZeaStaticStrings.elysianID) ? 0f : 1f;
-        picker.add(ZeaStaticStrings.elysianID, w);
-        if (ZeaUtils.useDomres) picker.add(KolStaticStrings.DOMRES, 1f);
-        if (ZeaUtils.useDustkeepers) picker.add(KolStaticStrings.SOTF_DUSTKEEPERS, 0.8f);
-        w = primary.equals(ZeaStaticStrings.dawnID) ? 0.75f : 0f;
-        if (ZeaUtils.useEnigma) picker.add(KolStaticStrings.ENIGMA, w);
-        if (ZeaUtils.useLostech) picker.add(KolStaticStrings.TAHLAN_ALLMOTHER, 0.6f);
-        return picker.pick();
-    }
-
-    public static void copyFleetMembers(String fromID, CampaignFleetAPI from, CampaignFleetAPI to, boolean pruneCaps) {
-        for (FleetMemberAPI member : from.getMembersWithFightersCopy()) {
-            boolean skip = false;
-            if (member.isFighterWing()) continue;
-            if (pruneCaps && member.getHullSpec().getHullSize().equals(ShipAPI.HullSize.CAPITAL_SHIP)) continue;
-            for (String s : ZeaStaticStrings.hullBlacklist) {
-                if (s.equals(member.getHullId())) {
-                    skip = true;
-                }
-            }
-            if (skip) continue;
-            //Unrecoverable status set by hullmod
-            if (member.getVariant().hasTag(Tags.AUTOMATED_RECOVERABLE)) member.getVariant().removeTag(Tags.AUTOMATED_RECOVERABLE);
-            if (member.isFlagship()) member.setFlagship(false);
-            member.setShipName(Global.getSector().getFaction(fromID).pickRandomShipName());
-            to.getFleetData().addFleetMember(member);
-        }
-    }
-
-    public static CampaignFleetAPI spawnFleet(long seed, float factorSecond, StarSystemAPI sys, String fac, int min, int max) {
+    public static CampaignFleetAPI spawnFleet(long seed, StarSystemAPI sys, String fac, int min, int max) {
         Random random = new Random(seed);
-        float factorMain = 1f-factorSecond;
-        boolean mixAll = false;
 
         FleetParamsV3 params = new FleetParamsV3(
                 sys.getLocation(),
@@ -139,28 +99,13 @@ public class ZeaFleetManager extends SeededFleetManager {
         params.random = random;
 
         CampaignFleetAPI fleet = FleetFactoryV3.createFleet(params);
-
-        if (factorMain == 1) return fleet;
-
-        String facSecond = getSecondFaction(seed, fac);
-        params.factionId = facSecond;
-        params.combatPts = params.combatPts/factorMain * (1-factorMain);
-
-        CampaignFleetAPI fleet2 = FleetFactoryV3.createFleet(params);
-
-        copyFleetMembers(facSecond, fleet2, fleet, true);
-
-        fleet2.despawn();
-
-        //fleet.getFleetData().sort();
-
         return fleet;
     }
 
     @Override
     protected CampaignFleetAPI spawnFleet(long seed) {
         Random random = new Random(seed);
-        CampaignFleetAPI fleet = spawnFleet(seed, ZEA_FACTOR_OTHER_FACTIONS, system, fac, minPts, maxPts);
+        CampaignFleetAPI fleet = spawnFleet(seed, system, fac, minPts, maxPts);
 
         if (fleet == null) return null;
 
@@ -292,7 +237,7 @@ public class ZeaFleetManager extends SeededFleetManager {
 
     public static void addElysianInteractionConfig(CampaignFleetAPI fleet) {
         fleet.getMemoryWithoutUpdate().set(MemFlags.FLEET_INTERACTION_DIALOG_CONFIG_OVERRIDE_GEN,
-                new ZeaFleetManager.AbyssalFleetInteractionConfigGen());
+                new ZeaFleetSoloManager.AbyssalFleetInteractionConfigGen());
     }
 
     public static OfficerManagerEvent.SkillPickPreference getFactionSkillPref (String faction) {
