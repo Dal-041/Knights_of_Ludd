@@ -50,8 +50,13 @@ public class PrepareShadows {
 
         SectorEntityToken neb_ozymandias_fingers = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(GfxCat.TERRAIN,"zea_nebula_fingers"),
                 0, 0, system,
+                GfxCat.TERRAIN, "nebula_zea_purpleblue",
+                4, 4, StarAge.AVERAGE);
+
+        SectorEntityToken neb_ozymandias_locus = Misc.addNebulaFromPNG(Global.getSettings().getSpriteName(GfxCat.TERRAIN,"zea_nebula_locus"),
+                0, 0, system,
                 GfxCat.TERRAIN, "nebula_zea_dawntide",
-                4, 4, ZeaTerrain.NEBULA_ZEA_SHOAL, StarAge.AVERAGE);
+                1, 1, ZeaTerrain.NEBULA_ZEA_SHOAL, StarAge.AVERAGE);
 
         system.getMemoryWithoutUpdate().set(MUSIC_SET_MEM_KEY, "music_zea_lunasea_theme");
 
@@ -121,8 +126,10 @@ public class PrepareShadows {
         loot4.setCircularOrbitPointingDown(fourth, 171, (float)Math.random()*1500+1000, 100000);
 
         SectorEntityToken sleeper = addSalvageEntity(new Random(), system, Entities.DERELICT_CRYOSLEEPER, dawnID);
-        sleeper.setCircularOrbitPointingDown(third, (float)Math.random()*360, 555, 700);
+        //sleeper.setCircularOrbitPointingDown(third, (float)Math.random()*360, 555, 700);
+        sleeper.setFixedLocation(6115, -8194);
         sleeper.setName(ZEA_TITLE_CRYOSLEEPER_DAWN);
+
         SectorEntityToken hab = addSalvageEntity(new Random(), system, Entities.ORBITAL_HABITAT, dawnID);
         hab.setCircularOrbitPointingDown(second, (float)Math.random()*360, 200, 200);
         hab.addDropRandom("zea_organs", (int)(40 + (Math.random() * 200)));
@@ -132,7 +139,7 @@ public class PrepareShadows {
 
         //FP bumped to account for backup capital ships getting pruned
         ZeaFleetSoloManager fleets = new ZeaFleetSoloManager(system, dawnID, 7, 40, 80);
-        ZeaFleetManager fleetsMiniboss = new ZeaFleetManager(system, dawnID, 1, 240, 425);
+        ZeaFleetSoloManager fleetsMiniboss = new ZeaFleetSoloManager(system, dawnID, 1, 240, 425);
         system.addScript(fleets);
         system.addScript(fleetsMiniboss);
     }

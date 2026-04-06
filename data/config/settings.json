@@ -350,6 +350,7 @@
 			"zea_flower_nebula_cut":"graphics/zea/terrain/flower_nebula_cut.png",
 			"zea_flower_nebula_layer2":"graphics/zea/terrain/flower_nebula_layer2.png",
 			"zea_nebula_fingers":"graphics/zea/terrain/zea_nebula_fingers.png",
+			"zea_nebula_locus":"graphics/zea/terrain/zea_nebula_locus.png",
 		},
 		"characters":{
 			"kol_grandmaster":"graphics/kol/portraits/kol_grandmaster.png",
