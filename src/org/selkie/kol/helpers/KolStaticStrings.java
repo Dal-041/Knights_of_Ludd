@@ -50,6 +50,9 @@ public class KolStaticStrings {
     
     // intel tag
     public static final String KNIGHTS_OF_LUDD = "Knights of Ludd";
+
+    // fleet tags
+    public static final String KOL_FLEET_MERGED_KNIGHTS = "kol_merged_knights";
     
     // campaign entity
     public static final String KOL_CYGNUS = "kol_cygnus";
@@ -78,5 +81,7 @@ public class KolStaticStrings {
 
         public static final String KOL_LP_RETRIBUTION_DONE = "$kol_lp_retribution_dropped";
         public static final String KOL_LP_INVICTUS_DONE = "$kol_lp_invictus_dropped";
+
+        public static final String KOL_TAKEOVERS_ENDED = "$kol_takeovers_ended";
     }
 }

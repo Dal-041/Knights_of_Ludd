@@ -13,6 +13,7 @@ import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.CompatabilityUtils;
+import org.selkie.kol.campaign.intel.KnightsTakeoverOverride;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
@@ -85,6 +86,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
+		if (!Global.getSector().getScripts().contains(KnightsTakeoverOverride.class)) Global.getSector().addScript(new KnightsTakeoverOverride());
 	}
 
     public String getVersion() {
@@ -113,6 +115,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_INTIALIZED, true);
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		//Global.getSector().addTransientScript(new SpoilersNotif());
+		if (!Global.getSector().getScripts().contains(KnightsTakeoverOverride.class)) Global.getSector().addScript(new KnightsTakeoverOverride());
 	}
 
 	@Override
