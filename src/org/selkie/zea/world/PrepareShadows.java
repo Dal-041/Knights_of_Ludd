@@ -25,7 +25,8 @@ import java.util.Random;
 import static com.fs.starfarer.api.impl.MusicPlayerPluginImpl.MUSIC_SET_MEM_KEY;
 import static com.fs.starfarer.api.impl.campaign.procgen.themes.BaseThemeGenerator.addSalvageEntity;
 import static org.selkie.zea.helpers.ZeaStaticStrings.TOXIC;
-import static org.selkie.zea.helpers.ZeaStaticStrings.ZeaTitles.ZEA_TITLE_CRYOSLEEPER_DAWN;
+import static org.selkie.zea.helpers.ZeaStaticStrings.ZeaDescs.ZEA_DESC_CRYOSLEEPER_DAWN;
+import static org.selkie.zea.helpers.ZeaStaticStrings.ZeaDescs.ZEA_TITLE_CRYOSLEEPER_DAWN;
 import static org.selkie.zea.helpers.ZeaStaticStrings.dawnID;
 import static org.selkie.zea.world.PrepareAbyss.getAbyssLootID;
 
@@ -129,6 +130,7 @@ public class PrepareShadows {
         //sleeper.setCircularOrbitPointingDown(third, (float)Math.random()*360, 555, 700);
         sleeper.setFixedLocation(6115, -8194);
         sleeper.setName(ZEA_TITLE_CRYOSLEEPER_DAWN);
+        sleeper.setCustomDescriptionId("zea_sleeper_caeli_desc");
 
         SectorEntityToken hab = addSalvageEntity(new Random(), system, Entities.ORBITAL_HABITAT, dawnID);
         hab.setCircularOrbitPointingDown(second, (float)Math.random()*360, 200, 200);

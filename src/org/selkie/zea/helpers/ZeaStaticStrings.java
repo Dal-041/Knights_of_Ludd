@@ -155,9 +155,12 @@ public class ZeaStaticStrings {
         public static final String UI = "ui";
     }
 
-    public static class ZeaTitles {
+    public static class ZeaDescs {
         public static final String ZEA_TITLE_CRYOSLEEPER_DAWN = "Dawn Era Cryosleeper - \"Caeli\"";
+        public static final String ZEA_DESC_CRYOSLEEPER_DAWN = "Dawn Era Cryosleeper - \"Caeli\"";
     }
+
+
     //tags
     public static final String ZEA_EXCLUDE_TAG = "zea_rulesfortheebutnotforme";
     public static final String SIC_DELAY_XO = "sic_fleet_encounter2";
