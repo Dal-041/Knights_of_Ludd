@@ -167,7 +167,7 @@
     },
     {
       "id": "WS0016",
-      "size": "SMALL",
+      "size": "MEDIUM",
       "type": "BALLISTIC",
       "mount": "HARDPOINT",
       "arc": 7,
@@ -176,7 +176,7 @@
     },
     {
       "id": "WS0017",
-      "size": "SMALL",
+      "size": "MEDIUM",
       "type": "BALLISTIC",
       "mount": "HARDPOINT",
       "arc": 7,
