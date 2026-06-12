@@ -264,7 +264,7 @@ AI Fixer,kol_alysse_ai_fixer,,,,800,,1000,,0,100,0,,,,KINETIC,0,,0,1,1,,0,0,0,0,
 #,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 Styrax Driver,zea_styrax_driver,3,0.5,7500,950,,160,,24,18,14,,,,KINETIC,145,,0,1.3,2,0.2,0,10,1.6,1,,900,,,30,,,,"kinetic16, restricted, zea_common_bp, codex_unlockable",,Elysia,,Anti Shield,,,,,,,,,,57.5
 Yomogi Plasma Autogun,zea_plasma_chaingun,2,0.5,1000,550,,75,,3,30,12,,,,ENERGY,70,,0,0.15,1,,0,20,1,10,,800,,,30,,,,"energy15, SR, restricted, zea_common_bp, codex_unlockable",,Dusk,,General,,,,,,,,,,56
-Myoga Ultradriver,zea_myoga_driver,3,0.2,15000,1150,,240,240,50,8,17,,,,KINETIC,360,,0,2,1,,0,1,0.3,0.1,,2500,,,300,,,,"kinetic16, LR, restricted, zea_common_bp, codex_unlockable",,Dusk,,Sniper,,,,,,,,,,57.4
+Myoga Ultradriver,zea_myoga_driver,3,0.2,15000,1150,,275,400,50,8,17,,,,KINETIC,360,,0,2,1,,0,1,0.3,0.1,,2500,,,300,,,,"kinetic16, LR, restricted, zea_common_bp, codex_unlockable",,Dusk,,Sniper,,,,,Projectiles travel %s faster.,100%,,,,57.4
 Konara Thermal Sniper,zea_thermal_cannon,3,0.25,20000,1100,,150,,7,18,28,,,,ENERGY,250,,0.166,1.01,4,0.166,0,3,0.3,0.1,,820,,,150,,,,"energy20, LR, restricted, zea_common_bp, codex_unlockable",,Dusk,,Attrition,,,,,,,,,,55
 Mazuma Torpedo Launcher,zea_mazuma_m,3,0.2,15000,1200,,3000,,75,6,16,16,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike28, rocket6, restricted, zea_common_bp, codex_unlockable",,Dusk,,Torpedo,Fast,None,,,,,,,TRUE,58.2
 Mazuma Torpedo Rack,zea_mazuma_s,3,0.2,8000,1200,,3000,,75,10,8,4,,2,HIGH_EXPLOSIVE,250,,0,15,2,0.4,0,0.5,0.5,0.1,,400,100,4,300,,,STRIKE,"strike18, rocket3, restricted, zea_common_bp, codex_unlockable",,Dusk,,Torpedo,Fast,None,,,,,,,TRUE,58.1
@@ -357,3 +357,8 @@ r,zea_deco_edf_amaterasu_engS,0,,,1,,,,,0.5,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_dro
 ,zea_deco_edf_toyotama_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
 ,zea_deco_edf_raiju_ll,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
 ,zea_deco_edf_raiju_lr,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+,zea_deco_nightfall_oiwa_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
+,zea_deco_nightfall_okiku_lights,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,YY Deco
+Twilight's End,zea_deco_nightfall_resonator,3,,0,1500,,1000,,15,0,0,3,0.2,3,HIGH_EXPLOSIVE,65,,0,5,3,0.25,0,0,0,,,400,200,10,225,,,"DO_NOT_AIM, DO_NOT_CONSERVE, SYSTEM","no_drop, no_drop_salvage, codex_require_related",,,,Eradication,Fast,Medium,,,,,,,,
+,zea_deco_nightfall_oiwa_front,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,SYSTEM,"no_drop, no_drop_salvage",,,,,,,,,,,,,,
+Insatiable Rift,zea_assaying_rift,3,,10000,2000,,600,,,180,18,,,,HIGH_EXPLOSIVE,600,,0,2,1,,0,0,0,0,,200,400,14,600,,,DO_NOT_AIM,"monster, dweller, restricted, pd10, missile10, no_drop",,Shrouded Dweller,,General,Slow,Excellent,,,"When impacting hull or armor, heals one of the Shrouded Dweller projections on the battlefield for 1000 points.",1000,A poorly understood property inherent to space-time inhibits the formation of more than 10 total active rifts for all weapons on the battlefield. This limitation does not apply to the Shrouded Dweller.,10,,20.5

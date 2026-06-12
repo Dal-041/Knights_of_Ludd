@@ -17,6 +17,7 @@
     "shieldRadius": 100,
     "viewOffset": 0,
     "builtInWings": [],
+    "builtInMods": ["fluxshunt"],
     "builtInModules": null,
     "weaponSlots": [],
     "engineSlots": [

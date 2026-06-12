@@ -1,0 +1,166 @@
+{
+  "hullName": "Oiwa",
+  "hullId": "zea_nightfall_oiwa",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/zea/ships/zea_nightfall_oiwa.png",
+  "style": "ZEA_DUSK_TECH",
+  "height": 138,
+  "width": 200,
+  "center": [100, 68],
+  "collisionRadius": 105.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 94,
+  "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "automated",
+    "zea_dusk_mist",
+    "zea_dusk_builtin",
+    "zea_recovery_limiter"
+  ],
+  "builtInWeapons": {
+    "WS0003": "zea_deco_nightfall_oiwa_lights",
+    "WS0004": "zea_deco_nightfall_oiwa_front"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [15, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-18, -0],
+      "renderOrderMod": 301
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 135,
+      "locations": [9, 51.5]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -135,
+      "locations": [9, -51.5]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 135,
+      "locations": [9, 51.5]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -135,
+      "locations": [9, -51.5]
+    },
+    {
+      "id": "WS0003",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [5, -0],
+      "renderOrderMod": 201
+    },
+    {
+      "id": "WS0004",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-8, -1],
+      "renderOrderMod": 101
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [10.5, 50.5],
+      "length": 55,
+      "width": 35,
+      "angle": 130,
+      "contrailSize": 30.540001,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [10.5, -50.5],
+      "length": 55,
+      "width": 35,
+      "angle": -130,
+      "contrailSize": 30.540001,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [4, 58],
+      "length": 45,
+      "width": 18.15,
+      "angle": 129.5,
+      "contrailSize": 18.15,
+      "style": "zea_nightfall2"
+    },
+    {
+      "location": [4, -58],
+      "length": 45,
+      "width": 18.15,
+      "angle": -129.5,
+      "contrailSize": 18.15,
+      "style": "zea_nightfall2"
+    }
+  ],
+  "bounds": [
+    35, -13,
+    56, -21,
+    43, -25,
+    10, -85.5,
+    5, -88,
+    10, -64.5,
+    4.5, -43.5,
+    -27.5, -62.5,
+    -12.5, -39,
+    -30, -27.5,
+    -56.5, -16,
+    -31, -14.5,
+    -29.5, -11,
+    -49, -3,
+    -49, 3,
+    -29.5, 11,
+    -31, 14.5,
+    -56.5, 16,
+    -30, 27.5,
+    -12.5, 39,
+    -27.5, 62.5,
+    4.5, 43.5,
+    10, 64.5,
+    5, 88,
+    10, 85.5,
+    43, 25,
+    56, 21,
+    35, 13
+  ]
+}

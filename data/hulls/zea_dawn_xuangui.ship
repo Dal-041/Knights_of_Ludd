@@ -33,7 +33,7 @@
     {
       "id": "WS0003",
       "size": "MEDIUM",
-      "type": "HYBRID",
+      "type": "UNIVERSAL",
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
@@ -42,7 +42,7 @@
     {
       "id": "WS0004",
       "size": "MEDIUM",
-      "type": "HYBRID",
+      "type": "UNIVERSAL",
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
@@ -51,7 +51,7 @@
     {
       "id": "WS0001",
       "size": "MEDIUM",
-      "type": "UNIVERSAL",
+      "type": "HYBRID",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,

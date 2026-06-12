@@ -1,0 +1,227 @@
+{
+  "hullName": "Okiku",
+  "hullId": "zea_nightfall_okiku",
+  "hullSize": "CRUISER",
+  "spriteName": "graphics/zea/ships/zea_nightfall_okiku.png",
+  "style": "ZEA_DUSK_TECH",
+  "height": 155,
+  "width": 310,
+  "center": [155, 77.5],
+  "collisionRadius": 161,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 155.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "phasefield",
+    "automated",
+    "zea_dusk_mist",
+    "zea_dusk_builtin",
+    "zea_recovery_limiter"
+  ],
+  "builtInWeapons": {
+    "WS0004": "zea_deco_nightfall_okiku_lights",
+    "WS0010": "zea_deco_nightfall_resonator",
+    "WS0011": "zea_deco_nightfall_resonator"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 90,
+      "locations": [27.5, 92]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -90,
+      "locations": [27.5, -92]
+    },
+    {
+      "id": "WS0005",
+      "size": "LARGE",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 7,
+      "angle": 0,
+      "locations": [42.5, -0]
+    },
+    {
+      "id": "WS0006",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": 35,
+      "locations": [44.5, 38]
+    },
+    {
+      "id": "WS0007",
+      "size": "MEDIUM",
+      "type": "HYBRID",
+      "mount": "TURRET",
+      "arc": 210,
+      "angle": -35,
+      "locations": [44.5, -38]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -139.5,
+      "locations": [19.5, -52]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 139.5,
+      "locations": [19.5, 52]
+    },
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 180,
+      "locations": [-26.5, -0]
+    },
+    {
+      "id": "WS0004",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [10, -0]
+    },
+    {
+      "id": "WS0010",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 139.5,
+      "locations": [19.5, 52]
+    },
+    {
+      "id": "WS0011",
+      "size": "MEDIUM",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -139.5,
+      "locations": [19.5, -52]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [20.5, 51.5],
+      "length": 64.029999,
+      "width": 45,
+      "angle": 139,
+      "contrailSize": 37.119999,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [20.5, -51.5],
+      "length": 64.029999,
+      "width": 45,
+      "angle": -139,
+      "contrailSize": 37.119999,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [-25.5, -0],
+      "length": 65.5,
+      "width": 45,
+      "angle": 180,
+      "contrailSize": 28,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [15, -57.5],
+      "length": 52.610001,
+      "width": 10,
+      "angle": -139,
+      "contrailSize": 14.62,
+      "style": "zea_nightfall2"
+    },
+    {
+      "location": [15, 57.5],
+      "length": 52.610001,
+      "width": 10,
+      "angle": 139,
+      "contrailSize": 14.62,
+      "style": "zea_nightfall2"
+    },
+    {
+      "location": [-30.5, -0],
+      "length": 61,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "zea_nightfall2"
+    }
+  ],
+  "bounds": [
+    57, -7,
+    62.5, -8,
+    55, -15,
+    54.5, -24,
+    64.5, -33.5,
+    64.5, -43.5,
+    24.5, -139,
+    19, -144,
+    24.5, -109,
+    13.5, -121,
+    5.5, -115.5,
+    15, -101,
+    10, -96.5,
+    21.5, -79.5,
+    14, -73,
+    15, -61.5,
+    3.5, -54,
+    -58.5, -79,
+    -67, -75.5,
+    -16.5, -43.5,
+    -16.5, -33,
+    -41.5, -17,
+    -36, -12,
+    -55.5, -4,
+    -55.5, 4,
+    -36, 12,
+    -41.5, 17,
+    -16.5, 33,
+    -16.5, 43.5,
+    -67, 75.5,
+    -58.5, 79,
+    3.5, 54,
+    15, 61.5,
+    14, 73,
+    21.5, 79.5,
+    10, 96.5,
+    15, 101,
+    5.5, 115.5,
+    13.5, 121,
+    24.5, 109,
+    19, 144,
+    24.5, 139,
+    64.5, 43.5,
+    64.5, 33.5,
+    54.5, 24,
+    55, 15,
+    62.5, 8,
+    57, 7
+  ]
+}
