@@ -34,6 +34,7 @@ import org.lazywizard.lazylib.MathUtils
 import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
+import org.magiclib.kotlin.addGlowyParticle
 import org.selkie.kol.OpenGlUtils
 import org.selkie.zea.helpers.ZeaStaticStrings
 import org.selkie.zea.terrain.AbyssSea.AbyssSeaWaveManager.Companion.LUNA_COLOR
@@ -70,6 +71,9 @@ class AbyssSeaWave(): BaseRingTerrain() {
 
         const val SHIELDS_FROM_TAG = "zea_blockAbyssSeaWave"
         const val IGNORES_MEMORY_FLAG = "\$zea_ignoresAbyssSeaWave"
+
+        const val PARTICLE_GEN_DIST = 10000f
+        const val PARTICLES_PER_SECOND = 45f
     }
 
     class AbyssSeaWaveParams(
@@ -134,6 +138,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
         idealBandwidth = params.bandWidthInEngine
     }
 
+    var particleCache = 0f
     override fun advance(amount: Float) {
         if (params !is AbyssSeaWaveParams) {
             relatedEntity?.containingLocation?.removeEntity(entity)
@@ -159,6 +164,31 @@ class AbyssSeaWave(): BaseRingTerrain() {
 
         blockerUtil.updateLimits(entity, entity.starSystem?.star, 0.5f)
         blockerUtil.advance(amount, 100f, 0.5f)
+
+        particleCache += amount * PARTICLES_PER_SECOND
+        if (particleCache >= 1) {
+            while (particleCache-- > 0) {
+                val point = MathUtils.getRandomPointOnCircumference(
+                    entity.location,
+                    casted.middleRadius + (casted.bandWidthInEngine / 2)
+                )
+                if (MathUtils.getDistance(point, Global.getSector().viewport.center) > PARTICLE_GEN_DIST) return
+                val particle = entity.containingLocation.addGlowyParticle(
+                    Global.getSector().playerFleet.location, // we're tricking the particles to spawn even when they will be outside our viewport
+                    VectorUtils.getDirectionalVector(entity.location, point).scale(casted.speed * MathUtils.getRandomNumberInRange(0.04f, 0.06f)) as Vector2f,
+                    MathUtils.getRandomNumberInRange(50f, 60f),
+                    0.1f,
+                    MathUtils.getRandomNumberInRange(20f, 30f),
+                    Color(0, 90, 0)
+                )
+                for (part in particle) {
+                    if (part == null) continue
+                    part.setPos(point.x, point.y)
+                }
+                particle[1]?.color = Color(0, 30, 0)
+                particle[2]?.color = Color(0, 30, 0)
+            }
+        }
     }
 
     @Transient

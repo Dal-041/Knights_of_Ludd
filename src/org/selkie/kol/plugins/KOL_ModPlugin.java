@@ -15,6 +15,7 @@ import org.dark.shaders.util.TextureData;
 import org.selkie.kol.CompatabilityUtils;
 import org.selkie.kol.campaign.intel.KnightsTakeoverOverride;
 import org.selkie.kol.helpers.KolStaticStrings;
+import org.selkie.kol.listeners.SaveListener;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.world.GenerateKnights;
 import org.selkie.zea.campaign.AICoreCampaignPlugin;
@@ -87,9 +88,34 @@ public class KOL_ModPlugin extends BaseModPlugin {
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		if (!Global.getSector().getScripts().contains(KnightsTakeoverOverride.class)) Global.getSector().addScript(new KnightsTakeoverOverride());
+
+		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
+			listener.onGameLoad();
+		}
 	}
 
-    public String getVersion() {
+	@Override
+	public void beforeGameSave() {
+		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
+			listener.beforeGameSave();
+		}
+	}
+
+	@Override
+	public void afterGameSave() {
+		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
+			listener.afterGameSave();
+		}
+	}
+
+	@Override
+	public void onGameSaveFailed() {
+		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
+			listener.onGameSaveFailed();
+		}
+	}
+
+	public String getVersion() {
         return Global.getSettings().getModManager().getModSpec("knights_of_ludd").getVersion();
     }
 
