@@ -74,11 +74,6 @@ class AbyssSeaWave(): BaseRingTerrain() {
 
         const val PARTICLE_GEN_DIST = 10000f
         const val PARTICLES_PER_SECOND = 45f
-        val PARTICLE_COLORS = listOf(
-            Color(165,235,220),
-            Color(165,235,245),
-            Color(130,240,230),
-        )
     }
 
     class AbyssSeaWaveParams(
