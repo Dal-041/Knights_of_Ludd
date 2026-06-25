@@ -8,7 +8,9 @@ Stormrider,logi_stormrider,,0,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.Stormri
  
 Redirects hyperstorm strikes to generally align with your current fleets heading. Decreases the effect hyperstorm strikes has on combat readiness by %s for the entire fleet; also has half the effect for operations in a solar corona.",Stormrider,,graphics/icons/abilities/slipsurge.png,
 Oracle Sensor Suite,logi_oracle,,0,,codex_require_related,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.OracleSensorSuite,"Covered from stem to stern with every type of scanner known to exist, the Oracle Sensor Suite provides unmatched early warning, navigation charting, and command-and-control capabilities.",Oracle,,,
-,,,,,,,,,,,,,,,,,,,,
+Ballistic Acceleration Suite,kol_tamarisk,,,,codex_require_related,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.TamariskHmod,"The Tamarisk is equipped with a primitive yet robust ordnance acceleration system. Receivers are overpressured to obtain breakneck muzzle velocity, to only limited danger to crew and material.
+
+Increases projectile speed by %s.",Tamarisk,,graphics/icons/skills/ordnance_expert.png,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,

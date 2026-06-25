@@ -1,7 +1,6 @@
 {
 	"id": "zea_edf_hellfire_m",
 	"specClass": "beam",
-	"onFireEffect":"com.fs.starfarer.api.impl.combat.dem.DEMEffect",
 	"type": "HYBRID",
 	"size": "MEDIUM",
 	"collisionClass": "RAY",

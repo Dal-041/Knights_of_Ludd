@@ -2,13 +2,11 @@ package org.selkie.kol.shipsystems;
 
 
 import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.CombatEngineAPI;
-import com.fs.starfarer.api.combat.CombatEngineLayers;
-import com.fs.starfarer.api.combat.MutableShipStatsAPI;
-import com.fs.starfarer.api.combat.ShipAPI;
+import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 import com.fs.starfarer.api.util.IntervalUtil;
+import com.fs.starfarer.api.util.Misc;
 import org.lazywizard.lazylib.CollisionUtils;
 import org.lazywizard.lazylib.FastTrig;
 import org.lazywizard.lazylib.MathUtils;
@@ -19,6 +17,7 @@ import org.selkie.zea.fx.FakeSmokePlugin;
 import java.awt.*;
 
 import static com.fs.starfarer.api.util.Misc.ZERO;
+import org.lazywizard.lazylib.VectorUtils;
 
 
 public class LungeStats extends BaseShipSystemScript {
@@ -212,29 +211,34 @@ public class LungeStats extends BaseShipSystemScript {
 
     }
 
-    public StatusData getStatusData(int index, State state, float effectLevel) {
-        return null;
+    @Override
+    public boolean isUsable(ShipSystemAPI system, ShipAPI ship) {
+        if (!super.isUsable(system, ship)) {
+            return false;
+        }
+
+        return !isReversing(ship);
     }
 
+    public boolean isReversing(ShipAPI ship) {
+        float facing = Misc.normalizeAngle(90f - ship.getFacing());
+        Vector2f vel = ship.getVelocity();
+        float velAngle = VectorUtils.getFacing(vel) - 90f;
+        float adjustedVelAngle = Misc.normalizeAngle(velAngle + facing);
+        if (adjustedVelAngle < 240f && adjustedVelAngle > 120f) {
+            return true;
+        }
 
-    public float getActiveOverride(ShipAPI ship) {
-        return -1;
+        return false;
     }
 
-    public float getInOverride(ShipAPI ship) {
-        return -1;
-    }
+    @Override
+    public String getInfoText(ShipSystemAPI system, ShipAPI ship) {
+        if (isReversing(ship)) {
+            return "CANNOT BE USED WHILE REVERSING";
+        }
 
-    public float getOutOverride(ShipAPI ship) {
-        return -1;
-    }
-
-    public float getRegenOverride(ShipAPI ship) {
-        return -1;
-    }
-
-    public int getUsesOverride(ShipAPI ship) {
-        return -1;
+        return super.getInfoText(system, ship);
     }
 }
 
