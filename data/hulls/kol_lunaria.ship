@@ -14,7 +14,8 @@
   "builtInMods": [
     "kol_refit",
     "hbi",
-    "kol_shields"
+    "kol_shields",
+    "kol_lunaria",
   ],
   "builtInWeapons": {
     "DECO_0001": "kol_blinker_white30",

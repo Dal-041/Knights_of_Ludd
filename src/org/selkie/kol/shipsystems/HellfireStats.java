@@ -1,9 +1,14 @@
 package org.selkie.kol.shipsystems;
 
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.combat.DamagingProjectileAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
+import org.selkie.kol.ReflectionUtilsV2;
+
+import java.util.Objects;
 
 public class HellfireStats extends BaseShipSystemScript {
 
@@ -24,7 +29,11 @@ public class HellfireStats extends BaseShipSystemScript {
 				if (wpn.getType() != WeaponAPI.WeaponType.BALLISTIC) {
 					continue;
 				}
-				wpn.setRemainingCooldownTo(0);
+                if (wpn.isInBurst()) {
+                    continue;
+                }
+
+				wpn.setRemainingCooldownTo(0); // this instantly finishes their burst and makes them instantly fire the rest of their salvo
 			}
 			ship.setCustomData("KOL_hellfireReloadedAlready", true);
 		}

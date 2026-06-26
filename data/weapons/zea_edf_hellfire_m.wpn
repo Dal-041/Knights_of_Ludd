@@ -3,6 +3,7 @@
 	"specClass": "beam",
 	"type": "HYBRID",
 	"size": "MEDIUM",
+	"everyFrameEffect":"org.selkie.zea.weapons.HellfireOnFireEffect",
 	"collisionClass": "RAY",
 	"collisionClassByFighter": "RAY_FIGHTER",
 	"turretSprite": "graphics/zea/weapons/zea_hellfire_beam_m.png",
@@ -30,5 +31,16 @@
     FIGHTER,
     ASTEROID
 	],
-	"fireSoundOne": "dragonfire_payload_fire"
+    "smokeSpec":{		 "particleSizeMin":16.0,
+                 "particleSizeRange":18.0,
+                 "cloudParticleCount":8,
+                 "cloudDuration":1.5,
+                 "cloudRadius":10.0,
+                 "blowbackParticleCount":4,
+                 "blowbackDuration":2.0,
+                 "blowbackLength":22.0,
+                 "blowbackSpread":15.0,
+                 "particleColor":[125,50,50,105]},
+    "animationType":"SMOKE",
+	"fireSoundOne": "dragonfire_payload_fire",
 }
