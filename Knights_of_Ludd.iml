@@ -8,7 +8,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="KnightsOfSelkie" level="project" />
-    <orderEntry type="library" name="starsector-core" level="project" />
     <orderEntry type="library" name="Kotlin-Runtime" level="project" />
     <orderEntry type="library" name="MagicLib" level="project" />
     <orderEntry type="library" name="LazyLib" level="project" />
@@ -16,5 +15,6 @@
     <orderEntry type="library" name="Graphics" level="project" />
     <orderEntry type="library" name="lw_Console" level="project" />
     <orderEntry type="library" name="ExerelinCore" level="project" />
+    <orderEntry type="library" name="starsector-core" level="project" />
   </component>
 </module>
