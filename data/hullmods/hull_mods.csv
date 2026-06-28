@@ -8,8 +8,10 @@ Stormrider,logi_stormrider,,0,,,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.Stormri
  
 Redirects hyperstorm strikes to generally align with your current fleets heading. Decreases the effect hyperstorm strikes has on combat readiness by %s for the entire fleet; also has half the effect for operations in a solar corona.",Stormrider,,graphics/icons/abilities/slipsurge.png,
 Oracle Sensor Suite,logi_oracle,,0,,codex_require_related,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.OracleSensorSuite,"Covered from stem to stern with every type of scanner known to exist, the Oracle Sensor Suite provides unmatched early warning, navigation charting, and command-and-control capabilities.",Oracle,,,
-,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,
+Streamlined Spinal Receivers,kol_tamarisk,,,,codex_require_related,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.TamariskHmod,"The Tamarisk is built around its spinal hardpoint in such a way that it is feasible to overpressure the receiver without causing undue harm to the crew or ship.
+
+Increases base projectile velocity of the large ballistic hardpoint by %s.",Tamarisk,,graphics/icons/skills/ordnance_expert.png,
+Enhanced Spinal Hardpoint,kol_lunaria,,,,codex_require_related,,,,TRUE,,0,0,0,0,org.selkie.kol.hullmods.LunariaRangeExtender,"The Lunaria is built around its central spinal hardpoint, granting it excellent stability - translating into a base range increase of %s for ballistics mounted in that slot.",Lunaria,,graphics/icons/skills/ordnance_expert.png,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,

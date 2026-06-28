@@ -17,6 +17,7 @@ import java.util.List;
 public class IFFOverrideSubsystem extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
+    public static final float MIN_FLIGHT_TIME_TO_TARGET = 1f;
     final IntervalUtil aiInterval = new IntervalUtil(0.5f, 1f);
     private final Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
     private final Set<ShipAPI> affectedFighters = new HashSet<>();
@@ -55,6 +56,14 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
         affectedFighters.clear();
     }
 
+    public static boolean isMissileValidTarget(MissileAPI missile) {
+        if (missile.getFlightTime() < MIN_FLIGHT_TIME_TO_TARGET) {
+            return false;
+        }
+
+        return true;
+    }
+
     @Override
     public boolean shouldActivateAI(float amount) {
         aiInterval.advance(amount);
@@ -64,6 +73,9 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
             float totalShieldDamage = 0f;
             int mirvMissiles = 0;
             for (MissileAPI missile : AIUtils.getNearbyEnemyMissiles(ship, getHackingRange())) {
+                if (!isMissileValidTarget(missile)) {
+                    continue;
+                }
                 float damage = missile.getDamageAmount();
                 if (missile.getDamageType() == DamageType.KINETIC) {
                     damage *= 2;
@@ -135,6 +147,9 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
 
         if (state == State.ACTIVE) {
             for (MissileAPI missile : missilesInRange) {
+                if (!isMissileValidTarget(missile)) {
+                    continue;
+                }
                 if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher"))
                     continue;
                 if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher_hf"))

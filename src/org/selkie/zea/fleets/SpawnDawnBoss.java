@@ -65,6 +65,7 @@ public class SpawnDawnBoss {
 		flagship.getVariant().addTag(Tags.SHIP_LIMITED_TOOLTIP);
 		flagship.getVariant().addTag(ZeaMemKeys.ZEA_BOSS_TAG);
 		flagship.getVariant().addTag(Tags.VARIANT_UNBOARDABLE);
+        flagship.getVariant().addTag(Tags.SHIP_RECOVERABLE); // counterintuitively makes the ship not appear in debris fields
 
 		flagship.getStats().getDynamic().getMod(Stats.INDIVIDUAL_SHIP_RECOVERY_MOD).modifyFlat("NoNormalRecovery", -2000);
 		flagship.getCaptain().setPortraitSprite(Global.getSettings().getSpriteName(GfxCat.CHARACTERS, ZeaStaticStrings.portraitDawnBoss));

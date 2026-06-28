@@ -16,6 +16,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.selkie.zea.combat.subsystems.IFFOverrideSubsystem.MIN_FLIGHT_TIME_TO_TARGET;
+import static org.selkie.zea.combat.subsystems.IFFOverrideSubsystem.isMissileValidTarget;
+
 public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
@@ -149,6 +152,9 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
             CombatEntityAPI entityToHack = null;
             float biggestThreat = 0f;
             for (MissileAPI missile : missilesInRange) {
+                if (!isMissileValidTarget(missile)) {
+                    continue;
+                }
                 if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher"))
                     continue;
                 if (missile.getWeaponSpec() != null && missile.getWeaponSpec().getWeaponId().equals("motelauncher_hf"))

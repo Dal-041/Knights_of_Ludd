@@ -192,6 +192,9 @@ public class TargetingBeamStats extends BaseShipSystemScript {
         float range = lidarMaxRange;
         ArrayList<ShipAPI> targets = new ArrayList<>();
         for(ShipAPI other : AIUtils.getNearbyEnemies(ship, range)){
+            if (other.isStationModule()) {
+                continue;
+            }
             Vector2f closestPoint = MathUtils.getNearestPointOnLine(other.getLocation(), ship.getLocation(), MathUtils.getPointOnCircumference(ship.getLocation(), range, ship.getFacing()));
             float otherDistance = Misc.getTargetingRadius(closestPoint, other, other.getShield() != null && other.getShield().isOn());
             if (MathUtils.getDistanceSquared(closestPoint, other.getLocation()) < otherDistance*otherDistance){

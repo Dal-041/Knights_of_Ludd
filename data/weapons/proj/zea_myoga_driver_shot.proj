@@ -6,7 +6,10 @@
 
 	"spawnType":"BALLISTIC",
 	"collisionClass":"PROJECTILE_FF",
-	"collisionClassByFighter":"PROJECTILE_FIGHTER",	
+	"collisionClassByFighter":"PROJECTILE_FIGHTER",
+	"passThroughMissiles":true,
+	"passThroughFighters":true,
+	"passThroughFightersOnlyWhenDestroyed":true,
 	#"spawnType":"BALLISTIC_AS_BEAM",
 	#"collisionClass":"RAY",
 	#"collisionClassByFighter":"RAY_FIGHTER",

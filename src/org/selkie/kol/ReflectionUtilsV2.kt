@@ -84,12 +84,12 @@ internal object ReflectionUtilsV2 {
     }
 
     @JvmStatic
-    fun invoke(methodName: String? = null, instance: Any, vararg arguments: Any?, returnType: Class<*>? = null, parameterCount: Int? = null) : Any?
+    fun invoke(methodName: String? = null, instance: Any, vararg arguments: Any?, returnType: Class<*>? = null, parameterCount: Int? = null, skipParameterCheck: Boolean = false) : Any?
     {
         val clazz = instance.javaClass
         val args = arguments.map { it!!::class.javaPrimitiveType ?: it::class.java }
 
-        var method = getMethod(methodName, instance.javaClass, returnType, parameterCount, args) ?: return null
+        var method = getMethod(methodName, instance.javaClass, returnType, parameterCount, args, skipParameterCheck = skipParameterCheck) ?: return null
         return method.invoke(instance, *arguments)
     }
 
@@ -181,7 +181,7 @@ internal object ReflectionUtilsV2 {
         }
     }
 
-    fun getMethod(methodName: String? = null, clazz: Class<*>, returnType: Class<*>?=null, parameterCount: Int?=null, parameters: List<Class<*>?>?) : ReflectedMethod? {
+    fun getMethod(methodName: String? = null, clazz: Class<*>, returnType: Class<*>?=null, parameterCount: Int?=null, parameters: List<Class<*>?>?, skipParameterCheck: Boolean = false) : ReflectedMethod? {
         val key = ReflectedMethodKey(clazz, methodName, parameterCount, returnType, parameters)
         return methodsCache.getOrPut(key) {
             var targetMethod: Any? = null
@@ -198,7 +198,7 @@ internal object ReflectionUtilsV2 {
                     var methodParams = getMethodParametersHandle.invoke(method) as Array<Class<*>>
 
                     //Skip if parameters do not match
-                    if (parameters?.isNotEmpty() == true) {
+                    if (!skipParameterCheck && parameters?.isNotEmpty() == true) {
                         if (methodParams.any { !parameters.contains(it) }) continue
                     }
 

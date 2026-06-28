@@ -120,9 +120,9 @@ public class GenerateKnights {
                         Industries.POPULATION,
                         Industries.SPACEPORT,
                         "kol_garden",
-                        Industries.PATROLHQ,
+                        Industries.MILITARYBASE,
                         Industries.LIGHTINDUSTRY,
-                        Industries.GROUNDDEFENSES,
+                        Industries.HEAVYBATTERIES,
                         Industries.BATTLESTATION)),
                 new ArrayList<>(Arrays.asList(
                         Submarkets.SUBMARKET_STORAGE,
@@ -165,14 +165,14 @@ public class GenerateKnights {
         lyra.setCustomDescriptionId("kol_lyra_desc");
 		//yra.getMemoryWithoutUpdate().set(MusicPlayerPluginImpl.KEEP_PLAYING_LOCATION_MUSIC_DURING_ENCOUNTER_MEM_KEY, true);
 
-		MarketHelpers.addMarketplace(KolStaticStrings.kolFactionID, lyra, null, "Star Keep Lyra", 5,
+		MarketAPI lyraMarket = MarketHelpers.addMarketplace(KolStaticStrings.kolFactionID, lyra, null, "Star Keep Lyra", 5,
                 new ArrayList<>(Arrays.asList(Conditions.OUTPOST,
                         Conditions.POPULATION_5)),
                 new ArrayList<>(Arrays.asList(
                         Industries.POPULATION,
                         Industries.SPACEPORT,
                         "kol_garden",
-                        Industries.MILITARYBASE,
+                        Industries.HIGHCOMMAND,
                         Industries.ORBITALWORKS,
                         Industries.FUELPROD,
                         Industries.HEAVYBATTERIES,
@@ -186,18 +186,21 @@ public class GenerateKnights {
         		0.3f
         );
 
+		lyraMarket.getIndustry(Industries.HIGHCOMMAND).setImproved(true);
+		lyraMarket.getIndustry(Industries.HEAVYBATTERIES).setImproved(true);
+
 		lyra.setInteractionImage(GfxCat.ILLUSTRATIONS, "kol_citadel_large");
 
-		lyra.getMarket().removeSubmarket(Submarkets.SUBMARKET_BLACK);
-		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
+		lyraMarket.removeSubmarket(Submarkets.SUBMARKET_BLACK);
+		if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyraMarket.getId());
 
-		MarketHelpers.addMarketPeople(lyra.getMarket());
+		MarketHelpers.addMarketPeople(lyraMarket);
 
-		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyra.getMarket(), "Grandmaster", "Lyon", "kol_grandmaster",
+		PersonAPI grandmaster = MagicCampaign.addCustomPerson(lyraMarket, "Grandmaster", "Lyon", "kol_grandmaster",
 				FullName.Gender.MALE, KolStaticStrings.kolFactionID, Ranks.FACTION_LEADER, Ranks.POST_FACTION_LEADER,
 				false, 0, 1);
 
-		PersonAPI lackey2 = MagicCampaign.addCustomPerson(lyra.getMarket(), "Rebecca", "Greenflight", "kol_agent_f",
+		PersonAPI lackey2 = MagicCampaign.addCustomPerson(lyraMarket, "Rebecca", "Greenflight", "kol_agent_f",
 				FullName.Gender.FEMALE, KolStaticStrings.kolFactionID, Ranks.SISTER, Ranks.POST_INTELLIGENCE_DIRECTOR,
 				false, 0, 0);
 
