@@ -2,22 +2,18 @@
   "hullName": "Shachihoko",
   "hullId": "zea_edf_shachihoko",
   "hullSize": "FIGHTER",
-  "style": "ZEA_ELYSIAN_TECH",
   "spriteName": "graphics/zea/ships/fighters/zea_edf_shachihoko.png",
+  "style": "ZEA_ELYSIAN_TECH",
   "height": 50,
   "width": 82,
-  "center": [
-    41, 25
-  ],
-  "collisionRadius": 42,
-  "coversColor": "",
-  "shieldCenter": [
-    0, 0
-  ],
-  "shieldRadius": 54,
+  "center": [41, 23],
+  "collisionRadius": 62,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 51.5,
   "viewOffset": 0,
-  "builtInWings": [ ],
-  "builtInModules": null,
+  "builtInMods": [
+    "advancedshieldemitter",
+  ],
   "weaponSlots": [
     {
       "id": "WS 001",
@@ -26,28 +22,58 @@
       "mount": "HIDDEN",
       "arc": 45,
       "angle": 0,
-      "locations": [
-        0, 0
-      ]
+      "locations": [0, -0]
     }
   ],
   "engineSlots": [
     {
-      "location": [
-        -24.5, 0
-      ],
+      "location": [-11.5, 21],
       "length": 23,
       "width": 9,
       "angle": 180,
       "contrailSize": 64,
       "style": "zea_EDF_ENG_F"
+    },
+    {
+      "location": [-11.5, -21],
+      "length": 23,
+      "width": 9,
+      "angle": -180,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    },
+    {
+      "location": [-8.5, 24.5],
+      "length": 23,
+      "width": 9,
+      "angle": 170,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
+    },
+    {
+      "location": [-8.5, -24.5],
+      "length": 23,
+      "width": 9,
+      "angle": -170,
+      "contrailSize": 64,
+      "style": "zea_EDF_ENG_F"
     }
   ],
   "bounds": [
-    -19.5, 9.5,
-    1.5, 40,
-    25.5, 0,
-    1.5, -40,
-    -19.5, -9.5
+    18.5, -9.5,
+    21.5, -16,
+    16, -23,
+    21, -31,
+    12.5, -41.5,
+    -19, -19,
+    -10.5, -8,
+    -22, -0,
+    -10.5, 8,
+    -19, 19,
+    12.5, 41.5,
+    21, 31,
+    16, 23,
+    21.5, 16,
+    18.5, 9.5
   ]
 }

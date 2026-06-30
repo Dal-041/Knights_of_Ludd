@@ -20,7 +20,9 @@
   ],
   "builtInWeapons": {
     "WS0003": "zea_deco_nightfall_oiwa_lights",
-    "WS0004": "zea_deco_nightfall_oiwa_front"
+    "WS0004": "zea_deco_nightfall_oiwa_front",
+    "WS0007": "zea_nightfall_resonator_S",
+    "WS0008": "zea_nightfall_resonator_S"
   },
   "weaponSlots": [
     {
@@ -37,7 +39,7 @@
       "size": "SMALL",
       "type": "UNIVERSAL",
       "mount": "TURRET",
-      "arc": 0,
+      "arc": 270,
       "angle": 0,
       "locations": [-18, -0],
       "renderOrderMod": 301
@@ -85,7 +87,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [5, -0],
+      "locations": [3, -0],
       "renderOrderMod": 201
     },
     {
@@ -95,7 +97,7 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [-8, -1],
+      "locations": [-8, -0],
       "renderOrderMod": 101
     }
   ],
@@ -117,20 +119,36 @@
       "style": "zea_nightfall"
     },
     {
-      "location": [4, 58],
-      "length": 45,
-      "width": 18.15,
-      "angle": 129.5,
-      "contrailSize": 18.15,
+      "location": [8, 53],
+      "length": 49.717468,
+      "width": 12.111761,
+      "angle": 130,
+      "contrailSize": 12.111761,
       "style": "zea_nightfall2"
     },
     {
-      "location": [4, -58],
-      "length": 45,
-      "width": 18.15,
-      "angle": -129.5,
-      "contrailSize": 18.15,
+      "location": [8, -53],
+      "length": 49.717468,
+      "width": 12.111761,
+      "angle": -130,
+      "contrailSize": 12.111761,
       "style": "zea_nightfall2"
+    },
+    {
+      "location": [-6, 36],
+      "length": 6,
+      "width": 12,
+      "angle": 150.5,
+      "contrailSize": 12,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [-6, -36],
+      "length": 6,
+      "width": 12,
+      "angle": -150.5,
+      "contrailSize": 12,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     }
   ],
   "bounds": [

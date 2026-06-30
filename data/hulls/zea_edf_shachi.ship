@@ -4,7 +4,7 @@
   "hullSize": "FIGHTER",
   "spriteName": "graphics/zea/ships/fighters/zea_edf_shachi.png",
   "style": "ZEA_ELYSIAN_TECH",
-  "height": 28,
+  "height": 32,
   "width": 48,
   "center": [24, 14],
   "collisionRadius": 35,
@@ -39,13 +39,29 @@
       "angle": 180,
       "contrailSize": 64,
       "style": "zea_EDF_ENG_F"
+    },
+    {
+      "location": [-6, 11],
+      "length": 16,
+      "width": 6,
+      "angle": 158,
+      "contrailSize": 6,
+      "style": "zea_EDF_ENG_F"
+    },
+    {
+      "location": [-6, -11],
+      "length": 16,
+      "width": 6,
+      "angle": -158,
+      "contrailSize": 6,
+      "style": "zea_EDF_ENG_F"
     }
   ],
   "bounds": [
-    -11, 12.5,
-    -1.5, 23.5,
-    12, 0,
-    -1.5, -23.5,
-    -11, -12.5
+    -12.5, -0,
+    2.5, 24,
+    16.5, 6.5,
+    16.5, -6.5,
+    2.5, -24
   ]
 }

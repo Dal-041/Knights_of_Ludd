@@ -18,7 +18,7 @@
   "hardpointOffsets": [16,0],
   "hardpointAngleOffsets": [0],
   #"darkCore":true,
-  "width":50.0,
+  "width":100.0,
   "textureScrollSpeed":500.0,
   "pixelsPerTexel":5.0,
   "pierceSet":[

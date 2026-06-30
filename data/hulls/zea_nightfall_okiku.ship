@@ -20,14 +20,17 @@
   ],
   "builtInWeapons": {
     "WS0004": "zea_deco_nightfall_okiku_lights",
-    "WS0010": "zea_deco_nightfall_resonator",
-    "WS0011": "zea_deco_nightfall_resonator"
+    "WS0010": "zea_nightfall_resonator_M",
+    "WS0011": "zea_nightfall_resonator_M",
+    "WS0012": "zea_deco_nightfall_okiku_front",
+    "WS0014": "shockrepeater",
+    "WS0015": "shockrepeater"
   },
   "weaponSlots": [
     {
       "id": "WS0002",
       "size": "SMALL",
-      "type": "HYBRID",
+      "type": "UNIVERSAL",
       "mount": "TURRET",
       "arc": 210,
       "angle": 90,
@@ -36,7 +39,7 @@
     {
       "id": "WS0003",
       "size": "SMALL",
-      "type": "HYBRID",
+      "type": "UNIVERSAL",
       "mount": "TURRET",
       "arc": 210,
       "angle": -90,
@@ -45,11 +48,11 @@
     {
       "id": "WS0005",
       "size": "LARGE",
-      "type": "UNIVERSAL",
+      "type": "ENERGY",
       "mount": "HARDPOINT",
       "arc": 7,
       "angle": 0,
-      "locations": [42.5, -0]
+      "locations": [29.5, -0]
     },
     {
       "id": "WS0006",
@@ -58,7 +61,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": 35,
-      "locations": [44.5, 38]
+      "locations": [44.5, 38],
+      "renderOrderMod": 301
     },
     {
       "id": "WS0007",
@@ -67,7 +71,8 @@
       "mount": "TURRET",
       "arc": 210,
       "angle": -35,
-      "locations": [44.5, -38]
+      "locations": [44.5, -38],
+      "renderOrderMod": 301
     },
     {
       "id": "WS0008",
@@ -103,7 +108,8 @@
       "mount": "HARDPOINT",
       "arc": 0,
       "angle": 0,
-      "locations": [10, -0]
+      "locations": [9, -0],
+      "renderOrderMod": 201
     },
     {
       "id": "WS0010",
@@ -122,22 +128,50 @@
       "arc": 0,
       "angle": -139.5,
       "locations": [19.5, -52]
+    },
+    {
+      "id": "WS0014",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 75,
+      "angle": 0,
+      "locations": [56.5, 19]
+    },
+    {
+      "id": "WS0015",
+      "size": "SMALL",
+      "type": "BUILT_IN",
+      "mount": "HIDDEN",
+      "arc": 75,
+      "angle": -0,
+      "locations": [56.5, -19]
+    },
+    {
+      "id": "WS0012",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HARDPOINT",
+      "arc": 0,
+      "angle": 0,
+      "locations": [14.5, -0],
+      "renderOrderMod": 101
     }
   ],
   "engineSlots": [
     {
-      "location": [20.5, 51.5],
+      "location": [22.5, 49],
       "length": 64.029999,
       "width": 45,
-      "angle": 139,
+      "angle": 135,
       "contrailSize": 37.119999,
       "style": "zea_nightfall"
     },
     {
-      "location": [20.5, -51.5],
+      "location": [22.5, -49],
       "length": 64.029999,
       "width": 45,
-      "angle": -139,
+      "angle": -135,
       "contrailSize": 37.119999,
       "style": "zea_nightfall"
     },
@@ -150,18 +184,18 @@
       "style": "zea_nightfall"
     },
     {
-      "location": [15, -57.5],
+      "location": [20.5, -51],
       "length": 52.610001,
       "width": 10,
-      "angle": -139,
+      "angle": -135.5,
       "contrailSize": 14.62,
       "style": "zea_nightfall2"
     },
     {
-      "location": [15, 57.5],
+      "location": [20.5, 51],
       "length": 52.610001,
       "width": 10,
-      "angle": 139,
+      "angle": 135.5,
       "contrailSize": 14.62,
       "style": "zea_nightfall2"
     },
@@ -172,6 +206,70 @@
       "angle": 180,
       "contrailSize": 12,
       "style": "zea_nightfall2"
+    },
+    {
+      "location": [17.5, 117],
+      "length": 28.99,
+      "width": 7,
+      "angle": 120,
+      "contrailSize": 11.31,
+      "style": "zea_nightfall2"
+    },
+    {
+      "location": [17.5, -117],
+      "length": 28.99,
+      "width": 7,
+      "angle": -120,
+      "contrailSize": 11.31,
+      "style": "zea_nightfall2"
+    },
+    {
+      "location": [19.5, 113.5],
+      "length": 34.217621,
+      "width": 20.53332,
+      "angle": 120,
+      "contrailSize": 20.53332,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [19.5, -113.5],
+      "length": 34.217621,
+      "width": 20.53332,
+      "angle": -120,
+      "contrailSize": 20.53332,
+      "style": "zea_nightfall"
+    },
+    {
+      "location": [-10.5, 34],
+      "length": 5.415063,
+      "width": 8.75833,
+      "angle": 120,
+      "contrailSize": 8.75833,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [-10.5, -34],
+      "length": 5.415063,
+      "width": 8.75833,
+      "angle": -120,
+      "contrailSize": 8.75833,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [19, 92.5],
+      "length": 5.415063,
+      "width": 8.75833,
+      "angle": 120,
+      "contrailSize": 8.75833,
+      "style": "zea_OMEGA_TRAIL_ONLY"
+    },
+    {
+      "location": [19, -92.5],
+      "length": 5.415063,
+      "width": 8.75833,
+      "angle": -120,
+      "contrailSize": 8.75833,
+      "style": "zea_OMEGA_TRAIL_ONLY"
     }
   ],
   "bounds": [
