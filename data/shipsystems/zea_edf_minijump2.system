@@ -1,0 +1,25 @@
+{
+	"id":"zea_edf_minijump2",
+    "type":"ENGINE_MOD",
+    "aiType":"MANEUVERING_JETS",
+
+	"statsScript":"org.selkie.zea.shipsystems.MiniJump",
+    "runScriptWhileIdle":true,  # this means unapply() never gets called
+    "engineGlowLengthMult":1.5,
+
+    "flameoutOnImpactChance":0,
+
+	"useSound":"zea_elysian_minijump_deactivate",
+    "outOfUsesSound":"engine_disabled",
+	
+	"jitterColor":[255,255,255,75],
+	"jitterCopies":1,
+	"jitterRange":0,
+	"jitterRangeRadiusFraction":0.75,
+
+    "aiHints":{
+		"activeSpeedIncrease":0,
+        "burstMovementPotential":1000,
+        "averageSpeedIncrease":10,
+    }
+}
