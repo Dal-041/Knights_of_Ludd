@@ -284,6 +284,13 @@ public class ZeaStaticStrings {
         }
     }
 
+    // COFFIN link: consumable that lets the player pilot automated ships (after Tahlan's Neural Uplink)
+    public static class CoffinLink {
+        public static final String ITEM_ID = "zea_elysia_COFFIN_link";                // special item, Amaterasu drop
+        public static final String COMMODITY_ID = "zea_elysia_COFFIN_link_core";      // hidden captain-picker entry
+        public static final String SKILL_ID = "zea_elysia_COFFIN_link_skill";         // granted on use
+    }
+
     public static final String[] techInheritIDs = {
         "remnant",
         "mercenary"

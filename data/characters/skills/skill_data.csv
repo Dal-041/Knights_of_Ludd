@@ -11,3 +11,4 @@ zea_boss_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat
 zea_dawn_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
 zea_dusk_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
 zea_elysian_core_aptitude,,0,,,,,,,,,npc_only,graphics/icons/skills/category_combat.png
+zea_elysia_COFFIN_link_skill,COFFIN Link,10001,1,0,,A human mind where an AI core should be.,,TRUE,,,"npc_only, deprecated",graphics/zea/icons/cargo/zea_elysia_COFFIN_link.png

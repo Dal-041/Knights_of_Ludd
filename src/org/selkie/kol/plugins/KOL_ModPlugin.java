@@ -23,6 +23,7 @@ import org.selkie.zea.campaign.NullspaceVFXRenderer;
 import org.selkie.zea.campaign.ZeaCampaignPlugin;
 import org.selkie.zea.campaign.cores.AICoreDropReplacerScript;
 import org.selkie.zea.campaign.cores.AICoreReplacerScript;
+import org.selkie.zea.campaign.coffinlink.CoffinLinkScript;
 import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.zea.helpers.ZeaUtils;
@@ -78,6 +79,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().registerPlugin(new AICoreCampaignPlugin());
 		Global.getSector().addTransientScript(new AICoreReplacerScript());
 		Global.getSector().addTransientListener(new AICoreDropReplacerScript());
+		Global.getSector().addTransientScript(new CoffinLinkScript());
 
 		LunaCampaignRenderer.addTransientRenderer(new NullspaceVFXRenderer());
 

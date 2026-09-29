@@ -8,6 +8,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Drops;
 import com.fs.starfarer.api.impl.campaign.ids.Entities;
 import com.fs.starfarer.api.impl.campaign.ids.Factions;
 import com.fs.starfarer.api.impl.campaign.ids.MemFlags;
+import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.BaseSalvageSpecial;
 import com.fs.starfarer.api.impl.campaign.rulecmd.salvage.special.ShipRecoverySpecial;
 import org.lazywizard.lazylib.VectorUtils;
 import org.lwjgl.util.vector.Vector2f;
@@ -109,6 +110,12 @@ public class ManageElysianAmaterasu implements FleetEventListener {
 			wreck.addDropRandom(ZeaDrops.OMEGA_WEAPONS_MEDIUM, 2);
 			wreck.addDropRandom(ZeaDrops.OMEGA_WEAPONS_LARGE, 1);
 			wreck.getMemoryWithoutUpdate().set(MemFlags.ENTITY_MISSION_IMPORTANT, true);
+
+			// guaranteed COFFIN Link
+			CargoAPI coffinLink = Global.getFactory().createCargo(true);
+			coffinLink.addSpecial(new SpecialItemData(ZeaStaticStrings.CoffinLink.ITEM_ID, null), 1);
+			BaseSalvageSpecial.addExtraSalvage(wreck, coffinLink);
+
 			wreck.setLocation(primaryWinner.getLocation().getX(), primaryWinner.getLocation().getY());
 		}
 	}
