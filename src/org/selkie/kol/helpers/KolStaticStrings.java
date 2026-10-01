@@ -84,4 +84,41 @@ public class KolStaticStrings {
 
         public static final String KOL_TAKEOVERS_ENDED = "$kol_takeovers_ended";
     }
+
+    // Knights prelude quest chain (openspec change add-knights-prelude-chain).
+    // Global memory keys; rules.csv reads them as $global.<key without $>.
+    public static class KolPrelude {
+        public static final String ENARMS_ID = "kol_knightcaptain";
+        public static final String MARTINS_ID = "kol_libramaster";
+
+        // mission ids (person_missions.csv / bar_events.csv)
+        public static final String HOOK_ID = "kolPreludeHook";
+        public static final String PIRATE_ID = "kolPreludePirate";
+        public static final String LIBRA_ID = "kolPreludeLibra";
+
+        // mission references (setGlobalReference)
+        public static final String HOOK_REF = "$kolPreludeHook_ref";
+        public static final String PIRATE_REF = "$kolPreludePirate_ref";
+        public static final String LIBRA_REF = "$kolPreludeLibra_ref";
+
+        // Permanent flags (never registered with a mission, so they survive mission end)
+        public static final String HOOK_SEEN = "$kolPreludeHook_seen";
+        public static final String ENARMS_MET = "$kolPrelude_metEnarms";
+        public static final String PIRATE_COMPLETE = "$kolPrelude_pirateComplete";
+        public static final String LIBRA_COMPLETE = "$kolPrelude_libraComplete";
+        public static final String PRELUDE_DONE = "$kol_prelude_done";
+
+        // Mission-owned flags: set while a mission runs and auto-unset by BaseHubMission when it ends.
+        // Rules may gate "during" states on these, never "after" states.
+        public static final String PIRATE_ACTIVE = "$kolPreludePirate_active";     // setGlobalReference in-progress flag
+        public static final String LIBRA_ACTIVE = "$kolPreludeLibra_active";
+        public static final String HOOK_TALKED = "$kolPreludeHook_talked";         // stage trigger: hook -> COMPLETED
+        public static final String PIRATE_BEATEN = "$kolPreludePirate_beaten";     // stage trigger: -> REPORT
+        public static final String PIRATE_DONE = "$kolPreludePirate_done";         // stage trigger: -> COMPLETED
+        public static final String LIBRA_DELIVERED = "$kolPreludeLibra_delivered"; // stage trigger: -> REPORT
+        public static final String LIBRA_DONE = "$kolPreludeLibra_done";           // stage trigger: -> COMPLETED
+
+        // rules.csv trigger fired when the pirate fleet is beaten
+        public static final String PIRATE_DEFEAT_TRIGGER = "KolPreludePirateDefeated";
+    }
 }

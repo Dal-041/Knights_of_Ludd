@@ -1,0 +1,3 @@
+mission id,person id,tagsAll,tagsAny,tagsNotAny,tags,freq,min timeout,max timeout,min rep,max rep,importance,reqMissionAny,reqMissionAll,reqMissionNone,icon,plugin
+kolPreludePirate,,,,,,,,,,,,,,,graphics/icons/missions/pirate_system_bounty.png,org.selkie.kol.campaign.missions.KolPreludePirate
+kolPreludeLibra,,,,,,,,,,,,,,,graphics/icons/missions/pilgrims_path.png,org.selkie.kol.campaign.missions.KolPreludeLibra

@@ -51,7 +51,7 @@ defaultGrandmasterMeetingResponseAnswer,GrandmasterMeetingResponse,,$askedToMeet
 #END Grandmaster,,,,,,
 ,,,,,,
 # Knightmaster,,,,,,
-defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a prefunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
+defaultKnightmasterGreeting,PickGreeting,$id == kol_chaptermaster score:100,ShowPersonVisual,"After some time waiting, you reach the office of the Chaptermaster. There's a perfunctory greeting before you're pushed off the line with instructions to contact an underling if looking for freelance writs. No doubt dealings with her will require building some trust within the organization first. Perhaps the Knight-Leader has some work.",,
 ,,,"ShowDefaultVisual
 FireAll PopulateOptions",,,
 #END Knightmaster,,,,,,
@@ -67,11 +67,13 @@ FireAll PopulateOptions",,,
 #END Grandmaster Lackey,,,,,,
 ,,,,,,
 # Knightmaster Lackey,,,,,,
-defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""His light upon you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. 
+defaultKnightmasterLackeyGreeting,PickGreeting,$id == kol_knightcaptain score:100,ShowPersonVisual,"""Blessings on you, $PlayerSirOrMadam. I regret that we're quite inundated over here. If you're looking for work, please contact one of the administrators, they have reliable contracts for our commissioned freelancers; the faith has many that we must defend against who would see it brought low. 
 
 Our Master of Agents on our sister-station Lyra may also need a lead investigated. 
 
-Visit me again sometime soon and we may have some formal contracts ready."" - At least you're pretty sure you heard ""soon,"" but for some reason the comm transcriber says ""in later patches."" How strange. - ""Till next we meet, Captain!""",0:kol_km_lackey_expeditions:Continue,
+Visit me again sometime soon and we may have some formal contracts ready.""
+
+""Till next we meet, Captain!""",0:kol_km_lackey_expeditions:Continue,
 defaultKnightmasterLackeyExpeditionsBlurb,DialogOptionSelected,$option == kol_km_lackey_expeditions,"ShowDefaultVisual
 FireAll PopulateOptions","Ah, another thing, Captain. Perhaps if you're the valiant type, you can find our expeditions gather about twice a month, as soon as one returns, or... if we lose contact. Please, if you provide them escort they're sure to go somewhere interesting. You'd be doing us a great favor. Blessings upon you, Captain.",,
 #END Knightmaster Lackey,,,,,,
@@ -217,15 +219,15 @@ BeginMission MGAIntro
 $global.nraRH_completed = true",,cutCommLink:Cut the comm link,
 nraOpenDialog,OpenInteractionDialog,"$id == mga_station_nomios_rapid_autofab score:1000
 ","ShowDefaultVisual
-FireBest NRAPostOpen","The angular, utilitarian structure of Nomios Rapid Autofab stands ahead, its industrial modules buzzing with the constant activity of projects that need to be turned around quickly. This station thrives on efficiency, handling smaller, high-priority tasks for the sector’s major factions—aside from one notable exception. Here, prototypes and specialized components are built at speed, driven by the need to meet tight deadlines. A few engineering vessels and freighters shuttle between bays, ensuring that every project keeps moving toward completion, no matter how tight the schedule.
+FireBest NRAPostOpen","The angular, utilitarian structure of Nomios Rapid Autofab stands ahead, its industrial modules buzzing with the constant activity of projects that need to be turned around quickly. This station thrives on efficiency, handling smaller, high-priority tasks for the sector’s major factions - aside from one notable exception. Here, prototypes and specialized components are built at speed, driven by the need to meet tight deadlines. A few engineering vessels and freighters shuttle between bays, ensuring that every project keeps moving toward completion, no matter how tight the schedule.
 ",,
 nraDefaultDocking,NRAPostOpen,"!$global.nraRH_completed
 !$market.mgaIntro_completed",,"As your ship nears, you transmit a docking request, but the response is quick and professional. ""Captain, this facility is restricted to authorized personnel and faction contracts. Without a direct referral or specific business with Mbaye-Gogol, we cannot grant docking clearance."" The voice remains polite, but firm. ""For general work or services, I'd recommend heading down to the planet Nomios itself. Safe travels."" The channel cuts off, and your ship’s course shifts away, the station receding into the backdrop of Arcadia.",defaultLeave:Leave,
 nraActiveQuestDocking,NRAPostOpen,"$global.nraRH_completed
-$market.mgaIntro_completed",FireAll NRAPopulateOptions,"The docking procedure is swift, almost routine now. ""Welcome back, Captain $playerName,"" the voice over the comms greets you, professional but with a hint of recognition. Your ship is guided smoothly into a private berth. While the station continues its business as usual, there’s a subtle sense that the relic recovery represents something special—an opportunity that might grow in importance, depending on what the station’s engineers can eventually unlock from these ancient ships. A polite message from the liaison invites you to use the station's facilities before heading out again.",,
+$market.mgaIntro_completed",FireAll NRAPopulateOptions,"The docking procedure is swift, almost routine now. ""Welcome back, Captain $playerName,"" the voice over the comms greets you, professional but with a hint of recognition. Your ship is guided smoothly into a private berth. While the station continues its business as usual, there’s a subtle sense that the relic recovery represents something special - an opportunity that might grow in importance, depending on what the station’s engineers can eventually unlock from these ancient ships. A polite message from the liaison invites you to use the station's facilities before heading out again.",,
 nraAddOptionTrade,NRAPopulateOptions,,MakeOptionOpenCore marketOpenCoreUI CARGO $tradeMode,,10:marketOpenCoreUI:Transfer goods or ships,
 nraIntroDocking,NRAPostOpen,"$global.nraRH_completed
-!$market.mgaIntro_completed",$market.mgaIntro_completed = true,"As you send your docking request, a quick response follows. ""Captain $playerName, welcome. We’ve received word from Callisto Ibrahim about your arrival. Director Amadou Sembene is expecting you."" The mention of the director himself catches you slightly off guard—this isn’t the kind of place where top leadership meets with just anyone. The docking queue opens, and your ship is smoothly guided to a private berth. Once docked, the subtle hum of the station's machinery fades, replaced by a message from a station liaison, inviting you to meet Sembene personally. It’s clear you’ve caught their interest—rarely does someone meet with the head of such a facility directly.",nraDirectorMeeting:Contiune,
+!$market.mgaIntro_completed",$market.mgaIntro_completed = true,"As you send your docking request, a quick response follows. ""Captain $playerName, welcome. We’ve received word from Callisto Ibrahim about your arrival. Director Amadou Sembene is expecting you."" The mention of the director himself catches you slightly off guard - this isn’t the kind of place where top leadership meets with just anyone. The docking queue opens, and your ship is smoothly guided to a private berth. Once docked, the subtle hum of the station's machinery fades, replaced by a message from a station liaison, inviting you to meet Sembene personally. It’s clear you’ve caught their interest - rarely does someone meet with the head of such a facility directly.",nraDirectorMeeting:Contiune,
 nraDirectorMeeting,DialogOptionSelected,"$option == nraDirectorMeeting
 ",FireAll PopulateOptions,Start DIrector Logi Relic Ship Mission,defaultLeave:Leave,
 #END Mbaye Gogol Autofab,,,,,,
@@ -245,3 +247,257 @@ zeaNullGateUseOpt,DialogOptionSelected,$option == NULL_GATE,NullGateCMD Traverse
 ,,,,,,
 #END Nullgate,,,,,,
 ,,,,,,
+# Knights prelude chain (openspec: add-knights-prelude-chain),,,,,,
+kolPreludeHook_blurbBar,kolPreludeHook_blurbBar,,,"A Knight in a worn coat is pinning hand-lettered notices to the bar's message board, one careful tack at a time, ignoring the looks from the regulars.",,
+kolPreludeHook_optionBar,kolPreludeHook_optionBar,,,,kolPreludeHook_start:Read one of the Knight's notices,
+kolPreludeHook_start,DialogOptionSelected,$option == kolPreludeHook_start,"$global.kolPreludeHook_seen = true
+$missionId = kolPreludeHook
+ShowPersonVisual","""FREELANCE CAPTAINS SOUGHT,"" the notice reads, in an old-fashioned hand. ""The Knights of Ludd have need of able ships and steady crews. Fair pay; blessings freely given. Enquire with Brother Enarms, Battlestation Cygnus.""
+
+The Knight notices you reading and straightens, one thumb still pressing a tack home. ""You are looking for work, captain? We are few, and the duties we keep are many. The Order asks for your service, not your faith."" $HeOrShe waits for your answer with the patience of someone who has waited through a great many sermons.","kolPreludeHook_accept:""I'll look up Brother Enarms.""
+kolPreludeHook_decline:""Not my kind of work.""",
+kolPreludeHook_accept,DialogOptionSelected,$option == kolPreludeHook_accept,"BarCMD accept $missionId
+BarCMD returnFromEvent true","The Knight presses a notice into your hand, as if you might forget. ""Tell him the Knight with the tacks sent you. He will pretend to be pleased."" $HisOrHer mouth curves to a light smile. ""Blessings on you, captain. Do Good out there.""",,
+kolPreludeHook_decline,DialogOptionSelected,$option == kolPreludeHook_decline,BarCMD returnFromEvent true,"The Knight nods, unoffended, and returns to $hisOrHer tacks. ""Seek virtue, captain. The notice will keep.""",,
+kolPrelude_enarmsGreetingFirst,PickGreeting,"$id == kol_knightcaptain score:200
+RepIsAtWorst knights_of_selkie NEUTRAL
+!$global.kolPrelude_metEnarms","ShowPersonVisual
+FireAll PopulateOptions","A Knight-Captain answers your hail, his face cast in the staccato flicker of several open data slates. He does not look at the viewer immediately; his gaze is fixed on a scrolling manifest, his expression distant and severe. Around one wrist, a devotional cord is knotted tight.
+
+""Brother Enarms. His light upon you,"" he says, still reading. Then the manifest scrolls out of frame and he sits straighter, like he only now remembers the camera. ""$PlayerSirOrMadam. Forgive the delay. What can I do for you?""",,
+kolPrelude_enarmsGreeting,PickGreeting,"$id == kol_knightcaptain score:200
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPrelude_metEnarms","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms finishes the entry he is reading before he looks up. ""What can I do for you?""",,
+kolPrelude_enarmsGreetingPirateDone,PickGreeting,"$id == kol_knightcaptain score:210
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPrelude_metEnarms
+$global.kolPrelude_pirateComplete","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" The slate is already set aside, and he is looking straight at the screen. ""Tell me this is good news. I am owed some.""",,
+kolPrelude_enarmsGreetingLibraDone,PickGreeting,"$id == kol_knightcaptain score:220
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPrelude_metEnarms
+$global.kolPrelude_libraComplete","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms touches the cord at his wrist before he speaks, and does not seem to notice he has done it. He says something to someone off-frame, and a door closes somewhere behind him. ""Providence has brought you back intact. Go on.""",,
+kolPrelude_enarmsGreetingPirateActive,PickGreeting,"$id == kol_knightcaptain score:230
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPreludePirate_active
+!$global.kolPreludePirate_beaten","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms looks up from his slate. ""The raiders are still lying in wait, then. Two more traders turned back at Canaan this week."" He does not make it an accusation.",,
+kolPrelude_enarmsGreetingPirateBeaten,PickGreeting,"$id == kol_knightcaptain score:235
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPreludePirate_beaten
+!$global.kolPreludePirate_done","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms sets the slate down the moment the link opens. ""You found them. I can see it."" 
+
+He waits, hands folded on the desk.",,
+kolPrelude_enarmsGreetingLibraActive,PickGreeting,"$id == kol_knightcaptain score:240
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPreludeLibra_active
+!$global.kolPreludeLibra_delivered","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" A slate bearing Libra's seal sits on top of the stack at his elbow. Enarms turns it face-down before he speaks. ""Their last courier was late again. What do you need?""",,
+kolPrelude_enarmsGreetingLibraDelivered,PickGreeting,"$id == kol_knightcaptain score:245
+RepIsAtWorst knights_of_selkie NEUTRAL
+$global.kolPreludeLibra_delivered
+!$global.kolPreludeLibra_done","ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms's attention is already fixed on the screen. ""You reached Libra."" Not quite a question. ""Tell me. Leave nothing out for my sake.""",,
+kolPrelude_optWorkFaithful,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPreludeHook_seen
+!$global.kolPreludePirate_active
+!$global.kolPrelude_pirateComplete
+RepIsAtWorst knights_of_selkie NEUTRAL",,,"5:kolPrelude_askWorkFaithful:""I seek to serve the Order, Brother Enarms. Your notice spoke of a need for steady crews.""",
+kolPrelude_optWorkDeferential,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+!$global.kolPreludePirate_active
+!$global.kolPrelude_pirateComplete
+RepIsAtWorst knights_of_selkie NEUTRAL",,,"5:kolPrelude_askWorkDeferential:""I am honored by the welcome, I know the Order doesn't often look to free spacers.""",
+kolPrelude_optWorkInterest,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+!$global.kolPreludePirate_active
+!$global.kolPrelude_pirateComplete
+RepIsAtWorst knights_of_selkie NEUTRAL",,,"6:kolPrelude_askWorkInterest:""I've heard the Knights pay fairly and keep their word. I'm looking for work that pays well.""",
+kolPrelude_optWorkImpatient,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPreludeHook_seen
+!$global.kolPreludePirate_active
+!$global.kolPrelude_pirateComplete
+RepIsAtWorst knights_of_selkie NEUTRAL",,,"6:kolPrelude_askWorkImpatient:""I'm here about the notices. I hope you have a job and not just sermons.""",
+kolPrelude_askWorkFaithful,DialogOptionSelected,$option == kolPrelude_askWorkFaithful,"$global.kolPrelude_metEnarms = true
+$global.kolPreludeHook_talked = true
+BeginMission kolPreludePirate false
+FireBest KolPreludePirateOffer","""Faith is a fine foundation, captain, but you'll strength too to serve the Order. If your resolve is as steady as your words, we may have a use for you.""",,
+kolPrelude_askWorkDeferential,DialogOptionSelected,$option == kolPrelude_askWorkDeferential,"$global.kolPrelude_metEnarms = true
+BeginMission kolPreludePirate false
+FireBest KolPreludePirateOffer","""The Order's needs are great, but our trust is earned, not given. That you recognize this opportunity is good. We will pray your skills match your courtesy.""",,
+kolPrelude_askWorkInterest,DialogOptionSelected,$option == kolPrelude_askWorkInterest,"$global.kolPrelude_metEnarms = true
+BeginMission kolPreludePirate false
+FireBest KolPreludePirateOffer","""Payment is a certainty when Good work is completed. The Knights honor their debts, but we do expect a professional's discretion in return.""",,
+kolPrelude_askWorkImpatient,DialogOptionSelected,$option == kolPrelude_askWorkImpatient,"$global.kolPrelude_metEnarms = true
+$global.kolPreludeHook_talked = true
+BeginMission kolPreludePirate false
+FireBest KolPreludePirateOffer","""Patience is a virtue the Order prizes, captain. One I suggest you cultivate. However... timeliness in the field is equally valuable. We will trust you can deliver.""",,
+kolPrelude_pirateOffer,KolPreludePirateOffer,!$missionCreationFailed,"Call $global.kolPreludePirate_ref updateData
+FireBest KolPreludePirateOfferText",,,
+kolPrelude_pirateOfferText,KolPreludePirateOfferText,,Highlight $kolPreludePirate_fleetName $kolPreludePirate_systemName,"""Indeed, we have work to offer."" Enarms locks his gaze on a slate of shipping manifests and distress pings.
+
+""Raiders, calling themselves the $kolPreludePirate_fleetName. Three of our traders and a pilgrim ship vanished since the turn of the cycle. Our last confirmed sighting: the $kolPreludePirate_systemName.""
+
+He looks up then. The lens is too honest about the shadows under his eyes.
+
+""I'd send a patrol. I have one assembling now. It is currently: me."" A pause, in case that was funny.
+
+""Drive them off or break them, whichever the raiders allow. We will give you due reward; you will not be asked to take our vows of poverty.""","kolPrelude_pirateAskWhy:""Why hire outsiders?""
+kolPrelude_pirateAccept:""Consider them dealt with.""
+kolPrelude_pirateDecline:""Not right now.""",
+kolPrelude_pirateAskWhy,DialogOptionSelected,$option == kolPrelude_pirateAskWhy,$global.kolPrelude_askedWhyOutsiders = true,"""Because every fleet I have is already somewhere it would be worse not to have one."" He turns a slate face-down on the stack. 
+
+""And an outsider is paid and sent home. It is a cleaner sort of debt."" A glance at you. ""No offense meant.""","kolPrelude_pirateAccept:""Consider them dealt with.""
+kolPrelude_pirateDecline:""Not right now.""",
+kolPrelude_pirateOfferFail,KolPreludePirateOffer,$missionCreationFailed,"unset $missionCreationFailed
+FireAll PopulateOptions","Enarms frowns at his slate. ""The raiders I had in mind seem to have gone to ground. Try me again in a few days, captain.""",,
+kolPrelude_pirateAccept,DialogOptionSelected,$option == kolPrelude_pirateAccept,"AcceptMission
+FireAll PopulateOptions","Enarms bows his head. ""Then go, and go carefully. And keep an eye on what they carry, captain. These raiders are organized; they don't usually know our schedules this well.""",,
+kolPrelude_pirateDecline,DialogOptionSelected,$option == kolPrelude_pirateDecline,"AbortMission
+FireAll PopulateOptions","""No shame in it. The writ will keep a while.""",,
+kolPrelude_optPirateRemind,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPreludePirate_active
+!$global.kolPreludePirate_beaten",,,"6:kolPrelude_pirateRemind:""Where were the raiders last seen?""",
+kolPrelude_pirateRemind,DialogOptionSelected,$option == kolPrelude_pirateRemind,"Call $global.kolPreludePirate_ref updateData
+FireBest KolPreludePirateRemindText",,,
+kolPrelude_pirateRemindText,KolPreludePirateRemindText,,"Highlight $kolPreludePirate_fleetName $kolPreludePirate_systemName
+FireAll PopulateOptions","""The $kolPreludePirate_systemName,"" Enarms says, without looking it up. ""They call themselves the $kolPreludePirate_fleetName. They will not have gone far. Raiders seldom do, while the hunting is good.""",,
+kolPrelude_pirateDefeated,KolPreludePirateDefeated,,$global.kolPreludePirate_beaten = true,"Your boarding teams pull the raiders' data cores before the scuttling charges can finish their work. Most of it is the usual: fence contacts, stolen transponder codes, a pilgrim-ship manifest with the prices of the passengers marked.
+
+And a dossier. A thorough one, on Knight trade schedules: convoy timings, patrol rotations, the quiet routes between Knight holdings. Thorough, except where it isn't. Whole weeks are blank, whole routes are missing. The gaps are too tidy to be damage.",,
+kolPrelude_optPirateReport,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPreludePirate_beaten
+!$global.kolPreludePirate_done",,,"4:kolPrelude_pirateReport:""The raiders won't trouble your ships again. They had something you should see.""",
+kolPrelude_pirateReport,DialogOptionSelected,$option == kolPrelude_pirateReport,,"You transfer the dossier. Enarms reads it once at speed, then again slowly, lips moving slightly at the route names.
+
+""Those are our schedules. The real ones."" He scrolls. ""Cygnus-Lyra is missing. And the outer resupply. Whoever sold this held back exactly what would have hurt us most..."" He stops. ""Or exactly what they needed to keep."" 
+
+He takes a long breath. ""Ludd's-"" He breaks off and glances past the edge of the viewer. ""I will take this to the Master of Agents. Not through the usual channels.""","kolPrelude_dossierFaithful:""A betrayal of the Order's trust. This is a grave matter, Brother Enarms.""
+kolPrelude_dossierBlunt:""Someone on your side sold you out.""
+kolPrelude_dossierAmbig:""Someone held the worst of it back. Maybe for you.""
+kolPrelude_dossierNeutral:""What do you want done with it?""",
+kolPrelude_dossierFaithful,DialogOptionSelected,$option == kolPrelude_dossierFaithful,$global.kolPrelude_dossierTake = faithful,"""The Faith is eternal, captain, but the men who serve it are flawed. Today, we are reminded of that truth once more.""",kolPrelude_pirateReport2:Continue,
+kolPrelude_dossierBlunt,DialogOptionSelected,$option == kolPrelude_dossierBlunt,$global.kolPrelude_dossierTake = blunt,"Enarms does not argue. ""Perhaps."" He looks at the slate for a while. 
+
+""'Perhaps' is as far as I will go today, and further than I would like.""",kolPrelude_pirateReport2:Continue,
+kolPrelude_dossierAmbig,DialogOptionSelected,$option == kolPrelude_dossierAmbig,$global.kolPrelude_dossierTake = ambiguous,"He nods slowly. ""I had thought it. I had hoped no one would say it aloud."" His hand comes into frame and lies flat on the slate, as if it might get up and harm him.",kolPrelude_pirateReport2:Continue,
+kolPrelude_dossierNeutral,DialogOptionSelected,$option == kolPrelude_dossierNeutral,$global.kolPrelude_dossierTake = neutral,"""Nothing. Forget you saw it."" He hears himself. ""No. I do not mean that. Do not forget it, but do not speak of it.""",kolPrelude_pirateReport2:Continue,
+kolPrelude_pirateReport2,DialogOptionSelected,$option == kolPrelude_pirateReport2,"$global.kolPreludePirate_done = true
+Call $global.kolPreludePirate_ref updateStage
+AddPotentialContact
+FireAll PopulateOptions","Then he looks up, and something in his manner has changed. ""You did well, captain, better than a writ asks for. The Knights remember those who serve the faith.""",,
+kolPrelude_optLibra,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPrelude_pirateComplete
+!$global.kolPreludeLibra_active
+!$global.kolPrelude_libraComplete
+RepIsAtWorst knights_of_selkie NEUTRAL",,,"5:kolPrelude_askLibra:""Is there anything else the Knights need?""",
+kolPrelude_askLibra,DialogOptionSelected,$option == kolPrelude_askLibra,"BeginMission kolPreludeLibra false
+FireBest KolPreludeLibraOffer",,,
+kolPrelude_libraOffer,KolPreludeLibraOffer,!$missionCreationFailed,"Call $global.kolPreludeLibra_ref updateData
+FireBest KolPreludeLibraPitch",,,
+kolPrelude_libraOfferFail,KolPreludeLibraOffer,$missionCreationFailed,"unset $missionCreationFailed
+FireAll PopulateOptions","Enarms shakes his head. ""Not today, captain. Nothing I can put in a writ.""",,
+kolPrelude_libraPitchUnknown,KolPreludeLibraPitch,!$kolPreludeLibra_known,Highlight $kolPreludeLibra_stipend $kolPreludeLibra_areaName,"Enarms hesitates, then seems to decide something. ""There is a holding called Libra. A former battlestar, far from here, kept off the charts for good reasons."" 
+
+""It's under the command of Knightmaster Martins, and he has been asking for supplies for longer than I like to think about.""
+
+""I can't give you its position over comms. I can tell you it lies somewhere in $kolPreludeLibra_areaName, and that a captain who looks carefully will find it.""
+
+""They need supplies, food, and heavy machinery. The Knights can fund most of it, $kolPreludeLibra_stipend. The rest..."" He spreads his hands. ""The rest would be charity. And bring Martins the news; he'll want it as much as the food.""","kolPrelude_libraAskCharts:""Why is Libra off the charts?""
+kolPrelude_libraAccept:""I'll find Libra.""
+kolPrelude_libraDecline:""Not right now.""",
+kolPrelude_libraAskCharts,DialogOptionSelected,$option == kolPrelude_libraAskCharts,$global.kolPrelude_askedCharts = true,"""Because someone decided so, before my time, and I was not given the reason."" He looks at the slate. ""That suffices.""","kolPrelude_libraAccept:""I'll find Libra.""
+kolPrelude_libraDecline:""Not right now.""",
+kolPrelude_libraPitchKnown,KolPreludeLibraPitch,$kolPreludeLibra_known,Highlight $kolPreludeLibra_stipend $kolPreludeLibra_systemName,"""There is a holding called Libra, a battlestar kept off the charts."" Enarms stops, reading your face. 
+
+""You've been there already. Of course you have."" His face breaks into a pained smile. ""Then you know how thin they're stretched out there.""
+
+""They need supplies, food, and heavy machinery. The Knights can fund most of it, $kolPreludeLibra_stipend. The rest..."" He spreads his hands. ""The rest would be charity. And bring Martins the news; he'll want it as much as the food.""","kolPrelude_libraAccept:""I'll see Libra supplied.""
+kolPrelude_libraDecline:""Not right now.""",
+kolPrelude_libraAccept,DialogOptionSelected,$option == kolPrelude_libraAccept,"AcceptMission
+AddCredits $kolPreludeLibra_stipendAmount
+FireAll PopulateOptions","""His light upon you, captain. And upon them."" Enarms transfers the funds himself, without ceremony.",,
+kolPrelude_libraDecline,DialogOptionSelected,$option == kolPrelude_libraDecline,"AbortMission
+FireAll PopulateOptions","""I understand. Libra has waited this long."" He looks at the slate rather than at you.",,
+kolPrelude_optLibraRemind,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPreludeLibra_active
+!$global.kolPreludeLibra_delivered",,,"6:kolPrelude_libraRemind:""Remind me what Libra needs, and where to look.""",
+kolPrelude_libraRemind,DialogOptionSelected,$option == kolPrelude_libraRemind,"Call $global.kolPreludeLibra_ref updateData
+FireBest KolPreludeLibraRemindText",,,
+kolPrelude_libraRemindTextUnknown,KolPreludeLibraRemindText,!$kolPreludeLibra_known,"Highlight $kolPreludeLibra_areaName
+FireAll PopulateOptions","""Supplies, food, heavy machinery; the writ has the figures."" Enarms lowers his voice, though the line is his own. ""As for where: $kolPreludeLibra_areaName. I will not say more over comms, captain. Look carefully and you will find it.""",,
+kolPrelude_libraRemindTextKnown,KolPreludeLibraRemindText,$kolPreludeLibra_known,"Highlight $kolPreludeLibra_systemName
+FireAll PopulateOptions","""Supplies, food, heavy machinery; the writ has the figures. You know the way to the $kolPreludeLibra_systemName better than most of my Brothers do."" A pause. ""That is not a comfortable thought.""",,
+kolPrelude_martinsGreetingLibra,PickGreeting,"$id == kol_libramaster score:200
+$global.kolPreludeLibra_active
+!$global.kolPreludeLibra_delivered","ShowPersonVisual
+FireAll PopulateOptions","The answer comes from a stern man in a patched jacket, the station's command deck dim behind him. Most of the displays are dark.",,
+kolPrelude_martinsOptCargo,PopulateOptions,"$isPerson
+$id == kol_libramaster
+$global.kolPreludeLibra_active
+!$global.kolPreludeLibra_delivered",,,"4:kolPrelude_martinsCargo:""Cygnus sent me with relief cargo.""",
+kolPrelude_martinsCargo,DialogOptionSelected,$option == kolPrelude_martinsCargo,"Call $global.kolPreludeLibra_ref checkCargo
+FireBest KolPreludeLibraDockCheck",,,
+kolPrelude_libraDockHasCargo,KolPreludeLibraDockCheck,$kolPreludeLibra_hasCargo,,"""Knightmaster Martins. Welcome to our humble post. I'd offer you hospitality, but..."" He lets the idea trail off. ""I trust our 'guests' outside didn't trouble you too much. Cygnus sent you?"" He looks at your manifest for a long moment. 
+
+""Supplies. Food. Heavy equipment."" A short laugh with forced patience under it. ""We'll take a late delivery over one that doesn't arrive at all, and thank providence for it. Our Knights will meet your shuttles at bay four.""
+
+""Thank you, captain.""","kolPrelude_libraDeliver:Open the holds
+kolPrelude_libraLater:""Not yet.""",
+kolPrelude_libraDockMissing,KolPreludeLibraDockCheck,!$kolPreludeLibra_hasCargo,FireAll PopulateOptions,"Martins checks your manifest against Cygnus' writ, line by line, and shakes his head.
+
+""You're short, captain: $kolPreludeLibra_missing. Come back when it's all aboard. We can't ration a promise.""",,
+kolPrelude_libraLater,DialogOptionSelected,$option == kolPrelude_libraLater,FireAll PopulateOptions,"""Of course. We'll be here."" Martins is already turning back to his dark displays.
+
+""We always are.""",,
+kolPrelude_libraDeliver,DialogOptionSelected,$option == kolPrelude_libraDeliver,Call $global.kolPreludeLibra_ref deliver,"On the docking feed, Knights in mismatched armour form a chain from your shuttles into the station, passing crates hand to hand. The channel to the command deck is still open, and it carries the sound from Martins's own monitor: some of the crew are singing.
+
+Martins has half turned to watch it. ""Tell Enarms we're grateful. Tell him also that we see things out here Cygnus doesn't. Ships that aren't ours and aren't pirates, sitting at the edge of our guns and just... watching. They're getting bolder.""
+
+The singing swells as another crate goes hand to hand. He listens a moment. ""This song is one of harvest, and it is a better one than what we sang for the last convoy."" 
+
+A short breath that isn't quite a sigh. ""Faith is a fine shield, captain, but it cannot replace the strength of arms.""
+
+""Take the news back; we'll manage. We always manage.""","kolPrelude_libraAskWatchers:""Those watchers. What do you know about them?""
+kolPrelude_libraDeliver2:Continue",
+kolPrelude_libraAskWatchers,DialogOptionSelected,$option == kolPrelude_libraAskWatchers,$global.kolPrelude_askedWatchers = true,"""Nothing. That is the part I dislike."" Martins does not look away from the feed. 
+
+""They don't answer hails. They don't jam. They don't even seem to mind the guns. I think they log us, every arrival, every departure - a scouting party."" He is quiet for a long moment. 
+
+""I have known devout sentries less steady than these watchers. That is also a part I dislike.""",kolPrelude_libraDeliver2:Continue,
+kolPrelude_libraDeliver2,DialogOptionSelected,$option == kolPrelude_libraDeliver2,"Call $global.kolPreludeLibra_ref martinsTrade
+FireAll PopulateOptions","Martins gestures at something outside your feed. At the docking bays, a work crew is already wheeling crates the other way: pitted rifles, sidearms with the grips worn smooth, pallets of assorted plate.
+
+""It's little more than trouble and scrap,"" he admits. ""But you'll be doing us a favor by taking it off our hands. Sell it or drop it, but it needs to be off our docks.""
+
+""I shall pray to meet you again, captain, with just as glad tidings.""",,
+kolPrelude_optLibraReport,PopulateOptions,"$isPerson
+$id == kol_knightcaptain
+$global.kolPreludeLibra_delivered
+!$global.kolPreludeLibra_done",,,"4:kolPrelude_libraReport:""Libra has its supplies. Knightmaster Martins sends his regards, of a sort.""",
+kolPrelude_libraReport,DialogOptionSelected,$option == kolPrelude_libraReport,,"You tell Enarms about the dark displays, the singing, and Martins's watchers: ships that aren't friendly and aren't pirates.
+
+He listens without interrupting. When you finish he is quiet for a while. ""Raiders with our schedules. Strangers at Libra."" He touches the cord at his wrist. ""Two threads, captain, and I don't like where either of them leads.""
+
+""You have done the Knights a real service, twice now. I'd like to call on you again, if you'll let me.""
+
+""There is more going on in the Order than a freelancer's writ can hold, and I find I need people I can trust outside it."" 
+
+He stops. ""That was not a thing to say to a freelancer. Forget I said it.""","kolPrelude_libraReport2:""It sounds like you need more than a mercenary.""",
+kolPrelude_libraReport2,DialogOptionSelected,$option == kolPrelude_libraReport2,"$global.kolPrelude_shuttlePromised = true
+Call $global.kolPreludeLibra_ref complete
+FireAll PopulateOptions","He demurs. ""There are things I will not say over a link, and the channels on this station have more ears than I would like.""
+
+""When there is something worth saying, I will send a shuttle."" A pause. ""His light upon you, captain."" And for the first time, Enarms sounds like he's saying it with a little warmth.
+
+The channel drops while his hand goes to the cord at his wrist. In the last frame, you're fairly sure there is a new knot in it.",,
+#END Knights prelude chain,,,,,,

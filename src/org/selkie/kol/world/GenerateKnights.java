@@ -51,7 +51,7 @@ public class GenerateKnights {
 	}
 
 	public static void genAlways() {
-		genBattlestarLibra();
+		ensureLibra();
 		SpawnInvictus.spawnInvictus();
 		SpawnRetribution.spawnRetribution();
 		copyChurchEquipment();
@@ -155,6 +155,26 @@ public class GenerateKnights {
 
 		lackey1.setImportance(PersonImportance.MEDIUM);
 		lackey1.setVoice(Voices.FAITHFUL);
+		lackey1.addTag(Tags.CONTACT_MILITARY); // story character who can later offer contact missions
+		Global.getSector().getImportantPeople().addPerson(lackey1);
+	}
+
+	/** Brother Enarms: registered as an important person with a contact tag. Idempotent; also fixes older saves. */
+	public static void ensureEnarms() {
+		PersonAPI enarms = Global.getSector().getImportantPeople().getPerson(KolStaticStrings.KolPrelude.ENARMS_ID);
+		if (enarms == null) {
+			MarketAPI cygnus = Global.getSector().getEconomy().getMarket(KolStaticStrings.KOL_CYGNUS);
+			if (cygnus == null) return; // no Cygnus (e.g. Nexerelin random sector): no Enarms, no prelude chain
+			for (PersonAPI person : cygnus.getPeopleCopy()) {
+				if (KolStaticStrings.KolPrelude.ENARMS_ID.equals(person.getId())) {
+					enarms = person;
+					Global.getSector().getImportantPeople().addPerson(enarms);
+					break;
+				}
+			}
+			if (enarms == null) return;
+		}
+		if (!enarms.hasTag(Tags.CONTACT_MILITARY)) enarms.addTag(Tags.CONTACT_MILITARY);
 	}
 	
 	public static void genKnightsStarfortress() {
@@ -214,15 +234,45 @@ public class GenerateKnights {
 		lackey2.setVoice(Voices.FAITHFUL);
 	}
 
-	public static void genBattlestarLibra() {
-		StarSystemAPI home = getLibraHome(Long.parseLong(Global.getSector().getSeedString().substring(3)));
-		if (home == null) {
-			log.error("KOL: Could not find a system for Libra");
-			return;
+	/** The Libra market, or null if this sector has none. */
+	public static MarketAPI getLibraMarket() {
+		for (MarketAPI market : Global.getSector().getEconomy().getMarketsCopy()) {
+			if (market.getMemoryWithoutUpdate().getBoolean(KolStaticStrings.KolMemKeys.KOL_MARKET_LIBRA)) return market;
 		}
-		//SectorEntityToken libra = home.addCustomEntity(entID, "Battlestar Libra", "kol_battlestar_libra_entity", ZeaStaticStrings.kolID);
-		//libra.setCircularOrbitPointingDown(home.getStar(), (float)Math.random()*360f, 4750, 199);
+		return null;
+	}
 
+	/** Creates Libra if the sector doesn't have it (older saves, or a failed placement). Idempotent. */
+	public static void ensureLibra() {
+		if (getLibraMarket() != null) return;
+		log.info("KOL: Battlestar Libra missing, creating it");
+		genBattlestarLibra();
+	}
+
+	public static void genBattlestarLibra() {
+		long seed = Long.parseLong(Global.getSector().getSeedString().substring(3));
+		// Strict pass first (same first pick as before), then relaxed rules if no system works
+		if (placeLibra(getLibraHomePicker(seed, libraExclusionTags, true), "strict")) return;
+		if (placeLibra(getLibraHomePicker(seed, libraRelaxedExclusionTags, false), "relaxed")) return;
+		log.error("KOL: Could not find a system and location for Libra, even with relaxed rules");
+	}
+
+	private static boolean placeLibra(WeightedRandomPicker<StarSystemAPI> homes, String pass) {
+		while (!homes.isEmpty()) {
+			StarSystemAPI home = homes.pickAndRemove();
+			BaseThemeGenerator.EntityLocation loc = pickLibraLocation(home);
+			if (loc == null) {
+				log.warn(String.format("KOL: No location for Libra in %s, trying another system", home.getId()));
+				continue;
+			}
+			log.info(String.format("KOL: Placing Libra in [%s] (%s pass)", home.getName(), pass));
+			buildBattlestarLibra(home, loc);
+			return true;
+		}
+		return false;
+	}
+
+	private static BaseThemeGenerator.EntityLocation pickLibraLocation(StarSystemAPI home) {
 		LinkedHashMap<BaseThemeGenerator.LocationType, Float> weights = new LinkedHashMap<>();
 		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_BELT, 2f);
 		weights.put(BaseThemeGenerator.LocationType.IN_ASTEROID_FIELD, 10f);
@@ -233,13 +283,10 @@ public class GenerateKnights {
 		weights.put(BaseThemeGenerator.LocationType.STAR_ORBIT, 0.01f);
 		weights.put(BaseThemeGenerator.LocationType.JUMP_ORBIT, 0.03f);
 		WeightedRandomPicker<BaseThemeGenerator.EntityLocation> locs = BaseThemeGenerator.getLocations(null, home, null, 100f, weights);
-		BaseThemeGenerator.EntityLocation loc = locs.pick();
+		return locs.pick();
+	}
 
-		if (loc == null) {
-			log.error(String.format("KOL: Could not find a location for Libra in %s", home.getId()));
-			return;
-		}
-
+	private static void buildBattlestarLibra(StarSystemAPI home, BaseThemeGenerator.EntityLocation loc) {
 		home.getMemoryWithoutUpdate().set(KolStaticStrings.KolMemKeys.KOL_LIBRA_START_SYSTEM, true);
 		// Debug
 		/*
@@ -323,6 +370,7 @@ public class GenerateKnights {
 
 		elder.setImportance(PersonImportance.VERY_HIGH);
 		elder.setVoice(Voices.SOLDIER);
+		Global.getSector().getImportantPeople().addPerson(elder);
 
 		MarketHelpers.addMarketPeople(market);
 	}
@@ -337,15 +385,27 @@ public class GenerateKnights {
 			Tags.THEME_CORE,
 	};
 
+	// Fallback when no system passes the strict rules: still never the core worlds or Remnant strongholds
+	protected static final String[] libraRelaxedExclusionTags = {
+			Tags.THEME_REMNANT_MAIN,
+			Tags.THEME_REMNANT_RESURGENT,
+			Tags.THEME_CORE,
+	};
+
 	public static StarSystemAPI getLibraHome(long seed) {
+		return getLibraHomePicker(seed, libraExclusionTags, true).pick();
+	}
+
+	private static WeightedRandomPicker<StarSystemAPI> getLibraHomePicker(long seed, String[] exclusionTags, boolean strictStars) {
 		WeightedRandomPicker<StarSystemAPI> picker = new WeightedRandomPicker<>(new Random(seed));
 		float width = Global.getSettings().getFloat("sectorWidth");
 		float height = Global.getSettings().getFloat("sectorHeight");
 		OUTER: for (StarSystemAPI system : Global.getSector().getStarSystems()) {
-			if (system.getStar() == null || system.getStar().getTypeId().equals(StarTypes.NEUTRON_STAR) || system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE) || system.getStar().getTypeId().equals(StarTypes.BLUE_SUPERGIANT)) continue;
+			if (system.getStar() == null) continue;
+			if (strictStars && (system.getStar().getTypeId().equals(StarTypes.NEUTRON_STAR) || system.getStar().getTypeId().equals(StarTypes.BLACK_HOLE) || system.getStar().getTypeId().equals(StarTypes.BLUE_SUPERGIANT))) continue;
 			if (system.getPlanets().isEmpty()) continue;
 			if (PrepareAbyss.isWithinCoreSpace(system.getLocation().getX(), system.getLocation().getY())) continue;
-			for (String tag : libraExclusionTags) {
+			for (String tag : exclusionTags) {
 				if (system.hasTag(tag)) {
 					continue OUTER;
 				}
@@ -363,7 +423,7 @@ public class GenerateKnights {
 
 			picker.add(system, w);
 		}
-		return picker.pick();
+		return picker;
 	}
 
 
