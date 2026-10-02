@@ -91,5 +91,5 @@ class KolCh1Lyra : HubMissionWithSearch() {
         return true
     }
 
-    override fun getBaseName(): String = "The Master of Agents"
+    override fun getBaseName(): String = "The Inquisitor"
 }

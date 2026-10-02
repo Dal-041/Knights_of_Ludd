@@ -297,7 +297,7 @@ kolPrelude_enarmsGreetingLibraDelivered,PickGreeting,"$id == kol_knightcaptain s
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolPreludeLibra_delivered
 !$global.kolPreludeLibra_done","ShowPersonVisual
-FireAll PopulateOptions","""Captain $playerName."" Enarms's attention is already fixed on the screen. ""You reached Libra."" Not quite a question. ""Tell me. Leave nothing out for my sake.""",,
+FireAll PopulateOptions","""Captain $playerName."" Enarms' attention is already fixed on the screen. ""You reached Libra."" Not quite a question. ""Tell me. Leave nothing out for my sake.""",,
 kolPrelude_optWorkFaithful,PopulateOptions,"$isPerson
 $id == kol_knightcaptain
 $global.kolPreludeHook_seen
@@ -456,7 +456,7 @@ kolPrelude_libraDockMissing,KolPreludeLibraDockCheck,!$kolPreludeLibra_hasCargo,
 kolPrelude_libraLater,DialogOptionSelected,$option == kolPrelude_libraLater,FireAll PopulateOptions,"""Of course. We'll be here."" Martins is already turning back to his dark displays.
 
 ""We always are.""",,
-kolPrelude_libraDeliver,DialogOptionSelected,$option == kolPrelude_libraDeliver,Call $global.kolPreludeLibra_ref deliver,"On the docking feed, Knights in mismatched armour form a chain from your shuttles into the station, passing crates hand to hand. The channel to the command deck is still open, and it carries the sound from Martins's own monitor: some of the crew are singing.
+kolPrelude_libraDeliver,DialogOptionSelected,$option == kolPrelude_libraDeliver,Call $global.kolPreludeLibra_ref deliver,"On the docking feed, Knights in mismatched armor form a chain from your shuttles into the station, passing crates hand to hand. The channel to the command deck is still open, and it carries the sound from Martins' own monitor: some of the crew are singing.
 
 Martins has half turned to watch it. ""Tell Enarms we're grateful. Tell him also that we see things out here Cygnus doesn't. Ships that aren't ours and aren't pirates, sitting at the edge of our guns and just... watching. They're getting bolder.""
 
@@ -481,7 +481,7 @@ kolPrelude_optLibraReport,PopulateOptions,"$isPerson
 $id == kol_knightcaptain
 $global.kolPreludeLibra_delivered
 !$global.kolPreludeLibra_done",,,"4:kolPrelude_libraReport:""Libra has its supplies. Knightmaster Martins sends his regards, of a sort.""",
-kolPrelude_libraReport,DialogOptionSelected,$option == kolPrelude_libraReport,,"You tell Enarms about the dark displays, the singing, and Martins's watchers: ships that aren't friendly and aren't pirates.
+kolPrelude_libraReport,DialogOptionSelected,$option == kolPrelude_libraReport,,"You tell Enarms about the dark displays, the singing, and Martins' watchers: ships that aren't friendly and aren't pirates.
 
 He listens without interrupting. When you finish he is quiet for a while. ""Raiders with our schedules. Strangers at Libra."" He touches the cord at his wrist. ""Two threads, captain, and I don't like where either of them leads.""
 
@@ -494,29 +494,29 @@ kolPrelude_libraReport2,DialogOptionSelected,$option == kolPrelude_libraReport2,
 Call $global.kolPreludeLibra_ref complete
 FireAll PopulateOptions","He demurs. ""There are things I will not say over a link, and the channels on this station have more ears than I would like.""
 
-""When there is something worth saying, I will send a shuttle."" A pause. ""His light upon you, captain."" And for the first time, Enarms sounds like he's saying it with a little warmth.
+""I will give you shuttle access. When you're ready I will be waiting."" A pause. ""His light upon you, captain."" And for the first time, Enarms sounds like he's saying it with a little warmth.
 
 The channel drops while his hand goes to the cord at his wrist. In the last frame, you're fairly sure there is a new knot in it.",,
 kolCh1_quartersOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolPrelude_shuttlePromised
-!$global.kolCh1_quartersDone",,,3:kolCh1_quarters:Take Brother Enarms' shuttle to his quarters,
-kolCh1_quarters,DialogOptionSelected,$option == kolCh1_quarters,BeginConversation kol_knightcaptain,"The shuttle Enarms sends is a plain courier, its pilot a novice who says nothing for the whole of the short hop. It sets down in a quiet bay on Cygnus' inner ring, and the novice leads you through two locked doors into a room that is nothing like the command deck you have seen over the comm.
+!$global.kolCh1_quartersDone",,,3:kolCh1_quarters:Take the shuttle to Brother Enarms' quarters,
+kolCh1_quarters,DialogOptionSelected,$option == kolCh1_quarters,BeginConversation kol_knightcaptain,"The shuttle is a plain courier, its pilot a novice who says nothing for the whole of the short hop. It sets down in a quiet bay on Cygnus' inner ring, and the novice leads you through halls of locked doors into a room that is nothing like the command deck you have seen over the link.
 
 It is warm. There are plants: tomato vines on a trellis by the lamp, herbs in a long trough, a lemon tree in a ceramic pot that must have cost someone a great deal to bring up the well. A kettle ticks on a hotplate. Two good chairs face each other across a low table, and only one of them looks as though it has ever been sat in.
 
-Enarms is by the trough with a watering can, in a plain tunic rather than armour. He sets the can down when he sees you. ""Captain. Welcome. Sit, please."" He pours the tea without asking whether you want it, which is its own kind of answer.","kolCh1_quarters2:Take the cup and sit
+Enarms is by the trough with a watering can, in a clothspun shirt quite unlike the typical spacer's jumpsuit and, you note, better-made than most Luddic garb. He sets the can down when he sees you. ""Captain. Welcome. Sit, please."" He pours the tea without asking whether you want it.","kolCh1_quarters2:Take the cup and sit
 kolCh1_quarters2NoCup:Sit without taking the cup",
 kolCh1_quarters2,DialogOptionSelected,$option == kolCh1_quarters2,FireBest KolCh1Quarters2,,,
-kolCh1_quarters2NoCup,DialogOptionSelected,$option == kolCh1_quarters2NoCup,FireBest KolCh1Quarters2,,,
-kolCh1_quarters2Text,KolCh1Quarters2,,,"He sits across from you and looks at the plants for a while rather than at you.
+kolCh1_quarters2NoCup,DialogOptionSelected,$option == kolCh1_quarters2NoCup,FireBest KolCh1Quarters2,He helpfully pushes the cup closer to you. ,,
+kolCh1_quarters2Text,KolCh1Quarters2,,,"He takes the seat across the table from you before nodding a greeting, and lets his gaze drift to the plants around the room.
 
-""Master Helensis told me once that a Knight who forgets how things grow will forget what he guards. So I keep these. I water them at night, most nights.""
+""Master Helensis told me once that a Knight who forgets how things grow will forget what he guards. She was speaking of the Order, I think, but I took it to heart. So I keep these. I water them at night, most nights."" He says.
 
-""I will be plain, because you have earned it. The Order is stretched past what it can hold. We are losing ships, captain. Not to battle, mostly; to distance. Expeditions go out to the dark places to learn what waits there, and fewer come home than went. Patrols run double watches. What you saw at Libra was not neglect. It was arithmetic.""
+""The Order is stretched past what it can hold. We are losing ships, captain. Not to battle, mostly; to attrition, to duty. Expeditions go out to the dark places to learn what waits there, and few come home with answers. Many don't come home at all. Patrols run double watches. There is a danger growing, captain, and our strength is not. What you saw at Libra was not only simple neglect. It was arithmetic.""
 
-He turns the cup in his hands. ""When I was a novice, the Church's word carried to the edge of the charts. People listened. Now..."" He does not finish.","kolCh1_declineGrieve:""It grieves me to hear it.""
+He turns the cup in his hands. ""When I was a Novice, the Church's word would carry to every ear in the sector, and tip the scales. People listened. Now..."" He does not finish.","kolCh1_declineGrieve:""It grieves me to hear it.""
 kolCh1_declineGrieveLie:""It grieves me to hear it."" (lie)
 kolCh1_declineIndifferent:""Influence comes and goes. The Sector doesn't wait for anyone.""
 kolCh1_declineGlad:""Forgive me, Brother, but not everyone out there will mourn it.""
@@ -528,11 +528,13 @@ $global.kolCh1_declineLie = true
 FireBest KolCh1DeclineGrieve",,,
 kolCh1_declineGrieveText,KolCh1DeclineGrieve,,,"Enarms inclines his head. ""Thank you. It is good to hear that from someone who isn't paid to say it.""",kolCh1_quarters3:Continue,
 kolCh1_declineIndifferent,DialogOptionSelected,$option == kolCh1_declineIndifferent,$global.kolCh1_decline = indifferent,"""No,"" he agrees after a moment. ""It doesn't. That is rather the trouble.""",kolCh1_quarters3:Continue,
-kolCh1_declineGlad,DialogOptionSelected,$option == kolCh1_declineGlad,$global.kolCh1_decline = glad,"He is quiet long enough that you wonder if you have misjudged him. Then: ""No. I don't suppose they will."" He does not sound offended. He sounds like a man adding a figure to a ledger he already knew was short.",kolCh1_quarters3:Continue,
+kolCh1_declineGlad,DialogOptionSelected,$option == kolCh1_declineGlad,$global.kolCh1_decline = glad,"He is quiet long enough that you wonder if you have misjudged him. Then: ""No. I don't suppose all of them will."" If he is offended, he doesn't express it. ""They will notice if our guard is dropped, though.""",kolCh1_quarters3:Continue,
 kolCh1_declineDefer,DialogOptionSelected,$option == kolCh1_declineDefer,$global.kolCh1_decline = defer,You let the silence answer. Enarms seems to find that easier than anything you might have said.,kolCh1_quarters3:Continue,
-kolCh1_quarters3,DialogOptionSelected,$option == kolCh1_quarters3,,"He sets the cup down. ""There are Brothers and Sisters, good ones, who look at the same arithmetic and draw a different conclusion. The Order already flies starships, they say. It already fires guns the size of chapels. What is one more compromise? Let the trusted few carry better tools. Only the trusted. Only until the danger passes.""
+kolCh1_quarters3,DialogOptionSelected,$option == kolCh1_quarters3,,"He sets the cup down. ""There are Brothers and Sisters, good ones, who look at the same math and draw a different conclusion. The Order already flies starships, they say. It already fires guns the size of chapels. What is one more compromise? So what if we embrace the strength around us? Let the trusted few carry better tools. Only the trusted. Until the danger passes.""
 
-""I have heard it said in the refectory. Lately I have heard it in rooms with more authority than the refectory."" His hand finds the cord at his wrist. ""I am not one of them. A tool you are afraid to name is not a tool, captain. It is a master you have not yet admitted to.""","kolCh1_techOppose:""You're right to hold the line.""
+""I have heard it said in the refectory. Of late I have heard it among Curates."" His hand finds the cord at his wrist. ""We do not need it. The Church is weakened, but not weak.""
+
+""'Until the danger passes.'"" His repetition takes on a subtle iron. ""I have asked, 'What marks that time?', and no one has been able to answer me.""","kolCh1_techOppose:""You're right to hold the line.""
 kolCh1_techOpposeLie:""You're right to hold the line."" (lie)
 kolCh1_techEmbrace:""If it keeps your people alive, I'd hear them out.""
 kolCh1_techDefer:""That's for the Order to decide, not me.""",
@@ -544,82 +546,89 @@ FireBest KolCh1TechOppose",,,
 kolCh1_techOpposeText,KolCh1TechOppose,,,"Something in his shoulders eases. ""Then I am not alone in this room, at least.""",kolCh1_quarters4:Continue,
 kolCh1_techEmbrace,DialogOptionSelected,$option == kolCh1_techEmbrace,$global.kolCh1_tech = embrace,"Enarms doesn't argue. ""You would, and you would not be wicked for it."" He looks at the lemon tree. ""That is what makes it difficult.""",kolCh1_quarters4:Continue,
 kolCh1_techDefer,DialogOptionSelected,$option == kolCh1_techDefer,$global.kolCh1_tech = defer,"""It is,"" he says. ""And the Order is deciding, whether it means to or not.""",kolCh1_quarters4:Continue,
-kolCh1_quarters4,DialogOptionSelected,$option == kolCh1_quarters4,$global.kolCh1_quartersDone = true,"Enarms rises and takes a slate from the shelf behind the herbs, and when he sits again he is the Knight-Captain from the comm screen once more.
+kolCh1_quarters4,DialogOptionSelected,$option == kolCh1_quarters4,$global.kolCh1_quartersDone = true,"Enarms rises and takes a slate from the shelf behind the herbs. When he sits again he sits straighter, the way he did for the camera.
 
-""There is a place the Order cannot reach. Our survey crews call it a gravo-electric anomaly, because no one has given them a better word. Gravity that pulls the wrong way. Light that goes in and does not come out."" He sets the slate between you. ""We have sent expeditions. Their reports are... incomplete.""
+""There is a place the Order cannot reach. Our astrographers call it a gravo-electric anomaly, because no one has given them a better word. Space that bends the wrong way. Light that twists and spirals."" He sets the slate between you. ""We have sent expeditions. The reports we've gotten back are... incomplete.""
 
-That is all he says about it. You notice he does not say how many ships the reports came from.
+You notice he does not say how many ships returned to make full reports.",kolCh1_quarters4b:Continue,
+kolCh1_quarters4b,DialogOptionSelected,$option == kolCh1_quarters4b,,"He lets the slate lie there a moment.
 
-""I cannot order you there; you are not mine to order. But if you go, I must be able to trust what you bring back, and what you do with it. So I will ask of you what I would ask of a Brother."" He meets your eyes. ""Will you swear to serve the Knights honourably, in this and in what follows?""","kolCh1_oathSwear:""I swear it.""
+""I cannot order you to go. You are not mine to order.""
+
+""But if you go, I need to be able to trust what you bring back, and what you do with it.""
+
+""You came to us for work, and I am asking for something more than that. It is what I would ask of a Brother. Will you swear to serve the Knights honorably, in this and in what follows?""","kolCh1_oathSwear:""I swear it.""
 kolCh1_oathSwearLie:""I swear it."" (lie)
-kolCh1_oathDefer:""I can't make that promise now.""",
+kolCh1_oathDefer:""I can't swear you an oath like that.""",
 kolCh1_oathSwear,DialogOptionSelected,$option == kolCh1_oathSwear,"$global.kolCh1_oathSworn = true
 FireBest KolCh1OathSworn",,,
 kolCh1_oathSwearLie,DialogOptionSelected,$option == kolCh1_oathSwearLie,"$global.kolCh1_oathSworn = true
 $global.kolCh1_oathLie = true
 FireBest KolCh1OathSworn",,,
-kolCh1_oathSwornText,KolCh1OathSworn,,,"Enarms bows his head, briefly, the way Knights do before an altar. ""Then His light upon you, captain. I will hold you to it, and you may hold me to mine.""","kolCh1_scoutBrief:""Tell me about the anomaly.""",
-kolCh1_oathDefer,DialogOptionSelected,$option == kolCh1_oathDefer,$global.kolCh1_oathDeferred = true,"Enarms nods slowly. ""An honest answer. I would rather have that than an easy one."" He leaves the slate where it is. ""Call for the shuttle when you are ready. The tea will be worse; I make it badly when I am alone.""",kolCh1_leaveQuarters:Return to your shuttle,
+kolCh1_oathSwornText,KolCh1OathSworn,,,"Enarms bows his head, briefly, the way Knights do before an altar. ""Then travel in His light, captain. Thank you. I swear to always treat you with the same grace you have offered.""","kolCh1_scoutBrief:""Tell me about the anomaly.""",
+kolCh1_oathDefer,DialogOptionSelected,$option == kolCh1_oathDefer,$global.kolCh1_oathDeferred = true,"Enarms nods slowly. ""That is fair. I would rather you give an honest answer than an easy lie."" He leaves the slate where it is. ""Call the shuttle when you are ready. Should you return, the kettle will still be waiting.""",kolCh1_leaveQuarters:Return to your shuttle,
 kolCh1_oathResumeOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1_oathDeferred
-!$global.kolCh1_oathSworn",,,3:kolCh1_oathResume:Take Brother Enarms' shuttle to his quarters,
-kolCh1_oathResume,DialogOptionSelected,$option == kolCh1_oathResume,BeginConversation kol_knightcaptain,"The same silent novice, the same warm room. The lemon tree has put out a new leaf. Enarms pours the tea and does not mention how long it has been.
+!$global.kolCh1_oathSworn",,,3:kolCh1_oathResume:Take the shuttle to Brother Enarms' quarters,
+kolCh1_oathResume,DialogOptionSelected,$option == kolCh1_oathResume,BeginConversation kol_knightcaptain,"The same silent novice, then the same warm room. The lemon tree has put out a new leaf. Enarms pours tea and does not mention how long it has been.
 
-""You know what I asked of you,"" he says. ""The anomaly, and the oath before it. I have not asked anyone else.""","kolCh1_oathSwear:""I swear it.""
+""You know what I asked of you,"" he says. ""The anomaly, and fidelity before it. I have not asked anyone else. Will you swear to serve the Knights honorably, in this and what follows?""","kolCh1_oathSwear:""I swear it.""
 kolCh1_oathSwearLie:""I swear it."" (lie)
-kolCh1_oathDefer:""I can't make that promise now.""",
+kolCh1_oathDefer:""I can't make that promise.""",
 kolCh1_leaveQuarters,DialogOptionSelected,$option == kolCh1_leaveQuarters,"ShowDefaultVisual
 EndConversation",The novice is waiting at the door to walk you back to the shuttle.,,
 kolCh1_scoutBrief,DialogOptionSelected,$option == kolCh1_scoutBrief,"BeginMission kolCh1Scout false
 FireBest KolCh1ScoutOffer",,,
 kolCh1_scoutOffer,KolCh1ScoutOffer,!$missionCreationFailed,"Call $global.kolCh1Scout_ref updateData
 FireBest KolCh1ScoutBriefText",,,
-kolCh1_scoutOfferFail,KolCh1ScoutOffer,$missionCreationFailed,unset $missionCreationFailed,"Enarms frowns at the slate and pages back and forth through it. ""The survey crews have the bearings wrong again. Give me time to have them redone, captain. I will send for you.""",kolCh1_leaveQuarters:Return to your shuttle,
+kolCh1_scoutOfferFail,KolCh1ScoutOffer,$missionCreationFailed,unset $missionCreationFailed,"Enarms frowns at the slate and taps back and forth across it. ""The survey crews have the charts wrong again. Give me time to have them redone, captain. I will send for you.""",kolCh1_leaveQuarters:Return to your shuttle,
 kolCh1_scoutBriefText,KolCh1ScoutBriefText,,"AcceptMission
 Highlight $kolCh1Scout_landmark","""Observe,"" he says. ""Only observe. If anything there takes notice of you, you leave. You do not fight it, you do not hail it, you do not wait to learn what it wants. I would rather have half a report than another empty berth.""
 
-He turns the slate toward you: a smear of hyperspace with no star marked in it, somewhere near $kolCh1Scout_landmark. ""That is as close as anyone came and returned.""",kolCh1_leaveQuarters:Return to your shuttle,
+He turns the datapad toward you: a smear of hyperspace with no star marked in it, somewhere near $kolCh1Scout_landmark. ""That is as close as anyone came and returned.""",kolCh1_leaveQuarters:Return to your shuttle,
 kolCh1_scoutRetryOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1_oathSworn
 !$global.kolCh1Scout_active
-!$global.kolCh1_scoutComplete",,,3:kolCh1_scoutRetry:Take Brother Enarms' shuttle to his quarters,
+!$global.kolCh1_scoutComplete",,,3:kolCh1_scoutRetry:Take the shuttle to Brother Enarms' quarters,
 kolCh1_scoutRetry,DialogOptionSelected,$option == kolCh1_scoutRetry,"BeginConversation kol_knightcaptain
 BeginMission kolCh1Scout false
 FireBest KolCh1ScoutOffer",Enarms has the slate ready before you sit.,,
 kolCh1_debriefOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
-$global.kolCh1Scout_scouted",,,3:kolCh1_debrief:Take Brother Enarms' shuttle to his quarters,
-kolCh1_debrief,DialogOptionSelected,$option == kolCh1_debrief,BeginConversation kol_knightcaptain,"The room has had visitors. The second chair has been sat in, and recently. Three cups are drying by the sink instead of one. The lemon tree has been moved off the table to the floor, to make room for something, and a document lies face-down where it stood, a wax seal pressed into its corner.
+$global.kolCh1Scout_scouted",,,3:kolCh1_debrief:Take the shuttle to Brother Enarms' quarters,
+kolCh1_debrief,DialogOptionSelected,$option == kolCh1_debrief,BeginConversation kol_knightcaptain,"The room has had visitors. The second chair has been sat in, and recently. Three cups are drying by the sink instead of one. The lemon tree has been moved off the table to the floor, to make room for something, and a data slate lies face-down on the table, its notification light still blinking.
 
-Enarms is in armour this time, though his gauntlets are on the shelf beside the herbs. He does not offer an explanation, and his tea is already poured. ""Tell me,"" he says.",kolCh1_debrief2:Tell him what you saw,
+Enarms is in armor this time, though his gloves are on the shelf beside the herbs. He does not offer an explanation, and the tea is already poured. ""Tell me,"" he says.",kolCh1_debrief2:Tell him what you saw,
 kolCh1_debrief2,DialogOptionSelected,$option == kolCh1_debrief2,"FireAll KolCh1DebriefRemarks
-FireBest KolCh1DebriefLink","You tell him: the star that is not a star, light bending the wrong way around it, and the ships. Not pirates; not anyone's patrol. Hulls finer than anything in a Knight's yard, moving with a patience no human captain has.
+FireBest KolCh1DebriefLink","You tell him: the star that is not a star, light bending the wrong way around it, and the ships. Not pirates; not anyone's patrol. Hulls sleeker than anything ever made by human hands, moving with a persistence no flesh and blood captain has.
 
-Enarms listens with his hands folded, the way a priest listens to a confession.",,
+Enarms listens without interrupting, his tea growing colder where it sits.",,
 kolCh1_debriefPulled,KolCh1DebriefRemarks,$global.kolCh1_pulledThrough,,"When you describe the fall, the dark star taking hold of your fleet and the strange sky on the far side of it, Enarms puts down his cup. For a while he says nothing at all.
 
-""Creation is larger than our charts,"" he says at last, quietly, as if to himself. ""We forget that. It is good to be reminded, and terrible."" He does not ask you to describe it again.",,
-kolCh1_debriefFought,KolCh1DebriefRemarks,$global.kolCh1_foughtDusk,,"""I said observe."" It is not quite a rebuke. He looks you over as though expecting to find the damage on you. ""You are here, so I will give thanks rather than a lecture. This time.""",,
-kolCh1_debriefLink,KolCh1DebriefLink,,,"He rises and turns the face-down document over, then thinks better of it and turns it back. ""Ships that are not ours and not pirates, watching Libra. Ships that are not ours and not pirates, keeping the anomaly. Machine-built, past anything our yards could make. Molochian things."" He says the word carefully, the way one handles a blade.
+""Creation is larger than our charts,"" he says at last, quietly. ""We forget that. It is good to be reminded, and terrible."" He does not ask you to describe it again.",,
+kolCh1_debriefFought,KolCh1DebriefRemarks,$global.kolCh1_foughtDusk,,"""I recall ordering you to 'observe.'"" It is not quite a rebuke. He looks you over as though expecting to find the damage on your hull. ""You are here, so I will give thanks rather than a lecture. This time.""",,
+kolCh1_debriefLink,KolCh1DebriefLink,,,"He rises and turns the face-down slate over, then thinks better of it and turns it back. ""Mysterious ships scouting Libra. Mysterious ships keeping the anomaly. Machine-built and machine designed. Devices of Moloch."" He says the name with intentional precision.
 
-""One hand, captain, reaching toward us out of the dark. And the raiders with our schedules may be its fingers."" He sits again, heavily. ""This is beyond the two of us. Beyond a Knight-Captain's writ. It has to go higher.""","kolCh1_debriefDoubt:""The ships at the anomaly didn't sound like Martins' watchers.""
-kolCh1_debriefAgree:""Then take it higher.""",
-kolCh1_debriefDoubt,DialogOptionSelected,$option == kolCh1_debriefDoubt,$global.kolCh1_doubtedLink = true,"Enarms considers it honestly; you can see him do it. ""Perhaps not. Two hands, then, from the same body. I cannot see the body yet."" He shakes his head. ""But I will not bring my superiors two puzzles when one will frighten them enough to act. Hold the thought, captain. I will not forget you raised it.""",kolCh1_debriefBounty:Continue,
-kolCh1_debriefAgree,DialogOptionSelected,$option == kolCh1_debriefAgree,,"""Yes."" He glances at the sealed document. ""That is already begun, as you can see. Getting the right people in one room takes longer than it should.""",kolCh1_debriefBounty:Continue,
+""There is a force, captain, reaching toward us out of the dark. And already the enemy within, compromising our strength. If they are one and the same..."" He sits again, heavily. It goes unsaid. ""This is beyond the two of us. Beyond a Knight-Captain's mandate. It has to go higher.""","kolCh1_debriefDoubt:""The ships at the anomaly didn't seem like Martins' watchers.""
+kolCh1_debriefAgree:""Then we take it higher.""",
+kolCh1_debriefDoubt,DialogOptionSelected,$option == kolCh1_debriefDoubt,$global.kolCh1_doubtedLink = true,"Enarms considers it seriously; you can see him do it. ""Perhaps not. Two, then, from the same accursed lineage. We will reveal the link."" He shakes his head. ""But I will not bring my superiors two puzzles when one will frighten them enough. Hold the thought, captain. I will not forget you raised it.""",kolCh1_debriefBounty:Continue,
+kolCh1_debriefAgree,DialogOptionSelected,$option == kolCh1_debriefAgree,,"""Yes."" He glances at the overturned slate. ""That is already begun, as you may see. Getting the right people in one room takes longer than you would think, no matter how long it is you think.""",kolCh1_debriefBounty:Continue,
 kolCh1_debriefBounty,DialogOptionSelected,$option == kolCh1_debriefBounty,"Call $global.kolCh1Scout_ref complete
 BeginMission kolCh1Bounty false
-FireBest KolCh1BountyOffer","""While I make the arrangements, there is something else."" He brings up a list on the slate: pirate bands, a few of them, hitting the ore lighters that run to Cygnus' yards. ""It is the kind of work I would give a novice. Do not mistake that for unimportant. The lighters carry hull plate, and the yards are what keep us flying. Every lighter we lose is a patrol we cannot send, and we have no patrols to spare.""
+FireBest KolCh1BountyOffer","""While I make the arrangements, there is something else."" He brings up a list on the slate: pirate bands, a few of them, thinning Cygnus' supply runs.
 
-""I need it done. I need it done by someone I trust, and seen to be done.""",,
+""The latest attacks aren't coordinated like before - thank you again - but they seem to sense our injury. It is the kind of work I would give to a green cohort of Knights, but do not mistake that for unimportant. Every ship that does not return to its berth is a tragedy, and more compound when the patrols waiting on their supplies cannot be sent.""
+
+""We need it done. You've demonstrated your ability, and this work will earn you a voice when we convene the council. Return to Cygnus with good news.""",,
 kolCh1_bountyOffer,KolCh1BountyOffer,!$missionCreationFailed,FireBest KolCh1BountyChoose,,,
 kolCh1_bountyOfferFail,KolCh1BountyOffer,$missionCreationFailed,unset $missionCreationFailed,"Enarms scrolls, frowns, and scrolls back. ""The reports are stale. Give me a little time to have them refreshed.""",kolCh1_leaveQuarters:Return to your shuttle,
 kolCh1_bountyChoose,KolCh1BountyChoose,,,,"kolCh1_bountyLow:""I'll take the smallest of them.""
-kolCh1_bountyNormal:""I'll take an ordinary one.""
+kolCh1_bountyNormal:""I'll take a typical group.""
 kolCh1_bountyHigh:""Give me the worst of them.""
 kolCh1_bountyLater:""Not now.""",
 kolCh1_bountyLow,DialogOptionSelected,$option == kolCh1_bountyLow,"$kolCh1Bounty_difficulty = LOW 0
@@ -632,10 +641,10 @@ kolCh1_bountyShow,KolCh1BountyShow,,Call $global.kolCh1Bounty_ref showBountyDeta
 kolCh1_bountyIntel,DialogOptionSelected,$option == kolCh1_bountyIntel,Call $global.kolCh1Bounty_ref showBountyAssessment,,"kolCh1_bountyAccept:""I'll see it done.""
 kolCh1_bountyBack:""Show me the others.""
 kolCh1_bountyLater:""Not now.""",
-kolCh1_pirateOfferDesc,KolCh1PirateCreatorOfferDesc,,Highlight $bcb_dist $bcb_reward $bcb_days,"The entry names $bcb_targetName, who leads a band preying on the lighters out of the $bcb_systemName, $bcb_dist light-years from Cygnus. ""The Order will pay $bcb_reward when it is done,"" Enarms says. ""Within $bcb_days days, if you can. After that the lighters will have stopped running.""",,
+kolCh1_pirateOfferDesc,KolCh1PirateCreatorOfferDesc,,Highlight $bcb_dist $bcb_reward $bcb_days,"The entry names $bcb_targetName, who leads a band of pirates out of the $bcb_systemName, $bcb_dist light-years from Cygnus. ""The Order will pay $bcb_reward when it is done,"" Enarms says. ""Within $bcb_days days, if you can. After that the pirates will have gone to ground.""",,
 kolCh1_bountyBack,DialogOptionSelected,$option == kolCh1_bountyBack,FireBest KolCh1BountyChoose,Enarms scrolls back to the list.,,
-kolCh1_bountyAccept,DialogOptionSelected,$option == kolCh1_bountyAccept,AcceptMission,"""His light upon you."" He makes a note on the slate, and for a moment looks almost relieved. ""I will send for you when the room is ready.""",kolCh1_leaveQuarters:Return to your shuttle,
-kolCh1_bountyLater,DialogOptionSelected,$option == kolCh1_bountyLater,AbortMission,"""As you like. The lighters will still be running when you change your mind; that is rather the problem.""",kolCh1_leaveQuarters:Return to your shuttle,
+kolCh1_bountyAccept,DialogOptionSelected,$option == kolCh1_bountyAccept,AcceptMission,"""Our blessings with you, captain."" He makes a note on the slate, and for a moment looks almost relieved. ""I will send for you when the council is ready.""",kolCh1_leaveQuarters:Return to your shuttle,
+kolCh1_bountyLater,DialogOptionSelected,$option == kolCh1_bountyLater,AbortMission,"""As you like. The pirates will still be raiding when you change your mind; that is rather the problem.""",kolCh1_leaveQuarters:Return to your shuttle,
 kolCh1_bountyRetryOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
@@ -644,113 +653,149 @@ $global.kolCh1_scoutComplete
 !$global.kolCh1_bountyComplete",,,3:kolCh1_bountyRetry:Take Brother Enarms' shuttle to his quarters,
 kolCh1_bountyRetry,DialogOptionSelected,$option == kolCh1_bountyRetry,"BeginConversation kol_knightcaptain
 BeginMission kolCh1Bounty false
-FireBest KolCh1BountyOffer","Enarms is at the trough when you arrive, and does not stop watering. ""The lighters are still being hit,"" he says. ""The list has changed. The arithmetic hasn't.""",,
+FireBest KolCh1BountyOffer","Enarms is at the trough when you arrive, and looks up but does not stop watering. ""The traders are still being attacked,"" he says. ""The list has changed, but our need hasn't.""",,
 kolCh1_councilOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1_bountyComplete
 !$global.kolCh1_councilDone",,,3:kolCh1_council:Take the shuttle Brother Enarms has sent for you,
-kolCh1_council,DialogOptionSelected,$option == kolCh1_council,"$global.kolCh1Return_done = true
+kolCh1_council,DialogOptionSelected,$option == kolCh1_council,"Call $global.kolCh1Return_ref complete
 BeginConversation kol_chaptermaster
-ShowSecondPerson kol_knightcaptain","The shuttle does not take you to Enarms' quarters. It sets down near the station's spine, and a pair of Knights in full harness walk you up a long ramp into a chamber that was built as a chapel and is used as something else.
+ShowSecondPerson kol_knightcaptain","The shuttle does not take you to Enarms' quarters. It sets down near the station's spine, and a pair of Knights in full combat plate walk you up a long ramp into a chamber that was once built as a chapel.
 
-A dozen people sit in a half-ring of carved seats under the lamps: Knight-Captains in their harness, an old curate with a censer smoking at her feet, two administrators with slates on their knees. At the centre, in the highest chair, sits Master Helensis, grey-haired and very still, her hands folded on a staff she does not need.
+A dozen people sit in a half-ring of carved seats under the lamps: Knight-Leaders in their day-suits, an old curate with a censer smoking at her feet, two administrators with slates on their knees. At the centre, in the highest chair, sits Master Helensis, grey-haired and very still.
 
-Enarms stands at a lectern below her. He does not look at you as you are shown to a bench, but he touches the cord at his wrist. The curate leads a short prayer. Everyone bows their heads; you notice Helensis keeps her eyes open.",kolCh1_council2:Continue,
-kolCh1_council2,DialogOptionSelected,$option == kolCh1_council2,,"Enarms gives his report the way a Knight gives anything: without ornament, and in order. A pirate band carrying the Order's true schedules, with the gaps in exactly the wrong places. Strange ships keeping watch on Libra. An anomaly in the dark where expeditions go and do not return, and machine-built hulls guarding it, past anything the Order's yards could make.
+Enarms stands at a lectern at the focus. He does not look at you as you are shown to a bench, but he brushes at the cord on his wrist. 
 
-""I believe these are one enemy,"" he finishes. ""Molochian creations, hostile to the Church, and closing on us from several directions at once. I believe it is aware of us. I do not believe it is in any hurry.""
+The curate leads a short prayer. Everyone bows their heads; you notice Helensis keeps her eyes open.",kolCh1_council2:Continue,
+kolCh1_council2,DialogOptionSelected,$option == kolCh1_council2,,"Enarms gives his report without ornament, and in order.
+ A pirate band carrying the Order's true schedules, with a selection that could only come from intimate knowledge.
+ Strange ships keeping watch on Libra.
+ An anomaly in the dark where expeditions go and do not return, and machine-built hulls guarding it, beyond anything humanity has forged.
+
+""I believe these reports are linked,"" he finishes. ""Molochian creations, hostile to the Faith, and closing on us from several directions. I believe they are sizing us up. I do not believe they are in any hurry.""
 
 Murmurs travel around the half-ring and die out under Helensis' gaze.",kolCh1_council3:Continue,
-kolCh1_council3,DialogOptionSelected,$option == kolCh1_council3,,"""The Church has endured raiders since before the Collapse, Brother,"" Helensis says. Her voice is mild and carries without effort. ""A few stolen schedules do not make a crusade. The Order is not so fragile that every shadow on a sensor screen is the Adversary come at last.""
+kolCh1_council3,DialogOptionSelected,$option == kolCh1_council3,,"""The Church has endured raiders since the first days of the Collapse, Brother,"" Helensis says. Her voice is mild and carries without effort.""
 
-She lets that settle, then tilts her head. ""And yet. I will not pretend these are a raider's mischief. Whatever waits at that anomaly is not idle. The faithful are called to endure, yes. We are not called only to endure."" It is said so gently that it takes you a moment to hear what she has said.
+""A few stolen schedules do not make a crusade. The Order is not so fragile that every shadow on a sensor screen is the Adversary come at last.""
 
-A Knight-Captain begins to answer; another cuts across him; the curate says something about prudence that nobody acknowledges. Helensis raises one finger and the room is quiet again. She turns to you. ""You have seen these things with your own eyes, captain. What would you counsel?""","kolCh1_councilFreelancers:""Hire more captains like me. Or give me the means to do more myself.""",
-kolCh1_councilFreelancers,DialogOptionSelected,$option == kolCh1_councilFreelancers,FireBest KolCh1CouncilQuorum,"The suggestion goes around the half-ring like a coin being tested with teeth. An administrator cites the cost of the last freelance writ. A Knight-Captain observes, not unkindly, that the Order cannot hand its fleet to outsiders, however capable.",,
-kolCh1_councilQuorum,KolCh1CouncilQuorum,,,"""An oath is a fine thing,"" says another. ""So is a commission. Neither makes a secular captain one of us, and the Order does not put its own in the hands of those who are not.""
+She lets that settle, then tilts her head. ""And yet. I will not pretend these are a raider's mischief. Whatever watches us is not idle. The faithful are called to endure, yes. We are not called only to endure.""
 
-Helensis calls the question. The quorum declines, by a margin that is polite rather than close.","kolCh1_councilAllies:""Then call on the Knights' allies.""",
-kolCh1_councilQuorumCommissioned,KolCh1CouncilQuorum,$player.commissionFactionId == knights_of_selkie score:10,,"""You carry our commission, captain, and carry it well,"" says another. ""We pay you to fight beside us. That is not the same as asking you to stand among us.""
+A Knight-Commander begins to answer; another cuts across him; the curate says something about prudence that nobody acknowledges. Helensis raises one finger and the room is quiet again. She turns to you. ""You have seen these things with your own eyes, captain. What would you counsel?""","kolCh1_councilFreelancers:""Hire more captains. A whole armada to fight under your crest.""
+kolCh1_councilEmpower:""I would defeat them personally, I only need your support.""",
+kolCh1_councilFreelancers,DialogOptionSelected,$option == kolCh1_councilFreelancers,FireBest KolCh1CouncilQuorum,"The suggestion goes around the half-ring like a coin being tested with teeth. An administrator cites the cost of the last freelance writ. A Knight-Captain observes, not unkindly, that the faithful cannot hand their mandate to outsiders, however capable.",,
+kolCh1_councilEmpower,DialogOptionSelected,$option == kolCh1_councilEmpower,"$option = kolCh1_councilFreelancers 0
+FireBest DialogOptionSelected",,,
+kolCh1_councilQuorum,KolCh1CouncilQuorum,,,"""An oath is a fine thing,"" says another. ""So is a commission. Neither makes a secular captain a Knight, and the Order does not put its own in the hands of those who are not.""
 
-Helensis calls the question. The quorum declines, by a margin that is polite rather than close.","kolCh1_councilAllies:""Then call on the Knights' allies.""",
-kolCh1_councilAllies,DialogOptionSelected,$option == kolCh1_councilAllies,,"""The Curia has its own troubles,"" Helensis says, ""and its own Knights' expeditions to answer for. Our friends among the faithful worlds are generous with prayers."" A faint smile. ""Less so with hulls. We have asked, captain. We will ask again. I would not plan on the answer.""","kolCh1_councilLibra:""Then recommission Libra. It's already out there, and it already sees them.""",
-kolCh1_councilLibra,DialogOptionSelected,$option == kolCh1_councilLibra,,"For the first time the room goes properly still. Enarms does not move at his lectern.
+Helensis calls the question. The quorum declines, by a margin that is polite rather than close.","kolCh1_councilAllies:""Then ask the Order's allies among the other powers.""
+kolCh1_councilFaithful:""Then call on the faithful. Every world that keeps the Faith can spare something.""",
+kolCh1_councilQuorumCommissioned,KolCh1CouncilQuorum,$player.commissionFactionId == knights_of_selkie score:10,,"""You carry our commission, captain, and carry it well,"" says another. ""We pay you to fight beside us. That is not the same as you standing in place of the Faith.""
 
-""Libra,"" Helensis says. ""Yes. Knightmaster Martins is a faithful servant, and has been faithful in that place for a very long time."" She says faithful the way some people say stubborn. ""His station is old, captain. Its reactors are older. To make it a fortress again would cost what this Order spends on its living in a year, for a post that guards nothing we need guarded.""
+Helensis calls the question. The quorum declines, by a margin that is polite rather than close.","kolCh1_councilAllies:""Then ask the Order's allies among the other powers.""
+kolCh1_councilFaithful:""Then call on the faithful. Every world that keeps the Faith can spare something.""",
+kolCh1_councilFaithful,DialogOptionSelected,$option == kolCh1_councilFaithful,"$option = kolCh1_councilAllies 0
+FireBest DialogOptionSelected",,,
+kolCh1_councilAllies,DialogOptionSelected,$option == kolCh1_councilAllies,,"""Your diplomatic instincts speak well of your character, Captain. Sadly, the Curia has its own troubles,"" A faint smile. ""and its own needs to answer for. Our friends among the powers are generous with courtesy, and the faithful worlds with prayers."" Helensis says.
+
+""Less so with hulls. We have asked, captain, and we will ask again this time. I would not wait on that answer. Providence and our own strength will see us through this threat; it will not be the first time we have found the answers to a crisis waiting within.""","kolCh1_councilLibra:""Then restore Libra. It's already out there, and it's already on the front lines.""
+kolCh1_councilLibraDuty:""Knightmaster Martins needs a garrison. The enemy's scouts are already there.""",
+kolCh1_councilLibraDuty,DialogOptionSelected,$option == kolCh1_councilLibraDuty,"$option = kolCh1_councilLibra 0
+FireBest DialogOptionSelected",,,
+kolCh1_councilLibra,DialogOptionSelected,$option == kolCh1_councilLibra,,"For the first time the room goes properly still. Enarms stands still at his lectern.
+
+""Libra,"" Helensis says. ""Yes. Knightmaster Martins is a faithful servant, and has been faithful in that place for a very long time.""
+
+She holds for a deep breath. ""That station is old, captain. Its equipment is older. To make it a fortress again would cost what this Order spends in a cycle, for a post that guards nothing.""
 
 ""We pray for Libra every week."" She inclines her head toward the curate, who nods. ""We cannot afford to do more. It is a sorrow, and we bear it."" She does not sound as though she bears it heavily.",kolCh1_councilOutcome:Continue,
-kolCh1_councilOutcome,DialogOptionSelected,$option == kolCh1_councilOutcome,,"When the murmuring has run its course, Helensis gives the council's word. The matter is grave, and will be watched. It belongs, in the first instance, to the Office of Agents. ""You will take what you have seen to the Master of Agents at Star Keep Lyra,"" she tells you. ""Sister Greenflight will know what to make of it, if anyone does."" The quorum assents without debate; it is the kind of decision that costs nothing.
+kolCh1_councilOutcome,DialogOptionSelected,$option == kolCh1_councilOutcome,,"When the murmuring has run its course, Helensis gives the council's word. The matter is grave, and will be watched. It belongs, in the first instance, to the Knights' Inquisitors.
 
-Then, as the Knights begin to rise, she adds: ""And since you are so willing, captain, there is one more thing. These machines are an enemy we do not understand. Bring us pieces of them. Their weapons, their hulls, their thinking engines, if such things can be carried. The Order will pay a bounty for each, for the sake of knowing what we face.""
+""You will take what you have seen to the Master of Agents at Star Keep Lyra,"" she tells you. ""Sister Greenflight will know what to make of it, if anyone does.""
 
-Nobody in the half-ring objects. One or two of the Knight-Captains look at their hands.",kolCh1_councilClose:Continue,
-kolCh1_councilClose,DialogOptionSelected,$option == kolCh1_councilClose,BeginConversation kol_knightcaptain,"The curate closes with a blessing. The chamber empties quickly, the way rooms do when the decision in them has been made before anyone entered. Enarms waits by the door until the last of them have gone, then falls into step beside you on the long ramp down.
+The quorum assents without debate; it is the kind of decision that costs nothing.
 
-He does not speak until you are past the guards.","kolCh1_walkout2:""That went about as well as you expected.""",
+Then, as the Knights begin to rise, she adds: ""And since you are so willing, captain, there is one more thing. These machines are an enemy we do not understand. Bring us pieces of them. Their weapons, their hulls, their thinking engines, if such things can be recovered.""
+
+""The Order will pay a bounty for each, for the sake of knowing what we face.""
+
+Nobody in the half-ring objects. Some of the Knight-Leaders look at their hands.",kolCh1_councilClose:Continue,
+kolCh1_councilClose,DialogOptionSelected,$option == kolCh1_councilClose,BeginConversation kol_knightcaptain,"The curate closes with a blessing. The chamber empties quickly; none stay to confer. Enarms waits by the door until the last of them have gone, then falls into step beside you on the long ramp down.
+
+He does not speak until you are past the guards.","kolCh1_walkout2:""That went about as well as expected.""",
 kolCh1_walkout2,DialogOptionSelected,$option == kolCh1_walkout2,,"""Better,"" he says. ""They listened. They will watch. That is not nothing."" He walks a few more steps. ""It is not a ship, either. Or a Knight. Or a single credit.""
 
-""We lose a little more every season. Not in battle; in distance, in wear, in expeditions that do not come home. The council can vote that away no more than it can vote away the dark. The way things stand will not hold, captain. I am not permitted to move the Order's patrols on my own judgement."" He considers the deck plates. ""But there is no stricture I know of against arranging for patrols to be going the same direction you are. I will think on that.""","kolCh1_walkout3:""And Libra?""",
+He sighs. ""We lose a little ground every cycle. The council can vote that away no more than it can vote away the dark. This stalemate cannot hold forever, captain.""
+
+""I am not permitted to move the Order's patrols on my own judgement."" He considers the wall inlay. ""But there is no stricture against arranging for patrols to be going the same direction you are. I will think on that.""","kolCh1_walkout3:""And Libra?""",
 kolCh1_walkout3,DialogOptionSelected,$option == kolCh1_walkout3,"BeginMission kolCh1Lyra false
 FireBest KolCh1LyraOffer","Enarms stops walking.
 
-""Libra was written off,"" he says. ""You heard it. Not disowned. Written off. The Order cannot afford it, and the Master is right that we cannot."" He touches the cord at his wrist. ""But I read the writ again last night, captain, every line of it. There is no instruction anywhere against accepting charity on Libra's behalf. None.""
+""Libra was written off,"" he says. ""You heard it. Not disowned. Written off. The Order cannot afford it, and the Master is right that we cannot."" He touches the cord at his wrist. ""But I spend my nights studying, captain, and I am sure of this. There is no instruction anywhere against accepting charity on a battlestation's behalf.""
 
-He looks at you for a long moment. ""I will not ask it of you. I will only say that whatever you can do for Martins and his people, the Order will not forbid. Do what you can.""",,
+He looks at you for a long moment, seemingly torn between a smile and a frown. ""I will not order it of you. I will only say that we will gladly accept whatever you can do for Martins and his people."" He pauses, as though ashamed of the request to come. ""Please do what you can.""",,
 kolCh1_lyraOffer,KolCh1LyraOffer,!$missionCreationFailed,"AcceptMission
 $global.kolCh1_councilDone = true","""His light upon you, captain. Sister Greenflight is expecting you; I made certain of that much.""",kolCh1_leaveCouncil:Return to your shuttle,
 kolCh1_lyraOfferFail,KolCh1LyraOffer,$missionCreationFailed,unset $missionCreationFailed,"""There is a delay at Lyra,"" Enarms says, reading a message on his slate with a frown. ""The Office of Agents will send word. I will send for you again.""",kolCh1_leaveCouncil:Return to your shuttle,
 kolCh1_leaveCouncil,DialogOptionSelected,$option == kolCh1_leaveCouncil,"ShowDefaultVisual
 EndConversation","Enarms walks you as far as the shuttle bay, and watches you board.",,
 kolCh1_greenflightGreeting,PickGreeting,"$id == kol_intel_director score:200
-$global.kolCh1Lyra_active",ShowPersonVisual,"Sister Rebecca Greenflight answers the comm herself. The office behind her is spare: a reliquary on a shelf, a wall of sealed files, a narrow window full of the Eos gate. A slate on her desk carries the seal of the council at Cygnus.
+$global.kolCh1Lyra_active",ShowPersonVisual,"Sister Rebecca Greenflight answers the comm herself. The office behind her is spare: a reliquary on a shelf, a wall of sealed files, a narrow window full of the Eos gate. A slate on her desk illuminates the seal of the Council of Cygnus.
 
-""Captain $playerName."" She does not need to look it up. ""Brother Enarms' freelancer. Master Helensis' volunteer. You have been busy at Cygnus.""","kolCh1_greenflight2:""The council sent me to report to you.""",
-kolCh1_greenflight2,DialogOptionSelected,$option == kolCh1_greenflight2,,"You give her the same account you gave the council. She listens without interrupting, and without taking notes, which is somehow more unnerving than if she had.
+""Captain $playerName."" She does not need to look it up. ""Brother Enarms' freelancer. Master Helensis' volunteer. Welcome. You have been busy at Cygnus.""","kolCh1_greenflight2:""The council sent me to report to you.""",
+kolCh1_greenflight2,DialogOptionSelected,$option == kolCh1_greenflight2,,"You give her the same account you gave the council. She listens without interrupting, without taking notes. And you're pretty sure without blinking.
 
-""Machine ships at a dark star. Watchers at a station we do not put on charts. Raiders carrying our schedules."" She folds her hands. ""Enarms sent me that dossier some time ago, with a very careful letter. He has always been quick to see a hand in the dark. Sometimes there is one.""
+""Machine armadas at a dark star. Scouts at a station we hide from the charts. Raiders carrying our schedules."" Her eyes go once to the wall of sealed files behind her. ""Enarms sent me that dossier some time ago, with a very careful letter. He has always been quick to see a hand in the dark. Sometimes his vision is keen.""
 
-""You will forgive me, captain, if I do not take a freelancer's account and a Knight-Captain's fears as a revelation. The Office of Agents has heard of a great many enemies. Most of them were men with debts.""","kolCh1_greenflight3:""Then what would convince you?""",
+""You will forgive me, captain, if I do not take a freelancer's account and a Knight-Captain's fears as a revelation. The Inquisition has heard of a great many enemies. Most of them were men with debts.""","kolCh1_greenflight3:""What would you need to convince you?""",
 kolCh1_greenflight3,DialogOptionSelected,$option == kolCh1_greenflight3,"Call $global.kolCh1Lyra_ref updateData
 FireBest KolCh1GreenflightLead","""Evidence I can hold,"" she says. ""Logs. Wreckage. Names. If what you saw at that star is real, it came from somewhere.""",,
-kolCh1_greenflightLeadAcademy,KolCh1GreenflightLead,,FireBest KolCh1GreenflightClose,"She turns a stylus over in her fingers. ""The Order is poorly placed to find where. We are not scholars of the old machines, and we keep little company with those who are. The Galatia Academy does. It keeps what the Domain left behind, and keeps it honestly, by its own lights.""
+kolCh1_greenflightLeadAcademy,KolCh1GreenflightLead,,FireBest KolCh1GreenflightClose,"She turns a stylus over in her fingers. ""The Order is poorly placed to find where. We are not students of humanity's old sins, and we keep little company with those who are.""
 
-A faint dryness. ""The Church and the Academy disagree about a great many things. We have never disagreed that learning is a duty. Seek allies there, captain. They will speak more freely to a starfarer than to a Sister of the Order.""",,
+""The Academy does, and we will not pretend to approve, but they are not fools. The scholars pick over the rotten carcass of the Domain, but what they find they keep honestly.""
+
+A faint dryness. ""The Church and the Academy disagree about a great many things, but we will not condemn them simply for the pursuit of knowledge, however misguided. Seek allies there, captain. They will speak more freely to a starfarer than to a Sister of the Order.""",,
 kolCh1_greenflightLeadAlphaSite,KolCh1GreenflightLead,"$kolCh1Lyra_visitedAlphaSite score:10
-!$global.zea_defeatedNinaya",FireBest KolCh1GreenflightClose,"""You have been to the place the Academy calls Alpha Site."" It is not a question; somewhere in the wall of sealed files behind her is a record of it. ""Whatever took you there, you came back. I do not think you found everything. Things that hide at the edge of a system rarely do so by accident.""
+!$global.zea_defeatedNinaya",FireBest KolCh1GreenflightClose,"""You have been to the place the cynics call Alpha Site."" It is not a question; somewhere in the wall of sealed files behind her is a vivid record of it.
 
-""Go back. Search the reaches, far out where no one patrols. A starfarer's instruments may catch what a careful eye misses; I am told a neutrino detector hears drives that run cold."" She folds her hands. ""I would send my own agents, but a flight of the Order's ships in that system would be seen by everyone who watches it. One captain is weather. A dozen is a declaration.""",,
+""Whatever trial you faced there, you returned intact. We have reason to believe there is more. Be wary, captain. Whatever it is that waits in that darkness, it is not passive. Things that hide at the edge of a system rarely do so by accident.""
+
+""Go back. Search the reaches, far out where no one patrols. A starfarer's instruments may catch what a careful eye misses; I am told a neutrino detector might hear a pebble across an ocean."" 
+
+""I would send my own agents, but a flight of the Faith's ships to that system would be watched by every eye across the sector. One mercenary is gossip - a dozen Knights is a declaration. My office prefers subtler methods.""",,
 kolCh1_greenflightLeadBegun,KolCh1GreenflightLead,$global.zea_defeatedNinaya score:20,FireBest KolCh1GreenflightClose,[PLACEHOLDER: the player has already begun the Tri-Tachyon trail (the Ninaya is beaten). Greenflight reacts to what they have found so far and points them onward. To be written with Chapter 2.],,
-kolCh1_greenflightClose,KolCh1GreenflightClose,,Call $global.kolCh1Lyra_ref met,"Something in her face changes very slightly, the look of someone filing a thing away rather than dismissing it. ""Bring me what you find, captain. I will not promise to believe you. I will promise to read it.""",kolCh1_greenflightEnd:Continue,
+kolCh1_greenflightClose,KolCh1GreenflightClose,,Call $global.kolCh1Lyra_ref met,"Something in her face changes very slightly, the look of someone filing a thing away rather than dismissing it. ""Bring me what you find, captain. I will not promise to believe you, but I will promise to investigate it.""",kolCh1_greenflightEnd:Continue,
 kolCh1_greenflightEnd,DialogOptionSelected,$option == kolCh1_greenflightEnd,FireAll PopulateOptions,,,
 kolCh1_enarmsGreetingQuarters,PickGreeting,"$id == kol_knightcaptain score:250
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolPrelude_shuttlePromised
 !$global.kolCh1_quartersDone","ShowPersonVisual
-FireAll PopulateOptions","""Captain."" Enarms glances past the viewer at something you can't see. ""Not on this channel. I promised you a shuttle, and it is waiting at Cygnus whenever you are.""",,
+FireAll PopulateOptions","""Captain."" Enarms glances past the lens at something you can't see. ""Not on this channel. A shuttle is waiting at your collar. I will meet you when you're ready.""",,
 kolCh1_enarmsGreetingOath,PickGreeting,"$id == kol_knightcaptain score:250
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1_oathDeferred
 !$global.kolCh1_oathSworn","ShowPersonVisual
-FireAll PopulateOptions","""Captain."" He does not mention the oath, which is its own kind of mentioning it. ""The shuttle is still yours to call when you have an answer for me.""",,
+FireAll PopulateOptions","""Captain."" He does not mention the oath. ""The shuttle is still yours to call, whenever you have an answer for me.""",,
 kolCh1_enarmsGreetingDebrief,PickGreeting,"$id == kol_knightcaptain score:250
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1Scout_scouted","ShowPersonVisual
-FireAll PopulateOptions","""You're back."" Enarms looks you over through the viewer as if counting hull plates. ""Whatever you saw, don't tell me over the comm. Take the shuttle to my quarters.""",,
+FireAll PopulateOptions","""Providence smiles on us."" Enarms' voice is too warm to be the full truth. ""Whatever you saw, don't tell me over the comm. Take the shuttle to my section.""",,
 kolCh1_enarmsGreetingBounty,PickGreeting,"$id == kol_knightcaptain score:250
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1_scoutComplete
 !$global.kolCh1Bounty_active
 !$global.kolCh1_bountyComplete","ShowPersonVisual
-FireAll PopulateOptions","""Captain. The lighters are still being hit."" He holds up a slate you can't read. ""If you have time for them, the shuttle knows the way.""",,
+FireAll PopulateOptions","""Captain. Our traders are still being attacked."" He holds up a slate you can't read. ""If you have time for them, the shuttle knows the way.""",,
 kolCh1_enarmsGreetingCouncil,PickGreeting,"$id == kol_knightcaptain score:250
 RepIsAtWorst knights_of_selkie NEUTRAL
 $global.kolCh1_bountyComplete
 !$global.kolCh1_councilDone","ShowPersonVisual
-FireAll PopulateOptions","""Captain."" Enarms is in full harness, which you have rarely seen. ""The room is ready. The shuttle will bring you to the council at Cygnus when you are.""",,
+FireAll PopulateOptions","""Captain."" Enarms is in what passes for a formal Knightly suit, which you have rarely seen. ""The room is ready. The shuttle will bring you to the council chambers.""",,
 kolCh1_dockNotice,MarketPostDock,"$market.id == kol_cygnus score:50
 !$kolCh1_dockChecked
 RepIsAtWorst knights_of_selkie NEUTRAL","$kolCh1_dockChecked = true 0
+Call $global.kolCh1Return_ref complete
 FireBest KolCh1ShuttleNotice
 FireBest MarketPostDock",,,
 kolCh1_noticeNone,KolCh1ShuttleNotice,,,,,
@@ -766,5 +811,5 @@ kolCh1_noticeBounty,KolCh1ShuttleNotice,"$global.kolCh1_scoutComplete score:10
 !$global.kolCh1Bounty_active
 !$global.kolCh1_bountyComplete",,Brother Enarms' courier is waiting at your docking collar.,,
 kolCh1_noticeCouncil,KolCh1ShuttleNotice,"$global.kolCh1_bountyComplete score:10
-!$global.kolCh1_councilDone",,"A courier is waiting at your docking collar, two Knights in full harness at its hatch. Brother Enarms has sent for you.",,
+!$global.kolCh1_councilDone",,"A courier is waiting at your docking collar, two Knights in armor flanking him. Brother Enarms has sent for you.",,
 #END Knights prelude chain,,,,,,

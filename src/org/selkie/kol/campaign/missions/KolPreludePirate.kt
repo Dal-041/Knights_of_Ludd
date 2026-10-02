@@ -26,7 +26,7 @@ class KolPreludePirate : HubMissionWithSearch() {
     enum class Stage { FIND_PIRATES, REPORT, COMPLETED }
 
     companion object {
-        const val FLEET_NAME = "Three Prince Gang"
+        const val FLEET_NAME = "Three Princes Gang"
     }
 
     private var enarms: PersonAPI? = null
@@ -101,7 +101,7 @@ class KolPreludePirate : HubMissionWithSearch() {
         when (currentStage) {
             Stage.FIND_PIRATES -> info.addPara("${enarms?.nameString} wants the $FLEET_NAME, a pirate band harassing " +
                     "Knight traffic, dealt with. They were last seen in the ${target?.nameWithLowercaseTypeShort}.", 10f)
-            Stage.REPORT -> info.addPara("The $FLEET_NAME are beaten, and their dossier on Knight shipping raises questions. " +
+            Stage.REPORT -> info.addPara("The $FLEET_NAME are beaten, and their dossier on Knights shipping raises questions. " +
                     "Report to ${enarms?.nameString} at ${enarms?.market?.name}.", 10f)
         }
     }
@@ -115,5 +115,5 @@ class KolPreludePirate : HubMissionWithSearch() {
         return true
     }
 
-    override fun getBaseName(): String = "Raiders on the Pilgrim Lanes"
+    override fun getBaseName(): String = "Raiders on the Pilgrim's Path"
 }

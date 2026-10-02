@@ -1,6 +1,9 @@
 package org.selkie.kol.campaign.missions
 
 import com.fs.starfarer.api.Global
+import com.fs.starfarer.api.campaign.InteractionDialogAPI
+import com.fs.starfarer.api.campaign.rules.MemoryAPI
+import com.fs.starfarer.api.util.Misc
 import com.fs.starfarer.api.campaign.econ.MarketAPI
 import com.fs.starfarer.api.characters.PersonAPI
 import com.fs.starfarer.api.impl.campaign.missions.hub.HubMissionWithSearch
@@ -11,8 +14,8 @@ import java.awt.Color
 
 /**
  * Knights Chapter 1: the return leg after the make-work bounty. Started from KolCh1Bounty when the target is
- * beaten; points the player back to Enarms at Cygnus without revealing the council. Completes when the council
- * scene opens (kolCh1_council sets $kolCh1Return_done).
+ * beaten; points the player back to Enarms at Cygnus without revealing the council. Completes when the
+ * player docks at Cygnus (kolCh1_dockNotice, or kolCh1_council as a fallback: Call ... complete).
  */
 class KolCh1Return : HubMissionWithSearch() {
 
@@ -35,9 +38,20 @@ class KolCh1Return : HubMissionWithSearch() {
         return true
     }
 
+    override fun callAction(action: String?, ruleId: String?, dialog: InteractionDialogAPI?,
+                            params: MutableList<Misc.Token>?, memoryMap: MutableMap<String, MemoryAPI>?): Boolean {
+        if (action == "complete") {
+            // complete now, inside the docking dialog (the periodic stage check doesn't run while the game is paused)
+            Global.getSector().memoryWithoutUpdate.set(KolCh1.RETURN_DONE, true)
+            checkStageChangesAndTriggers(dialog, memoryMap)
+            return true
+        }
+        return super.callAction(action, ruleId, dialog, params, memoryMap)
+    }
+
     override fun addDescriptionForNonEndStage(info: TooltipMakerAPI, width: Float, height: Float) {
         if (currentStage == Stage.RETURN) {
-            info.addPara("The raiders preying on the ore lighters are dealt with. ${enarms?.nameString} will want " +
+            info.addPara("The raiders preying on the Luddic merchants are dealt with. ${enarms?.nameString} will want " +
                     "to hear it from you. Return to him at ${enarms?.market?.name}.", 10f)
         }
     }
