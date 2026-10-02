@@ -37,7 +37,7 @@ class KolPreludeHook : HubMissionWithBarEvent() {
         if (!knightsAtWorstNeutral()) return false
         if (!setGlobalReference(KolPrelude.HOOK_REF)) return false
 
-        enarms = getImportantPerson(KolPrelude.ENARMS_ID)
+        enarms = Global.getSector().importantPeople.getPerson(KolPrelude.ENARMS_ID)
         if (enarms == null) return false
 
         if (barEvent) {

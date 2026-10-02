@@ -66,8 +66,8 @@ class KolPreludeLibra : HubMissionWithSearch() {
         if (!Global.getSector().memoryWithoutUpdate.getBoolean(KolPrelude.PIRATE_COMPLETE)) return false
         if (!setGlobalReference(KolPrelude.LIBRA_REF, KolPrelude.LIBRA_ACTIVE)) return false
 
-        enarms = getImportantPerson(KolPrelude.ENARMS_ID) ?: return false
-        GenerateKnights.ensureLibra()
+        GenerateKnights.ensureStoryState() // Libra and its people, if this save predates them
+        enarms = Global.getSector().importantPeople.getPerson(KolPrelude.ENARMS_ID) ?: return false
         val libraMarket = GenerateKnights.getLibraMarket() ?: return false
         libra = libraMarket.primaryEntity
         libraSystem = libra?.starSystem ?: return false
@@ -100,9 +100,7 @@ class KolPreludeLibra : HubMissionWithSearch() {
             }
         }
         // Martins: highlighted in Libra's comm directory, without a map pin that would give Libra away
-        // (getImportantPerson throws on an unregistered id; Libra built in an older save may not have registered him)
         val martins = Global.getSector().importantPeople.getPerson(KolPrelude.MARTINS_ID)
-            ?: libraMarket.peopleCopy.firstOrNull { it.id == KolPrelude.MARTINS_ID }
         if (martins != null) makeImportantDoNotShowAsIntelMapLocation(martins, "\$kolPreludeLibra_martins", Stage.DELIVER)
         makeImportant(enarms!!, "\$kolPreludeLibra_report", Stage.REPORT)
         setStageOnGlobalFlag(Stage.REPORT, KolPrelude.LIBRA_DELIVERED)

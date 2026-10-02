@@ -51,7 +51,7 @@ public class GenerateKnights {
 	}
 
 	public static void genAlways() {
-		ensureLibra();
+		ensureStoryState();
 		SpawnInvictus.spawnInvictus();
 		SpawnRetribution.spawnRetribution();
 		copyChurchEquipment();
@@ -159,22 +159,43 @@ public class GenerateKnights {
 		Global.getSector().getImportantPeople().addPerson(lackey1);
 	}
 
-	/** Brother Enarms: registered as an important person with a contact tag. Idempotent; also fixes older saves. */
-	public static void ensureEnarms() {
-		PersonAPI enarms = Global.getSector().getImportantPeople().getPerson(KolStaticStrings.KolPrelude.ENARMS_ID);
-		if (enarms == null) {
-			MarketAPI cygnus = Global.getSector().getEconomy().getMarket(KolStaticStrings.KOL_CYGNUS);
-			if (cygnus == null) return; // no Cygnus (e.g. Nexerelin random sector): no Enarms, no prelude chain
-			for (PersonAPI person : cygnus.getPeopleCopy()) {
-				if (KolStaticStrings.KolPrelude.ENARMS_ID.equals(person.getId())) {
-					enarms = person;
-					Global.getSector().getImportantPeople().addPerson(enarms);
-					break;
-				}
-			}
-			if (enarms == null) return;
+	/**
+	 * Everything the Knights story chain (prelude onward) expects to exist: Battlestar Libra (created if missing,
+	 * e.g. older saves or a failed placement), and its speakers registered in ImportantPeople so missions and
+	 * BeginConversation can find them. Idempotent; runs at generation and on every load so older saves catch up.
+	 * In a sector without Cygnus (e.g. a Nexerelin random sector) the people are simply missing and the chain
+	 * is never offered.
+	 */
+	public static void ensureStoryState() {
+		if (getLibraMarket() == null) {
+			log.info("KOL: Battlestar Libra missing, creating it");
+			genBattlestarLibra();
 		}
-		if (!enarms.hasTag(Tags.CONTACT_MILITARY)) enarms.addTag(Tags.CONTACT_MILITARY);
+		MarketAPI cygnus = Global.getSector().getEconomy().getMarket(KolStaticStrings.KOL_CYGNUS);
+		MarketAPI lyra = Global.getSector().getEconomy().getMarket(KolStaticStrings.KOL_LYRA);
+
+		PersonAPI enarms = ensureImportantPerson(KolStaticStrings.KolPrelude.ENARMS_ID, cygnus);
+		if (enarms != null && !enarms.hasTag(Tags.CONTACT_MILITARY)) enarms.addTag(Tags.CONTACT_MILITARY);
+		ensureImportantPerson(KolStaticStrings.KolPrelude.MARTINS_ID, getLibraMarket());
+		ensureImportantPerson(KolStaticStrings.KolCh1.HELENSIS_ID, cygnus);
+		ensureImportantPerson(KolStaticStrings.KolCh1.GREENFLIGHT_ID, lyra);
+	}
+
+	/**
+	 * Registers a station NPC in ImportantPeople, looking them up among the market's people.
+	 * Returns null if the market or the person is missing.
+	 */
+	public static PersonAPI ensureImportantPerson(String personId, MarketAPI market) {
+		PersonAPI found = Global.getSector().getImportantPeople().getPerson(personId);
+		if (found != null) return found;
+		if (market == null) return null;
+		for (PersonAPI person : market.getPeopleCopy()) {
+			if (personId.equals(person.getId())) {
+				Global.getSector().getImportantPeople().addPerson(person);
+				return person;
+			}
+		}
+		return null;
 	}
 	
 	public static void genKnightsStarfortress() {
@@ -240,13 +261,6 @@ public class GenerateKnights {
 			if (market.getMemoryWithoutUpdate().getBoolean(KolStaticStrings.KolMemKeys.KOL_MARKET_LIBRA)) return market;
 		}
 		return null;
-	}
-
-	/** Creates Libra if the sector doesn't have it (older saves, or a failed placement). Idempotent. */
-	public static void ensureLibra() {
-		if (getLibraMarket() != null) return;
-		log.info("KOL: Battlestar Libra missing, creating it");
-		genBattlestarLibra();
 	}
 
 	public static void genBattlestarLibra() {

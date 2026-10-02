@@ -37,7 +37,7 @@ class KolPreludePirate : HubMissionWithSearch() {
         if (!knights.relToPlayer.isAtWorst(RepLevel.NEUTRAL)) return false
         if (!setGlobalReference(KolPrelude.PIRATE_REF, KolPrelude.PIRATE_ACTIVE)) return false
 
-        enarms = getImportantPerson(KolPrelude.ENARMS_ID)
+        enarms = Global.getSector().importantPeople.getPerson(KolPrelude.ENARMS_ID)
         val home = enarms?.market ?: return false
         val homeLoc = home.primaryEntity.locationInHyperspace
 

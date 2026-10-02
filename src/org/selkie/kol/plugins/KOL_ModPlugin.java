@@ -68,8 +68,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 		GenerateKnights.copyChurchEquipment();
 		GenerateKnights.addKoLIntel();
-		if (!newGame) GenerateKnights.ensureLibra(); // new games get Libra from genAlways()
-		GenerateKnights.ensureEnarms();
+		GenerateKnights.ensureStoryState();
 		ZeaUtils.checkAbyssalFleets();
 		ZeaUtils.copyHighgradeEquipment();
         CompatabilityUtils.INSTANCE.run(getVersion());

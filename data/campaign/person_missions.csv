@@ -1,3 +1,7 @@
 mission id,person id,tagsAll,tagsAny,tagsNotAny,tags,freq,min timeout,max timeout,min rep,max rep,importance,reqMissionAny,reqMissionAll,reqMissionNone,icon,plugin
 kolPreludePirate,,,,,,,,,,,,,,,graphics/icons/missions/pirate_system_bounty.png,org.selkie.kol.campaign.missions.KolPreludePirate
 kolPreludeLibra,,,,,,,,,,,,,,,graphics/icons/missions/pilgrims_path.png,org.selkie.kol.campaign.missions.KolPreludeLibra
+kolCh1Scout,,,,,,,,,,,,,,,graphics/icons/missions/hyperspace_oddity.png,org.selkie.kol.campaign.missions.KolCh1Scout
+kolCh1Bounty,,,,,,,,,,,,,,,graphics/icons/missions/military_bounty.png,org.selkie.kol.campaign.missions.KolCh1Bounty
+kolCh1Lyra,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.missions.KolCh1Lyra
+kolCh1Return,,,,,,,,,,,,,,,graphics/icons/missions/shuttle_vip.png,org.selkie.kol.campaign.missions.KolCh1Return
