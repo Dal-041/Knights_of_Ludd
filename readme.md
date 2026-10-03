@@ -13,6 +13,7 @@ Featuring:
 ## Credits
 - Ships: Selkie
 - Code: Dal, Starficz, President Matt Damon, Lukas04, NiaTahl, CeruleanPancake, Niko
+- - Contributions by Claude and Qwen models. 
 
 - Weapons: SkylordZero, SnazzyPantsMcGee
 - VFX: NiaTahl, President Matt Damon, Starficz, Dal, Himemi, Wisp
@@ -20,7 +21,8 @@ Featuring:
 - Portraits (AI): Selkie (ironic, right?)
 - Art contributions: SnazzyPantsMcGee, Nes, Quacken, Pyrophage, Sleepyfish, Sirhartley, Alfonzo, NiaTahl, Dal
 
-- Writing: Wisp, Dal, Alfonzo, Candlebury, Demto, WMGreywind
+- Writing: Dal, Wisp, Alfonzo, Candlebury, Demto, WMGreywind
+- - Contributions by Claude, Qwen, and Gemma models. 
 - Sounds: Mesotronik
 - Music: Haplogynae
 
