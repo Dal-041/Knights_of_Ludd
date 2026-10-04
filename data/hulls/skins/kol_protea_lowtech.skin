@@ -1,0 +1,16 @@
+{
+	"baseHullId":"kol_protea",
+	"skinHullId":"kol_protea_lowtech",
+	"hullName":"Protea (Ordained)",
+	"incompatibleWithBaseHull":false,
+	# restored to the low-tech standard: no primitive-shield timer, low-tech shield efficiency,
+	# no Knights engine cores, low-tech shield and vent colours (kol_lowtech_style)
+	# generated from kol_protea.ship; regenerate if its engine slots change
+	"tags":["no_dealer", "no_drop", "no_bp_drop"],
+	"addHints":["HIDE_IN_CODEX"],
+	"shieldEfficiency":1.0,
+	"removeEngineSlots":[2, 3],
+	"removeBuiltInMods":["kol_shields"],
+	"removeBuiltInWeapons":["WS0009"],
+	"builtInMods":["kol_lowtech_style"],
+}

@@ -471,10 +471,42 @@
 		"KOL_ArmorPaperdolls": "org.selkie.kol.plugins.KOL_ArmorPaperdolls"
 	},
 	"ruleCommandPackages": [
-        "org.selkie.zea.rulecmd"
+        "org.selkie.zea.rulecmd",
+        "org.selkie.kol.rulecmd"
     ],
 	
 	"drop_prob_officer_zea_dusk_boss_core":0,
 	"drop_prob_officer_zea_dawn_boss_core":0,
-	"drop_prob_officer_zea_elysia_boss_core":0
+	"drop_prob_officer_zea_elysia_boss_core":0,
+
+	# Knights: the Technology situation (Helensis' "bounty" on AI technology). All values tunable.
+	"kol_tech":{
+		"scripPerProgress":100,                    # progress bar = lifetime scrip / this
+		"stageThresholds":[500, 5000, 15000, 36000], # REQUISITIONS, TRUSTED, ARMORY, CONSECRATED (lifetime scrip)
+		"maxScrip":50000,                          # bar maximum (lifetime scrip)
+		"acceptedManufacturers":["Dusk", "Dawn", "Dawntide", "Nightfall", "Elysia", "Unity"],
+		"forbiddenManufacturers":["Shrouded Dweller"],
+		"baseValue":100,                           # small weapon, tier 0
+		"sizeSteps":[1, 2, 4],                     # small, medium, large (fighter wings count as large)
+		"tierSteps":[1, 1.5, 2, 2.5, 3],           # weapon/wing tier 0-4
+		"coreValues":{"gamma_core":500, "beta_core":1000, "alpha_core":2000},
+		"hullBaseValue":1000,                      # frigate; x2 per size step; / max(1, d-mods)
+		"fixedValues":{                            # story items, accepted regardless of manufacturer (placeholders)
+			"zea_dusk_boss_core":5000, "zea_dawn_boss_core":5000, "zea_elysia_boss_core":5000,
+			"zea_dormant_dusk_boss_core":5000,
+			"zea_boss_ninaya":5000, "zea_boss_ninmah":5000, "zea_boss_nineveh":5000
+		},
+		"storeRates":[25, 30, 35, 40],             # credits of goods per scrip at REQUISITIONS..CONSECRATED
+		"officerCreditValue":100000,               # officers cost this / officer rate (about a Knights cruiser)
+		"officerRates":[25, 27, 28, 30],           # officers are discounted less than equipment (TRUSTED onward uses index stage-1)
+		"officerPriceVariance":0.15,               # each candidate's price varies +/- this fraction
+		"officersPerMilestone":2,                  # officers released at TRUSTED and again at ARMORY; unlimited from CONSECRATED
+		"officerLevel":4,
+		"uniques":[                                # hidden until the variant exists (placeholder ids and prices)
+			{"stage":2, "variant":"kol_unique_frigate_Standard", "price":4000},
+			{"stage":3, "variant":"kol_unique_destroyer_Standard", "price":8000},
+			{"stage":4, "variant":"kol_unique_cruiser_Standard", "price":15000}
+		],
+		"excommunicationRep":"VENGEFUL"            # Knights and Luddic Church on handing over Shrouded tech
+	}
 }

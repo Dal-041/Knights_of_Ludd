@@ -19,6 +19,7 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 import org.selkie.kol.Utils;
+import org.selkie.kol.campaign.tech.KolLowTech;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.helpers.KolStaticStrings;
@@ -63,10 +64,13 @@ public class KnightRefit extends BaseHullMod {
 
     @Override
     public void applyEffectsAfterShipCreation(ShipAPI ship, String id) {
-        if (ship.getVariant().hasHullMod(HullMods.ACCELERATED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.ACCELERATED_SHIELDS, KolStaticStrings.KNIGHT_REFIT);
-        if (ship.getVariant().hasHullMod(HullMods.OMNI_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.OMNI_SHIELD_CONVERSION, KolStaticStrings.KNIGHT_REFIT);
-        if (ship.getVariant().hasHullMod(HullMods.FRONT_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.FRONT_SHIELD_CONVERSION, KolStaticStrings.KNIGHT_REFIT);
-        if (ship.getVariant().hasHullMod(HullMods.EXTENDED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.EXTENDED_SHIELDS, KolStaticStrings.KNIGHT_REFIT);
+        // hulls restored to the low-tech standard have ordinary shields, so shield hullmods are allowed
+        if (!KolLowTech.INSTANCE.isConverted(ship.getVariant())) {
+            if (ship.getVariant().hasHullMod(HullMods.ACCELERATED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.ACCELERATED_SHIELDS, KolStaticStrings.KNIGHT_REFIT);
+            if (ship.getVariant().hasHullMod(HullMods.OMNI_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.OMNI_SHIELD_CONVERSION, KolStaticStrings.KNIGHT_REFIT);
+            if (ship.getVariant().hasHullMod(HullMods.FRONT_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.FRONT_SHIELD_CONVERSION, KolStaticStrings.KNIGHT_REFIT);
+            if (ship.getVariant().hasHullMod(HullMods.EXTENDED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.getVariant(), HullMods.EXTENDED_SHIELDS, KolStaticStrings.KNIGHT_REFIT);
+        }
 
         PersonAPI captain = ship.getOriginalCaptain();
         MutableCharacterStatsAPI stats = captain == null ? null : captain.getFleetCommanderStats();
@@ -302,7 +306,9 @@ public class KnightRefit extends BaseHullMod {
         tooltip.addImageWithText(underHeadingPad);
 
 
-        boolean hasShield = ship != null && ship.getShield() != null;
+        // hulls restored to the low-tech standard have no capacitor shields: dimmed, like phase hulls
+        boolean lowTech = ship != null && KolLowTech.INSTANCE.isConverted(ship.getVariant());
+        boolean hasShield = ship != null && ship.getShield() != null && !lowTech;
         tooltip.addSectionHeading("Primitive Capacitor Shields", hasShield ? activeHeaderTextColor : inactiveHeaderTextColor,
                 hasShield ? activeHeaderBannerColor : inactiveHeaderBannerColor, Alignment.MID, headingPad);
         TooltipMakerAPI capacitorShields = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, hasShield ? "kol_primshield" : "kol_primshield_grey"), HEIGHT);

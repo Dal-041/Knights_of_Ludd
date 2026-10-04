@@ -663,7 +663,7 @@ kolCh1_council,DialogOptionSelected,$option == kolCh1_council,"Call $global.kolC
 BeginConversation kol_chaptermaster
 ShowSecondPerson kol_knightcaptain","The shuttle does not take you to Enarms' quarters. It sets down near the station's spine, and a pair of Knights in full combat plate walk you up a long ramp into a chamber that was once built as a chapel.
 
-A dozen people sit in a half-ring of carved seats under the lamps: Knight-Leaders in their day-suits, an old curate with a censer smoking at her feet, two administrators with slates on their knees. At the centre, in the highest chair, sits Master Helensis, grey-haired and very still.
+A dozen people sit in a half-ring of carved seats under the lamps: Knight-Leaders in their day-suits, an old curate with a censer smoking at her feet, two administrators with slates on their knees. At the center, in the highest chair, sits Master Helensis, gray-haired and very still.
 
 Enarms stands at a lectern at the focus. He does not look at you as you are shown to a bench, but he brushes at the cord on his wrist. 
 
@@ -676,7 +676,7 @@ kolCh1_council2,DialogOptionSelected,$option == kolCh1_council2,,"Enarms gives h
 ""I believe these reports are linked,"" he finishes. ""Molochian creations, hostile to the Faith, and closing on us from several directions. I believe they are sizing us up. I do not believe they are in any hurry.""
 
 Murmurs travel around the half-ring and die out under Helensis' gaze.",kolCh1_council3:Continue,
-kolCh1_council3,DialogOptionSelected,$option == kolCh1_council3,,"""The Church has endured raiders since the first days of the Collapse, Brother,"" Helensis says. Her voice is mild and carries without effort.""
+kolCh1_council3,DialogOptionSelected,$option == kolCh1_council3,,"""The Church has endured raiders since the first days of the Collapse, Brother,"" Helensis says. Her voice is mild and carries without effort.
 
 ""A few stolen schedules do not make a crusade. The Order is not so fragile that every shadow on a sensor screen is the Adversary come at last.""
 
@@ -697,7 +697,7 @@ Helensis calls the question. The quorum declines, by a margin that is polite rat
 kolCh1_councilFaithful:""Then call on the faithful. Every world that keeps the Faith can spare something.""",
 kolCh1_councilFaithful,DialogOptionSelected,$option == kolCh1_councilFaithful,"$option = kolCh1_councilAllies 0
 FireBest DialogOptionSelected",,,
-kolCh1_councilAllies,DialogOptionSelected,$option == kolCh1_councilAllies,,"""Your diplomatic instincts speak well of your character, Captain. Sadly, the Curia has its own troubles,"" A faint smile. ""and its own needs to answer for. Our friends among the powers are generous with courtesy, and the faithful worlds with prayers."" Helensis says.
+kolCh1_councilAllies,DialogOptionSelected,$option == kolCh1_councilAllies,,"Helensis answers you, ""Your diplomatic instincts speak well of your character, Captain. Sadly, the Curia has its own troubles,"" A pained smile. ""and its own needs to answer for. Our friends among the powers are generous with courtesy, and the faithful worlds with prayers.""
 
 ""Less so with hulls. We have asked, captain, and we will ask again this time. I would not wait on that answer. Providence and our own strength will see us through this threat; it will not be the first time we have found the answers to a crisis waiting within.""","kolCh1_councilLibra:""Then restore Libra. It's already out there, and it's already on the front lines.""
 kolCh1_councilLibraDuty:""Knightmaster Martins needs a garrison. The enemy's scouts are already there.""",
@@ -707,7 +707,7 @@ kolCh1_councilLibra,DialogOptionSelected,$option == kolCh1_councilLibra,,"For th
 
 ""Libra,"" Helensis says. ""Yes. Knightmaster Martins is a faithful servant, and has been faithful in that place for a very long time.""
 
-She holds for a deep breath. ""That station is old, captain. Its equipment is older. To make it a fortress again would cost what this Order spends in a cycle, for a post that guards nothing.""
+She holds for a deep breath. ""That station is old, captain. Its equipment is older. To make it a fortress again would cost what this Order spends in a cycle, for a post on a fringe that guards nothing.""
 
 ""We pray for Libra every week."" She inclines her head toward the curate, who nods. ""We cannot afford to do more. It is a sorrow, and we bear it."" She does not sound as though she bears it heavily.",kolCh1_councilOutcome:Continue,
 kolCh1_councilOutcome,DialogOptionSelected,$option == kolCh1_councilOutcome,,"When the murmuring has run its course, Helensis gives the council's word. The matter is grave, and will be watched. It belongs, in the first instance, to the Knights' Inquisitors.
@@ -716,7 +716,7 @@ kolCh1_councilOutcome,DialogOptionSelected,$option == kolCh1_councilOutcome,,"Wh
 
 The quorum assents without debate; it is the kind of decision that costs nothing.
 
-Then, as the Knights begin to rise, she adds: ""And since you are so willing, captain, there is one more thing. These machines are an enemy we do not understand. Bring us pieces of them. Their weapons, their hulls, their thinking engines, if such things can be recovered.""
+Then, as the Knights begin to rise, she adds: ""And since you are so willing, captain, there is one more thing. These machines you've found. They are an enemy we do not understand. Bring us pieces of them. Their weapons, their hulls, their thinking engines, if such things can be recovered.""
 
 ""The Order will pay a bounty for each, for the sake of knowing what we face.""
 
@@ -726,9 +726,9 @@ kolCh1_councilClose,DialogOptionSelected,$option == kolCh1_councilClose,BeginCon
 He does not speak until you are past the guards.","kolCh1_walkout2:""That went about as well as expected.""",
 kolCh1_walkout2,DialogOptionSelected,$option == kolCh1_walkout2,,"""Better,"" he says. ""They listened. They will watch. That is not nothing."" He walks a few more steps. ""It is not a ship, either. Or a Knight. Or a single credit.""
 
-He sighs. ""We lose a little ground every cycle. The council can vote that away no more than it can vote away the dark. This stalemate cannot hold forever, captain.""
+He sighs. ""We keep losing ground with every cycle. The council can vote that away no more than it can vote away the dark. This stalemate cannot hold forever, captain.""
 
-""I am not permitted to move the Order's patrols on my own judgement."" He considers the wall inlay. ""But there is no stricture against arranging for patrols to be going the same direction you are. I will think on that.""","kolCh1_walkout3:""And Libra?""",
+""I am not permitted to commission the Order's patrols on my own judgement."" He considers the inlay of a wall panel. ""But there is no stricture against arranging for patrols to be going the same direction you are. I will think on that.""","kolCh1_walkout3:""And Libra?""",
 kolCh1_walkout3,DialogOptionSelected,$option == kolCh1_walkout3,"BeginMission kolCh1Lyra false
 FireBest KolCh1LyraOffer","Enarms stops walking.
 
@@ -812,4 +812,220 @@ kolCh1_noticeBounty,KolCh1ShuttleNotice,"$global.kolCh1_scoutComplete score:10
 !$global.kolCh1_bountyComplete",,Brother Enarms' courier is waiting at your docking collar.,,
 kolCh1_noticeCouncil,KolCh1ShuttleNotice,"$global.kolCh1_bountyComplete score:10
 !$global.kolCh1_councilDone",,"A courier is waiting at your docking collar, two Knights in armor flanking him. Brother Enarms has sent for you.",,
+kolTech_helensisGreeting,PickGreeting,"$id == kol_chaptermaster score:200
+$global.kolCh1_councilDone
+!$global.kol_excommunicated
+!$global.kolTech_trusted","ShowPersonVisual
+FireAll PopulateOptions","Master Helensis answers the link herself. ""Captain $playerName. The Order's study of its enemy continues. Have you brought something for it?""",,
+kolTech_helensisGreetingMid,PickGreeting,"$id == kol_chaptermaster score:210
+$global.kolCh1_councilDone
+!$global.kol_excommunicated
+$global.kolTech_trusted
+!$global.kolTech_armory","ShowPersonVisual
+FireAll PopulateOptions","Helensis sets down her pen and gives the lens her whole attention. ""There you are, captain. We spoke of you at prayer this morning. Tell me what you have found.""",,
+kolTech_helensisGreetingLate,PickGreeting,"$id == kol_chaptermaster score:220
+$global.kolCh1_councilDone
+!$global.kol_excommunicated
+$global.kolTech_armory","ShowPersonVisual
+FireAll PopulateOptions","Helensis inclines her head to the lens. ""There you are, captain. I had hoped it would be you. What have you brought us?""",,
+kolTech_helensisExcommunicated,PickGreeting,"$id == kol_chaptermaster score:300
+$global.kol_excommunicated",ShowPersonVisual,"The channel opens long enough for Master Helensis to look through you, and closes without a word.",cutCommLink:Cut the comm link,
+kolTech_optHandover,PopulateOptions,"$isPerson
+$id == kol_chaptermaster
+$global.kolCh1_councilDone
+!$global.kol_excommunicated
+",,,"10:kolTech_handover:""I've brought technology from the AI fleets.""",
+kolTech_handover,DialogOptionSelected,$option == kolTech_handover,KolTechCMD handover,"Helensis gestures to a clerk, who brings up a manifest. ""Show me what you have. We will reward you by the bulk.""",,
+kolTech_optHandoverShips,PopulateOptions,"$isPerson
+$id == kol_chaptermaster
+$global.kolCh1_councilDone
+!$global.kol_excommunicated
+$global.kolTech_trusted",,,"11:kolTech_handoverShips:""I have ships for the Order's study.""",
+kolTech_handoverShips,DialogOptionSelected,$option == kolTech_handoverShips,KolTechCMD handoverShips,"""Whole hulls. Praise Ludd."" Helensis nods her head. ""Our scholars will greatly benefit from them.""",,
+kolTech_shrouded,KolTechShrouded,,,"Helensis sees the entries in the manifest and stands so quickly her chair clatters back.
+
+For a moment she cannot speak. Then: ""Get it out of this station. Get it out of the sight of God!""
+
+When she speaks again it is to the room, not to you: ""You are cast out of the Church, and every faithful soul is obliged to treat you as what you are: Damned."" 
+
+You beat a hasty exit; knights are already sweeping in as you go.",kolTech_shroudedLeave:Leave,
+kolTech_shroudedLeave,DialogOptionSelected,$option == kolTech_shroudedLeave,"ShowDefaultVisual
+EndConversation",,,
+kolTech_optRequisitions,PopulateOptions,"$isPerson
+$id == kol_chaptermaster
+$global.kolCh1_councilDone
+!$global.kol_excommunicated
+$global.kolTech_requisitions",,,"12:kolTech_requisitions:""I'd like to make a requisition.""",
+kolTech_requisitions,DialogOptionSelected,$option == kolTech_requisitions,FireBest KolTechReqMenu,,,
+kolTech_reqMenu,KolTechReqMenu,,"KolTechCMD publish
+FireBest KolTechReqMenuText",,,
+kolTech_reqOptEquipment,KolTechReqOptions,,,,1:kolTech_reqEquipment:Equipment from the Order's stores,
+kolTech_reqOptOfficers,KolTechReqOptions,$global.kolTech_trusted,,,2:kolTech_reqOfficers:Officers,
+kolTech_reqOptBack,KolTechReqOptions,,,,9:kolTech_reqBack:Back,
+kolTech_reqEquipment,DialogOptionSelected,$option == kolTech_reqEquipment,KolTechCMD requisition,,,
+kolTech_reqBack,DialogOptionSelected,$option == kolTech_reqBack,FireAll PopulateOptions,,,
+kolTech_reqOfficers,DialogOptionSelected,$option == kolTech_reqOfficers,"KolTechCMD clearOfficer
+KolTechCMD publish
+FireBest KolTechOfficerMenu",,,
+kolTech_officerCautious,DialogOptionSelected,$option == kolTech_officerCautious,"$kolTech_personality = cautious 0
+FireBest KolTechOfficerPreview",,,
+kolTech_officerSteady,DialogOptionSelected,$option == kolTech_officerSteady,"$kolTech_personality = steady 0
+FireBest KolTechOfficerPreview",,,
+kolTech_officerAggressive,DialogOptionSelected,$option == kolTech_officerAggressive,"$kolTech_personality = aggressive 0
+FireBest KolTechOfficerPreview",,,
+kolTech_officerBack,DialogOptionSelected,$option == kolTech_officerBack,FireBest KolTechReqMenu,,,
+kolTech_reqOptUnique1,KolTechReqOptions,$kolTech_uniqueOffer1,,,3:kolTech_reqUnique1:$kolTech_uniqueName1 ($kolTech_uniquePrice1 scrip),
+kolTech_reqUnique1,DialogOptionSelected,$option == kolTech_reqUnique1,FireBest KolTechUniqueBuy1,,,
+kolTech_uniqueBuy1,KolTechUniqueBuy1,$kolTech_canAffordUnique1 score:10,"KolTechCMD buyUnique 1
+FireBest KolTechReqMenu",,,
+kolTech_uniqueBuyNoScrip1,KolTechUniqueBuy1,,FireBest KolTechReqMenu,You do not have enough scrip.,,
+kolTech_uniqueBought1,KolTechUniqueBought1,,,[PLACEHOLDER] Purchase scene for unique ship 1: the Knights bring the vessel out of its long rest.,,
+kolTech_uniqueUnlocked1,KolTechAfterHandover,"$global.kolTech_uniqueUnlocked1
+!$global.kolTech_uniqueScene1",$global.kolTech_uniqueScene1 = true,[PLACEHOLDER] Unlock scene for unique ship 1: Helensis mentions a vessel in the Order's care that might be released to you.,,
+kolTech_reqOptUnique2,KolTechReqOptions,$kolTech_uniqueOffer2,,,4:kolTech_reqUnique2:$kolTech_uniqueName2 ($kolTech_uniquePrice2 scrip),
+kolTech_reqUnique2,DialogOptionSelected,$option == kolTech_reqUnique2,FireBest KolTechUniqueBuy2,,,
+kolTech_uniqueBuy2,KolTechUniqueBuy2,$kolTech_canAffordUnique2 score:10,"KolTechCMD buyUnique 2
+FireBest KolTechReqMenu",,,
+kolTech_uniqueBuyNoScrip2,KolTechUniqueBuy2,,FireBest KolTechReqMenu,You do not have enough scrip.,,
+kolTech_uniqueBought2,KolTechUniqueBought2,,,[PLACEHOLDER] Purchase scene for unique ship 2: the Knights bring the vessel out of its long rest.,,
+kolTech_uniqueUnlocked2,KolTechAfterHandover,"$global.kolTech_uniqueUnlocked2
+!$global.kolTech_uniqueScene2",$global.kolTech_uniqueScene2 = true,[PLACEHOLDER] Unlock scene for unique ship 2: Helensis mentions a vessel in the Order's care that might be released to you.,,
+kolTech_reqOptUnique3,KolTechReqOptions,$kolTech_uniqueOffer3,,,5:kolTech_reqUnique3:$kolTech_uniqueName3 ($kolTech_uniquePrice3 scrip),
+kolTech_reqUnique3,DialogOptionSelected,$option == kolTech_reqUnique3,FireBest KolTechUniqueBuy3,,,
+kolTech_reqMenuText,KolTechReqMenuText,,"Highlight $kolTech_balance
+FireAll KolTechReqOptions",Your balance with the Order stands at $kolTech_balance scrip.,,
+kolTech_officerMenu,KolTechOfficerMenu,,Highlight $kolTech_officerPrice,"""The Order can spare a few Knights of proven service to journey with you. Their service costs $kolTech_officerPrice scrip.""","kolTech_officerCautious:A cautious officer
+kolTech_officerSteady:A steady officer
+kolTech_officerAggressive:An aggressive officer
+kolTech_officerBack:Back",
+kolTech_officerMenuNone,KolTechOfficerMenu,!$kolTech_officerAvailable score:10,,"""The Order cannot spare more Knights at this time, captain. When our preparations have been further bolstered, perhaps.""",kolTech_officerBack:Back,
+kolTech_uniqueBuy3,KolTechUniqueBuy3,$kolTech_canAffordUnique3 score:10,"KolTechCMD buyUnique 3
+FireBest KolTechReqMenu",,,
+kolTech_uniqueBuyNoScrip3,KolTechUniqueBuy3,,FireBest KolTechReqMenu,You do not have enough scrip.,,
+kolTech_uniqueBought3,KolTechUniqueBought3,,,[PLACEHOLDER] Purchase scene for unique ship 3: the Knights bring the vessel out of its long rest.,,
+kolTech_uniqueUnlocked3,KolTechAfterHandover,"$global.kolTech_uniqueUnlocked3
+!$global.kolTech_uniqueScene3",$global.kolTech_uniqueScene3 = true,[PLACEHOLDER] Unlock scene for unique ship 3: Helensis mentions a vessel in the Order's care that might be released to you.,,
+kolTech_tell1,KolTechAfterHandover,"$global.kolTech_requisitions
+!$global.kolTech_told1",$global.kolTech_told1 = true,"""Thank you, captain. You do the Order a service. The few of the faith who work with such things, I keep close, and I have vetted every one."" 
+
+""They are already at work on what you brought. With your help we will be able to defend ourselves when the time comes.""",,
+kolTech_enarmsReact1,PickGreeting,"$id == kol_knightcaptain score:301
+$global.kolTech_requisitions
+!$global.kolTech_enarmsSaw1","$global.kolTech_enarmsSaw1 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms finishes the line he is reading before he looks up. ""The refectory has stopped speaking of the machine fleets as something to be endured. This morning I heard them speak of beating them."" He sets the slate down. ""I should be glad, and I am. I am also curious who taught them to say it. What can I do for you?""",,
+kolTech_greenflightReact1,PickGreeting,"$id == kol_intel_director score:301
+$global.kol_ch1_done
+$global.kolTech_requisitions
+!$global.kolTech_greenflightSaw1","$global.kolTech_greenflightSaw1 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" She does not need the slate to know. ""They are speaking of you in the Cygnus refectories, I am told. The Order has not had a name to put its hopes to in some time, and it is not a bad thing to have."" She sounds approving.
+
+""I wrote to the Master to ask what she has learned. She answered by return, and briefly. If you would be so kind, keep an eye on her progress.""
+
+""Blessings be.""",,
+kolTech_tell2,KolTechAfterHandover,"$global.kolTech_trusted
+!$global.kolTech_told2",$global.kolTech_told2 = true,"""You have been of more use to the Faith than many who wear its robes, captain. You know that we pray when you go and give thanks upon your return. What you share will give us the strength to answer the dark.""",,
+kolTech_enarmsReact2,PickGreeting,"$id == kol_knightcaptain score:302
+$global.kolTech_trusted
+!$global.kolTech_enarmsSaw2","$global.kolTech_enarmsSaw1 = true
+$global.kolTech_enarmsSaw2 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain."" A Knight in good armor passes behind him as he speaks. He does not greet them and he does not look round. 
+
+""There are more of the Master's own Knights about the station than I can remember. They are courteous. They are always going somewhere together.""
+
+""I have known Helensis a long time, and I have never known her to reward loyalty without expecting to collect in return. I do not say it against you; I say it so that you will know not to take your partnership with her lightly.""",,
+kolTech_greenflightReact2,PickGreeting,"$id == kol_intel_director score:302
+$global.kol_ch1_done
+$global.kolTech_trusted
+!$global.kolTech_greenflightSaw2","$global.kolTech_greenflightSaw1 = true
+$global.kolTech_greenflightSaw2 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" The lamp lights a slate with a long list of names. ""Requests for the Inquisition's archives have tripled this month. Knights, mostly. Some who have never set foot in my library."" She sounds pleased.
+
+""The Order has begun asking the right questions. I would like to think that is your doing. What can I do for you?""",,
+kolTech_tell3,KolTechAfterHandover,"$global.kolTech_armory
+!$global.kolTech_told3",$global.kolTech_told3 = true,"""Yesterday we held a prayer for your success, captain, and providence has guided you back. It is thanks to your efforts that our insight has blossomed to understanding. Our shields are gleaming and our arms are renewed.""
+
+""We would be honored to share this bounty with you. You'll find the Knightly ships you requisition from us will now keep pace with the most modern of the sector.""
+
+""Please, continue with your donations; we are so close to a new chapter for the Faith, blessed in God's light.""",,
+kolTech_enarmsReact3,PickGreeting,"$id == kol_knightcaptain score:303
+$global.kolTech_armory
+!$global.kolTech_enarmsSaw3","$global.kolTech_enarmsSaw1 = true
+$global.kolTech_enarmsSaw2 = true
+$global.kolTech_enarmsSaw3 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Enarms almost looks like a man who has slept. ""The traders on the Pilgrim's Path have stopped turning back, and the patrol-masters want to thank you. I let them know them you prefer humility.""
+
+He glances for something off-frame. ""Helensis' knights go quiet when I pass by them now. I have decided to take it as a compliment to my rank."" He lies.
+
+""There is much to do, captain. Come meet me when you have a chance.""",,
+kolTech_greenflightReact3,PickGreeting,"$id == kol_intel_director score:303
+$global.kol_ch1_done
+$global.kolTech_armory
+!$global.kolTech_greenflightSaw3","$global.kolTech_greenflightSaw1 = true
+$global.kolTech_greenflightSaw2 = true
+$global.kolTech_greenflightSaw3 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Her office is as spare as before. ""The requests at my office have changed. A month ago the Knights asked what the machines were. Now they ask what the machines can do."" She says it without heat.
+
+""That is the question the Domain asked, you know. Its engineers were careful, and devout in their own way, and not one of them believed they were building anything but a tool."" She lets that sit. ""I do not say the Master is the Domain. I say she studies alone, and my office, which exists to look at exactly this, has not been invited to look.""
+
+""If you ever see where it goes, I would like to hear of it. My office writes things down while they are happening. It is mostly what it is for. No one will be able to say, afterwards, that nobody saw.""",,
+kolTech_tell4,KolTechAfterHandover,"$global.kolTech_consecrated
+!$global.kolTech_told4",$global.kolTech_told4 = true,"Helensis does not hide her satisfaction. ""Your work has been an example to us all, captain. In truth, we gleaned all we needed from this decried technology some time ago, but we will continue to reward any effort that bolsters our armory.
+
+With our new strength we will bring protection, peace, and Goodness back to the sector. In our new Order you will have a revered place among the holy.""",,
+kolTech_enarmsReact4,PickGreeting,"$id == kol_knightcaptain score:304
+$global.kolTech_consecrated
+!$global.kolTech_enarmsSaw4","$global.kolTech_enarmsSaw1 = true
+$global.kolTech_enarmsSaw2 = true
+$global.kolTech_enarmsSaw3 = true
+$global.kolTech_enarmsSaw4 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" The slates are gone from the desk behind him, which you have not seen before. ""Two Knight-Captains I have served beside for years have stopped speaking to me about the Master. A third asked, very politely, whether I had considered a posting to the outer holdings.""
+
+He lets that stand. ""I do not know what the Order is becoming, captain. I know that it is becoming it faster than anyone is permitted to ask about.""
+
+""I would not ask you to stop. You are not mine to tell. I would ask you to look at what is being made, now and then, and decide whether you like the look of it. There is more I could say. I have found there is no one to say it to."" He meets the lens. ""Go carefully.""",,
+kolTech_greenflightReact4,PickGreeting,"$id == kol_intel_director score:304
+$global.kol_ch1_done
+$global.kolTech_consecrated
+!$global.kolTech_greenflightSaw4","$global.kolTech_greenflightSaw1 = true
+$global.kolTech_greenflightSaw2 = true
+$global.kolTech_greenflightSaw3 = true
+$global.kolTech_greenflightSaw4 = true
+ShowPersonVisual
+FireAll PopulateOptions","""Captain $playerName."" Her slate is dark, and she leaves it that way. ""I have begun to receive letters in praise of the Master's wisdom. Nobody writes such letters unless someone has asked for them.""
+
+""I asked her to open her study to my office. She says it is not yet convenient. She answers every letter I send, captain. She has not yet answered the question.""
+
+""I am told the Order needs what is being done, and perhaps it does. I notice that no one who tells me so is willing to show me what it is for."" A pause. ""I asked in writing, and more than once. I would like you to remember that.""",,
+kolTech_officerPreview,KolTechOfficerPreview,,"KolTechCMD previewOfficer $kolTech_personality
+KolTechCMD publish
+FireBest KolTechOfficerChoice",[PLACEHOLDER] Helensis sends for a Knight of the kind you asked for. The candidate presents themself.,,
+kolTech_officerChoice,KolTechOfficerChoice,"$kolTech_canAffordOfficer score:10
+$kolTech_officerSlotFree",Highlight $kolTech_officerPrice,Their service will cost $kolTech_officerPrice scrip.,"kolTech_officerHire:""I'll take this one.""
+kolTech_officerAnother:""Who else is there?""
+kolTech_officerPreviewBack:Back",
+kolTech_officerChoiceNoScrip,KolTechOfficerChoice,!$kolTech_canAffordOfficer score:5,Highlight $kolTech_officerPrice,"Their service would cost $kolTech_officerPrice scrip, more than you have.","kolTech_officerAnother:""Who else is there?""
+kolTech_officerPreviewBack:Back",
+kolTech_officerChoiceNoRoom,KolTechOfficerChoice,,,Your fleet has no room for another officer.,"kolTech_officerAnother:""Who else is there?""
+kolTech_officerPreviewBack:Back",
+kolTech_officerHire,DialogOptionSelected,$option == kolTech_officerHire,"KolTechCMD hireOfficer
+ShowPersonVisual
+FireBest KolTechReqMenu",,,
+kolTech_officerAnother,DialogOptionSelected,$option == kolTech_officerAnother,FireBest KolTechOfficerPreview,,,
+kolTech_officerPreviewBack,DialogOptionSelected,$option == kolTech_officerPreviewBack,"KolTechCMD clearOfficer
+ShowPersonVisual
+FireBest KolTechReqMenu",,,
+kolTech_purchase,KolTechAfterPurchase,,,"Helensis notes the requisition on her slate. ""May it serve you faithfully.""",,
+kolTech_purchaseWeapons,KolTechAfterPurchase,$kolTech_purchaseType == weapons score:10,,"""You choose well, captain. I will have them sent down to your storage directly.""",,
+kolTech_purchaseFighters,KolTechAfterPurchase,$kolTech_purchaseType == fighters score:10,,"""Fighter wings. The young Knights will envy you.""",,
+kolTech_purchaseShips,KolTechAfterPurchase,$kolTech_purchaseType == ships score:10,,"""A hull from our yards, in capable hands. Treat her kindly, captain.""",,
+kolTech_purchaseMixed,KolTechAfterPurchase,$kolTech_purchaseType == mixed score:10,,"""A generous order. It pleases me to see the Order's stores put to use.""",,
+kolTech_purchaseOfficer,KolTechAfterPurchase,$kolTech_purchaseType == officer score:10,,"""One of my own Knights goes with you. Treat them well, captain. They are dear to me.""",,
+kolTech_purchaseUnique,KolTechAfterPurchase,$kolTech_purchaseType == unique score:10,,"""I do not release such a vessel lightly, captain. I hope you will think of it as a gift from the Order, not a purchase.""",,
 #END Knights prelude chain,,,,,,

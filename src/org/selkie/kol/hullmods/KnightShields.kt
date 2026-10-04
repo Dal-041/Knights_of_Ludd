@@ -18,12 +18,14 @@ class KnightShields : BaseHullMod() {
     [orange text] Shield arc cannot be extended by any means.
      */
 
-    private val INNERLARGE = "graphics/kol/fx/kol_shield_fx.png"
-    private val OUTERLARGE = "graphics/kol/fx/kol_shield_fx.png"
+    companion object {
+        /** Also used by the low-tech restoration skins ([KolLowTechStyle]). */
+        const val SHIELD_TEXTURE = "graphics/kol/fx/kol_shield_fx.png"
+    }
 
     override fun applyEffectsAfterShipCreation(ship: ShipAPI, id: String) {
         if (ship.shield != null) {
-            ship.shield.setRadius(ship.shieldRadiusEvenIfNoShield, INNERLARGE, OUTERLARGE)
+            ship.shield.setRadius(ship.shieldRadiusEvenIfNoShield, SHIELD_TEXTURE, SHIELD_TEXTURE)
         }
         if (ship.variant.hasHullMod(HullMods.ACCELERATED_SHIELDS)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, HullMods.ACCELERATED_SHIELDS, KolStaticStrings.KNIGHT_REFIT)
         if (ship.variant.hasHullMod(HullMods.OMNI_SHIELD_CONVERSION)) MagicIncompatibleHullmods.removeHullmodWithWarning(ship.variant, HullMods.OMNI_SHIELD_CONVERSION, KolStaticStrings.KNIGHT_REFIT)

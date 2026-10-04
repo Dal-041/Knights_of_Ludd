@@ -1,0 +1,16 @@
+{
+	"baseHullId":"kol_sundew",
+	"skinHullId":"kol_sundew_lowtech",
+	"hullName":"Sundew (Ordained)",
+	"incompatibleWithBaseHull":false,
+	# restored to the low-tech standard: no primitive-shield timer, low-tech shield efficiency,
+	# no Knights engine cores, low-tech shield and vent colours (kol_lowtech_style)
+	# generated from kol_sundew.ship; regenerate if its engine slots change
+	"tags":["no_dealer", "no_drop", "no_bp_drop"],
+	"addHints":["HIDE_IN_CODEX"],
+	"shieldEfficiency":1.0,
+	"removeEngineSlots":[5, 6, 7, 8, 9],
+	"removeBuiltInMods":["kol_shields"],
+	"removeBuiltInWeapons":["FLICKERSHIELD"],
+	"builtInMods":["kol_lowtech_style"],
+}

@@ -172,4 +172,24 @@ public class KolStaticStrings {
         public static final String TECH_SITUATION_KEY = "$kolTechSituation_ref";
         public static final String LIBRA_SITUATION_KEY = "$kolLibraSituation_ref";
     }
+
+    /** The Technology situation: Helensis' scrip "bounty" on AI technology and her requisitions. */
+    public static class KolTech {
+        public static final String SETTINGS_KEY = "kol_tech";        // JSON object in settings.json
+        public static final String DATA_KEY = "kol_techData";        // sector persistent data
+
+        // Permanent flags other content reads (set on stage reached)
+        public static final String STAGE = "$kolTech_stage";         // 0 START .. 4 CONSECRATED, 5 at the bar maximum
+        public static final String[] STAGE_FLAGS = {
+                "$kolTech_start", "$kolTech_requisitions", "$kolTech_trusted",
+                "$kolTech_armory", "$kolTech_consecrated", "$kolTech_max"};
+        public static final String EXCOMMUNICATED = "$kol_excommunicated";
+
+        // Rule triggers fired by KolTechCMD
+        public static final String TRIGGER_AFTER_HANDOVER = "KolTechAfterHandover";
+        public static final String TRIGGER_SHROUDED = "KolTechShrouded";
+        public static final String TRIGGER_UNIQUE_BOUGHT = "KolTechUniqueBought";  // + slot number
+        public static final String TRIGGER_AFTER_PURCHASE = "KolTechAfterPurchase"; // $kolTech_purchaseType set
+        public static final String TRIGGER_REQ_MENU = "KolTechReqMenu";
+    }
 }

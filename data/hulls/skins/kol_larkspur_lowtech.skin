@@ -1,0 +1,16 @@
+{
+	"baseHullId":"kol_larkspur",
+	"skinHullId":"kol_larkspur_lowtech",
+	"hullName":"Larkspur (Consecrated)",
+	"incompatibleWithBaseHull":false,
+	# restored to the low-tech standard: no primitive-shield timer, low-tech shield efficiency,
+	# no Knights engine cores, low-tech shield and vent colours (kol_lowtech_style)
+	# generated from kol_larkspur.ship; regenerate if its engine slots change
+	"tags":["no_dealer", "no_drop", "no_bp_drop"],
+	"addHints":["HIDE_IN_CODEX"],
+	"shieldEfficiency":1.0,
+	"removeEngineSlots":[4, 5, 6, 7, 10, 11, 14, 15],
+	"removeBuiltInMods":["kol_shields"],
+	"removeBuiltInWeapons":["FLICKERSHIELD"],
+	"builtInMods":["kol_lowtech_style"],
+}

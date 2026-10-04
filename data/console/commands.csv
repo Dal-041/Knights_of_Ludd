@@ -1,0 +1,2 @@
+command,class,tags,syntax,help
+kol_AddScrip,org.selkie.kol.console.AddScripCommand,"cheat,campaign",kol_AddScrip <amount>,"Knights of Ludd: add spendable scrip for Master Helensis' requisitions (testing). Does not advance the Technology situation."

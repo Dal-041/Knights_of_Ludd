@@ -17,6 +17,7 @@ import org.selkie.kol.campaign.intel.KnightsTakeoverOverride;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.listeners.SaveListener;
 import org.selkie.kol.listeners.UpdateRelationships;
+import org.selkie.kol.listeners.SimUnlocks;
 import org.selkie.kol.world.GenerateKnights;
 import org.selkie.zea.campaign.AICoreCampaignPlugin;
 import org.selkie.zea.campaign.NullspaceVFXRenderer;
@@ -24,15 +25,11 @@ import org.selkie.zea.campaign.ZeaCampaignPlugin;
 import org.selkie.zea.campaign.cores.AICoreDropReplacerScript;
 import org.selkie.zea.campaign.cores.AICoreReplacerScript;
 import org.selkie.zea.campaign.coffinlink.CoffinLinkScript;
-import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaMemKeys;
 import org.selkie.zea.helpers.ZeaUtils;
 import org.selkie.zea.listeners.ReportTransit;
 import org.selkie.zea.world.PrepareAbyss;
 import org.selkie.zea.world.PrepareDarkDeeds;
-
-import java.util.Arrays;
-import java.util.Set;
 
 public class KOL_ModPlugin extends BaseModPlugin {
 
@@ -90,6 +87,8 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		}
 
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
+		Global.getSector().addTransientListener(new SimUnlocks());
+		SimUnlocks.unlockFactionsOfLearnedShips();
 		if (!Global.getSector().getScripts().contains(KnightsTakeoverOverride.class)) Global.getSector().addScript(new KnightsTakeoverOverride());
 
 		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
