@@ -192,4 +192,101 @@ public class KolStaticStrings {
         public static final String TRIGGER_AFTER_PURCHASE = "KolTechAfterPurchase"; // $kolTech_purchaseType set
         public static final String TRIGGER_REQ_MENU = "KolTechReqMenu";
     }
+
+    /** Knights story foundations (Chapters 2-3): chapters, chronicle, assemblies, dock events, duties, desertion. */
+    public static class KolStory {
+        public static final String SETTINGS_KEY = "kol_story";       // JSON object in settings.json
+
+        // Chapter counter (int); 2 once Chapter 1 is done, advanced only by chapter assemblies
+        public static final String CHAPTER = "$kol_chapter";
+
+        // Chronicle: $global.kolChron_<fact>, _day, _chapter; $global.kolChron_<thread>_grade
+        public static final String CHRON_PREFIX = "$kolChron_";
+        public static final String CHRON_POWERS_DEFEATED = "$kolChron_powersDefeated";
+        public static final String CHRON_TT_SITES_CLEARED = "$kolChron_ttSitesCleared";
+        public static final String CHRON_DATA_KEY = "kol_chronicleData";
+
+        // Assemblies (at Star Keep Lyra)
+        public static final String ASSEMBLY_DATA_KEY = "kol_assemblyData";
+        public static final String ASSEMBLY_PREFIX = "$kolAssembly_";             // + report key (published at an assembly)
+        public static final String ASSEMBLY_MISSED = "$kolAssembly_missed";       // int
+        public static final String ASSEMBLY_HELD = "$kolAssembly_held";           // int
+        public static final String TRIGGER_ASSEMBLY = "KolAssembly";
+        public static final String TRIGGER_ASSEMBLY_ITEMS = "KolAssemblyItems";   // FireAll: one line rule per report key
+        public static final String TRIGGER_ASSEMBLY_CHAPTER = "KolAssemblyChapter"; // + the chapter being entered
+        public static final String TRIGGER_ASSEMBLY_NOTICE = "KolAssemblyNotice";   // the blurb at Lyra while an assembly sits
+
+        // Attending an important assembly (convocation or chapter assembly)
+        public static final String ATTEND_ID = "kolAssemblyAttend";
+        public static final String ATTEND_REF = "$kolAssemblyAttend_ref";
+        public static final String ATTEND_ACTIVE = "$kolAssemblyAttend_active";
+        public static final String ATTEND_SITTING = "$kolAssemblyAttend_sitting"; // stage flags, cleared by the mission
+        public static final String ATTEND_DONE = "$kolAssemblyAttend_done";
+        public static final String ATTEND_MISSED = "$kolAssemblyAttend_missed";
+
+        // Dock event queue (one MarketPostDock guard per Knights market)
+        public static final String DOCK_DATA_KEY = "kol_dockEvents";
+        public static final String TRIGGER_DOCK_NEXT = "KolDockNext";
+
+        // Duties board (a hidden board person per Knights market carries vanilla's mission hub)
+        public static final String DUTIES_PERSON_PREFIX = "kol_duties_";          // + market id
+        public static final String DUTIES_TAG = "kol_duties";
+        public static final String DUTIES_BOARD_FLAG = "$kolDutiesBoard";         // on the board person
+        public static final String DUTIES_DONE = "$kolDuties_done";               // int
+
+        // Desertion
+        public static final String DESERTION_DATA_KEY = "kol_desertionData";
+        public static final String DESERTER_FLEET_TAG = "kol_deserters";
+        public static final String FLEET_MODIFIED_TAG = "kol_spawnModified";     // set by the fleet-spawn hook
+    }
+
+    /** Knights Chapter 2: convocation, patron, joint operations, Ozymandias, the agent, the player inquest. */
+    public static class KolCh2 {
+        // Missions (person_missions.csv ids) and their global references / in-progress flags
+        public static final String PATRON_ID = "kolCh2Patron";
+        public static final String PATRON_REF = "$kolCh2Patron_ref";
+        public static final String PATRON_ACTIVE = "$kolCh2Patron_active";
+        public static final String NINAYA_ID = "kolCh2Ninaya";
+        public static final String NINAYA_REF = "$kolCh2Ninaya_ref";
+        public static final String NINAYA_ACTIVE = "$kolCh2Ninaya_active";
+        public static final String OZY_ID = "kolCh2Ozymandias";
+        public static final String OZY_REF = "$kolCh2Oz_ref";
+        public static final String OZY_ACTIVE = "$kolCh2Oz_active";
+        public static final String AGENT_ID = "kolCh2Agent";
+        public static final String AGENT_REF = "$kolCh2Agent_ref";
+        public static final String INQUEST_ID = "kolCh2Inquest";
+        public static final String INQUEST_REF = "$kolCh2Inquest_ref";
+        public static final String INQUEST_ACTIVE = "$kolCh2Inquest_active";
+
+        // Permanent flags
+        public static final String CONVOCATION_DONE = "$kolCh2_convocationDone";
+        public static final String PATRON = "$kol_patron";                    // faction id, or "player"
+        public static final String PATRON_SECURED = "$kolCh2_patronSecured";  // boolean twin for rules
+        public static final String NINAYA_OP_DONE = "$kolCh2_ninayaOpDone";
+        public static final String OZY_DONE = "$kolCh2_ozymandiasDone";
+        public static final String CAELI_CHOICE = "$kolCh2_caeliChoice";      // wake / leave / tomb
+        public static final String OUTSIDE_POWER = "$kol_outsidePower";       // faction id
+        public static final String AGENT_TRIGGERED = "$kolCh2_agentTriggered";
+        public static final String AGENT_ANSWER = "$kol_agentAnswer";         // comply / refuse / deflect
+        public static final String AGENT_ANSWERED = "$kolCh2_agentAnswered";
+        public static final String INQUEST_PLAYER = "$kolInquest_player";     // cleared / watched / censured
+        public static final String INQUEST_PLAYER_DONE = "$kolCh2_inquestDone";
+        public static final String CONV_OATH_SWORN = "$kolCh2_convOathSworn";   // the player offered their own forces under oath
+        public static final String CONV_OATH_LIE = "$kolCh2_convOathLie";       // ... and lied (counts at the inquest)
+
+        // Entity flags (Ozymandias stops, patron doors)
+        public static final String OZY_STOP = "$kolCh2Oz_stop";
+        public static final String OZY_CAELI = "$kolCh2Oz_caeli";
+        public static final String PATRON_DOOR = "$kolCh2Patron_door";
+
+        // People
+        public static final String GRANDMASTER_ID = "kol_grandmaster";
+        public static final String INQUISITOR_PREFIX = "kol_inquisitor_";     // + slot
+        public static final String AGENT_PERSON_ID = "kol_outside_agent";
+        public static final String BENCH_PREFIX = "kol_bench_";               // + slot (the assembly's regular voices)
+
+        // Rule triggers
+        public static final String TRIGGER_INQUEST = "KolInquestPlayer";
+        public static final String INQUEST_EVENT_KEY = "kol_inquestPlayer";
+    }
 }

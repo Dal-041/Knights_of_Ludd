@@ -190,6 +190,7 @@ class KolTechSituationIntel : KolSituationIntel(KolCh1.TECH_SITUATION_KEY) {
         val memory = Global.getSector().memoryWithoutUpdate
         memory.set(KolTech.STAGE, reached.ordinal)
         memory.set(KolTech.STAGE_FLAGS[reached.ordinal], true)
+        if (reached != TechStage.START) org.selkie.kol.campaign.story.KolAssembly.report("techStage")
         // unique ships announced at this stage (hidden while their variant doesn't exist yet)
         val data = KolTechData.get()
         for (slot in KolTechSettings.uniques) {

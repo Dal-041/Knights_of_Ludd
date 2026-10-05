@@ -57,7 +57,7 @@ public class KnightsTakeoverOverride implements EveryFrameScript {
     public int pruneFleetMembers (CampaignFleetAPI fleet, float factor) {
         List<FleetMemberAPI> toRemove = new ArrayList<>();
         int removed = 0;
-        for (FleetMemberAPI member : fleet.getMembersWithFightersCopy()) {
+        for (FleetMemberAPI member : fleet.getFleetData().getMembersListCopy()) {
             if (member.isFlagship() || member.isCivilian()) continue;
             if (!member.getVariant().getFittedWings().isEmpty()) {
                 //remove fighter wings if needed
@@ -68,7 +68,7 @@ public class KnightsTakeoverOverride implements EveryFrameScript {
         }
         for (FleetMemberAPI ship : toRemove) {
             removed += ship.getFleetPointCost();
-            fleet.getMembersWithFightersCopy().remove(ship);
+            fleet.getFleetData().removeFleetMember(ship);
         }
         return removed;
     }

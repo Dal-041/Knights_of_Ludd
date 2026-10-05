@@ -18,6 +18,7 @@ import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.listeners.SaveListener;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.listeners.SimUnlocks;
+import org.selkie.kol.campaign.story.KolStoryBootstrap;
 import org.selkie.kol.world.GenerateKnights;
 import org.selkie.zea.campaign.AICoreCampaignPlugin;
 import org.selkie.zea.campaign.NullspaceVFXRenderer;
@@ -89,7 +90,10 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		Global.getSector().addTransientListener(new SimUnlocks());
 		SimUnlocks.unlockFactionsOfLearnedShips();
-		if (!Global.getSector().getScripts().contains(KnightsTakeoverOverride.class)) Global.getSector().addScript(new KnightsTakeoverOverride());
+		KolStoryBootstrap.onGameLoad();
+		//Holds no saved state; purge saved copies duplicated by older versions, then register transiently
+		Global.getSector().removeScriptsOfClass(KnightsTakeoverOverride.class);
+		Global.getSector().addTransientScript(new KnightsTakeoverOverride());
 
 		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
 			listener.onGameLoad();
@@ -143,7 +147,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().getMemoryWithoutUpdate().set(ZeaMemKeys.ZEA_INTIALIZED, true);
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		//Global.getSector().addTransientScript(new SpoilersNotif());
-		if (!Global.getSector().getScripts().contains(KnightsTakeoverOverride.class)) Global.getSector().addScript(new KnightsTakeoverOverride());
 	}
 
 	@Override

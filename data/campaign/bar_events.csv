@@ -1,2 +1,3 @@
 bar event id,tags,freq,prob,min dur,max dur,min timeout,max timeout,min accepted timeout,max accepted timeout,plugin
 kolPreludeHook,,20,1,30,40,15,20,60,90,org.selkie.kol.campaign.missions.KolPreludeHook
+kolCh2Agent,,15,1,20,30,10,20,60,90,org.selkie.kol.campaign.story.ch2.KolCh2Agent

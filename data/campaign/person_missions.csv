@@ -5,3 +5,10 @@ kolCh1Scout,,,,,,,,,,,,,,,graphics/icons/missions/hyperspace_oddity.png,org.selk
 kolCh1Bounty,,,,,,,,,,,,,,,graphics/icons/missions/military_bounty.png,org.selkie.kol.campaign.missions.KolCh1Bounty
 kolCh1Lyra,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.missions.KolCh1Lyra
 kolCh1Return,,,,,,,,,,,,,,,graphics/icons/missions/shuttle_vip.png,org.selkie.kol.campaign.missions.KolCh1Return
+kolDutyPatrol,,,kol_duties,,,20,30,60,INHOSPITABLE,,,,,,graphics/icons/missions/military_bounty.png,org.selkie.kol.campaign.story.KolDutyPatrol
+kolCh2Patron,,,,,,,,,,,,,,,graphics/icons/missions/pilgrims_path.png,org.selkie.kol.campaign.story.ch2.KolCh2Patron
+kolCh2Ninaya,,,,,,,,,,,,,,,graphics/icons/missions/military_bounty.png,org.selkie.kol.campaign.story.ch2.KolCh2Ninaya
+kolCh2Ozymandias,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.story.ch2.KolCh2Ozymandias
+kolCh2Agent,,,,,,,,,,,,,,,graphics/icons/missions/shuttle_vip.png,org.selkie.kol.campaign.story.ch2.KolCh2Agent
+kolCh2Inquest,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.story.ch2.KolCh2Inquest
+kolAssemblyAttend,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.story.KolAssemblyAttend

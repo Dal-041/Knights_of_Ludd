@@ -1,2 +1,6 @@
 command,class,tags,syntax,help
 kol_AddScrip,org.selkie.kol.console.AddScripCommand,"cheat,campaign",kol_AddScrip <amount>,"Knights of Ludd: add spendable scrip for Master Helensis' requisitions (testing). Does not advance the Technology situation."
+kol_Chronicle,org.selkie.kol.console.ChronicleCommand,"cheat,campaign",kol_Chronicle [fact | thread grade],"Knights of Ludd: list the story chronicle's facts and thread grades, record a fact, or set a thread's grade (elysian, dusk, dawn, tritach, path)."
+kol_Assembly,org.selkie.kol.console.AssemblyCommand,"cheat,campaign",kol_Assembly [now | chapter | status],"Knights of Ludd: open the next assembly at Star Keep Lyra now, as the chapter assembly, or show the schedule and chapter requirements."
+kol_Chapter,org.selkie.kol.console.ChapterCommand,"cheat,campaign",kol_Chapter <n> | veto <n> | unveto <n>,"Knights of Ludd: set the story chapter, or veto a chapter's conditions for testing."
+kol_Desertion,org.selkie.kol.console.DesertionCommand,"cheat,campaign",kol_Desertion [amount],"Knights of Ludd: add to the desertion budget (Knights ships joining large Path fleets), or show it."

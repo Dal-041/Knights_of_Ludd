@@ -508,5 +508,32 @@
 			{"stage":4, "variant":"kol_unique_cruiser_Standard", "price":15000}
 		],
 		"excommunicationRep":"VENGEFUL"            # Knights and Luddic Church on handing over Shrouded tech
+	},
+	# Knights story foundations (Chapters 2-3): chronicle, assemblies, duties board, desertion
+	"kol_story":{
+		"chronicleIntervalDays":3,                 # how often the chronicle checks exploration facts
+		"assemblyIntervalDays":60,                 # an assembly at Star Keep Lyra every N days
+		"assemblyNoticeDays":10,                   # announced this many days before it sits
+		"assemblyWindowDays":10,                   # sits for this many days
+		"firstAssemblyDays":20,                    # the first assembly of Chapter 2 opens this many days after the chapter begins
+		"patronOwnFleetPoints":150,                # fleet points the player needs to offer their own faction as patron
+		"jointOpFleetPoints":120,                  # size of the Knights squadron on joint operations
+		"alreadyDoneBountyCredits":150000,         # Greenflight's bounty when the player beat an operation's boss first (the other half strengthens the next operation)
+		# Inquest: one score = interview answer + lies told to Enarms + the fleet inspection; the total sets the outcome
+		"inquestAnswerWeights":[0, 2, 5],         # candid, guarded, defiant
+		"inquestLieWeight":3,                      # per Chapter 1 lie
+		"inquestWatchedScore":4,                   # total for "watched" (small reputation loss)
+		"inquestModerateScore":8,                  # total for "censured" (larger reputation loss)
+		"inquestHeavyScore":20,                    # total for being cast out (excommunication)
+		"chapterAdvanceEnabled":true,              # chapter assemblies advance once a chapter's registered requirements are met
+		"inquestValidFraction":0.75,               # an inquest gates its chapter from this share of its milestone
+		"readingAppends":true,                     # dossier readings (the inquest record) run on without "Continue" lines between items
+		"desertionBase":0.5,                       # deserters per month with the situations balanced
+		"desertionK":3.0,                          # steepness: rate = base * e^(k * lead / scale)
+		"desertionScale":100,                      # bar points of Technology lead over Libra per k step
+		"desertionCap":6,                          # deserters per month at most
+		"desertionMinFleetPoints":80,              # Path fleets smaller than this are left alone
+		"desertionPerFleetCap":3,                  # ships replaced per fleet at most
+		"desertionOrdainedShare":0.34              # share of replacements that are Ordained after the early rollout
 	}
 }
