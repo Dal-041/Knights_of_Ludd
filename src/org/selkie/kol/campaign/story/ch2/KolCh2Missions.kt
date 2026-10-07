@@ -30,16 +30,16 @@ import java.awt.Color
 private val memory get() = Global.getSector().memoryWithoutUpdate
 
 /**
- * Securing a patron for the Church (raised at the convocation). Doors: Mazalot (Persean League), Jangala (Hegemony),
- * Volturn (Sindrian Diktat) while their powers hold them, else independent Luddic Majority worlds; or the player's
- * own faction, offered through Enarms. Rules: kolCh2_patron*.
+ * Securing a patron for the Church (raised at the convocation; coordinated by Greenflight). One parent with a branch
+ * intel per prospective patron (KolPatronLeadIntel, the Pilgrim's Path pattern). SECURE: the branches develop; a
+ * signing (or the convocation oath) moves it to ANNOUNCE; it completes when the next assembly announces the patron
+ * (KolPatron.onAssemblyAttended). Discovery is KolPatron (rules kolPatron_*). Planned in add-knights-patron-lobbying.
  */
 class KolCh2Patron : HubMissionWithSearch() {
     companion object { const val STAGE_DONE = "\$kolCh2Patron_stageDone" }
 
-    enum class Stage { SECURE, COMPLETED }
-
-    private val doors = ArrayList<MarketAPI>()
+    /** SECURE: seeking a patron (the branches). ANNOUNCE: a patron is signed; the next assembly announces it. */
+    enum class Stage { SECURE, ANNOUNCE, COMPLETED }
 
     override fun create(createdAt: MarketAPI?, barEvent: Boolean): Boolean {
         if (!setGlobalReference(KolCh2.PATRON_REF, KolCh2.PATRON_ACTIVE)) return false
@@ -47,63 +47,112 @@ class KolCh2Patron : HubMissionWithSearch() {
         addSuccessStages(Stage.COMPLETED)
         setStoryMission()
         setNoRepChanges()
-        doors.addAll(KolCh2Story.openDoors().ifEmpty { KolCh2Story.fallbackDoors() })
-        for (door in doors) makeImportant(door.primaryEntity, KolCh2.PATRON_DOOR, Stage.SECURE)
         // stage flags are unset when a mission ends, so missions complete on their own flag, never a permanent one
+        setStageOnGlobalFlag(Stage.ANNOUNCE, KolPatronFlags.ANNOUNCE)
         setStageOnGlobalFlag(Stage.COMPLETED, STAGE_DONE)
+        KolAssembly.lyra?.primaryEntity?.let { makeImportant(it, "\$kolPatron_announceAt", Stage.ANNOUNCE) }
         return true
+    }
+
+    override fun acceptImpl(dialog: InteractionDialogAPI?, memoryMap: MutableMap<String, MemoryAPI>?) {
+        // the convocation oath secures the player's own forces at once: no branches to seek
+        if (!memory.getBoolean(KolCh2.CONV_OATH_SWORN)) KolPatron.startingLeads()
     }
 
     override fun callAction(action: String?, ruleId: String?, dialog: InteractionDialogAPI?,
                             params: MutableList<Misc.Token>?, memoryMap: MutableMap<String, MemoryAPI>?): Boolean {
-        when (action) {
-            "secure" -> {
-                val factionId = dialog?.interactionTarget?.market?.factionId ?: return false
-                secure(factionId, dialog, memoryMap)
-                return true
-            }
-            "secureOwn" -> {
-                secure(Factions.PLAYER, dialog, memoryMap)
-                return true
-            }
+        if (action == "secureOwn") {
+            // the oath opens the player's own branch; the meeting at Lyra settles and signs it (KolPatron.signOwn)
+            KolPatron.ownPledged(dialog?.textPanel)
+            return true
         }
         return super.callAction(action, ruleId, dialog, params, memoryMap)
     }
 
-    /** The player's own faction may stand as patron with a colony and a strong enough fleet. */
-    private fun canOfferOwn(): Boolean = KolCh2Story.canOfferOwn()
-    // Conditions don't go through Call: BaseHubMission.callEvent treats a false return as an unhandled action and
-    // throws. Rules use `KolCh2CMD canOfferOwn` instead.
-
-    private fun secure(factionId: String, dialog: InteractionDialogAPI?, memoryMap: MutableMap<String, MemoryAPI>?) {
-        memory.set(KolCh2.PATRON, factionId)
-        memory.set(KolCh2.PATRON_SECURED, true)
-        memory.set(STAGE_DONE, true)
-        if (factionId != Factions.PLAYER) {
-            val faction = Global.getSector().getFaction(factionId)
-            faction?.adjustRelationship(Factions.PLAYER, 0.1f)
-            dialog?.textPanel?.addPara("Relations with ${faction?.displayNameWithArticle} improved",
-                Misc.getPositiveHighlightColor())
+    /**
+     * A patron is signed: recorded with its lever and price, its branch marked signed and the others closed by a
+     * status update, and the quest moves to ANNOUNCE (the next assembly). [patron] is a faction id, `charter` or
+     * `player`.
+     */
+    fun signed(patron: String, lever: String, price: String?, dialog: InteractionDialogAPI?, memoryMap: MutableMap<String, MemoryAPI>?) {
+        memory.set(KolCh2.PATRON, patron)
+        memory.set(KolStaticStrings.KolPatron.LEVER, lever)
+        if (price != null) memory.set(KolStaticStrings.KolPatron.PRICE, price)
+        val signedBranch = KolPatron.branchOfPatron(patron)
+        for (branch in KolPatronLeadIntel.all()) {
+            if (branch.key == signedBranch) branch.advance("signed", dialog?.textPanel)
+            else if (branch.stage != "closed") branch.advance("closed", null)
         }
-        KolAssembly.report("patron")
+        memory.set(KolPatronFlags.ANNOUNCE, true)
+        KolPatronParley.registerGate() // Lyra's pre-assembly scenes: the pirates' arrival, a charter's reaction, the delegation home
         checkStageChangesAndTriggers(dialog, memoryMap)
     }
 
+    /**
+     * The announcing assembly sat (KolPatron.onAssemblyAttended): the patron is secured, its fleets take station at
+     * Lyra and Cygnus, and the quest completes. The assembly's own scene announces it (kolPatron_announce*).
+     */
+    fun announced() {
+        if (currentStage != Stage.ANNOUNCE) return
+        memory.set(KolCh2.PATRON_SECURED, true)
+        memory.getString(KolCh2.PATRON)?.let { KolPatronFleets.station(it) }
+        KolPatronParley.dropOff() // a fallback: the delegation normally goes home in the gate at Lyra
+        memory.set(STAGE_DONE, true)
+        checkStageChangesAndTriggers(null, null)
+    }
+
+    /** A lead was learned (KolPatron): mark where it leads, while the quest seeks. */
+    fun leadLearned(key: String) {
+        val target = (KolPatronPower.of(key)?.seat() ?: KolPatron.place(key))?.primaryEntity ?: return
+        makeImportant(target, "\$kolPatron_leadMarker", Stage.SECURE)
+    }
+
     override fun addDescriptionForNonEndStage(info: TooltipMakerAPI, width: Float, height: Float) {
-        if (currentStage != Stage.SECURE) return
-        info.addPara("[PLACEHOLDER] The assembly at Star Keep Lyra has charged you with finding the Church a secular " +
-                "patron while the Order's fleets are committed. Luddic communities under other powers may broker it.", 10f)
-        for (door in doors) info.addPara("${door.name} (${door.faction.displayName})", 3f)
-        if (canOfferOwn()) info.addPara("Your own forces may be strong enough to offer instead; speak to Brother Enarms.", 10f)
+        when (currentStage) {
+            Stage.SECURE -> {
+                info.addPara("[PLACEHOLDER] The assembly at Star Keep Lyra has charged you with finding the Church a secular " +
+                        "patron while the Order's fleets are committed. Sister Greenflight's office coordinates the Order's part. " +
+                        "The great powers decide such things at their seats, and the faithful under their banners may help you " +
+                        "be heard.", 10f)
+                if (!KolPatron.allWildcardsFound()) info.addPara("[PLACEHOLDER] There may be less conventional options, " +
+                        "for those who ask the right people.", 10f)
+            }
+            Stage.ANNOUNCE -> info.addPara("[PLACEHOLDER] The arrangement is made. It will be announced at the next " +
+                    "assembly at Star Keep Lyra.", 10f)
+            else -> {}
+        }
+        KolPatronLeadIntel.addShowLeadsButton(this, width, height, info)
+    }
+
+    override fun buttonPressConfirmed(buttonId: Any?, ui: com.fs.starfarer.api.ui.IntelUIAPI) {
+        if (buttonId == KolPatronLeadIntel.BUTTON_SHOW_LEADS) {
+            KolPatronLeadIntel.toggleLeadList(this, ui)
+            return
+        }
+        super.buttonPressConfirmed(buttonId, ui)
+    }
+
+    override fun notifyEnding() {
+        super.notifyEnding()
+        KolPatronLeadIntel.endAll()
     }
 
     override fun addNextStepText(info: TooltipMakerAPI, tc: Color?, pad: Float): Boolean {
-        if (currentStage != Stage.SECURE) return false
-        info.addPara("Seek a patron for the Church", tc, pad)
+        when (currentStage) {
+            Stage.SECURE -> info.addPara("Seek a patron for the Church", tc, pad)
+            Stage.ANNOUNCE -> info.addPara("Attend the next assembly at Star Keep Lyra", tc, pad)
+            else -> return false
+        }
         return true
     }
 
     override fun getBaseName(): String = "A Patron for the Church"
+}
+
+/** The patron quest's private flags (the mission completes on its own flags, never a permanent one). */
+object KolPatronFlags {
+    /** A patron is signed; the quest waits for the next assembly. */
+    const val ANNOUNCE = "\$kolCh2Patron_announce"
 }
 
 /**

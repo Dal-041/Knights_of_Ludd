@@ -247,6 +247,7 @@ class KolTechCMD : BaseCommandPlugin() {
         for (id in listOf(KolStaticStrings.kolFactionID, Factions.LUDDIC_CHURCH)) {
             Global.getSector().getFaction(id)?.setRelationship(Factions.PLAYER, level)
         }
+        org.selkie.kol.campaign.story.KolSeverance.sever("shrouded") // its own flag, and severance (after the scene)
         FireBest.fire(null, dialog, memoryMap, KolTech.TRIGGER_SHROUDED)
     }
 

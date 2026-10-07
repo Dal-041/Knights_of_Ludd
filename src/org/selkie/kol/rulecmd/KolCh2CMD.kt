@@ -17,7 +17,7 @@ import org.selkie.kol.helpers.KolStaticStrings.KolPrelude
  * - `KolCh2CMD startPatron` / `startNinaya` / `startOzymandias`: start the mission from the dialog.
  * - `KolCh2CMD showPerson <grandmaster|inquisitor|agent|bench:<slot>|<person id>>`: show a person's card.
  * - `KolCh2CMD convocationDone`: the convocation is over.
- * - `KolCh2CMD canOfferOwn` (condition): the player's own forces can stand as the Church's patron.
+ * - `KolCh2CMD canOfferOwn` (condition): the player's own forces can stand as the Church's patron (at the convocation).
  * - `KolCh2CMD inquestOpen`: publishes the lead Inquisitor's name tokens (`$global.kolPerson_inquisitor_*`).
  * - `KolCh2CMD readOn <trigger>`: plays the best rule on the trigger as a continuation of the reading (KolCh2Story.readOn).
  * - `KolCh2CMD convOpen`: opens the convocation (bench voices and world state, `$global.kolConv_*`).
@@ -34,7 +34,7 @@ class KolCh2CMD : BaseCommandPlugin() {
         dialog ?: return false
         val map = memoryMap ?: return false
         return when (params?.getOrNull(0)?.getString(map)) {
-            "startPatron" -> KolCh2Story.start(KolCh2.PATRON_ID, KolPrelude.ENARMS_ID, dialog) != null
+            "startPatron" -> KolCh2Story.start(KolCh2.PATRON_ID, KolCh1.GREENFLIGHT_ID, dialog) != null
             "startNinaya" -> KolCh2Story.start(KolCh2.NINAYA_ID, KolCh1.GREENFLIGHT_ID, dialog) != null
             "startOzymandias" -> KolCh2Story.start(KolCh2.OZY_ID, KolPrelude.ENARMS_ID, dialog) != null
             "showPerson" -> {

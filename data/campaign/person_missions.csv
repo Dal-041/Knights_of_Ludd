@@ -12,3 +12,9 @@ kolCh2Ozymandias,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.sel
 kolCh2Agent,,,,,,,,,,,,,,,graphics/icons/missions/shuttle_vip.png,org.selkie.kol.campaign.story.ch2.KolCh2Agent
 kolCh2Inquest,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.story.ch2.KolCh2Inquest
 kolAssemblyAttend,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.story.KolAssemblyAttend
+
+kolPirateCut,,,,,,,,,,,,,,,graphics/icons/missions/military_bounty.png,org.selkie.kol.campaign.story.ch2.KolPirateCut
+kolLibraSupplyContract,,,,,,,,,,,,,,,graphics/icons/missions/procurement.png,org.selkie.kol.campaign.libra.KolLibraSupplyContract
+kolLibraCrewContract,,,,,,,,,,,,,,,graphics/icons/missions/luddic_pilgrim_transport.png,org.selkie.kol.campaign.libra.KolLibraCrewContract
+kolLibraDrill,,,,,,,,,,,,,,,graphics/icons/missions/military_bounty.png,org.selkie.kol.campaign.libra.KolLibraDrill
+kolLibraRestoration,,,,,,,,,,,,,,,graphics/icons/missions/knight_errant.png,org.selkie.kol.campaign.libra.KolLibraRestoration

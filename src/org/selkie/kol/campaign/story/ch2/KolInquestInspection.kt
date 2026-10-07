@@ -178,5 +178,6 @@ object KolInquestInspection {
         for (id in listOf(KolStaticStrings.kolFactionID, Factions.LUDDIC_CHURCH)) {
             Global.getSector().getFaction(id)?.setRelationship(Factions.PLAYER, level)
         }
+        org.selkie.kol.campaign.story.KolSeverance.sever("inquest") // its own flag, and severance (after the scene)
     }
 }

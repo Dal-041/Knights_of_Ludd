@@ -28,6 +28,7 @@ object KolCh2Story {
     /** Chapter 2's requirements for the chapter assembly (registered at each load). */
     fun register() {
         repairFlags()
+        if (memory.getBoolean(KolCh2.PATRON_ACTIVE)) KolPatron.startingLeads()
         KolChapterRequirements.register(2, "patron", { true }, { memory.getBoolean(KolCh2.PATRON_SECURED) })
         KolChapterRequirements.register(2, "ninayaOperation",
             { memory.getBoolean(KolCh2.PATRON_SECURED) }, { memory.getBoolean(KolCh2.NINAYA_OP_DONE) })
@@ -43,7 +44,8 @@ object KolCh2Story {
      * they complete on). Restores them from what else was recorded.
      */
     private fun repairFlags() {
-        if (memory.getString(KolCh2.PATRON) != null) memory.set(KolCh2.PATRON_SECURED, true)
+        // a patron is recorded at signing; it's secured once the quest completes (at the announcing assembly)
+        if (memory.getString(KolCh2.PATRON) != null && !memory.getBoolean(KolCh2.PATRON_ACTIVE)) memory.set(KolCh2.PATRON_SECURED, true)
         if (memory.getString(KolCh2.CAELI_CHOICE) != null) memory.set(KolCh2.OZY_DONE, true)
         if (memory.getString(KolCh2.INQUEST_PLAYER) != null) memory.set(KolCh2.INQUEST_PLAYER_DONE, true)
         if (memory.getBoolean(KolStaticStrings.KolStory.CHRON_PREFIX + "ninayaDefeated"))
@@ -250,22 +252,25 @@ object KolCh2Story {
         KolAssembly.report("inquestPlayer")
     }
 
-    // --- patron doors ------------------------------------------------------------------------------------------
+    // --- the convocation's worlds of the faithful ---------------------------------------------------------------
 
-    /** The worlds whose Luddic communities can broker a patron, with the power that must hold them. */
+    /** The worlds whose Luddic congregations the convocation names, with the power that must hold them. */
     val PATRON_DOORS = linkedMapOf("mazalot" to Factions.PERSEAN, "jangala" to Factions.HEGEMONY, "volturn" to Factions.DIKTAT)
 
-    /** The player's own forces are strong enough to stand as the Church's patron: a colony and enough fleet. */
-    fun canOfferOwn(): Boolean = com.fs.starfarer.api.util.Misc.getPlayerMarkets(true).isNotEmpty() &&
-            Global.getSector().playerFleet.fleetPoints >= org.selkie.kol.campaign.story.KolStorySettings.patronOwnFleetPoints
+    /**
+     * The player's own forces can stand as the Church's patron (offered only at the convocation): a colony and enough
+     * fleet, and the player can commit them unilaterally: not a League member, and not holding the commission of a
+     * faction hostile to the Knights.
+     */
+    fun canOfferOwn(): Boolean {
+        if (com.fs.starfarer.api.util.Misc.getPlayerMarkets(true).isEmpty()) return false
+        if (Global.getSector().playerFleet.fleetPoints < org.selkie.kol.campaign.story.KolStorySettings.patronOwnFleetPoints) return false
+        if (com.fs.starfarer.api.impl.campaign.intel.PerseanLeagueMembership.isLeagueMember()) return false
+        val commission = com.fs.starfarer.api.util.Misc.getCommissionFactionId() ?: return true
+        return !Global.getSector().getFaction(commission).isHostileTo(KolStaticStrings.kolFactionID)
+    }
 
     fun openDoors(): List<MarketAPI> = PATRON_DOORS.mapNotNull { (marketId, faction) ->
         Global.getSector().economy.getMarket(marketId)?.takeIf { it.factionId == faction && !it.isHidden && it.primaryEntity != null }
-    }
-
-    /** If no named door is open: independent markets with a Luddic majority. */
-    fun fallbackDoors(): List<MarketAPI> = Global.getSector().economy.marketsCopy.filter {
-        it.factionId == Factions.INDEPENDENT && !it.isHidden &&
-                it.hasCondition(com.fs.starfarer.api.impl.campaign.ids.Conditions.LUDDIC_MAJORITY)
     }
 }

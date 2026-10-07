@@ -509,6 +509,28 @@
 		],
 		"excommunicationRep":"VENGEFUL"            # Knights and Luddic Church on handing over Shrouded tech
 	},
+	# Battlestar Libra's restoration (add-knights-libra-situation); placeholders to be tuned
+	"kol_libra":{
+		"pointsPerProgress":100,                   # progress bar = lifetime points / this (Technology's scale)
+		"stageThresholds":[500, 5000, 15000, 36000], # SUPPLY, CREW, DRILL, RESTORATION (lifetime points)
+		"maxPoints":50000,                         # bar maximum (lifetime points)
+		"acceptedCommodities":["supplies", "heavy_machinery", "metals", "rare_metals", "organics", "food"],
+		"commodityMult":0.01,                      # points per credit of base value handed in
+		"donationManufacturers":["Low Tech", "Midline", "Pirate", "Common"], # add modded manufacturers here
+		"donationMult":0.01,                       # points per credit of a donated ship's current value
+		"deployCap":8,                             # Libra's escorts after activation; the roster keeps 3x this
+		"lineMonthlyPoints":150,                   # each penned supply line, per month
+		"supplyStanding":"FAVORABLE", "crewStanding":"WELCOMING", # the supplier's faction, toward the player
+		"supplyPrice":100000, "crewPrice":250000,  # credits, paid when the terms are accepted
+		"raiderTaskChance":0.33, "raiderFleetPoints":60, # raiders at the supplier system's edge
+		"minSupply":5,                             # a material supplier's available amount of each line commodity
+		"beaconCooldownDays":30,                   # gunnery training
+		"wavePlayerFactor":0.6, "waveStageFP":30, "waveVariance":0.3, "waveFleets":3, "drillWaveMult":1.5,
+		"gunneryMult":1.0,                         # points per enemy FP destroyed
+		"moduleLossPoints":100,                    # points lost per module Libra's station loses
+		"responderChance":0.1667, "responderRep":0.05, # a genuine independent responder; reputation for rewarding them
+		"convoyFleetPoints":40, "convoyRaidFleetPoints":80 # the crew escort
+	},
 	# Knights story foundations (Chapters 2-3): chronicle, assemblies, duties board, desertion
 	"kol_story":{
 		"chronicleIntervalDays":3,                 # how often the chronicle checks exploration facts
@@ -534,6 +556,37 @@
 		"desertionCap":6,                          # deserters per month at most
 		"desertionMinFleetPoints":80,              # Path fleets smaller than this are left alone
 		"desertionPerFleetCap":3,                  # ships replaced per fleet at most
-		"desertionOrdainedShare":0.34              # share of replacements that are Ordained after the early rollout
+		"desertionOrdainedShare":0.34,             # share of replacements that are Ordained after the early rollout
+		# Patron (add-knights-patron-lobbying); amounts are placeholders to be tuned
+		"patronCharterCost":1500000,               # the player's share of the mercenary charter, paid up front
+		"patronCharterCompanyName":"Independent Security Combine", # [PLACEHOLDER] the independent company's name
+		"patronPirateDeal":800000,                 # the pirates' price for the arrangement
+		"patronPirateAudienceBribe":25000,         # the bribe for an audience with Kanta's delegate (halved when the pirates favor the player)
+		"patronPirateAgreementBribe":50000,        # the bribe for an agreement (halved when favored)
+		"patronPirateNominalFee":50000,            # the arrangement's price when the pirates favor the player
+		"patronPirateCut":250000,                  # the turncoat's cut: Knights weapons and commodities worth about this much
+		"patronSwarmFleetPoints":2000,             # the pirates' "protection fleets" at Lyra, in total (8 fleets, the At the Gates profile)
+		"patronSwarmKnightsMult":2.0,              # the Knights launch this many times the pirates' strength from Lyra
+		"patronSwarmLaunchRange":2500,             # how close a pirate fleet comes to Lyra before the Knights launch
+		"patronDiktatReplyDays":14,                # days until Balashi's terms arrive
+		"patronFleetCount":2,                      # a patron's stationed fleets per system (Lyra's and Cygnus')
+		"patronFleetPoints":150,                   # each stationed fleet's size
+		"patronFleetReplenishDays":30,            # days between replacing a lost stationed fleet, per system
+		"patronOwnFleetPenalty":0.4,               # the player's colonies' fleet-size penalty when their forces stand as patron
+		"patronCharterOffenseRep":0.10,            # Knights reputation lost when the player hires a charter for the Church
+		"patronPathAttemptRep":0.05,               # Knights reputation lost for asking the Path
+		"patronOffStagePeople":["daud","andrada","sun","macario","kanta","arroyo","horus_yaribay","menes_yaribay","reynard_hannan","damos_hannan","tell","rao","cotton","sedge"], # vanilla leadership: mentioned, never met (faction leaders are always off stage)
+		"patronPirateBribe":20000,                 # what a hostile pirate wants, personally, before talking about protection
+		"patronRivalRep":{                         # on signing with a power (key): reputation lost with each rival faction
+			"league":{"hegemony":0.15, "sindrian_diktat":0.10},
+			"hegemony":{"persean":0.15},
+			"diktat":{"hegemony":0.05, "persean":0.05}
+		},
+		"severanceRepLevels":{"pirates":"INHOSPITABLE"}, # Knights level when the swarm is decided without the player turning; excommunications use kol_tech excommunicationRep
+		"standingGates":{                          # Knights standing needed for story offers, attendance and duties
+			"default":"NEUTRAL",
+			"jointOperation":"FAVORABLE",              # placeholder level for a key moment
+			"oath":"FAVORABLE"                         # placeholder level for a key moment
+		}
 	}
 }

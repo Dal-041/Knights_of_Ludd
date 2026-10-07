@@ -58,12 +58,34 @@ object KolAssembly {
     fun chapterReady(): Boolean =
         KolStorySettings.chapterAdvanceEnabled && KolChapterRequirements.isMet(KolChapter.get())
 
-    /** The convocation is still to be held, or the chapter is ready to advance. */
-    fun importantNext(): Boolean =
-        chapterReady() || !Global.getSector().memoryWithoutUpdate.getBoolean(KolStaticStrings.KolCh2.CONVOCATION_DONE)
+    const val LIBRA_TOPIC_PENDING = "\$kolLibra_assemblyPending"
+    const val TOPIC_KEY = "\$kolAssembly_topic"
+
+    /**
+     * The important topic the next assembly takes up, by priority: the convocation (Chapter 1 to 2), a patron to
+     * announce, Libra's restoration, chapter advancement; null for a routine assembly. One topic per assembly; the
+     * others wait for the next, and each topic's effect applies only at the assembly that takes it up.
+     */
+    fun pickTopic(chapterForced: Boolean = false): String? {
+        val memory = Global.getSector().memoryWithoutUpdate
+        return when {
+            !memory.getBoolean(KolStaticStrings.KolCh2.CONVOCATION_DONE) -> "convocation"
+            memory.getBoolean(org.selkie.kol.campaign.story.ch2.KolPatronFlags.ANNOUNCE) -> "patron"
+            memory.getBoolean(LIBRA_TOPIC_PENDING) -> "libra"
+            chapterForced || chapterReady() -> "chapter"
+            else -> null
+        }
+    }
+
+    /** Some important topic waits for the next assembly. */
+    fun importantNext(): Boolean = pickTopic() != null
+
+    /** Publishes the assembly's topic for its scene (`$global.kolAssembly_topic`: a topic, or `routine`). */
+    fun publishTopic(topic: String?) = Global.getSector().memoryWithoutUpdate.set(TOPIC_KEY, topic ?: "routine")
 
     /** An assembly is sitting and the player has not attended it yet (the market option and notice at Lyra). */
-    fun isOpen(): Boolean = data().let { it.state == KolAssemblyData.State.SITTING && !it.attended }
+    fun isOpen(): Boolean = data().let { it.state == KolAssemblyData.State.SITTING && !it.attended } &&
+            !org.selkie.kol.campaign.story.ch2.KolPatronParley.gatePending() // the patron's pre-assembly scenes play first
 
     /** Publishes the reckoning for the scene (`$global.kolAssembly_<key>`) and clears it. */
     fun publishReckoning() {
@@ -83,6 +105,8 @@ object KolAssembly {
         val data = data()
         val memory = Global.getSector().memoryWithoutUpdate
         memory.set(KolStory.ASSEMBLY_HELD, memory.getInt(KolStory.ASSEMBLY_HELD) + 1)
+        // a patron waiting to be announced (reported first), only at the assembly that takes up that topic
+        if (data.topic == "patron") org.selkie.kol.campaign.story.ch2.KolPatron.onAssemblyAttended()
         publishReckoning()
         memory.set("\$kolAssembly_unique", data.unique)
         memory.set("\$kolAssembly_nextChapter", KolChapter.get() + 1)
@@ -99,7 +123,7 @@ object KolAssembly {
             script.announce(data, chapter)
         } else {
             data.nextSit = minOf(data.nextSit, now())
-            if (chapter) { data.unique = true; data.important = true }
+            if (chapter) { data.unique = true; data.important = true; data.topic = "chapter"; publishTopic("chapter") }
         }
         script.tick()
     }
@@ -119,7 +143,8 @@ class KolAssemblyData {
     var nextSit = 0L           // when the next (or current) assembly sits
     var state = State.IDLE
     var unique = false          // this assembly advances the chapter
-    var important = false       // the convocation or a chapter assembly: attend mission, not held without the player
+    var important = false       // an important topic: attend mission, not held without the player
+    var topic: String? = null   // the important topic this assembly takes up (KolAssembly.pickTopic), or null
     var attended = false
     var tracker: KolAssemblyTracker? = null
     val pending = LinkedHashMap<String, Int>()
@@ -139,6 +164,7 @@ class KolAssemblyScript : EveryFrameScript {
         interval.advance(Misc.getDays(amount))
         if (!interval.intervalElapsed()) return
         KolChapter.ensureChapterTwo()
+        org.selkie.kol.campaign.story.ch2.KolPatron.watchFixerVisit()
         if (KolChapter.get() < 2 || KolAssembly.lyra == null) return
         tick()
         org.selkie.kol.campaign.story.ch2.KolCh2Story.pulse()
@@ -156,6 +182,11 @@ class KolAssemblyScript : EveryFrameScript {
             KolDockEvents.get().remove(KolAssembly.EVENT_KEY)
         }
         KolAssemblyTracker.ensure()
+        // saves from before the topic queue: an assembly already called takes up the topic it was called for
+        if (data.state != KolAssemblyData.State.IDLE && data.important && data.topic == null) {
+            data.topic = if (data.unique) "chapter" else KolAssembly.pickTopic()
+            KolAssembly.publishTopic(data.topic)
+        }
 
         val untilSit = -KolAssembly.daysSince(data.nextSit)
         when (data.state) {
@@ -171,8 +202,10 @@ class KolAssemblyScript : EveryFrameScript {
     }
 
     fun announce(data: KolAssemblyData, chapter: Boolean) {
-        data.unique = chapter || KolAssembly.chapterReady()
-        data.important = data.unique || KolAssembly.importantNext()
+        data.topic = KolAssembly.pickTopic(chapter)
+        data.unique = data.topic == "chapter"
+        data.important = data.topic != null
+        KolAssembly.publishTopic(data.topic)
         data.attended = false
         data.state = KolAssemblyData.State.ANNOUNCED
         if (data.important) KolAssemblyAttend.start()
@@ -197,6 +230,8 @@ class KolAssemblyScript : EveryFrameScript {
         data.state = KolAssemblyData.State.IDLE
         data.attended = false
         data.important = false
+        data.topic = null
+        KolAssembly.publishTopic(null)
         // the calendar is fixed: the next assembly sits one interval after this one, whenever this one closed
         do {
             data.nextSit = KolAssembly.plusDays(data.nextSit, KolStorySettings.assemblyIntervalDays)

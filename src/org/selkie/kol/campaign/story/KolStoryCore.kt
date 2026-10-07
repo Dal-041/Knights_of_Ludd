@@ -34,6 +34,42 @@ object KolStorySettings {
     val desertionMinFleetPoints get() = json.getInt("desertionMinFleetPoints")
     val desertionPerFleetCap get() = json.getInt("desertionPerFleetCap")
     val desertionOrdainedShare get() = json.getDouble("desertionOrdainedShare").toFloat()
+
+    // patron (add-knights-patron-lobbying)
+    val patronCharterCost get() = json.optInt("patronCharterCost", 1500000)
+    val patronCharterCompanyName: String get() = json.optString("patronCharterCompanyName", "Independent Security Combine")
+    val patronPirateDeal get() = json.optInt("patronPirateDeal", 800000)
+    val patronPirateAudienceBribe get() = json.optInt("patronPirateAudienceBribe", 25000)
+    val patronPirateAgreementBribe get() = json.optInt("patronPirateAgreementBribe", 50000)
+    val patronPirateNominalFee get() = json.optInt("patronPirateNominalFee", 50000)
+    val patronPirateCut get() = json.optInt("patronPirateCut", 250000)
+    val patronSwarmFleetPoints get() = json.optDouble("patronSwarmFleetPoints", 2000.0).toFloat()
+    val patronSwarmKnightsMult get() = json.optDouble("patronSwarmKnightsMult", 2.0).toFloat()
+    val patronSwarmLaunchRange get() = json.optDouble("patronSwarmLaunchRange", 2500.0).toFloat()
+    val patronDiktatReplyDays get() = json.optDouble("patronDiktatReplyDays", 14.0).toFloat()
+    val patronFleetCount get() = json.optInt("patronFleetCount", 2)
+    val patronFleetPoints get() = json.optDouble("patronFleetPoints", 150.0).toFloat()
+    val patronFleetReplenishDays get() = json.optDouble("patronFleetReplenishDays", 30.0).toFloat()
+    val patronOwnFleetPenalty get() = json.optDouble("patronOwnFleetPenalty", 0.4).toFloat()
+    val patronCharterOffenseRep get() = json.optDouble("patronCharterOffenseRep", 0.1).toFloat()
+    val patronPathAttemptRep get() = json.optDouble("patronPathAttemptRep", 0.05).toFloat()
+    val patronPirateBribe get() = json.optInt("patronPirateBribe", 20000)
+    val patronOffStagePeople: Set<String> get() = json.optJSONArray("patronOffStagePeople")?.let { a -> (0 until a.length()).map { a.getString(it) }.toSet() } ?: emptySet()
+
+    /** The rival factions penalized when the Church signs with the power keyed [powerKey], with the reputation lost. */
+    fun patronRivalRep(powerKey: String): Map<String, Float> {
+        val o = json.optJSONObject("patronRivalRep")?.optJSONObject(powerKey) ?: return emptyMap()
+        return o.keys().asSequence().map { it as String }.associateWith { o.optDouble(it, 0.0).toFloat() }
+    }
+
+    /** The Knights level for a severance [reason], or null to use the excommunication level. */
+    fun severanceRepLevel(reason: String): String? = json.optJSONObject("severanceRepLevels")?.optString(reason, null)
+
+    /** The standing a story [moment] needs (a RepLevel name); the default gate when the moment has none of its own. */
+    fun standingGate(moment: String): String {
+        val gates = json.optJSONObject("standingGates")
+        return gates?.optString(moment, null) ?: gates?.optString("default", null) ?: "NEUTRAL"
+    }
 }
 
 /** The Knights story chapter: `$global.kol_chapter`. 1 until Chapter 1 is done; then 2, advanced by chapter assemblies. */

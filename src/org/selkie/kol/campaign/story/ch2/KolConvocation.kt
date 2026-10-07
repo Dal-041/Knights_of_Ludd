@@ -90,7 +90,8 @@ object KolConvocation {
             Ranks.FATHER -> "Father"
             Ranks.MOTHER -> "Mother"
             Ranks.BROTHER -> "Brother"
-            else -> "Sister"
+            Ranks.SISTER -> "Sister"
+            else -> person.rank ?: ""
         })
         memory.set(p + "heOrShe", if (male) "he" else "she")
         memory.set(p + "HeOrShe", if (male) "He" else "She")
