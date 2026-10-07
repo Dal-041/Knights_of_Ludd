@@ -121,7 +121,7 @@ class KolLibraSupplyContract : KolLibraMission() {
 
     override fun addDescriptionForNonEndStage(info: TooltipMakerAPI, width: Float, height: Float) {
         val h = Misc.getHighlightColor()
-        info.addPara("[PLACEHOLDER] Charity keeps Libra breathing; it doesn't mend a hull. Knightmaster Martins wants four " +
+        info.addPara("[PLACEHOLDER] Charity keeps Libra breathing; it doesn't mend a hull. Knight-Master Martins wants four " +
                 "standing supply lines for the repairs, penned with the quartermasters of markets that have the goods to spare.", 10f)
         val lines = KolLibra.data().lines
         for (line in KolLibraLine.values()) {
@@ -331,7 +331,7 @@ class KolLibraCrewContract : KolLibraMission(), FleetEventListener {
             }
             Stage.ESCORT -> info.addPara(if (underway) "Escort the crew convoy to Battlestar Libra"
                                          else "Meet the crew convoy at %s", pad, tc, Misc.getHighlightColor(), supplier()?.name ?: "the supplier")
-            Stage.RESTART -> info.addPara("Ask Knightmaster Martins to send for another convoy", tc, pad)
+            Stage.RESTART -> info.addPara("Ask Knight-Master Martins to send for another convoy", tc, pad)
             else -> return false
         }
         return true
@@ -387,7 +387,7 @@ class KolLibraDrill : KolLibraMission() {
     }
 
     override fun addNextStepText(info: TooltipMakerAPI, tc: Color, pad: Float): Boolean {
-        if (currentStage == Stage.RESTAGE) info.addPara("Ask Knightmaster Martins to stage the drill again", tc, pad)
+        if (currentStage == Stage.RESTAGE) info.addPara("Ask Knight-Master Martins to stage the drill again", tc, pad)
         else info.addPara("Beat the raiders the beacon draws to Battlestar Libra", tc, pad)
         return true
     }

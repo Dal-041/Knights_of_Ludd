@@ -295,8 +295,8 @@ class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
     override val title = "Knights: Battlestar Libra"
     override val description = "The council judged Battlestar Libra too costly to recommission. It has been " +
             "written off, but not disowned, and nothing in the Order's writ forbids accepting charity on its behalf. " +
-            "Knightmaster Martins takes what you can bring."
-    override val whomToSee = "Knightmaster Martins at Battlestar Libra."
+            "Knight-Master Martins takes what you can bring."
+    override val whomToSee = "Knight-Master Martins at Battlestar Libra."
     override val contactId: String get() = KolStaticStrings.KolPrelude.MARTINS_ID
 
     override fun setup() {

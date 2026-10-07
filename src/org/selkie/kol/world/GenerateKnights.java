@@ -374,7 +374,7 @@ public class GenerateKnights {
 		//This one does have a black market
 		//if (KOL_ModPlugin.haveNex) SectorManager.NO_BLACK_MARKET.add(lyra.getMarket().getId());
 
-		PersonAPI elder = MagicCampaign.addCustomPerson(market, "Knightmaster", "Martins", "kol_grandmaster",
+		PersonAPI elder = MagicCampaign.addCustomPerson(market, "Knight-Master", "Martins", "kol_grandmaster",
 				FullName.Gender.MALE, KolStaticStrings.kolFactionID, Ranks.ELDER, Ranks.POST_STATION_COMMANDER,
 				true, 1, 0);
 
