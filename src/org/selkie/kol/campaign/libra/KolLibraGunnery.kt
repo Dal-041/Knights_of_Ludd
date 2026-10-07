@@ -122,8 +122,8 @@ class KolLibraGunnery(private val drill: Boolean) : EveryFrameScript, FleetEvent
         val detached = detachedModules()
         val lost = (detached - stationDetached).coerceAtLeast(0)
         stationDetached = detached
-        val points = (destroyed * KolLibraSettings.gunneryMult).toInt() - lost * KolLibraSettings.moduleLossPoints
-        if (points != 0) KolLibra.contribute(points, dialog, if (drill) "The drill" else "Gunnery training")
+        val progress = Math.round(destroyed * KolLibraSettings.gunneryMult) - lost * KolLibraSettings.moduleLossProgress
+        KolLibra.contribute(progress, dialog, if (drill) "The drill" else "Gunnery training")
     }
 
     override fun reportBattleOccurred(fleet: CampaignFleetAPI?, primaryWinner: CampaignFleetAPI?, battle: BattleAPI?) {

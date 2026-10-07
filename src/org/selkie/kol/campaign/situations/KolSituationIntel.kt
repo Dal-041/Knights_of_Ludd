@@ -6,6 +6,7 @@ import com.fs.starfarer.api.campaign.TextPanelAPI
 import com.fs.starfarer.api.impl.campaign.ids.Tags
 import com.fs.starfarer.api.impl.campaign.intel.events.BaseEventIntel
 import com.fs.starfarer.api.impl.campaign.intel.events.BaseEventIntel.StageIconSize
+import com.fs.starfarer.api.impl.campaign.intel.events.BaseEventFactor
 import com.fs.starfarer.api.impl.campaign.intel.events.BaseFactorTooltip
 import com.fs.starfarer.api.impl.campaign.intel.events.BaseOneTimeFactor
 import com.fs.starfarer.api.campaign.comm.IntelInfoPlugin
@@ -283,9 +284,9 @@ class KolTechHandoverFactor(points: Int, private val scrip: Int) : BaseOneTimeFa
 }
 
 /**
- * Battlestar Libra's restoration (add-knights-libra-situation). The bar is Libra's lifetime contributed points /
- * scale, on Technology's scale (KolLibraData, KolLibraSettings). Four thresholds gate the milestone events, each also
- * needing the previous one done (KolLibra.open). Upgraded in place from Chapter 1's placeholder.
+ * Battlestar Libra's restoration (add-knights-libra-situation). The bar's own progress is the record: contributions
+ * are one-time factors, the supply lines a monthly factor (KolLibraSettings). Four thresholds gate the milestone
+ * events, each also needing the previous one done (KolLibra.open). Upgraded in place from Chapter 1's placeholder.
  */
 class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
 
@@ -302,15 +303,15 @@ class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
     override fun setup() {
         factors.clear()
         stages.clear()
-        val scale = org.selkie.kol.campaign.libra.KolLibraSettings.pointsPerProgress
         val t = org.selkie.kol.campaign.libra.KolLibraSettings.stageThresholds
-        setMaxProgress(org.selkie.kol.campaign.libra.KolLibraSettings.maxPoints / scale)
+        setMaxProgress(org.selkie.kol.campaign.libra.KolLibraSettings.maxProgress)
         addStage(LibraStage.START, 0)
-        addStage(LibraStage.SUPPLY, t[0] / scale, StageIconSize.SMALL)
-        addStage(LibraStage.CREW, t[1] / scale, StageIconSize.MEDIUM)
-        addStage(LibraStage.DRILL, t[2] / scale, StageIconSize.MEDIUM)
-        addStage(LibraStage.RESTORATION, t[3] / scale, StageIconSize.LARGE)
+        addStage(LibraStage.SUPPLY, t[0], StageIconSize.SMALL)
+        addStage(LibraStage.CREW, t[1], StageIconSize.MEDIUM)
+        addStage(LibraStage.DRILL, t[2], StageIconSize.MEDIUM)
+        addStage(LibraStage.RESTORATION, t[3], StageIconSize.LARGE)
         addStage(LibraStage.MAX, maxProgress, StageIconSize.LARGE)
+        addFactor(KolLibraLinesFactor())
     }
 
     /** Upgrades Chapter 1's placeholder (START/END stages). Touches no sector state: see syncAfterLoad(). */
@@ -320,13 +321,9 @@ class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
         return this
     }
 
-    private fun barFor(points: Int) = (points / org.selkie.kol.campaign.libra.KolLibraSettings.pointsPerProgress).coerceIn(0, maxProgress)
-
-    /** Keeps the bar equal to lifetime points / scale, and Libra's market effects current. */
+    /** Keeps Libra's market effects current. */
     override fun syncAfterLoad() {
         super.syncAfterLoad()
-        val bar = barFor(org.selkie.kol.campaign.libra.KolLibraData.get().lifetimePoints)
-        if (progress != bar) setProgress(bar)
         org.selkie.kol.campaign.libra.KolLibraEffects.apply()
     }
 
@@ -340,13 +337,8 @@ class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
         if (check.intervalElapsed()) org.selkie.kol.campaign.libra.KolLibraEffects.stationPenalty()
     }
 
-    /** Points were contributed (already in KolLibraData): the bar moves to match, with a factor line. */
-    fun sync(points: Int, reason: String, dialog: InteractionDialogAPI?) {
-        ensureSynced()
-        val delta = barFor(org.selkie.kol.campaign.libra.KolLibraData.get().lifetimePoints) - progress
-        if (delta > 0) addFactor(KolLibraFactor(delta, points, reason), dialog)
-        else if (delta < 0) setProgress(progress + delta)
-    }
+    /** The milestone's threshold is reached (its stage is active). */
+    fun reached(m: org.selkie.kol.campaign.libra.KolLibraMilestone): Boolean = isStageActive(LibraStage.values()[m.ordinal + 1])
 
     /** Current stage index (0 START .. 5 MAX), from the bar. */
     fun stageIndex(): Int = LibraStage.values().lastOrNull { isStageActive(it) }?.ordinal ?: 0
@@ -435,15 +427,26 @@ class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
     }
 }
 
-/** Points contributed to Libra: the bar moves by [points]; the tooltip names the source. */
-class KolLibraFactor(points: Int, private val contributed: Int, private val reason: String) : BaseOneTimeFactor(points) {
+/** A one-time contribution to Libra (negative for a loss), listed under its source. */
+class KolLibraFactor(progress: Int, private val reason: String) : BaseOneTimeFactor(progress) {
     override fun getDesc(intel: BaseEventIntel?): String = reason
+}
+
+/** The penned supply lines, monthly. */
+class KolLibraLinesFactor : BaseEventFactor() {
+    private fun lines() = if (org.selkie.kol.campaign.libra.KolLibra.active()) org.selkie.kol.campaign.libra.KolLibra.data().lines.size else 0
+
+    override fun getProgress(intel: BaseEventIntel?): Int = lines() * org.selkie.kol.campaign.libra.KolLibraSettings.lineMonthlyProgress
+
+    override fun shouldShow(intel: BaseEventIntel?): Boolean = lines() > 0
+
+    override fun getDesc(intel: BaseEventIntel?): String = "Supply lines"
 
     override fun getMainRowTooltip(intel: BaseEventIntel?): TooltipMakerAPI.TooltipCreator =
         object : BaseFactorTooltip() {
             override fun createTooltip(tooltip: TooltipMakerAPI, expanded: Boolean, tooltipParam: Any?) {
-                tooltip.addPara("%s points toward Libra's restoration.", 0f, Misc.getHighlightColor(),
-                    Misc.getWithDGS(contributed.toFloat()))
+                tooltip.addPara("[PLACEHOLDER] %s of 4 supply lines penned, each adding %s a month.", 0f,
+                    Misc.getHighlightColor(), "" + lines(), "" + org.selkie.kol.campaign.libra.KolLibraSettings.lineMonthlyProgress)
             }
         }
 }

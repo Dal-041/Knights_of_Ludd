@@ -8,12 +8,12 @@ object KolStoryBootstrap {
     fun onGameLoad() {
         val sector = Global.getSector()
         KolChapter.ensureChapterTwo()
+        org.selkie.kol.campaign.story.ch2.KolPatronParley.refreshSteps() // step markers for saves made before they existed
 
         sector.addTransientScript(KolChronicle())
         sector.addTransientScript(KolAssemblyScript())
         sector.addTransientScript(org.selkie.kol.campaign.story.ch2.KolPatronFleetScript())
         sector.addTransientScript(KolSeveranceScript())
-        sector.listenerManager.addListener(org.selkie.kol.campaign.libra.KolLibraAgreements.Monthly(), true)
 
         KolFleetSpawnHook.register("desertion", KolDesertion.Modifier())
         sector.addTransientListener(KolFleetSpawnHook())

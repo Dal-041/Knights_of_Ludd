@@ -14,15 +14,14 @@ object KolLibraSettings {
 
     private fun JSONObject.strings(key: String) = optJSONArray(key)?.let { a -> (0 until a.length()).map { a.getString(it) } } ?: emptyList()
 
-    val pointsPerProgress get() = json.optInt("pointsPerProgress", 100)
-    val stageThresholds get() = json.optJSONArray("stageThresholds")?.let { a -> List(a.length()) { a.getInt(it) } } ?: listOf(500, 5000, 15000, 36000)
-    val maxPoints get() = json.optInt("maxPoints", 50000)
+    val stageThresholds get() = json.optJSONArray("stageThresholds")?.let { a -> List(a.length()) { a.getInt(it) } } ?: listOf(50, 500, 1500, 3600)
+    val maxProgress get() = json.optInt("maxProgress", 5000)
     val acceptedCommodities get() = json.strings("acceptedCommodities").toSet()
-    val commodityMult get() = json.optDouble("commodityMult", 0.01).toFloat()
+    val commodityMult get() = json.optDouble("commodityMult", 0.001).toFloat()
     val donationManufacturers get() = json.strings("donationManufacturers").toSet()
-    val donationMult get() = json.optDouble("donationMult", 0.01).toFloat()
+    val donationMult get() = json.optDouble("donationMult", 0.001).toFloat()
     val deployCap get() = json.optInt("deployCap", 8)
-    val lineMonthlyPoints get() = json.optInt("lineMonthlyPoints", 150)
+    val lineMonthlyProgress get() = json.optInt("lineMonthlyProgress", 15)
     val supplyStanding: String get() = json.optString("supplyStanding", "FAVORABLE")
     val crewStanding: String get() = json.optString("crewStanding", "WELCOMING")
     val supplyPrice get() = json.optInt("supplyPrice", 100000)
@@ -36,8 +35,8 @@ object KolLibraSettings {
     val waveVariance get() = json.optDouble("waveVariance", 0.3).toFloat()
     val waveFleets get() = json.optInt("waveFleets", 3)
     val drillWaveMult get() = json.optDouble("drillWaveMult", 1.5).toFloat()
-    val gunneryMult get() = json.optDouble("gunneryMult", 1.0).toFloat()
-    val moduleLossPoints get() = json.optInt("moduleLossPoints", 100)
+    val gunneryMult get() = json.optDouble("gunneryMult", 0.1).toFloat()
+    val moduleLossProgress get() = json.optInt("moduleLossProgress", 10)
     val responderChance get() = json.optDouble("responderChance", 1.0 / 6.0).toFloat()
     val responderRep get() = json.optDouble("responderRep", 0.05).toFloat()
     val convoyFleetPoints get() = json.optDouble("convoyFleetPoints", 40.0).toFloat()
@@ -46,8 +45,6 @@ object KolLibraSettings {
 
 /** Saved state of the Libra situation (sector persistent data). Severance leaves it: what was restored remains. */
 class KolLibraData {
-    /** Points contributed over the whole game; the bar is this / `pointsPerProgress`. Never falls below 0. */
-    var lifetimePoints = 0
     val milestonesDone = HashSet<String>()
     /** Penned supply lines: line key -> supplier market id. */
     val lines = LinkedHashMap<String, String>()
@@ -79,7 +76,7 @@ enum class KolLibraMilestone(val key: String) {
     val previous: KolLibraMilestone? get() = values().getOrNull(ordinal - 1)
 }
 
-/** The Libra situation's shared logic: the bar's points, the milestone gates, and contributions. */
+/** The Libra situation's shared logic: the milestone gates, contributions and their valuation. */
 object KolLibra {
     private val memory get() = Global.getSector().memoryWithoutUpdate
 
@@ -94,8 +91,7 @@ object KolLibra {
     fun done(m: KolLibraMilestone): Boolean = m.key in data().milestonesDone
 
     /** The milestone's bar threshold is reached. */
-    fun reached(m: KolLibraMilestone): Boolean =
-        data().lifetimePoints >= (KolLibraSettings.stageThresholds.getOrNull(m.ordinal) ?: Int.MAX_VALUE)
+    fun reached(m: KolLibraMilestone): Boolean = KolLibraSituationIntel.get()?.reached(m) ?: false
 
     /** Offered: its threshold reached, the previous milestone done, and not done itself. */
     fun open(m: KolLibraMilestone): Boolean = active() && !done(m) && reached(m) && (m.previous?.let { done(it) } ?: true)
@@ -109,20 +105,19 @@ object KolLibra {
         KolLibraSituationIntel.get()?.milestoneCompleted(m, dialog?.textPanel)
     }
 
-    /** Points contributed (or lost, if negative): the lifetime total and the bar move. */
-    fun contribute(points: Int, dialog: InteractionDialogAPI?, reason: String) {
-        if (points == 0) return
-        val data = data()
-        data.lifetimePoints = (data.lifetimePoints + points).coerceIn(0, KolLibraSettings.maxPoints)
-        KolLibraSituationIntel.get()?.sync(points, reason, dialog)
+    /** A one-time contribution (or loss, if negative) to the bar, listed under its reason. */
+    fun contribute(progress: Int, dialog: InteractionDialogAPI?, reason: String) {
+        if (progress == 0) return
+        KolLibraSituationIntel.get()?.addFactor(org.selkie.kol.campaign.situations.KolLibraFactor(progress, reason), dialog)
     }
 
     // --- valuation -------------------------------------------------------------------------------------------
 
     fun acceptsCommodity(id: String?) = id != null && id in KolLibraSettings.acceptedCommodities
 
-    fun commodityPoints(id: String, qty: Float): Int =
-        (Global.getSettings().getCommoditySpec(id).basePrice * qty * KolLibraSettings.commodityMult).toInt()
+    /** Progress for handed-in goods; sum before rounding. */
+    fun commodityValue(id: String, qty: Float): Float =
+        Global.getSettings().getCommoditySpec(id).basePrice * qty * KolLibraSettings.commodityMult
 
     /** Donations open after the crew contract. */
     fun donationsOpen(): Boolean = active() && done(KolLibraMilestone.CREW)
@@ -130,7 +125,8 @@ object KolLibra {
     fun acceptsShip(member: FleetMemberAPI): Boolean =
         !member.isFlagship && !member.isStation && member.hullSpec.manufacturer in KolLibraSettings.donationManufacturers
 
-    fun shipPoints(member: FleetMemberAPI): Int = (member.baseValue * KolLibraSettings.donationMult).toInt()
+    /** Progress for a donated ship; sum before rounding. */
+    fun shipValue(member: FleetMemberAPI): Float = member.baseValue * KolLibraSettings.donationMult
 
     /** A donated hull joins the roster; the oldest entries drop past three times the deployment cap. */
     fun addToRoster(hullId: String) {

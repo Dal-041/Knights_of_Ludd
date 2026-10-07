@@ -360,7 +360,7 @@ object KolPatron {
         if (market.factionId == KolStaticStrings.kolFactionID) return false
         if (market.memoryWithoutUpdate.getBoolean("\$kolPatron_congregationSought")) return false
         if (market.id == "mazalot" && KolPatronParley.mazalotOpen()) return false // the League's own scene there
-        if (market.id == "jangala" && KolPatronParley.stage(KolPatronPower.HEGEMONY) == "jangala") return false // the Hegemony's
+        if (market.id == "jangala" && KolPatronParley.jangalaOpen()) return false // the Hegemony's
         return market.factionId == Factions.LUDDIC_CHURCH || market.hasCondition(Conditions.LUDDIC_MAJORITY)
     }
 

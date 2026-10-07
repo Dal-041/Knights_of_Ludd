@@ -65,7 +65,8 @@ class KolPatronCMD : BaseCommandPlugin() {
             }
             "hegemonyOfficeIs" -> KolPatronParley.hegemonyOffice() == params.getOrNull(1)?.getString(map)
             "hegemonySentAway" -> { KolPatronParley.hegemonySentAway(dialog.textPanel); true }
-            "jangalaOpen" -> KolPatronParley.stage(org.selkie.kol.campaign.story.ch2.KolPatronPower.HEGEMONY) == "jangala"
+            "jangalaOpen" -> KolPatronParley.jangalaOpen()
+            "jangalaFound" -> { KolPatronParley.jangalaFound(dialog.textPanel); true }
             "jangalaDone" -> { KolPatronParley.jangalaDone(dialog.textPanel); true }
             "hegemonyMeetingReady" -> KolPatronParley.hegemonyMeetingReady()
             "mazalotOpen" -> KolPatronParley.mazalotOpen()

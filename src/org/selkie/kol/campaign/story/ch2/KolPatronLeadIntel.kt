@@ -32,7 +32,33 @@ class KolPatronLeadIntel(val key: String) : BaseIntelPlugin() {
     fun advance(newStage: String, text: TextPanelAPI?) {
         if (stage == newStage) return
         stage = newStage
+        refreshStep()
         show(text)
+    }
+
+    /**
+     * When the branch began ending (the quest is over). Intel isn't advanced, so a delayed end never counts down on its
+     * own: the delay is checked here, as vanilla's fleet log does (FleetLogIntel.shouldRemoveIntel).
+     */
+    private var endingSince: Long? = null
+
+    override fun shouldRemoveIntel(): Boolean {
+        if (super.shouldRemoveIntel()) return true
+        if (!isEnding) return false
+        val since = endingSince ?: Global.getSector().clock.timestamp.also { endingSince = it } // saves from before
+        return Global.getSector().clock.getElapsedDaysSince(since) >= DAYS_AFTER_END
+    }
+
+    /** The entity marked important for this branch's next step (KolPatronParley.stepPlace), if any. */
+    private var stepMarked: SectorEntityToken? = null
+
+    /** Moves the step marker to where the branch now leads, or clears it. */
+    fun refreshStep() {
+        val place = if (isEnding || isEnded) null else power?.let { KolPatronParley.stepPlace(it) }?.primaryEntity
+        if (place === stepMarked) return
+        stepMarked?.let { Misc.makeUnimportant(it, "kolPatron_step_$key") }
+        place?.let { Misc.makeImportant(it, "kolPatron_step_$key") }
+        stepMarked = place
     }
 
     /** A second route joined the branch (the mercenaries): shown like an advance. */
@@ -117,7 +143,8 @@ class KolPatronLeadIntel(val key: String) : BaseIntelPlugin() {
     /** The seat for a power, the recorded place for the pirate and Path leads; none yet for the others. */
     private fun where() = power?.seat() ?: leads().firstNotNullOfOrNull { KolPatron.place(it) }
 
-    override fun getMapLocation(map: SectorMapAPI?): SectorEntityToken? = where()?.primaryEntity
+    override fun getMapLocation(map: SectorMapAPI?): SectorEntityToken? =
+        power?.let { KolPatronParley.stepPlace(it) }?.primaryEntity ?: where()?.primaryEntity
 
     override fun getIntelTags(map: SectorMapAPI?): MutableSet<String> {
         val tags = super.getIntelTags(map)
@@ -174,7 +201,15 @@ class KolPatronLeadIntel(val key: String) : BaseIntelPlugin() {
         }
 
         /** Ends every branch (the quest is over). */
-        fun endAll() = all().forEach { if (!it.isEnding && !it.isEnded) it.endAfterDelay() }
+        fun endAll() = all().forEach {
+            if (!it.isEnding && !it.isEnded) {
+                it.endAfterDelay()
+                it.endingSince = Global.getSector().clock.timestamp
+            }
+            it.refreshStep()
+        }
+
+        private const val DAYS_AFTER_END = 3f
 
         /** "Show leads" / "Go back", as the Pilgrim's Path shows its shrines: the parent and its branches together. */
         fun addShowLeadsButton(curr: IntelInfoPlugin, width: Float, height: Float, info: TooltipMakerAPI) {

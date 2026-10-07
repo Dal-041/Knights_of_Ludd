@@ -149,6 +149,18 @@ object KolCh2Story {
     const val JOINT_OP_CARRY = "\$kol_jointOpCarry"
 
     /**
+     * Caeli's Zhi Nu was recovered (vanilla's PostShipRecoverySpecial rule hook): a Knights reputation hit if any of
+     * the Ozymandias mission's Knights fleets is alive in the system.
+     */
+    fun zhiNuRecovered(dialog: InteractionDialogAPI) {
+        val system = Global.getSector().getStarSystem(org.selkie.zea.helpers.ZeaStaticStrings.ozymandiasSysName) ?: return
+        if (system.fleets.none { it.isAlive && it.memoryWithoutUpdate.getBoolean(KolCh2.OZY_KNIGHTS) }) return
+        val impact = com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.CustomRepImpact()
+        impact.delta = -org.selkie.kol.campaign.story.KolStorySettings.ozZhiNuRecoveryRep
+        KolPatron.knightsRepAction(impact, dialog.textPanel)
+    }
+
+    /**
      * The player beat the operation's boss before the Order could sail: half of what was set aside is paid to them
      * as a bounty, half strengthens the next operation; the operation counts as done.
      */

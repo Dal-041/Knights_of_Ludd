@@ -66,6 +66,38 @@ object KolPatronParley {
     }
 
     /**
+     * Where a power's branch goes next, when that's one place: marked important and shown as the branch's map
+     * location. Null while it waits, plays aboard, or has to be asked around for (a hint, not a marker).
+     */
+    fun stepPlace(power: KolPatronPower): com.fs.starfarer.api.campaign.econ.MarketAPI? {
+        val economy = Global.getSector().economy
+        val lyra = org.selkie.kol.campaign.story.KolAssembly.lyra
+        val aboard = delegationAboard()
+        return when (power) {
+            KolPatronPower.LEAGUE -> when (stage(power)) {
+                "lead" -> power.seat()
+                "kazeron" -> economy.getMarket("mazalot")
+                "mazalot" -> if (aboard) power.seat() else lyra
+                else -> null
+            }
+            KolPatronPower.HEGEMONY -> when (stage(power)) {
+                "lead", "curate" -> power.seat()
+                "jangala" -> economy.getMarket("jangala")
+                "meetingSet" -> if (aboard) power.seat() else lyra
+                else -> null
+            }
+            KolPatronPower.DIKTAT -> when (stage(power)) {
+                "lead", "dispatched" -> power.seat()
+                "terms" -> if (aboard) null else lyra
+                else -> null
+            }
+        }
+    }
+
+    /** Every branch's step marker, after something that changes where they lead (the delegation boarding or leaving). */
+    fun refreshSteps() = KolPatronLeadIntel.all().forEach { it.refreshStep() }
+
+    /**
      * How the power's office receives the player: `commissioned`, `neutral`, `unwelcome` (Suspicious or worse), or
      * `hostile` (the branch stalls until standing recovers). Published as `$kolPatron_reception`, with
      * `$kolPatron_powerName` (the faction with its article).
@@ -107,6 +139,7 @@ object KolPatronParley {
         // every branch that was waiting on them shows its new step
         if (stage(KolPatronPower.LEAGUE) == "mazalot") KolPatronLeadIntel.get(KolPatronPower.LEAGUE.key)?.routeAdded(dialog.textPanel)
         if (stage(KolPatronPower.HEGEMONY) == "meetingSet") KolPatronLeadIntel.get(KolPatronPower.HEGEMONY.key)?.routeAdded(dialog.textPanel)
+        refreshSteps()
     }
 
     /** A passenger who travels to the meeting (Mazalot's delegate, Jangala's curate). */
@@ -117,6 +150,7 @@ object KolPatronParley {
     /** The delegation goes home (its scene in the gate at Lyra, or the announcing assembly as a fallback). */
     fun dropOff() {
         memory.unset(K.DELEGATION)
+        refreshSteps()
     }
 
     // --- the gate at Lyra --------------------------------------------------------------------------------------------
@@ -328,6 +362,16 @@ object KolPatronParley {
         val direct = Global.getSector().characterData.memoryWithoutUpdate.getBoolean("\$metDaud") ||
                 Misc.getCommissionFactionId() == Factions.HEGEMONY
         advance(KolPatronPower.HEGEMONY, if (direct) "jangala" else "sentAway", text)
+    }
+
+    /** Jangala's curate can be sought: named by asking around, or found by going to Jangala after being sent away. */
+    fun jangalaOpen(): Boolean = stage(KolPatronPower.HEGEMONY).let { it == "sentAway" || it == "jangala" }
+
+    /** Going to Jangala counts as finding it: from `sentAway`, the branch moves on as if the curate had been named. */
+    fun jangalaFound(text: TextPanelAPI) {
+        if (stage(KolPatronPower.HEGEMONY) != "sentAway") return
+        memory.set(K.LEAD_PREFIX + KolPatron.HEG_CURATE, true)
+        advance(KolPatronPower.HEGEMONY, "jangala", text)
     }
 
     /** Jangala's curate is convinced and boards. */

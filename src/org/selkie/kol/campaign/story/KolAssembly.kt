@@ -386,12 +386,23 @@ class KolAssemblyAttend : HubMissionWithSearch() {
     override fun getBaseName(): String = if (KolAssembly.data().unique) "The Great Assembly" else "Called to Assembly"
 }
 
-/** Summary of a routine assembly held without the player (placeholder text). */
+/**
+ * Summary of a routine assembly held without the player (placeholder text). Dropped two weeks after the player first
+ * sees it, as vanilla's fleet log entries are (FleetLogIntel.shouldRemoveIntel): intel isn't advanced, so a delayed end
+ * would never count down.
+ */
 class KolAssemblyIntel(private val entries: Map<String, Int> = emptyMap()) : BaseIntelPlugin() {
     fun post() {
         Global.getSector().intelManager.addIntel(this)
-        endAfterDelay(30f)
     }
+
+    override fun shouldRemoveIntel(): Boolean {
+        if (isEnded) return true
+        val seen = playerVisibleTimestamp ?: return false
+        return Global.getSector().clock.getElapsedDaysSince(seen) >= DAYS_SHOWN
+    }
+
+    companion object { private const val DAYS_SHOWN = 14f }
 
     override fun getName(): String = "Knights: Assembly Held"
 

@@ -8,7 +8,6 @@ import com.fs.starfarer.api.campaign.FleetAssignment
 import com.fs.starfarer.api.campaign.InteractionDialogAPI
 import com.fs.starfarer.api.campaign.RepLevel
 import com.fs.starfarer.api.campaign.econ.MarketAPI
-import com.fs.starfarer.api.campaign.listeners.EconomyTickListener
 import com.fs.starfarer.api.campaign.listeners.FleetEventListener
 import com.fs.starfarer.api.campaign.rules.MemKeys
 import com.fs.starfarer.api.campaign.rules.MemoryAPI
@@ -224,8 +223,11 @@ object KolLibraAgreements {
 
     // --- vouches ----------------------------------------------------------------------------------------------
 
-    /** Who can vouch, by person id. The Order's two only while their relationship with the player is above 0. */
-    val VOUCHERS = listOf("jaspis", "bornanew", "oak", "standfast", "killa_curate", "kol_knightcaptain", "kol_intel_director")
+    /**
+     * Who can vouch, by person id. The Order's two only while their relationship with the player is above 0.
+     * Bornanew is deliberately absent: he gives his word in a scene (rules.csv), but it doesn't count toward the two.
+     */
+    val VOUCHERS = listOf("jaspis", "oak", "standfast", "killa_curate", "kol_knightcaptain", "kol_intel_director")
     private val ORDER = setOf("kol_knightcaptain", "kol_intel_director")
 
     /** This person can vouch for Libra now: the crew contract is open, fewer than two vouches, not theirs yet. */
@@ -233,6 +235,8 @@ object KolLibraAgreements {
         if (id == null || id !in VOUCHERS || !KolLibraCrewContract.active()) return false
         val data = KolLibra.data()
         if (data.vouches.size >= 2 || id in data.vouches || data.crewSupplier != null) return false
+        // vanilla's razed Volturn shrine (`$global.lpp_volturnShrineRazed`) leaves Standfast with nothing to send
+        if (id == "standfast" && Global.getSector().memoryWithoutUpdate.getBoolean("\$lpp_volturnShrineRazed")) return false
         if (id in ORDER) {
             val person = Global.getSector().importantPeople.getPerson(id) ?: return false
             if (person.relToPlayer.rel <= 0f) return false
@@ -248,17 +252,6 @@ object KolLibraAgreements {
         KolLibraCrewContract.get()?.update("Vouch for Libra's crew from $who ($n of 2)", dialog?.textPanel)
     }
 
-    // --- the monthly credit ---------------------------------------------------------------------------------------
-
-    /** Each penned line credits Libra monthly (transient; registered at each load). */
-    class Monthly : EconomyTickListener {
-        override fun reportEconomyTick(iterIndex: Int) {}
-        override fun reportEconomyMonthEnd() {
-            if (!KolLibra.active()) return
-            val lines = KolLibra.data().lines.size
-            if (lines > 0) KolLibra.contribute(lines * KolLibraSettings.lineMonthlyPoints, null, "Supply lines")
-        }
-    }
 }
 
 /** A raider task: when the raiders are beaten or gone, the agreement they held up is penned. */

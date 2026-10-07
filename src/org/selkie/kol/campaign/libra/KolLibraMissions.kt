@@ -308,7 +308,7 @@ class KolLibraCrewContract : KolLibraMission(), FleetEventListener {
         when (currentStage) {
             Stage.VOUCHES -> {
                 info.addPara("Vouches: %s of 2.", 10f, h, "" + vouches.size)
-                info.addPara("[PLACEHOLDER] Those who might vouch: Archcurate Jaspis, Jethro Bornanew, the Excubitor Orbis, " +
+                info.addPara("[PLACEHOLDER] Those who might vouch: Archcurate Jaspis, the Excubitor Orbis, " +
                         "Mother Standfast, the curate sacraria of Killa's ossuary, and, if they think well of you, Brother " +
                         "Enarms or Sister Greenflight.", 3f)
             }
