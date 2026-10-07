@@ -201,6 +201,33 @@ ZeaIntelCMD addYukiImage
 $printedDesc = true 0
 $fidpi_addContinue = true 0","The opposing fleet moves in to meet yours, enveloped in dancing twinkles of volatile half-light. A sound grazes your consciousness like a bullet grazing your skin, a tune on perception's edge just failing to be heard. The dance of the light changes, matching the inaudible rhythm pace for pace. The crew surrounding you wavers, drifting in and out of focus. Sweat trickles, a nose bleeds, straining to hear the absence. Conduits pulse and readouts flicker as your ship tries to sing along. Amidst the maddening silence waits Yukionna, ready with her embrace.",,
 zea_BossYukionnaEnc2,BeginFleetEncounter2,$zea_yukionna score:1000,ZeaIntelCMD showFleetInfo,,,
+"# Caeli's guardian, Ozymandias (ZeaCaeli): either the cryosleeper or the Zhi Nu's derelict offers the fight",,,,,,
+zea_caeliOpen,OpenInteractionDialog,"$zea_caeli
+!$global.zea_caeliGuardianBeaten score:2000","ShowDefaultVisual
+PrintDescription 1
+SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] A derelict prototype drifts in Caeli's shadow, close enough to be tethered to it. Its drive is cold, but your sensors officer keeps glancing back at the readings: something aboard the pair is still drawing power.","0:zea_caeliApproach:[PLACEHOLDER] Move in closer
+100:defaultLeave:Leave",
+zea_caeliZhiNuOpen,OpenInteractionDialog,"$zea_caeliZhiNu
+!$global.zea_caeliGuardianBeaten score:2000","ShowDefaultVisual
+SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The derelict is a prototype hull of a design you don't recognize, drifting beside the Caeli cryosleeper. Its drive is cold, but its systems are not quite dark.","0:zea_caeliApproach:[PLACEHOLDER] Move in closer
+100:defaultLeave:Leave",
+zea_caeliApproach,DialogOptionSelected,$option == zea_caeliApproach,ZeaCaeliCMD engage,"[PLACEHOLDER] The prototype's drive flares as your fleet closes. Behind it, something far larger unfolds from Caeli's hull: the cryosleeper's guardian, awake.",,
+zea_caeliBeatenMission,ZeaCaeliBeaten,$global.kolCh2Oz_active score:10,"SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The guardian goes dark, and the prototype with it. Helensis' clerks will want to know what kind of hull it was, and who built it. Caeli drifts on, silent; the Order will want it remembered.",100:defaultLeave:Leave,
+zea_caeliBeaten,ZeaCaeliBeaten,,FireBest ZeaCaeliLore,"[PLACEHOLDER] The guardian goes dark, and the prototype with it.",,
+zea_caeliLore,ZeaCaeliLore,,"SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] Caeli's lore: what the boarding party finds aboard the sleeper ship, and what was done to it.","0:zea_caeliSalvage:[PLACEHOLDER] Search what's left aboard
+100:defaultLeave:Leave",
+zea_caeliSalvage,DialogOptionSelected,$option == zea_caeliSalvage,ZeaCaeliCMD reward,,,
+zea_caeliAfterLore,OpenInteractionDialog,"$zea_caeli
+$global.zea_caeliGuardianBeaten
+!$global.zea_caeliRewarded
+!$global.kolCh2Oz_active score:600","ShowDefaultVisual
+PrintDescription 1
+FireBest ZeaCaeliLore",,,
+zea_caeliAfter,OpenInteractionDialog,"$zea_caeli
+$global.zea_caeliGuardianBeaten score:500","ShowDefaultVisual
+PrintDescription 1
+SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] Caeli drifts on, silent. Nothing aboard will ever wake.",100:defaultLeave:Leave,never vanilla's salvage flow: Caeli is not a usable cryosleeper
+kolCh2_ozZhiNuRecovered,PostShipRecoverySpecial,$srs_baseHullId == zea_boss_zhi_nu,KolCh2CMD ozZhiNuRecovered,,,a Knights reputation hit if the Ozymandias mission's Knights are in the system
 #END boss interactions,,,,,,
 #END relationship level descriptions,,,,,,
 ,,,,,,
@@ -1533,14 +1560,38 @@ kolPatron_priceReact,KolPatronPriceReact,,,[PLACEHOLDER] The Order's delegates c
 2:kolPatron_meetConcede:""The Church can bear that.""
 3:kolPatron_meetDefer:Defer to the delegation",Generic; per price key or delegate below
 kolPatron_priceReactLeague,KolPatronPriceReact,$global.kolPatron_priceKey == league_antipiracy score:10,,[PLACEHOLDER] The Lector glances at Greenflight. Every patrol sent to League space is one not sent to the far holdings; the whole convocation argued about exactly that. Greenflight's face says nothing at all.,"1:kolPatron_meetPress:""The Order is stretched thin already. Ask for less.""
-2:kolPatron_meetConcede:""The Church can bear that.""
+2:kolPatron_meetConcede:""Pirates prey on the faithful too. The Church will hunt them.""
 3:kolPatron_meetDefer:Defer to the delegation",
-kolPatron_meetPress,DialogOptionSelected,$option == kolPatron_meetPress,FireBest KolPatronAgree,"[PLACEHOLDER] The other side hears you out, and gives a little on the edges: fewer systems, a review after a year. The heart of it doesn't move.",,
+kolPatron_meetPress,DialogOptionSelected,$option == kolPatron_meetPress,FireBest KolPatronAgree,"[PLACEHOLDER] The other side hears you out, and gives a little on the edges. The heart of it doesn't move.",,
 kolPatron_meetConcede,DialogOptionSelected,$option == kolPatron_meetConcede,FireBest KolPatronAgree,"[PLACEHOLDER] The Lector looks at you a moment longer than the remark needs, and does not contradict you.",,
 kolPatron_meetDefer,DialogOptionSelected,$option == kolPatron_meetDefer,FireBest KolPatronAgree,"[PLACEHOLDER] You sit back. The delegates argue it out between themselves for some time, in the long courteous sentences of people who will be dealing with one another for years.",,
-kolPatron_agree,KolPatronAgree,,KolPatronCMD confirmTooltip kolPatron_meetSign,[PLACEHOLDER] In the end the terms stand much as they were offered. The aide slides the arrangement across the table for the Church's signature.,"1:kolPatron_meetSign:Agree to the terms
+kolPatron_meetPressLeague,DialogOptionSelected,"$option == kolPatron_meetPress
+$global.kolPatron_priceKey == league_antipiracy score:10",FireBest KolPatronAgree,"[PLACEHOLDER] The other side hears you out, and gives a little on the edges: fewer systems, a review after a year. The heart of it doesn't move.",,
+kolPatron_meetPressHegemony,DialogOptionSelected,"$option == kolPatron_meetPress
+$global.kolPatron_priceKey == hegemony_ties score:10",FireBest KolPatronAgree,"[PLACEHOLDER] The liaison agrees that the matter will be entered in the record. The curate thanks them, and does not look as though an entry were what was asked for.",,
+kolPatron_meetQueryHegemony,DialogOptionSelected,$option == kolPatron_meetQuery,FireBest KolPatronAgree,"[PLACEHOLDER] The liaison answers that the expeditions go where the Hegemony's interests require. That is the whole answer, and it is offered as a generous one. At the Church's end of the table, Helensis turns a page.",,
+kolPatron_meetConcedeHegemony,DialogOptionSelected,"$option == kolPatron_meetConcede
+$global.kolPatron_priceKey == hegemony_ties score:10",FireBest KolPatronAgree,[PLACEHOLDER] The liaison inclines their head; the point was never in doubt. Helensis is the only one at the Church's end who looks satisfied.,,
+kolPatron_meetPressDiktat,DialogOptionSelected,"$option == kolPatron_meetPress
+$global.kolPatron_priceKey == diktat_volturn score:10",FireBest KolPatronAgree,[PLACEHOLDER] The functionary takes the request down and promises that it will be considered. Macario does not look up.,,
+kolPatron_meetRedactDiktat,DialogOptionSelected,$option == kolPatron_meetRedact,FireBest KolPatronAgree,"[PLACEHOLDER] The functionary has no objection to the Church sending less than it has. The Lector writes it into the terms. ""The files will be prepared with care,"" Greenflight says, and it sounds like routine.",,
+kolPatron_meetConcedeDiktat,DialogOptionSelected,"$option == kolPatron_meetConcede
+$global.kolPatron_priceKey == diktat_volturn score:10",FireBest KolPatronAgree,"[PLACEHOLDER] The Lector does not contradict you, and does not thank you for it. Greenflight sets her pen down.",,
+kolPatron_agree,KolPatronAgree,,KolPatronCMD confirmTooltip kolPatron_meetSign,[PLACEHOLDER] In the end the terms stand much as they were offered. The arrangement is slid across the table for the Church's signature.,"1:kolPatron_meetSign:Agree to the terms
 2:kolPatron_meetDecline:""Not yet.""",Generic; per power if needed
-kolPatron_meetDecline,DialogOptionSelected,$option == kolPatron_meetDecline,,"[PLACEHOLDER] The arrangement is put back in its case, without offense. ""The Council will be here,"" the aide says.",kolPatron_meetExit:Leave,The branch stays open; the delegates stay aboard
+kolPatron_agreeLeague,KolPatronAgree,$kolPatron_power == league score:10,KolPatronCMD confirmTooltip kolPatron_meetSign,[PLACEHOLDER] In the end the terms stand much as they were offered. The aide slides the arrangement across the table for the Church's signature.,"1:kolPatron_meetSign:Agree to the terms
+2:kolPatron_meetDecline:""Not yet.""",
+kolPatron_agreeHegemony,KolPatronAgree,$kolPatron_power == hegemony score:10,KolPatronCMD confirmTooltip kolPatron_meetSign,"[PLACEHOLDER] In the end the terms stand much as they were offered. The liaison turns the arrangement round for the Church's signature, and the ministry officer notes the time.","1:kolPatron_meetSign:Agree to the terms
+2:kolPatron_meetDecline:""Not yet.""",
+kolPatron_agreeDiktat,KolPatronAgree,$kolPatron_power == diktat score:10,KolPatronCMD confirmTooltip kolPatron_meetSign,[PLACEHOLDER] In the end the terms stand much as they were offered. The functionary pushes the arrangement across the table. The Supreme Executor's seal is already on it.,"1:kolPatron_meetSign:Agree to the terms
+2:kolPatron_meetDecline:""Not yet.""",
+kolPatron_meetDecline,DialogOptionSelected,$option == kolPatron_meetDecline,,"[PLACEHOLDER] The arrangement is put back in its case, without offense.",kolPatron_meetExit:Leave,The branch stays open; the delegates stay aboard
+kolPatron_meetDeclineLeague,DialogOptionSelected,"$option == kolPatron_meetDecline
+$kolPatron_power == league score:10",,"[PLACEHOLDER] The arrangement is put back in its case, without offense. ""The Council will be here,"" the aide says.",kolPatron_meetExit:Leave,
+kolPatron_meetDeclineHegemony,DialogOptionSelected,"$option == kolPatron_meetDecline
+$kolPatron_power == hegemony score:10",,"[PLACEHOLDER] The arrangement is put back in its case. ""The Ministry will be here,"" the liaison says, and the ministry officer writes down that the Church asked for time.",kolPatron_meetExit:Leave,
+kolPatron_meetDeclineDiktat,DialogOptionSelected,"$option == kolPatron_meetDecline
+$kolPatron_power == diktat score:10",,"[PLACEHOLDER] The arrangement is put back in its case. ""The Supreme Executor's patience is a matter for the Supreme Executor,"" the functionary says, and writes down the date.",kolPatron_meetExit:Leave,
 kolPatron_meetSign,DialogOptionSelected,$option == kolPatron_meetSign,"FireBest KolPatronPriceScene
 KolPatronCMD sign $kolPatron_power",,,
 kolPatron_priceScene,KolPatronPriceScene,,,"[PLACEHOLDER] The Lector signs for the Grandmaster, and the price is entered beside the signatures.",kolPatron_meetLeave:Leave the chamber,Generic; per price key below
@@ -1577,7 +1628,8 @@ kolPatron_jangalaOpt,PopulateOptions,"$market.id == jangala
 !$isPerson
 $global.kolCh2Patron_active
 KolPatronCMD jangalaOpen",,,11:kolPatron_jangala:Seek out the curate of Jangala's shrine on the Church's behalf,The Hegemony's intermediary
-kolPatron_jangala,DialogOptionSelected,$option == kolPatron_jangala,KolPatronCMD meet jangalaCurate,"[PLACEHOLDER] The shrine at Jangala has stood through the orbital burns, the protest, and the patrols that came after. The curate receives you in a side chapel, with a Hegemony officer within earshot who is pretending not to be.",kolPatron_jangala2:Continue,
+kolPatron_jangala,DialogOptionSelected,$option == kolPatron_jangala,"KolPatronCMD jangalaFound
+KolPatronCMD meet jangalaCurate","[PLACEHOLDER] The shrine at Jangala has stood through the orbital burns, the protest, and the patrols that came after. The curate receives you in a side chapel, with a Hegemony officer within earshot who is pretending not to be.",kolPatron_jangala2:Continue,
 kolPatron_jangala2,DialogOptionSelected,$option == kolPatron_jangala2,,"[PLACEHOLDER] $global.kolPerson_jangalaCurate_title $global.kolPerson_jangalaCurate_last hears the Church's need out with the patience of someone who has learned what can be said aloud here. ""You want me to open doors at Chicomoztoc. I can. They listen to me there."" A glance at the officer. ""They listened after the protest, too, and the faithful paid for that.""","1:kolPatron_jangalaFaithful:""Then let the meeting be where the faithful are heard. Raise the orbital burns there.""
 2:kolPatron_jangalaOrder:""The Order needs this. The Church needs this.""
 3:kolPatron_jangalaQuiet:Wait for the curate to decide",Narrative; the trajectory doesn't change
@@ -1592,20 +1644,21 @@ kolPatron_hegMeetOpt,PopulateOptions,"$market.id == chicomoztoc
 $global.kolCh2Patron_active
 KolPatronCMD hegemonyMeetingReady",,,4:kolPatron_hegMeet:Attend the meeting at the High Hegemon's offices,
 kolPatron_hegMeet,DialogOptionSelected,$option == kolPatron_hegMeet,"$kolPatron_inPerson = true 0
-KolCh2CMD showPerson rivas","[PLACEHOLDER] The Hegemony receives the Church's delegates in a shipyard office, down a corridor with more checkpoints than doors. At the last, a man in civilian clothes is already waiting. He lifts each delegate's sidearm from its case, thumbs the cellmag free, and hands it back with the barrel clear. The Lector surrenders a stylus case with great dignity, and receives it back opened. Helensis has brought nothing, and watches him do it.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
+KolCh2CMD showPerson rivas","[PLACEHOLDER] The High Hegemon's offices sit inside the Council campus, behind a gate that checks you twice and a lobby that checks you again. The Church's delegates are taken aside, one at a time, and a technician runs a scanner over each of them and over what they carry. The Lector's stylus case is opened and closed. A clerk's datapad takes longer. Helensis has brought nothing, and watches it done. Rivas, Daud's chief of security, looks on from the wall.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
 kolPatron_hegMeetMetDaud,DialogOptionSelected,"$option == kolPatron_hegMeet
 $player.metDaud score:10","$kolPatron_inPerson = true 0
-KolCh2CMD showPerson rivas","[PLACEHOLDER] The Hegemony receives the Church's delegates in a shipyard office, down a corridor with more checkpoints than doors. At the last, a man in civilian clothes is already waiting. He lifts each delegate's sidearm from its case, thumbs the cellmag free, and hands it back with the barrel clear. The Lector surrenders a stylus case with great dignity, and receives it back opened. Helensis has brought nothing, and watches him do it.
+KolCh2CMD showPerson rivas","[PLACEHOLDER] The High Hegemon's offices sit inside the Council campus, behind a gate that checks you twice and a lobby that checks you again. The Church's delegates are taken aside, one at a time, and a technician runs a scanner over each of them and over what they carry. The Lector's stylus case is opened and closed. A clerk's datapad takes longer. Helensis has brought nothing, and watches it done. Rivas, Daud's chief of security, looks on from the wall.
 
-The man in civilian clothes meets your eye once, and it is the only acknowledgement you get.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
+Rivas meets your eye once, and it is the only acknowledgement you get.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
 kolPatron_hegMeet2,DialogOptionSelected,$option == kolPatron_hegMeet2,"KolPatronCMD openMeeting hegemony
 KolPatronCMD meet hegemonyLiaison
 FireBest KolPatronMeetOpen",,,
 kolPatron_meetOpenHegemony,KolPatronMeetOpen,$kolPatron_power == hegemony score:10,,"[PLACEHOLDER] On the Hegemony's side: $global.kolPerson_hegemonyLiaison_title $global.kolPerson_hegemonyLiaison_last, the Ministry of Technology Standards' liaison to the Church, and a ministry officer who keeps the record and says nothing. On the Church's: the Lector, Master Helensis, and Jangala's curate, seated at the end of the table nearest the door. The High Hegemon is referred to only by his title, and no one expects him.",kolPatron_meetAsk:Continue,
-kolPatron_priceAskHegemony,KolPatronPriceAsk,$global.kolPatron_priceKey == hegemony_ties score:10,,"[PLACEHOLDER] The liaison reads the terms the way inspection orders are read: evenly, with no heat. The Ministry and the Church have disagreed about almost everything for two centuries, and agreed about one thing without exception. Closer ties would put that on paper. In return, the Church's worlds would resupply the Hegemony's expeditions, wherever they are bound.",,
+kolPatron_priceAskHegemony,KolPatronPriceAsk,$global.kolPatron_priceKey == hegemony_ties score:10,,"[PLACEHOLDER] The liaison reads the terms off in numbered order. The Ministry and the Church have disagreed about almost everything for two centuries, and agreed about one thing without exception. Closer ties would put that on paper. In return, the Church's worlds would resupply the Hegemony's expeditions, wherever they are bound.",,
 kolPatron_priceReactHegemony,KolPatronPriceReact,$global.kolPatron_priceKey == hegemony_ties score:10,,"[PLACEHOLDER] Helensis nods along, and asks one question about where the expeditions go. The liaison answers it smoothly, and not at all. Jangala's curate raises the burns, and what they cost the pilgrims; the liaison replies that the biosphere leaves the Hegemony little choice. The ministry officer writes both down.","1:kolPatron_meetPress:""The Church will want its faithful treated better for this.""
-2:kolPatron_meetConcede:""The Church can bear that.""
-3:kolPatron_meetDefer:Defer to the delegation",
+2:kolPatron_meetQuery:""Name the expeditions, or the Church cannot supply them.""
+3:kolPatron_meetConcede:""The Church and the Ministry fear the same thing. It can bear that.""
+4:kolPatron_meetDefer:Defer to the delegation",
 kolPatron_priceSceneHegemony,KolPatronPriceScene,$global.kolPatron_priceKey == hegemony_ties score:10,,"[PLACEHOLDER] You stand witness as the liaison and the Lector sign. Helensis is pleased, and doesn't trouble to hide it. Behind her, the unnamed delegates' unease is almost audible: Church worlds feeding expeditions no one will name. The curate signs last, for the faithful, and asks for a copy.",kolPatron_meetLeave:Leave the offices,
 kolPatron_greenflightOwn,PickGreeting,"$id == kol_intel_director score:262
 $global.kolCh2Patron_active
@@ -1630,11 +1683,17 @@ kolCh2_ozOption,PopulateOptions,"$id == kol_knightcaptain
 $global.kolCh2_convocationDone
 !$global.kolCh2Oz_active
 !$global.kolCh2_ozymandiasDone",,,5:kolCh2_oz:Ask what the Order needs of you,
-kolCh2_oz,DialogOptionSelected,$option == kolCh2_oz,,"[PLACEHOLDER] Enarms names a system the charts call Ozymandias: four dead worlds and a sleeper ship, out past the Luna Sea. ""The Order has never looked at it properly. Someone should, and then someone should remember it.""","kolCh2_ozAccept:""I'll go.""
+kolCh2_oz,DialogOptionSelected,$option == kolCh2_oz,FireBest KolCh2OzPitch,"[PLACEHOLDER] Enarms names a system the charts call Ozymandias: four dead worlds and a sleeper ship, out past the Luna Sea. ""The Order has never looked at it properly. Someone should, and then someone should remember it.""",,
+kolCh2_ozPitchKnights,KolCh2OzPitch,$global.kolCh2_patronSecured score:10,,"[PLACEHOLDER] ""With a patron behind us, Cygnus can spare Knights to meet you at its jump point and go in with you.""","kolCh2_ozAccept:""I'll go.""
+kolCh2_ozDecline:""Not yet.""",
+kolCh2_ozPitchAlone,KolCh2OzPitch,,,"[PLACEHOLDER] ""I can't send Knights with you. Until the Order has a patron, Cygnus has none to spare; if you go now, you go alone.""","kolCh2_ozAccept:""I'll go.""
 kolCh2_ozDecline:""Not yet.""",
 kolCh2_ozAccept,DialogOptionSelected,$option == kolCh2_ozAccept,"KolCh2CMD startOzymandias
 FireAll PopulateOptions",,,
 kolCh2_ozDecline,DialogOptionSelected,$option == kolCh2_ozDecline,FireAll PopulateOptions,,,
+kolCh2_ozKnightsOpt,PopulateOptions,"$menuState == fleetConvMain
+$entity.kolCh2Oz_waiting",,,5:kolCh2_ozReady:[PLACEHOLDER] Tell them you're ready to secure Ozymandias,
+kolCh2_ozReady,DialogOptionSelected,$option == kolCh2_ozReady,Call $global.kolCh2Oz_ref ready,"[PLACEHOLDER] ""Then we go in ahead of you,"" the captain says. ""We'll hold at the jump point until you're with us.""",cutCommLink:Cut the comm link,
 kolCh2_ozStop,OpenInteractionDialog,$kolCh2Oz_stop score:1000,"ShowDefaultVisual
 FireAll KolCh2OzStopText",,kolCh2_ozStopDone:Continue,
 kolCh2_ozExplored,KolCh2OzStopText,"$global.kolCh2Oz_wasExplored
@@ -1643,15 +1702,24 @@ kolCh2_ozMourn,KolCh2OzStopText,$id == zea_ozy_one,,"[PLACEHOLDER] Mourn. The fi
 kolCh2_ozAbandon,KolCh2OzStopText,$id == zea_ozy_two,,"[PLACEHOLDER] Abandon. Fewer ruins here, and newer. Someone tried to leave in a hurry.",,
 kolCh2_ozForget,KolCh2OzStopText,$id == zea_ozy_three,,[PLACEHOLDER] Forget. Nothing on the surface has a name any longer. Your crew stops talking.,,
 kolCh2_ozRest,KolCh2OzStopText,$id == zea_ozy_four,,"[PLACEHOLDER] Rest. Cold, and small, and quiet. It is strange to have come so far for this.",,
+kolCh2_ozHabitat,KolCh2OzStopText,$customType == orbital_habitat_remnant,,"[PLACEHOLDER] The habitat. The Inquiry's eye: cold storage where there should be quarters, and inventory tags on what was kept in it.",,
+kolCh2_ozMining,KolCh2OzStopText,$customType == station_mining_remnant,,"[PLACEHOLDER] The mining station. The Inquiry's eye: the same tags as the habitat's, on fewer containers. Whatever was taken from here was taken last.",,
 kolCh2_ozStopDone,DialogOptionSelected,$option == kolCh2_ozStopDone,"Call $global.kolCh2Oz_ref visit
 FireBest OpenInteractionDialog",,,
-kolCh2_ozCaeli,OpenInteractionDialog,$kolCh2Oz_caeli score:1000,ShowDefaultVisual,"[PLACEHOLDER] The Caeli cryosleeper still holds its sleepers, row on row, and still keeps them cold. The Order will want to know what was done with them, and by whom.","kolCh2_ozCaeliWake:Begin waking the sleepers
-kolCh2_ozCaeliLeave:Leave them as they are
-kolCh2_ozCaeliTomb:Consecrate the sleeper as a tomb",
-kolCh2_ozCaeliWake,DialogOptionSelected,$option == kolCh2_ozCaeliWake,Call $global.kolCh2Oz_ref caeli wake,"[PLACEHOLDER] You order the first pods brought up. Whatever they wake to, it will be the Order's doing, and yours.",kolCh2_ozCaeliDone:Continue,
-kolCh2_ozCaeliLeave,DialogOptionSelected,$option == kolCh2_ozCaeliLeave,Call $global.kolCh2Oz_ref caeli leave,[PLACEHOLDER] You leave them sleeping. It may be mercy. It may only be patience.,kolCh2_ozCaeliDone:Continue,
-kolCh2_ozCaeliTomb,DialogOptionSelected,$option == kolCh2_ozCaeliTomb,Call $global.kolCh2Oz_ref caeli tomb,"[PLACEHOLDER] A prayer is read over the pods, and the ship is marked as a place of the dead.",kolCh2_ozCaeliDone:Continue,
-kolCh2_ozCaeliDone,DialogOptionSelected,$option == kolCh2_ozCaeliDone,FireBest OpenInteractionDialog,"[PLACEHOLDER] Before you leave the system, the Order's memorial is set in orbit over Mourn.",,
+kolCh2_ozCaeli,OpenInteractionDialog,$kolCh2Oz_caeli score:1000,"ShowDefaultVisual
+SetShortcut defaultLeave ""ESCAPE""
+FireBest KolCh2OzMemorial",,,
+kolCh2_ozCaeliDone,DialogOptionSelected,$option == kolCh2_ozCaeliDone,FireBest OpenInteractionDialog,"[PLACEHOLDER] The beacon takes up its message, and will keep it for as long as it has power.",,
+kolCh2_ozMemorialKnights,KolCh2OzMemorial,$global.kolCh2Oz_knightsHere score:10,,"[PLACEHOLDER] The Knights hold station around Caeli while the memorial beacon is readied. Their captain asks whether you will say the words, or whether they should.","0:kolCh2_ozLayMemorial:[PLACEHOLDER] Lay the Order's memorial
+100:defaultLeave:Leave",
+kolCh2_ozMemorialAlone,KolCh2OzMemorial,,,"[PLACEHOLDER] Caeli drifts on, silent. There is no one here to hear the words but your own crew. The memorial beacon is ready.","0:kolCh2_ozLayMemorial:[PLACEHOLDER] Lay the Order's memorial
+100:defaultLeave:Leave",
+kolCh2_ozLayMemorial,DialogOptionSelected,$option == kolCh2_ozLayMemorial,Call $global.kolCh2Oz_ref memorial,[PLACEHOLDER] The beacon is set in orbit of Caeli. The names that could be read are read; the rest are remembered as the dead of Ozymandias.,kolCh2_ozCaeliDone:Continue,
+kolCh2_ozMemorialBeacon,OpenInteractionDialog,"$tag:warning_beacon
+$kolCh2Oz_memorial score:1000","ShowDefaultVisual
+SetShortcut beaconLeave ""ESCAPE""","This autonomous beacon emits a looping message.
+
+""[PLACEHOLDER] The Order's memorial for the dead of Ozymandias.""",beaconLeave:Leave,
 "# Knights Chapter 2: the outside power's agent (KolCh2Agent, bar event)",,,,,,
 kolCh2Agent_blurbBar,kolCh2Agent_blurbBar,,,"[PLACEHOLDER] A well-dressed patron at a corner table has been watching you since you came in, and is not hiding it.",,
 kolCh2Agent_optionBar,kolCh2Agent_optionBar,,,,kolCh2Agent_start:Join the patron at the corner table,
@@ -1878,9 +1946,9 @@ kolPatron_dikTerms0,DialogOptionSelected,$option == kolPatron_dikTerms0,FireBest
 kolPatron_aboardDiktat,KolPatronAboardDiktat,,"unset $kolPatron_inPerson
 KolPatronCMD collectOpen
 KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] Balashi's terms reach your fleet on an ordinary courier packet. Within the hour the Order's delegation has taken over your wardroom: the Lector at the head of the table, Greenflight beside the packet's seal, and the clerks clearing a space for their cases.",kolPatron_dikTerms0:Continue,Played in space when the terms arrive and the delegation is aboard (KolPatronParley.aboardScene)
-kolPatron_dikTerms,KolPatronDiktatTerms,,,"[PLACEHOLDER] The Lector reads the terms aloud, evenly, as $global.kolBench_lector_heOrShe would read anything into the record: the Diktat will stand over the Church's congregations, and in return the Church will give the Supreme Executor its own files on Volturn's faithful.
+kolPatron_dikTerms,KolPatronDiktatTerms,,,"[PLACEHOLDER] The Lector reads the terms aloud, as $global.kolBench_lector_heOrShe would read anything into the record: the Diktat will stand over the Church's congregations, and in return the Church will give the Supreme Executor its own files on Volturn's faithful.
 
-""The Diktat has already been taking suspected Pathers off Volturn,"" Greenflight says. ""They go to Cruor, to the labor camps, and they do not come back. These files have names in them that the Diktat does not have yet."" She does not raise her voice. ""I would ask the delegation to remember that before it says yes.""","1:kolPatron_dikTermsRefuse:""The Church can't hand its own faithful to Cruor.""
+""The Diktat has already been taking suspected Pathers off Volturn,"" Greenflight says. ""They go to Cruor, to the labor camps, and they do not come back. These files have names in them that the Diktat does not have yet."" She squares the packet on the table. ""I would ask the delegation to remember that before it says yes.""","1:kolPatron_dikTermsRefuse:""The Church can't hand its own faithful to Cruor.""
 2:kolPatron_dikTermsPrice:""The Diktat will find those names with or without the files.""
 3:kolPatron_dikTermsQuiet:Say nothing",Greenflight's reservations
 kolPatron_dikTermsRefuse,DialogOptionSelected,$option == kolPatron_dikTermsRefuse,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] ""No,"" the Lector agrees. ""It cannot. Nor can it leave the rest of its faithful unguarded."" $global.kolBench_lector_HeOrShe folds $global.kolBench_lector_hisOrHer hands on the terms. ""We will hear the Diktat out, and weigh it there.""",,
@@ -1906,8 +1974,9 @@ FireBest KolPatronMeetOpen",,,
 kolPatron_meetOpenDiktat,KolPatronMeetOpen,$kolPatron_power == diktat score:10,,"[PLACEHOLDER] On the Diktat's side: $global.kolPerson_diktatFunctionary_title $global.kolPerson_diktatFunctionary_last, a functionary of the Supreme Executor's court, with a folder of the Diktat's own drafts, and the Lion's Guard officer at the door. On the Church's: the Lector and Sister Greenflight, the clerks behind them. The functionary opens every clause with the Supreme Executor's name, as though dating it. Macario watches the Church's side of the table, and mostly Greenflight.",kolPatron_meetAsk:Continue,
 kolPatron_priceAskDiktat,KolPatronPriceAsk,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The functionary restates Balashi's terms as if they were new. The Diktat will stand over the Church's congregations; the Church, as a demonstration of good faith, will provide the Diktat its records of the faithful on Volturn. ""For the order of Volturn, and the safety of its people.""",,
 kolPatron_priceReactDiktat,KolPatronPriceReact,$global.kolPatron_priceKey == diktat_volturn score:10,,[PLACEHOLDER] Greenflight asks what becomes of the people named in the files. The functionary answers that the Diktat's justice is well known. The Lector lets the silence after that sit for exactly as long as courtesy allows.,"1:kolPatron_meetPress:""The Church will want assurances for the faithful named in those files.""
-2:kolPatron_meetConcede:""The Church can bear that.""
-3:kolPatron_meetDefer:Defer to the delegation",
+2:kolPatron_meetRedact:""Send what the Diktat can already prove, and no more.""
+3:kolPatron_meetConcede:""The Church has no better offer.""
+4:kolPatron_meetDefer:Defer to the delegation",
 kolPatron_priceSceneDiktat,KolPatronPriceScene,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The Lector signs for the Grandmaster, and the functionary for the Supreme Executor. Then the files: Greenflight passes the case across the table herself, rather than through a clerk. Macario rises for the first time, opens it, reads the first page and the last, and closes it again. He looks at Greenflight. She looks back, and nothing in her face changes at all.",kolPatron_meetLeave:Leave the palace,The files change hands; Greenflight prepared them herself
 # Knights patron: the gate at Lyra (pre-assembly scenes),,,,,,
 kolPatron_gate,KolPatronGate,,KolPatronCMD gateNext,,,"A dock event at Lyra after a non-pirate signing: every pending pre-assembly scene, in order"
@@ -1951,7 +2020,7 @@ kolPatron_charterLater,DialogOptionSelected,$option == kolPatron_charterLater,"S
 FireAll PopulateOptions","[PLACEHOLDER] ""The offer stands. Come back when you have the credits, or the nerve.""",,
 kolPatron_charterSign,DialogOptionSelected,$option == kolPatron_charterSign,"KolPatronCMD signCharter
 FireBest KolPatronCharterSigned",,,
-kolPatron_charterSigned,KolPatronCharterSigned,,,"[PLACEHOLDER] You sign for the Church, on your own authority and your own credit. The admiral countersigns without ceremony. ""We'll be on station when your Church announces us. Not before; we don't work for free, and we don't work for rumors.""",kolPatron_charterLeave:Leave,
+kolPatron_charterSigned,KolPatronCharterSigned,,,"[PLACEHOLDER] You sign for the Church, on your own authority and your own credit. The admiral countersigns. ""We'll be on station when your Church announces us. Not before; we don't work for free, and we don't work for rumors.""",kolPatron_charterLeave:Leave,
 kolPatron_charterSignedTactistar,KolPatronCharterSigned,$kolPatron_route == tritach score:10,,"[PLACEHOLDER] You sign for the Church, on your own authority and your own credit. The representative countersigns and offers a hand, and a second brochure. ""Tactistar will be on station when your Church announces us. You won't regret paying for quality.""",kolPatron_charterLeave:Leave,
 kolPatron_charterLeave,DialogOptionSelected,$option == kolPatron_charterLeave,"ShowDefaultVisual
 FireAll PopulateOptions",,,
@@ -2070,26 +2139,153 @@ I mean it not to diminish your efforts, but I won't pretend for grace's sake. It
 kolLibra_negotiateOpt,PopulateOptions,"$isPerson
 KolLibraCMD negotiable",,,9:kolLibra_negotiate:Negotiate an agreement for Battlestar Libra,Supply lines with a quartermaster; the crew contract with an administrator
 kolLibra_negotiate,DialogOptionSelected,$option == kolLibra_negotiate,KolLibraCMD negotiate,"[PLACEHOLDER] $HeOrShe hears out what Libra needs, already counting what could be spared.",,
+kolLibra_negotiateMazalot,DialogOptionSelected,"$option == kolLibra_negotiate
+$id == dardan_kato score:10",KolLibraCMD negotiate,"[PLACEHOLDER] Kato listens with one eye on his datapad, and the other on a column of figures that is plainly not about Libra. ""Volunteers. From the Luddic quarters."" He says it as he would name a line item. ""Mazalot has more young people than work for them, and more Luddies than patience for them. My policies on your people are a matter of record, captain, and this does not change them.""",,
+kolLibra_negotiateTartessus,DialogOptionSelected,"$option == kolLibra_negotiate
+$market.id == tartessus score:10
+$postId == administrator",KolLibraCMD negotiate,"[PLACEHOLDER] The administrator hears out what Libra needs with the careful look of someone who works in the same building as the Eos Exodus Curia. Tartessus has farmers' sons to spare, $heOrShe allows. What it does not have is a form for a station that is not on the charts.",,
+kolLibra_negotiateGilead,DialogOptionSelected,"$option == kolLibra_negotiate
+$market.id == gilead score:10
+$postId == administrator",KolLibraCMD negotiate,"[PLACEHOLDER] The Sub-presbyter hears out what Libra needs with the attention of someone who has signed many such requests. Gilead is a paradise, $heOrShe says, and paradises do not lack for people who would rather stay. Then $heOrShe says the other thing: that Gilead has always sent its people where the Order asked, and has not always been told where they went.",,
 kolLibra_negotiateBack,DialogOptionSelected,$option == kolLibra_negotiateBack,FireAll PopulateOptions,,,
 kolLibra_termsChosen,DialogOptionSelected,KolLibraCMD isTermsOption,KolLibraCMD terms,,,A line or the crew contract chosen
 kolLibra_terms,KolLibraTerms,,,"[PLACEHOLDER] ""$kolLibra_termsLabel, for a station nobody's heard of."" The terms: $kolLibra_termsPrice credits, and $theFaction's trust: $kolLibra_termsStanding standing or better.","1:kolLibra_termsAccept:Accept and pay $kolLibra_termsPrice credits
 2:kolLibra_negotiateBack:""Not now.""",
 kolLibra_termsCrew,KolLibraTerms,$kolLibra_termsCrew score:10,,"[PLACEHOLDER] Volunteers from the congregation, sent to Libra on two vouches and $theFaction's leave. The terms: $kolLibra_termsPrice credits, and $kolLibra_termsStanding standing or better. ""Someone will have to see them there safely.""","1:kolLibra_termsAccept:Accept and pay $kolLibra_termsPrice credits
 2:kolLibra_negotiateBack:""Not now.""",
+kolLibra_termsCrewMazalot,KolLibraTerms,"$kolLibra_termsCrew score:10
+$id == dardan_kato score:10",,"[PLACEHOLDER] ""Every one who leaves is a ration I do not have to explain."" Kato names the terms without looking up: $kolLibra_termsPrice credits, and $theFaction's trust, $kolLibra_termsStanding standing or better. ""This is a commercial arrangement. I have a great deal else on this desk, and I would like this one to be quiet.""","1:kolLibra_termsAccept:Accept and pay $kolLibra_termsPrice credits
+2:kolLibra_negotiateBack:""Not now.""",
+kolLibra_termsCrewTartessus,KolLibraTerms,"$kolLibra_termsCrew score:10
+$market.id == tartessus score:10",,"[PLACEHOLDER] The administrator has the Curia's phrasing ready, and uses it: volunteers from the congregations of Tartessus, $kolLibra_termsPrice credits for their keep and passage, and $theFaction's trust, $kolLibra_termsStanding standing or better. ""The Curia will want it in writing. It will not want to read the word Libra twice.""","1:kolLibra_termsAccept:Accept and pay $kolLibra_termsPrice credits
+2:kolLibra_negotiateBack:""Not now.""",
+kolLibra_termsCrewGilead,KolLibraTerms,"$kolLibra_termsCrew score:10
+$market.id == gilead score:10",,"[PLACEHOLDER] The Sub-presbyter names the terms as plainly as scripture names a debt: $kolLibra_termsPrice credits for the passage and the blessing of their going, and $theFaction's trust, $kolLibra_termsStanding standing or better. ""Gilead will send them. Gilead would like them to come home.""","1:kolLibra_termsAccept:Accept and pay $kolLibra_termsPrice credits
+2:kolLibra_negotiateBack:""Not now.""",
 kolLibra_termsAccept,DialogOptionSelected,$option == kolLibra_termsAccept,"KolLibraCMD accept
 FireBest KolLibraAccepted",,,
 kolLibra_accepted,KolLibraAccepted,,FireAll PopulateOptions,[PLACEHOLDER] The agreement is penned.,,
+kolLibra_acceptedMazalot,KolLibraAccepted,"$kolLibra_termsCrew
+!$kolLibra_raiderTask
+$id == dardan_kato score:10",FireAll PopulateOptions,"[PLACEHOLDER] Kato signs, and pushes the datapad back across the link before it has finished warming. ""The quarters will hear of it by morning. I would rather they heard it from your Church than from me.""",,
+kolLibra_acceptedTartessus,KolLibraAccepted,"$kolLibra_termsCrew
+!$kolLibra_raiderTask
+$market.id == tartessus score:10",FireAll PopulateOptions,"[PLACEHOLDER] The administrator seals the agreement, and files the only copy where the Curia is unlikely to look.",,
+kolLibra_acceptedGilead,KolLibraAccepted,"$kolLibra_termsCrew
+!$kolLibra_raiderTask
+$market.id == gilead score:10",FireAll PopulateOptions,"[PLACEHOLDER] The Sub-presbyter seals the agreement with a prayer for the ones who will go, and a shorter one for the ones who will wait for news.",,
 kolLibra_acceptedRaiders,KolLibraAccepted,$kolLibra_raiderTask score:10,FireAll PopulateOptions,"[PLACEHOLDER] ""One more thing. Raiders are lurking at the edge of the system, and my escorts are tied up watching them. Clear them out, and the agreement is penned.""",,The raider task
 kolLibra_vouchOpt,PopulateOptions,"$isPerson
 KolLibraCMD canVouch",,,9:kolLibra_vouch:Ask $himOrHer to vouch for Libra's crew,"Jaspis, Bornanew, Oak, Standfast, Enarms, Greenflight"
 kolLibra_vouch,DialogOptionSelected,$option == kolLibra_vouch,"KolLibraCMD vouch
 FireAll PopulateOptions","[PLACEHOLDER] You explain what Libra is, and what it needs. $HeOrShe takes a long moment, then agrees to put $hisOrHer name to it.",,Per-person variants to write
+kolLibra_vouchJaspis,DialogOptionSelected,"$option == kolLibra_vouch
+$id == jaspis score:10",,"[PLACEHOLDER] You explain what Libra is, and what it asks. Jaspis hears it through with her hands folded, her blind eyes on nothing in particular.
+
+""Libra,"" she says. ""I know the name. It is filed under things the Order does to itself, and I have not looked at that page in some years."" She turns a cup a quarter-turn on its saucer. ""A word from this office is read in places I will never see, captain, and what it promises is taken as promised. Use it with care. Volunteers, not conscripts, and a way home for each of them. The Knights are very good at remembering the first half of a posting.""","1:kolLibra_vJaspisA:""Every one of them will be free to leave.""
+2:kolLibra_vJaspisB:""Libra is a posting, not a pilgrimage.""",
+kolLibra_vJaspisA,DialogOptionSelected,$option == kolLibra_vJaspisA,"KolLibraCMD vouch
+$global.kolLibra_ask_jaspis = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Then I will write tonight. Do not make me a liar."" She reaches for her book.",,
+kolLibra_vJaspisB,DialogOptionSelected,$option == kolLibra_vJaspisB,"KolLibraCMD vouch
+$global.kolLibra_ask_jaspis = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Postings end,"" Jaspis says. ""I am asking only that this one be permitted to."" A short pause. ""I will write tonight regardless.""",,
+kolLibra_vouchOak,DialogOptionSelected,"$option == kolLibra_vouch
+$id == oak score:10",,"[PLACEHOLDER] You explain what Libra is, and what it asks. The Excubitor Orbis lets the silence run, as he does, until it is you who must decide whether it is over.
+
+""Libra,"" he says at last. ""I had thought it decommissioned."" He considers that, and does not seem to like it. ""You ask me to put the Order's name behind volunteers for a station the Order has not charted. Their families may be told its name. They may not be told where it lies. I will sign on no other terms.""","1:kolLibra_vOakA:""Agreed. The position goes no further than the crew.""
+2:kolLibra_vOakB:""The families will want to know where their own have gone.""",
+kolLibra_vOakA,DialogOptionSelected,$option == kolLibra_vOakA,"KolLibraCMD vouch
+$global.kolLibra_ask_oak = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Then we understand each other."" He inclines his head, once.",,
+kolLibra_vOakB,DialogOptionSelected,$option == kolLibra_vOakB,"KolLibraCMD vouch
+$global.kolLibra_ask_oak = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""They will want to,"" Oak says. ""That is different from needing to.""",,
+kolLibra_vouchStandfast,DialogOptionSelected,"$option == kolLibra_vouch
+$id == standfast score:10",,"[PLACEHOLDER] You explain what Libra is, and what it asks. Standfast hears it out with her cup in both hands and her eyes on something off-frame.
+
+""A station nobody has heard of,"" she says, ""asking a shrine for people."" It is not said unkindly. ""The-one-who-would-be was hidden among other people. I have never doubted the method, only the supply of people."" She sets the cup down. ""If I send anyone, I send two with reasons to leave. The Executor's men have been at my door twice this month, and some of my flock would be better placed at the edge of the charts than on this side of them.""","1:kolLibra_vStandA:""Libra will take them in.""
+2:kolLibra_vStandB:""I'm not hiding anyone from the Diktat.""",
+kolLibra_vStandA,DialogOptionSelected,$option == kolLibra_vStandA,"KolLibraCMD vouch
+AddCommodity crew 2
+$global.kolLibra_ask_standfast = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Then it will do."" She dips two fingers in her cup and flicks the drops toward the pickup. ""Blessed be the ones who go, and the ones they go to. May Providence be merciful in hardship, and if it is not, may they be quick about the next thing.""
+
+Two of hers are at your docking collar before the link closes, with their kit and no luggage to speak of. They give their names to your purser, and nothing else.",,
+kolLibra_vStandB,DialogOptionSelected,$option == kolLibra_vStandB,"KolLibraCMD vouch
+AddCommodity crew 2
+$global.kolLibra_ask_standfast = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Of course not. You are recruiting, and I am telling you who will volunteer."" The corner of her mouth moves. ""The-one-who-would-be never asked those who sheltered him what he was being sheltered from. It was thought rude, and then it was thought unnecessary.""
+
+Two of hers are at your docking collar before the link closes, with their kit and no luggage to speak of. They give their names to your purser, and nothing else.",,
+kolLibra_vouchStandfastDiktat,DialogOptionSelected,"$option == kolLibra_vouch
+$id == standfast score:10
+$player.commissionFactionId == sindrian_diktat score:10",,"[PLACEHOLDER] You explain what Libra is, and what it asks. Standfast's expression does not change, which is not the same as being at ease.
+
+""You come to me wearing the Lion's colors,"" she says, ""and ask me for people."" The cup goes down. ""My faith is not the Executor's to borrow, and my flock is not his to count. Whose is this? His, or the Church's?""","1:kolLibra_vStandDA:""The Church's. The Order's.""
+2:kolLibra_vStandDB:""It has nothing to do with the Diktat.""",
+kolLibra_vStandDA,DialogOptionSelected,$option == kolLibra_vStandDA,"KolLibraCMD vouch
+AddCommodity crew 2
+$global.kolLibra_ask_standfast = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Then I am a fool, and Providence will have to forgive me for it. Two, with reasons to leave.""
+
+Two of hers are at your docking collar before the link closes, with their kit and no luggage to speak of. They give their names to your purser, and nothing else.",,
+kolLibra_vStandDB,DialogOptionSelected,$option == kolLibra_vStandDB,"KolLibraCMD vouch
+AddCommodity crew 2
+$global.kolLibra_ask_standfast = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""That is what the Executor's officers say."" She almost smiles. ""Two, with reasons to leave. I will choose them myself, and I will pray over the choosing.""
+
+Two of hers are at your docking collar before the link closes, with their kit and no luggage to speak of. They give their names to your purser, and nothing else.",,
+kolLibra_vouchEnarms,DialogOptionSelected,"$option == kolLibra_vouch
+$id == kol_knightcaptain score:10","KolLibraCMD vouch
+$global.kolLibra_ask_enarms = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] Enarms hears you out with the stylus stopped. ""Libra has never wanted for faith,"" he says. ""It has wanted for everything faith has to be fed on."" He writes a line, and does not show it to you. ""Send me the names of whoever goes. A hold with nothing in it I can write off. People I have to account for."" He touches the cord at his wrist. ""I will put my name to it.""",,
+kolLibra_vouchGreenflight,DialogOptionSelected,"$option == kolLibra_vouch
+$id == kol_intel_director score:10","KolLibraCMD vouch
+$global.kolLibra_ask_greenflight = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] Greenflight does not ask why. ""Yes."" She writes one line. ""If your crews see anything at Libra that is not the Order's, I want it described to me. Exactly. Not as it was reported.""",,
+kolLibra_wordOpt,PopulateOptions,"$isPerson
+$id == bornanew
+$global.kolLibraCrew_active
+!$global.kolLibra_word_bornanew",,,9:kolLibra_word:Ask whether he would speak for Libra's crew,
+kolLibra_word,DialogOptionSelected,$option == kolLibra_word,,"[PLACEHOLDER] You explain what Libra is. Bornanew listens with his head slightly bowed, as if the explanation were something to be endured politely.
+
+""I have never heard of it, which I suppose is its purpose."" A short laugh. ""You should know my word will not carry, captain. A novice in poor standing recommending a post to the congregations is more likely to be taken for a joke at someone's expense. Ask others."" A pause. ""But if you ask me, I will say it. Tell them the truth about the place. All of it. They ought to go knowing.""","1:kolLibra_wordA:""I'll tell them everything.""
+2:kolLibra_wordB:""Some of it might frighten them off.""",
+kolLibra_wordA,DialogOptionSelected,$option == kolLibra_wordA,"$global.kolLibra_word_bornanew = true
+$global.kolLibra_ask_bornanew = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""Thank you. That is worth more to me than the endorsement, such as it is.""",,
+kolLibra_wordB,DialogOptionSelected,$option == kolLibra_wordB,"$global.kolLibra_word_bornanew = true
+$global.kolLibra_ask_bornanew = true
+$global.kolLibra_askAny = true
+FireAll PopulateOptions","[PLACEHOLDER] ""It might."" The smile holds a moment longer than the joke. ""Better that than the other way round.""",,
 kolLibra_killaVouch,DialogOptionSelected,"$option == lpp_killaShrineVisitAgain3 score:10
 !$kolLibra_vanillaKilla
 KolLibraCMD canVouch killa_curate","$kolLibra_vanillaKilla = true 0
 FireBest DialogOptionSelected
 KolLibraCMD addKillaOption",,,Vanilla's revisit plays; our option is added after
-kolLibra_killaVouchAsk,DialogOptionSelected,$option == kolLibra_killaVouchAsk,KolLibraCMD vouch killa_curate,"[PLACEHOLDER] The curate sacraria hears you out without a word, and then, with very few, agrees.","lpp_killaShrineStayAWhile:Stay a while
+kolLibra_killaVouchAsk,DialogOptionSelected,$option == kolLibra_killaVouchAsk,,"[PLACEHOLDER] You explain what Libra is, and what it asks. The curate sacraria listens among his dead, and does not interrupt.
+
+""Libra,"" he says, turning the name over like a coin. ""Have they dead?"" And then, before you can answer: ""Bring me their names, when you have them.""","1:kolLibra_vKillaA:""I will.""
+2:kolLibra_vKillaB:""I don't know that anyone kept them.""",
+kolLibra_vKillaA,DialogOptionSelected,$option == kolLibra_vKillaA,"KolLibraCMD vouch killa_curate
+$global.kolLibra_ask_killa = true
+$global.kolLibra_askAny = true","[PLACEHOLDER] He nods once, and turns back to his dead.","lpp_killaShrineStayAWhile:Stay a while
+lpp_killaShrineLeaveStart:Return to your shuttle",
+kolLibra_vKillaB,DialogOptionSelected,$option == kolLibra_vKillaB,"KolLibraCMD vouch killa_curate
+$global.kolLibra_ask_killa = true
+$global.kolLibra_askAny = true","[PLACEHOLDER] ""Someone will have kept something,"" he says. ""Someone always does.""","lpp_killaShrineStayAWhile:Stay a while
 lpp_killaShrineLeaveStart:Return to your shuttle",
 kolLibra_optCrew,PopulateOptions,"$id == kol_libramaster
 $isPerson
@@ -2153,6 +2349,21 @@ KolLibraCMD active
 KolLibraCMD drillRestageable",,,"5:kolLibra_restage:""Light the beacon again. Your crews will get their fight.""","The drill, restaged"
 kolLibra_restage,DialogOptionSelected,$option == kolLibra_restage,"KolLibraCMD restageDrill
 FireAll PopulateOptions","[PLACEHOLDER] Martins orders the beacon lit again, louder this time.",,
+kolLibra_asksDock,MarketPostDock,"$market.kol_market_libra score:100
+$global.kolLibra_crewDone
+$global.kolLibra_askAny
+!$global.kolLibra_asksTold","$global.kolLibra_asksTold = true
+KolCh2CMD showPerson kol_libramaster
+FireAll KolLibraAsks","[PLACEHOLDER] Martins has the new crews' papers squared on the console in front of him. ""They came with conditions, captain. I have read all of them.""",kolLibra_asksDone:Continue,
+kolLibra_asksJaspis,KolLibraAsks,$global.kolLibra_ask_jaspis,,"[PLACEHOLDER] The Archcurate's letter asks that every volunteer be free to leave, and that someone see them home.",,
+kolLibra_asksOak,KolLibraAsks,$global.kolLibra_ask_oak,,"[PLACEHOLDER] The Excubitor Orbis's seal is on a line saying the families may know Libra's name, and not its position.",,
+kolLibra_asksStandfast,KolLibraAsks,$global.kolLibra_ask_standfast,,[PLACEHOLDER] Mother Standfast asked that anyone she sent have reasons to leave.,,
+kolLibra_asksKilla,KolLibraAsks,$global.kolLibra_ask_killa,,"[PLACEHOLDER] A scrap from the curate of Killa asks, in six words, for Libra's dead by name.",,
+kolLibra_asksBornanew,KolLibraAsks,$global.kolLibra_ask_bornanew,,[PLACEHOLDER] A note in Novice Bornanew's hand asks only that the volunteers be told the truth.,,
+kolLibra_asksEnarms,KolLibraAsks,$global.kolLibra_ask_enarms,,[PLACEHOLDER] Brother Enarms wants a manifest of everyone who came.,,
+kolLibra_asksGreenflight,KolLibraAsks,$global.kolLibra_ask_greenflight,,[PLACEHOLDER] Sister Greenflight's note asks to hear of anything at Libra that is not the Order's.,,
+kolLibra_asksDone,DialogOptionSelected,$option == kolLibra_asksDone,"ShowDefaultVisual
+FireBest MarketPostDock","[PLACEHOLDER] ""None of it is unreasonable,"" Martins says. ""All of it is more than anyone has asked of this station in some years."" He squares the papers again. ""I will see what can be honored.""",,
 kolPrelude_enarmsGreetingSevered,PickGreeting,"$id == kol_knightcaptain score:500
 $global.kol_severed",ShowPersonVisual,"[PLACEHOLDER] The link opens on a clerk, not Brother Enarms. ""The Order has no business with you, captain."" It closes again.",cutCommLink:Cut the comm link,After severance: the story doesn't restart
 kolAssembly_noticeRoutine,KolAssemblyNotice,,"SetTextHighlights ""The Order is in assembly.""","[PLACEHOLDER] The Order is in assembly. Bells ring through Star Keep Lyra on the hour, and the dock crews wear surcoats over their work clothes. Captains in the Order's service are expected in the hall.",,

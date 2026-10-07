@@ -277,6 +277,7 @@ public class KolStaticStrings {
         // Entity flags (Ozymandias stops)
         public static final String OZY_STOP = "$kolCh2Oz_stop";
         public static final String OZY_CAELI = "$kolCh2Oz_caeli";
+        public static final String OZY_KNIGHTS = "$kolCh2Oz_knights";        // on the mission's Knights fleets
 
         // People
         public static final String GRANDMASTER_ID = "kol_grandmaster";

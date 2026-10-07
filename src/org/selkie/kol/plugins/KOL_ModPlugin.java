@@ -71,6 +71,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		ZeaUtils.copyHighgradeEquipment();
         CompatabilityUtils.INSTANCE.run(getVersion());
 		PrepareDarkDeeds.andContinue();
+		org.selkie.zea.campaign.ZeaCaeli.ensure();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 

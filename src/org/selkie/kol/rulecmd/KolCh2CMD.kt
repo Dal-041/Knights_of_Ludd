@@ -50,6 +50,7 @@ class KolCh2CMD : BaseCommandPlugin() {
                 true
             }
             "ninayaBounty" -> { KolCh2Story.alreadyDoneBounty(KolCh2.NINAYA_OP_DONE, dialog); true }
+            "ozZhiNuRecovered" -> { KolCh2Story.zhiNuRecovered(dialog); true }
             "inspect" -> { KolCh2Story.inspect(); true }
             "inquestAnswer" -> {
                 KolCh2Story.answerInquest(params.getOrNull(1)?.getString(map) ?: "guarded")

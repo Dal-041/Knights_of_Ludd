@@ -28,6 +28,13 @@ public class ZeaStaticStrings {
         public static final String ZEA_TT_NINMAH_DONE = "$zea_defeatedNinmah";
         public static final String ZEA_TT_NINEVEH_DONE = "$zea_defeatedNineveh";
 
+        // Caeli's guardian, in Ozymandias (ZeaCaeli)
+        public static final String ZEA_CAELI = "$zea_caeli";                              // on the Caeli cryosleeper
+        public static final String ZEA_CAELI_ZHINU = "$zea_caeliZhiNu";                   // on the Zhi Nu's derelict
+        public static final String ZEA_CAELI_ZHINU_PLACED = "$zea_caeliZhiNuPlaced";      // global: placed once
+        public static final String ZEA_CAELI_BEATEN = "$zea_caeliGuardianBeaten";         // global
+        public static final String ZEA_CAELI_REWARDED = "$zea_caeliRewarded";             // global: the loot given
+
         public static final String ZEA_NINAYA_BOSS_FLEET = "$zea_ninaya";
         public static final String ZEA_NINEVEH_BOSS_FLEET = "$zea_nineveh";
         public final static String ZEA_CORRUPTING_HEART_BOSS_FLEET = "$zea_corruptingheart";
@@ -193,6 +200,8 @@ public class ZeaStaticStrings {
     public static final String ZEA_BOSS_AMATERASU_BLINDING = "zea_boss_amaterasu_Blinding";
     public static final String ZEA_BOSS_YUKIONNA_ULTIMATE = "zea_boss_yukionna_Ultimate";
     public static final String ZEA_BOSS_NIAN_SALVATION = "zea_boss_nian_Salvation";
+    public static final String ZEA_BOSS_ZHI_NU = "zea_boss_zhi_nu";
+    public static final String ZEA_BOSS_ZHI_NU_DANCING = "zea_boss_zhi_nu_Dancing";
 
     public static final String ZEA_DAWN_CHIWEN_WING = "zea_dawn_chiwen_wing";
     public static final String ZEA_EDF_SHACHIHOKO_WING = "zea_edf_shachihoko_wing";

@@ -4,6 +4,7 @@ import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.campaign.CampaignFleetAPI
 import com.fs.starfarer.api.campaign.FleetAssignment
 import com.fs.starfarer.api.campaign.InteractionDialogAPI
+import com.fs.starfarer.api.campaign.JumpPointAPI
 import com.fs.starfarer.api.campaign.SectorEntityToken
 import com.fs.starfarer.api.campaign.StarSystemAPI
 import com.fs.starfarer.api.campaign.econ.MarketAPI
@@ -24,6 +25,7 @@ import org.selkie.kol.campaign.story.KolChronicle
 import org.selkie.kol.campaign.story.KolStorySettings
 import org.selkie.kol.helpers.KolStaticStrings
 import org.selkie.kol.helpers.KolStaticStrings.KolCh2
+import org.selkie.zea.campaign.ZeaCaeli
 import org.selkie.zea.helpers.ZeaStaticStrings
 import java.awt.Color
 
@@ -258,35 +260,80 @@ class KolCh2Ninaya : KolJointOperation() {
 }
 
 /**
- * The Order investigates and memorializes Ozymandias (from Enarms after the convocation): Mourn, Abandon, Forget and
- * Rest, then the Caeli cryosleeper, where the player decides the sleepers' fate; ends with a memorial beacon at Mourn.
+ * The Order secures and memorializes Ozymandias (from Enarms after the convocation). The Knights come only if a patron
+ * is secured when the mission is accepted; without one the player goes alone, and the rendezvous is skipped.
+ * - Rendezvous: four Knights fleets from Cygnus wait at Ozymandias's jump point in hyperspace. Told the player is
+ *   ready, they jump in and hold at the inner jump point. With none left to talk to, the stage passes silently; if
+ *   Caeli's guardian is beaten while they wait, they go home.
+ * - Secure: visit the four worlds and the two stations, and beat Caeli's guardian (ZeaCaeli). In Ozymandias the
+ *   Knights follow the player (an aggressive orbit, so they engage Dawn fleets); `$cfai_noJump` keeps them there.
+ * - Memorial: one memorial beacon at Caeli, with or without the Knights present; then they return to Cygnus.
+ * If the guardian is already beaten when the mission starts, securing is the visits alone.
  * Stops are flagged on their entities and handled by high-score OpenInteractionDialog rules (kolCh2_oz*).
  */
 class KolCh2Ozymandias : HubMissionWithSearch() {
-    companion object { const val STAGE_DONE = "\$kolCh2Oz_stageDone" }
+    companion object {
+        const val STAGE_DONE = "\$kolCh2Oz_stageDone"
+        private const val MET = "\$kolCh2Oz_metKnights"
+        private const val SECURED = "\$kolCh2Oz_secured"
+        /** On the Knights fleets while they wait at the rendezvous (the comm topic's gate). */
+        const val WAITING = "\$kolCh2Oz_waiting"
+        private const val FOLLOWING = "\$kolCh2Oz_following"
+        /** On the memorial beacon. */
+        const val MEMORIAL = "\$kolCh2Oz_memorial"
+        /** Global, kept current: a Knights fleet of the mission is alive in Ozymandias (memorial text variants). */
+        const val KNIGHTS_HERE = "\$kolCh2Oz_knightsHere"
 
-    enum class Stage { SURVEY, CAELI, COMPLETED }
+        // four fleets the size of the system's regular Dawn spawns (ZeaFleetSoloManager in PrepareShadows: 40-80 FP)
+        private const val FLEETS = 4
+        private const val MIN_FP = 40f
+        private const val MAX_FP = 80f
+    }
+
+    enum class Stage { RENDEZVOUS, SECURE, MEMORIAL, COMPLETED }
 
     private var system: StarSystemAPI? = null
     private val stops = ArrayList<SectorEntityToken>()
     private var caeli: SectorEntityToken? = null
     private var visited = 0
+    private val knights = ArrayList<CampaignFleetAPI>()
+    /** Ozymandias's jump point in hyperspace (the rendezvous), and where it leads in the system. */
+    private var outer: SectorEntityToken? = null
+    private var inner: SectorEntityToken? = null
+    private var beatenAtStart = false
+    /** A patron was secured at acceptance: the Knights come. Fixed for the mission. */
+    private var withKnights = false
 
     override fun create(createdAt: MarketAPI?, barEvent: Boolean): Boolean {
         if (!setGlobalReference(KolCh2.OZY_REF, KolCh2.OZY_ACTIVE)) return false
-        system = Global.getSector().getStarSystem(ZeaStaticStrings.ozymandiasSysName) ?: return false
+        val sys = Global.getSector().getStarSystem(ZeaStaticStrings.ozymandiasSysName) ?: return false
+        system = sys
         val ids = listOf(ZeaStaticStrings.ZeaEntities.ZEA_OZYMANDIAS_PLANET_ONE, ZeaStaticStrings.ZeaEntities.ZEA_OZYMANDIAS_PLANET_TWO,
             ZeaStaticStrings.ZeaEntities.ZEA_OZYMANDIAS_PLANET_THREE, ZeaStaticStrings.ZeaEntities.ZEA_OZYMANDIAS_PLANET_FOUR)
-        ids.mapNotNullTo(stops) { system!!.getEntityById(it) }
+        ids.mapNotNullTo(stops) { sys.getEntityById(it) }
+        sys.customEntities.filterTo(stops) { it.customEntityType == Entities.ORBITAL_HABITAT || it.customEntityType == Entities.STATION_MINING }
         if (stops.isEmpty()) return false
-        caeli = system!!.customEntities.firstOrNull { it.customEntityType == Entities.DERELICT_CRYOSLEEPER }
+        val sleeper = ZeaCaeli.caeli() ?: return false
+        caeli = sleeper
 
-        setStartingStage(Stage.SURVEY)
+        // the outermost jump point leading to hyperspace
+        val center = sys.center
+        val jump = sys.jumpPoints.filterIsInstance<JumpPointAPI>()
+            .filter { jp -> jp.destinations.any { it.destination?.containingLocation?.isHyperspace == true } }
+            .maxByOrNull { Misc.getDistance(it, center) } ?: return false
+        inner = jump
+        outer = jump.destinations.first { it.destination?.containingLocation?.isHyperspace == true }.destination
+        beatenAtStart = ZeaCaeli.beaten()
+        withKnights = Global.getSector().memoryWithoutUpdate.getBoolean(KolCh2.PATRON_SECURED)
+
+        setStartingStage(if (withKnights) Stage.RENDEZVOUS else Stage.SECURE)
         addSuccessStages(Stage.COMPLETED)
         setStoryMission()
         setNoRepChanges()
-        setStageOnGlobalFlag(Stage.CAELI, "\$kolCh2Oz_surveyed")
+        connectWithGlobalFlag(Stage.RENDEZVOUS, Stage.SECURE, MET)
+        connectWithGlobalFlag(Stage.SECURE, Stage.MEMORIAL, SECURED)
         setStageOnGlobalFlag(Stage.COMPLETED, STAGE_DONE)
+        makeImportant(sleeper, KolCh2.OZY_CAELI, Stage.MEMORIAL)
         return true
     }
 
@@ -296,6 +343,93 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
             stop.memoryWithoutUpdate.set(KolCh2.OZY_STOP, true)
             Misc.makeImportant(stop, "kolCh2Oz")
         }
+        // a hint toward the cryosleeper while its guardian stands
+        if (!beatenAtStart) caeli?.let { makeImportant(it, "\$kolCh2Oz_guardian", Stage.SECURE) }
+        if (withKnights) spawnKnights()
+    }
+
+    private fun spawnKnights() {
+        val target = outer ?: return
+        val home = Global.getSector().economy.getMarket(KolStaticStrings.KOL_CYGNUS)?.primaryEntity ?: return
+        val random = java.util.Random()
+        repeat(FLEETS) {
+            val fp = MIN_FP + random.nextFloat() * (MAX_FP - MIN_FP)
+            val params = FleetParamsV3(null, KolStaticStrings.kolFactionID, null, FleetTypes.PATROL_MEDIUM, fp, 0f, 0f, 0f, 0f, 0f, 0f)
+            val fleet = FleetFactoryV3.createFleet(params) ?: return@repeat
+            home.containingLocation.addEntity(fleet)
+            fleet.setLocation(home.location.x, home.location.y)
+            val mem = fleet.memoryWithoutUpdate
+            mem.set(KolCh2.OZY_KNIGHTS, true)
+            mem.set(WAITING, true)
+            // undistracted on the way and while waiting
+            mem.set(MemFlags.FLEET_IGNORES_OTHER_FLEETS, true)
+            mem.set(MemFlags.FLEET_IGNORED_BY_OTHER_FLEETS, true)
+            fleet.addAssignment(FleetAssignment.GO_TO_LOCATION, target, 1000f, "travelling to Ozymandias")
+            fleet.addAssignment(FleetAssignment.ORBIT_PASSIVE, target, 3650f, "waiting at the Ozymandias jump point")
+            makeImportant(fleet, "\$kolCh2Oz_rendezvous", Stage.RENDEZVOUS)
+            knights.add(fleet)
+        }
+    }
+
+    private fun alive() = knights.filter { it.isAlive }
+
+    /** The player tells the Knights at the rendezvous they're ready: they jump in and hold at the inner jump point. */
+    private fun ready() {
+        val target = inner ?: return
+        for (fleet in alive()) {
+            fleet.memoryWithoutUpdate.unset(WAITING)
+            fleet.clearAssignments()
+            fleet.addAssignment(FleetAssignment.GO_TO_LOCATION, target, 1000f, "jumping into Ozymandias")
+            fleet.addAssignment(FleetAssignment.ORBIT_PASSIVE, target, 3650f, "holding at the jump point")
+        }
+        memory.set(MET, true)
+    }
+
+    private fun sendHome(fleet: CampaignFleetAPI) {
+        val mem = fleet.memoryWithoutUpdate
+        for (key in listOf(WAITING, FOLLOWING, MemFlags.MEMORY_KEY_NO_JUMP, MemFlags.FLEET_IGNORES_OTHER_FLEETS,
+                MemFlags.FLEET_IGNORED_BY_OTHER_FLEETS)) mem.unset(key)
+        fleet.clearAssignments()
+        val home = Global.getSector().economy.getMarket(KolStaticStrings.KOL_CYGNUS)?.primaryEntity
+        if (home != null) fleet.addAssignment(FleetAssignment.GO_TO_LOCATION_AND_DESPAWN, home, 1000f, "returning to Cygnus")
+        else fleet.despawn()
+    }
+
+    override fun advanceImpl(amount: Float) {
+        super.advanceImpl(amount)
+        val sys = system ?: return
+        val player = Global.getSector().playerFleet ?: return
+        if (currentStage == Stage.RENDEZVOUS) {
+            when {
+                alive().isEmpty() -> memory.set(MET, true)       // none left to talk to: on without a conversation
+                !beatenAtStart && ZeaCaeli.beaten() -> {          // beaten while they waited: their work is done
+                    alive().forEach { sendHome(it) }
+                    knights.clear()
+                    memory.set(MET, true)
+                }
+            }
+            return
+        }
+        // the Knights in Ozymandias stay there, and follow the player while the player is there too
+        var here = false
+        for (fleet in alive()) {
+            if (fleet.containingLocation != sys) continue
+            here = true
+            val mem = fleet.memoryWithoutUpdate
+            if (!mem.getBoolean(MemFlags.MEMORY_KEY_NO_JUMP)) {
+                mem.set(MemFlags.MEMORY_KEY_NO_JUMP, true)
+                mem.unset(MemFlags.FLEET_IGNORES_OTHER_FLEETS)
+                mem.unset(MemFlags.FLEET_IGNORED_BY_OTHER_FLEETS)
+            }
+            if (player.containingLocation == sys && !mem.getBoolean(FOLLOWING)) {
+                mem.set(FOLLOWING, true)
+                fleet.clearAssignments()
+                // aggressive: a passive orbit never engages anything but the player (StrategicModule.isAllowedToEngage)
+                fleet.addAssignment(FleetAssignment.ORBIT_AGGRESSIVE, player, 3650f, "accompanying your fleet")
+            }
+        }
+        memory.set(KNIGHTS_HERE, here)
+        if (currentStage == Stage.SECURE && visited >= stops.size && ZeaCaeli.beaten()) memory.set(SECURED, true)
     }
 
     override fun callAction(action: String?, ruleId: String?, dialog: InteractionDialogAPI?,
@@ -307,46 +441,31 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
                 entity.memoryWithoutUpdate.unset(KolCh2.OZY_STOP)
                 Misc.makeUnimportant(entity, "kolCh2Oz")
                 visited++
-                if (visited >= stops.size) surveyed(dialog, memoryMap)
                 return true
             }
-            "caeli" -> {
-                val choice = params?.getOrNull(1)?.getString(memoryMap) ?: return false
-                memory.set(KolCh2.CAELI_CHOICE, choice)
-                caeli?.memoryWithoutUpdate?.unset(KolCh2.OZY_CAELI)
-                caeli?.let { Misc.makeUnimportant(it, "kolCh2Oz") }
-                finish(dialog, memoryMap)
+            "ready" -> {
+                ready()
+                checkStageChangesAndTriggers(dialog, memoryMap)
+                return true
+            }
+            "memorial" -> {
+                layMemorial()
+                memory.set(KolCh2.OZY_DONE, true)
+                memory.set(STAGE_DONE, true)
+                KolAssembly.report("ozymandias")
+                checkStageChangesAndTriggers(dialog, memoryMap)
                 return true
             }
         }
         return super.callAction(action, ruleId, dialog, params, memoryMap)
     }
 
-    private fun surveyed(dialog: InteractionDialogAPI?, memoryMap: MutableMap<String, MemoryAPI>?) {
-        val sleeper = caeli
-        if (sleeper == null) {
-            finish(dialog, memoryMap)
-            return
-        }
-        sleeper.memoryWithoutUpdate.set(KolCh2.OZY_CAELI, true)
-        Misc.makeImportant(sleeper, "kolCh2Oz")
-        memory.set("\$kolCh2Oz_surveyed", true)
-        checkStageChangesAndTriggers(dialog, memoryMap)
-    }
-
-    private fun finish(dialog: InteractionDialogAPI?, memoryMap: MutableMap<String, MemoryAPI>?) {
-        layMemorial()
-        memory.set(KolCh2.OZY_DONE, true)
-        memory.set(STAGE_DONE, true)
-        KolAssembly.report("ozymandias")
-        checkStageChangesAndTriggers(dialog, memoryMap)
-    }
-
     private fun layMemorial() {
-        val sys = system ?: return
-        val mourn = sys.getEntityById(ZeaStaticStrings.ZeaEntities.ZEA_OZYMANDIAS_PLANET_ONE) ?: return
-        val beacon = sys.addCustomEntity(null, "Memorial of the Order", Entities.WARNING_BEACON, KolStaticStrings.kolFactionID)
-        beacon.setCircularOrbitPointingDown(mourn, 90f, mourn.radius + 250f, 60f)
+        val at = caeli ?: return
+        val beacon = at.containingLocation.addCustomEntity(null, "[PLACEHOLDER] Memorial of the Order", Entities.WARNING_BEACON,
+            KolStaticStrings.kolFactionID)
+        beacon.setCircularOrbitPointingDown(at, 90f, at.radius + 200f, 60f)
+        beacon.memoryWithoutUpdate.set(MEMORIAL, true)
     }
 
     override fun notifyEnding() {
@@ -355,23 +474,34 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
             stop.memoryWithoutUpdate.unset(KolCh2.OZY_STOP)
             Misc.makeUnimportant(stop, "kolCh2Oz")
         }
-        caeli?.memoryWithoutUpdate?.unset(KolCh2.OZY_CAELI)
-        caeli?.let { Misc.makeUnimportant(it, "kolCh2Oz") }
+        alive().forEach { sendHome(it) }
+        knights.clear()
+        memory.unset(KNIGHTS_HERE)
     }
 
     override fun addDescriptionForNonEndStage(info: TooltipMakerAPI, width: Float, height: Float) {
+        val h = Misc.getHighlightColor()
         when (currentStage) {
-            Stage.SURVEY -> info.addPara("[PLACEHOLDER] Brother Enarms asks you to carry the Order's eyes to Ozymandias: " +
-                    "visit its four worlds, Mourn, Abandon, Forget and Rest ($visited of ${stops.size} visited).", 10f)
-            Stage.CAELI -> info.addPara("[PLACEHOLDER] The worlds are seen. What remains is the cryosleeper, and the people still in it.", 10f)
+            Stage.RENDEZVOUS -> info.addPara("[PLACEHOLDER] Brother Enarms has sent Knights from Cygnus to secure Ozymandias " +
+                    "with you. They will wait at the system's jump point in hyperspace until you join them.", 10f)
+            Stage.SECURE -> info.addPara("[PLACEHOLDER] " + (if (withKnights) "" else "Without a patron, the Order has no Knights to spare; you go alone. ") +
+                    "Scout and secure Ozymandias: its worlds and stations " +
+                    "(%s of %s visited)" + (if (ZeaCaeli.beaten()) "." else ", and whatever keeps the Caeli cryosleeper."),
+                10f, h, "$visited", "${stops.size}")
+            Stage.MEMORIAL -> info.addPara("[PLACEHOLDER] Ozymandias is secured. The Order's memorial is to be laid at Caeli.", 10f)
             else -> {}
         }
     }
 
     override fun addNextStepText(info: TooltipMakerAPI, tc: Color?, pad: Float): Boolean {
+        val h = Misc.getHighlightColor()
         when (currentStage) {
-            Stage.SURVEY -> info.addPara("Visit the worlds of Ozymandias ($visited/${stops.size})", tc, pad)
-            Stage.CAELI -> info.addPara("Visit the Caeli cryosleeper", tc, pad)
+            Stage.RENDEZVOUS -> info.addPara("Meet the Knights at the Ozymandias jump point", tc, pad)
+            Stage.SECURE -> {
+                if (visited < stops.size) info.addPara("Visit Ozymandias's worlds and stations: %s of %s", pad, tc, h, "$visited", "${stops.size}")
+                if (!ZeaCaeli.beaten()) info.addPara("Secure the Caeli cryosleeper", tc, if (visited < stops.size) 0f else pad)
+            }
+            Stage.MEMORIAL -> info.addPara("Lay the memorial at Caeli", tc, pad)
             else -> return false
         }
         return true

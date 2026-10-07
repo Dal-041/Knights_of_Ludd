@@ -511,23 +511,22 @@
 	},
 	# Battlestar Libra's restoration (add-knights-libra-situation); placeholders to be tuned
 	"kol_libra":{
-		"pointsPerProgress":100,                   # progress bar = lifetime points / this (Technology's scale)
-		"stageThresholds":[500, 5000, 15000, 36000], # SUPPLY, CREW, DRILL, RESTORATION (lifetime points)
-		"maxPoints":50000,                         # bar maximum (lifetime points)
+		"stageThresholds":[50, 500, 1500, 3600],   # SUPPLY, CREW, DRILL, RESTORATION (bar progress)
+		"maxProgress":5000,                        # bar maximum
 		"acceptedCommodities":["supplies", "heavy_machinery", "metals", "rare_metals", "organics", "food"],
-		"commodityMult":0.01,                      # points per credit of base value handed in
+		"commodityMult":0.001,                     # progress per credit of base value handed in
 		"donationManufacturers":["Low Tech", "Midline", "Pirate", "Common"], # add modded manufacturers here
-		"donationMult":0.01,                       # points per credit of a donated ship's current value
+		"donationMult":0.001,                      # progress per credit of a donated ship's current value
 		"deployCap":8,                             # Libra's escorts after activation; the roster keeps 3x this
-		"lineMonthlyPoints":150,                   # each penned supply line, per month
+		"lineMonthlyProgress":15,                  # each penned supply line, per month (a monthly factor)
 		"supplyStanding":"FAVORABLE", "crewStanding":"WELCOMING", # the supplier's faction, toward the player
 		"supplyPrice":100000, "crewPrice":250000,  # credits, paid when the terms are accepted
 		"raiderTaskChance":0.33, "raiderFleetPoints":60, # raiders at the supplier system's edge
 		"minSupply":5,                             # a material supplier's available amount of each line commodity
 		"beaconCooldownDays":30,                   # gunnery training
 		"wavePlayerFactor":0.6, "waveStageFP":30, "waveVariance":0.3, "waveFleets":3, "drillWaveMult":1.5,
-		"gunneryMult":1.0,                         # points per enemy FP destroyed
-		"moduleLossPoints":100,                    # points lost per module Libra's station loses
+		"gunneryMult":0.1,                         # progress per enemy FP destroyed
+		"moduleLossProgress":10,                   # progress lost per module Libra's station loses
 		"responderChance":0.1667, "responderRep":0.05, # a genuine independent responder; reputation for rewarding them
 		"convoyFleetPoints":40, "convoyRaidFleetPoints":80 # the crew escort
 	},
@@ -540,6 +539,7 @@
 		"firstAssemblyDays":20,                    # the first assembly of Chapter 2 opens this many days after the chapter begins
 		"patronOwnFleetPoints":150,                # fleet points the player needs to offer their own faction as patron
 		"jointOpFleetPoints":120,                  # size of the Knights squadron on joint operations
+		"ozZhiNuRecoveryRep":0.05,                 # Knights reputation lost for recovering Caeli's Zhi Nu while the Ozymandias mission's Knights fleets are in the system
 		"alreadyDoneBountyCredits":150000,         # Greenflight's bounty when the player beat an operation's boss first (the other half strengthens the next operation)
 		# Inquest: one score = interview answer + lies told to Enarms + the fleet inspection; the total sets the outcome
 		"inquestAnswerWeights":[0, 2, 5],         # candid, guarded, defiant
