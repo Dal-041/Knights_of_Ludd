@@ -274,10 +274,9 @@ public class KolStaticStrings {
         public static final String CONV_OATH_SWORN = "$kolCh2_convOathSworn";   // the player offered their own forces under oath
         public static final String CONV_OATH_LIE = "$kolCh2_convOathLie";       // ... and lied (counts at the inquest)
 
-        // Entity flags (Ozymandias stops, patron doors)
+        // Entity flags (Ozymandias stops)
         public static final String OZY_STOP = "$kolCh2Oz_stop";
         public static final String OZY_CAELI = "$kolCh2Oz_caeli";
-        public static final String PATRON_DOOR = "$kolCh2Patron_door";
 
         // People
         public static final String GRANDMASTER_ID = "kol_grandmaster";
@@ -288,5 +287,32 @@ public class KolStaticStrings {
         // Rule triggers
         public static final String TRIGGER_INQUEST = "KolInquestPlayer";
         public static final String INQUEST_EVENT_KEY = "kol_inquestPlayer";
+    }
+
+    /** The patron quest (add-knights-patron-lobbying). Record keys are permanent; stage keys belong to the mission. */
+    public static class KolPatron {
+        // Leads the player has learned: + league / hegemony / diktat / charter / tritach / pirate / path
+        public static final String LEAD_PREFIX = "$kolPatron_lead_";
+        // Per-power parley keys: PREFIX + power key + STAGE_SUFFIX (lead ... signed) or PRICE_SUFFIX (the price on the table)
+        public static final String PREFIX = "$kolPatron_";
+        public static final String STAGE_SUFFIX = "_stage";
+        public static final String PRICE_SUFFIX = "_price";
+        public static final String DELEGATION = "$kolPatron_delegation";         // the Order's delegation is aboard (one party, collected once)
+
+        // The record (permanent)
+        public static final String LEVER = "$kol_patronLever";
+        public static final String PRICE = "$kol_patronPrice";                   // the price key paid
+        public static final String CHARTER_SOURCE = "$kol_patronCharterSource";  // independent / tritach
+        public static final String CHARTER_SCUTTLED = "$kol_patronCharterScuttled";
+        public static final String CHARTER_ACCEPTED = "$kolPatron_charterAccepted";
+        public static final String TRIED_PREFIX = "$kolPatron_tried_";           // + pirate / path
+        public static final String OWN_COMMITMENT = "$kolPatron_ownCommitment";      // the forces committed at the Lyra meeting
+        public static final String VOLTURN_FILES_GIVEN = "$kolPatron_volturnFilesGiven";  // the Diktat's price: the faith's files on Volturn
+        public static final String MET_FIXER = "$kolPatron_metFixer";             // the player met the Tri-Tachyon fixer (vanilla records nothing)
+        public static final String FIXER_VISIT_SEEN = "$kolPatron_fixerVisitSeen";
+
+        // People
+        public static final String STANDIN_PREFIX = "kol_patron_standin_";      // + the vanilla id a remembered stand-in replaces
+        public static final String PERSON_PREFIX = "kol_patron_";                // + role: the parleys' remembered people
     }
 }

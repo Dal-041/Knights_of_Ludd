@@ -1,0 +1,7 @@
+name,id,tags,planetary,decivRemove,script,desc,icon,order
+Written Off,kol_libra_damaged,,,FALSE,org.selkie.kol.campaign.libra.KolLibraDamagedCondition,[PLACEHOLDER] The council at Cygnus judged Battlestar Libra too costly to recommission. It shows.,graphics/icons/markets/decivilized.png,900
+Under Repair,kol_libra_repairing,,,FALSE,org.selkie.kol.campaign.libra.KolLibraRepairingCondition,[PLACEHOLDER] Standing supply lines feed Libra's repairs.,graphics/icons/markets/orbital_station.png,900
+Under-crewed,kol_libra_undercrewed,,,FALSE,org.selkie.kol.campaign.libra.KolLibraUndercrewedCondition,"[PLACEHOLDER] Libra has guns enough, and too few hands for them.",graphics/icons/markets/frontier.png,901
+A Crew of Its Own,kol_libra_crewed,,,FALSE,org.selkie.kol.campaign.libra.KolLibraCrewedCondition,[PLACEHOLDER] A congregation sends its people to Libra.,graphics/icons/markets/luddic_majority.png,901
+Drilled Crews,kol_libra_drilled,,,FALSE,org.selkie.kol.campaign.libra.KolLibraDrilledCondition,"[PLACEHOLDER] Libra's crews have been tested, and held.",graphics/icons/markets/military_base.png,902
+Supplying Libra,kol_libra_supply,,,TRUE,org.selkie.kol.campaign.libra.KolLibraSupplyCondition,[PLACEHOLDER] Part of this market's goods are diverted to Battlestar Libra.,graphics/icons/markets/trade_disruption.png,1000

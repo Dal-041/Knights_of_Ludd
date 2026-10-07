@@ -282,12 +282,168 @@ class KolTechHandoverFactor(points: Int, private val scrip: Int) : BaseOneTimeFa
         }
 }
 
-/** Enarms' invitation to do what you can for Libra, as charity the Order does not forbid. */
+/**
+ * Battlestar Libra's restoration (add-knights-libra-situation). The bar is Libra's lifetime contributed points /
+ * scale, on Technology's scale (KolLibraData, KolLibraSettings). Four thresholds gate the milestone events, each also
+ * needing the previous one done (KolLibra.open). Upgraded in place from Chapter 1's placeholder.
+ */
 class KolLibraSituationIntel : KolSituationIntel(KolCh1.LIBRA_SITUATION_KEY) {
-    override val title = "Knights: Charity for Libra"
+
+    /** Stage index = ordinal; SUPPLY..RESTORATION are the milestones' thresholds. */
+    enum class LibraStage { START, SUPPLY, CREW, DRILL, RESTORATION, MAX }
+
+    override val title = "Knights: Battlestar Libra"
     override val description = "The council judged Battlestar Libra too costly to recommission. It has been " +
             "written off, but not disowned, and nothing in the Order's writ forbids accepting charity on its behalf. " +
-            "Brother Enarms asks you to do what you can."
-    override val whomToSee = "Knightmaster Martins at Battlestar Libra, or Brother Enarms at Battlestation Cygnus."
+            "Knightmaster Martins takes what you can bring."
+    override val whomToSee = "Knightmaster Martins at Battlestar Libra."
     override val contactId: String get() = KolStaticStrings.KolPrelude.MARTINS_ID
+
+    override fun setup() {
+        factors.clear()
+        stages.clear()
+        val scale = org.selkie.kol.campaign.libra.KolLibraSettings.pointsPerProgress
+        val t = org.selkie.kol.campaign.libra.KolLibraSettings.stageThresholds
+        setMaxProgress(org.selkie.kol.campaign.libra.KolLibraSettings.maxPoints / scale)
+        addStage(LibraStage.START, 0)
+        addStage(LibraStage.SUPPLY, t[0] / scale, StageIconSize.SMALL)
+        addStage(LibraStage.CREW, t[1] / scale, StageIconSize.MEDIUM)
+        addStage(LibraStage.DRILL, t[2] / scale, StageIconSize.MEDIUM)
+        addStage(LibraStage.RESTORATION, t[3] / scale, StageIconSize.LARGE)
+        addStage(LibraStage.MAX, maxProgress, StageIconSize.LARGE)
+    }
+
+    /** Upgrades Chapter 1's placeholder (START/END stages). Touches no sector state: see syncAfterLoad(). */
+    @Suppress("unused")
+    private fun readResolve(): Any {
+        if (getDataFor(LibraStage.SUPPLY) == null) setup()
+        return this
+    }
+
+    private fun barFor(points: Int) = (points / org.selkie.kol.campaign.libra.KolLibraSettings.pointsPerProgress).coerceIn(0, maxProgress)
+
+    /** Keeps the bar equal to lifetime points / scale, and Libra's market effects current. */
+    override fun syncAfterLoad() {
+        super.syncAfterLoad()
+        val bar = barFor(org.selkie.kol.campaign.libra.KolLibraData.get().lifetimePoints)
+        if (progress != bar) setProgress(bar)
+        org.selkie.kol.campaign.libra.KolLibraEffects.apply()
+    }
+
+    @Transient private var stationCheck: com.fs.starfarer.api.util.IntervalUtil? = null
+
+    /** The station's damage penalty is reapplied now and then: its fleet is re-created by the industry. */
+    override fun advanceImpl(amount: Float) {
+        super.advanceImpl(amount)
+        val check = stationCheck ?: com.fs.starfarer.api.util.IntervalUtil(1f, 2f).also { stationCheck = it }
+        check.advance(Misc.getDays(amount))
+        if (check.intervalElapsed()) org.selkie.kol.campaign.libra.KolLibraEffects.stationPenalty()
+    }
+
+    /** Points were contributed (already in KolLibraData): the bar moves to match, with a factor line. */
+    fun sync(points: Int, reason: String, dialog: InteractionDialogAPI?) {
+        ensureSynced()
+        val delta = barFor(org.selkie.kol.campaign.libra.KolLibraData.get().lifetimePoints) - progress
+        if (delta > 0) addFactor(KolLibraFactor(delta, points, reason), dialog)
+        else if (delta < 0) setProgress(progress + delta)
+    }
+
+    /** Current stage index (0 START .. 5 MAX), from the bar. */
+    fun stageIndex(): Int = LibraStage.values().lastOrNull { isStageActive(it) }?.ordinal ?: 0
+
+    override fun notifyStageReached(stage: EventStageData) {
+        super.notifyStageReached(stage)
+        val reached = stage.id as? LibraStage ?: return
+        Global.getSector().memoryWithoutUpdate.set("\$kolLibra_stage", reached.ordinal)
+        Global.getSector().memoryWithoutUpdate.set("\$kolLibra_${reached.name.lowercase()}", true)
+        if (reached != LibraStage.START) org.selkie.kol.campaign.story.KolAssembly.report("libraStage")
+    }
+
+    /** A milestone event completed: an update for the player. */
+    fun milestoneCompleted(m: org.selkie.kol.campaign.libra.KolLibraMilestone, text: TextPanelAPI?) {
+        sendUpdateIfPlayerHasIntel(m, text)
+    }
+
+    override fun addBulletPoints(info: TooltipMakerAPI, mode: IntelInfoPlugin.ListInfoMode, isUpdate: Boolean,
+                                 tc: Color, initPad: Float) {
+        if (addEventFactorBulletPoints(info, mode, isUpdate, tc, initPad)) return
+        when (val param = listInfoParam) {
+            is org.selkie.kol.campaign.libra.KolLibraMilestone -> info.addPara(milestoneDoneText(param), tc, initPad)
+            is EventStageData -> if (isUpdate) (param.id as? LibraStage)?.let { stageUnlockText(it) }?.let { info.addPara(it, tc, initPad) }
+        }
+    }
+
+    override fun getStageIconImpl(stageId: Any?): String =
+        if (stageId == LibraStage.START) icon else Global.getSettings().getSpriteName("events", "stage_unknown_good")
+
+    override fun addStageDescriptionText(info: TooltipMakerAPI, width: Float, stageId: Any?) {
+        if (!isStageActive(stageId) || stageId != LibraStage.values().last { isStageActive(it) }) return
+        info.addPara(if (stageId == LibraStage.START) description else stageDescription(stageId as LibraStage), 0f)
+        info.addPara("See: %s", 10f, Misc.getHighlightColor(), whomToSee)
+    }
+
+    override fun getStageTooltipImpl(stageId: Any?): TooltipMakerAPI.TooltipCreator? {
+        val stage = stageId as? LibraStage ?: return null
+        if (stage == LibraStage.START) return null
+        return object : BaseFactorTooltip() {
+            override fun createTooltip(tooltip: TooltipMakerAPI, expanded: Boolean, tooltipParam: Any?) {
+                tooltip.addTitle(stageTitle(stage))
+                tooltip.addPara(stageDescription(stage), 10f)
+                stageUnlockText(stage)?.let { tooltip.addPara(it, Misc.getHighlightColor(), 10f) }
+            }
+        }
+    }
+
+    // [PLACEHOLDER] texts
+    private fun stageTitle(stage: LibraStage) = when (stage) {
+        LibraStage.START -> "Charity"
+        LibraStage.SUPPLY -> "A Supply Line"
+        LibraStage.CREW -> "A Crew of Its Own"
+        LibraStage.DRILL -> "The Drill"
+        LibraStage.RESTORATION -> "Restoration"
+        LibraStage.MAX -> "Restored"
+    }
+
+    private fun stageDescription(stage: LibraStage) = when (stage) {
+        LibraStage.START -> description
+        LibraStage.SUPPLY -> "[PLACEHOLDER] Libra can be kept on charity a while longer, but not repaired. Martins wants a standing supply line."
+        LibraStage.CREW -> "[PLACEHOLDER] The station is mending. Martins wants a crew of Libra's own, from a congregation that will send its people."
+        LibraStage.DRILL -> "[PLACEHOLDER] Libra has hands enough to man its guns. Martins wants to see whether they can shoot."
+        LibraStage.RESTORATION -> "[PLACEHOLDER] Everything Libra needs is aboard. What remains is to bring it back."
+        LibraStage.MAX -> "[PLACEHOLDER] Libra has everything it can be given."
+    }
+
+    private fun stageUnlockText(stage: LibraStage): String? = when (stage) {
+        LibraStage.SUPPLY -> "[PLACEHOLDER] Martins can arrange the supply contract"
+        LibraStage.CREW -> "[PLACEHOLDER] Martins can arrange the crew contract, once the supply contract is done"
+        LibraStage.DRILL -> "[PLACEHOLDER] Martins can stage the drill, once the crew contract is done"
+        LibraStage.RESTORATION -> "[PLACEHOLDER] Libra can be restored, once the drill is done"
+        else -> null
+    }
+
+    private fun milestoneDoneText(m: org.selkie.kol.campaign.libra.KolLibraMilestone) = when (m) {
+        org.selkie.kol.campaign.libra.KolLibraMilestone.SUPPLY -> "[PLACEHOLDER] Supply contract complete: Libra joins the economy"
+        org.selkie.kol.campaign.libra.KolLibraMilestone.CREW -> "[PLACEHOLDER] Crew contract complete: Libra has a crew of its own"
+        org.selkie.kol.campaign.libra.KolLibraMilestone.DRILL -> "[PLACEHOLDER] The drill is done: gunnery training is open"
+        org.selkie.kol.campaign.libra.KolLibraMilestone.RESTORATION -> "[PLACEHOLDER] Battlestar Libra is restored"
+    }
+
+    companion object {
+        @JvmStatic
+        fun get(): KolLibraSituationIntel? =
+            Global.getSector().memoryWithoutUpdate.get(KolCh1.LIBRA_SITUATION_KEY) as? KolLibraSituationIntel
+    }
+}
+
+/** Points contributed to Libra: the bar moves by [points]; the tooltip names the source. */
+class KolLibraFactor(points: Int, private val contributed: Int, private val reason: String) : BaseOneTimeFactor(points) {
+    override fun getDesc(intel: BaseEventIntel?): String = reason
+
+    override fun getMainRowTooltip(intel: BaseEventIntel?): TooltipMakerAPI.TooltipCreator =
+        object : BaseFactorTooltip() {
+            override fun createTooltip(tooltip: TooltipMakerAPI, expanded: Boolean, tooltipParam: Any?) {
+                tooltip.addPara("%s points toward Libra's restoration.", 0f, Misc.getHighlightColor(),
+                    Misc.getWithDGS(contributed.toFloat()))
+            }
+        }
 }
