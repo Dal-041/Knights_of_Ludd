@@ -539,7 +539,8 @@
 		"firstAssemblyDays":20,                    # the first assembly of Chapter 2 opens this many days after the chapter begins
 		"patronOwnFleetPoints":150,                # fleet points the player needs to offer their own faction as patron
 		"jointOpFleetPoints":120,                  # size of the Knights squadron on joint operations
-		"ozZhiNuRecoveryRep":0.05,                 # Knights reputation lost for recovering Caeli's Zhi Nu while the Ozymandias mission's Knights fleets are in the system
+		"ozZhiNuRecoveryRep":0.05,
+		"ozRelicScrip":5000,                       # Technology handover for delivering the Caeli relic to Helensis (one time)                 # Knights reputation lost for recovering Caeli's Zhi Nu while the Ozymandias mission's Knights fleets are in the system
 		"alreadyDoneBountyCredits":150000,         # Greenflight's bounty when the player beat an operation's boss first (the other half strengthens the next operation)
 		# Inquest: one score = interview answer + lies told to Enarms + the fleet inspection; the total sets the outcome
 		"inquestAnswerWeights":[0, 2, 5],         # candid, guarded, defiant

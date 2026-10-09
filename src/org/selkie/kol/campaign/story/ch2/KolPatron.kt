@@ -136,6 +136,15 @@ object KolPatron {
         for (branch in BRANCHES) if (hasBranch(branch)) KolPatronLeadIntel.add(branch, null, true)
     }
 
+    /** Greenflight briefs only a player the faith welcomes: Welcoming or better with the Luddic Church. */
+    fun churchWelcomes(): Boolean =
+        Global.getSector().getFaction(Factions.LUDDIC_CHURCH).relToPlayer.isAtWorst(com.fs.starfarer.api.campaign.RepLevel.WELCOMING)
+
+    /** The brief: a great power introduced by its champion; its branch shows in the dialog. */
+    fun introduce(power: KolPatronPower, text: TextPanelAPI?) {
+        if (power.seat() != null) learn(power.key, text = text)
+    }
+
     /**
      * Records a lead: marks where it leads (through the mission) and adds its branch intel, shown in the dialog when
      * [text] is given. [asked] is the market where it was learned, a fallback place for the pirate and Path leads.

@@ -885,6 +885,14 @@ $id == kol_chaptermaster
 $global.kolCh1_councilDone
 !$global.kol_excommunicated
 $global.kolTech_requisitions",,,"12:kolTech_requisitions:""I'd like to make a requisition.""",
+kolCh2_ozDeliverOpt,PopulateOptions,"$isPerson
+$id == kol_chaptermaster
+$kolCh2Oz_deliver",,,"9:kolCh2_ozDeliver:[PLACEHOLDER] ""I've brought what was recovered at Ozymandias.""",
+kolCh2_ozDeliver,DialogOptionSelected,$option == kolCh2_ozDeliver,,[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down.,kolCh2_ozDeliver2:Continue,
+kolCh2_ozDeliver2,DialogOptionSelected,$option == kolCh2_ozDeliver2,KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""Master, with respect: we don't know what this is. Doctrine has an answer for things we can't name, and it isn't a shelf in your office."" Enarms doesn't look at you. He doesn't need to.",kolCh2_ozDeliver3:Continue,
+kolCh2_ozDeliver3,DialogOptionSelected,$option == kolCh2_ozDeliver3,"KolCh2CMD showPerson kol_chaptermaster
+Call $global.kolCh2Oz_ref deliverRelic","[PLACEHOLDER] ""Doctrine is for what we understand, Brother. This, we'll learn."" Helensis turns back to you, and for a moment she's almost warm. ""The Order is in your debt."" Enarms leaves without being dismissed.",kolCh2_ozDeliverDone:Continue,
+kolCh2_ozDeliverDone,DialogOptionSelected,$option == kolCh2_ozDeliverDone,FireAll PopulateOptions,,,
 kolTech_requisitions,DialogOptionSelected,$option == kolTech_requisitions,FireBest KolTechReqMenu,,,
 kolTech_reqMenu,KolTechReqMenu,,"KolTechCMD publish
 FireBest KolTechReqMenuText",,,
@@ -1489,7 +1497,9 @@ $global.kolPatron_lead_player
 !$global.kolCh2Patron_announce",,,4:kolPatron_ownMeet:Meet Sister Greenflight and the Lector about your oath,The own-forces branch: the details settled before the assembly
 kolPatron_ownMeet,DialogOptionSelected,$option == kolPatron_ownMeet,"KolPatronCMD ownOpen
 KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. She is not alone. The Lector sits across the desk from her, with the book your name was entered in open on one knee.",kolPatron_own2:Continue,
-kolPatron_own2,DialogOptionSelected,$option == kolPatron_own2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""An oath sworn in the hall is a promise,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""This is where it becomes an arrangement."" $global.kolBench_lector_HeOrShe reads back what you swore: to hold the faithful under your banner as under the Church's own; to answer the Order's need before your own; to account for your acts before the Order.
+kolPatron_own2,DialogOptionSelected,$option == kolPatron_own2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""An oath sworn in the hall is a promise,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""This is where it becomes an arrangement. It is not one the Order has made before. Doctrine keeps the faithful in the faith's own keeping, and the assembly has chosen to put some of them in a captain's. There are those in the hall who think it a risk."" $global.kolBench_lector_HeOrShe lays a hand on the book open on $global.kolBench_lector_hisOrHer knee. ""They are right. It is the Order's risk now, and yours.""
+
+$global.kolBench_lector_HeOrShe reads back what you swore: to hold the faithful under your banner as under the Church's own; to answer the Order's need before your own; to account for your acts before the Order.
 
 Greenflight turns a slate toward you: Lyra, Cygnus, the systems around them. ""The congregations need to see ships that are not ours. How many of yours, captain, and of what kind?""","1:kolPatron_ownForcesGuard:""A standing guard: enough to be seen, and to hold until the Order arrives.""
 2:kolPatron_ownForcesStrong:""A real force. If they're to be protected, let it be done properly.""
@@ -1503,6 +1513,39 @@ FireBest KolPatronOwnClose","[PLACEHOLDER] ""That is a generous answer,"" Greenf
 kolPatron_ownClose,KolPatronOwnClose,,"KolCh2CMD showPerson kol_intel_director
 KolPatronCMD signOwn $global.kolPatron_ownCommitment","[PLACEHOLDER] ""Then it is an arrangement."" Greenflight sets her seal beside the Lector's. ""It will be read to the assembly when it next sits. Until then: your ships answer the Order's need before your own. When they fail, it is your failure, and you will account for it. When they hold, the faithful will not learn your name.""",kolPatron_ownLeave:Leave the office,
 kolPatron_ownLeave,DialogOptionSelected,$option == kolPatron_ownLeave,"ShowDefaultVisual
+FireAll PopulateOptions",,,
+kolPatron_briefOpt,PopulateOptions,"$kolPatron_briefAt
+!$isPerson",,,4:kolPatron_brief:Meet Sister Greenflight in her office,
+kolPatron_brief,DialogOptionSelected,"$option == kolPatron_brief score:10
+KolPatronCMD churchWelcomes","KolPatronCMD collectOpen
+KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. The Lector is already there, in the chair across from her desk. The third chair is empty; on its seat lies a bound brief under Cygnus' seal.
+
+""Master Helensis has gone back to Cygnus,"" Greenflight says. ""She left her counsel in writing. The rest of us prefer to give ours in person.""",kolPatron_brief2:Continue,
+kolPatron_briefTooSoon,DialogOptionSelected,$option == kolPatron_brief,"KolCh2CMD showPerson kol_intel_director
+KolPatronCMD briefRefused","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office. She hears you out without looking up from her files, then sets her pen down.
+
+""The assembly gave you its charge. The Church hasn't given you its welcome."" She says it without heat. ""Whoever speaks for the faith at Kazeron or Chicomoztoc has to be someone the faithful would recognize. Come back when they would.""",kolPatron_briefLeave:Leave the office,below Welcoming with the Luddic Church; the brief stays open
+kolPatron_brief2,DialogOptionSelected,$option == kolPatron_brief2,"KolCh2CMD showPerson bench:lector
+KolPatronCMD introduce league","[PLACEHOLDER] ""The League first,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""It would take the Church as one congregation's voice among many members. A small place to stand, and an honest one."" $global.kolBench_lector_HeOrShe sets a hand on the charter. ""Ludd did not ask to be first at the table. Kazeron will not ask it of us either, and it will not ask much else.""",kolPatron_brief3:Continue,
+kolPatron_brief3,DialogOptionSelected,$option == kolPatron_brief3,KolPatronCMD introduce hegemony,"[PLACEHOLDER] Greenflight breaks the seal on Helensis' brief and passes it to you rather than reading it out. It runs to many pages, each annotated in a tight hand: the yards at Cygnus working short-crewed, the hulls the Order lacks, the patrols no longer flown. Its argument is the Hegemony, and one line is underlined twice: ""Restraint is a virtue of the well-provisioned."" It closes with her rank, not her name.
+
+""She has the numbers right,"" Greenflight says.
+
+""She does,"" the Lector says. ""And if the Order takes whichever patron fills those berths fastest, it will have its ships, and owe its conduct to someone else. I would rather we were short of hulls than short of ourselves.""
+
+""The holdings without patrols might not agree.""
+
+""No,"" $global.kolBench_lector_heOrShe admits. ""That is why we are asking, and not deciding.""",kolPatron_brief4:Continue,
+kolPatron_brief4,DialogOptionSelected,$option == kolPatron_brief4,"KolCh2CMD showPerson kol_intel_director
+KolPatronCMD introduce diktat
+Call $global.kolCh2Patron_ref briefed","[PLACEHOLDER] ""And Sindria,"" Greenflight says. ""The worst of them, I know. But it asks the least of the Order itself: files on people it is already hunting, kept current by my office. It will tie up agents I would rather use elsewhere, and it is still the cheapest thing any of them will ask of us. In return, Sindria's ships stand over congregations it would otherwise leave to the raiders.""
+
+""Names, Sister, and more of them every season,"" the Lector says. ""Whatever Sindria already knows, the Church would be the one keeping it informed.""
+
+""Yes. I won't pretend otherwise."" Greenflight turns to you. ""I would still weigh it against the congregations we can't guard. That's the choice, Captain, and none of the three makes it a clean one.""
+
+""Hear them all,"" the Lector says. ""Then the Order will choose.""",kolPatron_briefLeave:Leave the office,
+kolPatron_briefLeave,DialogOptionSelected,$option == kolPatron_briefLeave,"ShowDefaultVisual
 FireAll PopulateOptions",,,
 # Knights patron: the great powers (KolPatronParley). The League is the reference implementation,,,,,,
 kolPatron_hannanBusiness,DialogOptionSelected,"$option == RHannan_haveBusiness score:10
@@ -1574,7 +1617,7 @@ kolPatron_meetConcedeHegemony,DialogOptionSelected,"$option == kolPatron_meetCon
 $global.kolPatron_priceKey == hegemony_ties score:10",FireBest KolPatronAgree,[PLACEHOLDER] The liaison inclines their head; the point was never in doubt. Helensis is the only one at the Church's end who looks satisfied.,,
 kolPatron_meetPressDiktat,DialogOptionSelected,"$option == kolPatron_meetPress
 $global.kolPatron_priceKey == diktat_volturn score:10",FireBest KolPatronAgree,[PLACEHOLDER] The functionary takes the request down and promises that it will be considered. Macario does not look up.,,
-kolPatron_meetRedactDiktat,DialogOptionSelected,$option == kolPatron_meetRedact,FireBest KolPatronAgree,"[PLACEHOLDER] The functionary has no objection to the Church sending less than it has. The Lector writes it into the terms. ""The files will be prepared with care,"" Greenflight says, and it sounds like routine.",,
+kolPatron_meetRedactDiktat,DialogOptionSelected,$option == kolPatron_meetRedact,FireBest KolPatronAgree,"[PLACEHOLDER] The functionary has no objection to the Church sending less than it has, so long as it keeps sending. The Lector writes it into the terms. ""The files will be prepared with care,"" Greenflight says, and it sounds like routine.",,
 kolPatron_meetConcedeDiktat,DialogOptionSelected,"$option == kolPatron_meetConcede
 $global.kolPatron_priceKey == diktat_volturn score:10",FireBest KolPatronAgree,"[PLACEHOLDER] The Lector does not contradict you, and does not thank you for it. Greenflight sets her pen down.",,
 kolPatron_agree,KolPatronAgree,,KolPatronCMD confirmTooltip kolPatron_meetSign,[PLACEHOLDER] In the end the terms stand much as they were offered. The arrangement is slid across the table for the Church's signature.,"1:kolPatron_meetSign:Agree to the terms
@@ -1714,12 +1757,20 @@ kolCh2_ozMemorialKnights,KolCh2OzMemorial,$global.kolCh2Oz_knightsHere score:10,
 100:defaultLeave:Leave",
 kolCh2_ozMemorialAlone,KolCh2OzMemorial,,,"[PLACEHOLDER] Caeli drifts on, silent. There is no one here to hear the words but your own crew. The memorial beacon is ready.","0:kolCh2_ozLayMemorial:[PLACEHOLDER] Lay the Order's memorial
 100:defaultLeave:Leave",
-kolCh2_ozLayMemorial,DialogOptionSelected,$option == kolCh2_ozLayMemorial,Call $global.kolCh2Oz_ref memorial,[PLACEHOLDER] The beacon is set in orbit of Caeli. The names that could be read are read; the rest are remembered as the dead of Ozymandias.,kolCh2_ozCaeliDone:Continue,
+kolCh2_ozLayMemorial,DialogOptionSelected,$option == kolCh2_ozLayMemorial,Call $global.kolCh2Oz_ref memorial,"[PLACEHOLDER] The beacon is set in orbit of Caeli. The names that could be read are read; the rest are remembered as the dead of Ozymandias. As it settles, your sensors officer flags something that wasn't there before: a sealed cache, shaken loose from the guardian's wreckage.",kolCh2_ozCaeliDone:Continue,
 kolCh2_ozMemorialBeacon,OpenInteractionDialog,"$tag:warning_beacon
 $kolCh2Oz_memorial score:1000","ShowDefaultVisual
 SetShortcut beaconLeave ""ESCAPE""","This autonomous beacon emits a looping message.
 
 ""[PLACEHOLDER] The Order's memorial for the dead of Ozymandias.""",beaconLeave:Leave,
+kolCh2_ozCache,OpenInteractionDialog,$kolCh2Oz_cache score:1000,"ShowDefaultVisual
+SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The cache drifts where the guardian's wreckage came apart: no larger than a shuttle, and sealed seamlessly, the way the guardian itself was built. Nothing in your sensors' library knows the make. Your engineers can say only what it isn't: not a weapon housing, not a fuel cell, nothing they'd care to open with a cutter.
+
+Master Helensis asked for anything recovered here. You doubt the Order meant this when it sent you to lay a memorial.","0:kolCh2_ozTakeRelic:[PLACEHOLDER] Bring it aboard
+100:defaultLeave:Leave",
+kolCh2_ozTakeRelic,DialogOptionSelected,$option == kolCh2_ozTakeRelic,Call $global.kolCh2Oz_ref takeRelic,"[PLACEHOLDER] It takes a tug and the better part of a watch to coax the cache into an empty hold. The crew who lash it down don't linger, and by the next watch it has a name below decks you'd rather Helensis didn't hear.
+
+At Cygnus, someone will clear a shelf for it. Someone else at Cygnus will want to know why.",defaultLeave:Leave,
 "# Knights Chapter 2: the outside power's agent (KolCh2Agent, bar event)",,,,,,
 kolCh2Agent_blurbBar,kolCh2Agent_blurbBar,,,"[PLACEHOLDER] A well-dressed patron at a corner table has been watching you since you came in, and is not hiding it.",,
 kolCh2Agent_optionBar,kolCh2Agent_optionBar,,,,kolCh2Agent_start:Join the patron at the corner table,
@@ -1867,7 +1918,7 @@ kolInq_rec_patronOwn,KolInquestRecord,"$global.kol_patron == player
 $global.kolInquest_readCount++","""You have sworn before the assembly to stand as the Church's patron yourself. You are quick to make yourself crucial to our fate.""",kolInq_next:Continue,
 kolInq_rec_ozymandiasDone,KolInquestRecord,"$global.kolCh2_ozymandiasDone
 !$global.kolInq_read_ozymandiasDone score:103","$global.kolInq_read_ozymandiasDone = true 30
-$global.kolInquest_readCount++","""A memorial laid at Mourn, in Ozymandias, at the Order's asking."" A short nod. ""That is Good.""",kolInq_next:Continue,
+$global.kolInquest_readCount++","""A memorial laid beside Caeli, in Ozymandias, at the Order's asking."" A short nod. ""That is Good.""",kolInq_next:Continue,
 kolInq_rec_missed,KolInquestRecord,"$global.kolAssembly_missed >= 1
 !$global.kolInq_read_missed score:102","$global.kolInq_read_missed = true 30
 $global.kolInquest_readCount++","[PLACEHOLDER] ""You've been absent at $global.kolAssembly_missed assemblies."" The implication is placed on the table.",kolInq_next:Continue,
@@ -1896,7 +1947,7 @@ kolCh2_inquestDefiant:Ask by what right they question you",
 # Assembly reckoning lines for Chapter 2 reports,,,,,,
 kolAssembly_itemPatron,KolAssemblyItems,$global.kolAssembly_patron > 0,,[PLACEHOLDER] The clerk reads that the Church has a patron while the Knights are away. Some of the benches approve.,,
 kolAssembly_itemJointOp,KolAssemblyItems,$global.kolAssembly_jointOperation > 0,,[PLACEHOLDER] An operation sailed with the Order's squadrons is entered into the record.,,
-kolAssembly_itemOzymandias,KolAssemblyItems,$global.kolAssembly_ozymandias > 0,,"[PLACEHOLDER] A memorial now stands over Mourn, in Ozymandias. The names of the dead there are not known; a prayer is read for them anyway.",,
+kolAssembly_itemOzymandias,KolAssemblyItems,$global.kolAssembly_ozymandias > 0,,"[PLACEHOLDER] A memorial now stands beside Caeli, in Ozymandias. The names of the dead there are not known; a prayer is read for them anyway.",,
 kolAssembly_itemInquest,KolAssemblyItems,$global.kolAssembly_inquestPlayer > 0,,[PLACEHOLDER] The Inquisition reports that it has questioned a captain in the Order's service. It does not say whom; everyone looks at you.,,
 kolAssembly_dockNotice,MarketPostDock,"$market.id == kol_lyra score:55
 !$kolAssembly_noticed
@@ -1946,17 +1997,23 @@ kolPatron_dikTerms0,DialogOptionSelected,$option == kolPatron_dikTerms0,FireBest
 kolPatron_aboardDiktat,KolPatronAboardDiktat,,"unset $kolPatron_inPerson
 KolPatronCMD collectOpen
 KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] Balashi's terms reach your fleet on an ordinary courier packet. Within the hour the Order's delegation has taken over your wardroom: the Lector at the head of the table, Greenflight beside the packet's seal, and the clerks clearing a space for their cases.",kolPatron_dikTerms0:Continue,Played in space when the terms arrive and the delegation is aboard (KolPatronParley.aboardScene)
-kolPatron_dikTerms,KolPatronDiktatTerms,,,"[PLACEHOLDER] The Lector reads the terms aloud, as $global.kolBench_lector_heOrShe would read anything into the record: the Diktat will stand over the Church's congregations, and in return the Church will give the Supreme Executor its own files on Volturn's faithful.
+kolPatron_dikTerms,KolPatronDiktatTerms,,,"[PLACEHOLDER] The Lector reads the terms aloud, as $global.kolBench_lector_heOrShe would read anything into the record: the Diktat will stand over the Church's congregations, and in return the Church will keep the Supreme Executor supplied with its own files on Volturn's faithful, for as long as the arrangement stands.
 
-""The Diktat has already been taking suspected Pathers off Volturn,"" Greenflight says. ""They go to Cruor, to the labor camps, and they do not come back. These files have names in them that the Diktat does not have yet."" She squares the packet on the table. ""I would ask the delegation to remember that before it says yes.""","1:kolPatron_dikTermsRefuse:""The Church can't hand its own faithful to Cruor.""
+""The Diktat has been taking suspected Pathers off Volturn,"" $global.kolBench_lector_heOrShe says. ""They go to Cruor, to the labor camps, and they do not come back. These would be names Sindria does not have yet, and next season's after them. The Order has done hard things before. It has not done easy ones of this kind.""
+
+""And how the Church keeps them,"" Helensis says. ""Send Sindria our ledgers season after season, and it will learn how this Order counts its own. I would not have the Lion's Guard learning that.""
+
+""The Master is right about that too,"" the Lector says.
+
+Greenflight has not touched the packet. ""Sindria is already on Volturn. These files change whom it takes, not whether it takes them. My office will carry the reporting. It will cost me agents, and it is still the cheapest thing on this table. In return, it stands over congregations no one else will guard."" She looks to you, then to the Lector. ""I would rather we chose that with our eyes open than pretend there was a clean option.""","1:kolPatron_dikTermsRefuse:""The Church can't hand its own faithful to Cruor.""
 2:kolPatron_dikTermsPrice:""The Diktat will find those names with or without the files.""
 3:kolPatron_dikTermsQuiet:Say nothing",Greenflight's reservations
 kolPatron_dikTermsRefuse,DialogOptionSelected,$option == kolPatron_dikTermsRefuse,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] ""No,"" the Lector agrees. ""It cannot. Nor can it leave the rest of its faithful unguarded."" $global.kolBench_lector_HeOrShe folds $global.kolBench_lector_hisOrHer hands on the terms. ""We will hear the Diktat out, and weigh it there.""",,
-kolPatron_dikTermsPrice,DialogOptionSelected,$option == kolPatron_dikTermsPrice,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] Greenflight looks at you for a long moment. ""Perhaps,"" she says. ""I would rather they found them without us.""",,
-kolPatron_dikTermsQuiet,DialogOptionSelected,$option == kolPatron_dikTermsQuiet,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] Nobody looks to you. The Lector and Greenflight speak quietly for some time, and the clerks find reasons to be busy with their cases.",,
+kolPatron_dikTermsPrice,DialogOptionSelected,$option == kolPatron_dikTermsPrice,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] ""It will,"" Greenflight agrees. The Lector looks at her, not at you, for longer than the remark deserves.",,
+kolPatron_dikTermsQuiet,DialogOptionSelected,$option == kolPatron_dikTermsQuiet,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] Nobody looks to you. The Lector, Greenflight and Helensis speak quietly for some time, and the clerks find reasons to be busy with their cases.",,
 kolPatron_dikTermsAgree,KolPatronDiktatTermsAgree,,KolPatronCMD diktatDispatched,"[PLACEHOLDER] In the end the Lector gives the delegation's answer: it will go to Sindria and hear the Supreme Executor's court in person, as the Grandmaster would expect. ""The terms are the Diktat's opening, not its last word.""
 
-Greenflight says only that she will prepare the files herself.",kolPatron_dikTermsLeave:Continue,
+Greenflight says only that her office will see to the files, and go on seeing to them.",kolPatron_dikTermsLeave:Continue,
 kolPatron_dikTermsLeave,DialogOptionSelected,$option == kolPatron_dikTermsLeave,"ShowDefaultVisual
 DismissDialog",,,Aboard: back to space
 kolPatron_dikTermsLeaveInPerson,DialogOptionSelected,"$option == kolPatron_dikTermsLeave
@@ -1972,12 +2029,12 @@ kolPatron_dikMeet2,DialogOptionSelected,$option == kolPatron_dikMeet2,"KolPatron
 KolPatronCMD meet diktatFunctionary
 FireBest KolPatronMeetOpen",,,
 kolPatron_meetOpenDiktat,KolPatronMeetOpen,$kolPatron_power == diktat score:10,,"[PLACEHOLDER] On the Diktat's side: $global.kolPerson_diktatFunctionary_title $global.kolPerson_diktatFunctionary_last, a functionary of the Supreme Executor's court, with a folder of the Diktat's own drafts, and the Lion's Guard officer at the door. On the Church's: the Lector and Sister Greenflight, the clerks behind them. The functionary opens every clause with the Supreme Executor's name, as though dating it. Macario watches the Church's side of the table, and mostly Greenflight.",kolPatron_meetAsk:Continue,
-kolPatron_priceAskDiktat,KolPatronPriceAsk,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The functionary restates Balashi's terms as if they were new. The Diktat will stand over the Church's congregations; the Church, as a demonstration of good faith, will provide the Diktat its records of the faithful on Volturn. ""For the order of Volturn, and the safety of its people.""",,
+kolPatron_priceAskDiktat,KolPatronPriceAsk,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The functionary restates Balashi's terms as if they were new. The Diktat will stand over the Church's congregations; the Church, as a demonstration of good faith, will keep the Diktat supplied with its records of the faithful on Volturn, as they change. ""For the order of Volturn, and the safety of its people.""",,
 kolPatron_priceReactDiktat,KolPatronPriceReact,$global.kolPatron_priceKey == diktat_volturn score:10,,[PLACEHOLDER] Greenflight asks what becomes of the people named in the files. The functionary answers that the Diktat's justice is well known. The Lector lets the silence after that sit for exactly as long as courtesy allows.,"1:kolPatron_meetPress:""The Church will want assurances for the faithful named in those files.""
 2:kolPatron_meetRedact:""Send what the Diktat can already prove, and no more.""
 3:kolPatron_meetConcede:""The Church has no better offer.""
 4:kolPatron_meetDefer:Defer to the delegation",
-kolPatron_priceSceneDiktat,KolPatronPriceScene,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The Lector signs for the Grandmaster, and the functionary for the Supreme Executor. Then the files: Greenflight passes the case across the table herself, rather than through a clerk. Macario rises for the first time, opens it, reads the first page and the last, and closes it again. He looks at Greenflight. She looks back, and nothing in her face changes at all.",kolPatron_meetLeave:Leave the palace,The files change hands; Greenflight prepared them herself
+kolPatron_priceSceneDiktat,KolPatronPriceScene,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The Lector signs for the Grandmaster, and the functionary for the Supreme Executor. Then the first of the files: Greenflight passes the case across the table herself, rather than through a clerk. Macario rises for the first time, opens it, reads the first page and the last, and closes it again. He looks at Greenflight. She looks back, and nothing in her face changes at all. The functionary notes, for the record, that the next will be expected within the quarter. Greenflight writes the date down.",kolPatron_meetLeave:Leave the palace,The files change hands; Greenflight prepared them herself
 # Knights patron: the gate at Lyra (pre-assembly scenes),,,,,,
 kolPatron_gate,KolPatronGate,,KolPatronCMD gateNext,,,"A dock event at Lyra after a non-pirate signing: every pending pre-assembly scene, in order"
 kolPatron_gateCharter,KolPatronGateCharter,,KolCh2CMD showPerson kol_intel_director,"[PLACEHOLDER] A clerk is waiting at the foot of the ramp: Sister Greenflight would see you, now, and alone. Her office door is closed behind you before she speaks.
@@ -1995,6 +2052,40 @@ kolPatron_aboardCharter,KolPatronAboardCharter,,KolCh2CMD showPerson kol_intel_d
 kolPatron_aboardCharter2,DialogOptionSelected,$option == kolPatron_aboardCharter2,,"[PLACEHOLDER] She is quiet for a moment. ""And it will work. That is the worst of it. I will take it to the Grandmaster's office myself, before the assembly hears it from anyone else."" She opens the door again. ""Do not do this again.""",kolPatron_aboardCharterDone:Continue,
 kolPatron_aboardCharterDone,DialogOptionSelected,$option == kolPatron_aboardCharterDone,"KolPatronCMD charterReacted
 ShowDefaultVisual
+DismissDialog",,,
+kolPatron_aboardLeague,KolPatronAboardLeague,,"KolPatronCMD collectOpen
+KolCh2CMD showPerson bench:lector","[PLACEHOLDER] Mazalot's delegate has retired to a guest cabin, and the Order's delegation keeps the wardroom. The Lector is still turning over something the delegate said at dinner: that Mazalot petitions Kazeron every year, and every year Kazeron answers, because the Council can't afford to lose Mazalot's vote.
+
+""A patron that needs its faithful,"" $global.kolBench_lector_heOrShe says, ""and asks only that we be one voice among them. I would rather be needed than kept.""",kolPatron_aboardLeague2:Continue,
+kolPatron_aboardLeague2,DialogOptionSelected,$option == kolPatron_aboardLeague2,KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""A yearly vote,"" Helensis says. ""And in the years between, the raiders come. I don't doubt the League's honesty, Lector. I doubt its speed. The faithful waiting on Kazeron's courtesy are the ones the raiders reach first.""
+
+""Speed is what we would be giving up our own counsel to buy, Master,"" the Lector says. ""The League asks us to be patient, and small. I think the Order can be both.""
+
+""It can,"" Helensis says. She turns to you. ""I'm not sure the holdings at the edge can survive it.""
+
+""Kazeron will hold to it as long as Mazalot's votes matter in the Council,"" Greenflight says. ""Keeping them mattering is my office's work, not Kazeron's.""","1:kolPatron_aboardLeagueA:""Better slow than bought.""
+2:kolPatron_aboardLeagueB:""Patience doesn't crew a patrol.""
+3:kolPatron_aboardLeagueC:Say nothing",
+kolPatron_aboardLeagueA,DialogOptionSelected,$option == kolPatron_aboardLeagueA,FireBest KolPatronAboardLeagueClose,"[PLACEHOLDER] ""Some things are,"" the Lector says. Helensis doesn't argue it; she has made her case.",,
+kolPatron_aboardLeagueB,DialogOptionSelected,$option == kolPatron_aboardLeagueB,FireBest KolPatronAboardLeagueClose,"[PLACEHOLDER] ""No,"" the Lector agrees, quietly. ""It doesn't.""",,
+kolPatron_aboardLeagueC,DialogOptionSelected,$option == kolPatron_aboardLeagueC,FireBest KolPatronAboardLeagueClose,[PLACEHOLDER] Neither of them asks what you think.,,
+kolPatron_aboardLeagueClose,KolPatronAboardLeagueClose,,KolPatronCMD talked league,"[PLACEHOLDER] The wardroom empties a few at a time. By the next watch, the delegation is talking about other things.",kolPatron_aboardTalkDone:Continue,
+kolPatron_aboardHegemony,KolPatronAboardHegemony,,"KolPatronCMD collectOpen
+KolCh2CMD showPerson kol_chaptermaster","[PLACEHOLDER] Helensis has cleared the wardroom table for a single sheet: Cygnus' muster, with every empty berth marked in red. She doesn't explain it. She doesn't need to.
+
+""Chicomoztoc could fill this in a year,"" she says. ""I would like to hear anyone else at this table say the same of their patron.""",kolPatron_aboardHegemony2:Continue,
+kolPatron_aboardHegemony2,DialogOptionSelected,$option == kolPatron_aboardHegemony2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""Jangala's faithful marched once,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""You will have read how that ended. A Church that leans on that arm will be asked, sooner or later, to look away when it's raised. I would not have us practice looking away.""
+
+""I'm not asking the Church to look away, Lector,"" Helensis says. ""I'm asking for yards, hulls and crews, and the Hegemony is the only power at the table with them to spare. A prayer doesn't hold a patrol line over a congregation. A ship does."" She sets the muster in front of you, so you can read it too. ""Those berths are people we can't send.""
+
+""Whatever we promise Chicomoztoc,"" Greenflight says, ""it will want to inspect. The Inspectorate checks what it's given. We should only offer what we're willing to have counted.""","1:kolPatron_aboardHegA:""Filled berths save lives.""
+2:kolPatron_aboardHegB:""Borrowed strength has to be paid back.""
+3:kolPatron_aboardHegC:Say nothing",
+kolPatron_aboardHegA,DialogOptionSelected,$option == kolPatron_aboardHegA,FireBest KolPatronAboardHegemonyClose,"[PLACEHOLDER] ""Thank you,"" Helensis says. The Lector doesn't dispute it, only that it's the whole of the question.",,
+kolPatron_aboardHegB,DialogOptionSelected,$option == kolPatron_aboardHegB,FireBest KolPatronAboardHegemonyClose,"[PLACEHOLDER] ""Everything is paid back,"" Helensis says. ""I would rather choose the creditor.""",,
+kolPatron_aboardHegC,DialogOptionSelected,$option == kolPatron_aboardHegC,FireBest KolPatronAboardHegemonyClose,[PLACEHOLDER] Helensis takes your silence for assent. The Lector does not.,,
+kolPatron_aboardHegemonyClose,KolPatronAboardHegemonyClose,,KolPatronCMD talked hegemony,"[PLACEHOLDER] The wardroom empties a few at a time. By the next watch, the delegation is talking about other things.",kolPatron_aboardTalkDone:Continue,
+kolPatron_aboardTalkDone,DialogOptionSelected,$option == kolPatron_aboardTalkDone,"ShowDefaultVisual
 DismissDialog",,,
 # Knights patron: the mercenaries,,,,,,
 kolPatron_brokerOpt,PopulateOptions,"!$isPerson

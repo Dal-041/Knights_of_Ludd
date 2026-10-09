@@ -76,6 +76,10 @@ class KolPatronCMD : BaseCommandPlugin() {
             "dropOff" -> { KolPatronParley.dropOff(); true }
             "gateNext" -> { KolPatronParley.gateNext(dialog, map); true }
             "charterReacted" -> { KolPatronParley.charterReacted(); true }
+            "churchWelcomes" -> KolPatron.churchWelcomes()
+            "briefRefused" -> { com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.set("\$kolCh2Patron_briefRefused", true); true }
+            "introduce" -> { KolPatron.introduce(power(params, map) ?: return false, dialog.textPanel); true }
+            "talked" -> { KolPatronParley.setTalked(params.getOrNull(1)?.getString(map) ?: return false); true }
             "charterHere" -> KolPatron.charterRoute(market) != null
             "charterOpen" -> KolPatron.charterOpen(dialog, map)
             "charterPitch" -> KolPatron.charterPitch(dialog, map)

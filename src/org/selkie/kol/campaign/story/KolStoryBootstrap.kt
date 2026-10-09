@@ -9,6 +9,7 @@ object KolStoryBootstrap {
         val sector = Global.getSector()
         KolChapter.ensureChapterTwo()
         org.selkie.kol.campaign.story.ch2.KolPatronParley.refreshSteps() // step markers for saves made before they existed
+        KolStoryCue.check() // cues due in saves from before they existed
 
         sector.addTransientScript(KolChronicle())
         sector.addTransientScript(KolAssemblyScript())

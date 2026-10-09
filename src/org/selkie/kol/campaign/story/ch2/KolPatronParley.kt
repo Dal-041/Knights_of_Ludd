@@ -35,7 +35,8 @@ object KolPatronPrices {
         KolPatronPrice("hegemony_ties", KolPatronPower.HEGEMONY,
             "Closer ties with the Hegemony, and resupply of Hegemony expeditions at Church worlds.") { memory.set(K.PREFIX + "price_hegemony_ties", true) },
         KolPatronPrice("diktat_volturn", KolPatronPower.DIKTAT,
-            "The faith hands the Diktat its own files on Volturn's Path-affiliated faithful.") { memory.set(K.VOLTURN_FILES_GIVEN, true) },
+            "The faith keeps the Diktat supplied with its own files on Volturn's Path-affiliated faithful, through Sister " +
+                "Greenflight's office, for as long as the arrangement stands.") { memory.set(K.VOLTURN_FILES_GIVEN, true) },
     )
 
     fun get(key: String?): KolPatronPrice? = all.firstOrNull { it.key == key }
@@ -213,8 +214,19 @@ object KolPatronParley {
         !delegationAboard() -> null
         stage(KolPatronPower.DIKTAT) == "terms" -> "KolPatronAboardDiktat"
         charterReactionPending() -> "KolPatronAboardCharter"
+        // champion and skeptics, once the power's passenger is aboard too: before the meeting, once each
+        stage(KolPatronPower.LEAGUE) == "mazalot" && passenger("mazalotDelegate") && !talked("league") -> "KolPatronAboardLeague"
+        // the Hegemony in general, as soon as the delegation is aboard while it's still being courted: its meeting is
+        // usually set and held in one stay at Chicomoztoc, with no flight between
+        stage(KolPatronPower.HEGEMONY) in HEGEMONY_COURTED && !talked("hegemony") -> "KolPatronAboardHegemony"
         else -> null
     }
+
+    private val HEGEMONY_COURTED = setOf("lead", "sentAway", "jangala", "curate", "meetingSet")
+
+    /** A power's conversation in flight has played (its champion and skeptics). */
+    fun talked(power: String): Boolean = memory.getBoolean(K.PREFIX + "talked_" + power)
+    fun setTalked(power: String) = memory.set(K.PREFIX + "talked_" + power, true)
 
     /** Opens an aboard scene in space, at the next moment no dialog or menu is up (KolPatronFleetScript). */
     fun playAboard(trigger: String) {

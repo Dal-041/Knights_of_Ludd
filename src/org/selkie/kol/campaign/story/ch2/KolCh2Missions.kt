@@ -33,36 +33,48 @@ private val memory get() = Global.getSector().memoryWithoutUpdate
 
 /**
  * Securing a patron for the Church (raised at the convocation; coordinated by Greenflight). One parent with a branch
- * intel per prospective patron (KolPatronLeadIntel, the Pilgrim's Path pattern). SECURE: the branches develop; a
+ * intel per prospective patron (KolPatronLeadIntel, the Pilgrim's Path pattern). BRIEF: meet Greenflight in her office
+ * at Lyra, where each great power is introduced by its champion (skipped after the convocation oath, whose own meeting
+ * at Lyra serves). SECURE: the branches develop; a
  * signing (or the convocation oath) moves it to ANNOUNCE; it completes when the next assembly announces the patron
  * (KolPatron.onAssemblyAttended). Discovery is KolPatron (rules kolPatron_*). Planned in add-knights-patron-lobbying.
  */
 class KolCh2Patron : HubMissionWithSearch() {
     companion object { const val STAGE_DONE = "\$kolCh2Patron_stageDone" }
 
-    /** SECURE: seeking a patron (the branches). ANNOUNCE: a patron is signed; the next assembly announces it. */
-    enum class Stage { SECURE, ANNOUNCE, COMPLETED }
+    /**
+     * BRIEF: meet Greenflight in her office (the branches are introduced there). SECURE: seeking a patron (the
+     * branches). ANNOUNCE: a patron is signed; the next assembly announces it.
+     */
+    enum class Stage { BRIEF, SECURE, ANNOUNCE, COMPLETED }
 
     override fun create(createdAt: MarketAPI?, barEvent: Boolean): Boolean {
         if (!setGlobalReference(KolCh2.PATRON_REF, KolCh2.PATRON_ACTIVE)) return false
-        setStartingStage(Stage.SECURE)
+        // the oath secures the player's own forces at once: its own meeting at Lyra takes the brief's place
+        setStartingStage(if (memory.getBoolean(KolCh2.CONV_OATH_SWORN)) Stage.SECURE else Stage.BRIEF)
         addSuccessStages(Stage.COMPLETED)
         setStoryMission()
         setNoRepChanges()
         // stage flags are unset when a mission ends, so missions complete on their own flag, never a permanent one
+        connectWithGlobalFlag(Stage.BRIEF, Stage.SECURE, KolPatronFlags.BRIEFED)
         setStageOnGlobalFlag(Stage.ANNOUNCE, KolPatronFlags.ANNOUNCE)
         setStageOnGlobalFlag(Stage.COMPLETED, STAGE_DONE)
-        KolAssembly.lyra?.primaryEntity?.let { makeImportant(it, "\$kolPatron_announceAt", Stage.ANNOUNCE) }
+        KolAssembly.lyra?.primaryEntity?.let {
+            makeImportant(it, "\$kolPatron_briefAt", Stage.BRIEF) // the brief's option at Lyra keys on this flag
+            makeImportant(it, "\$kolPatron_announceAt", Stage.ANNOUNCE)
+        }
         return true
-    }
-
-    override fun acceptImpl(dialog: InteractionDialogAPI?, memoryMap: MutableMap<String, MemoryAPI>?) {
-        // the convocation oath secures the player's own forces at once: no branches to seek
-        if (!memory.getBoolean(KolCh2.CONV_OATH_SWORN)) KolPatron.startingLeads()
     }
 
     override fun callAction(action: String?, ruleId: String?, dialog: InteractionDialogAPI?,
                             params: MutableList<Misc.Token>?, memoryMap: MutableMap<String, MemoryAPI>?): Boolean {
+        if (action == "briefed") {
+            // the champions have introduced their powers (kolPatron_brief*); anything still missing joins quietly
+            KolPatron.startingLeads()
+            memory.set(KolPatronFlags.BRIEFED, true)
+            checkStageChangesAndTriggers(dialog, memoryMap)
+            return true
+        }
         if (action == "secureOwn") {
             // the oath opens the player's own branch; the meeting at Lyra settles and signs it (KolPatron.signOwn)
             KolPatron.ownPledged(dialog?.textPanel)
@@ -101,6 +113,7 @@ class KolCh2Patron : HubMissionWithSearch() {
         KolPatronParley.dropOff() // a fallback: the delegation normally goes home in the gate at Lyra
         memory.set(STAGE_DONE, true)
         checkStageChangesAndTriggers(null, null)
+        org.selkie.kol.campaign.story.KolStoryCue.check() // the next mission, if it hasn't been taken up
     }
 
     /** A lead was learned (KolPatron): mark where it leads, while the quest seeks. */
@@ -111,6 +124,8 @@ class KolCh2Patron : HubMissionWithSearch() {
 
     override fun addDescriptionForNonEndStage(info: TooltipMakerAPI, width: Float, height: Float) {
         when (currentStage) {
+            Stage.BRIEF -> info.addPara("[PLACEHOLDER] The assembly at Star Keep Lyra has charged you with finding the " +
+                    "Church a secular patron. Sister Greenflight's office coordinates the Order's part, and expects you.", 10f)
             Stage.SECURE -> {
                 info.addPara("[PLACEHOLDER] The assembly at Star Keep Lyra has charged you with finding the Church a secular " +
                         "patron while the Order's fleets are committed. Sister Greenflight's office coordinates the Order's part. " +
@@ -141,6 +156,11 @@ class KolCh2Patron : HubMissionWithSearch() {
 
     override fun addNextStepText(info: TooltipMakerAPI, tc: Color?, pad: Float): Boolean {
         when (currentStage) {
+            Stage.BRIEF -> {
+                info.addPara("Meet Sister Greenflight in her office at Star Keep Lyra", tc, pad)
+                if (memory.getBoolean("\$kolCh2Patron_briefRefused") && !KolPatron.churchWelcomes())
+                    info.addPara("Be welcomed by the Luddic Church", tc, 0f)
+            }
             Stage.SECURE -> info.addPara("Seek a patron for the Church", tc, pad)
             Stage.ANNOUNCE -> info.addPara("Attend the next assembly at Star Keep Lyra", tc, pad)
             else -> return false
@@ -155,6 +175,8 @@ class KolCh2Patron : HubMissionWithSearch() {
 object KolPatronFlags {
     /** A patron is signed; the quest waits for the next assembly. */
     const val ANNOUNCE = "\$kolCh2Patron_announce"
+    /** The brief at Greenflight's office is done. */
+    const val BRIEFED = "\$kolCh2Patron_briefed"
 }
 
 /**
@@ -267,7 +289,10 @@ class KolCh2Ninaya : KolJointOperation() {
  *   Caeli's guardian is beaten while they wait, they go home.
  * - Secure: visit the four worlds and the two stations, and beat Caeli's guardian (ZeaCaeli). In Ozymandias the
  *   Knights follow the player (an aggressive orbit, so they engage Dawn fleets); `$cfai_noJump` keeps them there.
- * - Memorial: one memorial beacon at Caeli, with or without the Knights present; then they return to Cygnus.
+ * - Memorial: one memorial beacon at Caeli, with or without the Knights present; then they return to Cygnus. A
+ *   cache surfaces beside it with the memorial: the relic.
+ * - Recover and deliver: the relic is brought aboard (a status line, not cargo) and taken to Helensis at Cygnus,
+ *   where Enarms objects; it counts as a Technology handover. The mission ends there.
  * If the guardian is already beaten when the mission starts, securing is the visits alone.
  * Stops are flagged on their entities and handled by high-score OpenInteractionDialog rules (kolCh2_oz*).
  */
@@ -283,14 +308,23 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
         const val MEMORIAL = "\$kolCh2Oz_memorial"
         /** Global, kept current: a Knights fleet of the mission is alive in Ozymandias (memorial text variants). */
         const val KNIGHTS_HERE = "\$kolCh2Oz_knightsHere"
+        private const val MEMORIALIZED = "\$kolCh2Oz_memorialized"
+        private const val RECOVERED = "\$kolCh2Oz_relicAboard"
+        /** On the cache that holds the relic, and on Helensis while it's to be delivered. */
+        const val CACHE = "\$kolCh2Oz_cache"
+        const val DELIVER = "\$kolCh2Oz_deliver"
+        /** Global, permanent: the relic was delivered to Helensis. */
+        const val RELIC_DELIVERED = "\$kolCh2_ozRelicDelivered"
+        /** [PLACEHOLDER] What the Order calls the object; narrative only (a status line, never cargo). */
+        const val RELIC_NAME = "the Caeli relic"
 
         // four fleets the size of the system's regular Dawn spawns (ZeaFleetSoloManager in PrepareShadows: 40-80 FP)
         private const val FLEETS = 4
-        private const val MIN_FP = 40f
-        private const val MAX_FP = 80f
+        private const val MIN_FP = 80f
+        private const val MAX_FP = 120f
     }
 
-    enum class Stage { RENDEZVOUS, SECURE, MEMORIAL, COMPLETED }
+    enum class Stage { RENDEZVOUS, SECURE, MEMORIAL, RECOVER, DELIVER, COMPLETED }
 
     private var system: StarSystemAPI? = null
     private val stops = ArrayList<SectorEntityToken>()
@@ -303,6 +337,7 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
     private var beatenAtStart = false
     /** A patron was secured at acceptance: the Knights come. Fixed for the mission. */
     private var withKnights = false
+    private var cache: SectorEntityToken? = null
 
     override fun create(createdAt: MarketAPI?, barEvent: Boolean): Boolean {
         if (!setGlobalReference(KolCh2.OZY_REF, KolCh2.OZY_ACTIVE)) return false
@@ -332,8 +367,11 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
         setNoRepChanges()
         connectWithGlobalFlag(Stage.RENDEZVOUS, Stage.SECURE, MET)
         connectWithGlobalFlag(Stage.SECURE, Stage.MEMORIAL, SECURED)
+        connectWithGlobalFlag(Stage.MEMORIAL, Stage.RECOVER, MEMORIALIZED)
+        connectWithGlobalFlag(Stage.RECOVER, Stage.DELIVER, RECOVERED)
         setStageOnGlobalFlag(Stage.COMPLETED, STAGE_DONE)
         makeImportant(sleeper, KolCh2.OZY_CAELI, Stage.MEMORIAL)
+        Global.getSector().importantPeople.getPerson(KolStaticStrings.KolCh1.HELENSIS_ID)?.let { makeImportant(it, DELIVER, Stage.DELIVER) }
         return true
     }
 
@@ -450,9 +488,36 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
             }
             "memorial" -> {
                 layMemorial()
+                spawnCache()
+                memory.set(MEMORIALIZED, true)
+                // their duties done, the Knights go home; the relic is the player's to carry
+                alive().forEach { sendHome(it) }
+                knights.clear()
+                checkStageChangesAndTriggers(dialog, memoryMap)
+                return true
+            }
+            "takeRelic" -> {
+                val text = dialog?.textPanel
+                text?.setFontSmallInsignia()
+                text?.addPara("%s brought aboard", Misc.getPositiveHighlightColor(), Misc.getHighlightColor(), Misc.ucFirst(RELIC_NAME))
+                text?.setFontInsignia()
+                cache?.let { Misc.fadeAndExpire(it) }
+                cache = null
+                memory.set(RECOVERED, true)
+                checkStageChangesAndTriggers(dialog, memoryMap)
+                return true
+            }
+            "deliverRelic" -> {
+                val text = dialog?.textPanel
+                text?.setFontSmallInsignia()
+                text?.addPara("%s handed over", Misc.getNegativeHighlightColor(), Misc.getHighlightColor(), Misc.ucFirst(RELIC_NAME))
+                text?.setFontInsignia()
+                org.selkie.kol.campaign.situations.KolTechSituationIntel.get()?.credit(KolStorySettings.ozRelicScrip, dialog)
+                memory.set(RELIC_DELIVERED, true)
+                // the last objective: only now is Ozymandias done (the chapter requirement, the assembly's reckoning)
                 memory.set(KolCh2.OZY_DONE, true)
-                memory.set(STAGE_DONE, true)
                 KolAssembly.report("ozymandias")
+                memory.set(STAGE_DONE, true)
                 checkStageChangesAndTriggers(dialog, memoryMap)
                 return true
             }
@@ -468,6 +533,17 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
         beacon.memoryWithoutUpdate.set(MEMORIAL, true)
     }
 
+    /** The relic's cache, surfaced beside Caeli as the memorial is laid. */
+    private fun spawnCache() {
+        val at = caeli ?: return
+        val entity = at.containingLocation.addCustomEntity(null, "[PLACEHOLDER] Sealed Cache",
+            ZeaStaticStrings.ZeaEntities.ZEA_CACHE_LOW, ZeaStaticStrings.dawnID)
+        entity.setCircularOrbitPointingDown(at, 270f, at.radius + 150f, 45f)
+        entity.isDiscoverable = false // in plain sight: it surfaced as the player watched
+        cache = entity
+        makeImportant(entity, CACHE, Stage.RECOVER)
+    }
+
     override fun notifyEnding() {
         super.notifyEnding()
         for (stop in stops) {
@@ -477,6 +553,8 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
         alive().forEach { sendHome(it) }
         knights.clear()
         memory.unset(KNIGHTS_HERE)
+        cache?.let { Misc.fadeAndExpire(it) } // the mission ended (severance) before the relic was taken
+        cache = null
     }
 
     override fun addDescriptionForNonEndStage(info: TooltipMakerAPI, width: Float, height: Float) {
@@ -489,6 +567,10 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
                     "(%s of %s visited)" + (if (ZeaCaeli.beaten()) "." else ", and whatever keeps the Caeli cryosleeper."),
                 10f, h, "$visited", "${stops.size}")
             Stage.MEMORIAL -> info.addPara("[PLACEHOLDER] Ozymandias is secured. The Order's memorial is to be laid at Caeli.", 10f)
+            Stage.RECOVER -> info.addPara("[PLACEHOLDER] As the memorial was laid, a sealed cache surfaced from the guardian's " +
+                    "wreckage beside Caeli. Master Helensis has asked that anything recovered be brought to her.", 10f)
+            Stage.DELIVER -> info.addPara("[PLACEHOLDER] You carry %s. Master Helensis wants it at Cygnus; not everyone " +
+                    "in the Order will be glad to see it there.", 10f, h, RELIC_NAME)
             else -> {}
         }
     }
@@ -502,6 +584,8 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
                 if (!ZeaCaeli.beaten()) info.addPara("Secure the Caeli cryosleeper", tc, if (visited < stops.size) 0f else pad)
             }
             Stage.MEMORIAL -> info.addPara("Lay the memorial at Caeli", tc, pad)
+            Stage.RECOVER -> info.addPara("Recover the cache beside Caeli", tc, pad)
+            Stage.DELIVER -> info.addPara("Bring %s to Master Helensis at Cygnus", pad, tc, h, RELIC_NAME)
             else -> return false
         }
         return true

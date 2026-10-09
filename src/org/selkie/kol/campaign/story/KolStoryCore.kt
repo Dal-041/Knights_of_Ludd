@@ -20,6 +20,7 @@ object KolStorySettings {
     val jointOpFleetPoints get() = json.optDouble("jointOpFleetPoints", 120.0).toFloat()
     val alreadyDoneBountyCredits get() = json.optInt("alreadyDoneBountyCredits", 150000)
     val ozZhiNuRecoveryRep get() = json.optDouble("ozZhiNuRecoveryRep", 0.05).toFloat()
+    val ozRelicScrip get() = json.optInt("ozRelicScrip", 5000)
     val inquestModerateScore get() = json.optDouble("inquestModerateScore", 8.0).toFloat()
     val inquestHeavyScore get() = json.optDouble("inquestHeavyScore", 20.0).toFloat()
     val readingAppends get() = json.optBoolean("readingAppends", true)

@@ -194,7 +194,6 @@ class KolAssemblyScript : EveryFrameScript {
             KolAssemblyData.State.ANNOUNCED -> if (untilSit <= 0f) {
                 data.state = KolAssemblyData.State.SITTING
                 if (data.important) Global.getSector().memoryWithoutUpdate.set(KolStory.ATTEND_SITTING, true)
-                data.tracker?.update(KolAssemblyTracker.UPDATE_SITTING)
             }
             KolAssemblyData.State.SITTING ->
                 if (data.attended || untilSit + KolStorySettings.assemblyWindowDays <= 0f) close(data)
@@ -209,7 +208,6 @@ class KolAssemblyScript : EveryFrameScript {
         data.attended = false
         data.state = KolAssemblyData.State.ANNOUNCED
         if (data.important) KolAssemblyAttend.start()
-        data.tracker?.update(KolAssemblyTracker.UPDATE_CALLED)
     }
 
     private fun close(data: KolAssemblyData) {
@@ -236,26 +234,20 @@ class KolAssemblyScript : EveryFrameScript {
         do {
             data.nextSit = KolAssembly.plusDays(data.nextSit, KolStorySettings.assemblyIntervalDays)
         } while (KolAssembly.daysSince(KolAssembly.closeTime()) > 0f)
-        data.tracker?.update(null)
     }
 }
 
-/** The standing tracker: the next two assemblies at Lyra, with their dates. Never ends. */
+/**
+ * The standing tracker: the next two assemblies at Lyra, with their dates. Never ends. Routine: added silently and never
+ * announces itself (its entry reads the dates live); an important assembly is announced by the attend mission.
+ */
 class KolAssemblyTracker : BaseIntelPlugin() {
     companion object {
-        const val UPDATE_CALLED = "called"
-        const val UPDATE_SITTING = "sitting"
-
         fun ensure() {
             val data = KolAssembly.data()
             if (data.tracker != null) return
-            data.tracker = KolAssemblyTracker().also { Global.getSector().intelManager.addIntel(it) }
+            data.tracker = KolAssemblyTracker().also { Global.getSector().intelManager.addIntel(it, true) }
         }
-    }
-
-    fun update(param: Any?) {
-        if (param == null) return
-        sendUpdateIfPlayerHasIntel(param, false)
     }
 
     override fun shouldRemoveIntel(): Boolean = false
@@ -268,20 +260,13 @@ class KolAssemblyTracker : BaseIntelPlugin() {
         val h = Misc.getHighlightColor()
         val data = KolAssembly.data()
         bullet(info)
-        if (isUpdate) {
-            when (listInfoParam) {
-                UPDATE_CALLED -> info.addPara("Sits from %s", initPad, tc, h, KolAssembly.dateOf(KolAssembly.sitTime()))
-                UPDATE_SITTING -> info.addPara("In session until %s", initPad, tc, h, KolAssembly.dateOf(KolAssembly.closeTime()))
-            }
+        if (data.state == KolAssemblyData.State.SITTING && !data.attended) {
+            info.addPara("In session until %s", initPad, tc, h, KolAssembly.dateOf(KolAssembly.closeTime()))
         } else {
-            if (data.state == KolAssemblyData.State.SITTING && !data.attended) {
-                info.addPara("In session until %s", initPad, tc, h, KolAssembly.dateOf(KolAssembly.closeTime()))
-            } else {
-                val days = (-KolAssembly.daysSince(KolAssembly.sitTime())).toInt()
-                info.addPara("Next: %s (in %s)", initPad, tc, h, range(0), Misc.getStringForDays(days))
-            }
-            info.addPara("Then: %s", 0f, tc, h, range(1))
+            val days = (-KolAssembly.daysSince(KolAssembly.sitTime())).toInt()
+            info.addPara("Next: %s (in %s)", initPad, tc, h, range(0), Misc.getStringForDays(days))
         }
+        info.addPara("Then: %s", 0f, tc, h, range(1))
         unindent(info)
     }
 
@@ -392,8 +377,9 @@ class KolAssemblyAttend : HubMissionWithSearch() {
  * would never count down.
  */
 class KolAssemblyIntel(private val entries: Map<String, Int> = emptyMap()) : BaseIntelPlugin() {
+    /** Routine: added silently, without an announcement. */
     fun post() {
-        Global.getSector().intelManager.addIntel(this)
+        Global.getSector().intelManager.addIntel(this, true)
     }
 
     override fun shouldRemoveIntel(): Boolean {

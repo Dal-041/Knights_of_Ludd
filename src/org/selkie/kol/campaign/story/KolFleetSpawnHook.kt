@@ -49,11 +49,11 @@ class KolFleetSpawnHook : BaseCampaignEventListener(false) {
 
         /** Replaces [old] with a new ship of [variantId], keeping its officer and flagship status. */
         fun swapMember(fleet: CampaignFleetAPI, old: FleetMemberAPI, variantId: String): FleetMemberAPI? {
-            if (!Global.getSettings().doesVariantExist(variantId)) return null
+            //if (!Global.getSettings().doesVariantExist(variantId)) return null
             val member = Global.getFactory().createFleetMember(FleetMemberType.SHIP, variantId)
             val variant = member.variant.clone()
             variant.source = VariantSource.REFIT
-            variant.addTag(Tags.TAG_NO_AUTOFIT)
+            //variant.addTag(Tags.TAG_NO_AUTOFIT)
             member.setVariant(variant, false, true)
             member.shipName = old.shipName
             if (old.captain != null && !old.captain.isDefault) member.captain = old.captain
