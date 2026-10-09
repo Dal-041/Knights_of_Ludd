@@ -161,8 +161,8 @@ private static final ArrayList<String[]> KoLHLs = new ArrayList<>();
 
     public Set<String> getIntelTags(SectorMapAPI map) {
         Set<String> tags = super.getIntelTags(map);
-        if (!name.contains("Knights")) tags.add(ZeaStaticStrings.IntelLoreTag);
-        else tags.add(KolStaticStrings.KNIGHTS_OF_LUDD);
+        if (!name.contains("Knights of Ludd")) tags.add(ZeaStaticStrings.IntelLoreTag);
+        else tags.add(ID); // the faction's own tab: vanilla files faction intel by faction id
         return tags;
     }
 
