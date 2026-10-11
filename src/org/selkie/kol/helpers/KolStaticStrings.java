@@ -185,6 +185,13 @@ public class KolStaticStrings {
                 "$kolTech_armory", "$kolTech_consecrated", "$kolTech_max"};
         public static final String EXCOMMUNICATED = "$kol_excommunicated";
 
+        // Ordained rollouts (add-knights-tech-milestones): permanent flags
+        public static final String ORDAINED_EARLY = "$kolTech_ordainedEarly";            // the early rollout happened
+        public static final String ORDAINED_FULL = "$kolTech_ordainedFull";              // the full rollout happened
+        public static final String ORDAINED_EARLY_STANCE = "$kolOrdained_earlyStance";   // helensis / enarms / silent
+        public static final String ORDAINED_EARLY_SHAKEDOWN = "$kolOrdained_earlyShakedown"; // joined / absent
+        public static final String ORDAINED_EARLY_LOST = "$kolOrdained_earlyLost";       // the squadron was destroyed
+
         // Rule triggers fired by KolTechCMD
         public static final String TRIGGER_AFTER_HANDOVER = "KolTechAfterHandover";
         public static final String TRIGGER_SHROUDED = "KolTechShrouded";

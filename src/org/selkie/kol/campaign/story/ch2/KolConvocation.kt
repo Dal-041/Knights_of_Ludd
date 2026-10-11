@@ -160,35 +160,31 @@ object KolConvocation {
 
     private fun person(id: String) = Global.getSector().importantPeople.getPerson(id)
 
-    private fun adjust(person: PersonAPI?, amount: Float, dialog: InteractionDialogAPI) {
-        person ?: return
-        person.relToPlayer.adjustRelationship(amount, null)
-        val name = "${person.rank} ${person.name.last}"
-        if (amount > 0) dialog.textPanel.addPara("Relations with $name improved", Misc.getPositiveHighlightColor())
-        else dialog.textPanel.addPara("Relations with $name worsened", Misc.getNegativeHighlightColor())
-    }
+    private fun adjust(person: PersonAPI?, points: Int, dialog: InteractionDialogAPI) =
+        org.selkie.kol.campaign.story.KolPeople.approve(person, points, dialog.textPanel)
 
     /** The oath for offering the player's own forces. A lie costs Greenflight's regard at once (she was watching). */
     fun oath(lie: Boolean, dialog: InteractionDialogAPI) {
         memory.set(KolCh2.CONV_OATH_SWORN, true)
         if (lie) {
             memory.set(KolCh2.CONV_OATH_LIE, true)
-            adjust(person(KolCh1.GREENFLIGHT_ID), -0.15f, dialog)
+            adjust(person(KolCh1.GREENFLIGHT_ID), -15, dialog) // a lie under oath, witnessed: a large swing
         }
     }
 
     /** Settles what the player said, at the close. */
     fun effects(dialog: InteractionDialogAPI) {
         fun said(topic: String) = memory.getString("\$kolConv_said_$topic")
-        var helensis = 0f
-        var enarms = 0f
-        var greenflight = 0f
-        when (said("attrition")) { "offense" -> helensis += 0.05f; "defense" -> enarms += 0.05f; "pragmatic" -> greenflight += 0.05f }
-        when (said("funding")) { "coin" -> helensis += 0.05f; "loyal" -> enarms += 0.05f }
-        when (said("powers")) { "outside", "allies" -> greenflight += 0.05f; "diplomat" -> greenflight += 0.08f }
-        if (said("threats") == "fought") helensis += 0.05f
-        if (helensis > 0f) adjust(person(KolCh1.HELENSIS_ID), helensis, dialog)
-        if (enarms > 0f) adjust(person(KolPrelude.ENARMS_ID), enarms, dialog)
-        if (greenflight > 0f) adjust(person(KolCh1.GREENFLIGHT_ID), greenflight, dialog)
+        // approval points: the Masters (Helensis, Greenflight) move less than Enarms
+        var helensis = 0
+        var enarms = 0
+        var greenflight = 0
+        when (said("attrition")) { "offense" -> helensis += 2; "defense" -> enarms += 3; "pragmatic" -> greenflight += 2 }
+        when (said("funding")) { "coin" -> helensis += 2; "loyal" -> enarms += 3 }
+        when (said("powers")) { "outside", "allies" -> greenflight += 2; "diplomat" -> greenflight += 3 }
+        if (said("threats") == "fought") helensis += 2
+        adjust(person(KolCh1.HELENSIS_ID), helensis, dialog)
+        adjust(person(KolPrelude.ENARMS_ID), enarms, dialog)
+        adjust(person(KolCh1.GREENFLIGHT_ID), greenflight, dialog)
     }
 }

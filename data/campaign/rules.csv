@@ -408,7 +408,8 @@ He takes a long breath. ""Ludd's-"" He breaks off and glances past the edge of t
 kolPrelude_dossierBlunt:""Someone on your side sold you out.""
 kolPrelude_dossierAmbig:""Someone held the worst of it back. Maybe for you.""
 kolPrelude_dossierNeutral:""What do you want done with it?""",
-kolPrelude_dossierFaithful,DialogOptionSelected,$option == kolPrelude_dossierFaithful,$global.kolPrelude_dossierTake = faithful,"""The Faith is eternal, captain, but the men who serve it are flawed. Today, we are reminded of that truth once more.""",kolPrelude_pirateReport2:Continue,
+kolPrelude_dossierFaithful,DialogOptionSelected,$option == kolPrelude_dossierFaithful,"$global.kolPrelude_dossierTake = faithful
+KolStoryCMD approve kol_knightcaptain 3","""The Faith is eternal, captain, but the men who serve it are flawed. Today, we are reminded of that truth once more.""",kolPrelude_pirateReport2:Continue,
 kolPrelude_dossierBlunt,DialogOptionSelected,$option == kolPrelude_dossierBlunt,$global.kolPrelude_dossierTake = blunt,"Enarms does not argue. ""Perhaps."" He looks at the slate for a while. 
 
 ""'Perhaps' is as far as I will go today, and further than I would like.""",kolPrelude_pirateReport2:Continue,
@@ -485,7 +486,8 @@ kolPrelude_libraDockMissing,KolPreludeLibraDockCheck,!$kolPreludeLibra_hasCargo,
 kolPrelude_libraLater,DialogOptionSelected,$option == kolPrelude_libraLater,FireAll PopulateOptions,"""Of course. We'll be here."" Martins is already turning back to his dark displays.
 
 ""We always are.""",,
-kolPrelude_libraDeliver,DialogOptionSelected,$option == kolPrelude_libraDeliver,Call $global.kolPreludeLibra_ref deliver,"On the docking feed, Knights in mismatched armor form a chain from your shuttles into the station, passing crates hand to hand. The channel to the command deck is still open, and it carries the sound from Martins' own monitor: some of the crew are singing.
+kolPrelude_libraDeliver,DialogOptionSelected,$option == kolPrelude_libraDeliver,"Call $global.kolPreludeLibra_ref deliver
+KolStoryCMD approve kol_libramaster 10","On the docking feed, Knights in mismatched armor form a chain from your shuttles into the station, passing crates hand to hand. The channel to the command deck is still open, and it carries the sound from Martins' own monitor: some of the crew are singing.
 
 Martins has half turned to watch it. ""Tell Enarms we're grateful. Tell him also that we see things out here Cygnus doesn't. Ships that aren't friends and aren't pirates, sitting at the edge of our guns and just... watching. They're getting bolder.""",kolPrelude_libraDeliver_c2:Continue,
 kolPrelude_libraDeliver_c2,DialogOptionSelected,$option == kolPrelude_libraDeliver_c2,,"The singing swells as another crate goes hand to hand. He listens a moment. ""This song is one of harvest, and it is a better one than what we sang for the last convoy."" 
@@ -549,13 +551,16 @@ kolCh1_declineIndifferent:""Influence comes and goes. The Sector doesn't wait fo
 kolCh1_declineGlad:""Forgive me, Brother, but not everyone out there will mourn it.""
 kolCh1_declineDefer:Say nothing",
 kolCh1_declineGrieve,DialogOptionSelected,$option == kolCh1_declineGrieve,"$global.kolCh1_decline = grieve
-FireBest KolCh1DeclineGrieve",,,
+FireBest KolCh1DeclineGrieve
+KolStoryCMD approve kol_knightcaptain 3",,,
 kolCh1_declineGrieveLie,DialogOptionSelected,$option == kolCh1_declineGrieveLie,"$global.kolCh1_decline = grieve
 $global.kolCh1_declineLie = true
-FireBest KolCh1DeclineGrieve",,,
+FireBest KolCh1DeclineGrieve
+KolStoryCMD approve kol_knightcaptain 3",,,
 kolCh1_declineGrieveText,KolCh1DeclineGrieve,,,"Enarms inclines his head. ""Thank you. It is good to hear that from someone who isn't paid to say it.""",kolCh1_quarters3:Continue,
 kolCh1_declineIndifferent,DialogOptionSelected,$option == kolCh1_declineIndifferent,$global.kolCh1_decline = indifferent,"""No,"" he agrees after a moment. ""It doesn't. That is rather the trouble.""",kolCh1_quarters3:Continue,
-kolCh1_declineGlad,DialogOptionSelected,$option == kolCh1_declineGlad,$global.kolCh1_decline = glad,"He is quiet long enough that you wonder if you have misjudged him. Then: ""No. I don't suppose all of them will."" If he is offended, he doesn't express it.
+kolCh1_declineGlad,DialogOptionSelected,$option == kolCh1_declineGlad,"$global.kolCh1_decline = glad
+KolStoryCMD approve kol_knightcaptain -3","He is quiet long enough that you wonder if you have misjudged him. Then: ""No. I don't suppose all of them will."" If he is offended, he doesn't express it.
 
 ""They will notice if our guard is dropped, though.""",kolCh1_quarters3:Continue,
 kolCh1_declineDefer,DialogOptionSelected,$option == kolCh1_declineDefer,$global.kolCh1_decline = defer,You let the silence answer. Enarms seems to find that easier than anything you might have said.,kolCh1_quarters3:Continue,
@@ -569,12 +574,15 @@ kolCh1_techOpposeLie:""You're right to hold the line."" (lie)
 kolCh1_techEmbrace:""If it keeps your people alive, I'd hear them out.""
 kolCh1_techDefer:""That's for the Order to decide, not me.""",
 kolCh1_techOppose,DialogOptionSelected,$option == kolCh1_techOppose,"$global.kolCh1_tech = oppose
-FireBest KolCh1TechOppose",,,
+FireBest KolCh1TechOppose
+KolStoryCMD approve kol_knightcaptain 4",,,
 kolCh1_techOpposeLie,DialogOptionSelected,$option == kolCh1_techOpposeLie,"$global.kolCh1_tech = oppose
 $global.kolCh1_techLie = true
-FireBest KolCh1TechOppose",,,
+FireBest KolCh1TechOppose
+KolStoryCMD approve kol_knightcaptain 4",,,
 kolCh1_techOpposeText,KolCh1TechOppose,,,"Something in his shoulders eases. ""Then I am not alone in this room, at least.""",kolCh1_quarters4:Continue,
-kolCh1_techEmbrace,DialogOptionSelected,$option == kolCh1_techEmbrace,$global.kolCh1_tech = embrace,"Enarms doesn't argue. ""You would, and you would not be wicked for it."" He looks at the lemon tree. ""That is what makes it difficult.""",kolCh1_quarters4:Continue,
+kolCh1_techEmbrace,DialogOptionSelected,$option == kolCh1_techEmbrace,"$global.kolCh1_tech = embrace
+KolStoryCMD approve kol_knightcaptain -2","Enarms doesn't argue. ""You would, and you would not be wicked for it."" He looks at the lemon tree. ""That is what makes it difficult.""",kolCh1_quarters4:Continue,
 kolCh1_techDefer,DialogOptionSelected,$option == kolCh1_techDefer,$global.kolCh1_tech = defer,"""It is,"" he says. ""And the Order is deciding, whether it means to or not.""",kolCh1_quarters4:Continue,
 kolCh1_quarters4,DialogOptionSelected,$option == kolCh1_quarters4,$global.kolCh1_quartersDone = true,"Enarms rises and takes a slate from the shelf behind the herbs. When he sits again he sits straighter, the way he did for the camera.
 
@@ -591,12 +599,15 @@ You came to us for work, and I am asking for something more than that. It is wha
 kolCh1_oathSwearLie:""I swear it."" (lie)
 kolCh1_oathDefer:""I can't swear you an oath like that.""",
 kolCh1_oathSwear,DialogOptionSelected,$option == kolCh1_oathSwear,"$global.kolCh1_oathSworn = true
-FireBest KolCh1OathSworn",,,
+FireBest KolCh1OathSworn
+KolStoryCMD approve kol_knightcaptain 10",,,
 kolCh1_oathSwearLie,DialogOptionSelected,$option == kolCh1_oathSwearLie,"$global.kolCh1_oathSworn = true
 $global.kolCh1_oathLie = true
-FireBest KolCh1OathSworn",,,
+FireBest KolCh1OathSworn
+KolStoryCMD approve kol_knightcaptain 10",,,
 kolCh1_oathSwornText,KolCh1OathSworn,,,"Enarms bows his head, briefly, the way Knights do before an altar. ""Then travel in His light, captain. Thank you. I swear to always treat you with the same grace you have offered.""","kolCh1_scoutBrief:""Tell me about the anomaly.""",
-kolCh1_oathDefer,DialogOptionSelected,$option == kolCh1_oathDefer,$global.kolCh1_oathDeferred = true,"Enarms nods slowly. ""That is fair. I would rather you give an honest answer than an easy lie."" He leaves the slate where it is. ""Call the shuttle when you are ready. Should you return, the kettle will still be waiting.""",kolCh1_leaveQuarters:Return to your shuttle,
+kolCh1_oathDefer,DialogOptionSelected,$option == kolCh1_oathDefer,"$global.kolCh1_oathDeferred = true
+KolStoryCMD approve kol_knightcaptain 2","Enarms nods slowly. ""That is fair. I would rather you give an honest answer than an easy lie."" He leaves the slate where it is. ""Call the shuttle when you are ready. Should you return, the kettle will still be waiting.""",kolCh1_leaveQuarters:Return to your shuttle,
 kolCh1_oathResumeOpt,PopulateOptions,"$market.id == kol_cygnus
 !$isPerson
 RepIsAtWorst knights_of_selkie NEUTRAL
@@ -646,7 +657,8 @@ kolCh1_debriefLink,KolCh1DebriefLink,,,"He rises and turns the face-down slate o
 
 ""There is a force, captain, reaching toward us out of the dark. And already the enemy within, compromising our strength. If they are one and the same..."" He sits again, heavily. It goes unsaid. ""This is beyond the two of us. Beyond a Knight-Captain's mandate. It has to go higher.""","kolCh1_debriefDoubt:""The ships at the anomaly didn't seem like Martins' watchers.""
 kolCh1_debriefAgree:""Then we take it higher.""",
-kolCh1_debriefDoubt,DialogOptionSelected,$option == kolCh1_debriefDoubt,$global.kolCh1_doubtedLink = true,"Enarms considers it seriously; you can see him do it. ""Perhaps not. Two, then, from the same accursed lineage. We will reveal the link."" He shakes his head. ""But I will not bring my superiors two puzzles when one will frighten them enough. Hold the thought, captain. I will not forget you raised it.""",kolCh1_debriefBounty:Continue,
+kolCh1_debriefDoubt,DialogOptionSelected,$option == kolCh1_debriefDoubt,"$global.kolCh1_doubtedLink = true
+KolStoryCMD approve kol_knightcaptain 2","Enarms considers it seriously; you can see him do it. ""Perhaps not. Two, then, from the same accursed lineage. We will reveal the link."" He shakes his head. ""But I will not bring my superiors two puzzles when one will frighten them enough. Hold the thought, captain. I will not forget you raised it.""",kolCh1_debriefBounty:Continue,
 kolCh1_debriefAgree,DialogOptionSelected,$option == kolCh1_debriefAgree,,"""Yes."" He glances at the overturned slate. ""That is already begun, as you may see. Getting the right people in one room takes longer than you would think, no matter how long it is you think.""",kolCh1_debriefBounty:Continue,
 kolCh1_debriefBounty,DialogOptionSelected,$option == kolCh1_debriefBounty,Call $global.kolCh1Scout_ref complete,"""While I make the arrangements, there is something else."" He brings up a list on the slate: pirate bands, a few of them, thinning Cygnus' supply runs.
 
@@ -712,7 +724,8 @@ A Knight-Commander begins to answer; another cuts across him; the curate says so
 kolCh1_councilEmpower:""I would defeat them personally, I only need your support.""",
 kolCh1_councilFreelancers,DialogOptionSelected,$option == kolCh1_councilFreelancers,FireBest KolCh1CouncilQuorum,"The suggestion goes around the half-ring like a coin being tested with teeth. An administrator cites the cost of the last freelance writ. A Knight-Captain observes, not unkindly, that the faithful cannot hand their mandate to outsiders, however capable.",,
 kolCh1_councilEmpower,DialogOptionSelected,$option == kolCh1_councilEmpower,"$option = kolCh1_councilFreelancers 0
-FireBest DialogOptionSelected",,,
+FireBest DialogOptionSelected
+KolStoryCMD approve kol_chaptermaster 2",,,
 kolCh1_councilQuorum,KolCh1CouncilQuorum,,,"""An oath is a fine thing,"" says another. ""So is a commission. Neither makes a secular captain a Knight, and the Order does not put its own in the hands of those who are not.""
 
 Helensis calls the question. The quorum declines, by a margin that is polite rather than close.","kolCh1_councilAllies:""Then ask the Order's allies among the other powers.""
@@ -731,7 +744,8 @@ Providence and our own strength will see us through this threat; it will not be 
 kolCh1_councilLibraDuty:""Knight-Master Martins needs a garrison. The enemy's scouts are already there.""",
 kolCh1_councilLibraDuty,DialogOptionSelected,$option == kolCh1_councilLibraDuty,"$option = kolCh1_councilLibra 0
 FireBest DialogOptionSelected",,,
-kolCh1_councilLibra,DialogOptionSelected,$option == kolCh1_councilLibra,,"For the first time the room goes properly still. Enarms stands still at his lectern.
+kolCh1_councilLibra,DialogOptionSelected,$option == kolCh1_councilLibra,"KolStoryCMD approve kol_chaptermaster -2
+KolStoryCMD approve kol_knightcaptain 3","For the first time the room goes properly still. Enarms stands still at his lectern.
 
 ""Libra,"" Helensis says. ""Yes. Knight-Master Martins is a faithful servant, and has been faithful in that place for a very long time.""
 
@@ -889,9 +903,22 @@ kolCh2_ozDeliverOpt,PopulateOptions,"$isPerson
 $id == kol_chaptermaster
 $kolCh2Oz_deliver",,,"9:kolCh2_ozDeliver:[PLACEHOLDER] ""I've brought what was recovered at Ozymandias.""",
 kolCh2_ozDeliver,DialogOptionSelected,$option == kolCh2_ozDeliver,,[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down.,kolCh2_ozDeliver2:Continue,
+kolCh2_ozDeliverAgain,DialogOptionSelected,"$option == kolCh2_ozDeliver score:10
+$global.kolHelensis_confrontations >= 1",,"[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down. He looks at it, then out of the window at the third berth, and you can watch him add it up.",kolCh2_ozDeliver2:Continue,escalated: the Ordained confrontation came first
 kolCh2_ozDeliver2,DialogOptionSelected,$option == kolCh2_ozDeliver2,KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""Master, with respect: we don't know what this is. Doctrine has an answer for things we can't name, and it isn't a shelf in your office."" Enarms doesn't look at you. He doesn't need to.",kolCh2_ozDeliver3:Continue,
+kolCh2_ozDeliver2Again,DialogOptionSelected,"$option == kolCh2_ozDeliver2 score:10
+$global.kolHelensis_confrontations >= 1",KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""We don't know what it is,"" Enarms says. ""I couldn't have told you what was in that berth either, until I counted it. I'd like to know where this goes, Master, before it goes there.""",kolCh2_ozDeliver3:Continue,
 kolCh2_ozDeliver3,DialogOptionSelected,$option == kolCh2_ozDeliver3,"KolCh2CMD showPerson kol_chaptermaster
-Call $global.kolCh2Oz_ref deliverRelic","[PLACEHOLDER] ""Doctrine is for what we understand, Brother. This, we'll learn."" Helensis turns back to you, and for a moment she's almost warm. ""The Order is in your debt."" Enarms leaves without being dismissed.",kolCh2_ozDeliverDone:Continue,
+Call $global.kolCh2Oz_ref deliverRelic
+KolStoryCMD approve kol_chaptermaster 3
+KolStoryCMD approve kol_knightcaptain -3","[PLACEHOLDER] ""Doctrine is for what we understand, Brother. This, we'll learn."" Helensis turns back to you, and for a moment she's almost warm. ""The Order is in your debt."" Enarms leaves without being dismissed.",kolCh2_ozDeliverDone:Continue,
+kolCh2_ozDeliver3Again,DialogOptionSelected,"$option == kolCh2_ozDeliver3 score:10
+$global.kolHelensis_confrontations >= 1","KolCh2CMD showPerson kol_chaptermaster
+Call $global.kolCh2Oz_ref deliverRelic
+KolStoryCMD approve kol_chaptermaster 3
+KolStoryCMD approve kol_knightcaptain -3","[PLACEHOLDER] ""It goes where I can study it, Brother. That's what it's for."" Helensis turns back to you. ""The Order is in your debt.""
+
+Enarms leaves when you do. He walks you as far as the shuttle, and doesn't say anything the whole way.",kolCh2_ozDeliverDone:Continue,
 kolCh2_ozDeliverDone,DialogOptionSelected,$option == kolCh2_ozDeliverDone,FireAll PopulateOptions,,,
 kolTech_requisitions,DialogOptionSelected,$option == kolTech_requisitions,FireBest KolTechReqMenu,,,
 kolTech_reqMenu,KolTechReqMenu,,"KolTechCMD publish
@@ -1065,6 +1092,85 @@ kolTech_purchaseShips,KolTechAfterPurchase,$kolTech_purchaseType == ships score:
 kolTech_purchaseMixed,KolTechAfterPurchase,$kolTech_purchaseType == mixed score:10,,"""A generous order. It pleases me to see the Order's stores put to use.""",,
 kolTech_purchaseOfficer,KolTechAfterPurchase,$kolTech_purchaseType == officer score:10,,"""One of my own Knights goes with you. Treat them well, captain. They are dear to me.""",,
 kolTech_purchaseUnique,KolTechAfterPurchase,$kolTech_purchaseType == unique score:10,,"""I do not release such a vessel lightly, captain. I hope you will think of it as a gift from the Order, not a purchase.""",,
+kolOrdained_greeting,PickGreeting,"$id == kol_chaptermaster score:400
+KolOrdainedCMD due
+!$global.kol_excommunicated","ShowPersonVisual
+KolOrdainedCMD begin","[PLACEHOLDER] The link opens on Helensis' office, not the command deck. She's on her feet, a report still in one hand. ""Captain. Come up, would you? I've sent a shuttle.""
+
+Someone off-frame says her title, and then says it again. She lets the second one go unanswered. ""Now, if you can.""",kolOrdained_up:Take the shuttle up,"the early Ordained rollout's confrontation; some days after ARMORY, on the next call"
+kolOrdained_up,DialogOptionSelected,$option == kolOrdained_up,,"[PLACEHOLDER] Her office is smaller than you expected: a chart table, a cot made up with square corners, and a window on the yard. The third berth is lit, though the others are dark at this hour.
+
+Brother Enarms is standing. He has a stack of requisition slips in one hand, and from the look of it he has been holding them for some time. ""Captain,"" he says, and nothing else.",kolOrdained_enarms:Continue,first confrontation in her office
+kolOrdained_upAgain,DialogOptionSelected,"$option == kolOrdained_up score:10
+$global.kolHelensis_confrontations >= 1",,"[PLACEHOLDER] The office is as you left it, except that the cache from Ozymandias has been moved into a corner under a cloth, and the window's blind is up. The yard's third berth is lit.
+
+Brother Enarms is already here. He doesn't greet you; he's partway through a sentence, and he finishes it. ""...two full crews, Master, and not a line of them on my rolls.""",kolOrdained_enarms:Continue,escalated: the Ozymandias relic came first
+kolOrdained_enarms,DialogOptionSelected,$option == kolOrdained_enarms,KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""I couldn't make the plate balance,"" Enarms says. It sounds like an apology. ""Three months of hull plate, more than every repair on the station. I went through it twice, thinking the error was mine."" He sets the slips on her desk. ""It isn't mine. It's in that berth.
+
+The council said study, Master. I was in the room. Nobody stood up and asked whether we'd build on it, and I would have liked the chance to say no.""",kolOrdained_helensis:Continue,
+kolOrdained_enarmsAgain,DialogOptionSelected,"$option == kolOrdained_enarms score:10
+$global.kolHelensis_confrontations >= 1",KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""I came about the plate,"" Enarms says to you, since you're the one who doesn't know. ""Three months of it, more than every repair on the station, and two yard crews I can't find."" There's a chair; he doesn't take it.
+
+""When you took the cache, Master, I told myself it was a box on a floor."" He looks past her, at the window. ""That's a keel. Who decided the faithful would carry that? It wasn't the Order.""",kolOrdained_helensis:Continue,
+kolOrdained_helensis,DialogOptionSelected,$option == kolOrdained_helensis,KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""It's a shield, Brother."" Helensis doesn't get up. ""The same emitters the Order has flown since before either of us took vows, without the governor that drops them in the middle of a fight. I've read every loss report from the last two years. I know how many of them end with a shield going down.""
+
+She turns to you. ""You've flown against what we're studying, captain. You tell him.""","1:kolOrdained_standHelensis:""If they bring patrols home, I'd have built them too.""
+2:kolOrdained_standEnarms:""Brother Enarms is right. This should go before the Order.""
+3:kolOrdained_standSilent:Say nothing",
+kolOrdained_helensisAgain,DialogOptionSelected,"$option == kolOrdained_helensis score:10
+$global.kolHelensis_confrontations >= 1",KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""Nobody decided, Brother. Nobody in this Order ever decides anything."" It comes out sharper than she meant, and she lets it stand. ""It's the same shield, without the governor that drops it mid-fight. You've read the loss reports. You file them.""
+
+Then, to you, more evenly: ""You've seen what's out there. Say what you think.""","1:kolOrdained_standHelensis:""If they bring patrols home, I'd have built them too.""
+2:kolOrdained_standEnarms:""Brother Enarms is right. This should go before the Order.""
+3:kolOrdained_standSilent:Say nothing",
+kolOrdained_standHelensis,DialogOptionSelected,$option == kolOrdained_standHelensis,"Call $global.kolOrdainedEarly_ref confronted helensis
+KolStoryCMD approve kol_chaptermaster 3
+KolStoryCMD approve kol_knightcaptain -4","[PLACEHOLDER] Enarms looks at you for a moment, then gathers the slips back off her desk. ""Then I'll correct my rolls,"" he says, and seems to mean only that.",kolOrdained_invite:Continue,
+kolOrdained_standEnarms,DialogOptionSelected,$option == kolOrdained_standEnarms,"Call $global.kolOrdainedEarly_ref confronted enarms
+KolStoryCMD approve kol_knightcaptain 4
+KolStoryCMD approve kol_chaptermaster -2","[PLACEHOLDER] ""It will go before the Order,"" Helensis says. ""With a ship that came home, not a drawing for the assembly to argue over.""
+
+""Then they'll be asked to bless it,"" Enarms says, ""not to decide it.""
+
+Helensis considers that, and doesn't disagree.",kolOrdained_invite:Continue,
+kolOrdained_standSilent,DialogOptionSelected,$option == kolOrdained_standSilent,Call $global.kolOrdainedEarly_ref confronted silent,[PLACEHOLDER] Neither of them presses you. After a while Enarms puts the slips down on her desk and leaves them there.,kolOrdained_invite:Continue,
+kolOrdained_invite,DialogOptionSelected,$option == kolOrdained_invite,,"[PLACEHOLDER] ""They launch in three days, or sooner if you'd like to see them work,"" Helensis says. ""There's a pirate band off the edge of the system, waiting for a convoy to come out light. Their commander will take your hail.""
+
+She's already reaching for the next report. Enarms leaves before you do.",kolOrdained_leave:Continue,
+kolOrdained_inviteAgain,DialogOptionSelected,"$option == kolOrdained_invite score:10
+$global.kolHelensis_confrontations >= 1",,"[PLACEHOLDER] ""The squadron launches in three days,"" Helensis says. ""Pirates, off the system's edge. The commander will take your hail if you want to go along.""
+
+Enarms is still there when you leave. From the corridor, you can hear that neither of them has started talking again.",kolOrdained_leave:Continue,
+kolOrdained_leave,DialogOptionSelected,$option == kolOrdained_leave,"ShowPersonVisual
+FireAll PopulateOptions",,,
+kolOrdained_squadOpt,PopulateOptions,"$menuState == fleetConvMain
+$entity.kolOrdained_waiting",,,5:kolOrdained_go:[PLACEHOLDER] Give them the go,
+kolOrdained_go,DialogOptionSelected,$option == kolOrdained_go,Call $global.kolOrdainedEarly_ref go,"[PLACEHOLDER] ""Then we move out,"" the commander says. Behind them, someone is still reading a checklist aloud. ""Stay close if you're coming, captain. We'd like to see how they handle, too.""",cutCommLink:Cut the comm link,
+kolOrdained_followupOpt,PopulateOptions,"$isPerson
+$id == kol_chaptermaster
+$global.kolOrdained_followup",,,"9:kolOrdained_followup:[PLACEHOLDER] ""Your squadron is back.""",
+kolOrdained_followupJoined,DialogOptionSelected,"$option == kolOrdained_followup score:10
+$global.kolOrdained_earlyShakedown == joined
+!$global.kolOrdained_earlyLost","unset $global.kolOrdained_followup
+KolStoryCMD approve kol_chaptermaster 2","[PLACEHOLDER] Helensis has the after-action report open, though she clearly knows it by heart. ""Not one shield down, the whole engagement. The commander wants to know where you learned to fly with them. I told him you didn't.""
+
+She closes the report. ""The Order will hear about it from me.""",kolOrdained_followupDone:Continue,
+kolOrdained_followupAbsent,DialogOptionSelected,"$option == kolOrdained_followup
+!$global.kolOrdained_earlyLost",unset $global.kolOrdained_followup,"[PLACEHOLDER] ""Every hull came home."" Helensis has the after-action report open. ""I'd have liked you to see it. You'd have had something to tell Brother Enarms."" She closes it. ""The Order will hear about it from me.""",kolOrdained_followupDone:Continue,
+kolOrdained_followupLost,DialogOptionSelected,"$option == kolOrdained_followup score:20
+$global.kolOrdained_earlyLost",unset $global.kolOrdained_followup,"[PLACEHOLDER] ""None of them came back."" The report on her desk is closed, and she doesn't open it. ""I'll be writing to their families tonight. Ask me about it another time, captain.""",kolOrdained_followupDone:Continue,
+kolOrdained_followupDone,DialogOptionSelected,$option == kolOrdained_followupDone,FireAll PopulateOptions,,,
+kolOrdained_enarmsAfter,PickGreeting,"$id == kol_knightcaptain score:310
+$global.kolTech_ordainedEarly
+!$global.kolOrdained_enarmsSaw","$global.kolOrdained_enarmsSaw = true
+ShowPersonVisual
+FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Enarms is at his desk, not among the plants. ""The third berth has been given back to my rolls. There's a new keel in it already."" He turns a slip over and sets it on the pile. ""I prayed for the crews. I'd have prayed for them whoever built the ships.""",,
+kolOrdained_enarmsAfterSided,PickGreeting,"$id == kol_knightcaptain score:311
+$global.kolTech_ordainedEarly
+!$global.kolOrdained_enarmsSaw
+$global.kolOrdained_earlyStance == enarms","$global.kolOrdained_enarmsSaw = true
+ShowPersonVisual
+FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Enarms is at his desk, not among the plants. ""The third berth has been given back to my rolls. There's a new keel in it already."" He turns a slip over and sets it on the pile. ""Thank you for what you said in her office. It changed nothing. I find it helps anyway.""",,
 #
 # Knights story foundations: dock event queue (KolDockEvents),,,,,,
 kolDock_guard,MarketPostDock,KolStoryCMD dockPending score:60,KolStoryCMD dockNext,,,"One guard per dock: plays pending story events at this Knights market, then returns to the market"
@@ -1497,16 +1603,17 @@ $global.kolPatron_lead_player
 !$global.kolCh2Patron_announce",,,4:kolPatron_ownMeet:Meet Sister Greenflight and the Lector about your oath,The own-forces branch: the details settled before the assembly
 kolPatron_ownMeet,DialogOptionSelected,$option == kolPatron_ownMeet,"KolPatronCMD ownOpen
 KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. She is not alone. The Lector sits across the desk from her, with the book your name was entered in open on one knee.",kolPatron_own2:Continue,
-kolPatron_own2,DialogOptionSelected,$option == kolPatron_own2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""An oath sworn in the hall is a promise,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""This is where it becomes an arrangement. It is not one the Order has made before. Doctrine keeps the faithful in the faith's own keeping, and the assembly has chosen to put some of them in a captain's. There are those in the hall who think it a risk."" $global.kolBench_lector_HeOrShe lays a hand on the book open on $global.kolBench_lector_hisOrHer knee. ""They are right. It is the Order's risk now, and yours.""
-
-$global.kolBench_lector_HeOrShe reads back what you swore: to hold the faithful under your banner as under the Church's own; to answer the Order's need before your own; to account for your acts before the Order.
+kolPatron_own2,DialogOptionSelected,$option == kolPatron_own2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""An oath sworn in the hall is a promise,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""This is where it becomes an arrangement. It is not one the Order has made before. Doctrine keeps the faithful in the faith's own keeping, and the assembly has chosen to put some of them in a captain's. There are those in the hall who think it a risk."" $global.kolBench_lector_HeOrShe lays a hand on the book open on $global.kolBench_lector_hisOrHer knee. ""They are right. It is the Order's risk now, and yours.""",kolPatron_own2_c2:Continue,
+kolPatron_own2_c2,DialogOptionSelected,$option == kolPatron_own2_c2,,"$global.kolBench_lector_HeOrShe reads back what you swore: to hold the faithful under your banner as under the Church's own; to answer the Order's need before your own; to account for your acts before the Order.
 
 Greenflight turns a slate toward you: Lyra, Cygnus, the systems around them. ""The congregations need to see ships that are not ours. How many of yours, captain, and of what kind?""","1:kolPatron_ownForcesGuard:""A standing guard: enough to be seen, and to hold until the Order arrives.""
 2:kolPatron_ownForcesStrong:""A real force. If they're to be protected, let it be done properly.""
 3:kolPatron_ownForcesDefer:""Tell me what the Order needs, and it will be there.""",
 kolPatron_ownForcesGuard,DialogOptionSelected,$option == kolPatron_ownForcesGuard,"$global.kolPatron_ownCommitment = guard
+KolStoryCMD approve kol_intel_director 2
 FireBest KolPatronOwnClose","[PLACEHOLDER] The Lector writes it down exactly as you said it. Greenflight nods once. ""Enough"" is a word she respects.",,The commitment is recorded; the penalty is fixed for now
 kolPatron_ownForcesStrong,DialogOptionSelected,$option == kolPatron_ownForcesStrong,"$global.kolPatron_ownCommitment = strong
+KolStoryCMD approve bench:lector 3
 FireBest KolPatronOwnClose","[PLACEHOLDER] The Lector's stylus pauses. ""Properly,"" $global.kolBench_lector_heOrShe repeats, and writes that down too.",,
 kolPatron_ownForcesDefer,DialogOptionSelected,$option == kolPatron_ownForcesDefer,"$global.kolPatron_ownCommitment = deferred
 FireBest KolPatronOwnClose","[PLACEHOLDER] ""That is a generous answer,"" Greenflight says. ""It may also be a dangerous one. The Order will hold you to it."" She names a figure. It is not small.",,
@@ -1527,9 +1634,8 @@ KolPatronCMD briefRefused","[PLACEHOLDER] A clerk walks you up from the docks to
 ""The assembly gave you its charge. The Church hasn't given you its welcome."" She says it without heat. ""Whoever speaks for the faith at Kazeron or Chicomoztoc has to be someone the faithful would recognize. Come back when they would.""",kolPatron_briefLeave:Leave the office,below Welcoming with the Luddic Church; the brief stays open
 kolPatron_brief2,DialogOptionSelected,$option == kolPatron_brief2,"KolCh2CMD showPerson bench:lector
 KolPatronCMD introduce league","[PLACEHOLDER] ""The League first,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""It would take the Church as one congregation's voice among many members. A small place to stand, and an honest one."" $global.kolBench_lector_HeOrShe sets a hand on the charter. ""Ludd did not ask to be first at the table. Kazeron will not ask it of us either, and it will not ask much else.""",kolPatron_brief3:Continue,
-kolPatron_brief3,DialogOptionSelected,$option == kolPatron_brief3,KolPatronCMD introduce hegemony,"[PLACEHOLDER] Greenflight breaks the seal on Helensis' brief and passes it to you rather than reading it out. It runs to many pages, each annotated in a tight hand: the yards at Cygnus working short-crewed, the hulls the Order lacks, the patrols no longer flown. Its argument is the Hegemony, and one line is underlined twice: ""Restraint is a virtue of the well-provisioned."" It closes with her rank, not her name.
-
-""She has the numbers right,"" Greenflight says.
+kolPatron_brief3,DialogOptionSelected,$option == kolPatron_brief3,KolPatronCMD introduce hegemony,"[PLACEHOLDER] Greenflight breaks the seal on Helensis' brief and passes it to you rather than reading it out. It runs to many pages, each annotated in a tight hand: the yards at Cygnus working short-crewed, the hulls the Order lacks, the patrols no longer flown. Its argument is the Hegemony, and one line is underlined twice: ""Restraint is a virtue of the well-provisioned."" It closes with her rank, not her name.",kolPatron_brief3_c2:Continue,
+kolPatron_brief3_c2,DialogOptionSelected,$option == kolPatron_brief3_c2,,"""She has the numbers right,"" Greenflight says.
 
 ""She does,"" the Lector says. ""And if the Order takes whichever patron fills those berths fastest, it will have its ships, and owe its conduct to someone else. I would rather we were short of hulls than short of ourselves.""
 
@@ -1537,10 +1643,8 @@ kolPatron_brief3,DialogOptionSelected,$option == kolPatron_brief3,KolPatronCMD i
 
 ""No,"" $global.kolBench_lector_heOrShe admits. ""That is why we are asking, and not deciding.""",kolPatron_brief4:Continue,
 kolPatron_brief4,DialogOptionSelected,$option == kolPatron_brief4,"KolCh2CMD showPerson kol_intel_director
-KolPatronCMD introduce diktat
-Call $global.kolCh2Patron_ref briefed","[PLACEHOLDER] ""And Sindria,"" Greenflight says. ""The worst of them, I know. But it asks the least of the Order itself: files on people it is already hunting, kept current by my office. It will tie up agents I would rather use elsewhere, and it is still the cheapest thing any of them will ask of us. In return, Sindria's ships stand over congregations it would otherwise leave to the raiders.""
-
-""Names, Sister, and more of them every season,"" the Lector says. ""Whatever Sindria already knows, the Church would be the one keeping it informed.""
+KolPatronCMD introduce diktat","[PLACEHOLDER] ""And Sindria,"" Greenflight says. ""The worst of them, I know. But it asks the least of the Order itself: files on people it is already hunting, kept current by my office. It will tie up agents I would rather use elsewhere, and it is still the cheapest thing any of them will ask of us. In return, Sindria's ships stand over congregations it would otherwise leave to the raiders.""",kolPatron_brief4_c2:Continue,
+kolPatron_brief4_c2,DialogOptionSelected,$option == kolPatron_brief4_c2,Call $global.kolCh2Patron_ref briefed,"""Names, Sister, and more of them every season,"" the Lector says. ""Whatever Sindria already knows, the Church would be the one keeping it informed.""
 
 ""Yes. I won't pretend otherwise."" Greenflight turns to you. ""I would still weigh it against the congregations we can't guard. That's the choice, Captain, and none of the three makes it a clean one.""
 
@@ -1946,7 +2050,7 @@ kolCh2_inquestGuarded:Answer carefully
 kolCh2_inquestDefiant:Ask by what right they question you",
 # Assembly reckoning lines for Chapter 2 reports,,,,,,
 kolAssembly_itemPatron,KolAssemblyItems,$global.kolAssembly_patron > 0,,[PLACEHOLDER] The clerk reads that the Church has a patron while the Knights are away. Some of the benches approve.,,
-kolAssembly_itemJointOp,KolAssemblyItems,$global.kolAssembly_jointOperation > 0,,[PLACEHOLDER] An operation sailed with the Order's squadrons is entered into the record.,,
+kolAssembly_itemJointOp,KolAssemblyItems,$global.kolAssembly_jointOperation > 0,,[PLACEHOLDER] An operation flown with the Order's squadrons is entered into the record.,,
 kolAssembly_itemOzymandias,KolAssemblyItems,$global.kolAssembly_ozymandias > 0,,"[PLACEHOLDER] A memorial now stands beside Caeli, in Ozymandias. The names of the dead there are not known; a prayer is read for them anyway.",,
 kolAssembly_itemInquest,KolAssemblyItems,$global.kolAssembly_inquestPlayer > 0,,[PLACEHOLDER] The Inquisition reports that it has questioned a captain in the Order's service. It does not say whom; everyone looks at you.,,
 kolAssembly_dockNotice,MarketPostDock,"$market.id == kol_lyra score:55
@@ -1999,17 +2103,18 @@ KolPatronCMD collectOpen
 KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] Balashi's terms reach your fleet on an ordinary courier packet. Within the hour the Order's delegation has taken over your wardroom: the Lector at the head of the table, Greenflight beside the packet's seal, and the clerks clearing a space for their cases.",kolPatron_dikTerms0:Continue,Played in space when the terms arrive and the delegation is aboard (KolPatronParley.aboardScene)
 kolPatron_dikTerms,KolPatronDiktatTerms,,,"[PLACEHOLDER] The Lector reads the terms aloud, as $global.kolBench_lector_heOrShe would read anything into the record: the Diktat will stand over the Church's congregations, and in return the Church will keep the Supreme Executor supplied with its own files on Volturn's faithful, for as long as the arrangement stands.
 
-""The Diktat has been taking suspected Pathers off Volturn,"" $global.kolBench_lector_heOrShe says. ""They go to Cruor, to the labor camps, and they do not come back. These would be names Sindria does not have yet, and next season's after them. The Order has done hard things before. It has not done easy ones of this kind.""
+""The Diktat has been taking suspected Pathers off Volturn,"" $global.kolBench_lector_heOrShe says. ""They go to Cruor, to the labor camps, and they do not come back. These would be names Sindria does not have yet, and next season's after them. The Order has done hard things before. It has not done easy ones of this kind.""",kolPatron_dikTerms_c2:Continue,Greenflight's reservations
+kolPatron_dikTerms_c2,DialogOptionSelected,$option == kolPatron_dikTerms_c2,,"""And how the Church keeps them,"" Helensis says. ""Send Sindria our ledgers season after season, and it will learn how this Order counts its own. I would not have the Lion's Guard learning that.""
 
-""And how the Church keeps them,"" Helensis says. ""Send Sindria our ledgers season after season, and it will learn how this Order counts its own. I would not have the Lion's Guard learning that.""
-
-""The Master is right about that too,"" the Lector says.
-
-Greenflight has not touched the packet. ""Sindria is already on Volturn. These files change whom it takes, not whether it takes them. My office will carry the reporting. It will cost me agents, and it is still the cheapest thing on this table. In return, it stands over congregations no one else will guard."" She looks to you, then to the Lector. ""I would rather we chose that with our eyes open than pretend there was a clean option.""","1:kolPatron_dikTermsRefuse:""The Church can't hand its own faithful to Cruor.""
+""The Master is right about that too,"" the Lector says.",kolPatron_dikTerms_c3:Continue,
+kolPatron_dikTerms_c3,DialogOptionSelected,$option == kolPatron_dikTerms_c3,,"Greenflight has not touched the packet. ""Sindria is already on Volturn. These files change whom it takes, not whether it takes them. My office will carry the reporting. It will cost me agents, and it is still the cheapest thing on this table. In return, it stands over congregations no one else will guard."" She looks to you, then to the Lector. ""I would rather we chose that with our eyes open than pretend there was a clean option.""","1:kolPatron_dikTermsRefuse:""The Church can't hand its own faithful to Cruor.""
 2:kolPatron_dikTermsPrice:""The Diktat will find those names with or without the files.""
-3:kolPatron_dikTermsQuiet:Say nothing",Greenflight's reservations
-kolPatron_dikTermsRefuse,DialogOptionSelected,$option == kolPatron_dikTermsRefuse,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] ""No,"" the Lector agrees. ""It cannot. Nor can it leave the rest of its faithful unguarded."" $global.kolBench_lector_HeOrShe folds $global.kolBench_lector_hisOrHer hands on the terms. ""We will hear the Diktat out, and weigh it there.""",,
-kolPatron_dikTermsPrice,DialogOptionSelected,$option == kolPatron_dikTermsPrice,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] ""It will,"" Greenflight agrees. The Lector looks at her, not at you, for longer than the remark deserves.",,
+3:kolPatron_dikTermsQuiet:Say nothing",
+kolPatron_dikTermsRefuse,DialogOptionSelected,$option == kolPatron_dikTermsRefuse,"KolStoryCMD approve bench:lector 3
+FireBest KolPatronDiktatTermsAgree","[PLACEHOLDER] ""No,"" the Lector agrees. ""It cannot. Nor can it leave the rest of its faithful unguarded."" $global.kolBench_lector_HeOrShe folds $global.kolBench_lector_hisOrHer hands on the terms. ""We will hear the Diktat out, and weigh it there.""",,
+kolPatron_dikTermsPrice,DialogOptionSelected,$option == kolPatron_dikTermsPrice,"KolStoryCMD approve kol_intel_director 2
+KolStoryCMD approve bench:lector -2
+FireBest KolPatronDiktatTermsAgree","[PLACEHOLDER] ""It will,"" Greenflight agrees. The Lector looks at her, not at you, for longer than the remark deserves.",,
 kolPatron_dikTermsQuiet,DialogOptionSelected,$option == kolPatron_dikTermsQuiet,FireBest KolPatronDiktatTermsAgree,"[PLACEHOLDER] Nobody looks to you. The Lector, Greenflight and Helensis speak quietly for some time, and the clerks find reasons to be busy with their cases.",,
 kolPatron_dikTermsAgree,KolPatronDiktatTermsAgree,,KolPatronCMD diktatDispatched,"[PLACEHOLDER] In the end the Lector gives the delegation's answer: it will go to Sindria and hear the Supreme Executor's court in person, as the Grandmaster would expect. ""The terms are the Diktat's opening, not its last word.""
 
@@ -2045,7 +2150,7 @@ kolPatron_gateCharterDone,DialogOptionSelected,$option == kolPatron_gateCharterD
 ShowDefaultVisual
 KolPatronCMD gateNext",,,
 kolPatron_gateDelegation,KolPatronGateDelegation,,"KolPatronCMD dropOff
-KolCh2CMD showPerson bench:lector","[PLACEHOLDER] The Order's delegation goes ashore at Star Keep Lyra with their cases and their clerks. The Lector stops at the foot of the ramp to thank you formally, in the Grandmaster's name, for the use of your ship and your patience. Greenflight has already gone ahead.",kolPatron_gateDelegationDone:Continue,The delegation goes home
+KolCh2CMD showPerson bench:lector","[PLACEHOLDER] The Order's delegation disembarks at Star Keep Lyra with their cases and their clerks. The Lector stops at the foot of the ramp to thank you formally, in the Grandmaster's name, for the use of your ship and your patience. Greenflight has already gone ahead.",kolPatron_gateDelegationDone:Continue,The delegation goes home
 kolPatron_gateDelegationDone,DialogOptionSelected,$option == kolPatron_gateDelegationDone,"ShowDefaultVisual
 KolPatronCMD gateNext",,,
 kolPatron_aboardCharter,KolPatronAboardCharter,,KolCh2CMD showPerson kol_intel_director,"[PLACEHOLDER] Greenflight asks for a word in private, and closes the wardroom door behind you both. ""A charter,"" she says. ""Signed in the Church's name, paid from your own purse, with the Order's delegation aboard your own ship and none of us asked. You went around the Order, captain.""",kolPatron_aboardCharter2:Continue,"Greenflight's private reaction, with the delegation aboard"
@@ -2059,30 +2164,33 @@ KolCh2CMD showPerson bench:lector","[PLACEHOLDER] Mazalot's delegate has retired
 ""A patron that needs its faithful,"" $global.kolBench_lector_heOrShe says, ""and asks only that we be one voice among them. I would rather be needed than kept.""",kolPatron_aboardLeague2:Continue,
 kolPatron_aboardLeague2,DialogOptionSelected,$option == kolPatron_aboardLeague2,KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""A yearly vote,"" Helensis says. ""And in the years between, the raiders come. I don't doubt the League's honesty, Lector. I doubt its speed. The faithful waiting on Kazeron's courtesy are the ones the raiders reach first.""
 
-""Speed is what we would be giving up our own counsel to buy, Master,"" the Lector says. ""The League asks us to be patient, and small. I think the Order can be both.""
-
-""It can,"" Helensis says. She turns to you. ""I'm not sure the holdings at the edge can survive it.""
+""Speed is what we would be giving up our own counsel to buy, Master,"" the Lector says. ""The League asks us to be patient, and small. I think the Order can be both.""",kolPatron_aboardLeague2_c2:Continue,
+kolPatron_aboardLeague2_c2,DialogOptionSelected,$option == kolPatron_aboardLeague2_c2,,"""It can,"" Helensis says. She turns to you. ""I'm not sure the holdings at the edge can survive it.""
 
 ""Kazeron will hold to it as long as Mazalot's votes matter in the Council,"" Greenflight says. ""Keeping them mattering is my office's work, not Kazeron's.""","1:kolPatron_aboardLeagueA:""Better slow than bought.""
 2:kolPatron_aboardLeagueB:""Patience doesn't crew a patrol.""
 3:kolPatron_aboardLeagueC:Say nothing",
-kolPatron_aboardLeagueA,DialogOptionSelected,$option == kolPatron_aboardLeagueA,FireBest KolPatronAboardLeagueClose,"[PLACEHOLDER] ""Some things are,"" the Lector says. Helensis doesn't argue it; she has made her case.",,
-kolPatron_aboardLeagueB,DialogOptionSelected,$option == kolPatron_aboardLeagueB,FireBest KolPatronAboardLeagueClose,"[PLACEHOLDER] ""No,"" the Lector agrees, quietly. ""It doesn't.""",,
+kolPatron_aboardLeagueA,DialogOptionSelected,$option == kolPatron_aboardLeagueA,"KolStoryCMD approve bench:lector 3
+KolStoryCMD approve kol_chaptermaster -2
+FireBest KolPatronAboardLeagueClose","[PLACEHOLDER] ""Some things are,"" the Lector says. Helensis doesn't argue it; she has made her case.",,
+kolPatron_aboardLeagueB,DialogOptionSelected,$option == kolPatron_aboardLeagueB,"KolStoryCMD approve kol_chaptermaster 2
+FireBest KolPatronAboardLeagueClose","[PLACEHOLDER] ""No,"" the Lector agrees, quietly. ""It doesn't.""",,
 kolPatron_aboardLeagueC,DialogOptionSelected,$option == kolPatron_aboardLeagueC,FireBest KolPatronAboardLeagueClose,[PLACEHOLDER] Neither of them asks what you think.,,
 kolPatron_aboardLeagueClose,KolPatronAboardLeagueClose,,KolPatronCMD talked league,"[PLACEHOLDER] The wardroom empties a few at a time. By the next watch, the delegation is talking about other things.",kolPatron_aboardTalkDone:Continue,
 kolPatron_aboardHegemony,KolPatronAboardHegemony,,"KolPatronCMD collectOpen
 KolCh2CMD showPerson kol_chaptermaster","[PLACEHOLDER] Helensis has cleared the wardroom table for a single sheet: Cygnus' muster, with every empty berth marked in red. She doesn't explain it. She doesn't need to.
 
 ""Chicomoztoc could fill this in a year,"" she says. ""I would like to hear anyone else at this table say the same of their patron.""",kolPatron_aboardHegemony2:Continue,
-kolPatron_aboardHegemony2,DialogOptionSelected,$option == kolPatron_aboardHegemony2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""Jangala's faithful marched once,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""You will have read how that ended. A Church that leans on that arm will be asked, sooner or later, to look away when it's raised. I would not have us practice looking away.""
-
-""I'm not asking the Church to look away, Lector,"" Helensis says. ""I'm asking for yards, hulls and crews, and the Hegemony is the only power at the table with them to spare. A prayer doesn't hold a patrol line over a congregation. A ship does."" She sets the muster in front of you, so you can read it too. ""Those berths are people we can't send.""
+kolPatron_aboardHegemony2,DialogOptionSelected,$option == kolPatron_aboardHegemony2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""Jangala's faithful marched once,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""You will have read how that ended. A Church that leans on that arm will be asked, sooner or later, to look away when it's raised. I would not have us practice looking away.""",kolPatron_aboardHegemony2_c2:Continue,
+kolPatron_aboardHegemony2_c2,DialogOptionSelected,$option == kolPatron_aboardHegemony2_c2,,"""I'm not asking the Church to look away, Lector,"" Helensis says. ""I'm asking for yards, hulls and crews, and the Hegemony is the only power at the table with them to spare. A prayer doesn't hold a patrol line over a congregation. A ship does."" She sets the muster in front of you, so you can read it too. ""Those berths are people we can't send.""
 
 ""Whatever we promise Chicomoztoc,"" Greenflight says, ""it will want to inspect. The Inspectorate checks what it's given. We should only offer what we're willing to have counted.""","1:kolPatron_aboardHegA:""Filled berths save lives.""
 2:kolPatron_aboardHegB:""Borrowed strength has to be paid back.""
 3:kolPatron_aboardHegC:Say nothing",
-kolPatron_aboardHegA,DialogOptionSelected,$option == kolPatron_aboardHegA,FireBest KolPatronAboardHegemonyClose,"[PLACEHOLDER] ""Thank you,"" Helensis says. The Lector doesn't dispute it, only that it's the whole of the question.",,
-kolPatron_aboardHegB,DialogOptionSelected,$option == kolPatron_aboardHegB,FireBest KolPatronAboardHegemonyClose,"[PLACEHOLDER] ""Everything is paid back,"" Helensis says. ""I would rather choose the creditor.""",,
+kolPatron_aboardHegA,DialogOptionSelected,$option == kolPatron_aboardHegA,"KolStoryCMD approve kol_chaptermaster 2
+FireBest KolPatronAboardHegemonyClose","[PLACEHOLDER] ""Thank you,"" Helensis says. The Lector doesn't dispute it, only that it's the whole of the question.",,
+kolPatron_aboardHegB,DialogOptionSelected,$option == kolPatron_aboardHegB,"KolStoryCMD approve bench:lector 3
+FireBest KolPatronAboardHegemonyClose","[PLACEHOLDER] ""Everything is paid back,"" Helensis says. ""I would rather choose the creditor.""",,
 kolPatron_aboardHegC,DialogOptionSelected,$option == kolPatron_aboardHegC,FireBest KolPatronAboardHegemonyClose,[PLACEHOLDER] Helensis takes your silence for assent. The Lector does not.,,
 kolPatron_aboardHegemonyClose,KolPatronAboardHegemonyClose,,KolPatronCMD talked hegemony,"[PLACEHOLDER] The wardroom empties a few at a time. By the next watch, the delegation is talking about other things.",kolPatron_aboardTalkDone:Continue,
 kolPatron_aboardTalkDone,DialogOptionSelected,$option == kolPatron_aboardTalkDone,"ShowDefaultVisual
@@ -2181,7 +2289,7 @@ FireBest KolPatronPirateSigned",,,
 kolPatron_pirateSigned,KolPatronPirateSigned,,,"[PLACEHOLDER] The delegate thumbs the datapad and the deal is done. ""Tell your Order we'll be there for its next assembly. We wouldn't miss it.""",kolPatron_pirateLeave:Leave,
 kolPatron_pirateLeave,DialogOptionSelected,$option == kolPatron_pirateLeave,"ShowDefaultVisual
 FireAll PopulateOptions",,,
-kolPatron_gateDelegationPirate,KolPatronGateDelegation,$global.kol_patron == pirate score:10,KolPatronCMD dropOff,[PLACEHOLDER] The Order's delegation goes ashore at Star Keep Lyra. The Lector thanks you for the passage in a single formal sentence. Greenflight does not look at you at all.,kolPatron_gateDelegationDone:Continue,After the pirate deal: the deal isn't acknowledged
+kolPatron_gateDelegationPirate,KolPatronGateDelegation,$global.kol_patron == pirate score:10,KolPatronCMD dropOff,[PLACEHOLDER] The Order's delegation disembarks at Star Keep Lyra. The Lector thanks you for the passage in a single formal sentence. Greenflight does not look at you at all.,kolPatron_gateDelegationDone:Continue,After the pirate deal: the deal isn't acknowledged
 kolPatron_gatePirates,KolPatronGatePirates,,"KolPatronCMD pirateDelegationGone
 FireBest KolPatronPirateArrival",,,The assembly that would announce the deal: the pirates arrive
 kolPatron_pirateArrival,KolPatronPirateArrival,,,"[PLACEHOLDER] You are still in the docking queue when Lyra's traffic control breaks in on every channel: fleets at the jump points, pirate transponders, a great many of them. They are broadcasting that they have come to protect the faithful.

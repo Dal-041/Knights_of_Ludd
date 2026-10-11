@@ -1,7 +1,7 @@
 {
 	"baseHullId":"kol_larkspur",
 	"skinHullId":"kol_larkspur_lowtech",
-	"hullName":"Larkspur (Consecrated)",
+	"hullName":"Larkspur (Ordained)",
 	"incompatibleWithBaseHull":false,
 	# restored to the low-tech standard: no primitive-shield timer, low-tech shield efficiency,
 	# no Knights engine cores, low-tech shield and vent colours (kol_lowtech_style)

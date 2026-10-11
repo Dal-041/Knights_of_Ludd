@@ -80,6 +80,9 @@ object KolCh2Story {
 
     /** Runs with the assembly schedule (twice a day): starts what has become due. */
     fun pulse() {
+        // the early Ordained rollout's delay and cue (a Technology milestone, outside the chapters)
+        org.selkie.kol.campaign.tech.KolOrdainedEarly.pulse()
+        org.selkie.kol.campaign.story.KolStoryCue.check()
         if (KolChapter.get() < 2) return
         // the agent becomes due once the player has felled an Abyss power or finished the Ninaya operation
         if (!memory.getBoolean(KolCh2.AGENT_TRIGGERED) &&
@@ -161,7 +164,7 @@ object KolCh2Story {
     }
 
     /**
-     * The player beat the operation's boss before the Order could sail: half of what was set aside is paid to them
+     * The player beat the operation's boss before the Order could launch: half of what was set aside is paid to them
      * as a bounty, half strengthens the next operation; the operation counts as done.
      */
     fun alreadyDoneBounty(doneFlag: String, dialog: InteractionDialogAPI) {

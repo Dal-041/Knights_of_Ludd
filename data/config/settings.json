@@ -558,6 +558,8 @@
 		"desertionMinFleetPoints":80,              # Path fleets smaller than this are left alone
 		"desertionPerFleetCap":3,                  # ships replaced per fleet at most
 		"desertionOrdainedShare":0.34,             # share of replacements that are Ordained after the early rollout
+		"ordainedShareEarly":0.15,                 # share of eligible ships in new Knights fleets that are Ordained after the early rollout
+		"ordainedShareFull":0.4,                   # ... after the full rollout
 		# Patron (add-knights-patron-lobbying); amounts are placeholders to be tuned
 		"patronCharterCost":1500000,               # the player's share of the mercenary charter, paid up front
 		"patronCharterCompanyName":"Independent Security Combine", # [PLACEHOLDER] the independent company's name

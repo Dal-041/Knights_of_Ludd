@@ -514,6 +514,7 @@ class KolCh2Ozymandias : HubMissionWithSearch() {
                 text?.setFontInsignia()
                 org.selkie.kol.campaign.situations.KolTechSituationIntel.get()?.credit(KolStorySettings.ozRelicScrip, dialog)
                 memory.set(RELIC_DELIVERED, true)
+                org.selkie.kol.campaign.tech.KolOrdainedEarly.confronted() // Enarms' objection in her office (kolCh2_ozDeliver*)
                 // the last objective: only now is Ozymandias done (the chapter requirement, the assembly's reckoning)
                 memory.set(KolCh2.OZY_DONE, true)
                 KolAssembly.report("ozymandias")

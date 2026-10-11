@@ -23,6 +23,8 @@ import org.selkie.kol.helpers.KolStaticStrings.KolStory
  * - `KolStoryCMD assemblyAdvance`: the chapter assembly advances the chapter.
  * - `KolStoryCMD dutiesAvailable` (condition): this market has a duties board.
  * - `KolStoryCMD dutiesOpen` / `dutiesClose`: make the market's duties-board person active / inactive.
+ * - `KolStoryCMD approve <personId | bench:slot> <points>`: a named character's approval of the player changes
+ *   (their own standing; vanilla's message is printed).
  */
 class KolStoryCMD : BaseCommandPlugin() {
     override fun execute(ruleId: String?, dialog: InteractionDialogAPI?, params: MutableList<Misc.Token>?,
@@ -43,6 +45,12 @@ class KolStoryCMD : BaseCommandPlugin() {
             } ?: false
             "dutiesOpen" -> KolDutiesBoard.open(dialog)
             "dutiesClose" -> { KolDutiesBoard.close(dialog); true }
+            "approve" -> {
+                val id = params.getOrNull(1)?.getString(map) ?: return false
+                val points = params.getOrNull(2)?.getString(map)?.toIntOrNull() ?: return false
+                org.selkie.kol.campaign.story.KolPeople.approve(org.selkie.kol.campaign.story.KolPeople.byId(id), points, dialog.textPanel)
+                true
+            }
             else -> false
         }
     }

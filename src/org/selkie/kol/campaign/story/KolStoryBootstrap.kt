@@ -17,6 +17,7 @@ object KolStoryBootstrap {
         sector.addTransientScript(KolSeveranceScript())
 
         KolFleetSpawnHook.register("desertion", KolDesertion.Modifier())
+        KolFleetSpawnHook.register("ordained", org.selkie.kol.campaign.tech.KolOrdained.Modifier())
         sector.addTransientListener(KolFleetSpawnHook())
         sector.listenerManager.addListener(KolDesertion.Tick(), true)
 

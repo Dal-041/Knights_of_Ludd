@@ -36,6 +36,8 @@ object KolStorySettings {
     val desertionMinFleetPoints get() = json.getInt("desertionMinFleetPoints")
     val desertionPerFleetCap get() = json.getInt("desertionPerFleetCap")
     val desertionOrdainedShare get() = json.getDouble("desertionOrdainedShare").toFloat()
+    val ordainedShareEarly get() = json.optDouble("ordainedShareEarly", 0.15).toFloat()
+    val ordainedShareFull get() = json.optDouble("ordainedShareFull", 0.4).toFloat()
 
     // patron (add-knights-patron-lobbying)
     val patronCharterCost get() = json.optInt("patronCharterCost", 1500000)
@@ -50,7 +52,7 @@ object KolStorySettings {
     val patronSwarmLaunchRange get() = json.optDouble("patronSwarmLaunchRange", 2500.0).toFloat()
     val patronDiktatReplyDays get() = json.optDouble("patronDiktatReplyDays", 14.0).toFloat()
     val patronFleetCount get() = json.optInt("patronFleetCount", 2)
-    val patronFleetPoints get() = json.optDouble("patronFleetPoints", 150.0).toFloat()
+    val patronFleetPoints get() = json.optDouble("patronFleetPoints", 240.0).toFloat()
     val patronFleetReplenishDays get() = json.optDouble("patronFleetReplenishDays", 30.0).toFloat()
     val patronOwnFleetPenalty get() = json.optDouble("patronOwnFleetPenalty", 0.4).toFloat()
     val patronCharterOffenseRep get() = json.optDouble("patronCharterOffenseRep", 0.1).toFloat()
@@ -106,4 +108,25 @@ object KolPeople {
         }
         return person
     }
+
+    /**
+     * A named character's approval of the player: their own standing, the vanilla per-person relationship (shown on
+     * their card), changed through vanilla's reputation plugin. With no text panel, vanilla reports it as a campaign
+     * message (portrait, "Relationship with ... improved", the standing) rather than a line in the conversation.
+     * [points] are percent of the scale (2-5 typical; senior people move less; up to 20 for dramatic moments).
+     * Nothing reads it yet. [text] is unused (kept so callers in dialogs stay unchanged).
+     */
+    fun approve(person: PersonAPI?, points: Int, text: com.fs.starfarer.api.campaign.TextPanelAPI?) {
+        if (person == null || points == 0) return
+        val impact = com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.CustomRepImpact()
+        impact.delta = points * 0.01f
+        impact.limit = if (points > 0) com.fs.starfarer.api.campaign.RepLevel.COOPERATIVE else com.fs.starfarer.api.campaign.RepLevel.VENGEFUL
+        Global.getSector().adjustPlayerReputation(com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActionEnvelope(
+            com.fs.starfarer.api.impl.campaign.CoreReputationPlugin.RepActions.CUSTOM, impact, null, null, false), person)
+    }
+
+    /** A story person by id: an important person, or `bench:<slot>` for the assembly's regular voices. */
+    fun byId(id: String): PersonAPI? =
+        if (id.startsWith("bench:")) org.selkie.kol.campaign.story.ch2.KolConvocation.bench(id.removePrefix("bench:"))
+        else Global.getSector().importantPeople.getPerson(id)
 }

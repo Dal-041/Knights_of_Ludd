@@ -69,7 +69,7 @@ object KolDesertion {
             val candidates = fleet.fleetData.membersListCopy
                 .filter { !it.isFighterWing && !it.isStation && it.hullSpec.sourceMod == null && !it.isFlagship }
                 .sortedByDescending { it.fleetPointCost }
-            val ordained = Global.getSector().memoryWithoutUpdate.getBoolean("\$kolTech_ordainedEarly")
+            val ordained = Global.getSector().memoryWithoutUpdate.getBoolean(KolStaticStrings.KolTech.ORDAINED_EARLY)
             var swapped = 0
             var strongest: FleetMemberAPI? = null
             for (old in candidates) {
