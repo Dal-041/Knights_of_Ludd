@@ -13,7 +13,6 @@ import com.fs.starfarer.api.characters.PersonAPI
 import com.fs.starfarer.api.fleet.FleetMemberAPI
 import com.fs.starfarer.api.fleet.FleetMemberType
 import com.fs.starfarer.api.impl.campaign.events.OfficerManagerEvent
-import com.fs.starfarer.api.impl.campaign.ids.Factions
 import com.fs.starfarer.api.impl.campaign.ids.Personalities
 import com.fs.starfarer.api.impl.campaign.rulecmd.AddRemoveCommodity
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin
@@ -21,15 +20,15 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.FireAll
 import com.fs.starfarer.api.impl.campaign.rulecmd.FireBest
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.campaign.situations.KolTechSituationIntel
-import org.selkie.kol.campaign.tech.KolTechData
-import org.selkie.kol.campaign.tech.KolTechRequisition
-import org.selkie.kol.campaign.tech.KolTechSettings
-import org.selkie.kol.campaign.tech.KolTechValuation
 import org.selkie.kol.helpers.KolStaticStrings
-import org.selkie.kol.helpers.KolStaticStrings.KolTech
 import java.util.Random
 import kotlin.math.roundToInt
+import org.selkie.kol.campaign.story.situations.tech.KolTechSituationIntel
+import org.selkie.kol.campaign.story.situations.tech.KolTechData
+import org.selkie.kol.campaign.story.situations.tech.KolTechSettings
+import org.selkie.kol.campaign.story.situations.tech.KolTechValuation
+import org.selkie.kol.campaign.story.situations.tech.KolTechRequisition
+import org.selkie.kol.campaign.story.situations.tech.TechKeys
 
 /**
  * Rules entry point for the Technology situation (Helensis at Cygnus).
@@ -99,7 +98,7 @@ class KolTechCMD : BaseCommandPlugin() {
         /** Helensis comments on a purchase (rules: KolTechAfterPurchase, keyed on $kolTech_purchaseType). */
         fun afterPurchase(dialog: InteractionDialogAPI, memoryMap: MutableMap<String, MemoryAPI>, type: String) {
             memoryMap[MemKeys.LOCAL]?.set("\$kolTech_purchaseType", type, 0f)
-            FireBest.fire(null, dialog, memoryMap, KolTech.TRIGGER_AFTER_PURCHASE)
+            FireBest.fire(null, dialog, memoryMap, TechKeys.TRIGGER_AFTER_PURCHASE)
         }
     }
 
@@ -155,7 +154,7 @@ class KolTechCMD : BaseCommandPlugin() {
                         lossText(stack, dialog)
                     }
                     pay(scrip, dialog)
-                    FireAll.fire(null, dialog, memoryMap, KolTech.TRIGGER_AFTER_HANDOVER)
+                    FireAll.fire(null, dialog, memoryMap, TechKeys.TRIGGER_AFTER_HANDOVER)
                     done(dialog, memoryMap)
                 }
 
@@ -231,7 +230,7 @@ class KolTechCMD : BaseCommandPlugin() {
                         AddRemoveCommodity.addFleetMemberLossText(m, dialog.textPanel)
                     }
                     pay(scrip, dialog)
-                    FireAll.fire(null, dialog, memoryMap, KolTech.TRIGGER_AFTER_HANDOVER)
+                    FireAll.fire(null, dialog, memoryMap, TechKeys.TRIGGER_AFTER_HANDOVER)
                     done(dialog, memoryMap)
                 }
 
@@ -242,13 +241,9 @@ class KolTechCMD : BaseCommandPlugin() {
     // --- Shrouded -----------------------------------------------------------------------------------------
 
     private fun excommunicate(dialog: InteractionDialogAPI, memoryMap: MutableMap<String, MemoryAPI>) {
-        Global.getSector().memoryWithoutUpdate.set(KolTech.EXCOMMUNICATED, true)
-        val level = runCatching { RepLevel.valueOf(KolTechSettings.excommunicationRep) }.getOrDefault(RepLevel.VENGEFUL)
-        for (id in listOf(KolStaticStrings.kolFactionID, Factions.LUDDIC_CHURCH)) {
-            Global.getSector().getFaction(id)?.setRelationship(Factions.PLAYER, level)
-        }
-        org.selkie.kol.campaign.story.KolSeverance.sever("shrouded") // its own flag, and severance (after the scene)
-        FireBest.fire(null, dialog, memoryMap, KolTech.TRIGGER_SHROUDED)
+        org.selkie.kol.campaign.story.systems.severance.KolSeverance.excommunicate("shrouded",
+            runCatching { RepLevel.valueOf(KolTechSettings.excommunicationRep) }.getOrDefault(RepLevel.VENGEFUL))
+        FireBest.fire(null, dialog, memoryMap, TechKeys.TRIGGER_SHROUDED)
     }
 
     // --- officers -----------------------------------------------------------------------------------------
@@ -303,7 +298,7 @@ class KolTechCMD : BaseCommandPlugin() {
         text.addPara("Spent %s scrip", Misc.getNegativeHighlightColor(), Misc.getHighlightColor(), Misc.getWithDGS(unique.price.toFloat()))
         text.setFontInsignia()
         AddRemoveCommodity.addFleetMemberGainText(member, text)
-        FireBest.fire(null, dialog, memoryMap, KolTech.TRIGGER_UNIQUE_BOUGHT + slot)
+        FireBest.fire(null, dialog, memoryMap, TechKeys.TRIGGER_UNIQUE_BOUGHT + slot)
         afterPurchase(dialog, memoryMap, "unique")
         return true
     }

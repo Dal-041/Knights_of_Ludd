@@ -13,12 +13,10 @@ import org.dark.shaders.light.LightData;
 import org.dark.shaders.util.ShaderLib;
 import org.dark.shaders.util.TextureData;
 import org.selkie.kol.CompatabilityUtils;
-import org.selkie.kol.campaign.intel.KnightsTakeoverOverride;
 import org.selkie.kol.helpers.KolStaticStrings;
 import org.selkie.kol.listeners.SaveListener;
 import org.selkie.kol.listeners.UpdateRelationships;
 import org.selkie.kol.listeners.SimUnlocks;
-import org.selkie.kol.campaign.story.KolStoryBootstrap;
 import org.selkie.kol.world.GenerateKnights;
 import org.selkie.zea.campaign.AICoreCampaignPlugin;
 import org.selkie.zea.campaign.NullspaceVFXRenderer;
@@ -31,6 +29,7 @@ import org.selkie.zea.helpers.ZeaUtils;
 import org.selkie.zea.listeners.ReportTransit;
 import org.selkie.zea.world.PrepareAbyss;
 import org.selkie.zea.world.PrepareDarkDeeds;
+import org.selkie.kol.campaign.story.systems.KolStoryBootstrap;
 
 public class KOL_ModPlugin extends BaseModPlugin {
 
@@ -71,7 +70,6 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		ZeaUtils.copyHighgradeEquipment();
         CompatabilityUtils.INSTANCE.run(getVersion());
 		PrepareDarkDeeds.andContinue();
-		org.selkie.zea.campaign.ZeaCaeli.ensure();
 
 		if (!Global.getSector().getListenerManager().hasListenerOfClass(ReportTransit.class)) Global.getSector().getListenerManager().addListener(new ReportTransit(), true);
 
@@ -91,10 +89,7 @@ public class KOL_ModPlugin extends BaseModPlugin {
 		Global.getSector().addTransientListener(new UpdateRelationships(false));
 		Global.getSector().addTransientListener(new SimUnlocks());
 		SimUnlocks.unlockFactionsOfLearnedShips();
-		KolStoryBootstrap.onGameLoad();
-		//Holds no saved state; purge saved copies duplicated by older versions, then register transiently
-		Global.getSector().removeScriptsOfClass(KnightsTakeoverOverride.class);
-		Global.getSector().addTransientScript(new KnightsTakeoverOverride());
+		KolStoryBootstrap.onGameLoad(); // the story's modules, after the ZEA world (Caeli) is prepared
 
 		for (SaveListener listener : Global.getSector().getListenerManager().getListeners(SaveListener.class)) {
 			listener.onGameLoad();

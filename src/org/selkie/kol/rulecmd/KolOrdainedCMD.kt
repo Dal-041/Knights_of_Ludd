@@ -4,9 +4,9 @@ import com.fs.starfarer.api.campaign.InteractionDialogAPI
 import com.fs.starfarer.api.campaign.rules.MemoryAPI
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.campaign.story.ch2.KolCh2Story
-import org.selkie.kol.campaign.tech.KolOrdainedEarly
-import org.selkie.kol.helpers.KolStaticStrings
+import org.selkie.kol.campaign.story.core.KolMissions
+import org.selkie.kol.campaign.story.situations.tech.milestones.ordained.KolOrdainedEarly
+import org.selkie.kol.campaign.story.core.KolIds
 
 /**
  * Rule commands for the Ordained rollouts (kolOrdained_* rules):
@@ -20,7 +20,7 @@ class KolOrdainedCMD : BaseCommandPlugin() {
         val map = memoryMap ?: return false
         return when (params?.getOrNull(0)?.getString(map)) {
             "due" -> KolOrdainedEarly.due()
-            "begin" -> KolCh2Story.start(KolOrdainedEarly.ID, KolStaticStrings.KolCh1.HELENSIS_ID, dialog) != null
+            "begin" -> KolMissions.start(KolOrdainedEarly.ID, KolIds.HELENSIS, dialog) != null
             else -> false
         }
     }

@@ -19,7 +19,6 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.util.MagicIncompatibleHullmods;
 import org.selkie.kol.Utils;
-import org.selkie.kol.campaign.tech.KolLowTech;
 import org.selkie.kol.combat.ShipExplosionListener;
 import org.selkie.kol.combat.StarficzAIUtils;
 import org.selkie.kol.helpers.KolStaticStrings;
@@ -30,6 +29,7 @@ import java.util.List;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.selkie.kol.campaign.story.situations.tech.KolLowTech;
 /*
 - flavor description tl;dr-ing both the limited-charge shielding, and ablative armor modules, reduced main ship hull/armor
 

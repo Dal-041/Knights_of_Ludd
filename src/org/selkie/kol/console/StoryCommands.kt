@@ -5,13 +5,13 @@ import org.lazywizard.console.BaseCommand
 import org.lazywizard.console.BaseCommand.CommandContext
 import org.lazywizard.console.BaseCommand.CommandResult
 import org.lazywizard.console.Console
-import org.selkie.kol.campaign.story.KolAssembly
-import org.selkie.kol.campaign.story.KolAssemblyData
-import org.selkie.kol.campaign.story.KolChapter
-import org.selkie.kol.campaign.story.KolChapterRequirements
-import org.selkie.kol.campaign.story.KolChronicle
-import org.selkie.kol.campaign.story.KolDesertion
-import org.selkie.kol.campaign.story.KolDesertionData
+import org.selkie.kol.campaign.story.systems.chapter.KolChapter
+import org.selkie.kol.campaign.story.systems.chapter.KolChapterRequirements
+import org.selkie.kol.campaign.story.systems.assembly.KolAssembly
+import org.selkie.kol.campaign.story.systems.assembly.KolAssemblyData
+import org.selkie.kol.campaign.story.systems.chronicle.KolChronicle
+import org.selkie.kol.campaign.story.systems.desertion.KolDesertionData
+import org.selkie.kol.campaign.story.systems.desertion.KolDesertion
 
 // Console Commands (data/console/commands.csv) for testing the story foundations. Loaded only by that mod.
 

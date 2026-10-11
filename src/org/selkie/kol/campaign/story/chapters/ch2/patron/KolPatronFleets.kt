@@ -1,0 +1,186 @@
+package org.selkie.kol.campaign.story.chapters.ch2.patron
+
+import com.fs.starfarer.api.EveryFrameScript
+import com.fs.starfarer.api.Global
+import com.fs.starfarer.api.campaign.CampaignFleetAPI
+import com.fs.starfarer.api.campaign.FleetAssignment
+import com.fs.starfarer.api.campaign.SectorEntityToken
+import com.fs.starfarer.api.campaign.StarSystemAPI
+import com.fs.starfarer.api.impl.campaign.ids.Factions
+import com.fs.starfarer.api.impl.campaign.ids.FleetTypes
+import com.fs.starfarer.api.impl.campaign.ids.MemFlags
+import com.fs.starfarer.api.impl.campaign.ids.Stats
+import com.fs.starfarer.api.util.IntervalUtil
+import com.fs.starfarer.api.util.Misc
+import org.selkie.kol.campaign.story.core.KolStoryData
+import org.selkie.kol.campaign.story.core.KolFleets
+import org.selkie.kol.campaign.story.core.KolStorySettings
+import org.selkie.kol.campaign.story.core.KolIds
+
+/**
+ * The charter's story hook. Scuttling (later story only, never otherwise) records the reason in
+ * `$kolPatron_charterScuttled` and removes the fleets' management (no replacements); the fleets themselves
+ * are left where they are for the story to deal with.
+ */
+object KolPatronCharter {
+    fun scuttle(reason: String) {
+        Global.getSector().memoryWithoutUpdate.set(PatronKeys.CHARTER_SCUTTLED, reason)
+        KolPatronFleets.data().unmanaged = true
+    }
+
+    fun scuttled(): Boolean = Global.getSector().memoryWithoutUpdate.contains(PatronKeys.CHARTER_SCUTTLED)
+}
+
+/** Saved state of the patron's stationed fleets (in persistent data). */
+class KolPatronFleetData {
+    var patron: String? = null          // faction id, `charter` or `player`
+    var dismissed = false
+    var unmanaged = false               // the charter was scuttled: no replacements
+    val lastSpawn = HashMap<String, Long>() // per system id
+}
+
+/**
+ * The patron's persistent fleets: stationed in the systems containing Lyra and Cygnus once the patron is announced,
+ * replenished slowly, until dismissed later in the story ([dismiss]). Each fleet is built from the patron's own faction
+ * and handed to the Knights (`handOver`), so it shares the Order's relationships. The player's own forces stand as the
+ * defenders, at a fleet-size cost to the player's colonies.
+ */
+object KolPatronFleets {
+    const val FLEET_FLAG = "\$kolPatron_guard"
+    private const val DATA_KEY = "kol_patronFleets"
+    private const val OWN_PENALTY_ID = "kol_patronOwnForces"
+
+    fun data(): KolPatronFleetData {
+        return KolStoryData.get(DATA_KEY) { KolPatronFleetData() }
+    }
+
+    fun active(): Boolean = data().let { it.patron != null && !it.dismissed }
+
+    /** The patron is announced: its fleets arrive at Lyra and Cygnus. */
+    fun station(patron: String) {
+        val data = data()
+        data.patron = patron
+        data.dismissed = false
+        for (system in systems()) {
+            repeat(KolStorySettings.patronFleetCount) { spawn(system) }
+            data.lastSpawn[system.id] = Global.getSector().clock.timestamp
+        }
+        if (patron == Factions.PLAYER) applyOwnPenalty()
+    }
+
+    /** Later in the story: the patron's fleets go home, and stop being replaced. */
+    fun dismiss() {
+        val data = data()
+        data.dismissed = true
+        for (fleet in fleets()) {
+            fleet.clearAssignments()
+            val exit = fleet.starSystem?.jumpPoints?.firstOrNull() ?: fleet
+            fleet.addAssignment(FleetAssignment.GO_TO_LOCATION_AND_DESPAWN, exit, 1000f, "returning home")
+        }
+        removeOwnPenalty()
+    }
+
+    /** The systems containing Lyra and Cygnus. */
+    fun systems(): List<StarSystemAPI> = listOf(KolIds.LYRA, KolIds.CYGNUS)
+        .mapNotNull { Global.getSector().economy.getMarket(it)?.starSystem }.distinct()
+
+    /** The station a system's fleets guard (Lyra's or Cygnus'). */
+    private fun anchor(system: StarSystemAPI): SectorEntityToken? = listOf(KolIds.LYRA, KolIds.CYGNUS)
+        .mapNotNull { Global.getSector().economy.getMarket(it)?.primaryEntity }.firstOrNull { it.starSystem == system }
+
+    fun fleets(system: StarSystemAPI? = null): List<CampaignFleetAPI> = (if (system != null) listOf(system) else systems())
+        .flatMap { it.fleets }.filter { it.isAlive && it.memoryWithoutUpdate.getBoolean(FLEET_FLAG) }
+
+    private fun factionFor(patron: String): String = when (patron) {
+        KolPatron.CHARTER -> Factions.MERCENARY
+        else -> patron
+    }
+
+    private fun tactistar(): Boolean = Global.getSector().memoryWithoutUpdate.getString(PatronKeys.CHARTER_SOURCE) == KolPatron.TRITACH
+
+    /** [PLACEHOLDER] fleet names, in full: the fleets fly as the Knights, so the game's faction prefix is off. */
+    private fun nameFor(patron: String): String = when (patron) {
+        KolPatron.CHARTER -> if (tactistar()) "Tactistar Guard Detachment" else KolStorySettings.patronCharterCompanyName + " Detachment"
+        else -> Global.getSector().getFaction(patron).displayName + " Protectorate Squadron"
+    }
+
+    /**
+     * The patron's fleets are built from its own faction (ships, doctrine, officers) and handed to the Knights: they fly
+     * as the Order's, so they share its relationships, and nothing has to be copied or flagged.
+     */
+    private fun handOver(fleet: CampaignFleetAPI, patron: String) {
+        fleet.setFaction(KolIds.FACTION, true)
+        fleet.name = nameFor(patron)
+        fleet.isNoFactionInName = true
+        fleet.isTransponderOn = true // openly the Church's protectors
+    }
+
+    /** One fleet arrives at a jump point of [system] and takes station by its Knights holding. */
+    private fun spawn(system: StarSystemAPI) {
+        val patron = data().patron ?: return
+        val anchor = anchor(system) ?: return
+        val fleet = KolFleets.combat(factionFor(patron), FleetTypes.PATROL_LARGE, KolStorySettings.patronFleetPoints) {
+            if (patron == KolPatron.CHARTER && tactistar()) { // Tactistar's better offerings, as vanilla's Tactistar fleets
+                qualityOverride = 1f
+                averageSMods = 2
+            }
+        } ?: return
+        handOver(fleet, patron)
+        fleet.memoryWithoutUpdate.set(FLEET_FLAG, true)
+        system.addEntity(fleet)
+        val arrival = system.jumpPoints.randomOrNull() ?: anchor
+        fleet.setLocation(arrival.location.x, arrival.location.y)
+        fleet.addAssignment(FleetAssignment.DEFEND_LOCATION, anchor, 1_000_000f, "guarding the faithful")
+    }
+
+    /** The player's own forces stand as patron: a flat fleet-size penalty on the player's colonies. */
+    private fun applyOwnPenalty() {
+        val mult = 1f - KolStorySettings.patronOwnFleetPenalty
+        for (market in Misc.getPlayerMarkets(true))
+            market.stats.dynamic.getMod(Stats.COMBAT_FLEET_SIZE_MULT).modifyMult(OWN_PENALTY_ID, mult, "The Church's patron (your own forces)")
+    }
+
+    private fun removeOwnPenalty() {
+        for (market in Misc.getPlayerMarkets(true)) market.stats.dynamic.getMod(Stats.COMBAT_FLEET_SIZE_MULT).unmodify(OWN_PENALTY_ID)
+    }
+
+    /** Runs with the story scripts: replaces lost fleets slowly, keeps the own-forces penalty current. */
+    fun tick() {
+        if (!active() || data().unmanaged) return
+        val data = data()
+        val patron = data.patron ?: return
+        for (system in systems()) {
+            val fleets = fleets(system)
+            // fleets from before the hand-over: give them to the Knights, and drop the old relationship flags
+            for (fleet in fleets) if (fleet.faction.id != KolIds.FACTION) {
+                fleet.memoryWithoutUpdate.keys.filter { it.startsWith(MemFlags.MEMORY_KEY_MAKE_NON_HOSTILE) || it.startsWith(MemFlags.MEMORY_KEY_MAKE_HOSTILE) || it == MemFlags.NON_HOSTILE_OVERRIDES_MAKE_HOSTILE }
+                    .forEach { fleet.memoryWithoutUpdate.unset(it) }
+                handOver(fleet, patron)
+            }
+            if (fleets.size >= KolStorySettings.patronFleetCount) continue
+            val last = data.lastSpawn[system.id] ?: 0L
+            if (Global.getSector().clock.getElapsedDaysSince(last) < KolStorySettings.patronFleetReplenishDays) continue
+            spawn(system)
+            data.lastSpawn[system.id] = Global.getSector().clock.timestamp
+        }
+        if (patron == Factions.PLAYER) applyOwnPenalty()
+    }
+}
+
+/** Ticks the patron's fleets every few days (transient; registered at each load). */
+class KolPatronFleetScript : EveryFrameScript {
+    private val interval = IntervalUtil(2f, 3f)
+    private val aboard = IntervalUtil(0.1f, 0.2f)
+    override fun isDone() = false
+    override fun runWhilePaused() = false
+    override fun advance(amount: Float) {
+        val days = Misc.getDays(amount)
+        interval.advance(days)
+        if (interval.intervalElapsed()) {
+            KolPatronParley.tick()
+            KolPatronFleets.tick()
+        }
+        aboard.advance(days)
+        if (aboard.intervalElapsed()) KolPatronParley.aboardScene()?.let { KolPatronParley.playAboard(it) }
+    }
+}

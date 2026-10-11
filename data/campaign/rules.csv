@@ -202,32 +202,32 @@ $printedDesc = true 0
 $fidpi_addContinue = true 0","The opposing fleet moves in to meet yours, enveloped in dancing twinkles of volatile half-light. A sound grazes your consciousness like a bullet grazing your skin, a tune on perception's edge just failing to be heard. The dance of the light changes, matching the inaudible rhythm pace for pace. The crew surrounding you wavers, drifting in and out of focus. Sweat trickles, a nose bleeds, straining to hear the absence. Conduits pulse and readouts flicker as your ship tries to sing along. Amidst the maddening silence waits Yukionna, ready with her embrace.",,
 zea_BossYukionnaEnc2,BeginFleetEncounter2,$zea_yukionna score:1000,ZeaIntelCMD showFleetInfo,,,
 "# Caeli's guardian, Ozymandias (ZeaCaeli): either the cryosleeper or the Zhi Nu's derelict offers the fight",,,,,,
-zea_caeliOpen,OpenInteractionDialog,"$zea_caeli
+zeaCaeli_open,OpenInteractionDialog,"$zea_caeli
 !$global.zea_caeliGuardianBeaten score:2000","ShowDefaultVisual
 PrintDescription 1
-SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] A derelict prototype drifts in Caeli's shadow, close enough to be tethered to it. Its drive is cold, but your sensors officer keeps glancing back at the readings: something aboard the pair is still drawing power.","0:zea_caeliApproach:[PLACEHOLDER] Move in closer
+SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] A derelict prototype drifts in Caeli's shadow, close enough to be tethered to it. Its drive is cold, but your sensors officer keeps glancing back at the readings: something aboard the pair is still drawing power.","0:zeaCaeli_approach:[PLACEHOLDER] Move in closer
 100:defaultLeave:Leave",
-zea_caeliZhiNuOpen,OpenInteractionDialog,"$zea_caeliZhiNu
+zeaCaeli_zhiNuOpen,OpenInteractionDialog,"$zea_caeliZhiNu
 !$global.zea_caeliGuardianBeaten score:2000","ShowDefaultVisual
-SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The derelict is a prototype hull of a design you don't recognize, drifting beside the Caeli cryosleeper. Its drive is cold, but its systems are not quite dark.","0:zea_caeliApproach:[PLACEHOLDER] Move in closer
+SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The derelict is a prototype hull of a design you don't recognize, drifting beside the Caeli cryosleeper. Its drive is cold, but its systems are not quite dark.","0:zeaCaeli_approach:[PLACEHOLDER] Move in closer
 100:defaultLeave:Leave",
-zea_caeliApproach,DialogOptionSelected,$option == zea_caeliApproach,ZeaCaeliCMD engage,"[PLACEHOLDER] The prototype's drive flares as your fleet closes. Behind it, something far larger unfolds from Caeli's hull: the cryosleeper's guardian, awake.",,
-zea_caeliBeatenMission,ZeaCaeliBeaten,$global.kolCh2Oz_active score:10,"SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The guardian goes dark, and the prototype with it. Helensis' clerks will want to know what kind of hull it was, and who built it. Caeli drifts on, silent; the Order will want it remembered.",100:defaultLeave:Leave,
-zea_caeliBeaten,ZeaCaeliBeaten,,FireBest ZeaCaeliLore,"[PLACEHOLDER] The guardian goes dark, and the prototype with it.",,
-zea_caeliLore,ZeaCaeliLore,,"SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] Caeli's lore: what the boarding party finds aboard the sleeper ship, and what was done to it.","0:zea_caeliSalvage:[PLACEHOLDER] Search what's left aboard
+zeaCaeli_approach,DialogOptionSelected,$option == zeaCaeli_approach,ZeaCaeliCMD engage,"[PLACEHOLDER] The prototype's drive flares as your fleet closes. Behind it, something far larger unfolds from Caeli's hull: the cryosleeper's guardian, awake.",,
+zeaCaeli_beatenMission,ZeaCaeliBeaten,$global.kolOzy_active score:10,"SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The guardian goes dark, and the prototype with it. Helensis' clerks will want to know what kind of hull it was, and who built it. Caeli drifts on, silent; the Order will want it remembered.",100:defaultLeave:Leave,
+zeaCaeli_beaten,ZeaCaeliBeaten,,FireBest ZeaCaeliLore,"[PLACEHOLDER] The guardian goes dark, and the prototype with it.",,
+zeaCaeli_lore,ZeaCaeliLore,,"SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] Caeli's lore: what the boarding party finds aboard the sleeper ship, and what was done to it.","0:zeaCaeli_salvage:[PLACEHOLDER] Search what's left aboard
 100:defaultLeave:Leave",
-zea_caeliSalvage,DialogOptionSelected,$option == zea_caeliSalvage,ZeaCaeliCMD reward,,,
-zea_caeliAfterLore,OpenInteractionDialog,"$zea_caeli
+zeaCaeli_salvage,DialogOptionSelected,$option == zeaCaeli_salvage,ZeaCaeliCMD reward,,,
+zeaCaeli_afterLore,OpenInteractionDialog,"$zea_caeli
 $global.zea_caeliGuardianBeaten
 !$global.zea_caeliRewarded
-!$global.kolCh2Oz_active score:600","ShowDefaultVisual
+!$global.kolOzy_active score:600","ShowDefaultVisual
 PrintDescription 1
 FireBest ZeaCaeliLore",,,
-zea_caeliAfter,OpenInteractionDialog,"$zea_caeli
+zeaCaeli_after,OpenInteractionDialog,"$zea_caeli
 $global.zea_caeliGuardianBeaten score:500","ShowDefaultVisual
 PrintDescription 1
 SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] Caeli drifts on, silent. Nothing aboard will ever wake.",100:defaultLeave:Leave,never vanilla's salvage flow: Caeli is not a usable cryosleeper
-kolCh2_ozZhiNuRecovered,PostShipRecoverySpecial,$srs_baseHullId == zea_boss_zhi_nu,KolCh2CMD ozZhiNuRecovered,,,a Knights reputation hit if the Ozymandias mission's Knights are in the system
+kolOzy_zhiNuRecovered,PostShipRecoverySpecial,$srs_baseHullId == zea_boss_zhi_nu,KolOzyCMD zhiNuRecovered,,,a Knights reputation hit if the Ozymandias mission's Knights are in the system
 #END boss interactions,,,,,,
 #END relationship level descriptions,,,,,,
 ,,,,,,
@@ -899,27 +899,27 @@ $id == kol_chaptermaster
 $global.kolCh1_councilDone
 !$global.kol_excommunicated
 $global.kolTech_requisitions",,,"12:kolTech_requisitions:""I'd like to make a requisition.""",
-kolCh2_ozDeliverOpt,PopulateOptions,"$isPerson
+kolOzy_deliverOpt,PopulateOptions,"$isPerson
 $id == kol_chaptermaster
-$kolCh2Oz_deliver",,,"9:kolCh2_ozDeliver:[PLACEHOLDER] ""I've brought what was recovered at Ozymandias.""",
-kolCh2_ozDeliver,DialogOptionSelected,$option == kolCh2_ozDeliver,,[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down.,kolCh2_ozDeliver2:Continue,
-kolCh2_ozDeliverAgain,DialogOptionSelected,"$option == kolCh2_ozDeliver score:10
-$global.kolHelensis_confrontations >= 1",,"[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down. He looks at it, then out of the window at the third berth, and you can watch him add it up.",kolCh2_ozDeliver2:Continue,escalated: the Ordained confrontation came first
-kolCh2_ozDeliver2,DialogOptionSelected,$option == kolCh2_ozDeliver2,KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""Master, with respect: we don't know what this is. Doctrine has an answer for things we can't name, and it isn't a shelf in your office."" Enarms doesn't look at you. He doesn't need to.",kolCh2_ozDeliver3:Continue,
-kolCh2_ozDeliver2Again,DialogOptionSelected,"$option == kolCh2_ozDeliver2 score:10
-$global.kolHelensis_confrontations >= 1",KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""We don't know what it is,"" Enarms says. ""I couldn't have told you what was in that berth either, until I counted it. I'd like to know where this goes, Master, before it goes there.""",kolCh2_ozDeliver3:Continue,
-kolCh2_ozDeliver3,DialogOptionSelected,$option == kolCh2_ozDeliver3,"KolCh2CMD showPerson kol_chaptermaster
-Call $global.kolCh2Oz_ref deliverRelic
+$kolOzy_deliver",,,"9:kolOzy_deliver:[PLACEHOLDER] ""I've brought what was recovered at Ozymandias.""",
+kolOzy_deliver,DialogOptionSelected,$option == kolOzy_deliver,,[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down.,kolOzy_deliver2:Continue,
+kolOzy_deliverAgain,DialogOptionSelected,"$option == kolOzy_deliver score:10
+$global.kolHelensis_confrontations >= 1",,"[PLACEHOLDER] Helensis has the cache brought to her office before she asks a single question about it. Brother Enarms arrives while it's still being set down. He looks at it, then out of the window at the third berth, and you can watch him add it up.",kolOzy_deliver2:Continue,escalated: the Ordained confrontation came first
+kolOzy_deliver2,DialogOptionSelected,$option == kolOzy_deliver2,KolStoryCMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""Master, with respect: we don't know what this is. Doctrine has an answer for things we can't name, and it isn't a shelf in your office."" Enarms doesn't look at you. He doesn't need to.",kolOzy_deliver3:Continue,
+kolOzy_deliver2Again,DialogOptionSelected,"$option == kolOzy_deliver2 score:10
+$global.kolHelensis_confrontations >= 1",KolStoryCMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""We don't know what it is,"" Enarms says. ""I couldn't have told you what was in that berth either, until I counted it. I'd like to know where this goes, Master, before it goes there.""",kolOzy_deliver3:Continue,
+kolOzy_deliver3,DialogOptionSelected,$option == kolOzy_deliver3,"KolStoryCMD showPerson kol_chaptermaster
+Call $global.kolOzy_ref deliverRelic
 KolStoryCMD approve kol_chaptermaster 3
-KolStoryCMD approve kol_knightcaptain -3","[PLACEHOLDER] ""Doctrine is for what we understand, Brother. This, we'll learn."" Helensis turns back to you, and for a moment she's almost warm. ""The Order is in your debt."" Enarms leaves without being dismissed.",kolCh2_ozDeliverDone:Continue,
-kolCh2_ozDeliver3Again,DialogOptionSelected,"$option == kolCh2_ozDeliver3 score:10
-$global.kolHelensis_confrontations >= 1","KolCh2CMD showPerson kol_chaptermaster
-Call $global.kolCh2Oz_ref deliverRelic
+KolStoryCMD approve kol_knightcaptain -3","[PLACEHOLDER] ""Doctrine is for what we understand, Brother. This, we'll learn."" Helensis turns back to you, and for a moment she's almost warm. ""The Order is in your debt."" Enarms leaves without being dismissed.",kolOzy_deliverDone:Continue,
+kolOzy_deliver3Again,DialogOptionSelected,"$option == kolOzy_deliver3 score:10
+$global.kolHelensis_confrontations >= 1","KolStoryCMD showPerson kol_chaptermaster
+Call $global.kolOzy_ref deliverRelic
 KolStoryCMD approve kol_chaptermaster 3
 KolStoryCMD approve kol_knightcaptain -3","[PLACEHOLDER] ""It goes where I can study it, Brother. That's what it's for."" Helensis turns back to you. ""The Order is in your debt.""
 
-Enarms leaves when you do. He walks you as far as the shuttle, and doesn't say anything the whole way.",kolCh2_ozDeliverDone:Continue,
-kolCh2_ozDeliverDone,DialogOptionSelected,$option == kolCh2_ozDeliverDone,FireAll PopulateOptions,,,
+Enarms leaves when you do. He walks you as far as the shuttle, and doesn't say anything the whole way.",kolOzy_deliverDone:Continue,
+kolOzy_deliverDone,DialogOptionSelected,$option == kolOzy_deliverDone,FireAll PopulateOptions,,,
 kolTech_requisitions,DialogOptionSelected,$option == kolTech_requisitions,FireBest KolTechReqMenu,,,
 kolTech_reqMenu,KolTechReqMenu,,"KolTechCMD publish
 FireBest KolTechReqMenuText",,,
@@ -979,7 +979,7 @@ $global.kolTech_requisitions
 ShowPersonVisual
 FireAll PopulateOptions","""Captain."" Enarms finishes the line he is reading before he looks up. ""The refectory has stopped speaking of the machine fleets as a storm to be weathered. This morning I heard them speak of beating them."" He sets the slate down. ""I am glad for it. What can I do for you?""",,
 kolTech_greenflightReact1,PickGreeting,"$id == kol_intel_director score:301
-$global.kol_ch1_done
+$global.kolCh1_done
 $global.kolTech_requisitions
 !$global.kolTech_greenflightSaw1","$global.kolTech_greenflightSaw1 = true
 ShowPersonVisual
@@ -1001,7 +1001,7 @@ FireAll PopulateOptions","""Captain."" A Knight in good armor passes behind him 
 
 I have known Helensis a long time, and I have never known her to reward loyalty without expecting to collect in return. I do not say it against you; I say it so that you will know not to take your partnership with her lightly.""",,
 kolTech_greenflightReact2,PickGreeting,"$id == kol_intel_director score:302
-$global.kol_ch1_done
+$global.kolCh1_done
 $global.kolTech_trusted
 !$global.kolTech_greenflightSaw2","$global.kolTech_greenflightSaw1 = true
 $global.kolTech_greenflightSaw2 = true
@@ -1027,7 +1027,7 @@ He glances for something off-frame. ""Helensis' knights go quiet when I pass by 
 
 ""There is much to do, captain. Come meet me when you have a chance.""",,
 kolTech_greenflightReact3,PickGreeting,"$id == kol_intel_director score:303
-$global.kol_ch1_done
+$global.kolCh1_done
 $global.kolTech_armory
 !$global.kolTech_greenflightSaw3","$global.kolTech_greenflightSaw1 = true
 $global.kolTech_greenflightSaw2 = true
@@ -1057,7 +1057,7 @@ He lets that stand. ""I do not know what the Order is becoming, captain. I know 
 
 I cannot order you to stop, but I would ask you to look at what is being made, now and then, and decide whether you like the look of it. There is more I could say."" He meets the camera. ""Go carefully.""",,
 kolTech_greenflightReact4,PickGreeting,"$id == kol_intel_director score:304
-$global.kol_ch1_done
+$global.kolCh1_done
 $global.kolTech_consecrated
 !$global.kolTech_greenflightSaw4","$global.kolTech_greenflightSaw1 = true
 $global.kolTech_greenflightSaw2 = true
@@ -1105,20 +1105,20 @@ kolOrdained_upAgain,DialogOptionSelected,"$option == kolOrdained_up score:10
 $global.kolHelensis_confrontations >= 1",,"[PLACEHOLDER] The office is as you left it, except that the cache from Ozymandias has been moved into a corner under a cloth, and the window's blind is up. The yard's third berth is lit.
 
 Brother Enarms is already here. He doesn't greet you; he's partway through a sentence, and he finishes it. ""...two full crews, Master, and not a line of them on my rolls.""",kolOrdained_enarms:Continue,escalated: the Ozymandias relic came first
-kolOrdained_enarms,DialogOptionSelected,$option == kolOrdained_enarms,KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""I couldn't make the plate balance,"" Enarms says. It sounds like an apology. ""Three months of hull plate, more than every repair on the station. I went through it twice, thinking the error was mine."" He sets the slips on her desk. ""It isn't mine. It's in that berth.
+kolOrdained_enarms,DialogOptionSelected,$option == kolOrdained_enarms,KolStoryCMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""I couldn't make the plate balance,"" Enarms says. It sounds like an apology. ""Three months of hull plate, more than every repair on the station. I went through it twice, thinking the error was mine."" He sets the slips on her desk. ""It isn't mine. It's in that berth.
 
 The council said study, Master. I was in the room. Nobody stood up and asked whether we'd build on it, and I would have liked the chance to say no.""",kolOrdained_helensis:Continue,
 kolOrdained_enarmsAgain,DialogOptionSelected,"$option == kolOrdained_enarms score:10
-$global.kolHelensis_confrontations >= 1",KolCh2CMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""I came about the plate,"" Enarms says to you, since you're the one who doesn't know. ""Three months of it, more than every repair on the station, and two yard crews I can't find."" There's a chair; he doesn't take it.
+$global.kolHelensis_confrontations >= 1",KolStoryCMD showPerson kol_knightcaptain,"[PLACEHOLDER] ""I came about the plate,"" Enarms says to you, since you're the one who doesn't know. ""Three months of it, more than every repair on the station, and two yard crews I can't find."" There's a chair; he doesn't take it.
 
 ""When you took the cache, Master, I told myself it was a box on a floor."" He looks past her, at the window. ""That's a keel. Who decided the faithful would carry that? It wasn't the Order.""",kolOrdained_helensis:Continue,
-kolOrdained_helensis,DialogOptionSelected,$option == kolOrdained_helensis,KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""It's a shield, Brother."" Helensis doesn't get up. ""The same emitters the Order has flown since before either of us took vows, without the governor that drops them in the middle of a fight. I've read every loss report from the last two years. I know how many of them end with a shield going down.""
+kolOrdained_helensis,DialogOptionSelected,$option == kolOrdained_helensis,KolStoryCMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""It's a shield, Brother."" Helensis doesn't get up. ""The same emitters the Order has flown since before either of us took vows, without the governor that drops them in the middle of a fight. I've read every loss report from the last two years. I know how many of them end with a shield going down.""
 
 She turns to you. ""You've flown against what we're studying, captain. You tell him.""","1:kolOrdained_standHelensis:""If they bring patrols home, I'd have built them too.""
 2:kolOrdained_standEnarms:""Brother Enarms is right. This should go before the Order.""
 3:kolOrdained_standSilent:Say nothing",
 kolOrdained_helensisAgain,DialogOptionSelected,"$option == kolOrdained_helensis score:10
-$global.kolHelensis_confrontations >= 1",KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""Nobody decided, Brother. Nobody in this Order ever decides anything."" It comes out sharper than she meant, and she lets it stand. ""It's the same shield, without the governor that drops it mid-fight. You've read the loss reports. You file them.""
+$global.kolHelensis_confrontations >= 1",KolStoryCMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""Nobody decided, Brother. Nobody in this Order ever decides anything."" It comes out sharper than she meant, and she lets it stand. ""It's the same shield, without the governor that drops it mid-fight. You've read the loss reports. You file them.""
 
 Then, to you, more evenly: ""You've seen what's out there. Say what you think.""","1:kolOrdained_standHelensis:""If they bring patrols home, I'd have built them too.""
 2:kolOrdained_standEnarms:""Brother Enarms is right. This should go before the Order.""
@@ -1161,12 +1161,12 @@ kolOrdained_followupLost,DialogOptionSelected,"$option == kolOrdained_followup s
 $global.kolOrdained_earlyLost",unset $global.kolOrdained_followup,"[PLACEHOLDER] ""None of them came back."" The report on her desk is closed, and she doesn't open it. ""I'll be writing to their families tonight. Ask me about it another time, captain.""",kolOrdained_followupDone:Continue,
 kolOrdained_followupDone,DialogOptionSelected,$option == kolOrdained_followupDone,FireAll PopulateOptions,,,
 kolOrdained_enarmsAfter,PickGreeting,"$id == kol_knightcaptain score:310
-$global.kolTech_ordainedEarly
+$global.kolOrdained_early
 !$global.kolOrdained_enarmsSaw","$global.kolOrdained_enarmsSaw = true
 ShowPersonVisual
 FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Enarms is at his desk, not among the plants. ""The third berth has been given back to my rolls. There's a new keel in it already."" He turns a slip over and sets it on the pile. ""I prayed for the crews. I'd have prayed for them whoever built the ships.""",,
 kolOrdained_enarmsAfterSided,PickGreeting,"$id == kol_knightcaptain score:311
-$global.kolTech_ordainedEarly
+$global.kolOrdained_early
 !$global.kolOrdained_enarmsSaw
 $global.kolOrdained_earlyStance == enarms","$global.kolOrdained_enarmsSaw = true
 ShowPersonVisual
@@ -1236,19 +1236,19 @@ kolDutyPatrol_choose:Read another entry
 contact_decline:Leave the writ",
 kolDutyPatrol_offerDesc,KolDutyPatrolCreatorOfferDesc,,Highlight $bcb_dist $bcb_reward $bcb_days,"The entry marks raiders troubling the faithful out of the $bcb_systemName, $bcb_dist light-years away. The Order will pay $bcb_reward when they are dealt with, if it is within $bcb_days days.",,
 # Knights Chapter 2: the convocation (first assembly the player attends),,,,,,
-kolCh2_convocation,KolAssembly,$global.kolAssembly_topic == convocation score:20,"KolStoryCMD assemblySit
-KolCh2CMD convOpen
-KolCh2CMD showPerson grandmaster","The great hall of Star Keep Lyra was a garden chamber once, and between assemblies is still used as such; vines run along the gallery rails and planters of fragrant herbs section the space.
+kolConv_begin,KolAssembly,$global.kolAssembly_topic == convocation score:20,"KolStoryCMD assemblySit
+KolConvCMD open
+KolStoryCMD showPerson grandmaster","The great hall of Star Keep Lyra was a garden chamber once, and between assemblies is still used as such; vines run along the gallery rails and planters of fragrant herbs section the space.
 
-Below the ivy are rows of benches, every one of them full: Knight-Captains in their coats, clerks with weathered slates on their knees, a row of Church robes near the front, and Knights standing in the aisle because there is nowhere left to sit. You are shown to the end of a bench among the captains in the Order's service.",kolCh2_convocation_c2:Continue,
-kolCh2_convocation_c2,DialogOptionSelected,$option == kolCh2_convocation_c2,,"Cygnus' principals sit at the front: Master Helensis, upright and still; Brother Enarms, waiting with a cup of tea beside him. Sister Greenflight has taken a tall chair in a corner, where the whole hall is in view.
+Below the ivy are rows of benches, every one of them full: Knight-Captains in their coats, clerks with weathered slates on their knees, a row of Church robes near the front, and Knights standing in the aisle because there is nowhere left to sit. You are shown to the end of a bench among the captains in the Order's service.",kolConv_begin_c2:Continue,
+kolConv_begin_c2,DialogOptionSelected,$option == kolConv_begin_c2,,"Cygnus' principals sit at the front: Master Helensis, upright and still; Brother Enarms, waiting with a cup of tea beside him. Sister Greenflight has taken a tall chair in a corner, where the whole hall is in view.
 
 Grandmaster Lyon rises to his height. He is older than his voice, but not by much. He leads the prayer himself, and the hall answers it in one breath. ""We are met in Ludd's name,"" he says, ""and in need."" Then he sits, attentive but stoic, and leaves the hall to the Lector.",kolConv_reckon:Continue,
-kolConv_reckon,DialogOptionSelected,$option == kolConv_reckon,"KolCh2CMD showPerson bench:lector
+kolConv_reckon,DialogOptionSelected,$option == kolConv_reckon,"KolStoryCMD showPerson bench:lector
 FireAll KolAssemblyItems","The Lector, $global.kolBench_lector_title $global.kolBench_lector_last, keeps the order of business from a lectern below the Grandmaster's chair. 
 
 $global.kolBench_lector_HeOrShe reads the reckoning first, in a voice trained to effortlessly project to the back of the hall.",kolConv_attrition:Continue,
-kolConv_attrition,DialogOptionSelected,$option == kolConv_attrition,KolCh2CMD showPerson bench:captain,"""The first matter before the assembly,"" the Lector says, ""are the recent attacks on the Order."" $global.kolBench_lector_HeOrShe yields the floor to a Knight-Captain on the second bench.
+kolConv_attrition,DialogOptionSelected,$option == kolConv_attrition,KolStoryCMD showPerson bench:captain,"""The first matter before the assembly,"" the Lector says, ""are the recent attacks on the Order."" $global.kolBench_lector_HeOrShe yields the floor to a Knight-Captain on the second bench.
 
 Knight-Captain $global.kolBench_captain_last rises swiftly. ""In only the last cycle my command has lost four patrols. Two to raiders. Two to the expeditions.
 
@@ -1256,7 +1256,7 @@ I have crews for seven lances and berths for eleven, and I have stopped calling 
 kolConv_attrition_c2,DialogOptionSelected,$option == kolConv_attrition_c2,,"""I do not think I am the worst of us. I would have those suffering more harshly speak now.""
 
 Nobody answers that, at first. Then several captains answer at once, and the Lector lets them, for a while.",kolConv_attrition2:Continue,
-kolConv_attrition2,DialogOptionSelected,$option == kolConv_attrition2,KolCh2CMD showPerson kol_chaptermaster,"When the Lector calls for order, it is Master Helensis who takes the floor.
+kolConv_attrition2,DialogOptionSelected,$option == kolConv_attrition2,KolStoryCMD showPerson kol_chaptermaster,"When the Lector calls for order, it is Master Helensis who takes the floor.
 
 ""The expeditions will not be recalled."" She lets that gain weight before she goes on. ""Every ship we have lost in the dark, we lost learning something. Bring them home and we lose them anyway, more slowly, to an enemy that has learned everything about us and given us nothing in return.
 
@@ -1264,7 +1264,7 @@ The Order was not founded to protect only its own doors.""",kolConv_attrition2_c
 kolConv_attrition2_c2,DialogOptionSelected,$option == kolConv_attrition2_c2,,"""Then who keeps them, Master?"" The Knight-Captain, still standing. ""With respect. The faithful at my congregations took no vows.""
 
 Helensis closes her eyes and inclines her head; not an answer. The captain responds with only a hardened expression, and sits.",kolConv_attrition3:Continue,
-kolConv_attrition3,DialogOptionSelected,$option == kolConv_attrition3,KolCh2CMD showPerson kol_knightcaptain,"Brother Enarms rises to speak.
+kolConv_attrition3,DialogOptionSelected,$option == kolConv_attrition3,KolStoryCMD showPerson kol_knightcaptain,"Brother Enarms rises to speak.
 
 ""The Master is right that we cannot resign, and the captain is right that we cannot go on."" He says it without apology. ""Our stations supply the expeditions, the patrols, and the refits out of one purse and one set of yards. At the rate we are losing ships, it can sustain two of those three. Not all of them, and not for long.
 
@@ -1286,12 +1286,12 @@ kolConv_attrPragmatic,DialogOptionSelected,$option == kolConv_attrPragmatic,"$gl
 FireBest KolConvAttritionDecide","That goes badly on the benches. There is no holding in the Order whose Knights believe it is the one worth losing, and several of them say so aloud. Only Sister Greenflight seems to find it worth hearing. She makes no note, but she watches who objects the loudest.",,
 kolConv_attrDemur,DialogOptionSelected,$option == kolConv_attrDemur,FireBest KolConvAttritionDecide,"The Lector accepts that with a small bow, and the argument closes back over the place it opened for you.",,
 kolConv_attrSilent,DialogOptionSelected,$option == kolConv_attrSilent,FireBest KolConvAttritionDecide,,,
-kolConv_attritionDecide,KolConvAttritionDecide,,KolCh2CMD showPerson kol_chaptermaster,"In the end it is the Cygnus Chapter-Master who decides it, if only by rank. ""The expeditions continue,"" Helensis says. ""The patrols continue where they can. Where they cannot, the congregations will be told so, and told why. Their own patrols are adequate.""
+kolConv_attritionDecide,KolConvAttritionDecide,,KolStoryCMD showPerson kol_chaptermaster,"In the end it is the Cygnus Chapter-Master who decides it, if only by rank. ""The expeditions continue,"" Helensis says. ""The patrols continue where they can. Where they cannot, the congregations will be told so, and told why. Their own patrols are adequate.""
 
 ""I will tell them,"" Enarms interjects. Whether he means it as an offer or as a penance, Helensis doesn't inquire.
 
 The Lector glances up at the Grandmaster's chair. Lyon is looking at Helensis intently, and finally nods. It is entered into the record.",kolConv_funding:Continue,
-kolConv_funding,DialogOptionSelected,$option == kolConv_funding,KolCh2CMD showPerson bench:keeper,"""The second matter,"" the Lector says, ""is the purse.""
+kolConv_funding,DialogOptionSelected,$option == kolConv_funding,KolStoryCMD showPerson bench:keeper,"""The second matter,"" the Lector says, ""is the purse.""
 
 The Keeper of Tithes, $global.kolBench_keeper_title $global.kolBench_keeper_last, rises with a ledger under one arm: paper, leather-bound, and heavy. $global.kolBench_keeper_HeOrShe opens it on the rail and reads without hurrying.
 
@@ -1303,7 +1303,7 @@ And the Hegemony's customs ""inspect"" what leaves Jangala twice.",kolConv_fundi
 kolConv_funding_c2,DialogOptionSelected,$option == kolConv_funding_c2,,"Against that, the stations. Against that, the expeditions. Against that, every writ paid to a captain who is not sworn.
 
 ""The Order is poor by vow,"" the Keeper finishes. ""Until recently, that has never meant it might not pay what it owes.""",kolConv_funding2:Continue,
-kolConv_funding2,DialogOptionSelected,$option == kolConv_funding2,KolCh2CMD showPerson bench:chaplain,"A curate in the front row of Church robes, $global.kolBench_chaplain_title $global.kolBench_chaplain_last, answers before the Lector can call on anyone.
+kolConv_funding2,DialogOptionSelected,$option == kolConv_funding2,KolStoryCMD showPerson bench:chaplain,"A curate in the front row of Church robes, $global.kolBench_chaplain_title $global.kolBench_chaplain_last, answers before the Lector can call on anyone.
 
 ""The Order will ask the congregations for more, and I will be the one asking."" $global.kolBench_chaplain_HeOrShe asserts; $global.kolBench_chaplain_heOrShe has the bearing of someone tired of hiding his fatigue. ""They give what they can. Some of them give what they cannot. It is an open shame.""
 
@@ -1322,14 +1322,14 @@ kolConv_fundCredits,DialogOptionSelected,$option == kolConv_fundCredits,"$global
 FireBest KolConvFundingDecide","""From someone who would know,"" Helensis says. It is not clear to whom. The Keeper does not look relieved.",,
 kolConv_fundDemur,DialogOptionSelected,$option == kolConv_fundDemur,FireBest KolConvFundingDecide,"""Nor mine, captain,"" the Keeper says. ""Yet we must.""",,
 kolConv_fundSilent,DialogOptionSelected,$option == kolConv_fundSilent,FireBest KolConvFundingDecide,,,
-kolConv_fundingDecide,KolConvFundingDecide,,KolCh2CMD showPerson kol_knightcaptain,"It is Enarms who answers at last, and he answers by his responsibilities rather than by his rank: Cygnus can carry the expeditions' supply out of its own stores until the question can be decided. Cygnus' own refits will wait. The Keeper will draw on Cygnus' tithes before the curias are asked for anything more. He gives a figure for each, and none of them are small.
+kolConv_fundingDecide,KolConvFundingDecide,,KolStoryCMD showPerson kol_knightcaptain,"It is Enarms who answers at last, and he answers by his responsibilities rather than by his rank: Cygnus can carry the expeditions' supply out of its own stores until the question can be decided. Cygnus' own refits will wait. The Keeper will draw on Cygnus' tithes before the curias are asked for anything more. He gives a figure for each, and none of them are small.
 
 Helensis looks focused while he speaks, then follows. ""We will honor it.""
 
 ""That buys time,"" the Keeper acknowledges. ""If we are favored, it buys enough.""
 
 Enarms sits. The chaplain looks at him with admiration. The Lector enters it in the record under Helensis' name.",kolConv_threats:Continue,
-kolConv_threats,DialogOptionSelected,$option == kolConv_threats,"KolCh2CMD showPerson kol_knightcaptain
+kolConv_threats,DialogOptionSelected,$option == kolConv_threats,"KolStoryCMD showPerson kol_knightcaptain
 FireBest KolConvStudy","""The third matter,"" says the Lector, ""is our new enemy.""
 
 Brother Enarms gives the report again, for the benches that were not there: the stolen schedules, the strange machines, the anomaly and all it portends. He leaves it a question how they might be linked.",kolConv_dossier:Continue,
@@ -1337,7 +1337,7 @@ kolConv_studyEarly,KolConvStudy,,,"Master Helensis stands, firmly reporting on w
 kolConv_studyLater,KolConvStudy,$global.kolTech_stage >= 2 score:10,,"Master Helensis stands, firmly reporting on what her study has made of the pieces brought to Cygnus, and for the first time today the benches go quiet for her rather than because of her.
 
 ""No human yard built these, and no human hand designed them. They are neither the leavings of the Domain. Someone is building them *today*.""",,
-kolConv_dossier,DialogOptionSelected,$option == kolConv_dossier,"KolCh2CMD showPerson kol_intel_director
+kolConv_dossier,DialogOptionSelected,$option == kolConv_dossier,"KolStoryCMD showPerson kol_intel_director
 FireAll KolConvDossier
 FireBest KolConvDossierMore
 FireBest KolConvDossierReact
@@ -1360,7 +1360,7 @@ kolConv_threatFought,DialogOptionSelected,$option == kolConv_threatFought,$globa
 You tell her what you have seen and she listens to all of it.",kolConv_powers:Continue,
 kolConv_threatSilent,DialogOptionSelected,$option == kolConv_threatSilent,"$option = kolConv_powers 0
 FireBest DialogOptionSelected",,,
-kolConv_powers,DialogOptionSelected,$option == kolConv_powers,KolCh2CMD showPerson kol_intel_director,"""The last matter,"" the Lector begins, but does not finish, because Master Helensis is already naming it.
+kolConv_powers,DialogOptionSelected,$option == kolConv_powers,KolStoryCMD showPerson kol_intel_director,"""The last matter,"" the Lector begins, but does not finish, because Master Helensis is already naming it.
 
 ""We must meet the new threat. Boldly. And without delay,"" she says, half as a challenge. ""The sooner we act, and the more decisively, the better our position will be.""
 
@@ -1375,7 +1375,7 @@ Greenflight lets the noise wane. ""We do. That answer used to protect us. Now ev
 However we answer this crisis, the Knights cannot act without other factions sweeping in. We cannot hand the danger to the powers; they would claim it or let it fester. 
 
 We need protection for our homes. And for that we need leverage.""",kolConv_powers2:Continue,
-kolConv_powers2,DialogOptionSelected,$option == kolConv_powers2,KolCh2CMD showPerson bench:delegate,"A delegate of the curias, $global.kolBench_delegate_title $global.kolBench_delegate_last, sits among the Church robes, younger than the chaplain and more careful. ""The Curia hears when the faithful plead,"" $global.kolBench_delegate_heOrShe says. 
+kolConv_powers2,DialogOptionSelected,$option == kolConv_powers2,KolStoryCMD showPerson bench:delegate,"A delegate of the curias, $global.kolBench_delegate_title $global.kolBench_delegate_last, sits among the Church robes, younger than the chaplain and more careful. ""The Curia hears when the faithful plead,"" $global.kolBench_delegate_heOrShe says. 
 
 ""It answers them with patience, and it has friendships of its own to keep. I am asked to say, with respect, that it cannot spend those friendships on the Knights' account.""
 
@@ -1408,11 +1408,11 @@ kolConv_powAllies,DialogOptionSelected,$option == kolConv_powAllies,"$global.kol
 FireBest KolConvPowersDecide","The Lector considers you a moment. Greenflight waits to speak, then, ""You're correct, captain, at least on the literal terms. It has been some time since the Church had a dependable treaty.""",,
 kolConv_powDemur,DialogOptionSelected,$option == kolConv_powDemur,FireBest KolConvPowersDecide,"The Lector nods. Greenflight's eyes rest on you a moment, taking in some information you did not offer.",,
 kolConv_powSilent,DialogOptionSelected,$option == kolConv_powSilent,FireBest KolConvPowersDecide,,,
-kolConv_powersDecide,KolConvPowersDecide,,KolCh2CMD showPerson kol_intel_director,"Greenflight closes the discussion, as far as it can be closed. ""No power will be trusted with the Order. That is not in question."" A pause.
+kolConv_powersDecide,KolConvPowersDecide,,KolStoryCMD showPerson kol_intel_director,"Greenflight closes the discussion, as far as it can be closed. ""No power will be trusted with the Order. That is not in question."" A pause.
 
 ""But great powers move when they have reason to, and they can be given reasons. Whatever we ask of one of them, there will be a price. We will endeavor that it is one we can bear.""",kolConv_toFlare:Continue,
 kolConv_toFlare,DialogOptionSelected,$option == kolConv_toFlare,FireBest KolConvFlare,,,
-kolConv_flare,KolConvFlare,,KolCh2CMD showPerson bench:young,"A Knight in the aisle stands up out of turn: young, an initiate's cord on $global.kolBench_young_hisOrHer sleeve.
+kolConv_flare,KolConvFlare,,KolStoryCMD showPerson bench:young,"A Knight in the aisle stands up out of turn: young, an initiate's cord on $global.kolBench_young_hisOrHer sleeve.
 
 ""We have spent this whole assembly number-keeping!"" The voice cracks once and steadies. ""Routes. Hulls. Tithes. Fleets that belong to other men. As if the Order could ever been kept by any of it! Ludd did not count the weapons raised against him."" $global.kolBench_young_HeOrShe is shaking, and does not sit.
 
@@ -1423,10 +1423,10 @@ The Grandmaster lifts one arm from his chair and the hall goes quiet so quickly 
 kolConv_flare2_c2,DialogOptionSelected,$option == kolConv_flare2_c2,,"Helensis speaks into the quiet, and not unkindly. ""You are not wrong, Knight. Faith will provide. It will provide us plenty, and it will provide us strength, and that strength is what we must carry today. For the holdings Knight-Captain $global.kolBench_captain_last cannot reach, for the powers who watch for weakness, and for the enemies that circle. Our faith is in this room strengthening us now. Sit down.""
 
 The initiate sits. Brother Enarms is gripping the cord at his wrist. Sister Greenflight writes a steady line in her notes, and does not look down while she does.",kolConv_patron:Continue,
-kolConv_patron,DialogOptionSelected,$option == kolConv_patron,KolCh2CMD showPerson bench:lector,"When the Lector puts the question to the assembly, $global.kolBench_lector_heOrShe puts it plainly. The Order cannot both hold its holdings and answer the dark. By Brother Enarms' reckoning it has a lifeline, but not a long one. What does the assembly propose?
+kolConv_patron,DialogOptionSelected,$option == kolConv_patron,KolStoryCMD showPerson bench:lector,"When the Lector puts the question to the assembly, $global.kolBench_lector_heOrShe puts it plainly. The Order cannot both hold its holdings and answer the dark. By Brother Enarms' reckoning it has a lifeline, but not a long one. What does the assembly propose?
 
 For a while, it proposes everything it has already rejected. Recall the expeditions: Helensis, a single ""No."" More writs: the Keeper, the ledger, the page already marked. The Curia: the delegates, regretful again. It goes on long enough that a clerk near you recharges his slate.",kolConv_patron2:Continue,
-kolConv_patron2,DialogOptionSelected,$option == kolConv_patron2,KolCh2CMD showPerson kol_knightcaptain,"Enarms waits until the Curia has been raised a third time before he stands.
+kolConv_patron2,DialogOptionSelected,$option == kolConv_patron2,KolStoryCMD showPerson kol_knightcaptain,"Enarms waits until the Curia has been raised a third time before he stands.
 
 ""There was a time,"" he says, ""when the Church's word was enough to keep the faithful safe where the Knights were not. This is not that time. So let it be someone else's word."" He finds his register. 
 
@@ -1437,7 +1437,7 @@ kolConv_patron2_c2,DialogOptionSelected,$option == kolConv_patron2_c2,,"""Sold,"
 kolConv_patron2_c3,DialogOptionSelected,$option == kolConv_patron2_c3,,"Greenflight's expression takes on suppressed pride. Helensis is silent longer than anyone expects. ""It could be. For a time,"" she says at last. ""Not longer. And no power has say among the Faith or the Order.""
 
 ""Who would even answer?"" Knight-Captain $global.kolBench_captain_last finally asks. ""We have spent an hour agreeing they all want something.""",kolConv_patron3:Continue,
-kolConv_patron3,DialogOptionSelected,$option == kolConv_patron3,"KolCh2CMD showPerson kol_intel_director
+kolConv_patron3,DialogOptionSelected,$option == kolConv_patron3,"KolStoryCMD showPerson kol_intel_director
 FireBest KolConvDoors
 FireAll KolConvChargeOpts",,,
 kolConv_doorsNamed,KolConvDoors,$global.kolConv_hasDoors score:10,,"""Those who have the faithful to lose,"" Greenflight says. She names the worlds from memory: $global.kolConv_doors. ""Those congregations know who rules them and how to be heard. A request carried through them is heard as theirs, not ours."" Then she looks along the captains' bench, to you. 
@@ -1448,11 +1448,11 @@ kolConv_chargeOptBase,KolConvChargeOpts,,,,"1:kolConv_accept:""I will find the C
 2:kolConv_accept2:""If the Order asks it of me.""",
 kolConv_chargeOptOwn,KolConvChargeOpts,"$global.kolConv_canOfferOwn
 !$global.kolConv_ownDismissed",,,"3:kolConv_offerOwn:""My own colonies will stand with the Church.""",
-kolConv_accept,DialogOptionSelected,$option == kolConv_accept,"KolCh2CMD startPatron
+kolConv_accept,DialogOptionSelected,$option == kolConv_accept,"KolPatronCMD start
 FireBest KolConvClose","Greenflight nods once, keeping a noticeably neutral expression.",,
-kolConv_accept2,DialogOptionSelected,$option == kolConv_accept2,"KolCh2CMD startPatron
+kolConv_accept2,DialogOptionSelected,$option == kolConv_accept2,"KolPatronCMD start
 FireBest KolConvClose","""It does,"" the Lector says, before anyone else can.",,
-kolConv_offerOwn,DialogOptionSelected,$option == kolConv_offerOwn,KolCh2CMD showPerson kol_chaptermaster,"At first the hall does not know what to do with that.
+kolConv_offerOwn,DialogOptionSelected,$option == kolConv_offerOwn,KolStoryCMD showPerson kol_chaptermaster,"At first the hall does not know what to do with that.
 
 Then it knows several things at once. A captain on your bench laughs, short and incredulous. The delegate looks to the Grandmaster. The chaplain looks at you as though you had offered to carry the congregations yourself, which is near enough what you have done.
 
@@ -1460,15 +1460,15 @@ Helensis does not laugh. ""A colony and a fleet are not a patron. A patron is a 
 kolConv_offerOwn_c2,DialogOptionSelected,$option == kolConv_offerOwn_c2,,"The Lector has the words ready, which tells you something about Lyra. They are older than the simple oath Brother Enarms asked of you, and heavier: to hold the faithful under your banner as under the Church's own; to answer the Order's need before your own; to account for your acts before the Order in failure or triumph both. The hall waits.","1:kolConv_oathSwear:""I swear it to you, so help me Ludd.""
 2:kolConv_oathLie:""I swear it to you."" (lie)
 3:kolConv_oathBalk:""I need time to consider it.""",
-kolConv_oathSwear,DialogOptionSelected,$option == kolConv_oathSwear,"KolCh2CMD convOath sworn
-KolCh2CMD startPatron
-Call $global.kolCh2Patron_ref secureOwn
+kolConv_oathSwear,DialogOptionSelected,$option == kolConv_oathSwear,"KolConvCMD oath sworn
+KolPatronCMD start
+Call $global.kolPatron_ref secureOwn
 FireBest KolConvClose","You swear it.
 
 The hall answers with the response the Knights give their own, an uncharacteristically jubilant hail, and the Lector enters your name in a book that is not the reckoning.",,
-kolConv_oathLie,DialogOptionSelected,$option == kolConv_oathLie,"KolCh2CMD convOath lie
-KolCh2CMD startPatron
-Call $global.kolCh2Patron_ref secureOwn
+kolConv_oathLie,DialogOptionSelected,$option == kolConv_oathLie,"KolConvCMD oath lie
+KolPatronCMD start
+Call $global.kolPatron_ref secureOwn
 FireBest KolConvClose","You swear it.
 
 The hall answers with the response the Knights give their own, an uncharacteristically jubilant hail, and the Lector enters your name in a book that is not the reckoning.
@@ -1476,25 +1476,25 @@ The hall answers with the response the Knights give their own, an uncharacterist
 From her chair at the side, Sister Greenflight watches you closely. She writes nothing down.",,
 kolConv_oathBalk,DialogOptionSelected,$option == kolConv_oathBalk,"$global.kolConv_ownDismissed = true
 FireAll KolConvChargeOpts","""Then it is not offered,"" Helensis says, and turns back to the hall as though you had not spoken. The Lector waits unmoved at the record, and Greenflight's question is still waiting for you.",,
-kolConv_close,KolConvClose,,"KolCh2CMD showPerson grandmaster
-KolCh2CMD convocationDone
-KolCh2CMD convEffects
+kolConv_close,KolConvClose,,"KolStoryCMD showPerson grandmaster
+KolConvCMD done
+KolConvCMD effects
 FireBest KolConvAside","The Grandmaster rises, and the hall rises with him: every bench, the aisle, the Church robes a moment after the Knights. He clears his throat. 
 
 ""Captain $playerName will be our liaison, tasked to bring to our delegation fair terms of protection,"" he says, inviting no argument. ""It is thus given."" 
 
 With that, the meeting is ajourned. The benches empty toward the doors. Someone has opened the way to the vegetable gardens, and the air that comes in is wet and green.",,
-kolConv_asideEnarms,KolConvAside,,KolCh2CMD showPerson kol_knightcaptain,"Brother Enarms finds you on the long ramp down to the docks. ""Better than Cygnus,"" he says. You must look doubtful, because he adds, ""They argued. At Cygnus they only listened.""
+kolConv_asideEnarms,KolConvAside,,KolStoryCMD showPerson kol_knightcaptain,"Brother Enarms finds you on the long ramp down to the docks. ""Better than Cygnus,"" he says. You must look doubtful, because he adds, ""They argued. At Cygnus they only listened.""
 
 He walks with you as far as the dock ring, then departs back toward Lyra's offices; Cygnus' share of the record is still waiting to be written down.",kolAssembly_end:Leave the hall,
-kolConv_asidePowers,KolConvAside,$global.kolConv_said_powers == diplomat score:10,KolCh2CMD showPerson kol_intel_director,"[PLACEHOLDER: after the diplomacy reply on the great powers] Sister Greenflight falls into step beside you at the door. ""The powers will ask what you meant by that, captain. Not I. Have an answer ready."" She is gone before you can give her one.",kolAssembly_end:Leave the hall,
-kolConv_asideOutside,KolConvAside,$global.kolConv_said_powers == outside score:10,KolCh2CMD showPerson kol_intel_director,"Sister Greenflight is at the door when you reach it. ""You will be asked what you meant by your statement, captain,"" she says, ""on the Church's reputation. Not by me. By the people whose doors you knock on. Have an answer."" She leaves without waiting for one.",kolAssembly_end:Leave the hall,
-kolConv_asideOath,KolConvAside,$global.kolCh2_convOathSworn score:20,KolCh2CMD showPerson kol_intel_director,"Sister Greenflight is at the door when you reach it. ""Captain."" She keeps pace with you for exactly as long as the threshold takes. ""The Order has placed great trust in you; we will hold you to that. As will I."" She is gone into the crowd before you can turn.",kolAssembly_end:Leave the hall,
-kolConv_asideOathLie,KolConvAside,$global.kolCh2_convOathLie score:30,,"Sister Greenflight is at the door when you reach it. She lets you pass without a word, and you can feel her eyes on you all the way down the gallery.",kolAssembly_end:Leave the hall,
+kolConv_asidePowers,KolConvAside,$global.kolConv_said_powers == diplomat score:10,KolStoryCMD showPerson kol_intel_director,"[PLACEHOLDER: after the diplomacy reply on the great powers] Sister Greenflight falls into step beside you at the door. ""The powers will ask what you meant by that, captain. Not I. Have an answer ready."" She is gone before you can give her one.",kolAssembly_end:Leave the hall,
+kolConv_asideOutside,KolConvAside,$global.kolConv_said_powers == outside score:10,KolStoryCMD showPerson kol_intel_director,"Sister Greenflight is at the door when you reach it. ""You will be asked what you meant by your statement, captain,"" she says, ""on the Church's reputation. Not by me. By the people whose doors you knock on. Have an answer."" She leaves without waiting for one.",kolAssembly_end:Leave the hall,
+kolConv_asideOath,KolConvAside,$global.kolConv_oathSworn score:20,KolStoryCMD showPerson kol_intel_director,"Sister Greenflight is at the door when you reach it. ""Captain."" She keeps pace with you for exactly as long as the threshold takes. ""The Order has placed great trust in you; we will hold you to that. As will I."" She is gone into the crowd before you can turn.",kolAssembly_end:Leave the hall,
+kolConv_asideOathLie,KolConvAside,$global.kolConv_oathLie score:30,,"Sister Greenflight is at the door when you reach it. She lets you pass without a word, and you can feel her eyes on you all the way down the gallery.",kolAssembly_end:Leave the hall,
 # Knights Chapter 2: the patron (KolCh2Patron),,,,,,
 # Knights patron: discovery by asking (add-knights-patron-lobbying),,,,,,
 kolPatron_askOpt,PopulateOptions,"$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD askable",,,8:kolPatron_ask:Ask about a patron for the Church,Officials and contacts by post; once per person (KolPatronCMD)
 kolPatron_ask,DialogOptionSelected,$option == kolPatron_ask,KolPatronCMD ask,,,
 kolPatron_replyAny,KolPatronAskReply,,,"[PLACEHOLDER] $HeOrShe hears you out, and has nothing to offer on the matter.",,
@@ -1567,43 +1567,43 @@ $isContact score:10",,"[PLACEHOLDER] Your contact takes a while to answer, and c
 kolPatron_replyPathFleet,KolPatronAskReply,$kolPatron_role == fleet score:10,,"[PLACEHOLDER] The captain's answer comes after a long pause, as though the request had to be prayed over first. ""The Path is no one's shield. Take your question to $kolPatron_placeText, if you must hear it from those who keep the Word there.""",,
 kolPatron_pathFleetOpt,PopulateOptions,"$faction.id == luddic_path
 $menuState == fleetConvMain
-$global.kolCh2Patron_active
+$global.kolPatron_active
 !$global.kolPatron_lead_path",,,20:kolPatron_askPathFleet:Ask about a patron for the Church,A Path fleet's comm (non-hostile)
 kolPatron_askPathFleet,DialogOptionSelected,$option == kolPatron_askPathFleet,KolPatronCMD askFleet PopulateOptions,,,
-kolPatron_pathTitheOpt,LPTitheOptions,"$global.kolCh2Patron_active
+kolPatron_pathTitheOpt,LPTitheOptions,"$global.kolPatron_active
 !$global.kolPatron_lead_path",,,20:kolPatron_askPathTithe:Ask about a patron for the Church,A hostile Path fleet's tithe hail
 kolPatron_askPathTithe,DialogOptionSelected,$option == kolPatron_askPathTithe,KolPatronCMD askFleet LPTitheOptions,,,
-kolPatron_askStationKing,KDStationKingOptions,"$global.kolCh2Patron_active
+kolPatron_askStationKing,KDStationKingOptions,"$global.kolPatron_active
 KolPatronCMD askable",,,15:kolPatron_askSK:Ask about a patron for the Church,"Kanta's Den: the station commander (the Station King) is the administrator, and vanilla gives him his own option list"
 kolPatron_askSK,DialogOptionSelected,$option == kolPatron_askSK,KolPatronCMD ask KDStationKingOptions,,,
 kolPatron_congOpt,PopulateOptions,"!$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD congregationHere",,,12:kolPatron_congregation:Seek out the local Luddic congregation,Luddic Majority or Church markets; once per market
 kolPatron_congregation,DialogOptionSelected,$option == kolPatron_congregation,KolPatronCMD congregation,,,
 kolPatron_congReply,KolPatronCongregationReply,,FireAll PopulateOptions,"[PLACEHOLDER] The faithful here keep a small house of prayer near the port. They hear you out over tea. They pray for the Order, and for a patron; they have no say in who it might be.",,
 kolPatron_congReplyPower,KolPatronCongregationReply,$kolPatron_lead != none score:10,FireAll PopulateOptions,"[PLACEHOLDER] The faithful here keep a small house of prayer near the port. They know how $theFaction is petitioned, and who is heard in it, and they tell you over tea.",,
 # Knights patron: check-ins while the quest runs,,,,,,
 kolPatron_greenflightSeek,PickGreeting,"$id == kol_intel_director score:260
-$global.kolCh2Patron_active
-!$global.kolCh2Patron_announce","ShowPersonVisual
+$global.kolPatron_active
+!$global.kolPatron_announce","ShowPersonVisual
 FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Greenflight closes a folder, and does not say which. ""The patron is still open. When you have something to bring, bring it here first.""",,While the patron quest seeks (Greenflight coordinates it)
 kolPatron_greenflightAnnounce,PickGreeting,"$id == kol_intel_director score:265
-$global.kolCh2Patron_active
-$global.kolCh2Patron_announce","ShowPersonVisual
+$global.kolPatron_active
+$global.kolPatron_announce","ShowPersonVisual
 FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Greenflight does not look up from the line she is writing. ""The assembly will hear the arrangement when it next sits. Until then, it is the Order's business and yours.""",,A patron signed; waiting for the assembly
 kolPatron_enarmsSeek,PickGreeting,"$id == kol_knightcaptain score:260
 RepIsAtWorst knights_of_selkie NEUTRAL
-$global.kolCh2Patron_active","ShowPersonVisual
+$global.kolPatron_active","ShowPersonVisual
 FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Enarms finishes the line he is reading before he looks up. ""Greenflight tells me you are still knocking on doors for the Church. I am glad of it. I would go myself, but there is a shortage of me.""",,While the patron quest runs
 "# Knights patron: the player's own forces, settled at Lyra after the convocation oath",,,,,,
 kolPatron_ownMeetOpt,PopulateOptions,"$market.id == kol_lyra
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 $global.kolPatron_lead_player
-!$global.kolCh2Patron_announce",,,4:kolPatron_ownMeet:Meet Sister Greenflight and the Lector about your oath,The own-forces branch: the details settled before the assembly
+!$global.kolPatron_announce",,,4:kolPatron_ownMeet:Meet Sister Greenflight and the Lector about your oath,The own-forces branch: the details settled before the assembly
 kolPatron_ownMeet,DialogOptionSelected,$option == kolPatron_ownMeet,"KolPatronCMD ownOpen
-KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. She is not alone. The Lector sits across the desk from her, with the book your name was entered in open on one knee.",kolPatron_own2:Continue,
-kolPatron_own2,DialogOptionSelected,$option == kolPatron_own2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""An oath sworn in the hall is a promise,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""This is where it becomes an arrangement. It is not one the Order has made before. Doctrine keeps the faithful in the faith's own keeping, and the assembly has chosen to put some of them in a captain's. There are those in the hall who think it a risk."" $global.kolBench_lector_HeOrShe lays a hand on the book open on $global.kolBench_lector_hisOrHer knee. ""They are right. It is the Order's risk now, and yours.""",kolPatron_own2_c2:Continue,
+KolStoryCMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. She is not alone. The Lector sits across the desk from her, with the book your name was entered in open on one knee.",kolPatron_own2:Continue,
+kolPatron_own2,DialogOptionSelected,$option == kolPatron_own2,KolStoryCMD showPerson bench:lector,"[PLACEHOLDER] ""An oath sworn in the hall is a promise,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""This is where it becomes an arrangement. It is not one the Order has made before. Doctrine keeps the faithful in the faith's own keeping, and the assembly has chosen to put some of them in a captain's. There are those in the hall who think it a risk."" $global.kolBench_lector_HeOrShe lays a hand on the book open on $global.kolBench_lector_hisOrHer knee. ""They are right. It is the Order's risk now, and yours.""",kolPatron_own2_c2:Continue,
 kolPatron_own2_c2,DialogOptionSelected,$option == kolPatron_own2_c2,,"$global.kolBench_lector_HeOrShe reads back what you swore: to hold the faithful under your banner as under the Church's own; to answer the Order's need before your own; to account for your acts before the Order.
 
 Greenflight turns a slate toward you: Lyra, Cygnus, the systems around them. ""The congregations need to see ships that are not ours. How many of yours, captain, and of what kind?""","1:kolPatron_ownForcesGuard:""A standing guard: enough to be seen, and to hold until the Order arrives.""
@@ -1617,7 +1617,7 @@ KolStoryCMD approve bench:lector 3
 FireBest KolPatronOwnClose","[PLACEHOLDER] The Lector's stylus pauses. ""Properly,"" $global.kolBench_lector_heOrShe repeats, and writes that down too.",,
 kolPatron_ownForcesDefer,DialogOptionSelected,$option == kolPatron_ownForcesDefer,"$global.kolPatron_ownCommitment = deferred
 FireBest KolPatronOwnClose","[PLACEHOLDER] ""That is a generous answer,"" Greenflight says. ""It may also be a dangerous one. The Order will hold you to it."" She names a figure. It is not small.",,
-kolPatron_ownClose,KolPatronOwnClose,,"KolCh2CMD showPerson kol_intel_director
+kolPatron_ownClose,KolPatronOwnClose,,"KolStoryCMD showPerson kol_intel_director
 KolPatronCMD signOwn $global.kolPatron_ownCommitment","[PLACEHOLDER] ""Then it is an arrangement."" Greenflight sets her seal beside the Lector's. ""It will be read to the assembly when it next sits. Until then: your ships answer the Order's need before your own. When they fail, it is your failure, and you will account for it. When they hold, the faithful will not learn your name.""",kolPatron_ownLeave:Leave the office,
 kolPatron_ownLeave,DialogOptionSelected,$option == kolPatron_ownLeave,"ShowDefaultVisual
 FireAll PopulateOptions",,,
@@ -1625,14 +1625,14 @@ kolPatron_briefOpt,PopulateOptions,"$kolPatron_briefAt
 !$isPerson",,,4:kolPatron_brief:Meet Sister Greenflight in her office,
 kolPatron_brief,DialogOptionSelected,"$option == kolPatron_brief score:10
 KolPatronCMD churchWelcomes","KolPatronCMD collectOpen
-KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. The Lector is already there, in the chair across from her desk. The third chair is empty; on its seat lies a bound brief under Cygnus' seal.
+KolStoryCMD showPerson kol_intel_director","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office: the reliquary, the wall of sealed files, a narrow window full of the Eos gate. The Lector is already there, in the chair across from her desk. The third chair is empty; on its seat lies a bound brief under Cygnus' seal.
 
 ""Master Helensis has gone back to Cygnus,"" Greenflight says. ""She left her counsel in writing. The rest of us prefer to give ours in person.""",kolPatron_brief2:Continue,
-kolPatron_briefTooSoon,DialogOptionSelected,$option == kolPatron_brief,"KolCh2CMD showPerson kol_intel_director
+kolPatron_briefTooSoon,DialogOptionSelected,$option == kolPatron_brief,"KolStoryCMD showPerson kol_intel_director
 KolPatronCMD briefRefused","[PLACEHOLDER] A clerk walks you up from the docks to Sister Greenflight's office. She hears you out without looking up from her files, then sets her pen down.
 
 ""The assembly gave you its charge. The Church hasn't given you its welcome."" She says it without heat. ""Whoever speaks for the faith at Kazeron or Chicomoztoc has to be someone the faithful would recognize. Come back when they would.""",kolPatron_briefLeave:Leave the office,below Welcoming with the Luddic Church; the brief stays open
-kolPatron_brief2,DialogOptionSelected,$option == kolPatron_brief2,"KolCh2CMD showPerson bench:lector
+kolPatron_brief2,DialogOptionSelected,$option == kolPatron_brief2,"KolStoryCMD showPerson bench:lector
 KolPatronCMD introduce league","[PLACEHOLDER] ""The League first,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""It would take the Church as one congregation's voice among many members. A small place to stand, and an honest one."" $global.kolBench_lector_HeOrShe sets a hand on the charter. ""Ludd did not ask to be first at the table. Kazeron will not ask it of us either, and it will not ask much else.""",kolPatron_brief3:Continue,
 kolPatron_brief3,DialogOptionSelected,$option == kolPatron_brief3,KolPatronCMD introduce hegemony,"[PLACEHOLDER] Greenflight breaks the seal on Helensis' brief and passes it to you rather than reading it out. It runs to many pages, each annotated in a tight hand: the yards at Cygnus working short-crewed, the hulls the Order lacks, the patrols no longer flown. Its argument is the Hegemony, and one line is underlined twice: ""Restraint is a virtue of the well-provisioned."" It closes with her rank, not her name.",kolPatron_brief3_c2:Continue,
 kolPatron_brief3_c2,DialogOptionSelected,$option == kolPatron_brief3_c2,,"""She has the numbers right,"" Greenflight says.
@@ -1642,9 +1642,9 @@ kolPatron_brief3_c2,DialogOptionSelected,$option == kolPatron_brief3_c2,,"""She 
 ""The holdings without patrols might not agree.""
 
 ""No,"" $global.kolBench_lector_heOrShe admits. ""That is why we are asking, and not deciding.""",kolPatron_brief4:Continue,
-kolPatron_brief4,DialogOptionSelected,$option == kolPatron_brief4,"KolCh2CMD showPerson kol_intel_director
+kolPatron_brief4,DialogOptionSelected,$option == kolPatron_brief4,"KolStoryCMD showPerson kol_intel_director
 KolPatronCMD introduce diktat","[PLACEHOLDER] ""And Sindria,"" Greenflight says. ""The worst of them, I know. But it asks the least of the Order itself: files on people it is already hunting, kept current by my office. It will tie up agents I would rather use elsewhere, and it is still the cheapest thing any of them will ask of us. In return, Sindria's ships stand over congregations it would otherwise leave to the raiders.""",kolPatron_brief4_c2:Continue,
-kolPatron_brief4_c2,DialogOptionSelected,$option == kolPatron_brief4_c2,Call $global.kolCh2Patron_ref briefed,"""Names, Sister, and more of them every season,"" the Lector says. ""Whatever Sindria already knows, the Church would be the one keeping it informed.""
+kolPatron_brief4_c2,DialogOptionSelected,$option == kolPatron_brief4_c2,Call $global.kolPatron_ref briefed,"""Names, Sister, and more of them every season,"" the Lector says. ""Whatever Sindria already knows, the Church would be the one keeping it informed.""
 
 ""Yes. I won't pretend otherwise."" Greenflight turns to you. ""I would still weigh it against the congregations we can't guard. That's the choice, Captain, and none of the three makes it a clean one.""
 
@@ -1653,7 +1653,7 @@ kolPatron_briefLeave,DialogOptionSelected,$option == kolPatron_briefLeave,"ShowD
 FireAll PopulateOptions",,,
 # Knights patron: the great powers (KolPatronParley). The League is the reference implementation,,,,,,
 kolPatron_hannanBusiness,DialogOptionSelected,"$option == RHannan_haveBusiness score:10
-$global.kolCh2Patron_active
+$global.kolPatron_active
 !$kolPatron_vanillaBusiness
 KolPatronCMD leagueOffice","KolPatronCMD reception league
 FireAll KolPatronHannanOpts","[PLACEHOLDER] The secretary nods, unhurried. ""And what is the nature of your business with the Prime Demarchon?""",,Passes back to vanilla through kolPatron_hannanOther
@@ -1671,7 +1671,7 @@ kolPatron_leaguePetitionUnwelcome,KolPatronLeaguePetition,$kolPatron_reception =
 kolPatron_leaguePetitionHostile,KolPatronLeaguePetition,$kolPatron_reception == hostile score:20,,"[PLACEHOLDER] ""I'm afraid the Prime Demarchon's office has no business with you at present."" The holding pattern returns before you can answer.",cutCommLink:Cut the comm link,Stalls until standing recovers
 kolPatron_mazalotOpt,PopulateOptions,"$market.id == mazalot
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD mazalotOpen",,,11:kolPatron_mazalot:Seek out Mazalot's congregation on the Church's behalf,The League's intermediary
 kolPatron_mazalot,DialogOptionSelected,$option == kolPatron_mazalot,KolPatronCMD meet mazalotElder,"[PLACEHOLDER] Mazalot's faithful keep a quiet house of prayer among the League's offices: plain benches, a samovar, a window onto the port's traffic. Their elder receives you at a table with two cups already set.",kolPatron_mazalot2:Continue,
 kolPatron_mazalot2,DialogOptionSelected,$option == kolPatron_mazalot2,,"[PLACEHOLDER] $global.kolPerson_mazalotElder_title $global.kolPerson_mazalotElder_last hears the Church's need out without interrupting, and pours a second cup before answering. ""Mazalot will speak for the Church at Kazeron. We always have. But the Council will want to know what the faithful here receive for it, and so will the faithful.""","1:kolPatron_mazalotPromise:""The Church will remember who spoke for it.""
@@ -1686,11 +1686,11 @@ kolPatron_mazalotLeave,DialogOptionSelected,$option == kolPatron_mazalotLeave,"S
 FireAll PopulateOptions",,,
 kolPatron_collectOpt,PopulateOptions,"$market.id == kol_lyra
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD delegationWanted",,,5:kolPatron_collect:Collect the Order's delegation from Sister Greenflight's office,Any power whose branch waits for them
 kolPatron_collect,DialogOptionSelected,$option == kolPatron_collect,"KolPatronCMD collectOpen
-KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] Greenflight's office is crowded for once: clerks with sealed cases, a chaplain with a travel bag, a Knight of the Grandmaster's household at the door, and Master Helensis, already in her traveling coat, reading something she does not offer to share.",kolPatron_collect2:Continue,"The Order's delegation: one party, collected once"
-kolPatron_collect2,DialogOptionSelected,$option == kolPatron_collect2,"KolCh2CMD showPerson bench:lector
+KolStoryCMD showPerson kol_intel_director","[PLACEHOLDER] Greenflight's office is crowded for once: clerks with sealed cases, a chaplain with a travel bag, a Knight of the Grandmaster's household at the door, and Master Helensis, already in her traveling coat, reading something she does not offer to share.",kolPatron_collect2:Continue,"The Order's delegation: one party, collected once"
+kolPatron_collect2,DialogOptionSelected,$option == kolPatron_collect2,"KolStoryCMD showPerson bench:lector
 KolPatronCMD collect","[PLACEHOLDER] The Lector, $global.kolBench_lector_title $global.kolBench_lector_last, will speak for the Grandmaster in every negotiation the Church opens; Greenflight and Helensis will speak for the Order's interests. ""We will keep out of your way aboard,"" the Lector says, which you suspect is a promise $global.kolBench_lector_heOrShe has made before. Helensis says nothing; she has already chosen a cabin.",kolPatron_collectLeave:Leave the office,
 kolPatron_collectLeave,DialogOptionSelected,$option == kolPatron_collectLeave,"ShowDefaultVisual
 FireAll PopulateOptions",,,
@@ -1751,10 +1751,10 @@ $kolPatron_inPerson score:10","ShowDefaultVisual
 FireAll PopulateOptions",,,A meeting held in person (back to the market)
 # Knights patron: the Hegemony,,,,,,
 kolPatron_daudOptPetition,PopulateOptions,"$id == daud
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD hegemonyOfficeIs petition",,,"3:kolPatron_hegPetition:""I come on behalf of the Church of Galactic Redemption.""",The Hegemony's first step
 kolPatron_daudOptCurate,PopulateOptions,"$id == daud
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD hegemonyOfficeIs curate",,,"3:kolPatron_hegCurate:""Jangala's curate is with me, on the Church's behalf.""",
 kolPatron_hegPetition,DialogOptionSelected,$option == kolPatron_hegPetition,"KolPatronCMD reception hegemony
 FireBest KolPatronHegPetition",,,
@@ -1773,7 +1773,7 @@ kolPatron_replyAdminHegCurate,KolPatronAskReply,"$kolPatron_role == admin score:
 $kolPatron_lead == hegemonyCurate score:20",,"[PLACEHOLDER] The administrator doesn't have to think long. ""Influence at Chicomoztoc? The curate at Jangala's shrine. That congregation is the biggest Luddic one under our flag, and the curate writes to the ministries every week. They answer the curate's messages, which is more than most get.""",,The Hegemony's ask-around step
 kolPatron_jangalaOpt,PopulateOptions,"$market.id == jangala
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD jangalaOpen",,,11:kolPatron_jangala:Seek out the curate of Jangala's shrine on the Church's behalf,The Hegemony's intermediary
 kolPatron_jangala,DialogOptionSelected,$option == kolPatron_jangala,"KolPatronCMD jangalaFound
 KolPatronCMD meet jangalaCurate","[PLACEHOLDER] The shrine at Jangala has stood through the orbital burns, the protest, and the patrols that came after. The curate receives you in a side chapel, with a Hegemony officer within earshot who is pretending not to be.",kolPatron_jangala2:Continue,
@@ -1788,13 +1788,13 @@ kolPatron_jangalaLeave,DialogOptionSelected,$option == kolPatron_jangalaLeave,"S
 FireAll PopulateOptions",,,
 kolPatron_hegMeetOpt,PopulateOptions,"$market.id == chicomoztoc
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD hegemonyMeetingReady",,,4:kolPatron_hegMeet:Attend the meeting at the High Hegemon's offices,
 kolPatron_hegMeet,DialogOptionSelected,$option == kolPatron_hegMeet,"$kolPatron_inPerson = true 0
-KolCh2CMD showPerson rivas","[PLACEHOLDER] The High Hegemon's offices sit inside the Council campus, behind a gate that checks you twice and a lobby that checks you again. The Church's delegates are taken aside, one at a time, and a technician runs a scanner over each of them and over what they carry. The Lector's stylus case is opened and closed. A clerk's datapad takes longer. Helensis has brought nothing, and watches it done. Rivas, Daud's chief of security, looks on from the wall.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
+KolStoryCMD showPerson rivas","[PLACEHOLDER] The High Hegemon's offices sit inside the Council campus, behind a gate that checks you twice and a lobby that checks you again. The Church's delegates are taken aside, one at a time, and a technician runs a scanner over each of them and over what they carry. The Lector's stylus case is opened and closed. A clerk's datapad takes longer. Helensis has brought nothing, and watches it done. Rivas, Daud's chief of security, looks on from the wall.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
 kolPatron_hegMeetMetDaud,DialogOptionSelected,"$option == kolPatron_hegMeet
 $player.metDaud score:10","$kolPatron_inPerson = true 0
-KolCh2CMD showPerson rivas","[PLACEHOLDER] The High Hegemon's offices sit inside the Council campus, behind a gate that checks you twice and a lobby that checks you again. The Church's delegates are taken aside, one at a time, and a technician runs a scanner over each of them and over what they carry. The Lector's stylus case is opened and closed. A clerk's datapad takes longer. Helensis has brought nothing, and watches it done. Rivas, Daud's chief of security, looks on from the wall.
+KolStoryCMD showPerson rivas","[PLACEHOLDER] The High Hegemon's offices sit inside the Council campus, behind a gate that checks you twice and a lobby that checks you again. The Church's delegates are taken aside, one at a time, and a technician runs a scanner over each of them and over what they carry. The Lector's stylus case is opened and closed. A clerk's datapad takes longer. Helensis has brought nothing, and watches it done. Rivas, Daud's chief of security, looks on from the wall.
 
 Rivas meets your eye once, and it is the only acknowledgement you get.",kolPatron_hegMeet2:Continue,"Rivas, as in At the Gates"
 kolPatron_hegMeet2,DialogOptionSelected,$option == kolPatron_hegMeet2,"KolPatronCMD openMeeting hegemony
@@ -1808,246 +1808,246 @@ kolPatron_priceReactHegemony,KolPatronPriceReact,$global.kolPatron_priceKey == h
 4:kolPatron_meetDefer:Defer to the delegation",
 kolPatron_priceSceneHegemony,KolPatronPriceScene,$global.kolPatron_priceKey == hegemony_ties score:10,,"[PLACEHOLDER] You stand witness as the liaison and the Lector sign. Helensis is pleased, and doesn't trouble to hide it. Behind her, the unnamed delegates' unease is almost audible: Church worlds feeding expeditions no one will name. The curate signs last, for the faithful, and asks for a copy.",kolPatron_meetLeave:Leave the offices,
 kolPatron_greenflightOwn,PickGreeting,"$id == kol_intel_director score:262
-$global.kolCh2Patron_active
+$global.kolPatron_active
 $global.kolPatron_lead_player
-!$global.kolCh2Patron_announce","ShowPersonVisual
+!$global.kolPatron_announce","ShowPersonVisual
 FireAll PopulateOptions","[PLACEHOLDER] ""Captain."" Greenflight does not spend the link on a greeting. ""Your oath needs more than a hall's hail behind it. The Lector and I will see you at Lyra, in person.""",,Own forces pledged; the meeting at Lyra not yet held
 # Knights Chapter 2: Greenflight's operation at Alpha Site (KolCh2Ninaya),,,,,,
-kolCh2_ninayaOption,PopulateOptions,"$id == kol_intel_director
-$global.kolCh2_patronSecured
-!$global.kolCh2Ninaya_active
-!$global.kolCh2_ninayaOpDone",,,5:kolCh2_ninaya:Ask about the vessel at Alpha Site,
-kolCh2_ninaya,DialogOptionSelected,$option == kolCh2_ninaya,,"[PLACEHOLDER] Greenflight turns a slate toward you: a sensor trace at the edge of the system the cynics call Alpha Site. ""Something there still answers to Tri-Tachyon. With a patron at our back, the Order can spare a squadron. They will meet you there.""","kolCh2_ninayaAccept:""I'll go.""
-kolCh2_ninayaDecline:""Not yet.""",
-kolCh2_ninayaDead,DialogOptionSelected,"$option == kolCh2_ninaya
-$global.zea_defeatedNinaya score:10","KolCh2CMD ninayaBounty
+kolNinaya_option,PopulateOptions,"$id == kol_intel_director
+$global.kolPatron_secured
+!$global.kolNinaya_active
+!$global.kolNinaya_done",,,5:kolNinaya_start:Ask about the vessel at Alpha Site,
+kolNinaya_start,DialogOptionSelected,$option == kolNinaya_start,,"[PLACEHOLDER] Greenflight turns a slate toward you: a sensor trace at the edge of the system the cynics call Alpha Site. ""Something there still answers to Tri-Tachyon. With a patron at our back, the Order can spare a squadron. They will meet you there.""","kolNinaya_accept:""I'll go.""
+kolNinaya_decline:""Not yet.""",
+kolNinaya_dead,DialogOptionSelected,"$option == kolNinaya_start
+$global.zea_defeatedNinaya score:10","KolJointOpsCMD ninayaBounty
 FireAll PopulateOptions","[PLACEHOLDER] Greenflight looks at you over the slate, then sets it face down. ""You have already been there, and what waited is wreckage now. There is no squadron to send."" She writes a short order and seals it. ""Half of what the Order set aside for that operation is yours, as bounty. It was not an easy kill. The other half goes to the next.""",,
-kolCh2_ninayaAccept,DialogOptionSelected,$option == kolCh2_ninayaAccept,"KolCh2CMD startNinaya
+kolNinaya_accept,DialogOptionSelected,$option == kolNinaya_accept,"KolJointOpsCMD startNinaya
 FireAll PopulateOptions","[PLACEHOLDER] ""His light upon you, captain.""",,
-kolCh2_ninayaDecline,DialogOptionSelected,$option == kolCh2_ninayaDecline,FireAll PopulateOptions,,,
+kolNinaya_decline,DialogOptionSelected,$option == kolNinaya_decline,FireAll PopulateOptions,,,
 "# Knights Chapter 2: Ozymandias (KolCh2Ozymandias, from Enarms)",,,,,,
-kolCh2_ozOption,PopulateOptions,"$id == kol_knightcaptain
-$global.kolCh2_convocationDone
-!$global.kolCh2Oz_active
-!$global.kolCh2_ozymandiasDone",,,5:kolCh2_oz:Ask what the Order needs of you,
-kolCh2_oz,DialogOptionSelected,$option == kolCh2_oz,FireBest KolCh2OzPitch,"[PLACEHOLDER] Enarms names a system the charts call Ozymandias: four dead worlds and a sleeper ship, out past the Luna Sea. ""The Order has never looked at it properly. Someone should, and then someone should remember it.""",,
-kolCh2_ozPitchKnights,KolCh2OzPitch,$global.kolCh2_patronSecured score:10,,"[PLACEHOLDER] ""With a patron behind us, Cygnus can spare Knights to meet you at its jump point and go in with you.""","kolCh2_ozAccept:""I'll go.""
-kolCh2_ozDecline:""Not yet.""",
-kolCh2_ozPitchAlone,KolCh2OzPitch,,,"[PLACEHOLDER] ""I can't send Knights with you. Until the Order has a patron, Cygnus has none to spare; if you go now, you go alone.""","kolCh2_ozAccept:""I'll go.""
-kolCh2_ozDecline:""Not yet.""",
-kolCh2_ozAccept,DialogOptionSelected,$option == kolCh2_ozAccept,"KolCh2CMD startOzymandias
+kolOzy_option,PopulateOptions,"$id == kol_knightcaptain
+$global.kolConv_done
+!$global.kolOzy_active
+!$global.kolOzy_done",,,5:kolOzy_start:Ask what the Order needs of you,
+kolOzy_start,DialogOptionSelected,$option == kolOzy_start,FireBest KolOzyPitch,"[PLACEHOLDER] Enarms names a system the charts call Ozymandias: four dead worlds and a sleeper ship, out past the Luna Sea. ""The Order has never looked at it properly. Someone should, and then someone should remember it.""",,
+kolOzy_pitchKnights,KolOzyPitch,$global.kolPatron_secured score:10,,"[PLACEHOLDER] ""With a patron behind us, Cygnus can spare Knights to meet you at its jump point and go in with you.""","kolOzy_accept:""I'll go.""
+kolOzy_decline:""Not yet.""",
+kolOzy_pitchAlone,KolOzyPitch,,,"[PLACEHOLDER] ""I can't send Knights with you. Until the Order has a patron, Cygnus has none to spare; if you go now, you go alone.""","kolOzy_accept:""I'll go.""
+kolOzy_decline:""Not yet.""",
+kolOzy_accept,DialogOptionSelected,$option == kolOzy_accept,"KolOzyCMD start
 FireAll PopulateOptions",,,
-kolCh2_ozDecline,DialogOptionSelected,$option == kolCh2_ozDecline,FireAll PopulateOptions,,,
-kolCh2_ozKnightsOpt,PopulateOptions,"$menuState == fleetConvMain
-$entity.kolCh2Oz_waiting",,,5:kolCh2_ozReady:[PLACEHOLDER] Tell them you're ready to secure Ozymandias,
-kolCh2_ozReady,DialogOptionSelected,$option == kolCh2_ozReady,Call $global.kolCh2Oz_ref ready,"[PLACEHOLDER] ""Then we go in ahead of you,"" the captain says. ""We'll hold at the jump point until you're with us.""",cutCommLink:Cut the comm link,
-kolCh2_ozStop,OpenInteractionDialog,$kolCh2Oz_stop score:1000,"ShowDefaultVisual
-FireAll KolCh2OzStopText",,kolCh2_ozStopDone:Continue,
-kolCh2_ozExplored,KolCh2OzStopText,"$global.kolCh2Oz_wasExplored
-!$global.kolCh2Oz_exploredSaid",$global.kolCh2Oz_exploredSaid = true,[PLACEHOLDER] You have been here before. This time you look as the Order would.,,
-kolCh2_ozMourn,KolCh2OzStopText,$id == zea_ozy_one,,"[PLACEHOLDER] Mourn. The first world is the warmest and the busiest: weather, ash, and the bones of a city laid out for pilgrims who did not come.",,
-kolCh2_ozAbandon,KolCh2OzStopText,$id == zea_ozy_two,,"[PLACEHOLDER] Abandon. Fewer ruins here, and newer. Someone tried to leave in a hurry.",,
-kolCh2_ozForget,KolCh2OzStopText,$id == zea_ozy_three,,[PLACEHOLDER] Forget. Nothing on the surface has a name any longer. Your crew stops talking.,,
-kolCh2_ozRest,KolCh2OzStopText,$id == zea_ozy_four,,"[PLACEHOLDER] Rest. Cold, and small, and quiet. It is strange to have come so far for this.",,
-kolCh2_ozHabitat,KolCh2OzStopText,$customType == orbital_habitat_remnant,,"[PLACEHOLDER] The habitat. The Inquiry's eye: cold storage where there should be quarters, and inventory tags on what was kept in it.",,
-kolCh2_ozMining,KolCh2OzStopText,$customType == station_mining_remnant,,"[PLACEHOLDER] The mining station. The Inquiry's eye: the same tags as the habitat's, on fewer containers. Whatever was taken from here was taken last.",,
-kolCh2_ozStopDone,DialogOptionSelected,$option == kolCh2_ozStopDone,"Call $global.kolCh2Oz_ref visit
+kolOzy_decline,DialogOptionSelected,$option == kolOzy_decline,FireAll PopulateOptions,,,
+kolOzy_knightsOpt,PopulateOptions,"$menuState == fleetConvMain
+$entity.kolOzy_waiting",,,5:kolOzy_ready:[PLACEHOLDER] Tell them you're ready to secure Ozymandias,
+kolOzy_ready,DialogOptionSelected,$option == kolOzy_ready,Call $global.kolOzy_ref ready,"[PLACEHOLDER] ""Then we go in ahead of you,"" the captain says. ""We'll hold at the jump point until you're with us.""",cutCommLink:Cut the comm link,
+kolOzy_stop,OpenInteractionDialog,$kolOzy_stop score:1000,"ShowDefaultVisual
+FireAll KolOzyStopText",,kolOzy_stopDone:Continue,
+kolOzy_explored,KolOzyStopText,"$global.kolOzy_wasExplored
+!$global.kolOzy_exploredSaid",$global.kolOzy_exploredSaid = true,[PLACEHOLDER] You have been here before. This time you look as the Order would.,,
+kolOzy_mourn,KolOzyStopText,$id == zea_ozy_one,,"[PLACEHOLDER] Mourn. The first world is the warmest and the busiest: weather, ash, and the bones of a city laid out for pilgrims who did not come.",,
+kolOzy_abandon,KolOzyStopText,$id == zea_ozy_two,,"[PLACEHOLDER] Abandon. Fewer ruins here, and newer. Someone tried to leave in a hurry.",,
+kolOzy_forget,KolOzyStopText,$id == zea_ozy_three,,[PLACEHOLDER] Forget. Nothing on the surface has a name any longer. Your crew stops talking.,,
+kolOzy_rest,KolOzyStopText,$id == zea_ozy_four,,"[PLACEHOLDER] Rest. Cold, and small, and quiet. It is strange to have come so far for this.",,
+kolOzy_habitat,KolOzyStopText,$customType == orbital_habitat_remnant,,"[PLACEHOLDER] The habitat. The Inquiry's eye: cold storage where there should be quarters, and inventory tags on what was kept in it.",,
+kolOzy_mining,KolOzyStopText,$customType == station_mining_remnant,,"[PLACEHOLDER] The mining station. The Inquiry's eye: the same tags as the habitat's, on fewer containers. Whatever was taken from here was taken last.",,
+kolOzy_stopDone,DialogOptionSelected,$option == kolOzy_stopDone,"Call $global.kolOzy_ref visit
 FireBest OpenInteractionDialog",,,
-kolCh2_ozCaeli,OpenInteractionDialog,$kolCh2Oz_caeli score:1000,"ShowDefaultVisual
+kolOzy_caeli,OpenInteractionDialog,$kolOzy_caeli score:1000,"ShowDefaultVisual
 SetShortcut defaultLeave ""ESCAPE""
-FireBest KolCh2OzMemorial",,,
-kolCh2_ozCaeliDone,DialogOptionSelected,$option == kolCh2_ozCaeliDone,FireBest OpenInteractionDialog,"[PLACEHOLDER] The beacon takes up its message, and will keep it for as long as it has power.",,
-kolCh2_ozMemorialKnights,KolCh2OzMemorial,$global.kolCh2Oz_knightsHere score:10,,"[PLACEHOLDER] The Knights hold station around Caeli while the memorial beacon is readied. Their captain asks whether you will say the words, or whether they should.","0:kolCh2_ozLayMemorial:[PLACEHOLDER] Lay the Order's memorial
+FireBest KolOzyMemorial",,,
+kolOzy_caeliDone,DialogOptionSelected,$option == kolOzy_caeliDone,FireBest OpenInteractionDialog,"[PLACEHOLDER] The beacon takes up its message, and will keep it for as long as it has power.",,
+kolOzy_memorialKnights,KolOzyMemorial,$global.kolOzy_knightsHere score:10,,"[PLACEHOLDER] The Knights hold station around Caeli while the memorial beacon is readied. Their captain asks whether you will say the words, or whether they should.","0:kolOzy_layMemorial:[PLACEHOLDER] Lay the Order's memorial
 100:defaultLeave:Leave",
-kolCh2_ozMemorialAlone,KolCh2OzMemorial,,,"[PLACEHOLDER] Caeli drifts on, silent. There is no one here to hear the words but your own crew. The memorial beacon is ready.","0:kolCh2_ozLayMemorial:[PLACEHOLDER] Lay the Order's memorial
+kolOzy_memorialAlone,KolOzyMemorial,,,"[PLACEHOLDER] Caeli drifts on, silent. There is no one here to hear the words but your own crew. The memorial beacon is ready.","0:kolOzy_layMemorial:[PLACEHOLDER] Lay the Order's memorial
 100:defaultLeave:Leave",
-kolCh2_ozLayMemorial,DialogOptionSelected,$option == kolCh2_ozLayMemorial,Call $global.kolCh2Oz_ref memorial,"[PLACEHOLDER] The beacon is set in orbit of Caeli. The names that could be read are read; the rest are remembered as the dead of Ozymandias. As it settles, your sensors officer flags something that wasn't there before: a sealed cache, shaken loose from the guardian's wreckage.",kolCh2_ozCaeliDone:Continue,
-kolCh2_ozMemorialBeacon,OpenInteractionDialog,"$tag:warning_beacon
-$kolCh2Oz_memorial score:1000","ShowDefaultVisual
+kolOzy_layMemorial,DialogOptionSelected,$option == kolOzy_layMemorial,Call $global.kolOzy_ref memorial,"[PLACEHOLDER] The beacon is set in orbit of Caeli. The names that could be read are read; the rest are remembered as the dead of Ozymandias. As it settles, your sensors officer flags something that wasn't there before: a sealed cache, shaken loose from the guardian's wreckage.",kolOzy_caeliDone:Continue,
+kolOzy_memorialBeacon,OpenInteractionDialog,"$tag:warning_beacon
+$kolOzy_memorial score:1000","ShowDefaultVisual
 SetShortcut beaconLeave ""ESCAPE""","This autonomous beacon emits a looping message.
 
 ""[PLACEHOLDER] The Order's memorial for the dead of Ozymandias.""",beaconLeave:Leave,
-kolCh2_ozCache,OpenInteractionDialog,$kolCh2Oz_cache score:1000,"ShowDefaultVisual
+kolOzy_cache,OpenInteractionDialog,$kolOzy_cache score:1000,"ShowDefaultVisual
 SetShortcut defaultLeave ""ESCAPE""","[PLACEHOLDER] The cache drifts where the guardian's wreckage came apart: no larger than a shuttle, and sealed seamlessly, the way the guardian itself was built. Nothing in your sensors' library knows the make. Your engineers can say only what it isn't: not a weapon housing, not a fuel cell, nothing they'd care to open with a cutter.
 
-Master Helensis asked for anything recovered here. You doubt the Order meant this when it sent you to lay a memorial.","0:kolCh2_ozTakeRelic:[PLACEHOLDER] Bring it aboard
+Master Helensis asked for anything recovered here. You doubt the Order meant this when it sent you to lay a memorial.","0:kolOzy_takeRelic:[PLACEHOLDER] Bring it aboard
 100:defaultLeave:Leave",
-kolCh2_ozTakeRelic,DialogOptionSelected,$option == kolCh2_ozTakeRelic,Call $global.kolCh2Oz_ref takeRelic,"[PLACEHOLDER] It takes a tug and the better part of a watch to coax the cache into an empty hold. The crew who lash it down don't linger, and by the next watch it has a name below decks you'd rather Helensis didn't hear.
+kolOzy_takeRelic,DialogOptionSelected,$option == kolOzy_takeRelic,Call $global.kolOzy_ref takeRelic,"[PLACEHOLDER] It takes a tug and the better part of a watch to coax the cache into an empty hold. The crew who lash it down don't linger, and by the next watch it has a name below decks you'd rather Helensis didn't hear.
 
 At Cygnus, someone will clear a shelf for it. Someone else at Cygnus will want to know why.",defaultLeave:Leave,
 "# Knights Chapter 2: the outside power's agent (KolCh2Agent, bar event)",,,,,,
 kolCh2Agent_blurbBar,kolCh2Agent_blurbBar,,,"[PLACEHOLDER] A well-dressed patron at a corner table has been watching you since you came in, and is not hiding it.",,
-kolCh2Agent_optionBar,kolCh2Agent_optionBar,,,,kolCh2Agent_start:Join the patron at the corner table,
-kolCh2Agent_start,DialogOptionSelected,$option == kolCh2Agent_start,"$missionId = kolCh2Agent
-ShowPersonVisual","[PLACEHOLDER] ""Captain."" The agent of $global.kolCh2Agent_powerArticle orders for both of you. ""You have been doing a great deal of digging lately, much of it for the Knights. Some of what you are digging up belongs to people who would rather it stayed buried. I would consider stopping. As a friend.""","kolCh2Agent_comply:""Consider it stopped.""
-kolCh2Agent_deflect:""I'll think about it.""
-kolCh2Agent_refuse:""No.""",
-kolCh2Agent_comply,DialogOptionSelected,$option == kolCh2Agent_comply,Call $global.kolCh2Agent_ref answer comply,"[PLACEHOLDER] ""Good."" The agent pays for both drinks and is gone before you finish yours.",kolCh2Agent_leave:Leave,
-kolCh2Agent_deflect,DialogOptionSelected,$option == kolCh2Agent_deflect,Call $global.kolCh2Agent_ref answer deflect,"[PLACEHOLDER] ""Do."" The agent smiles without meaning it, and leaves you the bill.",kolCh2Agent_leave:Leave,
-kolCh2Agent_refuse,DialogOptionSelected,$option == kolCh2Agent_refuse,Call $global.kolCh2Agent_ref answer refuse,"[PLACEHOLDER] ""That is a pity."" The agent finishes the drink slowly, as if there were all the time in the world.",kolCh2Agent_leave:Leave,
-kolCh2Agent_leave,DialogOptionSelected,$option == kolCh2Agent_leave,BarCMD returnFromEvent true,,,
+kolCh2Agent_optionBar,kolCh2Agent_optionBar,,,,kolAgent_start:Join the patron at the corner table,
+kolAgent_start,DialogOptionSelected,$option == kolAgent_start,"$missionId = kolCh2Agent
+ShowPersonVisual","[PLACEHOLDER] ""Captain."" The agent of $global.kolAgent_powerArticle orders for both of you. ""You have been doing a great deal of digging lately, much of it for the Knights. Some of what you are digging up belongs to people who would rather it stayed buried. I would consider stopping. As a friend.""","kolAgent_comply:""Consider it stopped.""
+kolAgent_deflect:""I'll think about it.""
+kolAgent_refuse:""No.""",
+kolAgent_comply,DialogOptionSelected,$option == kolAgent_comply,Call $global.kolAgent_ref answer comply,"[PLACEHOLDER] ""Good."" The agent pays for both drinks and is gone before you finish yours.",kolAgent_leave:Leave,
+kolAgent_deflect,DialogOptionSelected,$option == kolAgent_deflect,Call $global.kolAgent_ref answer deflect,"[PLACEHOLDER] ""Do."" The agent smiles without meaning it, and leaves you the bill.",kolAgent_leave:Leave,
+kolAgent_refuse,DialogOptionSelected,$option == kolAgent_refuse,Call $global.kolAgent_ref answer refuse,"[PLACEHOLDER] ""That is a pity."" The agent finishes the drink slowly, as if there were all the time in the world.",kolAgent_leave:Leave,
+kolAgent_leave,DialogOptionSelected,$option == kolAgent_leave,BarCMD returnFromEvent true,,,
 "# Knights Chapter 2: the inquest into the player (KolCh2Inquest, dock event at Cygnus)",,,,,,
-kolCh2_inquest,KolInquestPlayer,,KolCh2CMD inquestOpen,"[PLACEHOLDER] Two Knights in plain armor are waiting at your docking collar. They are courteous about it, which somehow does not help. One of them carries a slate with your name on it and checks your face against it, twice.
+kolInquest_start,KolInquestPlayer,,KolInquestCMD open,"[PLACEHOLDER] Two Knights in plain armor are waiting at your docking collar. They are courteous about it, which somehow does not help. One of them carries a slate with your name on it and checks your face against it, twice.
 
-They walk you inward, past the chapel and down a stair you have not seen before, to a corridor where the doors have no names on them. Your crew is told, politely, that they may stay aboard.",kolInq_room:Continue,
-kolCh2_inquestCandid,DialogOptionSelected,$option == kolCh2_inquestCandid,KolCh2CMD inquestAnswer candid,[PLACEHOLDER] You answer plainly. The Inquisitor writes it all down.,,
-kolCh2_inquestGuarded,DialogOptionSelected,$option == kolCh2_inquestGuarded,KolCh2CMD inquestAnswer guarded,[PLACEHOLDER] You choose your words. The Inquisitor notices you choosing them.,,
-kolCh2_inquestDefiant,DialogOptionSelected,$option == kolCh2_inquestDefiant,KolCh2CMD inquestAnswer defiant,"[PLACEHOLDER] ""By the right of the Order you serve."" The Inquisitor makes a note.",,
-kolCh2_inquestEnd,DialogOptionSelected,$option == kolCh2_inquestEnd,FireBest KolDockNext,,,
-kolCh2_inquestVerdictClean,KolCh2InquestVerdict,!$global.kolInquest_hasItems,KolCh2CMD inquestResolve none,"[PLACEHOLDER] A clerk comes in and whispers. The Inquisitor nods. ""Your ships are clean, captain.""",,
-kolCh2_inquestSurrender,DialogOptionSelected,$option == kolCh2_inquestSurrender,KolCh2CMD inquestResolve surrender,"[PLACEHOLDER] Knights go down to your hangars with the clerks. It takes most of a day. When it is done, the Inquisitor signs the list and hands you a copy.",,
-kolCh2_inquestRefuse,DialogOptionSelected,$option == kolCh2_inquestRefuse,KolCh2CMD inquestResolve refuse,"[PLACEHOLDER] ""As you wish."" The Inquisitor writes one line, slowly, so that you can read it upside down.",,
-kolCh2_inquestVerdictItems,KolCh2InquestVerdict,$global.kolInquest_hasItems score:10,,"[PLACEHOLDER] A clerk comes in with a list. Ships: $global.kolInquest_ships. Weapons and wings: $global.kolInquest_weapons. Engineered modifications: $global.kolInquest_hullmods. Thinking machines aboard: $global.kolInquest_aiOfficers, and $global.kolInquest_cores more in the holds. ""All of it will be surrendered to the Order, captain. Your answer will be weighed with everything else.""","kolCh2_inquestSurrender:Surrender them
-kolCh2_inquestRefuse:Refuse",
-kolCh2_inquestVerdictItemsHeavy,KolCh2InquestVerdict,"$global.kolInquest_hasItems
-$global.kolInquest_projected >= 3 score:20",,"[PLACEHOLDER] The clerk who brings the list does not meet your eyes. Ships: $global.kolInquest_ships. Weapons and wings: $global.kolInquest_weapons. Engineered modifications: $global.kolInquest_hullmods. Thinking machines aboard: $global.kolInquest_aiOfficers, and $global.kolInquest_cores more in the holds. The Inquisitor reads it twice. ""You will surrender all of it, captain. Weigh carefully what refusing would cost you.""","kolCh2_inquestSurrender:Surrender them
-kolCh2_inquestRefuse:Refuse",
-kolCh2_inquestOutcomeCleared,KolCh2InquestOutcome,$global.kolInquest_player == cleared,,"[PLACEHOLDER] ""Thank you, captain. You are free to go.""",kolCh2_inquestEnd:Leave the room,
-kolCh2_inquestOutcomeWatched,KolCh2InquestOutcome,$global.kolInquest_player == watched,,"[PLACEHOLDER] ""That will do, for now."" Greenflight watches you all the way to the door.",kolCh2_inquestEnd:Leave the room,
-kolCh2_inquestOutcomeCensured,KolCh2InquestOutcome,$global.kolInquest_player == censured,,"[PLACEHOLDER] ""The Order will remember this inquest, captain."" It is not said kindly.",kolCh2_inquestEnd:Leave the room,
-kolCh2_inquestOutcomeCastOut,KolCh2InquestOutcome,$global.kolInquest_player == castOut,,"[PLACEHOLDER] The Inquisitor stands. ""Then it is done."" Greenflight opens the door for you, and does not follow you out.",kolCh2_inquestEnd:Leave the room,
-kolInq_room,DialogOptionSelected,$option == kolInq_room,"KolCh2CMD showPerson inquisitor
-KolCh2CMD inspect","[PLACEHOLDER] The room under the chapel is bare: a table, two chairs, a lamp. $global.kolPerson_inquisitor_title $global.kolPerson_inquisitor_last of the Inquisition sits behind the table with a single slate, and stands when you come in, which you did not expect. Sister Greenflight is by the wall, and does not.
+They walk you inward, past the chapel and down a stair you have not seen before, to a corridor where the doors have no names on them. Your crew is told, politely, that they may stay aboard.",kolInquest_room:Continue,
+kolInquest_candid,DialogOptionSelected,$option == kolInquest_candid,KolInquestCMD answer candid,[PLACEHOLDER] You answer plainly. The Inquisitor writes it all down.,,
+kolInquest_guarded,DialogOptionSelected,$option == kolInquest_guarded,KolInquestCMD answer guarded,[PLACEHOLDER] You choose your words. The Inquisitor notices you choosing them.,,
+kolInquest_defiant,DialogOptionSelected,$option == kolInquest_defiant,KolInquestCMD answer defiant,"[PLACEHOLDER] ""By the right of the Order you serve."" The Inquisitor makes a note.",,
+kolInquest_end,DialogOptionSelected,$option == kolInquest_end,FireBest KolDockNext,,,
+kolInquest_verdictClean,KolInquestVerdict,!$global.kolInquest_hasItems,KolInquestCMD resolve none,"[PLACEHOLDER] A clerk comes in and whispers. The Inquisitor nods. ""Your ships are clean, captain.""",,
+kolInquest_surrender,DialogOptionSelected,$option == kolInquest_surrender,KolInquestCMD resolve surrender,"[PLACEHOLDER] Knights go down to your hangars with the clerks. It takes most of a day. When it is done, the Inquisitor signs the list and hands you a copy.",,
+kolInquest_refuse,DialogOptionSelected,$option == kolInquest_refuse,KolInquestCMD resolve refuse,"[PLACEHOLDER] ""As you wish."" The Inquisitor writes one line, slowly, so that you can read it upside down.",,
+kolInquest_verdictItems,KolInquestVerdict,$global.kolInquest_hasItems score:10,,"[PLACEHOLDER] A clerk comes in with a list. Ships: $global.kolInquest_ships. Weapons and wings: $global.kolInquest_weapons. Engineered modifications: $global.kolInquest_hullmods. Thinking machines aboard: $global.kolInquest_aiOfficers, and $global.kolInquest_cores more in the holds. ""All of it will be surrendered to the Order, captain. Your answer will be weighed with everything else.""","kolInquest_surrender:Surrender them
+kolInquest_refuse:Refuse",
+kolInquest_verdictItemsHeavy,KolInquestVerdict,"$global.kolInquest_hasItems
+$global.kolInquest_projected >= 3 score:20",,"[PLACEHOLDER] The clerk who brings the list does not meet your eyes. Ships: $global.kolInquest_ships. Weapons and wings: $global.kolInquest_weapons. Engineered modifications: $global.kolInquest_hullmods. Thinking machines aboard: $global.kolInquest_aiOfficers, and $global.kolInquest_cores more in the holds. The Inquisitor reads it twice. ""You will surrender all of it, captain. Weigh carefully what refusing would cost you.""","kolInquest_surrender:Surrender them
+kolInquest_refuse:Refuse",
+kolInquest_outcomeCleared,KolInquestOutcome,$global.kolInquest_player == cleared,,"[PLACEHOLDER] ""Thank you, captain. You are free to go.""",kolInquest_end:Leave the room,
+kolInquest_outcomeWatched,KolInquestOutcome,$global.kolInquest_player == watched,,"[PLACEHOLDER] ""That will do, for now."" Greenflight watches you all the way to the door.",kolInquest_end:Leave the room,
+kolInquest_outcomeCensured,KolInquestOutcome,$global.kolInquest_player == censured,,"[PLACEHOLDER] ""The Order will remember this inquest, captain."" It is not said kindly.",kolInquest_end:Leave the room,
+kolInquest_outcomeCastOut,KolInquestOutcome,$global.kolInquest_player == castOut,,"[PLACEHOLDER] The Inquisitor stands. ""Then it is done."" Greenflight opens the door for you, and does not follow you out.",kolInquest_end:Leave the room,
+kolInquest_room,DialogOptionSelected,$option == kolInquest_room,"KolStoryCMD showPerson inquisitor
+KolInquestCMD inspect","[PLACEHOLDER] The room under the chapel is bare: a table, two chairs, a lamp. $global.kolPerson_inquisitor_title $global.kolPerson_inquisitor_last of the Inquisition sits behind the table with a single slate, and stands when you come in, which you did not expect. Sister Greenflight is by the wall, and does not.
 
 ""You will forgive the formality, captain. The Order asks questions of those who serve it closely. It is not an accusation."" $global.kolPerson_inquisitor_HeOrShe gestures you to the other chair. ""While we speak, the clerks will see to your ships. That is not an accusation either.""
 
-$global.kolPerson_inquisitor_HeOrShe wakes the slate. ""Before the questions, the record. Correct me if anything in it is wrong.""",kolInq_next:Continue,
-kolInq_next,DialogOptionSelected,$option == kolInq_next,KolCh2CMD readOn KolInquestRecord,,,
-kolInq_rec_ch1Fought,KolInquestRecord,"$global.kolCh1_foughtDusk
-!$global.kolInq_read_ch1Fought score:200","$global.kolInq_read_ch1Fought = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""At the anomaly, ordered by Brother Enarms to observe."" A pause. ""Engaged.""",kolInq_next:Continue,
-kolInq_rec_ch1Pulled,KolInquestRecord,"$global.kolCh1_pulledThrough
-!$global.kolInq_read_ch1Pulled score:199","$global.kolInq_read_ch1Pulled = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""Taken through the dark star, and returned."" The Inquisitor looks up. ""The Inquisition has no form for that. One is being written.""",kolInq_next:Continue,
-kolInq_rec_alphaSite,KolInquestRecord,"$global.kolChron_alphaSiteVisited
-!$global.kolInq_read_alphaSite score:180","$global.kolInq_read_alphaSite = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The place the cynics call Alpha Site. Visited.""",kolInq_next:Continue,
-kolInq_rec_deltaSite,KolInquestRecord,"$global.kolChron_deltaSiteVisited
-!$global.kolInq_read_deltaSite score:179","$global.kolInq_read_deltaSite = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""A second such place, which your own logs call Delta Site. Visited.""",kolInq_next:Continue,
-kolInq_rec_elysia,KolInquestRecord,"$global.kolChron_elysiaVisited
-!$global.kolInq_read_elysia score:178","$global.kolInq_read_elysia = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""Elysia."" The name is read carefully, as if it might be contagious. ""Visited.""",kolInq_next:Continue,
-kolInq_rec_nullspace,KolInquestRecord,"$global.kolChron_nullspaceVisited
-!$global.kolInq_read_nullspace score:177","$global.kolInq_read_nullspace = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""A region your logs call Nullspace. We could not find it on any chart. Visited.""",kolInq_next:Continue,
-kolInq_rec_lunaSea,KolInquestRecord,"$global.kolChron_lunaSeaVisited
-!$global.kolInq_read_lunaSea score:176","$global.kolInq_read_lunaSea = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The Luna Sea. Visited.""",kolInq_next:Continue,
-kolInq_rec_neutron,KolInquestRecord,"$global.kolChron_neutronVisited
-!$global.kolInq_read_neutron score:175","$global.kolInq_read_neutron = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""Systems around dead stars, the kind no one settles. Visited, more than once.""",kolInq_next:Continue,
-kolInq_rec_ozymandias,KolInquestRecord,"$global.kolChron_ozymandiasVisited
-!$global.kolInq_read_ozymandias score:174","$global.kolInq_read_ozymandias = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""Ozymandias."" A small pause, which might be respect. ""Visited.""",kolInq_next:Continue,
-kolInq_rec_jumpElysia,KolInquestRecord,"$global.kolChron_jumpElysia
-!$global.kolInq_read_jumpElysia score:170","$global.kolInq_read_jumpElysia = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: the player has the jump to Elysia] ""You have a way into these places that does not pass through any gate."" It is not a question, so you are not asked to answer it.",kolInq_next:Continue,
-kolInq_rec_jumpLuna,KolInquestRecord,"$global.kolChron_jumpLunaSea
+$global.kolPerson_inquisitor_HeOrShe wakes the slate. ""Before the questions, the record. Correct me if anything in it is wrong.""",kolInquest_next:Continue,
+kolInquest_next,DialogOptionSelected,$option == kolInquest_next,KolStoryCMD readOn KolInquestRecord,,,
+kolInquest_rec_ch1Fought,KolInquestRecord,"$global.kolCh1_foughtDusk
+!$global.kolInquest_read_ch1Fought score:200","$global.kolInquest_read_ch1Fought = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""At the anomaly, ordered by Brother Enarms to observe."" A pause. ""Engaged.""",kolInquest_next:Continue,
+kolInquest_rec_ch1Pulled,KolInquestRecord,"$global.kolCh1_pulledThrough
+!$global.kolInquest_read_ch1Pulled score:199","$global.kolInquest_read_ch1Pulled = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""Taken through the dark star, and returned."" The Inquisitor looks up. ""The Inquisition has no form for that. One is being written.""",kolInquest_next:Continue,
+kolInquest_rec_alphaSite,KolInquestRecord,"$global.kolChron_alphaSiteVisited
+!$global.kolInquest_read_alphaSite score:180","$global.kolInquest_read_alphaSite = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The place the cynics call Alpha Site. Visited.""",kolInquest_next:Continue,
+kolInquest_rec_deltaSite,KolInquestRecord,"$global.kolChron_deltaSiteVisited
+!$global.kolInquest_read_deltaSite score:179","$global.kolInquest_read_deltaSite = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""A second such place, which your own logs call Delta Site. Visited.""",kolInquest_next:Continue,
+kolInquest_rec_elysia,KolInquestRecord,"$global.kolChron_elysiaVisited
+!$global.kolInquest_read_elysia score:178","$global.kolInquest_read_elysia = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""Elysia."" The name is read carefully, as if it might be contagious. ""Visited.""",kolInquest_next:Continue,
+kolInquest_rec_nullspace,KolInquestRecord,"$global.kolChron_nullspaceVisited
+!$global.kolInquest_read_nullspace score:177","$global.kolInquest_read_nullspace = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""A region your logs call Nullspace. We could not find it on any chart. Visited.""",kolInquest_next:Continue,
+kolInquest_rec_lunaSea,KolInquestRecord,"$global.kolChron_lunaSeaVisited
+!$global.kolInquest_read_lunaSea score:176","$global.kolInquest_read_lunaSea = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The Luna Sea. Visited.""",kolInquest_next:Continue,
+kolInquest_rec_neutron,KolInquestRecord,"$global.kolChron_neutronVisited
+!$global.kolInquest_read_neutron score:175","$global.kolInquest_read_neutron = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""Systems around dead stars, the kind no one settles. Visited, more than once.""",kolInquest_next:Continue,
+kolInquest_rec_ozymandias,KolInquestRecord,"$global.kolChron_ozymandiasVisited
+!$global.kolInquest_read_ozymandias score:174","$global.kolInquest_read_ozymandias = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""Ozymandias."" A small pause, which might be respect. ""Visited.""",kolInquest_next:Continue,
+kolInquest_rec_jumpElysia,KolInquestRecord,"$global.kolChron_jumpElysia
+!$global.kolInquest_read_jumpElysia score:170","$global.kolInquest_read_jumpElysia = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: the player has the jump to Elysia] ""You have a way into these places that does not pass through any gate."" It is not a question, so you are not asked to answer it.",kolInquest_next:Continue,
+kolInquest_rec_jumpLuna,KolInquestRecord,"$global.kolChron_jumpLunaSea
 !$global.kolChron_jumpElysia
-!$global.kolInq_read_jumpLuna score:170","$global.kolInq_read_jumpLuna = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: the player has the jump to the Luna Sea (Dawn), not to Elysia] ""You have a way into these places that does not pass through any gate."" It is not a question, so you are not asked to answer it.",kolInq_next:Continue,
-kolInq_rec_jumpNeutron,KolInquestRecord,"$global.kolChron_jumpNeutron
+!$global.kolInquest_read_jumpLuna score:170","$global.kolInquest_read_jumpLuna = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: the player has the jump to the Luna Sea (Dawn), not to Elysia] ""You have a way into these places that does not pass through any gate."" It is not a question, so you are not asked to answer it.",kolInquest_next:Continue,
+kolInquest_rec_jumpNeutron,KolInquestRecord,"$global.kolChron_jumpNeutron
 !$global.kolChron_jumpElysia
 !$global.kolChron_jumpLunaSea
-!$global.kolInq_read_jumpNeutron score:170","$global.kolInq_read_jumpNeutron = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: the player has the jump to the neutron stars (Dusk), not to Elysia or the Luna Sea] ""You have a way into these places that does not pass through any gate."" It is not a question, so you are not asked to answer it.",kolInq_next:Continue,
-kolInq_rec_ttCleared,KolInquestRecord,"$global.kolChron_ttSitesCleared >= 1
+!$global.kolInquest_read_jumpNeutron score:170","$global.kolInquest_read_jumpNeutron = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: the player has the jump to the neutron stars (Dusk), not to Elysia or the Luna Sea] ""You have a way into these places that does not pass through any gate."" It is not a question, so you are not asked to answer it.",kolInquest_next:Continue,
+kolInquest_rec_ttCleared,KolInquestRecord,"$global.kolChron_ttSitesCleared >= 1
 $global.kolChron_ttSitesCleared < 3
-!$global.kolInq_read_ttCleared score:160","$global.kolInq_read_ttCleared = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""A Tri-Tachyon vessel destroyed, of a kind no yard admits to building."" Greenflight, from the wall: ""My office asked that of the captain."" The Inquisitor writes that down too.",kolInq_next:Continue,
-kolInq_rec_ttClearedAll,KolInquestRecord,"$global.kolChron_ttSitesCleared >= 3
-!$global.kolInq_read_ttClearedAll score:161","$global.kolInq_read_ttClearedAll = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""Three Tri-Tachyon vessels destroyed, each of a kind no yard admits to building."" The Inquisitor reads the next line silently before reading it aloud. ""Their sites left empty.""",kolInq_next:Continue,
-kolInq_rec_elysianBeaten,KolInquestRecord,"$global.kolChron_elysian_grade >= 3
-!$global.kolInq_read_elysianBeaten score:159","$global.kolInq_read_elysianBeaten = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The ships at the dark star. Some of them, at least."" The Inquisitor's finger rests on the line. ""Destroyed. The Order has lost expeditions trying to say as much.""",kolInq_next:Continue,
-kolInq_rec_dawnBeaten,KolInquestRecord,"$global.kolChron_nianDefeated
-!$global.kolInq_read_dawnBeaten score:158","$global.kolInq_read_dawnBeaten = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The vessel your logs call Nian. Destroyed.""",kolInq_next:Continue,
-kolInq_rec_duskBeaten,KolInquestRecord,"$global.kolChron_yukionnaDefeated
-!$global.kolInq_read_duskBeaten score:157","$global.kolInq_read_duskBeaten = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The vessel your logs call Yukionna. Destroyed.""",kolInq_next:Continue,
-kolInq_rec_pathHulls,KolInquestRecord,"$global.kolChron_invictusLpDefeated
-!$global.kolInq_read_pathHulls score:156","$global.kolInq_read_pathHulls = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: the Malleus (Invictus LP) destroyed] ""A ship of the Order's own design, in heretic hands, destroyed."" The Inquisitor's voice does not change, but $global.kolPerson_inquisitor_heOrShe reads the line a second time, as though for the pleasure of it.",kolInq_next:Continue,
-kolInq_rec_pathHullsRet,KolInquestRecord,"$global.kolChron_retributionLpDefeated
+!$global.kolInquest_read_ttCleared score:160","$global.kolInquest_read_ttCleared = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""A Tri-Tachyon vessel destroyed, of a kind no yard admits to building."" Greenflight, from the wall: ""My office asked that of the captain."" The Inquisitor writes that down too.",kolInquest_next:Continue,
+kolInquest_rec_ttClearedAll,KolInquestRecord,"$global.kolChron_ttSitesCleared >= 3
+!$global.kolInquest_read_ttClearedAll score:161","$global.kolInquest_read_ttClearedAll = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""Three Tri-Tachyon vessels destroyed, each of a kind no yard admits to building."" The Inquisitor reads the next line silently before reading it aloud. ""Their sites left empty.""",kolInquest_next:Continue,
+kolInquest_rec_elysianBeaten,KolInquestRecord,"$global.kolChron_elysian_grade >= 3
+!$global.kolInquest_read_elysianBeaten score:159","$global.kolInquest_read_elysianBeaten = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The ships at the dark star. Some of them, at least."" The Inquisitor's finger rests on the line. ""Destroyed. The Order has lost expeditions trying to say as much.""",kolInquest_next:Continue,
+kolInquest_rec_dawnBeaten,KolInquestRecord,"$global.kolChron_nianDefeated
+!$global.kolInquest_read_dawnBeaten score:158","$global.kolInquest_read_dawnBeaten = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The vessel your logs call Nian. Destroyed.""",kolInquest_next:Continue,
+kolInquest_rec_duskBeaten,KolInquestRecord,"$global.kolChron_yukionnaDefeated
+!$global.kolInquest_read_duskBeaten score:157","$global.kolInquest_read_duskBeaten = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The vessel your logs call Yukionna. Destroyed.""",kolInquest_next:Continue,
+kolInquest_rec_pathHulls,KolInquestRecord,"$global.kolChron_invictusLpDefeated
+!$global.kolInquest_read_pathHulls score:156","$global.kolInquest_read_pathHulls = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: the Malleus (Invictus LP) destroyed] ""A ship of the Order's own design, in heretic hands, destroyed."" The Inquisitor's voice does not change, but $global.kolPerson_inquisitor_heOrShe reads the line a second time, as though for the pleasure of it.",kolInquest_next:Continue,
+kolInquest_rec_pathHullsRet,KolInquestRecord,"$global.kolChron_retributionLpDefeated
 !$global.kolChron_invictusLpDefeated
-!$global.kolInq_read_pathHullsRet score:156","$global.kolInq_read_pathHullsRet = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: the Retribution LP destroyed, not the Malleus] ""A ship of the Order's own design, in heretic hands, destroyed."" The Inquisitor's voice does not change, but $global.kolPerson_inquisitor_heOrShe reads the line a second time, as though for the pleasure of it.",kolInq_next:Continue,
-kolInq_rec_elysianHull,KolInquestRecord,"$global.kolChron_elysianHullClaimed
-!$global.kolInq_read_elysianHull score:140","$global.kolInq_read_elysianHull = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""One of the ships from the dark star. Not destroyed."" The slate is turned toward you. ""Kept.""",kolInq_next:Continue,
-kolInq_rec_dawnHull,KolInquestRecord,"$global.kolChron_dawnHullClaimed
-!$global.kolInq_read_dawnHull score:139","$global.kolInq_read_dawnHull = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The Nian. Kept.""",kolInq_next:Continue,
-kolInq_rec_duskHull,KolInquestRecord,"$global.kolChron_duskHullClaimed
-!$global.kolInq_read_duskHull score:138","$global.kolInq_read_duskHull = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""The Yukionna. Kept.""",kolInq_next:Continue,
-kolInq_rec_ttHull,KolInquestRecord,"$global.kolChron_tritachHullClaimed
-!$global.kolInq_read_ttHull score:137","$global.kolInq_read_ttHull = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""A Tri-Tachyon vessel of the same kind. Kept.""",kolInq_next:Continue,
-kolInq_rec_pathHull,KolInquestRecord,"$global.kolChron_pathHullClaimed
-!$global.kolInq_read_pathHull score:136","$global.kolInq_read_pathHull = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""A ship of the Order's own design, taken from the heretics."" A pause. ""And not returned to the Order.""",kolInq_next:Continue,
-kolInq_rec_cores,KolInquestRecord,"$global.kolChron_elysianCoreUsed
-!$global.kolInq_read_cores score:130","$global.kolInq_read_cores = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: an Elysian boss core installed] ""A thinking machine taken from them. Installed, and trusted with a ship.""",kolInq_next:Continue,
-kolInq_rec_coresDawn,KolInquestRecord,"$global.kolChron_dawnCoreUsed
+!$global.kolInquest_read_pathHullsRet score:156","$global.kolInquest_read_pathHullsRet = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: the Retribution LP destroyed, not the Malleus] ""A ship of the Order's own design, in heretic hands, destroyed."" The Inquisitor's voice does not change, but $global.kolPerson_inquisitor_heOrShe reads the line a second time, as though for the pleasure of it.",kolInquest_next:Continue,
+kolInquest_rec_elysianHull,KolInquestRecord,"$global.kolChron_elysianHullClaimed
+!$global.kolInquest_read_elysianHull score:140","$global.kolInquest_read_elysianHull = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""One of the ships from the dark star. Not destroyed."" The slate is turned toward you. ""Kept.""",kolInquest_next:Continue,
+kolInquest_rec_dawnHull,KolInquestRecord,"$global.kolChron_dawnHullClaimed
+!$global.kolInquest_read_dawnHull score:139","$global.kolInquest_read_dawnHull = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The Nian. Kept.""",kolInquest_next:Continue,
+kolInquest_rec_duskHull,KolInquestRecord,"$global.kolChron_duskHullClaimed
+!$global.kolInquest_read_duskHull score:138","$global.kolInquest_read_duskHull = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""The Yukionna. Kept.""",kolInquest_next:Continue,
+kolInquest_rec_ttHull,KolInquestRecord,"$global.kolChron_tritachHullClaimed
+!$global.kolInquest_read_ttHull score:137","$global.kolInquest_read_ttHull = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""A Tri-Tachyon vessel of the same kind. Kept.""",kolInquest_next:Continue,
+kolInquest_rec_pathHull,KolInquestRecord,"$global.kolChron_pathHullClaimed
+!$global.kolInquest_read_pathHull score:136","$global.kolInquest_read_pathHull = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""A ship of the Order's own design, taken from the heretics."" A pause. ""And not returned to the Order.""",kolInquest_next:Continue,
+kolInquest_rec_cores,KolInquestRecord,"$global.kolChron_elysianCoreUsed
+!$global.kolInquest_read_cores score:130","$global.kolInquest_read_cores = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: an Elysian boss core installed] ""A thinking machine taken from them. Installed, and trusted with a ship.""",kolInquest_next:Continue,
+kolInquest_rec_coresDawn,KolInquestRecord,"$global.kolChron_dawnCoreUsed
 !$global.kolChron_elysianCoreUsed
-!$global.kolInq_read_coresDawn score:130","$global.kolInq_read_coresDawn = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: a Dawn boss core installed, no Elysian] ""A thinking machine taken from them. Installed, and trusted with a ship.""",kolInq_next:Continue,
-kolInq_rec_coresDusk,KolInquestRecord,"$global.kolChron_duskCoreUsed
+!$global.kolInquest_read_coresDawn score:130","$global.kolInquest_read_coresDawn = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: a Dawn boss core installed, no Elysian] ""A thinking machine taken from them. Installed, and trusted with a ship.""",kolInquest_next:Continue,
+kolInquest_rec_coresDusk,KolInquestRecord,"$global.kolChron_duskCoreUsed
 !$global.kolChron_elysianCoreUsed
 !$global.kolChron_dawnCoreUsed
-!$global.kolInq_read_coresDusk score:130","$global.kolInq_read_coresDusk = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER: a Dusk boss core installed, no Elysian or Dawn] ""A thinking machine taken from them. Installed, and trusted with a ship.""",kolInq_next:Continue,
-kolInq_rec_neuralLink,KolInquestRecord,"$global.kolChron_neuralLink
-!$global.kolInq_read_neuralLink score:128","$global.kolInq_read_neuralLink = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""An officer of yours who has let one of those machines into their own mind."" The Inquisitor sets the stylus down for this one. ""We will want the name.""",kolInq_next:Continue,
-kolInq_rec_coffinLink,KolInquestRecord,"$global.kolChron_coffinLink
-!$global.kolInq_read_coffinLink score:127","$global.kolInq_read_coffinLink = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] The Inquisitor reads the next line, and then looks at you rather than the slate for a long moment. ""And yourself."" Nothing more is read aloud. Nothing more needs to be.",kolInq_next:Continue,
-kolInq_rec_hypershunt,KolInquestRecord,"$global.kolChron_hypershuntRestored
-!$global.kolInq_read_hypershunt score:126","$global.kolInq_read_hypershunt = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""A Domain engine at Elysia, of the kind that powered whole sectors. Restored to working."" Greenflight shifts against the wall; it is the first time she has moved.",kolInq_next:Continue,
-kolInq_rec_tech,KolInquestRecord,"$global.kolTech_stage >= 2
-!$global.kolInq_read_tech score:110","$global.kolInq_read_tech = true 30
-$global.kolInquest_readCount++","""Master Helensis speaks well of you. She says you have provided the Order insight into the enemy, and that we would be blind without you. It's fascinating what you can see when someone else is handing you their lens.""",kolInq_next:Continue,
-kolInq_rec_convocation,KolInquestRecord,"$global.kolCh2_convocationDone
-!$global.kolInq_read_convocation score:105","$global.kolInq_read_convocation = true 30
-$global.kolInquest_readCount++","""You attended the convocation at Lyra. You were charged with finding the Church a patron.""",kolInq_next:Continue,
-kolInq_rec_patronOwn,KolInquestRecord,"$global.kol_patron == player
-!$global.kolInq_read_patronOwn score:104","$global.kolInq_read_patronOwn = true 30
-$global.kolInquest_readCount++","""You have sworn before the assembly to stand as the Church's patron yourself. You are quick to make yourself crucial to our fate.""",kolInq_next:Continue,
-kolInq_rec_ozymandiasDone,KolInquestRecord,"$global.kolCh2_ozymandiasDone
-!$global.kolInq_read_ozymandiasDone score:103","$global.kolInq_read_ozymandiasDone = true 30
-$global.kolInquest_readCount++","""A memorial laid beside Caeli, in Ozymandias, at the Order's asking."" A short nod. ""That is Good.""",kolInq_next:Continue,
-kolInq_rec_missed,KolInquestRecord,"$global.kolAssembly_missed >= 1
-!$global.kolInq_read_missed score:102","$global.kolInq_read_missed = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""You've been absent at $global.kolAssembly_missed assemblies."" The implication is placed on the table.",kolInq_next:Continue,
-kolInq_rec_declineLie,KolInquestRecord,"$global.kolCh1_declineLie
-!$global.kolInq_read_declineLie score:90","$global.kolInq_read_declineLie = true 30
-$global.kolInquest_readCount++","""Brother Enarms tells us you grieve for what the Church has lost."" The Inquisitor lets the words sit. ""Grief can be a heavy burden. You were very quick to share it.""",kolInq_next:Continue,
-kolInq_rec_techLie,KolInquestRecord,"$global.kolCh1_techLie
-!$global.kolInq_read_techLie score:89","$global.kolInq_read_techLie = true 30
-$global.kolInquest_readCount++","""You told the Faith you stand against sinful machines; you made a good impression at Cygnus."" A beat. ""A shame you do not say so elsewhere.""",kolInq_next:Continue,
-kolInq_rec_oathLie,KolInquestRecord,"$global.kolCh1_oathLie
-!$global.kolInq_read_oathLie score:88","$global.kolInq_read_oathLie = true 30
-$global.kolInquest_readCount++","""You swore an oath to the Order."" The Inquisitor does not look up. ""Did you not think we would see your heart?""",kolInq_next:Continue,
-kolInq_rec_convOathLie,KolInquestRecord,"$global.kolCh2_convOathLie
-!$global.kolInq_read_convOathLie score:87","$global.kolInq_read_convOathLie = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""You swore before the assembly to hold the faithful as the Church's own."" The Inquisitor turns a page. ""Sister Greenflight was present. She writes nothing down, and forgets nothing.""",kolInq_next:Continue,
-kolInq_recEnd,KolInquestRecord,,,"[PLACEHOLDER] The Inquisitor reaches the end of the record and sets the slate face down on the table.
+!$global.kolInquest_read_coresDusk score:130","$global.kolInquest_read_coresDusk = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER: a Dusk boss core installed, no Elysian or Dawn] ""A thinking machine taken from them. Installed, and trusted with a ship.""",kolInquest_next:Continue,
+kolInquest_rec_neuralLink,KolInquestRecord,"$global.kolChron_neuralLink
+!$global.kolInquest_read_neuralLink score:128","$global.kolInquest_read_neuralLink = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""An officer of yours who has let one of those machines into their own mind."" The Inquisitor sets the stylus down for this one. ""We will want the name.""",kolInquest_next:Continue,
+kolInquest_rec_coffinLink,KolInquestRecord,"$global.kolChron_coffinLink
+!$global.kolInquest_read_coffinLink score:127","$global.kolInquest_read_coffinLink = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] The Inquisitor reads the next line, and then looks at you rather than the slate for a long moment. ""And yourself."" Nothing more is read aloud. Nothing more needs to be.",kolInquest_next:Continue,
+kolInquest_rec_hypershunt,KolInquestRecord,"$global.kolChron_hypershuntRestored
+!$global.kolInquest_read_hypershunt score:126","$global.kolInquest_read_hypershunt = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""A Domain engine at Elysia, of the kind that powered whole sectors. Restored to working."" Greenflight shifts against the wall; it is the first time she has moved.",kolInquest_next:Continue,
+kolInquest_rec_tech,KolInquestRecord,"$global.kolTech_stage >= 2
+!$global.kolInquest_read_tech score:110","$global.kolInquest_read_tech = true 30
+$global.kolInquest_readCount++","""Master Helensis speaks well of you. She says you have provided the Order insight into the enemy, and that we would be blind without you. It's fascinating what you can see when someone else is handing you their lens.""",kolInquest_next:Continue,
+kolInquest_rec_convocation,KolInquestRecord,"$global.kolConv_done
+!$global.kolInquest_read_convocation score:105","$global.kolInquest_read_convocation = true 30
+$global.kolInquest_readCount++","""You attended the convocation at Lyra. You were charged with finding the Church a patron.""",kolInquest_next:Continue,
+kolInquest_rec_patronOwn,KolInquestRecord,"$global.kolPatron_signed == player
+!$global.kolInquest_read_patronOwn score:104","$global.kolInquest_read_patronOwn = true 30
+$global.kolInquest_readCount++","""You have sworn before the assembly to stand as the Church's patron yourself. You are quick to make yourself crucial to our fate.""",kolInquest_next:Continue,
+kolInquest_rec_ozymandiasDone,KolInquestRecord,"$global.kolOzy_done
+!$global.kolInquest_read_ozymandiasDone score:103","$global.kolInquest_read_ozymandiasDone = true 30
+$global.kolInquest_readCount++","""A memorial laid beside Caeli, in Ozymandias, at the Order's asking."" A short nod. ""That is Good.""",kolInquest_next:Continue,
+kolInquest_rec_missed,KolInquestRecord,"$global.kolAssembly_missed >= 1
+!$global.kolInquest_read_missed score:102","$global.kolInquest_read_missed = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""You've been absent at $global.kolAssembly_missed assemblies."" The implication is placed on the table.",kolInquest_next:Continue,
+kolInquest_rec_declineLie,KolInquestRecord,"$global.kolCh1_declineLie
+!$global.kolInquest_read_declineLie score:90","$global.kolInquest_read_declineLie = true 30
+$global.kolInquest_readCount++","""Brother Enarms tells us you grieve for what the Church has lost."" The Inquisitor lets the words sit. ""Grief can be a heavy burden. You were very quick to share it.""",kolInquest_next:Continue,
+kolInquest_rec_techLie,KolInquestRecord,"$global.kolCh1_techLie
+!$global.kolInquest_read_techLie score:89","$global.kolInquest_read_techLie = true 30
+$global.kolInquest_readCount++","""You told the Faith you stand against sinful machines; you made a good impression at Cygnus."" A beat. ""A shame you do not say so elsewhere.""",kolInquest_next:Continue,
+kolInquest_rec_oathLie,KolInquestRecord,"$global.kolCh1_oathLie
+!$global.kolInquest_read_oathLie score:88","$global.kolInquest_read_oathLie = true 30
+$global.kolInquest_readCount++","""You swore an oath to the Order."" The Inquisitor does not look up. ""Did you not think we would see your heart?""",kolInquest_next:Continue,
+kolInquest_rec_convOathLie,KolInquestRecord,"$global.kolConv_oathLie
+!$global.kolInquest_read_convOathLie score:87","$global.kolInquest_read_convOathLie = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""You swore before the assembly to hold the faithful as the Church's own."" The Inquisitor turns a page. ""Sister Greenflight was present. She writes nothing down, and forgets nothing.""",kolInquest_next:Continue,
+kolInquest_recEnd,KolInquestRecord,,,"[PLACEHOLDER] The Inquisitor reaches the end of the record and sets the slate face down on the table.
 
-""That is what the Order knows of you. Now I would like to hear the rest of it, in your own words.""","kolCh2_inquestCandid:Answer everything plainly
-kolCh2_inquestGuarded:Answer carefully
-kolCh2_inquestDefiant:Ask by what right they question you",
-kolInq_recEndNone,KolInquestRecord,$global.kolInquest_readCount == 0 score:1,,"[PLACEHOLDER] The record is short. The Inquisitor reads it twice anyway, and then sets the slate face down on the table.
+""That is what the Order knows of you. Now I would like to hear the rest of it, in your own words.""","kolInquest_candid:Answer everything plainly
+kolInquest_guarded:Answer carefully
+kolInquest_defiant:Ask by what right they question you",
+kolInquest_recEndNone,KolInquestRecord,$global.kolInquest_readCount == 0 score:1,,"[PLACEHOLDER] The record is short. The Inquisitor reads it twice anyway, and then sets the slate face down on the table.
 
-""The Order knows very little of you, captain. That is sometimes a good sign. Tell me the rest, in your own words.""","kolCh2_inquestCandid:Answer everything plainly
-kolCh2_inquestGuarded:Answer carefully
-kolCh2_inquestDefiant:Ask by what right they question you",
+""The Order knows very little of you, captain. That is sometimes a good sign. Tell me the rest, in your own words.""","kolInquest_candid:Answer everything plainly
+kolInquest_guarded:Answer carefully
+kolInquest_defiant:Ask by what right they question you",
 # Assembly reckoning lines for Chapter 2 reports,,,,,,
 kolAssembly_itemPatron,KolAssemblyItems,$global.kolAssembly_patron > 0,,[PLACEHOLDER] The clerk reads that the Church has a patron while the Knights are away. Some of the benches approve.,,
 kolAssembly_itemJointOp,KolAssemblyItems,$global.kolAssembly_jointOperation > 0,,[PLACEHOLDER] An operation flown with the Order's squadrons is entered into the record.,,
@@ -2062,24 +2062,24 @@ FireBest MarketPostDock",,,
 kolPatron_announce,KolAssembly,$global.kolAssembly_topic == patron score:15,"KolPatronCMD announceOpen
 KolStoryCMD assemblySit
 FireAll KolAssemblyItems
-KolCh2CMD showPerson grandmaster","[PLACEHOLDER] Every bench in the hall at Star Keep Lyra is full again, as it was at the convocation. Word has gone ahead of you: the clerks look up when you come in, and the Church's robes at the front turn as one.
+KolStoryCMD showPerson grandmaster","[PLACEHOLDER] Every bench in the hall at Star Keep Lyra is full again, as it was at the convocation. Word has gone ahead of you: the clerks look up when you come in, and the Church's robes at the front turn as one.
 
 The reckoning is read quickly. Everyone is waiting for the same thing.",kolPatron_announce2:Continue,The next assembly after a signing; attending it completes the quest
-kolPatron_announce2,DialogOptionSelected,$option == kolPatron_announce2,"KolCh2CMD showPerson bench:lector
+kolPatron_announce2,DialogOptionSelected,$option == kolPatron_announce2,"KolStoryCMD showPerson bench:lector
 FireBest KolPatronAnnounce",,,
 kolPatron_announceText,KolPatronAnnounce,,,"[PLACEHOLDER] The Lector rises with the arrangement in hand and reads it into the record: while the Knights' fleets are committed, the Church's congregations stand under the protection of $global.kolPatron_name.
 
 The hall takes it in silence. Then the Grandmaster inclines his head, once, and the benches let out a breath.",kolPatron_announceClose:Continue,Generic; per-patron variants below
-kolPatron_announceLeague,KolPatronAnnounce,$global.kol_patron == persean score:10,,"[PLACEHOLDER] The Lector reads the arrangement with the Persean League into the record, and the price beside it: the Church's forces will hunt pirates in League systems. Knight-Captain $global.kolBench_captain_last, whose patrols were already under-strength, hears where they are going, and says nothing at all.",kolPatron_announceClose:Continue,
-kolPatron_announceHegemony,KolPatronAnnounce,$global.kol_patron == hegemony score:10,,"[PLACEHOLDER] The Lector reads the arrangement with the Hegemony into the record: closer ties, and the Church's worlds to resupply the Hegemony's expeditions. Master Helensis nods along. Some of the delegates do not.",kolPatron_announceClose:Continue,
-kolPatron_announceDiktat,KolPatronAnnounce,$global.kol_patron == sindrian_diktat score:10,,"[PLACEHOLDER] The Lector reads the arrangement with the Sindrian Diktat into the record. What the Church gave for it is read too, in fewer words than it deserved. The chaplain's hand goes to the cord at $global.kolBench_chaplain_hisOrHer wrist.",kolPatron_announceClose:Continue,
-kolPatron_announceCharter,KolPatronAnnounce,$global.kol_patron == charter score:10,KolPatronCMD charterOffense,"[PLACEHOLDER] The Lector reads the charter into the record: hired guns, paid by a captain, to guard the faithful. The hall does not like it, and says so for some time. Then the Keeper of Tithes points out who paid most of the contract, and the room comes to terms with it.",kolPatron_announceClose:Continue,The Order's consternation and coming to terms; the reputation penalty
-kolPatron_announcePlayer,KolPatronAnnounce,$global.kol_patron == player score:10,,"[PLACEHOLDER] The Lector reads your oath into the record again, and the arrangement settled at Lyra beside it. This time the hall knows what it means: your ships, your name, the faithful under your banner as under the Church's own.",kolPatron_announceClose:Continue,
-kolPatron_announceClose,DialogOptionSelected,$option == kolPatron_announceClose,KolCh2CMD showPerson grandmaster,"[PLACEHOLDER] The Grandmaster rises, and the hall with him. ""Then the faithful are kept,"" he says, ""while we are away.""
+kolPatron_announceLeague,KolPatronAnnounce,$global.kolPatron_signed == persean score:10,,"[PLACEHOLDER] The Lector reads the arrangement with the Persean League into the record, and the price beside it: the Church's forces will hunt pirates in League systems. Knight-Captain $global.kolBench_captain_last, whose patrols were already under-strength, hears where they are going, and says nothing at all.",kolPatron_announceClose:Continue,
+kolPatron_announceHegemony,KolPatronAnnounce,$global.kolPatron_signed == hegemony score:10,,"[PLACEHOLDER] The Lector reads the arrangement with the Hegemony into the record: closer ties, and the Church's worlds to resupply the Hegemony's expeditions. Master Helensis nods along. Some of the delegates do not.",kolPatron_announceClose:Continue,
+kolPatron_announceDiktat,KolPatronAnnounce,$global.kolPatron_signed == sindrian_diktat score:10,,"[PLACEHOLDER] The Lector reads the arrangement with the Sindrian Diktat into the record. What the Church gave for it is read too, in fewer words than it deserved. The chaplain's hand goes to the cord at $global.kolBench_chaplain_hisOrHer wrist.",kolPatron_announceClose:Continue,
+kolPatron_announceCharter,KolPatronAnnounce,$global.kolPatron_signed == charter score:10,KolPatronCMD charterOffense,"[PLACEHOLDER] The Lector reads the charter into the record: hired guns, paid by a captain, to guard the faithful. The hall does not like it, and says so for some time. Then the Keeper of Tithes points out who paid most of the contract, and the room comes to terms with it.",kolPatron_announceClose:Continue,The Order's consternation and coming to terms; the reputation penalty
+kolPatron_announcePlayer,KolPatronAnnounce,$global.kolPatron_signed == player score:10,,"[PLACEHOLDER] The Lector reads your oath into the record again, and the arrangement settled at Lyra beside it. This time the hall knows what it means: your ships, your name, the faithful under your banner as under the Church's own.",kolPatron_announceClose:Continue,
+kolPatron_announceClose,DialogOptionSelected,$option == kolPatron_announceClose,KolStoryCMD showPerson grandmaster,"[PLACEHOLDER] The Grandmaster rises, and the hall with him. ""Then the faithful are kept,"" he says, ""while we are away.""
 
 By the time you reach the docks, the first of the patron's ships are already taking station off the battlestation.",kolAssembly_end:Leave the hall,
 # Knights patron: the Diktat,,,,,,
-kolPatron_andradaOptProposal,AndradaOfficeReplies,"$global.kolCh2Patron_active
+kolPatron_andradaOptProposal,AndradaOfficeReplies,"$global.kolPatron_active
 KolPatronCMD diktatOfficeIs proposal",,,"kolPatron_dikProposal:""I come on behalf of the Church of Galactic Redemption, with a proposal for the Supreme Executor.""",The Diktat's first step; Balashi (vanilla sec_officer) answers
 kolPatron_dikProposal,DialogOptionSelected,$option == kolPatron_dikProposal,"KolPatronCMD reception diktat
 FireBest KolPatronDiktatProposal",,,
@@ -2092,15 +2092,15 @@ FireAll AndradaOfficeReplies","[PLACEHOLDER] $Rank $PersonName's expression does
 kolPatron_dikProposalHostile,KolPatronDiktatProposal,$kolPatron_reception == hostile score:20,FireAll AndradaOfficeReplies,"[PLACEHOLDER] ""The Supreme Executor's office does not accept proposals from enemies of the Diktat."" $Rank $PersonName does not log anything.",,Stalls until standing recovers
 kolPatron_dikLyraOpt,PopulateOptions,"$market.id == kol_lyra
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD diktatAtLyra",,,5:kolPatron_dikLyra:Present Balashi's terms at Sister Greenflight's office,The delegation isn't aboard: collected in the same scene
 kolPatron_dikLyra,DialogOptionSelected,$option == kolPatron_dikLyra,"$kolPatron_inPerson = true 0
 KolPatronCMD collectOpen
-KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] Greenflight reads Balashi's terms at her desk, twice, while the Lector reads them over her shoulder. Then she sends a clerk for Master Helensis, and another to have the delegation's cases brought up from the archive.",kolPatron_dikTerms0:Continue,
+KolStoryCMD showPerson kol_intel_director","[PLACEHOLDER] Greenflight reads Balashi's terms at her desk, twice, while the Lector reads them over her shoulder. Then she sends a clerk for Master Helensis, and another to have the delegation's cases brought up from the archive.",kolPatron_dikTerms0:Continue,
 kolPatron_dikTerms0,DialogOptionSelected,$option == kolPatron_dikTerms0,FireBest KolPatronDiktatTerms,,,
 kolPatron_aboardDiktat,KolPatronAboardDiktat,,"unset $kolPatron_inPerson
 KolPatronCMD collectOpen
-KolCh2CMD showPerson kol_intel_director","[PLACEHOLDER] Balashi's terms reach your fleet on an ordinary courier packet. Within the hour the Order's delegation has taken over your wardroom: the Lector at the head of the table, Greenflight beside the packet's seal, and the clerks clearing a space for their cases.",kolPatron_dikTerms0:Continue,Played in space when the terms arrive and the delegation is aboard (KolPatronParley.aboardScene)
+KolStoryCMD showPerson kol_intel_director","[PLACEHOLDER] Balashi's terms reach your fleet on an ordinary courier packet. Within the hour the Order's delegation has taken over your wardroom: the Lector at the head of the table, Greenflight beside the packet's seal, and the clerks clearing a space for their cases.",kolPatron_dikTerms0:Continue,Played in space when the terms arrive and the delegation is aboard (KolPatronParley.aboardScene)
 kolPatron_dikTerms,KolPatronDiktatTerms,,,"[PLACEHOLDER] The Lector reads the terms aloud, as $global.kolBench_lector_heOrShe would read anything into the record: the Diktat will stand over the Church's congregations, and in return the Church will keep the Supreme Executor supplied with its own files on Volturn's faithful, for as long as the arrangement stands.
 
 ""The Diktat has been taking suspected Pathers off Volturn,"" $global.kolBench_lector_heOrShe says. ""They go to Cruor, to the labor camps, and they do not come back. These would be names Sindria does not have yet, and next season's after them. The Order has done hard things before. It has not done easy ones of this kind.""",kolPatron_dikTerms_c2:Continue,Greenflight's reservations
@@ -2126,10 +2126,10 @@ $kolPatron_inPerson score:10","ShowDefaultVisual
 FireAll PopulateOptions",,,At Lyra: back to the market
 kolPatron_dikMeetOpt,PopulateOptions,"$market.id == sindria
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD diktatMeetingReady",,,4:kolPatron_dikMeet:Attend the meeting at the Supreme Executor's court,
 kolPatron_dikMeet,DialogOptionSelected,$option == kolPatron_dikMeet,"$kolPatron_inPerson = true 0
-KolCh2CMD showPerson macario","[PLACEHOLDER] The meeting is held in a room of the Supreme Executor's palace that has been made to look larger than it is. A Lion's Guard officer stands at the door, and does not sit when invited to. In a chair by the wall, apart from the table, is Dolos Macario. He does not rise, does not introduce himself, and does not need to.",kolPatron_dikMeet2:Continue,"Macario observes, and does not speak"
+KolStoryCMD showPerson macario","[PLACEHOLDER] The meeting is held in a room of the Supreme Executor's palace that has been made to look larger than it is. A Lion's Guard officer stands at the door, and does not sit when invited to. In a chair by the wall, apart from the table, is Dolos Macario. He does not rise, does not introduce himself, and does not need to.",kolPatron_dikMeet2:Continue,"Macario observes, and does not speak"
 kolPatron_dikMeet2,DialogOptionSelected,$option == kolPatron_dikMeet2,"KolPatronCMD openMeeting diktat
 KolPatronCMD meet diktatFunctionary
 FireBest KolPatronMeetOpen",,,
@@ -2142,7 +2142,7 @@ kolPatron_priceReactDiktat,KolPatronPriceReact,$global.kolPatron_priceKey == dik
 kolPatron_priceSceneDiktat,KolPatronPriceScene,$global.kolPatron_priceKey == diktat_volturn score:10,,"[PLACEHOLDER] The Lector signs for the Grandmaster, and the functionary for the Supreme Executor. Then the first of the files: Greenflight passes the case across the table herself, rather than through a clerk. Macario rises for the first time, opens it, reads the first page and the last, and closes it again. He looks at Greenflight. She looks back, and nothing in her face changes at all. The functionary notes, for the record, that the next will be expected within the quarter. Greenflight writes the date down.",kolPatron_meetLeave:Leave the palace,The files change hands; Greenflight prepared them herself
 # Knights patron: the gate at Lyra (pre-assembly scenes),,,,,,
 kolPatron_gate,KolPatronGate,,KolPatronCMD gateNext,,,"A dock event at Lyra after a non-pirate signing: every pending pre-assembly scene, in order"
-kolPatron_gateCharter,KolPatronGateCharter,,KolCh2CMD showPerson kol_intel_director,"[PLACEHOLDER] A clerk is waiting at the foot of the ramp: Sister Greenflight would see you, now, and alone. Her office door is closed behind you before she speaks.
+kolPatron_gateCharter,KolPatronGateCharter,,KolStoryCMD showPerson kol_intel_director,"[PLACEHOLDER] A clerk is waiting at the foot of the ramp: Sister Greenflight would see you, now, and alone. Her office door is closed behind you before she speaks.
 
 ""A charter."" She does not raise her voice. ""Signed in the Church's name, paid from your own purse, and brought to me after the fact. You went around the Order, captain. Do not tell me you did not know it.""",kolPatron_gateCharter2:Continue,"Greenflight's private reaction, when it didn't play aboard"
 kolPatron_gateCharter2,DialogOptionSelected,$option == kolPatron_gateCharter2,,"[PLACEHOLDER] She is quiet for a moment. ""And it will work. That is the worst of it."" She draws a fresh slate toward her. ""I will take it to the Grandmaster's office myself, before the assembly hears it from anyone else. Do not do this again.""",kolPatron_gateCharterDone:Leave the office,
@@ -2150,19 +2150,19 @@ kolPatron_gateCharterDone,DialogOptionSelected,$option == kolPatron_gateCharterD
 ShowDefaultVisual
 KolPatronCMD gateNext",,,
 kolPatron_gateDelegation,KolPatronGateDelegation,,"KolPatronCMD dropOff
-KolCh2CMD showPerson bench:lector","[PLACEHOLDER] The Order's delegation disembarks at Star Keep Lyra with their cases and their clerks. The Lector stops at the foot of the ramp to thank you formally, in the Grandmaster's name, for the use of your ship and your patience. Greenflight has already gone ahead.",kolPatron_gateDelegationDone:Continue,The delegation goes home
+KolStoryCMD showPerson bench:lector","[PLACEHOLDER] The Order's delegation disembarks at Star Keep Lyra with their cases and their clerks. The Lector stops at the foot of the ramp to thank you formally, in the Grandmaster's name, for the use of your ship and your patience. Greenflight has already gone ahead.",kolPatron_gateDelegationDone:Continue,The delegation goes home
 kolPatron_gateDelegationDone,DialogOptionSelected,$option == kolPatron_gateDelegationDone,"ShowDefaultVisual
 KolPatronCMD gateNext",,,
-kolPatron_aboardCharter,KolPatronAboardCharter,,KolCh2CMD showPerson kol_intel_director,"[PLACEHOLDER] Greenflight asks for a word in private, and closes the wardroom door behind you both. ""A charter,"" she says. ""Signed in the Church's name, paid from your own purse, with the Order's delegation aboard your own ship and none of us asked. You went around the Order, captain.""",kolPatron_aboardCharter2:Continue,"Greenflight's private reaction, with the delegation aboard"
+kolPatron_aboardCharter,KolPatronAboardCharter,,KolStoryCMD showPerson kol_intel_director,"[PLACEHOLDER] Greenflight asks for a word in private, and closes the wardroom door behind you both. ""A charter,"" she says. ""Signed in the Church's name, paid from your own purse, with the Order's delegation aboard your own ship and none of us asked. You went around the Order, captain.""",kolPatron_aboardCharter2:Continue,"Greenflight's private reaction, with the delegation aboard"
 kolPatron_aboardCharter2,DialogOptionSelected,$option == kolPatron_aboardCharter2,,"[PLACEHOLDER] She is quiet for a moment. ""And it will work. That is the worst of it. I will take it to the Grandmaster's office myself, before the assembly hears it from anyone else."" She opens the door again. ""Do not do this again.""",kolPatron_aboardCharterDone:Continue,
 kolPatron_aboardCharterDone,DialogOptionSelected,$option == kolPatron_aboardCharterDone,"KolPatronCMD charterReacted
 ShowDefaultVisual
 DismissDialog",,,
 kolPatron_aboardLeague,KolPatronAboardLeague,,"KolPatronCMD collectOpen
-KolCh2CMD showPerson bench:lector","[PLACEHOLDER] Mazalot's delegate has retired to a guest cabin, and the Order's delegation keeps the wardroom. The Lector is still turning over something the delegate said at dinner: that Mazalot petitions Kazeron every year, and every year Kazeron answers, because the Council can't afford to lose Mazalot's vote.
+KolStoryCMD showPerson bench:lector","[PLACEHOLDER] Mazalot's delegate has retired to a guest cabin, and the Order's delegation keeps the wardroom. The Lector is still turning over something the delegate said at dinner: that Mazalot petitions Kazeron every year, and every year Kazeron answers, because the Council can't afford to lose Mazalot's vote.
 
 ""A patron that needs its faithful,"" $global.kolBench_lector_heOrShe says, ""and asks only that we be one voice among them. I would rather be needed than kept.""",kolPatron_aboardLeague2:Continue,
-kolPatron_aboardLeague2,DialogOptionSelected,$option == kolPatron_aboardLeague2,KolCh2CMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""A yearly vote,"" Helensis says. ""And in the years between, the raiders come. I don't doubt the League's honesty, Lector. I doubt its speed. The faithful waiting on Kazeron's courtesy are the ones the raiders reach first.""
+kolPatron_aboardLeague2,DialogOptionSelected,$option == kolPatron_aboardLeague2,KolStoryCMD showPerson kol_chaptermaster,"[PLACEHOLDER] ""A yearly vote,"" Helensis says. ""And in the years between, the raiders come. I don't doubt the League's honesty, Lector. I doubt its speed. The faithful waiting on Kazeron's courtesy are the ones the raiders reach first.""
 
 ""Speed is what we would be giving up our own counsel to buy, Master,"" the Lector says. ""The League asks us to be patient, and small. I think the Order can be both.""",kolPatron_aboardLeague2_c2:Continue,
 kolPatron_aboardLeague2_c2,DialogOptionSelected,$option == kolPatron_aboardLeague2_c2,,"""It can,"" Helensis says. She turns to you. ""I'm not sure the holdings at the edge can survive it.""
@@ -2178,10 +2178,10 @@ FireBest KolPatronAboardLeagueClose","[PLACEHOLDER] ""No,"" the Lector agrees, q
 kolPatron_aboardLeagueC,DialogOptionSelected,$option == kolPatron_aboardLeagueC,FireBest KolPatronAboardLeagueClose,[PLACEHOLDER] Neither of them asks what you think.,,
 kolPatron_aboardLeagueClose,KolPatronAboardLeagueClose,,KolPatronCMD talked league,"[PLACEHOLDER] The wardroom empties a few at a time. By the next watch, the delegation is talking about other things.",kolPatron_aboardTalkDone:Continue,
 kolPatron_aboardHegemony,KolPatronAboardHegemony,,"KolPatronCMD collectOpen
-KolCh2CMD showPerson kol_chaptermaster","[PLACEHOLDER] Helensis has cleared the wardroom table for a single sheet: Cygnus' muster, with every empty berth marked in red. She doesn't explain it. She doesn't need to.
+KolStoryCMD showPerson kol_chaptermaster","[PLACEHOLDER] Helensis has cleared the wardroom table for a single sheet: Cygnus' muster, with every empty berth marked in red. She doesn't explain it. She doesn't need to.
 
 ""Chicomoztoc could fill this in a year,"" she says. ""I would like to hear anyone else at this table say the same of their patron.""",kolPatron_aboardHegemony2:Continue,
-kolPatron_aboardHegemony2,DialogOptionSelected,$option == kolPatron_aboardHegemony2,KolCh2CMD showPerson bench:lector,"[PLACEHOLDER] ""Jangala's faithful marched once,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""You will have read how that ended. A Church that leans on that arm will be asked, sooner or later, to look away when it's raised. I would not have us practice looking away.""",kolPatron_aboardHegemony2_c2:Continue,
+kolPatron_aboardHegemony2,DialogOptionSelected,$option == kolPatron_aboardHegemony2,KolStoryCMD showPerson bench:lector,"[PLACEHOLDER] ""Jangala's faithful marched once,"" $global.kolBench_lector_title $global.kolBench_lector_last says. ""You will have read how that ended. A Church that leans on that arm will be asked, sooner or later, to look away when it's raised. I would not have us practice looking away.""",kolPatron_aboardHegemony2_c2:Continue,
 kolPatron_aboardHegemony2_c2,DialogOptionSelected,$option == kolPatron_aboardHegemony2_c2,,"""I'm not asking the Church to look away, Lector,"" Helensis says. ""I'm asking for yards, hulls and crews, and the Hegemony is the only power at the table with them to spare. A prayer doesn't hold a patrol line over a congregation. A ship does."" She sets the muster in front of you, so you can read it too. ""Those berths are people we can't send.""
 
 ""Whatever we promise Chicomoztoc,"" Greenflight says, ""it will want to inspect. The Inspectorate checks what it's given. We should only offer what we're willing to have counted.""","1:kolPatron_aboardHegA:""Filled berths save lives.""
@@ -2197,7 +2197,7 @@ kolPatron_aboardTalkDone,DialogOptionSelected,$option == kolPatron_aboardTalkDon
 DismissDialog",,,
 # Knights patron: the mercenaries,,,,,,
 kolPatron_brokerOpt,PopulateOptions,"!$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD charterHere",,,12:kolPatron_broker:Seek out a mercenary broker,"New Maxios (the independent company) or Cethlenn (Tactistar), once the lead is known"
 kolPatron_broker,DialogOptionSelected,$option == kolPatron_broker,"$kolPatron_inPerson = true 0
 KolPatronCMD charterOpen
@@ -2225,7 +2225,7 @@ kolPatron_charterLeave,DialogOptionSelected,$option == kolPatron_charterLeave,"S
 FireAll PopulateOptions",,,
 # Knights patron: the Path,,,,,,
 kolPatron_pathAdminOpt,PopulateOptions,"$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD pathAdmin",,,8:kolPatron_pathAsk:Ask whether the Path would shield the Church's faithful,"Chalcedon's administrator, with or without the lead"
 kolPatron_pathAsk,DialogOptionSelected,$option == kolPatron_pathAsk,KolPatronCMD pathAsk,,,
 kolPatron_pathSpeech,KolPatronPathSpeech,,,"[PLACEHOLDER] The administrator hears the request through without interrupting, as though it were a confession. ""The Church keeps the Word,"" $heOrShe says at last. ""We have never said otherwise. But it keeps it beside the machines, and calls that prudence. Ludd did not ask the forge's permission.
@@ -2236,9 +2236,9 @@ kolPatron_pathDone,DialogOptionSelected,$option == kolPatron_pathDone,"KolPatron
 FireAll PopulateOptions",,,
 kolAssembly_itemPathTried,KolAssemblyItems,"$global.kolPatron_tried_path
 !$global.kolPatron_pathMurmured",KolPatronCMD pathMurmur,"[PLACEHOLDER] Somewhere behind you on the benches, someone says the word ""Chalcedon"", and someone else hushes them. It goes along the row anyway.",,"The Path attempt, murmured about once; the reputation penalty"
-kolInq_rec_pathTried,KolInquestRecord,"$global.kolPatron_tried_path
-!$global.kolInq_read_pathTried score:101","$global.kolInq_read_pathTried = true 30
-$global.kolInquest_readCount++","[PLACEHOLDER] ""You went to Chalcedon, and asked the Path to stand over the Church's faithful.""",kolInq_next:Continue,
+kolInquest_rec_pathTried,KolInquestRecord,"$global.kolPatron_tried_path
+!$global.kolInquest_read_pathTried score:101","$global.kolInquest_read_pathTried = true 30
+$global.kolInquest_readCount++","[PLACEHOLDER] ""You went to Chalcedon, and asked the Path to stand over the Church's faithful.""",kolInquest_next:Continue,
 # Knights patron: Volturn after the Diktat's price,,,,,,
 kolPatron_volturnShrine,DialogOptionSelected,"$option == lpp_volturnShrineRevisit1 score:10
 !$kolPatron_vanillaShrine
@@ -2248,12 +2248,12 @@ KolPatronCMD volturnLament","$kolPatron_vanillaShrine = true 0
 FireBest DialogOptionSelected
 KolPatronCMD volturnOption",,,Vanilla's revisit plays as usual; our option is added after
 kolPatron_volturnLament,DialogOptionSelected,$option == kolPatron_volturnLament,"$global.kolPatron_volturnLamentSeen = true
-KolCh2CMD showPerson standfast","[PLACEHOLDER] Mother Standfast is at the back of the shrine, washing cups that are already clean. She pours you tea without asking, as she always does, and sits down heavily.
+KolStoryCMD showPerson standfast","[PLACEHOLDER] Mother Standfast is at the back of the shrine, washing cups that are already clean. She pours you tea without asking, as she always does, and sits down heavily.
 
 ""They came again this week,"" she says. ""The Executor's people. They knew which doors to knock on. They knew the names behind them."" She turns her cup slowly. ""Some of those names weren't Path, captain. They were only careful. I don't know how anyone knew them.""",kolPatron_volturnLament2:Continue,Standfast laments the raids; she doesn't know the Church's part
 kolPatron_volturnLament2,DialogOptionSelected,$option == kolPatron_volturnLament2,,"[PLACEHOLDER] She does not ask you to do anything about it. She asks you to drink your tea while it's hot, and to light a candle on your way out, for the ones who went to Cruor.",shrineDoLeave:Leave,
 # Knights patron: the pirates,,,,,,
-kolPatron_skArrangeOpt,KDStationKingOptions,"$global.kolCh2Patron_active
+kolPatron_skArrangeOpt,KDStationKingOptions,"$global.kolPatron_active
 KolPatronCMD pirateArrangeOpen",,,16:kolPatron_skArrange:Ask him to arrange a meeting with Kanta's people about the Church's faithful,The pirate lead known
 kolPatron_skArrange,DialogOptionSelected,$option == kolPatron_skArrange,KolPatronCMD pirateArrangeOffer,,,
 kolPatron_skArrangeReply,KolPatronSKArrange,,,"[PLACEHOLDER] The Station King laughs until he sees you mean it. ""Protection. For the Luddics. From us."" He wipes his eyes. ""Kanta's people will want to hear this themselves. I can get you down there. Getting you down there costs $kolPatron_audienceBribe.""","1:kolPatron_skArrangePay:Pay $kolPatron_audienceBribe credits
@@ -2265,7 +2265,7 @@ FireAll KDStationKingOptions","[PLACEHOLDER] ""Shuttle's yours whenever you want
 kolPatron_skArrangeLater,DialogOptionSelected,$option == kolPatron_skArrangeLater,FireAll KDStationKingOptions,,,
 kolPatron_pirateShuttleOpt,PopulateOptions,"$market.id == kantas_den
 !$isPerson
-$global.kolCh2Patron_active
+$global.kolPatron_active
 KolPatronCMD pirateShuttle",,,4:kolPatron_pirateShuttle:Take the shuttle down to meet Kanta's delegate,
 kolPatron_pirateShuttle,DialogOptionSelected,$option == kolPatron_pirateShuttle,"$kolPatron_inPerson = true 0
 KolPatronCMD pirateMeet",,,
@@ -2289,7 +2289,7 @@ FireBest KolPatronPirateSigned",,,
 kolPatron_pirateSigned,KolPatronPirateSigned,,,"[PLACEHOLDER] The delegate thumbs the datapad and the deal is done. ""Tell your Order we'll be there for its next assembly. We wouldn't miss it.""",kolPatron_pirateLeave:Leave,
 kolPatron_pirateLeave,DialogOptionSelected,$option == kolPatron_pirateLeave,"ShowDefaultVisual
 FireAll PopulateOptions",,,
-kolPatron_gateDelegationPirate,KolPatronGateDelegation,$global.kol_patron == pirate score:10,KolPatronCMD dropOff,[PLACEHOLDER] The Order's delegation disembarks at Star Keep Lyra. The Lector thanks you for the passage in a single formal sentence. Greenflight does not look at you at all.,kolPatron_gateDelegationDone:Continue,After the pirate deal: the deal isn't acknowledged
+kolPatron_gateDelegationPirate,KolPatronGateDelegation,$global.kolPatron_signed == pirate score:10,KolPatronCMD dropOff,[PLACEHOLDER] The Order's delegation disembarks at Star Keep Lyra. The Lector thanks you for the passage in a single formal sentence. Greenflight does not look at you at all.,kolPatron_gateDelegationDone:Continue,After the pirate deal: the deal isn't acknowledged
 kolPatron_gatePirates,KolPatronGatePirates,,"KolPatronCMD pirateDelegationGone
 FireBest KolPatronPirateArrival",,,The assembly that would announce the deal: the pirates arrive
 kolPatron_pirateArrival,KolPatronPirateArrival,,,"[PLACEHOLDER] You are still in the docking queue when Lyra's traffic control breaks in on every channel: fleets at the jump points, pirate transponders, a great many of them. They are broadcasting that they have come to protect the faithful.
@@ -2305,7 +2305,7 @@ kolPatron_lyraRefused,OpenInteractionDialog,"$market.id == kol_lyra score:2000
 KolPatronCMD swarmActive",ShowDefaultVisual,"[PLACEHOLDER] Lyra's traffic control refuses every approach. The station's guns are tracking the pirates, and, you suspect, you.",kolPatron_lyraRefusedLeave:Leave,No docking at Lyra until the swarm is decided
 kolPatron_lyraRefusedLeave,DialogOptionSelected,$option == kolPatron_lyraRefusedLeave,DismissDialog,,,
 kolPatron_lyraRebuff,MarketPostDock,"$market.id == kol_lyra score:100
-KolPatronCMD swarmRebuff","KolCh2CMD showPerson kol_intel_director
+KolPatronCMD swarmRebuff","KolStoryCMD showPerson kol_intel_director
 KolPatronCMD swarmRebuffed","[PLACEHOLDER] Sister Greenflight is waiting at the foot of the ramp, alone. ""Did you really think that would work?"" She does not wait for an answer. ""Never return here.""",kolPatron_lyraRebuffDone:Continue,After the Knights beat the pirates back
 kolPatron_lyraRebuffDone,DialogOptionSelected,$option == kolPatron_lyraRebuffDone,"ShowDefaultVisual
 FireBest MarketPostDock",,,
@@ -2537,8 +2537,8 @@ kolLibra_restore2,DialogOptionSelected,$option == kolLibra_restore2,KolLibraCMD 
 kolLibra_restoreDone,DialogOptionSelected,$option == kolLibra_restoreDone,FireAll PopulateOptions,,,
 kolLibra_assembly,KolAssembly,$global.kolAssembly_topic == libra score:12,"KolStoryCMD assemblySit
 FireAll KolAssemblyItems
-KolCh2CMD showPerson kol_libramaster","[PLACEHOLDER] The hall at Star Keep Lyra is full, and at the end of the captains' bench, in a patched coat, sits Knight-Master Martins. Heads turn as the Lector names him; some of the older Knights stand.",kolLibra_assembly2:Continue,Libra's restoration taken up by an important assembly
-kolLibra_assembly2,DialogOptionSelected,$option == kolLibra_assembly2,KolCh2CMD showPerson grandmaster,"[PLACEHOLDER] Martins reports in a few words: Libra is restored, crewed, supplied, its guns tested. Then, to the high chair, without looking away: ""The posting is completed, Grandmaster.""
+KolStoryCMD showPerson kol_libramaster","[PLACEHOLDER] The hall at Star Keep Lyra is full, and at the end of the captains' bench, in a patched coat, sits Knight-Master Martins. Heads turn as the Lector names him; some of the older Knights stand.",kolLibra_assembly2:Continue,Libra's restoration taken up by an important assembly
+kolLibra_assembly2,DialogOptionSelected,$option == kolLibra_assembly2,KolStoryCMD showPerson grandmaster,"[PLACEHOLDER] Martins reports in a few words: Libra is restored, crewed, supplied, its guns tested. Then, to the high chair, without looking away: ""The posting is completed, Grandmaster.""
 
 Grandmaster Lyon is quiet for a long time. When he speaks, it is not to the hall. ""Completed,"" he repeats. Then he is on his feet, and the hall with him.",kolLibra_assembly3:Continue,"Lyon: distant, not contemptuous; shaken out of his malaise"
 kolLibra_assembly3,DialogOptionSelected,$option == kolLibra_assembly3,KolLibraCMD legitimize,"[PLACEHOLDER] The Lector enters it in the record: Battlestar Libra is restored to the Order's charts, and to its books. Martins bows his head, and when he lifts it you could swear the old man is close to smiling.",kolAssembly_end:Leave the hall,Legitimized: no longer hidden
@@ -2552,7 +2552,7 @@ kolLibra_asksDock,MarketPostDock,"$market.kol_market_libra score:100
 $global.kolLibra_crewDone
 $global.kolLibra_askAny
 !$global.kolLibra_asksTold","$global.kolLibra_asksTold = true
-KolCh2CMD showPerson kol_libramaster
+KolStoryCMD showPerson kol_libramaster
 FireAll KolLibraAsks","[PLACEHOLDER] Martins has the new crews' papers squared on the console in front of him. ""They came with conditions, captain. I have read all of them.""",kolLibra_asksDone:Continue,
 kolLibra_asksJaspis,KolLibraAsks,$global.kolLibra_ask_jaspis,,"[PLACEHOLDER] The Archcurate's letter asks that every volunteer be free to leave, and that someone see them home.",,
 kolLibra_asksOak,KolLibraAsks,$global.kolLibra_ask_oak,,"[PLACEHOLDER] The Excubitor Orbis's seal is on a line saying the families may know Libra's name, and not its position.",,

@@ -14,17 +14,18 @@ import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin
 import com.fs.starfarer.api.impl.campaign.rulecmd.FireAll
 import com.fs.starfarer.api.ui.TooltipMakerAPI
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.campaign.libra.KolLibra
-import org.selkie.kol.campaign.libra.KolLibraAgreements
-import org.selkie.kol.campaign.libra.KolLibraCrewContract
-import org.selkie.kol.campaign.libra.KolLibraDrill
-import org.selkie.kol.campaign.libra.KolLibraMission
-import org.selkie.kol.campaign.libra.KolLibraRestoration
-import org.selkie.kol.campaign.libra.KolLibraSupplyContract
-import org.selkie.kol.campaign.libra.KolLibraGunnery
-import org.selkie.kol.campaign.libra.KolLibraMilestone
 import org.selkie.kol.helpers.KolStaticStrings
 import kotlin.math.roundToInt
+import org.selkie.kol.campaign.story.situations.libra.KolLibraMilestone
+import org.selkie.kol.campaign.story.situations.libra.KolLibra
+import org.selkie.kol.campaign.story.situations.libra.KolLibraAgreements
+import org.selkie.kol.campaign.story.situations.libra.KolLibraEffects
+import org.selkie.kol.campaign.story.situations.libra.KolLibraGunnery
+import org.selkie.kol.campaign.story.situations.libra.milestones.KolLibraMission
+import org.selkie.kol.campaign.story.situations.libra.milestones.KolLibraSupplyContract
+import org.selkie.kol.campaign.story.situations.libra.milestones.KolLibraCrewContract
+import org.selkie.kol.campaign.story.situations.libra.milestones.KolLibraDrill
+import org.selkie.kol.campaign.story.situations.libra.milestones.KolLibraRestoration
 
 /**
  * Rule commands for the Libra situation (add-knights-libra-situation):
@@ -75,13 +76,13 @@ class KolLibraCMD : BaseCommandPlugin() {
             "reward" -> KolLibraGunnery.rewardResponder(arg(1) ?: return false, dialog)
             "restore" -> {
                 KolLibra.complete(KolLibraMilestone.RESTORATION, dialog)
-                com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.set(org.selkie.kol.campaign.story.KolAssembly.LIBRA_TOPIC_PENDING, true)
+                com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.set(org.selkie.kol.campaign.story.systems.assembly.KolAssembly.LIBRA_TOPIC_PENDING, true)
                 KolLibraMission.start(KolLibraRestoration.ID, dialog)
                 true
             }
             "legitimize" -> {
-                org.selkie.kol.campaign.libra.KolLibraEffects.legitimize()
-                com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.unset(org.selkie.kol.campaign.story.KolAssembly.LIBRA_TOPIC_PENDING)
+                KolLibraEffects.legitimize()
+                com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.unset(org.selkie.kol.campaign.story.systems.assembly.KolAssembly.LIBRA_TOPIC_PENDING)
                 true
             }
             else -> false

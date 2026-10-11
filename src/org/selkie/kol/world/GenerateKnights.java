@@ -34,6 +34,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Random;
+import org.selkie.kol.campaign.story.core.KolIds;
 
 public class GenerateKnights {
 
@@ -174,11 +175,11 @@ public class GenerateKnights {
 		MarketAPI cygnus = Global.getSector().getEconomy().getMarket(KolStaticStrings.KOL_CYGNUS);
 		MarketAPI lyra = Global.getSector().getEconomy().getMarket(KolStaticStrings.KOL_LYRA);
 
-		PersonAPI enarms = ensureImportantPerson(KolStaticStrings.KolPrelude.ENARMS_ID, cygnus);
+		PersonAPI enarms = ensureImportantPerson(KolIds.ENARMS, cygnus);
 		if (enarms != null && !enarms.hasTag(Tags.CONTACT_MILITARY)) enarms.addTag(Tags.CONTACT_MILITARY);
-		ensureImportantPerson(KolStaticStrings.KolPrelude.MARTINS_ID, getLibraMarket());
-		ensureImportantPerson(KolStaticStrings.KolCh1.HELENSIS_ID, cygnus);
-		ensureImportantPerson(KolStaticStrings.KolCh1.GREENFLIGHT_ID, lyra);
+		ensureImportantPerson(KolIds.MARTINS, getLibraMarket());
+		ensureImportantPerson(KolIds.HELENSIS, cygnus);
+		ensureImportantPerson(KolIds.GREENFLIGHT, lyra);
 	}
 
 	/**

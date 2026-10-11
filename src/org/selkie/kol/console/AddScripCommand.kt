@@ -2,7 +2,7 @@ package org.selkie.kol.console
 
 import org.lazywizard.console.BaseCommand
 import org.lazywizard.console.Console
-import org.selkie.kol.campaign.tech.KolTechData
+import org.selkie.kol.campaign.story.situations.tech.KolTechData
 
 /**
  * Console Commands: `kol_AddScrip <amount>`. Adds spendable scrip only, for testing Helensis' requisitions.

@@ -31,7 +31,7 @@ import java.util.Random
 
 /**
  * Caeli's guardian, in Ozymandias: a derelict Zhi Nu prototype floats beside the Caeli cryosleeper, and either one's
- * dialog offers the fight (rules: `zea_caeli*`). The Zhi Nu and the guardian deploy together as one Dawn fleet, built
+ * dialog offers the fight (rules: `zeaCaeli_*`). The Zhi Nu and the guardian deploy together as one Dawn fleet, built
  * for each engagement as vanilla's Dweller fights are (DwellerCMD.engageFleet), with SalvageDefenderInteraction's
  * return to the entity afterwards. Beating it removes the system's Dawn spawns and leaves the Zhi Nu salvageable as
  * the Elysian boss wrecks are. Caeli itself never goes through vanilla's salvage flow, so it never becomes a usable

@@ -4,11 +4,20 @@ import com.fs.starfarer.api.campaign.InteractionDialogAPI
 import com.fs.starfarer.api.campaign.rules.MemoryAPI
 import com.fs.starfarer.api.impl.campaign.rulecmd.BaseCommandPlugin
 import com.fs.starfarer.api.util.Misc
-import org.selkie.kol.campaign.story.ch2.KolPatron
-import org.selkie.kol.campaign.story.ch2.KolPatronParley
+import org.selkie.kol.campaign.story.core.KolIds
+import org.selkie.kol.campaign.story.core.KolMissions
+import org.selkie.kol.campaign.story.chapters.ch2.patron.KolPatron
+import org.selkie.kol.campaign.story.chapters.ch2.patron.KolPatronDoors
+import org.selkie.kol.campaign.story.chapters.ch2.patron.KolPatronPower
+import org.selkie.kol.campaign.story.chapters.ch2.patron.KolPatronParley
+import org.selkie.kol.campaign.story.chapters.ch2.patron.KolPirateCut
+import org.selkie.kol.campaign.story.chapters.ch2.patron.KolPirateSwarm
+import org.selkie.kol.campaign.story.chapters.ch2.patron.PatronKeys
 
 /**
  * Rule commands for the patron quest (add-knights-patron-lobbying):
+ * - `KolPatronCMD start`: starts the patron quest from the dialog (Greenflight its contact).
+ * - `KolPatronCMD canOfferOwn` (condition): the player's own forces can stand as the Church's patron.
  * - `KolPatronCMD askable` (condition): the active person has a hint about a patron the player hasn't learned.
  * - `KolPatronCMD ask [returnTrigger]`: asks them (returning to PopulateOptions, or the given vanilla option list); each hint plays `FireBest KolPatronAskReply` (`$kolPatron_role`, `_lead`, `_placeText`).
  * - `KolPatronCMD payBribe`: pays a hostile pirate's price, then `FireBest KolPatronBribePaid` and any other hints.
@@ -50,6 +59,10 @@ class KolPatronCMD : BaseCommandPlugin() {
         val map = memoryMap ?: return false
         val market = dialog.interactionTarget?.market
         return when (params?.getOrNull(0)?.getString(map)) {
+            "start" -> KolMissions.start(
+                PatronKeys.PATRON_ID,
+                KolIds.GREENFLIGHT, dialog) != null
+            "canOfferOwn" -> KolPatronDoors.canOfferOwn()
             "askable" -> dialog.interactionTarget !is com.fs.starfarer.api.campaign.CampaignFleetAPI && // fleets: askFleet
                     KolPatron.askable(dialog.interactionTarget?.activePerson, market)
             "ask" -> KolPatron.ask(dialog, map, params.getOrNull(1)?.getString(map) ?: "PopulateOptions")
@@ -77,7 +90,7 @@ class KolPatronCMD : BaseCommandPlugin() {
             "gateNext" -> { KolPatronParley.gateNext(dialog, map); true }
             "charterReacted" -> { KolPatronParley.charterReacted(); true }
             "churchWelcomes" -> KolPatron.churchWelcomes()
-            "briefRefused" -> { com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.set("\$kolCh2Patron_briefRefused", true); true }
+            "briefRefused" -> { com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.set(PatronKeys.BRIEF_REFUSED, true); true }
             "introduce" -> { KolPatron.introduce(power(params, map) ?: return false, dialog.textPanel); true }
             "talked" -> { KolPatronParley.setTalked(params.getOrNull(1)?.getString(map) ?: return false); true }
             "charterHere" -> KolPatron.charterRoute(market) != null
@@ -90,8 +103,8 @@ class KolPatronCMD : BaseCommandPlugin() {
             "pathTried" -> { KolPatron.pathTried(dialog.textPanel); true }
             "pathMurmur" -> { KolPatron.pathMurmur(dialog.textPanel); true }
             "volturnLament" -> com.fs.starfarer.api.Global.getSector().memoryWithoutUpdate.let {
-                it.getBoolean(org.selkie.kol.helpers.KolStaticStrings.KolPatron.VOLTURN_FILES_GIVEN) &&
-                        it.getBoolean(org.selkie.kol.helpers.KolStaticStrings.KolCh2.PATRON_SECURED) &&
+                it.getBoolean(PatronKeys.VOLTURN_FILES_GIVEN) &&
+                        it.getBoolean(PatronKeys.PATRON_SECURED) &&
                         !it.getBoolean("\$kolPatron_volturnLamentSeen")
             }
             "pirateArrangeOpen" -> KolPatron.pirateArrangeOpen(market)
@@ -107,11 +120,11 @@ class KolPatronCMD : BaseCommandPlugin() {
                 if (KolPatronParley.delegationAboard()) map[com.fs.starfarer.api.campaign.rules.MemKeys.LOCAL]?.set("\$kolPatron_delegationLeft", true, 0f)
                 KolPatronParley.dropOff(); true
             }
-            "pirateSwarm" -> { org.selkie.kol.campaign.story.ch2.KolPirateSwarm.begin(); true }
-            "swarmActive" -> org.selkie.kol.campaign.story.ch2.KolPirateSwarm.active()
-            "swarmRebuff" -> org.selkie.kol.campaign.story.ch2.KolPirateSwarm.rebuffPending()
-            "swarmRebuffed" -> { org.selkie.kol.campaign.story.ch2.KolPirateSwarm.rebuffed(dialog.textPanel); true }
-            "pirateCut" -> org.selkie.kol.campaign.story.ch2.KolPirateCut.collect(dialog, map)
+            "pirateSwarm" -> { KolPirateSwarm.begin(); true }
+            "swarmActive" -> KolPirateSwarm.active()
+            "swarmRebuff" -> KolPirateSwarm.rebuffPending()
+            "swarmRebuffed" -> { KolPirateSwarm.rebuffed(dialog.textPanel); true }
+            "pirateCut" -> KolPirateCut.collect(dialog, map)
             "volturnOption" -> { dialog.optionPanel.addOption("[PLACEHOLDER] Look for Mother Standfast", "kolPatron_volturnLament"); true }
             "diktatOfficeIs" -> KolPatronParley.diktatOffice() == params.getOrNull(1)?.getString(map)
             "diktatProposed" -> { KolPatronParley.diktatProposed(dialog.textPanel); true }
@@ -140,5 +153,5 @@ class KolPatronCMD : BaseCommandPlugin() {
     }
 
     private fun power(params: MutableList<Misc.Token>, map: MutableMap<String, MemoryAPI>) =
-        org.selkie.kol.campaign.story.ch2.KolPatronPower.of(params.getOrNull(1)?.getString(map))
+        KolPatronPower.of(params.getOrNull(1)?.getString(map))
 }

@@ -7,12 +7,12 @@ import com.fs.starfarer.api.campaign.rules.MemoryAPI;
 import com.fs.starfarer.api.util.IntervalUtil;
 import com.fs.starfarer.api.util.WeightedRandomPicker;
 import com.fs.starfarer.campaign.CampaignEngine;
-import org.selkie.kol.helpers.KolStaticStrings.KolCh1;
 import org.selkie.zea.helpers.ZeaStaticStrings;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaEntities;
 import org.selkie.zea.helpers.ZeaStaticStrings.ZeaStarTypes;
 
 import java.util.Random;
+import org.selkie.kol.campaign.story.chapters.ch1.Ch1Keys;
 
 public class TrackFleet implements EveryFrameScript {
 
@@ -78,8 +78,8 @@ public class TrackFleet implements EveryFrameScript {
                                 fleet.clearAssignments();
                                 // Knights Chapter 1: Enarms remarks on it if it happens while scouting the anomaly
                                 MemoryAPI memory = Global.getSector().getMemoryWithoutUpdate();
-                                if (memory.getBoolean(KolCh1.SCOUT_ACTIVE) && !memory.getBoolean(KolCh1.SCOUT_SCOUTED)) {
-                                    memory.set(KolCh1.PULLED_THROUGH, true);
+                                if (memory.getBoolean(Ch1Keys.SCOUT_ACTIVE) && !memory.getBoolean(Ch1Keys.SCOUT_SCOUTED)) {
+                                    memory.set(Ch1Keys.PULLED_THROUGH, true);
                                 }
                             }
                             victim.setLocation(dest.getStar().getLocation().x, dest.getStar().getLocation().y);
