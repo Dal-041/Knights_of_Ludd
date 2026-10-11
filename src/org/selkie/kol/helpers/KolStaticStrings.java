@@ -10,15 +10,23 @@ public class KolStaticStrings {
     public static final String[] KNIGHT_HULLS = {
             "kol_alysse",
             "kol_larkspur",
+            "kol_larkspur_lowtech",
             "kol_libra",
             "kol_lotus",
+            "kol_lotus_lowtech",
             "kol_lunaria",
+            "kol_lunaria_lowtech",
             "kol_marigold",
+            "kol_marigold_lowtech",
             "kol_mimosa",
             "kol_protea",
+            "kol_protea_lowtech",
             "kol_snowdrop",
             "kol_sundew",
-            "kol_tamarisk"
+            "kol_sundew_lowtech",
+            "kol_tamarisk",
+            "kol_tamarisk_lowtech",
+            "kol_celosia"
     };
 
     // hullmod
@@ -47,17 +55,14 @@ public class KolStaticStrings {
     public static final String KOL_INVICTUS_LP = "kol_invictus_lp";
     public static final String KOL_BOSS_RET_LP_OVERDRIVEN = "kol_boss_ret_lp_Overdriven";
     public static final String KOL_INVICTUS_LP_HALLOWED = "kol_invictus_lp_Hallowed";
-    
-    // intel tag
-    public static final String KNIGHTS_OF_LUDD = "Knights of Ludd";
 
     // fleet tags
     public static final String KOL_FLEET_MERGED_KNIGHTS = "kol_merged_knights";
     
     // campaign entity
-    public static final String KOL_CYGNUS = org.selkie.kol.campaign.story.core.KolIds.CYGNUS;
-    public static final String KOL_LYRA = org.selkie.kol.campaign.story.core.KolIds.LYRA;
-    public static final String MEMKEY_KOL_SCHISMED = org.selkie.kol.campaign.story.core.KolRep.SCHISMED;
+    public static final String KOL_CYGNUS = "kol_cygnus";
+    public static final String KOL_LYRA = "kol_lyra";
+    public static final String MEMKEY_KOL_SCHISMED = "$kol_knights_schism";
 
     public static final String MGA_DIRECTOR = "AmadouSembene";
 
@@ -70,6 +75,7 @@ public class KolStaticStrings {
         public static final String ARMADA = "kolArmada";
     }
 
+    // Worldgen keys, quest-keys are local
     public static class KolMemKeys {
         public static final String KOL_INTIALIZED = "$kol_initialized";
         
@@ -84,5 +90,4 @@ public class KolStaticStrings {
 
         public static final String KOL_TAKEOVERS_ENDED = "$kol_takeovers_ended";
     }
-
 }

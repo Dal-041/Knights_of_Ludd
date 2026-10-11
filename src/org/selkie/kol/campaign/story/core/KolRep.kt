@@ -5,6 +5,7 @@ import com.fs.starfarer.api.campaign.RepLevel
 import com.fs.starfarer.api.campaign.TextPanelAPI
 import com.fs.starfarer.api.impl.campaign.CoreReputationPlugin
 import com.fs.starfarer.api.impl.campaign.ids.Factions
+import org.selkie.kol.helpers.KolStaticStrings
 
 /**
  * The player's standing with the Knights, the one way story code changes it. The Knights and the Church share one
@@ -13,7 +14,7 @@ import com.fs.starfarer.api.impl.campaign.ids.Factions
  * is set to match, unless the Order has schismed (`$kol_knights_schism`), when the two are deliberately apart.
  */
 object KolRep {
-    const val SCHISMED = "\$kol_knights_schism"
+    const val SCHISMED = KolStaticStrings.MEMKEY_KOL_SCHISMED
 
     fun knights(impact: CoreReputationPlugin.CustomRepImpact, text: TextPanelAPI?) {
         val sector = Global.getSector()

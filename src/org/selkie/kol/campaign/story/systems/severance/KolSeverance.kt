@@ -103,7 +103,7 @@ object KolSeverance {
     /** Knights story intel: the mod's campaign classes named Kol*, except the notice-giver's mission. */
     private fun storyIntel(intel: IntelInfoPlugin): Boolean {
         val name = intel.javaClass.name
-        if (!name.startsWith("org.selkie.kol.campaign.") && !name.startsWith("org.selkie.kol.story.")) return false
+        if (!name.startsWith("org.selkie.kol.campaign.")) return false
         val simple = intel.javaClass.simpleName
         return simple.startsWith("Kol") && simple != "KolPreludeHook" && simple != "KolPirateCut"
     }

@@ -59,8 +59,7 @@ class KolPatronCMD : BaseCommandPlugin() {
         val map = memoryMap ?: return false
         val market = dialog.interactionTarget?.market
         return when (params?.getOrNull(0)?.getString(map)) {
-            "start" -> KolMissions.start(
-                PatronKeys.PATRON_ID,
+            "start" -> KolMissions.start(PatronKeys.PATRON_ID,
                 KolIds.GREENFLIGHT, dialog) != null
             "canOfferOwn" -> KolPatronDoors.canOfferOwn()
             "askable" -> dialog.interactionTarget !is com.fs.starfarer.api.campaign.CampaignFleetAPI && // fleets: askFleet

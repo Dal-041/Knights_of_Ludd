@@ -36,8 +36,7 @@ object KolPatronPrices {
         KolPatronPrice("league_antipiracy", KolPatronPower.LEAGUE,
             "The Church's forces join anti-piracy efforts in League systems.") { memory.set(PatronKeys.PREFIX + "price_league_antipiracy", true) },
         KolPatronPrice("hegemony_ties", KolPatronPower.HEGEMONY,
-            "Closer ties with the Hegemony, and resupply of Hegemony expeditions at Church worlds.") { memory.set(
-            PatronKeys.PREFIX + "price_hegemony_ties", true) },
+            "Closer ties with the Hegemony, and resupply of Hegemony expeditions at Church worlds.") { memory.set(PatronKeys.PREFIX + "price_hegemony_ties", true) },
         KolPatronPrice("diktat_volturn", KolPatronPower.DIKTAT,
             "The faith keeps the Diktat supplied with its own files on Volturn's Path-affiliated faithful, through Sister " +
                 "Greenflight's office, for as long as the arrangement stands.") { memory.set(PatronKeys.VOLTURN_FILES_GIVEN, true) },

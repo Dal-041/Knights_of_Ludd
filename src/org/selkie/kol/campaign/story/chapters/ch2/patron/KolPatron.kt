@@ -556,8 +556,7 @@ object KolPatron {
 
     /** Chalcedon's administrator, while the quest seeks and before the Path has been asked there. */
     fun pathAdmin(person: PersonAPI?, market: MarketAPI?): Boolean =
-        person != null && market?.id == "chalcedon" && market.admin === person && seeking() && !memory.getBoolean(
-            PatronKeys.TRIED_PREFIX + PATH)
+        person != null && market?.id == "chalcedon" && market.admin === person && seeking() && !memory.getBoolean(PatronKeys.TRIED_PREFIX + PATH)
 
     /**
      * The player asks Chalcedon's administrator (with or without the lead): the Path branch is found, then closed by
@@ -658,8 +657,7 @@ object KolPatronModule : KolStoryModule {
         Global.getSector().addTransientScript(KolPatronFleetScript())
     }
 
-    override fun requirements() = listOf(KolStoryModule.Requirement(2, "patron", { true }, { memory.getBoolean(
-        PatronKeys.PATRON_SECURED) }))
+    override fun requirements() = listOf(KolStoryModule.Requirement(2, "patron", { true }, { memory.getBoolean(PatronKeys.PATRON_SECURED) }))
 
     override fun pulse() = KolPatron.watchFixerVisit()
 

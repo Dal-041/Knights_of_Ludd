@@ -2,17 +2,19 @@ package org.selkie.kol.campaign.story.core
 
 import com.fs.starfarer.api.Global
 import com.fs.starfarer.api.campaign.econ.MarketAPI
+import org.selkie.kol.helpers.KolStaticStrings
 
 /**
  * Shared identities of the Knights story: the faction, its places and its people. The only constants shared across
- * features; a feature's own keys live in its `<Feature>Keys` object.
+ * features; a feature's own keys live in its `<Feature>Keys` object. Ids that KolStaticStrings already holds are
+ * taken from it: it is the mod's ground truth, and never refers to story code.
  */
 object KolIds {
-    const val FACTION = "knights_of_selkie"
+    const val FACTION = KolStaticStrings.kolFactionID
 
     // markets (the stations' market ids)
-    const val CYGNUS = "kol_cygnus"
-    const val LYRA = "kol_lyra"
+    const val CYGNUS = KolStaticStrings.KOL_CYGNUS
+    const val LYRA = KolStaticStrings.KOL_LYRA
 
     // people (ImportantPeople ids)
     const val ENARMS = "kol_knightcaptain"

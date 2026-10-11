@@ -349,8 +349,7 @@ object KolOzymandiasModule : KolStoryModule {
 
     override fun onLoad() = ZeaCaeli.ensure()
 
-    override fun requirements() = listOf(KolStoryModule.Requirement(2, "ozymandias", { true }, { memory.getBoolean(
-        OzymandiasKeys.OZY_DONE) }))
+    override fun requirements() = listOf(KolStoryModule.Requirement(2, "ozymandias", { true }, { memory.getBoolean(OzymandiasKeys.OZY_DONE) }))
 
     override fun cues() = mapOf(
         // after the patron's announcement: Ozymandias, if it hasn't been taken up
