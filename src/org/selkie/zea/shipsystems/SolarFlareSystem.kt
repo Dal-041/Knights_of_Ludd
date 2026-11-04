@@ -18,10 +18,12 @@ import org.magiclib.kotlin.optColor
 import org.selkie.kol.Utils
 import org.selkie.zea.hullmods.ElysianBuiltin
 import org.selkie.kol.plugins.KOL_ModPlugin
+import java.io.IOException
 import java.awt.Color
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.random.Random
@@ -29,6 +31,7 @@ import kotlin.random.Random
 class SolarFlareSystem: BaseShipSystemScript() {
 
     var renderingPlugins: MutableList<Aurora> = mutableListOf()
+    var tether: SolarTether? = null
     val allyCheckInterval = IntervalUtil(0.7f, 1.3f)
     var allies: List<ShipAPI> = listOf()
 
@@ -82,6 +85,12 @@ class SolarFlareSystem: BaseShipSystemScript() {
         renderingPlugins[1].alphaMult = effectLevel/3f
         renderingPlugins[1].thicknessMult = effectLevel*2f
 
+        if (tether == null) {
+            tether = SolarTether(ship)
+            engine.addLayeredRenderingPlugin(tether!!)
+        }
+        tether!!.alphaMult = effectLevel
+
         val amount = engine.elapsedInLastFrame
         allyCheckInterval.advance(amount)
 
@@ -90,8 +99,19 @@ class SolarFlareSystem: BaseShipSystemScript() {
             allies = AIUtils.getNearbyAllies(ship, 2500f)
         }
 
+        val tetherTargets = mutableListOf<Pair<ShipAPI, Float>>()
         allies.forEach { ally ->
+            val rangeLevel = Utils.linMap(
+                MathUtils.getDistance(ship, ally),
+                Range,Range + DropoffRange,
+                1f, 0f
+            )
+            if (rangeLevel <= 0f) return@forEach
+
             val coronalCaps = ally.getListeners(ElysianBuiltin.ElysianBuiltinListener::class.java)
+            // fighters do not get visual bands
+            if (ally.isAlive && !ally.isFighter && coronalCaps.isNotEmpty()) tetherTargets.add(ally to rangeLevel)
+
             coronalCaps.forEach { coronalCap ->
                 val boost = when(ally.hullSize){
                     ShipAPI.HullSize.DEFAULT -> 0.5f
@@ -101,16 +121,12 @@ class SolarFlareSystem: BaseShipSystemScript() {
                     ShipAPI.HullSize.CRUISER -> 0.2f
                     ShipAPI.HullSize.CAPITAL_SHIP -> 0.1f
                 }
-                val rangeLevel = Utils.linMap(
-                    MathUtils.getDistance(ship, ally),
-                    Range,Range + DropoffRange,
-                    1f, 0f
-                )
                 // boost is % per second, full effect at Range, dropoff to no effect at Range + DropoffRange
                 coronalCap.capacitorAmount += ally.maxFlux * boost * Global.getCombatEngine().elapsedInLastFrame *
                         effectLevel * rangeLevel
             }
         }
+        tether!!.targets = tetherTargets
     }
 
     // never called
@@ -310,6 +326,81 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 GL11.glEnd()
 
                 GL11.glRotatef(180f, 0f, 0f, 1f)
+            }
+            GL11.glPopMatrix()
+        }
+    }
+
+    // Wavy bands from the ship to every ally its field is charging. Fighters are not linked.
+    class SolarTether(val ship: ShipAPI): BaseCombatLayeredRenderingPlugin() {
+        companion object {
+            const val TEXTURE_PATH = "graphics/fx/slipstream3.png"
+        }
+
+        // path sprites are not preloaded by vanilla, so load the texture before fetching the sprite
+        val sprite: SpriteAPI = try {
+            Global.getSettings().loadTexture(TEXTURE_PATH)
+            Global.getSettings().getSprite(TEXTURE_PATH)
+        } catch (e: IOException) {
+            Global.getSettings().getSprite(TEXTURE_PATH)
+        }
+        var targets: List<Pair<ShipAPI, Float>> = emptyList()
+        var alphaMult = 0f
+        private var phase = 0f
+        private var texScroll = 0f
+
+        override fun advance(amount: Float) {
+            phase = (phase + amount * 2.5f) % (Math.PI.toFloat() * 2f)
+            texScroll = (texScroll + amount * 1.5f) % 1f
+        }
+
+        override fun getRenderRadius(): Float = Range + DropoffRange
+
+        override fun render(layer: CombatEngineLayers, viewport: ViewportAPI) {
+            if (alphaMult <= 0f || targets.isEmpty() || !ship.isAlive) return
+            if (sprite.getTextureId() == 0) return
+
+            val from = ship.location
+            GL11.glPushMatrix()
+            GL11.glEnable(GL11.GL_TEXTURE_2D)
+            sprite.bindTexture()
+            GL11.glEnable(GL11.GL_BLEND)
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE)
+
+            for ((target, strength) in targets) {
+                if (!target.isAlive) continue
+                val to = target.location
+                val dx = to.x - from.x
+                val dy = to.y - from.y
+                val length = Math.hypot(dx.toDouble(), dy.toDouble()).toFloat()
+                if (length < 1f) continue
+
+                val angle = Math.atan2(dy.toDouble(), dx.toDouble()).toFloat()
+                val nx = -sin(angle)
+                val ny = cos(angle)
+                val amplitude = min(length * 0.08f, 50f)
+                val width = 20f
+                val targetPhase = phase + ((target.id.hashCode() and 0x7FFFFFFF) % 360) * 0.01f
+
+                GL11.glColor4ub(235.toByte(), 165.toByte(), 20.toByte(), (255f * alphaMult * strength).toInt().toByte())
+
+                val segments = 18
+                GL11.glBegin(GL11.GL_QUAD_STRIP)
+                for (i in 0..segments) {
+                    val t = i / segments.toFloat()
+                    val taper = sin(Math.PI.toFloat() * t)
+                    val wiggle = sin(t * Math.PI.toFloat() * 4f + targetPhase) * amplitude * taper
+                    val px = from.x + dx * t + nx * wiggle
+                    val py = from.y + dy * t + ny * wiggle
+                    val halfWidth = width * (0.3f + 0.7f * taper)
+                    val v = t * 3f + texScroll
+
+                    GL11.glTexCoord2f(0f, v)
+                    GL11.glVertex2f(px + nx * halfWidth, py + ny * halfWidth)
+                    GL11.glTexCoord2f(1f, v)
+                    GL11.glVertex2f(px - nx * halfWidth, py - ny * halfWidth)
+                }
+                GL11.glEnd()
             }
             GL11.glPopMatrix()
         }
