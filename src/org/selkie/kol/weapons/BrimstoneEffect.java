@@ -49,6 +49,7 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
             new Color(130, 25, 8, 22),
     };
     private static final Color SMOKE_COLOR = new Color(45, 32, 26, 70);
+    private static final int FLAME_OVER_PARTICLES = 3;
 
     private static final int CORE_PARTICLES = 2;
     // White-hot spine inside the flame: small, on-axis, additive, so it saturates white while the outer fire stays orange.
@@ -145,6 +146,29 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
         float sizeMult = Misc.getHitGlowSize(100f, projectile.getDamage().getBaseDamage(), damageResult) / 100f;
         Color c = Misc.scaleAlpha(FIRE_RAMP[2], projectile.getBrightness());
         engine.addNebulaParticle(point, vel, size, 5f + 3f * sizeMult, 0f, 0f, 1f, c);
+
+        // Flames pour over the hull: particles ride the target and slide along its surface,
+        // so the flame appears to wash across the ship instead of stopping dead at the impact point.
+        Vector2f normal = Vector2f.sub(point, target.getLocation(), new Vector2f());
+        Vector2f tangent = new Vector2f(-normal.y, normal.x);
+        if (tangent.lengthSquared() > 1f) {
+            tangent.normalise();
+            Vector2f jet = projectile.getVelocity();
+            if (Vector2f.dot(tangent, jet) < 0f) tangent.negate();
+            float slide = Math.min(jet.length(), 900f) * 0.4f;
+            for (int i = 0; i < FLAME_OVER_PARTICLES; i++) {
+                float along = size * (0.4f + 1.6f * Misc.random.nextFloat()) * (i + 1) / FLAME_OVER_PARTICLES;
+                Vector2f at = new Vector2f(point.x + tangent.x * along, point.y + tangent.y * along);
+                Vector2f pvel = new Vector2f(vel);
+                float drift = slide * (0.4f + 0.6f * Misc.random.nextFloat());
+                pvel.x += tangent.x * drift;
+                pvel.y += tangent.y * drift;
+                engine.addNebulaParticle(at, pvel, size * 0.7f,
+                        2.5f + 2f * Misc.random.nextFloat(), 0.15f, 0.5f,
+                        0.55f + 0.45f * Misc.random.nextFloat(),
+                        Misc.scaleAlpha(FIRE_RAMP[1], projectile.getBrightness()));
+            }
+        }
 
         Misc.playSound(damageResult, point, vel,
                 "cryoflamer_hit_shield_light",
