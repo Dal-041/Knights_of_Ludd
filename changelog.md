@@ -18,6 +18,8 @@
 - Fixed a few crash that could occur while using the special Dusk AI.
 - Blaze's Brimstone is now a wide-cone flamethrower; its damage is spread across the spray, and shield hits deal 2/3 damage.
 - Reduced Brimstone's flame brightness, particle overlap, and plume size for a rougher orange-and-smoke effect that keeps ships visible.
+- Denser Brimstone flame with a white-hot core.
+- Blaze no longer suffers Ill-Advised weapon malfunctions.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.

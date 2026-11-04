@@ -43,12 +43,18 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
     // Fire color over the flame's life: hot yellow at the muzzle, through orange, to a dim ember red.
     // Additive particles stack, so blue stays low: dense overlaps saturate to yellow instead of white.
     private static final Color[] FIRE_RAMP = {
-            new Color(245, 150, 35, 24),
-            new Color(235, 105, 20, 28),
-            new Color(205, 60, 12, 24),
-            new Color(130, 25, 8, 16),
+            new Color(245, 150, 35, 36),
+            new Color(235, 105, 20, 40),
+            new Color(205, 60, 12, 34),
+            new Color(130, 25, 8, 22),
     };
     private static final Color SMOKE_COLOR = new Color(45, 32, 26, 70);
+
+    private static final int CORE_PARTICLES = 2;
+    // White-hot spine inside the flame: small, on-axis, additive, so it saturates white while the outer fire stays orange.
+    private static final float CORE_SCALE_START = 0.35f;
+    private static final float CORE_SCALE_END = 1f;
+    private static final Color CORE_COLOR = new Color(255, 250, 235);
 
     private boolean init = false;
     private boolean active = false;
@@ -198,6 +204,7 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
     public static class ParticleData {
         public final SpriteAPI sprite;
         public final boolean smoke;
+        public final boolean core;
         public Vector2f offset = new Vector2f();
         public Vector2f vel = new Vector2f();
         public float sizeJitter;
@@ -205,8 +212,9 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
         public float angle;
         public final FaderUtil fader;
 
-        public ParticleData(DamagingProjectileAPI proj, boolean smoke) {
+        public ParticleData(DamagingProjectileAPI proj, boolean smoke, boolean core) {
             this.smoke = smoke;
+            this.core = core;
             sprite = Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles");
             float i = Misc.random.nextInt(4);
             float j = Misc.random.nextInt(4);
@@ -227,7 +235,7 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
             // Flames billow outward as they travel.
             float maxDur = proj.getWeapon().getRange() / proj.getWeapon().getProjectileSpeed();
             vel = Misc.getUnitVectorAtDegreeAngle((float) Math.random() * 360f);
-            vel.scale(proj.getProjectileSpec().getWidth() / maxDur * (smoke ? 0.6f : 0.4f));
+            vel.scale(proj.getProjectileSpec().getWidth() / maxDur * (core ? 0.1f : smoke ? 0.6f : 0.4f));
 
             fader = new FaderUtil(0f, smoke ? 0.4f : 0.1f, 0.5f);
             fader.fadeIn();
@@ -254,12 +262,13 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
 
         float length = proj.getProjectileSpec().getLength();
         float width = proj.getProjectileSpec().getWidth();
-        for (int i = 0; i < SMOKE_PARTICLES + FIRE_PARTICLES; i++) {
-            ParticleData p = new ParticleData(proj, i < SMOKE_PARTICLES);
+        for (int i = 0; i < SMOKE_PARTICLES + FIRE_PARTICLES + CORE_PARTICLES; i++) {
+            boolean core = i >= SMOKE_PARTICLES + FIRE_PARTICLES;
+            ParticleData p = new ParticleData(proj, i < SMOKE_PARTICLES, core);
             // Spread along the ray body, behind the head.
             Vector2f back = Misc.getUnitVectorAtDegreeAngle(baseFacing + 180f);
             back.scale(length * (float) Math.random());
-            p.offset = Misc.getPointWithinRadius(back, width * 0.3f);
+            p.offset = Misc.getPointWithinRadius(back, width * (core ? 0.06f : 0.3f));
             particles.add(p);
         }
     }
@@ -315,7 +324,11 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
             float alpha;
             float size;
             Color color;
-            if (p.smoke) {
+            if (p.core) {
+                size = width * (CORE_SCALE_START + (CORE_SCALE_END - CORE_SCALE_START) * (float) Math.sqrt(life));
+                alpha = 1f - 0.6f * life; // white along the spine, cooling only at the tail
+                color = CORE_COLOR;
+            } else if (p.smoke) {
                 size = width * (SMOKE_SCALE_START + (SMOKE_SCALE_END - SMOKE_SCALE_START) * life);
                 alpha = smokeAlpha;
                 color = SMOKE_COLOR;
