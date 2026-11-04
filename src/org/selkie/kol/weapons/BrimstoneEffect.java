@@ -49,7 +49,7 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
             new Color(130, 25, 8, 22),
     };
     private static final Color SMOKE_COLOR = new Color(45, 32, 26, 70);
-    private static final int FLAME_OVER_PARTICLES = 3;
+    private static final int FLAME_OVER_PARTICLES = 2;
 
     private static final int CORE_PARTICLES = 2;
     // White-hot spine inside the flame: small, on-axis, additive, so it saturates white while the outer fire stays orange.
@@ -155,7 +155,7 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
             tangent.normalise();
             Vector2f jet = projectile.getVelocity();
             if (Vector2f.dot(tangent, jet) < 0f) tangent.negate();
-            float slide = Math.min(jet.length(), 900f) * 0.4f;
+            float slide = Math.min(jet.length(), 900f) * 0.15f;
             for (int i = 0; i < FLAME_OVER_PARTICLES; i++) {
                 float along = size * (0.4f + 1.6f * Misc.random.nextFloat()) * (i + 1) / FLAME_OVER_PARTICLES;
                 Vector2f at = new Vector2f(point.x + tangent.x * along, point.y + tangent.y * along);
