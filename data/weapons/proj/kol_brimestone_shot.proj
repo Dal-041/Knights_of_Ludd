@@ -15,6 +15,6 @@
 	"coreColor":[255,150,150,0],
 	"textureType":"SMOOTH",  # only needed for BEAM spawnType
 	"textureScrollSpeed":-256,
-	"pixelsPerTexel":5.0
-	
+	"pixelsPerTexel":5.0,
+	"bulletSprite":"graphics/missiles/shell_gauss_cannon.png"
 }

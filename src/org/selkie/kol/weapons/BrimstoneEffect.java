@@ -54,7 +54,7 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
     // White-hot spine inside the flame: small, on-axis, additive, so it saturates white while the outer fire stays orange.
     private static final float CORE_SCALE_START = 0.35f;
     private static final float CORE_SCALE_END = 1f;
-    private static final Color CORE_COLOR = new Color(255, 250, 235);
+    private static final Color CORE_COLOR = new Color(255, 238, 190);
 
     private boolean init = false;
     private boolean active = false;
