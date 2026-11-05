@@ -368,8 +368,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
         private val shapes = HashMap<String, Shape>()
 
         override fun advance(amount: Float) {
-            phase = (phase + amount * 0.9f) % (Math.PI.toFloat() * 2f)
-            texScroll = (texScroll + amount * 0.6f) % 1f
+            phase = (phase + amount * 0.5f) % (Math.PI.toFloat() * 2f)
+            texScroll = (texScroll + amount * 0.3f) % 1f
             time += amount
 
             shapes.values.forEach { shape ->
@@ -432,6 +432,14 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val a = alphaMult * strength * flicker
 
                 // halo, body and core drift on their own waves, so the strands weave like a flare instead of stacking
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 104f, waves = 1.2f, phase = rootPhase * 0.6f, lateral = amplitude * 0.06f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 190, g = 80, b = 20, alpha = 0.05f * a, uScale = 0.8f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 76f, waves = 1.5f, phase = rootPhase * 0.7f, lateral = -amplitude * 0.05f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 205, g = 95, b = 22, alpha = 0.07f * a, uScale = 1f)
                 drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
                     width = 58f, waves = 1.8f, phase = rootPhase * 0.8f, lateral = 0f,
                     bend = shape.bend, bendSign = shape.bendSign,
