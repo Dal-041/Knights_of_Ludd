@@ -230,6 +230,7 @@ public class GenerateKnights {
 
 		lyraMarket.getIndustry(Industries.HIGHCOMMAND).setImproved(true);
 		lyraMarket.getIndustry(Industries.HEAVYBATTERIES).setImproved(true);
+		lyraMarket.getIndustry(Industries.STARFORTRESS).setImproved(true);
 
 		lyra.setInteractionImage(GfxCat.ILLUSTRATIONS, "kol_citadel_large");
 
