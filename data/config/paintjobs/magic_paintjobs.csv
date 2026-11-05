@@ -20,3 +20,11 @@ zea_vengeance_edf,eis_vengeance,Elysian,Elysia,graphics/zea/paintjobs/zea_vengea
 zea_audacious_edf,eis_audacious,Elysian,Elysia,graphics/zea/paintjobs/zea_audacious_edf.png,true,,,
 zea_courageous_edf,eis_courageous,Elysian,Elysia,graphics/zea/paintjobs/zea_courageous_edf.png,true,,,
 ,,,,,,,,
+# Vanilla fighters flown by Elysian and Dawn carriers. KOL_CombatPlugin applies them to the wing members of
+# ships whose hull style matches the paintjob family, replacing the old settings.json fighter skins.
+kol_elysian_spark,spark,Elysian Spark,ZEA_ELYSIAN_TECH,graphics/zea/ships/fighters/zea_spark_elysia.png,false,,,Faction livery applied automatically to vanilla fighters flown by Elysian carriers.
+kol_elysian_lux,lux,Elysian Lux,ZEA_ELYSIAN_TECH,graphics/zea/ships/fighters/zea_lux_elysia.png,false,,,Faction livery applied automatically to vanilla fighters flown by Elysian carriers.
+kol_elysian_flash,flash,Elysian Flash,ZEA_ELYSIAN_TECH,graphics/zea/ships/fighters/zea_flare_elysia.png,false,,,Faction livery applied automatically to vanilla fighters flown by Elysian carriers.
+kol_dawn_spark,spark,Dawn Spark,ZEA_DAWN_TECH,graphics/zea/ships/fighters/zea_spark_dawn.png,false,,,Faction livery applied automatically to vanilla fighters flown by Dawn carriers.
+kol_dawn_lux,lux,Dawn Lux,ZEA_DAWN_TECH,graphics/zea/ships/fighters/zea_lux_dawn.png,false,,,Faction livery applied automatically to vanilla fighters flown by Dawn carriers.
+kol_dawn_flash,flash,Dawn Flash,ZEA_DAWN_TECH,graphics/zea/ships/fighters/zea_flare_dawn.png,false,,,Faction livery applied automatically to vanilla fighters flown by Dawn carriers.

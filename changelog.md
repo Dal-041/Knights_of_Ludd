@@ -32,6 +32,7 @@
 - Missile reflection (Corrupting Heart's Passive IFF Disruptor, Seiryu's IFF Override and the Blizzard system) now ignores any missile for the first second of its flight.
 - The targeting beam's system AI no longer touches a dead or hulk ship, nor a missing AI config, so it cannot crash when its ship dies or its script runs uninitialised.
 - Module occlusion now uses a missile's real blast radius instead of its purely visual one, so Terminator drone strikes (and every other missile) no longer bypass KoL armour modules.
+- Elysian and Dawn carriers now give their vanilla Spark, Lux and Flash wings their faction livery through MagicLib paintjobs instead of the settings.json fighter skins.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.

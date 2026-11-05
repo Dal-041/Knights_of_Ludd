@@ -448,12 +448,6 @@
 			"zea_boss_amaterasu_coverR" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_coverR_paperdoll.png"
 		},
 		"fighterSkinsPlayerAndNPC":{
-			"spark_ZEA_ELYSIAN_TECH":"graphics/zea/ships/fighters/zea_spark_elysia.png",
-			"lux_ZEA_ELYSIAN_TECH":"graphics/zea/ships/fighters/zea_lux_elysia.png",
-			"flash_ZEA_ELYSIAN_TECH":"graphics/zea/ships/fighters/zea_flare_elysia.png",
-			"spark_ZEA_DAWN_TECH":"graphics/zea/ships/fighters/zea_spark_dawn.png",
-			"lux_ZEA_DAWN_TECH":"graphics/zea/ships/fighters/zea_lux_dawn.png",
-			"flash_ZEA_DAWN_TECH":"graphics/zea/ships/fighters/zea_flare_dawn.png",
 		},
 "weaponSkinsPlayerAndNPC":{
 			"kol_llyr:ZEA_ELYSIAN_TECH:TURRET":"graphics/kol/weapons/kol_llyr_turret_base_edf.png",			"kol_llyr:ZEA_ELYSIAN_TECH:HARDPOINT":"graphics/kol/weapons/kol_llyr_hardpoint_base_edf.png",
