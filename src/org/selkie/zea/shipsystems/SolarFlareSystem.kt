@@ -368,6 +368,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
         private val shapes = HashMap<String, Shape>()
 
         override fun advance(amount: Float) {
+            // Culling uses the plugin entity, not the world-space vertices drawn below.
+            entity?.location?.set(ship.location)
             phase = (phase + amount * 0.5f) % (Math.PI.toFloat() * 2f)
             texScroll = (texScroll + amount * 0.3f) % 1f
             time += amount
