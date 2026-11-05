@@ -350,33 +350,38 @@ class SolarFlareSystem: BaseShipSystemScript() {
         private var texScroll = 0f
         private var time = 0f
 
-        // per-ally shape: curviness and wave count drift to a new random target every few seconds,
-        // so a tether is sometimes a single gentle bend and sometimes as wavy as the base curve
+        // per-ally shape: amplitude and bend weight drift to a new random target every few seconds.
+        // Only amplitudes are moved, never frequencies, so a new target fades in instead of sliding the wave.
         private class Shape {
             var curve = 1f
             var curveTarget = 1f
-            var waveMult = 1f
-            var waveMultTarget = 1f
+            var bend = 0.2f
+            var bendTarget = 0.2f
+            var bendSign = if (Random.nextBoolean()) 1f else -1f
             var rerollIn = MathUtils.getRandomNumberInRange(1f, 4f)
         }
 
         private val shapes = HashMap<String, Shape>()
 
         override fun advance(amount: Float) {
-            phase = (phase + amount * 2.5f) % (Math.PI.toFloat() * 2f)
-            texScroll = (texScroll + amount * 1.5f) % 1f
+            phase = (phase + amount * 0.9f) % (Math.PI.toFloat() * 2f)
+            texScroll = (texScroll + amount * 0.6f) % 1f
             time += amount
 
             shapes.values.forEach { shape ->
-                val lerp = min(1f, amount * 0.7f)
+                val lerp = min(1f, amount * 0.55f)
                 shape.curve += (shape.curveTarget - shape.curve) * lerp
-                shape.waveMult += (shape.waveMultTarget - shape.waveMult) * lerp
+                shape.bend += (shape.bendTarget - shape.bend) * lerp
                 shape.rerollIn -= amount
                 if (shape.rerollIn <= 0f) {
-                    // a third of the time the tether pulls almost straight, otherwise it keeps some wave
-                    shape.curveTarget = if (Random.nextFloat() < 0.3f) MathUtils.getRandomNumberInRange(0.1f, 0.35f)
-                    else MathUtils.getRandomNumberInRange(0.85f, 1.3f)
-                    shape.waveMultTarget = MathUtils.getRandomNumberInRange(0.25f, 1.15f)
+                    // a third of the time the tether settles into one gentle arc, otherwise it keeps its waves
+                    if (Random.nextFloat() < 0.33f) {
+                        shape.bendTarget = MathUtils.getRandomNumberInRange(0.8f, 1f)
+                        shape.curveTarget = MathUtils.getRandomNumberInRange(0.5f, 0.9f)
+                    } else {
+                        shape.bendTarget = MathUtils.getRandomNumberInRange(0f, 0.3f)
+                        shape.curveTarget = MathUtils.getRandomNumberInRange(0.85f, 1.2f)
+                    }
                     shape.rerollIn = MathUtils.getRandomNumberInRange(2.5f, 6f)
                 }
             }
@@ -414,10 +419,22 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val a = alphaMult * strength * flicker
 
                 // halo, body and core drift on their own waves, so the strands weave like a flare instead of stacking
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 58f, 1.8f * shape.waveMult, rootPhase * 0.8f, 0f, 200, 90, 20, 0.1f * a, 1.2f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 30f, 2.5f * shape.waveMult, rootPhase, 0f, 230, 120, 25, 0.22f * a, 2f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 13f, 4f * shape.waveMult, rootPhase * 1.7f, amplitude * 0.12f, 240, 160, 40, 0.5f * a, 3f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 4f, 5.5f * shape.waveMult, -rootPhase * 1.3f, -amplitude * 0.2f, 255, 235, 190, 0.8f * a, 4f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 58f, waves = 1.8f, phase = rootPhase * 0.8f, lateral = 0f,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 200, g = 90, b = 20, alpha = 0.1f * a, uScale = 1.2f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 30f, waves = 2.5f, phase = rootPhase, lateral = 0f,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 230, g = 120, b = 25, alpha = 0.22f * a, uScale = 2f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 13f, waves = 4f, phase = rootPhase * 1.7f, lateral = amplitude * 0.12f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 240, g = 160, b = 40, alpha = 0.5f * a, uScale = 3f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 4f, waves = 5.5f, phase = -rootPhase * 1.3f, lateral = -amplitude * 0.2f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 255, g = 235, b = 190, alpha = 0.8f * a, uScale = 4f)
             }
             GL11.glPopMatrix()
         }
@@ -426,6 +443,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
             fromX: Float, fromY: Float, dx: Float, dy: Float,
             nx: Float, ny: Float, amplitude: Float,
             width: Float, waves: Float, phase: Float, lateral: Float,
+            bend: Float, bendSign: Float,
             r: Int, g: Int, b: Int, alpha: Float, uScale: Float
         ) {
             val segments = 26
@@ -434,7 +452,10 @@ class SolarFlareSystem: BaseShipSystemScript() {
             for (i in 0..segments) {
                 val t = i / segments.toFloat()
                 val taper = sin(Math.PI.toFloat() * t)
-                val wiggle = lateral + sin(t * Math.PI.toFloat() * waves + phase) * amplitude * taper
+                // blend the scrolling wave and a static single arc; blending amplitudes keeps the shape smooth
+                val waveTerm = sin(t * Math.PI.toFloat() * waves + phase) * (1f - bend)
+                val bendTerm = sin(Math.PI.toFloat() * t) * bend * bendSign
+                val wiggle = lateral + (waveTerm + bendTerm) * amplitude * taper
                 val px = fromX + dx * t + nx * wiggle
                 val py = fromY + dy * t + ny * wiggle
                 val halfWidth = width * (0.3f + 0.7f * taper)
