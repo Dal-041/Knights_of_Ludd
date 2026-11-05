@@ -393,11 +393,12 @@ class SolarFlareSystem: BaseShipSystemScript() {
                     val px = from.x + dx * t + nx * wiggle
                     val py = from.y + dy * t + ny * wiggle
                     val halfWidth = width * (0.3f + 0.7f * taper)
-                    val v = t * 3f + texScroll
+                    // texture runs along the band (u) and across it (v), matching the sprite's streak axis
+                    val u = t * 3f + texScroll
 
-                    GL11.glTexCoord2f(0f, v)
+                    GL11.glTexCoord2f(u, 0f)
                     GL11.glVertex2f(px + nx * halfWidth, py + ny * halfWidth)
-                    GL11.glTexCoord2f(1f, v)
+                    GL11.glTexCoord2f(u, 1f)
                     GL11.glVertex2f(px - nx * halfWidth, py - ny * halfWidth)
                 }
                 GL11.glEnd()
