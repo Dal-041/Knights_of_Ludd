@@ -28,6 +28,7 @@
 - Yukionna's Lightning Storm orb now sits centred between the ship's prongs instead of at their base, with the arc roots raised to match.
 - Star Keep Lyra's Star Fortress now starts with its story point improvement, matching its Heavy Batteries and High Command.
 - The Corrupting Heart now carries the Hellfire Beam: an omega-tier sustained high-explosive beam with ember and flame VFX, built into the boss and unobtainable elsewhere.
+- Myoga Ultradriver's tooltip now spells out that its shells pass through missiles and keep going through fighters they destroy.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.
