@@ -7,6 +7,7 @@ import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.DamageTakenModifier;
 import com.fs.starfarer.api.combat.listeners.HullDamageAboutToBeTakenListener;
 import com.fs.starfarer.api.impl.campaign.ids.HullMods;
+import com.fs.starfarer.api.loading.DamagingExplosionSpec;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.api.ui.Alignment;
 import com.fs.starfarer.api.ui.TooltipMakerAPI;
@@ -182,7 +183,10 @@ public class KnightRefit extends BaseHullMod {
                     MissileAPI missile = (MissileAPI) projectile;
                     if(missile.getDamagedAlready() != null) damagedAlready = missile.getDamagedAlready();
                     explosionLocation = missile.getLocation();
-                    radius = missile.getSpec().getExplosionRadius();
+                    // getExplosionRadius() is the purely visual radius; the damaging blast lives in the explosion spec
+                    DamagingExplosionSpec explosionSpec = missile.getSpec().getExplosionSpec();
+                    radius = explosionSpec != null && explosionSpec.getRadius() > 0f
+                            ? explosionSpec.getRadius() : missile.getSpec().getExplosionRadius();
                 } else{
                     DamagingExplosion explosion = (DamagingExplosion) projectile;
                     if(explosion.getDamagedAlready() != null) damagedAlready = explosion.getDamagedAlready();
