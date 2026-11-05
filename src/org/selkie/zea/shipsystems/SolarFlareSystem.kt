@@ -348,12 +348,10 @@ class SolarFlareSystem: BaseShipSystemScript() {
         var alphaMult = 0f
         private var phase = 0f
         private var texScroll = 0f
-        private var time = 0f
 
         override fun advance(amount: Float) {
             phase = (phase + amount * 2.5f) % (Math.PI.toFloat() * 2f)
             texScroll = (texScroll + amount * 1.5f) % 1f
-            time += amount
         }
 
         override fun getRenderRadius(): Float = Range + DropoffRange
@@ -381,47 +379,31 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val nx = -sin(angle)
                 val ny = cos(angle)
                 val amplitude = min(length * 0.08f, 50f)
-                val rootPhase = phase + ((target.id.hashCode() and 0x7FFFFFFF) % 360) * 0.01f
-                val flicker = 0.8f + 0.2f * sin(time * 7f + rootPhase)
-                val a = alphaMult * strength * flicker
+                val width = 20f
+                val targetPhase = phase + ((target.id.hashCode() and 0x7FFFFFFF) % 360) * 0.01f
 
-                // halo, body and core drift on their own waves, so the strands weave like a flare instead of stacking
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 58f, 1.8f, rootPhase * 0.8f, 0f, 200, 90, 20, 0.1f * a, 1.2f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 30f, 2.5f, rootPhase, 0f, 230, 120, 25, 0.22f * a, 2f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 13f, 4f, rootPhase * 1.7f, amplitude * 0.3f, 240, 160, 40, 0.5f * a, 3f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 4f, 5.5f, -rootPhase * 1.3f, -amplitude * 0.45f, 255, 235, 190, 0.8f * a, 4f)
+                GL11.glColor4ub(235.toByte(), 165.toByte(), 20.toByte(), (255f * alphaMult * strength).toInt().toByte())
+
+                val segments = 18
+                GL11.glBegin(GL11.GL_QUAD_STRIP)
+                for (i in 0..segments) {
+                    val t = i / segments.toFloat()
+                    val taper = sin(Math.PI.toFloat() * t)
+                    val wiggle = sin(t * Math.PI.toFloat() * 4f + targetPhase) * amplitude * taper
+                    val px = from.x + dx * t + nx * wiggle
+                    val py = from.y + dy * t + ny * wiggle
+                    val halfWidth = width * (0.3f + 0.7f * taper)
+                    // texture runs along the band (u) and across it (v), matching the sprite's streak axis
+                    val u = t * 3f + texScroll
+
+                    GL11.glTexCoord2f(u, 0f)
+                    GL11.glVertex2f(px + nx * halfWidth, py + ny * halfWidth)
+                    GL11.glTexCoord2f(u, 1f)
+                    GL11.glVertex2f(px - nx * halfWidth, py - ny * halfWidth)
+                }
+                GL11.glEnd()
             }
             GL11.glPopMatrix()
         }
-
-        private fun drawStrand(
-            fromX: Float, fromY: Float, dx: Float, dy: Float,
-            nx: Float, ny: Float, amplitude: Float,
-            width: Float, waves: Float, phase: Float, lateral: Float,
-            r: Int, g: Int, b: Int, alpha: Float, uScale: Float
-        ) {
-            val segments = 26
-            GL11.glBegin(GL11.GL_QUAD_STRIP)
-            for (i in 0..segments) {
-                val t = i / segments.toFloat()
-                val taper = sin(Math.PI.toFloat() * t)
-                val wiggle = lateral + sin(t * Math.PI.toFloat() * waves + phase) * amplitude * taper
-                val px = fromX + dx * t + nx * wiggle
-                val py = fromY + dy * t + ny * wiggle
-                val halfWidth = width * (0.3f + 0.7f * taper)
-                // texture runs along the band (u) and across it (v), matching the sprite's streak axis
-                val u = t * uScale + texScroll
-                // density varies along the strand, so it frays like plasma instead of reading as a flat ribbon
-                val at = alpha * (0.6f + 0.4f * sin(t * Math.PI.toFloat() * waves * 2f + phase * 2f))
-                GL11.glColor4ub(r.toByte(), g.toByte(), b.toByte(), (255f * at).toInt().coerceIn(0, 255).toByte())
-
-                GL11.glTexCoord2f(u, 0f)
-                GL11.glVertex2f(px + nx * halfWidth, py + ny * halfWidth)
-                GL11.glTexCoord2f(u, 1f)
-                GL11.glVertex2f(px - nx * halfWidth, py - ny * halfWidth)
-            }
-            GL11.glEnd()
-        }
-
     }
 }
