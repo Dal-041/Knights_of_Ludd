@@ -352,7 +352,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
 
         // per-ally shape: amplitude and bend weight ease to a new random target, then hold.
         // Only amplitudes are moved, never frequencies, so a new target fades in instead of sliding the wave.
-        private class Shape {
+        private class Shape(val phaseOffset: Double) {
             var curve = 1f
             var bend = 0.2f
             val bendSign = if (Random.nextBoolean()) 1f else -1f
@@ -366,6 +366,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
         }
 
         private val shapes = HashMap<String, Shape>()
+        private var nextPhaseOffset = Random.nextDouble(0.0, Math.PI * 2.0)
 
         override fun advance(amount: Float) {
             // Culling uses the plugin entity, not the world-space vertices drawn below.
@@ -428,13 +429,18 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val angle = Math.atan2(dy.toDouble(), dx.toDouble()).toFloat()
                 val nx = -sin(angle)
                 val ny = cos(angle)
-                val shape = shapes.getOrPut(target.id) { Shape() }
+                val shape = shapes.getOrPut(target.id) {
+                    val shape = Shape(nextPhaseOffset)
+                    // Golden-angle spacing keeps new links out of phase without rephasing existing links.
+                    nextPhaseOffset += Math.PI * (3.0 - Math.sqrt(5.0))
+                    shape
+                }
                 val amplitude = min(length * 0.08f, 50f) * shape.curve
-                val rootPhase = phase + ((target.id.hashCode() and 0x7FFFFFFF) % 360) * 0.01f
-                val flicker = 0.8f + 0.2f * sin(time * 7f + rootPhase).toFloat()
+                val rootPhase = phase + shape.phaseOffset
+                val flicker = 0.98f + 0.02f * sin(time * 1.5f + rootPhase).toFloat()
                 val a = alphaMult * strength * flicker
 
-                // halo, body and core drift on their own waves, so the strands weave like a flare instead of stacking
+                // halo and body drift on their own waves, so the strands weave like a flare instead of stacking
                 drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
                     width = 104f, waves = 1.2f, phase = rootPhase * 0.6f, lateral = amplitude * 0.06f * shape.bendSign,
                     bend = shape.bend, bendSign = shape.bendSign,
@@ -455,10 +461,6 @@ class SolarFlareSystem: BaseShipSystemScript() {
                     width = 13f, waves = 4f, phase = rootPhase * 1.7f, lateral = amplitude * 0.12f * shape.bendSign,
                     bend = shape.bend, bendSign = shape.bendSign,
                     r = 240, g = 160, b = 40, alpha = 0.5f * a, uScale = 3f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
-                    width = 4f, waves = 5.5f, phase = -rootPhase * 1.3f, lateral = -amplitude * 0.2f * shape.bendSign,
-                    bend = shape.bend, bendSign = shape.bendSign,
-                    r = 255, g = 235, b = 190, alpha = 0.8f * a, uScale = 4f)
             }
             GL11.glPopMatrix()
         }
