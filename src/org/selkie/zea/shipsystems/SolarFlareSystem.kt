@@ -479,14 +479,14 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val t = i / segments.toFloat()
                 val taper = sin(Math.PI.toFloat() * t)
                 // blend the scrolling wave and a static single arc; blending amplitudes keeps the shape smooth
-                val waveTerm = sin(t * Math.PI * waves + phase).toFloat() * (1f - bend)
+                val waveTerm = sin(t * Math.PI * waves - phase).toFloat() * (1f - bend)
                 val bendTerm = sin(Math.PI.toFloat() * t) * bend * bendSign
                 val wiggle = lateral + (waveTerm + bendTerm) * amplitude * taper
                 val px = fromX + dx * t + nx * wiggle
                 val py = fromY + dy * t + ny * wiggle
                 val halfWidth = width * (0.3f + 0.7f * taper)
                 // texture runs along the band (u) and across it (v), matching the sprite's streak axis
-                val u = t * uScale + texScroll
+                val u = t * uScale - texScroll
                 GL11.glTexCoord2f(u, 0f)
                 GL11.glVertex2f(px + nx * halfWidth, py + ny * halfWidth)
                 GL11.glTexCoord2f(u, 1f)
