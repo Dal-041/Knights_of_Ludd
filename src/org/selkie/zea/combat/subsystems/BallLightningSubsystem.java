@@ -21,10 +21,11 @@ public class BallLightningSubsystem extends MagicSubsystem {
     private static final float EMP_DAMAGE = 300f;
     // Distance ahead of the ship centre at which the orb sits, just inside the Yukionna's prong fork
     // (prong throat 90, prong tips 240 in sprite units).
-    private static final float ORB_OFFSET = 109f;
-    // The two arc roots inside the fork, ahead of the ship centre and spread either side of the axis.
+    private static final float ORB_OFFSET = 119f;
+    // The two arc roots inside the fork, ahead of the ship centre and spread either side of the axis
+    // (11.74 degrees puts them 26 units off-axis at this radius).
     private static final float EMITTER_OFFSET = 128f;
-    private static final float EMITTER_SPREAD = 14.5f;
+    private static final float EMITTER_SPREAD = 11.74f;
     final ShipAPI ship;
     final IntervalUtil lightningInterval = new IntervalUtil(0.07f, 0.15f);
     final IntervalUtil lightningDamageInterval = new IntervalUtil(0.05f, 0.5f);
