@@ -350,10 +350,37 @@ class SolarFlareSystem: BaseShipSystemScript() {
         private var texScroll = 0f
         private var time = 0f
 
+        // per-ally shape: curviness and wave count drift to a new random target every few seconds,
+        // so a tether is sometimes a single gentle bend and sometimes as wavy as the base curve
+        private class Shape {
+            var curve = 1f
+            var curveTarget = 1f
+            var waveMult = 1f
+            var waveMultTarget = 1f
+            var rerollIn = MathUtils.getRandomNumberInRange(1f, 4f)
+        }
+
+        private val shapes = HashMap<String, Shape>()
+
         override fun advance(amount: Float) {
             phase = (phase + amount * 2.5f) % (Math.PI.toFloat() * 2f)
             texScroll = (texScroll + amount * 1.5f) % 1f
             time += amount
+
+            shapes.values.forEach { shape ->
+                val lerp = min(1f, amount * 0.7f)
+                shape.curve += (shape.curveTarget - shape.curve) * lerp
+                shape.waveMult += (shape.waveMultTarget - shape.waveMult) * lerp
+                shape.rerollIn -= amount
+                if (shape.rerollIn <= 0f) {
+                    // a third of the time the tether pulls almost straight, otherwise it keeps some wave
+                    shape.curveTarget = if (Random.nextFloat() < 0.3f) MathUtils.getRandomNumberInRange(0.1f, 0.35f)
+                    else MathUtils.getRandomNumberInRange(0.85f, 1.3f)
+                    shape.waveMultTarget = MathUtils.getRandomNumberInRange(0.25f, 1.15f)
+                    shape.rerollIn = MathUtils.getRandomNumberInRange(2.5f, 6f)
+                }
+            }
+            shapes.keys.retainAll(targets.map { it.first.id }.toSet())
         }
 
         override fun getRenderRadius(): Float = Range + DropoffRange
@@ -380,16 +407,17 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val angle = Math.atan2(dy.toDouble(), dx.toDouble()).toFloat()
                 val nx = -sin(angle)
                 val ny = cos(angle)
-                val amplitude = min(length * 0.08f, 50f)
+                val shape = shapes.getOrPut(target.id) { Shape() }
+                val amplitude = min(length * 0.08f, 50f) * shape.curve
                 val rootPhase = phase + ((target.id.hashCode() and 0x7FFFFFFF) % 360) * 0.01f
                 val flicker = 0.8f + 0.2f * sin(time * 7f + rootPhase)
                 val a = alphaMult * strength * flicker
 
                 // halo, body and core drift on their own waves, so the strands weave like a flare instead of stacking
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 58f, 1.8f, rootPhase * 0.8f, 0f, 200, 90, 20, 0.1f * a, 1.2f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 30f, 2.5f, rootPhase, 0f, 230, 120, 25, 0.22f * a, 2f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 13f, 4f, rootPhase * 1.7f, amplitude * 0.12f, 240, 160, 40, 0.5f * a, 3f)
-                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 4f, 5.5f, -rootPhase * 1.3f, -amplitude * 0.2f, 255, 235, 190, 0.8f * a, 4f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 58f, 1.8f * shape.waveMult, rootPhase * 0.8f, 0f, 200, 90, 20, 0.1f * a, 1.2f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 30f, 2.5f * shape.waveMult, rootPhase, 0f, 230, 120, 25, 0.22f * a, 2f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 13f, 4f * shape.waveMult, rootPhase * 1.7f, amplitude * 0.12f, 240, 160, 40, 0.5f * a, 3f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude, 4f, 5.5f * shape.waveMult, -rootPhase * 1.3f, -amplitude * 0.2f, 255, 235, 190, 0.8f * a, 4f)
             }
             GL11.glPopMatrix()
         }
