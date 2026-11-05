@@ -22,6 +22,7 @@
 - Blaze no longer suffers Ill-Advised weapon malfunctions.
 - Toyotama's Photosphere now draws layered, wavy plasma filaments from the ship to every ally it charges, like a solar flare, easing between a wavy and a near-straight single curve every few tens of seconds; fighters are not linked.
 - Fixed Photosphere's plasma filaments disappearing when their rendering anchor was left behind as the ship moved.
+- Fixed Photosphere's wave bands snapping at animation loop boundaries by keeping their shared phase continuous.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.

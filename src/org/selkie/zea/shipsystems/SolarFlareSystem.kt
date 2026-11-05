@@ -346,7 +346,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
         }
         var targets: List<Pair<ShipAPI, Float>> = emptyList()
         var alphaMult = 0f
-        private var phase = 0f
+        private var phase = 0.0
         private var texScroll = 0f
         private var time = 0f
 
@@ -370,7 +370,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
         override fun advance(amount: Float) {
             // Culling uses the plugin entity, not the world-space vertices drawn below.
             entity?.location?.set(ship.location)
-            phase = (phase + amount * 0.5f) % (Math.PI.toFloat() * 2f)
+            // Fractional strand speeds require an unwrapped phase; keep double precision until sin().
+            phase += amount * 0.5
             texScroll = (texScroll + amount * 0.3f) % 1f
             time += amount
 
@@ -430,7 +431,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val shape = shapes.getOrPut(target.id) { Shape() }
                 val amplitude = min(length * 0.08f, 50f) * shape.curve
                 val rootPhase = phase + ((target.id.hashCode() and 0x7FFFFFFF) % 360) * 0.01f
-                val flicker = 0.8f + 0.2f * sin(time * 7f + rootPhase)
+                val flicker = 0.8f + 0.2f * sin(time * 7f + rootPhase).toFloat()
                 val a = alphaMult * strength * flicker
 
                 // halo, body and core drift on their own waves, so the strands weave like a flare instead of stacking
@@ -465,7 +466,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
         private fun drawStrand(
             fromX: Float, fromY: Float, dx: Float, dy: Float,
             nx: Float, ny: Float, amplitude: Float,
-            width: Float, waves: Float, phase: Float, lateral: Float,
+            width: Float, waves: Float, phase: Double, lateral: Float,
             bend: Float, bendSign: Float,
             r: Int, g: Int, b: Int, alpha: Float, uScale: Float
         ) {
@@ -476,7 +477,7 @@ class SolarFlareSystem: BaseShipSystemScript() {
                 val t = i / segments.toFloat()
                 val taper = sin(Math.PI.toFloat() * t)
                 // blend the scrolling wave and a static single arc; blending amplitudes keeps the shape smooth
-                val waveTerm = sin(t * Math.PI.toFloat() * waves + phase) * (1f - bend)
+                val waveTerm = sin(t * Math.PI * waves + phase).toFloat() * (1f - bend)
                 val bendTerm = sin(Math.PI.toFloat() * t) * bend * bendSign
                 val wiggle = lateral + (waveTerm + bendTerm) * amplitude * taper
                 val px = fromX + dx * t + nx * wiggle
