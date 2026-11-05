@@ -373,6 +373,8 @@ public class PulsarSystem extends BaseShipSystemScript implements CombatPulsarRe
                     float intensity = getIntensityAtPoint(missile.getLocation()) / 2f;
                     if (intensity <= 0) return;
 
+                    if (!IFFOverrideSubsystem.isMissileValidTarget(missile)) continue;
+
                     if (missile.getOwner() != ship.getOwner()) {
                         if (missile.getMissileAI() instanceof GuidedMissileAI) {
                             ((GuidedMissileAI) missile.getMissileAI()).setTarget(missile.getSource());
