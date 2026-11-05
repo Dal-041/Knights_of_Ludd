@@ -19,6 +19,9 @@ public class BallLightningSubsystem extends MagicSubsystem {
     private static final float MAX_ARC = 90f;
     private static final float DAMAGE = 50f;
     private static final float EMP_DAMAGE = 300f;
+    // Distance ahead of the ship centre at which the orb sits between the Yukionna's two prongs
+    // (prong throat 90, prong tips 240 in sprite units).
+    private static final float ORB_OFFSET = 165f;
     final ShipAPI ship;
     final IntervalUtil lightningInterval = new IntervalUtil(0.07f, 0.15f);
     final IntervalUtil lightningDamageInterval = new IntervalUtil(0.05f, 0.5f);
@@ -54,7 +57,7 @@ public class BallLightningSubsystem extends MagicSubsystem {
             List<MissileAPI> missiles = AIUtils.getNearbyEnemyMissiles(ship, MAX_RANGE + 100f);
             List<ShipAPI> enemies = AIUtils.getNearbyEnemies(ship, MAX_RANGE + 100f);
             if (missiles.size() + enemies.size() >= 5) {
-                Vector2f center = MathUtils.getPointOnCircumference(ship.getLocation(), 85, ship.getFacing());
+                Vector2f center = MathUtils.getPointOnCircumference(ship.getLocation(), ORB_OFFSET, ship.getFacing());
                 List<CombatEntityAPI> targets = findTargets(center, MAX_TARGETS);
                 return (targets.size() >= 3);
             }
@@ -72,7 +75,7 @@ public class BallLightningSubsystem extends MagicSubsystem {
 
             Vector2f leftEmitter = MathUtils.getPointOnCircumference(ship.getLocation(), 96, ship.getFacing() - 14.5f);
             Vector2f rightEmitter = MathUtils.getPointOnCircumference(ship.getLocation(), 96, ship.getFacing() + 14.5f);
-            Vector2f centerTarget = MathUtils.getRandomPointInCircle(MathUtils.getPointOnCircumference(ship.getLocation(), 93, ship.getFacing()), 5f);
+            Vector2f centerTarget = MathUtils.getRandomPointInCircle(MathUtils.getPointOnCircumference(ship.getLocation(), ORB_OFFSET, ship.getFacing()), 5f);
 
             EmpArcEntityAPI arcL = Global.getCombatEngine().spawnEmpArcVisual(leftEmitter, ship, centerTarget, ship, 0.01f, glowFringe, glowCenter);
             EmpArcEntityAPI arcR = Global.getCombatEngine().spawnEmpArcVisual(rightEmitter, ship, centerTarget, ship, 0.01f, glowFringe, glowCenter);
@@ -87,7 +90,7 @@ public class BallLightningSubsystem extends MagicSubsystem {
         if(getEffectLevel() > 0 && !ship.isPhased()){
             lightningDamageInterval.advance(amount);
             if(lightningDamageInterval.intervalElapsed()){
-                Vector2f center = MathUtils.getPointOnCircumference(ship.getLocation(), 93, ship.getFacing());
+                Vector2f center = MathUtils.getPointOnCircumference(ship.getLocation(), ORB_OFFSET, ship.getFacing());
                 List<CombatEntityAPI> targets = findTargets(center, MAX_TARGETS);
                 int visualArcs = MAX_TARGETS - targets.size();
                 while(!targets.isEmpty()){
