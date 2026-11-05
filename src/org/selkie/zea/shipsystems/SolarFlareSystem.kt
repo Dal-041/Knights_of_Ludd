@@ -350,15 +350,19 @@ class SolarFlareSystem: BaseShipSystemScript() {
         private var texScroll = 0f
         private var time = 0f
 
-        // per-ally shape: amplitude and bend weight drift to a new random target every few seconds.
+        // per-ally shape: amplitude and bend weight ease to a new random target, then hold.
         // Only amplitudes are moved, never frequencies, so a new target fades in instead of sliding the wave.
         private class Shape {
             var curve = 1f
-            var curveTarget = 1f
             var bend = 0.2f
-            var bendTarget = 0.2f
-            var bendSign = if (Random.nextBoolean()) 1f else -1f
-            var rerollIn = MathUtils.getRandomNumberInRange(1f, 4f)
+            val bendSign = if (Random.nextBoolean()) 1f else -1f
+            var fromCurve = 1f
+            var fromBend = 0.2f
+            var toCurve = 1f
+            var toBend = 0.2f
+            var progress = 1f
+            var duration = 6f
+            var holdIn = MathUtils.getRandomNumberInRange(6f, 14f)
         }
 
         private val shapes = HashMap<String, Shape>()
@@ -369,20 +373,29 @@ class SolarFlareSystem: BaseShipSystemScript() {
             time += amount
 
             shapes.values.forEach { shape ->
-                val lerp = min(1f, amount * 0.55f)
-                shape.curve += (shape.curveTarget - shape.curve) * lerp
-                shape.bend += (shape.bendTarget - shape.bend) * lerp
-                shape.rerollIn -= amount
-                if (shape.rerollIn <= 0f) {
-                    // a third of the time the tether settles into one gentle arc, otherwise it keeps its waves
-                    if (Random.nextFloat() < 0.33f) {
-                        shape.bendTarget = MathUtils.getRandomNumberInRange(0.8f, 1f)
-                        shape.curveTarget = MathUtils.getRandomNumberInRange(0.5f, 0.9f)
-                    } else {
-                        shape.bendTarget = MathUtils.getRandomNumberInRange(0f, 0.3f)
-                        shape.curveTarget = MathUtils.getRandomNumberInRange(0.85f, 1.2f)
+                if (shape.progress < 1f) {
+                    shape.progress = min(1f, shape.progress + amount / shape.duration)
+                    // smoothstep: the change starts and ends at zero speed, so it never reads as a snap
+                    val s = shape.progress * shape.progress * (3f - 2f * shape.progress)
+                    shape.curve = shape.fromCurve + (shape.toCurve - shape.fromCurve) * s
+                    shape.bend = shape.fromBend + (shape.toBend - shape.fromBend) * s
+                } else {
+                    shape.holdIn -= amount
+                    if (shape.holdIn <= 0f) {
+                        shape.fromCurve = shape.curve
+                        shape.fromBend = shape.bend
+                        // a third of the time the tether settles into one gentle arc, otherwise it keeps its waves
+                        if (Random.nextFloat() < 0.33f) {
+                            shape.toBend = MathUtils.getRandomNumberInRange(0.8f, 1f)
+                            shape.toCurve = MathUtils.getRandomNumberInRange(0.5f, 0.9f)
+                        } else {
+                            shape.toBend = MathUtils.getRandomNumberInRange(0f, 0.3f)
+                            shape.toCurve = MathUtils.getRandomNumberInRange(0.85f, 1.2f)
+                        }
+                        shape.duration = MathUtils.getRandomNumberInRange(5f, 8f)
+                        shape.holdIn = MathUtils.getRandomNumberInRange(6f, 14f)
+                        shape.progress = 0f
                     }
-                    shape.rerollIn = MathUtils.getRandomNumberInRange(2.5f, 6f)
                 }
             }
             shapes.keys.retainAll(targets.map { it.first.id }.toSet())
