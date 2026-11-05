@@ -30,6 +30,7 @@
 - The Corrupting Heart now carries the Hellfire Beam: an omega-tier sustained high-explosive beam with ember and flame VFX, built into the boss and unobtainable elsewhere.
 - Myoga Ultradriver's tooltip now spells out that its shells pass through missiles and keep going through fighters they destroy.
 - Missile reflection (Corrupting Heart's Passive IFF Disruptor, Seiryu's IFF Override and the Blizzard system) now ignores any missile for the first second of its flight.
+- The targeting beam's system AI no longer touches a dead or hulk ship, nor a missing AI config, so it cannot crash when its ship dies or its script runs uninitialised.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.

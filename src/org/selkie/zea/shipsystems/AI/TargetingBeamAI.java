@@ -24,16 +24,19 @@ public class TargetingBeamAI implements ShipSystemAIScript {
 
     @Override
     public void advance(float amount, Vector2f missileDangerDir, Vector2f collisionDangerDir, ShipAPI target) {
-        if (ship == null) return;
+        ShipAPI ship = this.ship;
+        if (ship == null || !ship.isAlive() || ship.isHulk()) return;
+
         ShipAPI bestTarget = null;
-        if(ship.getShipAI() != null)
-            ship.getShipAI().getConfig().personalityOverride = Personalities.CAUTIOUS; // force AI to be CAUTIOUS
+        ShipAIPlugin ai = ship.getShipAI();
+        if (ai != null && ai.getConfig() != null)
+            ai.getConfig().personalityOverride = Personalities.CAUTIOUS; // force AI to be CAUTIOUS
 
         tracker.advance(amount);
-        if(!ship.isAlive() || !AIUtils.canUseSystemThisFrame(ship) || !tracker.intervalElapsed()) return;
+        if(!AIUtils.canUseSystemThisFrame(ship) || !tracker.intervalElapsed()) return;
 
         for (WeaponAPI w : ship.getAllWeapons()) {
-            if (w.isDecorative() && w.getSpec().hasTag(Tags.LIDAR)) {
+            if (w.isDecorative() && w.getSpec() != null && w.getSpec().hasTag(Tags.LIDAR)) {
 
                 lidarRange = w.getRange() - 100f;
             }
