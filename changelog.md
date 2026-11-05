@@ -25,7 +25,7 @@
 - Fixed Photosphere's wave bands snapping at animation loop boundaries by keeping their shared phase continuous.
 - Removed Photosphere's thin white core strand, softened and slowed its alpha pulsing, and staggered ally links with stable, distinct wave phases.
 - Reversed Photosphere's texture flow and traveling waves so they move from Toyotama toward its allies.
-- Yukionna's Lightning Storm orb now sits centred between the ship's prongs instead of at their base.
+- Yukionna's Lightning Storm orb now sits centred between the ship's prongs instead of at their base, with the arc roots raised to match.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.

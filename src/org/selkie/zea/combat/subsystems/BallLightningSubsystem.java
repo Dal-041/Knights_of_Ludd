@@ -22,6 +22,9 @@ public class BallLightningSubsystem extends MagicSubsystem {
     // Distance ahead of the ship centre at which the orb sits between the Yukionna's two prongs
     // (prong throat 90, prong tips 240 in sprite units).
     private static final float ORB_OFFSET = 165f;
+    // The two arc roots at the prong bases, ahead of the ship centre and spread either side of the axis.
+    private static final float EMITTER_OFFSET = 112f;
+    private static final float EMITTER_SPREAD = 14.5f;
     final ShipAPI ship;
     final IntervalUtil lightningInterval = new IntervalUtil(0.07f, 0.15f);
     final IntervalUtil lightningDamageInterval = new IntervalUtil(0.05f, 0.5f);
@@ -73,8 +76,8 @@ public class BallLightningSubsystem extends MagicSubsystem {
         lightningInterval.advance(amount);
         if(lightningInterval.intervalElapsed()){
 
-            Vector2f leftEmitter = MathUtils.getPointOnCircumference(ship.getLocation(), 96, ship.getFacing() - 14.5f);
-            Vector2f rightEmitter = MathUtils.getPointOnCircumference(ship.getLocation(), 96, ship.getFacing() + 14.5f);
+            Vector2f leftEmitter = MathUtils.getPointOnCircumference(ship.getLocation(), EMITTER_OFFSET, ship.getFacing() - EMITTER_SPREAD);
+            Vector2f rightEmitter = MathUtils.getPointOnCircumference(ship.getLocation(), EMITTER_OFFSET, ship.getFacing() + EMITTER_SPREAD);
             Vector2f centerTarget = MathUtils.getRandomPointInCircle(MathUtils.getPointOnCircumference(ship.getLocation(), ORB_OFFSET, ship.getFacing()), 5f);
 
             EmpArcEntityAPI arcL = Global.getCombatEngine().spawnEmpArcVisual(leftEmitter, ship, centerTarget, ship, 0.01f, glowFringe, glowCenter);
