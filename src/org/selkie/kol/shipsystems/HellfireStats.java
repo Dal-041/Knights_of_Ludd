@@ -1,5 +1,6 @@
 package org.selkie.kol.shipsystems;
 
+import com.fs.starfarer.api.combat.AmmoTrackerAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
@@ -8,6 +9,7 @@ import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
 public class HellfireStats extends BaseShipSystemScript {
 
 	public static final float DAMAGE_BONUS = 0.4f;
+	private static final String RELOADED_KEY = "KOL_hellfireReloadedAlready";
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 
@@ -16,16 +18,26 @@ public class HellfireStats extends BaseShipSystemScript {
 		stats.getBallisticWeaponDamageMult().modifyMult(id, mult);
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-		for (WeaponAPI wpn : ship.getAllWeapons()) {
-			// Only the gap between shots of a burst that is already firing is skipped. Weapons that are
-			// reloading keep their remaining cooldown, so the system never hands out a free reload.
-			if (wpn.getType() == WeaponAPI.WeaponType.BALLISTIC && wpn.isInBurst()) {
+		if (ship.getCustomData().get(RELOADED_KEY) == null) {
+			for (WeaponAPI wpn : ship.getAllWeapons()) {
+				if (wpn.getType() != WeaponAPI.WeaponType.BALLISTIC) {
+					continue;
+				}
+
 				wpn.setRemainingCooldownTo(0);
+				AmmoTrackerAPI ammo = wpn.getAmmoTracker();
+				if (ammo.usesAmmo()) {
+					ammo.resetAmmo();
+				}
 			}
+			ship.setCustomData(RELOADED_KEY, true);
 		}
 	}
 	public void unapply(MutableShipStatsAPI stats, String id) {
 		stats.getBallisticWeaponDamageMult().unmodify(id);
+
+		ShipAPI ship = (ShipAPI) stats.getEntity();
+		ship.removeCustomData(RELOADED_KEY);
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {

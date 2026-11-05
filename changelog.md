@@ -33,7 +33,7 @@
 - The targeting beam's system AI no longer touches a dead or hulk ship, nor a missing AI config, so it cannot crash when its ship dies or its script runs uninitialised.
 - Module occlusion now uses a missile's real blast radius instead of its purely visual one, so Terminator drone strikes (and every other missile) no longer bypass KoL armour modules.
 - Elysian and Dawn carriers now give their vanilla Spark, Lux and Flash wings their faction livery through MagicLib paintjobs instead of the settings.json fighter skins.
-- Tamarisk's Hellfire system no longer wipes the reload of every ballistic weapon it carries. It only empties a burst that is already firing, so weapons still reloading keep their remaining delay.
+- Tamarisk's Hellfire system now refills ballistic magazines as well as refire delays, so every gun is ready to fire the moment it is used.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.
