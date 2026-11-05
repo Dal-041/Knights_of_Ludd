@@ -12,8 +12,7 @@
   "shieldRadius": 112.5,
   "viewOffset": 0,
   "builtInMods": [
-    "safetyoverrides",
-    "ill_advised"
+    "safetyoverrides"
   ],
   "builtInWeapons": {
     "WS0009": "kol_brimstone",

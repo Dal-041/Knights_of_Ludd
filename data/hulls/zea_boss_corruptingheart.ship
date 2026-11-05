@@ -24,6 +24,8 @@
     "zea_edf_kitsunebi"
   ],
   "builtInWeapons": {
+    "WS0001": "zea_edf_hellfire_m",
+    "WS0004": "zea_edf_hellfire_m",
     "WS0016": "zea_deco_edf_engS",
     "WS0017": "zea_deco_edf_engS",
     "WS0018": "zea_deco_edf_engS",

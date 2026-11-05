@@ -48,7 +48,8 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
     //TODO: Hardcoded bullshit, no clue how alex scales sprites here.
     private val PAPERDOLL_SCALE: Map<String, Float> = mapOf("kol_lunaria" to 0.455f, "kol_alysse" to 0.615f,
         "kol_larkspur" to 0.66f, "kol_tamarisk" to 0.565f, "kol_lotus" to 0.635f,
-        "kol_snowdrop" to 0.75f, "kol_marigold" to 0.64f,"kol_mimosa" to 0.555f, "kol_sundew" to 0.61f)
+        "kol_snowdrop" to 0.75f, "kol_marigold" to 0.64f,"kol_mimosa" to 0.555f, "kol_sundew" to 0.61f,
+        "kol_celosia" to 0.65f, "zea_boss_amaterasu" to 0.4f)
 
     private val noHPColor = Color(200, 30, 30, 255)
     private val fullHPColor = Color(120, 230, 0, 255)
@@ -62,15 +63,12 @@ class KOL_ArmorPaperdolls : BaseEveryFrameCombatPlugin() {
             for (module in ship.childModulesCopy) {
                 if (module.hitpoints <= 0f) continue
 
-                var moduleSprite: SpriteAPI
-                // use regex matching to figure out the correct paperdoll sprite
+                // paperdoll sprites are keyed by module hull id; fall back to the regex match, then the hull sprite
                 val matcher = kolPattern.matcher(module.hullSpec.spriteName)
-                if (matcher.find()) {
-                    moduleSprite = Global.getSettings().getSprite("paperdolls", matcher.group())
-                } else{
-                    // back up use the default ship sprite
-                    moduleSprite = Global.getSettings().getSprite(module.hullSpec.spriteName)
-                }
+                val paperdollSprite = Global.getSettings().getSprite("paperdolls", module.hullSpec.hullId)
+                        ?: if (matcher.find()) Global.getSettings().getSprite("paperdolls", matcher.group()) else null
+                val moduleSprite: SpriteAPI = paperdollSprite
+                        ?: Global.getSettings().getSprite(module.hullSpec.spriteName)
 
                 val offset: Vector2f = Vector2f.sub(ship.location, module.location, null).scale(shipScale) as Vector2f
                 val paperDollLocation = Vector2f.sub(location, offset, null)

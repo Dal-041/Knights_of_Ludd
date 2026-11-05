@@ -1,18 +1,15 @@
 package org.selkie.kol.shipsystems;
 
-import com.fs.starfarer.api.Global;
-import com.fs.starfarer.api.combat.DamagingProjectileAPI;
+import com.fs.starfarer.api.combat.AmmoTrackerAPI;
 import com.fs.starfarer.api.combat.MutableShipStatsAPI;
 import com.fs.starfarer.api.combat.ShipAPI;
 import com.fs.starfarer.api.combat.WeaponAPI;
 import com.fs.starfarer.api.impl.combat.BaseShipSystemScript;
-import org.selkie.kol.ReflectionUtilsV2;
-
-import java.util.Objects;
 
 public class HellfireStats extends BaseShipSystemScript {
 
 	public static final float DAMAGE_BONUS = 0.4f;
+	private static final String RELOADED_KEY = "KOL_hellfireReloadedAlready";
 
 	public void apply(MutableShipStatsAPI stats, String id, State state, float effectLevel) {
 
@@ -21,25 +18,26 @@ public class HellfireStats extends BaseShipSystemScript {
 		stats.getBallisticWeaponDamageMult().modifyMult(id, mult);
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-		if (ship.getCustomData().get("KOL_hellfireReloadedAlready") == null) {
+		if (ship.getCustomData().get(RELOADED_KEY) == null) {
 			for (WeaponAPI wpn : ship.getAllWeapons()) {
 				if (wpn.getType() != WeaponAPI.WeaponType.BALLISTIC) {
 					continue;
 				}
-                if (wpn.isInBurst()) {
-                    continue;
-                }
 
-				wpn.setRemainingCooldownTo(0); // this instantly finishes their burst and makes them instantly fire the rest of their salvo
+				wpn.setRemainingCooldownTo(0);
+				AmmoTrackerAPI ammo = wpn.getAmmoTracker();
+				if (ammo.usesAmmo()) {
+					ammo.resetAmmo();
+				}
 			}
-			ship.setCustomData("KOL_hellfireReloadedAlready", true);
+			ship.setCustomData(RELOADED_KEY, true);
 		}
 	}
 	public void unapply(MutableShipStatsAPI stats, String id) {
 		stats.getBallisticWeaponDamageMult().unmodify(id);
 
 		ShipAPI ship = (ShipAPI) stats.getEntity();
-		ship.removeCustomData("KOL_hellfireReloadedAlready");
+		ship.removeCustomData(RELOADED_KEY);
 	}
 
 	public StatusData getStatusData(int index, State state, float effectLevel) {

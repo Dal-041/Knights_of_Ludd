@@ -16,6 +16,24 @@
   - Its system can now be used to dodge through attacks.
 - Added some visual effects
 - Fixed a few crash that could occur while using the special Dusk AI.
+- Blaze's Brimstone is now a wide-cone flamethrower; its damage is spread across the spray, and shield hits deal 2/3 damage.
+- Reduced Brimstone's flame brightness, particle overlap, and plume size for a rougher orange-and-smoke effect that keeps ships visible.
+- Denser Brimstone flame with a white-hot core.
+- Blaze no longer suffers Ill-Advised weapon malfunctions.
+- Toyotama's Photosphere now draws layered, wavy plasma filaments from the ship to every ally it charges, like a solar flare, easing between a wavy and a near-straight single curve every few tens of seconds; fighters are not linked.
+- Fixed Photosphere's plasma filaments disappearing when their rendering anchor was left behind as the ship moved.
+- Fixed Photosphere's wave bands snapping at animation loop boundaries by keeping their shared phase continuous.
+- Removed Photosphere's thin white core strand, softened and slowed its alpha pulsing, and staggered ally links with stable, distinct wave phases.
+- Reversed Photosphere's texture flow and traveling waves so they move from Toyotama toward its allies.
+- Yukionna's Lightning Storm orb now sits centred between the ship's prongs instead of at their base, with the arc roots raised to match.
+- Star Keep Lyra's Star Fortress now starts with its story point improvement, matching its Heavy Batteries and High Command.
+- The Corrupting Heart now carries the Hellfire Beam: an omega-tier sustained high-explosive beam with ember and flame VFX, built into the boss and unobtainable elsewhere.
+- Myoga Ultradriver's tooltip now spells out that its shells pass through missiles and keep going through fighters they destroy.
+- Missile reflection (Corrupting Heart's Passive IFF Disruptor, Seiryu's IFF Override and the Blizzard system) now ignores any missile for the first second of its flight.
+- The targeting beam's system AI no longer touches a dead or hulk ship, nor a missing AI config, so it cannot crash when its ship dies or its script runs uninitialised.
+- Module occlusion now uses a missile's real blast radius instead of its purely visual one, so Terminator drone strikes (and every other missile) no longer bypass KoL armour modules.
+- Elysian and Dawn carriers now give their vanilla Spark, Lux and Flash wings their faction livery through MagicLib paintjobs instead of the settings.json fighter skins.
+- Tamarisk's Hellfire system now refills ballistic magazines as well as refire delays, so every gun is ready to fire the moment it is used.
 
 ## v1.3.6
 - The Null Gate can now be selected as a travel option when interacting with a gate, if its been scanned.

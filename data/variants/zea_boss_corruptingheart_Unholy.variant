@@ -36,14 +36,6 @@
             "autofire": true,
             "mode": "LINKED",
             "weapons": {
-                "WS0001": "ionbeam",
-                "WS0004": "ionbeam",
-            }
-        },
-        {
-            "autofire": true,
-            "mode": "LINKED",
-            "weapons": {
                 "WS0038": "zea_styrax_driver",
                 "WS0015": "zea_styrax_driver",
                 "WS0005": "zea_styrax_driver",

@@ -18,10 +18,12 @@ import org.magiclib.kotlin.optColor
 import org.selkie.kol.Utils
 import org.selkie.zea.hullmods.ElysianBuiltin
 import org.selkie.kol.plugins.KOL_ModPlugin
+import java.io.IOException
 import java.awt.Color
 import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.max
+import kotlin.math.min
 import kotlin.math.roundToInt
 import kotlin.math.sin
 import kotlin.random.Random
@@ -29,6 +31,7 @@ import kotlin.random.Random
 class SolarFlareSystem: BaseShipSystemScript() {
 
     var renderingPlugins: MutableList<Aurora> = mutableListOf()
+    var tether: SolarTether? = null
     val allyCheckInterval = IntervalUtil(0.7f, 1.3f)
     var allies: List<ShipAPI> = listOf()
 
@@ -82,6 +85,12 @@ class SolarFlareSystem: BaseShipSystemScript() {
         renderingPlugins[1].alphaMult = effectLevel/3f
         renderingPlugins[1].thicknessMult = effectLevel*2f
 
+        if (tether == null) {
+            tether = SolarTether(ship)
+            engine.addLayeredRenderingPlugin(tether!!)
+        }
+        tether!!.alphaMult = effectLevel
+
         val amount = engine.elapsedInLastFrame
         allyCheckInterval.advance(amount)
 
@@ -90,8 +99,19 @@ class SolarFlareSystem: BaseShipSystemScript() {
             allies = AIUtils.getNearbyAllies(ship, 2500f)
         }
 
+        val tetherTargets = mutableListOf<Pair<ShipAPI, Float>>()
         allies.forEach { ally ->
+            val rangeLevel = Utils.linMap(
+                MathUtils.getDistance(ship, ally),
+                Range,Range + DropoffRange,
+                1f, 0f
+            )
+            if (rangeLevel <= 0f) return@forEach
+
             val coronalCaps = ally.getListeners(ElysianBuiltin.ElysianBuiltinListener::class.java)
+            // fighters do not get visual bands
+            if (ally.isAlive && !ally.isFighter && coronalCaps.isNotEmpty()) tetherTargets.add(ally to rangeLevel)
+
             coronalCaps.forEach { coronalCap ->
                 val boost = when(ally.hullSize){
                     ShipAPI.HullSize.DEFAULT -> 0.5f
@@ -101,16 +121,12 @@ class SolarFlareSystem: BaseShipSystemScript() {
                     ShipAPI.HullSize.CRUISER -> 0.2f
                     ShipAPI.HullSize.CAPITAL_SHIP -> 0.1f
                 }
-                val rangeLevel = Utils.linMap(
-                    MathUtils.getDistance(ship, ally),
-                    Range,Range + DropoffRange,
-                    1f, 0f
-                )
                 // boost is % per second, full effect at Range, dropoff to no effect at Range + DropoffRange
                 coronalCap.capacitorAmount += ally.maxFlux * boost * Global.getCombatEngine().elapsedInLastFrame *
                         effectLevel * rangeLevel
             }
         }
+        tether!!.targets = tetherTargets
     }
 
     // never called
@@ -313,5 +329,171 @@ class SolarFlareSystem: BaseShipSystemScript() {
             }
             GL11.glPopMatrix()
         }
+    }
+
+    // Wavy bands from the ship to every ally its field is charging. Fighters are not linked.
+    class SolarTether(val ship: ShipAPI): BaseCombatLayeredRenderingPlugin() {
+        companion object {
+            const val TEXTURE_PATH = "graphics/fx/slipstream3.png"
+        }
+
+        // path sprites are not preloaded by vanilla, so load the texture before fetching the sprite
+        val sprite: SpriteAPI = try {
+            Global.getSettings().loadTexture(TEXTURE_PATH)
+            Global.getSettings().getSprite(TEXTURE_PATH)
+        } catch (e: IOException) {
+            Global.getSettings().getSprite(TEXTURE_PATH)
+        }
+        var targets: List<Pair<ShipAPI, Float>> = emptyList()
+        var alphaMult = 0f
+        private var phase = 0.0
+        private var texScroll = 0f
+        private var time = 0f
+
+        // per-ally shape: amplitude and bend weight ease to a new random target, then hold.
+        // Only amplitudes are moved, never frequencies, so a new target fades in instead of sliding the wave.
+        private class Shape(val phaseOffset: Double) {
+            var curve = 1f
+            var bend = 0.2f
+            val bendSign = if (Random.nextBoolean()) 1f else -1f
+            var fromCurve = 1f
+            var fromBend = 0.2f
+            var toCurve = 1f
+            var toBend = 0.2f
+            var progress = 1f
+            var duration = 6f
+            var holdIn = MathUtils.getRandomNumberInRange(6f, 14f)
+        }
+
+        private val shapes = HashMap<String, Shape>()
+        private var nextPhaseOffset = Random.nextDouble(0.0, Math.PI * 2.0)
+
+        override fun advance(amount: Float) {
+            // Culling uses the plugin entity, not the world-space vertices drawn below.
+            entity?.location?.set(ship.location)
+            // Fractional strand speeds require an unwrapped phase; keep double precision until sin().
+            phase += amount * 0.5
+            texScroll = (texScroll + amount * 0.3f) % 1f
+            time += amount
+
+            shapes.values.forEach { shape ->
+                if (shape.progress < 1f) {
+                    shape.progress = min(1f, shape.progress + amount / shape.duration)
+                    // smoothstep: the change starts and ends at zero speed, so it never reads as a snap
+                    val s = shape.progress * shape.progress * (3f - 2f * shape.progress)
+                    shape.curve = shape.fromCurve + (shape.toCurve - shape.fromCurve) * s
+                    shape.bend = shape.fromBend + (shape.toBend - shape.fromBend) * s
+                } else {
+                    shape.holdIn -= amount
+                    if (shape.holdIn <= 0f) {
+                        shape.fromCurve = shape.curve
+                        shape.fromBend = shape.bend
+                        // a third of the time the tether settles into one gentle arc, otherwise it keeps its waves
+                        if (Random.nextFloat() < 0.33f) {
+                            shape.toBend = MathUtils.getRandomNumberInRange(0.8f, 1f)
+                            shape.toCurve = MathUtils.getRandomNumberInRange(0.5f, 0.9f)
+                        } else {
+                            shape.toBend = MathUtils.getRandomNumberInRange(0f, 0.3f)
+                            shape.toCurve = MathUtils.getRandomNumberInRange(0.85f, 1.2f)
+                        }
+                        shape.duration = MathUtils.getRandomNumberInRange(5f, 8f)
+                        shape.holdIn = MathUtils.getRandomNumberInRange(6f, 14f)
+                        shape.progress = 0f
+                    }
+                }
+            }
+            shapes.keys.retainAll(targets.map { it.first.id }.toSet())
+        }
+
+        override fun getRenderRadius(): Float = Range + DropoffRange
+
+        override fun render(layer: CombatEngineLayers, viewport: ViewportAPI) {
+            if (alphaMult <= 0f || targets.isEmpty() || !ship.isAlive) return
+            if (sprite.getTextureId() == 0) return
+
+            val from = ship.location
+            GL11.glPushMatrix()
+            GL11.glEnable(GL11.GL_TEXTURE_2D)
+            sprite.bindTexture()
+            GL11.glEnable(GL11.GL_BLEND)
+            GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE)
+
+            for ((target, strength) in targets) {
+                if (!target.isAlive) continue
+                val to = target.location
+                val dx = to.x - from.x
+                val dy = to.y - from.y
+                val length = Math.hypot(dx.toDouble(), dy.toDouble()).toFloat()
+                if (length < 1f) continue
+
+                val angle = Math.atan2(dy.toDouble(), dx.toDouble()).toFloat()
+                val nx = -sin(angle)
+                val ny = cos(angle)
+                val shape = shapes.getOrPut(target.id) {
+                    val shape = Shape(nextPhaseOffset)
+                    // Golden-angle spacing keeps new links out of phase without rephasing existing links.
+                    nextPhaseOffset += Math.PI * (3.0 - Math.sqrt(5.0))
+                    shape
+                }
+                val amplitude = min(length * 0.08f, 50f) * shape.curve
+                val rootPhase = phase + shape.phaseOffset
+                val flicker = 0.98f + 0.02f * sin(time * 1.5f + rootPhase).toFloat()
+                val a = alphaMult * strength * flicker
+
+                // halo and body drift on their own waves, so the strands weave like a flare instead of stacking
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 104f, waves = 1.2f, phase = rootPhase * 0.6f, lateral = amplitude * 0.06f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 190, g = 80, b = 20, alpha = 0.05f * a, uScale = 0.8f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 76f, waves = 1.5f, phase = rootPhase * 0.7f, lateral = -amplitude * 0.05f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 205, g = 95, b = 22, alpha = 0.07f * a, uScale = 1f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 58f, waves = 1.8f, phase = rootPhase * 0.8f, lateral = 0f,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 200, g = 90, b = 20, alpha = 0.1f * a, uScale = 1.2f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 30f, waves = 2.5f, phase = rootPhase, lateral = 0f,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 230, g = 120, b = 25, alpha = 0.22f * a, uScale = 2f)
+                drawStrand(from.x, from.y, dx, dy, nx, ny, amplitude,
+                    width = 13f, waves = 4f, phase = rootPhase * 1.7f, lateral = amplitude * 0.12f * shape.bendSign,
+                    bend = shape.bend, bendSign = shape.bendSign,
+                    r = 240, g = 160, b = 40, alpha = 0.5f * a, uScale = 3f)
+            }
+            GL11.glPopMatrix()
+        }
+
+        private fun drawStrand(
+            fromX: Float, fromY: Float, dx: Float, dy: Float,
+            nx: Float, ny: Float, amplitude: Float,
+            width: Float, waves: Float, phase: Double, lateral: Float,
+            bend: Float, bendSign: Float,
+            r: Int, g: Int, b: Int, alpha: Float, uScale: Float
+        ) {
+            val segments = 26
+            GL11.glColor4ub(r.toByte(), g.toByte(), b.toByte(), (255f * alpha).toInt().coerceIn(0, 255).toByte())
+            GL11.glBegin(GL11.GL_QUAD_STRIP)
+            for (i in 0..segments) {
+                val t = i / segments.toFloat()
+                val taper = sin(Math.PI.toFloat() * t)
+                // blend the scrolling wave and a static single arc; blending amplitudes keeps the shape smooth
+                val waveTerm = sin(t * Math.PI * waves - phase).toFloat() * (1f - bend)
+                val bendTerm = sin(Math.PI.toFloat() * t) * bend * bendSign
+                val wiggle = lateral + (waveTerm + bendTerm) * amplitude * taper
+                val px = fromX + dx * t + nx * wiggle
+                val py = fromY + dy * t + ny * wiggle
+                val halfWidth = width * (0.3f + 0.7f * taper)
+                // texture runs along the band (u) and across it (v), matching the sprite's streak axis
+                val u = t * uScale - texScroll
+                GL11.glTexCoord2f(u, 0f)
+                GL11.glVertex2f(px + nx * halfWidth, py + ny * halfWidth)
+                GL11.glTexCoord2f(u, 1f)
+                GL11.glVertex2f(px - nx * halfWidth, py - ny * halfWidth)
+            }
+            GL11.glEnd()
+        }
+
     }
 }

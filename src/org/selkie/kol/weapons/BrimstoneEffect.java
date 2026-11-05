@@ -3,6 +3,7 @@ package org.selkie.kol.weapons;
 import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.*;
 import com.fs.starfarer.api.combat.listeners.ApplyDamageResultAPI;
+import com.fs.starfarer.api.combat.listeners.DamageDealtModifier;
 import com.fs.starfarer.api.graphics.SpriteAPI;
 import com.fs.starfarer.api.util.FaderUtil;
 import com.fs.starfarer.api.util.Misc;
@@ -15,7 +16,47 @@ import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
 
+/**
+ * Brimstone: wide-cone flamethrower built on the vanilla Cryoflamer trail technique.
+ * Each fired shot is replaced by a spray of rays across a cone; the rays themselves are invisible
+ * hitboxes (see kol_brimestone_shot.proj) and every visual comes from the fire and smoke particles here.
+ */
 public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements OnFireEffectPlugin, OnHitEffectPlugin, EveryFrameWeaponEffectPlugin {
+    private static final String WEAPON_ID = "kol_brimstone";
+    private static final String SPRAY_SPLIT_ID = "kol_brimstone_spray_split";
+    private static final String SHIELD_DAMAGE_ID = "kol_brimstone_shield_damage";
+    private static final float SHIELD_DAMAGE_MULT = 2f / 3f;
+
+    private static final int RAYS_PER_SHOT = 3;
+    private static final float CONE_HALF_ANGLE = 11f;
+    private static final float SPEED_JITTER = 0.15f; // each ray flies at 1 +- this times the weapon's speed
+    private static final float MUZZLE_JITTER = 12f;
+
+    private static final int FIRE_PARTICLES = 4;
+    private static final int SMOKE_PARTICLES = 2;
+    // Particle size as a multiple of the projectile width, at the muzzle and at max range.
+    private static final float FIRE_SCALE_START = 0.3f;
+    private static final float FIRE_SCALE_END = 1.8f;
+    private static final float SMOKE_SCALE_START = 0.7f;
+    private static final float SMOKE_SCALE_END = 2.6f;
+
+    // Fire color over the flame's life: hot yellow at the muzzle, through orange, to a dim ember red.
+    // Additive particles stack, so blue stays low: dense overlaps saturate to yellow instead of white.
+    private static final Color[] FIRE_RAMP = {
+            new Color(245, 150, 35, 36),
+            new Color(235, 105, 20, 40),
+            new Color(205, 60, 12, 34),
+            new Color(130, 25, 8, 22),
+    };
+    private static final Color SMOKE_COLOR = new Color(45, 32, 26, 70);
+    private static final int FLAME_OVER_PARTICLES = 2;
+
+    private static final int CORE_PARTICLES = 2;
+    // White-hot spine inside the flame: small, on-axis, additive, so it saturates white while the outer fire stays orange.
+    private static final float CORE_SCALE_START = 0.35f;
+    private static final float CORE_SCALE_END = 1f;
+    private static final Color CORE_COLOR = new Color(255, 238, 190);
+
     private boolean init = false;
     private boolean active = false;
     private ShipAPI ship;
@@ -33,6 +74,9 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
         }
         if (!init) {
             ship = weapon.getShip();
+            if (ship != null && !ship.hasListenerOfClass(ShieldDamageMod.class)) {
+                ship.addListener(new ShieldDamageMod());
+            }
             init = true;
         }
 
@@ -53,7 +97,6 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
             }
         }
 
-        //Cryoflux stuff follows
         if (trails == null) return;
 
         Iterator<BrimstoneEffect> iter = trails.iterator();
@@ -91,68 +134,41 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
                 Global.getSoundPlayer().playLoop("kol_brimstone_loop", ship, 1f, volume, com, ship.getVelocity());
             }
         }
-
-
-        //System.out.println("Trails: " + trails.size());
-        float numIter = 1f; // more doesn't actually change anything
-        amount /= numIter;
-        // drag along the previous projectile, starting with the most recently launched; new ones are added at the start
-        // note: prev is fired before and so is in front of proj
-        for (int i = 0; i < numIter; i++) {
-            for (BrimstoneEffect trail : trails) {
-                //trail.proj.setFacing(trail.proj.getFacing() + 180f * amount);
-                if (trail.prev != null && !trail.prev.isExpired() && Global.getCombatEngine().isEntityInPlay(trail.prev)) {
-                    float dist1 = Misc.getDistance(trail.prev.getLocation(), trail.proj.getLocation());
-                    if (dist1 < trail.proj.getProjectileSpec().getLength()) {
-                        float maxSpeed = trail.prev.getMoveSpeed() * 0.5f;// * Math.max(0.5f, 1f - trail.prev.getElapsed() * 0.5f);
-                        // goal here is to prevent longer shot series (e.g. from Paragon) from moving too unnaturally
-                        float e = trail.prev.getElapsed();
-                        float t = 0.5f;
-                        if (e > t) {
-                            maxSpeed *= Math.max(0.25f, 1f - (e - t) * 0.5f);
-                        }
-                        if (dist1 < 20f && e > t) {
-                            maxSpeed *= dist1 / 20f;
-                        }
-
-                        Vector2f driftTo = Misc.closestPointOnLineToPoint(trail.proj.getLocation(), trail.proj.getTailEnd(), trail.prev.getLocation());
-                        float dist = Misc.getDistance(driftTo, trail.prev.getLocation());
-                        Vector2f diff = Vector2f.sub(driftTo, trail.prev.getLocation(), new Vector2f());
-                        diff = Misc.normalise(diff);
-                        diff.scale(Math.min(dist, maxSpeed * amount));
-                        Vector2f.add(trail.prev.getLocation(), diff, trail.prev.getLocation());
-                        Vector2f.add(trail.prev.getTailEnd(), diff, trail.prev.getTailEnd());
-                    }
-                }
-            }
-        }
     }
 
     public void onHit(DamagingProjectileAPI projectile, CombatEntityAPI target, Vector2f point, boolean shieldHit, ApplyDamageResultAPI damageResult, CombatEngineAPI engine) {
-        Color color = projectile.getProjectileSpec().getFringeColor();
-//		Color inverted = NSLanceEffect.getColorForDarkening(color);
-//		inverted = Misc.setAlpha(inverted, 50);
-//		Color inverted = new Color(255, 255, 100, 50);
-
         Vector2f vel = new Vector2f();
         if (target instanceof ShipAPI) {
             vel.set(target.getVelocity());
         }
 
         float size = projectile.getProjectileSpec().getWidth();
-        //size = Misc.getHitGlowSize(size, projectile.getDamage().getBaseDamage(), damageResult);
         float sizeMult = Misc.getHitGlowSize(100f, projectile.getDamage().getBaseDamage(), damageResult) / 100f;
-//		sizeMult = 1.5f;
-//		System.out.println(sizeMult);
-        float dur = 1f;
-        float rampUp = 0f;
-        Color c = Misc.scaleAlpha(color, projectile.getBrightness());
-        engine.addNebulaParticle(point, vel, size, 5f + 3f * sizeMult,
-                rampUp, 0f, dur, c);
-//		engine.addNegativeNebulaParticle(point, vel, size, 2f,
-//										rampUp, 0f, dur, inverted);
-//		engine.addNegativeParticle(point, vel, size,
-//								   rampUp, dur, inverted);
+        Color c = Misc.scaleAlpha(FIRE_RAMP[2], projectile.getBrightness());
+        engine.addNebulaParticle(point, vel, size, 5f + 3f * sizeMult, 0f, 0f, 1f, c);
+
+        // Flames pour over the hull: particles ride the target and slide along its surface,
+        // so the flame appears to wash across the ship instead of stopping dead at the impact point.
+        Vector2f normal = Vector2f.sub(point, target.getLocation(), new Vector2f());
+        Vector2f tangent = new Vector2f(-normal.y, normal.x);
+        if (tangent.lengthSquared() > 1f) {
+            tangent.normalise();
+            Vector2f jet = projectile.getVelocity();
+            if (Vector2f.dot(tangent, jet) < 0f) tangent.negate();
+            float slide = Math.min(jet.length(), 900f) * 0.15f;
+            for (int i = 0; i < FLAME_OVER_PARTICLES; i++) {
+                float along = size * (0.4f + 1.6f * Misc.random.nextFloat()) * (i + 1) / FLAME_OVER_PARTICLES;
+                Vector2f at = new Vector2f(point.x + tangent.x * along, point.y + tangent.y * along);
+                Vector2f pvel = new Vector2f(vel);
+                float drift = slide * (0.4f + 0.6f * Misc.random.nextFloat());
+                pvel.x += tangent.x * drift;
+                pvel.y += tangent.y * drift;
+                engine.addNebulaParticle(at, pvel, size * 0.7f,
+                        2.5f + 2f * Misc.random.nextFloat(), 0.15f, 0.5f,
+                        0.55f + 0.45f * Misc.random.nextFloat(),
+                        Misc.scaleAlpha(FIRE_RAMP[1], projectile.getBrightness()));
+            }
+        }
 
         Misc.playSound(damageResult, point, vel,
                 "cryoflamer_hit_shield_light",
@@ -161,133 +177,136 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
                 "cryoflamer_hit_light",
                 "cryoflamer_hit_solid",
                 "cryoflamer_hit_heavy");
-
     }
 
     public void onFire(DamagingProjectileAPI projectile, WeaponAPI weapon, CombatEngineAPI engine) {
-        String prevKey = "cryo_prev_" + weapon.getShip().getId() + "_" + weapon.getSlot().getId();
-        DamagingProjectileAPI prev = (DamagingProjectileAPI) engine.getCustomData().get(prevKey);
+        ShipAPI source = weapon.getShip();
+        Vector2f origin = new Vector2f(projectile.getLocation());
+        float facing = projectile.getFacing();
+        float speed = weapon.getProjectileSpeed();
+        Vector2f shipVel = source.getVelocity();
 
-        BrimstoneEffect trail = new BrimstoneEffect(projectile, prev);
-        CombatEntityAPI e = engine.addLayeredRenderingPlugin(trail);
-        e.getLocation().set(projectile.getLocation());
+        // The fired shot only marks the muzzle; the spray below replaces it.
+        engine.removeEntity(projectile);
 
-        engine.getCustomData().put(prevKey, projectile);
+        for (int i = 0; i < RAYS_PER_SHOT; i++) {
+            // Stratify across the cone so every shot covers it, then jitter within each slice.
+            float slice = 2f * CONE_HALF_ANGLE / RAYS_PER_SHOT;
+            float angle = facing - CONE_HALF_ANGLE + slice * (i + Misc.random.nextFloat());
+            Vector2f point = Misc.getPointWithinRadius(origin, MUZZLE_JITTER);
+            CombatEntityAPI spawned = engine.spawnProjectile(source, weapon, weapon.getId(), point, angle, shipVel);
+            if (!(spawned instanceof DamagingProjectileAPI)) continue;
+            DamagingProjectileAPI proj = (DamagingProjectileAPI) spawned;
 
-        if (trails == null) {
-            trails = new ArrayList<>();
+            Vector2f vel = Misc.getUnitVectorAtDegreeAngle(angle);
+            vel.scale(speed * (1f + SPEED_JITTER * (2f * Misc.random.nextFloat() - 1f)));
+            Vector2f.add(vel, shipVel, proj.getVelocity());
+            proj.getDamage().getModifier().modifyMult(SPRAY_SPLIT_ID, 1f / RAYS_PER_SHOT);
+
+            BrimstoneEffect trail = new BrimstoneEffect(proj);
+            CombatEntityAPI e = engine.addLayeredRenderingPlugin(trail);
+            e.getLocation().set(proj.getLocation());
+
+            if (trails == null) {
+                trails = new ArrayList<>();
+            }
+            trails.add(trail);
         }
-        trails.add(0, trail);
     }
 
-
+    public static class ShieldDamageMod implements DamageDealtModifier {
+        @Override
+        public String modifyDamageDealt(Object param, CombatEntityAPI target, DamageAPI damage, Vector2f point, boolean shieldHit) {
+            if (!shieldHit || !(param instanceof DamagingProjectileAPI)) return null;
+            WeaponAPI weapon = ((DamagingProjectileAPI) param).getWeapon();
+            if (weapon == null || !WEAPON_ID.equals(weapon.getId())) return null;
+            damage.getModifier().modifyMult(SHIELD_DAMAGE_ID, SHIELD_DAMAGE_MULT);
+            return SHIELD_DAMAGE_ID;
+        }
+    }
 
     public static class ParticleData {
         public final SpriteAPI sprite;
+        public final boolean smoke;
+        public final boolean core;
         public Vector2f offset = new Vector2f();
         public Vector2f vel = new Vector2f();
-        public float scale = 1f;
-        public final DamagingProjectileAPI proj;
-        public float scaleIncreaseRate = 1f;
-        public float turnDir = 1f;
-        public float angle = 1f;
+        public float sizeJitter;
+        public float turnDir;
+        public float angle;
         public final FaderUtil fader;
 
-        public ParticleData(DamagingProjectileAPI proj) {
-            this.proj = proj;
+        public ParticleData(DamagingProjectileAPI proj, boolean smoke, boolean core) {
+            this.smoke = smoke;
+            this.core = core;
             sprite = Global.getSettings().getSprite(GfxCat.MISC, "nebula_particles");
-            //sprite = Global.getSettings().getSprite(ZeaStaticStrings.MISC, "dust_particles");
             float i = Misc.random.nextInt(4);
             float j = Misc.random.nextInt(4);
             sprite.setTexWidth(0.25f);
             sprite.setTexHeight(0.25f);
             sprite.setTexX(i * 0.25f);
             sprite.setTexY(j * 0.25f);
-            sprite.setAdditiveBlend();
+            if (smoke) {
+                sprite.setNormalBlend();
+            } else {
+                sprite.setAdditiveBlend();
+            }
 
             angle = (float) Math.random() * 360f;
+            sizeJitter = 0.75f + 0.5f * (float) Math.random();
+            turnDir = Math.signum((float) Math.random() - 0.5f) * 90f * (float) Math.random();
 
+            // Flames billow outward as they travel.
             float maxDur = proj.getWeapon().getRange() / proj.getWeapon().getProjectileSpeed();
-            scaleIncreaseRate = 2f / maxDur;
-            scale = 1f;
-//			scale = 0.1f;
-//			scaleIncreaseRate = 2.9f / maxDur;
-//			scale = 0.1f;
-//			scaleIncreaseRate = 2.5f / maxDur;
-//			scale = 0.5f;
+            vel = Misc.getUnitVectorAtDegreeAngle((float) Math.random() * 360f);
+            vel.scale(proj.getProjectileSpec().getWidth() / maxDur * (core ? 0.1f : smoke ? 0.6f : 0.4f));
 
-            turnDir = Math.signum((float) Math.random() - 0.5f) * 60f * (float) Math.random();
-            //turnDir = 0f;
-
-            float driftDir = (float) Math.random() * 360f;
-            vel = Misc.getUnitVectorAtDegreeAngle(driftDir);
-            vel.scale(proj.getProjectileSpec().getWidth() / maxDur * 0.33f);
-
-//			offset.x += vel.x * 1f;
-//			offset.y += vel.y * 1f;
-            fader = new FaderUtil(0f, 0.25f, 0.5f);
+            fader = new FaderUtil(0f, smoke ? 0.4f : 0.1f, 0.5f);
             fader.fadeIn();
         }
 
         public void advance(float amount) {
-            scale += scaleIncreaseRate * amount;
-            if (scale < 1f) {
-                scale += scaleIncreaseRate * amount * 1f;
-            }
-
             offset.x += vel.x * amount;
             offset.y += vel.y * amount;
-
             angle += turnDir * amount;
-
             fader.advance(amount);
         }
     }
 
-    protected final List<BrimstoneEffect.ParticleData> particles = new ArrayList<>();
+    protected final List<ParticleData> particles = new ArrayList<>();
 
     protected DamagingProjectileAPI proj;
-    protected DamagingProjectileAPI prev;
-    protected float baseFacing = 0f;
-    public BrimstoneEffect(DamagingProjectileAPI proj, DamagingProjectileAPI prev) {
+    protected float baseFacing;
+    protected float maxDur;
+
+    public BrimstoneEffect(DamagingProjectileAPI proj) {
         this.proj = proj;
-        this.prev = prev;
-
         baseFacing = proj.getFacing();
-
-        int num = 7;
-        for (int i = 0; i < num; i++) {
-            particles.add(new BrimstoneEffect.ParticleData(proj));
-        }
+        maxDur = proj.getWeapon().getRange() / proj.getWeapon().getProjectileSpeed();
 
         float length = proj.getProjectileSpec().getLength();
         float width = proj.getProjectileSpec().getWidth();
-
-        float index = 0;
-        for (BrimstoneEffect.ParticleData p : particles) {
-            float f = index / (particles.size() - 1);
-            Vector2f dir = Misc.getUnitVectorAtDegreeAngle(proj.getFacing() + 180f);
-            dir.scale(length * f);
-            Vector2f.add(p.offset, dir, p.offset);
-
-            p.offset = Misc.getPointWithinRadius(p.offset, width * 0.5f);
-            //p.scale = 0.25f + 0.75f * (1 - f);
-
-            index++;
+        for (int i = 0; i < SMOKE_PARTICLES + FIRE_PARTICLES + CORE_PARTICLES; i++) {
+            boolean core = i >= SMOKE_PARTICLES + FIRE_PARTICLES;
+            ParticleData p = new ParticleData(proj, i < SMOKE_PARTICLES, core);
+            // Spread along the ray body, behind the head.
+            Vector2f back = Misc.getUnitVectorAtDegreeAngle(baseFacing + 180f);
+            back.scale(length * (float) Math.random());
+            p.offset = Misc.getPointWithinRadius(back, width * (core ? 0.06f : 0.3f));
+            particles.add(p);
         }
     }
 
     public float getRenderRadius() {
-        return 300f;
+        return 500f;
     }
 
-
     protected final EnumSet<CombatEngineLayers> layers = EnumSet.of(CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER);
+
     @Override
     public EnumSet<CombatEngineLayers> getActiveLayers() {
         return layers;
     }
-
 
     public void init(CombatEntityAPI entity) {
         super.init(entity);
@@ -298,44 +317,62 @@ public class BrimstoneEffect extends BaseCombatLayeredRenderingPlugin implements
 
         entity.getLocation().set(proj.getLocation());
 
-        for (BrimstoneEffect.ParticleData p : particles) {
+        for (ParticleData p : particles) {
             p.advance(amount);
         }
     }
 
-
     public boolean isExpired() {
         return proj.isExpired() || !Global.getCombatEngine().isEntityInPlay(proj);
+    }
+
+    private static Color fireColor(float life) {
+        float scaled = Math.min(Math.max(life, 0f), 0.999f) * (FIRE_RAMP.length - 1);
+        int index = (int) scaled;
+        return Misc.interpolateColor(FIRE_RAMP[index], FIRE_RAMP[index + 1], scaled - index);
     }
 
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
         float x = entity.getLocation().x;
         float y = entity.getLocation().y;
 
-        //Color color = new Color(100,150,255,50);
-        Color color = proj.getProjectileSpec().getFringeColor();
-        color = Misc.setAlpha(color, 50);
-        float b = proj.getBrightness();
-        b *= viewport.getAlphaMult();
+        float life = Math.min(proj.getElapsed() / maxDur, 1f);
+        float b = proj.getBrightness() * viewport.getAlphaMult();
+        float width = proj.getProjectileSpec().getWidth();
+        Color fire = fireColor(life);
+        // Smoke only shows once the flame has cooled.
+        float smokeAlpha = Math.max(0f, (life - 0.35f) / 0.65f);
 
-        for (BrimstoneEffect.ParticleData p : particles) {
-            float size = proj.getProjectileSpec().getWidth() * 0.6f;
-            size *= p.scale;
+        float diff = Misc.getAngleDiff(baseFacing, proj.getFacing());
+        for (ParticleData p : particles) {
+            float alpha;
+            float size;
+            Color color;
+            if (p.core) {
+                size = width * (CORE_SCALE_START + (CORE_SCALE_END - CORE_SCALE_START) * (float) Math.sqrt(life));
+                alpha = 1f - 0.6f * life; // white along the spine, cooling only at the tail
+                color = CORE_COLOR;
+            } else if (p.smoke) {
+                size = width * (SMOKE_SCALE_START + (SMOKE_SCALE_END - SMOKE_SCALE_START) * life);
+                alpha = smokeAlpha;
+                color = SMOKE_COLOR;
+            } else {
+                size = width * (FIRE_SCALE_START + (FIRE_SCALE_END - FIRE_SCALE_START) * (float) Math.sqrt(life));
+                alpha = 1f;
+                color = fire;
+            }
+            size *= p.sizeJitter;
 
-            float alphaMult = 1f;
             Vector2f offset = p.offset;
-            float diff = Misc.getAngleDiff(baseFacing, proj.getFacing());
             if (Math.abs(diff) > 0.1f) {
                 offset = Misc.rotateAroundOrigin(offset, diff);
             }
-            Vector2f loc = new Vector2f(x + offset.x, y + offset.y);
 
             p.sprite.setAngle(p.angle);
             p.sprite.setSize(size, size);
-            p.sprite.setAlphaMult(b * alphaMult * p.fader.getBrightness());
+            p.sprite.setAlphaMult(b * alpha * p.fader.getBrightness());
             p.sprite.setColor(color);
-            p.sprite.renderAtCenter(loc.x, loc.y);
+            p.sprite.renderAtCenter(x + offset.x, y + offset.y);
         }
     }
-
 }

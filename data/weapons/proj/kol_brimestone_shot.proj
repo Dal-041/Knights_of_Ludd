@@ -1,7 +1,7 @@
 {
 	"id":"kol_brimestone_shot",
 	"specClass":"projectile",
-	"onHitEffect":"com.fs.starfarer.api.impl.combat.CryofluxTransducerEffect",
+	"onHitEffect":"org.selkie.kol.weapons.BrimstoneEffect",
 	
 	"spawnType":"BALLISTIC_AS_BEAM",
 	"collisionClass":"RAY",
@@ -10,10 +10,11 @@
 	"width":160.0,
 	"hitGlowRadius":0,
 	"fadeTime":0.25,
-	"fringeColor":[255,100,10,100],
-	"coreColor":[255,150,150,100],
+	# The ray is only a hitbox; BrimstoneEffect draws all of the flame.
+	"fringeColor":[255,100,10,0],
+	"coreColor":[255,150,150,0],
 	"textureType":"SMOOTH",  # only needed for BEAM spawnType
 	"textureScrollSpeed":-256,
-	"pixelsPerTexel":5.0
-	
+	"pixelsPerTexel":5.0,
+	"bulletSprite":"graphics/missiles/shell_gauss_cannon.png"
 }

@@ -191,6 +191,10 @@ public class IFFOverrideSubsystem extends MagicSubsystem {
             } catch (Exception ignored) {
             }
 
+            if (!isMissileValidTarget(missile)) {
+                continue;
+            }
+
             MissileTracker tracker = missileMap.get(missile);
             if (missile.getOwner() != ship.getOwner()) {
                 if (missile.getMissileAI() instanceof GuidedMissileAI) {
