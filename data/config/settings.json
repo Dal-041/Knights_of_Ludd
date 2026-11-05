@@ -439,6 +439,10 @@
 			"kol_mimosa_tr" : "graphics/kol/ships/modules/paperdolls/kol_mimosa_tr_paperdoll.png",
 			"kol_marigold_tl" : "graphics/kol/ships/modules/paperdolls/kol_marigold_tl_paperdoll.png",
 			"kol_marigold_tr" : "graphics/kol/ships/modules/paperdolls/kol_marigold_tr_paperdoll.png",
+			"kol_celosia_tl" : "graphics/kol/ships/modules/paperdolls/kol_celosia_tl.png",
+			"kol_celosia_tr" : "graphics/kol/ships/modules/paperdolls/kol_celosia_tr.png",
+			"kol_celosia_ll" : "graphics/kol/ships/modules/paperdolls/kol_celosia_ll.png",
+			"kol_celosia_lr" : "graphics/kol/ships/modules/paperdolls/kol_celosia_lr.png",
 			"zea_boss_amaterasu_thruster_droneL" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_thruster_droneL_paperdoll.png",
 			"zea_boss_amaterasu_coverL" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_coverL_paperdoll.png",
 			"zea_boss_amaterasu_coverR" : "graphics/zea/ships/modules/paperdolls/zea_boss_amaterasu_coverR_paperdoll.png"
