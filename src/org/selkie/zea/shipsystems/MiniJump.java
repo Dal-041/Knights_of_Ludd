@@ -32,7 +32,6 @@ public class MiniJump extends BaseShipSystemScript {
 	private boolean boostForward = false;
 
 	private float HEFTimer = 0f;
-	private float PHASE_DURATION = 1.0f;
 	private float phaseTimer = 0f;
 
 	public static final float DAMAGE_BONUS_PERCENT = 35f;
@@ -202,7 +201,7 @@ public class MiniJump extends BaseShipSystemScript {
 
 				// HEF BUFF STUFF
 				HEFTimer = HEF_BUFF_DURATION;
-				phaseTimer = PHASE_DURATION;
+				phaseTimer = getPhaseDuration();
 				stats.getEnergyRoFMult().modifyPercent(id, FIRERATE_BONUS_PERCENT);
 				stats.getEnergyWeaponFluxCostMod().modifyMult(id, 1f/FIRERATE_BONUS_PERCENT);
 				stats.getBallisticWeaponDamageMult().modifyPercent(id, DAMAGE_BONUS_PERCENT);
@@ -266,14 +265,20 @@ public class MiniJump extends BaseShipSystemScript {
 			stats.getBallisticWeaponDamageMult().unmodify(id);
 		}
 
-		if(phaseTimer > 0){
-			phaseTimer -= amount;
-			stats.getPhaseCloakCooldownBonus().modifyMult("minijump_system", 0f);
-			ship.setCollisionClass(CollisionClass.NONE);
+		if (getPhaseDuration() > 0f) {
+			if (phaseTimer > 0) {
+				phaseTimer -= amount;
+				stats.getPhaseCloakCooldownBonus().modifyMult("minijump_system", 0f);
+				ship.setCollisionClass(CollisionClass.NONE);
+			} else {
+				ship.setCollisionClass(INIT_COLLISION);
+			}
 		}
-		else{
-			ship.setCollisionClass(INIT_COLLISION);
-		}
+	}
+
+	/** Seconds the ship passes through everything after the jump; 0 disables the phase effect. */
+	protected float getPhaseDuration() {
+		return 1f;
 	}
 
 	@Override

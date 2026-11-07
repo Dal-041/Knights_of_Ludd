@@ -6,6 +6,8 @@ import com.fs.starfarer.api.combat.ShipAPI.HullSize
 import com.fs.starfarer.api.combat.WeaponAPI.WeaponSize
 import com.fs.starfarer.api.combat.listeners.AdvanceableListener
 import com.fs.starfarer.api.impl.campaign.ids.HullMods
+import com.fs.starfarer.api.impl.campaign.ids.Stats
+import com.fs.starfarer.api.impl.hullmods.AdaptivePhaseCoils
 import com.fs.starfarer.api.loading.WeaponSlotAPI
 import com.fs.starfarer.api.ui.Alignment
 import com.fs.starfarer.api.ui.TooltipMakerAPI
@@ -19,6 +21,8 @@ import org.selkie.kol.ReflectionUtils
 import org.selkie.kol.Utils
 import org.selkie.zea.combat.SparkleAIV2
 import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat
+import org.selkie.zea.shipsystems.PhaseCloakStats
+import kotlin.math.roundToInt
 
 class DuskBuiltin : BaseHullMod() {
 
@@ -130,6 +134,8 @@ class DuskBuiltin : BaseHullMod() {
 
         if(shipVariant.hullSpec.isPhase) {
             stats.crLossPerSecondPercent.modifyPercent(id, DEGRADE_INCREASE_PERCENT)
+            // innate Adaptive Phase Coils
+            stats.dynamic.getMod(Stats.PHASE_CLOAK_FLUX_LEVEL_FOR_MIN_SPEED_MOD).modifyPercent(id, AdaptivePhaseCoils.FLUX_THRESHOLD_INCREASE_PERCENT)
         }
 
         if (shipVariant.hullMods.contains(HullMods.ADAPTIVE_COILS)) {
@@ -172,7 +178,9 @@ class DuskBuiltin : BaseHullMod() {
             val phaseCoils = tooltip.beginImageWithText(Global.getSettings().getSpriteName(GfxCat.ICONS, "dusk_phase_coils"), HEIGHT)
             phaseCoils.setBulletedListMode("•")
             phaseCoils.setBulletWidth(15f)
-            val para1 = phaseCoils.addPara("No loss of top speed as hardflux level rises.", listPad, activeTextColor, activeHighlightColor)
+            val para1 = phaseCoils.addPara("Innate Adaptive Phase Coils: phased top speed falls to its minimum at %s hard flux, up from %s.", listPad, activeTextColor, activeHighlightColor,
+                "${(PhaseCloakStats.BASE_FLUX_LEVEL_FOR_MIN_SPEED * (1f + AdaptivePhaseCoils.FLUX_THRESHOLD_INCREASE_PERCENT / 100f) * 100f).roundToInt()}%",
+                "${(PhaseCloakStats.BASE_FLUX_LEVEL_FOR_MIN_SPEED * 100f).roundToInt()}%")
             val para2 = phaseCoils.addPara("Maintains parity with standard domain phase coils at a 3x timeflow while phased.", listPad, activeTextColor, activeHighlightColor, "3x")
             val para3 = phaseCoils.addPara("Increases the rate of in-combat CR decay after peak performance time runs out by %s.", listPad, activeTextColor, activeNegativeColor, "50%")
             tooltip.addImageWithText(underHeadingPad)
