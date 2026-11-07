@@ -8,7 +8,6 @@ import org.lazywizard.lazylib.combat.AIUtils;
 import org.lazywizard.lazylib.combat.CombatUtils;
 import org.lwjgl.util.vector.Vector2f;
 import org.magiclib.subsystems.MagicSubsystem;
-import org.selkie.zea.hullmods.ElysianBuiltin;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,11 +22,13 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     private static final float REFLECT_RANGE = 300f; // added onto ship collision radius
     private static final float ROTATION_SPEED = 420f; // 420f how fast missiles get rotated in degrees per second
     private float chargeRechargeMult = 1f;
+    private final CoronalCharge charge;
     private final Map<MissileAPI, MissileTracker> missileMap = new HashMap<>();
     private CombatEntityAPI target = null;
 
     public PassiveIFFDisruptorSubsystem(ShipAPI ship) {
         super(ship);
+        charge = new CoronalCharge(ship);
     }
 
     @Override
@@ -82,7 +83,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
 
     @Override
     public boolean canActivate() {
-        return ship.getCustomData().containsKey(ElysianBuiltin.CAPACITY_FACTOR_KEY) && ((Float) ship.getCustomData().get(ElysianBuiltin.CAPACITY_FACTOR_KEY) > 20f);
+        return charge.getLevel() > 0.2f;
     }
 
     private float getHackingRange() {
@@ -137,10 +138,11 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
     @Override
     public void advance(float amount, boolean isPaused) {
         if (isPaused) return;
+        charge.advance(amount);
         if (ship.getFluxTracker().isOverloaded()) {
             chargeRechargeMult = 1f;
         } else {
-            chargeRechargeMult += amount * (0.5f + 2f * (Float) ship.getCustomData().get(ElysianBuiltin.CAPACITY_FACTOR_KEY));
+            chargeRechargeMult += amount * (0.5f + 2f * charge.getLevel());
         }
 
         if (!chargeInterval.intervalElapsed()) {
@@ -148,7 +150,7 @@ public class PassiveIFFDisruptorSubsystem extends MagicSubsystem {
         }
 
         List<MissileAPI> missilesInRange = CombatUtils.getMissilesWithinRange(ship.getLocation(), getHackingRange());
-        if (state == State.READY && charges > 0 && !ship.getFluxTracker().isOverloadedOrVenting()) {
+        if (state == State.READY && charges > 0 && canActivate() && !ship.getFluxTracker().isOverloadedOrVenting()) {
             CombatEntityAPI entityToHack = null;
             float biggestThreat = 0f;
             for (MissileAPI missile : missilesInRange) {

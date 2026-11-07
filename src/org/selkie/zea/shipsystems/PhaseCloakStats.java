@@ -17,7 +17,18 @@ public class PhaseCloakStats extends BaseShipSystemScript {
     public static final float SHIP_ALPHA_MULT = 0.25f;
     public static final float VULNERABLE_FRACTION = 0f;
     public static final float MAX_TIME_MULT = 3f;
+    // vanilla phase coil stress: top speed falls to MIN_SPEED_MULT as hard flux reaches the threshold
+    public static final float MIN_SPEED_MULT = 0.33f;
+    public static final float BASE_FLUX_LEVEL_FOR_MIN_SPEED = 0.5f;
     protected final Object STATUSKEY = new Object();
+    protected final Object STATUSKEY2 = new Object();
+
+    protected float getSpeedMult(ShipAPI ship, float effectLevel) {
+        float threshold = ship.getMutableStats().getDynamic().getMod(Stats.PHASE_CLOAK_FLUX_LEVEL_FOR_MIN_SPEED_MOD)
+                .computeEffective(BASE_FLUX_LEVEL_FOR_MIN_SPEED);
+        float stress = threshold <= 0f ? 1f : Math.min(1f, ship.getHardFluxLevel() / threshold);
+        return MIN_SPEED_MULT + (1f - MIN_SPEED_MULT) * (1f - stress * effectLevel);
+    }
 
 
     protected void maintainStatus(ShipAPI playerShip, float effectLevel) {
@@ -27,6 +38,12 @@ public class PhaseCloakStats extends BaseShipSystemScript {
 
         if (effectLevel > VULNERABLE_FRACTION) {
             Global.getCombatEngine().maintainStatusForPlayerShip(STATUSKEY, cloak.getSpecAPI().getIconSpriteName(), cloak.getDisplayName(), "time flow altered", false);
+            float speedMult = getSpeedMult(playerShip, effectLevel);
+            if (speedMult >= 1f) {
+                Global.getCombatEngine().maintainStatusForPlayerShip(STATUSKEY2, cloak.getSpecAPI().getIconSpriteName(), "phase coils stable", "top speed at 100%", false);
+            } else {
+                Global.getCombatEngine().maintainStatusForPlayerShip(STATUSKEY2, cloak.getSpecAPI().getIconSpriteName(), "phase coil stress", "top speed at " + Math.round(speedMult * 100f) + "%", true);
+            }
         }
     }
 
@@ -66,6 +83,13 @@ public class PhaseCloakStats extends BaseShipSystemScript {
         stats.getMaxSpeed().modifyMult(id, speedMultMod * effectLevel);
         stats.getAcceleration().modifyMult(id, accelMultMod * effectLevel);
         stats.getDeceleration().modifyMult(id, accelMultMod * effectLevel);
+
+        float coilSpeedMult = getSpeedMult(ship, effectLevel);
+        if (coilSpeedMult < 1f) {
+            stats.getMaxSpeed().modifyMult(id + "_2", coilSpeedMult);
+        } else {
+            stats.getMaxSpeed().unmodifyMult(id + "_2");
+        }
 
         float levelForAlpha = effectLevel;
 
@@ -124,6 +148,7 @@ public class PhaseCloakStats extends BaseShipSystemScript {
         Global.getCombatEngine().getTimeMult().unmodify(id);
         stats.getTimeMult().unmodify(id);
         stats.getMaxSpeed().unmodify(id);
+        stats.getMaxSpeed().unmodify(id + "_2");
         stats.getAcceleration().unmodify(id);
         stats.getDeceleration().unmodify(id);
 

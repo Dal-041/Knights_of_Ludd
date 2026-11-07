@@ -28,6 +28,9 @@
 - Yukionna's Lightning Storm orb now sits centred between the ship's prongs instead of at their base, with the arc roots raised to match.
 - Star Keep Lyra's Star Fortress now starts with its story point improvement, matching its Heavy Batteries and High Command.
 - The Corrupting Heart now carries the Hellfire Beam: an omega-tier sustained high-explosive beam with ember and flame VFX, built into the boss and unobtainable elsewhere.
+- Elysian Coronal Capacitors replaced with an Accelerated Ammo Feeder subsystem: +100% ballistic rate of fire and -50% ballistic flux use for 5 seconds (frigates, destroyers) or 3 seconds (cruisers, capitals), 20 second cooldown. Toyotama's Photosphere now speeds up nearby allies' feeder cooldowns instead of charging capacitors. The Radiance and Passive IFF Disruptor boss systems keep their own stellar charge, which builds and drains as the capacitor did.
+- Seiryu's system no longer phases the ship through attacks after the jump.
+- Dusk phase ships now suffer vanilla phase coil stress (top speed falls with hard flux), with Adaptive Phase Coils built into Duskfall instead of the old full immunity.
 - Myoga Ultradriver's tooltip now spells out that its shells pass through missiles and keep going through fighters they destroy.
 - Missile reflection (Corrupting Heart's Passive IFF Disruptor, Seiryu's IFF Override and the Blizzard system) now ignores any missile for the first second of its flight.
 - The targeting beam's system AI no longer touches a dead or hulk ship, nor a missing AI config, so it cannot crash when its ship dies or its script runs uninitialised.

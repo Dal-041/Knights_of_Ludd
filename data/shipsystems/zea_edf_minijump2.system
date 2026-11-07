@@ -3,7 +3,7 @@
     "type":"ENGINE_MOD",
     "aiType":"MANEUVERING_JETS",
 
-	"statsScript":"org.selkie.zea.shipsystems.MiniJump",
+	"statsScript":"org.selkie.zea.shipsystems.MiniJumpNoPhase",
     "runScriptWhileIdle":true,  # this means unapply() never gets called
     "engineGlowLengthMult":1.5,
 
