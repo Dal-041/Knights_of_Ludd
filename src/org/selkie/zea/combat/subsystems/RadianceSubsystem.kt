@@ -20,7 +20,6 @@ import org.magiclib.kotlin.setAlpha
 import org.magiclib.subsystems.MagicSubsystem
 import org.magiclib.util.MagicRender
 import org.selkie.zea.helpers.ZeaStaticStrings.GfxCat
-import org.selkie.zea.hullmods.ElysianBuiltin
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.awt.Color
 
@@ -33,6 +32,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
 
     private val glowColorFull = Color(200, 150, 50, 200)
     private val glowColorEmpty = Color(255, 100, 25, 0)
+    private val charge = CoronalCharge(ship!!)
 
     private val EFFECT_RANGE =
         DAMAGE_RANGE - (DAMAGE_RANGE * 0.05f) //"For "player visual purposes" we reduce it by 5% See some random player theory crap."
@@ -67,13 +67,11 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
     }
 
     override fun canActivate(): Boolean {
-        return if (ship.customData.containsKey(ElysianBuiltin.CAPACITY_FACTOR_KEY)) {
-            ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float > 0.5f
-        } else false
+        return charge.level > 0.5f
     }
 
     private fun getDamage(): Float {
-        return (BASE_DAMAGE + (ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float) * DAMAGE_PER_BOOST) * baseCooldownDuration
+        return (BASE_DAMAGE + charge.level * DAMAGE_PER_BOOST) * baseCooldownDuration
     }
 
     override fun onActivate() {
@@ -102,13 +100,8 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
 
     override fun advance(amount: Float, isPaused: Boolean) {
         if (isPaused) return
-        if (ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] == null) return //Hopefully just one frame
-
-        val glowColorNow = Misc.interpolateColor(
-            glowColorEmpty,
-            glowColorFull,
-            ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float
-        )
+        charge.advance(amount)
+        val glowColorNow = Misc.interpolateColor(glowColorEmpty, glowColorFull, charge.level)
         if (!Global.getCombatEngine().isUIShowingHUD || Global.getCombatEngine().isUIShowingDialog || Global.getCombatEngine().combatUI.isShowingCommandUI) {
             return
         } else {
@@ -252,7 +245,7 @@ class RadianceSubsystem(ship: ShipAPI?) : MagicSubsystem(ship) {
     }
 
     override fun getBarFill(): Float {
-        return ((ship.customData[ElysianBuiltin.CAPACITY_FACTOR_KEY] as Float? ?: 0f) / 0.5f).coerceIn(0f..1f)
+        return (charge.level / 0.5f).coerceIn(0f..1f)
     }
 
     companion object {

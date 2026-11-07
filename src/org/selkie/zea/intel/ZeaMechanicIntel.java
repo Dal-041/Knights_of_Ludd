@@ -47,16 +47,16 @@ public class ZeaMechanicIntel extends BaseIntelPlugin {
     }
     private static final String[] edf = {
             "Elysian fleets appear numerous in terms of both fleets and vessels. It's %s to %s. It's best to %s and explore without them ever noticing.\n%s",
-            "The Elysian vessels appear to %s to empower their combat systems. The systems, \"%s\", as our engineers have dubbed them, recharge during combat %s. " +
-                    "\n When fully charged, we estimate they can provide a %s increase in the performance of their %s. The charge depletes when they build flux by firing their weapons." +
+            "The Elysian vessels appear to %s in short bursts. The systems, \"%s\", as our engineers have dubbed them, %s. " +
+                    "\n While active, we estimate they provide a %s increase in the rate of fire of their %s, at reduced flux cost." +
                     "\n Combat with these vessels will be %s."
     };
     private static final ArrayList<String[]> edfHLs = new ArrayList<>();
     static {
             String[] hl1 = { "strongly recommended", "avoid direct combat with their fleets", "avoid detection", "They are likely to win combat on their terms." };
             edfHLs.add(hl1);
-            String[] hl2 = { "harvest energy from nearby stars", "Coronal Capacitors", "depending where in the system they are", "30%",
-            "weapons and engines", "much easier the farther from local stars that we are." };
+            String[] hl2 = { "supercharge their guns", "Accelerated Ammo Feeders", "cycle every twenty seconds", "100%",
+            "ballistic weapons", "much easier if we weather those bursts." };
             edfHLs.add(hl2);
     }
     private static final String[] TT = {

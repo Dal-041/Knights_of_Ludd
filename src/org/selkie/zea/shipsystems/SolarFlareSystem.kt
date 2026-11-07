@@ -16,7 +16,8 @@ import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.optColor
 import org.selkie.kol.Utils
-import org.selkie.zea.hullmods.ElysianBuiltin
+import org.magiclib.subsystems.MagicSubsystemsManager
+import org.selkie.zea.combat.subsystems.AmmoFeedSubsystem
 import org.selkie.kol.plugins.KOL_ModPlugin
 import java.io.IOException
 import java.awt.Color
@@ -108,11 +109,12 @@ class SolarFlareSystem: BaseShipSystemScript() {
             )
             if (rangeLevel <= 0f) return@forEach
 
-            val coronalCaps = ally.getListeners(ElysianBuiltin.ElysianBuiltinListener::class.java)
+            val feeders = MagicSubsystemsManager.getSubsystemsForShipCopy(ally)
+                ?.filterIsInstance<AmmoFeedSubsystem>().orEmpty()
             // fighters do not get visual bands
-            if (ally.isAlive && !ally.isFighter && coronalCaps.isNotEmpty()) tetherTargets.add(ally to rangeLevel)
+            if (ally.isAlive && !ally.isFighter && feeders.isNotEmpty()) tetherTargets.add(ally to rangeLevel)
 
-            coronalCaps.forEach { coronalCap ->
+            feeders.forEach { feeder ->
                 val boost = when(ally.hullSize){
                     ShipAPI.HullSize.DEFAULT -> 0.5f
                     ShipAPI.HullSize.FIGHTER -> 0.5f
@@ -121,9 +123,8 @@ class SolarFlareSystem: BaseShipSystemScript() {
                     ShipAPI.HullSize.CRUISER -> 0.2f
                     ShipAPI.HullSize.CAPITAL_SHIP -> 0.1f
                 }
-                // boost is % per second, full effect at Range, dropoff to no effect at Range + DropoffRange
-                coronalCap.capacitorAmount += ally.maxFlux * boost * Global.getCombatEngine().elapsedInLastFrame *
-                        effectLevel * rangeLevel
+                // boost is fraction of the cooldown cleared per second, full effect at Range, dropoff to no effect at Range + DropoffRange
+                feeder.advanceCooldown(boost * Global.getCombatEngine().elapsedInLastFrame * effectLevel * rangeLevel)
             }
         }
         tether!!.targets = tetherTargets
