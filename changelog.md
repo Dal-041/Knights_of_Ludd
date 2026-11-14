@@ -1,3 +1,8 @@
+## v1.4.1
+- Updated for Starsector 0.98.5a. Requires 0.98.5a; the jar must be rebuilt for the new game version.
+- Fixed a crash when picking the AI of a Knight or [REDACTED] ship: `ShipAIConfig` now takes the ship it configures.
+- Rebuilt the jar from current source.
+
 ## v1.4.0
 - Updated for Starsector 0.98
 - Compiled for Java17 and Kotlin 2.0

@@ -23,7 +23,7 @@ public class KOL_ShipAITweaker {
 
         //HullSize size = ship.getHullSize();
 
-        ShipAIConfig config = new ShipAIConfig();
+        ShipAIConfig config = new ShipAIConfig(ship);
         config.alwaysStrafeOffensively = false;
         config.backingOffWhileNotVentingAllowed = true;
         config.turnToFaceWithUndamagedArmor = true;

@@ -35,11 +35,9 @@ import org.lazywizard.lazylib.VectorUtils
 import org.lwjgl.opengl.GL11
 import org.lwjgl.util.vector.Vector2f
 import org.magiclib.kotlin.addGlowyParticle
-import org.selkie.kol.OpenGlUtils
 import org.selkie.zea.helpers.ZeaStaticStrings
 import org.selkie.zea.terrain.AbyssSea.AbyssSeaWaveManager.Companion.LUNA_COLOR
 import org.selkie.zea.terrain.AbyssShoalNebulaTerrain
-import org.selkie.zea.terrain.KOL_rangeBlockerWithEnds
 import java.awt.Color
 import java.util.EnumSet
 import kotlin.collections.any
@@ -74,6 +72,9 @@ class AbyssSeaWave(): BaseRingTerrain() {
 
         const val PARTICLE_GEN_DIST = 10000f
         const val PARTICLES_PER_SECOND = 45f
+
+        /** Extra radius added around an obstacle's shelter, in SU. */
+        const val SHELTER_GRACE = 75f
     }
 
     class AbyssSeaWaveParams(
@@ -98,12 +99,26 @@ class AbyssSeaWave(): BaseRingTerrain() {
         val respectIgnore: Boolean = true
     ): RingParams(bandWidth, startingRange, relatedEntity, name)
 
+    /** The calm left behind each obstacle the wave breaks on. Rebuilt every frame since obstacles orbit. */
     @Transient
-    var blockerUtil: KOL_rangeBlockerWithEnds = KOL_rangeBlockerWithEnds(1440, 10000f, SHIELDS_FROM_TAG)
-        get() {
-            if (field == null) field = KOL_rangeBlockerWithEnds(1440, 10000f, SHIELDS_FROM_TAG)
-            return field
-        }
+    private var shelters: List<AbyssSeaShelter>? = null
+
+    private fun getShelters(): List<AbyssSeaShelter> = shelters ?: computeShelters().also { shelters = it }
+
+    /** Everything a fleet can hide behind or against. */
+    private fun getBlockers(): List<SectorEntityToken> {
+        val containing = entity.containingLocation ?: return emptyList()
+        return containing.planets + containing.getEntitiesWithTag(SHIELDS_FROM_TAG)
+    }
+
+    private fun computeShelters(): List<AbyssSeaShelter> {
+        val star = entity.starSystem?.star
+        val maxDistance = getCastedParams().distance
+        return getBlockers()
+            .filter { it != entity && it != relatedEntity && it != star }
+            .map { AbyssSeaShelter(entity.location, Vector2f(it.location), it.radius + SHELTER_GRACE) }
+            .filter { it.distance - it.radius < maxDistance }
+    }
 
     /** A list of fleets we've already hit. Used to avoid spamming hits over and over. */
     val alreadyHit = kotlin.collections.HashSet<CampaignFleetAPI>()
@@ -158,12 +173,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
         val adjustPos = casted.speed * days
         casted.middleRadius += adjustPos
 
-        if (!blockerUtil.wasEverUpdated()) {
-            blockerUtil.updateAndSync(entity, entity.starSystem?.star, 0.1f)
-        }
-
-        blockerUtil.updateLimits(entity, entity.starSystem?.star, 0.5f)
-        blockerUtil.advance(amount, 100f, 0.5f)
+        shelters = computeShelters()
 
         particleCache += amount * PARTICLES_PER_SECOND
         if (particleCache >= 1) {
@@ -173,6 +183,7 @@ class AbyssSeaWave(): BaseRingTerrain() {
                     casted.middleRadius + (casted.bandWidthInEngine / 2)
                 )
                 if (MathUtils.getDistance(point, Global.getSector().viewport.center) > PARTICLE_GEN_DIST) return
+                if (getShelters().any { it.contains(point) }) continue
                 val particle = entity.containingLocation.addGlowyParticle(
                     Global.getSector().playerFleet.location, // we're tricking the particles to spawn even when they will be outside our viewport
                     VectorUtils.getDirectionalVector(entity.location, point).scale(casted.speed * MathUtils.getRandomNumberInRange(0.04f, 0.06f)) as Vector2f,
@@ -206,16 +217,10 @@ class AbyssSeaWave(): BaseRingTerrain() {
         // glitches on advance, trust me, i tried
 
         val params = getCastedParams()
-        OpenGlUtils.drawTexturedRing(
-            Vector2f(entity.location),
-            params.middleRadius,
-            params.bandWidthInEngine,
-            380, // polygons of the circle
-            25, // segments of the ring
-            500f,
-            sprite,
-            90f,
-            getEffectMult(null),
+        val innerRadius = params.middleRadius - params.bandWidthInEngine / 2f
+        val outerRadius = params.middleRadius + params.bandWidthInEngine / 2f
+        AbyssSeaWaveRenderer.render(
+            Vector2f(entity.location), innerRadius, outerRadius, getShelters(), sprite, getEffectMult(null)
         )
     }
 
@@ -428,16 +433,9 @@ class AbyssSeaWave(): BaseRingTerrain() {
     }
 
     fun fleetIsBlocked(fleet: CampaignFleetAPI): Boolean {
-        val location = fleet.location
-        val angle = VectorUtils.getAngle(entity.location, location)
         val containing = entity.containingLocation ?: return false
-        val blockers = containing.planets + containing.getEntitiesWithTag(SHIELDS_FROM_TAG)
-        if (blockers.any { MathUtils.getDistance(it, fleet) <= 0f }) return true
-
-        val range = blockerUtil.getBlockedRangeAt(angle)
-        val dist = MathUtils.getDistance(entity.location, location)
-
-        if (dist > range.first && dist < range.second) return true
+        if (getBlockers().any { MathUtils.getDistance(it, fleet) <= 0f }) return true
+        if (getShelters().any { it.contains(fleet.location) }) return true
 
         val shoal = containing.terrainCopy.firstOrNull { it.plugin is AbyssShoalNebulaTerrain } ?: return false
         val plugin = shoal.plugin as AbyssShoalNebulaTerrain
