@@ -51,5 +51,17 @@ class AbyssSeaShelter(source: Vector2f, val center: Vector2f, val radius: Float)
         return halfWidth(along) - perp
     }
 
+    /** A point on the shelter's outline [along] SU downstream of [center], on the given side (+1 or -1). */
+    fun edgePoint(along: Float, side: Float): Vector2f {
+        val width = halfWidth(along) * side
+        return Vector2f(center.x + dirX * along - dirY * width, center.y + dirY * along + dirX * width)
+    }
+
+    /** Unit vector pointing from the shelter's axis out through the given side (+1 or -1). */
+    fun sideNormal(side: Float): Vector2f = Vector2f(-dirY * side, dirX * side)
+
+    /** Unit vector pointing downstream, away from the wave's source. */
+    fun downstream(): Vector2f = Vector2f(dirX, dirY)
+
     fun contains(point: Vector2f): Boolean = depth(point.x, point.y) > 0f
 }

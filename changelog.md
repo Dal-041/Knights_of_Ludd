@@ -2,6 +2,12 @@
 - Updated for Starsector 0.98.5a. Requires 0.98.5a; the jar must be rebuilt for the new game version.
 - Fixed a crash when picking the AI of a Knight or [REDACTED] ship: `ShipAIConfig` now takes the ship it configures.
 - Rebuilt the jar from current source.
+- Luna Sea Dawntide: the wave now tears open around planets and other obstacles instead of being cut by angular ranges.
+  - Fixed the wave rendering white with breaks around the ring; the texture is mapped around the ring as the art expects.
+  - The tear hugs the obstacle closely, with a feathered edge.
+  - A Karman vortex street of eddies swirls the water behind each obstacle, strongest near it and fading down the tail.
+  - White sea foam bursts off the obstacle where the wave crashes and spills over the tear's edges, with soft nebula puffs under it.
+  - The first Luna Sea wave of a new game comes after 1 day instead of 10.
 
 ## v1.4.0
 - Updated for Starsector 0.98

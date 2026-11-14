@@ -35,10 +35,12 @@ class AbyssSeaWaveManager(
         const val MAX_RANGE = 62225f
         const val DEFAULT_MIN_DAYS = 10f
         const val DEFAULT_MAX_DAYS = 10f
+        /** Days until the first wave after the manager is created (a new game), instead of a full interval. */
+        const val FIRST_PULSE_DAYS = 1f
         val LUNA_COLOR = Color(61, 178, 255, 255)
     }
 
-    val pulseInterval = IntervalUtil(params.minDays, params.maxDays)
+    val pulseInterval = IntervalUtil(params.minDays, params.maxDays).apply { forceCurrInterval(FIRST_PULSE_DAYS) }
 
     override fun isDone(): Boolean = !host.isAlive
     override fun runWhilePaused(): Boolean = false

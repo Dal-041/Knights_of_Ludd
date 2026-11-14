@@ -42,7 +42,7 @@ public class OpenGlUtils {
      * @param angles vertex angles in degrees, ascending
      * @param alphas per-vertex alpha multiplier indexed [radius][angle], or null for fully opaque
      * @param facing the angle the texture starts at
-     * @param rotated true to lay the texture along the band and let it repeat across it instead
+     * @param rotated true to lay the texture across the band and let it repeat around the ring instead
      */
     public static void drawTexturedRingGrid(Vector2f loc, float[] radii, float[] angles, float[][] alphas, int numRepetitions, float scrollSpeed, SpriteAPI sprite, float facing, float alpha, boolean rotated) {
         if (radii.length < 2 || angles.length < 2) return;
@@ -68,6 +68,9 @@ public class OpenGlUtils {
         java.util.Arrays.fill(colors, 1f);
 
         sprite.bindTexture();
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+
         // one quad strip per row of the grid, counter-clockwise winding
         for (int row = 0; row < radii.length - 1; row++) {
             float inner = radii[row];
@@ -83,10 +86,9 @@ public class OpenGlUtils {
                 vertices[indexReal + 3] = loc.y + outer * sin[i];
 
                 if (rotated) {
-                    // stop short of the far edge across the band, so wrapping never lands the first row on the band's edge
-                    texcoords[indexReal] = Math.min(innerTexY, 0.999f);
+                    texcoords[indexReal] = innerTexY;
                     texcoords[indexReal + 1] = texX[i];
-                    texcoords[indexReal + 2] = Math.min(outerTexY, 0.999f);
+                    texcoords[indexReal + 2] = outerTexY;
                     texcoords[indexReal + 3] = texX[i];
                 } else {
                     texcoords[indexReal] = texX[i];
@@ -110,7 +112,7 @@ public class OpenGlUtils {
      */
     public static float getTextureScroll(float scrollSpeed) {
         double scroll = (double) Global.getCombatEngine().getTotalElapsedTime(false) * -scrollSpeed;
-        return (float) (scroll % 1.0);
+        return (float) (((scroll % 1.0) + 1.0) % 1.0);
     }
 
     /** Draws with a per-vertex RGBA color array instead of a single color. */
